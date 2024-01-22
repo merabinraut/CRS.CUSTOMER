@@ -1,0 +1,25 @@
+﻿using CRS.CUSTOMER.REPOSITORY.CommonManagement;
+using CRS.CUSTOMER.SHARED;
+using System.Collections.Generic;
+
+namespace CRS.CUSTOMER.BUSINESS.CommonManagement
+{
+    public class CommonManagementBusiness : ICommonManagementBusiness
+    {
+        private ICommonManagementRepository _REPO;
+        public CommonManagementBusiness()
+        {
+            _REPO = new CommonManagementRepository();
+        }
+
+        public List<StaticDataCommon> GetDDL(string Flag, string Extra1 = "", string Extra2 = "")
+        {
+            return _REPO.GetDDL(Flag, Extra1, Extra2);
+        }
+
+        public Dictionary<string, string> GetDropDown(string Flag, string Extra1 = "", string Extra2 = "")
+        {
+            return _REPO.GetDropDown(Flag, Extra1, Extra2);
+        }
+    }
+}

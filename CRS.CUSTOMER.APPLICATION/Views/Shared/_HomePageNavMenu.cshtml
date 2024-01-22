@@ -1,0 +1,14 @@
+﻿<div class="py-[10px] px-[16px] flex justify-between border-b border-b-[#ECECEC] sticky top-0 bg-white z-[10]">
+    <a class="flex gap-[6px] items-center" href="@Url.Action("Index","Dashboard")">
+        <img src="~/Content/assets/images/logo.svg" class="h-[24px]" alt='logo' />
+    </a>
+    <div class="flex gap-4">
+        <div class="text-xl text-warmgray cursor-pointer" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
+            <i class="las la-bell"></i>
+        </div>
+        <div class="text-xl text-warmgray cursor-pointer" data-drawer-target="drawer-right-example"
+             data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+            <i class="las la-bars"></i>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿<div class="py-[10px] px-[16px] flex justify-between border-b border-b-[#ECECEC] sticky top-0 bg-white z-[10]">
+    <div class="flex gap-[6px] items-center" onclick="window.location.href='@Url.Action("Index","Dashboard")'">
+        <div class="text-xl text-warmgray cursor-pointer"><i class="las la-angle-left"></i></div>
+        <div class="text-charcoalBlack text-sm">@*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Notifications @(!string.IsNullOrWhiteSpace(ViewBag.NotificationCount) ? $"({ViewBag.NotificationCount})"  : "(0)")*@</div>
+        <div class="text-charcoalBlack text-sm">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Notifications</div>
+    </div>
+    <div class="flex gap-4">
+
+        <div class="text-xl text-warmgray cursor-pointer" data-drawer-target="drawer-right-example"
+             data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+            <i class="las la-bars"></i>
+        </div>
+    </div>
+
+</div>

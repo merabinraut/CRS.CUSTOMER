@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build-css": "tailwindcss -i CRS.CUSTOMER.APPLICATION/Content/assets/css/styles.css -o CRS.CUSTOMER.APPLICATION/Content/assets/css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

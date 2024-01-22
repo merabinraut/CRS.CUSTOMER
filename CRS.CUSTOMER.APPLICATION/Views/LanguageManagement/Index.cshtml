@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "Language Preference";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var myLanguageCookieValue = Context.Request.Cookies["culture"]?.Value;
+}
+
+<div class="px-4 py-[16px] grid border-t border-[#EFEFEF] ">
+    <div class="font-[700]">
+        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Select_Language
+    </div>
+    <div class="pt-[16px] grid gap-4">
+        <div class="language-option active" data-language="Ja">
+            <div class="flex flex-row w-full justify-between ">
+                <div class="flex items-center ">
+                    <svg class="mr-[12px]" xmlns="http://www.w3.org/2000/svg" width="27" height="18" viewBox="0 0 27 18"
+                         fill="none">
+                        <g clip-path="url(#clip0_5569_5129)">
+                            <path d="M26.4706 0H0V18H26.4706V0Z" fill="white" />
+                            <path d="M13.2355 14.4C16.1594 14.4 18.5296 11.9823 18.5296 9.00001C18.5296 6.01767 16.1594 3.60001 13.2355 3.60001C10.3117 3.60001 7.94141 6.01767 7.94141 9.00001C7.94141 11.9823 10.3117 14.4 13.2355 14.4Z"
+                                  fill="#BC002D" />
+                        </g>
+                        <rect x="0.5" y="0.5" width="25.4706" height="17" stroke="#F8F8F8" />
+                        <defs>
+                            <clipPath id="clip0_5569_5129">
+                                <rect width="26.4706" height="18" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <p class="lang" data-lang="Ja">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Japanese
+                    </p>
+
+                </div>
+
+                <div class="flex flex-row items-center">
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                            <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                  fill="#ECECEC" />
+                        </svg>
+                    </div>
+                    <div class="circle-active">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                            <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                  fill="#ECECEC" />
+                            <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
+                                  fill="#D75A8B" />
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="language-option" data-language="en">
+            <div class="flex flex-row w-full justify-between ">
+                <div class="flex items-center ">
+                    <svg class="mr-[12px] border border-[#EDEDED]" xmlns="http://www.w3.org/2000/svg" width="22" height="18" viewBox="0 0 26 18" fill="none">
+                        <mask id="mask0_9129_49478" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="-1" width="27" height="20">
+                            <path d="M0.470215 -0.573814H26.0004V18.5738H0.470215V-0.573814Z" fill="white" />
+                        </mask>
+                        <g mask="url(#mask0_9129_49478)">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.470215 -0.573792H26.0004V18.5738H0.470215V-0.573792Z" fill="#F7FCFF" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.470215 11.1276V12.7232H26.0004V11.1276H0.470215Z" fill="#E31D1C" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.470215 14.0529V15.6485H26.0004V14.0529H0.470215Z" fill="#E31D1C" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.470215 5.27681V6.87244H26.0004V5.27681H0.470215Z" fill="#E31D1C" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.470215 16.9782V18.5738H26.0004V16.9782H0.470215Z" fill="#E31D1C" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.470215 8.20221V9.79784H26.0004V8.20221H0.470215Z" fill="#E31D1C" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.470215 -0.573792V1.02184H26.0004V-0.573792H0.470215Z" fill="#E31D1C" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0.470215 2.35163V3.94727H26.0004V2.35163H0.470215Z" fill="#E31D1C" />
+                            <path d="M0.470215 -0.573769H16.4266V9.79786H0.470215V-0.573769Z" fill="#2E42A5" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.84524 1.77081L1.26611 2.1768L1.46163 1.45429L0.947266 0.996412H1.61909L1.84442 0.406769L2.10864 0.996412H2.68136L2.23136 1.45429L2.40557 2.1768L1.84524 1.77081ZM5.03651 1.77081L4.45739 2.1768L4.6529 1.45429L4.13854 0.996412H4.81037L5.03569 0.406769L5.29991 0.996412H5.87263L5.42263 1.45429L5.59684 2.1768L5.03651 1.77081ZM7.64866 2.1768L8.22778 1.77081L8.78811 2.1768L8.61387 1.45429L9.06391 0.996412H8.49116L8.22696 0.406769L8.00164 0.996412H7.32981L7.84417 1.45429L7.64866 2.1768ZM11.4191 1.77081L10.8399 2.1768L11.0355 1.45429L10.521 0.996412H11.1929L11.4183 0.406769L11.6824 0.996412H12.2552L11.8051 1.45429L11.9794 2.1768L11.4191 1.77081ZM1.26611 5.36807L1.84524 4.96208L2.40557 5.36807L2.23136 4.64556L2.68136 4.18768H2.10864L1.84442 3.59804L1.61909 4.18768H0.947266L1.46163 4.64556L1.26611 5.36807ZM5.03651 4.96208L4.45739 5.36807L4.6529 4.64556L4.13854 4.18768H4.81037L5.03569 3.59804L5.29991 4.18768H5.87263L5.42263 4.64556L5.59684 5.36807L5.03651 4.96208ZM7.64866 5.36807L8.22778 4.96208L8.78811 5.36807L8.61387 4.64556L9.06391 4.18768H8.49116L8.22696 3.59804L8.00164 4.18768H7.32981L7.84417 4.64556L7.64866 5.36807ZM11.4191 4.96208L10.8399 5.36807L11.0355 4.64556L10.521 4.18768H11.1929L11.4183 3.59804L11.6824 4.18768H12.2552L11.8051 4.64556L11.9794 5.36807L11.4191 4.96208ZM1.26611 8.55935L1.84524 8.15334L2.40557 8.55935L2.23136 7.83684L2.68136 7.37895H2.10864L1.84442 6.78931L1.61909 7.37895H0.947266L1.46163 7.83684L1.26611 8.55935ZM5.03651 8.15334L4.45739 8.55935L4.6529 7.83684L4.13854 7.37895H4.81037L5.03569 6.78931L5.29991 7.37895H5.87263L5.42263 7.83684L5.59684 8.55935L5.03651 8.15334ZM7.64866 8.55935L8.22778 8.15334L8.78811 8.55935L8.61387 7.83684L9.06391 7.37895H8.49116L8.22696 6.78931L8.00164 7.37895H7.32981L7.84417 7.83684L7.64866 8.55935ZM11.4191 8.15334L10.8399 8.55935L11.0355 7.83684L10.521 7.37895H11.1929L11.4183 6.78931L11.6824 7.37895H12.2552L11.8051 7.83684L11.9794 8.55935L11.4191 8.15334ZM14.0312 2.1768L14.6103 1.77081L15.1706 2.1768L14.9964 1.45429L15.4465 0.996412H14.8737L14.6095 0.406769L14.3842 0.996412H13.7123L14.2268 1.45429L14.0312 2.1768ZM14.6103 4.96208L14.0312 5.36807L14.2268 4.64556L13.7123 4.18768H14.3842L14.6095 3.59804L14.8737 4.18768H15.4465L14.9964 4.64556L15.1706 5.36807L14.6103 4.96208ZM14.0312 8.55935L14.6103 8.15334L15.1706 8.55935L14.9964 7.83684L15.4465 7.37895H14.8737L14.6095 6.78931L14.3842 7.37895H13.7123L14.2268 7.83684L14.0312 8.55935ZM3.44087 3.36644L2.86175 3.77243L3.05726 3.04992L2.5429 2.59205H3.21473L3.44006 2.0024L3.70427 2.59205H4.27699L3.82699 3.04992L4.0012 3.77243L3.44087 3.36644ZM6.05302 3.77243L6.63214 3.36644L7.19247 3.77243L7.01826 3.04992L7.46826 2.59205H6.89554L6.63133 2.0024L6.406 2.59205H5.73417L6.24854 3.04992L6.05302 3.77243ZM9.82344 3.36644L9.2443 3.77243L9.43985 3.04992L8.92541 2.59205H9.59725L9.82264 2.0024L10.0868 2.59205H10.6595L10.2095 3.04992L10.3837 3.77243L9.82344 3.36644ZM2.86175 6.9637L3.44087 6.55771L4.0012 6.9637L3.82699 6.24119L4.27699 5.78332H3.70427L3.44006 5.19367L3.21473 5.78332H2.5429L3.05726 6.24119L2.86175 6.9637ZM6.63214 6.55771L6.05302 6.9637L6.24854 6.24119L5.73417 5.78332H6.406L6.63133 5.19367L6.89554 5.78332H7.46826L7.01826 6.24119L7.19247 6.9637L6.63214 6.55771ZM9.2443 6.9637L9.82344 6.55771L10.3837 6.9637L10.2095 6.24119L10.6595 5.78332H10.0868L9.82264 5.19367L9.59725 5.78332H8.92541L9.43985 6.24119L9.2443 6.9637ZM13.0147 3.36644L12.4356 3.77243L12.6311 3.04992L12.1167 2.59205H12.7885L13.0139 2.0024L13.2781 2.59205H13.8508L13.4008 3.04992L13.575 3.77243L13.0147 3.36644ZM12.4356 6.9637L13.0147 6.55771L13.575 6.9637L13.4008 6.24119L13.8508 5.78332H13.2781L13.0139 5.19367L12.7885 5.78332H12.1167L12.6311 6.24119L12.4356 6.9637Z" fill="#F7FCFF" />
+                        </g>
+                    </svg>
+                    <p class="lang" data-lang="en">
+                        English
+                    </p>
+
+                </div>
+
+                <div class="flex flex-row items-center">
+                    <div class="circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                            <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                  fill="#ECECEC" />
+                        </svg>
+                    </div>
+                    <div class="circle-active">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                            <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                  fill="#ECECEC" />
+                            <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
+                                  fill="#D75A8B" />
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    // Get all the div elements
+    var divs = document.querySelectorAll('.language-option');
+
+    function handleLanguageSelection() {
+        var lang = $(".language-option.active p.lang").data('lang');
+        $.ajax({
+            url: "/LanguageManagement/Index?lang=" + lang,
+            method: "POST",
+            success: function (data) {
+                window.location.href = "/Dashboard/Index";
+            },
+            error: function (xhr, status, error) {
+                window.location.reload();
+            }
+        });
+    }
+
+    // Add click event listeners to each div
+    divs.forEach(function (div) {
+        var languageValue = div.getAttribute('data-language');
+        var SessionLanguageValue = "@myLanguageCookieValue";
+        if (languageValue === SessionLanguageValue)
+            div.classList.add('active');
+        else
+            div.classList.remove('active');
+        div.addEventListener('click', function () {
+             divs.forEach(function (d) {
+                   d.classList.remove('active');
+             });
+            this.classList.add('active');
+            LangChangeAlert("@CRS.CUSTOMER.APPLICATION.Resources.Resource.Are_you_sure_you_want_to_change_the_language?", "@CRS.CUSTOMER.APPLICATION.Resources.Resource.Confirm");
+
+        });
+    });
+
+    function LangChangeAlert(message, buttonText) {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "showDuration": "300",
+            "hideDuration": "0",
+            "timeOut": 0,
+            "extendedTimeOut": 0,
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "tapToDismiss": false
+        }
+        toastr.info(
+            `${message}
+           <button style="display: block; margin-top: 10px; background-color: #007bff; color: #fff; border: none; padding: 5px 10px; cursor: pointer;" onclick="handleLanguageSelection();">
+           ${buttonText}
+           </button>`
+        );
+    }
+</script>

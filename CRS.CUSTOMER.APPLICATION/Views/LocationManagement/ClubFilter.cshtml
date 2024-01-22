@@ -1,0 +1,500 @@
+﻿@model List<CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement.ClubSearchManagementResponseModel>
+@{
+    ViewBag.Title = "Club";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- search bar -->
+<div class=" border border-[#D6CEB4] flex my-2 mx-4 rounded-[4px] search-input" onclick="redirectToSearchPage()">
+    <span class=" mt-[10px] ml-3 material-icons-outlined text-[#D6CEB4]">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.125 1.875C11.5698 1.875 14.375 4.68018 14.375 8.125C14.375 9.62158 13.8501 10.9937 12.9688 12.0703L17.9492 17.0508L17.0508 17.9492L12.0703 12.9688C10.9937 13.8501 9.62158 14.375 8.125 14.375C4.68018 14.375 1.875 11.5698 1.875 8.125C1.875 4.68018 4.68018 1.875 8.125 1.875ZM8.125 3.125C5.35645 3.125 3.125 5.35645 3.125 8.125C3.125 10.8936 5.35645 13.125 8.125 13.125C10.8936 13.125 13.125 10.8936 13.125 8.125C13.125 5.35645 10.8936 3.125 8.125 3.125Z"
+                  fill="#BCB08A" />
+        </svg>
+    </span>
+    <input class="w-full text-xs text-[#BCB08A] "
+           title="Search"
+           type="text"
+           placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Filter_Placeholder" readonly />
+    <div class="group flex justify-end cursor-pointer p-3 rotate-90" title="Filter">
+        <a href="/LocationManagement/SearchFilter?LocationId=@ViewBag.LocationId">
+            <svg class="group-hover:bg-primaryLight w-4 h-4 text-[#BCB08A] " aria-hidden="true"
+                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                      d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2" />
+            </svg>
+        </a>
+    </div>
+
+</div>
+@*<div class="flex  flex-row items-center  py-2 bg-[#F8F8F8] gap-[8px]">
+        <div class="flex flex-col gap-0 ml-[16px]">
+            <div class=" text-white font-[500]  ml-[15px] rounded-full flex flex-row items-center text-[10px] justify-center bg-[#F89336] w-[15px] h-[15px]">
+                <span>
+                    45
+
+                </span>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="17" viewBox="0 0 18 17" fill="none">
+                    <path d="M6.7418 1.56701C6.49882 0.663746 5.7109 0 4.77835 0C3.8458 0 3.05792 0.663746 2.8149 1.56701H0V2.74227H2.8149C3.05788 3.64553 3.8458 4.30928 4.77835 4.30928C5.7109 4.30928 6.49878 3.64553 6.7418 2.74227H18V1.56701H6.7418ZM4.77835 3.13402C4.26674 3.13402 3.85052 2.69467 3.85052 2.15464C3.85052 1.61461 4.26674 1.17526 4.77835 1.17526C5.28996 1.17526 5.70619 1.61461 5.70619 2.15464C5.70619 2.69467 5.28996 3.13402 4.77835 3.13402Z"
+                          fill="#BCB08A" />
+                    <path d="M9 5.94162C8.06745 5.94162 7.27957 6.60537 7.03655 7.50863H0V8.68389H7.03655C7.27953 9.58715 8.06745 10.2509 9 10.2509C9.93255 10.2509 10.7204 9.58715 10.9634 8.68389H18V7.50863H10.9634C10.7204 6.60537 9.93255 5.94162 9 5.94162ZM9 9.07564C8.48839 9.07564 8.07216 8.63629 8.07216 8.09626C8.07216 7.55623 8.48839 7.11688 9 7.11688C9.51161 7.11688 9.92784 7.55623 9.92784 8.09626C9.92784 8.63629 9.51161 9.07564 9 9.07564Z"
+                          fill="#BCB08A" />
+                    <path d="M4.77835 11.8832C3.8458 11.8832 3.05792 12.547 2.8149 13.4502H0V14.6255H2.8149C3.05788 15.5288 3.8458 16.1925 4.77835 16.1925C5.7109 16.1925 6.49878 15.5288 6.7418 14.6255H18V13.4502H6.7418C6.49878 12.547 5.7109 11.8832 4.77835 11.8832ZM4.77835 15.0173C4.26674 15.0173 3.85052 14.5779 3.85052 14.0379C3.85052 13.4978 4.26674 13.0585 4.77835 13.0585C5.28996 13.0585 5.70619 13.4978 5.70619 14.0379C5.70619 14.5779 5.28996 15.0173 4.77835 15.0173Z"
+                          fill="#BCB08A" />
+                </svg>
+            </div>
+        </div>
+
+        <div style="margin-left:10px;" class="flex flex-col">
+            <div class="font-[600] text-[12px]">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Results
+                <span class="font-[600] text-[12px]">
+                    121 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Items
+                </span>
+
+            </div>
+            <div class="grid grid-cols-3 mt-[6px]  gap-[8px]  ">
+                <div id="tag1" style="width: fit-content;"
+                     class="flex flex-row px-2 py-[2px] text-[10px]  h-[16px] bg-[#FFFFFF]">
+                    <div class="flex gap-2  flex-row items-center ">
+                        <p>
+                            歌舞伎町
+                        </p>
+                        <button onclick="tag1()">
+                            <svg class="" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 6 6"
+                                 fill="none">
+                                <path d="M0.0326975 0.737705L0.768392 0L3.00817 2.2459L5.23161 0.0163934L5.9673 0.754098L3.74387 2.98361L6 5.2459L5.26431 5.98361L3.00817 3.72131L0.735695 6L0 5.26229L2.27248 2.98361L0.0326975 0.737705Z"
+                                      fill="#B9B9B9" />
+                            </svg>
+
+                        </button>
+
+                    </div>
+                </div>
+
+                <div id="tag2" style="width: fit-content;"
+                     class="flex flex-row px-2 py-[2px] text-[10px]  h-[16px] bg-[#FFFFFF]">
+                    <div class="flex gap-2  flex-row items-center ">
+                        <p>
+                            歌舞伎町
+                        </p>
+                        <button onclick="tag2()">
+                            <svg class="" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 6 6"
+                                 fill="none">
+                                <path d="M0.0326975 0.737705L0.768392 0L3.00817 2.2459L5.23161 0.0163934L5.9673 0.754098L3.74387 2.98361L6 5.2459L5.26431 5.98361L3.00817 3.72131L0.735695 6L0 5.26229L2.27248 2.98361L0.0326975 0.737705Z"
+                                      fill="#B9B9B9" />
+                            </svg>
+
+                        </button>
+
+                    </div>
+                </div>
+                <div id="tag3" style="width: fit-content;"
+                     class="flex flex-row px-2 py-[2px] text-[10px]  h-[16px] bg-[#FFFFFF]">
+                    <div class="flex gap-2  flex-row items-center ">
+                        <p>
+                            歌舞伎町
+                        </p>
+                        <button onclick="tag3()">
+                            <svg class="" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 6 6"
+                                 fill="none">
+                                <path d="M0.0326975 0.737705L0.768392 0L3.00817 2.2459L5.23161 0.0163934L5.9673 0.754098L3.74387 2.98361L6 5.2459L5.26431 5.98361L3.00817 3.72131L0.735695 6L0 5.26229L2.27248 2.98361L0.0326975 0.737705Z"
+                                      fill="#B9B9B9" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+@*Recommended club*@
+<div style="background-color:#E3E3E3;" class="flex flex-row ">
+    <div class="flex-col overflow-y-auto   pt-[8px] pb-[8px]">
+        <p class="text-[14px] font-[600] pl-[16px] ">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Club_recommended_for_you
+        </p>
+        <div class="flex  overflow-x-auto mx-[16px] no-scrollbar flex-row gap-[8px]  my-[8px]">
+            @{
+                var ClubRecommendationModel = ViewBag.ClubRecommendationModel as List<CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement.ClubRecommendationListModel>;
+                foreach (var item in ClubRecommendationModel)
+                {
+                    <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                        <div class="flex  w-[118px]">
+                            <div style="border-radius: 6px; border: 1px solid #EDEDED; background: #FFF;"
+                                 class=" flex flex-col w-[118px]  px-[8px] py-[10px]">
+                                <div class="flex flex-row justify-center">
+                                    <div class="h-[48px] w-[48px] object-fill   bg-[#ffffff]  flex flex-row justify-center">
+                                        @if (!string.IsNullOrEmpty(item.ClubLogo))
+                                        {
+                                            <img class="h-[48px] w-[48px] object-fill border-[1px]  rounded-full "
+                                                 src="@item.ClubLogo" alt="clublogo">
+                                        }
+                                        else
+                                        {
+                                            <img class="h-[48px] w-[48px] object-fill border-[1px]  rounded-full "
+                                                 src="~/Content/assets/images/customer/clublogo.jpeg" alt="clublogo">
+                                        }
+                                    </div>
+
+                                </div>
+                                <div class="flex flex-col">
+                                    <div class="flex flex-row mt-[7px] justify-center">
+                                        <p style="line-height: 100%;" class="font-[700] text-[10px]">@item.ClubNameEnglish</p>
+                                    </div>
+                                    <div class="flex flex-row mt-[4px] justify-center">
+                                        <p style="line-height: 100%;" class="font-[400] text-[10px]">@item.ClubNameJapanese</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            }
+
+        </div>
+    </div>
+
+</div>
+
+<!-- club section  -->
+<div class="flex flex-col">
+    @if (Model.Count <= 0)
+    {
+        <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center"
+             style="height:calc(100vh - 47px)">
+            <div class="text-[#18181B] font-semibold mt-12 text-center">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
+            </div>
+        </div>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div>
+                <div class="px-2 pt-[12px] pb-2 flex gap-0.5">
+                    @if (!string.IsNullOrEmpty(@item.Tag1))
+                    {
+                        <div class="px-[10px] bg-[#E3A1A1] text-[10px] rounded-[2px] text-white">@item.Tag1</div>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Tag2))
+                    {
+                        <div class="px-[10px] bg-[#BFA3B6] text-[10px] rounded-[2px] text-white">@item.Tag2</div>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Tag3))
+                    {
+                        <div class="px-[10px] bg-[#697DBF] text-[10px] rounded-[2px] text-white">@item.Tag3</div>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Tag4))
+                    {
+                        <div class="px-[10px] bg-[#96B41F] text-[10px] rounded-[2px] text-white">@item.Tag4</div>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Tag5))
+                    {
+                        <div class="px-[10px] bg-[#EFB726] text-[10px] rounded-[2px] text-white">@item.Tag5</div>
+                    }
+
+                </div>
+                <div class="px-4 pb-[12px] flex justify-between border-b-2 border-[#FAFAFA]">
+                    <div class="flex gap-[8px]" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                        <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                            @if (!string.IsNullOrEmpty(item.ClubLogo))
+                            {
+                                <img src="@item.ClubLogo"
+                                     class="h-[48px] w-[48px] object-fill rounded-full" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     class="h-[48px] w-[48px] object-fill rounded-full" />
+                            }
+                        </div>
+                        <div>
+                            <div class='text-sm font-bold text-charcolBlack '>@item.ClubName</div>
+                            <div class='text-xs  text-[#404040]'>@item.ClubNameJapanese</div>
+                            <div class="text-[10px] text-primary-softrose">@item.GroupName</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        @if (item.IsBookmarked.ToUpper() == "N")
+                        {
+                            <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
+                                 onclick="handleAddBookmarks('@item.ClubId','','club')">
+                                <img src="~/Content/assets/images/customer/bookmark-outlined.svg" class="h-[20px] w-[25px]" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
+                                 onclick="handleRemoveBookmarks('@item.ClubId','','club')">
+                                <img src="~/Content/assets/images/customer/bookmark-filled.svg" class="h-[20px] w-[25px]">
+                            </div>
+                        }
+                    </div>
+
+                </div>
+                <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5">
+                    @foreach (var item2 in item.HostGalleryImage)
+                    {
+                        <div class=" " onclick="OpenImagePopup('@item2')">
+                            <img src="@item2"
+                                 class="aspect-square object-fill h-[182px] w-full" />
+                        </div>
+                    }
+
+                </section>
+
+                <div class="px-4 py-[12px]">
+                    <div class="flex gap-[14px] pb-2">
+                        <div class="flex gap-1 text-base  items-center">
+                            @{
+                                var unratedScale = (5 - item.AverageRating);
+                                for (int i = 0; i < item.AverageRating; i++)
+                                {
+                                    <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
+                                              fill="#F89336" />
+                                    </svg>
+                                }
+                                for (int i = 0; i < unratedScale; i++)
+                                {
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                                        <g opacity="0.3">
+                                            <path d="M9.44612 1.1453L8.95768 2.25692L7.20604 6.18126L2.928 6.63601L1.71533 6.77076L2.62484 7.5792L5.8081 10.4593L4.91544 14.67L4.6628 15.849L5.72389 15.2426L9.44612 13.0868L13.1684 15.2426L14.2294 15.849L13.9768 14.67L13.0841 10.4593L16.2674 7.5792L17.1769 6.77076L15.9642 6.63601L11.6862 6.18126L9.93456 2.25692L9.44612 1.1453ZM9.44612 3.7896L10.8272 6.9055L10.962 7.19182L11.2651 7.22551L14.6505 7.5792L12.1241 9.85296L11.8883 10.0719L11.9557 10.3751L12.6631 13.6931L9.7156 12.0088L9.44612 11.8404L9.17664 12.0088L6.22917 13.6931L6.93656 10.3751L7.00393 10.0719L6.76813 9.85296L4.24173 7.5792L7.62711 7.22551L7.93028 7.19182L8.06502 6.9055L9.44612 3.7896Z"
+                                                  fill="#C8B477" />
+                                        </g>
+                                    </svg>
+                                }
+                            }
+                            <div class="text-secondary-1"> @item.AverageRating</div>
+                        </div>
+                        <div class="flex gap-1 text-base items-center">
+                            <i class="las la-comment text-[#BCB08A]"></i>
+                            <div class="text-secondary-1">@item.TotalComment</div>
+                        </div>
+                    </div>
+                    <div class="text-sm leading-4	text-secondary-1">
+                        @item.ClubDescription
+                    </div>
+                </div>
+
+                <div>
+                    <div class=" text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
+                        @foreach (var item2 in item.ClubWeeklyScheduleList)
+                        {
+                            if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SAT")
+                            {
+                                <div class="text-blue">
+                                    @item2.DayLabel
+                                </div>
+                            }
+                            else if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SUN")
+                            {
+
+                                <div class="text-red">
+                                    @item2.DayLabel
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    @item2.DayLabel
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
+                        @foreach (var item2 in item.ClubWeeklyScheduleList)
+                        {
+                            var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
+                            if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
+                            {
+                                <div onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName','@item2.FullDate')">
+                                    @item2.Date <div class="flex justify-center mt-1">
+                                        <img src="@imageURL" class="h-[11px] w-[11px]">
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    @item2.Date <div class="flex justify-center mt-1">
+                                        <img src="@imageURL" class="h-[11px] w-[11px]">
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="px-4 py-[12px] flex justify-between items-center">
+                    <div>
+                        @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
+                        {
+                            <div class="flex justify-center items-center gap-1 pb-1">
+                                @if (!string.IsNullOrEmpty(item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                                {
+                                    <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">
+                                        <img src="~/Content/assets/images/customer/sun.svg" />
+                                    </div>
+                                }
+                                else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                                {
+                                    <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">
+                                        <img src="~/Content/assets/images/customer/moon.svg" />
+                                    </div>
+                                }
+                                <div class="text-sm text-secondary-1">@item.ClubOpeningTime~@item.ClubClosingTime</div>
+                            </div>
+                            if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                            {
+                                <div class="bg-[#BCB08A] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="bg-[#D7D7D7] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Unreservable
+                                </div>
+                            }
+                        }
+                    </div>
+
+                    <button class="btn-gradient" onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName')">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
+                    </button>
+                </div>
+                <div class="divider-customer"></div>
+            </div>
+        }
+    }
+</div>
+<div class="loader" id="loader-id">
+    <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
+</div>
+@section scripts
+{
+    <script src="~/Content/CustomHelper.js"></script>
+    <script type="text/javascript">
+        function tag1() {
+            var x = document.getElementById("tag1");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function tag2() {
+            var x = document.getElementById("tag2");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function tag3() {
+            var x = document.getElementById("tag3");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // The DOM is fully loaded, hide the loader
+            document.getElementById("loader-id").style.display = "none";
+        });
+
+        // If you also want to handle external resources like images, use the load event
+        window.addEventListener("load", function () {
+            // The entire page, including external resources, is fully loaded, hide the loader
+            document.getElementById("loader-id").style.display = "none";
+        });
+
+        function ClubReservationActionFunction(i, j, k) {
+            DataStorageFunction(i, j);
+            window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
+        }
+        const DataStorageFunction = (i, j) => {
+            localStorage.setItem("ClubId", EncryptParameter(i));
+            localStorage.setItem("ClubName", EncryptParameter(j));
+        }
+
+     function redirectToSearchPage() {
+        var locationId = '@ViewBag.LocationId';
+         var searchUrl = `/LocationManagement/SearchFilter?locationId=${locationId}`;
+         window.location.href = searchUrl;
+     }
+
+        function redirectToSearchHomePage() {
+            var locationId = '@ViewBag.LocationId' ||'';
+            var searchUrl = `/LocationManagement/SearchFilter?&LocationId=${locationId}`
+
+            window.location.href = searchUrl;
+        }
+        function ClubDetailActionFunction(i, j) {
+            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
+        }
+
+        function handleAddBookmarks(clubId, hostId, agentType) {
+            ActivateLoaderFunction();
+            $.ajax({
+                url: '/BookmarkManagement/AddBookmarks',
+                type: 'POST',
+                data: { clubId: clubId, hostId: hostId, agentType: agentType },
+                success: function (result) {
+                    if (result.success) {
+                        location.reload();
+                    } else {
+                        // Handle failure, e.g., show an error message
+                        console.log('Error: ' + result.message);
+                        location.reload();
+                    }
+                },
+                error: function () {
+                    // Handle unexpected errors
+                    console.log('An unexpected error occurred.');
+                    location.reload();
+                }
+            });
+        }
+
+        function handleRemoveBookmarks(clubId, hostId, agentType) {
+            ActivateLoaderFunction();
+            $.ajax({
+                url: '/BookmarkManagement/RemoveBookmarks',
+                type: 'POST',
+                data: { clubId: clubId, hostId: hostId, agentType: agentType },
+                success: function (result) {
+                    if (result.success) {
+                        location.reload();
+                    } else {
+                        // Handle failure, e.g., show an error message
+                        console.log('Error: ' + result.message);
+                        location.reload();
+                    }
+                },
+                error: function () {
+                    // Handle unexpected errors
+                    console.log('An unexpected error occurred.');
+                    location.reload();
+                }
+            });
+        }
+
+        function ActivateLoaderFunction() {
+            var myDiv = document.getElementById("loader-id");
+            myDiv.style.display = "flex";
+        }
+        function DeactivateLoaderFunction() {
+            var myDiv = document.getElementById("loader-id");
+            myDiv.style.display = "none";
+        }
+    </script>
+}

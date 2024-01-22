@@ -1,0 +1,148 @@
+﻿.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+
+/*
+    Client UI Serive List
+*/
+
+.service-lists {
+    list-style-type: none;
+}
+
+.service-list-item {
+    display: inline-block;
+}
+
+
+.list-item-frame {
+    /*border: 1px solid #fff;*/
+    height: 180px;
+    width: 160px;
+    display: block;
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+    color: #000;
+}
+
+    .list-item-frame[for] {
+        border-color: #ddd;
+        vertical-align: bottom;
+        /*margin-top: 50%;*/
+    }
+
+.list-item-text {
+    margin-top: 50%;
+    /*position: center;*/
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+.commission {
+    color: green;
+}
+
+.produt-label {
+    margin-top: 10px;
+}
+
+.list-item-frame:after {
+    background-color: white;
+    color: white;
+    /*content: " ";*/
+    display: block;
+    border-radius: 50%;
+    border: 1px solid grey;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 28px;
+    transition-duration: 0.4s;
+    transform: scale(0);
+}
+
+.list-item-frame img {
+    height: 100px;
+    width: 100px;
+    margin-left: 16px;
+    transition-duration: 0.2s;
+    transform-origin: 50% 50%;
+    margin-left: 15%;
+    margin-top: 10%;
+    border-radius: 19px;
+    border: solid 1px #ddd;
+}
+
+@media (min-width: 992px) {
+    .col-md-2.fix-service-layout {
+        -ms-flex: 0 0 16.66667% !important;
+        flex: 0 0 16.66667% !important;
+        max-width: 16.66667% !important;
+    }
+}
+
+
+
+@media (max-width: 1352px) {
+    .col-md-2.fix-service-layout {
+        max-width: 100% !important;
+    }
+}
+
+/*--- Custom css for icon ---*/
+
+.navbar-dark {
+    background-color: #049E39 !important;
+    background-image: linear-gradient(0deg, rgba(23, 163, 53, 0)) !important;
+}
+
+
+
+.sidebar-dark {
+    color: #ddd;
+    background-color: #fff !important;
+}
+
+
+
+    .sidebar-dark .nav-sidebar .nav-link {
+        color: #049E39 !important;
+    }
+
+
+.btn-success {
+    border-radius: 50px;
+    border: none;
+    background-image: linear-gradient(-45deg, rgba(23, 163, 53, 0), rgba(194, 208, 21, 1.0));
+    background-color: #17A335;
+    color: #fff;
+    padding: 5px 20px;
+}
+
+.btn {
+    border-radius: 50px !important;
+}
+
+.login-page {
+    height: 90vh;
+}
+
+.login-box {
+    width: 400px;
+}
+
+.in {
+    color: #48dd61
+}
+
+.out {
+    color: #F15656
+}

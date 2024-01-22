@@ -1,0 +1,286 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReviewManagement.ReviewClubDetailModel
+@{
+    ViewBag.Title = "Review Details";
+    Layout = "~/Views/Shared/_ReviewLayout.cshtml";
+    var Request = Model;
+}
+@Html.AntiForgeryToken()
+<div class="flex flex-col justify-between h-screen">
+    <div>
+        <!-- header  -->
+        <div class="flex justify-center gap-[10px] pt-[13px] px-[14px] pb-[9px] border-b border-b-[#DCDCDC]">
+
+            <div class="text-[15px]  font-bold pb-[5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ConfirmReview</div>
+        </div>
+        <!-- header end  -->
+        <div style="height: calc(100vh - 180px);" class="no-scrollbar overflow-y-scroll pb-4">
+            <!-- image  -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                        @if (!string.IsNullOrEmpty(Model.ClubLogo))
+                        {
+                            <img src="@Model.ClubLogo"
+                                 class="h-[48px] w-[48px] object-cover rounded-full" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                 class="h-[48px] w-[48px] object-cover rounded-full" />
+                        }
+                    </div>
+                    <div>
+                        <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEnglish</div>
+                        <div class='text-xs  text-[#404040] '>@Model.ClubNameJapanese</div>
+                        <div class="text-[10px] text-[#A09E91] flex gap-[2px] items-center">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            @Model.ClubLocationName
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- image end  -->
+            <!-- image list  -->
+            <div class="px-[14px]  py-3 grid gap-3">
+                <div class="flex flex-col gap-[8px] p-[14px] pr-[8px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Selected <span class="text-primary cursor-pointer">
+                            <i class="las la-pen"></i><span class="border-b border-primary" onclick="Review2RedirectFunction();">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Edit</span>
+                        </span>
+                    </div>
+
+                    <div class="flex -space-x-2  items-center relative" id="selected-host-id">
+                    </div>
+                </div>
+            </div>
+
+            <!-- image list  end-->
+            <!-- About the store experience -->
+            <div class="pl-[14px] pr-[20px]  pb-3 border-t border-[#E3E3E3] grid gap-[14px]">
+                <div>
+                    <div class="flex justify-between text-start pt-[12px] pb-[0px] text-[13px] font-bold">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.ExperienceAboutClub
+                        <span class="text-primary cursor-pointer">
+                            <i class="las la-pen"></i><span class="border-b border-primary" onclick="Review3RedirectFunction();">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Edit</span>
+                        </span>
+                    </div>
+                    <div id="selected-remark-id">
+                    </div>
+                </div>
+            </div>
+            <!-- About the store experience end-->
+            <!-- About the store experience 2 -->
+            <div class="pl-[14px] pr-[20px] pb-3 border-t border-[#E3E3E3] grid gap-[15px]">
+                <div class="flex justify-between text-start pt-[12px] text-[13px] font-bold">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.QnAAboutClub <span class="text-primary cursor-pointer">
+                        <i class="las la-pen"></i><span class="border-b border-primary" onclick="Review4RedirectFunction();">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Edit</span>
+                    </span>
+                </div>
+                <div id="selected-dichotomous-qa-id">
+
+                </div>
+            </div>
+            <!-- About the store experience 2 end-->
+        </div>
+    </div>
+    <div class="px-4 py-[18px] shadow-review absolute bottom-0 left-0 w-full bg-white">
+
+        <button class="button-curve btn-primary h-[46px] " data-modal-target="defaultModal"
+                data-modal-toggle="defaultModal">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
+            <div class=" absolute top-[14px] right-[15px]">
+                <i class="fa-solid fa-arrow-right text-[18px]"></i>
+            </div>
+        </button>
+        <div class="text-center mt-[10px]">
+            <a onclick="window.history.back();" class="text-xs border-b border-[#404040] ">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.BackToPreviousPage
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Main modal -->
+<div id="defaultModal" tabindex="-1" aria-hidden="true"
+     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow ">
+            <!-- Modal header -->
+            <div class="text-center pt-4 pb-3 px-2 border-b border-[#DCDCDC]">
+                <div class=" text-[13px] font-bold">@CRS.CUSTOMER.APPLICATION.Resources.Resource.OverallExperienceAboutClub</div>
+            </div>
+            <!-- Modal body -->
+            <div class="grid gap-4 p-6 pt-4">
+                <div class="rating" id="stars">
+                    <div data-value="1"><i class="fa-solid fa-star"></i></div>
+                    <div data-value="2"><i class="fa-solid fa-star"></i></div>
+                    <div data-value="3"><i class="fa-solid fa-star"></i></div>
+                    <div data-value="4"><i class="fa-solid fa-star"></i></div>
+                    <div data-value="5"><i class="fa-solid fa-star"></i></div>
+                </div>
+                <button class="button-curve btn-primary h-[46px]" onclick="SubmitFunction();">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.PostAReviewForThisStore
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            const stars = $('.rating > div');
+            const ratingText = $('#rating-text');
+
+            stars.on('click', function () {
+                const rating = $(this).data('value');
+                ratingText.text(`You rated this ${rating} stars!`);
+                stars.removeClass('rated');
+
+                stars.each(function () {
+                    if ($(this).data('value') <= rating) {
+                        $(this).addClass('rated');
+                    }
+                });
+            });
+
+            SelectedHostDisplayFunction();
+            RemarksDisplayFunction();
+            DichotomousQADisplayFunction();
+        });
+
+        function Review3RedirectFunction() {
+             var reviewDetail = @Html.Raw(Json.Encode(@Request));
+             var encodedReviewDetail = encodeURIComponent(JSON.stringify(reviewDetail));
+             var url = '@Url.Action("Review3", "ReviewManagement")' + '?Request=' + encodedReviewDetail;
+            window.location.href = url;
+        }
+
+        function Review2RedirectFunction() {
+             var reviewDetail = @Html.Raw(Json.Encode(@Request));
+             var encodedReviewDetail = encodeURIComponent(JSON.stringify(reviewDetail));
+            var url = '@Url.Action("Review2", "ReviewManagement")' + '?RequestString=' + encodedReviewDetail;
+             window.location.href = url;
+        }
+
+        function Review4RedirectFunction() {
+             var reviewDetail = @Html.Raw(Json.Encode(@Request));
+             var encodedReviewDetail = encodeURIComponent(JSON.stringify(reviewDetail));
+            var url = '@Url.Action("Review4", "ReviewManagement")' + '?Request=' + encodedReviewDetail;
+             window.location.href = url;
+        }
+
+        function SubmitFunction() {
+            var elements = document.getElementsByClassName('rated');
+            var rating = elements.length;
+            if (rating === null || rating === "" || rating <= 0) {
+                toastr.info('Please rate to give us your experience');
+                return false;
+            }
+
+            var ReviewMVPHostId = localStorage.getItem("ReviewMVPHostId");
+            var ReviewDichotomousQAIdList = localStorage.getItem("ReviewDichotomousQAIdList");
+            var ReviewRemarkIdList = localStorage.getItem("ReviewRemarkIdList");
+            var ReviewHostIdList = localStorage.getItem("ReviewHostIdList");
+             var reviewDetail = @Html.Raw(Json.Encode(@Request));
+            var encodedReviewDetail = encodeURIComponent(JSON.stringify(reviewDetail));
+
+             $.ajax({
+             type: 'POST',
+             async: true,
+             url: '@Url.Action("ReviewDetails", "ReviewManagement")',
+             dataType: 'json',
+             data: {
+                 __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                 ReviewMVPHostId: ReviewMVPHostId,
+                 ReviewDichotomousQAIdList: JSON.parse(ReviewDichotomousQAIdList),
+                 ReviewRemarkIdList: JSON.parse(ReviewRemarkIdList),
+                 ReviewHostIdList: JSON.parse(ReviewHostIdList),
+                 Request: encodedReviewDetail,
+                 RatingScale: rating
+             },
+                 success: function (data) {
+                     if (data.redirectToUrl != null && data.redirectToUrl != "") {
+                          window.location.href = data.redirectToUrl;
+                     }
+                     else {
+                         window.location.reload();
+                     }
+             },
+                 error: function (ex) {
+                     window.location.reload();
+             }
+         });
+        }
+
+        function SelectedHostDisplayFunction() {
+            var ReviewMVPHostId = localStorage.getItem("ReviewMVPHostId");
+            var SelectedHostDetailList = JSON.parse(localStorage.getItem("SelectedHostDetailList"));
+            var targetElement = document.getElementById("selected-host-id");
+            var newHTMLContent = '';
+            for (var i = 0; i < SelectedHostDetailList.length; i++) {
+                let dataArray = [];
+                dataArray.push(SelectedHostDetailList[i].split(','));
+                var value = dataArray[0];
+                if (ReviewMVPHostId != null && ReviewMVPHostId != "" && ReviewMVPHostId === value[0]) {
+                    if (value[1] != null && value[1] != "") {
+                        newHTMLContent += `<img class="inline-block h-[26px] w-[26px] rounded-full border-2 border-[#DAA51E]"
+                 src="` + value[1] + `"
+                 alt="">
+                 <i class="las la-crown text-[#DAA51E] absolute top-[-9px] left-[22.3px] rotate-[26deg] text-xs "></i>`;
+                    }
+                    else {
+                        newHTMLContent += `<img class="inline-block h-[26px] w-[26px] rounded-full border-2 border-[#DAA51E]"
+                src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                alt="">
+                <i class="las la-crown text-[#DAA51E] absolute top-[-9px] left-[22.3px] rotate-[26deg] text-xs "></i>`;
+                    }
+                    continue;
+                }
+                if (value[1] != null && value[1] != "") {
+                    newHTMLContent += `<img class="inline-block h-6 w-6 rounded-full border-2 border-white"
+                   src="` + value[1] + `"
+                  alt="">`;
+                }
+                else {
+                    newHTMLContent += `<img class="inline-block h-6 w-6 rounded-full border-2 border-white"
+             src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+             alt="">`;
+
+                }
+            }
+            //newHTMLContent += `<div class="relative inline-flex items-center justify-center w-6 h-6 overflow-hidden bg-primary text-white rounded-full border-2 border-white">
+            //      <span class="font-medium text-[8px] ">+9</span>
+            //  </div>`;
+            targetElement.innerHTML = newHTMLContent;
+        }
+
+        function RemarksDisplayFunction() {
+            var ReviewRemarkDisplayLabelList = JSON.parse(localStorage.getItem("ReviewRemarkDisplayLabelList"));
+            var targetElement = document.getElementById("selected-remark-id");
+            var newHTMLContent = '';
+            for (var i = 0; i < ReviewRemarkDisplayLabelList.length; i++) {
+                newHTMLContent += `<div class="review-experience h-[19px] mb-0 text-[10px] active">` + ReviewRemarkDisplayLabelList[i] + `</div>`;
+            }
+            targetElement.innerHTML = newHTMLContent;
+        }
+
+        function DichotomousQADisplayFunction() {
+            var ReviewDichotomousQADisplayLabelList = JSON.parse(localStorage.getItem("ReviewDichotomousQADisplayLabelList"));
+            var targetElement = document.getElementById("selected-dichotomous-qa-id");
+            var newHTMLContent = '';
+            for (var i = 0; i < ReviewDichotomousQADisplayLabelList.length; i++) {
+                let dataArray = [];
+                dataArray.push(ReviewDichotomousQADisplayLabelList[i].split(','));
+                var value = dataArray[0];
+                var splitedvalue = value[0].split(':');
+                newHTMLContent += `<div>
+                     <div class="text-xs  text-start mb-2 ">`  + splitedvalue[0]  + `</div>
+                     <div class="text-xs  font-bold text-start ">`+ splitedvalue[1] +`</div>
+                 </div>`;
+                targetElement.innerHTML = newHTMLContent;
+            }
+        }
+    </script>
+}

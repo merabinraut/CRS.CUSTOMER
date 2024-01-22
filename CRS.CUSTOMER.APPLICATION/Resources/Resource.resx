@@ -1,0 +1,1269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutTheStoreExperience" xml:space="preserve">
+    <value>About the store experience</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Accompanying Fee" xml:space="preserve">
+    <value>Accompanying Fee</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="ActivityLogs" xml:space="preserve">
+    <value>Activity Logs</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Add Card" xml:space="preserve">
+    <value>Add Card</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Add Methods" xml:space="preserve">
+    <value>Add Methods</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Affiliate Registration" xml:space="preserve">
+    <value>Affiliate Registration</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="All fields are required" xml:space="preserve">
+    <value>All fields are required</value>
+  </data>
+  <data name="Allow" xml:space="preserve">
+    <value>Allow</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Allow Location" xml:space="preserve">
+    <value>Allow Location</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="AllPaymentMethods" xml:space="preserve">
+    <value>All Payment Methods</value>
+    <comment>Payment Method Controller</comment>
+  </data>
+  <data name="AnswerClubQuestionnaire" xml:space="preserve">
+    <value>Answer Club Questionnaire</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Are you sure you want to change the language" xml:space="preserve">
+    <value>Are you sure you want to change the language</value>
+    <comment>Language Preference</comment>
+  </data>
+  <data name="ArrivalDate" xml:space="preserve">
+    <value>Arrival Date</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="ArrivalTime" xml:space="preserve">
+    <value>Arrival Time</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="BackToPreviousPage" xml:space="preserve">
+    <value>Back to Previous Page</value>
+  </data>
+  <data name="Bank Account" xml:space="preserve">
+    <value>Bank Account</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="Birthdate" xml:space="preserve">
+    <value>Birthdate</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Birthday" xml:space="preserve">
+    <value>Birthday</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Blood Type" xml:space="preserve">
+    <value>Blood Type</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Book Now" xml:space="preserve">
+    <value>Book Now</value>
+    <comment>Location Management Index</comment>
+  </data>
+  <data name="BookingHistory" xml:space="preserve">
+    <value>Booking History</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Bookmark" xml:space="preserve">
+    <value>Bookmarks</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="BookNow" xml:space="preserve">
+    <value>Book Now</value>
+  </data>
+  <data name="BookWithThisPlan" xml:space="preserve">
+    <value>Book With This Plan</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="By Club Category" xml:space="preserve">
+    <value>By Club Category</value>
+    <comment>Search FIlter</comment>
+  </data>
+  <data name="By Previous Occupation" xml:space="preserve">
+    <value>By Previous Occupation</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="Card" xml:space="preserve">
+    <value>Card</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="Card holder s Name" xml:space="preserve">
+    <value>Card holder's Name</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Card number" xml:space="preserve">
+    <value>Card number</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Card Type" xml:space="preserve">
+    <value>Card Type</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Choose Rank" xml:space="preserve">
+    <value>Choose Rank</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="ChooseFromLocation" xml:space="preserve">
+    <value>Choose from Location</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="ChooseYourFavoriteHost" xml:space="preserve">
+    <value>CHOOSE YOUR FAVORITE HOST</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Club" xml:space="preserve">
+    <value>Club</value>
+    <comment>Location Management</comment>
+  </data>
+  <data name="Club Details" xml:space="preserve">
+    <value>Club Details</value>
+    <comment>Location Management Controller (Club Detail View)</comment>
+  </data>
+  <data name="Club recommended for you" xml:space="preserve">
+    <value>Club recommended for you</value>
+    <comment>Club Filter</comment>
+  </data>
+  <data name="ClubDetails" xml:space="preserve">
+    <value>Club Details</value>
+  </data>
+  <data name="ClubReservation" xml:space="preserve">
+    <value>Club Reservation</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="ClubReview" xml:space="preserve">
+    <value>Club review</value>
+  </data>
+  <data name="Clubs" xml:space="preserve">
+    <value>Clubs</value>
+    <comment>Club Detail</comment>
+  </data>
+  <data name="ClubTop" xml:space="preserve">
+    <value>Club Top</value>
+  </data>
+  <data name="Commented On" xml:space="preserve">
+    <value>Commented On</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+    <comment>Language Preference</comment>
+  </data>
+  <data name="Confirm Password" xml:space="preserve">
+    <value>Confirm Password</value>
+    <comment>Create Password Page</comment>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="ConfirmReview" xml:space="preserve">
+    <value>Confirm Review</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="ConfirmTheClubYouVisitedThisTime" xml:space="preserve">
+    <value>Confirm the club you visited this time.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="ConfirmTheHostsThatWereInCharge" xml:space="preserve">
+    <value>Confirm the hosts that were in charge.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Constellation" xml:space="preserve">
+    <value>Constellation</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Country/Region" xml:space="preserve">
+    <value>Country/Region</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Cozy" xml:space="preserve">
+    <value>Cozy</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="Create New Password" xml:space="preserve">
+    <value>Create New Password</value>
+    <comment>Create Password Page</comment>
+  </data>
+  <data name="CreateNewPassword" xml:space="preserve">
+    <value>Create New Password</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="Currently Linked" xml:space="preserve">
+    <value>Currently Linked</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="CustomerInformation" xml:space="preserve">
+    <value>Customer Information</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="CVV" xml:space="preserve">
+    <value>CVV</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>DATE</value>
+  </data>
+  <data name="Date of birth" xml:space="preserve">
+    <value>Date of Birth</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="DayByDay" xml:space="preserve">
+    <value>Day By Day</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="DeleteYourAccount" xml:space="preserve">
+    <value>Delete Account</value>
+  </data>
+  <data name="DetailedInformationOfClub" xml:space="preserve">
+    <value>Detailed information of club.</value>
+  </data>
+  <data name="Did not get a code" xml:space="preserve">
+    <value>Didn’t get a code?</value>
+    <comment>Otp Page</comment>
+  </data>
+  <data name="Do not have an account" xml:space="preserve">
+    <value>Don't have an account ?</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Do you need this information when saving a credit card" xml:space="preserve">
+    <value>Do you need this information when saving a credit card?</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="DOB" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+  <data name="Drink" xml:space="preserve">
+    <value>Drink</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="Enter 6 digit code sent in sms" xml:space="preserve">
+    <value>Enter 6 digit code sent in sms</value>
+    <comment>Verify OTP</comment>
+  </data>
+  <data name="Enter nickname" xml:space="preserve">
+    <value>Enter nickname</value>
+    <comment>Register Controller</comment>
+  </data>
+  <data name="Enter Phone Number" xml:space="preserve">
+    <value>Enter Phone Number</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="Excluding Tax" xml:space="preserve">
+    <value>Excluding Tax</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="ExperienceAboutClub" xml:space="preserve">
+    <value>Experience about club</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Expiry Date" xml:space="preserve">
+    <value>Expiry Date</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Extended Course" xml:space="preserve">
+    <value>Extended Course</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>FAQ</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="Find a Host" xml:space="preserve">
+    <value>Find a Host</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="FindAHostClub" xml:space="preserve">
+    <value>Search Host Club</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Forget password" xml:space="preserve">
+    <value>Forget password?</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Former Job" xml:space="preserve">
+    <value>Former Job</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Fri</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>Gallery</value>
+    <comment>Location Management Controller (Club Detail View)</comment>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="GivenName" xml:space="preserve">
+    <value>Given Name</value>
+  </data>
+  <data name="GoBackToPreviousPage" xml:space="preserve">
+    <value>Go Back To Previous Page</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Holiday" xml:space="preserve">
+    <value>Holiday</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+    <comment>Club Detail</comment>
+  </data>
+  <data name="Hoslog" xml:space="preserve">
+    <value>Hoslog</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Hoslog Limited Plan" xml:space="preserve">
+    <value>Hoslog Limited Plan</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="HoslogLimitedPlan" xml:space="preserve">
+    <value>Hoslog Limited Plan</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="Host" xml:space="preserve">
+    <value>Host</value>
+    <comment>Location Management</comment>
+  </data>
+  <data name="Host Blood Type" xml:space="preserve">
+    <value>Host Blood Type</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Host Constellation Group" xml:space="preserve">
+    <value>Host Constellation Group</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Host Height" xml:space="preserve">
+    <value>Host Height</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Host in charge" xml:space="preserve">
+    <value>Host in charge</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Host Liquor Strength" xml:space="preserve">
+    <value>Host Liquor Strength</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Host Ranking" xml:space="preserve">
+    <value>Host Ranking</value>
+    <comment>Location Management Controller (Club Detail View)</comment>
+  </data>
+  <data name="Host Recommended for you" xml:space="preserve">
+    <value>Hosts recommended for you</value>
+    <comment>Host Search</comment>
+  </data>
+  <data name="HostClubs" xml:space="preserve">
+    <value>host clubs</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="HostDetail" xml:space="preserve">
+    <value>Host Detail</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Host_in_charge_Info_Icon" xml:space="preserve">
+    <value>The 'assigned host' is a user-selected option. Please note that the platform does not guarantee its authenticity from the operational side.</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Hour</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="HourSystem" xml:space="preserve">
+    <value>Hour System</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="I Agree to Continue" xml:space="preserve">
+    <value>I Agree to Continue</value>
+  </data>
+  <data name="IncludingTax" xml:space="preserve">
+    <value>(including tax)</value>
+    <comment>Review</comment>
+  </data>
+  <data name="Inquiry" xml:space="preserve">
+    <value>Inquiry</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Invalid Email" xml:space="preserve">
+    <value>Please enter a valid email address</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="Invalid_mobile_number" xml:space="preserve">
+    <value>Invalid mobile number</value>
+    <comment>Register</comment>
+  </data>
+  <data name="Is this your first time using Hoslog" xml:space="preserve">
+    <value>Is this your first time using Hoslog?</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Items</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>Japanese</value>
+    <comment>Language Management</comment>
+  </data>
+  <data name="Kenshin" xml:space="preserve">
+    <value>Kenshin</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Langauge" xml:space="preserve">
+    <value>Langauge</value>
+    <comment>Language Management</comment>
+  </data>
+  <data name="LanguagePreference" xml:space="preserve">
+    <value>Language Preference</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Last Entry" xml:space="preserve">
+    <value>Last Entry</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Last Order" xml:space="preserve">
+    <value>Last Order</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="LastEntryLastOrderTime" xml:space="preserve">
+    <value>Last Entry/ Last Order Time</value>
+  </data>
+  <data name="Length_should_be_2_characters" xml:space="preserve">
+    <value>Length should be 2 characters</value>
+  </data>
+  <data name="Length_should_be_4_characters" xml:space="preserve">
+    <value>Length should be 4 characters</value>
+  </data>
+  <data name="ListOfHosts" xml:space="preserve">
+    <value>List of hosts</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Login with mobile" xml:space="preserve">
+    <value>Login with mobile</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="Mark all as read" xml:space="preserve">
+    <value>Mark all as read</value>
+    <comment>Notification Management</comment>
+  </data>
+  <data name="MarkThis" xml:space="preserve">
+    <value>Mark This</value>
+  </data>
+  <data name="Maximum length is 16 characters" xml:space="preserve">
+    <value>Maximum length is 16 characters</value>
+  </data>
+  <data name="Maximum length is 30 characters" xml:space="preserve">
+    <value>Maximum length is 30 characters</value>
+  </data>
+  <data name="Maximum length is 4 characters" xml:space="preserve">
+    <value>Maximum length is 4 characters</value>
+  </data>
+  <data name="Met handsome host" xml:space="preserve">
+    <value>Met handsome host</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="Minimum length is 1 characters" xml:space="preserve">
+    <value>Minimun length is 1 characters</value>
+  </data>
+  <data name="Minimum length is 11 characters" xml:space="preserve">
+    <value>Minimum length is 11 characters</value>
+    <comment>Register</comment>
+  </data>
+  <data name="Minimum length is 4 characters" xml:space="preserve">
+    <value>Minimun length is 4 characters</value>
+  </data>
+  <data name="Minimum length is 8 characters" xml:space="preserve">
+    <value>Minimum length is 8 characters</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Minutes</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Mobile</value>
+    <comment>Register</comment>
+  </data>
+  <data name="MobileNumber" xml:space="preserve">
+    <value>Mobile Number</value>
+  </data>
+  <data name="MobileNumberPlaceholder" xml:space="preserve">
+    <value>Enter your mobile number</value>
+  </data>
+  <data name="MobileNumberRequired" xml:space="preserve">
+    <value>Username is required</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Mon</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="MustBeAtlest8Characters" xml:space="preserve">
+    <value>Must be atlest 8 characters</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="MVP" xml:space="preserve">
+    <value>MVP</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>My Profile</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="New Hoslog Account" xml:space="preserve">
+    <value>New Hoslog Account</value>
+  </data>
+  <data name="Newly Added Club" xml:space="preserve">
+    <value>Newly Added Club</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Nickname" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="Night" xml:space="preserve">
+    <value>Night</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Nomimation Fee" xml:space="preserve">
+    <value>Nomimation Fee</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="NoSearchRecordFound" xml:space="preserve">
+    <value>Sorry, we couldn't find any matches. Try adjusting your search criteria.</value>
+    <comment>Search</comment>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="NumberOfPeople" xml:space="preserve">
+    <value>Number of people</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="Older" xml:space="preserve">
+    <value>Older</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Old Password</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="On-site Nomination" xml:space="preserve">
+    <value>On-site Nomination</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="OnSiteNomination" xml:space="preserve">
+    <value>On-site Nomination</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="OperatingCompany" xml:space="preserve">
+    <value>Operating Company</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>or</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="OverallClubGallery" xml:space="preserve">
+    <value>Overall Club Gallery</value>
+  </data>
+  <data name="OverallExperienceAboutClub" xml:space="preserve">
+    <value>Overall Experience about Club</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Password must match" xml:space="preserve">
+    <value>Password must match</value>
+    <comment>Create Password Page</comment>
+  </data>
+  <data name="PasswordMustMatch" xml:space="preserve">
+    <value>Password must match</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
+  <data name="PaymentAmount" xml:space="preserve">
+    <value>Payment Amount</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>Payment Methods</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="PaymentOptions" xml:space="preserve">
+    <value>Payment Options</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="Phone no" xml:space="preserve">
+    <value>Phone no.</value>
+    <comment>Register Controller</comment>
+  </data>
+  <data name="Phone number to login" xml:space="preserve">
+    <value>Phone number to login</value>
+    <comment>Login</comment>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="PickMVP" xml:space="preserve">
+    <value>Pick MVP</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Plan" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="PlanB" xml:space="preserve">
+    <value>Plan B</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="Plans" xml:space="preserve">
+    <value>Plans</value>
+  </data>
+  <data name="PleaseAnswerASimpleChoiceQuestion" xml:space="preserve">
+    <value>Please answer a simple choice question.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseCheckTheReviewContent" xml:space="preserve">
+    <value>Please Check The Review Content</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseConfirmTheStoreYouVisitedThisTime" xml:space="preserve">
+    <value>Please confirm the store you visited this time</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseGiveUsYourOverallEvaluationOfTheExperience" xml:space="preserve">
+    <value>Please give us your overall evaluation of the experience.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseMakeSureThatTheReviewIsCorrect" xml:space="preserve">
+    <value>Please make sure that the review is correct.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseMakeSureThereAreNoMistakesInTheReviewTarget" xml:space="preserve">
+    <value>Please make sure there are no mistakes in the review target</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseSelectAllHostsYouRemember" xml:space="preserve">
+    <value>Please select all hosts you remember</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseSelectAllThatApplyToYourExperience" xml:space="preserve">
+    <value>Please select all that apply to your experience</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseSelectAPaymentMethod" xml:space="preserve">
+    <value>Please Select A Payment Method</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="PleaseSelectAPlan" xml:space="preserve">
+    <value>PLEASE SELECT A PLAN</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="PleaseTellUsAboutYourExperienceAtTheStore" xml:space="preserve">
+    <value>Please tell us about your experience at the store.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>points</value>
+  </data>
+  <data name="Popularity" xml:space="preserve">
+    <value>Popular</value>
+  </data>
+  <data name="PostAReviewForThisStore" xml:space="preserve">
+    <value>Post a review for this store</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Preferred Host" xml:space="preserve">
+    <value>Preferred Host</value>
+    <comment>Reservation Detail</comment>
+  </data>
+  <data name="PreferredLocation" xml:space="preserve">
+    <value>Preferred Location</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="ProceedToNext" xml:space="preserve">
+    <value>Proceed To Next</value>
+  </data>
+  <data name="ProfileInfo" xml:space="preserve">
+    <value>Profile Info</value>
+  </data>
+  <data name="QnAAboutClub" xml:space="preserve">
+    <value>QnA about Club</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Rate&amp;ReviewOtherHostClubs" xml:space="preserve">
+    <value>Rate &amp; Review other host clubs</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="RateOtherHostClubs" xml:space="preserve">
+    <value>Rate other host clubs</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Re-selectTheHost" xml:space="preserve">
+    <value>Re-select the host</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Re-SelectYourHost" xml:space="preserve">
+    <value>Re-select your host</value>
+  </data>
+  <data name="RecommendedClub" xml:space="preserve">
+    <value>Recommended Club</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="RecommendedHosts" xml:space="preserve">
+    <value>Recommended Hosts</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="Regions" xml:space="preserve">
+    <value>Regions</value>
+    <comment>Location Management/Search Filter</comment>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Register an Account" xml:space="preserve">
+    <value>Register an Account</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Regular Price" xml:space="preserve">
+    <value>Regular Price</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Remember me" xml:space="preserve">
+    <value>Remember me</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Request a new code" xml:space="preserve">
+    <value>Request a new code</value>
+    <comment>Otp Page</comment>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="Reservable" xml:space="preserve">
+    <value>Reservable</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="ReservationContents" xml:space="preserve">
+    <value>Reservation Contents</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="ReservationDate" xml:space="preserve">
+    <value>Reservation Date</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="ReservationDetails" xml:space="preserve">
+    <value>Reservation details</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="ReservationHistory" xml:space="preserve">
+    <value>Reservation History</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Review</value>
+    <comment>Location Management Controller (Club Detail View)</comment>
+  </data>
+  <data name="ReviewAndComments" xml:space="preserve">
+    <value>Review &amp; Comments</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="ReviewClub" xml:space="preserve">
+    <value>Review Club</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="ReviewWhatYouThinkAboutTheClub" xml:space="preserve">
+    <value>Review what you think about the club?</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="RookieKingSalesNo1" xml:space="preserve">
+    <value>Rookie King Sales No.1</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Sat</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Search By" xml:space="preserve">
+    <value>Search By</value>
+    <comment>Location Management/ Search Filter</comment>
+  </data>
+  <data name="Search by Handsomeness" xml:space="preserve">
+    <value>Search by Handsomeness</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Search by nearest store" xml:space="preserve">
+    <value>Search by nearest store</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Search Filter" xml:space="preserve">
+    <value>Search Filter</value>
+    <comment>Location Management/ Search Filter</comment>
+  </data>
+  <data name="Search Filter Placeholder" xml:space="preserve">
+    <value>Search by store name, host name, or keyword</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Search Results" xml:space="preserve">
+    <value>Search Results</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="SearchFromOver" xml:space="preserve">
+    <value>Search from over</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="SearchHostClub" xml:space="preserve">
+    <value>Search host club</value>
+    <comment>Landing Page</comment>
+  </data>
+  <data name="See more" xml:space="preserve">
+    <value>See more</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Select Language" xml:space="preserve">
+    <value>Select Language</value>
+    <comment>Language Management</comment>
+  </data>
+  <data name="SelectAccordingToYourExperience" xml:space="preserve">
+    <value>Select according to your experience.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="SelectAllTheHostsYouRemember" xml:space="preserve">
+    <value>Select all the hosts you remember.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="SelectedHost" xml:space="preserve">
+    <value>Selected host</value>
+  </data>
+  <data name="SelectedPlan" xml:space="preserve">
+    <value>Selected Plan</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="SelectMultipleResponseAboutTheOverallClubAndHostsImpressions" xml:space="preserve">
+    <value>Select multiple response about the overall club and host’s impressions.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Service</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="Set up a new password to login" xml:space="preserve">
+    <value>Set up new password to login</value>
+    <comment>Create Password Page</comment>
+  </data>
+  <data name="SetupNewPasswordToLogin" xml:space="preserve">
+    <value>Setup new password to login</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="Shift" xml:space="preserve">
+    <value>Shift</value>
+    <comment>Location Management/Search Filter</comment>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="Strength of Alcohol" xml:space="preserve">
+    <value>Strength of Alcohol</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Stripe" xml:space="preserve">
+    <value>Stripe</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Sun</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="TaxIncluded" xml:space="preserve">
+    <value>Including tax</value>
+  </data>
+  <data name="TellUsAboutYourClubExperience" xml:space="preserve">
+    <value>Tell us about your club experience.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Terms of Use and Privacy Policy" xml:space="preserve">
+    <value>Terms of Use and Privacy Policy</value>
+  </data>
+  <data name="Thank you for your visit!" xml:space="preserve">
+    <value>Thank you for your visit!</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="The code will be sent through SMS" xml:space="preserve">
+    <value>The code will be sent through SMS</value>
+    <comment>Register</comment>
+  </data>
+  <data name="TheAmountOfMoneyForPayment" xml:space="preserve">
+    <value>The amount of money for payment</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="There are seats available today" xml:space="preserve">
+    <value>There are seats available today</value>
+    <comment>Location Management Index</comment>
+  </data>
+  <data name="TheSelectedTagWillBeUsedAsTheTitleOfTheReview" xml:space="preserve">
+    <value>The selected tag will be used as the title of the review.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="TheSelectedTagWillBeUsedInTheTitleOfTheReview" xml:space="preserve">
+    <value>The selected tag will be used in the title of the review</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="ThisTagWillBeUsedForTheReviewTitle" xml:space="preserve">
+    <value>This tag will be used for the review title</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="This_field_is_required" xml:space="preserve">
+    <value>This field is required</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Thu</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="TimeChange" xml:space="preserve">
+    <value>Change Time</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="ToConfirmAge" xml:space="preserve">
+    <value>To confirm age</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="Top Reviews" xml:space="preserve">
+    <value>Top Reviews</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="TopPage" xml:space="preserve">
+    <value>Top Page</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="TopRanking" xml:space="preserve">
+    <value>Top Ranking</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Tue</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="Unreservable" xml:space="preserve">
+    <value>Unreservable</value>
+  </data>
+  <data name="UpdateYourProfile" xml:space="preserve">
+    <value>Update your profile</value>
+  </data>
+  <data name="UpToPerson" xml:space="preserve">
+    <value>Up To Person</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="UsedPoints" xml:space="preserve">
+    <value>Used Points</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="UserGuide" xml:space="preserve">
+    <value>User Guide</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Various Drinks" xml:space="preserve">
+    <value>Various Drinks</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Visited Date" xml:space="preserve">
+    <value>Visited Date</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="Visited On" xml:space="preserve">
+    <value>Visited On</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="WarningNotes" xml:space="preserve">
+    <value>This site strictly prohibits viewing by anyone under the age of 18. Additionally, drinking alcohol for those under 20 years of age is prohibited by law.</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Wed</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="WeWillTryToBookYourSelectedHost" xml:space="preserve">
+    <value>We will try to book your selected host.</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="WhatDoYouMostWantToConveyThisTime" xml:space="preserve">
+    <value>What do you most want to convey this time?</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="WhatIWantToConveyMost" xml:space="preserve">
+    <value>What I want to convey most</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="WhoWasTheMostImpressiveHost" xml:space="preserve">
+    <value>Who was the most impressive host?</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Wish to revisit" xml:space="preserve">
+    <value>Wish to revisit</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="Working Hours" xml:space="preserve">
+    <value>Working Hours</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="WorkingHoursHoliday" xml:space="preserve">
+    <value>Working hours &amp; Holiday</value>
+  </data>
+  <data name="You have no Notifications yet" xml:space="preserve">
+    <value>You have no Notifications yet.</value>
+    <comment>Notification Management</comment>
+  </data>
+  <data name="You will earn 500 points" xml:space="preserve">
+    <value>You will earn 500 points</value>
+    <comment>Reservation Detail</comment>
+  </data>
+  <data name="YouCanAnswerMultipleAnswersAboutTheOverallAtmosphereAndImpressionsOfTheHost" xml:space="preserve">
+    <value>You can answer multiple answers about the overall atmosphere and impressions of the host.</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="YouHaveNoNotificationYet" xml:space="preserve">
+    <value>You have no notification yet.</value>
+    <comment>Notification Controller</comment>
+  </data>
+  <data name="YouHaveNoReviewCommentsYet" xml:space="preserve">
+    <value>You have no Review &amp; Comments yet.</value>
+    <comment>Review Nav</comment>
+  </data>
+</root>

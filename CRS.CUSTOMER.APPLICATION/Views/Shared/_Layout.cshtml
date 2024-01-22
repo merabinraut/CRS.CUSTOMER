@@ -1,0 +1,386 @@
+﻿<!-- #region Header -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/assets/css/tailwind.css">
+    <link rel="stylesheet" href="~/Content/assets/css/customer/global.css">
+    <link rel="stylesheet" href="~/Content/assets/css/customer/club.css">
+    <link rel="stylesheet" href="~/Content/assets/css/customer/customcss.css">
+    <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+    <script src="~/Content/assets/js/owl.carousel.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/Content/js/NotificationMessageToaster.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z189BCRTWP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-Z189BCRTWP');
+    </script>
+    <title>Hoslog | @ViewBag.Title</title>
+</head>
+<body class="md:hidden">
+    <!-- #endregion -->
+    <!-- #region Navbar -->
+    <div class="flex flex-col  justify-between h-screen">
+        <div>
+            @if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && ViewBag.ActionPageName == "Dashboard")
+            {
+                Html.RenderPartial("_HomePageNavMenu");
+            }
+            else if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && ViewBag.ActionPageName == "NavMenu")
+            {
+                Html.RenderPartial("_NavMenu");
+            }
+            else if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && ViewBag.ActionPageName == "NotificationNavNavMenu")
+            {
+                Html.RenderPartial("_NotificationNavMenu");
+            }
+            else if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && ViewBag.ActionPageName == "SearchNavMenu")
+            {
+                Html.RenderPartial("_SearchFilterNavMenu");
+            }
+            else if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && ViewBag.ActionPageName == "ClubHostDetailNavMenu")
+            {
+                Html.RenderPartial("_ClubHostDetailNavMenu");
+            }
+
+            <!-- drawer init and toggle -->
+            <!-- drawer component -->
+            <div id="drawer-right-example"
+                 class="fixed top-0 right-0 z-[60] h-screen  overflow-y-auto transition-transform translate-x-full bg-white w-[90%] "
+                 tabindex="-1" aria-labelledby="drawer-right-label">
+                <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
+                        class="fixed top-[16px] left-[1px] flex justify-center items-center h-[24px] w-[24px] rounded-full bg-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M13.3002 0.710001C12.9102 0.320001 12.2802 0.320001 11.8902 0.710001L7.00022 5.59L2.11022 0.700001C1.72022 0.310001 1.09021 0.310001 0.700215 0.700001C0.310215 1.09 0.310215 1.72 0.700215 2.11L5.59022 7L0.700215 11.89C0.310215 12.28 0.310215 12.91 0.700215 13.3C1.09021 13.69 1.72022 13.69 2.11022 13.3L7.00022 8.41L11.8902 13.3C12.2802 13.69 12.9102 13.69 13.3002 13.3C13.6902 12.91 13.6902 12.28 13.3002 11.89L8.41021 7L13.3002 2.11C13.6802 1.73 13.6802 1.09 13.3002 0.710001Z"
+                              fill="black" />
+                    </svg>
+                </button>
+                <div class="h-full flex flex-col justify-between  overflow-y-auto bg-gray-50 ">
+                    <div class=" font-medium">
+                        <div class="border-b border-[#E7E7E7] p-2">
+                            <a href="#" class="flex items-center px-4 pt-4 group">
+
+                                @if ((Session["ProfileImage"] == null))
+                                {
+                                    <img class="rounded-full w-[40px] h-[40px] object-fill border border-[#E1E1E1]"
+                                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                                         alt="ProfileImage" />
+                                }
+                                else
+                                {
+                                    <img class="rounded-full w-[40px] h-[40px] object-fill border border-[#E1E1E1]"
+                                         src="@Session["ProfileImage"]"
+                                         alt="ProfileImage">
+                                }
+
+                                <div class="flex flex-col">
+                                    <span class="ml-[12px] text-[14px] text-[#252525]  font-[700]">
+                                        @Session["Username"]
+                                    </span>
+                                    <span class="ml-[12px] text-[14px] text-[#252525] font-[400]">
+                                        @Session["EmailAddress"]
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="@Url.Action("Index", "ProfileManagement")" class="flex h-[48px]  items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2.25C6.62402 2.25 2.25 6.62402 2.25 12C2.25 17.376 6.62402 21.75 12 21.75C17.376 21.75 21.75 17.376 21.75 12C21.75 6.62402 17.376 2.25 12 2.25ZM12 3.75C16.5645 3.75 20.25 7.43555 20.25 12C20.25 16.5645 16.5645 20.25 12 20.25C7.43555 20.25 3.75 16.5645 3.75 12C3.75 7.43555 7.43555 3.75 12 3.75ZM12 6C9.9375 6 8.25 7.6875 8.25 9.75C8.25 10.8867 8.78027 11.8975 9.58594 12.5859C7.89844 13.4619 6.75 15.2256 6.75 17.25H8.25C8.25 15.1699 9.91992 13.5 12 13.5C14.0801 13.5 15.75 15.1699 15.75 17.25H17.25C17.25 15.2256 16.1016 13.4619 14.4141 12.5859C15.2197 11.8975 15.75 10.8867 15.75 9.75C15.75 7.6875 14.0625 6 12 6ZM12 7.5C13.251 7.5 14.25 8.49902 14.25 9.75C14.25 11.001 13.251 12 12 12C10.749 12 9.75 11.001 9.75 9.75C9.75 8.49902 10.749 7.5 12 7.5Z"
+                                          fill="#E49797" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.MyProfile
+                                </span>
+                            </a>
+                        </div>
+                        <!-- is active  -->
+                        @*<div>
+                                <a href="#"
+                                   class="flex items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group bg-[#F0F0F0]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12.5156 2.25L12.2812 2.46094L7.19531 7.5H3.75V19.5H16.3828C17.4404 19.5 18.3633 18.7529 18.5859 17.7188L20.2031 10.2188C20.499 8.83301 19.415 7.5 18 7.5H13.6875L13.8281 6.9375C13.9805 6.82031 14.0771 6.77051 14.2969 6.46875C14.6484 5.98828 15 5.24414 15 4.24219C15 3.17285 14.0332 2.25 12.8203 2.25H12.5156ZM13.0547 3.82031C13.3711 3.88184 13.5 4.01074 13.5 4.24219C13.5 4.91895 13.2949 5.33789 13.1016 5.60156C12.9082 5.86523 12.7734 5.92969 12.7734 5.92969L12.5156 6.07031L12.4219 6.375L11.9766 8.0625L11.7422 9H18C18.4951 9 18.8291 9.43066 18.7266 9.91406L17.1328 17.4141C17.0566 17.7656 16.7402 18 16.3828 18H8.25V8.55469L13.0547 3.82031ZM5.25 9H6.75V18H5.25V9Z"
+                                              fill="#E49797" />
+                                    </svg>
+                                    <span class="ml-[10px] text-[14px] font-[500]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ActivityLogs</span>
+                                </a>
+                            </div>*@
+                        <div>
+                            <a href="@Url.Action("ReviewList", "ReviewManagement")" class="flex items-center h-[48px]  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M2.25 4.5V19.5H9.43945L12 22.0605L14.5605 19.5H21.75V4.5H2.25ZM3.75 6H20.25V18H13.9395L12 19.9395L10.0605 18H3.75V6ZM6.75 8.25V9.75H17.25V8.25H6.75ZM6.75 11.25V12.75H17.25V11.25H6.75ZM6.75 14.25V15.75H14.25V14.25H6.75Z"
+                                          fill="#E49797" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.ReviewAndComments
+                                </span>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="@Url.Action("History", "ReservationHistoryManagement")" class="flex h-[48px] items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 3C8.87402 3 6.11426 4.58496 4.5 7.00781V4.5H3V9.75H8.25V8.25H5.53125C6.82617 6.01465 9.22266 4.5 12 4.5C16.1514 4.5 19.5 7.84863 19.5 12C19.5 16.1514 16.1514 19.5 12 19.5C7.84863 19.5 4.5 16.1514 4.5 12H3C3 16.9629 7.03711 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.25 6V12.75H16.5V11.25H12.75V6H11.25Z"
+                                          fill="#E49797" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.BookingHistory
+                                </span>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="@Url.Action("Index", "BookmarkManagement")" class="flex h-[48px]  items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 14 18" fill="none">
+                                    <path d="M0.25 0.375V17.625L1.44531 16.7344L7 12.5625L12.5547 16.7344L13.75 17.625V0.375H0.25ZM1.75 1.875H12.25V14.625L7.44531 11.0156L7 10.6875L6.55469 11.0156L1.75 14.625V1.875Z"
+                                          fill="#E49797" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Bookmark
+                                </span>
+                            </a>
+                        </div>
+                        @*<div>
+                                <a href="/PaymentMethodManagement/Index" class="flex items-center h-[48px]  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M1.5 5.25V18H22.5V5.25H1.5ZM4.5 6.75H19.5C19.5 7.57875 20.1712 8.25 21 8.25V15C20.1712 15 19.5 15.6713 19.5 16.5H4.5C4.5 15.6713 3.82875 15 3 15V8.25C3.82875 8.25 4.5 7.57875 4.5 6.75ZM12 8.25C10.3418 8.25 9 9.762 9 11.625C9 13.488 10.3418 15 12 15C13.6582 15 15 13.488 15 11.625C15 9.762 13.6582 8.25 12 8.25ZM12 9.75C12.8265 9.75 13.5 10.5908 13.5 11.625C13.5 12.6592 12.8265 13.5 12 13.5C11.1735 13.5 10.5 12.6592 10.5 11.625C10.5 10.5908 11.1735 9.75 12 9.75ZM6.375 10.5C5.754 10.5 5.25 11.004 5.25 11.625C5.25 12.246 5.754 12.75 6.375 12.75C6.996 12.75 7.5 12.246 7.5 11.625C7.5 11.004 6.996 10.5 6.375 10.5ZM17.625 10.5C17.004 10.5 16.5 11.004 16.5 11.625C16.5 12.246 17.004 12.75 17.625 12.75C18.246 12.75 18.75 12.246 18.75 11.625C18.75 11.004 18.246 10.5 17.625 10.5Z"
+                                              fill="#E49797" />
+                                    </svg>
+                                    <span class="ml-[10px] text-[14px] font-[500]">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.PaymentMethod
+                                    </span>
+                                </a>
+                            </div>*@
+                        <div>
+                            <a href="@Url.Action("Index", "LanguageManagement")"
+                               class="flex items-center  py-[10px] px-4 border-b h-[48px]  border-[#E7E7E7] rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M3 3V16.5H7.5V21H21V7.5H16.5V3H3ZM4.5 4.5H15V7.92188L7.92188 15H4.5V4.5ZM8.25 6V6.75H6V8.25H9.70312C9.60645 9.11133 9.34277 9.79102 8.90625 10.2656C8.64844 10.1807 8.41699 10.0752 8.22656 9.96094C7.69922 9.64746 7.5 9.31348 7.5 9H6C6 9.89355 6.55078 10.6377 7.28906 11.1328C6.91992 11.2119 6.49219 11.25 6 11.25V12.75C7.33008 12.75 8.4375 12.4453 9.28125 11.8828C9.67383 11.9502 10.0723 12 10.5 12V10.5938C10.9072 9.91113 11.124 9.11426 11.2031 8.25H12V6.75H9.75V6H8.25ZM16.0781 9H19.5V19.5H9V16.0781L16.0781 9ZM15 10.3828L14.2969 12.5156L12.7969 17.0156L12.75 17.1328V18H14.25V17.3438L14.2734 17.25H15.7266L15.75 17.3438V18H17.25V17.1328L17.2031 17.0156L15.7031 12.5156L15 10.3828ZM15 15.0938L15.2109 15.75H14.7891L15 15.0938Z"
+                                          fill="#E49797" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.LanguagePreference
+                                </span>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="@Url.Action("ChangePassword", "ProfileManagement")" class="flex h-[48px]  items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M15 2.25C11.291 2.25 8.25 5.29102 8.25 9C8.25 9.38965 8.31445 9.73242 8.36719 10.0781L2.46094 15.9609L2.25 16.1953V21.75H7.5V19.5H9.75V17.25H12V15.0234C12.8848 15.457 13.916 15.75 15 15.75C18.709 15.75 21.75 12.709 21.75 9C21.75 5.29102 18.709 2.25 15 2.25ZM15 3.75C17.8916 3.75 20.25 6.1084 20.25 9C20.25 11.8916 17.8916 14.25 15 14.25C14.0918 14.25 13.1572 13.9834 12.4453 13.5938L12.2578 13.5H10.5V15.75H8.25V18H6V20.25H3.75V16.8281L9.67969 10.875L9.96094 10.6172L9.89062 10.2188C9.81445 9.76758 9.75 9.36621 9.75 9C9.75 6.1084 12.1084 3.75 15 3.75ZM16.5 6C15.6709 6 15 6.6709 15 7.5C15 8.3291 15.6709 9 16.5 9C17.3291 9 18 8.3291 18 7.5C18 6.6709 17.3291 6 16.5 6Z"
+                                          fill="#E49797" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.ChangePassword
+                                </span>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#" class="flex items-center  py-[10px] h-[48px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 3C8.75391 3 6 5.29102 6 8.25V10.5H10.5V8.25C10.5 8.13867 10.5674 7.97754 10.8281 7.80469C11.0889 7.63184 11.5137 7.5 12 7.5C12.4893 7.5 12.9141 7.63184 13.1719 7.80469C13.4297 7.97754 13.5 8.12695 13.5 8.25C13.5 8.68359 13.3594 8.98535 13.0781 9.32812C12.7969 9.6709 12.3604 10.0254 11.8828 10.4297C10.9248 11.2412 9.75 12.3721 9.75 14.25V15H14.25V14.25C14.25 13.9951 14.3438 13.8164 14.625 13.5234C14.9062 13.2305 15.3721 12.8848 15.8672 12.4688C16.8574 11.6367 18 10.3623 18 8.25C18 5.31738 15.252 3 12 3ZM12 4.5C14.5459 4.5 16.5 6.27539 16.5 8.25C16.5 9.8584 15.7676 10.5762 14.8828 11.3203C14.4404 11.6924 13.9688 12.0557 13.5469 12.4922C13.2861 12.7617 13.084 13.1133 12.9375 13.5H11.4844C11.7188 12.7412 12.1758 12.1641 12.8672 11.5781C13.3271 11.1914 13.8281 10.7871 14.25 10.2656C14.6719 9.74414 15 9.06152 15 8.25C15 7.5293 14.5723 6.93164 14.0156 6.5625C13.459 6.19336 12.7529 6 12 6C11.2441 6 10.5381 6.19336 9.98438 6.5625C9.43066 6.93164 9 7.53223 9 8.25V9H7.5V8.25C7.5 6.2373 9.44824 4.5 12 4.5ZM9.75 16.5V21H14.25V16.5H9.75ZM11.25 18H12.75V19.5H11.25V18Z"
+                                          fill="#E49797" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Help
+                                </span>
+                            </a>
+                        </div>
+                        <div class="flex items-center  py-[10px] h-[48px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <g opacity="0.6">
+                                    <path d="M12 3C7.81641 3 4.30664 5.87402 3.30469 9.75H4.85156C5.80957 6.70898 8.64844 4.5 12 4.5C16.1367 4.5 19.5 7.86328 19.5 12C19.5 16.1367 16.1367 19.5 12 19.5C8.64844 19.5 5.80957 17.291 4.85156 14.25H3.30469C4.30664 18.126 7.81641 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.5078 8.46094L10.4297 9.53906L12.1406 11.25H3V12.75H12.1406L10.4297 14.4609L11.5078 15.5391L14.5078 12.5391L15.0234 12L14.5078 11.4609L11.5078 8.46094Z" fill="#E49797" />
+                                </g>
+                            </svg>
+                            <a class="ml-[10px]  text-[14px] font-[500]"
+                               href="@Url.Action("LogOff", "Home")">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Logout
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!-- #endregion -->
+            <!----Render Body section start-->
+            <div>
+                @RenderBody()
+
+            </div>
+        </div>
+        <!--Render Body section end-->
+        <!-- #region Footer -->
+        <!-- Go up section -->
+        <button onclick="topFunction()" id="myBtn">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="Frame">
+                    <path id="Vector"
+                          d="M18 3.375C9.936 3.375 3.375 9.936 3.375 18C3.375 26.064 9.936 32.625 18 32.625C26.064 32.625 32.625 26.064 32.625 18C32.625 9.936 26.064 3.375 18 3.375ZM18 5.625C19.6257 5.62303 21.2357 5.94177 22.738 6.56297C24.2403 7.18417 25.6053 8.09563 26.7548 9.24515C27.9044 10.3947 28.8158 11.7597 29.437 13.262C30.0582 14.7643 30.377 16.3743 30.375 18C30.377 19.6257 30.0582 21.2357 29.437 22.738C28.8158 24.2403 27.9044 25.6053 26.7548 26.7548C25.6053 27.9044 24.2403 28.8158 22.738 29.437C21.2357 30.0582 19.6257 30.377 18 30.375C16.3743 30.377 14.7643 30.0582 13.262 29.437C11.7597 28.8158 10.3947 27.9044 9.24515 26.7548C8.09563 25.6053 7.18417 24.2403 6.56297 22.738C5.94177 21.2357 5.62303 19.6257 5.625 18C5.62303 16.3743 5.94177 14.7643 6.56297 13.262C7.18417 11.7597 8.09563 10.3947 9.24515 9.24515C10.3947 8.09563 11.7597 7.18417 13.262 6.56297C14.7643 5.94177 16.3743 5.62303 18 5.625ZM18 9.984L10.7925 17.1915L12.375 18.8085L16.875 14.3085V25.875H19.125V14.31L23.625 18.81L25.2075 17.19L18 9.984Z"
+                          fill="#E3AB00" />
+                </g>
+            </svg>
+
+        </button>
+        <!-- go up end  -->
+        @if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && ViewBag.ActionPageName == "Dashboard")
+        {
+            <div>
+                <div class="py-4 px-[33px] bg-primary-100 flex justify-between items-center">
+                    @{
+                        var SystemLinkModel = ApplicationUtilities.GetSessionValue("SystemLinkModel") as List<CRS.CUSTOMER.APPLICATION.Models.Home.SystemLinkModel>;
+
+                        if (SystemLinkModel != null && SystemLinkModel.Count > 0)
+                        {
+                            int i = 0;
+                            foreach (var item in SystemLinkModel)
+                            {
+                                <a href="@item.Link" target="_blank">
+                                    <img class="h-[24px] w-[24px]" src="@item.PlatformImage" />
+                                </a>
+                                bool isLastItem = ++i == SystemLinkModel.Count;
+                                if (!isLastItem)
+                                {<div class="w-[1px] h-[16px] bg-[#ffffff99]"></div>}
+                            }
+                        }
+                    }
+                </div>
+                <div class="footer bg-footer">
+                    <div class="footer-logo px-4 pt-[12px] pb-[16px]">
+                        <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo.svg" />
+                    </div>
+                    <div class="p-4">
+                        <div class="footer-link text-white grid grid-cols-2 ">
+                            <div class="grid gap-[8px]">
+                                <a href="#" class="text-xs">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.TopPage
+                                </a>
+                                <a href="#" class="text-xs">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.FindAHostClub
+                                </a>
+                                <a href="#" class="text-xs">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan
+                                </a>
+                                <a href="#" class="text-xs">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide
+                                </a>
+                                <a href="@Url.Action("faq","Footer")" class="text-xs">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
+                                </a>
+                            </div>
+                            <div class="grid gap-[12px]">
+                                <a href="@Url.Action("inquery","Footer")" class="text-xs">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry
+                                </a>
+                                <a href="@Url.Action("operatingcompany","Footer")" class="text-xs">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany
+                                </a>
+                                <a href="@Url.Action("privacypolicy","Footer")" class="text-xs">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy
+                                </a>
+                                <a href="https://affiliate.hoslog.jp/" class="text-xs">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Affiliate_Registration
+                                </a>
+                                <a href="https://hoslog.jp/" class="text-xs">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class=" my-4 p-[8px] border rounded-[4px] border-[#393939] bg-[#232323] text-xs text-center text-white">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.WarningNotes
+                        </div>
+                        <div class='text-center text-sm text-white'>©@DateTime.Now.Year-@CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog</div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('select').select2({
+                minimumResultsForSearch: Infinity
+            });
+        });
+    </script>
+    <!-- #endregion -->
+    <!-- #region Fotter-links -->
+    <script src="~/Content/assets/js/slider.js"></script>
+    <script src="~/Content/assets/js/tabs.js"></script>
+    <script src="~/Content/assets/js/toogle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
+            integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    <script>
+        // Get the button
+        let mybutton = document.getElementById("myBtn");
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction()
+        };
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
+    <script>
+    //For toaster Notification
+    $(function () {
+    {
+        @if (TempData["Notifications"] != null)
+        {
+            var messages = (List<CRS.CUSTOMER.SHARED.NotificationModel>)TempData["Notifications"];
+            foreach (var note in messages)
+            {
+                <text>showNotification("@note.Message", "@note.Title", "@note.NotificationType");</text>
+            }
+
+        }
+        @{
+            ViewBag.Notifications = string.Empty;
+        }
+        }
+    });
+
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<!-- #endregion -->

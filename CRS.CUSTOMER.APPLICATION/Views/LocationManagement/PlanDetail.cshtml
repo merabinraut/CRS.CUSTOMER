@@ -1,0 +1,119 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationManagement.ReservationPlanListModel
+@{
+    ViewBag.Title = "Plan Detail";
+    Layout = "~/Views/Shared/_Reservation-Layout.cshtml";
+}
+<!-- #region Plan Section -->
+<div class="flex  h-screen flex-col	bg-[#F8F8F8] relative h-screen overflow-hidden">
+    <div class="no-scrollbar overflow-y-scroll pb-[80px]">
+        <div class="flex items-center border-t-[2px] border-t-[#C8B477] border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
+            <div class="flex gap-2 items-center absolute top-[12px] left-4 text-sm" onclick="history.go(-1); return false;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
+                          fill="#BCB08A" />
+                </svg><a class="text-[#292F33]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back</a>
+            </div>
+            <div class="text-center w-full font-bold">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog</div>
+        </div>
+        <div class="py-[8px] px-4 bg-[#E5E5E5] text-xs font-bold">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.PleaseSelectAPlan
+        </div>
+        <div class="px-4 py-[24px] grid gap-4 reservationplan-class pb-12">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ClubId)
+            @{
+                var i = 1;
+            }
+            @foreach (var item in Model.ReservationPlanDetailModel)
+            {
+                <div class="reservation-plan" id="reservation-plan-@i">
+                    @Html.HiddenFor(model => item.PlanId)
+                    @if (i == 1)
+                    {
+                        <div class="banner">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path d="M0 0H40V40L20 30.4167L0 40V0Z" fill="#CC527A" />
+                            </svg>
+                            <p>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Popularity</p>
+                        </div>
+                    }
+
+                    <div class="circle"></div>
+                    <div class="text-primary text-sm pb-[12px] plan-time-class">@item.PlanTime</div>
+                    <div class="text-[#282828] text-[32px] font-bold price-class">@item.Price</div>
+                    <div class="text-xs text-[#878787] pb-[12px] plan-name-class">@item.PlanName</div>
+                    <div class="text-xs text-[#878787] pb-[12px] liquor-class">@item.Liquor</div>
+                    <div class="middle-title nomination-class">@item.Nomination</div>
+                    @if (!string.IsNullOrEmpty(item.Remarks))
+                    {
+                        <div class="text-[#1E1B1B] text-sm remarks-class">@item.Remarks</div>
+                    }
+                </div>
+                i++;
+            }
+        </div>
+    </div>
+
+    <div class="py-[11px] px-4 flex gap-2 h-[64px] shadow-reservation  w-full bg-white fixed bottom-0 left-0">
+        <button class="btn" onclick="history.back()">
+            <a class="text-[#292F33]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back</a>
+        </button>
+        <button class="btn btn-primary" onclick="SubmitFunction();">
+            <a class="h-full w-full">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Next
+            </a>
+        </button>
+    </div>
+
+</div>
+@section scripts
+{
+    <script src="~/Content/CustomHelper.js"></script>
+    <script>
+        // Get all the div elements
+        var divs = document.querySelectorAll('.reservation-plan');
+
+        // Add click event listeners to each div
+        divs.forEach(function (div) {
+            div.addEventListener('click', function () {
+                // Remove the 'bg-red' class from all divs
+                divs.forEach(function (d) {
+                    d.classList.remove('active');
+                });
+                // Add the 'bg-red' class to the clicked div
+                this.classList.add('active');
+            });
+        });
+    </script>
+    <script>
+        $(".default_select").select2({
+            minimumResultsForSearch: Infinity
+        });
+    </script>
+    <script>
+        function SubmitFunction() {
+            var PlanId = $('.reservationplan-class .active #item_PlanId').val();
+            var ClubId = $('#ClubId').val();
+            if (PlanId === null || PlanId === "" || PlanId === undefined) {
+                toastr.info('Plan is required');
+                return false;
+            }
+            var PlanTime = $('.reservationplan-class .active .plan-time-class').html();
+            var Price = $('.reservationplan-class .active .price-class').html();
+            var Remarks = $('.reservationplan-class .active .remarks-class').html();
+            var PlanName = $('.reservationplan-class .active .plan-name-class').html();
+            var NoOfHost = $('.reservationplan-class .active .nomination-class').html();
+            var LiquorAvailability = $('.reservationplan-class .active .liquor-class').html();
+            DataStorageFunction(PlanTime, Price, Remarks, PlanName, LiquorAvailability);
+            window.location.href = "/LocationManagement/HostDetail?PlanId=" + PlanId + "&&ClubId=" + ClubId + "&NoOfHost=" + NoOfHost;
+        }
+        const DataStorageFunction = (i, j, k, l, m) => {
+            localStorage.setItem("PlanTime", EncryptParameter(i));
+            localStorage.setItem("Price", EncryptParameter(j));
+            localStorage.setItem("Remarks", EncryptParameter(k));
+            localStorage.setItem("PlanName", EncryptParameter(l));
+            localStorage.setItem("LiquorAvailability", EncryptParameter(m));
+        }
+    </script>
+    <!-- #endregion -->
+}

@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "Add Credit Card";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form action="">
+    <div class="px-4 py-[12px] grid border-t border-[#EFEFEF] ">
+        <p style="line-height: 18px;" class="font-[700] text-[16px]">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Add_Card
+        </p>
+        <div class="flex flex-col mt-[16px] ">
+            <label class="text-[14px] font-[500] text-[#535353] mb-[10px]" for="fname">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Card_number
+                <span class="text-[#D32F2F]">*</span>
+            </label>
+            <div class="buttonIn input-field-common">
+                <input type="text" id="CardInput" name="card-number" placeholder="0000-0000-0000-0000"
+                       oninput="formatCardNumber(this)"
+                       class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] h-[40px] w-full">
+
+                <button id="clearButton" style="display: none;" onclick="clearInput()">
+                    <svg xmlns="
+                http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM4.0436 4.98361L5.02452 4L8.0109 6.99454L10.9755 4.02186L11.9564 5.00546L8.99183 7.97814L12 10.9945L11.0191 11.9781L8.0109 8.96175L4.98093 12L4 11.0164L7.02997 7.97814L4.0436 4.98361Z"
+                              fill="#B9B9B9" />
+                    </svg>
+                </button>
+            </div>
+            <div class="input-field-common my-[10px] grid">
+                <label class="text-[14px] font-[500] text-[#535353] my-[10px] " for="fname">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Card_holder_s_Name
+                    <span class="text-[#D32F2F]">*</span>
+                </label>
+                <div class="buttonIn">
+                    <input type="text" id="CardNameInput" placeholder="Enter Your Name" oninput="formatCardName(this)"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] h-[40px] w-full">
+                    <button id="clearNameButton" style="display: none;" onclick="clearNameInput()">
+                        <svg xmlns="
+    http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM4.0436 4.98361L5.02452 4L8.0109 6.99454L10.9755 4.02186L11.9564 5.00546L8.99183 7.97814L12 10.9945L11.0191 11.9781L8.0109 8.96175L4.98093 12L4 11.0164L7.02997 7.97814L4.0436 4.98361Z"
+                                  fill="#B9B9B9" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div class="grid grid-cols-2 gap-[8px]">
+            <div class="flex flex-col input-field-common">
+                <label class="text-[14px] font-[500] text-[#535353] my-[10px]" for="fname">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Expiry_Date
+                    <span class="text-[#D32F2F]">*</span>
+                </label>
+                <input class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] h-[40px] " type="text">
+            </div>
+            <div class="flex flex-col input-field-common">
+                <label class="text-[14px] font-[500] text-[#535353] my-[10px]" for="fname">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.CVV
+                    <span class="text-[#D32F2F]">*</span>
+                </label>
+                <input class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] h-[40px] " type="text">
+            </div>
+        </div>
+        <label class="text-[14px] font-[500] text-[#535353] my-[10px]">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Country_Region
+        </label>
+        <div class=" grid input-field-common">
+            <select id="id_select2_schedule_status"
+                    style="width: 100%; border-radius:3px; border-color:#BEBEBE ; padding:11px;" class="text-[#B7B7B7]">
+
+                <option data-img_src="../../../assets/images/japanflag.svg" value="japan">
+                    Japan
+                </option>
+
+                <option data-img_src="../../../assets/images/in.svg" value="india">
+                    India
+                </option>
+                <option data-img_src="../../../assets/images/cn.svg" value="china">China</option>
+                <option data-img_src="../../../assets/images/kp.svg" value="korea">Korea</option>
+                <option data-img_src="../../../assets/images/us.svg" value="usa">Usa</option>
+            </select>
+
+        </div>
+        <div class="flex flex-row items-center mt-[10px]">
+            <input style="color:#D75A8B; border-color:#D75A8B; height:12px;width:12px;" type="checkbox">
+            <span style="line-height: 18px;" for="checkbox" class=" ml-[4px]  font-[400] text-[10px] text-[#535353]">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Do_you_need_this_information_when_saving_a_credit_card
+            </span>
+        </div>
+    </div>
+    <button type="submit" id="fixedpos"
+            class="flex rounded-full justify-center items-center text-white h-[48px]  bg-[#D75A8B]  mx-[16px]">
+        <p class="ml-2 text-[14px]">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
+        </p>
+    </button>
+</form>
+<script type="text/javascript">
+    function custom_template(obj) {
+        var data = $(obj.element).data();
+        var text = $(obj.element).text();
+        if (data) {
+            img_src = data['img_src'];
+            template = $("<div style=\"display: flex; gap:6px; align-items: center; justify-content: start;\"><img src=\"" +
+                img_src +
+                "\" style=\"width:16px;height:16px;\"/><p style=\"font-size:14px;text-align:center; color:#000;\">" +
+                text + "</p></div>");
+            return template;
+        }
+    }
+    var options = {
+        'templateSelection': custom_template,
+        'templateResult': custom_template,
+    }
+    $('#id_select2_schedule_status').select2(options);
+    $('.select2-container--default .select2-selection--single').css({
+        'height': '44px',
+        "display": 'flex',
+        "align-items": 'center'
+    });
+</script>
+<script>
+    function addHyphen() {
+        let input = document.getElementById("cardNumber");
+        let num = input.value.replace(/\D/g, '');
+        if (num.length > 4) {
+            num = num.substring(0, 4) + '-' + num.substring(4);
+        }
+        input.value = num;
+    }
+
+    function clearInput() {
+        document.getElementById("cardNumber").value = "";
+    }
+</script>
+<!-- for  card  -->
+<script>
+    function formatCardNumber(input) {
+        let formattedInput = input.value.replace(/\D/g, '');
+        let clearButton = document.getElementById('clearButton');
+        if (formattedInput.length > 0) {
+            clearButton.style.display = 'block';
+        } else {
+            clearButton.style.display = 'none';
+        }
+        let parts = [];
+        for (let i = 0; i < formattedInput.length && i < 16; i += 4) {
+            parts.push(formattedInput.substring(i, i + 4));
+        }
+        input.value = parts.join('-');
+    }
+    function clearInput() {
+        let input = document.getElementById('CardInput');
+        input.value = '';
+        document.getElementById('clearButton').style.display = 'none';
+    }
+</script>
+<!-- for  card number  -->
+<script>
+    function formatCardName(input) {
+        let formattedInput = input.value;
+        let clearButton = document.getElementById('clearNameButton');
+
+        if (formattedInput.length > 0) {
+            clearButton.style.display = 'block';
+        } else {
+            clearButton.style.display = 'none';
+        }
+    }
+
+    function clearNameInput() {
+        let input = document.getElementById('CardNameInput');
+        input.value = '';
+        document.getElementById('clearNameButton').style.display = 'none';
+    }
+</script>
+

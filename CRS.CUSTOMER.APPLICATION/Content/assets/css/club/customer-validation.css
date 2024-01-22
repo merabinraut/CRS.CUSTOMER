@@ -1,0 +1,48 @@
+.reservation-container {
+  border-radius: 8px;
+  border: 1px solid var(--white-2);
+}
+.reservation-container .reservation-header {
+  background: var(--ivory-light);
+  padding: 12px 64px;
+  color: var(--secondary-text);
+}
+.reservation-container .reservation-header .title {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 125% */
+}
+.reservation-details {
+  padding: 24px 64px;
+  display: flex;
+  gap: 96px;
+}
+.reservation-details .left-reservation-details {
+  display: grid;
+  gap: 24px;
+  width: 280px;
+}
+.reservation-details .right-reservation-details {
+  display: grid;
+  gap: 24px;
+  width: 350px;
+}
+.reservation-details .list-container {
+  display: grid;
+  gap: 8px;
+}
+.reservation-details .list-container .title {
+  color: var(--dark--secondary);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px; /* 157.143% */
+}
+.reservation-details .list-container .label {
+  color: var(--secondary-100);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px; /* 157.143% */
+}

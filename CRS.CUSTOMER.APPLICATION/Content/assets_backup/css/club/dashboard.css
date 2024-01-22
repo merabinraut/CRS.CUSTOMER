@@ -1,0 +1,10 @@
+.dashboard-date-list {
+  width: calc(100% - 60px);
+  overflow-x: scroll;
+}
+.dashboard-date-list .calender-card {
+  flex: none;
+}
+.dashboard-date-list::-webkit-scrollbar {
+  display: none;
+}

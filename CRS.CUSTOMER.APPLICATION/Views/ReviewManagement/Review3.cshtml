@@ -1,0 +1,266 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReviewManagement.Review3ViewModel
+@{
+    ViewBag.Title = "Review-3";
+    Layout = "~/Views/Shared/_ReviewLayout.cshtml";
+    var Request = Model.ReviewClubDetailModel;
+}
+<style>
+    .markbtn-active.active {
+        background-color: var(--primary);
+    }
+
+    .text-primary {
+        text-align: left;
+    }
+</style>
+<div class="flex flex-col justify-between h-screen">
+    <div>
+        <!-- header  -->
+        <div class="flex items-center gap-[10px] pt-[13px] px-[14px] pb-[9px] border-b border-b-[#DCDCDC]">
+            <div class="circle-border circle-third-quater">
+                <div class="text tracking-tight	">3/<span>4</span></div>
+            </div>
+            <div>
+                <div class="text-[13px] font-bold pb-[5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TellUsAboutYourClubExperience</div>
+                <div class="text-[13px] font-bold text-[#7E6D5E]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.SelectMultipleResponseAboutTheOverallClubAndHostsImpressions</div>
+            </div>
+        </div>
+        <!-- header end  -->
+        <div style="height: calc(100vh - 180px);" class="no-scrollbar overflow-y-scroll pb-4">
+            <!-- image  -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                        @if (!string.IsNullOrEmpty(Model.ReviewClubDetailModel.ClubLogo))
+                        {
+                            <img src="@Model.ReviewClubDetailModel.ClubLogo"
+                                 class="h-[48px] w-[48px] object-cover rounded-full" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                 class="h-[48px] w-[48px] object-cover rounded-full" />
+                        }
+                    </div>
+                    <div>
+                        <div class='text-sm font-bold text-charcolBlack '>@Model.ReviewClubDetailModel.ClubNameEnglish</div>
+                        <div class='text-xs  text-[#404040] '>@Model.ReviewClubDetailModel.ClubNameJapanese</div>
+                        <div class="text-[10px] text-[#A09E91] flex gap-[2px] items-center">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            @Model.ReviewClubDetailModel.ClubLocationName
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- image end  -->
+            <!-- image list  -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex flex-col gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.SelectedHost <span class="text-primary cursor-pointer">
+                            <i class="las la-pen"></i><span class="border-b border-primary" onclick="window.location.href='@Url.Action("Review2","ReviewManagement", @Request)'">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Edit</span>
+                        </span>
+                    </div>
+                    <div class="flex -space-x-2  items-center relative" id="selected-host-id">
+                    </div>
+                </div>
+            </div>
+            <!-- image list  end-->
+            <div class="px-[14px] pb-3">
+                <div class="text-[13px] font-bold text-center py-[14px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PleaseSelectAllThatApplyToYourExperience</div>
+                <div class="remark-list-class">
+                    @foreach (var item in Model.ReviewRemarkListModel)
+                    {
+                        if (!string.IsNullOrEmpty(item.RemarkTypeEnglish) && item.RemarkTypeEnglish.ToLower() == "good")
+                        {
+                            <div class="review-experience" data-info="@item.RemarkId">@item.RemarkLabel</div>
+                        }
+                        else
+                        {
+                            <div class="review-experience dotted" data-info="@item.RemarkId">@item.RemarkLabel</div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="px-4 py-[18px] shadow-review absolute bottom-0 left-0 w-full bg-white">
+        <a onclick="SubmitFunction();" class="">
+            <button class="button-curve btn-primary h-[46px]">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
+                <div class="absolute top-[14px] right-[15px]">
+                    <i class="fa-solid fa-arrow-right text-[18px]"></i>
+                </div>
+            </button>
+        </a>
+        <div class="text-center mt-[10px]">
+            <a onclick="window.history.back();" class="text-xs border-b border-[#404040] ">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.BackToPreviousPage
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Main modal -->
+<!-- Main modal -->
+<div id="defaultModal" tabindex="-1" aria-hidden="true"
+     class="fixed top-0 left-0 right-0 z-50 hidden w-full flex-col p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+</div>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+        <div class="relative bg-white rounded-lg shadow overflow-hidden">
+            <!-- Modal content -->
+            <div class="relative bg-white overflow-hidden">
+                <!-- Modal body -->
+                <div class="text-center pt-4 pb-3 px-2 border-b border-[#DCDCDC]">
+                    <div class=" text-[13px] font-bold">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ReviewWhatYouThinkAboutTheClub</div>
+                    <div class="text-[13px  ]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TheSelectedTagWillBeUsedInTheTitleOfTheReview</div>
+                </div>
+                <div class=" h-[201px] pb-2 overflow-hidden	 overflow-y-scroll	custom-scrollbar-review">
+                    @foreach (var item in Model.ReviewRemarkListModel)
+                    {
+                        <div class="flex justify-between items-center px-[13px] py-[10px] border-b border-[#DCDCDC]">
+                            <div class="flex justify-between items-center gap-[13px]">
+                                <div>
+                                    <div class="text-[10px] text-primary">@item.RemarkType</div>
+                                    <div class="text-[10px]">@item.RemarkLabel</div>
+                                </div>
+                            </div>
+                            <a>
+                                <button class="btn-primary-softrose-review gap-[2px] markbtn-active" data-value="@item.RemarkId">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Select
+                                </button>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="bg-[#FFF]  w-full rounded-b-lg shadow">
+                <div class="grid gap-[12px] pb-[18px]">
+                    <div>
+                        <div class="flex flex-row justify-center">
+                            <button onclick="window.location.href='@Url.Action("Review2","ReviewManagement", @Request)'">
+                                <b> @CRS.CUSTOMER.APPLICATION.Resources.Resource.Re_SelectYourHost</b>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex flex-row justify-center">
+                            <button class="button-curve btn-primary h-[29px] mx-[20px]" onclick="closeModal('modal1')">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Content/assets/js/modal.js"></script>
+    <script>
+        // Open the first modal automatically when the page loads
+        window.onload = function () {
+            openModal('modal1');
+        }
+        window.onclick = function (event) {
+            var modal1 = document.getElementById('modal1');
+            // Check if the click is outside of modal1
+            if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
+                closeModal('modal1');
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Add click event listeners to each div
+            $('.review-experience').on('click', function () {
+                // Toggle the 'active' class of the clicked div
+                $(this).toggleClass('active');
+            });
+            SelectedHostDisplayFunction();
+        });
+    </script>
+    <script>
+        function SubmitFunction() {
+            const ReviewRemarkList = [];
+            const ReviewRemarkDisplayLabelList = [];
+            const elements = document.querySelectorAll('.remark-list-class .active');
+            elements.forEach(function (element) {
+                ReviewRemarkList.push(element.dataset.info);
+                ReviewRemarkDisplayLabelList.push(element.innerHTML);
+            });
+            if (ReviewRemarkList === null || ReviewRemarkList === "" || ReviewRemarkList.length <= 0) {
+                toastr.info('Please select remark');
+                return false;
+            }
+            DataStorageFunction(ReviewRemarkList, ReviewRemarkDisplayLabelList);
+             var reviewDetail = @Html.Raw(Json.Encode(@Request));
+             var encodedReviewDetail = encodeURIComponent(JSON.stringify(reviewDetail));
+             var url = '@Url.Action("Review4", "ReviewManagement")' + '?Request=' + encodedReviewDetail;
+             window.location.href = url;
+        }
+        const DataStorageFunction = (i, j) => {
+            localStorage.setItem("ReviewRemarkIdList", JSON.stringify(i));
+            localStorage.setItem("ReviewRemarkDisplayLabelList", JSON.stringify(j));
+        }
+
+        function SelectedHostDisplayFunction() {
+            var ReviewMVPHostId = localStorage.getItem("ReviewMVPHostId");
+            var SelectedHostDetailList = JSON.parse(localStorage.getItem("SelectedHostDetailList"));
+            var targetElement = document.getElementById("selected-host-id");
+            var newHTMLContent = '';
+            for (var i = 0; i < SelectedHostDetailList.length; i++) {
+                let dataArray = [];
+                dataArray.push(SelectedHostDetailList[i].split(','));
+                var value = dataArray[0];
+                if (ReviewMVPHostId != null && ReviewMVPHostId != "" && ReviewMVPHostId === value[0])
+                {
+                    if (value[1] != null && value[1] != "") {
+                        newHTMLContent += `<img class="inline-block h-[26px] w-[26px] rounded-full border-2 border-[#DAA51E]"
+                         src="` + value[1] +`"
+                         alt="">
+                         <i class="las la-crown text-[#DAA51E] absolute top-[-9px] left-[22.3px] rotate-[26deg] text-xs "></i>`;
+                    }
+                    else {
+                        newHTMLContent += `<img class="inline-block h-[26px] w-[26px] rounded-full border-2 border-[#DAA51E]"
+                        src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt="">
+                        <i class="las la-crown text-[#DAA51E] absolute top-[-9px] left-[22.3px] rotate-[26deg] text-xs "></i>`;
+                    }
+                    continue;
+                }
+                if (value[1] != null && value[1] != "") {
+                    newHTMLContent += `<img class="inline-block h-6 w-6 rounded-full border-2 border-white"
+                           src="` + value[1] + `"
+                          alt="">`;
+                }
+                else {
+                    newHTMLContent += `<img class="inline-block h-6 w-6 rounded-full border-2 border-white"
+                     src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                     alt="">`;
+
+                }
+            }
+            //newHTMLContent += `<div class="relative inline-flex items-center justify-center w-6 h-6 overflow-hidden bg-primary text-white rounded-full border-2 border-white">
+            //      <span class="font-medium text-[8px] ">+9</span>
+            //  </div>`;
+            targetElement.innerHTML = newHTMLContent;
+        }
+
+        $('.markbtn-active').on('click', function () {
+            $(this).toggleClass('active');
+            var dataValue = this.getAttribute('data-value');
+            var elements = document.getElementsByClassName('review-experience');
+            for (var i = 0; i < elements.length; i++) {
+                var dataInfo = elements[i].getAttribute('data-info');
+                if (dataValue === dataInfo) {
+                    elements[i].classList.toggle('active');
+                }
+            }
+        });
+    </script>
+}

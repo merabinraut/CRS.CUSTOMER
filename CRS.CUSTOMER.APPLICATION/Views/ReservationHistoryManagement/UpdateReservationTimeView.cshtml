@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "UpdateReservationTimeView";
+    Layout = "~/Views/Shared/_Reservation-Layout.cshtml";
+    string reservationId = ViewBag.ReservationId;
+}
+
+<div class="flex justify-between h-screen flex-col relative h-screen overflow-hidden">
+    @Html.AntiForgeryToken()
+    <div class="no-scrollbar overflow-y-scroll pb-[80px]">
+        <div class="flex items-center border-t-[2px] border-t-[#C8B477] border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
+            <div class="flex gap-2 items-center absolute top-[12px] left-4 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none" onclick="history.go(-1); return false;">
+                    <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
+                          fill="#BCB08A" />
+                </svg><a class="text-[#292F33]" onclick="history.go(-1); return false;">戻る</a>
+            </div>
+            <div class="text-center w-full font-bold">Update Reservation Time</div>
+        </div>
+        <div class="py-[8px] px-4 bg-[#E5E5E5] text-xs font-bold">
+            ご予約内容
+        </div>
+        <div class="px-4 pt-2 flex overflow-x-auto no-scrollbar gap-[12px] visittime-class">
+            @foreach (KeyValuePair<string, string> item in ViewBag.ReservableTimeList as Dictionary<string, string>)
+            {
+                <div class="py-1 px-2 border border-[#D8D8D8] rounded-[4px] flex-none cursor-pointer select-time">@item.Key</div>
+            }
+        </div>
+    </div>
+    <div class="py-[11px] px-4 flex gap-2 h-[64px] shadow-reservation absolute bottom-0 left-0 w-full bg-white">
+        <button class="btn ">
+            <a class="text-[#292F33]" onclick="history.back()">戻る</a>
+        </button>
+        <button class="btn btn-primary">
+            <a onclick="UpdatReservationTime('@reservationId')" class="h-full w-full">
+                次
+            </a>
+        </button>
+    </div>
+</div>
+@section scripts{
+    <script>
+        // Get all the div elements
+        var divs = document.querySelectorAll('.select-time');
+
+        // Add click event listeners to each div
+        divs.forEach(function (div) {
+            div.addEventListener('click', function () {
+                // Remove the 'bg-red' class from all divs
+                divs.forEach(function (d) {
+                    d.classList.remove('bg-primary');
+                    d.classList.remove('text-white');
+
+                });
+
+                // Add the 'bg-red' class to the clicked div
+                this.classList.add('bg-primary');
+                this.classList.add('text-white');
+
+            });
+        });
+    </script>
+    <script>
+        $(".default_select").select2({
+            minimumResultsForSearch: Infinity
+        });
+    </script>
+    <script>
+        function UpdatReservationTime(reservationId) {
+            var VisitTime = $('.visittime-class .text-white').text().replace(/^\s+|\s+$/gm, '');
+            if (VisitTime === null || VisitTime === "" || VisitTime === undefined) {
+                toastr.info('Please select valid time');
+                return false;
+            }
+                $.ajax({
+                    type: 'POST',
+                    async: true,
+                    url: "/ReservationHistoryManagement/UpdateReservationTime?reservationId=" + reservationId + "&visitedTime=" + VisitTime + "&clubId=" + '@ViewBag.ClubId',
+                    dataType: 'json',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    },
+                    success: function (data) {
+                        if (data.redirectToUrl != null || data.redirectToUrl != "") {
+                            window.location.href = data.redirectToUrl;
+                        }
+                        else {
+                            window.location.reload();
+                        }
+                    },
+                    error: function (ex) {
+                        window.location.reload();
+                    }
+                });
+        }
+    </script>
+}
+

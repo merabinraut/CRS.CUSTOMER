@@ -1,0 +1,109 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReviewManagement.ReviewReservationResponseModel
+@{
+    ViewBag.Title = "Review";
+    Layout = "~/Views/Shared/_ReviewLayout.cshtml";
+    var Request = Model;
+}
+<div class="flex flex-col justify-between h-screen">
+    <div>
+        <!-- header  -->
+        <div class="flex items-center gap-[10px] pt-[13px] px-[14px] pb-[9px] border-b border-b-[#DCDCDC]">
+            <div class="circle-border circle-frist-quater ">
+                <div class="text tracking-tight	">1/<span>4</span></div>
+            </div>
+            <div>
+                <div class="text-[13px] font-bold pb-[5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ConfirmTheClubYouVisitedThisTime</div>
+                <div class="text-[13px] font-bold text-[#7E6D5E]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PleaseMakeSureThatTheReviewIsCorrect</div>
+            </div>
+        </div>
+        <!-- header end  -->
+        <div style="height: calc(100vh - 180px);" class="no-scrollbar overflow-y-scroll pb-4">
+            <!-- image  -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                        @if (!string.IsNullOrEmpty(Model.ClubLogo))
+                        {
+                            <img src="@Model.ClubLogo"
+                                 class="h-[48px] w-[48px] object-cover rounded-full" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                 class="h-[48px] w-[48px] object-cover rounded-full" />
+                        }
+                    </div>
+                    <div>
+                        <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEnglish</div>
+                        <div class='text-xs  text-[#404040] '>@Model.ClubNameJapanese</div>
+                        <div class="text-[10px] text-[#A09E91] flex gap-[2px] items-center">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            @Model.ClubLocationName
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- image end  -->
+            <!-- list  -->
+            <div class="px-[14px] mt-[12px]">
+                <div class="rounded-[6px] border border-[#EAEAEA] bg-[#F6F6F6]">
+                    <div class="pt-[15px] pl-[18px] pb-[11px] border-b border-[#DCDCDC] font-bold">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.ReservationDetails
+                    </div>
+                    <div class="p-[18px]">
+                        <table class="text-sm font-medium space-x-1">
+                            <tbody>
+                                <tr>
+                                    <td class="pr-3 pb-3 font-medium">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ArrivalDate</td>
+                                    <td class="pb-3 font-medium">：@Model.ReservationDate</td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-3 pb-3 font-medium">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ArrivalTime</td>
+                                    <td class="pb-3 font-medium">：@Model.ReservationTime〜</td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-3 pb-3 font-medium">@CRS.CUSTOMER.APPLICATION.Resources.Resource.SelectedPlan</td>
+                                    <td class="pb-3 font-medium">：@Model.Price </td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-3 pb-3 font-medium">@CRS.CUSTOMER.APPLICATION.Resources.Resource.NumberOfPeople </td>
+                                    <td class="pb-3 font-medium">：@Model.NoOfPeople 人 </td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-3 pb-3 font-medium">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Points</td>
+                                    <td class="pb-3 font-medium">：@Model.UsedPoint pt</td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-3 pb-3 font-medium">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PaymentAmount</td>
+                                    <td class="pb-3 font-medium">：@Model.TotalAmount @CRS.CUSTOMER.APPLICATION.Resources.Resource.IncludingTax</td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-3 pb-3 font-medium">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PaymentMethod</td>
+                                    <td class="pb-3 font-medium">：@Model.PaymentMethod </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- list  end-->
+        </div>
+    </div>
+    <div class="px-4 py-[18px] shadow-review absolute bottom-0 left-0 w-full bg-white">
+        <a href="@Url.Action("Review2","ReviewManagement", @Request)" class="">
+            <button class="button-curve btn-primary h-[46px]">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.ReviewClub
+                <div class="absolute top-[14px] right-[15px]">
+                    <i class="fa-solid fa-arrow-right text-[18px]"></i>
+                </div>
+            </button>
+        </a>
+        <div class="text-center mt-[10px]">
+            <a href="@Url.Action("Index", "Dashboard")" class="text-xs border-b border-[#404040] ">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Rate_ReviewOtherHostClubs
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+﻿using Aspose.Cells;
+using CRS.CUSTOMER.APPLICATION.CustomValidations;
+using CRS.CUSTOMER.APPLICATION.Resources;
+using CRS.CUSTOMER.SHARED;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace CRS.CUSTOMER.APPLICATION.Models.Home
+{
+    #region Registration Management
+    public class RegistrationHoldModel
+    {
+        [Display(Name = "Nickname", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
+        [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]
+        public string NickName { get; set; }
+
+        [Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        [MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
+        //[MobileNumber(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
+        //[RegularExpression(@"^(090|6490|3254)\d{8}$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
+        public string MobileNumber { get; set; }
+    }
+
+    public class RegistrationModel
+    {
+        public string AgentId { get; set; }
+        public string MobileNumber { get; set; }
+        public string ReferCode { get; set; }
+        public string OTP1 { get; set; }
+        public string OTP2 { get; set; }
+        public string OTP3 { get; set; }
+        public string OTP4 { get; set; }
+        public string OTP5 { get; set; }
+        public string OTP6 { get; set; }
+    }
+
+    public class ResendRegistrationOTPModel
+    {
+        public string AgentId { get; set; }
+        public string MobileNumber { get; set; }
+    }
+
+    public class SetRegistrationPasswordModel
+    {
+        public string AgentId { get; set; }
+        public string UserId { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Required")]
+        [MaxLength(16, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_16_characters")]
+        [RegularExpression(@"^.*(?=.{8,16})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be of length 8 to 16 and must contain a-z,A-Z,0-9,@#$%^&+=")]
+        //[MinLength(8, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_8_characters")]
+        public string Password { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Required")]
+        [MaxLength(16, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_16_characters")]
+        //[RegularExpression(@"^.*(?=.{8,16})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be of length 8 to 16 and must contain a-z,A-Z,0-9,@#$%^&+=")]
+        //[MinLength(8, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_8_characters")]
+        [Compare("Password", ErrorMessage = "Password  Mismatch")]
+        public string ConfirmPassword { get; set; }
+        public string MobileNumber { get; set; }
+    }
+    #endregion
+    #region Forgot Password
+    public class ForgotPasswordModel
+    {
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        [MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
+        //[MobileNumber(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
+        [Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
+        public string MobileNo { get; set; }
+        [Display(Name = "Nickname", ResourceType = typeof(Resource))]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
+        [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]
+        public string Username { get; set; }
+        public string CaptureTime { get; set; }
+    }
+    #endregion
+
+    #region "Referral Model"
+    public class ReferralModel : Common
+    {
+        public string ReferCode { get; set; }
+    }
+    #endregion
+}

@@ -1,0 +1,196 @@
+.input-field-common {
+  height: 100%;
+}
+.input-field-common input {
+  border-radius: 8px;
+  border: 1px solid var(--gray-300, #d0d5dd);
+  background: var(--White, #fff);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05) !important;
+
+  /* Shadow/xs */
+  font-size: 16px;
+  color: #667085;
+  padding: 10px 14px;
+  height: 44px;
+  /* height: inherit; */
+}
+.input-field-common input:focus {
+  box-shadow: none;
+  border-color: #d75a8b;
+  padding: 10px 14px;
+}
+.input-field-common .error {
+  color: var(--error);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  margin-top: 8px;
+}
+.input-field-common textarea {
+  border-radius: 8px;
+  border: 1px solid var(--gray-300, #d0d5dd);
+  background: var(--White, #fff);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+  /* Shadow/xs */
+  font-size: 16px;
+  color: #667085;
+  padding: 10px 14px;
+}
+.input-field-common textarea:focus {
+  box-shadow: none;
+  border-color: #d75a8b;
+}
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__rendered {
+  color: #667085 !important;
+}
+.input-field-common .select-common {
+  border-radius: 8px;
+  border: 1px solid var(--gray-300, #d0d5dd);
+  background: var(--White, #fff);
+  font-size: 14px;
+  color: #667085;
+  padding: 10px 14px;
+  height: 44px;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
+.input-field-common .select-common option {
+  background-color: #f6f6f6;
+}
+.input-field-common .select-common option:checked {
+  background-color: var(--primary-100);
+  color: white;
+}
+.input-field-common .select-common option:hover {
+  background-color: var(--primary-100);
+}
+.checkbox-common input:focus {
+  box-shadow: none;
+  cursor: pointer;
+}
+.checkbox-common input,
+label {
+  cursor: pointer;
+}
+
+/* Style for the custom file input button */
+
+.file-upload-common {
+  border: 1px solid var(--gray-300, #d0d5dd);
+  background: var(--White, #fff);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  padding: 0px 16px 0px 8px;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  border-radius: 8px;
+}
+.custom-file-upload {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 0px 8px 0px 8px;
+  background-color: #e49797;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  height: 27px;
+}
+#file_name_display {
+  padding-left: 10px;
+  color: #686868;
+}
+/* Style for the hidden file input */
+#file_input {
+  display: none; /* Hide the default file input */
+}
+
+/* Style for the file input label when hovering */
+.custom-file-upload:hover {
+  opacity: 0.8;
+}
+
+/* Style for the file input label when active (clicked) */
+.custom-file-upload:active {
+  opacity: 0.8;
+}
+.select2-container--default .select2-selection--single {
+  height: 40px !important;
+  padding: 6px 16px 6px 8px;
+}
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
+  top: 7px !important;
+  right: 10px !important;
+}
+.select2-results__option {
+  padding: 6px 16px !important;
+}
+.select2-results__option:nth-child(even) {
+  background-color: #fff;
+}
+.select2-results__option:nth-child(odd) {
+  background-color: #f3f3f3;
+  border-bottom: 1px solid rgba(183, 183, 183, 0.2);
+}
+.select2-results__option:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.display-page {
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding: 6px 16px !important;
+  position: relative;
+}
+.display-page .display-page-arrow {
+  height: 26px;
+  position: relative;
+
+  width: 10px;
+}
+.display-page .display-page-arrow b {
+  border-color: #888 transparent transparent transparent;
+  border-style: solid;
+  border-width: 5px 4px 0 4px;
+  height: 0;
+  left: 50%;
+  margin-left: -2px;
+  margin-top: -2px;
+  position: absolute;
+  top: 50%;
+  width: 0;
+}
+.toggleDiv {
+  display: none;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  height: 200px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.toggleDiv div:nth-child(even) {
+  background-color: #fff;
+}
+.toggleDiv div:nth-child(odd) {
+  background-color: #f3f3f3;
+  border-bottom: 1px solid rgba(183, 183, 183, 0.2);
+}
+.toggleDiv div:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}

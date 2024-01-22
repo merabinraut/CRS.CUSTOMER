@@ -1,0 +1,92 @@
+﻿@model List<CRS.CUSTOMER.APPLICATION.Models.NotificationManagement.NotificationDetailModel>
+@{
+    ViewBag.Title = "Notification Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="flex flex-col gap-4 p-4">
+    @if (Model.Count <= 0)
+    {
+        <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center"
+             style="height:calc(100vh - 47px)">
+            <div class="text-[#18181B] font-semibold mt-12 text-center">@CRS.CUSTOMER.APPLICATION.Resources.Resource.YouHaveNoNotificationYet.</div>
+        </div>
+    }
+    else
+    {
+        foreach (var group in Model.GroupBy(item => item.DateCategory))
+        {
+<div class="notification-all">
+    <div class="flex justify-between items-center mb-3">
+        <div class="text-[#18181B] text-sm">@group.Key</div>
+    </div>
+    <div class="flex flex-col gap-3 ">
+
+        @foreach (var item in group)
+        {
+            <div class="flex justify-between items-center notification-list ">
+                <div class="flex gap-3 w-max ">
+                    <div class="flex-none">
+                        <img src="@item.NotificationImage"
+                             class="h-[32px] w-[32px] object-fill rounded-full" />
+                    </div>
+                    <div class="notification-detail-class">
+                        <input type="hidden" value="@item.NotificationURL">
+                        <div class='text-sm font-bold text-charcolBlack notification-title pb-1 '>@item.NotificationSubject</div>
+                        <div class='text-xs  text-[#667085] pb-1'>@item.NotificationBody</div>
+                        <div class='text-[10px]  text-[#A1A1AA] pb-1'>@item.FormattedDate</div>
+                    </div>
+                </div>
+                <div class="circle flex-none">
+                </div>
+            </div>
+
+        }
+    </div>
+
+</div>
+        }
+    }
+</div>
+@section scripts
+{
+    <script>
+        // Store active titles in an array
+        let activeTitles = [];
+
+        // Get the elements
+        const markAllReadBtn = document.getElementById('markAllRead');
+        const notificationLists = document.querySelectorAll('.notification-today .notification-list');
+
+        // Add a click event listener to 'Mark all as read' button
+        markAllReadBtn.addEventListener('click', function () {
+            // Toggle 'active' class on all notification items
+            notificationLists.forEach(notification => {
+                notification.classList.toggle('active');
+                if (notification.classList.contains('active')) {
+                    const title = notification.querySelector('.notification-title');
+                    if (title) {
+                        activeTitles.push(title.textContent.trim());
+                    }
+                } else {
+                    const title = notification.querySelector('.notification-title');
+                    if (title) {
+                        const index = activeTitles.indexOf(title.textContent.trim());
+                        if (index > -1) {
+                            activeTitles.splice(index, 1);
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        $('.notification-detail-class').on('click', function () {
+            var redirectURL = $(this).find('input').val();
+            if (redirectURL != null && redirectURL != '' && redirectURL != '#') {
+                window.location.href = redirectURL;
+            }
+            else return false;
+        });
+    </script>
+}

@@ -1,0 +1,340 @@
+:root {
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  width: 100%;
+  --primary-100: #d75a8b;
+  --primary-200: #ffb6c1;
+  --primary-300: #18181b;
+  --primary-400: #667085;
+  --primay-dary: #dc3545;
+  --primay-light: #ec4899;
+  --secondary-100: #333;
+  --secondary-200: #a1a1aa;
+  --secondary-300: #7a7a7a;
+  --secondary-text: #3e3e3e;
+  --secondary-color-pink: #cc527a;
+  --dark--secondary: #a1a1aa;
+  --gold: #e3ab00;
+  --silver: #a6a6a6;
+  --copper: #bd764b;
+  --white: #fff;
+  --background-100: #15050b;
+  --background-200: #1c2434;
+
+  --stroke: #e2e8f0;
+  --heading: #101828;
+  --gray-200: #e4e4e7;
+  --gray-400: #b7b7b7;
+  --gray-500: #71717a;
+  --green-500: #22c55e;
+  --gray-300: #d0d5dd;
+  --white-2: #f4f4f4;
+  --ivory-light: #fafafa;
+  --error: #959595;
+}
+body {
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  height: 100vh;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+input:focus {
+  border-color: #d75a8b !important;
+}
+.heading-title {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px; /* 160% */
+  color: var(---heading);
+}
+.span-title-light-gray {
+  color: var(--primary-400);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+}
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-100);
+  border-radius: 10px;
+  width: 5px;
+  height: 10px;
+}
+.title-info {
+  padding: 16px 32px 28px 32px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-100);
+}
+
+.btn {
+  display: flex;
+  padding: 10px;
+  height: 36px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 14px;
+  background: #fff;
+  line-height: 20px;
+}
+.btn-primary {
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  background: var(--primary-100);
+  color: var(--white);
+}
+.btn-secondary {
+  border: 1px solid var(--secondary-200);
+  background: var(--white);
+  color: var(--secondary-200);
+}
+.btn-gray {
+  border: 1px solid var(--gray-400);
+  background: var(--gray-400);
+  color: var(--white);
+}
+.btn-secondary-box-shadow {
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  color: #3e3e3e;
+}
+.btn-primary-normal {
+  background: var(---white);
+  color: var(--primary-100);
+  border: 1px solid var(--primary-100);
+}
+.btn-primary-default {
+  background: var(--primary-100) !important;
+  color: var(--white) !important;
+  border: 1px solid var(--primary-100) !important;
+}
+.btn-primary-light {
+  background: var(--primay-light);
+  color: var(--white);
+  border: 1px solid var(--primay-light);
+}
+.approved {
+  border-radius: 16px;
+  background: #ecfdf3;
+  padding: 2px 8px 2px 6px;
+  display: flex;
+  color: #027a48 !important;
+  text-align: center;
+  font-family: Noto Sans;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}
+.pending {
+  border-radius: 16px;
+  background: #fffaeb;
+  padding: 2px 8px 2px 6px;
+  color: #b54708 !important;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: fit-content;
+  display: flex;
+}
+.rejected {
+  border-radius: 16px;
+  background: #fef3f2;
+  padding: 2px 8px 2px 6px;
+  color: #b42318 !important;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: fit-content;
+  display: flex;
+}
+.round-image-text {
+  display: flex;
+  gap: 4px;
+}
+.round-image-text img {
+  border: 1px solid #efefef;
+}
+.round-image-text p {
+  color: var(--primary-400);
+  /* Text sm/Regular */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+}
+/* Add this CSS rule to change the active tab color to red */
+#myTab button.active {
+  color: red !important; /* Change to the color you desire */
+  border-color: red !important; /* Change to the color you desire */
+}
+.table-image {
+  border-radius: 6px;
+  border: 1px solid #f2f4f7;
+  object-fit: cover;
+}
+.drawer-close-disable {
+  width: 100%;
+  height: 100vh;
+  background-color: #0000003e;
+}
+.drawer-container {
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.drawer-container::-webkit-scrollbar {
+  display: none;
+}
+
+.drawer-form div {
+  color: var(--white);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+}
+.divider-common {
+  height: 2px;
+  background: #ebebeb;
+  margin: 16px 0px;
+}
+.no-search .select2-search {
+  display: none;
+}
+.profile-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.profile-steps .steps-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #aeaeae;
+}
+.profile-steps .steps-text {
+  color: #aeaeae;
+}
+.profile-steps .setp-divider {
+  width: 56px;
+  border-color: #aeaeae;
+}
+.profile-steps:last-child .setp-divider {
+  display: none;
+}
+.profile-steps.active-green .steps-number {
+  background-color: #00a651;
+}
+.profile-steps.active-green .steps-text {
+  color: #00a651;
+}
+.profile-steps.active-green .setp-divider {
+  border-color: #00a651;
+}
+.profile-steps.active .steps-number {
+  background-color: #d75a8b;
+}
+.profile-steps.active .steps-text {
+  color: #d75a8b;
+}
+.profile-steps.active .setp-divider {
+  border-color: #d75a8b;
+}
+.text-ellipsis-customer {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.password-input {
+  position: relative;
+}
+.password-input .password-eye {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translatey(-50%);
+  color: #a6a6a6;
+  font-size: 20px;
+  cursor: pointer;
+  height: auto;
+  background: #fff;
+  padding-left: 5px;
+}
+.japan-flag {
+  width: 16px;
+  height: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.japan-flag div {
+  height: 7px;
+  width: 7px;
+  background-color: #bc002d;
+  border-radius: 50%;
+}
+.number-input {
+  position: relative;
+}
+.number-input input {
+  padding-left: 89px !important;
+}
+.number-input .flag-section {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translatey(-50%);
+  color: #a6a6a6;
+  cursor: pointer;
+  height: auto;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-right: 10px;
+}
+
+.number-input .flag-section .line-y {
+  height: 20px;
+  width: 2px;
+  background-color: #a6a6a6;
+}

@@ -1,0 +1,192 @@
+﻿﻿@model CRS.CUSTOMER.APPLICATION.Models.Home.LoginRequestModel
+@{
+    ViewBag.Title = "Hoslog | Sign In";
+    Layout = null;
+    var CallJavaScriptFunction = ViewBag.CallJavaScriptFunction;
+}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
+    <title>@ViewBag.Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/Content/js/NotificationMessageToaster.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /*font-family: 'Noto Sans JP', sans-serif;*/
+            font-family: 'Noto Sans JP';
+            color: #292f33;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body class="md:hidden">
+    <div class="mx-[16px]">
+        <div class="pb-4">
+            <p class="text-[#D75A8B] mt-[25px] font-bold">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Login_with_mobile
+            </p>
+            <p class="mt-[10px] text-[12px] font-semibold">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Phone_number_to_login
+            </p>
+        </div>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <div class="w-full md:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.PhoneNumber
+                    </label>
+                    @Html.TextBoxFor(model => model.LoginId, new
+                        {
+                            @class = "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-[#d75a8b]",
+                            @placeholder = CRS.CUSTOMER.APPLICATION.Resources.Resource.Enter_Phone_Number,
+                            @maxLength = "11",
+                            @onkeypress = "return isNumber(event)"
+                        })
+                    <span class="validationMessage">
+                        @Html.ValidationMessageFor(m => m.LoginId)
+                    </span>
+                </div>
+            </div>
+            <div class="flex flex-wrap -mx-3 mb-6 password-parent">
+                <div class="w-full px-3 relative">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Password
+                    </label>
+                    @Html.TextBoxFor(model => model.Password, new { @class = "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-[#d75a8b]", @type = "password", @placeholder = "******************", @maxlength = "16" })
+                    <span class="p-viewer" style=" z-index: 9999; position: absolute; right:20px; top:40px">
+                        <i class="fa-solid fa-eye-slash" onclick="hideShowPassword()"></i>
+                    </span>
+                    <span class="validationMessage">
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </span>
+                </div>
+            </div>
+            <div class="flex justify-between text-[14px]">
+                <div class="flex justify-center cursor-pointer">
+                    <input type="checkbox" id="remember" name="RememberMe" value="Remember" />
+                    <label for="remember">
+                        <span class="pl-2  font-semibold">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Remember_me
+                        </span>
+                    </label><br />
+                </div>
+                <a href="~/home/ForgotPassword">
+                    <p class="font-bold cursor-pointer text-[#D75A8B]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Forget_password
+                    </p>
+                </a>
+            </div>
+        }
+    </div>
+    <div class="flex rounded-full justify-center items-center text-white h-[48px] mt-[164px] bg-[#D75A8B] mx-[15px]">
+        <p class="ml-2 text-[14px] w-full h-full flex items-center justify-center cursor-pointer focus-visible:outline-none" id="FormSubmit" name="FormSubmit" value="Next">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Login
+        </p>
+    </div>
+    <div class="flex justify-center">
+        <p class="p-10 mb-auto">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Do_not_have_an_account
+            <span class="font-bold text-[#D75A8B] cursor-pointer pl-[10px]" id="RegisterId">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register
+            </span>
+        </p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        var inputElement = document.getElementById("Password");
+        inputElement.addEventListener("keydown", function (event) {
+            if (event.keyCode === 13 || event.key === "Enter") {
+                $("#Form").submit();
+            }
+        });
+        $("#FormSubmit").click(function () {
+            $("#Form").submit();
+        });
+        document.getElementById("RegisterId").onclick = function () {
+            location.href = "/Home/Register";
+        };
+
+        $('#remember').click(function () {
+            var myCheckbox = document.getElementById("remember");
+            if (myCheckbox.checked) $('#remember').val(true);
+            else $('#remember').val(false);
+        });
+    </script>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.querySelector('.password-input input');
+            const eyeIcon = document.querySelector('.password-eye');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('la-eye');
+                eyeIcon.classList.add('la-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('la-eye-slash');
+                eyeIcon.classList.add('la-eye');
+            }
+        }
+        function hideShowPassword() {
+            var passwordField = $('.password-parent').find('input');
+            var passwordFieldType = passwordField.attr("type");
+
+            if (passwordFieldType === 'password') {
+                $('.password-parent').find('.fa-eye').removeClass('fa-eye-slash');
+                $('.password-parent').find('.fa-solid').addClass('fa-eye');
+                passwordField.attr('type', 'text');
+            } else {
+                $('.password-parent').find('.fa-eye').removeClass('fa-eye');
+                $('.password-parent').find('.fa-solid').addClass('fa-eye-slash');
+                passwordField.attr('type', 'password');
+            }
+        }
+    </script>
+    <script>
+    //For toaster Notification
+    $(function () {
+    {
+        @if (TempData["Notifications"] != null)
+        {
+            var messages = (List<CRS.CUSTOMER.SHARED.NotificationModel>)TempData["Notifications"];
+            foreach (var note in messages)
+            {
+                <text>showNotification("@note.Message", "@note.Title", "@note.NotificationType");</text>
+            }
+        }
+        @{
+            ViewBag.Notifications = string.Empty;
+        }
+        }
+    });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            clearLocalStorage();
+        });
+        function clearLocalStorage() {
+            if ('@CallJavaScriptFunction' === "True") {
+                localStorage.clear();
+            }
+        }
+    </script>
+    <script src="~/Content/validation.js"></script>
+</body>
+</html>

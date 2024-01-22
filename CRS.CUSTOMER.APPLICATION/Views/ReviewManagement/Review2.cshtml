@@ -1,0 +1,267 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReviewManagement.ReviewHostListByClubViewModel
+@{
+    ViewBag.Title = "Review-2";
+    Layout = "~/Views/Shared/_ReviewLayout.cshtml";
+    var Request = Model.ReviewClubDetailModel;
+    var MVPLabel = CRS.CUSTOMER.APPLICATION.Resources.Resource.MVP;
+}
+<style>
+    .image-active.active .active-circle {
+        display: block;
+        position: absolute;
+        top: 6px;
+        right: 38px;
+    }
+
+    .active-circle {
+        background: none;
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+</style>
+<div class="flex flex-col justify-between h-screen relative">
+    <div>
+        <!-- header  -->
+        <div class="flex items-center gap-[10px] pt-[13px] px-[14px] pb-[9px] border-b border-b-[#DCDCDC]">
+            <div class="circle-border circle-second-quater ">
+                <div class="text tracking-tight	">2/<span>4</span></div>
+            </div>
+            <div>
+                <div class="text-[13px] font-bold pb-[5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ConfirmTheHostsThatWereInCharge</div>
+                <div class="text-[13px] font-bold text-[#7E6D5E]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.SelectAllTheHostsYouRemember</div>
+            </div>
+        </div>
+        <!-- header end  -->
+        <div style="height: calc(100vh - 180px);" class="no-scrollbar overflow-y-scroll pb-4">
+            <!-- image  -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                        @if (!string.IsNullOrEmpty(Model.ReviewClubDetailModel.ClubLogo))
+                        {
+                            <img src="@Model.ReviewClubDetailModel.ClubLogo"
+                                 class="h-[48px] w-[48px] object-cover rounded-full" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                 class="h-[48px] w-[48px] object-cover rounded-full" />
+                        }
+                    </div>
+                    <div>
+                        <div class='text-sm font-bold text-charcolBlack '>@Model.ReviewClubDetailModel.ClubNameEnglish</div>
+                        <div class='text-xs  text-[#404040] '>@Model.ReviewClubDetailModel.ClubNameJapanese</div>
+                        <div class="text-[10px] text-[#A09E91] flex gap-[2px] items-center">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            @Model.ReviewClubDetailModel.ClubLocationName
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- image end  -->
+            <!-- list  -->
+            <div class="px-[10px] grid gap-4 grid-cols-3 host-list-class">
+                @{
+                    int i = 1;
+                    foreach (var item in Model.ReviewHostListModel)
+                    {
+                        <div class="image-active">
+                            <input class="HostClassName" value="@string.Concat(item.HostId, ',', item.HostImage, ',', item.HostPosition, ',', item.HostName)" hidden />
+                            <div class="relative">
+                                <div class="circle">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                        <g filter="url(#filter0_d_4292_63623)">
+                                            <circle cx="20" cy="20" r="13" fill="#090909" fill-opacity="0.3" shape-rendering="crispEdges" />
+                                            <circle cx="20" cy="20" r="12.5" stroke="white" shape-rendering="crispEdges" />
+                                        </g>
+                                        <path opacity="0.4" d="M15.543 19.844L18.854 23.0856L24.4573 17.5999" stroke="#FDFBFA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <defs>
+                                            <filter id="filter0_d_4292_63623" x="0" y="0" width="40" height="40" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                <feOffset />
+                                                <feGaussianBlur stdDeviation="3.5" />
+                                                <feComposite in2="hardAlpha" operator="out" />
+                                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4292_63623" />
+                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4292_63623" result="shape" />
+                                            </filter>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <div class="active-circle">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                        <g filter="url(#filter0_d_4207_94042)">
+                                            <circle cx="20" cy="20" r="13" fill="#D75A8B" />
+                                        </g>
+                                        <path d="M15.543 19.844L18.854 23.0856L24.4573 17.5999" stroke="#FDFBFA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                                        <defs>
+                                            <filter id="filter0_d_4207_94042" x="0" y="0" width="40" height="40" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                <feOffset />
+                                                <feGaussianBlur stdDeviation="3.5" />
+                                                <feComposite in2="hardAlpha" operator="out" />
+                                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4207_94042" />
+                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4207_94042" result="shape" />
+                                            </filter>
+                                        </defs>
+                                    </svg>
+
+                                </div>
+                                @if (!string.IsNullOrEmpty(item.HostImage))
+                                {
+                                    <img src="@item.HostImage" alt="">
+                                }
+                                else
+                                {
+                                    <img src="~/Content/assets/images/customer/demo-image.jpeg" alt="">
+                                }
+                                <div class="text-[10px] px-[6px] rounded-[2px] absolute bottom-1 left-1 bg-[#ffffffe6] leading-[17px]">
+                                    No. @i
+                                </div>
+                            </div>
+                            <div class="py-1 px-2">
+                                @if (!string.IsNullOrEmpty(@item.HostPosition))
+                                {
+                                    <div class="text-[10px] text-primary font-bold">@item.HostPosition</div>
+                                }
+                                <div class="text-xs text-[#404040]">@item.HostName</div>
+                            </div>
+                        </div>
+                        i++;
+                    }
+                }
+            </div>
+        </div>
+        <!-- list  end-->
+    </div>
+    <div class="px-4 py-[18px] shadow-review absolute bottom-0 left-0 w-full bg-white">
+        <button class="button-curve btn-light h-[46px]" disabled id="button-review" onclick="ManageMVPFunction()" data-modal-target="defaultModal"
+                data-modal-toggle="defaultModal">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Select
+            <div class="absolute top-[14px] right-[15px]">
+                <i class="fa-solid fa-arrow-right text-[18px]"></i>
+            </div>
+        </button>
+        <div class="text-center mt-[10px]">
+            <a onclick="window.history.back();" class="text-xs border-b border-[#404040] ">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.BackToPreviousPage
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Main modal -->
+<div id="defaultModal" tabindex="-1" aria-hidden="true"
+     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-2xl max-h-full mx-[36px] ">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow overflow-hidden">
+            <!-- Modal body -->
+            <div class="text-center pt-4 pb-3 px-2 border-b border-[#DCDCDC]">
+                <div class=" text-[13px] font-bold">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PickMVP</div>
+                <div class="text-[13px  ]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.WhoWasTheMostImpressiveHost</div>
+            </div>
+            <div class=" h-[201px] pb-2 overflow-hidden	 overflow-y-scroll	custom-scrollbar-review" id="MVPHostId">
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            // Add click event listeners to each div
+            $('.image-active').on('click', function () {
+                // Toggle the 'active' class of the clicked div
+                $(this).toggleClass('active');
+                // Count the number of active divs
+                var activeDivsCount = $('.image-active.active').length;
+                // Check if there's at least one active div
+                var selectedElement = document.getElementById('button-review');
+                if (activeDivsCount > 0) {
+                    $('#button-review').removeClass('btn-light');
+                    // If there's at least one active div, add the 'active-btn' class to the button
+                    $('#button-review').addClass('btn-primary');
+                    $('#button-review').prop('disabled', false);
+                    selectedElement.textContent = '@CRS.CUSTOMER.APPLICATION.Resources.Resource.Selected' + '(' + activeDivsCount + ')';
+                } else {
+                    // If there are no active divs, remove the 'active-btn' class from the button
+                    $('#button-review').removeClass('btn-primary');
+                    // If there's at least one active div, add the 'active-btn' class to the button
+                    $('#button-review').addClass('btn-light');
+                    $('#button-review').prop('disabled', true);
+                    selectedElement.textContent = '@CRS.CUSTOMER.APPLICATION.Resources.Resource.Select';
+                }
+            });
+        });
+
+        let HostIdList = [];
+        function ManageMVPFunction() {
+            HostIdList = [];
+            $('.host-list-class .active .HostClassName').each(function () { HostIdList.push($(this).val()); });
+            var targetElement = document.getElementById("MVPHostId");
+            var newHTMLContent = '';
+            for (var i = 0; i < HostIdList.length; i++) {
+                let dataArray = [];
+                dataArray.push(HostIdList[i].split(','));
+                var value = dataArray[0];
+                newHTMLContent += `<div class="flex justify-between items-center px-[13px] py-[10px] border-b border-[#DCDCDC]">
+                                                             <div class="flex justify-between items-center gap-[13px]">
+                                                                 <div>`;
+                if (value[1] != null && value[1] != "") {
+                    newHTMLContent += `<img src="` + value[1] + `" alt="img"
+                                                     class="h-[48px] w-[48px] rounded-[6px]">`;
+                }
+                else {
+                    newHTMLContent += `<img src="/Content/assets/images/customer/demo-image.jpeg" alt="img"
+                                                                         class="h-[48px] w-[48px] rounded-[6px]">`;
+                }
+                newHTMLContent += ` </div> <div>`;
+                if (value[2] != null && value[2] != "") {
+                    newHTMLContent += `<div class="text-[10px] text-primary">` + value[2] + `</div>`;
+                }
+                newHTMLContent += `<div class="text-xs">` + value[3] + `</div>
+                                                                 </div>
+                                                             </div>`;
+                newHTMLContent += `<button class="btn-primary-softrose-review gap-[2px]" onclick="SubmitFunction('` + value[0] + `')">
+                                                                 <i class="las la-crown"></i>
+                                                                 @MVPLabel
+                                                             </button>
+
+                                                         </div>
+                                                     `;
+            }
+            targetElement.innerHTML = newHTMLContent;
+        }
+
+        function SubmitFunction(MVPHostId) {
+            if (MVPHostId === null || MVPHostId === "") {
+                toastr.info('MVP host is required');
+                return false;
+            }
+            if (HostIdList === null || HostIdList === "" || HostIdList.length <= 0) {
+                toastr.info('Host is required');
+                return false;
+            }
+            DataStorageFunction(MVPHostId, HostIdList);
+            var reviewDetail = @Html.Raw(Json.Encode(@Request));
+            var encodedReviewDetail = encodeURIComponent(JSON.stringify(reviewDetail));
+            var url = '@Url.Action("Review3", "ReviewManagement")' + '?Request=' + encodedReviewDetail;
+            window.location.href = url;
+        }
+        const DataStorageFunction = (i, j) => {
+            localStorage.setItem("SelectedHostDetailList", JSON.stringify(HostIdList));
+            localStorage.setItem("ReviewMVPHostId", i);
+            for (let z = 0; z < j.length; z++) {
+                const firstPart = j[z].split(',')[0];
+                j[z] = firstPart;
+            }
+            localStorage.setItem("ReviewHostIdList", JSON.stringify(j));
+        }
+    </script>
+}

@@ -1,0 +1,57 @@
+.calender-card-schedule-container {
+  column-gap: 26.5px;
+  row-gap: 12px;
+}
+.calender-card-schedule {
+  display: flex;
+  width: 116px;
+  height: 116px;
+  padding: 8px 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+  border: 1px solid #ebe2e2;
+  cursor: pointer;
+}
+.calender-card-schedule.active {
+  background: rgba(236, 72, 153, 0.1);
+}
+.calender-card-schedule.disabled {
+  opacity: 0.4;
+}
+.calender-number-schedule {
+  display: flex;
+  width: 20px;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  color: #ec4899;
+  text-align: center;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%; /* 10px */
+  background-color: #feedf5;
+  border-radius: 2px;
+}
+.calender-card-schedule .text-center {
+  display: grid;
+  gap: 6px;
+}
+.calender-card-schedule .text-center div {
+  font-size: 16px;
+  font-weight: 500;
+}
+.calender-card-schedule .text-center .date-number {
+  color: #000;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px; /* 91.667% */
+}
+#id_select2_schedule_status + .select2-container .select2-selection__arrow {
+  top: 8px;
+}

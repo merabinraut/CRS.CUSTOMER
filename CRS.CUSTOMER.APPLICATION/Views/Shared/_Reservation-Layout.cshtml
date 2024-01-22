@@ -1,0 +1,133 @@
+<!-- #region Header section -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/assets/css/tailwind.css">
+    <link rel="stylesheet" href="~/Content/assets/css/customer/global.css">
+    <link rel="stylesheet" href="~/Content/assets/css/customer/club.css">
+    <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.theme.default.min.css">
+
+
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/Content/js/NotificationMessageToaster.js"></script>
+    <!--share js-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Include Clipboard.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "warmgray": "#BCB08A",
+                        "warmgray-1": "#a09e91",
+                        "warmgray-2": "#404040",
+                        "charcoalBlack": "#292F33",
+                        "primary": "#D75A8B",
+                        "primaryDark": "#d17979",
+                        "footer": "#2C2C2C",
+                        "primary-softrose": "#e3a1a1",
+                        "secondary-1": "#333",
+                        "blue": "#697DBF",
+                        "red": "#B12D23",
+                        'creamy-secondary': "#EFEFEF",
+                        "blushpink": "#FFC6C6"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <title>Hoslog | Reservation | @ViewBag.Title</title>
+</head>
+
+<body class="md:hidden">
+
+    <!-- #endregion -->
+    @RenderBody()
+    <!-- #region Footer section -->
+
+    <script src="~/Content/assets/js/tabs.js"></script>
+    <script src="~/Content/assets/js/toogle.js"></script>
+    <script src="~/Content/assets/js/owl.carousel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
+            integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    <script>
+        // Get the button
+        let mybutton = document.getElementById("myBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+
+        }
+    </script>
+    <script>
+     //For toaster Notification
+     $(function () {
+         {
+             @if (TempData["Notifications"] != null)
+             {
+                 var messages = (List<CRS.CUSTOMER.SHARED.NotificationModel>)TempData["Notifications"];
+                 foreach (var note in messages)
+                 {
+                     <text>showNotification("@note.Message", "@note.Title", "@note.NotificationType");</text>
+                 }
+
+             }
+             @{
+                 ViewBag.Notifications = string.Empty;
+             }
+         }
+     });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
+
+<!-- #endregion -->

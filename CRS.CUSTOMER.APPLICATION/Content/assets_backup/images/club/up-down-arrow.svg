@@ -1,0 +1,20 @@
+<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon">
+<g id="unfold_more">
+<mask id="mask0_3202_22127" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="17">
+<rect id="Bounding box" y="0.5" width="16" height="16" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_3202_22127)">
+<path id="unfold_more_2" d="M5.96667 6.53307L5 5.56641L8 2.56641L11 5.56641L10.0333 6.53307L8 4.49974L5.96667 6.53307Z" fill="#545659"/>
+</g>
+</g>
+<g id="unfold_more_3">
+<mask id="mask1_3202_22127" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="17">
+<rect id="Bounding box_2" y="0.5" width="16" height="16" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask1_3202_22127)">
+<path id="unfold_more_4" d="M8 14.4997L5 11.4997L5.96667 10.5331L8 12.5664L10.0333 10.5331L11 11.4997L8 14.4997Z" fill="#545659" fill-opacity="0.35"/>
+</g>
+</g>
+</g>
+</svg>

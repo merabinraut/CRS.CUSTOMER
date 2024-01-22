@@ -1,0 +1,1273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutTheStoreExperience" xml:space="preserve">
+    <value>お店の体験について</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Accompanying Fee" xml:space="preserve">
+    <value>同伴料</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="ActivityLogs" xml:space="preserve">
+    <value>アクティビティログ</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Add Card" xml:space="preserve">
+    <value>カードを追加</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Add Methods" xml:space="preserve">
+    <value>メソッドの追加</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>ご住所</value>
+  </data>
+  <data name="Affiliate Registration" xml:space="preserve">
+    <value>アリフィエイター登録</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="All fields are required" xml:space="preserve">
+    <value>全て必須項目です</value>
+  </data>
+  <data name="Allow" xml:space="preserve">
+    <value>許可する</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Allow Location" xml:space="preserve">
+    <value>位置情報を許可する</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="AllPaymentMethods" xml:space="preserve">
+    <value>すべての支払い方法</value>
+    <comment>Payment Method Controller</comment>
+  </data>
+  <data name="AnswerClubQuestionnaire" xml:space="preserve">
+    <value>店舗のアンケートに答えてください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Are you sure you want to change the language" xml:space="preserve">
+    <value>言語を変更してもよろしいですか</value>
+    <comment>Language Preference</comment>
+  </data>
+  <data name="ArrivalDate" xml:space="preserve">
+    <value>訪問日</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="ArrivalTime" xml:space="preserve">
+    <value>訪問時間</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="BackToPreviousPage" xml:space="preserve">
+    <value>前のページに戻る</value>
+  </data>
+  <data name="Bank Account" xml:space="preserve">
+    <value>銀行口座</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="Birthdate" xml:space="preserve">
+    <value>誕生日</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Birthday" xml:space="preserve">
+    <value>誕生日</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Blood Type" xml:space="preserve">
+    <value>血液型</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Book Now" xml:space="preserve">
+    <value>今予約する</value>
+    <comment>Location Management Index</comment>
+  </data>
+  <data name="BookingHistory" xml:space="preserve">
+    <value>予約履歴</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Bookmark" xml:space="preserve">
+    <value>ブックマーク</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="BookNow" xml:space="preserve">
+    <value>今予約する</value>
+  </data>
+  <data name="BookWithThisPlan" xml:space="preserve">
+    <value>このプランで予約する</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="By Club Category" xml:space="preserve">
+    <value>店舗カテゴリーから探す</value>
+    <comment>Search FIlter</comment>
+  </data>
+  <data name="By Previous Occupation" xml:space="preserve">
+    <value>前職を選ぶ</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="Card" xml:space="preserve">
+    <value>カード</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="Card holder s Name" xml:space="preserve">
+    <value>保有者本人名</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Card number" xml:space="preserve">
+    <value>カード番号</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Card Type" xml:space="preserve">
+    <value>カードタイプ</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>カテゴリー</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>パスワードを変更する</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Choose Rank" xml:space="preserve">
+    <value>ランクを選ぶ</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="ChooseFromLocation" xml:space="preserve">
+    <value>場所から選ぶ</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="ChooseYourFavoriteHost" xml:space="preserve">
+    <value>好きなホストを選択してください</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>市</value>
+  </data>
+  <data name="Club" xml:space="preserve">
+    <value>クラブ一覧</value>
+    <comment>Location Management</comment>
+  </data>
+  <data name="Club Details" xml:space="preserve">
+    <value>クラブの詳細</value>
+    <comment>Location Management Controller (Club Detail View)</comment>
+  </data>
+  <data name="Club recommended for you" xml:space="preserve">
+    <value>あなたにオススメのホストクラブ</value>
+    <comment>Club Filter</comment>
+  </data>
+  <data name="ClubDetails" xml:space="preserve">
+    <value>クラブの詳細</value>
+  </data>
+  <data name="ClubReservation" xml:space="preserve">
+    <value>クラブ予約</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="ClubReview" xml:space="preserve">
+    <value>クラブ、ホストのレビュー</value>
+  </data>
+  <data name="Clubs" xml:space="preserve">
+    <value>クラブ</value>
+    <comment>Club Detail</comment>
+  </data>
+  <data name="ClubTop" xml:space="preserve">
+    <value>クラブトップ</value>
+  </data>
+  <data name="Commented On" xml:space="preserve">
+    <value>投稿日時</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>確認する</value>
+    <comment>Language Preference</comment>
+  </data>
+  <data name="Confirm Password" xml:space="preserve">
+    <value>確認パスワード</value>
+    <comment>Create Password Page</comment>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>新しいパスワードを確認</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="ConfirmReview" xml:space="preserve">
+    <value>レビュー内容をご確認ください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="ConfirmTheClubYouVisitedThisTime" xml:space="preserve">
+    <value>今回来店した店舗を確認してください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="ConfirmTheHostsThatWereInCharge" xml:space="preserve">
+    <value>今回担当になったホストを教えてください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Constellation" xml:space="preserve">
+    <value>星座</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>次に進む</value>
+  </data>
+  <data name="Country/Region" xml:space="preserve">
+    <value>国/地域</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Cozy" xml:space="preserve">
+    <value>また行きたい</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="Create New Password" xml:space="preserve">
+    <value>新しいパスワードを作成する</value>
+    <comment>Create Password Page</comment>
+  </data>
+  <data name="CreateNewPassword" xml:space="preserve">
+    <value>新しいパスワードを作成する</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="Currently Linked" xml:space="preserve">
+    <value>現在リンク中</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="CustomerInformation" xml:space="preserve">
+    <value>お客様情報</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="CVV" xml:space="preserve">
+    <value>CVV</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>日付</value>
+  </data>
+  <data name="Date of birth" xml:space="preserve">
+    <value>誕生日</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>日日</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="DayByDay" xml:space="preserve">
+    <value>日ごと</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="DeleteYourAccount" xml:space="preserve">
+    <value>アカウントを削除する</value>
+  </data>
+  <data name="DetailedInformationOfClub" xml:space="preserve">
+    <value>イベント,住所,SNS その他他に情報</value>
+  </data>
+  <data name="Did not get a code" xml:space="preserve">
+    <value>コードを取得できませんでしたか?</value>
+    <comment>Otp Page</comment>
+  </data>
+  <data name="Do not have an account" xml:space="preserve">
+    <value>アカウントをお持ちでない方は?</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Do you need this information when saving a credit card" xml:space="preserve">
+    <value>クレジット カードを保存するときにこの情報が必要ですか?</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="DOB" xml:space="preserve">
+    <value>生年月日</value>
+  </data>
+  <data name="Drink" xml:space="preserve">
+    <value>ドリンク</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>編集します</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>メールアドレス</value>
+  </data>
+  <data name="Enter 6 digit code sent in sms" xml:space="preserve">
+    <value>SMSで送信された6桁のコードを入力してください</value>
+    <comment>Verify OTP</comment>
+  </data>
+  <data name="Enter nickname" xml:space="preserve">
+    <value>ニックネーム</value>
+    <comment>Register Controller</comment>
+  </data>
+  <data name="Enter Phone Number" xml:space="preserve">
+    <value>あなたの電話番号</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>イベント情報</value>
+  </data>
+  <data name="Excluding Tax" xml:space="preserve">
+    <value>税抜き</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="ExperienceAboutClub" xml:space="preserve">
+    <value>お店の体験について</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Expiry Date" xml:space="preserve">
+    <value>有効期限</value>
+    <comment>Add Card</comment>
+  </data>
+  <data name="Extended Course" xml:space="preserve">
+    <value>延長コース</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>よくあるご質問</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>女性</value>
+  </data>
+  <data name="Find a Host" xml:space="preserve">
+    <value>ホストを探す</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="FindAHostClub" xml:space="preserve">
+    <value>ホストクラブを探す</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Forget password" xml:space="preserve">
+    <value>パスワードを忘れの方？</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Former Job" xml:space="preserve">
+    <value>前職</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>金</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>時</value>
+  </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>写真</value>
+    <comment>Location Management Controller (Club Detail View)</comment>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>性別</value>
+  </data>
+  <data name="GivenName" xml:space="preserve">
+    <value>名</value>
+  </data>
+  <data name="GoBackToPreviousPage" xml:space="preserve">
+    <value>前のページに戻る</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>身長</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>ヘルプ</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Holiday" xml:space="preserve">
+    <value>店休日</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>ホーム</value>
+    <comment>Club Detail</comment>
+  </data>
+  <data name="Hoslog" xml:space="preserve">
+    <value>ホスログ</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Hoslog Limited Plan" xml:space="preserve">
+    <value>ホスログ限定プラン</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="HoslogLimitedPlan" xml:space="preserve">
+    <value>ホスログ限定プラン</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="Host" xml:space="preserve">
+    <value>ホスト一覧</value>
+    <comment>Location Management</comment>
+  </data>
+  <data name="Host Blood Type" xml:space="preserve">
+    <value>血液型を選ぶ</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Host Constellation Group" xml:space="preserve">
+    <value>星座を選ぶ</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Host Height" xml:space="preserve">
+    <value>身長を選ぶ</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Host in charge" xml:space="preserve">
+    <value>担当したホスト</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Host Liquor Strength" xml:space="preserve">
+    <value>お酒の強さを選ぶ</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Host Ranking" xml:space="preserve">
+    <value>ホストランキング</value>
+    <comment>Location Management Controller (Club Detail View)</comment>
+  </data>
+  <data name="Host Recommended for you" xml:space="preserve">
+    <value>あなたにオススメのホスト</value>
+    <comment>Host Search</comment>
+  </data>
+  <data name="HostClubs" xml:space="preserve">
+    <value>ホストクラブ</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="HostDetail" xml:space="preserve">
+    <value>ホストの詳細</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Host_in_charge_Info_Icon" xml:space="preserve">
+    <value>「担当したホスト」はユーザーが任意で選択したものです。運営側で真偽を保証するものではありませんのでご注意ください。</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>時間</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="HourSystem" xml:space="preserve">
+    <value>時間制</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="I Agree to Continue" xml:space="preserve">
+    <value>同意したものとみなします</value>
+  </data>
+  <data name="IncludingTax" xml:space="preserve">
+    <value>( 税込 )</value>
+    <comment>Review</comment>
+  </data>
+  <data name="Inquiry" xml:space="preserve">
+    <value>お問い合わせ</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Invalid Email" xml:space="preserve">
+    <value>有効なメールアドレスを入力してください</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="Invalid_mobile_number" xml:space="preserve">
+    <value>無効な携帯番号</value>
+    <comment>Register</comment>
+  </data>
+  <data name="Is this your first time using Hoslog" xml:space="preserve">
+    <value>初めてホスログをご利用ですか？</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>件</value>
+    <comment>Bookmark Management</comment>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>日本語</value>
+    <comment>Language Management</comment>
+  </data>
+  <data name="Kenshin" xml:space="preserve">
+    <value>ケンシン</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Langauge" xml:space="preserve">
+    <value>言語</value>
+    <comment>Language Management</comment>
+  </data>
+  <data name="LanguagePreference" xml:space="preserve">
+    <value>言語の設定</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Last Entry" xml:space="preserve">
+    <value>最終入店</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Last Order" xml:space="preserve">
+    <value>ラストオーダー</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="LastEntryLastOrderTime" xml:space="preserve">
+    <value>最終入店とラストオーダー</value>
+  </data>
+  <data name="Length_should_be_2_characters" xml:space="preserve">
+    <value>長さは 2 文字である必要があります</value>
+  </data>
+  <data name="Length_should_be_4_characters" xml:space="preserve">
+    <value>長さは 4 文字である必要があります</value>
+  </data>
+  <data name="ListOfHosts" xml:space="preserve">
+    <value>ホスト・お店のスタッフ一覧</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>ログイン</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Login with mobile" xml:space="preserve">
+    <value>モバイルでログイン</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>ログアウト</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>男</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>マップ</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="Mark all as read" xml:space="preserve">
+    <value>すべて既読にする</value>
+    <comment>Notification Management</comment>
+  </data>
+  <data name="MarkThis" xml:space="preserve">
+    <value>これにマークを付ける</value>
+  </data>
+  <data name="Maximum length is 16 characters" xml:space="preserve">
+    <value>最大長は 16 文字です</value>
+  </data>
+  <data name="Maximum length is 30 characters" xml:space="preserve">
+    <value>最大長は 30 文字です</value>
+  </data>
+  <data name="Maximum length is 4 characters" xml:space="preserve">
+    <value>最大長は 4 文字です</value>
+  </data>
+  <data name="Met handsome host" xml:space="preserve">
+    <value>イケメンの多さ</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="Minimum length is 1 characters" xml:space="preserve">
+    <value>最小長は 1 文字です</value>
+  </data>
+  <data name="Minimum length is 11 characters" xml:space="preserve">
+    <value>最小長は 11 文字です</value>
+    <comment>Register</comment>
+  </data>
+  <data name="Minimum length is 4 characters" xml:space="preserve">
+    <value>最小長は 4 文字です</value>
+  </data>
+  <data name="Minimum length is 8 characters" xml:space="preserve">
+    <value>最小長は 8 文字です</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>分</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>電話番号</value>
+    <comment>Register</comment>
+  </data>
+  <data name="MobileNumber" xml:space="preserve">
+    <value>電話番号</value>
+  </data>
+  <data name="MobileNumberPlaceholder" xml:space="preserve">
+    <value>あなたの電話番号</value>
+  </data>
+  <data name="MobileNumberRequired" xml:space="preserve">
+    <value>ユーザー名が必要です</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>月</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="MustBeAtlest8Characters" xml:space="preserve">
+    <value>少なくとも8文字でなければなりませんか</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="MVP" xml:space="preserve">
+    <value>最優秀選手</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>マイプロフィール</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="New Hoslog Account" xml:space="preserve">
+    <value>新しくホスログを始める</value>
+  </data>
+  <data name="Newly Added Club" xml:space="preserve">
+    <value>新規店舗</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>新しいパスワード</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>次</value>
+  </data>
+  <data name="Nickname" xml:space="preserve">
+    <value>ニックネーム</value>
+  </data>
+  <data name="Night" xml:space="preserve">
+    <value>夜</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>いいえ</value>
+  </data>
+  <data name="Nomimation Fee" xml:space="preserve">
+    <value>指名料</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="NoSearchRecordFound" xml:space="preserve">
+    <value>申し訳ありませんが、一致するものが見つかりませんでした。検索条件を調整してみてください</value>
+    <comment>Search</comment>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>通知</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="NumberOfPeople" xml:space="preserve">
+    <value>人数</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="Older" xml:space="preserve">
+    <value>古い</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>以前のパスワード</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="On-site Nomination" xml:space="preserve">
+    <value>場内指名</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="OnSiteNomination" xml:space="preserve">
+    <value>場内指名</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="OperatingCompany" xml:space="preserve">
+    <value>運営会社</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>または</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="OverallClubGallery" xml:space="preserve">
+    <value>クラブとホストの写真同</value>
+  </data>
+  <data name="OverallExperienceAboutClub" xml:space="preserve">
+    <value>体験の総合評価を教えてください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>パスワード</value>
+  </data>
+  <data name="Password must match" xml:space="preserve">
+    <value>パスワード一致しなければならない</value>
+    <comment>Create Password Page</comment>
+  </data>
+  <data name="PasswordMustMatch" xml:space="preserve">
+    <value>パスワード一致しなければならない</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>パスワードが必要</value>
+  </data>
+  <data name="PaymentAmount" xml:space="preserve">
+    <value>お支払い金額</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>お支払い方法</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="PaymentOptions" xml:space="preserve">
+    <value>支払いオプション</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="Phone no" xml:space="preserve">
+    <value>あなたの電話番号</value>
+    <comment>Register Controller</comment>
+  </data>
+  <data name="Phone number to login" xml:space="preserve">
+    <value>ログインするための電話番号</value>
+    <comment>Login</comment>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>電話番号</value>
+  </data>
+  <data name="PickMVP" xml:space="preserve">
+    <value>最優秀選手をお願い致します</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Plan" xml:space="preserve">
+    <value>プラン</value>
+  </data>
+  <data name="PlanB" xml:space="preserve">
+    <value>次のプラン</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="Plans" xml:space="preserve">
+    <value>プラン内容</value>
+  </data>
+  <data name="PleaseAnswerASimpleChoiceQuestion" xml:space="preserve">
+    <value>簡単な選択式の質問にご回答ください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseCheckTheReviewContent" xml:space="preserve">
+    <value>レビュー内容をご確認ください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseConfirmTheStoreYouVisitedThisTime" xml:space="preserve">
+    <value>今回来店した店舗を確認してください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseGiveUsYourOverallEvaluationOfTheExperience" xml:space="preserve">
+    <value>体験の総合評価を教えてください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseMakeSureThatTheReviewIsCorrect" xml:space="preserve">
+    <value>レビュー対象に間違いが無いかご確認ください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseMakeSureThereAreNoMistakesInTheReviewTarget" xml:space="preserve">
+    <value>レビュー対象に間違いが無いかご確認ください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseSelectAllHostsYouRemember" xml:space="preserve">
+    <value>覚えているホストを全て選択してください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseSelectAllThatApplyToYourExperience" xml:space="preserve">
+    <value>体験について当てはまるものを全て選んでください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="PleaseSelectAPaymentMethod" xml:space="preserve">
+    <value>支払方法を選択してください</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="PleaseSelectAPlan" xml:space="preserve">
+    <value>プランを選択してください</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="PleaseTellUsAboutYourExperienceAtTheStore" xml:space="preserve">
+    <value>店舗での体験について教えてください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>ポイント利用</value>
+  </data>
+  <data name="Popularity" xml:space="preserve">
+    <value>人気</value>
+  </data>
+  <data name="PostAReviewForThisStore" xml:space="preserve">
+    <value>この店舗へレビュー投稿する</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Preferred Host" xml:space="preserve">
+    <value>ご希望のホスト</value>
+    <comment>Reservation Detail</comment>
+  </data>
+  <data name="PreferredLocation" xml:space="preserve">
+    <value>お気に入りのエリア</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>プライバシーポリシー</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="ProceedToNext" xml:space="preserve">
+    <value>次に進む</value>
+  </data>
+  <data name="ProfileInfo" xml:space="preserve">
+    <value>マイプロフィール</value>
+  </data>
+  <data name="QnAAboutClub" xml:space="preserve">
+    <value>お店の体験について</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Rate&amp;ReviewOtherHostClubs" xml:space="preserve">
+    <value>他のホストクラブを評価</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="RateOtherHostClubs" xml:space="preserve">
+    <value>他のホストクラブを評価</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Re-selectTheHost" xml:space="preserve">
+    <value>ホストを再選択します</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Re-SelectYourHost" xml:space="preserve">
+    <value>体験を選び直す</value>
+  </data>
+  <data name="RecommendedClub" xml:space="preserve">
+    <value>オススメのクラブ</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="RecommendedHosts" xml:space="preserve">
+    <value>オススメのホスト</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="Regions" xml:space="preserve">
+    <value>場所から探す</value>
+    <comment>Location Management/Search Filter</comment>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>新規会員登録</value>
+  </data>
+  <data name="Register an Account" xml:space="preserve">
+    <value>新規会員登録</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Regular Price" xml:space="preserve">
+    <value>通常料金</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Remember me" xml:space="preserve">
+    <value>パスワードを覚える</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Request a new code" xml:space="preserve">
+    <value>新しいコードをリクエストする</value>
+    <comment>Otp Page</comment>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>必須</value>
+  </data>
+  <data name="Reservable" xml:space="preserve">
+    <value>本日空席あり</value>
+    <comment>Bookmark Controller</comment>
+  </data>
+  <data name="ReservationContents" xml:space="preserve">
+    <value>予約内容</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="ReservationDate" xml:space="preserve">
+    <value>予約日</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="ReservationDetails" xml:space="preserve">
+    <value>ご予約内容</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="ReservationHistory" xml:space="preserve">
+    <value>予約履歴</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>リセット</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>レビュー</value>
+    <comment>Location Management Controller (Club Detail View)</comment>
+  </data>
+  <data name="ReviewAndComments" xml:space="preserve">
+    <value>レビューとコメント</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="ReviewClub" xml:space="preserve">
+    <value>この店舗へレビュー投稿する</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>口コミ</value>
+  </data>
+  <data name="ReviewWhatYouThinkAboutTheClub" xml:space="preserve">
+    <value>今回、最も伝えたいことはどれですか？</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="RookieKingSalesNo1" xml:space="preserve">
+    <value>新人王 売上No.1</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>土</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>検索</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Search By" xml:space="preserve">
+    <value>検索対象を選ぶ</value>
+    <comment>Location Management/ Search Filter</comment>
+  </data>
+  <data name="Search by Handsomeness" xml:space="preserve">
+    <value>イケメンから探す</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Search by nearest store" xml:space="preserve">
+    <value>現在地に近い店舗から探す</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Search Filter" xml:space="preserve">
+    <value>検索フィルター</value>
+    <comment>Location Management/ Search Filter</comment>
+  </data>
+  <data name="Search Filter Placeholder" xml:space="preserve">
+    <value>店舗名、ホスト名、キーワードで検索</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Search Results" xml:space="preserve">
+    <value>検索結果</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="SearchFromOver" xml:space="preserve">
+    <value>検索する</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="SearchHostClub" xml:space="preserve">
+    <value>ホストクラブを探す</value>
+    <comment>Landing Page</comment>
+  </data>
+  <data name="See more" xml:space="preserve">
+    <value>もっと見る</value>
+    <comment>Search Filter</comment>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>選ぶ</value>
+  </data>
+  <data name="Select Language" xml:space="preserve">
+    <value>言語を選択する</value>
+    <comment>Language Management</comment>
+  </data>
+  <data name="SelectAccordingToYourExperience" xml:space="preserve">
+    <value>体験について当てはまるものを全て選んでください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="SelectAllTheHostsYouRemember" xml:space="preserve">
+    <value>覚えているホストを全て選択してください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>を選びました！</value>
+  </data>
+  <data name="SelectedHost" xml:space="preserve">
+    <value>選択中のホスト</value>
+  </data>
+  <data name="SelectedPlan" xml:space="preserve">
+    <value>プラン</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="SelectMultipleResponseAboutTheOverallClubAndHostsImpressions" xml:space="preserve">
+    <value>全体の雰囲気やホストの印象を複数回答できます</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>接客</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="Set up a new password to login" xml:space="preserve">
+    <value>ログインするための新しいパスワードを設定する</value>
+    <comment>Create Password Page</comment>
+  </data>
+  <data name="SetupNewPasswordToLogin" xml:space="preserve">
+    <value>ログインするための新しいパスワードを設定する</value>
+    <comment>Profile Management Controller</comment>
+  </data>
+  <data name="Shift" xml:space="preserve">
+    <value>営業時間から探す</value>
+    <comment>Location Management/Search Filter</comment>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>通り</value>
+  </data>
+  <data name="Strength of Alcohol" xml:space="preserve">
+    <value>お酒の強さ</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Stripe" xml:space="preserve">
+    <value>ストライプ</value>
+    <comment>Payment Methods</comment>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>日</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>姓</value>
+  </data>
+  <data name="TaxIncluded" xml:space="preserve">
+    <value>税込</value>
+  </data>
+  <data name="TellUsAboutYourClubExperience" xml:space="preserve">
+    <value>店舗での体験について教えてください</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Terms of Use and Privacy Policy" xml:space="preserve">
+    <value>利用規約 と プライバシーポリシー に</value>
+  </data>
+  <data name="Thank you for your visit!" xml:space="preserve">
+    <value>ご来店ありがとうございました！</value>
+    <comment>Review Page</comment>
+  </data>
+  <data name="The code will be sent through SMS" xml:space="preserve">
+    <value>コードはSMSで送信されます</value>
+    <comment>Register</comment>
+  </data>
+  <data name="TheAmountOfMoneyForPayment" xml:space="preserve">
+    <value>お支払い金額</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="There are seats available today" xml:space="preserve">
+    <value>本日空席あり</value>
+    <comment>Location Management Index</comment>
+  </data>
+  <data name="TheSelectedTagWillBeUsedAsTheTitleOfTheReview" xml:space="preserve">
+    <value>選んだタグがレビューのタイトルに使用されます</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="TheSelectedTagWillBeUsedInTheTitleOfTheReview" xml:space="preserve">
+    <value>選んだタグがレビューのタイトルに使用されます</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="The_code_will_be_sent_through_SMS" xml:space="preserve">
+    <value>コードはSMSで送信されます</value>
+    <comment>Register</comment>
+  </data>
+  <data name="ThisTagWillBeUsedForTheReviewTitle" xml:space="preserve">
+    <value>このタグがレビューのタイトルに使用されます</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="This_field_is_required" xml:space="preserve">
+    <value>この項目は必須です</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>木</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>時間</value>
+  </data>
+  <data name="TimeChange" xml:space="preserve">
+    <value>時間変更</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="ToConfirmAge" xml:space="preserve">
+    <value>年齢確認の為誕生日</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>本日</value>
+    <comment>Reservation History Management Controller</comment>
+  </data>
+  <data name="Top Reviews" xml:space="preserve">
+    <value>トップレビュー</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="TopPage" xml:space="preserve">
+    <value>トップページ</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="TopRanking" xml:space="preserve">
+    <value>トップランキング</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>合計</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>火</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="Unreservable" xml:space="preserve">
+    <value>予約不可</value>
+  </data>
+  <data name="UpdateYourProfile" xml:space="preserve">
+    <value>プロフィールを更新</value>
+  </data>
+  <data name="UpToPerson" xml:space="preserve">
+    <value>名まで</value>
+    <comment>Dashboard Controller</comment>
+  </data>
+  <data name="UsedPoints" xml:space="preserve">
+    <value>使用済みポイント</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="UserGuide" xml:space="preserve">
+    <value>ご利用ガイド</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>ニックネーム</value>
+  </data>
+  <data name="Various Drinks" xml:space="preserve">
+    <value>ドリンク</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="Visited Date" xml:space="preserve">
+    <value>来店日時</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="Visited On" xml:space="preserve">
+    <value>訪問日時</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="WarningNotes" xml:space="preserve">
+    <value>当サイトは18歳未満の方の閲覧を固くお断りいたします。また、20歳未満の飲酒は法律で禁じられています。</value>
+    <comment>_Layout</comment>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>水</value>
+    <comment>User Club Page</comment>
+  </data>
+  <data name="WeWillTryToBookYourSelectedHost" xml:space="preserve">
+    <value>選んだホストの予約を試みます.</value>
+    <comment>Reservation Controller</comment>
+  </data>
+  <data name="WhatDoYouMostWantToConveyThisTime" xml:space="preserve">
+    <value>今回、最も伝えたいことはどれですか？</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="WhatIWantToConveyMost" xml:space="preserve">
+    <value>最も伝えたいこと</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="WhoWasTheMostImpressiveHost" xml:space="preserve">
+    <value>最も印象的なホストは誰でしたか？</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="Wish to revisit" xml:space="preserve">
+    <value>居心地</value>
+    <comment>Dashboard</comment>
+  </data>
+  <data name="Working Hours" xml:space="preserve">
+    <value>営業時間</value>
+    <comment>Host Detail</comment>
+  </data>
+  <data name="WorkingHoursHoliday" xml:space="preserve">
+    <value>営業時間と店休日</value>
+  </data>
+  <data name="You have no Notifications yet" xml:space="preserve">
+    <value>まだ通知はありません</value>
+    <comment>Notification Management</comment>
+  </data>
+  <data name="You will earn 500 points" xml:space="preserve">
+    <value>500ポイント獲得できます</value>
+    <comment>Reservation Detail</comment>
+  </data>
+  <data name="YouCanAnswerMultipleAnswersAboutTheOverallAtmosphereAndImpressionsOfTheHost" xml:space="preserve">
+    <value>全体の雰囲気やホストの印象を複数回答できます</value>
+    <comment>Review Controller</comment>
+  </data>
+  <data name="YouHaveNoNotificationYet" xml:space="preserve">
+    <value>まだ通知はありません</value>
+    <comment>Notification Controller</comment>
+  </data>
+  <data name="YouHaveNoReviewCommentsYet" xml:space="preserve">
+    <value>まだレビューとコメントがありません</value>
+    <comment>Review Nav</comment>
+  </data>
+</root>

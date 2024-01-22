@@ -1,0 +1,344 @@
+﻿
+@{
+    ViewBag.Title = "faq";
+    Layout = "~/Views/Shared/_FooterLayout.cshtml";
+}
+
+<style>
+    .containermain {
+        position: relative;
+        height: 50px;
+    }
+
+    #first {
+        position: absolute;
+        /* left: 55px; */
+        z-index: 3;
+        margin-right: 55px;
+    }
+
+    #second {
+        position: absolute;
+        /* left: 75px; */
+        z-index: 1;
+        margin-left: 105px;
+    }
+
+    #third {
+        position: absolute;
+        margin-left: 25px;
+        z-index: 3;
+        width: 56px;
+        height: 56px;
+        border-radius: 200px;
+        bottom: 3px;
+        border: 1.5px solid var(--White, #FFF);
+    }
+</style>
+<!-- breadcrum -->
+<div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
+    <a href="@Url.Action("HomePage", "Home")" class="active">ホーム</a>
+    <i class="las la-angle-right"></i>
+    <a href="#">よくある質問</a>
+</div>
+
+<div class="grid  mx-[16px] mt-[12px] mb-[16px] px-4">
+    <div class="bg-[#FBFBFB] mb-[16px] ">
+        <div style="line-height: 38px;"
+             class=" mb-[16px] font-[600] grid text-[24px] text-[#101828] flex-row justify-center">
+            <div class="flex flex-row justify-center">
+                よくある質問
+
+            </div>
+            <div style="line-height: 24px;" class="font-[400] justify-center text-[12px] text-[#667085] ">
+                ホスログに関するすべてを見つけてください。
+            </div>
+        </div>
+    </div>
+
+
+    <div style="border-top: 0.5px solid rgba(255, 182, 193, 0.20);background: #FFF9F9;border-left: 0.5px solid rgba(255, 182, 193, 0.20) ;border-right:0.5px solid rgba(255, 182, 193, 0.20);" class="toggle-container  ">
+        <div style="border-top: 4px;"
+             class="toggle-header" onclick="toggleContent(this)">
+            <div class="flex   border-t-0  flex-row gap-[14px]">
+                <span style="padding-left: 8px; padding-right:8px; padding-top:8px;" class="text-[#101828]  text-[14px]">
+                    初回時間が終了して、引き続き遊びたい場合はどのような料金体系になりますか？
+                </span>
+                <span class="toggle-icon mt-[8px] mr-[8px]">
+                    <!-- Replace the following SVG with your own SVG code -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <g clip-path="url(#clip0_7421_20909)">
+                            <path d="M8.00065 5.33398V10.6673M5.33398 8.00065H10.6673M14.6673 8.00065C14.6673 11.6825 11.6825 14.6673 8.00065 14.6673C4.31875 14.6673 1.33398 11.6825 1.33398 8.00065C1.33398 4.31875 4.31875 1.33398 8.00065 1.33398C11.6825 1.33398 14.6673 4.31875 14.6673 8.00065Z"
+                                  stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_7421_20909">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <div style="display: none;background: #FFF9F9;border-bottom: 0.5px solid rgba(255, 182, 193, 0.20);border-left:0.5px solid rgba(255, 182, 193, 0.20);border-right:0.5px solid rgba(255, 182, 193, 0.20);" class="toggle-content">
+            <p style="align-self: stretch; padding-left: 8px; padding-right:8px; padding-top:4px; padding-bottom:8px;" class=" pr-[20px] text-[12px] text-[#667085]">
+                お店により異なりますが、約2000円(30分間)程度の延長料金が加算されます。飲み物は単品注文制となり、飲み放題メニューではなくなることが殆どです。別途サービス料がかかることもありますので必ず延長開始前に確認しておきましょう。
+            </p>
+        </div>
+    </div>
+    <div style="background: var(--gray-200, #EAECF0);" class=" mt-[12px] mb-[24px] h-[1px]    w-full">
+    </div>
+    <!-- 2 -->
+    <div class="toggle-container ">
+        <div style="border-top: 4px;border-top: 0.5px solid rgba(255, 182, 193, 0.20);background: #FFF9F9;border-left: 0.5px solid rgba(255, 182, 193, 0.20) ;border-right:0.5px solid rgba(255, 182, 193, 0.20);"
+             class="toggle-header" onclick="toggleContent(this)">
+            <div class="flex  flex-row gap-[14px]">
+                <span style="padding-left: 8px; padding-right:8px; padding-top:8px;" class="text-[#101828]  text-[14px]">初回システム料金内に含まれている「場内指名」とはどのようなものでしょうか？</span>
+                <span class="toggle-icon mt-[8px] mr-[8px]">
+                    <!-- Replace the following SVG with your own SVG code -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <g clip-path="url(#clip0_7421_20909)">
+                            <path d="M8.00065 5.33398V10.6673M5.33398 8.00065H10.6673M14.6673 8.00065C14.6673 11.6825 11.6825 14.6673 8.00065 14.6673C4.31875 14.6673 1.33398 11.6825 1.33398 8.00065C1.33398 4.31875 4.31875 1.33398 8.00065 1.33398C11.6825 1.33398 14.6673 4.31875 14.6673 8.00065Z"
+                                  stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_7421_20909">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <div style="display: none;background: #FFF9F9;border-bottom: 0.5px solid rgba(255, 182, 193, 0.20);border-left:0.5px solid rgba(255, 182, 193, 0.20);border-right:0.5px solid rgba(255, 182, 193, 0.20);" class="toggle-content">
+            <p style="align-self: stretch; padding-left: 8px; padding-right:8px; padding-top:4px; padding-bottom:8px;" class=" pr-[20px] text-[12px] text-[#667085]">
+                初回来店時は、基本的にホストと対面した状態での接客となります。話している中で気に入ったホストが見つかった場合は積極的に「場内指名」をしましょう。隣に座って接客をして貰える為、より近い距離でホストとの会話をお楽しみ頂けます。
+            </p>
+        </div>
+    </div>
+    <div style="background: var(--gray-200, #EAECF0);" class=" mt-[12px] mb-[24px] h-[1px]    w-full">
+    </div>
+    <!-- 3 -->
+    <!-- 4 th -->
+    <div class="toggle-container ">
+        <div style="border-top: 4px;border-top: 0.5px solid rgba(255, 182, 193, 0.20);background: #FFF9F9;border-left: 0.5px solid rgba(255, 182, 193, 0.20) ;border-right:0.5px solid rgba(255, 182, 193, 0.20);"
+             class="toggle-header" onclick="toggleContent(this)">
+            <div class="flex  flex-row gap-[14px]">
+                <span style="padding-left: 8px; padding-right:8px; padding-top:8px;" class="text-[#101828]  text-[14px]">
+                    当日になって突然「ホスログ」からお店の予約をお願いすることは出来ますか？
+                </span>
+                <span class="toggle-icon mt-[8px] mr-[8px]">
+                    <!-- Replace the following SVG with your own SVG code -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <g clip-path="url(#clip0_7421_20909)">
+                            <path d="M8.00065 5.33398V10.6673M5.33398 8.00065H10.6673M14.6673 8.00065C14.6673 11.6825 11.6825 14.6673 8.00065 14.6673C4.31875 14.6673 1.33398 11.6825 1.33398 8.00065C1.33398 4.31875 4.31875 1.33398 8.00065 1.33398C11.6825 1.33398 14.6673 4.31875 14.6673 8.00065Z"
+                                  stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_7421_20909">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <div style="display: none;background: #FFF9F9;border-bottom: 0.5px solid rgba(255, 182, 193, 0.20);border-left:0.5px solid rgba(255, 182, 193, 0.20);border-right:0.5px solid rgba(255, 182, 193, 0.20);" class="toggle-content">
+            <p style="align-self: stretch; padding-left: 8px; padding-right:8px; padding-top:4px; padding-bottom:8px;" class=" pr-[20px] text-[12px] text-[#667085]">
+                おまかせください！もちろん可能です◎事前予約でない場合、混雑の為に入店出来ないお店もあるかと思いますが、空席確認の上でスグにご案内可能なお店をご提案致します。当日のご予約はウエブサイトがスムーズです。
+            </p>
+        </div>
+    </div>
+    <div style="background: var(--gray-200, #EAECF0);" class=" mt-[12px] mb-[24px] h-[1px]    w-full">
+    </div>
+    <!-- 4th  -->
+    <div class="toggle-container ">
+        <div style="border-top: 4px;border-top: 0.5px solid rgba(255, 182, 193, 0.20);background: #FFF9F9;border-left: 0.5px solid rgba(255, 182, 193, 0.20) ;border-right:0.5px solid rgba(255, 182, 193, 0.20);"
+             class="toggle-header" onclick="toggleContent(this)">
+            <div class="flex  flex-row gap-[14px]">
+                <span style="padding-left: 8px; padding-right:8px; padding-top:8px;" class="text-[#101828]  text-[14px]">
+                    「ホスログ」の紹介サービスを使うと、紹介料や案内料などの手数料がかかりますか？
+                </span>
+                <span class="toggle-icon mt-[8px] mr-[8px]">
+                    <!-- Replace the following SVG with your own SVG code -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <g clip-path="url(#clip0_7421_20909)">
+                            <path d="M8.00065 5.33398V10.6673M5.33398 8.00065H10.6673M14.6673 8.00065C14.6673 11.6825 11.6825 14.6673 8.00065 14.6673C4.31875 14.6673 1.33398 11.6825 1.33398 8.00065C1.33398 4.31875 4.31875 1.33398 8.00065 1.33398C11.6825 1.33398 14.6673 4.31875 14.6673 8.00065Z"
+                                  stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_7421_20909">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <div style="display: none;background: #FFF9F9;border-bottom: 0.5px solid rgba(255, 182, 193, 0.20);border-left:0.5px solid rgba(255, 182, 193, 0.20);border-right:0.5px solid rgba(255, 182, 193, 0.20);" class="toggle-content">
+            <p style="align-self: stretch; padding-left: 8px; padding-right:8px; padding-top:4px; padding-bottom:8px;" class=" pr-[20px] text-[12px] text-[#667085]">
+                完全無料にてご利用頂けます。当サイトを通してご紹介・ご案内する際に必要な料金は特に御座いません。お気軽にご利用ください。実際に必要になるのはホストクラブで遊ぶ料金のみとなります。ご予約時には料金の確認もさせて頂きますのでご安心ください。
+            </p>
+        </div>
+    </div>
+    <div style="background: var(--gray-200, #EAECF0);" class=" mt-[12px] mb-[24px] h-[1px]    w-full">
+    </div>
+    <!-- 5th  -->
+
+    <div class="toggle-container ">
+        <div style="border-top: 4px;border-top: 0.5px solid rgba(255, 182, 193, 0.20);background: #FFF9F9;border-left: 0.5px solid rgba(255, 182, 193, 0.20) ;border-right:0.5px solid rgba(255, 182, 193, 0.20);"
+             class="toggle-header" onclick="toggleContent(this)">
+            <div class="flex  flex-row gap-[14px]">
+                <span style="padding-left: 8px; padding-right:8px; padding-top:8px;" class="text-[#101828]  text-[14px]">
+                    身分証明書は参加者全員分必要ですか？また、顔写真入り以外はダメですか？
+
+                </span>
+                <span class="toggle-icon mt-[8px] mr-[8px]">
+                    <!-- Replace the following SVG with your own SVG code -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <g clip-path="url(#clip0_7421_20909)">
+                            <path d="M8.00065 5.33398V10.6673M5.33398 8.00065H10.6673M14.6673 8.00065C14.6673 11.6825 11.6825 14.6673 8.00065 14.6673C4.31875 14.6673 1.33398 11.6825 1.33398 8.00065C1.33398 4.31875 4.31875 1.33398 8.00065 1.33398C11.6825 1.33398 14.6673 4.31875 14.6673 8.00065Z"
+                                  stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_7421_20909">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <div style="display: none;background: #FFF9F9;border-bottom: 0.5px solid rgba(255, 182, 193, 0.20);border-left:0.5px solid rgba(255, 182, 193, 0.20);border-right:0.5px solid rgba(255, 182, 193, 0.20);" class="toggle-content">
+            <p style="align-self: stretch; padding-left: 8px; padding-right:8px; padding-top:4px; padding-bottom:8px;" class=" pr-[20px] text-[12px] text-[#667085]">
+                初めてのお店に入店する際、必ず参加者全員の身分証明書が必要となります。免許証やパスポートをお持ちください。顔写真入りの身分証明書をお持ちで無い場合、保険証やクレジットカード等を2点提示して頂く事で入店可能なお店も御座います。
+            </p>
+        </div>
+    </div>
+    <div style="background: var(--gray-200, #EAECF0);" class=" mt-[12px] mb-[24px] h-[1px]    w-full">
+    </div>
+
+    <!-- 6th -->
+
+    <div class="toggle-container ">
+        <div style="border-top: 4px;border-top: 0.5px solid rgba(255, 182, 193, 0.20);background: #FFF9F9;border-left: 0.5px solid rgba(255, 182, 193, 0.20) ;border-right:0.5px solid rgba(255, 182, 193, 0.20);"
+             class="toggle-header" onclick="toggleContent(this)">
+            <div class="flex  flex-row gap-[14px]">
+                <span style="padding-left: 8px; padding-right:8px; padding-top:8px;" class="text-[#101828]  text-[14px]">
+                    参加者の中に、18歳の未成年者がいます。ホストクラブは利用出来ますか？
+
+
+                </span>
+                <span class="toggle-icon mt-[8px] mr-[8px]">
+                    <!-- Replace the following SVG with your own SVG code -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <g clip-path="url(#clip0_7421_20909)">
+                            <path d="M8.00065 5.33398V10.6673M5.33398 8.00065H10.6673M14.6673 8.00065C14.6673 11.6825 11.6825 14.6673 8.00065 14.6673C4.31875 14.6673 1.33398 11.6825 1.33398 8.00065C1.33398 4.31875 4.31875 1.33398 8.00065 1.33398C11.6825 1.33398 14.6673 4.31875 14.6673 8.00065Z"
+                                  stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_7421_20909">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <div style="display: none;background: #FFF9F9;border-bottom: 0.5px solid rgba(255, 182, 193, 0.20);border-left:0.5px solid rgba(255, 182, 193, 0.20);border-right:0.5px solid rgba(255, 182, 193, 0.20);" class="toggle-content">
+            <p style="align-self: stretch; padding-left: 8px; padding-right:8px; padding-top:4px; padding-bottom:8px;" class=" pr-[20px] text-[12px] text-[#667085]">
+                未成年でも18歳以上ならホストクラブをご利用頂く事が出来ます。しかし、18歳でも在学中の高校生の入店は出来ません。ご提供出来る飲み物はソフトドリンクのみとなり、喫煙もNGです。独自規定により20歳以上しか入店出来ないお店もあります。
+            </p>
+        </div>
+    </div>
+    <div style="background: var(--gray-200, #EAECF0);" class=" mt-[12px] mb-[24px] h-[1px]    w-full">
+    </div>
+
+    <!-- 7th  -->
+    <div class="toggle-container ">
+        <div style="border-top: 4px;border-top: 0.5px solid rgba(255, 182, 193, 0.20);background: #FFF9F9;border-left: 0.5px solid rgba(255, 182, 193, 0.20) ;border-right:0.5px solid rgba(255, 182, 193, 0.20);border-left: 0.5px solid rgba(255, 182, 193, 0.20) ;border-right:0.5px solid rgba(255, 182, 193, 0.20)"
+             class="toggle-header" onclick="toggleContent(this)">
+            <div class="flex  flex-row gap-[14px]">
+                <span style="padding-left: 8px; padding-right:8px; padding-top:8px;" class="text-[#101828]  text-[14px]">
+                    タバコの煙が苦手です。喫煙・分煙ルーム等を用意して貰う事は出来ますか？
+
+                </span>
+                <span class="toggle-icon mt-[8px] mr-[8px]">
+                    <!-- Replace the following SVG with your own SVG code -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <g clip-path="url(#clip0_7421_20909)">
+                            <path d="M8.00065 5.33398V10.6673M5.33398 8.00065H10.6673M14.6673 8.00065C14.6673 11.6825 11.6825 14.6673 8.00065 14.6673C4.31875 14.6673 1.33398 11.6825 1.33398 8.00065C1.33398 4.31875 4.31875 1.33398 8.00065 1.33398C11.6825 1.33398 14.6673 4.31875 14.6673 8.00065Z"
+                                  stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_7421_20909">
+                                <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <div style="display: none;background: #FFF9F9;border-bottom: 0.5px solid rgba(255, 182, 193, 0.20);border-left:0.5px solid rgba(255, 182, 193, 0.20);border-right:0.5px solid rgba(255, 182, 193, 0.20);" class="toggle-content">
+            <p style="align-self: stretch; padding-left: 8px; padding-right:8px; padding-top:4px; padding-bottom:8px;" class=" pr-[20px] text-[12px] text-[#667085]">
+                お店によりご希望に沿ったお席をご用意する事が可能です。昨今の受動喫煙防止政策に則って、ホストクラブでの分煙化も進んでいます。中には完全禁煙がコンセプトのお店もあります。ご予約の際、専任アドバイザーまでお気軽にお申し付けください。
+            </p>
+        </div>
+    </div>
+    <div class=" mt-[12px] mb-[24px] h-[1px]    w-full">
+    </div>
+
+
+
+    <!-- bottom content -->
+    <div style="background: rgba(255, 182, 193, 0.12); border-radius:16px;" class="px-[20px] py-[16px] mb-[16px]">
+        <div class="containermain justify-center flex flex-row">
+            <div class="box w-[48px]  h-[48px]" id="first">
+                <img class="rounded-full object-cover" src="~/Content/assets/images/customer/stackimg.png"
+                     alt="profileimg">
+
+            </div>
+            <div class="box w-[48px]  h-[48px]" id="second">
+                <img class="rounded-full object-cover" src="~/Content/assets/images/customer/stackimg.png"
+                     alt="profileimg">
+
+            </div>
+            <div class="box" id="third">
+                <img class="rounded-full object-cover" src="~/Content/assets/images/customer/stackmid.png"
+                     alt="profileimg">
+
+            </div>
+        </div>
+        <div class="grid  gap-[4px] justify-center  text-[#101828] ">
+            <div class="leading-[30px] flex flex-row justify-center mt-4">
+                何か質問ありますか？
+            </div>
+            <div style="align-self: stretch;" class="flex text-[#667085] text-[12px] flex-row justify-center mt-4 mb-4">
+                ご質問のために私たちに連絡してください
+            </div>
+            <button style="background-color: #D75A8B; color: #ffffff; border-radius: 8px;" class="p-2 mt-[16px]" onclick="window.location.href='@Url.Action("inquery","Footer")'">お問い合わせを！</button>
+        </div>
+
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function toggleContent(header) {
+        const content = header.nextElementSibling;
+        header.classList.toggle('expanded');
+        content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+        const icon = header.querySelector('.toggle-icon');
+        icon.innerHTML = (content.style.display === 'block') ? getArrowDownSVG()
+            : getArrowRightSVG();
+    }
+
+    function getArrowRightSVG() {
+        return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><g clip-path="url(#clip0_7399_72594)"> <path d="M7.99967 5.33398V10.6673M5.33301 8.00065H10.6663M14.6663 8.00065C14.6663 11.6825 11.6816 14.6673 7.99967 14.6673C4.31778 14.6673 1.33301 11.6825 1.33301 8.00065C1.33301 4.31875 4.31778 1.33398 7.99967 1.33398C11.6816 1.33398 14.6663 4.31875 14.6663 8.00065Z" stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round"/></g> <defs> <clipPath id="clip0_7399_72594">   <rect width="16" height="16" fill="white"/> </clipPath></defs></svg>';
+    }
+
+    function getArrowDownSVG() {
+        return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><g clip-path="url(#clip0_7421_21042)">  <path d="M5.33398 8.00065H10.6673M14.6673 8.00065C14.6673 11.6825 11.6825 14.6673 8.00065 14.6673C4.31875 14.6673 1.33398 11.6825 1.33398 8.00065C1.33398 4.31875 4.31875 1.33398 8.00065 1.33398C11.6825 1.33398 14.6673 4.31875 14.6673 8.00065Z" stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round"/></g>  <defs> <clipPath id="clip0_7421_21042"> <rect width="16" height="16" fill="white"/> </clipPath> </defs></svg>';
+    }
+</script>

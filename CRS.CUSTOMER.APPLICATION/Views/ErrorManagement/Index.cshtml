@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </script>
+    <title>Hoslog | Error</title>
+    <link rel="stylesheet" href="~/Content/assets/css/tailwind.css">
+    <style>
+    </style>
+</head>
+
+<body>
+    <div class="h-screen w-full flex justify-center items-center px-8">
+        <div>
+            <img src="~/Content/assets/images/404.svg" alt="error">
+            <div class="text-[#18181B] text-base font-semibold text-center mt-8">Ooops.. Page Not Found</div>
+            <a href="@Url.Action("Index","Dashboard")">
+                <button class="border border-[#D75A8B] bg-[#D75A8B] rounded-full p-3 h-[44px] text-white w-full leading-[16px] mt-16">
+                    Back
+                    to
+                    Home
+                    Page
+                </button>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

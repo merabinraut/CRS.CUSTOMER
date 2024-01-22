@@ -1,0 +1,773 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.Dashboard.DashboardModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .slide-wrapper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .slide-container {
+        margin: 0 auto;
+        width: 80%;
+        height: 180px;
+        position: relative;
+        /* overflow: hidden; */
+    }
+
+    .slides {
+        display: flex;
+        height: 100%;
+    }
+
+    .slide {
+        min-width: 100%;
+        position: relative;
+        border-left: 2px solid #fff;
+        border-right: 2px solid #fff;
+    }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .slide-controls {
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+    }
+
+    /*#next-btn,
+    #prev-btn {
+        cursor: pointer;
+        background: transparent;
+        font-size: 30px;
+        border: none;
+        color: white;
+    }
+        #next-btn:focus,
+        #prev-btn:focus {
+            outline: none;
+        }*/
+    .active-circle {
+        background: #000;
+        /*background: #fff;*/
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .prev-circle {
+        /*background: #fff6;*/
+        background: #000;
+        height: 6px;
+        width: 6px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .next-circle {
+        /*background: #fff6;*/
+        background: #000;
+        height: 6px;
+        width: 6px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .slide-content {
+        position: absolute;
+        top: 50%;
+        left: 50px;
+        transform: translateY(-50%);
+        font-size: 60px;
+        color: white;
+    }
+</style>
+@Html.AntiForgeryToken()
+<!-- #region Location section -->
+@*<div class="loop owl-carousel owl-theme center-image-slider">
+        @foreach (var item in Model.Banners)
+        {
+            if (!string.IsNullOrEmpty(item.BannerImage))
+            {
+                <div class="item h-[152px]">
+                    <img src="@item.BannerImage"
+                         class="absolute block  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="@item.BannerName">
+                </div>
+            }
+            else
+            {
+                <div class="item h-[152px]">
+                    <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                         class="absolute block  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                </div>
+            }
+        }
+    </div>*@
+<div class="slide-wrapper pb-4">
+    <div class="slide-container">
+        <div class="slides">
+
+            @foreach (var item in Model.Banners)
+            {
+                if (!string.IsNullOrEmpty(item.BannerImage))
+                {
+                    <div class="slide">
+                        <img src="@item.BannerImage" alt="@item.BannerName">
+                    </div>
+                }
+                else
+                {
+                    <div class="slide">
+                        <img src="~/Content/assets/images/customer/demo-image.jpeg" alt="banner">
+                    </div>
+                    @*<div class="item h-[152px]">
+                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                 class="absolute block  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                        </div>*@
+                }
+            }
+
+        </div>
+        <div class="slide-controls">
+            <button id="prev-btn">
+                <i class="fa-solid fa-circle text-[#fff6] text-[6px] cursor-pointer"></i>
+            </button>
+            <button>
+                <i class="fa-solid fa-circle text-[#fff] text-[8px] cursor-pointer mt-3"></i>
+            </button>
+            <button id="next-btn">
+                <i id="next-btn" class="fa-solid fa-circle text-[#fff6] text-[6px] cursor-pointer"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- sider nm  -->
+<!-- sider nm  -->
+<div class="flex mx-[16px] flex-row pb-[12px]">
+    <div class=" flex flex-row justify-start items-center w-[160px] ">
+        <i class="fa-solid fa-location-dot text-primaryDark"></i>
+        <div class="ml-3 font-[700] text-[14px] flex-none">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ChooseFromLocation</div>
+    </div>
+</div>
+
+<div class="flex flex-col  gap-[6px] px-4 gap-[6px] pb-[12px]">
+    <div class="grid  grid-cols-2 gap-[6px]">
+        @{
+            if (Model.Location != null && Model.Location.Count > 0)
+            {
+                for (int i = 0; (i < 2 && i < Model.Location.Count); i++)
+                {
+                    <div class="relative cursor-pointer" onclick="LocationFunction('@Model.Location[i].LocationID')">
+                        <div class="innercontainer h-[100px] flex flex-row justify-center items-center w-full  overflow-hidden rounded-[4px]">
+                            <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location">
+                            <p class=" locationtext justify-center text-white font-[600] z-10">@Model.Location[i].LocationName</p>
+                        </div>
+                        <div class="overlay"></div>
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="grid grid-cols-3 gap-[6px]">
+        @{
+            if (Model.Location != null && Model.Location.Count > 0)
+            {
+                for (int i = 2; (i < 5 && i < Model.Location.Count); i++)
+                {
+                    <div class="relative cursor-pointer" onclick="LocationFunction('@Model.Location[i].LocationID')">
+                        <div class=" innercontainer h-[100px] flex flex-row justify-center items-center w-full  overflow-hidden rounded-[4px]">
+                            <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location">
+                            <p class=" locationtext justify-center text-white font-[600] z-10">@Model.Location[i].LocationName</p>
+                        </div>
+                        <div class="overlay"></div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.owl-carousel').owlCarousel({
+            center: true,
+            items: 2,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            responsive: {
+                600: {
+                    items: 2
+                }
+            }
+        })
+    })
+</script>
+<!-- #endregion -->
+<!-- #region Club section -->
+<div class="border-t border-b border-[#EDEDED]">
+    <div class="flex mt-[16px]  justify-start mx-[16px] flex-row">
+        <div class="  flex flex-row justify-start items-center  ">
+            <div class="flex flex-col">
+                <div class="font-[700] text-[14px] flex-none">@CRS.CUSTOMER.APPLICATION.Resources.Resource.RecommendedClub</div>
+            </div>
+        </div>
+    </div>
+    <div class="flex  overflow-x-auto mflex-row gap-[8px] mx-[16px] my-[8px] pb-2 mb-[12px]" id="recommended-club-content-id">
+    </div>
+</div>
+<!-- #endregion -->
+<div class="h-[8px] w-full bg-[#F8F8F8]">
+
+</div>
+<!-- #region Host images section -->
+<div class="flex  border-t  border-[#EDEDED]  justify-start px-[16px] flex-row">
+    <div class="  flex flex-row justify-start items-center  ">
+        <div class="flex flex-col">
+            <div class="font-[700] text-[14px] flex-none">@CRS.CUSTOMER.APPLICATION.Resources.Resource.RecommendedHosts</div>
+        </div>
+    </div>
+</div>
+<div style=""
+     class="pb-2 flex  overflow-x-auto flex-row gap-[8px] mx-[16px] my-[12px]" id="recommended-host-content-id">
+</div>
+<!-- #endregion -->
+<!-- #region Plan section -->
+<div class="flex flex-col overflow-hidden bg-[#EFDDE4] mt-8 py-[25px]">
+    <p class="text-[14px] pl-[16px] flex-none  font-[700]">
+        @CRS.CUSTOMER.APPLICATION.Resources.Resource.HoslogLimitedPlan
+    </p>
+    <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-2 py-4 pt-[70px]">
+        @{
+            var groupedByPrice = Model.PlanModel.OrderByDescending(p => p.Price)
+                .GroupBy(p => p.Price);
+            var HighestPrice = Model.PlanModel.OrderByDescending(p => p.Price)
+                .GroupBy(p => p.Price).First();
+
+            foreach (var group in groupedByPrice)
+            {
+                string priceKey = group.Key;
+                foreach (var item in group)
+                {
+
+                    <div style="box-shadow: 0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 16px -4px rgba(16, 24, 40, 0.08);border-radius: 8px;
+               border: 1px solid #EAECF0;"
+                         class="bg-white w-[272px] pb-6 pt-4 flex flex-col justify-between">
+                        <!-- image  -->
+                        <div class="px-4">
+                            <div class='flex'>
+                                <div class="">
+                                    @if (item.PlanId == HighestPrice.First().PlanId)
+                                    {
+                                        <i class="las la-crown linear-gradient-text text-[23px]"></i>
+                                        <div class="linear-gradient-text table text-[11px] mt-[-5px] font-bold tracking-[0.5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Popularity</div>
+                                    }
+                                </div>
+                                <div class="flex ml-[35px] mt-[-70px]">
+                                    <img src="@item.PlanImage"
+                                         class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] rotate-[12deg] z-[3]"
+                                         style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" />
+                                    <img src="@item.PlanImage"
+                                         class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] z-[2] -ml-[25px] rotate-[12deg]"
+                                         style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6">
+                            <div class="text-center mb-4">
+                                <div class="font-bold text-[#404040]">@item.PlanName</div>
+                                <div class="text-warmgray-1 text-[11px]">@item.PlanType</div>
+                            </div>
+                            <div class="text-warmgray-1 text-center  text-[10px] pb-[10px]">@item.Remarks</div>
+                            <div>
+                                <div class="flex w-full items-center text-warmgray-1 text-[12px] gap-[6px]">
+                                    Price
+                                    <hr class="w-[191px] bg-[#A09E91]">
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-[36px] text-[#404040]">¥ @priceKey</div>
+                                    <div class="text-[10px] text-warmgray-1">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TaxIncluded</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex w-full items-center text-warmgray-1 text-[12px] gap-[6px] mb-4">
+                                    Plan
+                                    <hr class="w-[191px] bg-[#A09E91]">
+                                </div>
+                                <div class="flex justify-center gap-4 mb-[25px]">
+                                    <div class="grid text-center w-full">
+                                        <i class="las la-clock text-[28px] text-primaryDark"></i>
+                                        <div class="text-[10px] text-[#282828]">
+                                            <span class="text-[15px] font-futura font-bold">@item.PlanTime</span>
+                                        </div>
+                                        <div class="text-[10px] text-[#282828]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.HourSystem</div>
+                                    </div>
+                                    <div class="grid text-center w-full">
+                                        <i class="las la-glass-cheers text-[28px] text-primaryDark"></i>
+                                        <div class="text-[10px] text-[#282828]">
+                                            <span class="text-[15px] font-futura font-bold">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Drink</span>
+                                        </div>
+                                        <div class="text-[10px] text-[#282828]">@item.Liquor</div>
+                                    </div>
+                                    <div class="grid text-center w-full">
+                                        <i class="las la-user text-[28px] text-primaryDark"></i>
+                                        <div class="text-[10px] text-[#282828]">
+                                            <span class="text-[15px] font-futura font-bold">@item.Nomination </span>@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpToPerson
+                                        </div>
+                                        <div class="text-[10px] text-[#282828]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.OnSiteNomination</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            @*<a href="#">
+                                    <button class="p-[12px] btn linear-gradient text-white rounded-[5px]">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.BookWithThisPlan
+                                    </button>
+                                </a>*@
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
+<!-- #endregion -->
+<!-- #region Review section -->
+<!-- Review section -->
+<div class="py-[23px]" style="background-color: #F8F8F8 ;">
+    <div style="background-color: #F8F8F8 ;" class='pl-[16px] overflow-x-auto text-sm font-bold'>
+        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Top_Reviews
+    </div>
+
+    <div style="background-color: #F8F8F8" class=" pb-[16px] flex overflow-x-auto no-scrollbar px-4 gap-4 mt-[12px]">
+        <div style="border-radius: 6px; width: 313px; border: 1px solid #EAECF0;" class="  bg-[#F8F8F8] ">
+            <div style="border-radius: 6px;border: 1px solid #EAECF0; background: #FFF;box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.04);"
+                 class="w-[313px] h-full pb-[14px]">
+                <div style="padding: 24px 16px;" class="flex w-full  justify-between flex-row">
+                    <div class="flex flex-row items-center w-full">
+                        <img src="~/Content/assets/images/customer/CustomerImage.jpg"
+                             class="h-[30px] w-[30px] rounded-full object-fill" alt="profileimg">
+                        <div class="flex flex-col pl-2 leading-[11px] w-full">
+                            <div class="flex justify-between items-center ">
+                                <p class=" font-[700] text-[11px] text-start flex">
+                                    NecoYanagi
+                                </p>
+                                <div class=" flex gap-[2px] text-[9px]">
+                                    <i class="las la-calendar text-[11px]"></i>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_Date:2023/11/20 14:00
+                                </div>
+                            </div>
+                            <div class="flex gap-1 items-center">
+                                <div class="rating-review text-[11px]" id="stars">
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        <div class="rating-review text-[11px]" id="stars">
+                                            <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
+                                                      fill="#F89336" />
+                                            </svg>
+
+                                        </div>
+                                    }
+                                </div>
+                                <div class="text-[11px] mt-[2px]">5.0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="px-3">
+                    <div class="text-[8px] font-bold bg-[#FFECEC] rounded-[2px] py-[4px] px-[6px] ">
+                        <p class="inline-flex p-[1px] mr-[2px]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Met_handsome_host：
+                            <img src="~/Content/assets/images/customer/red--emoji.svg" />
+                        </p>
+                        <p class="inline-flex p-[1px] mr-[2px]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Service：
+                            <img src="~/Content/assets/images/customer/blue-emoji.svg" />
+
+                        </p>
+                        <p class="inline-flex p-[1px] mr-[2px]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Wish_to_revisit：
+                            <img src="~/Content/assets/images/customer/green-emoji.svg" />
+
+                        </p>
+                        <p class="inline-flex p-[1px] mr-[2px]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Cozy：
+                            <img src="~/Content/assets/images/customer/green-emoji.svg" />
+                        </p>
+
+                    </div>
+                    <div class="flex gap-1 items-center mt-2">
+                        <div class="text-[11px] font-bold ">#推しが見つかった</div>
+                        <div class="linear-gradient rounded-[2px] text-[8px] text-white px-4">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Extended_Course
+                        </div>
+                    </div>
+                    <div>
+                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#推しに会えた</div>
+                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#トークが上手い</div>
+                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#店内が綺麗</div>
+                        <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">#イケメンがいた</div>
+
+                    </div>
+                    <div class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                        <div>
+                            <img src="~/Content/assets/images/customer/ACQUAFUKUOKA.jpg"
+                                 class="h-[28px] w-[28px] object-fill rounded-full">
+                        </div>
+                        <div>
+                            <div class="text-[10px] font-bold text-charcolBlack ">ACQUA FUKUOKA</div>
+                            <div class="text-[8px] text-[#A09E91] flex gap-[2px] items-center">
+                                <svg class="svg-inline--fa fa-location-dot text-primary" aria-hidden="true"
+                                     focusable="false" data-prefix="fas" data-icon="location-dot" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
+                                    </path>
+                                </svg>
+                                <!-- <i class="fa-solid fa-location-dot text-primary"></i> Font Awesome fontawesome.com -->
+                                歌舞伎町
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="border-radius: 6px; width: 313px; border: 1px solid #EAECF0;" class="  bg-[#F8F8F8] ">
+            <div style="border-radius: 6px;border: 1px solid #EAECF0; background: #FFF;box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.04);"
+                 class="w-[313px] h-full pb-[14px]">
+                <div style="padding: 24px 16px;" class="flex w-full  justify-between flex-row">
+                    <div class="flex flex-row items-center w-full">
+                        <img src="~/Content/assets/images/customer/CustomerImage.jpg"
+                             class="h-[30px] w-[30px] rounded-full object-fill" alt="profileimg">
+                        <div class="flex flex-col pl-2 leading-[11px] w-full">
+                            <div class="flex justify-between items-center ">
+                                <p class=" font-[700] text-[11px] text-start flex">
+                                    NecoYanagi
+                                </p>
+                                <div class=" flex gap-[2px] text-[9px]">
+                                    <i class="las la-calendar text-[11px]"></i>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_Date:2023/12/15 14:00
+                                </div>
+                            </div>
+                            <div class="flex gap-1 items-center">
+                                @for (int i = 0; i < 4; i++)
+                                {
+                                    <div class="rating-review text-[11px]" id="stars">
+                                        <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                            <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
+                                                  fill="#F89336" />
+                                        </svg>
+
+                                    </div>
+                                }
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                                    <g opacity="0.3">
+                                        <path d="M9.44612 1.1453L8.95768 2.25692L7.20604 6.18126L2.928 6.63601L1.71533 6.77076L2.62484 7.5792L5.8081 10.4593L4.91544 14.67L4.6628 15.849L5.72389 15.2426L9.44612 13.0868L13.1684 15.2426L14.2294 15.849L13.9768 14.67L13.0841 10.4593L16.2674 7.5792L17.1769 6.77076L15.9642 6.63601L11.6862 6.18126L9.93456 2.25692L9.44612 1.1453ZM9.44612 3.7896L10.8272 6.9055L10.962 7.19182L11.2651 7.22551L14.6505 7.5792L12.1241 9.85296L11.8883 10.0719L11.9557 10.3751L12.6631 13.6931L9.7156 12.0088L9.44612 11.8404L9.17664 12.0088L6.22917 13.6931L6.93656 10.3751L7.00393 10.0719L6.76813 9.85296L4.24173 7.5792L7.62711 7.22551L7.93028 7.19182L8.06502 6.9055L9.44612 3.7896Z"
+                                              fill="#C8B477" />
+                                    </g>
+                                </svg>
+                                <div class="text-[11px] mt-[2px]">4.0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="px-3">
+                    <div class="text-[8px] font-bold bg-[#FFECEC] rounded-[2px] py-[4px] px-[6px] ">
+                        <p class="inline-flex p-[1px] mr-[2px]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Met_handsome_host：
+                            <img src="~/Content/assets/images/customer/red--emoji.svg" />
+                        </p>
+                        <p class="inline-flex p-[1px] mr-[2px]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Service：
+                            <img src="~/Content/assets/images/customer/blue-emoji.svg" />
+
+                        </p>
+                        <p class="inline-flex p-[1px] mr-[2px]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Wish_to_revisit：
+                            <img src="~/Content/assets/images/customer/green-emoji.svg" />
+
+                        </p>
+                        <p class="inline-flex p-[1px] mr-[2px]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Cozy：
+                            <img src="~/Content/assets/images/customer/green-emoji.svg" />
+                        </p>
+
+                    </div>
+                    <div class="flex gap-1 items-center mt-2">
+                        <div class="text-[11px] font-bold ">#推しが見つかった</div>
+                        <div class="linear-gradient rounded-[2px] text-[8px] text-white px-4">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Extended_Course
+                        </div>
+                    </div>
+                    <div>
+                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#推しに会えた</div>
+                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#トークが上手い</div>
+                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#店内が綺麗</div>
+                        <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">#イケメンがいた</div>
+
+                    </div>
+                    <div class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                        <div>
+                            <img src="~/Content/assets/images/customer/ACQUALABEL.jpg"
+                                 class="h-[28px] w-[28px] object-fill rounded-full">
+                        </div>
+                        <div>
+                            <div class="text-[10px] font-bold text-charcolBlack ">ACQUA LABEL</div>
+                            <div class="text-[8px] text-[#A09E91] flex gap-[2px] items-center">
+                                <svg class="svg-inline--fa fa-location-dot text-primary" aria-hidden="true"
+                                     focusable="false" data-prefix="fas" data-icon="location-dot" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
+                                    </path>
+                                </svg>
+                                <!-- <i class="fa-solid fa-location-dot text-primary"></i> Font Awesome fontawesome.com -->
+                                歌舞伎町
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader" id="loader-id">
+    <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
+</div>
+<!-- review section end -->
+<!-- #endregion -->
+@section scripts
+{
+    <script>
+        const slideContainer = document.querySelector('.container');
+        const slide = document.querySelector('.slides');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const interval = 9000;
+
+        let slides = document.querySelectorAll('.slide');
+        let index = 1;
+        let slideId;
+
+        const firstClone = slides[0].cloneNode(true);
+        const lastClone = slides[slides.length - 1].cloneNode(true);
+
+        firstClone.id = 'first-clone';
+        lastClone.id = 'last-clone';
+
+        slide.append(firstClone);
+        slide.prepend(lastClone);
+
+        let slideWidth = slides[index].clientWidth;
+
+        slide.style.transform = `translateX(${-slideWidth * index}px)`;
+
+        const startSlide = () => {
+            slideId = setInterval(() => {
+                moveToNextSlide();
+            }, interval);
+        };
+
+        const getSlides = () => document.querySelectorAll('.slide');
+
+        slide.addEventListener('transitionend', () => {
+            slides = getSlides();
+            if (slides[index].id === firstClone.id) {
+                slide.style.transition = 'none';
+                index = 1;
+                slide.style.transform = `translateX(${-slideWidth * index}px)`;
+            }
+
+            if (slides[index].id === lastClone.id) {
+                slide.style.transition = 'none';
+                index = slides.length - 2;
+                slide.style.transform = `translateX(${-slideWidth * index}px)`;
+            }
+        });
+
+        const updateSlideWidth = () => {
+            slides = getSlides();
+            slideWidth = slides[index].clientWidth;
+            slide.style.transition = 'none';
+            slide.style.transform = `translateX(${-slideWidth * index}px)`;
+        };
+
+        const moveToNextSlide = () => {
+            slides = getSlides();
+            if (index >= slides.length - 1) return;
+            index++;
+            slide.style.transition = '.7s ease-out';
+            slide.style.transform = `translateX(${-slideWidth * index}px)`;
+        };
+
+        const moveToPreviousSlide = () => {
+            if (index <= 0) return;
+            index--;
+            slide.style.transition = '.7s ease-out';
+            slide.style.transform = `translateX(${-slideWidth * index}px)`;
+        };
+
+        // slideContainer.addEventListener('mouseenter', () => {
+        //   clearInterval(slideId);
+        // });
+
+        // slideContainer.addEventListener('mouseleave', startSlide);
+        nextBtn.addEventListener('click', moveToNextSlide);
+        prevBtn.addEventListener('click', moveToPreviousSlide);
+
+        startSlide();
+
+        // Listen for window resize event
+        window.addEventListener('resize', updateSlideWidth);
+    </script>
+    <script>
+        $(document).ready(function () {
+            localStorage.clear();
+            GetRecommendedClubAndHost();
+            //LoaderFunction();
+            setTimeout(LoaderFunction, 2000);
+        });
+        function LocationFunction(i) {
+            window.location.href = "/LocationManagement/Index?LocationId=" + i;
+        }
+        function LoaderFunction() {
+            var myDiv = document.getElementById("loader-id");
+            myDiv.style.display = "none";
+        }
+        //document.addEventListener("DOMContentLoaded", function () {
+        //    // The DOM is fully loaded, hide the loader
+        //    document.getElementById("loader-id").style.display = "none";
+        //});
+        //window.addEventListener("load", function () {
+        //    // The entire page, including external resources, is fully loaded, hide the loader
+        //    document.getElementById("loader-id").style.display = "none";
+        //});
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&libraries=geometry&callback=initMap" async defer></script>
+    <script>
+        var CurrentLocationId = 0;
+        function initMap() {
+            function findNearestLocation(userLocation, locations) {
+                var userLatLng = new google.maps.LatLng(userLocation.lat, userLocation.lng);
+                var nearestLocation = null;
+                var nearestDistance = Number.MAX_VALUE;
+
+                for (var i = 0; i < locations.length; i++) {
+                    var locationLatLng = new google.maps.LatLng(locations[i].lat, locations[i].lng);
+                    var distance = google.maps.geometry.spherical.computeDistanceBetween(userLatLng, locationLatLng);
+
+                    if (distance < nearestDistance) {
+                        nearestDistance = distance;
+                        nearestLocation = locations[i];
+                    }
+                }
+                //console.log("Nearest Location:", nearestLocation);
+                CurrentLocationId = nearestLocation.id;
+            }
+            var userLocation = { lat: 0, lng: 0 }; // User's location
+            (async () => {
+                const rawResponse = await fetch('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ "considerIp": "true" }),
+                });
+                const content = await rawResponse.json();
+                userLocation.lat = content.location.lat;
+                userLocation.lng = content.location.lng;
+            })();
+            var locations = JSON.parse(@Html.Raw(Json.Encode(ViewBag.JsonLocation)));
+            findNearestLocation(userLocation, locations);
+        }
+            function GetRecommendedClubAndHost() {
+                $.ajax({
+                    type: 'GET',
+                    async: true,
+                    url: '@Url.Action("GetRecommendedClubAndHost", "Dashboard")',
+                    dataType: 'json',
+                    data: { __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(), LocationId: CurrentLocationId },
+                    success: function (response) {
+                        var ResponseModel = response;
+                        if (ResponseModel != null && ResponseModel.RecommendedClubModel != null && ResponseModel.RecommendedClubModel.length > 0) {
+                            var recommendedClubContentId = document.getElementById('recommended-club-content-id');
+                            for (var i = 0; i < ResponseModel.RecommendedClubModel.length; i++) {
+                                recommendedClubContentId.innerHTML += `<a onclick="ClubDetailRedirectFunction('` + ResponseModel.RecommendedClubModel[i].LocationId + "','" + ResponseModel.RecommendedClubModel[i].ClubId +`')">
+                                    <div class="flex  w-[118px]">
+                                        <div style="border-radius: 6px; border: 1px solid #EDEDED; background: #FFF;"
+                                             class=" flex flex-col w-[118px]  px-[8px] py-[10px]">
+                                            <div class="flex flex-row justify-center">
+
+                                                <div class="h-[48px] w-[48px] object-fill   bg-[#ffffff]  flex flex-row justify-center">
+                                                    <img class="h-[48px] w-[48px] object-fill border-[1px]  rounded-full "
+                                                         src="`+ ResponseModel.RecommendedClubModel[i].ClubLogo +`" alt="clublogo">
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <div class="flex flex-row mt-[7px] justify-center">
+                                                    <p style="line-height: 100%;" class="font-[700] text-[10px]">` + ResponseModel.RecommendedClubModel[i].ClubNameEnglish +`</p>
+                                                </div>
+                                                <div class="flex flex-row mt-[4px] justify-center">
+                                                    <p style="line-height: 100%;" class="font-[400] text-[10px]">` + ResponseModel.RecommendedClubModel[i].ClubNameJapanese +`</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>`;
+                            }
+                        }
+                        if (ResponseModel != null && ResponseModel.RecommendedHostModel != null && ResponseModel.RecommendedHostModel.length > 0) {
+                            var recommendedHostContentId = document.getElementById('recommended-host-content-id');
+                            for (var i = 0; i < ResponseModel.RecommendedHostModel.length; i++) {
+                                recommendedHostContentId.innerHTML +=` <a onclick="HostDetailRedirectFunction('` + ResponseModel.RecommendedHostModel[i].HostId +`')">
+                                 <div class="flex  hover:cursor-pointer">
+                                     <div class="w-[122px] h-auto flex flex-col justify-end text-center relative">
+                                         <div class="w-full flex justify-center">
+                                             <img class="w-[128px] h-[154px] object-fill rounded-[2px]"
+                                                  src="`+ ResponseModel.RecommendedHostModel[i].HostImage +`" />
+                                         </div>
+                                         <div class="absolute  w-[118px] bg-[#ffffffe6] rounded-[2px] flex flex-col right-[2px] left-[2px] bottom-[4px] py-[2px] px-[4px]">
+                                             <strong class="text-[12px] font-bold text-start">`+ ResponseModel.RecommendedHostModel[i].HostName +`</strong>
+                                             <p class=" flex items-center gap-1 text-[10px]"> <img src="`+ ResponseModel.RecommendedHostModel[i].ClubLogo + `" alt="img" class="h-[11px] w-[11px] rounded-full"> ` + ResponseModel.RecommendedHostModel[i].ClubNameEnglish +`</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </a>`
+                            }
+                        }
+                    },
+                    error: function (ex) {
+                    }
+                });
+                return false;
+        }
+
+        function ClubDetailRedirectFunction(i,j) {
+            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
+        }
+        function HostDetailRedirectFunction(i) {
+            window.location.href = "/LocationManagement/ViewHostDetail?HostId=" + i;
+        }
+    </script>
+}

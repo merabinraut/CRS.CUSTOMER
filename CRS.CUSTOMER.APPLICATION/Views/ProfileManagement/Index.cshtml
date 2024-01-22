@@ -1,0 +1,465 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement.UserProfileModel
+@{
+    ViewBag.Title = "Profile Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .modal-content {
+        max-width: 100%;
+        width: 400px;
+    }
+</style>
+<div class=" no-scrollbar overflow-y-auto">
+
+    <div class="px-[12px] py-[20px] grid border-y  ">
+        <div class="flex flex-row justify-between">
+            <div class="flex flex-row">
+                <div class="photocontainer">
+                    <div class="profileimage">
+                        @if (String.IsNullOrWhiteSpace(Model.ProfileImage))
+                        {
+                            <img class="rounded-full h-[64px] w-[64px] object-fill " src="~/Content/assets/images/customer/demo-image.jpeg" alt="Profile Image">
+                        }
+                        else
+                        {
+                            <img class="rounded-full h-[64px] w-[64px] object-fill " src="@Url.Content(ViewBag.FileLocationPath + Model.ProfileImage)" alt="Profile Image">
+                        }
+                    </div>
+                    <div class="editoption">
+                        <input type="file" id="fileInput" accept="image/jpeg, image/png, image/jpg" style="display: none">
+                        <button onclick="uploadProfileImage()">
+                            <svg id="camera"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 width="18"
+                                 height="18"
+                                 viewBox="0 0 18 18"
+                                 fill="none">
+                                <path d="M6.46875 3.375L6.29297 3.60352L5.625 4.5H1.6875V14.625H16.3125V4.5H12.375L11.707 3.60352L11.5312 3.375H6.46875ZM7.03125 4.5H10.9688L11.6367 5.39648L11.8125 5.625H15.1875V13.5H2.8125V5.625H6.1875L6.36328 5.39648L7.03125 4.5ZM4.5 6.1875C4.19019 6.1875 3.9375 6.44019 3.9375 6.75C3.9375 7.05981 4.19019 7.3125 4.5 7.3125C4.80981 7.3125 5.0625 7.05981 5.0625 6.75C5.0625 6.44019 4.80981 6.1875 4.5 6.1875ZM9 6.1875C7.14331 6.1875 5.625 7.70581 5.625 9.5625C5.625 11.4192 7.14331 12.9375 9 12.9375C10.8567 12.9375 12.375 11.4192 12.375 9.5625C12.375 7.70581 10.8567 6.1875 9 6.1875ZM9 7.3125C10.2502 7.3125 11.25 8.31226 11.25 9.5625C11.25 10.8127 10.2502 11.8125 9 11.8125C7.74976 11.8125 6.75 10.8127 6.75 9.5625C6.75 8.31226 7.74976 7.3125 9 7.3125Z"
+                                      fill="#8D8D8D" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-[0px] pl-[16px]">
+                    <div class="text-[14px] font-[700]">
+                        @Model.NickName
+                    </div>
+                    <div class="text-[14px] ">
+                        @Model.EmailAddress
+                    </div>
+                    <div class="border-[1px] px-[7px] mt-[10px] rounded-[3px] text-[#F89336] border-[#F89336] flex flex-row items-center rounded-[3px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M5.38429 4.16667C4.90152 4.16667 4.40272 4.33947 4.00608 4.66797C3.60945 4.99648 3.33301 5.50158 3.33301 6.11112C3.33301 6.62761 3.56137 7.06815 3.84583 7.41754C4.13028 7.76693 4.47483 8.04227 4.79134 8.31381C5.42435 8.85688 5.89711 9.30312 5.89711 10C5.89711 10.0741 5.82099 10.2526 5.72083 10.395C5.62067 10.5374 5.52852 10.6228 5.52852 10.6228L6.2657 11.3064C6.2657 11.3064 6.42996 11.1507 6.58621 10.9267C6.72043 10.7349 6.86666 10.488 6.90673 10.1671C6.96482 10.3247 7.02091 10.4861 7.08301 10.638C7.43557 11.5001 7.84222 12.273 8.30096 12.8559C8.46722 13.0686 8.6395 13.2566 8.8298 13.418C7.77011 13.4901 6.92275 14.3256 6.92275 15.3472V15.8333H13.0766V15.3472C13.0766 14.3142 12.2132 13.4749 11.1375 13.418C11.3298 13.2566 11.5141 13.0667 11.6824 12.8559C12.1431 12.2749 12.5437 11.5001 12.9003 10.638C12.9664 10.4766 13.0305 10.3038 13.0926 10.1367C13.1267 10.4709 13.2749 10.7292 13.4131 10.9267C13.5694 11.1507 13.7336 11.3064 13.7336 11.3064L14.4708 10.6228C14.4708 10.6228 14.3787 10.5374 14.2785 10.395C14.1784 10.2526 14.1022 10.0741 14.1022 10C14.1022 9.30312 14.575 8.85688 15.208 8.31381C15.5245 8.04227 15.8691 7.76693 16.1535 7.41754C16.438 7.06815 16.6663 6.62761 16.6663 6.11112C16.6663 5.50158 16.3899 4.99648 15.9933 4.66797C15.5966 4.33947 15.0978 4.16667 14.6151 4.16667C13.96 4.16667 13.5113 4.4496 13.2689 4.65278H6.73044C6.48806 4.4496 6.03934 4.16667 5.38429 4.16667ZM5.38429 5.13889C5.62668 5.13889 5.78293 5.21105 5.89711 5.27561C5.91113 6.26682 6.09142 7.39096 6.37788 8.4961C6.10544 8.14671 5.7649 7.85618 5.46442 7.59983C5.1399 7.3226 4.84342 7.06625 4.64711 6.82509C4.4508 6.58394 4.35865 6.37506 4.35865 6.11112C4.35865 5.77122 4.49887 5.56044 4.69519 5.39714C4.8915 5.23384 5.16193 5.13889 5.38429 5.13889ZM14.6151 5.13889C14.8374 5.13889 15.1078 5.23384 15.3042 5.39714C15.5005 5.56044 15.6407 5.77122 15.6407 6.11112C15.6407 6.37506 15.5486 6.58394 15.3522 6.82509C15.1559 7.06625 14.8594 7.3226 14.5349 7.59983C14.2284 7.86188 13.8819 8.1638 13.6054 8.52648C13.8999 7.41374 14.0882 6.28012 14.1022 5.27561C14.2164 5.21105 14.3727 5.13889 14.6151 5.13889ZM6.98685 5.62501H13.0125C12.9344 7.07005 12.5397 8.8322 11.9388 10.2886C11.6062 11.0938 11.2216 11.7925 10.849 12.2635C10.4764 12.7344 10.1359 12.9167 9.98365 12.9167C9.83341 12.9167 9.50488 12.7344 9.13429 12.2635C8.7637 11.7925 8.37507 11.0957 8.04455 10.2886C7.44759 8.8303 7.06498 7.06245 6.98685 5.62501ZM9.48685 7.08334V9.51389H10.5125V7.08334H9.48685ZM8.97403 14.375H11.0253C11.3939 14.375 11.6463 14.5896 11.8266 14.8611H8.17275C8.35304 14.5896 8.60544 14.375 8.97403 14.375Z"
+                                  fill="#F89336" />
+                        </svg>
+                        0 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Points
+                    </div>
+                </div>
+            </div>
+            <div>
+                @*<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18.75 3.02344C18.1758 3.02344 17.6133 3.24609 17.1797 3.67969L9.75 11.0859L9.58594 11.25L9.53906 11.4844L9.02344 14.1094L8.78906 15.2109L9.89062 14.9766L12.5156 14.4609L12.75 14.4141L12.9141 14.25L20.3203 6.82031C21.1846 5.95605 21.1846 4.54395 20.3203 3.67969C19.8867 3.24609 19.3242 3.02344 18.75 3.02344ZM18.75 4.47656C18.9258 4.47656 19.0986 4.56738 19.2656 4.73438C19.5996 5.06836 19.5996 5.43164 19.2656 5.76562L12 13.0312L10.7109 13.2891L10.9688 12L18.2344 4.73438C18.4014 4.56738 18.5742 4.47656 18.75 4.47656ZM3 6V21H18V11.1094L16.5 12.6094V19.5H4.5V7.5H11.3906L12.8906 6H3Z"
+                              fill="#D1D1D1" />
+                    </svg>*@
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        if (!string.IsNullOrEmpty(Model.EmailAddress))
+        {
+            @Html.HiddenFor(model => model.EmailAddress)
+        }
+        @Html.HiddenFor(model => model.Gender)
+        @Html.HiddenFor(model => model.NickName)
+        <div class="flex flex-col mt-[16px] mx-[16px]">
+            <div class="input-field-common w-full flex flex-col">
+                <label class="text-[14px] font-[700] uppercase mb-[10px]" for="fname">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Nickname
+                </label>
+                <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Nickname"
+                       class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                       type="text"
+                       value="@Model.NickName"
+                       disabled style="background-color:lightgrey">
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-[16px] mt-[12px] ">
+                <div class="flex flex-col input-field-common">
+                    <label class="text-[14px] font-[700] uppercase mb-[10px]" for="fname">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Surname </label>
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Surname"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ="
+                           name="LastName"
+                           type="text"
+                           data-val="true"
+                           data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
+                           value="@Model.LastName"
+                           id="Surname">
+                    <span class="validationMessage">
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </span>
+                </div>
+                <div class="flex flex-col input-field-common">
+                    <label class="text-[14px] font-[700] uppercase mb-[10px]" for="fname">@CRS.CUSTOMER.APPLICATION.Resources.Resource.GivenName </label>
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.GivenName"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ="
+                           type="text"
+                           data-val="true"
+                           data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
+                           value="@Model.FirstName"
+                           name="FirstName"
+                           id="GivenName">
+                    <span class="validationMessage">
+                        @Html.ValidationMessageFor(m => m.FirstName)
+                    </span>
+                </div>
+            </div>
+            <div class="input-field-common w-full flex flex-col">
+                <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email <span class="text-[#D32F2F]">*</span>
+                </label>
+                @if (!string.IsNullOrEmpty(Model.EmailAddress))
+                {
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                           type="text"
+                           value="@Model.EmailAddress"
+                           id="emailInput"
+                           name="EmailAddress"
+                           disabled style="background-color:lightgrey">
+                }
+                else
+                {
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                           type="text"
+                           value="@Model.EmailAddress"
+                           id="emailInput"
+                           name="EmailAddress">
+                }
+
+            </div>
+
+            <div class="input-field-common w-full flex flex-col">
+                <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.PhoneNumber<span class="text-[#D32F2F]">*</span>
+                </label>
+                <input placeholder="+101761408054" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                       type="text" value="@Model.MobileNumber" name="MobileNumber" disabled style="background-color:lightgrey">
+            </div>
+
+
+            <div class="input-field-common flex flex-col">
+                <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.ToConfirmAge<span class="text-[#D32F2F]">*</span>
+                </label>
+                <div class="grid grid-cols-3  gap-[6px]">
+                    <div>
+                        @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "YYYY", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
+                        <span class="validationMessage">
+                            @Html.ValidationMessageFor(m => m.DOBYear)
+                        </span>
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.DOBMonth, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "MM", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
+                        <span class="validationMessage">
+                            @Html.ValidationMessageFor(m => m.DOBMonth)
+                        </span>
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.DOBDay, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "DD", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
+                        <span class="validationMessage">
+                            @Html.ValidationMessageFor(m => m.DOBDay)
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Gender<span class="text-[#D32F2F]">*</span>
+            </label>
+            <div class="grid grid-cols-2 gap-[8px]">
+                <div class="language-option active h-[40px]" data-gender="Male">
+                    <div class="flex flex-row w-full  ">
+                        <div class="flex flex-row items-center">
+                            <div class="circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                    <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                          fill="#ECECEC" />
+                                </svg>
+                            </div>
+                            <div class="circle-active">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                    <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                          fill="#ECECEC" />
+                                    <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
+                                          fill="#D75A8B" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-center ">
+                            <p class="lang">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Male
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="language-option h-[40px]" data-gender="Female">
+                    <div class="flex flex-row w-full  ">
+                        <div class="flex items-center ">
+                            <div class="flex flex-row items-center">
+                                <div class="circle">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
+                                         fill="none">
+                                        <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                              fill="#ECECEC" />
+                                    </svg>
+                                </div>
+                                <div class="circle-active">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
+                                         fill="none">
+                                        <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                              fill="#ECECEC" />
+                                        <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
+                                              fill="#D75A8B" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="lang">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Female
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PreferredLocation</label>
+            <div class="flex flex-col">
+                <div class="input-field-common">
+                    <select id="default_select" style="width: 100%; font-size:15px"
+                            class="default_select text-[#B7B7B7] h-[44px] select-common" name="PreferredLocationDDL">
+                        @foreach (KeyValuePair<string, string> item in ViewBag.LocationDDL as Dictionary<string, string>)
+                        {
+                            var selectedId = ViewBag.PreferredLocationKey as string;
+                            if (item.Key == selectedId)
+                            {
+                                <option value="@item.Key" selected>
+                                    @item.Value
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@item.Key">
+                                    @item.Value
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address</label>
+            <div class="input-field-common">
+
+                @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px] mb-[10px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @placeholder = "〒", autocomplete = "off" })
+
+                <span class="validationMessage">
+                    @Html.ValidationMessageFor(m => m.PostalCode)
+                </span>
+            </div>
+            <div class="grid grid-cols-2 gap-[6px] ">
+                <div class="input-field-common">
+                    <select id="default_select" style="width: 100%; font-size:15px"
+                            class="default_select text-[#B7B7B7] h-[44px] select-common" name="PrefectureDDL">
+                        @foreach (KeyValuePair<string, string> item in ViewBag.PrefectureDDL as Dictionary<string, string>)
+                        {
+                            var selectedId = ViewBag.PrefectureKey as string;
+                            if (item.Key == selectedId)
+                            {
+                                <option value="@item.Key" selected>
+                                    @item.Value
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@item.Key">
+                                    @item.Value
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="input-field-common">
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.City"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] h-[40px]"
+                           value="@Model.City"
+                           type="text"
+                           data-val="true"
+                           data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
+                           name="City">
+                    <span class="validationMessage">
+                        @Html.ValidationMessageFor(m => m.City)
+                    </span>
+                </div>
+            </div>
+            <div class="flex flex-col gap-[6px] mt-[10px]">
+                <div class="input-field-common">
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Street" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                           value="@Model.Street"
+                           type="text"
+                           data-val="true"
+                           data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
+                           name="Street">
+                    <span class="validationMessage">
+                        @Html.ValidationMessageFor(m => m.Street)
+                    </span>
+                </div>
+                <div class="input-field-common mt-[6px]">
+                    <input placeholder="ビール名と部屋番号"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                           type="text"
+                           data-val="true"
+                           data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
+                           name="ResidenceNumber"
+                           value="@Model.ResidenceNumber">
+                    <span class="validationMessage">
+                        @Html.ValidationMessageFor(m => m.ResidenceNumber)
+                    </span>
+                </div>
+
+                @*<span class="text-[12px] font-[400] text-[#BDBDBD] ">
+                        山田
+                    </span>*@
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-[50px] mb-[40px]">
+                <div style="border: 1px solid var(--Secondary-Text-II, #A1A1AA);"
+                     class="flex rounded-[4px] justify-center items-center text-white h-[48px]    ">
+                    <p class="ml-2 text-[14px] text-[#B7B7B7]" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</p>
+                </div>
+                <div class="flex rounded-[4px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  ">
+                    <button type="submit" class="ml-2 text-[14px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+        <div class="relative bg-white rounded-lg shadow overflow-hidden">
+            <!-- Modal content -->
+            <div class="bg-[#FFF]  w-full rounded-b-lg shadow">
+                <div class="grid gap-[12px] pb-[18px]">
+                    <div>
+                        <div class="flex flex-row justify-center">
+                            <button onclick="closeModal('modal1')">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Cancel
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex flex-row justify-center">
+                            <button class="button-curve btn-primary h-[29px] mx-[20px]" onclick="DeleteAccount()">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script src="~/Content/assets/js/modal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/validation.js"></script>
+    <script>
+    const uploadProfileImage = () => {
+        // Trigger the file input to open the file selection dialog
+        const fileInput = document.getElementById('fileInput');
+        fileInput.click();
+
+        // Listen for changes in the file input (when a file is selected)
+        fileInput.addEventListener('change', () => {
+            // Get the selected file from the input
+            const selectedFile = fileInput.files[0];
+
+            if (selectedFile) {
+                // Create a FormData object and append the selected file
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+
+                // Send an AJAX POST request to the controller action
+                fetch('/ProfileManagement/ChangeProfileImage', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                            location.reload();
+                    })
+                    .catch(error => {
+                        console.error('An error occurred:', error);
+                    });
+            }
+        });
+    };
+    // Get all the div elements
+    var divs = document.querySelectorAll('.language-option');
+
+    // Add click event listeners to each div
+    divs.forEach(function (div) {
+        var genderValue = div.getAttribute('data-gender');
+        var backEndGenderValue="@Model.Gender";
+
+        if (genderValue === backEndGenderValue)
+           div.classList.add('active');
+                else
+            div.classList.remove('active');
+
+        div.addEventListener('click', function () {
+            // Remove the 'bg-red' class from all divs
+            divs.forEach(function (d) {
+                d.classList.remove('active');
+
+            });
+            // Add the 'bg-red' class to the clicked div
+            this.classList.add('active');
+
+            var genderValue = this.getAttribute('data-gender');
+            $('#Gender').val(genderValue);
+        });
+    });
+    function DeleteAccount() {
+        $.ajax({
+            type: 'POST',
+            async: true,
+            url: "/ProfileManagement/DeleteCustomereAccount",
+            dataType: 'json',
+            data: {
+                __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+            },
+            success: function (data) {
+                if (data.redirect) {
+                    // Perform the redirect
+                    window.location.href = data.redirect;
+                } else {
+                    window.location.reload();
+                }
+            },
+            error: function (ex) {
+                window.location.reload();
+            }
+        });
+        }
+        window.onload = function () {
+            closeModal('modal1');
+        }
+    </script>
+}
