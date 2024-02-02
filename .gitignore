@@ -340,4 +340,6 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
-
+/CRS.CUSTOMER.APPLICATION/Web.config
+/CRS.CUSTOMER.APPLICATION/Web.Debug.config
+/CRS.CUSTOMER.APPLICATION/Web.Release.config
