@@ -19,6 +19,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         //[MinLength(8, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_8_characters")]
         public string Password { get; set; }
         public string SessionId { get; set; }
+        public string NickName { get; set; }
     }
     public class LoginResponseModel
     {
