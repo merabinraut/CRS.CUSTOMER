@@ -3,8 +3,33 @@
     ViewBag.Title = "Notification Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .notification-list {
+        background: #fff;
+        padding: 4px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
+        .notification-list.active {
+            background: #ffb6c11f;
+        }
+
+            .notification-list.active .circle {
+                display: block;
+                height: 6px;
+                width: 6px;
+                background: #D75A8B;
+                border-radius: 50%;
+                margin-right: 15px;
+            }
+
+        .notification-list .circle {
+            display: none;
+        }
+</style>
 <div class="flex flex-col gap-4 p-4">
+    @Html.AntiForgeryToken()
     @if (Model.Count <= 0)
     {
         <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center"
@@ -16,70 +41,47 @@
     {
         foreach (var group in Model.GroupBy(item => item.DateCategory))
         {
-<div class="notification-all">
-    <div class="flex justify-between items-center mb-3">
-        <div class="text-[#18181B] text-sm">@group.Key</div>
-    </div>
-    <div class="flex flex-col gap-3 ">
-
-        @foreach (var item in group)
-        {
-            <div class="flex justify-between items-center notification-list ">
-                <div class="flex gap-3 w-max ">
-                    <div class="flex-none">
-                        <img src="@item.NotificationImage"
-                             class="h-[32px] w-[32px] object-fill rounded-full" />
-                    </div>
-                    <div class="notification-detail-class">
-                        <input type="hidden" value="@item.NotificationURL">
-                        <div class='text-sm font-bold text-charcolBlack notification-title pb-1 '>@item.NotificationSubject</div>
-                        <div class='text-xs  text-[#667085] pb-1'>@item.NotificationBody</div>
-                        <div class='text-[10px]  text-[#A1A1AA] pb-1'>@item.FormattedDate</div>
-                    </div>
+            <div class="notification-all">
+                <div class="flex justify-between items-center mb-3">
+                    <div class="text-[#18181B] text-sm">@group.Key</div>
+                    @if (!string.IsNullOrEmpty(group.FirstOrDefault().NotificationReadStatus) && group.FirstOrDefault().NotificationReadStatus.Trim().ToUpper() == "P")
+                    {
+                        <div class="flex gap-1 items-center text-primary cursor-pointer" id="markAllRead" onclick="ManageNotificationReadStatus();">
+                            <img src="~/Content/assets/images/double-check.svg" alt="check">@CRS.CUSTOMER.APPLICATION.Resources.Resource.MarkAllAsRead
+                        </div>
+                    }
                 </div>
-                <div class="circle flex-none">
+                <div class="flex flex-col gap-3 ">
+                    @{
+                        var activeClassName = "";
+                        foreach (var item in group)
+                        {
+                            activeClassName = (!string.IsNullOrEmpty(item.NotificationReadStatus) && item.NotificationReadStatus.Trim().ToUpper() == "P") ? "active" : "";
+                            <div class="flex justify-between items-center notification-list @activeClassName">
+                                <div class="flex gap-3 w-max ">
+                                    <div class="flex-none">
+                                        <img src="@item.NotificationImage"
+                                             class="h-[32px] w-[32px] object-fill rounded-full" />
+                                    </div>
+                                    <div class="notification-detail-class">
+                                        <input type="hidden" value="@item.NotificationURL">
+                                        <div class='text-sm font-bold text-charcolBlack notification-title pb-1 '>@item.NotificationSubject</div>
+                                        <div class='text-xs  text-[#667085] pb-1'>@item.NotificationBody</div>
+                                        <div class='text-[10px]  text-[#A1A1AA] pb-1'>@item.FormattedDate</div>
+                                    </div>
+                                </div>
+                                <div class="circle flex-none">
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
-
-        }
-    </div>
-
-</div>
         }
     }
 </div>
 @section scripts
 {
-    <script>
-        // Store active titles in an array
-        let activeTitles = [];
-
-        // Get the elements
-        const markAllReadBtn = document.getElementById('markAllRead');
-        const notificationLists = document.querySelectorAll('.notification-today .notification-list');
-
-        // Add a click event listener to 'Mark all as read' button
-        markAllReadBtn.addEventListener('click', function () {
-            // Toggle 'active' class on all notification items
-            notificationLists.forEach(notification => {
-                notification.classList.toggle('active');
-                if (notification.classList.contains('active')) {
-                    const title = notification.querySelector('.notification-title');
-                    if (title) {
-                        activeTitles.push(title.textContent.trim());
-                    }
-                } else {
-                    const title = notification.querySelector('.notification-title');
-                    if (title) {
-                        const index = activeTitles.indexOf(title.textContent.trim());
-                        if (index > -1) {
-                            activeTitles.splice(index, 1);
-                        }
-                    }
-                }
-            });
-        });
-    </script>
     <script>
         $('.notification-detail-class').on('click', function () {
             var redirectURL = $(this).find('input').val();
@@ -88,5 +90,35 @@
             }
             else return false;
         });
+        var notificationListItems = document.querySelectorAll('.notification-list');
+        var pageLabel = document.getElementById("page-label-id");
+        var markAllRead = document.getElementById("markAllRead");
+        function ManageNotificationReadStatus() {
+            $.ajax({
+                url: '/NotificationManagement/ManageNotificationReadStatus',
+                type: 'POST',
+                data: {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                },
+                success: function (result) {
+                    if (result.Code === "0") {
+                        toastr.success(result.Message);
+                        pageLabel.innerHTML = result.PageTitle;
+                        markAllRead.innerHTML = '';
+                        notificationListItems.forEach(function (item) {
+                            if (item.classList.contains('active')) {
+                                item.classList.remove('active');
+                            }
+                        });
+                    }
+                    else {
+                        toastr.info(result.Message);
+                    }
+                },
+                error: function () {
+                    toastr.error("Something went wrong. Please try again later.");
+                }
+            });
+        }
     </script>
 }

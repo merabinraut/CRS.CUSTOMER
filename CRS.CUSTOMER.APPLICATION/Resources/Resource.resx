@@ -643,6 +643,10 @@
     <value>Mark all as read</value>
     <comment>Notification Management</comment>
   </data>
+  <data name="MarkAllAsRead" xml:space="preserve">
+    <value>Mark all as read</value>
+    <comment>Notification Controller</comment>
+  </data>
   <data name="MarkThis" xml:space="preserve">
     <value>Mark This</value>
   </data>
