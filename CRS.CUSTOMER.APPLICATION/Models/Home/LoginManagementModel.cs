@@ -9,7 +9,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
     {
         [Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
+        //[MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
         //[MobileNumber(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
         public string LoginId { get; set; }
 
