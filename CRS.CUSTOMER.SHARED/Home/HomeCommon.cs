@@ -38,7 +38,6 @@ namespace CRS.CUSTOMER.SHARED.Home
         public string LoginId { get; set; }
         public string Password { get; set; }
         public string SessionId { get; set; }
-        public string NickName { get; set; }
     }
     public class LoginResponseCommon
     {

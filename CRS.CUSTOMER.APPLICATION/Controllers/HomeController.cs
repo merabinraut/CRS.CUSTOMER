@@ -369,6 +369,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             LoginRequestCommon commonRequest = Model.MapObject<LoginRequestCommon>();
             commonRequest.SessionId = Session.SessionID;
+            commonRequest.ActionIP = ApplicationUtilities.GetIP();
             var dbResponse = _buss.Login(commonRequest);
             try
             {

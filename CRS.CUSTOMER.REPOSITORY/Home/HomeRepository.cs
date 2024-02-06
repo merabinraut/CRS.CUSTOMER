@@ -84,7 +84,6 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
             SQL += ",@Password=" + _dao.FilterString(Request.Password);
             SQL += ",@ActionIP=" + _dao.FilterString(Request.ActionIP);
             SQL += ",@ActionPlatform=" + _dao.FilterString(Request.ActionPlatform);
-            SQL += ",@NickName=" + _dao.FilterString(Request.NickName);
             var dbResponse = _dao.ExecuteDataRow(SQL);
             if (dbResponse != null)
             {
