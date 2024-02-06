@@ -3,18 +3,12 @@ using CRS.CUSTOMER.APPLICATION.Models.Home;
 using CRS.CUSTOMER.BUSINESS.Home;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Configuration;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Services.Description;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using static Google.Apis.Requests.BatchRequest;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
