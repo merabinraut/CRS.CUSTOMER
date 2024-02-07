@@ -136,7 +136,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (ModelState.IsValid)
             {
                 RegistrationCommon Common = Model.MapObject<RegistrationCommon>();
-                Common.VerificationCode = string.Concat(Model.OTP1, Model.OTP2, Model.OTP3, Model.OTP4, Model.OTP5, Model.OTP6);
+                Common.VerificationCode = Model.OTPCode;
                 Common.AgentId = Common.AgentId.DefaultDecryptParameter();
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Common.MobileNumber;
@@ -484,7 +484,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrEmpty(Model.OTP1) || string.IsNullOrEmpty(Model.OTP2) || string.IsNullOrEmpty(Model.OTP3) || string.IsNullOrEmpty(Model.OTP4) || string.IsNullOrEmpty(Model.OTP5) || string.IsNullOrEmpty(Model.OTP5))
+                if (string.IsNullOrEmpty(Model.OTPCode))
                 {
                     AddNotificationMessage(new NotificationModel()
                     {
@@ -495,7 +495,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     return View("ForgotPasswordOTP", Model);
                 }
                 RegistrationCommon Common = Model.MapObject<RegistrationCommon>();
-                Common.VerificationCode = string.Concat(Model.OTP1, Model.OTP2, Model.OTP3, Model.OTP4, Model.OTP5, Model.OTP6);
+                Common.VerificationCode = Model.OTPCode;
                 Common.AgentId = Common.AgentId.DecryptParameter();
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Common.MobileNumber;

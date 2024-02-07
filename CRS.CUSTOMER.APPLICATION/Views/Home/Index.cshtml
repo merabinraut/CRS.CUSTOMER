@@ -5,33 +5,6 @@
     var CallJavaScriptFunction = ViewBag.CallJavaScriptFunction;
 }
 <html lang="ja">
-@*<head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-              integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-              crossorigin="anonymous"
-              referrerpolicy="no-referrer" />
-
-        <title>@ViewBag.Title</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <script src="~/Content/js/NotificationMessageToaster.js"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-        <style>
-            :root {
-                /*font-family: 'Noto Sans JP', sans-serif;*/
-                font-family: 'Noto Sans JP';
-                color: #292f33;
-                font-size: 16px;
-            }
-        </style>
-    </head>*@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,6 +33,8 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <title>@ViewBag.Title</title>
 </head>
 <body class="md:hidden">
@@ -393,7 +368,7 @@
                     </div>
                     <!-- for forget pasword -->
                     <div>
-                        <a href="#" class="forgetPassword">パスワードをお忘れですか?</a>
+                        <a href="~/home/ForgotPassword" class="forgetPassword">パスワードをお忘れですか?</a>
                     </div>
                 </div>
                 <!-- for login  -->
@@ -420,7 +395,7 @@
             </div>
             <!-- for new registration -->
             <div>
-                <button type="submit" class="registerButton border rounded-lg  w-full"><a href="#">新しくホスログを始める</a></button>
+                <button type="submit" class="registerButton border rounded-lg  w-full" id="RegisterId">新しくホスログを始める</button>
             </div>
             <!-- for affiliation -->
             <div class="affiliation">
@@ -454,6 +429,9 @@
             if (myCheckbox.checked) $('#rememberMe').val(true);
             else $('#rememberMe').val(false);
         });
+        document.getElementById("RegisterId").onclick = function () {
+            location.href = "/Home/Register";
+        };
     </script>
     <script>
         $("#FormSubmit").click(function () {
