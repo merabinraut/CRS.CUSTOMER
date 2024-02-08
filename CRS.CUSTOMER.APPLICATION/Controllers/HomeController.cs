@@ -109,7 +109,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     var otpModel = new RegistrationModel()
                     {
                         AgentId = dbResponse.Extra1.DefaultEncryptParameter(),
-                        MobileNumber = Model.MobileNumber
+                        MobileNumber = Model.MobileNumber,
+                        NickName = Model.NickName
                     };
                     TempData["ReferCode"] = ReferCode;
                     //Session["exptime"] = DateTime.Parse(dbResponse.Extra2.ToString());
@@ -150,7 +151,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "SUCCESS",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("SetRegistrationPassword", "Home", new { AgentId = dbResponse.Extra1.DefaultEncryptParameter(), UserId = dbResponse.Extra2.DefaultEncryptParameter(), MobileNumber = Model.MobileNumber });
+                    return RedirectToAction("SetRegistrationPassword", "Home", new { AgentId = dbResponse.Extra1.DefaultEncryptParameter(), UserId = dbResponse.Extra2.DefaultEncryptParameter(), MobileNumber = Model.MobileNumber, NickName = Model.NickName });
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -225,13 +226,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet]
-        public ActionResult SetRegistrationPassword(string AgentId, string UserId, string MobileNumber)
+        public ActionResult SetRegistrationPassword(string AgentId, string UserId, string MobileNumber, string NickName)
         {
             var response = new SetRegistrationPasswordModel()
             {
                 AgentId = AgentId,
                 UserId = UserId,
-                MobileNumber = MobileNumber
+                MobileNumber = MobileNumber,
+                NickName = NickName,
             };
             return View(response);
         }
@@ -256,6 +258,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.UserId = Common.UserId.DefaultDecryptParameter();
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
+                ViewBag.NickName = Model.NickName;
                 var dbResponse = _buss.SetRegistrationPassword(Common);
                 if (dbResponse.Code == 0)
                 {
