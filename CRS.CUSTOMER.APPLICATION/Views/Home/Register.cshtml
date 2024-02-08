@@ -346,8 +346,8 @@
                 <div class="border  spertator"></div>
             </div>
             <!-- for login -->
-            <div>
-                <button type="submit" class="loginButton border rounded-lg  w-full"><a href="/Home/Index">ログイン</a></button>
+            <div onclick="window.location.href='@Url.Action("Index","Home")'">
+                <button type="submit" class="loginButton border rounded-lg  w-full">ログイン</button>
             </div>
             <!-- for affiliation -->
             <div class="affiliation">
@@ -362,6 +362,8 @@
         $("#FormSubmit").click(function (event) {
             var MobileNumber = $('#MobileNumber').val();
             var NickName = $('#NickName').val();
+            var isPolice = $('#policy').val();
+            debugger;
             if (MobileNumber != "" && NickName != "") {
                 $("#Form").submit();
             }

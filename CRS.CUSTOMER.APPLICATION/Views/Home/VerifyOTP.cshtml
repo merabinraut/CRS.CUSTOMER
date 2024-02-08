@@ -367,15 +367,17 @@
     </script>
     <script src="~/Content/validation.js"></script>
     <script>
+        var isValid = false;
         $(function () {
          var myDiv = document.getElementById("resend-verification-code");
-         myDiv.style.display = "none";
+         myDiv.style.display = "block";
          var today = new Date();
          var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
          var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-         var dateTime = date + ' ' + time;
+            var dateTime = date + ' ' + time;
+            isValid = false;
          countdown($("#exptime").val());
-             $("#resend-verification-code").click(function (e) {
+             @*$("#resend-verification-code").click(function (e) {
                  e.preventDefault();
                  this.style.display = "none";
                  //$(this).addClass('disable-link');
@@ -404,7 +406,7 @@
                      error: function (error) {
                      }
                  })
-             });
+             });*@
         });
         function countdown(endtime) {
              // Set the date we're counting down to
@@ -425,6 +427,8 @@
                  // If the count down is finished, write some text
                  if (distance < 0) {
                      clearInterval(x);
+                     isValid = true;
+                     $('#waitingMessageWrapper').hide();
                      //$("#resend-div").removeClass('resend-div');
                      //$("#resend-verification-code").removeClass('disable-link');
                      var myDiv = document.getElementById("resend-verification-code");
@@ -433,6 +437,46 @@
                  }
              }, 1000);
          }
+    </script>
+    <script>
+        $("#resend-verification-code").click(function (e) {
+            $('#waitingMessageWrapper').show();
+            setTimeout(function () {
+                // Reload the current page
+                $('#waitingMessageWrapper').hide();
+            }, 5000);
+            if (isValid == true) {
+                e.preventDefault();
+               // this.style.display = "none";
+                //$(this).addClass('disable-link');
+                /*$("#resend-div").addClass('resend-div');*/
+                var RequestVerificationToken = $('input[name="__RequestVerificationToken"]').val();
+                var MobileNo = $('input[name="MobileNumber"]').val();
+                var AgentId = $('input[name="AgentId"]').val();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ResendOTP", "Home")',
+                    data: {
+                        '__RequestVerificationToken': RequestVerificationToken, 'MobileNumber': MobileNo, AgentId
+                    },
+                    success: function (result) {
+                        /*location.reload();*/
+                        if (result.code == "0") {
+                            $("#exptime").val(result.ExpTime);
+                            countdown(result.ExpTime);
+                            $("#resend-div-class").hide();
+                            toastr.success(result.message);
+                        }
+                        else {
+                            toastr.info(result.message);
+                        }
+                    },
+                    error: function (error) {
+                    }
+                })
+            }
+             });
+
     </script>
 </body>
 </html>

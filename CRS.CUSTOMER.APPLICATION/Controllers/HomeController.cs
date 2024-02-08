@@ -265,7 +265,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("Index", "Home");
+                    return View("NewRegistration_SuccessView");
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -661,7 +661,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("Index", "Home");
+                    return View("ForgotPassword_SuccessView");
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
