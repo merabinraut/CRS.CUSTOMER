@@ -336,7 +336,7 @@
                 </div>
                 <!-- for register  -->
                 <div>
-                    <button type="submit" class="registerButton border rounded-lg  w-full">認証コードを受け取る</button>
+                    <button id="FormSubmit" class="registerButton border rounded-lg  w-full">認証コードを受け取る</button>
                 </div>
             }
             <!-- for login -->
@@ -359,12 +359,14 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript">
+
         $("#FormSubmit").click(function (event) {
             var MobileNumber = $('#MobileNumber').val();
             var NickName = $('#NickName').val();
-            var isPolice = $('#policy').val();
+            var checkbox = document.getElementById("policy");
+            var ischecked = checkbox.checked;
             debugger;
-            if (MobileNumber != "" && NickName != "") {
+            if (MobileNumber != "" && NickName != "" && ischecked) {
                 $("#Form").submit();
             }
             if (MobileNumber == "" && NickName == "") {
