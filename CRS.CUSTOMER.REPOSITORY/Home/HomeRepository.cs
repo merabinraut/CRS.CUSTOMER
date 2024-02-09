@@ -135,7 +135,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
             string sql = "sproc_customer_registration_management ";
             sql += "@flag='fp_otp'";
             sql += ",@MobileNumber=" + _dao.FilterString(common.MobileNo);
-            sql += ",@NickName=" + _dao.FilterString(common.Username);
+            //sql += ",@NickName=" + _dao.FilterString(common.Username);
             sql += ",@ActionPlatform=" + _dao.FilterString(common.CreatedPlatform);
             return _dao.ParseCommonDbResponse(sql);
         }

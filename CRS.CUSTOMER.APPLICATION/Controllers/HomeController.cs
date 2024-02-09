@@ -3,18 +3,12 @@ using CRS.CUSTOMER.APPLICATION.Models.Home;
 using CRS.CUSTOMER.BUSINESS.Home;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Configuration;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Services.Description;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using static Google.Apis.Requests.BatchRequest;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
@@ -115,7 +109,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     var otpModel = new RegistrationModel()
                     {
                         AgentId = dbResponse.Extra1.DefaultEncryptParameter(),
-                        MobileNumber = Model.MobileNumber
+                        MobileNumber = Model.MobileNumber,
+                        NickName = Model.NickName
                     };
                     TempData["ReferCode"] = ReferCode;
                     //Session["exptime"] = DateTime.Parse(dbResponse.Extra2.ToString());
@@ -142,7 +137,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (ModelState.IsValid)
             {
                 RegistrationCommon Common = Model.MapObject<RegistrationCommon>();
-                Common.VerificationCode = string.Concat(Model.OTP1, Model.OTP2, Model.OTP3, Model.OTP4, Model.OTP5, Model.OTP6);
+                Common.VerificationCode = Model.OTPCode;
                 Common.AgentId = Common.AgentId.DefaultDecryptParameter();
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Common.MobileNumber;
@@ -156,7 +151,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "SUCCESS",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("SetRegistrationPassword", "Home", new { AgentId = dbResponse.Extra1.DefaultEncryptParameter(), UserId = dbResponse.Extra2.DefaultEncryptParameter(), MobileNumber = Model.MobileNumber });
+                    return RedirectToAction("SetRegistrationPassword", "Home", new { AgentId = dbResponse.Extra1.DefaultEncryptParameter(), UserId = dbResponse.Extra2.DefaultEncryptParameter(), MobileNumber = Model.MobileNumber, NickName = Model.NickName });
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -231,13 +226,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet]
-        public ActionResult SetRegistrationPassword(string AgentId, string UserId, string MobileNumber)
+        public ActionResult SetRegistrationPassword(string AgentId, string UserId, string MobileNumber, string NickName)
         {
             var response = new SetRegistrationPasswordModel()
             {
                 AgentId = AgentId,
                 UserId = UserId,
-                MobileNumber = MobileNumber
+                MobileNumber = MobileNumber,
+                NickName = NickName,
             };
             return View(response);
         }
@@ -262,6 +258,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.UserId = Common.UserId.DefaultDecryptParameter();
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
+                ViewBag.NickName = Model.NickName;
                 var dbResponse = _buss.SetRegistrationPassword(Common);
                 if (dbResponse.Code == 0)
                 {
@@ -271,7 +268,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("Index", "Home");
+                    return View("NewRegistration_SuccessView");
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -375,6 +372,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             LoginRequestCommon commonRequest = Model.MapObject<LoginRequestCommon>();
             commonRequest.SessionId = Session.SessionID;
+            commonRequest.ActionIP = ApplicationUtilities.GetIP();
             var dbResponse = _buss.Login(commonRequest);
             try
             {
@@ -465,7 +463,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     var otpModel = new RegistrationModel()
                     {
                         AgentId = dbresp.Extra1.EncryptParameter(),
-                        MobileNumber = model.MobileNo
+                        MobileNumber = model.MobileNo,
+                        NickName = dbresp.Extra3,
                     };
                     Session["exptime"] = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");//DateTime.Parse(dbresp.Extra2.ToString());
                     //Session["exptime"] = DateTime.Parse(starttime.ToString());
@@ -489,7 +488,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrEmpty(Model.OTP1) || string.IsNullOrEmpty(Model.OTP2) || string.IsNullOrEmpty(Model.OTP3) || string.IsNullOrEmpty(Model.OTP4) || string.IsNullOrEmpty(Model.OTP5) || string.IsNullOrEmpty(Model.OTP5))
+                if (string.IsNullOrEmpty(Model.OTPCode))
                 {
                     AddNotificationMessage(new NotificationModel()
                     {
@@ -500,7 +499,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     return View("ForgotPasswordOTP", Model);
                 }
                 RegistrationCommon Common = Model.MapObject<RegistrationCommon>();
-                Common.VerificationCode = string.Concat(Model.OTP1, Model.OTP2, Model.OTP3, Model.OTP4, Model.OTP5, Model.OTP6);
+                Common.VerificationCode = Model.OTPCode;
                 Common.AgentId = Common.AgentId.DecryptParameter();
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Common.MobileNumber;
@@ -514,7 +513,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("SetNewPassword", "Home", new { AgentId = dbResponse.Extra1.EncryptParameter(), MobileNumber = Model.MobileNumber.EncryptParameter(), UserID = dbResponse.Extra3.EncryptParameter() });
+                    return RedirectToAction("SetNewPassword", "Home", new { AgentId = dbResponse.Extra1.EncryptParameter(), MobileNumber = Model.MobileNumber.EncryptParameter(), UserID = dbResponse.Extra3.EncryptParameter(), NickName = Model.NickName });
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -591,7 +590,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Set new Password
         [HttpGet]
-        public ActionResult SetNewPassword(string AgentId, string MobileNumber, string UserID)
+        public ActionResult SetNewPassword(string AgentId, string MobileNumber, string UserID, string NickName)
         {
             var aId = !string.IsNullOrEmpty(AgentId) ? AgentId.DecryptParameter() : null;
             var mn = !string.IsNullOrEmpty(MobileNumber) ? MobileNumber.DecryptParameter() : null;
@@ -610,7 +609,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 AgentId = AgentId,
                 UserId = UserID,
-                MobileNumber = MobileNumber
+                MobileNumber = MobileNumber,
+                NickName = NickName,
             };
             return View(response);
         }
@@ -657,6 +657,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.UserId = Common.UserId.DecryptParameter();
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
+                ViewBag.NickName = Model.NickName;
                 var dbResponse = _buss.SetNewPassword(Common);
                 if (dbResponse.Code == 0)
                 {
@@ -666,7 +667,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("Index", "Home");
+                    return View("ForgotPassword_SuccessView");
                 }
                 AddNotificationMessage(new NotificationModel()
                 {

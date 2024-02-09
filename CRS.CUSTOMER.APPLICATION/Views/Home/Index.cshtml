@@ -6,133 +6,413 @@
 }
 <html lang="ja">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer" />
-
-    <title>@ViewBag.Title</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Content/assets/css/tailwind.css">
+    <link rel="stylesheet" href="/Content/assets/css/customer/global.css">
+    <link rel="stylesheet" href="/Content/assets/css/customer/club.css">
+    <link rel="stylesheet" href="/Content/assets/css/customer/customcss.css">
+    <link rel="stylesheet" href="/Content/assets/css/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/Content/assets/css/owl-carousel/owl.theme.default.min.css">
     <script src="~/Content/js/NotificationMessageToaster.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+    <script src="/Content/assets/js/owl.carousel.js"></script>
+    <script src="/Content/assets/js/modal.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /*font-family: 'Noto Sans JP', sans-serif;*/
-            font-family: 'Noto Sans JP';
-            color: #292f33;
-            font-size: 16px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <title>@ViewBag.Title</title>
 </head>
 <body class="md:hidden">
-    <div class="mx-[16px]">
-        <div class="pb-4">
-            <p class="text-[#D75A8B] mt-[25px] font-bold">
-                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Login_with_mobile
-            </p>
-            <p class="mt-[10px] text-[12px] font-semibold">
-                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Phone_number_to_login
+    @*<div class="mx-[16px]">
+            <div class="pb-4">
+                <p class="text-[#D75A8B] mt-[25px] font-bold">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Login_with_mobile
+                </p>
+                <p class="mt-[10px] text-[12px] font-semibold">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Phone_number_to_login
+                </p>
+            </div>
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.PhoneNumber
+                        </label>
+                        @Html.TextBoxFor(model => model.LoginId, new
+                            {
+                                @class = "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-[#d75a8b]",
+                                @placeholder = CRS.CUSTOMER.APPLICATION.Resources.Resource.Enter_Phone_Number,
+                                @maxLength = "11",
+                                @onkeypress = "return isNumber(event)"
+                            })
+                        <span class="validationMessage">
+                            @Html.ValidationMessageFor(m => m.LoginId)
+                        </span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6 password-parent">
+                    <div class="w-full px-3 relative">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Password
+                        </label>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-[#d75a8b]", @type = "password", @placeholder = "******************", @maxlength = "16" })
+                        <span class="p-viewer" style=" z-index: 9999; position: absolute; right:20px; top:40px">
+                            <i class="fa-solid fa-eye-slash" onclick="hideShowPassword()"></i>
+                        </span>
+                        <span class="validationMessage">
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </span>
+                    </div>
+                </div>
+                <div class="flex justify-between text-[14px]">
+                    <div class="flex justify-center cursor-pointer">
+                        <input type="checkbox" id="remember" name="RememberMe" value="Remember" />
+                        <label for="remember">
+                            <span class="pl-2  font-semibold">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Remember_me
+                            </span>
+                        </label><br />
+                    </div>
+                    <a href="~/home/ForgotPassword">
+                        <p class="font-bold cursor-pointer text-[#D75A8B]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Forget_password
+                        </p>
+                    </a>
+                </div>
+            }
+        </div>
+        <div class="flex rounded-full justify-center items-center text-white h-[48px] mt-[164px] bg-[#D75A8B] mx-[15px]">
+            <p class="ml-2 text-[14px] w-full h-full flex items-center justify-center cursor-pointer focus-visible:outline-none" id="FormSubmit" name="FormSubmit" value="Next">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Login
             </p>
         </div>
-        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
-        {
-            @Html.AntiForgeryToken()
-            <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full md:w-1/2 px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.PhoneNumber
-                    </label>
+        <div class="flex justify-center">
+            <p class="p-10 mb-auto">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Do_not_have_an_account
+                <span class="font-bold text-[#D75A8B] cursor-pointer pl-[10px]" id="RegisterId">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register
+                </span>
+            </p>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+        <script type="text/javascript">
+            var inputElement = document.getElementById("Password");
+            inputElement.addEventListener("keydown", function (event) {
+                if (event.keyCode === 13 || event.key === "Enter") {
+                    $("#Form").submit();
+                }
+            });
+            $("#FormSubmit").click(function () {
+                $("#Form").submit();
+            });
+            document.getElementById("RegisterId").onclick = function () {
+                location.href = "/Home/Register";
+            };
+
+            $('#remember').click(function () {
+                var myCheckbox = document.getElementById("remember");
+                if (myCheckbox.checked) $('#remember').val(true);
+                else $('#remember').val(false);
+            });
+        </script>
+        <script>
+            function togglePassword() {
+                const passwordInput = document.querySelector('.password-input input');
+                const eyeIcon = document.querySelector('.password-eye');
+
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    eyeIcon.classList.remove('la-eye');
+                    eyeIcon.classList.add('la-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    eyeIcon.classList.remove('la-eye-slash');
+                    eyeIcon.classList.add('la-eye');
+                }
+            }
+            function hideShowPassword() {
+                var passwordField = $('.password-parent').find('input');
+                var passwordFieldType = passwordField.attr("type");
+
+                if (passwordFieldType === 'password') {
+                    $('.password-parent').find('.fa-eye').removeClass('fa-eye-slash');
+                    $('.password-parent').find('.fa-solid').addClass('fa-eye');
+                    passwordField.attr('type', 'text');
+                } else {
+                    $('.password-parent').find('.fa-eye').removeClass('fa-eye');
+                    $('.password-parent').find('.fa-solid').addClass('fa-eye-slash');
+                    passwordField.attr('type', 'password');
+                }
+            }
+        </script>*@
+
+    <!--new login ui -->
+
+    <style>
+        .borderTop {
+            border-top: 1px solid #ECECEC;
+        }
+
+        .loginContainer {
+            padding: 0 24px;
+        }
+
+        .login {
+            color: #18181B;
+            font-weight: 700;
+            line-height: 16px;
+            font-size: 16px;
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        .inputWrapper {
+            border: 1px solid #ECECEC;
+            border-radius: 4px;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            background: none;
+        }
+
+            input:focus {
+                shape-outside: none;
+                border: none;
+                outline: none;
+            }
+
+            input::placeholder {
+                color: #A6A6A6;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 18px;
+            }
+
+        .rememberMe {
+            color: #000;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: 0.4px;
+        }
+
+        .checkBox {
+            border: 0.5px solid #D9D9D9;
+            border-radius: 1.5px;
+            color: #D75A8B;
+        }
+
+            .checkBox:focus {
+                border: 0.5px solid #D9D9D9;
+                border-radius: 1.5px;
+            }
+
+        .forgetPassword {
+            color: #839AD6;
+            font-family: "Noto Sans";
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 16px;
+            letter-spacing: 0.4px;
+        }
+
+        .loginButton {
+            background: #D75A8B;
+            padding: 8px 12px;
+            color: #fff;
+            font-weight: 700;
+            line-height: 24px;
+            font-size: 14px;
+            margin-top: 18px;
+        }
+
+        .termsAndContion {
+            color: rgba(24, 24, 27, 0.60);
+            font-weight: 700;
+        }
+
+        .termLink {
+            color: #839AD6;
+            font-size: 11px;
+        }
+
+        .spertator {
+            width: calc((100% - 185px)/2);
+            height: 1px;
+            background-color: #A1A1AA;
+        }
+
+        .otherAccotunt {
+            color: #666;
+            text-align: center;
+            font-family: "Noto Sans";
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 166%;
+            padding: 0 13px;
+        }
+
+        .registerButton {
+            background: #FFF;
+            padding: 8px 12px;
+            color: #666;
+            font-weight: 600;
+            line-height: 23px;
+            font-size: 14px;
+            margin-top: 18px;
+            border: 1px solid #F1F1F1;
+            letter-spacing: -0.165px;
+        }
+
+        .affiliation {
+            display: flex;
+            padding: 4px 0px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .affiliationText {
+            color: #839AD6;
+            text-align: center;
+            font-family: "Noto Sans JP";
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 166%;
+        }
+
+        .dividerCol {
+            color: #999;
+            text-align: center;
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 166%;
+            /* 18.26px */
+        }
+
+        .touggleButton {
+            display: hidden;
+        }
+
+        .contactNumber {
+            background: none;
+        }
+
+        input {
+            --tw-ring-shadow: 0 0 #000 !important;
+            background: none;
+        }
+    </style>
+    <div class="  ">
+        <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[24px]">
+            <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+            </div>
+            <div class="text-center w-full font-bold"></div>
+        </div>
+        <div class="loginContainer">
+            <div class="login">ログイン</div>
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="inputWrapper">
                     @Html.TextBoxFor(model => model.LoginId, new
-                        {
-                            @class = "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-[#d75a8b]",
-                            @placeholder = CRS.CUSTOMER.APPLICATION.Resources.Resource.Enter_Phone_Number,
-                            @maxLength = "11",
-                            @onkeypress = "return isNumber(event)"
-                        })
+               {
+                   @class = "contactNumber focus:outline-none border-none  w-full ring-0 focus:ring-0 focus:ring-transparent",
+                   @placeholder = CRS.CUSTOMER.APPLICATION.Resources.Resource.Enter_Phone_Number,
+                   @type = "text"
+               })
                     <span class="validationMessage">
                         @Html.ValidationMessageFor(m => m.LoginId)
                     </span>
+                    <hr>
+                    <div class="relative">
+                        @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent", @type = "password", @placeholder = "******************", @maxlength = "16" })
+                        <i class="las la-eye password-eye absolute top-3 right-2 text-[#]" onclick="togglePassword()"></i>
+                    </div>
                 </div>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-6 password-parent">
-                <div class="w-full px-3 relative">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Password
-                    </label>
-                    @Html.TextBoxFor(model => model.Password, new { @class = "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-[#d75a8b]", @type = "password", @placeholder = "******************", @maxlength = "16" })
-                    <span class="p-viewer" style=" z-index: 9999; position: absolute; right:20px; top:40px">
-                        <i class="fa-solid fa-eye-slash" onclick="hideShowPassword()"></i>
-                    </span>
-                    <span class="validationMessage">
-                        @Html.ValidationMessageFor(m => m.Password)
-                    </span>
+                <!-- for check box -->
+                <div class="checkboxWrapper flex justify-between items-center mt-4">
+                    <div>
+                        <input type="checkbox" name="RememberMe" value="Remember"
+                               class="checkBox focus:outline-none bg-transparent ring-offset-0 ring-0 focus:ring-0 focus:ring-transparent focus:ring-shadow-none"
+                               id="rememberMe">
+                        <label for="rememberMe" class="rememberMe">ログインしたままにする</label>
+                    </div>
+                    <!-- for forget pasword -->
+                    <div>
+                        <a href="~/home/ForgotPassword" class="forgetPassword">パスワードをお忘れですか?</a>
+                    </div>
                 </div>
-            </div>
-            <div class="flex justify-between text-[14px]">
-                <div class="flex justify-center cursor-pointer">
-                    <input type="checkbox" id="remember" name="RememberMe" value="Remember" />
-                    <label for="remember">
-                        <span class="pl-2  font-semibold">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Remember_me
-                        </span>
-                    </label><br />
+                <!-- for login  -->
+                <div>
+                    <button type="submit" class="loginButton border rounded-lg  w-full" id="FormSubmit" name="FormSubmit" value="Next">ログイン</button>
                 </div>
-                <a href="~/home/ForgotPassword">
-                    <p class="font-bold cursor-pointer text-[#D75A8B]">
-                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Forget_password
-                    </p>
-                </a>
-            </div>
-        }
-    </div>
-    <div class="flex rounded-full justify-center items-center text-white h-[48px] mt-[164px] bg-[#D75A8B] mx-[15px]">
-        <p class="ml-2 text-[14px] w-full h-full flex items-center justify-center cursor-pointer focus-visible:outline-none" id="FormSubmit" name="FormSubmit" value="Next">
-            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Login
-        </p>
-    </div>
-    <div class="flex justify-center">
-        <p class="p-10 mb-auto">
-            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Do_not_have_an_account
-            <span class="font-bold text-[#D75A8B] cursor-pointer pl-[10px]" id="RegisterId">
-                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register
-            </span>
-        </p>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
-    <script type="text/javascript">
-        var inputElement = document.getElementById("Password");
-        inputElement.addEventListener("keydown", function (event) {
-            if (event.keyCode === 13 || event.key === "Enter") {
-                $("#Form").submit();
             }
-        });
-        $("#FormSubmit").click(function () {
-            $("#Form").submit();
-        });
-        document.getElementById("RegisterId").onclick = function () {
-            location.href = "/Home/Register";
-        };
-
-        $('#remember').click(function () {
-            var myCheckbox = document.getElementById("remember");
-            if (myCheckbox.checked) $('#remember').val(true);
-            else $('#remember').val(false);
-        });
-    </script>
+            <!-- for term and condition -->
+            <div class="mt-4 flex justify-center items-center flex-col">
+                <div class="flex justify-center items-center text-[11px] font-bold leading-[15px] termsAndContion">
+                    <a href="#" class="termLink">利用規約</a><span>と</span>
+                    <a href="#" class="termLink">プライバシーポリシ</a>
+                    <span>ー に</span>
+                </div>
+                <div class="termsAndContion text-[11px]">
+                    同意したものとみなします
+                </div>
+            </div>
+            <!-- for other account -->
+            <div class="mt-16 flex justify-center items-center">
+                <div class="border  spertator"></div>
+                <span class="otherAccotunt">初めてホスログをご利用ですか?</span>
+                <div class="border  spertator"></div>
+            </div>
+            <!-- for new registration -->
+            <div>
+                <button type="submit" class="registerButton border rounded-lg  w-full" id="RegisterId">新しくホスログを始める</button>
+            </div>
+            <!-- for affiliation -->
+            <div class="affiliation">
+                <div class="affiliationText"><a href="#">アフィリエイター登録</a></div>
+                <div class="dividerCol">|</div>
+                <div class="affiliationText">店舗オーナー登録</div>
+            </div>
+        </div>
+    </div>
     <script>
-        function togglePassword() {
-            const passwordInput = document.querySelector('.password-input input');
-            const eyeIcon = document.querySelector('.password-eye');
+        document.querySelectorAll('.password-eye').forEach(function (eyeIcon) {
+            eyeIcon.addEventListener('click', function () {
+                togglePassword(this);
+            });
+        });
+        function togglePassword(eyeIcon) {
+            const passwordInput = eyeIcon.previousElementSibling; // Get the input element before the icon
 
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
@@ -144,20 +424,19 @@
                 eyeIcon.classList.add('la-eye');
             }
         }
-        function hideShowPassword() {
-            var passwordField = $('.password-parent').find('input');
-            var passwordFieldType = passwordField.attr("type");
-
-            if (passwordFieldType === 'password') {
-                $('.password-parent').find('.fa-eye').removeClass('fa-eye-slash');
-                $('.password-parent').find('.fa-solid').addClass('fa-eye');
-                passwordField.attr('type', 'text');
-            } else {
-                $('.password-parent').find('.fa-eye').removeClass('fa-eye');
-                $('.password-parent').find('.fa-solid').addClass('fa-eye-slash');
-                passwordField.attr('type', 'password');
-            }
-        }
+        $('#rememberMe').click(function () {
+            var myCheckbox = document.getElementById("rememberMe");
+            if (myCheckbox.checked) $('#rememberMe').val(true);
+            else $('#rememberMe').val(false);
+        });
+        document.getElementById("RegisterId").onclick = function () {
+            location.href = "/Home/Register";
+        };
+    </script>
+    <script>
+        $("#FormSubmit").click(function () {
+            $("#Form").submit();
+        });
     </script>
     <script>
     //For toaster Notification

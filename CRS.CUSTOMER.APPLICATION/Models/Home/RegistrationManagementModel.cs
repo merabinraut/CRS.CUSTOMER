@@ -29,12 +29,14 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string AgentId { get; set; }
         public string MobileNumber { get; set; }
         public string ReferCode { get; set; }
-        public string OTP1 { get; set; }
-        public string OTP2 { get; set; }
-        public string OTP3 { get; set; }
-        public string OTP4 { get; set; }
-        public string OTP5 { get; set; }
-        public string OTP6 { get; set; }
+        public string NickName { get; set; }
+        //public string OTP1 { get; set; }
+        //public string OTP2 { get; set; }
+        //public string OTP3 { get; set; }
+        //public string OTP4 { get; set; }
+        //public string OTP5 { get; set; }
+        //public string OTP6 { get; set; }
+        public string OTPCode { get; set; }
     }
 
     public class ResendRegistrationOTPModel
@@ -59,21 +61,22 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         [Compare("Password", ErrorMessage = "Password  Mismatch")]
         public string ConfirmPassword { get; set; }
         public string MobileNumber { get; set; }
+        public string NickName { get; set; }
     }
     #endregion
     #region Forgot Password
     public class ForgotPasswordModel
     {
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
+        //[MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
         //[MobileNumber(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
-        [Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
+        //[Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
         public string MobileNo { get; set; }
-        [Display(Name = "Nickname", ResourceType = typeof(Resource))]
-        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
-        [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]
-        public string Username { get; set; }
+        //[Display(Name = "Nickname", ResourceType = typeof(Resource))]
+        //[Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        //[MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
+        //[MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]
+        //public string Username { get; set; }
         public string CaptureTime { get; set; }
     }
     #endregion

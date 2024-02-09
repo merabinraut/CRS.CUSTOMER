@@ -653,6 +653,8 @@
     <Content Include="Views\Footer\inquery.cshtml" />
     <Content Include="Views\Footer\operatingcompany.cshtml" />
     <Content Include="Views\Footer\privacypolicy.cshtml" />
+    <Content Include="Views\Home\ForgotPassword_SuccessView.cshtml" />
+    <Content Include="Views\Home\NewRegistration_SuccessView.cshtml" />
     <Content Include="Views\LocationManagement\ViewHostDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
