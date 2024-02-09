@@ -378,7 +378,25 @@
         }
         }
     });
-
+        var notificationBell = document.getElementById("notification-bell-id");
+        function NotificationFunction() {
+            $.ajax({
+                url: '/NotificationManagement/HasUnReadNotification',
+                type: 'POST',
+                success: function (result) {
+                    if (result.HasUnReadNotification) {
+                        notificationBell.innerHTML = '<img src="/Content/assets/images/Customer/UnReadNotification.svg" class="h-[10px]" alt="notification"/>';
+                    }
+                    else {
+                        notificationBell.innerHTML = '';
+                    }
+                },
+                error: function () {
+                    notificationBell.innerHTML = '';
+                }
+            });
+        }
+        setInterval(NotificationFunction, 20000);
     </script>
     @RenderSection("scripts", required: false)
 </body>

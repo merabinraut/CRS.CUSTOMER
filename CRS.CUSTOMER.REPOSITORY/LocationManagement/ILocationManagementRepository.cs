@@ -18,6 +18,7 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
         List<ClubWeeklyScheduleCommon> GetClubReservationSchedule(string ClubId);
         #region Host view details
         ViewHostDetailCommon ViewHostDetails(string HostId, string customerId);
+        ViewHostDetailCommonV2 ViewHostDetailsV2(string HostId, string customerId);
         #endregion
     }
 }

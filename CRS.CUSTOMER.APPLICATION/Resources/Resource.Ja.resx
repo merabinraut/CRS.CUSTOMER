@@ -643,6 +643,10 @@
     <value>すべて既読にする</value>
     <comment>Notification Management</comment>
   </data>
+  <data name="MarkAllAsRead" xml:space="preserve">
+    <value>すべて既読にする</value>
+    <comment>Notification Controller</comment>
+  </data>
   <data name="MarkThis" xml:space="preserve">
     <value>これにマークを付ける</value>
   </data>

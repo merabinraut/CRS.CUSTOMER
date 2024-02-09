@@ -19,5 +19,6 @@
         public string FormattedDate { get; set; }
         public string NotificationURL { get; set; }
         public string NotificationImage { get; set; }
+        public string UnReadNotification { get; set; }
     }
 }

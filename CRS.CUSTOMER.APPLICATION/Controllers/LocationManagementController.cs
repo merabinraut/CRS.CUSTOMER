@@ -200,32 +200,33 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(responseModel);
         }
         #endregion
-
+        [HttpGet]
         public ActionResult ViewHostDetail(string HostId)
         {
+            var culture = Request.Cookies["culture"]?.Value;
+            culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
+            var FileLocationPath = "";
             var hId = string.IsNullOrEmpty(HostId) ? string.Empty : HostId.DecryptParameter();
             if (string.IsNullOrEmpty(hId))
             {
                 AddNotificationMessage(new NotificationModel()
                 {
-                    NotificationType = NotificationMessage.WARNING,
+                    NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid Details",
-                    Title = NotificationMessage.WARNING.ToString()
+                    Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return RedirectToAction("Index", "Dashboard");
             }
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") ViewBag.FileLocationPath = "";
-            else ViewBag.FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-
+            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
             string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
-
-            var dbResponse = _business.ViewHostDetails(hId, agentId);
+            var dbResponse = _business.ViewHostDetailsV2(hId, agentId);
             if (dbResponse != null)
             {
-                var ResponseModel = dbResponse.MapObject<ViewHostDetailModel>();
+                var ResponseModel = dbResponse.MapObject<ViewHostDetailModelV2>();
                 ResponseModel.ClubId = ResponseModel.ClubId.EncryptParameter();
                 ResponseModel.HostId = ResponseModel.HostId.EncryptParameter();
                 ResponseModel.LocationId = ResponseModel.LocationId.EncryptParameter();
+                ResponseModel.ClubLogo = FileLocationPath + ResponseModel.ClubLogo;
                 if (!string.IsNullOrEmpty(ResponseModel.HostInstagramLink) && ResponseModel.HostInstagramLink != "#")
                 {
                     if (!ResponseModel.HostInstagramLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostInstagramLink = "https://" + ResponseModel.HostInstagramLink;
@@ -242,16 +243,69 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     if (!ResponseModel.HostLine.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostLine = "https://" + ResponseModel.HostLine;
                 }
+                ResponseModel.HostGalleryImageList.Select(x => FileLocationPath + x).ToList();
+                ResponseModel.HostIdentityDetailsModel.ForEach(x => x.Label = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.LabelEnglish : x.LabelJapanese);
                 return View(ResponseModel);
             }
             AddNotificationMessage(new NotificationModel()
             {
-                NotificationType = NotificationMessage.WARNING,
+                NotificationType = NotificationMessage.INFORMATION,
                 Message = "Something went wrong.",
-                Title = NotificationMessage.WARNING.ToString()
+                Title = NotificationMessage.INFORMATION.ToString()
             });
             return RedirectToAction("Index", "Dashboard");
         }
+        //public ActionResult ViewHostDetail(string HostId)
+        //{
+        //    var hId = string.IsNullOrEmpty(HostId) ? string.Empty : HostId.DecryptParameter();
+        //    if (string.IsNullOrEmpty(hId))
+        //    {
+        //        AddNotificationMessage(new NotificationModel()
+        //        {
+        //            NotificationType = NotificationMessage.WARNING,
+        //            Message = "Invalid Details",
+        //            Title = NotificationMessage.WARNING.ToString()
+        //        });
+        //        return RedirectToAction("Index", "Dashboard");
+        //    }
+        //    if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") ViewBag.FileLocationPath = "";
+        //    else ViewBag.FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+
+        //    string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
+
+        //    var dbResponse = _business.ViewHostDetails(hId, agentId);
+        //    if (dbResponse != null)
+        //    {
+        //        var ResponseModel = dbResponse.MapObject<ViewHostDetailModel>();
+        //        ResponseModel.ClubId = ResponseModel.ClubId.EncryptParameter();
+        //        ResponseModel.HostId = ResponseModel.HostId.EncryptParameter();
+        //        ResponseModel.LocationId = ResponseModel.LocationId.EncryptParameter();
+        //        if (!string.IsNullOrEmpty(ResponseModel.HostInstagramLink) && ResponseModel.HostInstagramLink != "#")
+        //        {
+        //            if (!ResponseModel.HostInstagramLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostInstagramLink = "https://" + ResponseModel.HostInstagramLink;
+        //        }
+        //        if (!string.IsNullOrEmpty(ResponseModel.HostTwitterLink) && ResponseModel.HostTwitterLink != "#")
+        //        {
+        //            if (!ResponseModel.HostTwitterLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostTwitterLink = "https://" + ResponseModel.HostTwitterLink;
+        //        }
+        //        if (!string.IsNullOrEmpty(ResponseModel.HostTiktokLink) && ResponseModel.HostTiktokLink != "#")
+        //        {
+        //            if (!ResponseModel.HostTiktokLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostTiktokLink = "https://" + ResponseModel.HostTiktokLink;
+        //        }
+        //        if (!string.IsNullOrEmpty(ResponseModel.HostLine) && ResponseModel.HostLine != "#")
+        //        {
+        //            if (!ResponseModel.HostLine.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostLine = "https://" + ResponseModel.HostLine;
+        //        }
+        //        return View(ResponseModel);
+        //    }
+        //    AddNotificationMessage(new NotificationModel()
+        //    {
+        //        NotificationType = NotificationMessage.WARNING,
+        //        Message = "Something went wrong.",
+        //        Title = NotificationMessage.WARNING.ToString()
+        //    });
+        //    return RedirectToAction("Index", "Dashboard");
+        //}
 
         #region Club Reservation
         public ActionResult ClubReservation(string ClubId, string SelectedDate = "", string SelectedHost = "")

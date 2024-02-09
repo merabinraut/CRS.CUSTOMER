@@ -1,4 +1,5 @@
-﻿using CRS.CUSTOMER.SHARED.NotificationManagement;
+﻿using CRS.CUSTOMER.SHARED;
+using CRS.CUSTOMER.SHARED.NotificationManagement;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,6 +26,27 @@ namespace CRS.CUSTOMER.REPOSITORY.NotificationManagement
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0) return _dao.DataTableToListObject<NotificationDetailCommon>(dbResponse).ToList();
             return new List<NotificationDetailCommon>();
+        }
+
+        public bool HasUnReadNotification(string AgentId)
+        {
+            string SQL = "sproc_customer_notification_management @Flag='cichurn'";
+            SQL += ",@AgentId=" + _dao.FilterString(AgentId);
+            var dbResponse = _dao.ExecuteDataRow(SQL);
+            if (dbResponse != null)
+            {
+                var code = _dao.ParseColumnValue(dbResponse, "Code").ToString();
+                if (!string.IsNullOrEmpty(code) && code.Trim() == "0") return true;
+            }
+            return false;
+        }
+
+        public CommonDbResponse ManageNotificationReadStatus(Common Request)
+        {
+            string SQL = "sproc_customer_notification_management @Flag='unrs'";
+            SQL += ",@AgentId=" + _dao.FilterString(Request.AgentId);
+            SQL += ",@ActionUser=" + _dao.FilterString(Request.ActionUser);
+            return _dao.ParseCommonDbResponse(SQL);
         }
     }
 }

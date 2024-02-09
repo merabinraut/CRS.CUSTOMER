@@ -54,6 +54,10 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
         {
             return _repo.ViewHostDetails(HostId, customerId);
         }
+        public ViewHostDetailCommonV2 ViewHostDetailsV2(string HostId, string customerId)
+        {
+            return _repo.ViewHostDetailsV2(HostId, customerId);
+        }
         #endregion
     }
 }
