@@ -260,7 +260,6 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
                 var dbResponse4 = _dao.ExecuteDataTable(SQL4);
                 if (dbResponse4 != null && dbResponse4.Rows.Count > 0) HostIdentityDetailsModelResponse.AddRange(_dao.DataTableToListObject<HostIdentityDetailsCommon>(dbResponse4).ToList());
                 Response.HostIdentityDetailsModel = HostIdentityDetailsModelResponse;
-                return Response;
             }
             return Response;
         }

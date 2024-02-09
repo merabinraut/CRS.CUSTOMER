@@ -32,6 +32,8 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
 
     public class ViewHostDetailCommonV2
     {
+        public string LocationId { get; set; }
+        public string LocationURL { get; set; }
         public string HostId { get; set; }
         public string ClubId { get; set; }
         public string ClubNameEnglish { get; set; }
