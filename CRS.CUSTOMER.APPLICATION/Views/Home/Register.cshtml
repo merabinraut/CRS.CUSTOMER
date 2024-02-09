@@ -361,11 +361,11 @@
     <script type="text/javascript">
 
         $("#FormSubmit").click(function (event) {
+            event.preventDefault();
             var MobileNumber = $('#MobileNumber').val();
             var NickName = $('#NickName').val();
             var checkbox = document.getElementById("policy");
             var ischecked = checkbox.checked;
-            debugger;
             if (MobileNumber != "" && NickName != "" && ischecked) {
                 $("#Form").submit();
             }
