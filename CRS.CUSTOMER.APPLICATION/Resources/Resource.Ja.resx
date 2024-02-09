@@ -193,6 +193,9 @@
     <value>誕生日</value>
     <comment>Bookmark Management</comment>
   </data>
+  <data name="BirthPlace" xml:space="preserve">
+    <value>出身地</value>
+  </data>
   <data name="Blood Type" xml:space="preserve">
     <value>血液型</value>
     <comment>Bookmark Management</comment>

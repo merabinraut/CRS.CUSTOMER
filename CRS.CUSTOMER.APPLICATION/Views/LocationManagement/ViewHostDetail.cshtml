@@ -82,7 +82,7 @@
         </div>
     }
 </div>
-<div class="bg-[#EDF1F6]">
+<div class="">
     <!-- host details -->
     <div class=" px-4 ">
         <div class="mt-6 flex justify-start items-center gap-[9px] border-b border-[#EFEFEF] pb-[11px]">
@@ -191,7 +191,7 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
             @if (!string.IsNullOrEmpty(@Model.HostBirthPlace))
             {
                 <p style="line-height: 180%;">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Address :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostBirthPlace</span>
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.BirthPlace :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostBirthPlace</span>
                 </p>
             }
             @if (!string.IsNullOrEmpty(@Model.HostBloodType))
