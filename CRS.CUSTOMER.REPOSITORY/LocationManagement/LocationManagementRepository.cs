@@ -218,6 +218,51 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             }
             return Response;
         }
+
+        public ViewHostDetailCommonV2 ViewHostDetailsV2(string HostId, string customerId)
+        {
+            var Response = new ViewHostDetailCommonV2();
+            string SQL = "EXEC sproc_cpanel_host_management @Flag='ghd'";
+            SQL += ",@HostId=" + _dao.FilterString(HostId);
+            SQL += ",@CustomerAgentId=" + _dao.FilterString(customerId);
+            var dbResponse = _dao.ExecuteDataTable(SQL);
+            if (dbResponse != null && dbResponse.Rows.Count == 1)
+            {
+                var ResponseMapper = _dao.DataTableToListObject<ViewHostDetailCommonV2>(dbResponse).ToList();
+                Response = ResponseMapper[0];
+                string SQL2 = "EXEC sproc_cpanel_host_management @Flag='ghgil'";
+                SQL2 += ",@HostId=" + _dao.FilterString(HostId);
+                var dbResponse2 = _dao.ExecuteDataTable(SQL2);
+                List<string> stringList = new List<string>();
+                if (dbResponse2 != null && dbResponse2.Rows.Count > 0)
+                {
+                    if (dbResponse2.Columns.Contains("ImagePath"))
+                    {
+                        foreach (DataRow item2 in dbResponse2.Rows)
+                        {
+                            object imagePathValue = item2["ImagePath"];
+                            if (imagePathValue != null)
+                            {
+                                string imagePath = imagePathValue.ToString();
+                                stringList.Add(imagePath);
+                            }
+                        }
+                    }
+                }
+                Response.HostGalleryImageList = stringList;
+                var HostIdentityDetailsModelResponse = new List<HostIdentityDetailsCommon>();
+                string SQL3 = "EXEC sproc_cpanel_host_management @Flag = 'ghs'";
+                SQL3 += ",@HostId=" + _dao.FilterString(HostId);
+                var dbResponse3 = _dao.ExecuteDataTable(SQL3);
+                if (dbResponse3 != null && dbResponse3.Rows.Count > 0) HostIdentityDetailsModelResponse.AddRange(_dao.DataTableToListObject<HostIdentityDetailsCommon>(dbResponse3).ToList());
+                string SQL4 = "EXEC sproc_cpanel_host_management @Flag = 'ghpnl'";
+                SQL4 += ",@HostId=" + _dao.FilterString(HostId);
+                var dbResponse4 = _dao.ExecuteDataTable(SQL4);
+                if (dbResponse4 != null && dbResponse4.Rows.Count > 0) HostIdentityDetailsModelResponse.AddRange(_dao.DataTableToListObject<HostIdentityDetailsCommon>(dbResponse4).ToList());
+                Response.HostIdentityDetailsModel = HostIdentityDetailsModelResponse;
+            }
+            return Response;
+        }
         #endregion
     }
 }

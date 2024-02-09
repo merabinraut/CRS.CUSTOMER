@@ -255,9 +255,7 @@
             <div class=" pb-4 flex gap-[8px] " draggable="true">
                 <div class="owl-carousel owl-theme store-host-carousel">
                     @{
-                        var HostListModels = Model.TopHostListModels;
-                        var OrderedHostList = HostListModels.OrderBy(y => y.Rank).GroupBy(x => x.Rank).SelectMany(y => y.Take(1)).OrderBy(y => y.Rank).Take(5).ToList();
-                        foreach (var item in OrderedHostList)
+                        foreach (var item in Model.TopHostListModels)
                         {
                             <div class="item" style="width:128px">
                                 <div class=" relative flex-none" draggable="true" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">

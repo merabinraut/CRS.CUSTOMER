@@ -1,4 +1,5 @@
 ﻿using CRS.CUSTOMER.REPOSITORY.NotificationManagement;
+using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.NotificationManagement;
 using System.Collections.Generic;
 
@@ -17,6 +18,16 @@ namespace CRS.CUSTOMER.BUSINESS.NotificationManagement
         public List<NotificationDetailCommon> GetNotification(string AgentId)
         {
             return _repo.GetNotification(AgentId);
+        }
+
+        public bool HasUnReadNotification(string AgentId)
+        {
+            return _repo.HasUnReadNotification(AgentId);
+        }
+
+        public CommonDbResponse ManageNotificationReadStatus(Common Request)
+        {
+            return _repo.ManageNotificationReadStatus(Request);
         }
     }
 }

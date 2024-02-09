@@ -1312,6 +1312,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mark all as read.
+        /// </summary>
+        public static string MarkAllAsRead {
+            get {
+                return ResourceManager.GetString("MarkAllAsRead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mark This.
         /// </summary>
         public static string MarkThis {

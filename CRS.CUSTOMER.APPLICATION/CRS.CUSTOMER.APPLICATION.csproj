@@ -646,7 +646,7 @@
     <Content Include="Views\ErrorManagement\Error_404.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\ReviewManagement\ReviewList.cshtml" />
-    <Content Include="Views\LocationManagement\ViewHostDetail.cshtml" />
+    <Content Include="Views\LocationManagement\ViewHostDetail_bk.cshtml" />
     <Content Include="Views\Footer\customervoice.cshtml" />
     <Content Include="Views\Shared\_FooterLayout.cshtml" />
     <Content Include="Views\Footer\faq.cshtml" />
@@ -655,6 +655,7 @@
     <Content Include="Views\Footer\privacypolicy.cshtml" />
     <Content Include="Views\Home\ForgotPassword_SuccessView.cshtml" />
     <Content Include="Views\Home\NewRegistration_SuccessView.cshtml" />
+    <Content Include="Views\LocationManagement\ViewHostDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
