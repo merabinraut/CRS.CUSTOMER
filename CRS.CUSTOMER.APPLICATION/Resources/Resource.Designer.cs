@@ -241,6 +241,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Birth Place.
+        /// </summary>
+        public static string BirthPlace {
+            get {
+                return ResourceManager.GetString("BirthPlace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Blood Type.
         /// </summary>
         public static string Blood_Type {
