@@ -463,7 +463,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     var otpModel = new RegistrationModel()
                     {
                         AgentId = dbresp.Extra1.EncryptParameter(),
-                        MobileNumber = model.MobileNo
+                        MobileNumber = model.MobileNo,
+                        NickName = dbresp.Extra3,
                     };
                     Session["exptime"] = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");//DateTime.Parse(dbresp.Extra2.ToString());
                     //Session["exptime"] = DateTime.Parse(starttime.ToString());
@@ -512,7 +513,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("SetNewPassword", "Home", new { AgentId = dbResponse.Extra1.EncryptParameter(), MobileNumber = Model.MobileNumber.EncryptParameter(), UserID = dbResponse.Extra3.EncryptParameter() });
+                    return RedirectToAction("SetNewPassword", "Home", new { AgentId = dbResponse.Extra1.EncryptParameter(), MobileNumber = Model.MobileNumber.EncryptParameter(), UserID = dbResponse.Extra3.EncryptParameter(), NickName = Model.NickName });
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -589,7 +590,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Set new Password
         [HttpGet]
-        public ActionResult SetNewPassword(string AgentId, string MobileNumber, string UserID)
+        public ActionResult SetNewPassword(string AgentId, string MobileNumber, string UserID, string NickName)
         {
             var aId = !string.IsNullOrEmpty(AgentId) ? AgentId.DecryptParameter() : null;
             var mn = !string.IsNullOrEmpty(MobileNumber) ? MobileNumber.DecryptParameter() : null;
@@ -608,7 +609,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 AgentId = AgentId,
                 UserId = UserID,
-                MobileNumber = MobileNumber
+                MobileNumber = MobileNumber,
+                NickName = NickName,
             };
             return View(response);
         }
@@ -655,6 +657,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.UserId = Common.UserId.DecryptParameter();
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
+                ViewBag.NickName = Model.NickName;
                 var dbResponse = _buss.SetNewPassword(Common);
                 if (dbResponse.Code == 0)
                 {
