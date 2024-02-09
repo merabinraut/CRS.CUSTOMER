@@ -227,7 +227,7 @@
             border-radius: 4px;
             background: #FFEDED;
             margin-top: 16px;
-            display: none;
+            /*display: none;*/
         }
 
         .activated {
@@ -275,14 +275,16 @@
                 @*1 分 59 秒*@
             </div>
             <!-- for waiting message -->
-            <div class="flex p-2 gap-2 items-center waitingMessageWrapper" id="waitingMessageWrapper">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M8 1.5C4.416 1.5 1.5 4.416 1.5 8C1.5 11.584 4.416 14.5 8 14.5C11.584 14.5 14.5 11.584 14.5 8C14.5 4.416 11.584 1.5 8 1.5ZM8 2.5C8.72252 2.49912 9.43811 2.64079 10.1058 2.91688C10.7735 3.19297 11.3801 3.59806 11.891 4.10896C12.4019 4.61985 12.807 5.22652 13.0831 5.8942C13.3592 6.56189 13.5009 7.27748 13.5 8C13.5009 8.72252 13.3592 9.43811 13.0831 10.1058C12.807 10.7735 12.4019 11.3801 11.891 11.891C11.3801 12.4019 10.7735 12.807 10.1058 13.0831C9.43811 13.3592 8.72252 13.5009 8 13.5C7.27748 13.5009 6.56189 13.3592 5.8942 13.0831C5.22652 12.807 4.61985 12.4019 4.10896 11.891C3.59806 11.3801 3.19297 10.7735 2.91688 10.1058C2.64079 9.43811 2.49912 8.72252 2.5 8C2.49912 7.27748 2.64079 6.56189 2.91688 5.8942C3.19297 5.22652 3.59806 4.61985 4.10896 4.10896C4.61985 3.59806 5.22652 3.19297 5.8942 2.91688C6.56189 2.64079 7.27748 2.49912 8 2.5ZM7.5 5V6H8.5V5H7.5ZM7.5 7V11H8.5V7H7.5Z"
-                          fill="black" />
-                </svg>
-                <p class="waitingMessage">
-                    2分まで、認証コードを再送信できません。
-                </p>
+            <div id="waitingMessageWrapper">
+                <div class="flex p-2 gap-2 items-center waitingMessageWrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 1.5C4.416 1.5 1.5 4.416 1.5 8C1.5 11.584 4.416 14.5 8 14.5C11.584 14.5 14.5 11.584 14.5 8C14.5 4.416 11.584 1.5 8 1.5ZM8 2.5C8.72252 2.49912 9.43811 2.64079 10.1058 2.91688C10.7735 3.19297 11.3801 3.59806 11.891 4.10896C12.4019 4.61985 12.807 5.22652 13.0831 5.8942C13.3592 6.56189 13.5009 7.27748 13.5 8C13.5009 8.72252 13.3592 9.43811 13.0831 10.1058C12.807 10.7735 12.4019 11.3801 11.891 11.891C11.3801 12.4019 10.7735 12.807 10.1058 13.0831C9.43811 13.3592 8.72252 13.5009 8 13.5C7.27748 13.5009 6.56189 13.3592 5.8942 13.0831C5.22652 12.807 4.61985 12.4019 4.10896 11.891C3.59806 11.3801 3.19297 10.7735 2.91688 10.1058C2.64079 9.43811 2.49912 8.72252 2.5 8C2.49912 7.27748 2.64079 6.56189 2.91688 5.8942C3.19297 5.22652 3.59806 4.61985 4.10896 4.10896C4.61985 3.59806 5.22652 3.19297 5.8942 2.91688C6.56189 2.64079 7.27748 2.49912 8 2.5ZM7.5 5V6H8.5V5H7.5ZM7.5 7V11H8.5V7H7.5Z"
+                              fill="black" />
+                    </svg>
+                    <p class="waitingMessage">
+                        2分まで、認証コードを再送信できません。
+                    </p>
+                </div>
             </div>
             @using (Html.BeginForm("VerifyOTP", "Home", FormMethod.Post, new { @role = "form" }))
             {
@@ -367,90 +369,66 @@
   });
     </script>
     <script src="~/Content/validation.js"></script>
+
     <script>
         var isValid = false;
         $(function () {
-         var myDiv = document.getElementById("resend-verification-code");
-         myDiv.style.display = "block";
-         var today = new Date();
-         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var myDiv = document.getElementById("resend-verification-code");
+            myDiv.style.display = "block";
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             var dateTime = date + ' ' + time;
             isValid = false;
-         countdown($("#exptime").val());
-             @*$("#resend-verification-code").click(function (e) {
-                 e.preventDefault();
-                 this.style.display = "none";
-                 //$(this).addClass('disable-link');
-                 /*$("#resend-div").addClass('resend-div');*/
-                 var RequestVerificationToken = $('input[name="__RequestVerificationToken"]').val();
-                 var MobileNo = $('input[name="MobileNumber"]').val();
-                 var AgentId = $('input[name="AgentId"]').val();
-                 $.ajax({
-                     type: "POST",
-                     url: '@Url.Action("ResendOTP", "Home")',
-                     data: {
-                         '__RequestVerificationToken': RequestVerificationToken, 'MobileNumber': MobileNo, AgentId
-},
-                     success: function (result) {
-                         /*location.reload();*/
-                         if (result.code == "0") {
-                             $("#exptime").val(result.ExpTime);
-                             countdown(result.ExpTime);
-                             $("#resend-div-class").hide();
-                             toastr.success(result.message);
-                         }
-                         else {
-                             toastr.info(result.message);
-                         }
-                     },
-                     error: function (error) {
-                     }
-                 })
-             });*@
+            countdown($("#exptime").val());
+            var divElement = document.getElementById("resend-verification-code");
+            divElement.style.pointerEvents = "none";
+            divElement.style.opacity = 0.5; 
+            var buttonsAndInputs = divElement.getElementsByTagName("button");
+            for (var i = 0; i < buttonsAndInputs.length; i++) {
+                buttonsAndInputs[i].disabled = true;
+            }
         });
         function countdown(endtime) {
-             // Set the date we're counting down to
-             var countDownDate = new Date(endtime).getTime();
-             // Update the count down every 1 second
-             var x = setInterval(function () {
-                 // Get today's date and time
-                 var now = new Date().getTime();
-                 // Find the distance between now and the count down date
-                 var distance = countDownDate - now;
-                 // Time calculations for days, hours, minutes and seconds
-                 var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                 var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                 // Display the result in the element with id="demo"
-                 document.getElementById("otp-code-timer").innerHTML = minutes + "分 " + seconds + "秒 ";
-                 // If the count down is finished, write some text
-                 if (distance < 0) {
-                     clearInterval(x);
-                     isValid = true;
-                     $('#waitingMessageWrapper').hide();
-                     //$("#resend-div").removeClass('resend-div');
-                     //$("#resend-verification-code").removeClass('disable-link');
-                     var myDiv = document.getElementById("resend-verification-code");
-                     myDiv.style.display = "block";
-                     document.getElementById("otp-code-timer").innerHTML = "あなたの認証コードは期限切れです。再送してください。";//"Your code is expired. Please resend.";
-                 }
-             }, 1000);
-         }
+            var countDownDate = new Date(endtime).getTime();
+            var x = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("otp-code-timer").innerHTML = minutes + "分 " + seconds + "秒 ";
+                if (distance < 0) {
+                    clearInterval(x);
+                    isValid = true;
+                    var divElement = document.getElementById("resend-verification-code");
+                    divElement.style.pointerEvents = "auto";
+                    divElement.style.opacity = 1; 
+                    var buttonsAndInputs = divElement.getElementsByTagName("button");
+                    for (var i = 0; i < buttonsAndInputs.length; i++) {
+                        buttonsAndInputs[i].disabled = false;
+                    }
+                    $('#waitingMessageWrapper').hide();
+                    var myDiv = document.getElementById("resend-verification-code");
+                    myDiv.style.display = "block";
+                    //document.getElementById("otp-code-timer").innerHTML = "あなたの認証コードは期限切れです。再送してください。";//"Your code is expired. Please resend.";
+                }
+            }, 1000);
+        }
     </script>
     <script>
         $("#resend-verification-code").click(function (e) {
             $('#waitingMessageWrapper').show();
-            setTimeout(function () {
-                // Reload the current page
-                $('#waitingMessageWrapper').hide();
-            }, 5000);
+            var divElement = document.getElementById("resend-verification-code");
+            divElement.style.pointerEvents = "none";
+            divElement.style.opacity = 0.5; 
+            var buttonsAndInputs = divElement.getElementsByTagName("button");
+            for (var i = 0; i < buttonsAndInputs.length; i++) {
+                buttonsAndInputs[i].disabled = true;
+            }
             if (isValid == true) {
                 e.preventDefault();
-               // this.style.display = "none";
-                //$(this).addClass('disable-link');
-                /*$("#resend-div").addClass('resend-div');*/
                 var RequestVerificationToken = $('input[name="__RequestVerificationToken"]').val();
                 var MobileNo = $('input[name="MobileNumber"]').val();
                 var AgentId = $('input[name="AgentId"]').val();
@@ -461,7 +439,6 @@
                         '__RequestVerificationToken': RequestVerificationToken, 'MobileNumber': MobileNo, AgentId
                     },
                     success: function (result) {
-                        /*location.reload();*/
                         if (result.code == "0") {
                             $("#exptime").val(result.ExpTime);
                             countdown(result.ExpTime);
@@ -478,6 +455,9 @@
             }
              });
 
+    </script>
+    <script>
+        $('#waitingMessageWrapper').hide();
     </script>
 </body>
 </html>
