@@ -243,7 +243,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     if (!ResponseModel.HostLine.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostLine = "https://" + ResponseModel.HostLine;
                 }
-                ResponseModel.HostGalleryImageList.Select(x => FileLocationPath + x).ToList();
+                for (int i = 0; i < ResponseModel.HostGalleryImageList.Count; i++) ResponseModel.HostGalleryImageList[i] = FileLocationPath + ResponseModel.HostGalleryImageList[i];
                 ResponseModel.HostIdentityDetailsModel.ForEach(x => x.Label = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.LabelEnglish : x.LabelJapanese);
                 return View(ResponseModel);
             }
