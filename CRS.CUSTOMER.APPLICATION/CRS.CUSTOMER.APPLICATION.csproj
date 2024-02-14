@@ -280,6 +280,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.Ja.resx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ReservationHistoryManagementV2Controller.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\userupload\ClubManagement\" />
@@ -288,6 +289,7 @@
     <Folder Include="Views\LogManagement\" />
     <Folder Include="Views\RecommendedClubHost\" />
     <Folder Include="Views\UserManagement\" />
+    <Folder Include="Views\ReservationHistoryManagementV2\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\artchart\anychart.min.css" />
@@ -571,6 +573,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\ReservationHistoryManagementV2\ReservationHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Resource.Ja.resx">
@@ -696,6 +699,11 @@
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
