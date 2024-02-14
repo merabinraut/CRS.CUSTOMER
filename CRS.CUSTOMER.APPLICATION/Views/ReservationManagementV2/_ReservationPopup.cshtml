@@ -1,10 +1,10 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2.InitiateClubReservationCommonModel
-<div class="">
-    <button class="border p-4" type="button" data-drawer-target="drawer-date" data-drawer-show="drawer-date"
-            data-drawer-placement="bottom" aria-controls="drawer-date">
-        date
-    </button>
-</div>
+@*<div class="">
+        <button class="border p-4" type="button" data-drawer-target="drawer-date" data-drawer-show="drawer-date"
+                data-drawer-placement="bottom" aria-controls="drawer-date">
+            date
+        </button>
+    </div>*@
 
 <!-- drawer component -->
 @*<div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform "
@@ -15,7 +15,8 @@
     " tabindex="-1" aria-labelledby="drawer-bottom-label"> -->
     <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
         <div class="text-center text-white mb-2 text-2xl">
-            <div data-drawer-hide="drawer-date" aria-controls="drawer-date">
+            @*<div data-drawer-hide="drawer-date" aria-controls="drawer-date">*@
+            <div onclick="CloseInitiatedClubReservationFunction();">
                 <i class="fa-solid fa-chevron-down"></i>
             </div>
         </div>
@@ -36,7 +37,7 @@
                         <!----------------------------------------------------------------------------------------------------------------->
                         <div class="relative">
                             <div class=" showTimeList h-[32px] w-[72px] px-3 py-1 bg-[#F6F6F6] rounded-[4px] text-[#666] text-xs flex justify-between items-center">
-                                <div id="selected-time-id" data-custom-value="@Model.ClubReservableTimeModel[0].Time">
+                                <div id="selected-time-id">
                                     @Model.ClubReservableTimeModel[0].Time
                                 </div>
                                 <div>
@@ -81,7 +82,7 @@
                         <!----------------------------------------------People--------------------------------------------------------------->
                         <div class="relative">
                             <div class=" showPeopleList cursor-pointer h-[32px] w-[72px] px-3 py-1 bg-[#F6F6F6] rounded-[4px] text-[#666] text-xs flex justify-between items-center">
-                                <div id="selected-noofpeople-id" data-custom-value="1">
+                                <div id="selected-noofpeople-id">
                                     1
                                 </div>
                                 <div>
@@ -117,7 +118,7 @@
             </div>
             <div class="flex items-center  gap-[6px] py-[11px] px-4"
                  style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
-                <button class="btn ">
+                <button class="btn" type="button" onclick="CloseInitiatedClubReservationFunction();">
                     キャンセル
                 </button>
                 <button class="btn btn-primary">
@@ -126,8 +127,13 @@
                     </a>
                 </button>
             </div>
-
         </div>
-
     </div>
 </div>
+
+<form action="/ReservationManagementV2/InitiateClubReservationProcess" method="post" id="club-reservation-id">
+    <input type="text" id="club-id" name="ClubId" value="@Model.ClubId" required hidden />
+    <input type="text" id="date-id" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" required hidden />
+    <input type="text" id="time-id" name="Time" value="@Model.ClubReservableTimeModel[0].Time" required hidden />
+    <input type="text" id="noofpeople-id" name="NoOfPeople" value="1" required hidden />
+</form>

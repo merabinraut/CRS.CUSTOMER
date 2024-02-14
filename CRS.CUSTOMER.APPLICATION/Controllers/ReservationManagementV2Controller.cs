@@ -27,6 +27,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (dbResponse.Code == ResponseCode.Success)
             {
                 ResponseModel = dbResponse.MapObject<InitiateClubReservationCommonModel>();
+                ResponseModel.ClubId = ClubId;
                 var partialViewString = RenderHelper.RenderPartialViewToString(this, "_ReservationPopup", ResponseModel);
                 responseData["Code"] = 0;
                 responseData["Message"] = "Success";
@@ -43,5 +44,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult Plan(string ClubId, string Date, string Time, string NoOfPeople)
+        {
+
+        }
     }
 }

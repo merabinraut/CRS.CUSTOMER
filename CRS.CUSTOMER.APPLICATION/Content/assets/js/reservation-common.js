@@ -9,7 +9,6 @@
             SelectedDate
         },
         success: function (data) {
-
             if (!data || data.Code !== 0) {
                 toastr.info(data?.Message);
                 return false;
@@ -61,10 +60,9 @@
                     },
                     onSelect: function (dateText, inst) {
                         inst.inline = true; // Set datepicker to inline mode
-                        console.log("Selected Date: " + dateText); // Log the selected date
+                        $('#date-id').val(dateText.trim());
                     }
                 });
-
 
                 // Open the calendar by default
                 $("#datepicker").datepicker("show");
@@ -126,8 +124,7 @@ function initTimeFunction() {
                 const timeValue = event.currentTarget.querySelector('.timeValue').textContent;
                 var selectedTimeDiv = document.getElementById("selected-time-id");
                 selectedTimeDiv.innerText = timeValue.trim();
-                var customValue = selectedTimeDiv.getAttribute("data-custom-value");
-                selectedTimeDiv.setAttribute("data-custom-value", timeValue.trim());
+                $('#time-id').val(timeValue.trim());
             }
         });
     });
@@ -138,7 +135,6 @@ function initTimeFunction() {
 function initPeopleFunction() {
     var showPeopleLists = document.querySelectorAll('.showPeopleList');
     showPeopleLists.forEach(function (showPeopleList) {
-
         showPeopleList.addEventListener('click', function (event) {
             var timeList = showPeopleList.nextElementSibling;
             if (timeList.style.display === "none" || timeList.style.display === "") {
@@ -168,18 +164,21 @@ function initPeopleFunction() {
                 item.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
-
             // Store the value if timeList has active class
             if (event.currentTarget.classList.contains('active')) {
                 debugger;
                 const peopleValue = event.currentTarget.querySelector('.peopleValue').textContent;
-                console.log('Time value:', peopleValue.trim());
+                //console.log('Time value:', peopleValue.trim());
                 var selectedPeopleDiv = document.getElementById("selected-noofpeople-id");
                 selectedPeopleDiv.innerText = peopleValue.trim();
-                var customValue = selectedPeopleDiv.getAttribute("data-custom-value");
-                selectedPeopleDiv.setAttribute("data-custom-value", peopleValue.trim());
+                $('#noofpeople-id').val(peopleValue.trim());
             }
         });
     });
 }
 /////////////////////////////////////////////////////////////////////// People JS ///////////////////////////////////////////////////////////////////////
+
+function CloseInitiatedClubReservationFunction() {
+    var element = document.getElementById('drawer-date');
+    element.classList.add('translate-y-full');
+}
