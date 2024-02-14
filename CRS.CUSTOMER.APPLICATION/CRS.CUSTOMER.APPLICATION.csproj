@@ -226,6 +226,8 @@
     <Compile Include="Controllers\ProfileManagementController.cs" />
     <Compile Include="Controllers\RecommendedClubHostController.cs" />
     <Compile Include="Controllers\ReservationHistoryManagementController.cs" />
+    <Compile Include="Controllers\ReservationManagementController.cs" />
+    <Compile Include="Controllers\ReservationManagementV2Controller.cs" />
     <Compile Include="Controllers\ReviewManagementController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="CustomHelpers\CustomHtmlHelpers.cs" />
@@ -235,6 +237,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\RenderHelper.cs" />
     <Compile Include="Library\ApplicationUtilities.cs" />
     <Compile Include="Library\LanguageManag.cs" />
     <Compile Include="Library\ProjectGrid.cs" />
@@ -259,6 +262,7 @@
     <Compile Include="Models\ProfileManagement\ChangePasswordModel.cs" />
     <Compile Include="Models\ProfileManagement\UserProfileModel.cs" />
     <Compile Include="Models\ReservationHistory\ReservationHistoryModel.cs" />
+    <Compile Include="Models\ReservationManagementV2\InitiateClubReservationModel.cs" />
     <Compile Include="Models\ReservationManagement\ReservationDetailModel.cs" />
     <Compile Include="Models\ReservationManagement\ReservationPlanModel.cs" />
     <Compile Include="Models\ReviewManagement\CustomerReviewedDetailModel.cs" />
@@ -287,6 +291,7 @@
     <Folder Include="Models\UserManagement\" />
     <Folder Include="Views\LogManagement\" />
     <Folder Include="Views\RecommendedClubHost\" />
+    <Folder Include="Views\ReservationManagement\" />
     <Folder Include="Views\UserManagement\" />
   </ItemGroup>
   <ItemGroup>
@@ -473,6 +478,7 @@
     <Content Include="Content\assets\js\modal.js" />
     <Content Include="Content\assets\js\owl.carousel.js" />
     <Content Include="Content\assets\js\owl.carousel.min.js" />
+    <Content Include="Content\assets\js\reservation-common.js" />
     <Content Include="Content\assets\js\tabs.js" />
     <Content Include="Content\assets\js\toogle.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -653,6 +659,7 @@
     <Content Include="Views\Home\ForgotPassword_SuccessView.cshtml" />
     <Content Include="Views\Home\NewRegistration_SuccessView.cshtml" />
     <Content Include="Views\LocationManagement\ViewHostDetail.cshtml" />
+    <Content Include="Views\ReservationManagementV2\_ReservationPopup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
