@@ -1,8 +1,32 @@
-﻿using System;
-namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
+﻿using System.Collections.Generic;
+
+namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
 {
-    public class ReservationHistoryV2ModelCommon
-    {
+    public class ReservationCommonModel
+	{
+		public List<ReservationHistoryV2Model> GetReservedList { get; set; }
+		public List<VisitedHistoryModel> GetVisitedHistoryList { get; set; }
+		public List<CancelledHistoryModel> GetCancelledHistoryList { get; set; }
+	}
+	public class ReservationHistoryV2Model
+	{
+		public string ReservationId { get; set; }
+		public string ClubId { get; set; }
+		public string ReservedDate { get; set; }
+		public string VisitedDate { get; set; }
+		public string VisitTime { get; set; }
+		public string InvoiceId { get; set; }
+		public string TransactionStatus { get; set; }
+		public string ClubNameEng { get; set; }
+		public string ClubNameJp { get; set; }
+		public string Price { get; set; }
+		public string CustomerId { get; set; }
+		public string ClubLogo { get; set; }
+		public string LocationURL { get; set; }
+
+	}
+	public class VisitedHistoryModel
+	{
         public string ReservationId { get; set; }
         public string ClubId { get; set; }
         public string ReservedDate { get; set; }
@@ -17,23 +41,7 @@ namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
         public string ClubLogo { get; set; }
         public string LocationURL { get; set; }
     }
-    public class VisitedHistoryModelCommon
-    {
-        public string ReservationId { get; set; }
-        public string ClubId { get; set; }
-        public string ReservedDate { get; set; }
-        public string VisitedDate { get; set; }
-        public string VisitTime { get; set; }
-        public string InvoiceId { get; set; }
-        public string TransactionStatus { get; set; }
-        public string ClubNameEng { get; set; }
-        public string ClubNameJp { get; set; }
-        public string Price { get; set; }
-        public string CustomerId { get; set; }
-        public string ClubLogo { get; set; }
-        public string LocationURL { get; set; }
-    }
-    public class CancelledHistoryModelCommon
+    public class CancelledHistoryModel
     {
         public string ReservationId { get; set; }
         public string ClubId { get; set; }

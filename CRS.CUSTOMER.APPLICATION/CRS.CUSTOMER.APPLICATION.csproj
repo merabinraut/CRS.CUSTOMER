@@ -281,6 +281,7 @@
       <DependentUpon>Resource.Ja.resx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ReservationHistoryManagementV2Controller.cs" />
+    <Compile Include="Models\ReservationHistoryV2\ReservationHistoryV2Model.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\userupload\ClubManagement\" />
@@ -290,6 +291,7 @@
     <Folder Include="Views\RecommendedClubHost\" />
     <Folder Include="Views\UserManagement\" />
     <Folder Include="Views\ReservationHistoryManagementV2\" />
+    <Folder Include="Models\ReservationHistoryV2\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\artchart\anychart.min.css" />
