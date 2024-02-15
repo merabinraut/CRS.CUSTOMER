@@ -22,6 +22,11 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
             return _repo.GetCancelledHistory(customerId);
         }
 
+        public ReservationHistoryDetailModelCommon GetReservationHistoryDetail(string customerId, string reservationId)
+        {
+            return _repo.GetReservationHistoryDetail(customerId, reservationId);
+        }
+
         public List<ReservationHistoryV2ModelCommon>GetReservedList(string customerId)
         {
 			return _repo.GetReservedList(customerId);

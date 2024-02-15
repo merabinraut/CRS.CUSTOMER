@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "View History Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="flex items-center border-b-[2px] border-t-[#C8B477] sticky top-0 bg-white z-[10] relative px-4 py-[10px] mb-4 h-[44px]">
+    <div class="flex gap-2 items-center absolute top-[9px] left-4 text-sm text-[#292F33]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
+            <path d="M15.2352 3.24084C14.786 2.79167 14.0618 2.79167 13.6127 3.24084L5.99518 10.8583C5.63768 11.2158 5.63768 11.7933 5.99518 12.1508L13.6127 19.7683C14.0618 20.2175 14.786 20.2175 15.2352 19.7683C15.6843 19.3192 15.6843 18.595 15.2352 18.1458L8.59851 11.5L15.2443 4.85417C15.6843 4.41417 15.6843 3.68084 15.2352 3.24084Z"
+                  fill="#BCB08A" />
+        </svg> 閉じる
+    </div>
+    <div class="text-center text-sm w-full font-[700] text-[#333] ">予約確認・変更…予約一覧</div>
+</div>
+<div class="flex flex-col justify-between h-screen relative pb-8">
+    <div>
+        <!-- header end  -->
+        <div style="height: calc(100vh - 140px);" class="no-scrollbar overflow-y-scroll pb-4 ">
+            <!-- image  -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                        <img src="/Content/assets/images/demo_image_2.jpeg"
+                             class="h-[48px] w-[48px] object-cover rounded-full border-[2px] border-[#EAEAEA]" />
+                    </div>
+                    <div>
+                        <div class='text-sm font-bold text-charcolBlack '>SINCE YOU HONTEN</div>
+                        <div class='text-xs  text-[#404040] '> シンス ユー本店</div>
+                        <div class="text-[10px] text-[#A09E91] flex gap-[2px] items-center">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            歌舞伎町
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Selected host -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex flex-col gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        選択中のホスト
+                        <span class="text-primary cursor-pointer">
+                            <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                        </span>
+                    </div>
+                    <div class="flex -space-x-2  items-center relative">
+
+                        <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                             src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                             alt="">
+                        <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                             src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+                             alt="">
+                        <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                             alt="">
+                        <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                             alt="">                        
+                    </div>
+                </div>
+            </div>
+            <!-- Reservation details -->
+            <div class="border border-y-[1px] border-[#E3E3E3]  bg-[#fff] pl-[14px] pr-[28px] py-3">
+                <div class="flex justify-between items-center text-[13px] text-[#404040] font-bold pb-2 ">
+                    ご予約内容
+                    <span class="text-primary cursor-pointer">
+                        <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                    </span>
+                </div>
+                <div class="text-[12px] text=[#333] pb-[2px]">
+                    来店日時：2024年1月10日(水) 19:00
+                </div>
+                <div class="text-[12px] text=[#333]">
+                    来店人数：2名
+                </div>
+            </div>
+            <!-- プラン内容 -->
+            <div class="px-[14px] py-3 ">
+                <div class="text-[#404040] text-[13px] font-bold pb-2">
+                    プラン内容
+                </div>
+                <div class="flex flex-col p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        <div class="flex items-center gap-2">
+                            <div class="text-[13px] text-[#404040] font-bold leading-[24px]">
+                                ノーマルプラン
+                            </div>
+                            <span class="popularity">
+                                <i class="las la-crown linear-gradient-text"></i>
+                                <div class="linear-gradient-text tracking-[1.26px] pl-1">人気</div>
+                            </span>
+                        </div>
+                        <span class="text-primary cursor-pointer">
+                            <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                        </span>
+                    </div>
+                    <div>
+                        <div class="text-[#D75A8B] font-futura pb-1">
+                            ¥1,000
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-1">
+                                <div class="text-[#D17979] text-[11px]">
+                                    <i class="las la-clock"></i>
+                                </div>
+                                <div class="text-[11px] text-[#282828] font-futura">
+                                    50分制
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="text-[#D17979] text-[11px]">
+                                    <i class="las la-glass-cheers"></i>
+                                </div>
+                                <div class="text-[11px] text-[#282828] font-futura">
+                                    飲み放題
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="text-[#D17979] text-[11px]">
+                                    <i class="las la-user"></i>
+                                </div>
+                                <div class="text-[11px] text-[#282828] font-futura">
+                                    場内指名1名まで
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-[37px] rounded-[5px] mt-[9px] border border-[#E3AB00] text-[#E3AB00] font-bold flex justify-center items-center text-sm gap-[2px]">
+                    <i class="las la-coins text-[18px]"></i> 500ポイント獲得できます！
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

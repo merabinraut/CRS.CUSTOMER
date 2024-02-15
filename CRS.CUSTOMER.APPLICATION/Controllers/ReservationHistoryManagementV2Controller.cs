@@ -73,6 +73,16 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 			responseInfo.GetAllHistoryList.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
 			return View(responseInfo);
 		}
+		public ActionResult ViewHistoryDetail(string ReservationId="")
+		{
+			string CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
+			string reservationId = "";
+			if (!string.IsNullOrEmpty(ReservationId)) reservationId = ReservationId.DecryptParameter();
+			ReservationHistoryDetailModel responseinfo = new ReservationHistoryDetailModel();
+			var dbResponseInfo = _buss.GetReservationHistoryDetail(CustomerId, reservationId);
+			responseinfo = dbResponseInfo.MapObject<ReservationHistoryDetailModel>();
+			return View(responseinfo);
+		}
 	}
 }
 

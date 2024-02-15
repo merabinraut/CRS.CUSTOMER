@@ -7,6 +7,7 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
     {
         List<AllHistoryModelCommon> GetAllHistoryList(string customerId);
         List<CancelledHistoryModelCommon> GetCancelledHistory(string customerId);
+        ReservationHistoryDetailModelCommon GetReservationHistoryDetail(string customerId, string reservationId);
         List<ReservationHistoryV2ModelCommon> GetReservedList(string customerId);
         List<VisitedHistoryModelCommon> GetVisitedHistoryList(string customerId);
     }

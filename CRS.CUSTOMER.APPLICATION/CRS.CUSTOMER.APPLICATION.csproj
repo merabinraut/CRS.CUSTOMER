@@ -576,6 +576,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\ReservationHistoryManagementV2\ReservationHistory.cshtml" />
+    <Content Include="Views\ReservationHistoryManagementV2\ViewHistoryDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Resource.Ja.resx">
