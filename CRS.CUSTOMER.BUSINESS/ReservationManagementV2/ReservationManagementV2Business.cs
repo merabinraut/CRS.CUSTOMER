@@ -12,6 +12,16 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
 			_repo = repo;
 		}
 
+        public List<AllHistoryModelCommon> GetAllHistoryList(string customerId)
+        {
+            return _repo.GetAllHistoryList(customerId);
+        }
+
+        public List<CancelledHistoryModelCommon> GetCancelledHistory(string customerId)
+        {
+            return _repo.GetCancelledHistory(customerId);
+        }
+
         public List<ReservationHistoryV2ModelCommon>GetReservedList(string customerId)
         {
 			return _repo.GetReservedList(customerId);
