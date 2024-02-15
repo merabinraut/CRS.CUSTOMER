@@ -262,7 +262,11 @@
     <Compile Include="Models\ProfileManagement\ChangePasswordModel.cs" />
     <Compile Include="Models\ProfileManagement\UserProfileModel.cs" />
     <Compile Include="Models\ReservationHistory\ReservationHistoryModel.cs" />
+    <Compile Include="Models\ReservationManagementV2\ClubBasicDetailModel.cs" />
+    <Compile Include="Models\ReservationManagementV2\ConfirmationModel.cs" />
+    <Compile Include="Models\ReservationManagementV2\HostV2Model.cs" />
     <Compile Include="Models\ReservationManagementV2\InitiateClubReservationModel.cs" />
+    <Compile Include="Models\ReservationManagementV2\PlanV2Model.cs" />
     <Compile Include="Models\ReservationManagement\ReservationDetailModel.cs" />
     <Compile Include="Models\ReservationManagement\ReservationPlanModel.cs" />
     <Compile Include="Models\ReviewManagement\CustomerReviewedDetailModel.cs" />
@@ -660,6 +664,12 @@
     <Content Include="Views\Home\NewRegistration_SuccessView.cshtml" />
     <Content Include="Views\LocationManagement\ViewHostDetail.cshtml" />
     <Content Include="Views\ReservationManagementV2\_ReservationPopup.cshtml" />
+    <Content Include="Views\ReservationManagementV2\Plan.cshtml" />
+    <Content Include="Views\Shared\_Reservation-Layout-V2.cshtml" />
+    <Content Include="Views\ReservationManagementV2\Host.cshtml" />
+    <Content Include="Views\ReservationManagementV2\Billing.cshtml" />
+    <Content Include="Views\ReservationManagementV2\Success.cshtml" />
+    <Content Include="Views\ReservationManagementV2\Confirmation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

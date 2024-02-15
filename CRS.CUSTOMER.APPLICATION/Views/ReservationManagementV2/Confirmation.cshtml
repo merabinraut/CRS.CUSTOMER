@@ -1,0 +1,229 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2.ConfirmationViewModel
+@{
+    ViewBag.Title = "Confirmation";
+    Layout = "~/Views/Shared/_Reservation-Layout-V2.cshtml";
+    var ClubDetailModel = Model.ClubDetailModel;
+}
+
+<div class="flex flex-col justify-between h-screen relative pb-8">
+    <div>
+        <!-- header  -->
+        <div class="flex items-center justify-between  pt-[13px] px-[14px] pb-[9px] border-b border-b-[#DCDCDC]">
+            <div class="flex items-center gap-[10px] ">
+                <div class="circle-border circle-third-quater ">
+                    <div class="text tracking-tight	">3/<span>4</span></div>
+                </div>
+                <div>
+                    <div class="text-[13px] font-bold pb-[5px]">予約内容の確認</div>
+                    <div class="text-[11px] text-[#7E6D5E]">ご予約の内容を確認してください</div>
+                </div>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                    <path d="M5.86328 4.69727L4.69531 5.86523L11.8301 13L4.69531 20.1348L5.86328 21.3027L12.998 14.168L20.1328 21.3027L21.3008 20.1348L14.166 13L21.3008 5.86523L20.1328 4.69727L12.998 11.832L5.86328 4.69727Z"
+                          fill="#BCB08A" />
+                </svg>
+            </div>
+        </div>
+        <!-- header end  -->
+        <div style="height: calc(100vh - 140px);" class="no-scrollbar overflow-y-scroll pb-4 ">
+            <!-- image  -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                        @if (!string.IsNullOrEmpty(Model.ClubDetailModel.ClubLogo))
+                        {
+                            <img src="@Model.ClubDetailModel.ClubLogo"
+                                 class="h-[48px] w-[48px] object-cover rounded-full border-[2px] border-[#EAEAEA]" alt="image" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                 class="h-[48px] w-[48px] object-cover rounded-full border-[2px] border-[#EAEAEA]" alt="image" />
+                        }
+                    </div>
+                    <div>
+                        <div class='text-sm font-bold text-charcolBlack '>@Model.ClubDetailModel.ClubNameEnglish</div>
+                        <div class='text-xs  text-[#404040] '>@Model.ClubDetailModel.ClubNameJapanese</div>
+                        <div class="text-[10px] text-[#A09E91] flex gap-[2px] items-center">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            @Model.ClubDetailModel.ClubLocationName
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Selected host -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex flex-col gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        選択中のホスト
+                        <span class="text-primary cursor-pointer">
+                            <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                        </span>
+                    </div>
+
+                    <div class="flex -space-x-2  items-center relative">
+                        @foreach (var item in Model.HostListModel)
+                        {
+                            if (!string.IsNullOrEmpty(item.HostImage))
+                            {
+                                <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                                     src="@item.HostImage"
+                                     alt="image">
+                            }
+                            else
+                            {
+                                <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                                     src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     alt="image">
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- Reservation details -->
+            <div class="border border-y-[1px] border-[#E3E3E3]  bg-[#fff] pl-[14px] pr-[28px] py-3">
+                <div class="flex justify-between items-center text-[13px] text-[#404040] font-bold pb-2 ">
+                    ご予約内容
+                    <span class="text-primary cursor-pointer">
+                        <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                    </span>
+                </div>
+                <div class="text-[12px] text=[#333] pb-[2px]">
+                    来店日時：<span id="visitdatetime-id">2024年1月10日(水) 19:00</span>
+                </div>
+                <div class="text-[12px] text=[#333]">
+                    来店人数：<span id="noofvisitor-id">2名</span>
+                </div>
+            </div>
+            <!-- プラン内容 -->
+            <div class="px-[14px] py-3 ">
+                <div class="text-[#404040] text-[13px] font-bold pb-2">
+                    プラン内容
+                </div>
+                <div class="flex flex-col p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        <div class="flex items-center gap-2">
+                            <div class="text-[13px] text-[#404040] font-bold leading-[24px]" id="PlanName-Id">
+                            </div>
+                            <span class="popularity">
+                                <i class="las la-crown linear-gradient-text"></i>
+                                <div class="linear-gradient-text tracking-[1.26px] pl-1">人気</div>
+                            </span>
+
+                        </div>
+                        <span class="text-primary cursor-pointer">
+                            <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                        </span>
+                    </div>
+                    <div>
+
+                        <div class="text-[#D75A8B] font-futura pb-1" id="PlanAmount-Id">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-1">
+                                <div class="text-[#D17979] text-[11px]">
+                                    <i class="las la-clock"></i>
+                                </div>
+                                <div class="text-[11px] text-[#282828] font-futura" id="PlanTime-Id">
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="text-[#D17979] text-[11px]">
+                                    <i class="las la-glass-cheers"></i>
+                                </div>
+                                <div class="text-[11px] text-[#282828] font-futura" id="PlanLiquor-Id">
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="text-[#D17979] text-[11px]">
+                                    <i class="las la-user"></i>
+                                </div>
+                                <div class="text-[11px] text-[#282828] font-futura" id="PlanNomination-Id">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="h-[37px] rounded-[5px] mt-[9px] border border-[#E3AB00] text-[#E3AB00] font-bold flex justify-center items-center text-sm gap-[2px]">
+                    <i class="las la-coins text-[18px]"></i> 500ポイント獲得できます！
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
+     style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
+    <button class="btn" onclick="window.history.back();">
+        キャンセル
+    </button>
+    <button class="btn btn-primary">
+        <a onclick="SubmitFunction();" class="h-full w-full">
+            次
+        </a>
+    </button>
+</div>
+@section scripts
+{
+    <script src="~/Content/CustomHelper.js"></script>
+    <script>
+        const decryptAndGetValue = key => localStorage.getItem(key) ? DecryptParameter(localStorage.getItem(key)) : "";
+
+        $(document).ready(function () {
+            const keys = ["VisitDate", "VisitTime", "NoOfPeople", "PlanName", "PlanPrice", "PlanTime", "PlanLiquor", "PlanNomination"];
+
+            keys.forEach(key => {
+                const value = decryptAndGetValue(key);
+                if (value !== "") {
+                    switch (key) {
+                        case "VisitDate":
+                            const VisitDateValue = value;
+                            const VisitTimeValue = decryptAndGetValue("VisitTime");
+                            const FormattedVisitDateTime = formatDate(VisitDateValue + 'T' + VisitTimeValue);
+                            $('#visitdatetime-id').html(FormattedVisitDateTime);
+                            break;
+                        case "NoOfPeople":
+                            $('#noofvisitor-id').html(value);
+                            break;
+                        case "PlanName":
+                            $('#PlanName-Id').html(value);
+                            break;
+                        case "PlanPrice":
+                            $('#PlanAmount-Id').html('¥' + value);
+                            break;
+                        case "PlanTime":
+                            $('#PlanTime-Id').html(value + '分制');
+                            break;
+                        case "PlanLiquor":
+                            $('#PlanLiquor-Id').html(value + '分制');
+                            break;
+                        case "PlanNomination":
+                            $('#PlanNomination-Id').html('場内指名' + value + '名まで');
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+        });
+
+         function SubmitFunction() {
+             const url = `@Url.Action("Billing", "ReservationManagementV2")?ClubDetailModel=${ClubDetailModel}`;
+             window.location.href = url;
+         }
+    </script>
+
+}

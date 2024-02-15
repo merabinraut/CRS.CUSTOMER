@@ -1,0 +1,216 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2.PlanViewModel
+@{
+    ViewBag.Title = "Plan";
+    Layout = "~/Views/Shared/_Reservation-Layout-V2.cshtml";
+    var ClubDetailModel = Model.ClubDetailModel;
+}
+
+<div class="flex flex-col justify-between h-screen relative pb-8">
+    <div>
+        <!-- header  -->
+        <div class="flex items-center justify-between  pt-[13px] px-[14px] pb-[9px] border-b border-b-[#DCDCDC]">
+            <div class="flex items-center gap-[10px] ">
+                <div class="circle-border circle-frist-quater ">
+                    <div class="text tracking-tight	">1/<span>4</span></div>
+                </div>
+                <div>
+                    <div class="text-[13px] font-bold pb-[5px]">プラン選択</div>
+                    <div class="text-[11px] text-[#7E6D5E]">予約するプランを選んでください</div>
+                </div>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                    <path d="M5.86328 4.69727L4.69531 5.86523L11.8301 13L4.69531 20.1348L5.86328 21.3027L12.998 14.168L20.1328 21.3027L21.3008 20.1348L14.166 13L21.3008 5.86523L20.1328 4.69727L12.998 11.832L5.86328 4.69727Z"
+                          fill="#BCB08A" />
+                </svg>
+            </div>
+        </div>
+        <!-- header end  -->
+        <div style="height: calc(100vh - 140px);" class="no-scrollbar overflow-y-scroll pb-4 ">
+            <!-- image  -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                        @if (!string.IsNullOrEmpty(Model.ClubDetailModel.ClubLogo))
+                        {
+                            <img src="@Model.ClubDetailModel.ClubLogo"
+                                 class="h-[48px] w-[48px] object-cover rounded-full border-[2px] border-[#EAEAEA]" alt="image" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                 class="h-[48px] w-[48px] object-cover rounded-full border-[2px] border-[#EAEAEA]" alt="image" />
+                        }
+                    </div>
+                    <div>
+                        <div class='text-sm font-bold text-charcolBlack '>@Model.ClubDetailModel.ClubNameEnglish</div>
+                        <div class='text-xs  text-[#404040] '> @Model.ClubDetailModel.ClubNameJapanese</div>
+                        <div class="text-[10px] text-[#A09E91] flex gap-[2px] items-center">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            @Model.ClubDetailModel.ClubLocationName
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (Model.PlanDetailModel.Count > 0)
+            {
+                <div class="plan-selection">
+                    @{
+                        foreach (var item in Model.PlanDetailModel)
+                        {
+                            <div class="plan-card">
+                                <input class="planid-class" value="@item.PlanId" hidden />
+                                <input class="ispopularplan-class" value="y" hidden />
+                                <div>
+                                    <div class="flex items-center gap-2 mb-[6px]">
+                                        <div class="text-[13px] text-[#404040] font-bold leading-[24px] PlanName-class" data-info="@item.PlanName">
+                                            @item.PlanName
+                                        </div>
+                                        <span class="popularity">
+                                            <i class="las la-crown linear-gradient-text"></i>
+                                            <div class="linear-gradient-text tracking-[1.26px] pl-1">人気</div>
+                                        </span>
+                                    </div>
+                                    <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class" data-info="@item.PlanPrice">
+                                        @string.Concat("¥", item.PlanPrice)
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="flex items-center gap-1">
+                                            <div class="text-[#D17979] text-[13px]">
+                                                <i class="las la-clock"></i>
+                                            </div>
+                                            <div class="text-[11px] text-[#282828] font-futura PlanTime-class" data-info="@item.PlanTime">
+                                                @string.Concat(item.PlanTime, "分制")
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <div class="text-[#D17979] text-[13px]">
+                                                <i class="las la-glass-cheers"></i>
+                                            </div>
+                                            <div class="text-[11px] text-[#282828] font-futura PlanLiquor-class" data-info="@item.PlanLiquor">
+                                                @item.PlanLiquor
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <div class="text-[#D17979] text-[13px]">
+                                                <i class="las la-user"></i>
+                                            </div>
+                                            <div class="text-[11px] text-[#282828] font-futura PlanNomination-class" data-info="@item.PlanNomination">
+                                                @string.Concat("場内指名", @item.PlanNomination, "名まで")
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="plan-check-icon">
+                                    <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                         viewBox="0 0 40 40" fill="none">
+                                        <g filter="url(#filter0_d_2745_60280)">
+                                            <circle cx="20" cy="20" r="13" fill="#D75A8B" />
+                                        </g>
+                                        <path d="M26.2665 15L17.4487 24.4457L13.7335 20.4658L13 21.2516L17.082 25.6242L17.4487 26L17.8155 25.6242L27 15.7857L26.2665 15Z"
+                                              fill="white" />
+                                        <defs>
+                                            <filter id="filter0_d_2745_60280" x="0" y="0" width="40" height="40"
+                                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                <feOffset />
+                                                <feGaussianBlur stdDeviation="3.5" />
+                                                <feComposite in2="hardAlpha" operator="out" />
+                                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                <feBlend mode="normal" in2="BackgroundImageFix"
+                                                         result="effect1_dropShadow_2745_60280" />
+                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2745_60280"
+                                                         result="shape" />
+                                            </filter>
+                                        </defs>
+                                    </svg>
+                                    <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+                                         viewBox="0 0 26 26" fill="none">
+                                        <circle cx="13" cy="13" r="12.5" fill="#F6F6F6" stroke="#DCDCDC" />
+                                        <path d="M19.2665 8L10.4487 17.4457L6.73349 13.4658L6 14.2516L10.082 18.6242L10.4487 19L10.8155 18.6242L20 8.78571L19.2665 8Z"
+                                              fill="#DCDCDC" />
+                                    </svg>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <div>現在、プランはありません</div>
+            }
+        </div>
+    </div>
+</div>
+<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
+     style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
+    <button class="btn" onclick="window.history.back();">
+        キャンセル
+    </button>
+    <button class="btn btn-primary">
+        <a onclick="SubmitFunction();" class="h-full w-full">
+            次
+        </a>
+    </button>
+</div>
+@section scripts
+{
+    <script src="~/Content/CustomHelper.js"></script>
+    <script>
+        // Get all the div elements
+        var divs = document.querySelectorAll('.plan-card');
+        // Add click event listeners to each div
+        divs.forEach(function (div) {
+            div.addEventListener('click', function () {
+                // Remove the 'bg-red' class from all divs
+                divs.forEach(function (d) {
+                    d.classList.remove('active');
+
+                });
+                // Add the 'bg-red' class to the clicked div
+                this.classList.add('active');
+            });
+        });
+
+        function SubmitFunction() {
+            const activeElement = document.querySelector('.plan-selection .active');
+            if (!activeElement) return false;
+
+            const PlanId = activeElement.querySelector('.planid-class').value;
+            if (!PlanId) {
+                toastr.info('Plan is required');
+                return false;
+            }
+
+            const dataAttributes = ['PlanName', 'PlanPrice', 'PlanTime', 'PlanLiquor', 'PlanNomination'].reduce((acc, attr) => {
+                const value = activeElement.querySelector(`.Plan${attr}-class`).getAttribute('data-info');
+                acc[attr] = value;
+                return acc;
+            }, {});
+
+            DataStorageFunction(PlanId, ...Object.values(dataAttributes));
+
+            const url = `@Url.Action("Host", "ReservationManagementV2")?ClubId=${@Model.ClubDetailModel.ClubId}&ClubDetailModel=${ClubDetailModel}`;
+            window.location.href = url;
+        }
+
+        const DataStorageFunction = (PlanId, PlanName, PlanPrice, PlanTime, PlanLiquor, PlanNomination, IsPopularPlan) => {
+            const encryptedData = {
+                ClubId: @Model.ClubDetailModel.ClubId,
+                PlanId: PlanId,
+                PlanName: EncryptParameter(PlanName),
+                PlanPrice: EncryptParameter(PlanPrice),
+                PlanTime: EncryptParameter(PlanTime),
+                PlanLiquor: EncryptParameter(PlanLiquor),
+                PlanNomination: EncryptParameter(PlanNomination),
+                IsPopularPlan: EncryptParameter(IsPopularPlan)
+            };
+
+            Object.entries(encryptedData).forEach(([key, value]) => localStorage.setItem(key, value));
+        };
+    </script>
+}
