@@ -88,6 +88,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string Price { get; set; }
         public string CustomerId { get; set; }
         public string ClubLogo { get; set; }
+        public string HostImages { get; set; }
+        public string LocationName { get; set; }
     }
 
     #endregion

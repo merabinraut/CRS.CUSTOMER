@@ -83,6 +83,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 			responseinfo = dbResponseInfo.MapObject<ReservationHistoryDetailModel>();
 			return View(responseinfo);
 		}
+		public ActionResult RescheduleReservation()
+		{
+			return View();
+		}
 	}
 }
 

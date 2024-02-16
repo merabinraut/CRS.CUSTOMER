@@ -34,7 +34,7 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
 
         public ReservationHistoryDetailModelCommon GetReservationHistoryDetail(string customerId, string reservationId)
         {
-            string SQL = "EXEC sproc_reservation_history_management_v2 @Flag = 'grhd'";
+            string SQL = "EXEC sproc_reservation_history_management_v2 @Flag='grhd'";
             SQL += ",@CustomerId=" + _dao.FilterString(customerId);
             SQL += ",@ReservationId=" + _dao.FilterString(reservationId);
             var dbResponse = _dao.ExecuteDataRow(SQL);
@@ -52,7 +52,9 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
                     ClubLogo = _dao.ParseColumnValue(dbResponse, "ClubLogo").ToString(),
                     ClubNameEng = _dao.ParseColumnValue(dbResponse, "ClubNameEng").ToString(),
                     ClubNameJp = _dao.ParseColumnValue(dbResponse, "ClubNameJp").ToString(),
-                    Price = _dao.ParseColumnValue(dbResponse, "Price").ToString()
+                    Price = _dao.ParseColumnValue(dbResponse, "Price").ToString(),
+                    HostImages = _dao.ParseColumnValue(dbResponse, "HostImages").ToString(),
+                    LocationName=_dao.ParseColumnValue(dbResponse, "LocationName").ToString()
                 };
             }
             return new ReservationHistoryDetailModelCommon();
