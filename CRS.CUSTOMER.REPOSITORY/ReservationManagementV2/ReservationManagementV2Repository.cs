@@ -126,10 +126,34 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
         public List<HostListV2Common> GetSelectedHostDetail(string ClubId, string HostListId)
         {
             string SQL = $"EXEC sproc_cp_reservation_management @Flag = 'ghlfr', @ClubId={_dao.FilterString(ClubId)}, @HostListId={_dao.FilterString(HostListId)}";
-            SQL += ",@HostIdList=" + _dao.FilterString(HostListId);
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0) return _dao.DataTableToListObject<HostListV2Common>(dbResponse).ToList();
             return new List<HostListV2Common>();
+        }
+        #endregion
+
+        #region get customer reservation billing details
+        public Tuple<ResponseCode, string, BillingResponseCommon> ReservationBillingDetail(BillingRequestModel Request)
+        {
+            string SQL = $"EXEC sproc_cp_reservation_management @Flag = 'gcrbd', @ClubId={_dao.FilterString(Request.ClubId)}, @CustomerId={_dao.FilterString(Request.CustomerId)}, @PlanId={_dao.FilterString(Request.PlanId)}, @NoOfPeople={_dao.FilterString(Request.NoOfPeople)}";
+            var dbResponse = _dao.ExecuteDataTable(SQL);
+
+            if (dbResponse == null)
+                return new Tuple<ResponseCode, string, BillingResponseCommon>(ResponseCode.Failed, "Invalid request", new BillingResponseCommon());
+
+            var code = _dao.ParseColumnValue(dbResponse.Rows[0], "Code").ToString();
+            if (string.IsNullOrEmpty(code) || code.Trim() != "0")
+                return new Tuple<ResponseCode, string, BillingResponseCommon>(ResponseCode.Failed, _dao.ParseColumnValue(dbResponse.Rows[0], "Message").ToString() ?? "Invalid request", new BillingResponseCommon());
+
+            return new Tuple<ResponseCode, string, BillingResponseCommon>(ResponseCode.Success, "Success", _dao.DataTableToListObject<BillingResponseCommon>(dbResponse).FirstOrDefault());
+        }
+        #endregion
+
+        #region Reservation Confirmation
+        public CommonDbResponse ReservationConfirmation(ReservationConfirmationRequestCommon Request)
+        {
+            string SQL = $"EXEC sproc_cp_reservation_transaction_management @Flag = 'rc', @ClubId={_dao.FilterString(Request.ClubId)}, @CustomerId={_dao.FilterString(Request.CustomerId)}, @PlanId={_dao.FilterString(Request.PlanId)}, @NoOfPeople={_dao.FilterString(Request.NoOfPeople)}, @VisitDate={_dao.FilterString(Request.VisitDate)}, @VisitTime={_dao.FilterString(Request.VisitTime)}, @PaymentType={_dao.FilterString(Request.PaymentType)}, @HostIdList={_dao.FilterString(Request.HostIdList)}, @ActionUser=N{_dao.FilterString(Request.ActionUser)}, @ActionPlatform={_dao.FilterString(Request.ActionPlatform)}, @ActionIP={_dao.FilterString(Request.ActionIP)}";
+            return _dao.ParseCommonDbResponse(SQL);
         }
         #endregion
     }

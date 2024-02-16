@@ -120,10 +120,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecommendedClubHost\RecommendedClubHostCommon.cs" />
     <Compile Include="ReservationHistoryManagement\ReservationHistoryCommon.cs" />
+    <Compile Include="ReservationManagementV2\BillingCommon.cs" />
     <Compile Include="ReservationManagementV2\ClubBasicDetailCommon.cs" />
     <Compile Include="ReservationManagementV2\HostV2Common.cs" />
     <Compile Include="ReservationManagementV2\InitiateClubReservationCommon.cs" />
     <Compile Include="ReservationManagementV2\PlanV2Common.cs" />
+    <Compile Include="ReservationManagementV2\ReservationConfirmationCommon.cs" />
     <Compile Include="ReservationManagement\ReservationDetailCommon.cs" />
     <Compile Include="ReservationManagement\ReservationPlanCommon.cs" />
     <Compile Include="ReviewManagement\ClubReviewManagementCommon.cs" />

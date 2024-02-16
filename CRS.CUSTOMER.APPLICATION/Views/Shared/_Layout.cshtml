@@ -357,6 +357,9 @@
             <!----Render Body section start-->
             <div>
                 @RenderBody()
+                <div class="loader" id="loader-id-v2" style="display:none;">
+                    <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
+                </div>
                 <div id="clubreservationpartialview-id">
 
                 </div>
@@ -506,24 +509,41 @@
         }
     });
         var notificationBell = document.getElementById("notification-bell-id");
-        function NotificationFunction() {
-            $.ajax({
-                url: '/NotificationManagement/HasUnReadNotification',
-                type: 'POST',
-                success: function (result) {
-                    if (result.HasUnReadNotification) {
-                        notificationBell.innerHTML = '<img src="/Content/assets/images/Customer/UnReadNotification.svg" class="h-[10px]" alt="notification"/>';
-                    }
-                    else {
+        if (notificationBell) {
+            function NotificationFunction() {
+                $.ajax({
+                    url: '/NotificationManagement/HasUnReadNotification',
+                    type: 'POST',
+                    success: function (result) {
+                        if (result.HasUnReadNotification) {
+                            notificationBell.innerHTML = '<img src="/Content/assets/images/Customer/UnReadNotification.svg" class="h-[10px]" alt="notification"/>';
+                        }
+                        else {
+                            notificationBell.innerHTML = '';
+                        }
+                    },
+                    error: function () {
                         notificationBell.innerHTML = '';
                     }
-                },
-                error: function () {
-                    notificationBell.innerHTML = '';
-                }
-            });
+                });
+            }
+            setInterval(NotificationFunction, 20000);
         }
-        setInterval(NotificationFunction, 20000);
+    </script>
+    <script>
+        function OnLoadLoaderFunction() {
+            document.getElementById('loader-id-v2').style.display = 'block';
+            setTimeout(function () {
+                document.getElementById('loader-id-v2').style.display = 'none';
+            }, 3000);
+        }
+
+        function EnableLoaderFunction() {
+            document.getElementById('loader-id-v2').style.display = 'block';
+        }
+        function DisableLoaderFunction() {
+            document.getElementById('loader-id-v2').style.display = 'none';
+        }
     </script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="~/Content/assets/js/reservation-common.js"></script>

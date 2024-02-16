@@ -1,4 +1,5 @@
-﻿function InitiateClubReservationFunction(ClubId, SelectedDate = "") {
+﻿function InitiateClubReservationFunction(ClubId, SelectedDate = "", SelectedHost = "") {
+    EnableLoaderFunction();
     $.ajax({
         type: 'GET',
         async: true,
@@ -6,15 +7,16 @@
         dataType: 'json',
         data: {
             ClubId,
-            SelectedDate
+            SelectedDate,
+            SelectedHost
         },
         success: function (data) {
             if (!data || data.Code !== 0) {
                 toastr.info(data?.Message);
+                DisableLoaderFunction();
                 return false;
             }
             $('#clubreservationpartialview-id').html(data.PartialView);
-            /* Japanese initialisation for the jQuery UI date picker plugin. */
             jQuery(function ($) {
                 $.datepicker.regional['ja'] = {
                     closeText: '閉じる',
@@ -71,10 +73,11 @@
             });
             initTimeFunction();
             initPeopleFunction();
+            DisableLoaderFunction();
         },
         error: function (xhr, status, error) {
-            //console.error(xhr.responseText);
             toastr.info("Something went wrong. Please try again later.");
+            DisableLoaderFunction();
             return false;
         }
     });
@@ -120,7 +123,6 @@ function initTimeFunction() {
 
             // Store the value if timeList has active class
             if (event.currentTarget.classList.contains('active')) {
-                debugger;
                 const timeValue = event.currentTarget.querySelector('.timeValue').textContent;
                 var selectedTimeDiv = document.getElementById("selected-time-id");
                 selectedTimeDiv.innerText = timeValue.trim();
@@ -166,7 +168,6 @@ function initPeopleFunction() {
             event.currentTarget.classList.add('active');
             // Store the value if timeList has active class
             if (event.currentTarget.classList.contains('active')) {
-                debugger;
                 const peopleValue = event.currentTarget.querySelector('.peopleValue').textContent;
                 //console.log('Time value:', peopleValue.trim());
                 var selectedPeopleDiv = document.getElementById("selected-noofpeople-id");
@@ -182,3 +183,25 @@ function CloseInitiatedClubReservationFunction() {
     var element = document.getElementById('drawer-date');
     element.classList.add('translate-y-full');
 }
+
+function SubmitClubReservationFunction() {
+    var form = document.getElementById('club-reservation-id');
+    var requiredFields = form.querySelectorAll('[required]');
+
+    for (var i = 0; i < requiredFields.length; i++) {
+        if (!requiredFields[i].value) {
+            toastr.info('Please fill out all required fields.');
+            return; // Prevent form submission
+        }
+    }
+    // If all required fields are filled, submit the form
+    form.submit();
+}
+
+function EnableLoaderFunction() {
+    document.getElementById('loader-id-v2').style.display = 'block';
+}
+function DisableLoaderFunction() {
+    document.getElementById('loader-id-v2').style.display = 'none';
+}
+

@@ -550,9 +550,9 @@
         </div>
     </div>
 </div>
-<div class="loader" id="loader-id">
-    <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
-</div>
+@*<div class="loader" id="loader-id">
+        <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
+    </div>*@
 <!-- review section end -->
 <!-- #endregion -->
 @section scripts
@@ -643,16 +643,17 @@
         $(document).ready(function () {
             localStorage.clear();
             GetRecommendedClubAndHost();
-            //LoaderFunction();
-            setTimeout(LoaderFunction, 2000);
+            ////LoaderFunction();
+            //setTimeout(LoaderFunction, 2000);
+            OnLoadLoaderFunction();
         });
         function LocationFunction(i) {
             window.location.href = "/LocationManagement/Index?LocationId=" + i;
         }
-        function LoaderFunction() {
-            var myDiv = document.getElementById("loader-id");
-            myDiv.style.display = "none";
-        }
+        //function LoaderFunction() {
+        //    var myDiv = document.getElementById("loader-id");
+        //    myDiv.style.display = "none";
+        //}
         //document.addEventListener("DOMContentLoaded", function () {
         //    // The DOM is fully loaded, hide the loader
         //    document.getElementById("loader-id").style.display = "none";

@@ -2,8 +2,6 @@
 {
     public class PlanV2Common
     {
-        public ResponseCode Code { get; set; } = ResponseCode.Failed;
-        public string Message { get; set; }
         public string PlanId { get; set; }
         public string PlanName { get; set; }
         public string PlanTime { get; set; }

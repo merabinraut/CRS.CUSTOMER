@@ -55,5 +55,19 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
             return _repo.GetSelectedHostDetail(ClubId, HostListId);
         }
         #endregion
+
+        #region get customer reservation billing details
+        public Tuple<ResponseCode, string, BillingResponseCommon> ReservationBillingDetail(BillingRequestModel Request)
+        {
+            return _repo.ReservationBillingDetail(Request);
+        }
+        #endregion
+
+        #region Reservation Confirmation
+        public CommonDbResponse ReservationConfirmation(ReservationConfirmationRequestCommon Request)
+        {
+            return _repo.ReservationConfirmation(Request);
+        }
+        #endregion
     }
 }

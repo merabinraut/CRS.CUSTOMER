@@ -237,6 +237,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\DDLHelper.cs" />
     <Compile Include="Helper\RenderHelper.cs" />
     <Compile Include="Library\ApplicationUtilities.cs" />
     <Compile Include="Library\LanguageManag.cs" />
@@ -262,11 +263,13 @@
     <Compile Include="Models\ProfileManagement\ChangePasswordModel.cs" />
     <Compile Include="Models\ProfileManagement\UserProfileModel.cs" />
     <Compile Include="Models\ReservationHistory\ReservationHistoryModel.cs" />
+    <Compile Include="Models\ReservationManagementV2\BillingModel.cs" />
     <Compile Include="Models\ReservationManagementV2\ClubBasicDetailModel.cs" />
     <Compile Include="Models\ReservationManagementV2\ConfirmationModel.cs" />
     <Compile Include="Models\ReservationManagementV2\HostV2Model.cs" />
     <Compile Include="Models\ReservationManagementV2\InitiateClubReservationModel.cs" />
     <Compile Include="Models\ReservationManagementV2\PlanV2Model.cs" />
+    <Compile Include="Models\ReservationManagementV2\ReservationConfirmationModel.cs" />
     <Compile Include="Models\ReservationManagement\ReservationDetailModel.cs" />
     <Compile Include="Models\ReservationManagement\ReservationPlanModel.cs" />
     <Compile Include="Models\ReviewManagement\CustomerReviewedDetailModel.cs" />

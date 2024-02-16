@@ -1,11 +1,4 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2.InitiateClubReservationCommonModel
-@*<div class="">
-        <button class="border p-4" type="button" data-drawer-target="drawer-date" data-drawer-show="drawer-date"
-                data-drawer-placement="bottom" aria-controls="drawer-date">
-            date
-        </button>
-    </div>*@
-
 <!-- drawer component -->
 @*<div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform "
     tabindex="-1" aria-labelledby="drawer-bottom-label">*@
@@ -121,8 +114,8 @@
                 <button class="btn" type="button" onclick="CloseInitiatedClubReservationFunction();">
                     キャンセル
                 </button>
-                <button class="btn btn-primary">
-                    <a href="host.php" class="h-full w-full">
+                <button class="btn btn-primary" onclick="SubmitClubReservationFunction();">
+                    <a class="h-full w-full">
                         検索
                     </a>
                 </button>
@@ -131,9 +124,10 @@
     </div>
 </div>
 
-<form action="/ReservationManagementV2/InitiateClubReservationProcess" method="post" id="club-reservation-id">
+<form action="/ReservationManagementV2/Plan" method="get" id="club-reservation-id">
     <input type="text" id="club-id" name="ClubId" value="@Model.ClubId" required hidden />
     <input type="text" id="date-id" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" required hidden />
     <input type="text" id="time-id" name="Time" value="@Model.ClubReservableTimeModel[0].Time" required hidden />
     <input type="text" id="noofpeople-id" name="NoOfPeople" value="1" required hidden />
+    <input type="text" name="SelectedHost" value="@Model.SelectedHost" hidden />
 </form>

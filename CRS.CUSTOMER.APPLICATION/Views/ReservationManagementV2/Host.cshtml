@@ -129,10 +129,10 @@
 <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
      style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
     <button class="btn" onclick="window.history.back();">
-        キャンセル
+        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
     </button>
-    <button class="btn btn-primary">
-        <a href="confirmation.php" class="h-full w-full">
+    <button class="btn btn-primary" onclick="SubmitFunction();">
+        <a class="h-full w-full">
             次
         </a>
     </button>
@@ -187,7 +187,9 @@
                 return false;
             }
             DataStorageFunction(HostIdList);
-            const url = `@Url.Action("Confirmation", "ReservationManagementV2")?ClubId=${@Model.ClubDetailModel.ClubId}&ClubDetailModel=${ClubDetailModel}&HostIdList=${HostIdList}`;
+            var clubDetail = @Html.Raw(Json.Encode(@ClubDetailModel));
+            var encodedClubDetail = encodeURIComponent(JSON.stringify(clubDetail));
+            const url = `@Url.Action("Confirmation", "ReservationManagementV2")?ClubId=${'@Model.ClubDetailModel.ClubId'}&ClubDetailModel=${encodedClubDetail}&HostIdList=${HostIdList}`;
             window.location.href = url;
         }
 

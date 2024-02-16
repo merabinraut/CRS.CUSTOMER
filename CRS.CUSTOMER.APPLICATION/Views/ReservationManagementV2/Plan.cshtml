@@ -56,6 +56,7 @@
             {
                 <div class="plan-selection">
                     @{
+                        bool isFirstItem = true;
                         foreach (var item in Model.PlanDetailModel)
                         {
                             <div class="plan-card">
@@ -66,10 +67,14 @@
                                         <div class="text-[13px] text-[#404040] font-bold leading-[24px] PlanName-class" data-info="@item.PlanName">
                                             @item.PlanName
                                         </div>
-                                        <span class="popularity">
-                                            <i class="las la-crown linear-gradient-text"></i>
-                                            <div class="linear-gradient-text tracking-[1.26px] pl-1">人気</div>
-                                        </span>
+                                        @if (isFirstItem)
+                                        {
+                                            isFirstItem = false;
+                                            <span class="popularity">
+                                                <i class="las la-crown linear-gradient-text"></i>
+                                                <div class="linear-gradient-text tracking-[1.26px] pl-1">人気</div>
+                                            </span>
+                                        }
                                     </div>
                                     <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class" data-info="@item.PlanPrice">
                                         @string.Concat("¥", item.PlanPrice)
@@ -141,21 +146,30 @@
             }
             else
             {
-                <div>現在、プランはありません</div>
+                <div class="rounded-[4px] bg-[#FFEDED] p-2 flex justify-between gap-2 items-start">
+                    <div class="text-base text-[#000] flex items-start">
+                        <i class="las la-info-circle"></i>
+                    </div>
+                    <div class="text-xs text-[#000]">現在、プランはありません</div>
+                </div>
             }
         </div>
     </div>
 </div>
+
 <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
      style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
     <button class="btn" onclick="window.history.back();">
-        キャンセル
+        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
     </button>
-    <button class="btn btn-primary">
-        <a onclick="SubmitFunction();" class="h-full w-full">
-            次
-        </a>
-    </button>
+    @if (Model.PlanDetailModel.Count > 0)
+    {
+        <button class="btn btn-primary" onclick="SubmitFunction();">
+            <a class="h-full w-full">
+                次
+            </a>
+        </button>
+    }
 </div>
 @section scripts
 {
@@ -187,27 +201,36 @@
             }
 
             const dataAttributes = ['PlanName', 'PlanPrice', 'PlanTime', 'PlanLiquor', 'PlanNomination'].reduce((acc, attr) => {
-                const value = activeElement.querySelector(`.Plan${attr}-class`).getAttribute('data-info');
-                acc[attr] = value;
+                const element = activeElement.querySelector(`.${attr}-class`);
+                if (element) {
+                    const value = element.getAttribute('data-info');
+                    acc[attr] = value;
+                }
                 return acc;
             }, {});
-
-            DataStorageFunction(PlanId, ...Object.values(dataAttributes));
-
-            const url = `@Url.Action("Host", "ReservationManagementV2")?ClubId=${@Model.ClubDetailModel.ClubId}&ClubDetailModel=${ClubDetailModel}`;
+            console.log('Data Attributes:', dataAttributes);
+            const IsPopularPlan = activeElement.querySelector('.ispopularplan-class').value;
+            DataStorageFunction(PlanId, ...Object.values(dataAttributes), IsPopularPlan);
+            var clubDetail = @Html.Raw(Json.Encode(@ClubDetailModel));
+            var encodedClubDetail = encodeURIComponent(JSON.stringify(clubDetail));
+            const url = `@Url.Action("Host", "ReservationManagementV2")?ClubId=${'@Model.ClubDetailModel.ClubId'}&ClubDetailModel=${encodedClubDetail}`;
             window.location.href = url;
         }
 
         const DataStorageFunction = (PlanId, PlanName, PlanPrice, PlanTime, PlanLiquor, PlanNomination, IsPopularPlan) => {
             const encryptedData = {
-                ClubId: @Model.ClubDetailModel.ClubId,
+                ClubId: '@Model.ClubDetailModel.ClubId',
                 PlanId: PlanId,
-                PlanName: EncryptParameter(PlanName),
-                PlanPrice: EncryptParameter(PlanPrice),
-                PlanTime: EncryptParameter(PlanTime),
-                PlanLiquor: EncryptParameter(PlanLiquor),
-                PlanNomination: EncryptParameter(PlanNomination),
-                IsPopularPlan: EncryptParameter(IsPopularPlan)
+                PlanName: PlanName? EncryptParameter(PlanName) : '',
+                PlanPrice: PlanPrice ? EncryptParameter(PlanPrice) : '',
+                PlanTime: PlanTime? EncryptParameter(PlanTime) : '',
+                PlanLiquor: PlanLiquor? EncryptParameter(PlanLiquor) : '',
+                PlanNomination: PlanNomination? EncryptParameter(PlanNomination) : '',
+                IsPopularPlan: IsPopularPlan? EncryptParameter(IsPopularPlan) : '',
+                SelectedHost: '@ViewBag.SelectedHost',
+                VisitDate: '@ViewBag.VisitDate' ? EncryptParameter('@ViewBag.VisitDate') : '',
+                VisitTime: '@ViewBag.VisitTime' ? EncryptParameter('@ViewBag.VisitTime') : '',
+                NoOfPeople: '@ViewBag.NoOfPeople' ? EncryptParameter('@ViewBag.NoOfPeople'): ''
             };
 
             Object.entries(encryptedData).forEach(([key, value]) => localStorage.setItem(key, value));

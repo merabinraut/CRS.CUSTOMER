@@ -30,5 +30,13 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
         #region Get host details by club and host id
         List<HostListV2Common> GetSelectedHostDetail(string ClubId, string HostListId);
         #endregion
+
+        #region get customer reservation billing details
+        Tuple<ResponseCode, string, BillingResponseCommon> ReservationBillingDetail(BillingRequestModel Request);
+        #endregion
+
+        #region Reservation Confirmation
+        CommonDbResponse ReservationConfirmation(ReservationConfirmationRequestCommon Request);
+        #endregion
     }
 }

@@ -7,6 +7,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2
         public string ClubId { get; set; }
         public int TotalNoOfPeople { get; set; } = 0;
         public int MaxNoOfPeopleAllowed { get; set; } = 0;
+        public string SelectedHost { get; set; }
         public List<ClubReservationScheduleModel> ClubReservationScheduleModel { get; set; } = new List<ClubReservationScheduleModel>();
         public List<ClubReservableTimeModel> ClubReservableTimeModel { get; set; } = new List<ClubReservableTimeModel>();
     }
