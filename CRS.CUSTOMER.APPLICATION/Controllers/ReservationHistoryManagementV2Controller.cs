@@ -1,8 +1,10 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Web.Mvc;
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2;
 using CRS.CUSTOMER.BUSINESS.ReservationManagementV2;
+using CRS.CUSTOMER.SHARED;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
@@ -28,6 +30,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 				item.ReservationId = item.ReservationId.EncryptParameter();
 				item.CustomerId = item.CustomerId.EncryptParameter();
 				item.InvoiceId = item.InvoiceId.EncryptParameter();
+                DateTime originalDate = DateTime.ParseExact(item.VisitDate, "yyyy/MM/dd H:mm:ss", null);
+                // Format the date using the custom format string "yyyy/MM/dd"
+                item.VisitDate = originalDate.ToString("yyyy/MM/dd");
             }
 			#endregion
 
@@ -40,7 +45,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 				visitedItem.ReservationId = visitedItem.ReservationId.EncryptParameter();
 				visitedItem.CustomerId = visitedItem.CustomerId.EncryptParameter();
 				visitedItem.InvoiceId = visitedItem.InvoiceId.EncryptParameter();
-			}
+                DateTime originalDate = DateTime.ParseExact(visitedItem.VisitDate, "yyyy/MM/dd H:mm:ss", null);
+                // Format the date using the custom format string "yyyy/MM/dd"
+                visitedItem.VisitDate = originalDate.ToString("yyyy/MM/dd");
+            }
 			#endregion
 
 			#region "Cancelled History"
@@ -52,7 +60,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 				cancelItem.ReservationId = cancelItem.ReservationId.EncryptParameter();
 				cancelItem.CustomerId = cancelItem.CustomerId.EncryptParameter();
 				cancelItem.InvoiceId = cancelItem.InvoiceId.EncryptParameter();
-			}
+                DateTime originalDate = DateTime.ParseExact(cancelItem.VisitDate, "yyyy/MM/dd H:mm:ss", null);
+                // Format the date using the custom format string "yyyy/MM/dd"
+                cancelItem.VisitDate = originalDate.ToString("yyyy/MM/dd");
+            }
 			#endregion
 
 			#region "All History"
@@ -64,7 +75,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 				allItem.ReservationId = allItem.ReservationId.EncryptParameter();
 				allItem.CustomerId = allItem.CustomerId.EncryptParameter();
 				allItem.InvoiceId = allItem.InvoiceId.EncryptParameter();
-			}
+                DateTime originalDate = DateTime.ParseExact(allItem.VisitDate, "yyyy/MM/dd H:mm:ss", null);
+                // Format the date using the custom format string "yyyy/MM/dd"
+                allItem.VisitDate = originalDate.ToString("yyyy/MM/dd");
+            }
 			#endregion
 			if (ConfigurationManager.AppSettings["Phase"]!=null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper()!="DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
 			responseInfo.GetReservedList.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
@@ -83,10 +97,56 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 			responseinfo = dbResponseInfo.MapObject<ReservationHistoryDetailModel>();
 			return View(responseinfo);
 		}
-		public ActionResult RescheduleReservation()
+		[HttpPost,ValidateAntiForgeryToken]
+		public ActionResult RescheduleReservation(string Selectedhour="",string Selectedminute="00",string ReservationID="")
 		{
-			return View();
-		}
+            var redirectToUrl = string.Empty;
+            if (!string.IsNullOrEmpty(Selectedhour) && !string.IsNullOrEmpty(Selectedminute) && !string.IsNullOrEmpty(ReservationID))
+			{
+				var commonDBRequest = new Common();
+				commonDBRequest.ActionIP = ApplicationUtilities.GetIP();
+				commonDBRequest.ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString();
+				commonDBRequest.AgentId = ReservationID.DecryptParameter();
+
+                string time = Selectedhour + ":" + Selectedminute;
+				var dbResponseInfo = _buss.RescheduleReservation(commonDBRequest, time);
+				if (dbResponseInfo != null)
+				{
+					if (dbResponseInfo.Code == ResponseCode.Success)
+					{
+                        AddNotificationMessage(new NotificationModel()
+                        {
+                            Message = dbResponseInfo.Message ?? " Your reservation time has been updated",
+                            NotificationType = NotificationMessage.SUCCESS,
+                            Title = NotificationMessage.SUCCESS.ToString(),
+                        });
+                        redirectToUrl = Url.Action("ReservationHistory", "ReservationHistoryManagementV2");
+                        return Json(new { redirectToUrl });
+					}
+					else
+					{
+                        AddNotificationMessage(new NotificationModel()
+                        {
+                            Message = dbResponseInfo.Message ?? "Failed",
+                            NotificationType = NotificationMessage.INFORMATION,
+                            Title = NotificationMessage.INFORMATION.ToString(),
+                        });
+                        return Json(new { redirectToUrl });
+                    }
+				}
+			}
+			else
+			{
+                AddNotificationMessage(new NotificationModel()
+                {
+                    Message = "Invalid Reservation Details",
+                    NotificationType = NotificationMessage.WARNING,
+                    Title = NotificationMessage.WARNING.ToString(),
+                });
+                return RedirectToAction("ReservationHistory", "ReservationHistoryManagementV2");
+            }
+            return Json(new { redirectToUrl });
+        }
 	}
 }
 

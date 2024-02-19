@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CRS.CUSTOMER.REPOSITORY.ReservationManagementV2;
+using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2;
 
 namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
@@ -35,6 +36,11 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
         public List<VisitedHistoryModelCommon> GetVisitedHistoryList(string customerId)
         {
             return _repo.GetVisitedHistoryList(customerId);
+        }
+
+        public CommonDbResponse RescheduleReservation(Common commonDBRequest, string time)
+        {
+            return _repo.RescheduleReservation(commonDBRequest, time);
         }
     }
 }
