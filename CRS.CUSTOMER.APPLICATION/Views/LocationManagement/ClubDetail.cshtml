@@ -226,7 +226,8 @@
             }
         }
     </div>
-    <button class="btn-gradient" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng')">
+    @*<button class="btn-gradient" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng')">*@
+    <button class="btn-gradient" onclick="InitiateClubReservationFunction('@Model.ClubId')">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.BookNow
     </button>
 </div>

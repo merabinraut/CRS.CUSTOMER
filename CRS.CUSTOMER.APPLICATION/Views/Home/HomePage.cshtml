@@ -80,32 +80,32 @@
         </div>
         <div class="px-[36px] pb-[45px] z-10">
             @Html.AntiForgeryToken()
-            <div class="flex justify-center pb-[29px]">
-                <img src="~/Content/assets/images/customer/logo-white.svg" />
-                <div class="input-field-common noofpeople-class absolute top-6 right-4">
-                    <select id="default_select" style="width: 100%; font-size:15px"
-                            class="default_select text-[#B7B7B7] h-[44px] select-common" onchange="ChangeLanguageFunction();">
-                        @{
-                            string Language = ViewBag.Language;
-                            if (!string.IsNullOrEmpty(Language) && Language.ToString().Trim().ToLower() == "en")
-                            {
-                                <option value="en" selected>English</option>
-                                <option value="Ja">日本語</option>
+            @*<div class="flex justify-center pb-[29px]">
+                    <img src="~/Content/assets/images/customer/logo-white.svg" />
+                    <div class="input-field-common noofpeople-class absolute top-6 right-4">
+                        <select id="default_select" style="width: 100%; font-size:15px"
+                                class="default_select text-[#B7B7B7] h-[44px] select-common" onchange="ChangeLanguageFunction();">
+                            @{
+                                string Language = ViewBag.Language;
+                                if (!string.IsNullOrEmpty(Language) && Language.ToString().Trim().ToLower() == "en")
+                                {
+                                    <option value="en" selected>English</option>
+                                    <option value="Ja">日本語</option>
+                                }
+                                else if (!string.IsNullOrEmpty(Language) && Language.ToString().Trim().ToLower() == "ja")
+                                {
+                                    <option value="en">English</option>
+                                    <option value="Ja" selected>日本語</option>
+                                }
+                                else
+                                {
+                                    <option value="en">English</option>
+                                    <option value="Ja">日本語</option>
+                                }
                             }
-                            else if (!string.IsNullOrEmpty(Language) && Language.ToString().Trim().ToLower() == "ja")
-                            {
-                                <option value="en">English</option>
-                                <option value="Ja" selected>日本語</option>
-                            }
-                            else
-                            {
-                                <option value="en">English</option>
-                                <option value="Ja">日本語</option>
-                            }
-                        }
-                    </select>
-                </div>
-            </div>
+                        </select>
+                    </div>
+                </div>*@
             <div class="text-center">
                 <button class="linear-gradient rounded-[40px] text-center w-full text-[15px] py-3 text-white font-semibold" onclick="window.location.href ='@Url.Action("Index", "Home")'">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Login

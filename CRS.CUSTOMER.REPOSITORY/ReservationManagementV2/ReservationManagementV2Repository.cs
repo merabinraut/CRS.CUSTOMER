@@ -96,7 +96,7 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
         {
             string SQL = $"EXEC sproc_cp_reservation_management @Flag = 'gpl', @ClubId={_dao.FilterString(ClubId)}, @CustomerId={_dao.FilterString(CustomerId)}";
             var dbResponse = _dao.ExecuteDataTable(SQL);
-            if (dbResponse != null)
+            if (dbResponse != null && dbResponse.Rows.Count > 0)
             {
                 var Code = _dao.ParseColumnValue(dbResponse.Rows[0], "Code").ToString();
                 var Message = _dao.ParseColumnValue(dbResponse.Rows[0], "Message").ToString();
@@ -104,11 +104,12 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
                 {
                     if (Code.Trim() == "0")
                         return new Tuple<ResponseCode, string, List<PlanV2Common>>(ResponseCode.Success, "Success", _dao.DataTableToListObject<PlanV2Common>(dbResponse).ToList());
-                    if (Code.Trim() == "9")
+                    else if (Code.Trim() == "9")
                         return new Tuple<ResponseCode, string, List<PlanV2Common>>(ResponseCode.Exception, Message ?? "Invalid request", new List<PlanV2Common>());
+                    return new Tuple<ResponseCode, string, List<PlanV2Common>>(ResponseCode.Failed, _dao.ParseColumnValue(dbResponse.Rows[0], "Message").ToString() ?? "Invalid request", new List<PlanV2Common>());
                 }
             }
-            return new Tuple<ResponseCode, string, List<PlanV2Common>>(ResponseCode.Failed, _dao.ParseColumnValue(dbResponse.Rows[0], "Message").ToString() ?? "Invalid request", new List<PlanV2Common>());
+            return new Tuple<ResponseCode, string, List<PlanV2Common>>(ResponseCode.Failed, "Invalid request", new List<PlanV2Common>());
         }
         #endregion
 

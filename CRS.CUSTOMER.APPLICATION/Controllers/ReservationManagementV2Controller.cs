@@ -36,6 +36,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 ResponseModel = dbResponse.MapObject<InitiateClubReservationCommonModel>();
                 ResponseModel.ClubId = ClubId;
+                ResponseModel.SelectedHost = SelectedHost;
                 var partialViewString = RenderHelper.RenderPartialViewToString(this, "_ReservationPopup", ResponseModel);
                 responseData["Code"] = 0;
                 responseData["Message"] = "Success";
@@ -179,14 +180,21 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var HostIdListSplit = HostIdList.Split(',');
             var HostIdListArray = HostIdListSplit.Select(x => x.DecryptParameter()).ToArray();
             var HostIdLists = HostIdListArray != null ? string.Join(",", HostIdListArray.ToArray()) : null;
-            if (HostIdLists != null && HostIdLists != "")
+            if (string.IsNullOrEmpty(HostIdLists))
             {
-                var dbResponse = _buss.GetSelectedHostDetail(cId, HostIdLists);
-                if (dbResponse != null && dbResponse.Count > 0)
+                AddNotificationMessage(new NotificationModel()
                 {
-                    ResponseModel.HostListModel = dbResponse.MapObjects<HostListV2Model>();
-                    ResponseModel.HostListModel.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
-                }
+                    NotificationType = NotificationMessage.INFORMATION,
+                    Message = "Invalid request",
+                    Title = NotificationMessage.INFORMATION.ToString()
+                });
+                return RedirectToAction("Index", "Dashboard");
+            }
+            var dbResponse = _buss.GetSelectedHostDetail(cId, HostIdLists);
+            if (dbResponse != null && dbResponse.Count > 0)
+            {
+                ResponseModel.HostListModel = dbResponse.MapObjects<HostListV2Model>();
+                ResponseModel.HostListModel.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
             }
             return View(ResponseModel);
         }
