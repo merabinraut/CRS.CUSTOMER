@@ -1,5 +1,5 @@
 :root {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: "Noto Sans", sans-serif;
     color: #292f33;
     font-size: 16px;
     width: 100%;
@@ -16,6 +16,8 @@
     --secondary-1: #333;
     --blue: #697dbf;
     --red: #b12d23;
+    --primaryHeading: #18181b;
+    --borderColor: #f1f1f1;
 }
 
 @font-face {
@@ -54,18 +56,18 @@ select:focus {
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
-    height: 5px;
+    height: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
+    box-shadow: inset 0 0 5px rgb(206, 206, 206);
     border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #f09dbe;
+    background: #ffb6c1;
     border-radius: 10px;
     width: 5px;
     height: 10px;
@@ -270,16 +272,54 @@ select:focus {
     /* border-bottom: 2px solid var(--primary-softrose); */
 }
 
-    .tab-container-plane .active::before {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 100%;
-        height: 4px; /* Height of the rounded border */
-        border-radius: 10px; /* Adjust the radius as needed */
-        background-color: var(--primary-softrose); /* Set your desired border color */
-    }
+.tab-container-plane-club-detail .active {
+    /* padding: 15px 4px 13px 4px; */
+    color: var(--charcoalBlack);
+    /* border-bottom: 2px solid var(--primary-softrose); */
+}
+
+.tab-container-plane .active::before {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 4px; /* Height of the rounded border */
+    border-radius: 10px; /* Adjust the radius as needed */
+    background-color: var(--primary-softrose); /* Set your desired border color */
+}
+
+.tab-container-plane.booking-tab .tab-button-plane {
+    padding: 15px 4px 15px 4px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    color: #667085;
+    position: relative;
+}
+
+.tab-container-plane.booking-tab .active {
+    /* padding: 15px 4px 13px 4px; */
+    color: #d75a8b;
+    /* border-bottom: 2px solid var(--primary-softrose); */
+}
+
+.tab-container-plane.booking-tab-club-detail .active {
+    /* padding: 15px 4px 13px 4px; */
+    color: #d75a8b;
+    /* border-bottom: 2px solid var(--primary-softrose); */
+}
+
+.tab-container-plane.booking-tab .active::before {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 4px; /* Height of the rounded border */
+    border-radius: 10px; /* Adjust the radius as needed */
+    background-color: #d75a8b; /* Set your desired border color */
+}
 
 .customer-title {
     position: relative;
@@ -333,12 +373,12 @@ select:focus {
     background-color: rgba( 0, 0, 0, 0.3 ); /* Adjust the alpha (4th) value for transparency */
 }
 /* form  */
-/*.input-field-common {
+.input-field-common {
     height: 100%;
-*/
+}
 
     .input-field-common input {
-        border-radius: 3px;
+        border-radius: 8px;
         border: 1px solid var(--gray-300, #d0d5dd);
         background: var(--White, #fff);
         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
@@ -346,19 +386,14 @@ select:focus {
         font-size: 16px;
         color: #667085;
         padding: 10px 14px;
-        height: 40px;
-        width:100%;
+        height: 44px;
         /* height: inherit; */
     }
 
         .input-field-common input:focus {
             box-shadow: none;
-            border-color: #d75a8b !important;
+            border-color: #d75a8b;
             padding: 10px 14px;
-        }
-        .input-field-common input:focus-visible {
-         
-            outline: #d75a8b;
         }
 
     .input-field-common .error {
@@ -370,7 +405,7 @@ select:focus {
     }
 
     .input-field-common textarea {
-        border-radius: 3px;
+        border-radius: 8px;
         border: 1px solid var(--gray-300, #d0d5dd);
         background: var(--White, #fff);
         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
@@ -386,7 +421,7 @@ select:focus {
         }
 
     .input-field-common .select-common {
-        border-radius: 3px;
+        border-radius: 8px;
         border: 1px solid var(--gray-300, #d0d5dd);
         /* background: var(--White, #fff); */
         /* Shadow/xs */
@@ -766,6 +801,36 @@ label {
             right: 6px;
         }
 
+.host-selection {
+    overflow: hidden;
+    cursor: pointer;
+}
+
+    .host-selection img {
+        height: 104px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .host-selection .circle {
+        display: block;
+        position: absolute;
+        top: 8px;
+        right: 7px;
+    }
+
+    .host-selection .active-circle {
+        display: none;
+    }
+
+    .host-selection.active .active-circle {
+        display: block;
+        position: absolute;
+        top: 8px;
+        right: 7px;
+    }
+
 .payment-option {
     border-radius: 4px;
     border: 1px solid #d8d8d8;
@@ -876,23 +941,11 @@ label {
     border: 1px solid #eaeaea !important;
 }
 
-.input-field-common.noofpeople-class .select2-container--default .select2-selection--single {
-    border: 1px solid #eaeaea00 !important;
-    background-color: #fff0 !important;
+.input-field-common.select-number-container
+.select2-container--default
+.select2-selection--single {
+    border: 1px solid #757575 !important;
 }
-
-    .input-field-common.noofpeople-class .select2-container--default .select2-selection--single .select2-selection__rendered {
-        color: #ffffff !important;
-    }
-
-    .input-field-common.noofpeople-class .select2-container--default .select2-selection--single .select2-selection__arrow b {
-        border-color: #fff transparent transparent transparent;
-    }
-    .input-field-common.select-number-container
-    .select2-container--default
-    .select2-selection--single {
-        border: 1px solid #757575 !important;
-    }
 
 .select-loaction-cs {
     display: flex;
@@ -917,91 +970,27 @@ label {
         border-radius: 3px;
     }
 
-
-.login-left-line {
-    background: #EFEFEF;
-    width: 100%;
-    margin-top: 8px;
-    height: 1px;
-    margin-left: -35px;
-    opacity: 0.2;
-}
-
-.login-right-line {
-    background: #EFEFEF;
-    width: 100%;
-    opacity: 0.2;
-    margin-top: 8px;
-    height: 1px;
-    margin-right: -35px;
-}
-
-.japan-flag {
-    width: 16px;
-    height: 11px;
+.select-loaction-host {
     display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 8px;
+    cursor: pointer;
 }
 
-    .japan-flag div {
-        height: 7px;
-        width: 7px;
-        background-color: #bc002d;
-        border-radius: 50%;
+    .select-loaction-host .square {
+        height: 20px;
+        width: 20px;
+        background-color: #fff;
+        border: 2px solid #d9d9d9;
+        border-radius: 3px;
     }
 
-.number-input {
-    position: relative;
-}
-
-    .number-input input {
-        padding-left: 89px !important;
-    }
-
-    .number-input .flag-section {
-        position: absolute;
-        top: 50%;
-        left: 16px;
-        transform: translatey(-50%);
-        color: #a6a6a6;
-        cursor: pointer;
-        height: auto;
-        background: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        padding-right: 10px;
-    }
-
-        .number-input .flag-section .line-y {
-            height: 20px;
-            width: 2px;
-            background-color: #a6a6a6;
-        }
-
-
-.input-field-common.login-number input {
-    border-radius: 3px;
-    border: 1px solid #BEBEBE;
-}
-
-.password-input {
-    position: relative;
-}
-
-    .password-input .password-eye {
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translatey(-50%);
-        color: #a6a6a6;
-        font-size: 20px;
-        cursor: pointer;
-        height: auto;
-        /*background: #fff;*/
-        padding-left: 5px;
+    .select-loaction-host.active .square {
+        height: 20px;
+        width: 20px;
+        background-color: #d75a8b;
+        border: 3px solid #d75a8b;
+        border-radius: 3px;
     }
 
 .review-start i {
@@ -1011,6 +1000,181 @@ label {
     .review-start i:first-child {
         margin-left: 0px;
     }
+
+.booking-small-banner {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='62' height='13' viewBox='0 0 62 13' fill='none'%3E%3Cpath d='M58.0636 1.5C57.5752 1.5 55.2303 1.57923 54.0335 1.57923C54.121 1.625 54.194 1.67841 54.2524 1.73944C54.807 2.15141 55.347 2.57102 55.8725 2.99825C57.0985 2.99825 59.0145 2.66543 59.558 3.5C59.558 3.5 58.5556 2 58.0636 1.5ZM62 7C61.0232 5.5 60.5348 5 59.558 3.5C59.0145 2.66543 57.0985 2.99825 55.8725 2.99825C57.7115 4.44015 59.4192 5.90493 61.3458 7.34683C59.463 8.74296 57.7553 10.1391 55.96 11.5352C57.1861 11.5352 59.0696 10.5 59.558 10.5C59.558 10.5 60.5348 9 62 7ZM59.558 10.5C59.0696 10.5 57.1861 11.5352 55.96 11.5352C55.3178 12.0235 54.6757 12.5117 54.0335 13C55.2303 13 56.4417 13 57.6677 13C58.0928 12.5 59.558 10.5 59.558 10.5ZM54.2524 1.73944C54.194 1.67841 54.121 1.625 54.0335 1.57923C37.9492 1.57923 21.865 1.57923 5.78078 1.57923C5.75159 1.57923 5.73701 1.57923 5.73701 1.57923C5.24076 1.56397 4.7445 1.54109 4.24826 1.51057C4.20447 1.94543 3.67903 2.40317 3.72281 2.86091C11.7357 3.66197 20.8871 2.99825 29.0314 2.99825C37.993 2.99825 46.9401 2.99825 55.8725 2.99825C55.347 2.57102 54.807 2.15141 54.2524 1.73944ZM61.3458 7.34683C59.4192 5.90493 57.7115 4.44015 55.8725 2.99825C46.9401 2.99825 37.993 2.99825 29.0314 2.99825C20.8871 2.99825 11.7357 3.66197 3.72281 2.86091C4.02932 5.72183 4.02932 8.53698 3.50388 11.3979C4.33582 11.4894 5.21156 11.5352 5.86836 11.5352C10.9476 11.6496 16.0706 11.5352 21.106 11.5352C32.724 11.5352 44.342 11.5352 55.96 11.5352C57.7553 10.1391 59.463 8.74296 61.3458 7.34683ZM55.96 11.5352C44.342 11.5352 32.724 11.5352 21.106 11.5352C16.0706 11.5352 10.9476 11.6496 5.86836 11.5352C5.21156 11.5352 4.33582 11.4894 3.50388 11.3979C3.46009 11.8556 4.0731 12.4507 3.94175 12.8856C4.7299 12.9771 5.38669 13 5.60563 13C5.63482 13 5.66401 13 5.6932 13C5.72239 13 5.75159 13 5.78078 13C21.865 13 37.9492 13 54.0335 13C54.6757 12.5117 55.3178 12.0235 55.96 11.5352ZM4.24826 1.51057C3.59146 1.44191 2.8033 1.35035 2.10272 1.19014C2.01514 1.625 1.75243 2.12853 1.84001 2.5405C2.40923 2.70071 3.06602 2.79225 3.72281 2.86091C3.67903 2.40317 4.20447 1.94543 4.24826 1.51057ZM3.72281 2.86091C3.06602 2.79225 2.40923 2.70071 1.84001 2.5405C2.01515 5.40141 1.97136 8.19367 1.66486 11.0546C2.23408 11.1919 2.84708 11.3063 3.50388 11.3979C4.02932 8.53698 4.02932 5.72183 3.72281 2.86091ZM3.50388 11.3979C2.84708 11.3063 2.23408 11.1919 1.66486 11.0546C1.62107 11.5352 1.97137 12.0845 1.84001 12.5423C2.4968 12.7254 3.28495 12.8398 3.94175 12.8856C4.0731 12.4507 3.46009 11.8556 3.50388 11.3979ZM2.10272 1.19014C1.09563 0.961269 0.176121 0.59507 0.000976562 0C0.000976562 0.0915489 0.000976562 0.160213 0.000976562 0.160213C0.000976562 0.572185 0.000976562 0.984162 0.000976562 1.39613C0.176121 1.94543 0.876705 2.31163 1.84001 2.5405C1.75243 2.12853 2.01514 1.625 2.10272 1.19014ZM1.84001 2.5405C0.876705 2.31163 0.176121 1.94543 0.000976562 1.39613C0.000976562 4.20364 0.000976562 7.01877 0.000976562 9.84154C0.0885506 10.4137 0.745342 10.7799 1.66486 11.0546C1.97136 8.19367 2.01515 5.40141 1.84001 2.5405ZM1.66486 11.0546C0.745342 10.7799 0.0885506 10.4137 0.000976562 9.84154C0.000976562 10.3145 0.000976562 10.7952 0.000976562 11.2835C0.0447617 11.9014 0.832916 12.2905 1.84001 12.5423C1.97137 12.0845 1.62107 11.5352 1.66486 11.0546Z' fill='url(%23paint0_linear_2795_47768)'/%3E%3Cdefs%3E%3ClinearGradient id='paint0_linear_2795_47768' x1='55.8001' y1='11.7' x2='7.1729' y2='-12.6506' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%2399AEFB'/%3E%3Cstop offset='0.578125' stop-color='%23F04AA4'/%3E%3Cstop offset='1' stop-color='%23E7B282'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E");
+}
+
+.booking-top-list div {
+    height: max-content;
+}
+
+.booking-card {
+    border-radius: 4px;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    box-shadow: -2px 2px 14px 0px rgba(0, 0, 0, 0.08);
+}
+
+.plan-selection .plan-card {
+    border-bottom: 1px solid #dcdcdc;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .plan-selection .plan-card:first-child {
+        border-top: 1px solid #dcdcdc;
+    }
+
+    .plan-selection .plan-card.active {
+        background-color: #f6f6f6;
+    }
+
+    .plan-selection .plan-card .plan-check-icon .active-svg {
+        display: none;
+        width: 40px;
+    }
+
+    .plan-selection .plan-card.active .plan-check-icon .active-svg {
+        display: block;
+        width: 40px;
+    }
+
+    .plan-selection .plan-card .plan-check-icon .inActive-svg {
+        display: block;
+        width: 40px;
+    }
+
+    .plan-selection .plan-card.active .plan-check-icon .inActive-svg {
+        display: none;
+        width: 40px;
+    }
+
+    .plan-selection .plan-card .popularity {
+        display: block;
+        display: flex;
+        align-items: center;
+        font-size: 9px;
+        background-color: #fff;
+        border-radius: 2px;
+        padding: 1px 6px;
+    }
+/* .plan-selection .plan-card .popularity {
+  display: none;
+} */
+.reservation-footer {
+    position: absolute;
+    bottom: 00px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);
+}
+
+    .reservation-footer .btn {
+        height: 40px;
+    }
+
+.popularity {
+    display: block;
+    display: flex;
+    align-items: center;
+    font-size: 9px;
+    background-color: #fff;
+    border-radius: 2px;
+    padding: 1px 6px;
+}
+
+.search-by-business-hours-select {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+    .search-by-business-hours-select .active-svg {
+        display: none;
+    }
+
+    .search-by-business-hours-select .inactive-svg {
+        display: block;
+    }
+
+    .search-by-business-hours-select.active .active-svg {
+        display: block;
+    }
+
+    .search-by-business-hours-select.active .inactive-svg {
+        display: none;
+    }
+
+.multi-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+    .multi-select .active-svg {
+        display: none;
+    }
+
+    .multi-select .inactive-svg {
+        display: block;
+    }
+
+    .multi-select.active .active-svg {
+        display: block;
+    }
+
+    .multi-select.active .inactive-svg {
+        display: none;
+    }
+
+.showTimeList {
+    cursor: pointer;
+}
+
+.timeListContainer {
+    position: absolute;
+    bottom: 32px;
+    left: 0px;
+    width: 72px;
+    overflow: hidden;
+    max-height: 160px;
+    overflow-y: auto;
+}
+
+    .timeListContainer .timeList {
+        border-bottom: 1px solid #eaeaea;
+        cursor: pointer;
+    }
+
+.timeList .activeTime {
+    display: none;
+}
+
+.timeList.active .activeTime {
+    display: block;
+}
+
+.timeListContainer .peopleList {
+    border-bottom: 1px solid #eaeaea;
+    cursor: pointer;
+}
+
+.peopleList .activeTime {
+    display: none;
+}
+
+.peopleList.active .activeTime {
+    display: block;
+}
 
 .loader {
     position: fixed;

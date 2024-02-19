@@ -2,8 +2,6 @@
 using CRS.CUSTOMER.APPLICATION.Models.Dashboard;
 using CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement;
 using CRS.CUSTOMER.BUSINESS.Dashboard;
-using CRS.CUSTOMER.BUSINESS.SearchFilterManagement;
-using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Configuration;

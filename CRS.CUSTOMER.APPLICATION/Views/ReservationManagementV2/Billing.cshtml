@@ -1,0 +1,247 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2.BillingViewModel
+@{
+    ViewBag.Title = "Billing";
+    Layout = "~/Views/Shared/_Reservation-Layout-V2.cshtml";
+}
+
+<div class="flex flex-col justify-between h-screen relative pb-8">
+    <div>
+        <!-- header  -->
+        <div class="flex items-center justify-between  pt-[13px] px-[14px] pb-[9px] border-b border-b-[#DCDCDC]">
+            <div class="flex items-center gap-[10px] ">
+                <div class="circle-border circle-fourth-quater ">
+                    <div class="text tracking-tight	">4/<span>4</span></div>
+                </div>
+                <div>
+                    <div class="text-[13px] font-bold pb-[5px]">プラン選択</div>
+                    <div class="text-[11px] text-[#7E6D5E]">予約するプランを選んでください</div>
+                </div>
+            </div>
+            <div onclick="window.location.href='@Url.Action("Index", "Dashboard")'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                    <path d="M5.86328 4.69727L4.69531 5.86523L11.8301 13L4.69531 20.1348L5.86328 21.3027L12.998 14.168L20.1328 21.3027L21.3008 20.1348L14.166 13L21.3008 5.86523L20.1328 4.69727L12.998 11.832L5.86328 4.69727Z"
+                          fill="#BCB08A" />
+                </svg>
+            </div>
+        </div>
+        <!-- header end  -->
+        <div style="height: calc(100vh - 140px);" class="no-scrollbar overflow-y-scroll pb-4 ">
+            <!-- Reservation contents     -->
+            <div class="px-[14px] py-3 flex flex-col gap-[6px]">
+                <div class="text-[#D75A8B] text-sm font-semibold">予約内容</div>
+                <div class="flex flex-col p-3 bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <table>
+                        <tr>
+                            <td>
+                                <p class="text-xs font-bold pb-3">ユーザネーム :</p>
+
+                            </td>
+                            <td>
+                                <p class="text-xs">
+                                    <span class="pl-2 font-normal"> @Model.CustomerUserName</span>
+
+                                </p>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="text-xs font-bold pb-3">予約時間 :</p>
+
+                            </td>
+                            <td>
+                                <p class="text-xs">
+                                    <span class="pl-2 font-normal" id="visitdatetime-id"></span>
+                                </p>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="text-xs font-bold ">プラン :</p>
+
+                            </td>
+                            <td>
+                                <p class="text-xs">
+                                    <span class="pl-2 font-normal" id="PlanName-Id"></span>
+                                </p>
+                            </td>
+
+                        </tr>
+                    </table>
+
+
+                </div>
+                @if (!string.IsNullOrEmpty(Model.ReservationRemark))
+                {
+                    <div class="rounded-[4px] bg-[#FFEDED] p-2 flex justify-between gap-2 items-start">
+                        <div class="text-base text-[#000] flex items-start">
+                            <i class="las la-info-circle"></i>
+                        </div>
+                        <div class="text-xs text-[#000]">
+                            @Model.ReservationRemark
+                        </div>
+
+                    </div>
+                }
+                <div class="flex pl-2 text-xs text-[#000] gap-2 ">
+                    <div>合計</div>
+                    <div class="font-bold">@Model.CustomerCostAmount 円</div>
+                </div>
+
+            </div>
+            <div class=" border-t-[1px] border-[#EFEFEF] py-3 px-4">
+                <div class="h-[24px] text-sm text-[#383232] mb-2">支払いオプション</div>
+                <div class="pt-[8px] grid gap-4 payment-type-class">
+                    @{
+                        var disabledClass = "";
+                        if (!string.IsNullOrEmpty(Model.CustomerCostAmount) && Model.CustomerCostAmount.Trim() == "0")
+                        {
+                            disabledClass = "disabled";
+                        }
+                        foreach (KeyValuePair<string, string> item in ViewBag.PaymentMethodList as Dictionary<string, string>)
+                        {
+                            <div class="payment-option bg-[#FAFAFA] text-[#BEBEBE] @disabledClass" style=" border-color: #F0F0F0; ">
+                                <div class="circle">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
+                                         fill="none">
+                                        <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                              fill="#ECECEC" />
+                                    </svg>
+                                </div>
+                                <div class="circle-active">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
+                                         fill="none">
+                                        <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                              fill="#ECECEC" />
+                                        <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
+                                              fill="#D75A8B" />
+                                    </svg>
+                                </div>
+                                @Html.HiddenFor(model => item.Key, new { @id = "", @class = "payment-option-value" })
+                                @item.Value
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
+     style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
+    <button class="btn" onclick="window.history.back();">
+        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
+    </button>
+    <button class="btn btn-primary" onclick="SubmitFunction();">
+        <a class="h-full w-full">
+            次
+        </a>
+    </button>
+</div>
+@section scripts
+{
+    <script src="~/Content/CustomHelper.js"></script>
+    <script>
+        const decryptAndGetValue = key => localStorage.getItem(key) ? DecryptParameter(localStorage.getItem(key)) : "";
+        $(document).ready(function () {
+            const keys = ["VisitDate", "VisitTime", "PlanName"];
+
+            keys.forEach(key => {
+                const value = decryptAndGetValue(key);
+                switch (key) {
+                    case "VisitDate":
+                        const VisitDateValue = value;
+                        const VisitTimeValue = decryptAndGetValue("VisitTime");
+                        const FormattedVisitDateTime = formatDateAndTime(VisitDateValue, VisitTimeValue);
+                        $('#visitdatetime-id').html(FormattedVisitDateTime);
+                        break;
+                    case "PlanName":
+                        $('#PlanName-Id').html(value);
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            // Add click event listeners to payment options
+            $('.payment-option').click(function () {
+                // Check if the clicked element has the class "disabled"
+                if (!$(this).hasClass('disabled')) {
+                    $('.payment-option').removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
+
+        });
+
+        function formatDateAndTime(inputDateString, inputTimeString) {
+            // Split the date string into year, month, and day components
+            let [year, month, day] = inputDateString.split(/[-\/]/).map(Number);
+
+            // Split the time string into hour and minute components
+            const [hour, minute] = inputTimeString.split(':').map(Number);
+
+            // Log parsed values for debugging
+            console.log('Parsed values:', year, month, day, hour, minute);
+
+            // Check for valid values
+            if (isNaN(year) || isNaN(month) || isNaN(day) || isNaN(hour) || isNaN(minute)) {
+                console.error('Invalid input values');
+                return 'Invalid input values';
+            }
+
+            // Adjust month if it's in the wrong format (1-indexed for "-" format, 0-indexed for "/" format)
+            if (month > 12) {
+                // Assuming it's in the "yyyy-MM-dd" format
+                [day, month] = [month, day];
+            }
+
+            // Create a Date object with the provided components
+            const date = new Date(year, month - 1, day, hour, minute);
+
+            // Check if the date object is valid
+            if (isNaN(date.getTime())) {
+                console.error('Invalid date');
+                return 'Invalid date';
+            }
+
+            // Define options for formatting the date
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: false,
+            };
+
+            // Format the date using Intl.DateTimeFormat
+            const formatter = new Intl.DateTimeFormat('ja-JP', options);
+            return formatter.format(date);
+        }
+
+
+        function SubmitFunction() {
+            var PaymentType = $('.payment-type-class .active .payment-option-value').val();
+            if (!PaymentType && '@Model.CustomerCostAmount.Trim()' === "0") {
+                PaymentType = 0;
+            }
+            else {
+                toastr.info('Payment type is required');
+                return false;
+            }
+            const ClubId = localStorage.getItem("ClubId") || "";
+            const PlanId = localStorage.getItem("PlanId") || "";
+            var VisitDate = decryptAndGetValue("VisitDate");
+            var VisitTime = decryptAndGetValue("VisitTime");
+            var NoOfPeople = decryptAndGetValue("NoOfPeople");
+            var HostIdList = JSON.parse(localStorage.getItem("HostIdList"));
+
+            var url = `/ReservationManagementV2/ReservationConfirmation?ClubId=${ClubId}&PlanId=${PlanId}&VisitDate=${VisitDate}&VisitTime=${VisitTime}&NoOfPeople=${NoOfPeople}&PaymentType=${PaymentType}&HostIdList=${HostIdList}`;
+            window.location.href = url;
+        }
+    </script>
+}

@@ -44,4 +44,4 @@ slide.addEventListener('transitionend', () => {
     }
 });
 
-const updateSlid
+//const updateSlid

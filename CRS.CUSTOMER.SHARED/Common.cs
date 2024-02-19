@@ -14,10 +14,17 @@ namespace CRS.CUSTOMER.SHARED
         public string ActionPlatform { get; set; } = "CUSTOMER";
         public string ActionIP { get; set; }
     }
+
     public class StaticDataCommon
     {
+        #region Old (need to replace/update)
         public string Value { get; set; }
         public string Text { get; set; }
         public string ExtraData1 { get; set; }
+        #endregion
+        public string StaticValue { get; set; }
+        public string StaticLabel { get; set; }
+        public string StaticLabelJapanese { get; set; }
+        public string StaticLabelEnglish { get; set; }
     }
 }

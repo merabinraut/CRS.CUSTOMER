@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_Reservation-Layout-V2.cshtml";
+}
+
+@Html.Partial("_HomePageNavMenu")
+
+<div class="mt-[70px]">
+    <div class="flex flex-col justify-center items-center w-full px-[45px]">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <path d="M18 10V12H10V56H54V12H46V10H42V12H22V10H18ZM14 16H18V18H22V16H42V18H46V16H50V20H14V16ZM14 24H50V52H14V24ZM40.5625 28.5625L30 39.125L25.4375 34.5625L22.5625 37.4375L28.5625 43.4375L30 44.8125L31.4375 43.4375L43.4375 31.4375L40.5625 28.5625Z"
+                      fill="#D75A8B" />
+            </svg>
+        </div>
+        <div class="pb-2 leading-[36px] font-semibold text-[#1A1C1E]">予約完了</div>
+        <div class="text-center text-[#1A1C1E] text-xs mb-[24px]">
+            ご予約ありがとうございます。 <br />
+            ご変更は予約履歴からお願いいたします。
+        </div>
+        <div class="rounded-[8px] bg-[#D75A8B] px-3 py-[14px] h-[40px] flex justify-center items-center w-full text-white text-sm mb-5" onclick="window.location.href='@Url.Action("Index", "Dashboard")'">
+            予約履歴へ
+        </div>
+        <div class="text-center text-[#333]  border-b-[1px] border-[#333] leading-[18px]" onclick="window.location.href='@Url.Action("Index", "Dashboard")'">
+            マイページへ
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            localStorage.clear();
+        });
+
+        var notificationBell = document.getElementById("notification-bell-id");
+        if (notificationBell) {
+            function NotificationFunction() {
+                $.ajax({
+                    url: '/NotificationManagement/HasUnReadNotification',
+                    type: 'POST',
+                    success: function (result) {
+                        if (result.HasUnReadNotification) {
+                            notificationBell.innerHTML = '<img src="/Content/assets/images/Customer/UnReadNotification.svg" class="h-[10px]" alt="notification"/>';
+                        }
+                        else {
+                            notificationBell.innerHTML = '';
+                        }
+                    },
+                    error: function () {
+                        notificationBell.innerHTML = '';
+                    }
+                });
+            }
+            setInterval(NotificationFunction, 20000);
+        }
+    </script>
+}

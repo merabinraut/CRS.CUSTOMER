@@ -226,7 +226,8 @@
             }
         }
     </div>
-    <button class="btn-gradient" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng')">
+    @*<button class="btn-gradient" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng')">*@
+    <button class="btn-gradient" onclick="InitiateClubReservationFunction('@Model.ClubId')">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.BookNow
     </button>
 </div>
@@ -814,9 +815,12 @@
     @*<div class="text-[#bcb08a] text-lg"><i class="las la-bookmark"></i></div>*@
     <div class="text-[#BCB08A] text-lg" id="shareButton"><i class="las la-share-square"></i></div>
     <a class="text-[#BCB08A] text-lg" href="@Model.LocationURL" target="_blank"><i class="las la-map-marked-alt"></i></a>
-    <button class="btn-gradient" data-drawer-placement="bottom" aria-controls="drawer-bottom-example" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng')">
+    <button class="btn-gradient" data-drawer-placement="bottom" aria-controls="drawer-bottom-example" onclick="InitiateClubReservationFunction('@Model.ClubId')">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.BookNow
     </button>
+    @*<button class="btn-gradient" data-drawer-placement="bottom" aria-controls="drawer-bottom-example" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng')">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.BookNow
+        </button>*@
 </div>
 <!-- Modal toggle -->
 <!-- Main modal -->
@@ -980,17 +984,10 @@
         })
     </script>
     <script>
-        //function ClubReservationActionFunction(i) {
-        //    window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i;
-        //}
         function ClubReservationActionFunction(i, j, k) {
             DataStorageFunction(i, j);
             window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
         }
-        //function ClubReservationActionFunction(i, j) {
-        //    DataStorageFunction(i, j);
-        //    window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i;
-        //}
         const DataStorageFunction = (i, j) => {
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));

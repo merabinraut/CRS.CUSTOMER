@@ -8,19 +8,7 @@
     .border-custom > div:first-child {
         border-left: 1px solid #efefef;
     }
-/*.store-top-image-title {
-    font-size: 10px;
-    position: absolute;
-    background-color: #ffffffe6;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 115px;
-    text-align: start;
-    border-radius: 4px;
-    height: 23px;
-    padding: 4px 5px;
-}*/
+
 .store-top-image-title {
     font-size: 10px;
     position: absolute;
@@ -274,4 +262,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.drawer-filter-location {
+    border-radius: 6px 6px 0px 0px;
+    height: calc(100% - 200px);
+    overflow: hidden;
+    overflow-y: scroll;
 }
