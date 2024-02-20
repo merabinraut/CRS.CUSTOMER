@@ -898,11 +898,11 @@
                     <!-- Modal header -->
                     <div class="text-center pt-2 pb-4 px-2 border-b border-[#DCDCDC] flex flex-col justify-center gap-1 ">
                         <div class=" text-[16px] font-semibold text-[#1A1C1E]">確認</div>
-                        <div class=" text-[12px] font-normal text-[#1A1C1E]">ご予約はキャンセルにしすか？</div>
+                        <div class=" text-[12px] font-normal text-[#1A1C1E]">よやくをやりなおしますか？</div>
                     </div>
                     <!-- Modal body -->
                     <div class="grid gap-4 p-6 pt-4 grid-cols-2">
-                        <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeModal('modal_cancel')"
+                        <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeRedoModal('modal_redo')"
                                 data-modal-hide="defaultModal">
                             いいえ
                         </button>
@@ -931,7 +931,6 @@
         }
         function RedoReservation() {
             var reservationId = $('#redo_id').val();
-            debugger
             if (reservationId != "") {
                 $.ajax({
                     type: 'POST',
@@ -951,7 +950,6 @@
     <script>
         function getid(reservationid) {
             $('#cancel_id').val(reservationid);
-            debugger
             var modal = document.getElementById('modal_cancel');
             if (modal) {
                 modal.style.display = "block";
@@ -1078,7 +1076,6 @@
         //post method
         function RescheduleReservation() {
             var reservationid = $('#reservation_id').val();
-            debugger;
             var data = {
                 Selectedhour: hour,
                 Selectedminute: minute,
