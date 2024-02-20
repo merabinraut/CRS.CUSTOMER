@@ -24,6 +24,17 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
             return dbresponse;
         }
 
+        public CommonDbResponse DeleteReservation(Common commonDbRequest)
+        {
+            string sp_name = "sproc_reservation_history_management_v2 @Flag='dr'";
+            sp_name += ",@ReservationId=" + _dao.FilterString(commonDbRequest.AgentId);
+            sp_name += ",@ActionUser=" + _dao.FilterString(commonDbRequest.ActionUser);
+            sp_name += ",@ActionIp=" + _dao.FilterString(commonDbRequest.ActionIP);
+            sp_name += ",@ActionPlatform=" + _dao.FilterString(commonDbRequest.ActionPlatform);
+            var dbResponse = _dao.ParseCommonDbResponse(sp_name);
+            return dbResponse;
+        }
+
         public List<AllHistoryModelCommon> GetAllHistoryList(string customerId)
         {
             string sp_name = "sproc_reservation_history_management_v2 @Flag='gahl'";

@@ -256,6 +256,59 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 return Json(JsonRequestBehavior.AllowGet);
             }            
         }
+        [HttpPost,ValidateAntiForgeryToken]
+        public ActionResult DeleteReservation(string RID = "")
+        {
+            string ReservationId = !string.IsNullOrEmpty(RID) ? ReservationId = RID.DecryptParameter() : null;
+            if (string.IsNullOrEmpty(ReservationId))
+            {
+                AddNotificationMessage(new NotificationModel()
+                {
+                    Message = "Invalid Reservation details",
+                    NotificationType = NotificationMessage.WARNING,
+                    Title = NotificationMessage.WARNING.ToString(),
+                });
+                return RedirectToAction("ReservationHistory", "ReservationHistoryManagementV2");
+            }
+            var commonDbRequest = new Common();
+            commonDbRequest.ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString();
+            commonDbRequest.ActionIP = ApplicationUtilities.GetIP();
+            commonDbRequest.AgentId = ReservationId;
+            var dbResponseInfo = _buss.DeleteReservation(commonDbRequest);
+            if (dbResponseInfo != null)
+            {
+                if (dbResponseInfo.Code == ResponseCode.Success)
+                {
+                    AddNotificationMessage(new NotificationModel()
+                    {
+                        Message = dbResponseInfo.Message ?? " Your reservation has been Deleted",
+                        NotificationType = NotificationMessage.SUCCESS,
+                        Title = NotificationMessage.SUCCESS.ToString(),
+                    });
+                    return Json(dbResponseInfo.SetMessageInTempData(this));
+                }
+                else
+                {
+                    AddNotificationMessage(new NotificationModel()
+                    {
+                        Message = dbResponseInfo.Message ?? "Failed",
+                        NotificationType = NotificationMessage.INFORMATION,
+                        Title = NotificationMessage.INFORMATION.ToString(),
+                    });
+                    return Json(JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                AddNotificationMessage(new NotificationModel()
+                {
+                    Message = "Something went wrong. Please try again later.",
+                    NotificationType = NotificationMessage.INFORMATION,
+                    Title = NotificationMessage.INFORMATION.ToString(),
+                });
+                return Json(JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }
 

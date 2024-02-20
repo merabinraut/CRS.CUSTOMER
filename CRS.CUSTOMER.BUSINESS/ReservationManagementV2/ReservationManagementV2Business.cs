@@ -18,6 +18,11 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
             return _repo.CancelReservation(commonDBRequest);
         }
 
+        public CommonDbResponse DeleteReservation(Common commonDbRequest)
+        {
+            return _repo.DeleteReservation(commonDbRequest);
+        }
+
         public List<AllHistoryModelCommon> GetAllHistoryList(string customerId)
         {
             return _repo.GetAllHistoryList(customerId);

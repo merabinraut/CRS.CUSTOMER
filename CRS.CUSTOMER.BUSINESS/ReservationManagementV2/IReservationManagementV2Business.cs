@@ -7,6 +7,7 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
     public interface IReservationManagementV2Business
     {
         CommonDbResponse CancelReservation(Common commonDBRequest);
+        CommonDbResponse DeleteReservation(Common commonDbRequest);
         List<AllHistoryModelCommon> GetAllHistoryList(string customerId);
         List<CancelledHistoryModelCommon> GetCancelledHistory(string customerId);
         ReservationHistoryDetailModelCommon GetReservationHistoryDetail(string customerId, string reservationId);
