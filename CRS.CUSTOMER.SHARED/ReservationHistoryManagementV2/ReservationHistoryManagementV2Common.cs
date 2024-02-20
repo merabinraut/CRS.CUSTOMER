@@ -16,6 +16,7 @@ namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
         public string CustomerId { get; set; }
         public string ClubLogo { get; set; }
         public string LocationURL { get; set; }
+        public string MobileNumber { get; set; }
     }
     public class VisitedHistoryModelCommon
     {
@@ -32,6 +33,7 @@ namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
         public string CustomerId { get; set; }
         public string ClubLogo { get; set; }
         public string LocationURL { get; set; }
+        public string MobileNumber { get; set; }
     }
     public class CancelledHistoryModelCommon
     {
@@ -48,6 +50,7 @@ namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
         public string CustomerId { get; set; }
         public string ClubLogo { get; set; }
         public string LocationURL { get; set; }
+        public string MobileNumber { get; set; }
     }
     public class AllHistoryModelCommon
     {
@@ -64,6 +67,7 @@ namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
         public string CustomerId { get; set; }
         public string ClubLogo { get; set; }
         public string LocationURL { get; set; }
+        public string MobileNumber { get; set; }
     }
     #region " Reservation History Detail Model"
     public class ReservationHistoryDetailModelCommon
