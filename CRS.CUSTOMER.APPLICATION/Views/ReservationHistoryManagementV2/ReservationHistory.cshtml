@@ -604,30 +604,82 @@
                                         </div>
 
                                     </div>
-                                    <div class="py-[6px] px-2">
-                                        <div class="flex justify-center mb-[2px]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
-                                                      fill="#666666" />
-                                            </svg>
+                                    @if (item.TransactionStatus.Trim().ToUpper() == "P")
+                                    {
+                                        <div class="py-[6px] px-2" data-drawer-target="drawer-date" data-drawer-show="drawer-date" data-drawer-placement="bottom" aria-controls="drawer-date" onclick="editTime('@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
+                                                          fill="#666666" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                時間変更
+                                            </div>
                                         </div>
-                                        <div class="text-[#565656] text-[8px]">
-                                            時間変更
+                                        <div class="py-[6px] px-2" data-drawer-target="model_cancel" data-drawer-show="model_cancel" data-drawer-placement="center" aria-controls="model_cancel" onclick="getid('@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M3.25167 4.38089L4.43019 3.19922L8.01261 6.79236L11.5694 3.22607L12.7468 4.40551L9.1889 7.97292L12.7992 11.5918L11.6218 12.7724L8.01261 9.15348L4.37662 12.7992L3.19922 11.6187L6.83409 7.97292L3.25167 4.38089Z"
+                                                          fill="#898783" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                キャンセル
+                                            </div>
                                         </div>
+                                    }
+                                    else if (item.TransactionStatus.Trim().ToUpper() == "C")
+                                    {
+                                        <div class="py-[6px] px-2">
+                                            <div class="flex justify-center mb-[2px]" onclick="openRedoModal('modal_redo','@item.ReservationId')">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M8 1.5C4.416 1.5 1.5 4.416 1.5 8C1.5 11.584 4.416 14.5 8 14.5C11.584 14.5 14.5 11.584 14.5 8H13.5C13.5009 8.72252 13.3592 9.43811 13.0831 10.1058C12.807 10.7735 12.4019 11.3801 11.891 11.891C11.3801 12.4019 10.7735 12.807 10.1058 13.0831C9.43811 13.3592 8.72252 13.5009 8 13.5C7.27748 13.5009 6.56189 13.3592 5.8942 13.0831C5.22652 12.807 4.61985 12.4019 4.10896 11.891C3.59806 11.3801 3.19297 10.7735 2.91688 10.1058C2.64079 9.43811 2.49912 8.72252 2.5 8C2.49912 7.27748 2.64079 6.56189 2.91688 5.8942C3.19297 5.22652 3.59806 4.61985 4.10896 4.10896C4.61985 3.59806 5.22652 3.19297 5.8942 2.91688C6.56189 2.64079 7.27748 2.49912 8 2.5C8.91612 2.49777 9.81815 2.72548 10.6234 3.16225C11.4287 3.59903 12.1116 4.23091 12.6093 5H10V6H14V2H13V3.86C12.392 3.12248 11.6285 2.52846 10.7641 2.12047C9.89971 1.71249 8.95583 1.50061 8 1.5Z"
+                                                          fill="#F89336" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                やり直す
+                                            </div>
+                                        </div>
+                                        <div class="py-[6px] px-2" onclick="openDeleteModal('modal_delete','@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M7 2C6.738 2 6.47067 2.092 6.28133 2.28133C6.092 2.47067 6 2.738 6 3V3.5H2.5V4.5H3.04667L4 13.5467L4.04667 14H11.9533L12 13.5467L12.9533 4.5H13.5V3.5H10V3C10 2.738 9.908 2.47067 9.71867 2.28133C9.52933 2.092 9.262 2 9 2H7ZM7 3H9V3.5H7V3ZM4.06267 4.5H11.9373L11.0467 13H4.95333L4.06267 4.5ZM6 6V11.5H7V6H6ZM7.5 6V11.5H8.5V6H7.5ZM9 6V11.5H10V6H9Z"
+                                                          fill="#F33D3D" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                削除
+                                            </div>
 
-                                    </div>
-                                    <div class="py-[6px] px-2">
-                                        <div class="flex justify-center mb-[2px]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                <path d="M3.25167 4.38089L4.43019 3.19922L8.01261 6.79236L11.5694 3.22607L12.7468 4.40551L9.1889 7.97292L12.7992 11.5918L11.6218 12.7724L8.01261 9.15348L4.37662 12.7992L3.19922 11.6187L6.83409 7.97292L3.25167 4.38089Z"
-                                                      fill="#898783" />
-                                            </svg>
                                         </div>
-                                        <div class="text-[#565656] text-[8px]">
-                                            キャンセル
+                                    }
+                                    else if (item.TransactionStatus.Trim().ToUpper() == "A" || item.TransactionStatus.Trim().ToUpper() == "S")
+                                    {
+                                        <div class="py-[6px] px-2">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
+                                                          fill="#666666" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                時間変更
+                                            </div>
                                         </div>
-
-                                    </div>
+                                        <div class="py-[6px] px-2">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M3.25167 4.38089L4.43019 3.19922L8.01261 6.79236L11.5694 3.22607L12.7468 4.40551L9.1889 7.97292L12.7992 11.5918L11.6218 12.7724L8.01261 9.15348L4.37662 12.7992L3.19922 11.6187L6.83409 7.97292L3.25167 4.38089Z"
+                                                          fill="#898783" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                キャンセル
+                                            </div>
+                                        </div>
+                                    }
 
                                 </div>
                             </div>
@@ -639,13 +691,9 @@
             </div>
         </div>
     </div>
-
-
-
     <script>function gotoHistoryDetail(reservationId, customerId) {
             window.location.href = "/ReservationHistoryManagementV2/ViewHistoryDetail?ReservationId=" + reservationId + "&CustomerId=" + customerId;
         }</script>
-
     <!-- Pop up section for reschedule time section-->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
     <style>
@@ -974,9 +1022,8 @@
                         window.location.href = "/ReservationHistoryManagementV2/ReservationHistory";
                     }
                 });
-            } 
-        }
-    </script>
+            }
+        }</script>
     <script>function closeRedoModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
