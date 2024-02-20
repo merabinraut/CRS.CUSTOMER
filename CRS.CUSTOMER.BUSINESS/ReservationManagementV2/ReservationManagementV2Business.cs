@@ -13,6 +13,11 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
 			_repo = repo;
 		}
 
+        public CommonDbResponse CancelReservation(Common commonDBRequest)
+        {
+            return _repo.CancelReservation(commonDBRequest);
+        }
+
         public List<AllHistoryModelCommon> GetAllHistoryList(string customerId)
         {
             return _repo.GetAllHistoryList(customerId);
@@ -36,6 +41,11 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
         public List<VisitedHistoryModelCommon> GetVisitedHistoryList(string customerId)
         {
             return _repo.GetVisitedHistoryList(customerId);
+        }
+
+        public CommonDbResponse RedoReservation(Common commonDbRequest)
+        {
+            return _repo.RedoReservation(commonDbRequest);
         }
 
         public CommonDbResponse RescheduleReservation(Common commonDBRequest, string time)

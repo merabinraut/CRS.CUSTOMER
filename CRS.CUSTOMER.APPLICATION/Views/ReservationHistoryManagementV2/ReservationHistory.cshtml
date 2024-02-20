@@ -165,7 +165,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="py-[6px] px-2">
+                                        <div class="py-[6px] px-2" data-drawer-target="model_cancel" data-drawer-show="model_cancel" data-drawer-placement="center" aria-controls="model_cancel" onclick="getid('@item.ReservationId')">
                                             <div class="flex justify-center mb-[2px]">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                     <path d="M3.25167 4.38089L4.43019 3.19922L8.01261 6.79236L11.5694 3.22607L12.7468 4.40551L9.1889 7.97292L12.7992 11.5918L11.6218 12.7724L8.01261 9.15348L4.37662 12.7992L3.19922 11.6187L6.83409 7.97292L3.25167 4.38089Z"
@@ -452,7 +452,7 @@
 
                                         </div>
                                         <div class="py-[6px] px-2">
-                                            <div class="flex justify-center mb-[2px]">
+                                            <div class="flex justify-center mb-[2px]" onclick="openRedoModal('modal_redo','@item.ReservationId')">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                     <path d="M8 1.5C4.416 1.5 1.5 4.416 1.5 8C1.5 11.584 4.416 14.5 8 14.5C11.584 14.5 14.5 11.584 14.5 8H13.5C13.5009 8.72252 13.3592 9.43811 13.0831 10.1058C12.807 10.7735 12.4019 11.3801 11.891 11.891C11.3801 12.4019 10.7735 12.807 10.1058 13.0831C9.43811 13.3592 8.72252 13.5009 8 13.5C7.27748 13.5009 6.56189 13.3592 5.8942 13.0831C5.22652 12.807 4.61985 12.4019 4.10896 11.891C3.59806 11.3801 3.19297 10.7735 2.91688 10.1058C2.64079 9.43811 2.49912 8.72252 2.5 8C2.49912 7.27748 2.64079 6.56189 2.91688 5.8942C3.19297 5.22652 3.59806 4.61985 4.10896 4.10896C4.61985 3.59806 5.22652 3.19297 5.8942 2.91688C6.56189 2.64079 7.27748 2.49912 8 2.5C8.91612 2.49777 9.81815 2.72548 10.6234 3.16225C11.4287 3.59903 12.1116 4.23091 12.6093 5H10V6H14V2H13V3.86C12.392 3.12248 11.6285 2.52846 10.7641 2.12047C9.89971 1.71249 8.95583 1.50061 8 1.5Z"
                                                           fill="#F89336" />
@@ -857,8 +857,145 @@
             </div>
         </div>
     </div>
-    <!--<button onclick="openModal('modal2')">timing success</button>-->
-
+    <!--cancel pop up model-->
+    <div id="modal_cancel" class="modal" style="display:none">
+        <div class="modal-content">
+            <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
+                <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('modal_cancel')"
+                      style="top:-49px">&times;</span>
+                <div id="cancel_id" value="" hidden></div>
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow py-6 flex  flex-col">
+                    <!-- Modal header -->
+                    <div class="text-center pt-2 pb-4 px-2 border-b border-[#DCDCDC] flex flex-col justify-center gap-1 ">
+                        <div class=" text-[16px] font-semibold text-[#1A1C1E]">確認</div>
+                        <div class=" text-[12px] font-normal text-[#1A1C1E]">ご予約はキャンセルにしすか？</div>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="grid gap-4 p-6 pt-4 grid-cols-2">
+                        <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeModal('modal_cancel')"
+                                data-modal-hide="defaultModal">
+                            いいえ
+                        </button>
+                        <button class=" btn-primary rounded h-[40px]  text-[#FFFFFF] font-medium text-[14px]  leading-[24px]" onclick="CancelReservation()"
+                                data-modal-hide="defaultModal">
+                            はい
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--redo pop up modal -->
+    <div id="modal_redo" class="modal" style="display:none">
+        <div class="modal-content">
+            <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
+                <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeRedoModal('modal_redo')"
+                      style="top:-49px">&times;</span>
+                <div id="redo_id" value="" hidden></div>
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow py-6 flex  flex-col">
+                    <!-- Modal header -->
+                    <div class="text-center pt-2 pb-4 px-2 border-b border-[#DCDCDC] flex flex-col justify-center gap-1 ">
+                        <div class=" text-[16px] font-semibold text-[#1A1C1E]">確認</div>
+                        <div class=" text-[12px] font-normal text-[#1A1C1E]">ご予約はキャンセルにしすか？</div>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="grid gap-4 p-6 pt-4 grid-cols-2">
+                        <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeModal('modal_cancel')"
+                                data-modal-hide="defaultModal">
+                            いいえ
+                        </button>
+                        <button class=" btn-primary rounded h-[40px]  text-[#FFFFFF] font-medium text-[14px]  leading-[24px]" onclick="RedoReservation()"
+                                data-modal-hide="defaultModal">
+                            はい
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function closeRedoModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
+        }
+        function openRedoModal(modalId,reservationId) {
+            var modal = document.getElementById(modalId);
+            $('#redo_id').val(reservationId);
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }
+        function RedoReservation() {
+            var reservationId = $('#redo_id').val();
+            debugger
+            if (reservationId != "") {
+                $.ajax({
+                    type: 'POST',
+                    async: true,
+                    url: "/ReservationHistoryManagementV2/RedoReservation?RID=" + reservationId,
+                    dataType: 'json',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    },
+                    success: function (data) {
+                        window.location.href = "/ReservationHistoryManagementV2/ReservationHistory";
+                    }
+                });
+            }
+        }
+    </script>
+    <script>
+        function getid(reservationid) {
+            $('#cancel_id').val(reservationid);
+            debugger
+            var modal = document.getElementById('modal_cancel');
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }
+        // Function to close a specific modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
+        }
+        // Close the modal if the overlay is clicked
+        window.onclick = function (event) {
+            var modals = document.getElementsByClassName("modal");
+            for (var i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    closeModal(modals[i].id);
+                }
+            }
+        }
+        // Close the modal only if the overlay is clicked outside of modal1
+        window.onclick = function (event) {
+            var modal1 = document.getElementById('modal_cancel');
+            // Check if the click is outside of modal1
+            if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
+                closeModal('modal_cancel');
+            }
+        }
+        function CancelReservation() {
+            var reservationId = $('#cancel_id').val();
+            $.ajax({
+                type: 'POST',
+                async: true,
+                url: "/ReservationHistoryManagementV2/CancelReservation?RID=" + reservationId,
+                dataType: 'json',
+                data: {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                },
+                success: function (data) {
+                    window.location.href = "/ReservationHistoryManagementV2/ReservationHistory";
+                }
+            });
+        }</script>
     <script>// Function to open a specific modal
         function editTime(reservationid) {
             $('#reservation_id').val(reservationid);
@@ -951,7 +1088,7 @@
             $.ajax({
                 type: "POST",
                 url: "/ReservationHistoryManagementV2/RescheduleReservation",
-                data: data, 
+                data: data,
                 success: function (response) {
                     if (response.redirectToUrl != null || response.redirectToUrl != "") {
                         window.location.href = response.redirectToUrl;

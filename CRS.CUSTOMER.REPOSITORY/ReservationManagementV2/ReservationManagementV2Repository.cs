@@ -2,8 +2,6 @@
 using System.Linq;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2;
-using CRS.CUSTOMER.SHARED.ReservationManagement;
-using DocumentFormat.OpenXml.Office2016.Excel;
 
 namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
 {
@@ -14,6 +12,17 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
 		{
 			_dao = new RepositoryDao();
 		}
+
+        public CommonDbResponse CancelReservation(Common commonDBRequest)
+        {
+            string sp_name = "sproc_reservation_history_management_v2 @Flag='cr'";
+            sp_name += ",@ReservationId=" + _dao.FilterString(commonDBRequest.AgentId);
+            sp_name += ",@ActionUser=" + _dao.FilterString(commonDBRequest.ActionUser);
+            sp_name += ",@ActionIp=" + _dao.FilterString(commonDBRequest.ActionIP);
+            sp_name += ",@ActionPlatform=" + _dao.FilterString(commonDBRequest.ActionPlatform);
+            var dbresponse = _dao.ParseCommonDbResponse(sp_name);
+            return dbresponse;
+        }
 
         public List<AllHistoryModelCommon> GetAllHistoryList(string customerId)
         {
@@ -77,6 +86,17 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
             var dbResponseInfo = _dao.ExecuteDataTable(sp_name);
             if (dbResponseInfo != null && dbResponseInfo.Rows.Count > 0) return _dao.DataTableToListObject<VisitedHistoryModelCommon>(dbResponseInfo).ToList();
             return new List<VisitedHistoryModelCommon>();
+        }
+
+        public CommonDbResponse RedoReservation(Common commonDbRequest)
+        {
+            string sp_name = "sproc_reservation_history_management_v2 @Flag='rr'";
+            sp_name += ",@ReservationId=" + _dao.FilterString(commonDbRequest.AgentId);
+            sp_name += ",@ActionUser=" + _dao.FilterString(commonDbRequest.ActionUser);
+            sp_name += ",@ActionIp=" + _dao.FilterString(commonDbRequest.ActionIP);
+            sp_name += ",@ActionPlatform=" + _dao.FilterString(commonDbRequest.ActionPlatform);
+            var dbResponse = _dao.ParseCommonDbResponse(sp_name);
+            return dbResponse;
         }
 
         public CommonDbResponse RescheduleReservation(Common commonDBRequest, string time)
