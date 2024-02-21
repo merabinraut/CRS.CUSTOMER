@@ -80,6 +80,8 @@
     <Compile Include="BookmarkManagement\IBookmarkManagementBusiness.cs" />
     <Compile Include="CommonManagement\CommonManagementBusiness.cs" />
     <Compile Include="CommonManagement\ICommonManagementBusiness.cs" />
+    <Compile Include="DashboardV2\DashboardV2Business.cs" />
+    <Compile Include="DashboardV2\IDashboardV2Business.cs" />
     <Compile Include="Dashboard\DashboardBusiness.cs" />
     <Compile Include="Dashboard\IDashboardBusiness.cs" />
     <Compile Include="Home\HomeBusiness.cs" />

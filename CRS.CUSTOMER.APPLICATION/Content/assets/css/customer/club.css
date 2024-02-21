@@ -13,15 +13,16 @@
     font-size: 10px;
     position: absolute;
     background-color: #ffffffe6;
-    bottom: 2rem;
+    bottom: 3rem;
     left: 50%;
+    padding-left: 7px;
     transform: translateX(-50%);
     width: 115px;
-    text-align: center;
+    text-align: left;
     border-radius: 4px;
     height: 23px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
@@ -42,7 +43,7 @@
     /* z-index: 100; */
     position: absolute;
     color: #fff;
-    font-size: 16px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 700;
     line-height: 100%;
@@ -115,7 +116,11 @@
     }
 
 .center-image-slider .owl-dots {
-    margin-top: 0px !important;
+    margin-top: -82px !important;
+    z-index: 100;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .review-experience {

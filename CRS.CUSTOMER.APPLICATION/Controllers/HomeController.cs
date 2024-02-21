@@ -390,7 +390,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Session["ProfileImage"] = ProfileImage;
                     Session["CreatedOn"] = response.ActionDate;
                     Session["SystemLinkModel"] = response.SystemLink;
-                    return new Tuple<string, string, bool>("Index", "Dashboard", true);
+                    return new Tuple<string, string, bool>("Index", "DashboardV2", true);
                 }
                 this.AddNotificationMessage(new NotificationModel()
                 {

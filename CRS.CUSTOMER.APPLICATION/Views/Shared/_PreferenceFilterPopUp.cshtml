@@ -1,0 +1,186 @@
+﻿
+<!------------------------------------------------------- #region PREFERENCE------------------------------------------------------->
+<!-- drawer component -->
+<div id="drawer-filter-location"
+     class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform " tabindex="-1"
+     aria-labelledby="drawer-bottom-label">
+    <!-- <div id="drawer-filter-location" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform translate-y-full
+    " tabindex="-1" aria-labelledby="drawer-bottom-label"> -->
+
+    <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
+        <div class="text-center text-white mb-2 text-2xl">
+            <div data-drawer-hide="drawer-filter-location" aria-controls="drawer-filter-location">
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+        </div>
+        <div class="px-4 pb-6 bg-white drawer-filter-location relative no-scrollbar">
+            <div class="">
+                <div class="bg-[#fff]  ">
+                    <div class="sticky top-0 z-10  pt-6 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
+                        <div class="flex gap-[24px] w-full " style="border-bottom: 4px solid #F4F4F4;">
+                            <div class="flex tab-container-plane booking-tab bg-white gap-6 w-full text-sm no-scrollbar">
+                                <button id="tab1Button"
+                                        class="tab-button-plane w-max flex-none tab-link active">
+                                    ホストクラブ
+                                </button>
+                                <button id="tab2Button"
+                                        class="tab-button-plane w-max flex-none tab-link pt-0 ">
+                                    ホスト
+                                </button>
+                                <button id="tab3Button"
+                                        class="tab-button-plane w-max flex-none tab-link pt-0 ">
+                                    新規店舗
+                                </button>
+                                <button id="tab4Button"
+                                        class="tab-button-plane w-max flex-none tab-link pt-0 ">
+                                    現在地に近い店舗
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-4">
+                        <div class="bg-white pb-4 ">
+                            <div id="tab1" class="tab-content-plane   ">
+                                <?php include("./host-club.php") ?>
+                            </div>
+                            <div id="tab2" class="tab-content-plane hidden">
+                                <?php include("./host.php") ?>
+
+                            </div>
+                            <div id="tab3" class="tab-content-plane hidden ">
+                                <?php include("./new-store.php") ?>
+
+                            </div>
+                            <div id="tab4" class="tab-content-plane  hidden">
+                                <?php include("./map.php") ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script>
+    // Get all the div elements
+
+    var divs = document.querySelectorAll('.select-location-store');
+    var inputField = document.querySelector('input[name="selectLocationStore"]'); // Select by name attribute
+    // Add click event listeners to each div
+    divs.forEach(function (div) {
+        div.addEventListener('click', function () {
+            // Remove the 'bg-red' class from all divs
+            divs.forEach(function (d) {
+                d.classList.remove('active');
+
+            });
+            // Add the 'bg-red' class to the clicked div
+            this.classList.add('active');
+            var locationSelectValue = this.querySelector('.select-location-store .locationValue')
+                .textContent.trim();
+            console.log("locationSelectValue", locationSelectValue)
+            // Set the value of the input field to the content of the <p> tag
+            inputField.value = locationSelectValue;
+
+        });
+    });
+</script>
+<script>
+    // Get all the div elements
+
+    var divs = document.querySelectorAll('.select-location-store');
+    var seleclLocationCLub = document.querySelectorAll('.select-location-club');
+
+    var inputField = document.querySelector('input[name="selectLocationStore"]'); // Select by name attribute
+    var inputFieldsClub = document.querySelector('input[name="selectLocationClub"]'); // Select by name attribute
+
+    // Add click event listeners to each div
+    divs.forEach(function (div) {
+        div.addEventListener('click', function () {
+            // Remove the 'bg-red' class from all divs
+            divs.forEach(function (d) {
+                d.classList.remove('active');
+
+            });
+            // Add the 'bg-red' class to the clicked div
+            this.classList.add('active');
+            var locationSelectValue = this.querySelector('.select-location-store .locationValue')
+                .textContent.trim();
+            console.log("locationSelectValue", locationSelectValue)
+            // Set the value of the input field to the content of the <p> tag
+            inputField.value = locationSelectValue;
+
+        });
+    });
+
+    seleclLocationCLub.forEach(function (div) {
+        div.addEventListener('click', function () {
+            // Remove the 'bg-red' class from all divs
+            seleclLocationCLub.forEach(function (d) {
+                d.classList.remove('active');
+
+            });
+            // Add the 'bg-red' class to the clicked div
+            this.classList.add('active');
+            var locationSelectValue = this.querySelector('.select-location-club .locationValue')
+                .textContent
+                .trim();
+            // Set the value of the input field to the content of the <p> tag
+            inputFieldsClub.value = locationSelectValue;
+
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    // see more
+    function seemore() {
+        var x = document.getElementById("seemore");
+
+        if (x.style.display === "none") {
+            x.style.display = "grid";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    const tabs = document.querySelector(".wrapper");
+    const tabButton = document.querySelectorAll(".tab-button");
+    const contents = document.querySelectorAll(".content");
+
+    tabs.onclick = (e) => {
+        const id = e.target.dataset.id;
+        if (id) {
+            tabButton.forEach((btn) => {
+                btn.classList.remove("active");
+            });
+            e.target.classList.add("active");
+
+            contents.forEach((content) => {
+                content.classList.remove("active");
+            });
+            const element = document.getElementById(id);
+            element.classList.add("active");
+        }
+    };
+
+
+
+    const checkboxes = document.querySelectorAll('input[name="myCheckbox"]');
+
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', function () {
+            if (this.checked) {
+                checkboxes.forEach((otherCheckbox) => {
+                    if (otherCheckbox !== this) {
+                        otherCheckbox.checked = false;
+                    }
+                });
+            }
+        });
+    });
+</script>
+<!------------------------------------------------------- #endregion ------------------------------------------------------->

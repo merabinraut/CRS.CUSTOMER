@@ -1,0 +1,102 @@
+﻿<!------------------------------------------------------- #region FILTER-LOCATION ------------------------------------------------------->
+<div id="drawer-search-by-area" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform  translate-y-full
+" tabindex="-1" aria-labelledby="drawer-bottom-label">
+
+    <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
+        <div class="text-center text-white mb-2 text-2xl">
+            <div data-drawer-hide="drawer-search-by-area" aria-controls="drawer-search-by-area">
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+        </div>
+        <div class="px-4 pt-6 pb-6 bg-white " style="padding-top: 24px; border-radius: 6px 6px 0px 0px;">
+            <div>
+                <div class="text-sm text-[#333] font-bold mb-[13px]">
+                    エリアから探す
+                </div>
+                <div class="flex flex-col mt-[8px] gap-[13px]">
+                    <input type="text" name="selectLocationStore" class="hidden" value="歌舞伎町" />
+
+                    <div class="select-location-store select-loaction-host text-[#333] text-sm active">
+                        <div class="square">
+                        </div>
+                        <div class="flex gap-1">
+                            <div class="locationValue font-bold">
+                                歌舞伎町/
+                            </div> <span>東京 (330 Clubs)</span>
+
+                        </div>
+                    </div>
+                    <div class="select-location-store select-loaction-host text-[#333] text-sm ">
+                        <div class="square">
+                        </div>
+                        <div class="flex gap-1">
+                            <div class="locationValue font-bold">キタ・ミナミ/</div> <span>大阪 (160)</span>
+
+                        </div>
+                    </div>
+                    <div class="select-location-store select-loaction-host text-[#333] text-sm ">
+                        <div class="square">
+                        </div>
+                        <div class="flex gap-1">
+                            <div class="locationValue font-bold">愛知/</div> <span>名古屋 (70)</span>
+
+                        </div>
+                    </div>
+                    <div class="select-location-store select-loaction-host text-[#333] text-sm ">
+                        <div class="square">
+                        </div>
+                        <div class="flex gap-1">
+                            <div class="locationValue font-bold">北海道/</div> <span>ススキノ (60)</span>
+
+                        </div>
+                    </div>
+                    <div class="select-location-store select-loaction-host text-[#333] text-sm ">
+                        <div class="square">
+                        </div>
+                        <div class="flex gap-1">
+                            <div class="locationValue font-bold">福岡/</div> <span>中洲 (40)</span>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex pt-6 items-center ">
+
+                <button class="btn btn-primary" style=" border-radius: 8px; ">
+                    <a href="#" class="h-full w-full">
+                        検索する
+                    </a>
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    // Get all the div elements
+    var divs = document.querySelectorAll('.select-location-store');
+    var inputField = document.querySelector('input[name="selectLocationStore"]'); // Select by name attribute
+    // Add click event listeners to each div
+    divs.forEach(function (div) {
+        div.addEventListener('click', function () {
+            // Remove the 'bg-red' class from all divs
+            divs.forEach(function (d) {
+                d.classList.remove('active');
+
+            });
+            // Add the 'bg-red' class to the clicked div
+            this.classList.add('active');
+            var locationSelectValue = this.querySelector('.select-location-store .locationValue')
+                .textContent.trim();
+            console.log("locationSelectValue", locationSelectValue)
+            // Set the value of the input field to the content of the <p> tag
+            inputField.value = locationSelectValue;
+
+        });
+    });
+</script>
+<!------------------------------------------------------- #endregion ------------------------------------------------------->

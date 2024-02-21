@@ -215,6 +215,7 @@
     <Compile Include="Controllers\BookmarkManagementController.cs" />
     <Compile Include="Controllers\CustomController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DashboardV2Controller.cs" />
     <Compile Include="Controllers\ErrorManagementController.cs" />
     <Compile Include="Controllers\FooterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -238,6 +239,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\DDLHelper.cs" />
+    <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="Helper\RenderHelper.cs" />
     <Compile Include="Library\ApplicationUtilities.cs" />
     <Compile Include="Library\LanguageManag.cs" />
@@ -294,6 +296,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\userupload\ClubManagement\" />
+    <Folder Include="Models\DashboardV2\" />
     <Folder Include="Models\RecommendedClubHost\" />
     <Folder Include="Models\UserManagement\" />
     <Folder Include="Views\LogManagement\" />
@@ -486,6 +489,7 @@
     <Content Include="Content\assets\js\owl.carousel.js" />
     <Content Include="Content\assets\js\owl.carousel.min.js" />
     <Content Include="Content\assets\js\reservation-common.js" />
+    <Content Include="Content\assets\js\search-filter-common.js" />
     <Content Include="Content\assets\js\tabs.js" />
     <Content Include="Content\assets\js\toogle.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -673,6 +677,10 @@
     <Content Include="Views\ReservationManagementV2\Billing.cshtml" />
     <Content Include="Views\ReservationManagementV2\Success.cshtml" />
     <Content Include="Views\ReservationManagementV2\Confirmation.cshtml" />
+    <Content Include="Views\DashboardV2\Index.cshtml" />
+    <Content Include="Views\DashboardV2\_MainPageClubHost.cshtml" />
+    <Content Include="Views\Shared\_PreferenceFilterPopUp.cshtml" />
+    <Content Include="Views\Shared\_LocationFilterPopUp.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

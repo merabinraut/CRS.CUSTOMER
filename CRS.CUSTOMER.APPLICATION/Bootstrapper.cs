@@ -1,6 +1,7 @@
 using CRS.CUSTOMER.BUSINESS.BookmarkManagement;
 using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Dashboard;
+using CRS.CUSTOMER.BUSINESS.DashboardV2;
 using CRS.CUSTOMER.BUSINESS.Home;
 using CRS.CUSTOMER.BUSINESS.LocationManagement;
 using CRS.CUSTOMER.BUSINESS.LogManagement.APILogManagement;
@@ -47,6 +48,7 @@ namespace CRS.CUSTOMER.APPLICATION
             container.RegisterType<IBookmarkManagementBusiness, BookmarkManagementBusiness>();
             container.RegisterType<IRecommendedClubHostBusiness, RecommendedClubHostBusiness>();
             container.RegisterType<IReservationManagementV2Business, ReservationManagementV2Business>();
+            container.RegisterType<IDashboardV2Business, DashboardV2Business>();
             return container;
         }
     }

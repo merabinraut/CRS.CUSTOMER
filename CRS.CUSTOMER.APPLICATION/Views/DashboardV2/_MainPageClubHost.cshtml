@@ -1,0 +1,288 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.LocationManagement.LocationClubHostModel
+
+<!-- toggle section end  -->
+<!-- club section  -->
+<div id="tab1" class="tab-content-plane  ">
+    @foreach (var item in Model.ClubListModel)
+    {
+        <div>
+            <section class="tags flex flex-wrap pt-3 pb-2 gap-2 px-4 items-center ">
+                @if (!string.IsNullOrEmpty(@item.Tag1))
+                {
+                    <div style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
+                        <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
+                        @item.Tag1
+                    </div>
+                }
+                <div class=" flex self-center gap-0.5  ">
+                    @if (!string.IsNullOrEmpty(@item.Tag2))
+                    {
+                        <span class="  lg:text-[9px] text-xs   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
+                            @item.Tag2
+                        </span>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Tag3))
+                    {
+                        <span class="  lg:text-[9px] text-xs   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
+                            @item.Tag3
+                        </span>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Tag4))
+                    {
+                        <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
+                            @item.Tag4
+                        </span>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Tag5))
+                    {
+                        <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
+                            @item.Tag5
+                        </span>
+                    }
+                </div>
+            </section>
+
+            <!-- club name -->
+            <section class="w-full flex px-4 pb-2 justify-between ">
+                <a onClick={goToTop}>
+                    <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
+                        <div style="border: 1px solid #FAFAFA;"
+                             class="h-12 w-12 rounded-full  bg-primary border overflow-hidden">
+                            <img src="@item.ClubLogo" alt="" title="club logo"
+                                 class="w-full h-full" />
+                        </div>
+
+                        <div class="flex flex-col ">
+                            <div class="flex gap-1 text-base items-center  font-semibold">
+
+                                <div style="line-height: 100%;" class="text-[14px] font-[700] items-start "
+                                     title="club name">
+                                    @item.ClubName
+                                </div>
+                            </div>
+                            <div style="line-height: 100%;" class="text-xs font-[400] items-start " title="club ">
+                                @item.ClubNameJapanese
+                            </div>
+                            <div style="line-height: 100%;" class="text-[10px] items-start font-[400] text-[#E3A1A1] "
+                                 title="club group">
+                                @item.GroupName
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+
+                <div class=" w-6 h-6 flex flex-col justify-center items-center  p-1  scale-90">
+                    <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer">
+                        <div>
+                            @if (item.IsBookmarked.ToUpper() == "Y")
+                            {
+                                <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[24px] w-[24px]" alt="filled bookmark" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[24px] w-[24px]" alt="not filled bookmark" />
+                            }
+                        </div>
+                        <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
+                            保存
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- photo -->
+            <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5">
+                @foreach (var item2 in item.HostGalleryImage)
+                {
+                    <div class=" ">
+                        <!-- onclick="OpenImagePopup('@item2')">-->
+                        <img src="@item2"
+                             class="aspect-square object-cover h-[120px] w-full" alt="host image" />
+                    </div>
+                }
+            </section>
+
+            <!-- rating /commment -->
+            <section class=" flex justify-start flex-wrap align-top mt-2 px-4 gap-3">
+                <div class="flex items-center gap-0.5" title="club rank">
+                    @{
+                        var unratedScale = (5 - item.AverageRating);
+                        for (int i = 0; i < item.AverageRating; i++)
+                        {
+                            <img src="~/Content/assets/images/ratingstar-filled.svg" class="h-[18px] w-[18px]" alt="rated" />
+                        }
+                        for (int i = 0; i < unratedScale; i++)
+                        {
+                            <img src="~/Content/assets/images/ratingstar-notfilled.svg" class="h-[24px] w-[24px]" alt="unrated" />
+                        }
+                    }
+                    <div class=" text-xs scale-110" title="club rating">
+                        @item.AverageRating
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-1 scale-75">
+                    <div class="flex items-center  " title="comment">
+
+                        <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" width="17" height="16"
+                             viewBox="0 0 17 16" fill="none">
+                            <path d="M1.52429 2.90909V12.8487H6.35078L8.06975 14.5455L9.78872 12.8487H14.6152V2.90909H1.52429ZM2.53129 3.90305H13.6082V11.8548H9.37176L8.06975 13.1399L6.76774 11.8548H2.53129V3.90305ZM4.54527 5.394V6.38796H11.5942V5.394H4.54527ZM4.54527 7.38192V8.37589H11.5942V7.38192H4.54527ZM4.54527 9.36985V10.3638H9.58024V9.36985H4.54527Z"
+                                  fill="#BCB08A" />
+                        </svg>
+                    </div>
+
+                    <div class=" text-xs scale-110">@item.TotalComment</div>
+                </div>
+            </section>
+
+            <!-- club description -->
+
+            <section class="flex flex-col gap-2 px-4 mb-3 ">
+                <p class="line-clamp-3 font-[Noto Sans] text-xs   text-[#333333]">
+                    @item.ClubDescription
+                </p>
+
+            </section>
+
+            <!-- club schedule  -->
+
+            <div class="px-4 py-[12px] flex justify-between items-center">
+                <div>
+                    @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
+                    {
+                        <div class="flex justify-center items-center gap-1 pb-1">
+                            <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">
+                                @if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                                {
+                                    <img src="~/Content/assets/images/customer/sun.svg" class="h-[12px] w-[12px]" alt="sun" />
+                                }
+                                else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                                {
+                                    <img src="~/Content/assets/images/customer/moon.svg" class="h-[12px] w-[12px]" alt="moon" />
+                                }
+                            </div>
+                            <div class="text-sm text-secondary-1">@item.ClubOpeningTime~@item.ClubClosingTime</div>
+
+                        </div>
+                        if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                        {
+                            <div class="bg-[#BCB08A] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="bg-[#D7D7D7] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Unreservable
+                            </div>
+                        }
+                    }
+                </div>
+                <button class="btn-gradient">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
+                </button>
+            </div>
+            <!-- location -->
+        </div>
+        <div style="background-color: #e8e8e8;" class=" h-[8px] my-[0px] py-[0px]">
+
+        </div>
+    }
+    <div style="background-color: #e8e8e8;"
+         class="flex flex-row gap-[4px] justify-center h-[24px] items-center my-[0px] pb-[12px] ">
+        <div style="line-height:18px;" class="text-[#D75A8B] underline text-[12px]">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.See_more
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M4.5 9L7.5 6L4.5 3" stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- club section end  -->
+<!-- Host image section  -->
+<div id="tab2" class="tab-content-plane  hidden ">
+    @foreach (var item in Model.HostListModel)
+    {
+        <div class="flex flex-row gap-[16px] mx-[16px]">
+            <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
+                <div class="w-full flex justify-center">
+                    <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
+                         src="@item.HostImage" />
+                </div>
+                <div id="like">
+                    @if (item.IsBookmarked.ToUpper() == "Y")
+                    {
+                        <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/assets/images/loveicon-notfilled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                    }
+                </div>
+            </div>
+            <div class="grid mt-[16px] mx-[16px] mb-[10px] grid-rows-7">
+                <div style="line-height: 140%;" class="text-[10px]">
+                    @if (!string.IsNullOrEmpty(@item.HostName))
+                    {
+                        <p class="font-[700] text-[13px]">@item.HostName </p>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.FormattedDOB))
+                    {
+                        <p>誕生日 :<span> @item.FormattedDOB</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.HostHeight))
+                    {
+                        <p>身長 :<span> @item.HostHeight</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.HostBloodType))
+                    {
+                        <p>血液型 :<span> @item.HostBloodType</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.HostConstellationGroup))
+                    {
+                        <p>星座 :<span> @item.HostConstellationGroup</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.HostBirthPlace))
+                    {
+                        <p>出身地 :<span> @item.HostBirthPlace</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Occupation))
+                    {
+                        <p>前職 :<span> @item.Occupation</span> </p>
+                    }
+                </div>
+                <div class="flex flex-row gap-1 items-center mb-[8px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+                        <path d="M2.71459 7.28802L2.70677 7.27992L2.70002 7.27344L2.69991 7.27333L2.69977 7.2732L2.69972 7.27314L2.69946 7.2729L2.69551 7.26898C2.69096 7.26443 2.68308 7.25648 2.67238 7.24533C2.65094 7.223 2.6184 7.18812 2.57856 7.14233C2.49833 7.0501 2.39165 6.91721 2.28715 6.75669C2.06486 6.41524 1.87295 6.01061 1.87295 5.57856C1.87295 4.15772 3.00042 3.00912 4.34113 3.00912C5.48553 3.00912 6.23896 3.72054 6.56537 4.06389L7.00022 4.52129L7.43507 4.06389C7.76149 3.72054 8.51491 3.00912 9.65931 3.00912C11 3.00912 12.1275 4.15772 12.1275 5.57856C12.1275 6.01777 11.9411 6.4329 11.7225 6.76253C11.6159 6.92322 11.509 7.05249 11.4297 7.14051C11.3902 7.18425 11.3583 7.21705 11.3376 7.23769C11.3272 7.24799 11.3198 7.25519 11.3156 7.25915L11.3127 7.26192L11.3121 7.26241L11.3121 7.26247L11.3119 7.26261L11.3118 7.26271L11.2993 7.27409L11.2859 7.28802L7.00022 11.7279L2.71459 7.28802Z"
+                              stroke="#D75A8B" stroke-width="1.2" />
+                    </svg>
+                    <p class="text-[10px]">
+                        @item.HostLoveCount
+                    </p>
+                </div>
+                <div style="padding: 4px;" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]">
+                    <div>
+                        <img style="border: 1px solid #F1EEEE;" class="object-cover h-[32px] w-[32px] rounded-full "
+                             src="@item.ClubLogo" alt="clublogo">
+                    </div>
+                    <div class="flex flex-col justify-center ">
+                        <p style="line-height: 100%;" class="text-[10px] text-[#292F33] font-[700]">
+                            @item.ClubName
+                        </p>
+                        <p style="line-height: 100%;" class="text-[8px] text-[#A09E91] font-[400]">
+                            @item.ClubName
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-[#F6F6F6] h-[4px] mt-[16px]">
+
+        </div>
+    }
+</div>
+<!-- Host image section end  -->

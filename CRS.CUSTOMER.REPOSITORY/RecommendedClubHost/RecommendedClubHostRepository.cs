@@ -20,7 +20,7 @@ namespace CRS.CUSTOMER.REPOSITORY.RecommendedClubHost
         {
             var Response = new List<RecommendedClubResponseCommon>();
             string SQL = "EXEC dbo.sproc_get_customer_recommended_clubandhost @Flag = 'grcl'";
-            SQL += ",@PositionId=" + Request.PositionId;
+            SQL += !string.IsNullOrEmpty(Request.PositionId) ? ",@PositionId=" + Request.PositionId : "";
             SQL += ",@CustomerId=" + _dao.FilterString(Request.CustomerId);
             SQL += ",@LocationId=" + _dao.FilterString(Request.LocationId);
             var dbResponse = _dao.ExecuteDataTable(SQL);
@@ -95,7 +95,7 @@ namespace CRS.CUSTOMER.REPOSITORY.RecommendedClubHost
         public List<RecommendedHostResponseCommon> GetRecommendedHost(RecommendedHostRequestCommon Request)
         {
             string SQL = "EXEC dbo.sproc_get_customer_recommended_clubandhost @Flag = 'grhl'";
-            SQL += ",@PositionId=" + Request.PositionId;
+            SQL += !string.IsNullOrEmpty(Request.PositionId) ? ",@PositionId=" + Request.PositionId : "";
             SQL += ",@CustomerId=" + _dao.FilterString(Request.CustomerId);
             SQL += ",@LocationId=" + _dao.FilterString(Request.LocationId);
             SQL += !string.IsNullOrEmpty(Request.ClubId) ? ",@ClubId=" + _dao.FilterString(Request.ClubId) : "";

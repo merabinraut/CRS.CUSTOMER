@@ -102,6 +102,8 @@
     <Compile Include="BookmarkManagement\IBookmarkManagementRepository.cs" />
     <Compile Include="CommonManagement\CommonManagementRepository.cs" />
     <Compile Include="CommonManagement\ICommonManagementRepository.cs" />
+    <Compile Include="DashboardV2\DashboardV2Repository.cs" />
+    <Compile Include="DashboardV2\IDashboardV2Repository.cs" />
     <Compile Include="Dashboard\DashboardRepository.cs" />
     <Compile Include="Dashboard\IDashboardRepository.cs" />
     <Compile Include="Home\HomeRepository.cs" />
