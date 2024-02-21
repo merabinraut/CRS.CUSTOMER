@@ -85,6 +85,9 @@ namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
         public string ClubLogo { get; set; }
         public string HostImages { get; set; }
         public string LocationName { get; set; }
+        public string NoOfPeople { get; set; }
+        public string PlanTime { get; set; }
+        public string Nomination { get; set; }
     }
 
     #endregion

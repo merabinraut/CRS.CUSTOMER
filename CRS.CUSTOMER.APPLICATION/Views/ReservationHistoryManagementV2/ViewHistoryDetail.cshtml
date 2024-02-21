@@ -41,22 +41,22 @@
                         <div class="flex justify-between items-center text-xs font-bold">
                             選択中のホスト
                             <span class="text-primary cursor-pointer">
-                                <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                                @if (Model.TransactionStatus.Trim().ToUpper() == "P")
+                                {
+                                    <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                                }
                             </span>
                         </div>
                         <div class="flex -space-x-2  items-center relative">
-                            <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
-                                 src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                 alt="">
-                            <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
-                                 src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-                                 alt="">
-                            <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
-                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                 alt="">
-                            <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
-                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                 alt="">
+                            @if (Model.HImages != null)
+                            {
+                                foreach (var H_item in Model.HImages)
+                                {
+                                    <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                                         src="@H_item"
+                                         alt="">
+                                }
+                            }
                         </div>
                     </div>
                 </div>
@@ -65,14 +65,17 @@
                     <div class="flex justify-between items-center text-[13px] text-[#404040] font-bold pb-2 ">
                         ご予約内容
                         <span class="text-primary cursor-pointer">
-                            <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                            @if (Model.TransactionStatus.Trim().ToUpper() == "P")
+                            {
+                                <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                            }
                         </span>
                     </div>
                     <div class="text-[12px] text=[#333] pb-[2px]">
-                        来店日時：2024年1月10日(水) 19:00
+                        来店日時：@Model.VisitDate @Model.VisitTime
                     </div>
                     <div class="text-[12px] text=[#333]">
-                        来店人数：2名
+                        来店人数：@Model.NoOfPeople 名
                     </div>
                 </div>
                 <!-- プラン内容 -->
@@ -92,12 +95,15 @@
                                 </span>
                             </div>
                             <span class="text-primary cursor-pointer">
-                                <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                                @if (Model.TransactionStatus.Trim().ToUpper() == "P")
+                                {
+                                    <i class="las la-pen"></i><span class="border-b border-primary ">編集</span>
+                                }
                             </span>
                         </div>
                         <div>
                             <div class="text-[#D75A8B] font-futura pb-1">
-                                ¥1,000
+                                ¥@Model.Price
                             </div>
                             <div class="flex items-center gap-2">
                                 <div class="flex items-center gap-1">
@@ -105,7 +111,7 @@
                                         <i class="las la-clock"></i>
                                     </div>
                                     <div class="text-[11px] text-[#282828] font-futura">
-                                        50分制
+                                        @Model.PlanTime 分制
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-1">
@@ -121,7 +127,7 @@
                                         <i class="las la-user"></i>
                                     </div>
                                     <div class="text-[11px] text-[#282828] font-futura">
-                                        場内指名1名まで
+                                        場内指名 @Model.Nomination 名まで
                                     </div>
                                 </div>
                             </div>

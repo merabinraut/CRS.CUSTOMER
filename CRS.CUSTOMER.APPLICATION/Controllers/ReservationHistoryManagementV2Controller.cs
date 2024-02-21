@@ -30,9 +30,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 item.ReservationId = item.ReservationId.EncryptParameter();
                 item.CustomerId = item.CustomerId.EncryptParameter();
                 item.InvoiceId = item.InvoiceId.EncryptParameter();
-                DateTime originalDate = DateTime.ParseExact(item.VisitDate, "yyyy/MM/dd H:mm:ss", null);
-                // Format the date using the custom format string "yyyy/MM/dd"
-                item.VisitDate = originalDate.ToString("yyyy/MM/dd");
+                if (DateTime.TryParse(item.VisitDate, out DateTime date))
+                {
+                    item.VisitDate = date.ToString("M/d/yyyy");
+                }
             }
             #endregion
 
@@ -45,9 +46,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 visitedItem.ReservationId = visitedItem.ReservationId.EncryptParameter();
                 visitedItem.CustomerId = visitedItem.CustomerId.EncryptParameter();
                 visitedItem.InvoiceId = visitedItem.InvoiceId.EncryptParameter();
-                DateTime originalDate = DateTime.ParseExact(visitedItem.VisitDate, "yyyy/MM/dd H:mm:ss", null);
-                // Format the date using the custom format string "yyyy/MM/dd"
-                visitedItem.VisitDate = originalDate.ToString("yyyy/MM/dd");
+                if (DateTime.TryParse(visitedItem.VisitDate, out DateTime date))
+                {
+                    visitedItem.VisitDate = date.ToString("M/d/yyyy");
+                }
             }
             #endregion
 
@@ -60,9 +62,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 cancelItem.ReservationId = cancelItem.ReservationId.EncryptParameter();
                 cancelItem.CustomerId = cancelItem.CustomerId.EncryptParameter();
                 cancelItem.InvoiceId = cancelItem.InvoiceId.EncryptParameter();
-                DateTime originalDate = DateTime.ParseExact(cancelItem.VisitDate, "yyyy/MM/dd H:mm:ss", null);
-                // Format the date using the custom format string "yyyy/MM/dd"
-                cancelItem.VisitDate = originalDate.ToString("yyyy/MM/dd");
+                if (DateTime.TryParse(cancelItem.VisitDate, out DateTime date))
+                {
+                    cancelItem.VisitDate = date.ToString("M/d/yyyy");
+                }
             }
             #endregion
 
@@ -75,9 +78,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 allItem.ReservationId = allItem.ReservationId.EncryptParameter();
                 allItem.CustomerId = allItem.CustomerId.EncryptParameter();
                 allItem.InvoiceId = allItem.InvoiceId.EncryptParameter();
-                DateTime originalDate = DateTime.ParseExact(allItem.VisitDate, "yyyy/MM/dd H:mm:ss", null);
-                // Format the date using the custom format string "yyyy/MM/dd"
-                allItem.VisitDate = originalDate.ToString("yyyy/MM/dd");
+                if (DateTime.TryParse(allItem.VisitDate, out DateTime date))
+                {
+                    allItem.VisitDate = date.ToString("M/d/yyyy");
+                }
             }
             #endregion
             if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
@@ -95,6 +99,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ReservationHistoryDetailModel responseinfo = new ReservationHistoryDetailModel();
             var dbResponseInfo = _buss.GetReservationHistoryDetail(CustomerId, reservationId);
             responseinfo = dbResponseInfo.MapObject<ReservationHistoryDetailModel>();
+            responseinfo.HImages = responseinfo.HostImages.Split(',');
             return View(responseinfo);
         }
         [HttpPost, ValidateAntiForgeryToken]

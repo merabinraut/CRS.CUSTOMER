@@ -5,13 +5,13 @@ using CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2;
 
 namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
 {
-    public class ReservationManagementV2Repository:IReservationManagementV2Repository
-	{
-		RepositoryDao _dao;
-		public ReservationManagementV2Repository()
-		{
-			_dao = new RepositoryDao();
-		}
+    public class ReservationManagementV2Repository : IReservationManagementV2Repository
+    {
+        RepositoryDao _dao;
+        public ReservationManagementV2Repository()
+        {
+            _dao = new RepositoryDao();
+        }
 
         public CommonDbResponse CancelReservation(Common commonDBRequest)
         {
@@ -75,7 +75,10 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
                     ClubNameJp = _dao.ParseColumnValue(dbResponse, "ClubNameJp").ToString(),
                     Price = _dao.ParseColumnValue(dbResponse, "Price").ToString(),
                     HostImages = _dao.ParseColumnValue(dbResponse, "HostImages").ToString(),
-                    LocationName=_dao.ParseColumnValue(dbResponse, "LocationName").ToString()
+                    LocationName = _dao.ParseColumnValue(dbResponse, "LocationName").ToString(),
+                    NoOfPeople = _dao.ParseColumnValue(dbResponse, "NoOfPeople").ToString(),
+                    PlanTime = _dao.ParseColumnValue(dbResponse, "PlanTime").ToString(),
+                    Nomination = _dao.ParseColumnValue(dbResponse, "Nomination").ToString(),
                 };
             }
             return new ReservationHistoryDetailModelCommon();
