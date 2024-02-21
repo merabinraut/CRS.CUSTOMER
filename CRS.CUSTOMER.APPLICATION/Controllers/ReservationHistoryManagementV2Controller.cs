@@ -28,12 +28,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 item.ClubId = item.ClubId.EncryptParameter();
                 item.ReservationId = item.ReservationId.EncryptParameter();
-                item.CustomerId = item.CustomerId.EncryptParameter();
-                item.InvoiceId = item.InvoiceId.EncryptParameter();
-                if (DateTime.TryParse(item.VisitDate, out DateTime date))
-                {
-                    item.VisitDate = date.ToString("M/d/yyyy");
-                }
+                item.CustomerId = item.CustomerId.EncryptParameter();                
             }
             #endregion
 
@@ -44,12 +39,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 visitedItem.ClubId = visitedItem.ClubId.EncryptParameter();
                 visitedItem.ReservationId = visitedItem.ReservationId.EncryptParameter();
-                visitedItem.CustomerId = visitedItem.CustomerId.EncryptParameter();
-                visitedItem.InvoiceId = visitedItem.InvoiceId.EncryptParameter();
-                if (DateTime.TryParse(visitedItem.VisitDate, out DateTime date))
-                {
-                    visitedItem.VisitDate = date.ToString("M/d/yyyy");
-                }
+                visitedItem.CustomerId = visitedItem.CustomerId.EncryptParameter();                
             }
             #endregion
 
@@ -60,12 +50,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 cancelItem.ClubId = cancelItem.ClubId.EncryptParameter();
                 cancelItem.ReservationId = cancelItem.ReservationId.EncryptParameter();
-                cancelItem.CustomerId = cancelItem.CustomerId.EncryptParameter();
-                cancelItem.InvoiceId = cancelItem.InvoiceId.EncryptParameter();
-                if (DateTime.TryParse(cancelItem.VisitDate, out DateTime date))
-                {
-                    cancelItem.VisitDate = date.ToString("M/d/yyyy");
-                }
+                cancelItem.CustomerId = cancelItem.CustomerId.EncryptParameter();                
             }
             #endregion
 
@@ -76,12 +61,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 allItem.ClubId = allItem.ClubId.EncryptParameter();
                 allItem.ReservationId = allItem.ReservationId.EncryptParameter();
-                allItem.CustomerId = allItem.CustomerId.EncryptParameter();
-                allItem.InvoiceId = allItem.InvoiceId.EncryptParameter();
-                if (DateTime.TryParse(allItem.VisitDate, out DateTime date))
-                {
-                    allItem.VisitDate = date.ToString("M/d/yyyy");
-                }
+                allItem.CustomerId = allItem.CustomerId.EncryptParameter();                
             }
             #endregion
             if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
