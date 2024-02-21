@@ -578,6 +578,7 @@
     <Content Include="Views\ReservationHistoryManagementV2\ReservationHistory.cshtml" />
     <Content Include="Views\ReservationHistoryManagementV2\ViewHistoryDetail.cshtml" />
     <Content Include="Views\ProfileManagement\ChangePasswordV2.cshtml" />
+    <Content Include="Views\Home\SetNewPasswordV2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Resource.Ja.resx">
