@@ -148,7 +148,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return RedirectToAction("Index", userProfileModel);
         }
 
-        public ActionResult ChangePassword()
+        public ActionResult ChangePasswordV2()
         {
             ViewBag.ActionPageName = "NavMenu";
             ViewBag.PageTitle = Resources.Resource.ChangePassword;
@@ -156,7 +156,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(ChangePasswordModel changePasswordModel)
+        public ActionResult ChangePasswordV2(ChangePasswordModel changePasswordModel)
         {
             ViewBag.ActionPageName = "NavMenu";
             ViewBag.PageTitle = Resources.Resource.ChangePassword;
