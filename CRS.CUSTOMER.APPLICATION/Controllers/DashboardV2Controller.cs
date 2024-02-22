@@ -1,14 +1,18 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
+using CRS.CUSTOMER.APPLICATION.Models.CommonModel;
 using CRS.CUSTOMER.APPLICATION.Models.Dashboard;
+using CRS.CUSTOMER.APPLICATION.Models.DashboardV2;
 using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
 using CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement;
+using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Dashboard;
 using CRS.CUSTOMER.BUSINESS.DashboardV2;
 using CRS.CUSTOMER.BUSINESS.RecommendedClubHost;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.RecommendedClubHost;
 using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -21,10 +25,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IDashboardBusiness _oldDashboardBusiness;
         private readonly IRecommendedClubHostBusiness _recommendedClubHostBuss;
         private readonly IDashboardV2Business _dashboardBusiness;
+        private readonly ICommonManagementBusiness _commonBusiness;
 
-        public DashboardV2Controller(IDashboardBusiness oldDashboardBusiness, IRecommendedClubHostBusiness recommendedClubHostBuss, IDashboardV2Business dashboardBusiness)
-            => (_oldDashboardBusiness, _recommendedClubHostBuss, _dashboardBusiness) = (oldDashboardBusiness, recommendedClubHostBuss, dashboardBusiness);
+        public DashboardV2Controller(IDashboardBusiness oldDashboardBusiness, IRecommendedClubHostBusiness recommendedClubHostBuss, IDashboardV2Business dashboardBusiness, ICommonManagementBusiness commonBusiness)
+          => (_oldDashboardBusiness, _recommendedClubHostBuss, _dashboardBusiness, _commonBusiness) = (oldDashboardBusiness, recommendedClubHostBuss, dashboardBusiness, commonBusiness);
 
+        #region DASHBOARD
         [HttpGet]
         public ActionResult Index()
         {
@@ -162,12 +168,41 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Filter
         [HttpGet]
         public JsonResult GetLocationFilterPopUp()
         {
             var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
+            var Response = new List<StaticDataModel>();
+            Response = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("1"));
+            if (Response.Count > 0)
+            {
+                responseData["Code"] = 0;
+                responseData["Message"] = "Success";
+                responseData["PartialView"] = RenderHelper.RenderPartialViewToString(this, "_LocationFilterPopUp", Response);
+            }
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult GetPreferenceFilterPopUp()
+        {
+            var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
+            var Response = new PreferenceFilterModel();
+            Response.AgeModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("7"));
+            Response.ConstellationModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("8"));
+            Response.BloodTypeModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("5"));
+            Response.ClubAvailabilityModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("4"));
+            Response.ClubCategoryModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("2"));
+            Response.HeightModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("6"));
+            Response.PlanPriceModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("3"));
+            responseData["Code"] = 0;
+            responseData["Message"] = "Success";
+            responseData["PartialView"] = RenderHelper.RenderPartialViewToString(this, "_PreferenceFilterPopUp", Response);
+            return Json(responseData, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

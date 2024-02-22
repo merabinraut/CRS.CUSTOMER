@@ -247,6 +247,8 @@
     <Compile Include="Library\StaticData.cs" />
     <Compile Include="Library\StringCipher.cs" />
     <Compile Include="Models\BookmarkManagement\BookmarkManagementModel.cs" />
+    <Compile Include="Models\CommonModel\CommonModel.cs" />
+    <Compile Include="Models\DashboardV2\PreferenceFilterModel.cs" />
     <Compile Include="Models\Dashboard\BannersModel.cs" />
     <Compile Include="Models\Dashboard\DashboardModel.cs" />
     <Compile Include="Models\Dashboard\DashboardPlanModel.cs" />
@@ -296,7 +298,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\userupload\ClubManagement\" />
-    <Folder Include="Models\DashboardV2\" />
     <Folder Include="Models\RecommendedClubHost\" />
     <Folder Include="Models\UserManagement\" />
     <Folder Include="Views\LogManagement\" />

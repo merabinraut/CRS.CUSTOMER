@@ -1,17 +1,14 @@
-﻿
+﻿@model CRS.CUSTOMER.APPLICATION.Models.DashboardV2.PreferenceFilterModel
 <!------------------------------------------------------- #region PREFERENCE------------------------------------------------------->
 <!-- drawer component -->
 <div id="drawer-filter-location"
      class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform " tabindex="-1"
      aria-labelledby="drawer-bottom-label">
-    <!-- <div id="drawer-filter-location" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform translate-y-full
-    " tabindex="-1" aria-labelledby="drawer-bottom-label"> -->
 
     <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
-        <div class="text-center text-white mb-2 text-2xl">
+        <div class="text-center text-white mb-2 text-2xl" onclick="ClosePreferenceFilterPopUp();">
             <div data-drawer-hide="drawer-filter-location" aria-controls="drawer-filter-location">
                 <i class="fa-solid fa-chevron-down"></i>
-
             </div>
         </div>
         <div class="px-4 pb-6 bg-white drawer-filter-location relative no-scrollbar">
@@ -21,19 +18,19 @@
                         <div class="flex gap-[24px] w-full " style="border-bottom: 4px solid #F4F4F4;">
                             <div class="flex tab-container-plane booking-tab bg-white gap-6 w-full text-sm no-scrollbar">
                                 <button id="tab1Button"
-                                        class="tab-button-plane w-max flex-none tab-link active">
+                                        class="tab-button-plane preferance-tab w-max flex-none tab-link active">
                                     ホストクラブ
                                 </button>
                                 <button id="tab2Button"
-                                        class="tab-button-plane w-max flex-none tab-link pt-0 ">
+                                        class="tab-button-plane preferance-tab w-max flex-none tab-link pt-0 ">
                                     ホスト
                                 </button>
                                 <button id="tab3Button"
-                                        class="tab-button-plane w-max flex-none tab-link pt-0 ">
+                                        class="tab-button-plane preferance-tab w-max flex-none tab-link pt-0 ">
                                     新規店舗
                                 </button>
                                 <button id="tab4Button"
-                                        class="tab-button-plane w-max flex-none tab-link pt-0 ">
+                                        class="tab-button-plane preferance-tab w-max flex-none tab-link pt-0 ">
                                     現在地に近い店舗
                                 </button>
                             </div>
@@ -41,19 +38,806 @@
                     </div>
                     <div class="my-4">
                         <div class="bg-white pb-4 ">
-                            <div id="tab1" class="tab-content-plane   ">
-                                <?php include("./host-club.php") ?>
-                            </div>
-                            <div id="tab2" class="tab-content-plane hidden">
-                                <?php include("./host.php") ?>
+                            <div id="tab1" class="tab-content-plane  tab-preferance  ">
+                                <!----------------------------- #region host-club ----------------------------->
+                                <div class="pb-8">
+                                    <!-- 店舗カテゴリーから探す -->
+                                    <div>
+                                        <div class="text-xs text-[#333]">
+                                            こだわりから探す
+                                        </div>
+                                        <form>
+                                            <div class="relative input-search-wrapper h-[40px] my-4 ">
+                                                <div class="absolute inset-y-0 left-0 flex items-center pt-[5pxa] pl-[16px] pointer-events-none">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                        <path d="M8.125 1.875C11.5698 1.875 14.375 4.68018 14.375 8.125C14.375 9.62158 13.8501 10.9937 12.9688 12.0703L17.9492 17.0508L17.0508 17.9492L12.0703 12.9688C10.9937 13.8501 9.62158 14.375 8.125 14.375C4.68018 14.375 1.875 11.5698 1.875 8.125C1.875 4.68018 4.68018 1.875 8.125 1.875ZM8.125 3.125C5.35645 3.125 3.125 5.35645 3.125 8.125C3.125 10.8936 5.35645 13.125 8.125 13.125C10.8936 13.125 13.125 10.8936 13.125 8.125C13.125 5.35645 10.8936 3.125 8.125 3.125Z"
+                                                              fill="#CECCC5" />
+                                                    </svg>
+                                                </div>
+                                                <input type="search" id="default-search"
+                                                       class="input-search block w-full h-[40px] focus-visible:outline-none" placeholder="店舗名から探す">
+                                                <input type="text" id="time-id" name="Time" value="" hidden />
+                                                <input type="text" id="clubavailability-id" name="ClubAvailability" value="" hidden />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="flex flex-col gap-[13px] mt-2">
+                                        <div class="">
+                                            <div class="text-sm text-[#333] font-bold mb-2">
+                                                店舗カテゴリーから探す
+                                            </div>
+                                            <form class="search-field-selection">
+                                                <div class="flex flex-col w-full ">
+                                                    <div class="flex flex-row flex-wrap  gap-[24px]">
+                                                        @foreach (var item in Model.ClubCategoryModel)
+                                                        {
+                                                            <div>
+                                                                <input type="radio" id="@item.StaticValue" name="search-by-store-category" value="@item.StaticValue">
+                                                                <label for="@item.StaticValue" class="w-[88px]">@item.StaticLabel</label>
+                                                            </div>
+                                                        }
+                                                    </div>
 
-                            </div>
-                            <div id="tab3" class="tab-content-plane hidden ">
-                                <?php include("./new-store.php") ?>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="">
+                                            <div class="text-sm text-[#333] font-bold mb-2">
+                                                料金
+                                            </div>
+                                            <form class="search-field-selection ">
+                                                <div class="flex flex-col   w-full ">
+                                                    <div class="flex flex-row flex-wrap  gap-[24px]">
+                                                        @foreach (var item in Model.PlanPriceModel)
+                                                        {
+                                                            <div>
+                                                                <input type="radio" id="@item.StaticValue" class="hidden" name="plan" value="@item.StaticValue">
+                                                                <label for="@item.StaticValue" class="w-[88px]">@item.StaticLabel</label>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="border-y-[1px] border-[#EFEFEF] py-[10px]">
+                                            <div class="text-sm text-[#333] font-bold mb-2">
+                                                料金
+                                            </div>
+                                            <div class="flex flex-row mt-[8px] gap-6 mb-4">
+                                                <input type="text" name="searchbybusinesshours" class="hidden" value="歌舞伎町" />
+                                                <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm active">
+                                                    <div class="">
+                                                        <svg class="inactive-svg" xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                             viewBox="0 0 13 13" fill="none">
+                                                            <circle cx="6.5" cy="6.5" r="5" stroke="#666666" stroke-opacity="0.4" stroke-width="2" />
+                                                        </svg>
+                                                        <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                             viewBox="0 0 13 13" fill="none">
+                                                            <circle cx="6.5" cy="6.5" r="5" stroke="#D75A8B" stroke-width="2" />
+                                                            <circle cx="6.4987" cy="6.4987" r="2.66667" fill="#D75A8B" />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="searchbybusinesshoursValue text-sm text-[#333]">昼</div>
+                                                </div>
+                                                <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm ">
+                                                    <div class="">
+                                                        <svg class="inactive-svg" xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                             viewBox="0 0 13 13" fill="none">
+                                                            <circle cx="6.5" cy="6.5" r="5" stroke="#666666" stroke-opacity="0.4" stroke-width="2" />
+                                                        </svg>
+                                                        <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                             viewBox="0 0 13 13" fill="none">
+                                                            <circle cx="6.5" cy="6.5" r="5" stroke="#D75A8B" stroke-width="2" />
+                                                            <circle cx="6.4987" cy="6.4987" r="2.66667" fill="#D75A8B" />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="searchbybusinesshoursValue text-sm text-[#333]">夜</div>
+                                                </div>
+                                                <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm ">
+                                                    <div class="">
+                                                        <svg class="inactive-svg" xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                             viewBox="0 0 13 13" fill="none">
+                                                            <circle cx="6.5" cy="6.5" r="5" stroke="#666666" stroke-opacity="0.4" stroke-width="2" />
+                                                        </svg>
+                                                        <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+                                                             viewBox="0 0 13 13" fill="none">
+                                                            <circle cx="6.5" cy="6.5" r="5" stroke="#D75A8B" stroke-width="2" />
+                                                            <circle cx="6.4987" cy="6.4987" r="2.66667" fill="#D75A8B" />
+                                                        </svg>
+                                                    </div>
+                                                    <div class="searchbybusinesshoursValue text-sm text-[#333]">時間を指定する</div>
+                                                </div>
 
+                                            </div>
+                                            <!------------------------------------------------------------------------------#region Time------------------------------------------------------------------------------>
+                                            <div class="relative">
+                                                <div class=" showTimeList h-[32px] w-[72px] px-3 py-1 bg-[#F6F6F6] rounded-[4px] text-[#666] text-xs flex justify-between items-center">
+                                                    <div id="selected-time-id">
+                                                        00:00
+                                                    </div>
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5" fill="none">
+                                                            <path d="M4 5L0.535898 0.5L7.4641 0.5L4 5Z" fill="#666666" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div id="timeListContainer" class=" timeListContainer rounded-[4px] bg-[#F6F6F6] w-[72px]" style="display: none;">
+                                                    @for (int i = 1; i <= 24; i++)
+                                                    {
+                                                        <div class="timeList  h-[32px]  px-3 py-1 text-[#666] text-xs flex justify-between items-center">
+                                                            <div>
+                                                                @(i.ToString("00")):00
+                                                            </div>
+                                                            <div class="activeTime">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                                    <path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z"
+                                                                          fill="#666666" />
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <!------------------------------------------------------------------------------#endregion------------------------------------------------------------------------------>
+                                        </div>
+                                        <div>
+                                            <div class="flex flex-col mt-[8px] gap-6 mb-4">
+                                                <div class="multi-select text-[#333] text-sm active">
+                                                    <div class="multi-select-value text-sm text-[#333]" data-value="0">今すぐ行けるお店</div>
+                                                    <div class="">
+                                                        <svg class="inactive-svg" xmlns="http://www.w3.org/2000/svg" width="25" height="24"
+                                                             viewBox="0 0 25 24" fill="none">
+                                                            <circle opacity="0.4" cx="12.5" cy="12" r="7" stroke="#666666" stroke-opacity="0.4"
+                                                                    stroke-width="4" />
+                                                        </svg>
+                                                        <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="25" height="24"
+                                                             viewBox="0 0 25 24" fill="none">
+                                                            <circle cx="12.5" cy="12" r="7.5" stroke="#D75A8B" stroke-width="3" />
+                                                            <circle cx="12.5" cy="12" r="4" fill="#D75A8B" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @foreach (var item in Model.ClubAvailabilityModel)
+                                            {
+                                                <div class="flex flex-col mt-[8px] gap-6 mb-4">
+                                                    <div class="multi-select text-[#333] text-sm ">
+                                                        <div class="multi-select-value text-sm text-[#333]" data-value="@item.StaticValue">@item.StaticLabel</div>
+                                                        <div class="">
+                                                            <svg class="inactive-svg" xmlns="http://www.w3.org/2000/svg" width="25" height="24"
+                                                                 viewBox="0 0 25 24" fill="none">
+                                                                <circle opacity="0.4" cx="12.5" cy="12" r="7" stroke="#666666" stroke-opacity="0.4"
+                                                                        stroke-width="4" />
+                                                            </svg>
+                                                            <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="25" height="24"
+                                                                 viewBox="0 0 25 24" fill="none">
+                                                                <circle cx="12.5" cy="12" r="7.5" stroke="#D75A8B" stroke-width="3" />
+                                                                <circle cx="12.5" cy="12" r="4" fill="#D75A8B" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+
+                                    </div>
+                                    <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
+
+                                        <button class="btn btn-primary" style=" border-radius: 8px; ">
+
+                                            <a href="#" class="h-full w-full">
+                                                検索する
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!----------------------------- #endregion ----------------------------->
                             </div>
-                            <div id="tab4" class="tab-content-plane  hidden">
-                                <?php include("./map.php") ?>
+                            <div id="tab2" class="tab-content-plane  tab-preferance hidden">
+                                <!----------------------------- #region host ----------------------------->
+                                <div class="pb-8">
+                                    <div>
+                                        <div class="text-xs text-[#333]">
+                                            こだわりから探す
+                                        </div>
+                                        <form>
+                                            <div class="relative input-search-wrapper h-[40px] my-4 ">
+                                                <div class="absolute inset-y-0 left-0 flex items-center pt-[5pxa] pl-[16px] pointer-events-none">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                        <path d="M8.125 1.875C11.5698 1.875 14.375 4.68018 14.375 8.125C14.375 9.62158 13.8501 10.9937 12.9688 12.0703L17.9492 17.0508L17.0508 17.9492L12.0703 12.9688C10.9937 13.8501 9.62158 14.375 8.125 14.375C4.68018 14.375 1.875 11.5698 1.875 8.125C1.875 4.68018 4.68018 1.875 8.125 1.875ZM8.125 3.125C5.35645 3.125 3.125 5.35645 3.125 8.125C3.125 10.8936 5.35645 13.125 8.125 13.125C10.8936 13.125 13.125 10.8936 13.125 8.125C13.125 5.35645 10.8936 3.125 8.125 3.125Z"
+                                                              fill="#CECCC5" />
+                                                    </svg>
+                                                </div>
+                                                <input type="search" id="default-search"
+                                                       class="input-search block w-full h-[40px] focus-visible:outline-none" placeholder="店舗名から探す"
+                                                       required>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="flex flex-col gap-[13px]">
+
+                                        <!-- 身長を選ぶ -->
+                                        <div class="">
+                                            <div class="text-sm text-[#333] font-bold mb-2">
+                                                身長を選ぶ
+                                            </div>
+                                            <form class="search-field-selection">
+                                                <div class="flex flex-col   w-full ">
+                                                    <div class="flex flex-row flex-wrap  gap-[16px]">
+                                                        <div>
+                                                            <input type="radio" id="161 -165 cm" name="choose-your-height" value="161 -165 cm">
+                                                            <label for="161 -165 cm">161 -165 cm</label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="166 -170 cm" name="choose-your-height" value="166 -170 cm">
+                                                            <label for="166 -170 cm">166 -170 cm</label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="176 -180 cm" name="choose-your-height" value="176 -180 cm">
+                                                            <label for="176 -180 cm">176 -180 cm</label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="181 -185 cm" name="choose-your-height" value="181 -185 cm">
+                                                            <label for="181 -185 cm">181 -185 cm</label>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="">
+                                            <div class="text-sm text-[#333] font-bold mb-2">
+                                                年齢を選ぶ
+                                            </div>
+                                            <form class="search-field-selection">
+                                                <div class="flex flex-col   w-full ">
+                                                    <div class="flex flex-row flex-wrap gap-[16px]">
+                                                        <div>
+                                                            <input type="radio" id="18-20" name="select-age" value="18-20">
+                                                            <label class="w-[64px]" for="18-20">18-20</label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="21-25" name="select-age" value="21-25">
+                                                            <label class="w-[64px]" for="21-25">21-25</label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="26-30" name="select-age" value="26-30">
+                                                            <label class="w-[64px]" for="26-30">26-30</label>
+                                                        </div>
+
+                                                        <div>
+                                                            <input type="radio" id="31-35" name="select-age" value="31-35">
+                                                            <label class="w-[64px]" for="31-35">31-35</label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="36-40" name="select-age" value="36-40">
+                                                            <label class="w-[64px]" for="36-40">36-40</label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="40+" name="select-age" value="40+">
+                                                            <label class="w-[64px]" for="40+">40+</label>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="">
+                                            <div class="text-sm text-[#333] font-bold mb-2">
+                                                血液型を選ぶ
+                                            </div>
+                                            <form class="search-field-selection">
+                                                <div class="flex flex-col   w-full ">
+                                                    <div class="flex flex-row flex-wrap gap-[16px]">
+
+                                                        <div>
+                                                            <input type="radio" id="A型+" name="choose-blood-type" value="A型+">
+                                                            <label class="w-[64px]" for="A型+">A型+</label>
+                                                        </div>
+
+                                                        <div>
+                                                            <input type="radio" id="B型+" name="choose-blood-type" value="B型+">
+                                                            <label class="w-[64px]" for="B型+">B型+</label>
+                                                        </div>
+
+                                                        <div>
+                                                            <input type="radio" id="AB型" name="choose-blood-type" value="AB型">
+                                                            <label class="w-[64px]" for="AB型">AB型</label>
+                                                        </div>
+
+                                                        <div>
+                                                            <input type="radio" id="O型" name="choose-blood-type" value="O型">
+                                                            <label class="w-[64px]" for="O型">O型</label>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="">
+                                            <div class="text-sm text-[#333] font-bold mb-2">
+                                                星座を選ぶ
+                                            </div>
+                                            <form class="search-field-selection">
+                                                <div class="flex flex-col   w-full ">
+                                                    <div class="flex flex-row flex-wrap gap-[24px]">
+
+                                                        <div>
+                                                            <input type="radio" id="牡羊座" name="constellation" value="牡羊座">
+                                                            <label class="w-[92px] gap-[6px]" for="牡羊座">
+                                                                牡羊座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none">
+                                                                    <mask id="mask0_3046_6518" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                                                          x="0" y="0" width="12" height="12">
+                                                                        <path d="M0 0H12V12H0V0Z" fill="white" />
+                                                                    </mask>
+                                                                    <g mask="url(#mask0_3046_6518)">
+                                                                        <path d="M1.73229 5.26761C1.26353 4.79885 1 4.16276 1 3.49985C1 2.83694 1.26353 2.20086 1.73229 1.7321C2.20105 1.26334 2.83714 0.999806 3.50005 0.999806C4.88067 0.999806 6.0001 2.11923 6.0001 3.49985V11"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M6 3.50177C6 2.12115 7.11942 1.00172 8.50005 1.00172C9.16296 1.00172 9.79905 1.26526 10.2678 1.73401C10.7366 2.20277 11.0001 2.83886 11.0001 3.50177C11.0001 4.16468 10.7366 4.80077 10.2678 5.26953"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                    </g>
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="おうし座" name="constellation" value="おうし座">
+                                                            <label class="w-[92px] gap-[6px]" for="おうし座">
+                                                                おうし座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12"
+                                                                     fill="none">
+                                                                    <path d="M7.33017 7.51723C7.33017 5.67609 5.83826 4.18359 3.99712 4.18359C2.15656 4.18359 0.664062 5.67609 0.664062 7.51723C0.664062 9.35779 2.15656 10.8503 3.99712 10.8503C5.83826 10.8503 7.33017 9.35779 7.33017 7.51723Z"
+                                                                          stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                          stroke-linejoin="round" />
+                                                                    <path d="M0.664062 0.851562C0.664062 2.6927 2.15656 4.18462 3.99712 4.18462C5.83826 4.18462 7.33017 2.6927 7.33017 0.851562"
+                                                                          stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                          stroke-linejoin="round" />
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="双子座" name="constellation" value="双子座">
+                                                            <label class="w-[92px] gap-[6px]" for="双子座">
+                                                                双子座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none">
+                                                                    <mask id="mask0_3046_44308" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                                                          x="0" y="0" width="12" height="12">
+                                                                        <path d="M0 0H11.9995V11.9995H0V0Z" fill="white" />
+                                                                    </mask>
+                                                                    <g mask="url(#mask0_3046_44308)">
+                                                                        <path d="M10.9998 11C9.47985 10.1226 7.75531 9.66025 5.99988 9.66025C4.24444 9.66025 2.52048 10.1226 1 11"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M10.9998 1.00009C9.47985 1.8781 7.75531 2.33984 5.99988 2.33984C4.24444 2.33984 2.52048 1.8781 1 1.00009"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                    </g>
+                                                                    <path d="M8.5 2.02344V9.97916" stroke="#666666" stroke-width="0.8"
+                                                                          stroke-linecap="round" stroke-linejoin="round" />
+                                                                    <path d="M3.5 2.02344V9.97916" stroke="#666666" stroke-width="0.8"
+                                                                          stroke-linecap="round" stroke-linejoin="round" />
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="おうし座" name="constellation" value="おうし座">
+                                                            <label class="w-[92px] gap-[6px]" for="おうし座">
+                                                                おうし座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none">
+                                                                    <mask id="mask0_3046_37021" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                                                          x="0" y="0" width="12" height="12">
+                                                                        <path d="M0 0H11.9995V11.9995H0V0Z" fill="white" />
+                                                                    </mask>
+                                                                    <g mask="url(#mask0_3046_37021)">
+                                                                        <path d="M11.0001 6C11.0001 3.23887 8.76191 1.00012 6.0002 1.00012C4.67444 1.00012 3.40232 1.52716 2.46484 2.46464"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M11.001 6.00115C11.001 5.08058 10.2548 4.33433 9.33421 4.33433C8.41422 4.33433 7.66797 5.08058 7.66797 6.00115C7.66797 6.92172 8.41422 7.66797 9.33421 7.66797C10.2548 7.66797 11.001 6.92172 11.001 6.00115Z"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M1 6.00012C1 8.76183 3.23875 11 5.99988 11C7.32622 11 8.59776 10.4735 9.53523 9.53548"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M1 6.00115C1 6.92172 1.74625 7.66797 2.66682 7.66797C3.58739 7.66797 4.33306 6.92172 4.33306 6.00115C4.33306 5.08058 3.58739 4.33433 2.66682 4.33433C1.74625 4.33433 1 5.08058 1 6.00115Z"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                    </g>
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="獅子座" name="constellation" value="獅子座">
+                                                            <label class="w-[92px] gap-[6px]" for="獅子座">
+                                                                獅子座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="12" viewBox="0 0 10 12"
+                                                                     fill="none">
+                                                                    <path d="M3.74994 7.24997C3.74994 6.55969 3.19025 6 2.49997 6C1.80969 6 1.25 6.55969 1.25 7.24997C1.25 7.94025 1.80969 8.49994 2.49997 8.49994C3.19025 8.49994 3.74994 7.94025 3.74994 7.24997Z"
+                                                                          stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                          stroke-linejoin="round" />
+                                                                    <path d="M3.74997 7.24984C3.74997 5.99987 2.5 4.74991 2.5 3.49994C2.5 2.11937 3.61938 1 4.99994 1C6.3805 1 7.49988 2.11937 7.49988 3.49994C7.49988 5.99988 6.24991 7.24984 6.24991 9.74978C6.24991 10.4401 6.80959 10.9998 7.49988 10.9998C8.19016 10.9998 8.74984 10.4401 8.74984 9.74978"
+                                                                          stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                          stroke-linejoin="round" />
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="乙女座" name="constellation" value="乙女座">
+                                                            <label class="w-[92px] gap-[6px]" for="乙女座">
+                                                                乙女座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none">
+                                                                    <mask id="mask0_3046_38523" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                                                          x="0" y="0" width="12" height="12">
+                                                                        <path d="M0 0H12V12H0V0Z" fill="white" />
+                                                                    </mask>
+                                                                    <g mask="url(#mask0_3046_38523)">
+                                                                        <path d="M1.36224 4.38378C1.12786 4.1494 0.996094 3.83165 0.996094 3.4999C0.996094 3.16874 1.12786 2.8504 1.36224 2.61602C1.59662 2.38164 1.91496 2.24988 2.24612 2.24988C2.93643 2.24988 3.49614 2.80959 3.49614 3.4999V8.5"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M3.5 3.4999C3.5 2.80959 4.05971 2.24988 4.75002 2.24988C5.44034 2.24988 6.00005 2.80959 6.00005 3.4999V8.5"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M5.99219 3.49988C5.99219 2.80957 6.5519 2.24985 7.24221 2.24985C7.93252 2.24985 8.49224 2.80957 8.49224 3.49988V8.49998C8.49224 9.19029 9.05195 9.75 9.74226 9.75"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M8.50002 8.5V4.74993C8.50002 4.05961 9.05974 3.4999 9.75005 3.4999C10.4404 3.4999 11.0001 4.05961 11.0001 4.74993C11.0001 6.82086 9.32094 8.5 7.25 8.5"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                    </g>
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="天秤座" name="constellation" value="天秤座">
+                                                            <label class="w-[92px] gap-[6px]" for="天秤座">
+                                                                天秤座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none">
+                                                                    <path d="M1 8.5H11.0002" stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                          stroke-linejoin="round" />
+                                                                    <mask id="mask0_3046_29233" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                                                          x="0" y="0" width="12" height="12">
+                                                                        <path d="M0 0H12V12H0V0Z" fill="white" />
+                                                                    </mask>
+                                                                    <g mask="url(#mask0_3046_29233)">
+                                                                        <path d="M1 6H3.50005C3.50005 4.61938 4.61947 3.49995 6.0001 3.49995C7.38072 3.49995 8.50015 4.61938 8.50015 6H11.0002"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                    </g>
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="蠍座" name="constellation" value="蠍座">
+                                                            <label class="w-[92px] gap-[6px]" for="蠍座">
+                                                                蠍座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none">
+                                                                    <mask id="mask0_3046_38637" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                                                          x="0" y="0" width="12" height="12">
+                                                                        <path d="M0 0H11.9995V11.9995H0V0Z" fill="white" />
+                                                                    </mask>
+                                                                    <g mask="url(#mask0_3046_38637)">
+                                                                        <path d="M1.36613 4.38397C1.13176 4.1496 1 3.83186 1 3.50013C1 3.16898 1.13176 2.85065 1.36613 2.61629C1.6005 2.38192 1.91882 2.25016 2.24997 2.25016C2.94025 2.25016 3.49994 2.80984 3.49994 3.50013V8.5"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M3.5 3.50013C3.5 2.80984 4.05969 2.25016 4.74997 2.25016C5.44025 2.25016 5.99994 2.80984 5.99994 3.50013V8.5"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M6 3.50016C6 2.80987 6.55969 2.25019 7.24997 2.25019C7.94025 2.25019 8.49994 2.80987 8.49994 3.50016V8.50003C8.49994 9.19031 9.05963 9.75 9.74991 9.75C10.0816 9.75 10.3994 9.61824 10.6337 9.38387C10.8681 9.1495 10.9999 8.83176 10.9999 8.50003C10.9999 8.16888 10.8681 7.85056 10.6337 7.61619L10.1341 7.11655"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                    </g>
+                                                                    <path d="M10.0078 8.24216V6.99219H11.2578" stroke="#666666" stroke-width="0.8"
+                                                                          stroke-linecap="round" stroke-linejoin="round" />
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="射手座" name="constellation" value="射手座">
+                                                            <label class="w-[92px] gap-[6px]" for="射手座">
+                                                                射手座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none">
+                                                                    <path d="M8.45703 1.04297H10.957V3.54291" stroke="#666666" stroke-width="0.8"
+                                                                          stroke-linecap="round" stroke-linejoin="round" />
+                                                                    <mask id="mask0_3046_44334" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                                                          x="-1" y="1" width="12" height="12">
+                                                                        <path d="M-0.0429688 1.04297H10.9566V12.0426H-0.0429688V1.04297Z"
+                                                                              fill="white" />
+                                                                    </mask>
+                                                                    <g mask="url(#mask0_3046_44334)">
+                                                                        <path d="M0.957031 11.043L10.9568 1.04322" stroke="#666666" stroke-width="0.8"
+                                                                              stroke-linecap="round" stroke-linejoin="round" />
+                                                                        <path d="M3.46094 3.54309L8.46081 8.54297" stroke="#666666" stroke-width="0.8"
+                                                                              stroke-linecap="round" stroke-linejoin="round" />
+                                                                    </g>
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="山羊座" name="constellation" value="山羊座">
+                                                            <label class="w-[92px] gap-[6px]" for="山羊座">
+                                                                山羊座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none">
+                                                                    <mask id="mask0_3046_46018" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                                                          x="-1" y="0" width="13" height="12">
+                                                                        <path d="M-0.148438 0H11.851V11.9995H-0.148438V0Z" fill="white" />
+                                                                    </mask>
+                                                                    <g mask="url(#mask0_3046_46018)">
+                                                                        <path d="M0.851562 4.33331H2.51838L4.18462 11L5.85144 4.33331H9.18449C10.1051 4.33331 10.8513 3.58764 10.8513 2.66707C10.8513 2.3744 10.7744 2.08698 10.628 1.83337C10.3307 1.31799 9.78033 1.00025 9.18449 1.00025C8.26451 1.00025 7.51826 1.7465 7.51826 2.66707C7.51826 2.95974 7.59521 3.24716 7.74155 3.50019L10.628 8.50006C10.7744 8.75367 10.8513 9.04109 10.8513 9.33318C10.8513 10.2538 10.1051 11 9.18449 11C8.26451 11 7.51826 10.2538 7.51826 9.33318"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                    </g>
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="水瓶座" name="constellation" value="水瓶座">
+                                                            <label class="w-[92px] gap-[6px]" for="水瓶座">
+                                                                水瓶座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" viewBox="0 0 12 6"
+                                                                     fill="none">
+                                                                    <path d="M1 4.75209C1.33173 4.42094 1.78123 4.23438 2.24997 4.23438C2.71871 4.23438 3.16879 4.42094 3.49994 4.75209C3.83167 5.08382 4.28117 5.2698 4.74991 5.2698C5.21864 5.2698 5.66873 5.08382 5.99988 4.75209C6.33161 4.42094 6.78111 4.23438 7.24984 4.23438C7.71858 4.23438 8.16866 4.42094 8.49981 4.75209C8.83154 5.08382 9.28104 5.2698 9.74978 5.2698C10.2185 5.2698 10.6686 5.08382 10.9998 4.75209"
+                                                                          stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                          stroke-linejoin="round" />
+                                                                    <path d="M1 1.25209C1.33173 0.920937 1.78123 0.734375 2.24997 0.734375C2.71871 0.734375 3.16879 0.920937 3.49994 1.25209C3.83167 1.58382 4.28117 1.7698 4.74991 1.7698C5.21864 1.7698 5.66873 1.58382 5.99988 1.25209C6.33161 0.920937 6.78111 0.734375 7.24984 0.734375C7.71858 0.734375 8.16866 0.920937 8.49981 1.25209C8.83154 1.58382 9.28104 1.7698 9.74978 1.7698C10.2185 1.7698 10.6686 1.58382 10.9998 1.25209"
+                                                                          stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                          stroke-linejoin="round" />
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+                                                        <div>
+                                                            <input type="radio" id="魚座" name="constellation" value="魚座">
+                                                            <label class="w-[92px] gap-[6px]" for="魚座">
+                                                                魚座
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
+                                                                     fill="none">
+                                                                    <path d="M1 6H10.9998" stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                          stroke-linejoin="round" />
+                                                                    <mask id="mask0_3046_45017" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                                                          x="0" y="0" width="12" height="12">
+                                                                        <path d="M0 0H11.9995V11.9995H0V0Z" fill="white" />
+                                                                    </mask>
+                                                                    <g mask="url(#mask0_3046_45017)">
+                                                                        <path d="M2.875 10.332C4.4223 9.43886 5.37494 7.78837 5.37494 6.00203C5.37494 4.2157 4.4223 2.5652 2.875 1.67203"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                        <path d="M9.12494 1.67203C7.57822 2.5652 6.625 4.2157 6.625 6.00203C6.625 7.78837 7.57822 9.43886 9.12494 10.332"
+                                                                              stroke="#666666" stroke-width="0.8" stroke-linecap="round"
+                                                                              stroke-linejoin="round" />
+                                                                    </g>
+                                                                </svg>
+                                                            </label>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="">
+                                            <div class="text-sm text-[#333] font-bold mb-2">
+                                                前職を選ぶ
+                                            </div>
+                                            <div class="input-field-common">
+
+                                                <select id="default_select" style="width: 100%;" class="text-[#B7B7B7] h-[44px]">
+
+                                                    <option value="選択">
+                                                        選択
+                                                    </option>
+
+                                                    <option value="選択">
+                                                        選択
+                                                    </option>
+                                                    <option value="選択">選択</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
+                                    <button class="btn btn-primary" style=" border-radius: 8px; ">
+                                        <a href="#" class="h-full w-full">
+                                            検索する
+                                        </a>
+                                    </button>
+                                </div>
+                                <!----------------------------- #endregion ----------------------------->
+                            </div>
+                            <div id="tab3" class="tab-content-plane  tab-preferance hidden ">
+                                <!----------------------------- #region NEW STORE ---------------------------------->
+                                <div class="pb-8">
+                                    <div>
+                                        <div class="text-sm text-[#333] font-bold mb-2">
+                                            新規店舗
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-2">
+                                            @for (int i = 0; i < 6; i++)
+                                            {
+                                                <a href="#">
+                                                    <div class="new-host-card">
+                                                        <div class="image">
+                                                            <img src="../../../assets/images/demo-image.jpeg" />
+                                                        </div>
+                                                        <div>
+                                                            <div class="title">
+                                                                SINCE YOU HONTENHONTEN
+                                                            </div>
+                                                            <div class="description">
+                                                                シンス ユー 本店
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            }
+                                        </div>
+                                        <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-1 ">
+                                            <div class="border-b-[1px] border-[#D75A8B] pb-[1px] ">
+                                                続きを見る
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
+                                                <path d="M5 9L8 6L5 3" stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div class="pt-[13px]">
+                                        <div class="text-sm text-[#333] font-bold mb-2">
+                                            あなたにマッチするホスト
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-[2px]">
+                                            @for (int i = 0; i < 6; i++)
+                                            {
+                                                <div class="hosts-that-match-you">
+                                                    <img src="../../../assets/images/host-image.png" />
+                                                    <div class="like-host">
+                                                        <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                                                             viewBox="0 0 31 34" fill="none">
+                                                            <g filter="url(#filter0_d_3058_46008)">
+                                                                <circle cx="17" cy="17" r="10" fill="white" />
+                                                            </g>
+                                                            <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
+                                                                  stroke="#E3A1A1" stroke-width="1.5" />
+                                                            <defs>
+                                                                <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
+                                                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                                                                   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                                    <feOffset />
+                                                                    <feGaussianBlur stdDeviation="3.5" />
+                                                                    <feComposite in2="hardAlpha" operator="out" />
+                                                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                                                             result="effect1_dropShadow_3058_46008" />
+                                                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
+                                                                             result="shape" />
+                                                                </filter>
+                                                            </defs>
+                                                        </svg>
+                                                        <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                                                             viewBox="0 0 31 34" fill="none">
+                                                            <g filter="url(#filter0_d_3058_39409)">
+                                                                <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                                                            </g>
+                                                            <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
+                                                                  fill="white" />
+                                                            <defs>
+                                                                <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
+                                                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                                                                   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                                    <feOffset />
+                                                                    <feGaussianBlur stdDeviation="3.5" />
+                                                                    <feComposite in2="hardAlpha" operator="out" />
+                                                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                                                             result="effect1_dropShadow_3058_39409" />
+                                                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
+                                                                             result="shape" />
+                                                                </filter>
+                                                            </defs>
+                                                        </svg>
+
+                                                    </div>
+                                                    <div class="description">
+                                                        <div class="title">後藤聖輝 </div>
+                                                        <div class="club-name"><img src="../../../assets/images/demo-image.jpeg" />SINCE YOU</div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                        <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-1 ">
+                                            <div class="border-b-[1px] border-[#D75A8B] pb-[1px] ">
+                                                続きを見る
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
+                                                <path d="M5 9L8 6L5 3" stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                @*<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white z-10">
+
+                                        <button class="btn btn-primary" style=" border-radius: 8px; ">
+
+                                            <a href="#" class="h-full w-full">
+                                                検索する
+                                            </a>
+                                        </button>
+                                    </div>*@
+                                <!----------------------------- #endregion ----------------------------->
+                            </div>
+                            <div id="tab4" class="tab-content-plane  tab-preferance  hidden">
+                                <!----------------------------- #region MAP ---------------------------->
+                                <div class="flex items-center gap-1 text-[#d75a8b] text-[10px] px-[2px] py-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8.00156 1C5.29256 1 3.10156 3.191 3.10156 5.9C3.10156 9.575 8.00156 15 8.00156 15C8.00156 15 12.9016 9.575 12.9016 5.9C12.9016 3.191 10.7106 1 8.00156 1ZM4.50156 5.9C4.50156 3.968 6.06956 2.4 8.00156 2.4C9.93356 2.4 11.5016 3.968 11.5016 5.9C11.5016 7.916 9.48556 10.933 8.00156 12.816C6.54556 10.947 4.50156 7.895 4.50156 5.9Z"
+                                              fill="#D75A8B" />
+                                        <path d="M8 7.64844C8.9665 7.64844 9.75 6.86494 9.75 5.89844C9.75 4.93194 8.9665 4.14844 8 4.14844C7.0335 4.14844 6.25 4.93194 6.25 5.89844C6.25 6.86494 7.0335 7.64844 8 7.64844Z"
+                                              fill="#D75A8B" />
+                                    </svg>
+                                    現在地
+                                </div>
+
+                                <div class="map-card mt-2 mx-4">
+                                    <div class="flex gap-1">
+                                        <img src="../../../assets/images/demo-image.jpeg" class="h-6 w-6 rounded-full border border-[#F1EEEE]" alt="">
+                                        <div class="text-[#333]">
+                                            <div class="text-[10px] text-ellipsis-customer h-[15px] w-[250px]">
+                                                SINCE SINCESINCE SINCE YOU SINCE YOUSINCE
+                                                YOUSINCE
+                                                YOUSINCE YOU
+                                            </div>
+                                            <div class="text-[8px]">シンスユーアルファ</div>
+                                            <div class="flex gap-1 items-center">
+                                                <span class="review-start text-[#F0D830] text-xs">
+                                                    <i class="las la-star"></i> <i class="las la-star"></i>
+                                                    <i class="las la-star"></i>
+                                                    <i class="las la-star"></i>
+                                                    <i class="las la-star-half-alt"></i>
+                                                </span>
+                                                <div class="text-[8px]">4.8</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex flex-col justify-between">
+                                        <div class="text-[10px]">50m</div>
+                                        <div class="text-[8px] border-b-[1px] border-[#D75A8B] text-[#D75A8B]">詳細を見る</div>
+
+                                    </div>
+                                </div>
+                                <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
+                                    <button class="btn btn-primary" style=" border-radius: 8px; ">
+                                        <a href="#" class="h-full w-full">
+                                            検索する
+                                        </a>
+                                    </button>
+                                </div>
+                                <!----------------------------- #endregion ----------------------------->
                             </div>
                         </div>
                     </div>
