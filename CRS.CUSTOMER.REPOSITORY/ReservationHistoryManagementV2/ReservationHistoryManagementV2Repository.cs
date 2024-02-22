@@ -3,12 +3,12 @@ using System.Linq;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2;
 
-namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
+namespace CRS.CUSTOMER.REPOSITORY.ReservationHistoryManagementV2
 {
-    public class ReservationManagementV2Repository : IReservationManagementV2Repository
+    public class ReservationHistoryManagementV2Repository : IReservationHistoryManagementV2Repository
     {
         RepositoryDao _dao;
-        public ReservationManagementV2Repository()
+        public ReservationHistoryManagementV2Repository()
         {
             _dao = new RepositoryDao();
         }

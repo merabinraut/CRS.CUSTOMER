@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
-using CRS.CUSTOMER.REPOSITORY.ReservationManagementV2;
+using CRS.CUSTOMER.BUSINESS.ReservationHistoryManagementV2;
+using CRS.CUSTOMER.REPOSITORY.ReservationHistoryManagementV2;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2;
 
-namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
+namespace CRS.CUSTOMER.BUSINESS.ReservationHistoryManagementV2
 {
-    public class ReservationManagementV2Business:IReservationManagementV2Business
-	{
-		private readonly IReservationManagementV2Repository _repo;
-		public ReservationManagementV2Business(ReservationManagementV2Repository repo)
+    public class ReservationHistoryManagementV2Business: IReservationHistoryManagementV2Business
+    {
+		private readonly IReservationHistoryManagementV2Repository _repo;
+		public ReservationHistoryManagementV2Business(ReservationHistoryManagementV2Repository repo)
 		{
 			_repo = repo;
 		}

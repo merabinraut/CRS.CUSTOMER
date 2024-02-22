@@ -2,9 +2,9 @@
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2;
 
-namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
+namespace CRS.CUSTOMER.BUSINESS.ReservationHistoryManagementV2
 {
-    public interface IReservationManagementV2Repository
+    public interface IReservationHistoryManagementV2Business
     {
         CommonDbResponse CancelReservation(Common commonDBRequest);
         CommonDbResponse DeleteReservation(Common commonDbRequest);

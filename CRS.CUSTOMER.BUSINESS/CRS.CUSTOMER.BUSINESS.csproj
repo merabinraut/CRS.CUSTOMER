@@ -107,8 +107,8 @@
     <Compile Include="SearchFilterManagement\SearchFilterManagementBusiness.cs" />
     <Compile Include="UserManagement\IUserManagementBusiness.cs" />
     <Compile Include="UserManagement\UserManagementBusiness.cs" />
-    <Compile Include="ReservationManagementV2\IReservationManagementV2Business.cs" />
-    <Compile Include="ReservationManagementV2\ReservationManagementV2Business.cs" />
+    <Compile Include="ReservationHistoryManagementV2\IReservationHistoryManagementV2Business.cs" />
+    <Compile Include="ReservationHistoryManagementV2\ReservationHistoryManagementV2Business.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CRS.CUSTOMER.REPOSITORY\CRS.CUSTOMER.REPOSITORY.csproj">
@@ -125,7 +125,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Folder Include="ReservationManagementV2\" />
+    <Folder Include="ReservationHistoryManagementV2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

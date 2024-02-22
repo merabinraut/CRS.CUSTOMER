@@ -130,8 +130,8 @@
     <Compile Include="SearchFilterManagement\SearchFilterManagementRepository.cs" />
     <Compile Include="UserManagement\IUserManagementRepository.cs" />
     <Compile Include="UserManagement\UserManagementRepository.cs" />
-    <Compile Include="ReservationManagementV2\IReservationManagementV2Repository.cs" />
-    <Compile Include="ReservationManagementV2\ReservationManagementV2Repository.cs" />
+    <Compile Include="ReservationHistoryManagementV2\IReservationHistoryManagementV2Repository.cs" />
+    <Compile Include="ReservationHistoryManagementV2\ReservationHistoryManagementV2Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -144,7 +144,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Folder Include="ReservationManagementV2\" />
+    <Folder Include="ReservationHistoryManagementV2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
