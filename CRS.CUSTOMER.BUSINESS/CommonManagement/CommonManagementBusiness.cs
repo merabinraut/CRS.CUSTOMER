@@ -21,5 +21,10 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         {
             return _REPO.GetDropDown(Flag, Extra1, Extra2);
         }
+
+        public List<StaticDataCommon> GetDropDown_V2(string Flag, string SearchField1 = "", string SearchField2 = "")
+        {
+            return _REPO.GetDropDown_V2(Flag, SearchField1, SearchField2);
+        }
     }
 }

@@ -11,6 +11,7 @@ using CRS.CUSTOMER.BUSINESS.ProfileManagement;
 using CRS.CUSTOMER.BUSINESS.RecommendedClubHost;
 using CRS.CUSTOMER.BUSINESS.ReservationManagement;
 using CRS.CUSTOMER.BUSINESS.ReservationHistoryManagementV2;
+using CRS.CUSTOMER.BUSINESS.ReservationManagementV2;
 using CRS.CUSTOMER.BUSINESS.ReviewManagement;
 using CRS.CUSTOMER.BUSINESS.SearchFilterManagement;
 using CRS.CUSTOMER.BUSINESS.UserManagement;
@@ -47,6 +48,7 @@ namespace CRS.CUSTOMER.APPLICATION
             container.RegisterType<IBookmarkManagementBusiness, BookmarkManagementBusiness>();
             container.RegisterType<IRecommendedClubHostBusiness, RecommendedClubHostBusiness>();
             container.RegisterType<IReservationHistoryManagementV2Business, ReservationHistoryManagementV2Business>();
+            container.RegisterType<IReservationManagementV2Business, ReservationManagementV2Business>();
             return container;
         }
     }

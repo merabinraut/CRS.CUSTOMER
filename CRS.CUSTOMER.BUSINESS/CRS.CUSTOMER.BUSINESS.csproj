@@ -99,6 +99,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecommendedClubHost\IRecommendedClubHostBusiness.cs" />
     <Compile Include="RecommendedClubHost\RecommendedClubHostBusiness.cs" />
+    <Compile Include="ReservationManagementV2\IReservationManagementV2Business.cs" />
+    <Compile Include="ReservationManagementV2\ReservationManagementV2Business.cs" />
     <Compile Include="ReservationManagement\IReservationManagementBusiness.cs" />
     <Compile Include="ReservationManagement\ReservationManagementBusiness.cs" />
     <Compile Include="ReviewManagement\IReviewManagementBusiness.cs" />

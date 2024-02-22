@@ -38,5 +38,15 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
             if (dbResponse != null && dbResponse.Rows.Count > 0) return _DAO.DataTableToListObject<StaticDataCommon>(dbResponse).ToList();
             return new List<StaticDataCommon>();
         }
+
+        public List<StaticDataCommon> GetDropDown_V2(string Flag, string SearchField1 = "", string SearchField2 = "")
+        {
+            string SQL = $"EXEC sproc_dropdown_management_v2 @Flag={_DAO.FilterString(Flag)}, @SearchField1={_DAO.FilterString(SearchField1)},@SearchField2={_DAO.FilterString(SearchField2)}";
+            var dbResponse = _DAO.ExecuteDataTable(SQL);
+            return dbResponse != null && dbResponse.Rows.Count > 0
+                ? _DAO.DataTableToListObject<StaticDataCommon>(dbResponse).ToList()
+                : new List<StaticDataCommon>();
+        }
+
     }
 }
