@@ -26,7 +26,8 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
                 { "5", "9" }, //Blood Group
                 { "6", "10" }, //Height list
                 { "7", "11" }, //Age Range
-                { "8", "12" } //Zodiac signs
+                { "8", "12" }, //Zodiac signs
+                { "9", "13" } //Occupation list
             };
 
             if (!methodMapping.TryGetValue(forMethod.Trim(), out var methodCode))

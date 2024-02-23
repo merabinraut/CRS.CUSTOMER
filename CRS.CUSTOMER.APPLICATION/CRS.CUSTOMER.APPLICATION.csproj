@@ -661,7 +661,6 @@
     <Content Include="Views\ErrorManagement\Error_404.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\ReviewManagement\ReviewList.cshtml" />
-    <Content Include="Views\LocationManagement\ViewHostDetail_bk.cshtml" />
     <Content Include="Views\Footer\customervoice.cshtml" />
     <Content Include="Views\Shared\_FooterLayout.cshtml" />
     <Content Include="Views\Footer\faq.cshtml" />
@@ -682,6 +681,7 @@
     <Content Include="Views\DashboardV2\_MainPageClubHost.cshtml" />
     <Content Include="Views\Shared\_PreferenceFilterPopUp.cshtml" />
     <Content Include="Views\Shared\_LocationFilterPopUp.cshtml" />
+    <Content Include="Views\DashboardV2\Preference.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

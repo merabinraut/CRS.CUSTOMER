@@ -172,6 +172,10 @@ function GetPreferenceFilterPopUp() {
                     });
                     // Add the 'active' class to the clicked div
                     this.classList.add('active');
+                    if (this.classList.contains('contains-time-class')) {
+                        var div = document.getElementById('time-div-id');
+                        div.removeAttribute('hidden');
+                    }
                     // Get the text content of the specific element within the clicked div
                     var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue')
                         .textContent.trim();
@@ -182,28 +186,6 @@ function GetPreferenceFilterPopUp() {
             //#endregion
 
             //#region 4
-            // Define searchbybusinesshours
-            var searchbybusinesshours = document.querySelectorAll('.search-by-business-hours');
-
-            // Define searchbybusinesshoursinputField
-            var searchbybusinesshoursinputField = document.querySelector('input[name="searchbybusinesshours"]');
-
-            // Add event listener to each searchbybusinesshours div
-            searchbybusinesshours.forEach(function (div) {
-                div.addEventListener('click', function () {
-                    // Remove the 'active' class from all divs
-                    searchbybusinesshours.forEach(function (d) {
-                        d.classList.remove('active');
-                    });
-                    // Add the 'active' class to the clicked div
-                    this.classList.add('active');
-                    // Get the text content of the specific element within the clicked div
-                    var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue')
-                        .textContent.trim();
-                    // Set the value of the input field to the content of the specific element
-                    searchbybusinesshoursinputField.value = searchbybusinesshoursSelectValue;
-                });
-            });
             //#endregion
 
             //#region 5
@@ -230,6 +212,31 @@ function GetPreferenceFilterPopUp() {
             //#endregion
 
             //#region 6
+            var showTimeLists = document.querySelectorAll('.showTimeList');
+
+            showTimeLists.forEach(function (showTimeList) {
+                showTimeList.addEventListener('click', function (event) {
+                    var timeList = showTimeList.nextElementSibling;
+                    if (timeList.style.display === "none" || timeList.style.display === "") {
+                        timeList.style.display = "block";
+                    } else {
+                        timeList.style.display = "none";
+                    }
+                    event.stopPropagation(); // Prevents the click event from bubbling up to the document
+                });
+            });
+
+            document.addEventListener('click', function (event) {
+                // Loop through each showTimeList
+                showTimeLists.forEach(function (showTimeList) {
+                    var timeList = showTimeList.nextElementSibling;
+                    // Check if the click target is not the showTimeList, its timeList, or their descendants and close the timeList if it's open
+                    if (!showTimeList.contains(event.target) && !timeList.contains(event.target) && timeList.style
+                        .display === "block") {
+                        timeList.style.display = "none";
+                    }
+                });
+            });
             document.querySelectorAll('.timeList').forEach(item => {
                 item.addEventListener('click', event => {
                     if (event.currentTarget.classList.contains('disabled')) {
@@ -242,10 +249,14 @@ function GetPreferenceFilterPopUp() {
 
                     // Store the value if timeList has active class
                     if (event.currentTarget.classList.contains('active')) {
-                        const timeValue = event.currentTarget.querySelector('.timeValue').textContent;
-                        var selectedTimeDiv = document.getElementById("selected-time-id");
-                        selectedTimeDiv.innerText = timeValue.trim();
-                        $('#time-id').val(timeValue.trim());
+                        debugger;
+                        const timeValueElement = event.currentTarget.querySelector('.timeValue');
+                        if (timeValueElement) {
+                            var timeValue = timeValueElement.getAttribute('data-info');
+                            var selectedTimeDiv = document.getElementById("selected-time-id");
+                            selectedTimeDiv.innerText = timeValue.trim();
+                            $('#time-id').val(timeValue.trim());
+                        }
                     }
                 });
             });
@@ -314,6 +325,12 @@ function ClosePreferenceFilterPopUp() {
         element.classList.add('translate-y-full');
         return false;
     }
+}
+//#endregion
+
+//#region 1
+function LocationFunction(i) {
+    window.location.href = "/LocationManagement/Index?LocationId=" + i;
 }
 //#endregion
 

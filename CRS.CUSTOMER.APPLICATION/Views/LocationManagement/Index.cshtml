@@ -127,33 +127,6 @@
         }
     }
 </div>
-@*<div class="slide-wrapper pb-4">
-        <div class="slide-container">
-            <div class="slides">
-
-                @foreach (var item in Model.Banners)
-                {
-                    <div class="slide">
-                        <img src="@Url.Content(ViewBag.FileLocationPath + item.BannerImage)" alt="@item.BannerName">
-
-                    </div>
-                }
-
-            </div>
-            <div class="slide-controls">
-                <button id="prev-btn">
-                    <i class="fa-solid fa-circle text-[#fff6] text-[6px] cursor-pointer"></i>
-                </button>
-                <button>
-                    <i class="fa-solid fa-circle text-[#fff] text-[8px] cursor-pointer mt-3"></i>
-                </button>
-                <button id="next-btn">
-                    <i id="next-btn" class="fa-solid fa-circle text-[#fff6] text-[6px] cursor-pointer"></i>
-                </button>
-            </div>
-        </div>
-    </div>*@
-
 <!-- #endregion -->
 <!-- #region Tab -->
 
@@ -313,71 +286,71 @@
                         <p class="line-clamp-3 font-[Noto Sans] text-xs   text-[#333333]">
                             @item.ClubDescription
                         </p>
-                        <a href="#" class=" flex border justify-between pl-[40%] border-[#D75A8B] px-6 h-8 w-full items-center"
-                           title="see full comment" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                        @*<a href="#" class=" flex border justify-between pl-[40%] border-[#D75A8B] px-6 h-8 w-full items-center"
+                               title="see full comment" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
 
-                            <div class="text-[10px] font-bold self-center flex  text-end text-primary see_more text-[#D75A8B]">
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.See_more
-                            </div>
-                            <i class="material-icons text-primary float-right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
-                                    <path d="M0.9375 11.8594L6.4375 6.35938L6.78125 6L6.4375 5.64063L0.937501 0.140625L0.21875 0.859375L5.35938 6L0.218749 11.1406L0.9375 11.8594Z"
-                                          fill="#E3A1A1" />
-                                </svg>
-                            </i>
-                        </a>
+                                <div class="text-[10px] font-bold self-center flex  text-end text-primary see_more text-[#D75A8B]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.See_more
+                                </div>
+                                <i class="material-icons text-primary float-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+                                        <path d="M0.9375 11.8594L6.4375 6.35938L6.78125 6L6.4375 5.64063L0.937501 0.140625L0.21875 0.859375L5.35938 6L0.218749 11.1406L0.9375 11.8594Z"
+                                              fill="#E3A1A1" />
+                                    </svg>
+                                </i>
+                            </a>*@
                     </section>
 
                     <!-- club schedule  -->
-                    <div>
-                        <div class=" text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
-                            @foreach (var item2 in item.ClubWeeklyScheduleList)
-                            {
-                                if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SAT")
+                    @*<div>
+                            <div class=" text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
+                                @foreach (var item2 in item.ClubWeeklyScheduleList)
                                 {
-                                    <div class="text-blue">
-                                        @item2.DayLabel
-                                    </div>
-                                }
-                                else if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SUN")
-                                {
-
-                                    <div class="text-red">
-                                        @item2.DayLabel
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div>
-                                        @item2.DayLabel
-                                    </div>
-                                }
-                            }
-                        </div>
-                        <div class="text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
-                            @foreach (var item2 in item.ClubWeeklyScheduleList)
-                            {
-                                var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
-                                if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
-                                {
-                                    <div onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName','@item2.FullDate')">
-                                        @item2.Date <div class="flex justify-center mt-1">
-                                            <img src="@imageURL" class="h-[11px] w-[11px]">
+                                    if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SAT")
+                                    {
+                                        <div class="text-blue">
+                                            @item2.DayLabel
                                         </div>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div>
-                                        @item2.Date <div class="flex justify-center mt-1">
-                                            <img src="@imageURL" class="h-[11px] w-[11px]">
-                                        </div>
-                                    </div>
-                                }
-                            }
+                                    }
+                                    else if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SUN")
+                                    {
 
-                        </div>
-                    </div>
+                                        <div class="text-red">
+                                            @item2.DayLabel
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            @item2.DayLabel
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div class="text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
+                                @foreach (var item2 in item.ClubWeeklyScheduleList)
+                                {
+                                    var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
+                                    if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
+                                    {
+                                        <div onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName','@item2.FullDate')">
+                                            @item2.Date <div class="flex justify-center mt-1">
+                                                <img src="@imageURL" class="h-[11px] w-[11px]">
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            @item2.Date <div class="flex justify-center mt-1">
+                                                <img src="@imageURL" class="h-[11px] w-[11px]">
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                        </div>*@
                     <div class="px-4 py-[12px] flex justify-between items-center">
                         <div>
                             @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
@@ -524,6 +497,26 @@
 {
     <script>
         $(document).ready(function () {
+            debugger;
+           var RenderValue = '@ViewBag.RenderValue';
+            var tab1Button = document.getElementById("tab1Button");
+            var tab2Button = document.getElementById("tab2Button");
+
+            if (RenderValue && (RenderValue === "host" || RenderValue === "club")) {
+                if (RenderValue === "host") {
+                    tab1Button.classList.remove("active");
+                    tab2Button.classList.add("active");
+                    tab1.classList.add("hidden");
+                    tab2.classList.remove("hidden");
+                } else {
+                    tab2Button.classList.remove("active");
+                    tab1Button.classList.add("active");
+                    tab2.classList.add("hidden");
+                    tab1.classList.remove("hidden");
+                }
+            }
+
+
             let currentPage = @Model.RequestModel.GroupId??1;
             const totalPages = @ViewBag.TotalGroupCount??0; // Define the total number of pages
             let currentPageSecond = @Model.RequestModel.PageNo?? 1;

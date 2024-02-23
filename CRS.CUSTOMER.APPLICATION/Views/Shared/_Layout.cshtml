@@ -367,7 +367,7 @@
                 <div id="locationfilterpopup-id">
 
                 </div>
-                
+
                 <div id="preferencefilterpopUp-id">
 
                 </div>
@@ -387,7 +387,7 @@
 
         </button>
         <!-- go up end  -->
-        @if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && ViewBag.ActionPageName == "Dashboard")
+        @if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && (ViewBag.ActionPageName == "Dashboard" || ViewBag.ActionPageName == "SearchFilter"))
         {
             <div>
                 <div class="py-4 px-[33px] bg-primary-100 flex justify-between items-center">

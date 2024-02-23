@@ -187,9 +187,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetPreferenceFilterPopUp()
+        public JsonResult GetPreferenceFilterPopUp(string LocationId)
         {
+            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
+            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId : string.Empty;
             var Response = new PreferenceFilterModel();
             Response.AgeModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("7"));
             Response.ConstellationModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("8"));
@@ -198,11 +200,32 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             Response.ClubCategoryModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("2"));
             Response.HeightModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("6"));
             Response.PlanPriceModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("3"));
+            Response.OccupationModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("9"));
+            ViewBag.HostConstellationGroup = _commonBusiness.GetDDL("023");
+            var dbClubResponse = _dashboardBusiness.GetNewClub(lId, CustomerId, "1");
+            Response.ClubModel = dbClubResponse.MapObjects<DashboardV2ClubDetailModel>();
+            Response.ClubModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); });
+            var dbHostResponse = _dashboardBusiness.GetNewHost(lId, CustomerId, "1");
+            Response.HostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
+            Response.HostModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.HostId = x.HostId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo); });
             responseData["Code"] = 0;
             responseData["Message"] = "Success";
             responseData["PartialView"] = RenderHelper.RenderPartialViewToString(this, "_PreferenceFilterPopUp", Response);
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
+
+        #region Preference
+        [HttpGet]
+        public ActionResult Preference(string LocationId, string Type)
+        {
+            var typeValue = !string.IsNullOrEmpty(Type) ? Type.DecryptParameter() : string.Empty;
+            ViewBag.ActionPageName = "SearchFilter";
+            ViewBag.TypeValue = typeValue;
+            ViewBag.LocationId = LocationId;
+            var Response = new List<PreferenceClubModel>();
+            return View(Response);
+        }
+        #endregion
         #endregion
     }
 }

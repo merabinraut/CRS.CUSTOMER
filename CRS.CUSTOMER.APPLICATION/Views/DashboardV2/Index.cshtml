@@ -159,7 +159,7 @@
                 {
                     for (int i = 0; (i < 2 && i < Model.Location.Count); i++)
                     {
-                        <div class="relative">
+                        <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
                             <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                 <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location1">
                                 <p class="locationtext justify-center text-white font-[600] text-[12px] z-10">
@@ -182,7 +182,7 @@
                 {
                     for (int i = 2; (i < 5 && i < Model.Location.Count); i++)
                     {
-                        <div class="relative">
+                        <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
                             <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                 <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location3">
                                 <p style="line-height:12px; " class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
@@ -617,11 +617,10 @@
         <div class=" flex flex-row justify-start items-center w-[160px] ">
             <div class="font-[700] text-black text-[14px] leading-[21px]">条件から探す</div>
         </div>
-
     </div>
     <div class="flex flex-col  gap-[6px] px-4  pb-[16px]">
         <div class="grid  grid-cols-2 gap-[6px]">
-            <div class="relative">
+            <div class="relative" onclick="GetLocationFilterPopUp();">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location1">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -630,7 +629,7 @@
                 </div>
                 <div class="overlay"></div>
             </div>
-            <div class="relative">
+            <div class="relative" onclick="ClubHostRedirectFunction('club');">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden  rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location2">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -642,7 +641,7 @@
             </div>
         </div>
         <div class="grid grid-cols-3 gap-[6px]">
-            <div class="relative">
+            <div class="relative" onclick="ClubHostRedirectFunction('host');">
                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location3">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -692,7 +691,7 @@
     </div>
     <div class="flex flex-col  gap-[6px] px-4 gap-[6px] pb-[16px]">
         <div class="grid  grid-cols-2 gap-[6px]">
-            <div class="relative">
+            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("0").ToString()');">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location1">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -702,7 +701,7 @@
                 <div class="overlay"></div>
 
             </div>
-            <div class="relative">
+            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("1").ToString()');">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden  rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location2">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -714,7 +713,7 @@
             </div>
         </div>
         <div class="grid grid-cols-3 gap-[6px]">
-            <div class="relative">
+            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("2").ToString()');">
                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location3">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -724,7 +723,7 @@
                 </div>
                 <div class="overlay"></div>
             </div>
-            <div class="relative">
+            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("3").ToString()');">
                 <div class="innercontainer h-[100px] flex flex-row text-center  justify-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="loction4">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -734,7 +733,7 @@
                 </div>
                 <div class="overlay"></div>
             </div>
-            <div class="relative">
+            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("4").ToString()');">
                 <div class="innercontainer h-[100px] flex flex-row text-center justify-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location5">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -957,6 +956,14 @@
                 }
             });
         }
+
+        function ClubHostRedirectFunction(RenderId) {
+            window.location.href = `/LocationManagement/Index?LocationId=${CurrentLocationId}&RenderId=${RenderId}`;
+        }
+
+        function PreferenceRedirect(Type) {
+            window.location.href = `/DashboardV2/Preference?LocationId=${CurrentLocationId}&Type=${Type}`;
+        }
     </script>
     <script>
         document.getElementById("tab1Button").onclick = function () {
@@ -995,4 +1002,11 @@
         };
     </script>
     <!----------------------------------------------------Location---------------------------------------------------->
+    <!--#region 1-->
+    <script>
+        function LocationFunction(i) {
+            window.location.href = "/LocationManagement/Index?LocationId=" + i;
+        }
+    </script>
+    <!--#endregion-->
 }

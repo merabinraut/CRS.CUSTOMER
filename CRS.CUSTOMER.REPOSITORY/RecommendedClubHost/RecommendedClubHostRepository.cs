@@ -82,10 +82,10 @@ namespace CRS.CUSTOMER.REPOSITORY.RecommendedClubHost
                     }
                     item.HostGalleryImage = stringList;
                     #endregion
-                    string SQL3 = "EXEC sproc_club_schedule_management @Flag ='gcws'";
-                    SQL3 += ",@ClubId=" + _dao.FilterString(item.ClubId);
-                    var dbResponse3 = _dao.ExecuteDataTable(SQL3);
-                    if (dbResponse3 != null && dbResponse3.Rows.Count > 0) item.ClubWeeklyScheduleList = _dao.DataTableToListObject<ClubWeeklyScheduleCommon>(dbResponse3).ToList();
+                    //string SQL3 = "EXEC sproc_club_schedule_management @Flag ='gcws'";
+                    //SQL3 += ",@ClubId=" + _dao.FilterString(item.ClubId);
+                    //var dbResponse3 = _dao.ExecuteDataTable(SQL3);
+                    //if (dbResponse3 != null && dbResponse3.Rows.Count > 0) item.ClubWeeklyScheduleList = _dao.DataTableToListObject<ClubWeeklyScheduleCommon>(dbResponse3).ToList();
                 }
                 return Response;
             }
