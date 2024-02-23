@@ -774,6 +774,10 @@
     <value>or</value>
     <comment>Search Filter</comment>
   </data>
+  <data name="Others" xml:space="preserve">
+    <value>Others</value>
+    <comment>Profile</comment>
+  </data>
   <data name="OverallClubGallery" xml:space="preserve">
     <value>Overall Club Gallery</value>
   </data>

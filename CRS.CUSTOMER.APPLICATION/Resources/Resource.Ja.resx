@@ -774,6 +774,10 @@
     <value>または</value>
     <comment>Search Filter</comment>
   </data>
+  <data name="Others" xml:space="preserve">
+    <value>その他</value>
+    <comment>Profile</comment>
+  </data>
   <data name="OverallClubGallery" xml:space="preserve">
     <value>クラブとホストの写真同</value>
   </data>
