@@ -291,6 +291,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.Ja.resx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ReservationHistoryManagementV2Controller.cs" />
+    <Compile Include="Models\ReservationHistoryV2\ReservationHistoryV2Model.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\userupload\ClubManagement\" />
@@ -300,6 +302,8 @@
     <Folder Include="Views\RecommendedClubHost\" />
     <Folder Include="Views\ReservationManagement\" />
     <Folder Include="Views\UserManagement\" />
+    <Folder Include="Views\ReservationHistoryManagementV2\" />
+    <Folder Include="Models\ReservationHistoryV2\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\artchart\anychart.min.css" />
@@ -584,7 +588,14 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+<<<<<<< HEAD
     <Content Include="Views\LocationManagement\ClubDetail_V2.cshtml" />
+=======
+    <Content Include="Views\ReservationHistoryManagementV2\ReservationHistory.cshtml" />
+    <Content Include="Views\ReservationHistoryManagementV2\ViewHistoryDetail.cshtml" />
+    <Content Include="Views\ProfileManagement\ChangePasswordV2.cshtml" />
+    <Content Include="Views\Home\SetNewPasswordV2.cshtml" />
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Resource.Ja.resx">
