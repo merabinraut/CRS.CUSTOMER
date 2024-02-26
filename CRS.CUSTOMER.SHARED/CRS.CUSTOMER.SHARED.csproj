@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -141,6 +141,7 @@
     <Compile Include="SearchFilterManagement\ClubSearchManagementCommon.cs" />
     <Compile Include="SearchFilterManagement\HostSearchManagementCommon.cs" />
     <Compile Include="SearchFilterManagement\SearchFilterViewCommon.cs" />
+    <Compile Include="ReservationHistoryManagementV2\ReservationHistoryManagementV2Common.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -148,6 +149,7 @@
   <ItemGroup>
     <Folder Include="CommonManagement\" />
     <Folder Include="LogManagement\" />
+    <Folder Include="ReservationHistoryManagementV2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

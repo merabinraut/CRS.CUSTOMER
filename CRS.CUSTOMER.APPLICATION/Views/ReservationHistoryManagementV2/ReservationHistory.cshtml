@@ -1,0 +1,1231 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2.ReservationCommonModel
+@{
+    ViewBag.Title = "Reservation History";
+    Layout = "~/Views/Shared/_Reservation-Layout.cshtml";
+}
+<style>
+.modalWrapper {
+    background:rgba(27,27,27,0.5);
+    height:100%;
+    z-index:555;
+    position:fixed;
+    top:0px;
+}
+    .modalContentWrapper{
+        display:block;
+        width:100vw;
+        padding:0 16px;
+        top:50%;
+        margin-top:65%
+    }
+</style>
+<!DOCTYPE html>
+<html>
+<body>
+    @Html.AntiForgeryToken()
+    <div class="flex items-center border-b-[2px] border-t-[#C8B477] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
+        <div class="flex gap-2 items-center absolute top-[9px] left-4 text-sm text-[#292F33]" onclick="window.location.href='@Url.Action("Index","Dashboard")'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
+                <path d="M15.2352 3.24084C14.786 2.79167 14.0618 2.79167 13.6127 3.24084L5.99518 10.8583C5.63768 11.2158 5.63768 11.7933 5.99518 12.1508L13.6127 19.7683C14.0618 20.2175 14.786 20.2175 15.2352 19.7683C15.6843 19.3192 15.6843 18.595 15.2352 18.1458L8.59851 11.5L15.2443 4.85417C15.6843 4.41417 15.6843 3.68084 15.2352 3.24084Z"
+                      fill="#BCB08A" />
+            </svg> 閉じる
+        </div>
+        <div class="text-center text-sm w-full font-[700] text-[#333] ">予約確認・変更…予約一覧</div>
+    </div>
+    <!-- tab  -->
+    <div class="bg-[#FAFAFA]">
+        <div class="px-8 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
+            <div class="flex gap-[24px]  w-full " style="border-bottom: 4px solid #F4F4F4;">
+                <div class="flex tab-container-plane booking-tab bg-white justify-between w-full text-sm no-scrollbar">
+                    <button id="tab1Button" class="tab-button-plane w-max flex-none tab-link  ">予約中</button>
+                    <button id="tab2Button" class="tab-button-plane w-max flex-none tab-link pt-0">訪問済み</button>
+                    <button id="tab3Button" class="tab-button-plane w-max flex-none tab-link pt-0 active">キャンセル済</button>
+                    <button id="tab4Button" class="tab-button-plane w-max flex-none tab-link pt-0">全ての予約</button>
+                </div>
+            </div>
+        </div>
+        <div class="my-4">
+            <div class="bg-white pb-4  px-[16px] ">
+                <div id="tab1" class="tab-content-plane hidden ">
+                    @if (Model.GetReservedList != null)
+                    {
+                        foreach (var item in Model.GetReservedList)
+                        {
+                            <div class="flex flex-col gap-4">
+                                <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
+                                    <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
+                                        <div class="h-[82px] w-[82px] relative flex-none">
+                                            <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
+                                                 class="absolute top-[6px] left-[-5px]" />
+                                            <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] " alt="img" />
+                                        </div>
+                                        <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
+                                            <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list">
+                                                <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                              d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                              fill="#D75A8B" />
+                                                    </svg>
+                                                    <span>歌舞伎町</span>
+                                                </div>
+                                                <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    ランク10
+                                                </div>
+                                                <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    プラチナ
+                                                </div>
+                                                <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    優良店
+                                                </div>
+                                                <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    大型店
+                                                </div>
+
+                                            </div>
+                                            <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
+                                                @item.ClubNameEng
+
+                                            </h3>
+                                            <div class="text-[8px] text-[#E3A1A1] mt-1">
+                                                @item.ClubNameJp
+                                            </div>
+                                            <div class="flex text-[#565656] gap-[2px] text-[9px] items-center gap-1">
+                                                <i class="las la-calendar text-[#565656] text-[10px] "></i>
+                                                <div class="text-[#565656]">@item.VisitDate</div>
+                                                <div class="text-[#565656]">
+                                                    @item.VisitTime 時
+                                                </div>
+                                            </div>
+
+                                            <div class="flex items-center text-[8px] text-[#66666666] gap-3 font-medium	mt-[6px]">
+                                                <div>
+                                                    人数: <span class="text-[#565656]">@item.NoOfPeople 人</span>
+                                                </div>
+                                                <div class="flex items-center gap-1">
+                                                    <div>
+                                                        支払金額
+                                                    </div>
+                                                    <div class="flex items-center gap-1">
+
+                                                        <div class="text-[6px]">
+                                                            税込
+                                                        </div>
+                                                        <div class="text-[#565656]">
+
+                                                            @item.Price 円
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h-[32px] border-b-[1px] border-[#F1F1F1] flex justify-between items-center">
+                                        <div class="flex items-center gap-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M5.25791 9.00002C4.74191 9.00202 4.34924 9.13336 4.34924 9.13336L4.33991 9.13669L1.50391 10.2247L2.49591 13.01L4.96057 12.0647L8.52924 14.0294L14.6912 11.476L14.3086 10.5547L8.58991 12.9214L5.03924 10.9667L3.09391 11.7107L2.77391 10.8087L4.67191 10.08C4.86211 10.0241 5.05966 9.9971 5.25791 10C5.60924 10 6.01924 10.078 6.36924 10.3947L6.37591 10.3987L6.37791 10.4007C6.89324 10.8474 7.28191 11.1607 7.82324 11.33C8.36391 11.5 8.97791 11.5194 10.0032 11.5154L9.9979 10.5154C8.9919 10.5194 8.46657 10.484 8.12324 10.3754C7.77924 10.2694 7.53524 10.08 7.03924 9.65069L7.03257 9.64669C6.45457 9.12669 5.76724 8.99802 5.25791 9.00002Z"
+                                                      fill="#BEBEBE" />
+                                                <path d="M7 3L9.34118 6H7.95771V6.54545H9.65981V7.09091H7.95771V7.63636H9.65981V9H10.3406V7.63636H12.0427V7.09091H10.3406V6.54545H12.0427V6H10.6597L13 3H12.1921L10.0002 5.82109L7.80884 3H7Z"
+                                                      fill="#BEBEBE" />
+                                            </svg>
+                                            <div class="text-[#565656] text-[8px] leading-[20px]">
+                                                現地で支払う
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-[2px]">
+                                            <div class="text-[#66666666] text-[8px]">
+                                                予約ID:
+                                            </div>
+                                            <div class="text-[10px] text-[#565656]">
+                                                # @item.InvoiceId
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="p-2 flex justify-between">
+                                        <div class="py-[6px] px-2">
+                                            <a href="tel:@item.MobileNumber">
+                                                <div class="flex justify-center mb-[2px]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path d="M9.4999 0V1C12.5319 1 14.9999 3.46733 14.9999 6.5H15.9999C15.9999 2.916 13.0839 0 9.4999 0ZM4.32456 1.50267C4.06256 1.50267 3.80056 1.58867 3.58656 1.76067L3.5619 1.78067L1.9899 3.40267L2.02323 3.37133C1.77957 3.58306 1.60673 3.86444 1.52805 4.1775C1.44936 4.49057 1.46862 4.82023 1.58323 5.122C2.0039 6.33733 3.0779 8.68667 5.19656 10.8027C7.32056 12.9287 9.69456 13.9567 10.8686 14.4153L10.8806 14.4187L10.8926 14.4227C11.1865 14.52 11.5007 14.5395 11.8045 14.4793C12.1082 14.4191 12.3912 14.2813 12.6259 14.0793L12.6406 14.066L14.2026 12.504C14.6179 12.0893 14.6179 11.362 14.2026 10.9473L12.1539 8.89667C11.7379 8.48067 11.0112 8.48067 10.5952 8.89667L9.60323 9.88867C8.84754 9.5321 8.15243 9.05924 7.54323 8.48733C6.7239 7.706 6.30523 6.802 6.1539 6.45333L7.1539 5.45333C7.59256 5.014 7.6179 4.26067 7.1119 3.85867L7.1579 3.90067L5.08656 1.78L5.06323 1.76C4.85373 1.59212 4.59304 1.50173 4.32456 1.50267ZM9.4999 2V3C10.4278 3.00106 11.3175 3.37015 11.9736 4.0263C12.6297 4.68244 12.9988 5.57207 12.9999 6.5H13.9999C13.9985 5.30696 13.5239 4.16319 12.6803 3.31958C11.8367 2.47597 10.6929 2.00141 9.4999 2ZM4.3259 2.5C4.36123 2.5 4.39656 2.51333 4.43123 2.54L6.46456 4.622L6.48923 4.642C6.48323 4.63733 6.5079 4.68467 6.44723 4.746L4.96856 6.22467L5.08256 6.52667C5.08256 6.52667 5.64723 8.06067 6.85323 9.21067C8.0399 10.342 9.5019 10.96 9.5019 10.96L9.81323 11.0933L11.3026 9.60333C11.3866 9.51933 11.3626 9.51933 11.4472 9.60333L13.4959 11.654C13.5812 11.7393 13.5812 11.7113 13.4959 11.7967L11.9726 13.32C11.7406 13.5173 11.5006 13.5693 11.2126 13.4733C10.0812 13.0313 7.86923 12.0633 5.9039 10.096C3.92523 8.11933 2.8999 5.87333 2.52323 4.78533L2.52123 4.77867L2.51856 4.772C2.44256 4.572 2.4979 4.282 2.67523 4.12867L2.6919 4.114L4.21923 2.54067C4.24931 2.51568 4.28682 2.50138 4.3259 2.5ZM9.49923 4V5C10.3266 5 10.9992 5.67333 10.9992 6.5H11.9999C11.9992 5.83717 11.7356 5.2017 11.2669 4.73301C10.7982 4.26432 10.1627 4.00071 9.4999 4H9.49923Z"
+                                                              fill="#839AD6" />
+                                                    </svg>
+                                                </div>
+                                                <div class="text-[#565656] text-[8px]">
+                                                    お店に電話
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="py-[6px] px-2">
+                                            <a href="@item.LocationURL">
+                                                <div class="flex justify-center mb-[2px]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path d="M12 0C9.79948 0 8 1.76051 8 3.91338C8 4.56051 8.25521 5.22038 8.58333 5.95159C8.91146 6.6828 9.32552 7.45732 9.75 8.17325C10.599 9.6051 11.4583 10.8025 11.4583 10.8025L12 11.5771L12.5417 10.8025C12.5417 10.8025 13.401 9.6051 14.25 8.17325C14.6745 7.45732 15.0885 6.6828 15.4167 5.95159C15.7448 5.22038 16 4.56051 16 3.91338C16 1.76051 14.2005 0 12 0ZM5.3125 1.26369L0 3.48535V15.6984C0 15.8415 0.145989 15.9383 0.277846 15.8826L5.35417 13.7376L10.6875 15.6943L16 13.4726V7.78599C15.5755 8.58344 15.1042 9.34777 14.6667 10.028V12.6166L11.3333 14.0025V12.9427L10.3542 11.5567C10.25 11.4089 10.1276 11.2331 10 11.0471V14.0637L6 12.5962V2.89427L6.72917 3.15924C6.79427 2.71847 6.91146 2.29299 7.08333 1.89554L5.3125 1.26369ZM12 1.30446C13.4792 1.30446 14.6667 2.46624 14.6667 3.91338C14.6667 4.16561 14.5052 4.76178 14.2083 5.42166C13.9115 6.08153 13.4922 6.83057 13.0833 7.52102C12.5391 8.43822 12.3047 8.76433 12 9.21274C11.6953 8.76433 11.4609 8.43822 10.9167 7.52102C10.5078 6.83057 10.0885 6.08153 9.79167 5.42166C9.49479 4.76178 9.33333 4.16561 9.33333 3.91338C9.33333 2.46624 10.5208 1.30446 12 1.30446ZM4.66667 2.93503V12.6166L1.33333 14.0025V4.3414L4.66667 2.93503ZM12 2.93503C11.4479 2.93503 11 3.37325 11 3.91338C11 4.4535 11.4479 4.89172 12 4.89172C12.5521 4.89172 13 4.4535 13 3.91338C13 3.37325 12.5521 2.93503 12 2.93503Z"
+                                                              fill="#D75A8B" />
+                                                    </svg>
+                                                </div>
+                                                <div class="text-[#565656] text-[8px]">
+                                                    マップを見る
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="py-[6px] px-2" data-drawer-target="drawer-date" data-drawer-show="drawer-date" data-drawer-placement="bottom" aria-controls="drawer-date" onclick="editTime('@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
+                                                          fill="#666666" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                時間変更
+                                            </div>
+
+                                        </div>
+                                        <div class="py-[6px] px-2" data-drawer-target="model_cancel" data-drawer-show="model_cancel" data-drawer-placement="center" aria-controls="model_cancel" onclick="getid('@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M3.25167 4.38089L4.43019 3.19922L8.01261 6.79236L11.5694 3.22607L12.7468 4.40551L9.1889 7.97292L12.7992 11.5918L11.6218 12.7724L8.01261 9.15348L4.37662 12.7992L3.19922 11.6187L6.83409 7.97292L3.25167 4.38089Z"
+                                                          fill="#898783" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                キャンセル
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+                <div id="tab2" class="tab-content-plane hidden ">
+                    @if (Model.GetVisitedHistoryList != null)
+                    {
+                        foreach (var item in Model.GetVisitedHistoryList)
+                        {
+                            <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
+                                <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
+                                    <div class="h-[82px] w-[82px] relative flex-none">
+                                        <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
+                                             class="absolute top-[6px] left-[-5px]" />
+                                        <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] " alt="img" />
+                                    </div>
+                                    <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
+                                        <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list">
+                                            <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                          d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                          fill="#D75A8B" />
+                                                </svg>
+                                                <span>歌舞伎町</span>
+                                            </div>
+                                            <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                ランク10
+                                            </div>
+                                            <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                プラチナ
+                                            </div>
+                                            <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                優良店
+                                            </div>
+                                            <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                大型店
+                                            </div>
+
+                                        </div>
+                                        <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
+                                            @item.ClubNameEng
+
+                                        </h3>
+                                        <div class="text-[8px] text-[#E3A1A1] mt-1">
+                                            @item.ClubNameJp
+                                        </div>
+                                        <div class="flex text-[#565656] gap-[2px] text-[9px] items-center gap-1">
+                                            <i class="las la-calendar text-[#565656] text-[10px] "></i>
+                                            <div class="text-[#565656]">@item.VisitDate</div>
+                                            <div class="text-[#565656]">
+                                                @item.VisitTime 時
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center text-[8px] text-[#66666666] gap-3 font-medium	mt-[6px]">
+                                            <div>
+                                                人数: <span class="text-[#565656]">@item.NoOfPeople 人</span>
+                                            </div>
+                                            <div class="flex items-center gap-1">
+                                                <div>
+                                                    支払金額
+                                                </div>
+                                                <div class="flex items-center gap-1">
+
+                                                    <div class="text-[6px]">
+                                                        税込
+                                                    </div>
+                                                    <div class="text-[#565656]">
+
+                                                        @item.Price 円
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="h-[32px] border-b-[1px] border-[#F1F1F1] flex justify-between items-center">
+                                    <div class="flex items-center gap-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M5.25791 9.00002C4.74191 9.00202 4.34924 9.13336 4.34924 9.13336L4.33991 9.13669L1.50391 10.2247L2.49591 13.01L4.96057 12.0647L8.52924 14.0294L14.6912 11.476L14.3086 10.5547L8.58991 12.9214L5.03924 10.9667L3.09391 11.7107L2.77391 10.8087L4.67191 10.08C4.86211 10.0241 5.05966 9.9971 5.25791 10C5.60924 10 6.01924 10.078 6.36924 10.3947L6.37591 10.3987L6.37791 10.4007C6.89324 10.8474 7.28191 11.1607 7.82324 11.33C8.36391 11.5 8.97791 11.5194 10.0032 11.5154L9.9979 10.5154C8.9919 10.5194 8.46657 10.484 8.12324 10.3754C7.77924 10.2694 7.53524 10.08 7.03924 9.65069L7.03257 9.64669C6.45457 9.12669 5.76724 8.99802 5.25791 9.00002Z"
+                                                  fill="#BEBEBE" />
+                                            <path d="M7 3L9.34118 6H7.95771V6.54545H9.65981V7.09091H7.95771V7.63636H9.65981V9H10.3406V7.63636H12.0427V7.09091H10.3406V6.54545H12.0427V6H10.6597L13 3H12.1921L10.0002 5.82109L7.80884 3H7Z"
+                                                  fill="#BEBEBE" />
+                                        </svg>
+                                        <div class="text-[#565656] text-[8px] leading-[20px]">
+                                            現地で支払う
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-[2px]">
+                                        <div class="text-[#66666666] text-[8px]">
+                                            予約ID:
+                                        </div>
+                                        <div class="text-[10px] text-[#565656]">
+                                            # @item.InvoiceId
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2 flex justify-between">
+                                    <div class="py-[6px] px-2">
+                                        <a href="tel:@item.MobileNumber">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M9.4999 0V1C12.5319 1 14.9999 3.46733 14.9999 6.5H15.9999C15.9999 2.916 13.0839 0 9.4999 0ZM4.32456 1.50267C4.06256 1.50267 3.80056 1.58867 3.58656 1.76067L3.5619 1.78067L1.9899 3.40267L2.02323 3.37133C1.77957 3.58306 1.60673 3.86444 1.52805 4.1775C1.44936 4.49057 1.46862 4.82023 1.58323 5.122C2.0039 6.33733 3.0779 8.68667 5.19656 10.8027C7.32056 12.9287 9.69456 13.9567 10.8686 14.4153L10.8806 14.4187L10.8926 14.4227C11.1865 14.52 11.5007 14.5395 11.8045 14.4793C12.1082 14.4191 12.3912 14.2813 12.6259 14.0793L12.6406 14.066L14.2026 12.504C14.6179 12.0893 14.6179 11.362 14.2026 10.9473L12.1539 8.89667C11.7379 8.48067 11.0112 8.48067 10.5952 8.89667L9.60323 9.88867C8.84754 9.5321 8.15243 9.05924 7.54323 8.48733C6.7239 7.706 6.30523 6.802 6.1539 6.45333L7.1539 5.45333C7.59256 5.014 7.6179 4.26067 7.1119 3.85867L7.1579 3.90067L5.08656 1.78L5.06323 1.76C4.85373 1.59212 4.59304 1.50173 4.32456 1.50267ZM9.4999 2V3C10.4278 3.00106 11.3175 3.37015 11.9736 4.0263C12.6297 4.68244 12.9988 5.57207 12.9999 6.5H13.9999C13.9985 5.30696 13.5239 4.16319 12.6803 3.31958C11.8367 2.47597 10.6929 2.00141 9.4999 2ZM4.3259 2.5C4.36123 2.5 4.39656 2.51333 4.43123 2.54L6.46456 4.622L6.48923 4.642C6.48323 4.63733 6.5079 4.68467 6.44723 4.746L4.96856 6.22467L5.08256 6.52667C5.08256 6.52667 5.64723 8.06067 6.85323 9.21067C8.0399 10.342 9.5019 10.96 9.5019 10.96L9.81323 11.0933L11.3026 9.60333C11.3866 9.51933 11.3626 9.51933 11.4472 9.60333L13.4959 11.654C13.5812 11.7393 13.5812 11.7113 13.4959 11.7967L11.9726 13.32C11.7406 13.5173 11.5006 13.5693 11.2126 13.4733C10.0812 13.0313 7.86923 12.0633 5.9039 10.096C3.92523 8.11933 2.8999 5.87333 2.52323 4.78533L2.52123 4.77867L2.51856 4.772C2.44256 4.572 2.4979 4.282 2.67523 4.12867L2.6919 4.114L4.21923 2.54067C4.24931 2.51568 4.28682 2.50138 4.3259 2.5ZM9.49923 4V5C10.3266 5 10.9992 5.67333 10.9992 6.5H11.9999C11.9992 5.83717 11.7356 5.2017 11.2669 4.73301C10.7982 4.26432 10.1627 4.00071 9.4999 4H9.49923Z"
+                                                          fill="#839AD6" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                お店に電話
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="py-[6px] px-2">
+                                        <a href="@item.LocationURL">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M12 0C9.79948 0 8 1.76051 8 3.91338C8 4.56051 8.25521 5.22038 8.58333 5.95159C8.91146 6.6828 9.32552 7.45732 9.75 8.17325C10.599 9.6051 11.4583 10.8025 11.4583 10.8025L12 11.5771L12.5417 10.8025C12.5417 10.8025 13.401 9.6051 14.25 8.17325C14.6745 7.45732 15.0885 6.6828 15.4167 5.95159C15.7448 5.22038 16 4.56051 16 3.91338C16 1.76051 14.2005 0 12 0ZM5.3125 1.26369L0 3.48535V15.6984C0 15.8415 0.145989 15.9383 0.277846 15.8826L5.35417 13.7376L10.6875 15.6943L16 13.4726V7.78599C15.5755 8.58344 15.1042 9.34777 14.6667 10.028V12.6166L11.3333 14.0025V12.9427L10.3542 11.5567C10.25 11.4089 10.1276 11.2331 10 11.0471V14.0637L6 12.5962V2.89427L6.72917 3.15924C6.79427 2.71847 6.91146 2.29299 7.08333 1.89554L5.3125 1.26369ZM12 1.30446C13.4792 1.30446 14.6667 2.46624 14.6667 3.91338C14.6667 4.16561 14.5052 4.76178 14.2083 5.42166C13.9115 6.08153 13.4922 6.83057 13.0833 7.52102C12.5391 8.43822 12.3047 8.76433 12 9.21274C11.6953 8.76433 11.4609 8.43822 10.9167 7.52102C10.5078 6.83057 10.0885 6.08153 9.79167 5.42166C9.49479 4.76178 9.33333 4.16561 9.33333 3.91338C9.33333 2.46624 10.5208 1.30446 12 1.30446ZM4.66667 2.93503V12.6166L1.33333 14.0025V4.3414L4.66667 2.93503ZM12 2.93503C11.4479 2.93503 11 3.37325 11 3.91338C11 4.4535 11.4479 4.89172 12 4.89172C12.5521 4.89172 13 4.4535 13 3.91338C13 3.37325 12.5521 2.93503 12 2.93503Z"
+                                                          fill="#D75A8B" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                マップを見る
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="py-[6px] px-2" disabled>
+                                        <div class="flex justify-center mb-[2px]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
+                                                      fill="#666666" />
+                                            </svg>
+                                        </div>
+                                        <div class="text-[#565656] text-[8px]">
+                                            時間変更
+                                        </div>
+                                    </div>
+                                    <div class="py-[6px] px-2" disabled>
+                                        <div class="flex justify-center mb-[2px]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M3.25167 4.38089L4.43019 3.19922L8.01261 6.79236L11.5694 3.22607L12.7468 4.40551L9.1889 7.97292L12.7992 11.5918L11.6218 12.7724L8.01261 9.15348L4.37662 12.7992L3.19922 11.6187L6.83409 7.97292L3.25167 4.38089Z"
+                                                      fill="#898783" />
+                                            </svg>
+                                        </div>
+                                        <div class="text-[#565656] text-[8px]">
+                                            キャンセル
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div id="tab3" class="tab-content-plane  ">
+                    @if (Model.GetCancelledHistoryList != null)
+                    {
+                        foreach (var item in Model.GetCancelledHistoryList)
+                        {
+                            <div class="flex flex-col gap-4">
+                                <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
+                                    <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
+                                        <div class="h-[82px] w-[82px] relative flex-none">
+                                            <img src="/Content/assets/images/status-cancelled.svg" alt="reserved"
+                                                 class="absolute top-[6px] left-[-5px]" />
+                                            <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] " alt="img" />
+                                        </div>
+                                        <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
+                                            <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list overflow-hidden overflow-x-auto no-scrollbar w-full">
+                                                <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                              d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                              fill="#D75A8B" />
+                                                    </svg>
+                                                    <span>歌舞伎町</span>
+                                                </div>
+                                                <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max flex-none text-[8px] rounded-[2px] text-white">
+                                                    ランク10
+                                                </div>
+                                                <div class="px-[5px] py-[1px] bg-[#697DBF] h-max flex-none text-[8px] rounded-[2px] text-white">
+                                                    プラチナ
+                                                </div>
+                                                <div class="px-[5px] py-[1px] bg-[#96B41F] h-max flex-none text-[8px] rounded-[2px] text-white">
+                                                    優良店
+                                                </div>
+                                                <div class="px-[5px] py-[1px] bg-[#EFB726] h-max flex-none text-[8px] rounded-[2px] text-white">
+                                                    大型店
+                                                </div>
+
+                                            </div>
+                                            <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
+                                                @item.ClubNameEng
+
+                                            </h3>
+                                            <div class="text-[8px] text-[#E3A1A1] mt-1">
+                                                @item.ClubNameJp
+                                            </div>
+                                            <div class="flex text-[#565656] gap-[2px] text-[9px] items-center gap-1">
+                                                <i class="las la-calendar text-[#565656] text-[10px] "></i>
+                                                <div class="text-[#565656]">@item.VisitDate</div>
+                                                <div class="text-[#565656]">
+                                                    @item.VisitTime 時
+                                                </div>
+                                            </div>
+
+                                            <div class="flex items-center text-[8px] text-[#66666666] gap-3 font-medium	mt-[6px]">
+                                                <div>
+                                                    人数: <span class="text-[#565656]">@item.NoOfPeople 人</span>
+                                                </div>
+                                                <div class="flex items-center gap-1">
+                                                    <div>
+                                                        支払金額
+                                                    </div>
+                                                    <div class="flex items-center gap-1">
+
+                                                        <div class="text-[6px]">
+                                                            税込
+                                                        </div>
+                                                        <div class="text-[#565656]">
+
+                                                            @item.Price 円
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="h-[32px] border-b-[1px] border-[#F1F1F1] flex justify-between items-center">
+                                        <div class="flex items-center gap-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M5.25791 9.00002C4.74191 9.00202 4.34924 9.13336 4.34924 9.13336L4.33991 9.13669L1.50391 10.2247L2.49591 13.01L4.96057 12.0647L8.52924 14.0294L14.6912 11.476L14.3086 10.5547L8.58991 12.9214L5.03924 10.9667L3.09391 11.7107L2.77391 10.8087L4.67191 10.08C4.86211 10.0241 5.05966 9.9971 5.25791 10C5.60924 10 6.01924 10.078 6.36924 10.3947L6.37591 10.3987L6.37791 10.4007C6.89324 10.8474 7.28191 11.1607 7.82324 11.33C8.36391 11.5 8.97791 11.5194 10.0032 11.5154L9.9979 10.5154C8.9919 10.5194 8.46657 10.484 8.12324 10.3754C7.77924 10.2694 7.53524 10.08 7.03924 9.65069L7.03257 9.64669C6.45457 9.12669 5.76724 8.99802 5.25791 9.00002Z"
+                                                      fill="#BEBEBE" />
+                                                <path d="M7 3L9.34118 6H7.95771V6.54545H9.65981V7.09091H7.95771V7.63636H9.65981V9H10.3406V7.63636H12.0427V7.09091H10.3406V6.54545H12.0427V6H10.6597L13 3H12.1921L10.0002 5.82109L7.80884 3H7Z"
+                                                      fill="#BEBEBE" />
+                                            </svg>
+                                            <div class="text-[#565656] text-[8px] leading-[20px]">
+                                                現地で支払う
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-[2px]">
+                                            <div class="text-[#66666666] text-[8px]">
+                                                予約ID:
+                                            </div>
+                                            <div class="text-[10px] text-[#565656]">
+                                                # @item.InvoiceId
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-2 flex justify-between">
+                                        <div class="py-[6px] px-2">
+                                            <a href="tel:@item.MobileNumber">
+                                                <div class="flex justify-center mb-[2px]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path d="M9.4999 0V1C12.5319 1 14.9999 3.46733 14.9999 6.5H15.9999C15.9999 2.916 13.0839 0 9.4999 0ZM4.32456 1.50267C4.06256 1.50267 3.80056 1.58867 3.58656 1.76067L3.5619 1.78067L1.9899 3.40267L2.02323 3.37133C1.77957 3.58306 1.60673 3.86444 1.52805 4.1775C1.44936 4.49057 1.46862 4.82023 1.58323 5.122C2.0039 6.33733 3.0779 8.68667 5.19656 10.8027C7.32056 12.9287 9.69456 13.9567 10.8686 14.4153L10.8806 14.4187L10.8926 14.4227C11.1865 14.52 11.5007 14.5395 11.8045 14.4793C12.1082 14.4191 12.3912 14.2813 12.6259 14.0793L12.6406 14.066L14.2026 12.504C14.6179 12.0893 14.6179 11.362 14.2026 10.9473L12.1539 8.89667C11.7379 8.48067 11.0112 8.48067 10.5952 8.89667L9.60323 9.88867C8.84754 9.5321 8.15243 9.05924 7.54323 8.48733C6.7239 7.706 6.30523 6.802 6.1539 6.45333L7.1539 5.45333C7.59256 5.014 7.6179 4.26067 7.1119 3.85867L7.1579 3.90067L5.08656 1.78L5.06323 1.76C4.85373 1.59212 4.59304 1.50173 4.32456 1.50267ZM9.4999 2V3C10.4278 3.00106 11.3175 3.37015 11.9736 4.0263C12.6297 4.68244 12.9988 5.57207 12.9999 6.5H13.9999C13.9985 5.30696 13.5239 4.16319 12.6803 3.31958C11.8367 2.47597 10.6929 2.00141 9.4999 2ZM4.3259 2.5C4.36123 2.5 4.39656 2.51333 4.43123 2.54L6.46456 4.622L6.48923 4.642C6.48323 4.63733 6.5079 4.68467 6.44723 4.746L4.96856 6.22467L5.08256 6.52667C5.08256 6.52667 5.64723 8.06067 6.85323 9.21067C8.0399 10.342 9.5019 10.96 9.5019 10.96L9.81323 11.0933L11.3026 9.60333C11.3866 9.51933 11.3626 9.51933 11.4472 9.60333L13.4959 11.654C13.5812 11.7393 13.5812 11.7113 13.4959 11.7967L11.9726 13.32C11.7406 13.5173 11.5006 13.5693 11.2126 13.4733C10.0812 13.0313 7.86923 12.0633 5.9039 10.096C3.92523 8.11933 2.8999 5.87333 2.52323 4.78533L2.52123 4.77867L2.51856 4.772C2.44256 4.572 2.4979 4.282 2.67523 4.12867L2.6919 4.114L4.21923 2.54067C4.24931 2.51568 4.28682 2.50138 4.3259 2.5ZM9.49923 4V5C10.3266 5 10.9992 5.67333 10.9992 6.5H11.9999C11.9992 5.83717 11.7356 5.2017 11.2669 4.73301C10.7982 4.26432 10.1627 4.00071 9.4999 4H9.49923Z"
+                                                              fill="#839AD6" />
+                                                    </svg>
+                                                </div>
+                                                <div class="text-[#565656] text-[8px]">
+                                                    お店に電話
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="py-[6px] px-2">
+                                            <a href="@item.LocationURL">
+                                                <div class="flex justify-center mb-[2px]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path d="M12 0C9.79948 0 8 1.76051 8 3.91338C8 4.56051 8.25521 5.22038 8.58333 5.95159C8.91146 6.6828 9.32552 7.45732 9.75 8.17325C10.599 9.6051 11.4583 10.8025 11.4583 10.8025L12 11.5771L12.5417 10.8025C12.5417 10.8025 13.401 9.6051 14.25 8.17325C14.6745 7.45732 15.0885 6.6828 15.4167 5.95159C15.7448 5.22038 16 4.56051 16 3.91338C16 1.76051 14.2005 0 12 0ZM5.3125 1.26369L0 3.48535V15.6984C0 15.8415 0.145989 15.9383 0.277846 15.8826L5.35417 13.7376L10.6875 15.6943L16 13.4726V7.78599C15.5755 8.58344 15.1042 9.34777 14.6667 10.028V12.6166L11.3333 14.0025V12.9427L10.3542 11.5567C10.25 11.4089 10.1276 11.2331 10 11.0471V14.0637L6 12.5962V2.89427L6.72917 3.15924C6.79427 2.71847 6.91146 2.29299 7.08333 1.89554L5.3125 1.26369ZM12 1.30446C13.4792 1.30446 14.6667 2.46624 14.6667 3.91338C14.6667 4.16561 14.5052 4.76178 14.2083 5.42166C13.9115 6.08153 13.4922 6.83057 13.0833 7.52102C12.5391 8.43822 12.3047 8.76433 12 9.21274C11.6953 8.76433 11.4609 8.43822 10.9167 7.52102C10.5078 6.83057 10.0885 6.08153 9.79167 5.42166C9.49479 4.76178 9.33333 4.16561 9.33333 3.91338C9.33333 2.46624 10.5208 1.30446 12 1.30446ZM4.66667 2.93503V12.6166L1.33333 14.0025V4.3414L4.66667 2.93503ZM12 2.93503C11.4479 2.93503 11 3.37325 11 3.91338C11 4.4535 11.4479 4.89172 12 4.89172C12.5521 4.89172 13 4.4535 13 3.91338C13 3.37325 12.5521 2.93503 12 2.93503Z"
+                                                              fill="#D75A8B" />
+                                                    </svg>
+                                                </div>
+                                                <div class="text-[#565656] text-[8px]">
+                                                    マップを見る
+                                                </div>
+                                            </a>
+
+                                        </div>
+                                        <div class="py-[6px] px-2">
+                                            <div class="flex justify-center mb-[2px]" onclick="openRedoModal('modal_redo','@item.ReservationId')">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M8 1.5C4.416 1.5 1.5 4.416 1.5 8C1.5 11.584 4.416 14.5 8 14.5C11.584 14.5 14.5 11.584 14.5 8H13.5C13.5009 8.72252 13.3592 9.43811 13.0831 10.1058C12.807 10.7735 12.4019 11.3801 11.891 11.891C11.3801 12.4019 10.7735 12.807 10.1058 13.0831C9.43811 13.3592 8.72252 13.5009 8 13.5C7.27748 13.5009 6.56189 13.3592 5.8942 13.0831C5.22652 12.807 4.61985 12.4019 4.10896 11.891C3.59806 11.3801 3.19297 10.7735 2.91688 10.1058C2.64079 9.43811 2.49912 8.72252 2.5 8C2.49912 7.27748 2.64079 6.56189 2.91688 5.8942C3.19297 5.22652 3.59806 4.61985 4.10896 4.10896C4.61985 3.59806 5.22652 3.19297 5.8942 2.91688C6.56189 2.64079 7.27748 2.49912 8 2.5C8.91612 2.49777 9.81815 2.72548 10.6234 3.16225C11.4287 3.59903 12.1116 4.23091 12.6093 5H10V6H14V2H13V3.86C12.392 3.12248 11.6285 2.52846 10.7641 2.12047C9.89971 1.71249 8.95583 1.50061 8 1.5Z"
+                                                          fill="#F89336" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                やり直す
+                                            </div>
+                                        </div>
+                                        <div class="py-[6px] px-2" onclick="openDeleteModal('modal_delete','@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M7 2C6.738 2 6.47067 2.092 6.28133 2.28133C6.092 2.47067 6 2.738 6 3V3.5H2.5V4.5H3.04667L4 13.5467L4.04667 14H11.9533L12 13.5467L12.9533 4.5H13.5V3.5H10V3C10 2.738 9.908 2.47067 9.71867 2.28133C9.52933 2.092 9.262 2 9 2H7ZM7 3H9V3.5H7V3ZM4.06267 4.5H11.9373L11.0467 13H4.95333L4.06267 4.5ZM6 6V11.5H7V6H6ZM7.5 6V11.5H8.5V6H7.5ZM9 6V11.5H10V6H9Z"
+                                                          fill="#F33D3D" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                削除
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+                <div id="tab4" class="tab-content-plane hidden ">
+                    @if (Model.GetAllHistoryList != null)
+                    {
+                        foreach (var item in Model.GetAllHistoryList)
+                        {
+                            <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
+                                <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
+                                    <div class="h-[82px] w-[82px] relative flex-none">
+                                        <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
+                                             class="absolute top-[6px] left-[-5px]" />
+                                        <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] " alt="img" />
+                                    </div>
+                                    <div class="" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
+                                        <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list">
+                                            <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                          d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                          fill="#D75A8B" />
+                                                </svg>
+                                                <span>歌舞伎町</span>
+                                            </div>
+                                            <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                ランク10
+                                            </div>
+                                            <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                プラチナ
+                                            </div>
+                                            <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                優良店
+                                            </div>
+                                            <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                大型店
+                                            </div>
+                                        </div>
+                                        <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
+                                            @item.ClubNameEng
+                                        </h3>
+                                        <div class="text-[8px] text-[#E3A1A1] mt-1">
+                                            @item.ClubNameJp
+                                        </div>
+                                        <div class="flex text-[#565656] gap-[2px] text-[9px] items-center gap-1">
+                                            <i class="las la-calendar text-[#565656] text-[10px] "></i>
+                                            <div class="text-[#565656]">@item.VisitDate</div>
+                                            <div class="text-[#565656]">
+                                                @item.VisitTime 時
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center text-[8px] text-[#66666666] gap-3 font-medium	mt-[6px]">
+                                            <div>
+                                                人数: <span class="text-[#565656]">@item.NoOfPeople 人</span>
+                                            </div>
+                                            <div class="flex items-center gap-1">
+                                                <div>
+                                                    支払金額
+                                                </div>
+                                                <div class="flex items-center gap-1">
+
+                                                    <div class="text-[6px]">
+                                                        税込
+                                                    </div>
+                                                    <div class="text-[#565656]">
+
+                                                        @item.Price 円
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="h-[32px] border-b-[1px] border-[#F1F1F1] flex justify-between items-center">
+                                    <div class="flex items-center gap-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M5.25791 9.00002C4.74191 9.00202 4.34924 9.13336 4.34924 9.13336L4.33991 9.13669L1.50391 10.2247L2.49591 13.01L4.96057 12.0647L8.52924 14.0294L14.6912 11.476L14.3086 10.5547L8.58991 12.9214L5.03924 10.9667L3.09391 11.7107L2.77391 10.8087L4.67191 10.08C4.86211 10.0241 5.05966 9.9971 5.25791 10C5.60924 10 6.01924 10.078 6.36924 10.3947L6.37591 10.3987L6.37791 10.4007C6.89324 10.8474 7.28191 11.1607 7.82324 11.33C8.36391 11.5 8.97791 11.5194 10.0032 11.5154L9.9979 10.5154C8.9919 10.5194 8.46657 10.484 8.12324 10.3754C7.77924 10.2694 7.53524 10.08 7.03924 9.65069L7.03257 9.64669C6.45457 9.12669 5.76724 8.99802 5.25791 9.00002Z"
+                                                  fill="#BEBEBE" />
+                                            <path d="M7 3L9.34118 6H7.95771V6.54545H9.65981V7.09091H7.95771V7.63636H9.65981V9H10.3406V7.63636H12.0427V7.09091H10.3406V6.54545H12.0427V6H10.6597L13 3H12.1921L10.0002 5.82109L7.80884 3H7Z"
+                                                  fill="#BEBEBE" />
+                                        </svg>
+                                        <div class="text-[#565656] text-[8px] leading-[20px]">
+                                            現地で支払う
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-[2px]">
+                                        <div class="text-[#66666666] text-[8px]">
+                                            予約ID:
+                                        </div>
+                                        <div class="text-[10px] text-[#565656]">
+                                            # @item.InvoiceId
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2 flex justify-between">
+                                    <div class="py-[6px] px-2">
+                                        <a href="tel:@item.MobileNumber">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M9.4999 0V1C12.5319 1 14.9999 3.46733 14.9999 6.5H15.9999C15.9999 2.916 13.0839 0 9.4999 0ZM4.32456 1.50267C4.06256 1.50267 3.80056 1.58867 3.58656 1.76067L3.5619 1.78067L1.9899 3.40267L2.02323 3.37133C1.77957 3.58306 1.60673 3.86444 1.52805 4.1775C1.44936 4.49057 1.46862 4.82023 1.58323 5.122C2.0039 6.33733 3.0779 8.68667 5.19656 10.8027C7.32056 12.9287 9.69456 13.9567 10.8686 14.4153L10.8806 14.4187L10.8926 14.4227C11.1865 14.52 11.5007 14.5395 11.8045 14.4793C12.1082 14.4191 12.3912 14.2813 12.6259 14.0793L12.6406 14.066L14.2026 12.504C14.6179 12.0893 14.6179 11.362 14.2026 10.9473L12.1539 8.89667C11.7379 8.48067 11.0112 8.48067 10.5952 8.89667L9.60323 9.88867C8.84754 9.5321 8.15243 9.05924 7.54323 8.48733C6.7239 7.706 6.30523 6.802 6.1539 6.45333L7.1539 5.45333C7.59256 5.014 7.6179 4.26067 7.1119 3.85867L7.1579 3.90067L5.08656 1.78L5.06323 1.76C4.85373 1.59212 4.59304 1.50173 4.32456 1.50267ZM9.4999 2V3C10.4278 3.00106 11.3175 3.37015 11.9736 4.0263C12.6297 4.68244 12.9988 5.57207 12.9999 6.5H13.9999C13.9985 5.30696 13.5239 4.16319 12.6803 3.31958C11.8367 2.47597 10.6929 2.00141 9.4999 2ZM4.3259 2.5C4.36123 2.5 4.39656 2.51333 4.43123 2.54L6.46456 4.622L6.48923 4.642C6.48323 4.63733 6.5079 4.68467 6.44723 4.746L4.96856 6.22467L5.08256 6.52667C5.08256 6.52667 5.64723 8.06067 6.85323 9.21067C8.0399 10.342 9.5019 10.96 9.5019 10.96L9.81323 11.0933L11.3026 9.60333C11.3866 9.51933 11.3626 9.51933 11.4472 9.60333L13.4959 11.654C13.5812 11.7393 13.5812 11.7113 13.4959 11.7967L11.9726 13.32C11.7406 13.5173 11.5006 13.5693 11.2126 13.4733C10.0812 13.0313 7.86923 12.0633 5.9039 10.096C3.92523 8.11933 2.8999 5.87333 2.52323 4.78533L2.52123 4.77867L2.51856 4.772C2.44256 4.572 2.4979 4.282 2.67523 4.12867L2.6919 4.114L4.21923 2.54067C4.24931 2.51568 4.28682 2.50138 4.3259 2.5ZM9.49923 4V5C10.3266 5 10.9992 5.67333 10.9992 6.5H11.9999C11.9992 5.83717 11.7356 5.2017 11.2669 4.73301C10.7982 4.26432 10.1627 4.00071 9.4999 4H9.49923Z"
+                                                          fill="#839AD6" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                お店に電話
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="py-[6px] px-2">
+                                        <a href="@item.LocationURL">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M12 0C9.79948 0 8 1.76051 8 3.91338C8 4.56051 8.25521 5.22038 8.58333 5.95159C8.91146 6.6828 9.32552 7.45732 9.75 8.17325C10.599 9.6051 11.4583 10.8025 11.4583 10.8025L12 11.5771L12.5417 10.8025C12.5417 10.8025 13.401 9.6051 14.25 8.17325C14.6745 7.45732 15.0885 6.6828 15.4167 5.95159C15.7448 5.22038 16 4.56051 16 3.91338C16 1.76051 14.2005 0 12 0ZM5.3125 1.26369L0 3.48535V15.6984C0 15.8415 0.145989 15.9383 0.277846 15.8826L5.35417 13.7376L10.6875 15.6943L16 13.4726V7.78599C15.5755 8.58344 15.1042 9.34777 14.6667 10.028V12.6166L11.3333 14.0025V12.9427L10.3542 11.5567C10.25 11.4089 10.1276 11.2331 10 11.0471V14.0637L6 12.5962V2.89427L6.72917 3.15924C6.79427 2.71847 6.91146 2.29299 7.08333 1.89554L5.3125 1.26369ZM12 1.30446C13.4792 1.30446 14.6667 2.46624 14.6667 3.91338C14.6667 4.16561 14.5052 4.76178 14.2083 5.42166C13.9115 6.08153 13.4922 6.83057 13.0833 7.52102C12.5391 8.43822 12.3047 8.76433 12 9.21274C11.6953 8.76433 11.4609 8.43822 10.9167 7.52102C10.5078 6.83057 10.0885 6.08153 9.79167 5.42166C9.49479 4.76178 9.33333 4.16561 9.33333 3.91338C9.33333 2.46624 10.5208 1.30446 12 1.30446ZM4.66667 2.93503V12.6166L1.33333 14.0025V4.3414L4.66667 2.93503ZM12 2.93503C11.4479 2.93503 11 3.37325 11 3.91338C11 4.4535 11.4479 4.89172 12 4.89172C12.5521 4.89172 13 4.4535 13 3.91338C13 3.37325 12.5521 2.93503 12 2.93503Z"
+                                                          fill="#D75A8B" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                マップを見る
+                                            </div>
+                                        </a>
+                                    </div>
+                                    @if (item.TransactionStatus.Trim().ToUpper() == "P")
+                                    {
+                                        <div class="py-[6px] px-2" data-drawer-target="drawer-date" data-drawer-show="drawer-date" data-drawer-placement="bottom" aria-controls="drawer-date" onclick="editTime('@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
+                                                          fill="#666666" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                時間変更
+                                            </div>
+                                        </div>
+                                        <div class="py-[6px] px-2" data-drawer-target="model_cancel" data-drawer-show="model_cancel" data-drawer-placement="center" aria-controls="model_cancel" onclick="getid('@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M3.25167 4.38089L4.43019 3.19922L8.01261 6.79236L11.5694 3.22607L12.7468 4.40551L9.1889 7.97292L12.7992 11.5918L11.6218 12.7724L8.01261 9.15348L4.37662 12.7992L3.19922 11.6187L6.83409 7.97292L3.25167 4.38089Z"
+                                                          fill="#898783" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                キャンセル
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (item.TransactionStatus.Trim().ToUpper() == "C")
+                                    {
+                                        <div class="py-[6px] px-2">
+                                            <div class="flex justify-center mb-[2px]" onclick="openRedoModal('modal_redo','@item.ReservationId')">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M8 1.5C4.416 1.5 1.5 4.416 1.5 8C1.5 11.584 4.416 14.5 8 14.5C11.584 14.5 14.5 11.584 14.5 8H13.5C13.5009 8.72252 13.3592 9.43811 13.0831 10.1058C12.807 10.7735 12.4019 11.3801 11.891 11.891C11.3801 12.4019 10.7735 12.807 10.1058 13.0831C9.43811 13.3592 8.72252 13.5009 8 13.5C7.27748 13.5009 6.56189 13.3592 5.8942 13.0831C5.22652 12.807 4.61985 12.4019 4.10896 11.891C3.59806 11.3801 3.19297 10.7735 2.91688 10.1058C2.64079 9.43811 2.49912 8.72252 2.5 8C2.49912 7.27748 2.64079 6.56189 2.91688 5.8942C3.19297 5.22652 3.59806 4.61985 4.10896 4.10896C4.61985 3.59806 5.22652 3.19297 5.8942 2.91688C6.56189 2.64079 7.27748 2.49912 8 2.5C8.91612 2.49777 9.81815 2.72548 10.6234 3.16225C11.4287 3.59903 12.1116 4.23091 12.6093 5H10V6H14V2H13V3.86C12.392 3.12248 11.6285 2.52846 10.7641 2.12047C9.89971 1.71249 8.95583 1.50061 8 1.5Z"
+                                                          fill="#F89336" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                やり直す
+                                            </div>
+                                        </div>
+                                        <div class="py-[6px] px-2" onclick="openDeleteModal('modal_delete','@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M7 2C6.738 2 6.47067 2.092 6.28133 2.28133C6.092 2.47067 6 2.738 6 3V3.5H2.5V4.5H3.04667L4 13.5467L4.04667 14H11.9533L12 13.5467L12.9533 4.5H13.5V3.5H10V3C10 2.738 9.908 2.47067 9.71867 2.28133C9.52933 2.092 9.262 2 9 2H7ZM7 3H9V3.5H7V3ZM4.06267 4.5H11.9373L11.0467 13H4.95333L4.06267 4.5ZM6 6V11.5H7V6H6ZM7.5 6V11.5H8.5V6H7.5ZM9 6V11.5H10V6H9Z"
+                                                          fill="#F33D3D" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                削除
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (item.TransactionStatus.Trim().ToUpper() == "A" || item.TransactionStatus.Trim().ToUpper() == "S")
+                                    {
+                                        <div class="py-[6px] px-2">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
+                                                          fill="#666666" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                時間変更
+                                            </div>
+                                        </div>
+                                        <div class="py-[6px] px-2">
+                                            <div class="flex justify-center mb-[2px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M3.25167 4.38089L4.43019 3.19922L8.01261 6.79236L11.5694 3.22607L12.7468 4.40551L9.1889 7.97292L12.7992 11.5918L11.6218 12.7724L8.01261 9.15348L4.37662 12.7992L3.19922 11.6187L6.83409 7.97292L3.25167 4.38089Z"
+                                                          fill="#898783" />
+                                                </svg>
+                                            </div>
+                                            <div class="text-[#565656] text-[8px]">
+                                                キャンセル
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>function gotoHistoryDetail(reservationId, customerId) {
+            window.location.href = "/ReservationHistoryManagementV2/ViewHistoryDetail?ReservationId=" + reservationId + "&CustomerId=" + customerId;
+        }</script>
+    <!-- Pop up section for reschedule time section-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <style>
+        .minute-scroll::-webkit-scrollbar {
+            display: none;
+            /* Hide scrollbar for webkit browsers (Chrome, Safari) */
+        }
+
+        .minute-scroll {
+            scrollbar-width: none;
+        }
+
+        .hours-scroll::-webkit-scrollbar {
+            display: none;
+            /* Hide scrollbar for webkit browsers (Chrome, Safari) */
+        }
+
+        .hours-scroll {
+            scrollbar-width: none;
+        }
+
+        .picker {
+            position: relative;
+            width: 300px;
+            overflow: hidden;
+            margin: 1rem auto 0;
+            outline: 1px solid #ccc;
+            padding: 0 30px;
+        }
+
+        .swiper-container {
+            width: 80px;
+            height: 210px;
+            float: left;
+        }
+
+        .swiper-slide {
+            color: #18181B;
+            text-align: center;
+            font-family: "Noto Sans";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 28px;
+            letter-spacing: 0.35px;
+            padding: 5px 0;
+        }
+
+        .swiper-slide-prev,
+        .swiper-slide-next {
+            cursor: pointer;
+        }
+
+        .swiper-slide-active {
+            opacity: 1;
+        }
+
+        .vizor {
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            height: 70px;
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            right: 1rem;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            line-height: 62px;
+        }
+
+            .vizor:before,
+            .vizor:after {
+                content: ':';
+                display: inline-block;
+                line-height: inherit;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                transform: translateX(-50%);
+            }
+
+            .vizor:before {
+                left: 95px;
+            }
+
+            .vizor:after {
+                left: 175px;
+            }
+
+        .arrows .swiper-container:after,
+        .arrows .swiper-container:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 4px;
+            border-color: transparent;
+            opacity: 0.5;
+        }
+
+        .arrows .swiper-container:before {
+            top: 0.5rem;
+            border-top-width: 0;
+            border-bottom-color: currentColor;
+        }
+
+        .arrows .swiper-container:after {
+            bottom: 0.5rem;
+            border-bottom-width: 0;
+            border-top-color: currentColor;
+        }
+    </style>
+    <!-- drawer component -->
+    <div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform  translate-y-full"
+         tabindex="-1" aria-labelledby="drawer-bottom-label">
+        <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
+            <div class="text-center text-white mb-2 text-2xl">
+                <div data-drawer-hide="drawer-date" aria-controls="drawer-date">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="px-4 pt-6 pb-6 bg-white  " style="padding-top: 24px; border-radius: 6px 6px 0px 0px;">
+                <div class="text-sm text-[#333] font-bold mb-3">Select Working Hours</div>
+                <div class=" relative">
+                    <div id="reservation_id" value="" hidden></div>
+                    <div class="flex justify-center gap-5 items-center h-[171px] py-6 ">
+                        <div class="relative">
+                            <div class="  overflow-y-scroll hours-scroll " style="height: 171px; ">
+                                <div class="swiper-slide">00</div>
+                                <div class="swiper-slide">01</div>
+                                <div class="swiper-slide">02</div>
+                                <div class="swiper-slide">03</div>
+                                <div class="swiper-slide">04</div>
+                                <div class="swiper-slide">05</div>
+                                <div class="swiper-slide">06</div>
+                                <div class="swiper-slide">07</div>
+                                <div class="swiper-slide">08</div>
+                                <div class="swiper-slide">09</div>
+                                <div class="swiper-slide">10</div>
+                                <div class="swiper-slide">11</div>
+                                <div class="swiper-slide">12</div>
+                                <div class="swiper-slide">13</div>
+                                <div class="swiper-slide">14</div>
+                                <div class="swiper-slide">15</div>
+                                <div class="swiper-slide">16</div>
+                                <div class="swiper-slide">17</div>
+                                <div class="swiper-slide">18</div>
+                                <div class="swiper-slide">19</div>
+                                <div class="swiper-slide">20</div>
+                                <div class="swiper-slide">21</div>
+                                <div class="swiper-slide">22</div>
+                                <div class="swiper-slide">23</div>
+                            </div>
+                            <div id="hourShadow" class="absolute  bottom-[56px] h-[36px] w-full " style=" top:40%">
+                            </div>
+                        </div>
+                        <div class="relative" style="height: 72px;">
+                            <div class=" overflow-y-scroll   minute-scroll absolute " style="height: 72px;  top:30%">
+                                <div class="swiper-slide">00</div>
+                                <div class="swiper-slide">30</div>
+                                <div class="swiper-slide">00</div>
+                                <div class="swiper-slide">30</div>
+                                <div class="swiper-slide">00</div>
+                            </div>
+                            <div id="minuteShadow" class="absolute  bottom-[56px] h-[36px] w-full " style="">
+                            </div>
+                        </div>
+                        <div id="test"
+                             class="absolute  bottom-[56px] h-[36px] w-full border border-zinc-300 text-[#18181B] bg-[#333]"
+                             style="border-radius: 6px; background: rgba(118, 118, 128, 0.12);">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary mt-3" style=" border-radius: 8px; " id="btn_next" onclick="openModal2('modal2')">
+                    <span class="h-full w-full">
+                        検索
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--warning pop up modal-->
+    <div id="modal2" class="modal h-screen "    style="display: none; position: fixed; top: 50%; width: 100%;  z-index: 500; background: rgba(27, 27, 27, 0.50);">
+        <div class="modal-content mx-auto" style="width:90%" >
+            <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
+                <span class=" absolute  z-130 text-[#fff] text-[28px] top-0 cursor-pointer right-3" onclick="closeModal('modal2')"
+                      style="top:-49px">&times;</span>
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow py-6 flex  flex-col">
+                    <!-- Modal header -->
+                    <div class="text-center pt-2 pb-4 px-2 border-b border-[#DCDCDC] flex flex-col justify-center gap-1 ">
+                        <div class=" text-[16px] font-semibold text-[#1A1C1E]">確認</div>
+                        <div class=" text-[12px] font-normal text-[#1A1C1E]">ご予約の時間を変更でよろしいですか？</div>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="grid gap-4 p-6 pt-4 grid-cols-2">
+                        <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeModal('modal2')"
+                                data-modal-hide="defaultModal">
+                            いいえ
+                        </button>
+                        <button class=" btn-primary rounded h-[40px]  text-[#FFFFFF] font-medium text-[14px]  leading-[24px]" onclick="RescheduleReservation()"
+                                data-modal-hide="defaultModal">
+                            はい
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--cancel pop up model-->
+    <div id="modal_cancel" class="modal modalWrapper" style="display:none">
+        <div class="modal-content modalContentWrapper">
+            <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
+                <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('modal_cancel')"
+                      style="top:-49px">&times;</span>
+                <div id="cancel_id" value="" hidden></div>
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow py-6 flex  flex-col">
+                    <!-- Modal header -->
+                    <div class="text-center pt-2 pb-4 px-2 border-b border-[#DCDCDC] flex flex-col justify-center gap-1 ">
+                        <div class=" text-[16px] font-semibold text-[#1A1C1E]">確認</div>
+                        <div class=" text-[12px] font-normal text-[#1A1C1E]">ご予約はキャンセルにしすか？</div>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="grid gap-4 p-6 pt-4 grid-cols-2">
+                        <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeModal('modal_cancel')"
+                                data-modal-hide="defaultModal">
+                            いいえ
+                        </button>
+                        <button class=" btn-primary rounded h-[40px]  text-[#FFFFFF] font-medium text-[14px]  leading-[24px]" onclick="CancelReservation()"
+                                data-modal-hide="defaultModal">
+                            はい
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--redo pop up modal -->
+    <div id="modal_redo" class="modal" style="display:none">
+        <div class="modal-content">
+            <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
+                <span class=" absolute  z-40 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeRedoModal('modal_redo')"
+                      style="top:-49px">&times;</span>
+                <div id="redo_id" value="" hidden></div>
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow py-6 flex  flex-col">
+                    <!-- Modal header -->
+                    <div class="text-center pt-2 pb-4 px-2 border-b border-[#DCDCDC] flex flex-col justify-center gap-1 ">
+                        <div class=" text-[16px] font-semibold text-[#1A1C1E]">確認</div>
+                        <div class=" text-[12px] font-normal text-[#1A1C1E]">よやくをやりなおしますか？</div>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="grid gap-4 p-6 pt-4 grid-cols-2">
+                        <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeRedoModal('modal_redo')"
+                                data-modal-hide="defaultModal">
+                            いいえ
+                        </button>
+                        <button class=" btn-primary rounded h-[40px]  text-[#FFFFFF] font-medium text-[14px]  leading-[24px]" onclick="RedoReservation()"
+                                data-modal-hide="defaultModal">
+                            はい
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--delete pop up modal-->
+    <div id="modal_delete" class="modal" style="display:none">
+        <div class="modal-content">
+            <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
+                <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeDeleteModal('modal_delete')"
+                      style="top:-49px">&times;</span>
+                <div id="delete_id" value="" hidden></div>
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow py-6 flex  flex-col">
+                    <!-- Modal header -->
+                    <div class="text-center pt-2 pb-4 px-2 border-b border-[#DCDCDC] flex flex-col justify-center gap-1 ">
+                        <div class=" text-[16px] font-semibold text-[#1A1C1E]">確認</div>
+                        <div class=" text-[12px] font-normal text-[#1A1C1E]">よやくをさくじょしますか？</div>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="grid gap-4 p-6 pt-4 grid-cols-2">
+                        <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeDeleteModal('modal_delete')"
+                                data-modal-hide="defaultModal">
+                            いいえ
+                        </button>
+                        <button class=" btn-primary rounded h-[40px]  text-[#FFFFFF] font-medium text-[14px]  leading-[24px]" onclick="DeleteReservation()"
+                                data-modal-hide="defaultModal">
+                            はい
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal 2 pop  up-->
+    <script>
+        function openModal2(modalid) {
+            var modal = document.getElementById(modalid);
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }
+    </script>
+    <script>function closeDeleteModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
+        }
+        function openDeleteModal(modalId, reservationId) {
+            var modal = document.getElementById(modalId);
+            $('#delete_id').val(reservationId);
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }
+        function DeleteReservation() {
+            var ReservationId = $('#delete_id').val();
+            if (ReservationId != "") {
+                $.ajax({
+                    type: 'POST',
+                    async: true,
+                    url: "/ReservationHistoryManagementV2/DeleteReservation?RID=" + ReservationId,
+                    dataType: 'json',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    },
+                    success: function (data) {
+                        window.location.href = "/ReservationHistoryManagementV2/ReservationHistory";
+                    }
+                });
+            }
+        }</script>
+    <script>function closeRedoModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
+        }
+        function openRedoModal(modalId, reservationId) {
+            var modal = document.getElementById(modalId);
+            $('#redo_id').val(reservationId);
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }
+        function RedoReservation() {
+            var reservationId = $('#redo_id').val();
+            if (reservationId != "") {
+                $.ajax({
+                    type: 'POST',
+                    async: true,
+                    url: "/ReservationHistoryManagementV2/RedoReservation?RID=" + reservationId,
+                    dataType: 'json',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    },
+                    success: function (data) {
+                        window.location.href = "/ReservationHistoryManagementV2/ReservationHistory";
+                    }
+                });
+            }
+        }</script>
+    <script>function getid(reservationid) {
+            $('#cancel_id').val(reservationid);
+            var modal = document.getElementById('modal_cancel');
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }
+        // Function to close a specific modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
+        }
+        // Close the modal if the overlay is clicked
+        window.onclick = function (event) {
+            var modals = document.getElementsByClassName("modal");
+            for (var i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    closeModal(modals[i].id);
+                }
+            }
+        }
+        // Close the modal only if the overlay is clicked outside of modal1
+        window.onclick = function (event) {
+            var modal1 = document.getElementById('modal_cancel');
+            // Check if the click is outside of modal1
+            if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
+                closeModal('modal_cancel');
+            }
+        }
+        function CancelReservation() {
+            var reservationId = $('#cancel_id').val();
+            $.ajax({
+                type: 'POST',
+                async: true,
+                url: "/ReservationHistoryManagementV2/CancelReservation?RID=" + reservationId,
+                dataType: 'json',
+                data: {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                },
+                success: function (data) {
+                    window.location.href = "/ReservationHistoryManagementV2/ReservationHistory";
+                }
+            });
+        }</script>
+    <script>// Function to open a specific modal
+        function editTime(reservationid) {
+            $('#reservation_id').val(reservationid);
+        }
+
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            var firstModal = document.getElementById("drawer-date");
+            if (modal) {
+                modal.style.display = "block";
+                firstModal.style.zIndex = "200";
+            }
+        }
+        // Function to close a specific modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            var firstModal = document.getElementById("drawer-date");
+
+            if (modal) {
+                modal.style.display = "none";
+                firstModal.style.zIndex = "40";
+            }
+        }
+
+        // Close the modal if the overlay is clicked
+        window.onclick = function (event) {
+            var modals = document.getElementsByClassName("modal");
+            for (var i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    closeModal(modals[i].id);
+                }
+            }
+        }
+        // Close the modal only if the overlay is clicked outside of modal1
+        window.onclick = function (event) {
+            var modal1 = document.getElementById('modal1');
+            // Check if the click is outside of modal1
+            if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
+                closeModal('modal1');
+            }
+        }</script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script>var hour;
+        var minute;
+        function handleScroll(scrollContainer, shadowElement, targetIndex, callback) {
+            const debouncedCallback = _.debounce(callback, 10);
+            scrollContainer.addEventListener('scroll', function () {
+                const shadowRect = shadowElement.getBoundingClientRect();
+
+                const swiperSlides = scrollContainer.querySelectorAll('.swiper-slide');
+                const targetSlide = Array.from(swiperSlides).filter((slide, index) => {
+                    return index >= (targetIndex - 1) && index <= (targetIndex + 3) && slide.getBoundingClientRect().bottom >= shadowRect.bottom;
+                })[0];
+
+                if (targetSlide) {
+                    const value = targetSlide.textContent.trim();
+                    debouncedCallback(value);
+                }
+            });
+        }
+        //Function to handle hour value
+        function handleHour(value) {
+            hour = value;
+            //console.log('Hour:', hour);
+        }
+        // Function to handle minute value
+        function handleMinute(value) {
+            minute = value;
+            //console.log('Minute:', minute);
+        }
+        // Call the function for the hour and minute elements
+        const hourScroll = document.querySelector('.hours-scroll');
+        const hourShadow = document.getElementById('hourShadow');
+        handleScroll(hourScroll, hourShadow, 3, handleHour);
+
+        const minuteScroll = document.querySelector('.minute-scroll');
+        const minuteShadow = document.getElementById('minuteShadow');
+        handleScroll(minuteScroll, minuteShadow, 1, handleMinute);
+
+        //post method
+        function RescheduleReservation() {
+            var reservationid = $('#reservation_id').val();
+            var data = {
+                Selectedhour: hour,
+                Selectedminute: minute,
+                ReservationID: reservationid,
+                __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+            };
+            $.ajax({
+                type: "POST",
+                url: "/ReservationHistoryManagementV2/RescheduleReservation",
+                data: data,
+                success: function (response) {
+                    if (response.redirectToUrl != null || response.redirectToUrl != "") {
+                        window.location.href = response.redirectToUrl;
+                    } else {
+                        window.location.reload();
+                    }
+                    //console.log("Ajax call successful", response);
+                },
+                error: function (error) {
+                    window.location.reload();
+                    //console.error("Ajax call failed", error);
+                }
+            });
+        }</script>
+</body>
+</html>
+
