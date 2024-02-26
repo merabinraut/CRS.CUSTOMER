@@ -1,14 +1,13 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
-using CRS.CUSTOMER.APPLICATION.Models.Home;
-using CRS.CUSTOMER.BUSINESS.Home;
-using CRS.CUSTOMER.SHARED;
-using CRS.CUSTOMER.SHARED.Home;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
+using CRS.CUSTOMER.APPLICATION.Library;
+using CRS.CUSTOMER.APPLICATION.Models.Home;
+using CRS.CUSTOMER.BUSINESS.Home;
+using CRS.CUSTOMER.SHARED;
+using CRS.CUSTOMER.SHARED.Home;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
@@ -513,7 +512,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("SetNewPassword", "Home", new { AgentId = dbResponse.Extra1.EncryptParameter(), MobileNumber = Model.MobileNumber.EncryptParameter(), UserID = dbResponse.Extra3.EncryptParameter(), NickName = Model.NickName });
+                    return RedirectToAction("SetNewPasswordV2", "Home", new { AgentId = dbResponse.Extra1.EncryptParameter(), MobileNumber = Model.MobileNumber.EncryptParameter(), UserID = dbResponse.Extra3.EncryptParameter(), NickName = Model.NickName });
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -590,7 +589,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Set new Password
         [HttpGet]
-        public ActionResult SetNewPassword(string AgentId, string MobileNumber, string UserID, string NickName)
+        public ActionResult SetNewPasswordV2(string AgentId, string MobileNumber, string UserID, string NickName)
         {
             var aId = !string.IsNullOrEmpty(AgentId) ? AgentId.DecryptParameter() : null;
             var mn = !string.IsNullOrEmpty(MobileNumber) ? MobileNumber.DecryptParameter() : null;
@@ -615,7 +614,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(response);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult SetNewPassword(SetRegistrationPasswordModel Model)
+        public ActionResult SetNewPasswordV2(SetRegistrationPasswordModel Model)
         {
             if (ModelState.IsValid)
             {
