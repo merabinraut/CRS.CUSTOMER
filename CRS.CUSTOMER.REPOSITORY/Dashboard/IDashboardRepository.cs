@@ -1,4 +1,5 @@
 ﻿using CRS.CUSTOMER.SHARED.Dashboard;
+using CRS.CUSTOMER.SHARED.DashboardV2;
 using CRS.CUSTOMER.SHARED.SearchFilterManagement;
 using System.Collections.Generic;
 

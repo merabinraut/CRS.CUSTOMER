@@ -218,11 +218,25 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet]
         public ActionResult Preference(string LocationId, string Type)
         {
-            var typeValue = !string.IsNullOrEmpty(Type) ? Type.DecryptParameter() : string.Empty;
+            var TypeValue = !string.IsNullOrEmpty(Type) ? Type.DecryptParameter() : string.Empty;
             ViewBag.ActionPageName = "SearchFilter";
-            ViewBag.TypeValue = typeValue;
+            ViewBag.TypeValue = TypeValue;
             ViewBag.LocationId = LocationId;
-            var Response = new List<PreferenceClubModel>();
+            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : LocationId;
+            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
+            var Response = new List<ClubAvailabilityDetailModel>();
+            var dbResponse = _dashboardBusiness.GetAvailabilityClub(lId, CustomerId, TypeValue);
+            if (dbResponse != null && dbResponse.Count > 0)
+            {
+                Response = dbResponse.MapObjects<ClubAvailabilityDetailModel>();
+                Response.ForEach(x =>
+                {
+                    x.ClubId = x.ClubId.EncryptParameter();
+                    x.ClubLocationId = x.ClubLocationId.EncryptParameter();
+                    x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
+                    x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
+                });
+            }
             return View(Response);
         }
         #endregion

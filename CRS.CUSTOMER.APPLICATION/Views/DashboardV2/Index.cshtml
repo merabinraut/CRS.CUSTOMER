@@ -964,6 +964,10 @@
         function PreferenceRedirect(Type) {
             window.location.href = `/DashboardV2/Preference?LocationId=${CurrentLocationId}&Type=${Type}`;
         }
+
+        function CurrentLocationRedirectFunction() {
+            window.location.href = "/LocationManagement/Index?LocationId=" + CurrentLocationId;
+        }
     </script>
     <script>
         document.getElementById("tab1Button").onclick = function () {

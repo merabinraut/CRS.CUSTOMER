@@ -93,7 +93,6 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    
     <Reference Include="Syncfusion.Compression.Base, Version=21.2460.5.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Compression.Base.21.2.5\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
     </Reference>
@@ -230,6 +229,7 @@
     <Compile Include="Controllers\ReservationManagementController.cs" />
     <Compile Include="Controllers\ReservationManagementV2Controller.cs" />
     <Compile Include="Controllers\ReviewManagementController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="CustomHelpers\CustomHtmlHelpers.cs" />
     <Compile Include="CustomValidations\MobileNumberAttribute.cs" />
@@ -301,13 +301,12 @@
   <ItemGroup>
     <Folder Include="Content\userupload\ClubManagement\" />
     <Folder Include="Models\RecommendedClubHost\" />
+    <Folder Include="Models\Search\" />
     <Folder Include="Models\UserManagement\" />
     <Folder Include="Views\LogManagement\" />
     <Folder Include="Views\RecommendedClubHost\" />
     <Folder Include="Views\ReservationManagement\" />
     <Folder Include="Views\UserManagement\" />
-    <Folder Include="Views\ReservationHistoryManagementV2\" />
-    <Folder Include="Models\ReservationHistoryV2\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\artchart\anychart.min.css" />
@@ -690,6 +689,8 @@
     <Content Include="Views\Shared\_PreferenceFilterPopUp.cshtml" />
     <Content Include="Views\Shared\_LocationFilterPopUp.cshtml" />
     <Content Include="Views\DashboardV2\Preference.cshtml" />
+    <Content Include="Views\Search\ClubSearchResult.cshtml" />
+    <Content Include="Views\Search\HostSearchResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

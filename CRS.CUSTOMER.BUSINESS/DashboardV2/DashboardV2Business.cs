@@ -18,5 +18,11 @@ namespace CRS.CUSTOMER.BUSINESS.DashboardV2
         {
             return _repo.GetNewHost(LocationId, CustomerId, Type);
         }
+        #region CLUB AVAILABILITY
+        public List<ClubAvailabilityDetailCommon> GetAvailabilityClub(string LocationId, string CustomerId, string AvailabilityType)
+        {
+            return _repo.GetAvailabilityClub(LocationId, CustomerId, AvailabilityType);
+        }
+        #endregion
     }
 }

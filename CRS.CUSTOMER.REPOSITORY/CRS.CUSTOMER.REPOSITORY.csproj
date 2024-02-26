@@ -146,9 +146,9 @@
       <Name>CRS.CUSTOMER.SHARED</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ReservationHistoryManagementV2\" />
+    <Folder Include="Search\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

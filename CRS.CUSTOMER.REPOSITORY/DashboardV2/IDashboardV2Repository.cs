@@ -7,5 +7,8 @@ namespace CRS.CUSTOMER.REPOSITORY.DashboardV2
     {
         List<ClubDetailCommon> GetNewClub(string LocationId, string CustomerId, string Type = "");
         List<HostDetailCommon> GetNewHost(string LocationId, string CustomerId, string Type = "");
+        #region CLUB AVAILABILITY
+        List<ClubAvailabilityDetailCommon> GetAvailabilityClub(string LocationId, string CustomerId, string AvailabilityType);
+        #endregion
     }
 }
