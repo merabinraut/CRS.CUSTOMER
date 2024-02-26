@@ -199,6 +199,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.FileLocationPath = FileLocationPath;
             return View(responseModel);
         }
+
+
+        public ActionResult ClubDetail_V2(string LocationId, string ClubId)
+        {
+            return View();
+        }
         #endregion
         [HttpGet]
         public ActionResult ViewHostDetail(string HostId)
