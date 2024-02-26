@@ -51,10 +51,17 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public List<GetClubReviewsModel> ClubReviewsModel { get; set; } = new List<GetClubReviewsModel>();
         public List<ClubWeeklyScheduleModel> ClubWeeklyScheduleList { get; set; } = new List<ClubWeeklyScheduleModel>();
         public List<ClubEventModel> ClubEventList { get; set; } = new List<ClubEventModel>();
+        public List<NoticeModel> GetNoticeByClubId { get; set; }
     }
     public class ClubEventModel
     {
         public string EventDate { get; set; }
         public string EventDescription { get; set; }
+    }
+    public class NoticeModel
+    {
+        public string ClubId { get; set; }
+        public string NoticeDate { get; set; }
+        public string NoticeDescription { get; set; }
     }
 }

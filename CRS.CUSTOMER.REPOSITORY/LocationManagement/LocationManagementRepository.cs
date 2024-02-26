@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.SHARED.LocationManagement;
 using CRS.CUSTOMER.SHARED.ReviewManagement;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -262,6 +263,23 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
                 Response.HostIdentityDetailsModel = HostIdentityDetailsModelResponse;
             }
             return Response;
+        }
+
+        public NoticeModelCommon GetNoticeByClubId(string cId)
+        {
+            string sp_name = "";
+            sp_name += ",@ClubId=" + _dao.FilterString(cId);
+            var dbResponseInfo = _dao.ExecuteDataRow(sp_name);
+            if (dbResponseInfo != null)
+            {
+                return new NoticeModelCommon()
+                {
+                    ClubId = _dao.ParseColumnValue(dbResponseInfo, "ClubId").ToString(),
+                    NoticeDate = _dao.ParseColumnValue(dbResponseInfo, "NoticeDate").ToString(),
+                    NoticeDescription = _dao.ParseColumnValue(dbResponseInfo, "NoticeDescription").ToString(),
+                };
+            }
+            return new NoticeModelCommon();
         }
         #endregion
     }

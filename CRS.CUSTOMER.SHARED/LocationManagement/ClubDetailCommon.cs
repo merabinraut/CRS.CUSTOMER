@@ -45,10 +45,17 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
         public string ClubHoliday { get; set; }
         public List<ClubWeeklyScheduleCommon> ClubWeeklyScheduleList { get; set; } = new List<ClubWeeklyScheduleCommon>();
         public List<ClubEventCommon> ClubEventList { get; set; } = new List<ClubEventCommon>();
+        public List<NoticeModelCommon> GetNoticeByClubId { get; set; }
     }
     public class ClubEventCommon
     {
         public string EventDate { get; set; }
         public string EventDescription { get; set; }
+    }
+    public class NoticeModelCommon
+    {
+        public string ClubId { get; set; }
+        public string NoticeDate { get; set; }
+        public string NoticeDescription { get; set; }
     }
 }

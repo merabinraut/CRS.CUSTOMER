@@ -267,6 +267,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     item.GetClubReviewHostList.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
                 }
             }
+            var dbNoticeResponseInfo = _business.GetNoticeByClubId(cId);
+            responseModel.GetNoticeByClubId = dbNoticeResponseInfo.MapObjects<NoticeModel>();
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
             return View(responseModel);
