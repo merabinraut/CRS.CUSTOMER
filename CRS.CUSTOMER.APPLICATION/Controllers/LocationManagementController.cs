@@ -203,7 +203,73 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         public ActionResult ClubDetail_V2(string LocationId, string ClubId)
         {
-            return View();
+            var culture = Request.Cookies["culture"]?.Value;
+            culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
+            var FileLocationPath = "";
+            var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
+            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
+            if (string.IsNullOrEmpty(cId) || string.IsNullOrEmpty(lId))
+            {
+                AddNotificationMessage(new NotificationModel()
+                {
+                    NotificationType = NotificationMessage.WARNING,
+                    Message = "Invalid Details",
+                    Title = NotificationMessage.WARNING.ToString()
+                });
+                return RedirectToAction("Index", "Dashboard");
+            }
+            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+
+            string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
+
+            var clubDetailResp = _business.GetClubDetailById(cId, agentId);
+            var responseModel = clubDetailResp.MapObject<ClubDetailModel>();
+            responseModel.ClubId = responseModel.ClubId.EncryptParameter();
+            responseModel.LocationId = responseModel.LocationId.EncryptParameter();
+            var dbHostList = _business.GetHostList(lId, cId);
+            responseModel.HostListModels = dbHostList.MapObjects<LocationHostListModel>();
+            foreach (var item in responseModel.HostListModels)
+            {
+                item.ClubId = item.ClubId.EncryptParameter();
+                item.HostId = item.HostId.EncryptParameter();
+                item.LocationId = item.LocationId.EncryptParameter();
+                item.HostImage = FileLocationPath + item.HostImage;
+            }
+            var dbTopHostList = _business.GetHostList(lId, cId, "", "trhl");
+            responseModel.TopHostListModels = dbTopHostList.MapObjects<LocationHostListModel>();
+            foreach (var item in responseModel.TopHostListModels)
+            {
+                item.ClubId = item.ClubId.EncryptParameter();
+                item.HostId = item.HostId.EncryptParameter();
+                item.LocationId = item.LocationId.EncryptParameter();
+                item.HostImage = FileLocationPath + item.HostImage;
+            }
+            var clubGalleryImageDBResponse = _business.GetClubGalleryImage(responseModel.ClubId.DecryptParameter(), "A");
+            if (clubGalleryImageDBResponse != null && clubGalleryImageDBResponse.Count > 0)
+            {
+                responseModel.ClubGalleryImageList = clubGalleryImageDBResponse;
+            }
+            else responseModel.ClubGalleryImageList = new List<string>();
+            responseModel.ClubCoverPhoto = FileLocationPath + responseModel.ClubCoverPhoto;
+            responseModel.ClubLogo = FileLocationPath + responseModel.ClubLogo;
+            responseModel.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
+            var reviewDBResponse = _business.GetClubReviewAndRatings(cId);
+            if (reviewDBResponse != null && reviewDBResponse.Count > 0)
+            {
+                responseModel.ClubReviewsModel = reviewDBResponse.MapObjects<GetClubReviewsModel>();
+                responseModel.ClubReviewsModel.ForEach(x => x.CustomerImage = FileLocationPath + x.CustomerImage);
+                foreach (var item in responseModel.ClubReviewsModel)
+                {
+                    item.GetClubReviewRemarkList.ForEach(x => x.Remark = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishRemark : x.JapaneseRemark);
+                }
+                foreach (var item in responseModel.ClubReviewsModel)
+                {
+                    item.GetClubReviewHostList.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
+                }
+            }
+            ViewBag.ActionPageName = "ClubHostDetailNavMenu";
+            ViewBag.FileLocationPath = FileLocationPath;
+            return View(responseModel);
         }
         #endregion
         [HttpGet]

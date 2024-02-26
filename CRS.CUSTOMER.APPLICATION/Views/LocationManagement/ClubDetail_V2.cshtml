@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Club Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime todayDate = DateTime.Now;
+    string formattedDate = todayDate.ToString("yyyy年M月");
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script src="/Content/assets/js/tabs.js"></script>
@@ -14,158 +16,174 @@
         width: 100vw;
         background: yellow;
     }
+
     .tab-container-plane .active {
         border-bottom: 2px solid #E3A1A1;
     }
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="#" class="active">ホーム</a>
+    <a href="@Url.Action("Index", "Dashboard")" class="active">
+        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Home
+    </a>
     <i class="las la-angle-right"></i>
-    <a href="#" class="active">クラブ</a>
+    <a href="@Url.Action("Index", "LocationManagement", new { LocationId = Model.LocationId })" class="active">
+        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Clubs
+    </a>
     <i class="las la-angle-right"></i>
-    <a href="#" class="font-bold">シンスユー本店</a>
+    <a href="#">@Model.ClubNameEng</a>
 </div>
 <div class="h-[189px]">
-    <img src="/Content/assets/images/customer/demo-image.jpeg" alt="banner" class="h-[189px] w-full object-cover"
+    <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
          style="height: 189px;" />
 </div>
 <!-- section 1 -->
 <div class="px-2 pt-[12px] pb-2 flex gap-1">
-    <div class="px-[10px] border-[1px] border-[#A09E91] text-[10px] rounded-[2px] text-[#A09E91] flex justify-start items-start self-start gap-[2px]">
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
-                  fill="#D75A8B" />
-        </svg>
-        <span>歌舞伎町</span>
-    </div>
-    <div class="px-[5px] py-[1px] bg-[#BFA3B6] text-[10px] rounded-[2px] text-white">ランク10</div>
-    <div class="px-[5px] py-[1px] bg-[#697DBF] text-[10px] rounded-[2px] text-white">プラチナ</div>
-    <div class="px-[5px] py-[1px] bg-[#96B41F] text-[10px] rounded-[2px] text-white">優良店</div>
-    <div class="px-[5px] py-[1px] bg-[#EFB726] text-[10px] rounded-[2px] text-white">大型店</div>
+    @if (!string.IsNullOrEmpty(Model.Tag1))
+    {
+        <div class="px-[10px] border-[1px] border-[#A09E91] text-[10px] rounded-[2px] text-[#A09E91] flex justify-start items-start self-start gap-[2px]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                      fill="#D75A8B" />
+            </svg>
+            <span>@Model.Tag1</span>
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(Model.Tag2))
+    {
+        <div class="px-[5px] py-[1px] bg-[#BFA3B6] text-[10px] rounded-[2px] text-white">@Model.Tag2</div>
+    }
+    @if (!string.IsNullOrEmpty(Model.Tag3))
+    {
+        <div class="px-[5px] py-[1px] bg-[#697DBF] text-[10px] rounded-[2px] text-white">@Model.Tag3</div>
+    }
+    @if (!string.IsNullOrEmpty(Model.Tag4))
+    {
+        <div class="px-[5px] py-[1px] bg-[#96B41F] text-[10px] rounded-[2px] text-white">@Model.Tag4</div>
+    }
+    @if (!string.IsNullOrEmpty(Model.Tag5))
+    {
+        <div class="px-[5px] py-[1px] bg-[#EFB726] text-[10px] rounded-[2px] text-white">@Model.Tag5</div>
+    }
 </div>
 <!-- section 2 -->
 <div class="px-4 pb-[8px] flex justify-between ">
     <div class="flex gap-[8px]">
         <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
-            <img src="/Content/assets/images/customer/demo-image.jpeg"
+            <img src="@Model.ClubLogo"
                  class="h-[48px] w-[48px] object-cover rounded-full border-[1px] border-[#FAFAFA]" />
         </div>
         <div>
-            <div class='text-sm font-bold text-charcolBlack '>SINCE YOU HONTEN</div>
-            <div class='text-xs  text-[#404040] '>シンス ユー本店</div>
-            <div class="text-[10px] text-[#E3A1A1]">シンス ユーグループ</div>
+            <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEng</div>
+            <div class='text-xs  text-[#404040] '>@Model.ClubNameJp</div>
+            <div class="text-[10px] text-[#E3A1A1]">@Model.GroupName</div>
         </div>
     </div>
-    <div class="flex items-center flex-col">
-        <!-- <i class="fa-solid fa-bookmark text-[#FFB800]"></i>
-        <i class="fa-regular fa-bookmark"></i> -->
-        <div class="p-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18" fill="none">
-                <path d="M0.25 0.125V17.375L1.44531 16.4844L7 12.3125L12.5547 16.4844L13.75 17.375V0.125H0.25ZM1.75 1.625H12.25V14.375L7.44531 10.7656L7 10.4375L6.55469 10.7656L1.75 14.375V1.625Z"
-                      fill="#BCB08A" />
-            </svg>
+    @if (Model.IsBookmarked.Trim().ToUpper() == "N")
+    {
+        <div class="flex items-center flex-col" onclick="handleAddBookmarks('@Model.ClubId', '', 'club')">
+            <div class="p-1">
+                <img src="~/Content/assets/images/customer/bookmark-outlined.svg" class="h-[20px] w-[25px]" />
+            </div>
+            <span class="text-[#BCB08A] text-[9px] font-medium" style="line-height: 100%;">保存</span>
         </div>
-        <span class="text-[#BCB08A] text-[9px] font-medium" style="line-height: 100%;">保存</span>
-    </div>
+    }
+    else
+    {
+        <div class="flex items-center flex-col" onclick="handleRemoveBookmarks('@Model.ClubId', '', 'club')">
+            <img src="~/Content/assets/images/customer/bookmark-filled.svg" class="h-[20px] w-[25px]">
+            <span class="text-[#BCB08A] text-[9px] font-medium" style="line-height: 100%;">保存</span>
+        </div>
+    }
+
 </div>
 <div class="px-4 py-[12px]">
     <div class="flex gap-[14px] pb-2">
         <div class="flex  text-base  items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M16.3496 6.76224L10.8673 6.18327L8.62306 1.14941L6.37878 6.18327L0.896484 6.76224L4.99136 10.4529L3.84816 15.8446L8.62306 13.0909L13.398 15.8446L12.2548 10.4529L16.3496 6.76224Z"
-                      fill="#F89336" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M16.3496 6.76224L10.8673 6.18327L8.62306 1.14941L6.37878 6.18327L0.896484 6.76224L4.99136 10.4529L3.84816 15.8446L8.62306 13.0909L13.398 15.8446L12.2548 10.4529L16.3496 6.76224Z"
-                      fill="#F89336" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M16.3496 6.76224L10.8673 6.18327L8.62306 1.14941L6.37878 6.18327L0.896484 6.76224L4.99136 10.4529L3.84816 15.8446L8.62306 13.0909L13.398 15.8446L12.2548 10.4529L16.3496 6.76224Z"
-                      fill="#F89336" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M16.3496 6.76224L10.8673 6.18327L8.62306 1.14941L6.37878 6.18327L0.896484 6.76224L4.99136 10.4529L3.84816 15.8446L8.62306 13.0909L13.398 15.8446L12.2548 10.4529L16.3496 6.76224Z"
-                      fill="#F89336" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M9.19758 1.28027L8.70915 2.37505L6.95751 6.31623L2.67947 6.75414L1.4668 6.88888L2.3763 7.69733L5.55957 10.5774L4.6669 14.7881L4.41426 15.9671H4.43111L5.47535 15.3607L9.19758 13.2217L12.9198 15.3607L13.9809 15.9671L13.7283 14.7881L12.8356 10.5774L16.0189 7.69733L16.9284 6.88888L15.7157 6.75414L11.4377 6.31623L9.68602 2.37505L9.19758 1.28027ZM9.19758 3.92457L10.5787 7.04047L10.7134 7.30995L11.0166 7.34364L14.4188 7.69733L11.8756 9.98794L11.6398 10.19L11.7071 10.4932L12.4145 13.8281L9.46707 12.127L9.19758 11.9754V3.92457Z"
-                      fill="#F89336" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
-                <g opacity="0.3">
-                    <path d="M9.44368 1.14551L8.95524 2.25712L7.2036 6.18147L2.92556 6.63622L1.71289 6.77096L2.6224 7.57941L5.80566 10.4595L4.913 14.6702L4.66036 15.8492L5.72145 15.2428L9.44368 13.087L13.1659 15.2428L14.227 15.8492L13.9744 14.6702L13.0817 10.4595L16.265 7.57941L17.1745 6.77096L15.9618 6.63622L11.6838 6.18147L9.93212 2.25712L9.44368 1.14551ZM9.44368 3.78981L10.8248 6.9057L10.9595 7.19203L11.2627 7.22571L14.6481 7.57941L12.1217 9.85317L11.8859 10.0721L11.9532 10.3753L12.6606 13.6933L9.71316 12.009L9.44368 11.8406L9.1742 12.009L6.22673 13.6933L6.93412 10.3753L7.00149 10.0721L6.76569 9.85317L4.23929 7.57941L7.62467 7.22571L7.92784 7.19203L8.06258 6.9057L9.44368 3.78981Z"
-                          fill="#C8B477" />
-                </g>
-            </svg>
+            @{
+                var unratedScale = (5 - Model.AverageRating);
+                for (int i = 0; i < Model.AverageRating; i++)
+                {
+                    <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
+                              fill="#F89336" />
+                    </svg>
+                }
+                for (int i = 0; i < unratedScale; i++)
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                        <g opacity="0.3">
+                            <path d="M9.44612 1.1453L8.95768 2.25692L7.20604 6.18126L2.928 6.63601L1.71533 6.77076L2.62484 7.5792L5.8081 10.4593L4.91544 14.67L4.6628 15.849L5.72389 15.2426L9.44612 13.0868L13.1684 15.2426L14.2294 15.849L13.9768 14.67L13.0841 10.4593L16.2674 7.5792L17.1769 6.77076L15.9642 6.63601L11.6862 6.18126L9.93456 2.25692L9.44612 1.1453ZM9.44612 3.7896L10.8272 6.9055L10.962 7.19182L11.2651 7.22551L14.6505 7.5792L12.1241 9.85296L11.8883 10.0719L11.9557 10.3751L12.6631 13.6931L9.7156 12.0088L9.44612 11.8404L9.17664 12.0088L6.22917 13.6931L6.93656 10.3751L7.00393 10.0719L6.76813 9.85296L4.24173 7.5792L7.62711 7.22551L7.93028 7.19182L8.06502 6.9055L9.44612 3.7896Z"
+                                  fill="#C8B477" />
+                        </g>
+                    </svg>
+                }
+            }
 
-            <div class="text-[#333] text-[12px] font-normal " style="line-height: 18px;">4.8</div>
+            <div class="text-[#333] text-[12px] font-normal " style="line-height: 18px;">@Model.AverageRating</div>
         </div>
         <div class="flex gap-1 text-base items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
                 <path d="M1.52539 2.90918V12.8488H6.35188L8.07085 14.5455L9.78981 12.8488H14.6163V2.90918H1.52539ZM2.53238 3.90314H13.6093V11.8549H9.37286L8.07085 13.14L6.76884 11.8549H2.53238V3.90314ZM4.54637 5.39409V6.38805H11.5953V5.39409H4.54637ZM4.54637 7.38202V8.37598H11.5953V7.38202H4.54637ZM4.54637 9.36994V10.3639H9.58134V9.36994H4.54637Z"
                       fill="#BCB08A" />
             </svg>
-            <div class="text-[#333] text-[12px] font-normal">45</div>
+            <div class="text-[#333] text-[12px] font-normal">@Model.TotalComment</div>
         </div>
     </div>
     <div class="text-[12px] font-normal leading-[18px] self-stretch	text-[#333]">
-        歌舞伎町最大級150坪の舞台で毎月「1000万Player」、年間【億の男】を続々と輩出!!本店の名に恥じないトップクラスの【質】がここに!!
+        @Model.ClubDescription
     </div>
 </div>
 <!-- calender -->
 <div>
     <div class=" text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
-        <div class="text-blue">土</div>
-        <div class="text-[#B12D23]">日</div>
-        <div>月</div>
-        <div>火</div>
-        <div>水</div>
-        <div>木</div>
-        <div>金</div>
+        @foreach (var item2 in Model.ClubWeeklyScheduleList)
+        {
+            if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SAT")
+            {
+                <div class="text-blue">
+                    @item2.DayLabel
+                </div>
+            }
+            else if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SUN")
+            {
+
+                <div class="text-red">
+                    @item2.DayLabel
+                </div>
+            }
+            else
+            {
+                <div>
+                    @item2.DayLabel
+                </div>
+            }
+        }
     </div>
     <div class="text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
-        <div class="text-blue">
-            1/13
-            <div class="text-center flex justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12" fill="none">
-                    <path d="M6.78406 1.85867C6.88052 1.69329 7.11947 1.69329 7.21594 1.85867L12.4749 10.874C12.5721 11.0407 12.4519 11.25 12.259 11.25H1.74104C1.54809 11.25 1.42787 11.0407 1.52509 10.874L6.78406 1.85867Z"
-                          stroke="#CC527A" stroke-width="1.5" />
-                </svg>
-            </div>
-        </div>
-        <div class="text-[#B12D23]">
-            14
-            <div>
-                <i class="fa-regular fa-circle"></i>
-            </div>
-        </div>
-        <div>
-            15
-            <div><i class="fa-solid fa-xmark text-[#CC527A]"></i></div>
-        </div>
-        <div>
-            16
-            <div class="text-warmgray-1">休</div>
-        </div>
-        <div>
-            17 <div>
-                <i class="fa-regular fa-circle text-[#CC527A]"></i>
-            </div>
-        </div>
-        <div>
-            18 <div>
-                <i class="fa-regular fa-circle text-[#CC527A]"></i>
-            </div>
-        </div>
-        <div>
-            19 <div>
-                <i class="fa-regular fa-circle text-[#CC527A]"></i>
-            </div>
-        </div>
+        @foreach (var item2 in Model.ClubWeeklyScheduleList)
+        {
+            var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
+            if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
+            {
+                <div onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng','@item2.FullDate')">
+                    @item2.Date <div class="flex justify-center mt-1">
+                        <img src="@imageURL" class="h-[11px] w-[11px]">
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div>
+                    @item2.Date <div class="flex justify-center mt-1">
+                        <img src="@imageURL" class="h-[11px] w-[11px]">
+                    </div>
+                </div>
+            }
+        }
     </div>
-</div>s
+</div>
 <div class="">
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
         <div class="flex tab-container-plane no-scrollbar bg-white gap-[14px] overflow-x-auto">
@@ -186,6 +204,7 @@
                 .box {
                     position: relative;
                 }
+
                     .box::after {
                         content: '';
                         position: absolute;
@@ -197,12 +216,14 @@
                         top: 5px;
                         background-color: #EFEFEF;
                     }
+
                 .custom-table {
                     border-collapse: collapse;
                     width: 100%;
                     border: none;
                     /* Remove outer border */
                 }
+
                     .custom-table tr:first-child td,
                     .custom-table tr:last-child td {
                         border-bottom: none;
@@ -230,133 +251,106 @@
                 <div class="mx-[8.5px] py-[6.54px] p-l-[22px] p-r-[10px] ">
                     <div class="customer-title">
                         <h3 class="text-[#292F33] text-[16px] font-bold" style="line-height:140%">トップランキング</h3>
-                        <p>2024年1月</p>
+                        <p>@formattedDate</p>
                     </div>
                 </div>
                 <div class=" pb-4 flex gap-[8px] " draggable="true">
                     <div class="owl-carousel owl-theme store-host-carousel">
-                        <div class="item" style="width:128px">
-                            <div class=" relative flex-none" draggable="true">
-                                <div class="flex pb-1">
-                                    <div class="absolute top-1 left-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="19"
-                                             height="31" viewBox="0 0 19 31" fill="none">
-                                            <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
-                                                  fill="#E3AB00" />
-                                            <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#E3AB00" />
-                                        </svg>
+                        @{
+                            foreach (var item in Model.TopHostListModels)
+                            {
+                                <div class="item" style="width:128px">
+                                    <div class=" relative flex-none" draggable="true">
+                                        <div class="flex pb-1">
+                                            <div class="absolute top-1 left-0">
+                                                @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
+                                                {
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
+                                                         viewBox="0 0 19 31" fill="none">
+                                                        <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
+                                                              fill="#E3AB00" />
+                                                        <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#E3AB00" />
+                                                    </svg>
+                                                }
+                                                else if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "2")
+                                                {
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
+                                                         viewBox="0 0 19 31" fill="none">
+                                                        <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
+                                                              fill="#C9CACA" />
+                                                        <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#C9CACA" />
+                                                    </svg>
+                                                }
+                                                else if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "3")
+                                                {
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
+                                                         viewBox="0 0 19 31" fill="none">
+                                                        <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
+                                                              fill="#BD764B" />
+                                                        <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#BD764B" />
+                                                    </svg>
+                                                }
+                                                else
+                                                {
+                                                    <svg></svg>
+                                                }
+                                            </div>
+                                            @if (string.IsNullOrEmpty(@item.Rank))
+                                            {
+                                                <div class="pl-6">-</div>
+                                            }
+                                            <div class="pl-6">@item.Rank</div>
+                                        </div>
+                                        <div class="relative h-[180px] w-[128px]">
+                                            @if (!string.IsNullOrEmpty(item.HostImage))
+                                            {
+                                                <img src="@item.HostImage"
+                                                     class="w-[128px] h-[180px] object-fill rounded-[6px]" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                                     class="w-[128px] h-[180px] object-fill rounded-[6px]" />
+                                            }
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                                 class="absolute top-2 right-2">
+                                                <g filter="url(#filter0_d_2488_112787)">
+                                                    <circle cx="20" cy="20" r="13" fill="#D75A8B" />
+                                                </g>
+                                                <path d="M16.752 15.001C14.6836 15.001 13.002 16.6955 13.002 18.7364C13.002 19.4484 13.3262 20.0652 13.627 20.5107C13.9277 20.9562 14.2363 21.2422 14.2363 21.2422L19.6426 26.643L20.002 27.001L20.3613 26.643L25.7676 21.2422C25.7676 21.2422 27.002 20.1586 27.002 18.7364C27.002 16.6955 25.3203 15.001 23.252 15.001C21.5352 15.001 20.4297 16.0302 20.002 16.464C19.5742 16.0302 18.4688 15.001 16.752 15.001Z"
+                                                      fill="white" />
+                                                <defs>
+                                                    <filter id="filter0_d_2488_112787" x="0" y="0" width="40" height="40"
+                                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                                                       values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                        <feOffset />
+                                                        <feGaussianBlur stdDeviation="3.5" />
+                                                        <feComposite in2="hardAlpha" operator="out" />
+                                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                                                 result="effect1_dropShadow_2488_112787" />
+                                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2488_112787"
+                                                                 result="shape" />
+                                                    </filter>
+                                                </defs>
+                                            </svg>
+                                        </div>
+                                        <div class="pt-[5px]">
+                                            <div class="text-[10px] font-bold text-primaryDark">@item.HostName</div>
+                                            <div class="text-xs  text-charcoalBlack">ClubNameEng</div>
+                                        </div>
+                                        @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
+                                        {
+                                            <div class=" store-top-image-title">
+                                                新人王 売上No.1
+                                            </div>
+                                        }
                                     </div>
-                                    <div class="pl-6">1</div>
                                 </div>
-                                <div class="relative h-[180px] w-[128px]">
-                                    <img src="/Content/assets/images/customer/demo-image.jpeg"
-                                         class="w-[128px] h-[180px] object-cover rounded-[6px]" />
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                         class="absolute top-2 right-2">
-                                        <g filter="url(#filter0_d_2488_112787)">
-                                            <circle cx="20" cy="20" r="13" fill="#D75A8B" />
-                                        </g>
-                                        <path d="M16.752 15.001C14.6836 15.001 13.002 16.6955 13.002 18.7364C13.002 19.4484 13.3262 20.0652 13.627 20.5107C13.9277 20.9562 14.2363 21.2422 14.2363 21.2422L19.6426 26.643L20.002 27.001L20.3613 26.643L25.7676 21.2422C25.7676 21.2422 27.002 20.1586 27.002 18.7364C27.002 16.6955 25.3203 15.001 23.252 15.001C21.5352 15.001 20.4297 16.0302 20.002 16.464C19.5742 16.0302 18.4688 15.001 16.752 15.001Z"
-                                              fill="white" />
-                                        <defs>
-                                            <filter id="filter0_d_2488_112787" x="0" y="0" width="40" height="40"
-                                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                                <feOffset />
-                                                <feGaussianBlur stdDeviation="3.5" />
-                                                <feComposite in2="hardAlpha" operator="out" />
-                                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                                <feBlend mode="normal" in2="BackgroundImageFix"
-                                                         result="effect1_dropShadow_2488_112787" />
-                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2488_112787"
-                                                         result="shape" />
-                                            </filter>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <div class="pt-[5px]">
-                                    <div class="text-[10px] font-bold text-primaryDark">支配人</div>
-                                    <div class="text-xs  text-charcoalBlack">DJ KOUKI</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item" style="width:128px">
-                            <div class=" relative flex-none" draggable="true">
-                                <div class="flex pb-1">
-                                    <div class="absolute top-1 left-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="19"
-                                             height="31" viewBox="0 0 19 31" fill="none">
-                                            <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
-                                                  fill="#C9CACA" />
-                                            <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#C9CACA" />
-                                        </svg>
-                                    </div>
-                                    <div class="pl-6">2</div>
-                                </div>
-                                <div class="relative h-[180px] w-[128px]">
-                                    <img src="/Content/assets/images/customer/demo-image.jpeg"
-                                         class="w-[128px] h-[180px] object-cover rounded-[6px]" />
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                         class="absolute top-2 right-2">
-                                        <g filter="url(#filter0_d_2488_112812)">
-                                            <circle cx="20" cy="20" r="13" fill="white" />
-                                        </g>
-                                        <path d="M14.7644 20.7106L14.7545 20.7007L14.7458 20.6927C14.7461 20.6929 14.746 20.6929 14.7457 20.6926L14.7456 20.6925L14.7407 20.6878C14.7353 20.6826 14.7258 20.6734 14.7129 20.6604C14.687 20.6344 14.6476 20.5937 14.5993 20.5402C14.5021 20.4323 14.3729 20.2772 14.2466 20.0901C13.9759 19.6891 13.75 19.2245 13.75 18.7354C13.75 17.109 15.0956 15.75 16.75 15.75C18.1523 15.75 19.0715 16.5896 19.4659 16.9896L20 17.5313L20.5341 16.9896C20.9285 16.5896 21.8477 15.75 23.25 15.75C24.9044 15.75 26.25 17.109 26.25 18.7354C26.25 19.2337 26.0301 19.7109 25.7649 20.0966C25.6361 20.2839 25.5067 20.4347 25.4106 20.5376C25.3628 20.5887 25.3242 20.6269 25.2992 20.6509C25.292 20.6579 25.2859 20.6636 25.2811 20.6681C25.2776 20.6713 25.2749 20.6739 25.2728 20.6758L25.2689 20.6793L25.2688 20.6794L25.2685 20.6796L25.2527 20.6936L25.2356 20.7106L20 25.9409L14.7644 20.7106Z"
-                                              fill="white" stroke="#E3A1A1" stroke-width="1.5" />
-                                        <defs>
-                                            <filter id="filter0_d_2488_112812" x="0" y="0" width="40" height="40"
-                                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                                <feOffset />
-                                                <feGaussianBlur stdDeviation="3.5" />
-                                                <feComposite in2="hardAlpha" operator="out" />
-                                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                                <feBlend mode="normal" in2="BackgroundImageFix"
-                                                         result="effect1_dropShadow_2488_112812" />
-                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2488_112812"
-                                                         result="shape" />
-                                            </filter>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <div class="pt-[5px]">
-                                    <div class="text-[10px] font-bold text-primaryDark">支配人</div>
-                                    <div class="text-xs  text-charcoalBlack">後藤聖輝</div>
-
-                                </div>
-                                <div class=" store-top-image-title">
-                                    新人王 売上No.1
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item" style="width:128px">
-                            <div class=" relative flex-none" draggable="true">
-                                <div class="flex pb-1">
-                                    <div class="absolute top-1 left-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="19"
-                                             height="31" viewBox="0 0 19 31" fill="none">
-                                            <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
-                                                  fill="#BD764B" />
-                                            <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#BD764B" />
-                                        </svg>
-                                    </div>
-                                    <div class="pl-6">3</div>
-                                </div>
-                                <img src="/Content/assets/images/customer/demo-image.jpeg"
-                                     class="w-[128px] h-[180px] object-cover rounded-[6px]" />
-                                <div class="pt-[5px]">
-                                    <div class="text-[10px] font-bold text-primaryDark">支配人</div>
-                                    <div class="text-xs  text-charcoalBlack">DJ KOUKI</div>
-                                </div>
-                                <div class=" store-top-image-title">
-                                    新人王 売上No.1
-                                </div>
-                            </div>
-                        </div>
+                            }
+                        }
                     </div>
                 </div>
             </div>
@@ -726,404 +720,282 @@
         <div id="tab2" class="tab-content-plane  hidden ">
             <div class="mx-[8px] py-[6.54px] p-l-[22px] p-r-[10px] ">
                 <div class="customer-title">
-                    <h3>ホスト</h3>
-                    <p>ホスト・お店のスタッフ一覧</p>
+                    <h3>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Host</h3>
+                    <p>@CRS.CUSTOMER.APPLICATION.Resources.Resource.ListOfHosts</p>
                 </div>
             </div>
             <div class="p-[10px] grid grid-cols-3 gap-3 bg-[#EFEFEF]">
-                <div>
-                    <img src="/Content/assets/images/customer/demo-image.jpeg"
-                         class="w-[104px] h-[104px] object-cover rounded-[6px]" />
-                    <div class="pt-[5px]">
-                        <div class="text-[10px] font-bold text-primaryDark">取締役</div>
-                        <div class="text-xs  text-charcoalBlack">後藤聖輝</div>
-
+                @foreach (var item in Model.HostListModels)
+                {
+                    <div onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                        @if (!string.IsNullOrEmpty(item.HostImage))
+                        {
+                            <img src="@item.HostImage"
+                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
+                        }
+                        <div class="pt-[5px]">
+                            <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
+                            <div class="text-xs  text-charcoalBlack">@item.HostName</div>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <img src="/Content/assets/images/customer/demo-image.jpeg"
-                         class="w-[104px] h-[104px] object-cover rounded-[6px]" />
-                    <div class="pt-[5px]">
-                        <div class="text-[10px] font-bold text-primaryDark">支配人</div>
-                        <div class="text-xs  text-charcoalBlack">DJ KOUKI</div>
-                    </div>
-                </div>
-                <div>
-                    <img src="/Content/assets/images/customer/demo-image.jpeg"
-                         class="w-[104px] h-[104px] object-cover rounded-[6px]" />
-                    <div class="pt-[5px]">
-                        <div class="text-[10px] font-bold text-primaryDark">支配人</div>
-                        <div class="text-xs  text-charcoalBlack">DJ KOUKI</div>
-                    </div>
-                </div>
-                <div>
-                    <img src="/Content/assets/images/customer/demo-image.jpeg"
-                         class="w-[104px] h-[104px] object-cover rounded-[6px]" />
-                    <div class="pt-[5px]">
-                        <div class="text-[10px] font-bold text-primaryDark">支配人</div>
-                        <div class="text-xs  text-charcoalBlack">DJ KOUKI</div>
-                    </div>
-                </div>
-                <div>
-                    <img src="/Content/assets/images/customer/demo-image.jpeg"
-                         class="w-[104px] h-[104px] object-cover rounded-[6px]" />
-                    <div class="pt-[5px]">
-                        <div class="text-[10px] font-bold text-primaryDark">支配人</div>
-                        <div class="text-xs  text-charcoalBlack">DJ KOUKI</div>
-                    </div>
-                </div>
-                <div>
-                    <img src="/Content/assets/images/customer/demo-image.jpeg"
-                         class="w-[104px] h-[104px] object-cover rounded-[6px]" />
-                    <div class="pt-[5px]">
-                        <div class="text-[10px] font-bold text-primaryDark">支配人</div>
-                        <div class="text-xs  text-charcoalBlack">DJ KOUKI</div>
-                    </div>
-                </div>
-                <div>
-                    <img src="/Content/assets/images/customer/demo-image.jpeg"
-                         class="w-[104px] h-[104px] object-cover rounded-[6px]" />
-                    <div class="pt-[5px]">
-                        <div class="text-[10px] font-bold text-primaryDark">支配人</div>
-                        <div class="text-xs  text-charcoalBlack">DJ KOUKI</div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
         <div id="tab3" class="tab-content-plane  ">
             <div class="mx-[8px] py-[6.54px] p-l-[22px] p-r-[10px] px-[16px]">
                 <div class="customer-title">
                     <!-- review -->
-                    <h3>レビュー</h3>
-                    <p>クラブ、ホストのレビュー</p>
+                    <h3>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Review</h3>
+                    <p>@CRS.CUSTOMER.APPLICATION.Resources.Resource.ClubReview</p>
                 </div>
             </div>
             <!-- section 1 -->
-            <div class=" border-b-2 border-[#efefef]">
-                <div class="px-4 py-[10px]">
-                    <div class="flex gap-[8px] items-center ">
-                        <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
-                            <img src="/Content/assets/images/customer/demo-image.jpeg"
-                                 class="h-[48px] w-[48px] object-cover rounded-full" />
-                        </div>
-                        <div>
-                            <div class='text-[11px] font-bold text-charcolBlack '>NecoYanagi</div>
-                            <div class="flex gap-1 items-center">
-                                <div class="rating-review text-[11px]" id="stars">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11"
-                                             fill="none">
-                                            <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z"
-                                                  fill="#F89336" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11"
-                                             fill="none">
-                                            <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z"
-                                                  fill="#F89336" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11"
-                                             fill="none">
-                                            <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z"
-                                                  fill="#F89336" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11"
-                                             fill="none">
-                                            <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z"
-                                                  fill="#F89336" />
-                                        </svg>
-                                    </div>
-                                    <!-- unfilled start -->
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11"
-                                             fill="none">
-                                            <path d="M5.5 0L5.15251 0.831615L3.90632 3.76747L0.862745 4.10767L0 4.20848L0.647059 4.81329L2.91176 6.96793L2.27669 10.118L2.09695 11L2.85185 10.5464L5.5 8.93356L8.14815 10.5464L8.90305 11L8.72331 10.118L8.08823 6.96793L10.3529 4.81329L11 4.20848L10.1373 4.10767L7.09368 3.76747L5.84749 0.831615L5.5 0ZM5.5 1.97824L6.48257 4.30928L6.57843 4.52348L6.79412 4.54868L9.20261 4.81329L7.40523 6.51432L7.23747 6.67812L7.2854 6.90493L7.78867 9.38717L5.69172 8.12715L5.5 8.00115L5.30828 8.12715L3.21133 9.38717L3.7146 6.90493L3.76253 6.67812L3.59477 6.51432L1.79739 4.81329L4.20588 4.54868L4.42157 4.52348L4.51743 4.30928L5.5 1.97824Z"
-                                                  fill="#7E6D5E" />
-                                        </svg>
+            @if (Model.ClubReviewsModel != null)
+            {
+                foreach (var item in Model.ClubReviewsModel)
+                {
+                    <div class=" border-b-2 border-[#efefef]">
+                        <div class="px-4 py-[10px]">
+                            <div class="flex gap-[8px] items-center ">
+                                <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                                    @if (!string.IsNullOrEmpty(item.CustomerImage))
+                                    {
+                                        <img src="@item.CustomerImage"
+                                             class="h-[48px] w-[48px] object-cover rounded-full" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                             class="h-[48px] w-[48px] object-cover rounded-full" />
+                                    }
+                                </div>
+                                <div>
+                                    <div class='text-[11px] font-bold text-charcolBlack '>@item.CustomerName</div>
+                                    <div class="flex gap-1 items-center">
+                                        <div class="rating-review text-[11px]" id="stars">
+                                            @{
+                                                var unratedScale2 = (5 - Convert.ToInt32(item.RatingScale));
+                                                for (int i = 0; i < Convert.ToInt32(item.RatingScale); i++)
+                                                {
+                                                    <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                        <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
+                                                              fill="#F89336" />
+                                                    </svg>
+                                                }
+                                                for (int i = 0; i < unratedScale2; i++)
+                                                {
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                                                        <g opacity="0.3">
+                                                            <path d="M9.44612 1.1453L8.95768 2.25692L7.20604 6.18126L2.928 6.63601L1.71533 6.77076L2.62484 7.5792L5.8081 10.4593L4.91544 14.67L4.6628 15.849L5.72389 15.2426L9.44612 13.0868L13.1684 15.2426L14.2294 15.849L13.9768 14.67L13.0841 10.4593L16.2674 7.5792L17.1769 6.77076L15.9642 6.63601L11.6862 6.18126L9.93456 2.25692L9.44612 1.1453ZM9.44612 3.7896L10.8272 6.9055L10.962 7.19182L11.2651 7.22551L14.6505 7.5792L12.1241 9.85296L11.8883 10.0719L11.9557 10.3751L12.6631 13.6931L9.7156 12.0088L9.44612 11.8404L9.17664 12.0088L6.22917 13.6931L6.93656 10.3751L7.00393 10.0719L6.76813 9.85296L4.24173 7.5792L7.62711 7.22551L7.93028 7.19182L8.06502 6.9055L9.44612 3.7896Z"
+                                                                  fill="#C8B477" />
+                                                        </g>
+                                                    </svg>
+                                                }
+                                            }
+                                        </div>
+                                        <div class="text-[11px] mt-[2px]">@item.RatingScale</div>
                                     </div>
                                 </div>
-                                <div class="text-[11px] mt-[2px]">4.0</div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="flex gap-1 items-center mt-2">
-                        <div class="text-[11px] font-bold ">#推しが見つかった</div>
-                        <div class="linear-gradient rounded-[2px] text-[8px] text-white px-[4px]"
-                             style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);">コースを延長した</div>
-                    </div>
-                    <div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#推しに会えた</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#トークが上手い</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#店内が綺麗</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#店内が綺麗</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">#イケメンがいた</div>
-                    </div>
-                </div>
-                <div class="px-4 py-[11px] bg-[#F6F6F6]">
-                    <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
-                        担当したホスト
-                        <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
-                                      fill="#7E6D5E" />
-                            </svg>
-                        </span>
-                        <div id="tooltip-right" role="tooltip"
-                             class="absolute z-10 invisible inline-block px-[6px] py-[6px] font-medium text-white text-[7px] w-[200px] bg-gray-900 rounded-lg leading-[140%] opacity-0 tooltip "
-                             style="background: rgba(41, 47, 51, 0.95);">
-                            「担当したホスト」はユーザーが任意で選択したものです。運営側で真偽を保証するものではありませんのでご注意ください。 <div class="tooltip-arrow" data-popper-arrow>
+                            <div class="flex gap-1 items-center mt-2">
+                                <div class="text-[11px] font-bold ">#推しが見つかった</div>
+                                <div class="linear-gradient rounded-[2px] text-[8px] text-white px-[4px]"
+                                     style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Extended_Course</div>
+                                </div>
+                                <div>
+                                    @foreach (var item2 in item.GetClubReviewRemarkList)
+                                    {
+                                        if (item2.RemarkType.Trim().ToUpper() == "GOOD" && !string.IsNullOrEmpty(item2.Remark))
+                                        {
+                                            <div class="review-experience h-[19px] mb-0 text-[10px] active">
+                                                @item2.Remark
+                                            </div>
+                                        }
+                                        else if (item2.RemarkType.Trim().ToUpper() == "Bad" && !string.IsNullOrEmpty(item2.Remark))
+                                        {
+                                            <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">
+                                                @item2.Remark
+                                            </div>
+                                        }
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
-                        <div>
-                            <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
-                                <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                     src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                     alt="">
-                                <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
-                            </div>
-                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">kazusadsdsd</div>
-                        </div>
-                        <div class="flex-none">
-                            <img class="inline-block h-[34px] w-[34px] rounded-full border-2 border-[#fff]"
-                                 src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                 alt="">
-                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">kazusadsdsd</div>
-                        </div>
-                        <div id="tooltip-right" role="tooltip"
-                             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white text-[7px] w-[200px] rounded-lg leading-[140%] opacity-0 tooltip "
-                             style="background: rgba(41, 47, 51, 0.95);">
-                            「担当したホスト」はユーザーが任意で選択したものです。運営側で真偽を保証するものではありませんのでご注意ください。 <div class="tooltip-arrow" data-popper-arrow>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                    </div>
-                </div>
-                <div class="px-[24px] py-[9px] flex gap-[6px] justify-between">
-                    <div class="flex text-[#A09E91] gap-[2px] text-[9px] items-center">
-                        <i class="las la-calendar text-[#7E6D5E]"></i>
-                        来店日時:2023/08/22 14:00
-                    </div>
-                    <div class="flex text-[#A09E91] gap-[2px] text-[9px] items-center">
-                        <i class="las la-clock text-[#7E6D5E]"></i>
-                        来店日時:2023/08/22 14:00
-                    </div>
-                </div>
-            </div>
-            <!-- section 1 end -->
-            <!-- section 2 -->
-            <div class=" border-b-2 border-[#efefef]">
-                <div class="px-4 py-[10px]">
-                    <div class="flex gap-[8px] items-center ">
-                        <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
-                            <img src="/Content/assets/images/customer/demo-image.jpeg"
-                                 class="h-[48px] w-[48px] object-cover rounded-full" />
-                        </div>
-                        <div>
-                            <div class='text-[11px] font-bold text-charcolBlack '>NecoYanagi</div>
-                            <div class="flex gap-1 items-center">
-                                <div class="rating-review text-[11px]" id="stars">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11"
-                                             fill="none">
-                                            <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z"
-                                                  fill="#F89336" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11"
-                                             fill="none">
-                                            <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z"
-                                                  fill="#F89336" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11"
-                                             fill="none">
-                                            <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z"
-                                                  fill="#F89336" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11"
-                                             fill="none">
-                                            <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z"
-                                                  fill="#F89336" />
-                                        </svg>
-                                    </div>
-                                    <!-- unfilled start -->
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11"
-                                             fill="none">
-                                            <path d="M5.5 0L5.15251 0.831615L3.90632 3.76747L0.862745 4.10767L0 4.20848L0.647059 4.81329L2.91176 6.96793L2.27669 10.118L2.09695 11L2.85185 10.5464L5.5 8.93356L8.14815 10.5464L8.90305 11L8.72331 10.118L8.08823 6.96793L10.3529 4.81329L11 4.20848L10.1373 4.10767L7.09368 3.76747L5.84749 0.831615L5.5 0ZM5.5 1.97824L6.48257 4.30928L6.57843 4.52348L6.79412 4.54868L9.20261 4.81329L7.40523 6.51432L7.23747 6.67812L7.2854 6.90493L7.78867 9.38717L5.69172 8.12715L5.5 8.00115L5.30828 8.12715L3.21133 9.38717L3.7146 6.90493L3.76253 6.67812L3.59477 6.51432L1.79739 4.81329L4.20588 4.54868L4.42157 4.52348L4.51743 4.30928L5.5 1.97824Z"
+                            <div class="px-4 py-[11px] bg-[#F6F6F6]">
+                                <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
+                                    <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
+                                            <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
                                                   fill="#7E6D5E" />
                                         </svg>
+                                    </span>
+                                    <div id="tooltip-right" role="tooltip"
+                                         class="absolute z-10 invisible inline-block px-[6px] py-[6px] font-medium text-white text-[7px] w-[200px] bg-gray-900 rounded-lg leading-[140%] opacity-0 tooltip "
+                                         style="background: rgba(41, 47, 51, 0.95);">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon <div class="tooltip-arrow" data-popper-arrow>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="text-[11px] mt-[2px]">4.0</div>
+                                <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
+                                    @{
+                                        var hostDetails = item.GetClubReviewHostList.FirstOrDefault(x => x.HostId == x.MVPHostId);
+                                        if (hostDetails != null)
+                                        {
+
+                                            <div>
+                                                <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
+                                                    @if (!string.IsNullOrEmpty(hostDetails.HostImage))
+                                                    {
+                                                        <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                                             src="@hostDetails.HostImage"
+                                                             alt="">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                                             src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                             alt="">
+                                                    }
+                                                    <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
+                                                </div>
+                                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">@hostDetails.HostName</div>
+                                            </div>
+                                        }
+                                    }
+                                    @{
+                                        var hostListDetails = item.GetClubReviewHostList.Where(x => x.HostId != x.MVPHostId).ToList();
+                                        foreach (var item2 in hostListDetails)
+                                        {
+                                            <div class="flex-none">
+                                                @if (!string.IsNullOrEmpty(item2.HostImage))
+                                                {
+                                                    <img class="inline-block h-[34px] w-[34px] rounded-full border-2 border-[#fff]"
+                                                         src="@item2.HostImage"
+                                                         alt="">
+                                                }
+                                                else
+                                                {
+                                                    <img class="inline-block h-[34px] w-[34px] rounded-full border-2 border-[#fff]"
+                                                         src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                         alt="">
+                                                }
+                                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">@item2.HostName</div>
+
+                                            </div>
+                                        }
+                                    }
+                                    <div id="tooltip-right" role="tooltip"
+                                         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white text-[7px] w-[200px] rounded-lg leading-[140%] opacity-0 tooltip "
+                                         style="background: rgba(41, 47, 51, 0.95);">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon<div class="tooltip-arrow" data-popper-arrow>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                            <div class="px-[24px] py-[9px] flex gap-[6px] justify-between">
+                                <div class="flex text-[#A09E91] gap-[2px] text-[9px] items-center">
+                                    <i class="las la-calendar text-[#7E6D5E]"></i>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_On :@item.VisitedOn
+                                </div>
+                                <div class="flex text-[#A09E91] gap-[2px] text-[9px] items-center">
+                                    <i class="las la-clock text-[#7E6D5E]"></i>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Commented_On :@item.CommentedOn
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex gap-1 items-center mt-2">
-                        <div class="text-[11px] font-bold ">#推しが見つかった</div>
-                        <div class="linear-gradient rounded-[2px] text-[8px] text-white px-[4px]"
-                             style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);">コースを延長した</div>
-                    </div>
-                    <div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#推しに会えた</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#トークが上手い</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#店内が綺麗</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#店内が綺麗</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">#イケメンがいた</div>
-                    </div>
-                </div>
-                <div class="px-4 py-[11px] bg-[#F6F6F6]">
-                    <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
-                        担当したホスト
-                        <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
-                                      fill="#7E6D5E" />
+                    }
+                }
+                else
+                {
+                    <!-- for no review found page  -->
+                    <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
+                        <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+                                <path d="M4.54688 8.34375V33.6562H16.6791L21 37.9772L25.3209 33.6562H37.4531V8.34375H4.54688ZM7.07812 10.875H34.9219V31.125H24.2728L21 34.3978L17.7272 31.125H7.07812V10.875ZM12.1406 14.6719V17.2031H29.8594V14.6719H12.1406ZM12.1406 19.7344V22.2656H29.8594V19.7344H12.1406ZM12.1406 24.7969V27.3281H24.7969V24.7969H12.1406Z"
+                                      fill="#E0E0E0" />
                             </svg>
-                        </span>
-                        <div id="tooltip-right" role="tooltip"
-                             class="absolute z-10 invisible inline-block px-[6px] py-[6px] font-medium text-white text-[7px] w-[200px] bg-gray-900 rounded-lg leading-[140%] opacity-0 tooltip "
-                             style="background: rgba(41, 47, 51, 0.95);">
-                            「担当したホスト」はユーザーが任意で選択したものです。運営側で真偽を保証するものではありませんのでご注意ください。 <div class="tooltip-arrow" data-popper-arrow>
-                            </div>
                         </div>
+                        <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだ評価やレビューはありません</div>
                     </div>
-                    <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
-                        <div>
-                            <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
-                                <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                     src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                     alt="">
-                                <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
-                            </div>
-                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">kazusadsdsd</div>
-                        </div>                        
-                        <div class="flex-none">
-                            <img class="inline-block h-[34px] w-[34px] rounded-full border-2 border-[#fff]"
-                                 src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                 alt="">
-                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">kazusadsdsd</div>
-                        </div>
-                        <div id="tooltip-right" role="tooltip"
-                             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white text-[7px] w-[200px] rounded-lg leading-[140%] opacity-0 tooltip "
-                             style="background: rgba(41, 47, 51, 0.95);">
-                            「担当したホスト」はユーザーが任意で選択したものです。運営側で真偽を保証するものではありませんのでご注意ください。 <div class="tooltip-arrow" data-popper-arrow>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                    </div>
-                </div>
-                <div class="px-[24px] py-[9px] flex gap-[6px] justify-between">
-                    <div class="flex text-[#A09E91] gap-[2px] text-[9px] items-center">
-                        <i class="las la-calendar text-[#7E6D5E]"></i>
-                        来店日時:2023/08/22 14:00
-                    </div>
-                    <div class="flex text-[#A09E91] gap-[2px] text-[9px] items-center">
-                        <i class="las la-clock text-[#7E6D5E]"></i>
-                        来店日時:2023/08/22 14:00
-                    </div>
-                </div>
-            </div>
-            <!-- section 2 end -->
-            <!-- for no review found page  -->
-            <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
-                <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
-                        <path d="M4.54688 8.34375V33.6562H16.6791L21 37.9772L25.3209 33.6562H37.4531V8.34375H4.54688ZM7.07812 10.875H34.9219V31.125H24.2728L21 34.3978L17.7272 31.125H7.07812V10.875ZM12.1406 14.6719V17.2031H29.8594V14.6719H12.1406ZM12.1406 19.7344V22.2656H29.8594V19.7344H12.1406ZM12.1406 24.7969V27.3281H24.7969V24.7969H12.1406Z"
-                              fill="#E0E0E0" />
-                    </svg>
-                </div>
-                <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだ評価やレビューはありません</div>
-            </div>
+                }
         </div>
         <div id="tab4" class="tab-content-plane hidden ">
             <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            justify-content: center;
-            align-items: center;
-        }
+                .modal {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.6);
+                    justify-content: center;
+                    align-items: center;
+                }
 
-        .modal-content {
-            border-radius: 5px;
-            max-width: 400px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-        }
+                .modal-content {
+                    border-radius: 5px;
+                    max-width: 400px;
+                    margin: 0 auto;
+                    text-align: center;
+                    position: relative;
+                }
 
-        .close-btn {
-            cursor: pointer;
-            position: absolute;
-            top: -15px;
-            right: 10px;
-            font-size: 20px;
-            color: #000;
-            background-color: #fff;
-            height: 20px;
-            width: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+                .close-btn {
+                    cursor: pointer;
+                    position: absolute;
+                    top: -15px;
+                    right: 10px;
+                    font-size: 20px;
+                    color: #000;
+                    background-color: #fff;
+                    height: 20px;
+                    width: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
 
-        /* Media queries for responsive design */
-        @@media (max-width: 600px) {
-            .modal-content {
-                max-width: 90%;
-            }
-        }
+                /* Media queries for responsive design */
+                @@media (max-width: 600px) {
+                    .modal-content {
+                        max-width: 90%;
+                    }
+                }
             </style>
             <div class="mx-[8px] py-[6.54px] p-l-[22px] p-r-[10px] px-[16px] ">
                 <div class="customer-title">
                     <!-- Galary -->
-                    <h3>写真</h3>
-                    <p>クラブとホストの写真同</p>
+                    <h3>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Gallery</h3>
+                    <p>@CRS.CUSTOMER.APPLICATION.Resources.Resource.OverallClubGallery</p>
                 </div>
             </div>
             <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3">
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[117px] object-cover " onclick="openModal('modal2')" />
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[117px] object-cover " />
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[117px] object-cover " />
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[117px] object-cover " />
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[117px] object-cover " />
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[117px] object-cover " />
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[117px] object-cover " />
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[117px] object-cover " />
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[117px] object-cover " />
+                @foreach (var item in Model.ClubGalleryImageList)
+                {
+                    <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] object-cover" onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
+                }
             </div>
-            <div id="modal2" class="modal">
-                <div class="modal-content">
-                    <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " onclick="closeModal('modal2')">&times;</span>
-                    <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
-                </div>
-            </div>
+            @*<div id="modal2" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " onclick="closeModal('modal2')">&times;</span>
+                        <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
+                    </div>
+                </div>*@
             <script>// Function to open a specific modal
                 function openModal(modalId) {
                     var modal = document.getElementById(modalId);
@@ -1502,38 +1374,152 @@
         </div>
     </div>
 </div>
-<script>function openModal() {
-        console.log("test");
-    }</script>
-<script>// Function to open a specific modal
-    function openModal(modalId) {
-        debugger
-        var modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "flex";
+@section scripts
+{
+    <script src="~/Content/CustomHelper.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            // The DOM is fully loaded, hide the loader
+            document.getElementById("loader-id").style.display = "none";
+        });
+
+        // If you also want to handle external resources like images, use the load event
+        window.addEventListener("load", function () {
+            // The entire page, including external resources, is fully loaded, hide the loader
+            document.getElementById("loader-id").style.display = "none";
+        });
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                margin: 10,
+                loop: true,
+                autoWidth: true,
+                items: 4
+            });
+            localStorage.clear();
+        })</script>
+    <script>function ClubReservationActionFunction(i, j, k) {
+            DataStorageFunction(i, j);
+            window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
         }
-    }
-    // Function to close a specific modal
-    function closeModal(modalId) {
-        var modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "none";
+        const DataStorageFunction = (i, j) => {
+            localStorage.setItem("ClubId", EncryptParameter(i));
+            localStorage.setItem("ClubName", EncryptParameter(j));
         }
-    }
-    // Close the modal if the overlay is clicked
-    window.onclick = function (event) {
-        var modals = document.getElementsByClassName("modal");
-        for (var i = 0; i < modals.length; i++) {
-            if (event.target == modals[i]) {
-                closeModal(modals[i].id);
+
+        function handleAddBookmarks(clubId, hostId, agentType) {
+            debugger
+            ActivateLoaderFunction();
+            $.ajax({
+                url: '/BookmarkManagement/AddBookmarks',
+                type: 'POST',
+                data: { clubId: clubId, hostId: hostId, agentType: agentType },
+                success: function (result) {
+                    if (result.success) {
+                        location.reload();
+                    } else {
+                        // Handle failure, e.g., show an error message
+                        console.log('Error: ' + result.message);
+                        location.reload();
+                    }
+                },
+                error: function () {
+                    // Handle unexpected errors
+                    console.log('An unexpected error occurred.');
+                    location.reload();
+                }
+            });
+        }
+
+        function handleRemoveBookmarks(clubId, hostId, agentType) {
+            ActivateLoaderFunction();
+            $.ajax({
+                url: '/BookmarkManagement/RemoveBookmarks',
+                type: 'POST',
+                data: { clubId: clubId, hostId: hostId, agentType: agentType },
+                success: function (result) {
+                    if (result.success) {
+                        location.reload();
+                    } else {
+                        // Handle failure, e.g., show an error message
+                        console.log('Error: ' + result.message);
+                        location.reload();
+                    }
+                },
+                error: function () {
+                    // Handle unexpected errors
+                    console.log('An unexpected error occurred.');
+                    location.reload();
+                }
+            });
+        }
+        function ActivateLoaderFunction() {
+            var myDiv = document.getElementById("loader-id");
+            myDiv.style.display = "flex";
+        }
+        function DeactivateLoaderFunction() {
+            var myDiv = document.getElementById("loader-id");
+            myDiv.style.display = "none";
+        }</script>
+    <script>const shareButton = document.querySelector("#shareButton");
+        var shareableLink = window.location.href;
+        shareButton.addEventListener("click", (event) => {
+            if (navigator.share) {
+                navigator.share({
+                    title: "Share club details",
+                    url: shareableLink,
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                }).catch(console.error);
+            } else {
+                toastr.info('Web Share API is not supported in this browser.');
+            }
+        });</script>
+    <script>function OpenImagePopup(ImageURL) {
+            if (ImageURL != '' && ImageURL != null) {
+                var modalImg = document.getElementById("img01");
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+                modalImg.src = ImageURL;
             }
         }
-    }
-    // Close the modal only if the overlay is clicked outside of modal1
-    window.onclick = function (event) {
-        var modal1 = document.getElementById('modal1');
-        // Check if the click is outside of modal1
-        if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
-            closeModal('modal1');
+
+        function closeImagePopup() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }</script>
+
+    <script>function openModal() {
+            console.log("test");
+        }</script>
+    <script>// Function to open a specific modal
+        function openModal(modalId) {
+            debugger
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "flex";
+            }
         }
-    }</script>
+        // Function to close a specific modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
+        }
+        // Close the modal if the overlay is clicked
+        window.onclick = function (event) {
+            var modals = document.getElementsByClassName("modal");
+            for (var i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    closeModal(modals[i].id);
+                }
+            }
+        }
+        // Close the modal only if the overlay is clicked outside of modal1
+        window.onclick = function (event) {
+            var modal1 = document.getElementById('modal1');
+            // Check if the click is outside of modal1
+            if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
+                closeModal('modal1');
+            }
+        }</script>
+}
