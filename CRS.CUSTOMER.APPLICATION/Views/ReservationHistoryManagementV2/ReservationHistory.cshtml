@@ -52,7 +52,7 @@
                         foreach (var item in Model.GetReservedList)
                         {
                             <div class="flex flex-col gap-4">
-                                <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card">
+                                <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
                                     <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
                                         <div class="h-[82px] w-[82px] relative flex-none">
                                             <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
@@ -207,7 +207,7 @@
                     {
                         foreach (var item in Model.GetVisitedHistoryList)
                         {
-                            <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card">
+                            <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
                                 <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
                                     <div class="h-[82px] w-[82px] relative flex-none">
                                         <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
@@ -356,7 +356,7 @@
                         foreach (var item in Model.GetCancelledHistoryList)
                         {
                             <div class="flex flex-col gap-4">
-                                <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card">
+                                <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
                                     <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
                                         <div class="h-[82px] w-[82px] relative flex-none">
                                             <img src="/Content/assets/images/status-cancelled.svg" alt="reserved"
@@ -507,14 +507,14 @@
                     {
                         foreach (var item in Model.GetAllHistoryList)
                         {
-                            <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card">
+                            <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
                                 <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
                                     <div class="h-[82px] w-[82px] relative flex-none">
                                         <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
                                              class="absolute top-[6px] left-[-5px]" />
                                         <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] " alt="img" />
                                     </div>
-                                    <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
+                                    <div class="" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                         <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list">
                                             <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
