@@ -68,7 +68,7 @@
                                         <div class="text-xs text-[#333]">
                                             こだわりから探す
                                         </div>
-                                        <form>
+                                        <form action="/Search/ClubSearchResult" method="get" id="club-filter-form-id">
                                             <div class="relative input-search-wrapper h-[40px] my-4 ">
                                                 <div class="absolute inset-y-0 left-0 flex items-center pt-[5pxa] pl-[16px] pointer-events-none">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -76,10 +76,11 @@
                                                               fill="#CECCC5" />
                                                     </svg>
                                                 </div>
-                                                <input type="search" id="default-search"
-                                                       class="input-search block w-full h-[40px] focus-visible:outline-none" placeholder="店舗名から探す">
-                                                <input type="text" id="time-type-id" name="TimeType" value="@ApplicationUtilities.EncryptParameter("1").ToString();" hidden />
-                                                <input type="text" id="time-id" name="Time" value="@ApplicationUtilities.EncryptParameter("19:00").ToString();" hidden />
+                                                <input type="search" id="club-search" name="SearchFilter" class="input-search block w-full h-[40px] focus-visible:outline-none" placeholder="店舗名から探す">
+                                                <input type="text" id="club-category-id" name="ClubCategory" value="" hidden />
+                                                <input type="text" id="price-id" name="Price" value="" hidden />
+                                                <input type="text" id="time-type-id" name="Shift" value="@ApplicationUtilities.EncryptParameter("1").ToString()" hidden />
+                                                <input type="text" id="time-id" name="Time" value="@ApplicationUtilities.EncryptParameter("01:00").ToString()" hidden />
                                                 <input type="text" id="clubavailability-id" name="ClubAvailability" value="" hidden />
                                             </div>
                                         </form>
@@ -95,7 +96,7 @@
                                                         @foreach (var item in Model.ClubCategoryModel)
                                                         {
                                                             <div class="preferance">
-                                                                <input type="checkbox" id="ClubCategoryModel_@item.StaticValue" name="search-by-store-category" value="@item.StaticValue">
+                                                                <input type="checkbox" id="ClubCategoryModel_@item.StaticValue" name="search-by-store-category" value="@item.StaticValue" class="club-category-class">
                                                                 <label for="ClubCategoryModel_@item.StaticValue" class="w-[88px]">@item.StaticLabel</label>
                                                             </div>
                                                         }
@@ -114,7 +115,7 @@
                                                         @foreach (var item in Model.PlanPriceModel)
                                                         {
                                                             <div class="preferance">
-                                                                <input type="checkbox" id="PlanPriceModel_@item.StaticValue" class="hidden" name="plan" value="@item.StaticValue">
+                                                                <input type="checkbox" id="PlanPriceModel_@item.StaticValue" class="plan-price-class hidden" name="search-by-plan" value="@item.StaticValue">
                                                                 <label for="PlanPriceModel_@item.StaticValue" class="w-[88px]">@item.StaticLabel</label>
                                                             </div>
                                                         }
@@ -139,7 +140,7 @@
                                                             <circle cx="6.4987" cy="6.4987" r="2.66667" fill="#D75A8B" />
                                                         </svg>
                                                     </div>
-                                                    <div class="searchbybusinesshoursValue text-sm text-[#333]" data-info="@ApplicationUtilities.EncryptParameter("1").ToString();">昼</div>
+                                                    <div class="searchbybusinesshoursValue text-sm text-[#333]" data-info="@ApplicationUtilities.EncryptParameter("1").ToString()">昼</div>
                                                 </div>
                                                 <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm ">
                                                     <div class="">
@@ -153,7 +154,7 @@
                                                             <circle cx="6.4987" cy="6.4987" r="2.66667" fill="#D75A8B" />
                                                         </svg>
                                                     </div>
-                                                    <div class="searchbybusinesshoursValue text-sm text-[#333]" data-info="@ApplicationUtilities.EncryptParameter("2").ToString();">夜</div>
+                                                    <div class="searchbybusinesshoursValue text-sm text-[#333]" data-info="@ApplicationUtilities.EncryptParameter("2").ToString()">夜</div>
                                                 </div>
                                                 <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm contains-time-class">
                                                     <div class="">
@@ -167,7 +168,7 @@
                                                             <circle cx="6.4987" cy="6.4987" r="2.66667" fill="#D75A8B" />
                                                         </svg>
                                                     </div>
-                                                    <div class="searchbybusinesshoursValue text-sm text-[#333]" data-info="@ApplicationUtilities.EncryptParameter("3").ToString();">時間を指定する</div>
+                                                    <div class="searchbybusinesshoursValue text-sm text-[#333]" data-info="@ApplicationUtilities.EncryptParameter("3").ToString()">時間を指定する</div>
                                                 </div>
 
                                             </div>
@@ -175,7 +176,7 @@
                                             <div class="relative" id="time-div-id" hidden>
                                                 <div class=" showTimeList h-[32px] w-[72px] px-3 py-1 bg-[#F6F6F6] rounded-[4px] text-[#666] text-xs flex justify-between items-center">
                                                     <div id="selected-time-id">
-                                                        19:00
+                                                        01:00
                                                     </div>
                                                     <div>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5" fill="none">
@@ -189,7 +190,7 @@
                                                         <div class="timeList  h-[32px]  px-3 py-1 text-[#666] text-xs flex justify-between items-center">
                                                             @{
                                                                 var timeValue = i.ToString("00") + ":00";
-                                                                <div class="timeValue" data-info="@ApplicationUtilities.EncryptParameter(timeValue).ToString();">
+                                                                <div class="timeValue" data-info="@ApplicationUtilities.EncryptParameter(timeValue).ToString()">
                                                                     @timeValue
                                                                 </div>
                                                             }
@@ -247,10 +248,8 @@
 
                                     </div>
                                     <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
-
-                                        <button class="btn btn-primary" style=" border-radius: 8px; ">
-
-                                            <a href="#" class="h-full w-full">
+                                        <button class="btn btn-primary" style=" border-radius: 8px; " onclick="ClubFilterSubmitButton();">
+                                            <a class="h-full w-full">
                                                 検索する
                                             </a>
                                         </button>

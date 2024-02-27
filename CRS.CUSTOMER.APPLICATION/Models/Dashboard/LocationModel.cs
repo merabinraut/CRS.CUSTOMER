@@ -29,7 +29,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Dashboard
 
     public class RecommendedClubAndHostModel
     {
-        public List<ClubRecommendationListModel> RecommendedClubModel { get; set; }
-        public List<HostRecommendationListModel> RecommendedHostModel { get; set; }
+        public List<ClubRecommendationListModel> RecommendedClubModel { get; set; } = new List<ClubRecommendationListModel>();
+        public List<HostRecommendationListModel> RecommendedHostModel { get; set; } = new List<HostRecommendationListModel>();
     }
 }

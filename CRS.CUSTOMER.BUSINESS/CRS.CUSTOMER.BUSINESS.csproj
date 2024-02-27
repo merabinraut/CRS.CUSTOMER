@@ -109,6 +109,8 @@
     <Compile Include="ReviewManagement\ReviewManagementBusiness.cs" />
     <Compile Include="SearchFilterManagement\ISearchFilterManagementBusiness.cs" />
     <Compile Include="SearchFilterManagement\SearchFilterManagementBusiness.cs" />
+    <Compile Include="Search\ISearchBusiness.cs" />
+    <Compile Include="Search\SearchBusiness.cs" />
     <Compile Include="UserManagement\IUserManagementBusiness.cs" />
     <Compile Include="UserManagement\UserManagementBusiness.cs" />
     <Compile Include="ReservationHistoryManagementV2\IReservationHistoryManagementV2Business.cs" />
@@ -127,9 +129,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Search\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

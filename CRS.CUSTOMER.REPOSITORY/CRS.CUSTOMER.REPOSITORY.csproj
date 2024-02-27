@@ -132,6 +132,8 @@
     <Compile Include="ReviewManagement\ReviewManagementRepository.cs" />
     <Compile Include="SearchFilterManagement\ISearchFilterManagementRepository.cs" />
     <Compile Include="SearchFilterManagement\SearchFilterManagementRepository.cs" />
+    <Compile Include="Search\ISearchRepository.cs" />
+    <Compile Include="Search\SearchRepository.cs" />
     <Compile Include="UserManagement\IUserManagementRepository.cs" />
     <Compile Include="UserManagement\UserManagementRepository.cs" />
     <Compile Include="ReservationHistoryManagementV2\IReservationHistoryManagementV2Repository.cs" />
@@ -146,9 +148,7 @@
       <Name>CRS.CUSTOMER.SHARED</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Search\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

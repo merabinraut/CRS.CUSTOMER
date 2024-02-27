@@ -284,6 +284,7 @@
     <Compile Include="Models\SearchFilterManagement\ClubSearchManagementModel.cs" />
     <Compile Include="Models\SearchFilterManagement\HostSearchManagementModel.cs" />
     <Compile Include="Models\SearchFilterManagement\SearchFilterViewModel.cs" />
+    <Compile Include="Models\Search\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -301,7 +302,6 @@
   <ItemGroup>
     <Folder Include="Content\userupload\ClubManagement\" />
     <Folder Include="Models\RecommendedClubHost\" />
-    <Folder Include="Models\Search\" />
     <Folder Include="Models\UserManagement\" />
     <Folder Include="Views\LogManagement\" />
     <Folder Include="Views\RecommendedClubHost\" />
