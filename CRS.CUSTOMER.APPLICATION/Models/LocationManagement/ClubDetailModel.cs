@@ -52,6 +52,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public List<ClubWeeklyScheduleModel> ClubWeeklyScheduleList { get; set; } = new List<ClubWeeklyScheduleModel>();
         public List<ClubEventModel> ClubEventList { get; set; } = new List<ClubEventModel>();
         public List<NoticeModel> GetNoticeByClubId { get; set; }
+        public ClubBasicInformationModel GetClubBasicInformation { get; set; }
     }
     public class ClubEventModel
     {
@@ -66,5 +67,32 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string EventDescription { get; set; }
         public string EventType { get; set; }
         public string EventTitle { get; set; }
+    }
+    public class ClubBasicInformationModel
+    {
+        public string ClubAddress { get; set; }
+        public string ClubOpeningTime { get; set; }
+        public string ClubClosingTime { get; set; }
+        public string LastEntryTime { get; set; }
+        public string Holiday { get; set; }
+        public string TiktokLink { get; set; }
+        public string InstagramLink { get; set; }
+        public string LineNumber { get; set; }
+        public string TwitterLink { get; set; }
+        public string RegularEntry { get; set; }
+        public string EnjoyPlan { get; set; }
+        public string GroupPlan { get; set; }
+        public string EPLastEntryTime { get; set; }
+        public string EpMaxReservation { get; set; }
+        public string GPLastEntryTime { get; set; }
+        public string GPMaxReservation { get; set; }
+        public string VPLastEntryTiime { get; set; }
+        public string VPMaxReservation { get; set; }
+        public string RegularPrice { get; set; }
+        public string DesignationFee { get; set; }
+        public string CompanionFee { get; set; }
+        public string ExtensionFee { get; set; }
+        public string Drink { get; set; }
+        public string Tax { get; set; }
     }
 }
