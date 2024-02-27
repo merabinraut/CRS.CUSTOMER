@@ -31,6 +31,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
         public string Gender { get; set; }
         public string PreferredLocation { get; set; }
+
+        [RegularExpression(@"^\d{3}-\d{4}$", ErrorMessage = "Invalid Postal Code")]
         public string PostalCode { get; set; }
         public string Prefecture { get; set; }
 
