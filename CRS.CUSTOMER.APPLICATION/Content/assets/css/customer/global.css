@@ -1304,3 +1304,7 @@ label {
     top: 50%;
     margin-top: 65%
 }
+.club-visited {
+    color: #E6E6E6 !important;
+    fill: #E6E6E6 !important; /* Set the color of the stroke */
+}
