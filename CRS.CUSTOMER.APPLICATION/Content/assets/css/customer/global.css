@@ -1306,5 +1306,5 @@ label {
 }
 .club-visited {
     color: #E6E6E6 !important;
-    fill: #E6E6E6 !important; /* Set the color of the stroke */
+    fill: #E6E6E6 !important; 
 }
