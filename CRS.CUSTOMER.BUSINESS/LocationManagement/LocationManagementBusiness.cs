@@ -59,7 +59,7 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
             return _repo.ViewHostDetailsV2(HostId, customerId);
         }
 
-        public NoticeModelCommon GetNoticeByClubId(string cId)
+        public List<NoticeModelCommon> GetNoticeByClubId(string cId)
         {
             return _repo.GetNoticeByClubId(cId);
         }

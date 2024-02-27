@@ -350,6 +350,8 @@
                                     </div>
                                 </div>
                             }
+
+
                         }
                     </div>
                 </div>
@@ -377,18 +379,24 @@
                         <!-- border bottom -->
                         <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
                         <!-- notices section -->
-                        <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px]"
-                             style="line-height:20px">
-                            <div>2024年01月10日(水)</div>
-                            <div>新しいメンバーが入店しました🎉</div>
-                        </div>
-                        <!-- border bottom -->
-                        <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
-                        <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px]"
-                             style="line-height:20px">
-                            <div>2024年01月10日(水)</div>
-                            <div>今月のスケジュールを更新しました！ぜひ…</div>
-                        </div>
+                        @{
+                            if (Model.GetNoticeByClubId != null)
+                            {
+                                foreach (var item in Model.GetNoticeByClubId)
+                                {
+                                    if (item.EventType.Trim().ToString() == "1")
+                                    {
+                                        <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px]"
+                                             style="line-height:20px">
+                                            <div>@item.EventDate (水)</div>
+                                            <div>@item.EventTitle</div>
+                                        </div>
+                                        <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
+                                    }
+
+                                }
+                            }
+                        }
                     </div>
                     <div class="box"></div>
                 </div>
@@ -416,10 +424,24 @@
                         <!-- border bottom -->
                         <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
                         <!-- notices section -->
-                        <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium py-[5px]">
-                            <div>2024年01月10日(水)</div>
-                            <div>柊斗CP昇格祭</div>
-                        </div>
+                        @{
+                            if (Model.GetNoticeByClubId != null)
+                            {
+                                foreach (var item in Model.GetNoticeByClubId)
+                                {
+                                    if (item.EventType.Trim().ToString() == "2")
+                                    {
+                                        <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px]"
+                                             style="line-height:20px">
+                                            <div>@item.EventDate (水)</div>
+                                            <div>@item.EventTitle</div>
+                                        </div>
+                                        <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
+                                    }
+
+                                }
+                            }
+                        }
                     </div>
                     <div class="box"></div>
                 </div>

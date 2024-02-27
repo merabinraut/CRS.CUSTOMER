@@ -54,8 +54,11 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
     }
     public class NoticeModelCommon
     {
-        public string ClubId { get; set; }
-        public string NoticeDate { get; set; }
-        public string NoticeDescription { get; set; }
+        public string AgentId { get; set; }
+        public string EventId { get; set; }
+        public string EventDate { get; set; }
+        public string EventDescription { get; set; }
+        public string EventType { get; set; }
+        public string EventTitle { get; set; }
     }
 }

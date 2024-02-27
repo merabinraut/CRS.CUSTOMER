@@ -265,21 +265,14 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             return Response;
         }
 
-        public NoticeModelCommon GetNoticeByClubId(string cId)
+        public List<NoticeModelCommon> GetNoticeByClubId(string cId)
         {
-            string sp_name = "";
+            string sp_name = "sproc_customer_club_detail @Flag='cdns'";
             sp_name += ",@ClubId=" + _dao.FilterString(cId);
-            var dbResponseInfo = _dao.ExecuteDataRow(sp_name);
-            if (dbResponseInfo != null)
-            {
-                return new NoticeModelCommon()
-                {
-                    ClubId = _dao.ParseColumnValue(dbResponseInfo, "ClubId").ToString(),
-                    NoticeDate = _dao.ParseColumnValue(dbResponseInfo, "NoticeDate").ToString(),
-                    NoticeDescription = _dao.ParseColumnValue(dbResponseInfo, "NoticeDescription").ToString(),
-                };
-            }
-            return new NoticeModelCommon();
+            var dbResponseInfo = _dao.ExecuteDataTable(sp_name);
+            if (dbResponseInfo != null) return _dao.DataTableToListObject<NoticeModelCommon>(dbResponseInfo).ToList();
+            return new List<NoticeModelCommon>();
+                
         }
         #endregion
     }
