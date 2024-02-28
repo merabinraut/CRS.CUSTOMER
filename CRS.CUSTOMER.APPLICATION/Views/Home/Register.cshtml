@@ -314,7 +314,7 @@
                     @Html.ValidationMessageFor(m => m.NickName)
                 </span>
                 <div class="inputWrapper mt-2">
-                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "携帯電話番号", @minlength = "11", @maxlength = "11", @onkeypress = "return isNumber(event)", autocomplete = "off" })
+                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "w-full ring-0 focus:ring-0 focus:ring-transparent",@type="number", @placeholder = "携帯電話番号", @minlength = "11", @maxlength = "11",   oninput = "limitInputLength(this, 11)", autocomplete = "off" })
                     @*<input type="number" name="contactNumber" value=""
                         class="w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="携帯電話番号" required>*@
                 </div>
@@ -336,7 +336,7 @@
                 </div>
                 <!-- for register  -->
                 <div>
-                    <button id="FormSubmit" class="registerButton border rounded-lg  w-full">認証コードを受け取る</button>
+                    <button id="FormSubmit" type="button" class="registerButton border rounded-lg  w-full">認証コードを受け取る</button>
                 </div>
             }
             <!-- for login -->
@@ -361,6 +361,7 @@
     <script type="text/javascript">
        
         $("#FormSubmit").click(function (event) {
+            debugger;
             event.preventDefault();
             var MobileNumber = $('#MobileNumber').val();
             var NickName = $('#NickName').val();
@@ -409,6 +410,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
     <script>
+        function limitInputLength(input, maxLength) {
+            var value = input.value;
+            // Remove non-numeric characters
+            var numericValue = value.replace(/\D/g, '');
+            // Trim to maximum length
+            var trimmedValue = numericValue.substring(0, maxLength);
+            // Update input value
+            input.value = trimmedValue;
+        }
     //For toaster Notification
     $(function () {
     {

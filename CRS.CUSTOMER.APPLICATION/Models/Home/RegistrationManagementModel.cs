@@ -70,8 +70,9 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
     public class ForgotPasswordModel
     {
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        [MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
         [RegularExpression("^(?![eE])[0-9]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
-        //[MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
+
         //[MobileNumber(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
         //[Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
         public string MobileNo { get; set; }

@@ -1627,7 +1627,7 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only numbers are allowed.
+        ///   Looks up a localized string similar to 数字のみが許可されています.
         /// </summary>
         public static string Only_numbers_are_allowed {
             get {

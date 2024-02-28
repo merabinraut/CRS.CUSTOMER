@@ -767,7 +767,7 @@
     <comment>Host Detail</comment>
   </data>
   <data name="Only numbers are allowed" xml:space="preserve">
-    <value>Only numbers are allowed</value>
+    <value>数字のみが許可されています</value>
     <comment>Login</comment>
   </data>
   <data name="OnSiteNomination" xml:space="preserve">
