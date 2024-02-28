@@ -182,7 +182,7 @@
             <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Gender<span class="text-[#D32F2F]">*</span>
             </label>
-            <div class="grid grid-cols-2 gap-[8px]">
+            <div class="grid grid-cols-3 gap-[8px]">
 
                 <div class="language-option  h-[40px]" data-gender="Female">
                     <div class="flex flex-row w-full  ">
@@ -263,29 +263,29 @@
                 </div>
             </div>
             @*<label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PreferredLocation</label>
-            <div class="flex flex-col">
-                <div class="input-field-common">
-                    <select id="default_select" style="width: 100%; font-size:15px"
-                            class="default_select text-[#B7B7B7] h-[44px] select-common" name="PreferredLocationDDL">
-                        @foreach (KeyValuePair<string, string> item in ViewBag.LocationDDL as Dictionary<string, string>)
-                        {
-                            var selectedId = ViewBag.PreferredLocationKey as string;
-                            if (item.Key == selectedId)
+                <div class="flex flex-col">
+                    <div class="input-field-common">
+                        <select id="default_select" style="width: 100%; font-size:15px"
+                                class="default_select text-[#B7B7B7] h-[44px] select-common" name="PreferredLocationDDL">
+                            @foreach (KeyValuePair<string, string> item in ViewBag.LocationDDL as Dictionary<string, string>)
                             {
-                                <option value="@item.Key" selected>
-                                    @item.Value
-                                </option>
+                                var selectedId = ViewBag.PreferredLocationKey as string;
+                                if (item.Key == selectedId)
+                                {
+                                    <option value="@item.Key" selected>
+                                        @item.Value
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Key">
+                                        @item.Value
+                                    </option>
+                                }
                             }
-                            else
-                            {
-                                <option value="@item.Key">
-                                    @item.Value
-                                </option>
-                            }
-                        }
-                    </select>
-                </div>
-            </div>*@
+                        </select>
+                    </div>
+                </div>*@
             <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address</label>
             <div class="input-field-common">
 
@@ -295,7 +295,7 @@
                     @Html.ValidationMessageFor(m => m.PostalCode)
                 </span>
             </div>
-            <div class="grid grid-cols-2 gap-[6px] ">
+            <div class="grid grid-cols-1 gap-[6px] ">
                 <div class="input-field-common">
                     <select id="default_select" style="width: 100%; font-size:15px"
                             class="default_select text-[#B7B7B7] h-[44px] select-common" name="PrefectureDDL">
@@ -317,10 +317,12 @@
                         }
                     </select>
                 </div>
+            </div>
+            <div class="grid grid-cols-2 gap-[6px] mt-[10px] ">
 
                 <div class="input-field-common">
                     <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.City"
-                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] h-[40px]"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] h-[40px] w-full"
                            value="@Model.City"
                            type="text"
                            data-val="true"
@@ -330,10 +332,8 @@
                         @Html.ValidationMessageFor(m => m.City)
                     </span>
                 </div>
-            </div>
-            <div class="flex flex-col gap-[6px] mt-[10px]">
                 <div class="input-field-common">
-                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Street" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Street" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] w-full"
                            value="@Model.Street"
                            type="text"
                            data-val="true"
@@ -343,9 +343,12 @@
                         @Html.ValidationMessageFor(m => m.Street)
                     </span>
                 </div>
-                <div class="input-field-common mt-[6px]">
+            </div>
+            <div class="flex flex-col gap-[6px] mt-[10px] pb-[61px]">
+
+                <div class="input-field-common mt-[6px] ">
                     <input placeholder="ビール名と部屋番号"
-                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] w-full "
                            type="text"
                            data-val="true"
                            data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
@@ -360,11 +363,17 @@
                         山田
                     </span>*@
             </div>
-            <div class="grid grid-cols-2 gap-2 mt-[50px] mb-[40px]">
-                <div style="border: 1px solid var(--Secondary-Text-II, #A1A1AA);"
-                     class="flex rounded-[4px] justify-center items-center text-white h-[48px]    ">
-                    <p class="ml-2 text-[14px] text-[#B7B7B7]" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</p>
-                </div>
+            <div class="text-[11px] text-[#D17979] underline leading-[16px] mt-[61px] mb-[19px]" style="margin-top:61px" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</div>
+
+
+        </div>
+        <div class="py-[12px] mt-[20px] px-[16px]  w-full grid grid-cols-1" style="box-shadow:0px 0px 7px 0px rgba(68,47,38,0.25)">
+
+            <div class="grid grid-cols-1   ">
+                @* <div style="border: 1px solid var(--Secondary-Text-II, #A1A1AA);"
+                         class="flex rounded-[4px] justify-center items-center text-white h-[48px]    ">
+                        <p class="ml-2 text-[14px] text-[#B7B7B7]" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</p>
+                    </div>*@
                 <div class="flex rounded-[4px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  ">
                     <button type="submit" class="ml-2 text-[14px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile</button>
                 </div>
@@ -436,14 +445,13 @@
             }
         });
         };
-        debugger;
+
 
     // Get all the div elements
     var divs = document.querySelectorAll('.language-option');
 
     // Add click event listeners to each div
         divs.forEach(function (div) {
-            debugger;
         var genderValue = div.getAttribute('data-gender');
         var backEndGenderValue="@Model.Gender";
 

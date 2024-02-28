@@ -174,7 +174,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }).ToArray();
 
                 AddNotificationMessage(notificationModels);
-                return View(changePasswordModel);
+                return RedirectToAction("ChangePasswordV2", changePasswordModel);
+                //return View(changePasswordModel);
             }
             else
             {
@@ -191,7 +192,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 if (dbResp.Code == ResponseCode.Failed)
                 {
                     AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.ERROR, Message = dbResp.Message });
-                    return RedirectToAction("ChangePassword", changePasswordModel);
+                    return RedirectToAction("ChangePasswordV2", changePasswordModel);
                 }
                 if (dbResp.Code == ResponseCode.Success)
                 {
@@ -203,7 +204,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     });
                     return RedirectToAction("LogOff", "Home");
                 }
-                return View();
+                return RedirectToAction("ChangePasswordV2", changePasswordModel);
             }
         }
 

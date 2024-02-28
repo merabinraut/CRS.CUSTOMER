@@ -631,6 +631,10 @@
     <value>Login with mobile</value>
     <comment>Login</comment>
   </data>
+  <data name="LoginPhoneNumber" xml:space="preserve">
+    <value>mobile number</value>
+    <comment>Login</comment>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
     <comment>_Layout</comment>
@@ -761,6 +765,10 @@
   <data name="On-site Nomination" xml:space="preserve">
     <value>On-site Nomination</value>
     <comment>Host Detail</comment>
+  </data>
+  <data name="Only numbers are allowed" xml:space="preserve">
+    <value>Only numbers are allowed</value>
+    <comment>Login</comment>
   </data>
   <data name="OnSiteNomination" xml:space="preserve">
     <value>On-site Nomination</value>

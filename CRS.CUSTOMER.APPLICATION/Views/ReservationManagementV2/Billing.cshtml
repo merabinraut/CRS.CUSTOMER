@@ -224,24 +224,26 @@
         }
 
 
-        function SubmitFunction() {
-            var PaymentType = $('.payment-type-class .active .payment-option-value').val();
-            if (!PaymentType && '@Model.CustomerCostAmount.Trim()' === "0") {
-                PaymentType = 0;
-            }
-            else {
-                toastr.info('Payment type is required');
-                return false;
-            }
-            const ClubId = localStorage.getItem("ClubId") || "";
-            const PlanId = localStorage.getItem("PlanId") || "";
-            var VisitDate = decryptAndGetValue("VisitDate");
-            var VisitTime = decryptAndGetValue("VisitTime");
-            var NoOfPeople = decryptAndGetValue("NoOfPeople");
-            var HostIdList = JSON.parse(localStorage.getItem("HostIdList"));
+    function SubmitFunction() {
+      var PaymentType = $('.payment-type-class .active .payment-option-value').val();
+      if (PaymentType == null || PaymentType == "") {
+          if ('@Model.CustomerCostAmount.Trim()' === "0") {
+              PaymentType = 0;
+          }
+          else {
+              toastr.info('Payment type is required');
+              return false;
+          }
+      }
+      const ClubId = localStorage.getItem("ClubId") || "";
+      const PlanId = localStorage.getItem("PlanId") || "";
+      var VisitDate = decryptAndGetValue("VisitDate");
+      var VisitTime = decryptAndGetValue("VisitTime");
+      var NoOfPeople = decryptAndGetValue("NoOfPeople");
+      var HostIdList = JSON.parse(localStorage.getItem("HostIdList"));
 
-            var url = `/ReservationManagementV2/ReservationConfirmation?ClubId=${ClubId}&PlanId=${PlanId}&VisitDate=${VisitDate}&VisitTime=${VisitTime}&NoOfPeople=${NoOfPeople}&PaymentType=${PaymentType}&HostIdList=${HostIdList}`;
-            window.location.href = url;
-        }
+      var url = `/ReservationManagementV2/ReservationConfirmation?ClubId=${ClubId}&PlanId=${PlanId}&VisitDate=${VisitDate}&VisitTime=${VisitTime}&NoOfPeople=${NoOfPeople}&PaymentType=${PaymentType}&HostIdList=${HostIdList}`;
+      window.location.href = url;
+  }
     </script>
 }

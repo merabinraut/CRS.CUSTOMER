@@ -346,8 +346,8 @@
                     @Html.TextBoxFor(model => model.LoginId, new
                {
                    @class = "contactNumber focus:outline-none border-none  w-full ring-0 focus:ring-0 focus:ring-transparent",
-                   @placeholder = CRS.CUSTOMER.APPLICATION.Resources.Resource.Enter_Phone_Number,
-                   @type = "text"
+                   @placeholder = "携帯電話番号",
+                   @type = "number"
                })
                     <span class="validationMessage">
                         @Html.ValidationMessageFor(m => m.LoginId)
@@ -399,9 +399,11 @@
             </div>
             <!-- for affiliation -->
             <div class="affiliation">
-                <div class="affiliationText"><a href="#">アフィリエイター登録</a></div>
+                <div class="affiliationText">
+                <a href=@Model.affiliateURL>アフィリエイター登録</a>
+                </div>
                 <div class="dividerCol">|</div>
-                <div class="affiliationText">店舗オーナー登録</div>
+                <div class="affiliationText"><a href=@Model.clubURL> 店舗オーナー登録 </a></div>
             </div>
         </div>
     </div>

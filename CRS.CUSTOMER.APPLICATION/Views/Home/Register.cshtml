@@ -305,7 +305,7 @@
                 @Html.AntiForgeryToken()
                 <input value="@ViewBag.ReferCode" name="ReferCode" hidden />
                 <div class="inputWrapper">
-                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ミクチャン", @onkeypress = "return isAlphabateOnly(event)", autocomplete = "off" })
+                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ミクチャン", @oninput = "validateInput(this)", autocomplete = "off" })
                     @*<input type="text" value="" name="nickName"
                         class=" focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="ミクチャン"
                         required>*@
@@ -359,7 +359,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript">
-
+       
         $("#FormSubmit").click(function (event) {
             event.preventDefault();
             var MobileNumber = $('#MobileNumber').val();
@@ -394,6 +394,16 @@
                 return false;
             }
         });
+
+        function validateInput(input) {
+            // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
+            var regex = /^[a-zA-Z0-9_\.\-\u3040-\u309f\u30a0-\u30ff]*$/u;
+            // Check if the input value matches the pattern
+            if (!regex.test(input.value)) {
+                // Clear the input value if it doesn't match the pattern
+                input.value = input.value.replace(/[^a-zA-Z0-9_\.\-\u3040-\u309f\u30a0-\u30ff]/gu, '');
+            }
+        }
     </script>
     <script src="~/Content/validation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>

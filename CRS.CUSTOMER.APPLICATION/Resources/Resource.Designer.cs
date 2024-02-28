@@ -1285,6 +1285,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to mobile number.
+        /// </summary>
+        public static string LoginPhoneNumber {
+            get {
+                return ResourceManager.GetString("LoginPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logout.
         /// </summary>
         public static string Logout {
@@ -1614,6 +1623,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         public static string On_site_Nomination {
             get {
                 return ResourceManager.GetString("On-site Nomination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only numbers are allowed.
+        /// </summary>
+        public static string Only_numbers_are_allowed {
+            get {
+                return ResourceManager.GetString("Only numbers are allowed", resourceCulture);
             }
         }
         

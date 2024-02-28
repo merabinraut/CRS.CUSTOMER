@@ -9,6 +9,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
     {
         [Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        //[RegularExpression("^[0-9]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
         //[MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
         //[MobileNumber(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
         public string LoginId { get; set; }
@@ -19,6 +20,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         //[MinLength(8, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_8_characters")]
         public string Password { get; set; }
         public string SessionId { get; set; }
+        public string clubURL { get; set; }
+        public string affiliateURL { get; set; }
     }
     public class LoginResponseModel
     {

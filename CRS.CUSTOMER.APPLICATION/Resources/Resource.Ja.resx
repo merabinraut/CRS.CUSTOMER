@@ -631,6 +631,10 @@
     <value>モバイルでログイン</value>
     <comment>Login</comment>
   </data>
+  <data name="LoginPhoneNumber" xml:space="preserve">
+    <value>携帯電話番号</value>
+    <comment>Login</comment>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>ログアウト</value>
     <comment>_Layout</comment>
@@ -761,6 +765,10 @@
   <data name="On-site Nomination" xml:space="preserve">
     <value>場内指名</value>
     <comment>Host Detail</comment>
+  </data>
+  <data name="Only numbers are allowed" xml:space="preserve">
+    <value>数字のみが許可されます</value>
+    <comment>Login</comment>
   </data>
   <data name="OnSiteNomination" xml:space="preserve">
     <value>場内指名</value>
