@@ -200,8 +200,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             Response.ClubCategoryModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("2"));
             Response.HeightModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("6"));
             Response.PlanPriceModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("3"));
-            Response.OccupationModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("9"));
-            ViewBag.HostConstellationGroup = _commonBusiness.GetDDL("023");
+            Response.OccupationModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("9"), true);
+            var HostConstellationGroup = _commonBusiness.GetDDL("023");
+            HostConstellationGroup.ForEach(x => x.Value = x.Value.EncryptParameter());
+            ViewBag.HostConstellationGroup = HostConstellationGroup;
             var dbClubResponse = _dashboardBusiness.GetNewClub(lId, CustomerId, "1");
             Response.ClubModel = dbClubResponse.MapObjects<DashboardV2ClubDetailModel>();
             Response.ClubModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); });

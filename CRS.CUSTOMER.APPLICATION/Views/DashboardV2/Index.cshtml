@@ -48,6 +48,7 @@
         width: 298px;
     }
 </style>
+<input type="text" id="current-location-id" value="" hidden />
 <div id="parent" class="loop owl-carousel kiran owl-theme center-image-slider">
     @foreach (var item in Model.Banners)
     {
@@ -76,7 +77,7 @@
                               fill="#B08194" />
                     </svg>
                 </div>
-                <div style="color: #666666" id="selected-locationlabel-id">
+                <div style="color: #666666" id="selected-locationlabel-id" data-info="">
                 </div>
             </div>
             <div class="flex flex-row gap-[4px] pl-[8px] pr-[12px]   items-center " style="border-left:1px solid #D6D6D6" onclick="GetPreferenceFilterPopUp();">
@@ -834,8 +835,8 @@
                         nearestLocation = locations[i];
                     }
                 }
-                //console.log("Nearest Location:", nearestLocation);
-                CurrentLocationId = nearestLocation.id;
+               CurrentLocationId = nearestLocation.id;
+               $('#current-location-id').val(CurrentLocationId);
             }
             var userLocation = { lat: 0, lng: 0 }; // User's location
             (async () => {

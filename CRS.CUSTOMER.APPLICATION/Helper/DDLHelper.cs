@@ -54,11 +54,15 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
             }
         }
 
-        public static List<StaticDataModel> ConvertDictionaryToList(Dictionary<string, string> dictionary)
+        public static List<StaticDataModel> ConvertDictionaryToList(Dictionary<string, string> dictionary, bool HasSelect = false)
         {
             if (dictionary == null)
                 return new List<StaticDataModel>();
 
+            if (HasSelect)
+            {
+                dictionary.Add("0", "--- select ---");
+            }
             return dictionary.Select(kvp => new StaticDataModel { StaticValue = kvp.Key, StaticLabel = kvp.Value }).ToList();
         }
     }

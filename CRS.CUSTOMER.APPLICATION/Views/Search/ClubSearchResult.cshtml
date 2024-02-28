@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CRS.CUSTOMER.APPLICATION.Models.Search.ClubSearchResultModel
+@{
     ViewBag.Title = "Club";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -130,9 +131,9 @@
         </div>
         <div class="flex  overflow-x-auto flex-row gap-[8px] mx-[16px] my-[12px] no-scrollbar mb-[12px]">
             @{
-                for (int i = 0; i < 5; i++)
+                foreach (var item in Model.RecommendedClubModel)
                 {
-                    <a href="#">
+                    <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                         <div class="flex  w-[118px]">
                             <div style="border-radius: 6px; border: 1px solid #F3F3F3; background: #FFF;"
                                  class=" flex flex-col w-[118px]  px-[8px] py-[10px]">
@@ -140,16 +141,15 @@
 
                                     <div class="h-[48px] w-[48px] object-fill   bg-[#ffffff]  flex flex-row justify-center">
                                         <img style="border-color:#F1EEEE" class="h-[48px] w-[48px] object-fill border-[1px]   rounded-full "
-                                             src="../../../assets/images/customer/demo-image.jpeg" alt="clublogo">
+                                             src="@item.ClubLogo" alt="clublogo">
                                     </div>
-
                                 </div>
                                 <div class="flex flex-col">
                                     <div class="flex flex-row mt-[7px] justify-center">
-                                        <p style="line-height: 100%;" class="font-[700] text-[10px]">ACQUA FUKUOKA</p>
+                                        <p style="line-height: 100%;" class="font-[700] text-[10px]">@item.ClubNameEnglish</p>
                                     </div>
                                     <div class="flex flex-row mt-[4px] justify-center">
-                                        <p style="line-height: 100%;" class="font-[400] text-[10px]">アクアフクオカ</p>
+                                        <p style="line-height: 100%;" class="font-[400] text-[10px]">@item.ClubNameJapanese</p>
                                     </div>
 
                                 </div>
@@ -165,194 +165,208 @@
 <!-- for search result -->
 <div class="bg-[#F1EEEE] flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]">
     <span>検索結果</span>
-    <span>121件</span>
+    <span>@Model.FilteredClubModel.Count 件</span>
 </div>
 <div class="bg-white">
     <!-- club section  -->
     <div id="tab1" class="tab-content-plane  ">
         @{
-            for (int i = 0; i < 5; i++)
+            if (Model.FilteredClubModel.Count <= 0)
             {
-                <div>
-                    <section class="tags flex flex-wrap pt-3 pb-2 gap-2 px-4 items-center ">
-                        <div style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
-                            <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
-                            歌舞伎町
-                        </div>
-
-                        <div class=" flex self-center gap-0.5  ">
-                            <span class="  lg:text-[9px] text-xs   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
-                                ランク1
-                            </span>
-                            <span class="  lg:text-[9px] text-xs   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
-                                プラチナ
-                            </span>
-                            <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
-                                優良店
-                            </span>
-                            <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
-                                大型店
-                            </span>
-                        </div>
-                    </section>
-
-                    <!-- club name -->
-                    <section class="w-full flex px-4 pb-2 justify-between ">
-                        <a onClick={goToTop}>
-                            <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
-                                <div style="border: 1px solid #FAFAFA;"
-                                     class="h-12 w-12 rounded-full  bg-primary border overflow-hidden">
-                                    <img src="../../../assets/images/customer/demo-image.jpeg" alt="" title="club logo"
-                                         class="w-full h-full" />
+                <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center"
+                     style="height:calc(100vh - 47px)">
+                    <div class="text-[#18181B] font-semibold mt-12 text-center">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
+                    </div>
+                </div>
+            }
+            else
+            {
+                foreach (var item in Model.FilteredClubModel)
+                {
+                    <div>
+                        <section class="tags flex flex-wrap pt-3 pb-2 gap-2 px-4 items-center ">
+                            @if (!string.IsNullOrEmpty(item.Tag1))
+                            {
+                                <div style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
+                                    <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
+                                    @item.Tag1
                                 </div>
+                            }
+                            <div class=" flex self-center gap-0.5  ">
+                                @if (!string.IsNullOrEmpty(item.Tag2))
+                                {
+                                    <span class="  lg:text-[9px] text-xs   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
+                                        @item.Tag2
+                                    </span>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Tag3))
+                                {
+                                    <span class="  lg:text-[9px] text-xs   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
+                                        @item.Tag3
+                                    </span>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Tag4))
+                                {
+                                    <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
+                                        @item.Tag4
+                                    </span>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Tag5))
+                                {
+                                    <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
+                                        @item.Tag5
+                                    </span>
+                                }
+                            </div>
+                        </section>
 
-                                <div class="flex flex-col ">
-                                    <div class="flex gap-1 text-base items-center  font-semibold">
+                        <!-- club name -->
+                        <section class="w-full flex px-4 pb-2 justify-between ">
+                            <a onClick={goToTop}>
+                                <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
+                                    <div style="border: 1px solid #FAFAFA;"
+                                         class="h-12 w-12 rounded-full  bg-primary border overflow-hidden">
+                                        <img src="@item.ClubLogo" alt="" title="club logo"
+                                             class="w-full h-full" />
+                                    </div>
 
-                                        <div style="line-height: 100%;" class="text-[14px] font-[700] items-start "
-                                             title="club name">
-                                            SINCE YOU HONTEN
+                                    <div class="flex flex-col ">
+                                        <div class="flex gap-1 text-base items-center  font-semibold">
+
+                                            <div style="line-height: 100%;" class="text-[14px] font-[700] items-start "
+                                                 title="club name">
+                                                @item.ClubNameEnglish
+                                            </div>
+                                        </div>
+                                        <div style="line-height: 100%;" class="text-xs font-[400] items-start " title="club ">
+                                            @item.ClubNameJapanese
+                                        </div>
+                                        <div style="line-height: 100%;" class="text-[10px] items-start font-[400] text-[#E3A1A1] "
+                                             title="club group">
+                                            @item.GroupName
                                         </div>
                                     </div>
-                                    <div style="line-height: 100%;" class="text-xs font-[400] items-start " title="club ">
-                                        シンス ユー本店
+                                </div>
+                            </a>
+
+
+                            <div class=" w-6 h-6 flex flex-col justify-center items-center  p-1  scale-90">
+                                <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer">
+                                    <div>
+                                        @if (item.IsBookmarked.ToUpper() == "Y")
+                                        {
+                                            <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[24px] w-[24px]" alt="filled bookmark" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[24px] w-[24px]" alt="not filled bookmark" />
+                                        }
                                     </div>
-                                    <div style="line-height: 100%;" class="text-[10px] items-start font-[400] text-[#E3A1A1] "
-                                         title="club group">
-                                        シンス ユーグループ
+                                    <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
+                                        保存
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </section>
 
+                        <!-- photo -->
+                        <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5">
+                            @foreach (var item2 in item.HostGalleryImage)
+                            {
+                                <div class=" ">
+                                    <!-- onclick="OpenImagePopup('@item2')">-->
+                                    <img src="@item2"
+                                         class="aspect-square object-cover h-[120px] w-full" alt="host image" />
+                                </div>
+                            }
+                        </section>
 
-                        <div class=" w-6 h-6 flex flex-col justify-center items-center  p-1  scale-90">
+                        <!-- rating /commment -->
+                        <section class=" flex justify-start flex-wrap align-top mt-2 px-4 gap-3">
+                            <div class="flex items-center gap-0.5" title="club rank">
+                                @{
+                                    var unratedScale = (5 - item.AverageRating);
+                                    for (int i = 0; i < item.AverageRating; i++)
+                                    {
+                                        <img src="~/Content/assets/images/ratingstar-filled.svg" class="h-[18px] w-[18px]" alt="rated" />
+                                    }
+                                    for (int i = 0; i < unratedScale; i++)
+                                    {
+                                        <img src="~/Content/assets/images/ratingstar-notfilled.svg" class="h-[24px] w-[24px]" alt="unrated" />
+                                    }
+                                }
+                                <div class=" text-xs scale-110" title="club rating">
+                                    @item.AverageRating
+                                </div>
+                            </div>
 
+                            <div class="flex items-center gap-1 scale-75">
+                                <div class="flex items-center  " title="comment">
 
-                            <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 14 18"
-                                         fill="none">
-                                        <path d="M0.25 0.375V17.625L1.44531 16.7344L7 12.5625L12.5547 16.7344L13.75 17.625V0.375H0.25ZM1.75 1.875H12.25V14.625L7.44531 11.0156L7 10.6875L6.55469 11.0156L1.75 14.625V1.875Z"
+                                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" width="17" height="16"
+                                         viewBox="0 0 17 16" fill="none">
+                                        <path d="M1.52429 2.90909V12.8487H6.35078L8.06975 14.5455L9.78872 12.8487H14.6152V2.90909H1.52429ZM2.53129 3.90305H13.6082V11.8548H9.37176L8.06975 13.1399L6.76774 11.8548H2.53129V3.90305ZM4.54527 5.394V6.38796H11.5942V5.394H4.54527ZM4.54527 7.38192V8.37589H11.5942V7.38192H4.54527ZM4.54527 9.36985V10.3638H9.58024V9.36985H4.54527Z"
                                               fill="#BCB08A" />
                                     </svg>
-
-                                </div>
-                                <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
-                                    保存
                                 </div>
 
-
-
+                                <div class=" text-xs scale-110">@item.TotalComment</div>
                             </div>
+                        </section>
 
-                        </div>
-                    </section>
+                        <!-- club description -->
 
-                    <!-- photo -->
-                    <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5">
+                        <section class="flex flex-col gap-2 px-4 mb-3 ">
+                            <p class="line-clamp-3 font-[Noto Sans] text-xs   text-[#333333]">
+                                @item.ClubDescription
+                            </p>
 
-                        <div class=" ">
-                            <img src="../../../assets/images/customer/demo-image.jpeg"
-                                 class="aspect-square object-cover h-[120px] w-full" />
-                        </div>
-                        <div class=" ">
-                            <img src="../../../assets/images/customer/demo-image.jpeg"
-                                 class="aspect-square object-cover h-[120px] w-full" />
-                        </div>
-                        <div class=" ">
-                            <img src="../../../assets/images/customer/demo-image.jpeg"
-                                 class="aspect-square object-cover h-[120px] w-full" />
-                        </div>
+                        </section>
 
-                    </section>
+                        <!-- club schedule  -->
 
-                    <!-- rating /commment -->
-                    <section class=" flex justify-start flex-wrap align-top mt-2 px-4 gap-3">
-                        <div class="flex items-center gap-0.5" title="club rank">
+                        <div class="px-4 py-[12px] flex justify-between items-center">
+                            <div>
+                                @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
+                                {
+                                    <div class="flex justify-center items-center gap-1 pb-1">
+                                        <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">
+                                            @if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                                            {
+                                                <img src="~/Content/assets/images/customer/sun.svg" class="h-[12px] w-[12px]" alt="sun" />
+                                            }
+                                            else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                                            {
+                                                <img src="~/Content/assets/images/customer/moon.svg" class="h-[12px] w-[12px]" alt="moon" />
+                                            }
+                                        </div>
+                                        <div class="text-sm text-secondary-1">@item.ClubOpeningTime~@item.ClubClosingTime</div>
 
-                            <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"
-                                 fill="none">
-                                <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
-                                      fill="#F89336" />
-                            </svg>
-                            <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"
-                                 fill="none">
-                                <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
-                                      fill="#F89336" />
-                            </svg>
-                            <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"
-                                 fill="none">
-                                <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
-                                      fill="#F89336" />
-                            </svg>
-
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                <path d="M9.19954 1.28004L8.7111 2.37482L6.95946 6.316L2.68142 6.75391L1.46875 6.88866L2.37825 7.6971L5.56152 10.5772L4.66886 14.7879L4.41622 15.9669H4.43306L5.47731 15.3605L9.19954 13.2215L12.9218 15.3605L13.9829 15.9669L13.7302 14.7879L12.8376 10.5772L16.0208 7.6971L16.9303 6.88866L15.7177 6.75391L11.4396 6.316L9.68797 2.37482L9.19954 1.28004ZM9.19954 3.92434L10.5806 7.04024L10.7154 7.30972L11.0185 7.34341L14.4208 7.6971L11.8775 9.98771L11.6417 10.1898L11.7091 10.493L12.4165 13.8278L9.46902 12.1267L9.19954 11.9751V3.92434Z"
-                                      fill="#F89336" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
-                                <g opacity="0.3">
-                                    <path d="M9.44612 1.1453L8.95768 2.25692L7.20604 6.18126L2.928 6.63601L1.71533 6.77076L2.62484 7.5792L5.8081 10.4593L4.91544 14.67L4.6628 15.849L5.72389 15.2426L9.44612 13.0868L13.1684 15.2426L14.2294 15.849L13.9768 14.67L13.0841 10.4593L16.2674 7.5792L17.1769 6.77076L15.9642 6.63601L11.6862 6.18126L9.93456 2.25692L9.44612 1.1453ZM9.44612 3.7896L10.8272 6.9055L10.962 7.19182L11.2651 7.22551L14.6505 7.5792L12.1241 9.85296L11.8883 10.0719L11.9557 10.3751L12.6631 13.6931L9.7156 12.0088L9.44612 11.8404L9.17664 12.0088L6.22917 13.6931L6.93656 10.3751L7.00393 10.0719L6.76813 9.85296L4.24173 7.5792L7.62711 7.22551L7.93028 7.19182L8.06502 6.9055L9.44612 3.7896Z"
-                                          fill="#C8B477" />
-                                </g>
-                            </svg>
-                            <div class=" text-xs scale-110" title="club rating">
-                                3.5
+                                    </div>
+                                    if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                                    {
+                                        <div class="bg-[#BCB08A] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
+                                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="bg-[#D7D7D7] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
+                                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Unreservable
+                                        </div>
+                                    }
+                                }
                             </div>
+                            <button class="btn-gradient">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
+                            </button>
                         </div>
-
-                        <div class="flex items-center gap-1 scale-75">
-                            <div class="flex items-center  " title="comment">
-
-                                <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" width="17" height="16"
-                                     viewBox="0 0 17 16" fill="none">
-                                    <path d="M1.52429 2.90909V12.8487H6.35078L8.06975 14.5455L9.78872 12.8487H14.6152V2.90909H1.52429ZM2.53129 3.90305H13.6082V11.8548H9.37176L8.06975 13.1399L6.76774 11.8548H2.53129V3.90305ZM4.54527 5.394V6.38796H11.5942V5.394H4.54527ZM4.54527 7.38192V8.37589H11.5942V7.38192H4.54527ZM4.54527 9.36985V10.3638H9.58024V9.36985H4.54527Z"
-                                          fill="#BCB08A" />
-                                </svg>
-                            </div>
-
-                            <div class=" text-xs scale-110">45</div>
-                        </div>
-                    </section>
-
-                    <!-- club description -->
-
-                    <section class="flex flex-col gap-2 px-4 mb-3 ">
-                        <p class="line-clamp-3 font-[Noto Sans] text-xs   text-[#333333]">
-                            ウーム (東京) は、日本の東京に位置する名高いナイトクラブです。ウームは、活気ある雰囲気と一流のエレクトロニックダンスミュージックイベントで知られており、多くのパーテ
-                        </p>
-
-                    </section>
-
-                    <!-- club schedule  -->
-
-                    <div class="px-4 py-[12px] flex justify-between items-center">
-                        <div>
-                            <div class="flex justify-center items-center gap-1 pb-1">
-                                <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"
-                                         fill="none">
-                                        <path d="M3.14182 2.35068L2.16 1.36986L1.39091 2.14247L2.36727 3.12329L3.14182 2.35068ZM0 5.45205H1.63636V6.54794H0V5.45205ZM5.45455 0H6.54545V1.61644H5.45455V0ZM9.84 1.36712L10.608 2.13808L9.63164 3.1189L8.86418 2.3474L9.84 1.36712ZM8.85818 9.64931L9.83455 10.6356L10.6036 9.86301L9.62182 8.88219L8.85818 9.64931ZM10.3636 5.45205H12V6.54794H10.3636V5.45205ZM6 2.71233C4.19455 2.71233 2.72727 4.1863 2.72727 6C2.72727 7.8137 4.19455 9.28767 6 9.28767C7.80545 9.28767 9.27273 7.8137 9.27273 6C9.27273 4.1863 7.80545 2.71233 6 2.71233ZM6 8.19178C4.79455 8.19178 3.81818 7.21096 3.81818 6C3.81818 4.78904 4.79455 3.80822 6 3.80822C7.20545 3.80822 8.18182 4.78904 8.18182 6C8.18182 7.21096 7.20545 8.19178 6 8.19178ZM5.45455 10.3836H6.54545V12H5.45455V10.3836ZM1.39091 9.85753L2.16 10.6301L3.13636 9.64384L2.36727 8.87123L1.39091 9.85753Z"
-                                              fill="white" />
-                                    </svg>
-                                </div>
-                                <div class="text-sm text-secondary-1">12:00~17:00</div>
-
-                            </div>
-                            <div class="bg-[#BCB08A] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
-                                本日空席あり
-                            </div>
-                        </div>
-                        <button class="btn-gradient">
-                            今予約する
-                        </button>
-
+                        <!-- location -->
                     </div>
-                    <!-- location -->
-                </div>
-                <div style="background-color: #e8e8e8;" class=" h-[8px] my-[0px] py-[0px]">
-                </div>
+                    <div style="background-color: #e8e8e8;" class=" h-[8px] my-[0px] py-[0px]">
+                    </div>
+                }
             }
         }
         <div class=" ">
@@ -377,3 +391,11 @@
         </div>
     </div>
 </div>
+@section scripts
+{
+    <script>
+        function ClubDetailActionFunction(i, j) {
+            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
+        }
+    </script>
+}

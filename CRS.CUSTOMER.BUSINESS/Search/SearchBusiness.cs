@@ -13,5 +13,15 @@ namespace CRS.CUSTOMER.BUSINESS.Search
         {
             return _repo.GetNewClub(LocationId, CustomerId);
         }
+
+        public List<SearchFilterClubDetailCommon> ClubPreferenceFilter(ClubPreferenceFilterRequest Request)
+        {
+            return _repo.ClubPreferenceFilter(Request);
+        }
+
+        public List<HostPreferenceFilterResponse> HostPreferenceFilter(HostPreferenceFilterRequest Request)
+        {
+            return _repo.HostPreferenceFilter(Request);
+        }
     }
 }

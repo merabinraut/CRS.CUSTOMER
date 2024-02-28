@@ -39,7 +39,6 @@ function GetLocationFilterPopUp() {
                     var locationSelectLabel = this.querySelector('.select-location-store .locationValue').getAttribute('data-info-2').trim();
                     $('#filter-location-id').val(locationSelectValue);
                     $('#selected-locationlabel-id').html(locationSelectLabel);
-
                 });
             });
             DisableLoaderFunction();
@@ -359,9 +358,30 @@ function ClubFilterSubmitButton() {
     EnableLoaderFunction();
     getSelectedCheckboxValues('search-by-store-category', 'club-category-id', 'club-category-class');// Call the function for the first set of checkboxes
     getSelectedCheckboxValues('search-by-plan', 'price-id', 'plan-price-class');// Call the function for the second set of checkboxes
-
+    let locationId = $('#filter-location-id').val();
+    if (!locationId || locationId.trim() === '') {
+        locationId = $('#current-location-id').val();
+    }
+    $('.location-class').val(locationId);
     ManagePreferenceFilterHTMLContent();
     var form = document.getElementById("club-filter-form-id");
+    form.submit();
+}
+
+function HostFilterSubmitButton() {
+    EnableLoaderFunction();
+    getSelectedCheckboxValues('choose-your-height', 'host-height-id', 'host-height');// Call the function for the first set of checkboxes
+    getSelectedCheckboxValues('select-age', 'host-age-id', 'host-age');// Call the function for the second set of checkboxes
+    getSelectedCheckboxValues('choose-blood-type', 'host-bloodtype-id', 'host-blood-type');// Call the function for the second set of checkboxes
+    getSelectedCheckboxValues('hostConstellationGroup', 'host-constellationgroup-id', 'host-constellation-group-class');// Call the function for the second set of checkboxes
+    let locationId = $('#filter-location-id').val();
+    if (!locationId || locationId.trim() === '') {
+        locationId = $('#current-location-id').val();
+    }
+    $('.location-class').val(locationId);
+    $('#host-occupation-id').val($('#host-occupation-ddl-id').val());
+    ManagePreferenceFilterHTMLContent();
+    var form = document.getElementById("host-filter-form-id");
     form.submit();
 }
 
