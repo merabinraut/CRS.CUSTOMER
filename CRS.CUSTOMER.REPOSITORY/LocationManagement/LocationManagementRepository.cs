@@ -312,6 +312,15 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             }
             return new ClubBasicInformationModelCommon();
         }
+
+        public List<AllNoticeModelCommon> GetAllNoticeTabList(string cId)
+        {
+            string sp_name = "sproc_customer_club_detail @Flag='gan'";
+            sp_name += ",@ClubId=" + _dao.FilterString(cId);
+            var dbResponse = _dao.ExecuteDataTable(sp_name);
+            if (dbResponse != null && dbResponse.Rows.Count > 0) return _dao.DataTableToListObject<AllNoticeModelCommon>(dbResponse).ToList();
+            return new List<AllNoticeModelCommon>();
+        }
         #endregion
     }
 }

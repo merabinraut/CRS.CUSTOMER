@@ -271,6 +271,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             responseModel.GetNoticeByClubId = dbNoticeResponseInfo.MapObjects<NoticeModel>();
             var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);
             responseModel.GetClubBasicInformation = dbBasicInfoResponse.MapObject<ClubBasicInformationModel>();
+            var dbAllNoticeResponse = _business.GetAllNoticeTabList(cId);
+            responseModel.GetAllNoticeTabList = dbAllNoticeResponse.MapObjects<AllNoticeModel>();
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
             return View(responseModel);

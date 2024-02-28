@@ -88,4 +88,8 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
         public string Drink { get; set; }
         public string Tax { get; set; }
     }
+    public class AllNoticeModelCommon : NoticeModelCommon
+    {
+        public string EventStatus { get; set; }
+    }
 }

@@ -53,6 +53,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public List<ClubEventModel> ClubEventList { get; set; } = new List<ClubEventModel>();
         public List<NoticeModel> GetNoticeByClubId { get; set; }
         public ClubBasicInformationModel GetClubBasicInformation { get; set; }
+        public List<AllNoticeModel> GetAllNoticeTabList { get; set; }
     }
     public class ClubEventModel
     {
@@ -94,5 +95,9 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string ExtensionFee { get; set; }
         public string Drink { get; set; }
         public string Tax { get; set; }
+    }
+    public class AllNoticeModel : NoticeModel
+    {
+        public string EventStatus { get; set; }
     }
 }

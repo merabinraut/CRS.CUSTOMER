@@ -26,6 +26,7 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
         ViewHostDetailCommonV2 ViewHostDetailsV2(string HostId, string customerId);
         List<NoticeModelCommon> GetNoticeByClubId(string cId);
         ClubBasicInformationModelCommon GetClubBasicInformation(string cId);
+        List<AllNoticeModelCommon> GetAllNoticeTabList(string cId);
         #endregion
     }
 }

@@ -1203,51 +1203,47 @@
             </div>
             <!-- for the notice section  -->
             <!-- first section -->
-            <div class="px-4">
-                <div class="flex justify-start flex-col gap-[2px] mb-[13px]">
-                    <div class="flex justify-start items-center gap-[5px] ">
-                        <!-- for date -->
-                        <div class="text-[#33333399] opacity-[60%] text-[10px] font-normal leading-[16px] py-[2px]">
-                            2024年01月10日(水)
+            @{
+                if (Model.GetAllNoticeTabList != null)
+                {
+                    foreach (var notice in Model.GetAllNoticeTabList)
+                    {
+                        <div class="px-4">
+                            <div class="flex justify-start flex-col gap-[2px] mb-[13px]">
+                                <div class="flex justify-start items-center gap-[5px] ">
+                                    <!-- for date -->
+                                    <div class="text-[#33333399] opacity-[60%] text-[10px] font-normal leading-[16px] py-[2px]">
+                                        @notice.EventDate (水)
+                                    </div>
+                                    <!-- for badge -->
+                                    @if (notice.EventStatus.Trim().ToUpper() == "NEW")
+                                    {
+                                        <span class="uppercase bg-[#D17979] px-1 rounded-[2px] text-white text-[12px] font-medium text-center">@notice.EventStatus</span>
+                                    }
+
+                                </div>
+                                <!-- for the notice with mention -->
+                                <div class="text-[11px] font-medium leading-[16px] text-[#333]">
+                                    新しく <span class="text-[#D17979] ">田中裕二</span> @notice.EventTitle
+                                </div>
+                            </div>
+                            <div class="h-[1px] bg-[#EFEFEF] w-full "></div>
                         </div>
-                        <!-- for badge -->
-                        <span class="uppercase bg-[#D17979] px-1 rounded-[2px] text-white text-[12px] font-medium text-center">new</span>
-                    </div>
-                    <!-- for the notice with mention -->
-                    <div class="text-[11px] font-medium leading-[16px] text-[#333]">
-                        新しく <span class="text-[#D17979] ">田中裕二</span> が入店しました。
-                    </div>
-                </div>
-                <div class="h-[1px] bg-[#EFEFEF] w-full "></div>
-            </div>
-            <!-- second section -->
-            <div class="px-4">
-                <div class="flex justify-start flex-col gap-[2px]  mb-[13px]">
-                    <div class="flex justify-start items-center gap-[5px] ">
-                        <!-- for date -->
-                        <div class="text-[#33333399] opacity-[60%] text-[10px] font-normal leading-[16px] py-[2px]">
-                            2024年01月10日(水)
+                    }
+                }
+                else
+                {
+                    <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
+                        <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+                                <path d="M0.328125 0.328125V28.1719H19.8272L20.2221 27.8175L27.8158 20.2237L28.1719 19.8272V0.328125H0.328125ZM2.85938 2.85938H25.6406V18.0469H18.0469V25.6406H2.85938V2.85938ZM20.5781 20.5781H23.8215L20.5781 23.8215V20.5781Z"
+                                      fill="#E0E0E0" />
+                            </svg>
                         </div>
-                        <!-- for badge -->
-                        <!-- <span class="uppercase bg-[#D17979] px-1 rounded-[2px] text-white text-[12px] font-medium text-center">new</span> -->
+                        <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだお知らせはありません</div>
                     </div>
-                    <!-- for the notice with mention -->
-                    <div class="text-[11px] font-medium leading-[16px] text-[#333]">
-                        2024.2.1 ~ 2024.2.5まで店舗改装のためおやすみいたします。
-                    </div>
-                </div>
-                <div class="h-[1px] bg-[#EFEFEF] w-full "></div>
-            </div>
-            <!-- for no notice found page  -->
-            <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
-                <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
-                        <path d="M0.328125 0.328125V28.1719H19.8272L20.2221 27.8175L27.8158 20.2237L28.1719 19.8272V0.328125H0.328125ZM2.85938 2.85938H25.6406V18.0469H18.0469V25.6406H2.85938V2.85938ZM20.5781 20.5781H23.8215L20.5781 23.8215V20.5781Z"
-                              fill="#E0E0E0" />
-                    </svg>
-                </div>
-                <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだお知らせはありません</div>
-            </div>
+                }
+            }
         </div>
     </div>
 </div>

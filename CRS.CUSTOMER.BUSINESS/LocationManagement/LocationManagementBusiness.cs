@@ -68,6 +68,11 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
         {
             return _repo.GetClubBasicInformation(cId);
         }
+
+        public List<AllNoticeModelCommon> GetAllNoticeTabList(string cId)
+        {
+            return _repo.GetAllNoticeTabList(cId);
+        }
         #endregion
     }
 }
