@@ -32,7 +32,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement
         public string Gender { get; set; }
         public string PreferredLocation { get; set; }
 
-        [RegularExpression(@"^\d{3}-\d{4}$", ErrorMessage = "Invalid Postal Code")]
+        [RegularExpression(@"^\d{3}-\d{4}$", ErrorMessage = "無効な郵便番号")]
         public string PostalCode { get; set; }
         public string Prefecture { get; set; }
 

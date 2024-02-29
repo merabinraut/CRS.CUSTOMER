@@ -79,7 +79,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ReservationHistoryDetailModel responseinfo = new ReservationHistoryDetailModel();
             var dbResponseInfo = _buss.GetReservationHistoryDetail(CustomerId, reservationId);
             responseinfo = dbResponseInfo.MapObject<ReservationHistoryDetailModel>();
-            responseinfo.HImages = responseinfo.HostImages.Split(',');
+            responseinfo.HImages = !string.IsNullOrEmpty(responseinfo.HostImages)? responseinfo.HostImages.Split(','):null;
             return View(responseinfo);
         }
         [HttpPost, ValidateAntiForgeryToken]
