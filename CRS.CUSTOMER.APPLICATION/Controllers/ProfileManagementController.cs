@@ -173,8 +173,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Title = NotificationMessage.ERROR.ToString(),
                 }).ToArray();
 
-                AddNotificationMessage(notificationModels);
-                return View(changePasswordModel);
+                //AddNotificationMessage(notificationModels);
+                //TempData["ChangePWErrorMessage"] = errorMessage;
+                return RedirectToAction("ChangePasswordV2", changePasswordModel);
+                //return View(changePasswordModel);
             }
             else
             {
@@ -190,8 +192,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
                 if (dbResp.Code == ResponseCode.Failed)
                 {
-                    AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.ERROR, Message = dbResp.Message });
-                    return RedirectToAction("ChangePassword", changePasswordModel);
+                    //AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.ERROR, Message = dbResp.Message });
+                    TempData["ChangePWErrorMessage"] = dbResp.Message;
+                    return RedirectToAction("ChangePasswordV2", changePasswordModel);
                 }
                 if (dbResp.Code == ResponseCode.Success)
                 {
@@ -203,7 +206,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     });
                     return RedirectToAction("LogOff", "Home");
                 }
-                return View();
+                return RedirectToAction("ChangePasswordV2", changePasswordModel);
             }
         }
 

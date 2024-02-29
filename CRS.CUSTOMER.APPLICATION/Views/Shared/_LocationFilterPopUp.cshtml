@@ -1,0 +1,43 @@
+﻿@model List<CRS.CUSTOMER.APPLICATION.Models.CommonModel.StaticDataModel>
+<!------------------------------------------------------- #region FILTER-LOCATION ------------------------------------------------------->
+<div id="drawer-search-by-area" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform
+" tabindex="-1" aria-labelledby="drawer-bottom-label">
+    <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
+        <div class="text-center text-white mb-2 text-2xl" onclick="CloseLocationFilterPopUp();">
+            <div data-drawer-hide="drawer-search-by-area" aria-controls="drawer-search-by-area">
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+        <div class="px-4 pt-6 pb-6 bg-white " style="padding-top: 24px; border-radius: 6px 6px 0px 0px;">
+            <div>
+                <div class="text-sm text-[#333] font-bold mb-[13px]">
+                    エリアから探す
+                </div>
+                <div class="flex flex-col mt-[8px] gap-[13px]">
+                    <input type="text" id="filter-location-id" name="LocationId" hidden />
+                    @foreach (var item in Model)
+                    {
+                        var Label = item.StaticLabel.Split('/');
+                        <div class="select-location-store select-loaction-host text-[#333] text-sm">
+                            <div class="square"></div>
+                            <div class="flex gap-1">
+                                <div class="locationValue font-bold" data-info="@item.StaticValue" data-info-2="@Label[0]">@Label[0]/</div>
+                                <span>@Label[1]</span>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="flex pt-6 items-center ">
+
+                <button class="btn btn-primary" style=" border-radius: 8px;">
+                    <a class="h-full w-full" onclick="LocationFunction($('#filter-location-id').val());">
+                        検索する
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------- #endregion ------------------------------------------------------->

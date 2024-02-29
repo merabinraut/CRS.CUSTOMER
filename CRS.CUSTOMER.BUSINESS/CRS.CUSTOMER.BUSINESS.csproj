@@ -80,6 +80,8 @@
     <Compile Include="BookmarkManagement\IBookmarkManagementBusiness.cs" />
     <Compile Include="CommonManagement\CommonManagementBusiness.cs" />
     <Compile Include="CommonManagement\ICommonManagementBusiness.cs" />
+    <Compile Include="DashboardV2\DashboardV2Business.cs" />
+    <Compile Include="DashboardV2\IDashboardV2Business.cs" />
     <Compile Include="Dashboard\DashboardBusiness.cs" />
     <Compile Include="Dashboard\IDashboardBusiness.cs" />
     <Compile Include="Home\HomeBusiness.cs" />
@@ -107,6 +109,8 @@
     <Compile Include="ReviewManagement\ReviewManagementBusiness.cs" />
     <Compile Include="SearchFilterManagement\ISearchFilterManagementBusiness.cs" />
     <Compile Include="SearchFilterManagement\SearchFilterManagementBusiness.cs" />
+    <Compile Include="Search\ISearchBusiness.cs" />
+    <Compile Include="Search\SearchBusiness.cs" />
     <Compile Include="UserManagement\IUserManagementBusiness.cs" />
     <Compile Include="UserManagement\UserManagementBusiness.cs" />
     <Compile Include="ReservationHistoryManagementV2\IReservationHistoryManagementV2Business.cs" />
@@ -126,8 +130,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="ReservationHistoryManagementV2\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
