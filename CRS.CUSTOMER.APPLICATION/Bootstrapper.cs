@@ -1,6 +1,7 @@
 using CRS.CUSTOMER.BUSINESS.BookmarkManagement;
 using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Dashboard;
+using CRS.CUSTOMER.BUSINESS.DashboardV2;
 using CRS.CUSTOMER.BUSINESS.Home;
 using CRS.CUSTOMER.BUSINESS.LocationManagement;
 using CRS.CUSTOMER.BUSINESS.LogManagement.APILogManagement;
@@ -9,10 +10,11 @@ using CRS.CUSTOMER.BUSINESS.LogManagement.ErrorLogManagement;
 using CRS.CUSTOMER.BUSINESS.NotificationManagement;
 using CRS.CUSTOMER.BUSINESS.ProfileManagement;
 using CRS.CUSTOMER.BUSINESS.RecommendedClubHost;
-using CRS.CUSTOMER.BUSINESS.ReservationManagement;
 using CRS.CUSTOMER.BUSINESS.ReservationHistoryManagementV2;
+using CRS.CUSTOMER.BUSINESS.ReservationManagement;
 using CRS.CUSTOMER.BUSINESS.ReservationManagementV2;
 using CRS.CUSTOMER.BUSINESS.ReviewManagement;
+using CRS.CUSTOMER.BUSINESS.Search;
 using CRS.CUSTOMER.BUSINESS.SearchFilterManagement;
 using CRS.CUSTOMER.BUSINESS.UserManagement;
 using System.Web.Mvc;
@@ -49,6 +51,8 @@ namespace CRS.CUSTOMER.APPLICATION
             container.RegisterType<IRecommendedClubHostBusiness, RecommendedClubHostBusiness>();
             container.RegisterType<IReservationHistoryManagementV2Business, ReservationHistoryManagementV2Business>();
             container.RegisterType<IReservationManagementV2Business, ReservationManagementV2Business>();
+            container.RegisterType<IDashboardV2Business, DashboardV2Business>();
+            container.RegisterType<ISearchBusiness, SearchBusiness>();
             return container;
         }
     }
