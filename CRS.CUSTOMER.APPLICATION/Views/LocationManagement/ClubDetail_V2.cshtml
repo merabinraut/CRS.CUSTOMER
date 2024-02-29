@@ -350,8 +350,6 @@
                                     </div>
                                 </div>
                             }
-
-
                         }
                     </div>
                 </div>
@@ -1111,33 +1109,58 @@
                         {
                             <option value="@item.Value">@item.Text</option>
                         }
+
+
                     }
                 </select>
             </div>
             <!-- for the schecdule card -->
             <div class="flex flex-col mt-4 border-t-2 border-[#EFEFEF]">
-                <div class="flex justify-start items-center gap-[9px]">
-                    <div class=" bg-[#EFEFEF] flex first:flex-1 flex-col gap-[2px] basis-0 px-[9px] py-[25px] "
-                         style="width: 33px;">
-                        <div class="text-[#333333] text-[13px] font-bold leading-[20px]">
-                            01
+                @if (Model.GetAllScheduleTabList != null)
+                {
+                    for (int i = 0; i < Model.GetAllScheduleTabList.Count; i++)
+                    {
+                        <div class="flex justify-start items-center gap-[9px]">
+                            <div class="@(i % 2 == 0 ? "bg-[#EFEFEF]" : "bg-[#BFA3B6]") flex first:flex-1 flex-col gap-[2px] basis-0 px-[9px] py-[25px]"
+                                 style="width: 33px;">
+                                <div class="text-[#333333] text-[13px] font-bold leading-[20px]">
+                                    01
+                                </div>
+                                <div class="text-[8px] font-normal leading-0">Thu</div>
+                            </div>
+                            <!-- for image and information -->
+                            <div class="flex justify-start gap-[9px] items-center">
+                                @if (Model.GetAllScheduleTabList[i].ScheduleImage != "" || Model.GetAllScheduleTabList[i].ScheduleImage != null)
+                                {
+                                    <div class="h-[61px] aspect-square object-cover object-top rounded-[3px]">
+                                        <img src="@Model.GetAllScheduleTabList[i].ScheduleImage"
+                                             alt="" class="h-[61px] w-[61px] aspect-square object-cover object-top rounded-[3px]">
+                                    </div>
+                                }
+
+                                <div class="flex justify-center items-start flex-col text-[#333] py-10px">
+                                    <p class=" text-[11px] font-bold leading-[20px]">@Model.GetAllScheduleTabList[i].ScheduleTitle</p>
+                                    <p class="text-[10px] font-medium leading-[16px]">@Model.GetAllScheduleTabList[i].ScheduleDescription</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="text-[8px] font-normal leading-0">Thu</div>
+                    }
+                }
+                else
+                {
+                    <!-- for no event found page  -->
+                    <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
+                        <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41" fill="none">
+                                <path d="M11.3906 5.0625V6.32812H6.32812V34.1719H34.1719V6.32812H29.1094V5.0625H26.5781V6.32812H13.9219V5.0625H11.3906ZM8.85938 8.85938H11.3906V10.125H13.9219V8.85938H26.5781V10.125H29.1094V8.85938H31.6406V11.3906H8.85938V8.85938ZM8.85938 13.9219H31.6406V31.6406H8.85938V13.9219ZM16.4531 16.4531V18.9844H18.9844V16.4531H16.4531ZM21.5156 16.4531V18.9844H24.0469V16.4531H21.5156ZM26.5781 16.4531V18.9844H29.1094V16.4531H26.5781ZM11.3906 21.5156V24.0469H13.9219V21.5156H11.3906ZM16.4531 21.5156V24.0469H18.9844V21.5156H16.4531ZM21.5156 21.5156V24.0469H24.0469V21.5156H21.5156ZM26.5781 21.5156V24.0469H29.1094V21.5156H26.5781ZM11.3906 26.5781V29.1094H13.9219V26.5781H11.3906ZM16.4531 26.5781V29.1094H18.9844V26.5781H16.4531ZM21.5156 26.5781V29.1094H24.0469V26.5781H21.5156Z"
+                                      fill="#E0E0E0" />
+                            </svg>
+                        </div>
+                        <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだスケジュールはありません</div>
                     </div>
-                    <!-- for image and information -->
-                    <div class="flex justify-start gap-[9px] items-center">
-                        <div class="h-[61px] aspect-square object-cover object-top rounded-[3px]">
-                            <img src="https://s3-alpha-sig.figma.com/img/4808/b166/85de1ad5a0d62ae32d8b9afc022bb245?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i7D3DKtydVLh8H-juUYUEVGtNVCofOLC2abzAjn91E6hOqWQlZu-z9pPSfAOyUoixfciqPwSkxjPPCfe2dzPd23DXu9A220xhUKQS6Fo8kcv29O9EfYaNDqPQdE8AC3MwVriXgGmt6qMOneKC0K2sXahf3-EU9if~FiuUwVbw-83AflomSbSbJ3ies~YrB5qvG98w-vbi7dU3fdr9ULmXd6fCp4pKEteGBUeEhivBY44VyKr-UqRUNlecqHP9Rg~xx5PdbAN-IfaiSKKqEGfKJkPnSaoJVz8RadN6DXNnChAVur~ItMakThe3S2N4lExj3PkcMZwHXSB7Fgs3daLWw__"
-                                 alt="" class="h-[61px] w-[61px] aspect-square object-cover object-top rounded-[3px]">
-                        </div>
-                        <div class="flex justify-center items-start flex-col text-[#333] py-10px">
-                            <p class=" text-[11px] font-bold leading-[20px]">3周年記念パーティ開催</p>
-                            <p class="text-[10px] font-medium leading-[16px]">てきすとてきすとてきすとてきすとてきすとてきすとてきすとてきすと</p>
-                        </div>
-                    </div>
-                </div>
+                }
                 <!-- second section -->
-                <div class="flex justify-start flex-row items-center gap-[9px] h-full">
+                <!--<div class="flex justify-start flex-row items-center gap-[9px] h-full">
                     <div class="bg-[#BFA3B6] flex flex-col basis-0 gap-[2px] px-[9px]  py-[10px] " style="width: 33px;">
                         <div class=" text-[13px] text-white font-bold leading-[20px] p-0 m-0">
                             01
@@ -1148,18 +1171,18 @@
                         <p class=" text-[11px] font-bold leading-[20px]">恵方巻きイベント開催</p>
                         <p class="text-[10px] font-medium leading-[16px]">来店いただくと恵方巻き振る舞います！</p>
                     </div>
-                </div>
+                </div>-->
                 <!-- third -->
-                <div class="flex justify-start items-center gap-[9px]">
-                    <div class=" bg-[#EFEFEF] flex first:flex-1 flex-col gap-[2px] basis-0 px-[9px] py-[25px] "
-                         style="width: 33px;">
-                        <div class="text-[#333333] text-[13px] font-bold leading-[20px]">
-                            01
-                        </div>
-                        <div class="text-[8px] font-normal leading-0">Thu</div>
+                <!--<div class="flex justify-start items-center gap-[9px]">
+                <div class=" bg-[#EFEFEF] flex first:flex-1 flex-col gap-[2px] basis-0 px-[9px] py-[25px] "
+                     style="width: 33px;">
+                    <div class="text-[#333333] text-[13px] font-bold leading-[20px]">
+                        01
                     </div>
-                    <!-- for image and information -->
-                    <div class="flex justify-start gap-[9px] items-center">
+                    <div class="text-[8px] font-normal leading-0">Thu</div>
+                </div>-->
+                <!-- for image and information -->
+                <!--<div class="flex justify-start gap-[9px] items-center">
                         <div class="h-[61px] aspect-square object-cover object-top rounded-[3px]">
                             <img src="https://s3-alpha-sig.figma.com/img/4808/b166/85de1ad5a0d62ae32d8b9afc022bb245?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i7D3DKtydVLh8H-juUYUEVGtNVCofOLC2abzAjn91E6hOqWQlZu-z9pPSfAOyUoixfciqPwSkxjPPCfe2dzPd23DXu9A220xhUKQS6Fo8kcv29O9EfYaNDqPQdE8AC3MwVriXgGmt6qMOneKC0K2sXahf3-EU9if~FiuUwVbw-83AflomSbSbJ3ies~YrB5qvG98w-vbi7dU3fdr9ULmXd6fCp4pKEteGBUeEhivBY44VyKr-UqRUNlecqHP9Rg~xx5PdbAN-IfaiSKKqEGfKJkPnSaoJVz8RadN6DXNnChAVur~ItMakThe3S2N4lExj3PkcMZwHXSB7Fgs3daLWw__"
                                  alt="" class="h-[61px] w-[61px] aspect-square object-cover object-top rounded-[3px]">
@@ -1169,9 +1192,9 @@
                             <p class="text-[10px] font-medium leading-[16px]">てきすとてきすとてきすとてきすとてきすとてきすとてきすとてきすと</p>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <!-- fourth -->
-                <div class="flex justify-start flex-row items-center gap-[9px] h-full">
+                <!--<div class="flex justify-start flex-row items-center gap-[9px] h-full">
                     <div class="bg-[#BFA3B6] flex flex-col basis-0 gap-[2px] px-[9px]  py-[10px] " style="width: 33px;">
                         <div class=" text-[13px] text-white font-bold leading-[20px] p-0 m-0">
                             01
@@ -1182,18 +1205,9 @@
                         <p class=" text-[11px] font-bold leading-[20px]">恵方巻きイベント開催</p>
                         <p class="text-[10px] font-medium leading-[16px]">来店いただくと恵方巻き振る舞います！</p>
                     </div>
-                </div>
+                </div>-->
             </div>
-            <!-- for no event found page  -->
-            <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
-                <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41" fill="none">
-                        <path d="M11.3906 5.0625V6.32812H6.32812V34.1719H34.1719V6.32812H29.1094V5.0625H26.5781V6.32812H13.9219V5.0625H11.3906ZM8.85938 8.85938H11.3906V10.125H13.9219V8.85938H26.5781V10.125H29.1094V8.85938H31.6406V11.3906H8.85938V8.85938ZM8.85938 13.9219H31.6406V31.6406H8.85938V13.9219ZM16.4531 16.4531V18.9844H18.9844V16.4531H16.4531ZM21.5156 16.4531V18.9844H24.0469V16.4531H21.5156ZM26.5781 16.4531V18.9844H29.1094V16.4531H26.5781ZM11.3906 21.5156V24.0469H13.9219V21.5156H11.3906ZM16.4531 21.5156V24.0469H18.9844V21.5156H16.4531ZM21.5156 21.5156V24.0469H24.0469V21.5156H21.5156ZM26.5781 21.5156V24.0469H29.1094V21.5156H26.5781ZM11.3906 26.5781V29.1094H13.9219V26.5781H11.3906ZM16.4531 26.5781V29.1094H18.9844V26.5781H16.4531ZM21.5156 26.5781V29.1094H24.0469V26.5781H21.5156Z"
-                              fill="#E0E0E0" />
-                    </svg>
-                </div>
-                <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだスケジュールはありません</div>
-            </div>
+
         </div>
         <div id="tab6" class="tab-content-plane hidden ">
             <div class="mx-[8px] py-[6.54px] p-l-[22px] p-r-[10px] px-[16px] ">
@@ -1260,7 +1274,10 @@
                           fill="white" />
                 </svg>
             </div>
-            <div class="text-sm text-secondary-1">12:00~17:00</div>
+            @if (Model.GetClubBasicInformation.ClubClosingTime != null || Model.GetClubBasicInformation.ClubOpeningTime != null)
+            {
+                <div class="text-sm text-secondary-1">@Model.GetClubBasicInformation.ClubOpeningTime ~ @Model.GetClubBasicInformation.ClubClosingTime</div>
+            }
         </div>
         <div class="bg-[#BCB08A] rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px]">
             来店予約
@@ -1427,7 +1444,7 @@
         </div>
     </div>
 </div>
-<div id="myModal" class="my-custom-modal">
+<div id="myModal" class="my-custom-modal" style="display:none">
     <span class="close" onclick="closeImagePopup();">&times;</span>
     <img class="my-modal-content" id="img01">
 </div>
@@ -1466,7 +1483,6 @@
         }
 
         function handleAddBookmarks(clubId, hostId, agentType) {
-            debugger
             ActivateLoaderFunction();
             $.ajax({
                 url: '/BookmarkManagement/AddBookmarks',
@@ -1552,7 +1568,6 @@
         }</script>
     <script>// Function to open a specific modal
         function openModal(modalId) {
-            debugger
             var modal = document.getElementById(modalId);
             if (modal) {
                 modal.style.display = "flex";
@@ -1584,13 +1599,12 @@
         }</script>
 
     <script>$(document).ready(function () {
-            debugger
             $("#scheduleDropdown").change(function () {
                 var selectedValue = $(this).val();
                 $.ajax({
-                    url: '/LocationManagement/ClubDetail_V2', 
-                    type: 'POST', 
-                    data: { ScheduleFilterDate: selectedValue }, 
+                    url: '/LocationManagement/ClubDetail_V2',
+                    type: 'POST',
+                    data: { ScheduleFilterDate: selectedValue },
                     success: function (result) {
                         window.location.reload();
                         console.log(result);
