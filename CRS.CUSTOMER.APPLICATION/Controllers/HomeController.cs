@@ -402,7 +402,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Session["ProfileImage"] = ProfileImage;
                     Session["CreatedOn"] = response.ActionDate;
                     Session["SystemLinkModel"] = response.SystemLink;
-                    return new Tuple<string, string, bool>("Index", "DashboardV2", true);
+                    return new Tuple<string, string, bool>("Index", "Dashboard", true);
                 }
                 this.AddNotificationMessage(new NotificationModel()
                 {

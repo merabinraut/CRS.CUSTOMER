@@ -148,8 +148,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             var ResponseModel = new HostViewV2Model();
             ResponseModel.ClubDetailModel = ClubDetail.MapObject<ClubBasicDetailModel>();
-            ResponseModel.ClubDetailModel.ClubId = ResponseModel.ClubDetailModel.ClubId.EncryptParameter();
-            ResponseModel.ClubDetailModel.ClubLogo = ImageHelper.ProcessedImage(ResponseModel.ClubDetailModel.ClubLogo);
             var dbResponse = _buss.GetHostList(cId);
             if (dbResponse.Count > 0)
             {
@@ -183,8 +181,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             var ResponseModel = new ConfirmationViewModel();
             ResponseModel.ClubDetailModel = ClubDetail.MapObject<ClubBasicDetailModel>();
-            ResponseModel.ClubDetailModel.ClubId = ResponseModel.ClubDetailModel.ClubId.EncryptParameter();
-            ResponseModel.ClubDetailModel.ClubLogo = ImageHelper.ProcessedImage(ResponseModel.ClubDetailModel.ClubLogo);
             var HostIdListSplit = HostIdList.Split(',');
             var HostIdListArray = HostIdListSplit.Select(x => x.DecryptParameter()).ToArray();
             var HostIdLists = HostIdListArray != null ? string.Join(",", HostIdListArray.ToArray()) : null;
@@ -198,16 +194,30 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 });
                 return RedirectToAction("Index", "Dashboard");
             }
-            var dbResponse = _buss.GetSelectedHostDetail(cId, HostIdLists);
-            if (dbResponse != null && dbResponse.Count > 0)
+            if (HostIdLists != null && HostIdLists.Trim() == "0")
             {
-                ResponseModel.HostListModel = dbResponse.MapObjects<HostListV2Model>();
-                ResponseModel.HostListModel.ForEach(x =>
+                ResponseModel.HostListModel = new List<HostListV2Model>
                 {
-                    x.HostId = x.HostId.EncryptParameter();
-                    x.ClubId = x.ClubId.EncryptParameter();
-                    x.HostImage = ImageHelper.ProcessedImage(x.HostImage);
-                });
+                    new HostListV2Model
+                    {
+                        HostId = ApplicationUtilities.EncryptParameter("0").ToString(),
+                        ClubId =ClubId
+                    }
+                };
+            }
+            else
+            {
+                var dbResponse = _buss.GetSelectedHostDetail(cId, HostIdLists);
+                if (dbResponse != null && dbResponse.Count > 0)
+                {
+                    ResponseModel.HostListModel = dbResponse.MapObjects<HostListV2Model>();
+                    ResponseModel.HostListModel.ForEach(x =>
+                    {
+                        x.HostId = x.HostId.EncryptParameter();
+                        x.ClubId = x.ClubId.EncryptParameter();
+                        x.HostImage = ImageHelper.ProcessedImage(x.HostImage);
+                    });
+                }
             }
             return View(ResponseModel);
         }
@@ -276,7 +286,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Reservation Confirmation
         [HttpGet]
-        public ActionResult ReservationConfirmation(ReservationConfirmationRequestModel Model, string[] HostIdList)
+        public ActionResult ReservationConfirmation(ReservationConfirmationRequestModel Model, string HostIdList)
         {
             var clubId = !string.IsNullOrEmpty(Model.ClubId) ? Model.ClubId.DecryptParameter() : null;
             var planId = !string.IsNullOrEmpty(Model.PlanId) ? Model.PlanId.DecryptParameter() : null;
@@ -296,7 +306,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 });
                 return RedirectToAction("Index", "Dashboard");
             }
-            var hId = HostIdList.Select(x => x.DecryptParameter()).ToList();
+            var HostIdListSplit = HostIdList.Split(',');
+            var HostIdListArray = HostIdListSplit.Select(x => x.DecryptParameter()).ToArray();
+            var HostIdLists = HostIdListArray != null ? string.Join(",", HostIdListArray.ToArray()) : null;
             var dbRequest = new ReservationConfirmationRequestCommon
             {
                 ClubId = clubId,
@@ -305,7 +317,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 VisitDate = Model.VisitDate,
                 VisitTime = Model.VisitTime,
                 NoOfPeople = Model.NoOfPeople,
-                HostIdList = hId != null ? string.Join(",", hId.ToArray()) : null,
+                HostIdList = HostIdLists,
                 ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString(),
                 ActionIP = ApplicationUtilities.GetIP()
             };

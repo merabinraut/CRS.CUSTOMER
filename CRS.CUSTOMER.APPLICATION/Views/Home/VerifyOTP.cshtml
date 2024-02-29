@@ -459,7 +459,6 @@
     </script>
     <script>
         $('#waitingMessageWrapper').hide();
-        debugger;
         var mobileNumber = "@Model.MobileNumber"; // Assuming Razor syntax
         // Function to mask the last four digits of the mobile number
         function maskLastFourDigits(number) {
@@ -473,9 +472,7 @@
             var maskedNumber = number.slice(0, -4).replace(/\d/g, '*') + lastFourDigits;
             return maskedNumber;
         }
-        debugger;
         if ("@Model.MobileNumber" !== "") {
-            debugger;
             var message = "+ 81-" + maskLastFourDigits(mobileNumber) + " 宛にSMSを送信しました、メッセージに記載された6桁の数字を確認し、入力してください";
             $(".displayMessage").text(message);
         }
