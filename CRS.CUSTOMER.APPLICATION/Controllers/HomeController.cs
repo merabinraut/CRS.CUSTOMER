@@ -301,8 +301,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult Index()
         {
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
+            string phaseValue = ConfigurationManager.AppSettings["phase"];
+            
             if (string.IsNullOrEmpty(Username))
             {
+                
                 ViewBag.CallJavaScriptFunction = TempData["CallJavaScriptFunction"] ?? "False";
                 var HasLandingSession = Request.Cookies["HasLandingSession"]?.Value;
                 if (!string.IsNullOrEmpty(HasLandingSession) && HasLandingSession.Trim() == "True")
@@ -316,6 +319,16 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else this.ClearSessionData();
                 LoginRequestModel Response = new LoginRequestModel();
+                if (phaseValue.ToUpper() == "DEVELOPMENT")
+                {
+                    Response.affiliateURL = "http://43.207.72.221:93/";
+                    Response.clubURL = "http://43.207.72.221:92/";
+                }
+                else
+                {
+                    Response.affiliateURL = "https://affiliate.hoslog.jp";
+                    Response.clubURL = "https://club.hoslog.jp";
+                }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
                 return View(Response);

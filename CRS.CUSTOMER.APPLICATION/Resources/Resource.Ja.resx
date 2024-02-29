@@ -631,6 +631,10 @@
     <value>モバイルでログイン</value>
     <comment>Login</comment>
   </data>
+  <data name="LoginPhoneNumber" xml:space="preserve">
+    <value>携帯電話番号</value>
+    <comment>Login</comment>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>ログアウト</value>
     <comment>_Layout</comment>
@@ -762,6 +766,10 @@
     <value>場内指名</value>
     <comment>Host Detail</comment>
   </data>
+  <data name="Only numbers are allowed" xml:space="preserve">
+    <value>数字のみが許可されます</value>
+    <comment>Login</comment>
+  </data>
   <data name="OnSiteNomination" xml:space="preserve">
     <value>場内指名</value>
     <comment>Dashboard Controller</comment>
@@ -773,6 +781,10 @@
   <data name="Or" xml:space="preserve">
     <value>または</value>
     <comment>Search Filter</comment>
+  </data>
+  <data name="Others" xml:space="preserve">
+    <value>その他</value>
+    <comment>Profile</comment>
   </data>
   <data name="OverallClubGallery" xml:space="preserve">
     <value>クラブとホストの写真同</value>
