@@ -1303,7 +1303,7 @@
     </div>
     <!-- </div> -->
     <button class=" flex justify-center items-center gap-[1px] px-[20px] py-[10px] rounded"
-            style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);">
+            style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);" data-drawer-placement="bottom" aria-controls="drawer-bottom-example" onclick="InitiateClubReservationFunction('@Model.ClubId')">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M5.625 3.125V3.75H3.125V17.5H16.875V3.75H14.375V3.125H13.125V3.75H6.875V3.125H5.625ZM4.375 5H5.625V5.625H6.875V5H13.125V5.625H14.375V5H15.625V6.25H4.375V5ZM4.375 7.5H15.625V16.25H4.375V7.5ZM9.375 8.75V11.25H6.875V12.5H9.375V15H10.625V12.5H13.125V11.25H10.625V8.75H9.375Z"
                   fill="white" />
@@ -1441,6 +1441,43 @@
                 </div>
                 <div class="text-sm font-bold text-center py-[20px]">今はスキップ</div>
             </div>
+        </div>
+    </div>
+</div>
+<div id="drawer-bottom-example"
+     class="fixed bottom-0 left-0 right-0 z-[120] w-full bg-white overflow-y-auto  bg-white dark:bg-gray-800 transition-transform -translate-x-full transform"
+     tabindex="-1" aria-labelledby="drawer-bottom-label">
+    <div class="py-[10px] px-4 border-b border-b-[#EDEDED] flex justify-between bg-white">
+        <h5 id="drawer-bottom-label" class="text-sm text-secondary-1">
+            共有
+        </h5>
+        <button type="button" data-drawer-hide="drawer-bottom-example" aria-controls="drawer-bottom-example" class="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M13.3 0.710032C12.91 0.320032 12.28 0.320032 11.89 0.710032L6.99997 5.59003L2.10997 0.700032C1.71997 0.310032 1.08997 0.310032 0.699971 0.700032C0.309971 1.09003 0.309971 1.72003 0.699971 2.11003L5.58997 7.00003L0.699971 11.89C0.309971 12.28 0.309971 12.91 0.699971 13.3C1.08997 13.69 1.71997 13.69 2.10997 13.3L6.99997 8.41003L11.89 13.3C12.28 13.69 12.91 13.69 13.3 13.3C13.69 12.91 13.69 12.28 13.3 11.89L8.40997 7.00003L13.3 2.11003C13.68 1.73003 13.68 1.09003 13.3 0.710032Z"
+                      fill="black" />
+            </svg>
+        </button>
+    </div>
+    <div class="py-[12px] px-4 bg-white">
+        <div class="flex py-[12px] px-4 gap-[12px] items-center">
+            <img src="~/Content/assets/images/customer/line-1.svg" alt="img" class="h-[22px] w-[22px]" />
+            <div class="text-sm text-secondary-1">LINE</div>
+        </div>
+        <div class="flex py-[12px] px-4 gap-[12px] items-center">
+            <img src="~/Content/assets/images/customer/tiktok-1.svg" alt="img" class="h-[22px] w-[22px]" />
+            <div class="text-sm text-secondary-1">Tiktok</div>
+        </div>
+        <div class="flex py-[12px] px-4 gap-[12px] items-center">
+            <img src="~/Content/assets/images/customer/insta.svg" alt="img" class="h-[22px] w-[22px]" />
+            <div class="text-sm text-secondary-1">Instagram</div>
+        </div>
+        <div class="flex py-[12px] px-4 gap-[12px] items-center">
+            <img src="~/Content/assets/images/customer/x.svg" alt="img" class="h-[22px] w-[22px]" />
+            <div class="text-sm text-secondary-1">Twitter</div>
+        </div>
+        <div class="flex py-[12px] px-4 gap-[12px] items-center">
+            <img src="~/Content/assets/images/customer/copy.svg" alt="img" class="h-[22px] w-[22px]" />
+            <div class="text-sm text-secondary-1">シェアリンクをコピー</div>
         </div>
     </div>
 </div>
