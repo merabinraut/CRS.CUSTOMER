@@ -54,6 +54,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public List<NoticeModel> GetNoticeByClubId { get; set; }
         public ClubBasicInformationModel GetClubBasicInformation { get; set; }
         public List<AllNoticeModel> GetAllNoticeTabList { get; set; }
+        public List<AllScheduleModel> GetAllScheduleTabList { get; set; }
+        public List<ScheduleDDLModel> GetScheduleDDL { get; set; }
     }
     public class ClubEventModel
     {
@@ -99,5 +101,20 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
     public class AllNoticeModel : NoticeModel
     {
         public string EventStatus { get; set; }
+    }
+    public class AllScheduleModel
+    {
+        public string ScheduleId { get; set; }
+        public string ScheduleTitle { get; set; }
+        public string ScheduleDate { get; set; }
+        public string ScheduleDescription { get; set; }
+        public string EventType { get; set; }
+        public string AgentId { get; set; }
+        public string ScheduleImage { get; set; }
+    }
+    public class ScheduleDDLModel
+    {
+        public string Text { get; set; }
+        public string Value { get; set; }
     }
 }

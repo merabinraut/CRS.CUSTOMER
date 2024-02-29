@@ -321,6 +321,17 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             if (dbResponse != null && dbResponse.Rows.Count > 0) return _dao.DataTableToListObject<AllNoticeModelCommon>(dbResponse).ToList();
             return new List<AllNoticeModelCommon>();
         }
+
+        public List<AllScheduleModelCommon> GetAllScheduleTabList(string cId, string sFD)
+        {
+            string sp_name = "sproc_customer_club_detail @Flag='gas'";
+            sp_name += ",@ClubId=" + _dao.FilterString(cId);
+            sp_name += ",@FilterDate=" + _dao.FilterString(sFD);
+            var dbResponseInfo = _dao.ExecuteDataTable(sp_name);
+            if (dbResponseInfo != null && dbResponseInfo.Rows.Count > 0) return _dao.DataTableToListObject<AllScheduleModelCommon>(dbResponseInfo).ToList();
+            return new List<AllScheduleModelCommon>();
+
+        }
         #endregion
     }
 }

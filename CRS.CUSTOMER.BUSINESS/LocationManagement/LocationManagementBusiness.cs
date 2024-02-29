@@ -73,6 +73,11 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
         {
             return _repo.GetAllNoticeTabList(cId);
         }
+
+        public List<AllScheduleModelCommon> GetAllScheduleTabList(string cId, string sFD)
+        {
+            return _repo.GetAllScheduleTabList(cId, sFD);
+        }
         #endregion
     }
 }

@@ -1103,13 +1103,15 @@
             </div>
             <!-- for drop down -->
             <div class="mt-[9px] mb-4 custom-select">
-                <select name="selectSchedule"
+                <select name="ScheduleFilterDate"
                         class="flex justify-between items-center w-full px-4 py-[11px] border border-[#BEBEBE] rounded-[3px] ring-0 focus:ring-0 focus:ring-transparent"
-                        id="">
-                    <option value="2024年 2月">2024年 2月</option>
-                    <option value="2024年 3月">2024年 3月</option>
-                    <option value="2024年 4月">2024年 4月</option>
-                    <option value="2024年 5月">2024年 5月</option>
+                        id="scheduleDropdown">
+                    @{
+                        foreach (var item in Model.GetScheduleDDL)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
                 </select>
             </div>
             <!-- for the schecdule card -->
@@ -1580,4 +1582,24 @@
                 closeModal('modal1');
             }
         }</script>
+
+    <script>$(document).ready(function () {
+            debugger
+            $("#scheduleDropdown").change(function () {
+                var selectedValue = $(this).val();
+                $.ajax({
+                    url: '/LocationManagement/ClubDetail_V2', 
+                    type: 'POST', 
+                    data: { ScheduleFilterDate: selectedValue }, 
+                    success: function (result) {
+                        window.location.reload();
+                        console.log(result);
+                    },
+                    error: function (error) {
+                        window.location.reload();
+                        console.error(error);
+                    }
+                });
+            });
+        });</script>
 }

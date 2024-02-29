@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -201,13 +202,18 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
 
-        public ActionResult ClubDetail_V2(string LocationId, string ClubId)
+        public ActionResult ClubDetail_V2(string LocationId, string ClubId, string[] ScheduleFilterDate = null)
         {
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
             var FileLocationPath = "";
             var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
             var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
+            string sFD = null;//!string.IsNullOrEmpty(ScheduleFilterDate[0]) ? ScheduleFilterDate : null;
+            if (ScheduleFilterDate != null)
+            {
+                sFD = ScheduleFilterDate[0].ToString();
+            }
             if (string.IsNullOrEmpty(cId) || string.IsNullOrEmpty(lId))
             {
                 AddNotificationMessage(new NotificationModel()
@@ -273,9 +279,32 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             responseModel.GetClubBasicInformation = dbBasicInfoResponse.MapObject<ClubBasicInformationModel>();
             var dbAllNoticeResponse = _business.GetAllNoticeTabList(cId);
             responseModel.GetAllNoticeTabList = dbAllNoticeResponse.MapObjects<AllNoticeModel>();
+            var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);
+            responseModel.GetAllScheduleTabList = dbScheduleResponse.MapObjects<AllScheduleModel>();
+            responseModel.GetScheduleDDL = GetScheduleList();
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
             return View(responseModel);
+        }
+        private List<ScheduleDDLModel> GetScheduleList()
+        {
+            List<ScheduleDDLModel> scheduleList = new List<ScheduleDDLModel>();
+
+            DateTime currentDate = DateTime.Now;
+            DateTime endDate = currentDate.AddMonths(3);
+
+            while (currentDate <= endDate)
+            {
+                scheduleList.Add(new ScheduleDDLModel
+                {
+                    Value = currentDate.ToString("yyyy年 M月", CultureInfo.InvariantCulture),
+                    Text = currentDate.ToString("yyyy年 M月", CultureInfo.InvariantCulture)
+                });
+
+                currentDate = currentDate.AddMonths(1);
+            }
+
+            return scheduleList;
         }
         #endregion
         [HttpGet]

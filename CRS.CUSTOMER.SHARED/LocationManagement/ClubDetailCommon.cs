@@ -92,4 +92,14 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
     {
         public string EventStatus { get; set; }
     }
+    public class AllScheduleModelCommon
+    {
+        public string ScheduleId { get; set; }
+        public string ScheduleTitle { get; set; }
+        public string ScheduleDate { get; set; }
+        public string ScheduleDescription { get; set; }
+        public string EventType { get; set; }
+        public string AgentId { get; set; }
+        public string ScheduleImage { get; set; }
+    }
 }

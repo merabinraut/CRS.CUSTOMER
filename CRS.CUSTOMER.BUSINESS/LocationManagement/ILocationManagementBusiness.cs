@@ -27,6 +27,7 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
         List<NoticeModelCommon> GetNoticeByClubId(string cId);
         ClubBasicInformationModelCommon GetClubBasicInformation(string cId);
         List<AllNoticeModelCommon> GetAllNoticeTabList(string cId);
+        List<AllScheduleModelCommon> GetAllScheduleTabList(string cId, string sFD);
         #endregion
     }
 }
