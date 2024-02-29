@@ -173,7 +173,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Title = NotificationMessage.ERROR.ToString(),
                 }).ToArray();
 
-                AddNotificationMessage(notificationModels);
+                //AddNotificationMessage(notificationModels);
+                //TempData["ChangePWErrorMessage"] = errorMessage;
                 return RedirectToAction("ChangePasswordV2", changePasswordModel);
                 //return View(changePasswordModel);
             }
@@ -191,7 +192,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
                 if (dbResp.Code == ResponseCode.Failed)
                 {
-                    AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.ERROR, Message = dbResp.Message });
+                    //AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.ERROR, Message = dbResp.Message });
+                    TempData["ChangePWErrorMessage"] = dbResp.Message;
                     return RedirectToAction("ChangePasswordV2", changePasswordModel);
                 }
                 if (dbResp.Code == ResponseCode.Success)
