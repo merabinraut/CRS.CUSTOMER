@@ -98,7 +98,7 @@
             </div>
         </div>
         <div style="background-color: #EEEEEE;  margin-left:15px;margin-right:15px; margin-top:8px; "
-             class="flex flex-row justify-between text-[14px] py-[8px] mx-[15px] rounded-[4px] border-black  ">
+             class="flex flex-row justify-between text-[14px] py-[8px] mx-[15px] rounded-[4px] border-black" onclick="InitiateDateTimeFilterPopupFunction()">
             <div class="flex flex-row gap-[4px] items-center  ">
                 <div class="pl-[8px]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
@@ -106,8 +106,8 @@
                               fill="#B08194" />
                     </svg>
                 </div>
-                <div style="color: #666666 ; ">
-                    2024/01/01
+                <div style="color: #666666 ; " id="main-date-id">
+                    Date
                 </div>
             </div>
             <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
@@ -119,7 +119,7 @@
                     </svg>
                 </div>
                 <div style="color: #666666">
-                    19:00
+                    Time
                 </div>
             </div>
             <div class="flex flex-row gap-[4px]  items-center  ">

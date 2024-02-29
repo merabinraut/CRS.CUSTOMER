@@ -7,6 +7,7 @@ using CRS.CUSTOMER.BUSINESS.Dashboard;
 using CRS.CUSTOMER.BUSINESS.DashboardV2;
 using CRS.CUSTOMER.BUSINESS.Search;
 using CRS.CUSTOMER.SHARED.Search;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -63,6 +64,41 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
             });
             return View(Response);
+        }
+
+        [HttpGet]
+        public ActionResult DateTimeFilter(string LocationId, string Date, string Time, string NoOfPeople)
+        {
+            ViewBag.ActionPageName = "SearchFilter";
+            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
+            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
+            var Response = new ClubSearchResultModel();
+            var clubRecommendationDBResponse = _oldDashboardBusiness.GetRecommendedClub(lId);
+            Response.RecommendedClubModel = clubRecommendationDBResponse.MapObjects<ClubRecommendationListModel>();
+            Response.RecommendedClubModel.ForEach(x =>
+            {
+                x.LocationId = x.LocationId.EncryptParameter();
+                x.ClubId = x.ClubId.EncryptParameter();
+                x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
+            });
+            var dbRequest = new ClubDateTimeAndOtherFilterRequest
+            {
+                LocationId = lId,
+                Date = Date,
+                Time = string.IsNullOrEmpty(Time) ? string.Empty : Time.DecryptParameter(),
+                NoOfPeople = string.IsNullOrEmpty(NoOfPeople) ? string.Empty : NoOfPeople.DecryptParameter(),
+                CustomerId = CustomerId
+            };
+            var dbResponse = _searchBusiness.ClubFilterViewDateTimeAndOthers(dbRequest);
+            Response.FilteredClubModel = dbResponse.MapObjects<SearchFilterClubDetailModel>();
+            Response.FilteredClubModel.ForEach(x =>
+            {
+                x.ClubId = x.ClubId.EncryptParameter();
+                x.ClubLocationId = x.ClubLocationId.EncryptParameter();
+                x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
+                x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
+            });
+            return View("ClubSearchResult", Response);
         }
 
         [HttpGet]
