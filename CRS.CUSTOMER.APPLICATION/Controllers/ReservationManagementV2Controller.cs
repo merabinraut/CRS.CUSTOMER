@@ -103,6 +103,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var ResponseModel = new PlanViewModel();
             ResponseModel.ClubDetailModel = dbResponse2.Item3.MapObject<ClubBasicDetailModel>();
             ResponseModel.ClubDetailModel.ClubId = ResponseModel.ClubDetailModel.ClubId.EncryptParameter();
+            ResponseModel.ClubDetailModel.ClubLogo = ImageHelper.ProcessedImage(ResponseModel.ClubDetailModel.ClubLogo);
             //Plan
             var dbResponse3 = _buss.GetPlans(cId, customerId);
             if (dbResponse3.Item1 == ResponseCode.Failed)
@@ -147,11 +148,18 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             var ResponseModel = new HostViewV2Model();
             ResponseModel.ClubDetailModel = ClubDetail.MapObject<ClubBasicDetailModel>();
+            ResponseModel.ClubDetailModel.ClubId = ResponseModel.ClubDetailModel.ClubId.EncryptParameter();
+            ResponseModel.ClubDetailModel.ClubLogo = ImageHelper.ProcessedImage(ResponseModel.ClubDetailModel.ClubLogo);
             var dbResponse = _buss.GetHostList(cId);
             if (dbResponse.Count > 0)
             {
                 ResponseModel.HostListModel = dbResponse.MapObjects<HostListV2Model>();
-                ResponseModel.HostListModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.HostId = x.HostId.EncryptParameter(); });
+                ResponseModel.HostListModel.ForEach(x =>
+                {
+                    x.ClubId = x.ClubId.EncryptParameter();
+                    x.HostId = x.HostId.EncryptParameter();
+                    x.HostImage = ImageHelper.ProcessedImage(x.HostImage);
+                });
             }
             return View(ResponseModel);
         }
@@ -173,10 +181,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 });
                 return RedirectToAction("Index", "Dashboard");
             }
-            string FileLocationPath = string.Empty;
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
             var ResponseModel = new ConfirmationViewModel();
             ResponseModel.ClubDetailModel = ClubDetail.MapObject<ClubBasicDetailModel>();
+            ResponseModel.ClubDetailModel.ClubId = ResponseModel.ClubDetailModel.ClubId.EncryptParameter();
+            ResponseModel.ClubDetailModel.ClubLogo = ImageHelper.ProcessedImage(ResponseModel.ClubDetailModel.ClubLogo);
             var HostIdListSplit = HostIdList.Split(',');
             var HostIdListArray = HostIdListSplit.Select(x => x.DecryptParameter()).ToArray();
             var HostIdLists = HostIdListArray != null ? string.Join(",", HostIdListArray.ToArray()) : null;
@@ -194,7 +202,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (dbResponse != null && dbResponse.Count > 0)
             {
                 ResponseModel.HostListModel = dbResponse.MapObjects<HostListV2Model>();
-                ResponseModel.HostListModel.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
+                ResponseModel.HostListModel.ForEach(x =>
+                {
+                    x.HostId = x.HostId.EncryptParameter();
+                    x.ClubId = x.ClubId.EncryptParameter();
+                    x.HostImage = ImageHelper.ProcessedImage(x.HostImage);
+                });
             }
             return View(ResponseModel);
         }
