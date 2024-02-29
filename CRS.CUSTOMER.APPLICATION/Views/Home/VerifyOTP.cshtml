@@ -460,6 +460,19 @@
     <script>
         $('#waitingMessageWrapper').hide();
         debugger;
+        function limitInputLength(input, maxLength) {
+            var value = input.value;
+            var numericValue = value.replace(/\D/g, '');
+            var trimmedValue = numericValue.substring(0, maxLength);
+            // Update input value
+            input.value = trimmedValue;
+            if (input.value.length > 5) {
+                $('#valCod').prop('disabled', false).removeAttr('style');
+            }
+            else {
+                $('#valCod').prop('disabled', true).css('opacity', '0.5');
+            }
+        }
         var mobileNumber = "@Model.MobileNumber"; // Assuming Razor syntax
         // Function to mask the last four digits of the mobile number
         function maskLastFourDigits(number) {
@@ -473,9 +486,7 @@
             var maskedNumber = number.slice(0, -4).replace(/\d/g, '*') + lastFourDigits;
             return maskedNumber;
         }
-        debugger;
         if ("@Model.MobileNumber" !== "") {
-            debugger;
             var message = "+ 81-" + maskLastFourDigits(mobileNumber) + " 宛にSMSを送信しました、メッセージに記載された6桁の数字を確認し、入力してください";
             $(".displayMessage").text(message);
         }

@@ -636,32 +636,35 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var uId = !string.IsNullOrEmpty(Model.UserId) ? Model.UserId.DecryptParameter() : null;
                 if (string.IsNullOrEmpty(aId) || string.IsNullOrEmpty(mn) || string.IsNullOrEmpty(uId))
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.INFORMATION,
-                        Message = "Invalid request",
-                        Title = NotificationMessage.INFORMATION.ToString()
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.INFORMATION,
+                    //    Message = "Invalid request",
+                    //    Title = NotificationMessage.INFORMATION.ToString()
+                    //});
+                    TempData["ForgetPWErrorMessage"] = "Invalid request";
                     return RedirectToAction("Index", "Home");
                 }
                 if (Model.Password != Model.ConfirmPassword)
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.INFORMATION,
-                        Message = "Password and confirm password must match",
-                        Title = NotificationMessage.INFORMATION.ToString()
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.INFORMATION,
+                    //    Message = "Password and confirm password must match",
+                    //    Title = NotificationMessage.INFORMATION.ToString()
+                    //});
+                    TempData["ForgetPWErrorMessage"] = "Password and confirm password must match";
                     return View(Model);
                 }
                 if (Model.Password == null || Model.ConfirmPassword == null)
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.INFORMATION,
-                        Message = "Password is required",
-                        Title = NotificationMessage.INFORMATION.ToString()
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.INFORMATION,
+                    //    Message = "Password is required",
+                    //    Title = NotificationMessage.INFORMATION.ToString()
+                    //});
+                    TempData["ForgetPWErrorMessage"] = "Password is required";
                     return View(Model);
                 }
                 SetRegistrationPasswordCommon Common = Model.MapObject<SetRegistrationPasswordCommon>();
@@ -681,12 +684,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     });
                     return View("ForgotPassword_SuccessView");
                 }
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse.Message ?? "Failed",
-                    Title = NotificationMessage.INFORMATION.ToString(),
-                });
+                //AddNotificationMessage(new NotificationModel()
+                //{
+                //    NotificationType = NotificationMessage.INFORMATION,
+                //    Message = dbResponse.Message ?? "Failed",
+                //    Title = NotificationMessage.INFORMATION.ToString(),
+                //});
+                TempData["ForgetPWErrorMessage"] = dbResponse.Message ?? "Failed";
                 return View(Model);
             }
             else
