@@ -418,7 +418,7 @@ function ManagePreferenceFilterHTMLContent() {
 //#endregion
 
 function EnableLoaderFunction() {
-    document.getElementById('loader-id-v2').style.display = 'block';
+    document.getElementById('loader-id-v2').style.display = 'flex';
 }
 function DisableLoaderFunction() {
     document.getElementById('loader-id-v2').style.display = 'none';
@@ -429,6 +429,38 @@ function DisableLoaderFunction() {
 //#region date/time filter
 function InitiateDateTimeFilterPopupFunction() {
     EnableLoaderFunction();
+    document.getElementById("DateTimeFilter-Id").classList.remove("disable-click");
+    var locationfilterpopupContent = $('#datetimefilterpopup-id').html();
+    if (locationfilterpopupContent.trim() !== '') {
+        var element = document.getElementById('drawer-date-time');
+        if (element) {
+            element.classList.remove('translate-y-full');
+            DisableLoaderFunction();
+            return false;
+        }
+    }
+
+    var savedData = localStorage.getItem('DateTimeFilterHTMLContent');
+    if (savedData) {
+        savedData = JSON.parse(savedData);
+        document.getElementById('preferencefilterpopUp-id').innerHTML = savedData.content; // Render the HTML content
+
+        // Set input field values
+        for (var inputId in savedData.inputValues) {
+            if (inputId != "" && inputId != '') {
+                document.getElementById(inputId).value = savedData.inputValues[inputId];
+            }
+        }
+
+        // Set checkbox states
+        for (var checkboxId in savedData.checkboxStates) {
+            document.getElementById(checkboxId).checked = savedData.checkboxStates[checkboxId];
+        }
+        DateTimeFilterCommon();
+        DisableLoaderFunction();
+        return false;
+    }
+
     $.ajax({
         type: 'GET',
         async: true,
@@ -443,47 +475,7 @@ function InitiateDateTimeFilterPopupFunction() {
                 return false;
             }
             $('#datetimefilterpopup-id').html(data.PartialView);
-            jQuery(function ($) {
-                $.datepicker.regional['ja'] = {
-                    closeText: '閉じる',
-                    prevText: '&#x3c;前',
-                    nextText: '次&#x3e;',
-                    currentText: '今日',
-                    monthNames: ['1月', '2月', '3月', '4月', '5月', '6月',
-                        '7月', '8月', '9月', '10月', '11月', '12月'
-                    ],
-                    monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月',
-                        '7月', '8月', '9月', '10月', '11月', '12月'
-                    ],
-                    dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
-                    dayNamesShort: ['月', '火', '水', '木', '金', '土', '日',],
-                    dayNamesMin: ['月', '火', '水', '木', '金', '土', '日',],
-                    weekHeader: '週',
-                    dateFormat: 'yy/mm/dd',
-                    firstDay: 0,
-                    isRTL: false,
-                    showMonthAfterYear: true,
-                    yearSuffix: '年'
-                };
-                $.datepicker.setDefaults($.datepicker.regional['ja']);
-                var currentDate = new Date();
-                var maxDate = new Date(currentDate.getTime() + (14 * 24 * 60 * 60 * 1000)); // 15 days from today
-                $("#datepicker2").datepicker({
-                    minDate: currentDate,
-                    maxDate: maxDate,
-                    onSelect: function (dateText, inst) {
-                        inst.inline = true; // Set datepicker to inline mode
-                        $('#date-id').val(dateText.trim());
-                    }
-                });
-
-                // Open the calendar by default
-                $("#datepicker2").datepicker("show");
-                // Update selected date in datevalue element
-
-            });
-            initTimeFunction2();
-            initPeopleFunction2();
+            DateTimeFilterCommon();
             DisableLoaderFunction();
         },
         error: function (xhr, status, error) {
@@ -492,6 +484,70 @@ function InitiateDateTimeFilterPopupFunction() {
             return false;
         }
     });
+}
+
+function DateTimeFilterCommon() {
+    jQuery(function ($) {
+        $.datepicker.regional['ja'] = {
+            closeText: '閉じる',
+            prevText: '&#x3c;前',
+            nextText: '次&#x3e;',
+            currentText: '今日',
+            monthNames: ['1月', '2月', '3月', '4月', '5月', '6月',
+                '7月', '8月', '9月', '10月', '11月', '12月'
+            ],
+            monthNamesShort: ['1月', '2月', '3月', '4月', '5月', '6月',
+                '7月', '8月', '9月', '10月', '11月', '12月'
+            ],
+            dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
+            dayNamesShort: ['月', '火', '水', '木', '金', '土', '日',],
+            dayNamesMin: ['月', '火', '水', '木', '金', '土', '日',],
+            weekHeader: '週',
+            dateFormat: 'yy/mm/dd',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: true,
+            yearSuffix: '年'
+        };
+        $.datepicker.setDefaults($.datepicker.regional['ja']);
+        var currentDate = new Date();
+        var maxDate = new Date(currentDate.getTime() + (14 * 24 * 60 * 60 * 1000)); // 15 days from today
+        $("#datepicker2").datepicker({
+            minDate: currentDate,
+            maxDate: maxDate,
+            onSelect: function (dateText, inst) {
+                inst.inline = true; // Set datepicker to inline mode
+                $('#date-id').val(dateText.trim());
+            }
+        });
+
+        // Open the calendar by default
+        $("#datepicker2").datepicker("show");
+        // Update selected date in datevalue element
+
+    });
+    initTimeFunction2();
+    initPeopleFunction2();
+}
+
+function ManageDateTimeFilterHTMLContent() {
+    var content = document.getElementById('datetimefilterpopup-id').innerHTML;
+    var inputValues = {};
+    var checkboxStates = {};
+    document.querySelectorAll('input').forEach(function (input) {
+        if (input.type === 'text') {
+            inputValues[input.id] = input.value; // Store input field values
+        }
+        else if (input.type === 'checkbox') {
+            checkboxStates[input.id] = input.checked; // Store checkbox states
+        }
+    });
+    var savedData = {
+        content: content,
+        inputValues: inputValues,
+        checkboxStates: checkboxStates
+    };
+    localStorage.setItem('DateTimeFilterHTMLContent', JSON.stringify(savedData)); // Store the data
 }
 
 //#region Time JS
@@ -522,7 +578,6 @@ function initTimeFunction2() {
     });
 
     document.querySelectorAll('.timeList2').forEach(item => {
-        debugger;
         item.addEventListener('click', event => {
             if (event.currentTarget.classList.contains('disabled')) {
                 return;
@@ -606,6 +661,7 @@ function SubmitDateTimeFilterFunction() {
         locationId = $('#current-location-id').val();
     }
     $('.location-class').val(locationId);
+    ManageDateTimeFilterHTMLContent();
     var form = document.getElementById("date-time-filter-id");
     form.submit();
 }

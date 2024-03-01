@@ -48,7 +48,6 @@
         width: 298px;
     }
 </style>
-<input type="text" id="current-location-id" value="" hidden />
 <div id="parent" class="loop owl-carousel kiran owl-theme center-image-slider">
     @foreach (var item in Model.Banners)
     {
@@ -134,8 +133,7 @@
                 </div>
             </div>
         </div>
-        <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px; "
-             class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]  ">
+        <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] disable-click" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
             <div class="my-[12px] text-[12px] font-[700] text-[#FFF]">
                 検索する
             </div>
@@ -276,6 +274,18 @@
                 ホストランキング
             </button>
         </div>
+        @* <div>
+                <button style="font-weight: 600;font-size: 12px; margin-left: 20px; " id="tab1Button"
+                        class="tab-link active ">
+                    店舗ランキング
+                </button>
+            </div>
+            <div>
+                <button style="font-weight: 600;font-size: 12px; margin-right: 20px; " id="tab2Button"
+                        class="tab-link ">
+                    ホストランキング
+                </button>
+            </div>*@
     </div>
 </div>
 

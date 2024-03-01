@@ -63,6 +63,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
                 x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
             });
+
+            ViewBag.LocationId = LocationId;
+            ViewBag.SearchFilter = SearchFilter;
+            ViewBag.ClubCategory = ClubCategory;
+            ViewBag.Price = Price;
+            ViewBag.Shift = Shift;
+            ViewBag.Time = Time;
+            ViewBag.ClubAvailability = ClubAvailability;
+
             return View(Response);
         }
 
@@ -98,6 +107,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
                 x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
             });
+            ViewBag.LocationId = LocationId;
+            ViewBag.Date = Date;
+            ViewBag.Time = Time;
+            ViewBag.NoOfPeople = NoOfPeople;
             return View("ClubSearchResult", Response);
         }
 

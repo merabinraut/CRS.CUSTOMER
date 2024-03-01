@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <div id="timeListContainer" class=" timeListContainer rounded-[4px] bg-[#F6F6F6] w-[72px]" style="display: none;">
-                                <input id="maxnoofpeopleallowedinreservation-id" value="10" h+ idden />
+                                <input id="maxnoofpeopleallowedinreservation-id" value="10" hidden />
                                 @{
                                     for (int i = 1; i <= 10; i++)
                                     {
@@ -124,7 +124,7 @@
 </div>
 
 <form action="/Search/DateTimeFilter" method="get" id="date-time-filter-id">
-    <input type="text" class="location-class" name="LocationId" value="" hidden />
+    <input type="text" class="location-class" id="DateFilterLocationId" name="LocationId" value="" hidden />
     <input type="text" id="date-id" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" hidden />
     <input type="text" id="time-id2" name="Time" value="@ApplicationUtilities.EncryptParameter("00:00").ToString()" hidden />
     <input type="text" id="noofpeople-id2" name="NoOfPeople" value="@ApplicationUtilities.EncryptParameter("1").ToString()" hidden />

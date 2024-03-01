@@ -81,8 +81,8 @@
                         </svg>
 
                     </div>
-                    <div style="color: #666666 ; ">
-                        Date
+                    <div style="color: #666666;">
+                        @((string.IsNullOrEmpty(ViewBag.Date) || string.IsNullOrEmpty(ApplicationUtilities.DecryptParameter(ViewBag.Date))) ? "Date" : ApplicationUtilities.DecryptParameter(ViewBag.Date))
                     </div>
                 </div>
                 <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
@@ -94,7 +94,7 @@
                         </svg>
                     </div>
                     <div style="color: #666666">
-                        Time
+                        @((string.IsNullOrEmpty(ViewBag.Time) || string.IsNullOrEmpty(ApplicationUtilities.DecryptParameter(ViewBag.Time))) ? "Time" : ApplicationUtilities.DecryptParameter(ViewBag.Time))
                     </div>
                 </div>
                 <div class="flex flex-row gap-[4px]  items-center  ">
@@ -109,8 +109,7 @@
                     </div>
                 </div>
             </div>
-            <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px; "
-                 class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]  ">
+            <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] disable-click" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
                 <div class="my-[12px] text-[12px] font-[700] text-[#FFF]">
                     検索する
                 </div>
@@ -275,6 +274,7 @@
 
                         <!-- photo -->
                         <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5">
+
                             @foreach (var item2 in item.HostGalleryImage)
                             {
                                 <div class=" ">
