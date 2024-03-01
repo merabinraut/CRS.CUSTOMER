@@ -1061,6 +1061,9 @@ label {
         border-radius: 2px;
         padding: 1px 6px;
     }
+    .plan-selection .plan-card .popularity i {
+       font-size:12px;
+    }
 /* .plan-selection .plan-card .popularity {
   display: none;
 } */
@@ -1293,4 +1296,28 @@ label {
 
 .peopleList.active .activeTime {
     display: block;
+}
+
+.modalWrapper {
+    background: rgba(27,27,27,0.5);
+    height: 100%;
+    z-index: 555;
+    position: fixed;
+    top: 0px;
+}
+
+.modalContentWrapper {
+    display: block;
+    width: 100vw;
+    padding: 0 16px;
+    top: 50%;
+    margin-top: 65%
+}
+.club-visited {
+    color: #E6E6E6 !important;
+    fill: #E6E6E6 !important; 
+}
+
+.image-cover{
+    object-fit:cover
 }
