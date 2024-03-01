@@ -127,12 +127,12 @@
                                     <div class="h-[48px] w-[48px] object-fill   bg-[#ffffff]  flex flex-row justify-center">
                                         @if (!string.IsNullOrEmpty(item.ClubLogo))
                                         {
-                                            <img class="h-[48px] w-[48px] object-fill border-[1px]  rounded-full object-cover "
+                                            <img class="h-[48px] w-[48px]  border-[1px]  rounded-full object-cover "
                                                  src="@item.ClubLogo" alt="clublogo">
                                         }
                                         else
                                         {
-                                            <img class="h-[48px] w-[48px] object-fill border-[1px]  rounded-full "
+                                            <img class="h-[48px] w-[48px] object-cover border-[1px]  rounded-full "
                                                  src="~/Content/assets/images/customer/clublogo.jpeg" alt="clublogo">
                                         }
                                     </div>
@@ -240,7 +240,7 @@
                     {
                         <div class=" " onclick="OpenImagePopup('@item2')">
                             <img src="@item2"
-                                 class="aspect-square object-fill h-[182px] w-full object-cover" />
+                                 class="aspect-square  h-[182px] w-full object-cover" />
                         </div>
                     }
 
