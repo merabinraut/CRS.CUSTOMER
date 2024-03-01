@@ -252,7 +252,7 @@
     <comment>Search Filter</comment>
   </data>
   <data name="ChangePassword" xml:space="preserve">
-    <value>パスワードを変更する</value>
+    <value>パスワード変更</value>
     <comment>_Layout</comment>
   </data>
   <data name="Choose Rank" xml:space="preserve">

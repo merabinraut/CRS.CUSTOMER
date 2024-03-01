@@ -1061,6 +1061,9 @@ label {
         border-radius: 2px;
         padding: 1px 6px;
     }
+    .plan-selection .plan-card .popularity i {
+       font-size:12px;
+    }
 /* .plan-selection .plan-card .popularity {
   display: none;
 } */
@@ -1307,4 +1310,8 @@ label {
 .club-visited {
     color: #E6E6E6 !important;
     fill: #E6E6E6 !important; 
+}
+
+.image-cover{
+    object-fit:cover
 }
