@@ -160,7 +160,7 @@
                     {
                         <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
                             <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
-                                <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location1">
+                                <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location1">
                                 <p class="locationtext justify-center text-white font-[600] text-[12px] z-10">
                                     @Model.Location[i].LocationName
                                     <br>
@@ -183,7 +183,7 @@
                     {
                         <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
                             <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
-                                <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location3">
+                                <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
                                 <p style="line-height:12px; " class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
                                     @Model.Location[i].LocationName
                                     <br>
@@ -633,7 +633,7 @@
         <div class="grid  grid-cols-2 gap-[6px]">
             <div class="relative" onclick="GetLocationFilterPopUp();">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
-                    <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location1">
+                    <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/Area.jpg" alt="location1">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
                         エリアで検索
                     </p>
@@ -642,7 +642,7 @@
             </div>
             <div class="relative" onclick="ClubHostRedirectFunction('club');">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden  rounded-[4px]">
-                    <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location2">
+                    <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/HostClubs.jpg" alt="location2">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         ホストクラブから探す
                         <br>
@@ -654,7 +654,7 @@
         <div class="grid grid-cols-3 gap-[6px]">
             <div class="relative" onclick="ClubHostRedirectFunction('host');">
                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
-                    <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location3">
+                    <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/Hosts.jpg" alt="location3">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         ホストから探す
                         <br>
@@ -666,7 +666,7 @@
             </div>
             <div class="relative">
                 <div class="innercontainer h-[100px] flex flex-row text-center  justify-center items-center w-full  overflow-hidden rounded-[4px]">
-                    <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="loction4">
+                    <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/WorkingHours.jpg" alt="loction4">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         営業時間から探す
                         <br>
@@ -678,7 +678,7 @@
             </div>
             <div class="relative">
                 <div class="innercontainer h-[100px] flex flex-row text-center justify-center items-center w-full  overflow-hidden rounded-[4px]">
-                    <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location5">
+                    <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/LastEntry.jpg" alt="location5">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
                         最終入店時間
                         <br>
@@ -704,7 +704,7 @@
         <div class="grid  grid-cols-2 gap-[6px]">
             <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("0").ToString()');">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
-                    <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location1">
+                    <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/ShopsYouCanVisit.jpg" alt="location1">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
                         今すぐ行けるお店
                     </p>
@@ -714,7 +714,7 @@
             </div>
             <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("1").ToString()');">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden  rounded-[4px]">
-                    <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location2">
+                    <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/PrivateReservation.jpg" alt="location2">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         貸し切りOK
                         <br>
@@ -726,7 +726,7 @@
         <div class="grid grid-cols-3 gap-[6px]">
             <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("2").ToString()');">
                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
-                    <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location3">
+                    <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/LargeNumber.jpg" alt="location3">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         在籍人数が多い
                         <br>
@@ -736,7 +736,7 @@
             </div>
             <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("3").ToString()');">
                 <div class="innercontainer h-[100px] flex flex-row text-center  justify-center items-center w-full  overflow-hidden rounded-[4px]">
-                    <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="loction4">
+                    <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/VIPRoomsAvailable.jpg" alt="loction4">
                     <p class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         VIPルームあり
                         <br>
@@ -746,7 +746,7 @@
             </div>
             <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("4").ToString()');">
                 <div class="innercontainer h-[100px] flex flex-row text-center justify-center items-center w-full  overflow-hidden rounded-[4px]">
-                    <img class="locationimage" src="~/Content/assets/images/customer/demo-image.jpeg" alt="location5">
+                    <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/GirlsNightOut.jpg" alt="location5">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
                         女子会向き
                         <br>
@@ -881,7 +881,7 @@
                             let club = ResponseModel.RecommendedClubModel[i];
                             let clubLogoSrc = club.ClubLogo ? club.ClubLogo : '~/Content/assets/images/customer/demo-image.jpeg';
                             recommendedClubContentHTML += `
-                                <a onclick="">
+                                <a onclick="ClubDetailActionFunction('${club.LocationId}', '${club.ClubId}')">
                                     <div class="flex w-[118px]">
                                         <div style="border-radius: 6px; border: 1px solid #F3F3F3; background: #FFF;" class="flex flex-col w-[118px] px-[8px] py-[10px]">
                                             <div class="flex flex-row justify-center">
@@ -913,18 +913,13 @@
                             const hostImage = host.HostImage || '~/Content/assets/images/customer/demo-image.jpeg';
                             const clubLogo = host.ClubLogo || '~/Content/assets/images/customer/demo-image.jpeg';
                             recommendedHostContentHTML += `
-                                <a onclick="HostDetailRedirectFunction('${host.HostId}')">
+                                <a onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=${host.HostId}'">
                                     <div class="flex hover:cursor-pointer">
                                         <div style="border-radius: 4px; width:112px" class="w-[112px] h-auto flex flex-col justify-end text-center relative">
                                             <div class="w-full flex justify-center">
                                                 <img style="width:112px" class="w-[112px] h-[154px] object-cover rounded-[2px]" src="${hostImage}" alt="hostlogo" />
                                             </div>
-                                            <div id="like">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
-                                                    <circle cx="17" cy="17" r="10" fill="white" />
-                                                    <path d="M13.0968 17.4247L13.0868 17.4147L13.0784 17.407L13.0783 17.4069L13.0763 17.4049C13.0729 17.4016 13.0665 17.3954 13.0575 17.3863C13.0393 17.3681 13.011 17.3388 12.976 17.3C12.9051 17.2215 12.8112 17.1086 12.7196 16.9729C12.5183 16.6747 12.3672 16.3525 12.3672 16.0277C12.3672 14.8722 13.3248 13.9043 14.5018 13.9043C15.5079 13.9043 16.1721 14.5064 16.4677 14.8063L17.0018 15.348L17.5359 14.8063C17.8316 14.5064 18.4957 13.9043 19.5018 13.9043C20.6789 13.9043 21.6364 14.8722 21.6364 16.0277C21.6364 16.3619 21.4878 16.6945 21.2937 16.9767C21.2005 17.1122 21.1068 17.2215 21.0373 17.2958C21.0029 17.3326 20.9754 17.3598 20.9582 17.3763C20.9497 17.3845 20.9437 17.39 20.9409 17.3927C20.9404 17.3931 20.94 17.3935 20.9397 17.3937C20.9395 17.3939 20.9393 17.3941 20.9392 17.3942L20.9239 17.4076L20.9068 17.4247L17.0018 21.3257L13.0968 17.4247Z" stroke="#E3A1A1" stroke-width="1.5" />
-                                                </svg>
-                                            </div>
+
                                             <div style="background-color:rgba(0, 0, 0, 0.70); left:0.25px" class="absolute w-[112px] h-[35px] rounded-[2px] flex flex-col right-[2px] left-[2px] py-[2px] px-[4px]">
                                                 <strong class="text-[12px] text-[#FFFFFF] font-bold text-center">${host.HostName}</strong>
                                                 <p style="font-weight:400; line-height:100%" class="flex items-center gap-1 text-[10px] justify-center text-[#FFFFFF]">
@@ -980,48 +975,16 @@
             window.location.href = "/LocationManagement/Index?LocationId=" + CurrentLocationId;
         }
     </script>
-    <script>
-        document.getElementById("tab1Button").onclick = function () {
-            var tab1Button = document.getElementById("tab1Button");
-            if (tab1Button.classList.contains("active")) {
-            } else {
-                tab1Button.classList.add("active");
-            }
-            var tab2Button = document.getElementById("tab2Button");
-            if (tab2Button.classList.contains("active")) {
-                tab2Button.classList.remove("active");
-            } else {
-            }
-            var tab1 = document.getElementById("tab1");
-            tab1.classList.remove("hidden");
-
-            var tab2 = document.getElementById("tab2");
-            tab2.classList.add("hidden");
-        };
-        document.getElementById("tab2Button").onclick = function () {
-            var tab1Button = document.getElementById("tab1Button");
-            if (tab1Button.classList.contains("active")) {
-                tab1Button.classList.remove("active");
-            } else {
-            }
-            var tab2Button = document.getElementById("tab2Button");
-            if (tab2Button.classList.contains("active")) {
-            } else {
-                tab2Button.classList.add("active");
-            }
-            var tab1 = document.getElementById("tab1");
-            tab1.classList.add("hidden");
-
-            var tab2 = document.getElementById("tab2");
-            tab2.classList.remove("hidden");
-        };
-    </script>
     <!----------------------------------------------------Location---------------------------------------------------->
     <!--#region 1-->
     <script>
         function LocationFunction(i) {
             window.location.href = "/LocationManagement/Index?LocationId=" + i;
         }
+        function ClubDetailActionFunction(i, j) {
+            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
+        }
     </script>
     <!--#endregion-->
 }
+

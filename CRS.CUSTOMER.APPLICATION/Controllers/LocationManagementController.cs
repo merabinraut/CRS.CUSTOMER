@@ -65,7 +65,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid location details",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var agentId = ApplicationUtilities.GetSessionValue("AgentId")?.ToString()?.DecryptParameter();
             var Model = new LocationClubHostModel();
@@ -146,7 +146,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid Details",
                     Title = NotificationMessage.WARNING.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
 
@@ -217,7 +217,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid Details",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
             string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
@@ -255,7 +255,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Message = "Something went wrong.",
                 Title = NotificationMessage.INFORMATION.ToString()
             });
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("Index", "DashboardV2");
         }
 
         #region Club Reservation
@@ -272,7 +272,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid Details",
                     Title = NotificationMessage.WARNING.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var clubDetailResponse = _business.GetClubDetailById(cId);
             var responseModel = new ClubReservationModel()
@@ -310,7 +310,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid club details",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var responseModel = new ReservationPlanListModel()
             {
@@ -332,7 +332,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid details",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             else
             {
@@ -342,7 +342,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse.First().Message.ToString() ?? "Invalid details",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
 
         }

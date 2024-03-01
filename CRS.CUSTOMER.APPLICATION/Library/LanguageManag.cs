@@ -24,7 +24,7 @@ namespace CRS.CUSTOMER.APPLICATION.Library
         }
         public static string GetDefaultLanguage()
         {
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") return "Ja";
+            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") return "en";
             return AvailableLanguages[1].LanguageCultureName;
         }
         public void SetLanguage(string lang)

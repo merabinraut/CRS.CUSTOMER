@@ -60,7 +60,8 @@ namespace CRS.CUSTOMER.REPOSITORY.Search
         public List<SearchFilterClubDetailCommon> ClubPreferenceFilter(ClubPreferenceFilterRequest Request)
         {
             var Response = new List<SearchFilterClubDetailCommon>();
-            string SQL = $"EXEC sproc_cp_search_filter_management @Flag = '1', @LocationId= {_dao.FilterString(Request.LocationId)}, @SearchFilter =N{_dao.FilterString(Request.SearchFilter)}, @ClubCategory= {_dao.FilterString(Request.ClubCategory)}, @Price= {_dao.FilterString(Request.Price)}, @Shift = {_dao.FilterString(Request.Shift)}, @Time= {_dao.FilterString(Request.Time)}, @ClubAvailability = {_dao.FilterString(Request.ClubAvailability)}, @CustomerId = {_dao.FilterString(Request.CustomerId)}";
+            string SQL = $"EXEC sproc_cp_search_filter_management @Flag = '1', @LocationId= {_dao.FilterString(Request.LocationId)}, @ClubCategory= {_dao.FilterString(Request.ClubCategory)}, @Price= {_dao.FilterString(Request.Price)}, @Shift = {_dao.FilterString(Request.Shift)}, @Time= {_dao.FilterString(Request.Time)}, @ClubAvailability = {_dao.FilterString(Request.ClubAvailability)}, @CustomerId = {_dao.FilterString(Request.CustomerId)}" +
+                $"{(!string.IsNullOrEmpty(Request.SearchFilter) ? $", @SearchFilter = N{_dao.FilterString(Request.SearchFilter)}" : "")}";
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0)
             {
@@ -105,7 +106,8 @@ namespace CRS.CUSTOMER.REPOSITORY.Search
         public List<HostPreferenceFilterResponse> HostPreferenceFilter(HostPreferenceFilterRequest Request)
         {
             var Response = new List<HostPreferenceFilterResponse>();
-            string SQL = $"EXEC sproc_cp_search_filter_management @Flag = '2', @LocationId= {_dao.FilterString(Request.LocationId)}, @SearchFilter = N{_dao.FilterString(Request.SearchFilter)}, @Height = {_dao.FilterString(Request.Height)}, @Age = {_dao.FilterString(Request.Age)}, @BloodType = {_dao.FilterString(Request.BloodType)}, @ConstellationGroup = {_dao.FilterString(Request.ConstellationGroup)}, @Occupation = {_dao.FilterString(Request.Occupation)}, @CustomerId = {_dao.FilterString(Request.CustomerId)} ";
+            string SQL = $"EXEC sproc_cp_search_filter_management @Flag = '2', @LocationId= {_dao.FilterString(Request.LocationId)}, @Height = {_dao.FilterString(Request.Height)}, @Age = {_dao.FilterString(Request.Age)}, @BloodType = {_dao.FilterString(Request.BloodType)}, @ConstellationGroup = {_dao.FilterString(Request.ConstellationGroup)}, @Occupation = {_dao.FilterString(Request.Occupation)}, @CustomerId = {_dao.FilterString(Request.CustomerId)} " +
+                 $"{(!string.IsNullOrEmpty(Request.SearchFilter) ? $", @SearchFilter = N{_dao.FilterString(Request.SearchFilter)}" : "")}";
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0)
                 Response = _dao.DataTableToListObject<HostPreferenceFilterResponse>(dbResponse).ToList();

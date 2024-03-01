@@ -1186,13 +1186,15 @@ label {
     height: 100%;
     align-items: center;
     justify-content: center;
-    background: #ffd5e5a8;
+    opacity: 0.5;
+    background: #3E3E3E;
     box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(17px);
 }
 
-    .reservation-footer .btn {
-        height: 40px;
-    }
+.reservation-footer .btn {
+    height: 40px;
+}
 
 .popularity {
     display: block;

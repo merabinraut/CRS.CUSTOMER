@@ -44,7 +44,7 @@
 
             <!-- club name -->
             <section class="w-full flex px-4 pb-2 justify-between ">
-                <a onClick={goToTop}>
+                <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                     <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
                         <div style="border: 1px solid #FAFAFA;"
                              class="h-12 w-12 rounded-full  bg-primary border overflow-hidden">
@@ -74,16 +74,19 @@
 
                 <div class=" w-6 h-6 flex flex-col justify-center items-center  p-1  scale-90">
                     <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer">
-                        <div>
-                            @if (item.IsBookmarked.ToUpper() == "Y")
-                            {
+                        @if (item.IsBookmarked.ToUpper() == "Y")
+                        {
+                            <div onclick="RemoveBookmark('@item.ClubId','','club')">
                                 <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[24px] w-[24px]" alt="filled bookmark" />
-                            }
-                            else
-                            {
+                            </div>
+                        }
+                        else
+                        {
+                            <div onclick="AddBookmark('@item.ClubId','','club')">
                                 <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[24px] w-[24px]" alt="not filled bookmark" />
-                            }
-                        </div>
+                            </div>
+                        }
+
                         <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
                             保存
                         </div>
@@ -96,7 +99,6 @@
                 @foreach (var item2 in item.HostGalleryImage)
                 {
                     <div class=" ">
-                        <!-- onclick="OpenImagePopup('@item2')">-->
                         <img src="@item2"
                              class="aspect-square object-cover h-[120px] w-full" alt="host image" />
                     </div>
@@ -114,7 +116,7 @@
                         }
                         for (int i = 0; i < unratedScale; i++)
                         {
-                            <img src="~/Content/assets/images/ratingstar-notfilled.svg" class="h-[24px] w-[24px]" alt="unrated" />
+                            <img src="~/Content/assets/images/ratingstar-notfilled.svg" class="h-[18px] w-[18px]" alt="unrated" />
                         }
                     }
                     <div class=" text-xs scale-110" title="club rating">
@@ -179,7 +181,7 @@
                         }
                     }
                 </div>
-                <button class="btn-gradient">
+                <button class="btn-gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
                 </button>
             </div>
@@ -208,20 +210,22 @@
     {
         <div class="flex flex-row gap-[16px] mx-[16px]">
             <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
-                <div class="w-full flex justify-center">
+                <div class="w-full flex justify-center" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                          src="@item.HostImage" />
                 </div>
-                <div id="like">
-                    @if (item.IsBookmarked.ToUpper() == "Y")
-                    {
+                @if (item.IsBookmarked.ToUpper() == "Y")
+                {
+                    <div id="like" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
                         <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
-                    }
-                    else
-                    {
-                        <img src="~/Content/assets/images/loveicon-notfilled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
-                    }
-                </div>
+                    </div>
+                }
+                else
+                {
+                    <div id="like" onclick="AddBookmark('@item.ClubId','@item.HostId','host')">
+                        <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                    </div>
+                }
             </div>
             <div class="grid mt-[16px] mx-[16px] mb-[10px] grid-rows-7">
                 <div style="line-height: 140%;" class="text-[10px]">

@@ -21,7 +21,7 @@ using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
-    public class DashboardV2Controller : Controller
+    public class DashboardV2Controller : CustomController
     {
         private readonly IDashboardBusiness _oldDashboardBusiness;
         private readonly IRecommendedClubHostBusiness _recommendedClubHostBuss;

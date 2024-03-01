@@ -46,11 +46,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     LocationId = lId,
                     SearchFilter = SearchFilter,
-                    ClubCategory = string.Join(",", ClubCategory.Split(',').Select(x => x.DecryptParameter())),
-                    Price = string.Join(",", Price.Split(',').Select(x => x.DecryptParameter())),
+                    ClubCategory = string.Join(",", ClubCategory.Split(',').Select(x => x.DecryptParameter())).Trim(','),
+                    Price = string.Join(",", Price.Split(',').Select(x => x.DecryptParameter())).Trim(','),
                     Shift = string.IsNullOrEmpty(Shift) ? string.Empty : Shift.DecryptParameter(),
-                    Time = string.IsNullOrEmpty(Time) ? string.Empty : Time.DecryptParameter(),
-                    ClubAvailability = string.Join(",", ClubAvailability.Split(',').Select(x => x.DecryptParameter())),
+                    Time = string.Join(",", Time.Split(',').Select(x => x.DecryptParameter())).Trim(','),
+                    ClubAvailability = string.Join(",", ClubAvailability.Split(',').Select(x => x.DecryptParameter())).Trim(','),
                     CustomerId = CustomerId
                 };
                 var dbResponse = _searchBusiness.ClubPreferenceFilter(dbRequest);
@@ -151,10 +151,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     LocationId = lId,
                     SearchFilter = SearchFilter,
-                    Height = string.Join(",", Height.Split(',').Select(x => x.DecryptParameter())),
-                    Age = string.Join(",", Age.Split(',').Select(x => x.DecryptParameter())),
-                    BloodType = string.Join(",", BloodType.Split(',').Select(x => x.DecryptParameter())),
-                    ConstellationGroup = string.Join(",", ConstellationGroup.Split(',').Select(x => x.DecryptParameter())),
+                    Height = string.Join(",", Height.Split(',').Select(x => x.DecryptParameter())).Trim(','),
+                    Age = string.Join(",", Age.Split(',').Select(x => x.DecryptParameter())).Trim(','),
+                    BloodType = string.Join(",", BloodType.Split(',').Select(x => x.DecryptParameter())).Trim(','),
+                    ConstellationGroup = string.Join(",", ConstellationGroup.Split(',').Select(x => x.DecryptParameter())).Trim(','),
                     Occupation = (string.IsNullOrEmpty(Occupation) || Occupation.Trim() == "0") ? string.Empty : Occupation.DecryptParameter(),
                     CustomerId = CustomerId
                 };
