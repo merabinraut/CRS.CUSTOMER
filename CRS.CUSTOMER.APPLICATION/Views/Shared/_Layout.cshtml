@@ -167,6 +167,10 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        .disable-click {
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="md:hidden">
@@ -356,6 +360,7 @@
             <!-- #endregion -->
             <!----Render Body section start-->
             <div>
+                <input type="text" id="current-location-id" value="" hidden />
                 @RenderBody()
                 <div class="loader" id="loader-id-v2" style="display:none;">
                     <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
@@ -369,6 +374,9 @@
                 </div>
 
                 <div id="preferencefilterpopUp-id">
+
+                </div>
+                <div id="datetimefilterpopup-id">
 
                 </div>
             </div>
@@ -411,7 +419,7 @@
                 </div>
                 <div class="footer bg-footer">
                     <div class="footer-logo px-4 pt-[12px] pb-[16px]">
-                        <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo.svg" />
+                        <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo_2.svg" />
                     </div>
                     <div class="p-4">
                         <div class="footer-link text-white grid grid-cols-2 ">
@@ -465,6 +473,8 @@
             $('select').select2({
                 minimumResultsForSearch: Infinity
             });
+
+            setInterval(NotificationFunction, 20000);
         });
     </script>
     <!-- #endregion -->
@@ -516,38 +526,33 @@
         }
         }
     });
-        var notificationBell = document.getElementById("notification-bell-id");
-        if (notificationBell) {
             function NotificationFunction() {
                 $.ajax({
                     url: '/NotificationManagement/HasUnReadNotification',
                     type: 'POST',
                     success: function (result) {
                         if (result.HasUnReadNotification) {
-                            notificationBell.innerHTML = '<img src="/Content/assets/images/Customer/UnReadNotification.svg" class="h-[10px]" alt="notification"/>';
+                            document.getElementById("notification-bell-id").getElementsByTagName("span")[0].style.display = "block";
                         }
                         else {
-                            notificationBell.innerHTML = '';
                         }
                     },
                     error: function () {
-                        notificationBell.innerHTML = '';
                     }
                 });
             }
-            setInterval(NotificationFunction, 20000);
-        }
+
     </script>
     <script>
         function OnLoadLoaderFunction() {
-            document.getElementById('loader-id-v2').style.display = 'block';
+            document.getElementById('loader-id-v2').style.display = 'flex';
             setTimeout(function () {
                 document.getElementById('loader-id-v2').style.display = 'none';
             }, 3000);
         }
 
         function EnableLoaderFunction() {
-            document.getElementById('loader-id-v2').style.display = 'block';
+            document.getElementById('loader-id-v2').style.display = 'flex';
         }
         function DisableLoaderFunction() {
             document.getElementById('loader-id-v2').style.display = 'none';

@@ -62,4 +62,12 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string ClubLocationId { get; set; }
         public string IsBookmarked { get; set; }
     }
+    public class ClubDateTimeAndOtherFilterRequest
+    {
+        public string LocationId { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
+        public string NoOfPeople { get; set; }
+        public string CustomerId { get; set; }
+    }
 }
