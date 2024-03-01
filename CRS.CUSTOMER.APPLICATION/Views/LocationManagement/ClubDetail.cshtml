@@ -90,7 +90,7 @@
     <div class="flex gap-[8px]">
         <div>
             <img src="@Model.ClubLogo"
-                 class="h-[48px] w-[48px] object-fill rounded-full" />
+                 class="h-[48px] w-[48px] object-fill rounded-full object-cover" />
         </div>
         <div>
             <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEng</div>
@@ -303,7 +303,7 @@
                                     @if (!string.IsNullOrEmpty(item.HostImage))
                                     {
                                         <img src="@item.HostImage"
-                                             class="w-[128px] h-[180px] object-fill rounded-[6px]" />
+                                             class="w-[128px] h-[180px] object-fill rounded-[6px] object-cover" />
                                     }
                                     else
                                     {
@@ -363,7 +363,7 @@
                         @if (!string.IsNullOrEmpty(item.HostImage))
                         {
                             <img src="@item.HostImage"
-                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
+                                 class="w-[104px] h-[104px] object-fill rounded-[6px] object-cover" />
                         }
                         else
                         {
@@ -561,7 +561,7 @@
             <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3">
                 @foreach (var item in Model.ClubGalleryImageList)
                 {
-                    <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] w-full object-fill " onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
+                    <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] w-full object-fill object-cover" onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
                 }
             </div>
         </div>
