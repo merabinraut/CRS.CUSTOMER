@@ -77,9 +77,12 @@ function GetPreferenceFilterPopUp() {
         savedData = JSON.parse(savedData);
         document.getElementById('preferencefilterpopUp-id').innerHTML = savedData.content; // Render the HTML content
 
+        
         // Set input field values
         for (var inputId in savedData.inputValues) {
-            document.getElementById(inputId).value = savedData.inputValues[inputId];
+            if (inputId != "" && inputId != '') {
+                document.getElementById(inputId).value = savedData.inputValues[inputId];
+            }
         }
 
         // Set checkbox states
@@ -204,7 +207,10 @@ function PreferenceFilterCommon() {
             this.classList.add('active');
             if (this.classList.contains('contains-time-class')) {
                 var div = document.getElementById('time-div-id');
-                div.removeAttribute('hidden');
+                div.style.display = 'block';
+            } else {
+                var div = document.getElementById('time-div-id');
+                div.style.display = 'none';
             }
             // Get the text content of the specific element within the clicked div
             var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue');
@@ -217,7 +223,7 @@ function PreferenceFilterCommon() {
     //#endregion
 
     //#region 5
-    //debugger;
+    //
     //const tabs = document.querySelector(".wrapper");
     //const tabButton = document.querySelectorAll(".tab-button");
     //const contents = document.querySelectorAll(".content");
@@ -445,6 +451,7 @@ function InitiateDateTimeFilterPopupFunction() {
         savedData = JSON.parse(savedData);
         document.getElementById('preferencefilterpopUp-id').innerHTML = savedData.content; // Render the HTML content
 
+        
         // Set input field values
         for (var inputId in savedData.inputValues) {
             if (inputId != "" && inputId != '') {

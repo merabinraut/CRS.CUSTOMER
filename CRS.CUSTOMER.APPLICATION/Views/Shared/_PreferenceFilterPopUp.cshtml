@@ -77,7 +77,7 @@
                                                     </svg>
                                                 </div>
                                                 <input type="search" id="club-search" name="SearchFilter" class="input-search block w-full h-[40px] focus-visible:outline-none" placeholder="店舗名から探す">
-                                                <input type="text" class="location-class" name="LocationId" value="" hidden />
+                                                <input type="text" class="location-class" id="LocationId_1" name="LocationId" value="" hidden />
                                                 <input type="text" id="club-category-id" name="ClubCategory" value="" hidden />
                                                 <input type="text" id="price-id" name="Price" value="" hidden />
                                                 <input type="text" id="time-type-id" name="Shift" value="@ApplicationUtilities.EncryptParameter("1").ToString()" hidden />
@@ -129,7 +129,7 @@
                                                 料金
                                             </div>
                                             <div class="flex flex-row mt-[8px] gap-6 mb-4">
-                                                <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm active">
+                                                <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm">
                                                     <div class="">
                                                         <svg class="inactive-svg" xmlns="http://www.w3.org/2000/svg" width="13" height="13"
                                                              viewBox="0 0 13 13" fill="none">
@@ -174,7 +174,7 @@
 
                                             </div>
                                             <!------------------------------------------------------------------------------#region Time------------------------------------------------------------------------------>
-                                            <div class="relative" id="time-div-id" hidden>
+                                            <div class="relative" id="time-div-id" style="display:none;">
                                                 <div class=" showTimeList h-[32px] w-[72px] px-3 py-1 bg-[#F6F6F6] rounded-[4px] text-[#666] text-xs flex justify-between items-center">
                                                     <div id="selected-time-id">
                                                         01:00
@@ -209,7 +209,7 @@
                                         </div>
                                         <div>
                                             <div class="flex flex-col mt-[8px] gap-6 mb-4">
-                                                <div class="multi-select text-[#333] text-sm active">
+                                                <div class="multi-select text-[#333] text-sm">
                                                     <div class="multi-select-value text-sm text-[#333]" data-value="@ApplicationUtilities.EncryptParameter("0").ToString()">今すぐ行けるお店</div>
                                                     <div class="">
                                                         <svg class="inactive-svg" xmlns="http://www.w3.org/2000/svg" width="25" height="24"
@@ -274,7 +274,7 @@
                                                     </svg>
                                                 </div>
                                                 <input type="search" id="host-search" name="SearchFilter" class="input-search block w-full h-[40px] focus-visible:outline-none" placeholder="店舗名から探す">
-                                                <input type="text" class="location-class" name="LocationId" value="" hidden />
+                                                <input type="text" class="location-class" id="LocationId_1" name="LocationId" value="" hidden />
                                                 <input type="text" id="host-height-id" name="Height" value="" hidden />
                                                 <input type="text" id="host-age-id" name="Age" value="" hidden />
                                                 <input type="text" id="host-bloodtype-id" name="BloodType" value="" hidden />
