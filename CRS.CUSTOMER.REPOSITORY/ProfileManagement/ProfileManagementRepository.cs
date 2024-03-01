@@ -79,9 +79,11 @@ namespace CRS.CUSTOMER.REPOSITORY.ProfileManagement
         {
             string sql = "sproc_customer_profile_management";
             sql += " @flag= 'u'";
-            sql += ", @NickName=" + _dao.FilterString(userProfileCommon.NickName);
-            sql += ", @FirstName=" + _dao.FilterString(userProfileCommon.FirstName);
-            sql += ", @LastName=" + _dao.FilterString(userProfileCommon.LastName);
+            sql += ",  @NickName=" + _dao.FilterString(userProfileCommon.NickName);
+
+            sql += string.IsNullOrEmpty(userProfileCommon.FirstName)? ",  @FirstName=" + _dao.FilterString(userProfileCommon.FirstName) : ",  @FirstName=N" + _dao.FilterString(userProfileCommon.FirstName);
+            sql += string.IsNullOrEmpty(userProfileCommon.LastName) ? ", @LastName=" + _dao.FilterString(userProfileCommon.LastName) : ", @LastName=N" + _dao.FilterString(userProfileCommon.LastName);
+
             sql += ", @MobileNumber=" + _dao.FilterString(userProfileCommon.MobileNumber);
             sql += ", @DOB=" + _dao.FilterString(userProfileCommon.DateOfBirth);
             sql += ", @EmailAddress=" + _dao.FilterString(userProfileCommon.EmailAddress);
@@ -89,9 +91,11 @@ namespace CRS.CUSTOMER.REPOSITORY.ProfileManagement
             sql += ", @PreferredLocation=" + _dao.FilterString(userProfileCommon.PreferredLocation);
             sql += ", @PostalCode=" + _dao.FilterString(userProfileCommon.PostalCode);
             sql += ", @Prefecture=" + _dao.FilterString(userProfileCommon.Prefecture);
-            sql += ", @City=" + _dao.FilterString(userProfileCommon.City);
-            sql += ", @Street=" + _dao.FilterString(userProfileCommon.Street);
-            sql += ", @ResidenceNumber=" + _dao.FilterString(userProfileCommon.ResidenceNumber);
+
+            sql += string.IsNullOrEmpty(userProfileCommon.City) ? ", @City=" + _dao.FilterString(userProfileCommon.City) : ", @City=N" + _dao.FilterString(userProfileCommon.City);
+            sql += string.IsNullOrEmpty(userProfileCommon.Street) ? ", @Street=" + _dao.FilterString(userProfileCommon.Street): ", @Street=N" + _dao.FilterString(userProfileCommon.Street);
+
+            sql += string.IsNullOrEmpty(userProfileCommon.ResidenceNumber) ?  ", @ResidenceNumber=" + _dao.FilterString(userProfileCommon.ResidenceNumber): ", @ResidenceNumber=N" + _dao.FilterString(userProfileCommon.ResidenceNumber);
             sql += ", @ProfileImage=" + _dao.FilterString(userProfileCommon.ProfileImage);
             sql += ", @Session=" + _dao.FilterString(userProfileCommon.Session);
             sql += ", @UserId=" + _dao.FilterString(userProfileCommon.ActionUserId);

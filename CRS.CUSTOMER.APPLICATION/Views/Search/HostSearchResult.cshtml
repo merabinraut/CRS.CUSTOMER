@@ -1,0 +1,402 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.Search.HostSearchResultModel
+@{
+    ViewBag.Title = "Host";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #like {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+    }
+
+    .active {
+        color: #D75A8B;
+        background: #F3F3F3;
+    }
+</style>
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] px-4 py-[10px] h-[44px]">
+    <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
+                  fill="#BCB08A" />
+        </svg>戻る
+    </div>
+    <div class="text-center w-full font-bold"></div>
+</div>
+<!-- for search button -->
+<div class="bg-[#F1F1F1] py-[12px]">
+
+    <div class="flex flex-row justify-center">
+        <div id="child" style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.14);width:90%"
+             class=" border-[1px] flex flex-col rounded-[8px] border-[#F1F1F1] bg-[#FCF8F9]  h-[196px]  mx-[16px]">
+            <div style="background-color: #EEEEEE; margin-left:15px;margin-right:15px; margin-top:24px; "
+                 class="grid grid-cols-2 text-[14px]  py-[8px] mx-[15px] rounded-[4px] border-black  ">
+                <div class="flex pr-[8px]  flex-row gap-[4px] items-center   ">
+                    <div class="pl-[8px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
+                            <path d="M7.5 2.39062C5.17625 2.39062 3.28125 4.28563 3.28125 6.60938C3.28125 7.26875 3.54875 8.025 3.91125 8.85063C4.27375 9.67625 4.74062 10.5531 5.215 11.37C5.81209 12.3945 6.44733 13.3962 7.11937 14.3731L7.5 14.9294L7.88125 14.3731C7.88125 14.3731 8.83687 13.005 9.785 11.37C10.2594 10.5531 10.7263 9.67625 11.0888 8.85063C11.4513 8.025 11.7188 7.26875 11.7188 6.60938C11.7188 4.28563 9.82375 2.39062 7.5 2.39062ZM7.5 3.32813C9.31875 3.32813 10.7812 4.79063 10.7812 6.60938C10.7812 6.98438 10.58 7.695 10.2394 8.47C9.89875 9.24438 9.42813 10.1031 8.96438 10.9013C8.22875 12.1719 7.77063 12.8444 7.5 13.245C7.22875 12.8444 6.77125 12.1719 6.035 10.9013C5.57188 10.1031 5.10125 9.24438 4.76063 8.47C4.42 7.695 4.21875 6.98438 4.21875 6.60938C4.21875 4.79063 5.68125 3.32813 7.5 3.32813ZM7.5 5.67188C7.25136 5.67188 7.0129 5.77065 6.83709 5.94646C6.66127 6.12228 6.5625 6.36073 6.5625 6.60938C6.5625 6.85802 6.66127 7.09647 6.83709 7.27229C7.0129 7.4481 7.25136 7.54688 7.5 7.54688C7.74864 7.54688 7.9871 7.4481 8.16291 7.27229C8.33873 7.09647 8.4375 6.85802 8.4375 6.60938C8.4375 6.36073 8.33873 6.12228 8.16291 5.94646C7.9871 5.77065 7.74864 5.67188 7.5 5.67188Z"
+                                  fill="#B08194" />
+                        </svg>
+
+                    </div>
+                    <div style="color: #666666">
+
+                        歌舞伎町/東京
+                    </div>
+                </div>
+
+                <div class="flex flex-row gap-[4px] pl-[8px] pr-[12px]   items-center "
+                     style="border-left:1px solid #D6D6D6">
+                    <div>
+                        <svg style="margin-left: 8px;" xmlns="http://www.w3.org/2000/svg" width="17" height="18"
+                             viewBox="0 0 17 18" fill="none">
+                            <path d="M6.74362 3.25108C6.55464 2.40552 5.94181 1.78418 5.2165 1.78418C4.49118 1.78418 3.87838 2.40552 3.68937 3.25108H1.5V4.35125H3.68937C3.87835 5.19681 4.49118 5.81815 5.2165 5.81815C5.94181 5.81815 6.55461 5.19681 6.74362 4.35125H15.5V3.25108H6.74362ZM5.2165 4.71798C4.81858 4.71798 4.49485 4.30669 4.49485 3.80117C4.49485 3.29564 4.81858 2.88435 5.2165 2.88435C5.61441 2.88435 5.93814 3.29564 5.93814 3.80117C5.93814 4.30669 5.61441 4.71798 5.2165 4.71798Z"
+                                  fill="#B08194" />
+                            <path d="M8.5 7.3457C7.77468 7.3457 7.16189 7.96704 6.97287 8.8126H1.5V9.91278H6.97287C7.16186 10.7583 7.77468 11.3797 8.5 11.3797C9.22532 11.3797 9.83811 10.7583 10.0271 9.91278H15.5V8.8126H10.0271C9.83811 7.96704 9.22532 7.3457 8.5 7.3457ZM8.5 10.2795C8.10208 10.2795 7.77835 9.86822 7.77835 9.36269C7.77835 8.85716 8.10208 8.44588 8.5 8.44588C8.89792 8.44588 9.22165 8.85716 9.22165 9.36269C9.22165 9.86822 8.89792 10.2795 8.5 10.2795Z"
+                                  fill="#B08194" />
+                            <path d="M5.2165 12.9072C4.49118 12.9072 3.87838 13.5286 3.68937 14.3741H1.5V15.4743H3.68937C3.87835 16.3199 4.49118 16.9412 5.2165 16.9412C5.94181 16.9412 6.55461 16.3199 6.74362 15.4743H15.5V14.3741H6.74362C6.55461 13.5286 5.94181 12.9072 5.2165 12.9072ZM5.2165 15.841C4.81858 15.841 4.49485 15.4297 4.49485 14.9242C4.49485 14.4187 4.81858 14.0074 5.2165 14.0074C5.61441 14.0074 5.93814 14.4187 5.93814 14.9242C5.93814 15.4297 5.61441 15.841 5.2165 15.841Z"
+                                  fill="#B08194" />
+                        </svg>
+
+                    </div>
+                    <div style="color: #666666" class="text-[14px] font-normal leading-[16px]">
+                        こだわり
+                    </div>
+                </div>
+
+            </div>
+            <div style="background-color: #EEEEEE;  margin-left:15px;margin-right:15px; margin-top:8px; "
+                 class="flex flex-row justify-between text-[14px] py-[8px] mx-[15px] rounded-[4px] border-black  ">
+                <div class="flex flex-row gap-[4px] items-center  ">
+                    <div class="pl-[8px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
+                            <path d="M4.78125 3.10938V3.64062H2.65625V15.3281H14.3438V3.64062H12.2188V3.10938H11.1562V3.64062H5.84375V3.10938H4.78125ZM3.71875 4.70312H4.78125V5.23438H5.84375V4.70312H11.1562V5.23438H12.2188V4.70312H13.2812V5.76562H3.71875V4.70312ZM3.71875 6.82812H13.2812V14.2656H3.71875V6.82812ZM6.90625 7.89062V8.95312H7.96875V7.89062H6.90625ZM9.03125 7.89062V8.95312H10.0938V7.89062H9.03125ZM11.1562 7.89062V8.95312H12.2188V7.89062H11.1562ZM4.78125 10.0156V11.0781H5.84375V10.0156H4.78125ZM6.90625 10.0156V11.0781H7.96875V10.0156H6.90625ZM9.03125 10.0156V11.0781H10.0938V10.0156H9.03125ZM11.1562 10.0156V11.0781H12.2188V10.0156H11.1562ZM4.78125 12.1406V13.2031H5.84375V12.1406H4.78125ZM6.90625 12.1406V13.2031H7.96875V12.1406H6.90625ZM9.03125 12.1406V13.2031H10.0938V12.1406H9.03125Z"
+                                  fill="#B08194" />
+                        </svg>
+
+                    </div>
+                    <div style="color: #666666 ; ">
+
+                        2024/01/01
+                    </div>
+                </div>
+                <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
+                     class="flex flex-row gap-[4px] justify-center  items-center  ">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
+                            <path d="M8.5 3.10938C4.98454 3.10938 2.125 5.96892 2.125 9.48438C2.125 12.9998 4.98454 15.8594 8.5 15.8594C12.0155 15.8594 14.875 12.9998 14.875 9.48438C14.875 5.96892 12.0155 3.10938 8.5 3.10938ZM8.5 4.17188C11.4403 4.17188 13.8125 6.54408 13.8125 9.48438C13.8125 12.4247 11.4403 14.7969 8.5 14.7969C7.80204 14.798 7.11072 14.6613 6.46567 14.3948C5.82062 14.1282 5.23453 13.7369 4.741 13.2434C4.24746 12.7498 3.85619 12.1638 3.58961 11.5187C3.32303 10.8737 3.18638 10.1823 3.1875 9.48438C3.1875 6.54408 5.55971 4.17188 8.5 4.17188ZM7.96875 5.23438V10.0156H11.6875V8.95312H9.03125V5.23438H7.96875Z"
+                                  fill="#B08194" />
+                        </svg>
+
+                    </div>
+                    <div style="color: #666666">
+                        19:00
+                    </div>
+                </div>
+                <div class="flex flex-row gap-[4px]  items-center  ">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M5.28125 4.70312C4.43656 4.70537 3.62711 5.04191 3.02983 5.6392C2.43254 6.23649 2.09599 7.04594 2.09375 7.89062C2.09375 8.94462 2.61225 9.88317 3.40558 10.464C2.0045 11.1589 1.03125 12.5996 1.03125 14.2656H2.09375C2.09282 13.8468 2.17463 13.4319 2.33448 13.0447C2.49434 12.6576 2.72909 12.3058 3.02526 12.0096C3.32144 11.7135 3.6732 11.4787 4.06034 11.3189C4.44749 11.159 4.8624 11.0772 5.28125 11.0781C5.7001 11.0772 6.11501 11.159 6.50216 11.3189C6.8893 11.4787 7.24106 11.7135 7.53724 12.0096C7.83341 12.3058 8.06816 12.6576 8.22802 13.0447C8.38787 13.4319 8.46968 13.8468 8.46875 14.2656H9.53125C9.53032 13.8468 9.61213 13.4319 9.77198 13.0447C9.93184 12.6576 10.1666 12.3058 10.4628 12.0096C10.7589 11.7135 11.1107 11.4787 11.4978 11.3189C11.885 11.159 12.2999 11.0772 12.7188 11.0781C13.1376 11.0772 13.5525 11.159 13.9397 11.3189C14.3268 11.4787 14.6786 11.7135 14.9747 12.0096C15.2709 12.3058 15.5057 12.6576 15.6655 13.0447C15.8254 13.4319 15.9072 13.8468 15.9062 14.2656H16.9688C16.9688 12.5996 15.9955 11.1589 14.5944 10.464C15.0001 10.1685 15.3303 9.78142 15.5582 9.33428C15.7862 8.88713 15.9054 8.39252 15.9062 7.89062C15.9062 6.13679 14.4726 4.70312 12.7188 4.70312C11.8741 4.70537 11.0646 5.04191 10.4673 5.6392C9.87004 6.23649 9.53349 7.04594 9.53125 7.89062C9.53125 8.94462 10.0498 9.88317 10.8431 10.464C10.0669 10.8454 9.42436 11.4529 9 12.2065C8.57564 11.4529 7.9331 10.8454 7.15692 10.464C7.56258 10.1685 7.8928 9.78142 8.12075 9.33428C8.34869 8.88713 8.46792 8.39252 8.46875 7.89062C8.46875 6.13679 7.03508 4.70312 5.28125 4.70312ZM5.28125 5.76562C6.46204 5.76562 7.40625 6.70983 7.40625 7.89062C7.40625 9.07142 6.46204 10.0156 5.28125 10.0156C4.10046 10.0156 3.15625 9.07142 3.15625 7.89062C3.15625 6.70983 4.10046 5.76562 5.28125 5.76562ZM12.7188 5.76562C13.8995 5.76562 14.8438 6.70983 14.8438 7.89062C14.8438 9.07142 13.8995 10.0156 12.7188 10.0156C11.538 10.0156 10.5938 9.07142 10.5938 7.89062C10.5938 6.70983 11.538 5.76562 12.7188 5.76562Z"
+                                  fill="#B08194" />
+                        </svg>
+
+                    </div>
+                    <div style="color: #666666 ; margin-right:30px;">
+                        人数
+                    </div>
+                </div>
+
+            </div>
+            <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px; "
+                 class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]  ">
+                <div class="my-[12px] text-[12px] font-[700] text-[#FFF]">
+                    検索する
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div style="border: 1px solid #EDEDED;background: #E3E3E3;">
+
+    <!-- clippath -->
+    <div class="mx-[16px] mt-[8px]">
+        <svg id="clippath" xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
+            <path d="M0 4C0 1.79086 1.79086 0 4 0H215L202.675 14.4652L215 27H4C1.79086 27 0 25.2091 0 23V4Z"
+                  fill="url(#paint0_linear_2051_57311)" />
+            <defs>
+                <linearGradient id="paint0_linear_2051_57311" x1="21.5" y1="2.7" x2="145.635" y2="106.49"
+                                gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#99AEFB" />
+                    <stop offset="0.578125" stop-color="#F04AA4" />
+                    <stop offset="1" stop-color="#E7B282" />
+                </linearGradient>
+            </defs>
+            <image x="7" y="5" width="16" height="16" xlink:href="../../../assets/images/customer/slippathsvg.svg" />
+            <text y="18" x="25" font-family="Arial" font-size="14" style="font-weight: 700; " fill="#FAFAFA">
+
+                あなたにマッチするホスト
+            </text>
+        </svg>
+    </div>
+    <!-- clippath end  -->
+    <div class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px] my-[12px]">
+        @{
+            foreach (var item in Model.HostRecommendationModel)
+            {
+                var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
+                <div class="hosts-that-match-you @activeClass">
+                    <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
+                    <div class="like-host">
+                        <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                             viewBox="0 0 31 34" fill="none">
+                            <g filter="url(#filter0_d_3058_46008)">
+                                <circle cx="17" cy="17" r="10" fill="white" />
+                            </g>
+                            <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
+                                  stroke="#E3A1A1" stroke-width="1.5" />
+                            <defs>
+                                <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                                   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="3.5" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                             result="effect1_dropShadow_3058_46008" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
+                                             result="shape" />
+                                </filter>
+                            </defs>
+                        </svg>
+                        <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                             viewBox="0 0 31 34" fill="none">
+                            <g filter="url(#filter0_d_3058_39409)">
+                                <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                            </g>
+                            <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
+                                  fill="white" />
+                            <defs>
+                                <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                                   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="3.5" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                             result="effect1_dropShadow_3058_39409" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
+                                             result="shape" />
+                                </filter>
+                            </defs>
+                        </svg>
+
+                    </div>
+                    <div class="description">
+                        <div class="title">@item.HostNameEnglish</div>
+                        <div class="club-name"><img src="@item.ClubLogo" alt="club-logo" />@item.ClubNameEnglish</div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<!-- for search result -->
+<div class="bg-[##FFFFFF]  flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]">
+    <span>検索結果</span>
+    <span>@Model.FilteredHostModel.Count() 件</span>
+</div>
+<div class="no-scrollbar flex flex-wrap flex-row gap-[8px] justify-center my-[12px] bg-[#FFFFFF]">
+    @{
+        foreach (var item in Model.FilteredHostModel)
+        {
+            var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
+            <div class="hosts-that-match-you @activeClass">
+                <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
+                <div class="like-host">
+                    <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                         viewBox="0 0 31 34" fill="none">
+                        <g filter="url(#filter0_d_3058_46008)">
+                            <circle cx="17" cy="17" r="10" fill="white" />
+                        </g>
+                        <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
+                              stroke="#E3A1A1" stroke-width="1.5" />
+                        <defs>
+                            <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                <feOffset />
+                                <feGaussianBlur stdDeviation="3.5" />
+                                <feComposite in2="hardAlpha" operator="out" />
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                <feBlend mode="normal" in2="BackgroundImageFix"
+                                         result="effect1_dropShadow_3058_46008" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
+                                         result="shape" />
+                            </filter>
+                        </defs>
+                    </svg>
+                    <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                         viewBox="0 0 31 34" fill="none">
+                        <g filter="url(#filter0_d_3058_39409)">
+                            <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                        </g>
+                        <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
+                              fill="white" />
+                        <defs>
+                            <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                <feOffset />
+                                <feGaussianBlur stdDeviation="3.5" />
+                                <feComposite in2="hardAlpha" operator="out" />
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                <feBlend mode="normal" in2="BackgroundImageFix"
+                                         result="effect1_dropShadow_3058_39409" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
+                                         result="shape" />
+                            </filter>
+                        </defs>
+                    </svg>
+
+                </div>
+                <div class="description">
+                    <div class="title">@item.HostNameEnglish</div>
+                    <div class="club-name"><img src="@item.ClubLogo" alt="club-logo" />@item.ClubNameEnglish</div>
+                </div>
+            </div>
+        }
+    }
+</div>
+<!-- for pagination -->
+<div class="flex justify-between bg-[#fff] px-[16px] pt-[4px]">
+    <div class="px-3 py-[10px]  flex justify-center items-center" style="border: 1px solid #F8F8F8;"
+         onclick="leftPageinate()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+            <path d="M10.7075 1.65118C10.895 1.83871 11.0003 2.09302 11.0003 2.35818C11.0003 2.62335 10.895 2.87766 10.7075 3.06518L5.75754 8.01518L10.7075 12.9652C10.8897 13.1538 10.9905 13.4064 10.9882 13.6686C10.9859 13.9308 10.8808 14.1816 10.6954 14.367C10.5099 14.5524 10.2591 14.6576 9.99694 14.6599C9.73474 14.6621 9.48214 14.5613 9.29354 14.3792L3.63654 8.72218C3.44907 8.53466 3.34375 8.28035 3.34375 8.01518C3.34375 7.75002 3.44907 7.49571 3.63654 7.30819L9.29354 1.65118C9.48106 1.46371 9.73537 1.3584 10.0005 1.3584C10.2657 1.3584 10.52 1.46371 10.7075 1.65118Z"
+                  fill="#959595" />
+        </svg>
+    </div>
+    <!-- Pagination items will be generated dynamically based on the number of pages -->
+    <div id="pagination" class="flex justify-center items-center col-span-5"></div>
+    <div class="px-3 py-[10px]  flex justify-center items-center" style="border: 1px solid #F8F8F8;"
+         onclick="rightPageinate()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+            <path d="M5.29246 1.65118C5.10499 1.83871 4.99968 2.09302 4.99968 2.35818C4.99968 2.62335 5.10499 2.87766 5.29246 3.06518L10.2425 8.01518L5.29246 12.9652C5.11031 13.1538 5.00951 13.4064 5.01179 13.6686C5.01407 13.9308 5.11924 14.1816 5.30465 14.367C5.49005 14.5524 5.74087 14.6576 6.00306 14.6599C6.26526 14.6621 6.51786 14.5613 6.70646 14.3792L12.3635 8.72218C12.5509 8.53466 12.6562 8.28035 12.6562 8.01518C12.6562 7.75002 12.5509 7.49571 12.3635 7.30819L6.70646 1.65118C6.51894 1.46371 6.26463 1.3584 5.99946 1.3584C5.7343 1.3584 5.47999 1.46371 5.29246 1.65118Z"
+                  fill="#959595" />
+        </svg>
+    </div>
+</div>
+<!-- pagination end -->
+<div class=" ">
+    <div>
+
+    </div>
+    <div style="background-color: #FFFFFF;" class="flex flex-row items-center justify-end gap-1 pr-[16px] ">
+        <div class="flex flex-row items-center justify-end gap-1 pr-[16px] py-[12px] " id="scrollToTopButton">
+
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M7.99996 2.34375L1.89062 8.45308L2.60929 9.15575L7.99996 3.76508L13.3906 9.15575L14.1093 8.45308L7.99996 2.34375ZM7.99996 5.84375L1.89062 11.9531L2.60929 12.6557L7.99996 7.26508L13.3906 12.6557L14.1093 11.9531L7.99996 5.84375Z"
+                          fill="#040000" />
+                </svg>
+            </div>
+            <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
+                トップに戻る
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- </div> -->
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 20) {
+                    $('#scrollToTopButton').fadeIn();
+                } else {
+                    $('#scrollToTopButton').fadeOut();
+                }
+            });
+
+            $('#scrollToTopButton').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                return false;
+            });
+
+            $('.flex-col').on('click', function () {
+                $('.flex-col').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
+    <script>
+        let currentPage = 1;
+        const itemsPerPage = 12;
+        const totalItems = 150;
+        const maxVisiblePages = 3;
+
+        function leftPageinate() {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePagination();
+            }
+        }
+
+        function rightPageinate() {
+            if (currentPage < Math.ceil(totalItems / itemsPerPage)) {
+                currentPage++;
+                updatePagination();
+            }
+        }
+
+        function updatePagination() {
+            // Remove all existing pagination items
+            document.getElementById('pagination').innerHTML = '';
+
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - Math.floor(maxVisiblePages / 2) && i <= currentPage + Math.floor(maxVisiblePages / 2))) {
+                    const paginationItem = document.createElement('div');
+                    paginationItem.classList.add('px-3', 'py-[10px]', 'flex', 'justify-center', 'items-center', 'font-medium', 'leading-[24px]', 'text-[16px]');
+                    paginationItem.textContent = i;
+                    if (i === currentPage) {
+                        paginationItem.classList.add('active');
+                    }
+                    paginationItem.addEventListener('click', function () {
+                        currentPage = i;
+                        updatePagination();
+                    });
+                    document.getElementById('pagination').appendChild(paginationItem);
+                } else if (document.getElementById('pagination').lastElementChild.textContent !== '...') {
+                    const ellipsisItem = document.createElement('div');
+                    ellipsisItem.textContent = '...';
+                    ellipsisItem.classList.add('px-3', 'py-[10px]', 'flex', 'justify-center', 'items-center', 'font-medium', 'leading-[24px]', 'text-[16px]');
+                    document.getElementById('pagination').appendChild(ellipsisItem);
+                }
+            }
+        }
+        updatePagination();
+    </script>
+}

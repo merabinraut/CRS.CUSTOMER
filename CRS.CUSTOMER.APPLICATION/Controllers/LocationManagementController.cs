@@ -49,7 +49,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             this._recommendedClubHostBuss = recommendedClubHostBuss;
             this._commonManagementBuss = commonManagementBuss;
         }
-        public ActionResult Index(LocationClubHostRequestModel RequestModel)
+        public ActionResult Index(LocationClubHostRequestModel RequestModel, string RenderId = "")
         {
             ViewBag.ActionPageName = "Dashboard";
             var culture = Request.Cookies["culture"]?.Value;
@@ -93,7 +93,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 item.LocationId = item.LocationId.EncryptParameter();
                 item.ClubLogo = FileLocationPath + item.ClubLogo;
                 item.ClubCoverPhoto = FileLocationPath + item.ClubCoverPhoto;
-                item.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
+                //item.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
                 item.HostGalleryImage = item.HostGalleryImage.Select(x => FileLocationPath + x).ToList();
             }
             if (Model.ClubListModel != null && Model.ClubListModel.Count > 0)
@@ -126,6 +126,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var getTotalPage = _recommendedClubHostBuss.GetTotalRecommendedPageCount();
             ViewBag.TotalGroupCount = getTotalPage >= 0 ? getTotalPage : 0;
             Model.RequestModel = RequestModel.MapObject<LocationClubHostRequestModel>();
+
+            ViewBag.RenderValue = !string.IsNullOrEmpty(RenderId) ? RenderId : null;
             return View(Model);
         }
 
@@ -362,57 +364,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             });
             return RedirectToAction("Index", "Dashboard");
         }
-        //public ActionResult ViewHostDetail(string HostId)
-        //{
-        //    var hId = string.IsNullOrEmpty(HostId) ? string.Empty : HostId.DecryptParameter();
-        //    if (string.IsNullOrEmpty(hId))
-        //    {
-        //        AddNotificationMessage(new NotificationModel()
-        //        {
-        //            NotificationType = NotificationMessage.WARNING,
-        //            Message = "Invalid Details",
-        //            Title = NotificationMessage.WARNING.ToString()
-        //        });
-        //        return RedirectToAction("Index", "Dashboard");
-        //    }
-        //    if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") ViewBag.FileLocationPath = "";
-        //    else ViewBag.FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-
-        //    string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
-
-        //    var dbResponse = _business.ViewHostDetails(hId, agentId);
-        //    if (dbResponse != null)
-        //    {
-        //        var ResponseModel = dbResponse.MapObject<ViewHostDetailModel>();
-        //        ResponseModel.ClubId = ResponseModel.ClubId.EncryptParameter();
-        //        ResponseModel.HostId = ResponseModel.HostId.EncryptParameter();
-        //        ResponseModel.LocationId = ResponseModel.LocationId.EncryptParameter();
-        //        if (!string.IsNullOrEmpty(ResponseModel.HostInstagramLink) && ResponseModel.HostInstagramLink != "#")
-        //        {
-        //            if (!ResponseModel.HostInstagramLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostInstagramLink = "https://" + ResponseModel.HostInstagramLink;
-        //        }
-        //        if (!string.IsNullOrEmpty(ResponseModel.HostTwitterLink) && ResponseModel.HostTwitterLink != "#")
-        //        {
-        //            if (!ResponseModel.HostTwitterLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostTwitterLink = "https://" + ResponseModel.HostTwitterLink;
-        //        }
-        //        if (!string.IsNullOrEmpty(ResponseModel.HostTiktokLink) && ResponseModel.HostTiktokLink != "#")
-        //        {
-        //            if (!ResponseModel.HostTiktokLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostTiktokLink = "https://" + ResponseModel.HostTiktokLink;
-        //        }
-        //        if (!string.IsNullOrEmpty(ResponseModel.HostLine) && ResponseModel.HostLine != "#")
-        //        {
-        //            if (!ResponseModel.HostLine.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostLine = "https://" + ResponseModel.HostLine;
-        //        }
-        //        return View(ResponseModel);
-        //    }
-        //    AddNotificationMessage(new NotificationModel()
-        //    {
-        //        NotificationType = NotificationMessage.WARNING,
-        //        Message = "Something went wrong.",
-        //        Title = NotificationMessage.WARNING.ToString()
-        //    });
-        //    return RedirectToAction("Index", "Dashboard");
-        //}
 
         #region Club Reservation
         public ActionResult ClubReservation(string ClubId, string SelectedDate = "", string SelectedHost = "")

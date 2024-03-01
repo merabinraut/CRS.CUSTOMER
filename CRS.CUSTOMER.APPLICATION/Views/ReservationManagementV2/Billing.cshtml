@@ -226,12 +226,14 @@
 
         function SubmitFunction() {
             var PaymentType = $('.payment-type-class .active .payment-option-value').val();
-            if (!PaymentType && '@Model.CustomerCostAmount.Trim()' === "0") {
-                PaymentType = 0;
-            }
-            else {
-                toastr.info('Payment type is required');
-                return false;
+            if (PaymentType == null || PaymentType == "") {
+                if ('@Model.CustomerCostAmount.Trim()' === "0") {
+                    PaymentType = 0;
+                }
+                else {
+                    toastr.info('Payment type is required');
+                    return false;
+                }
             }
             const ClubId = localStorage.getItem("ClubId") || "";
             const PlanId = localStorage.getItem("PlanId") || "";

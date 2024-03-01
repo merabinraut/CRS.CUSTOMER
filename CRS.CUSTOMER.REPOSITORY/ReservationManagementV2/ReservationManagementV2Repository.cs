@@ -70,7 +70,8 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
                     ClubId = _dao.ParseColumnValue(dbResponse, "ClubId").ToString(),
                     ClubNameEnglish = _dao.ParseColumnValue(dbResponse, "ClubNameEnglish").ToString(),
                     ClubNameJapanese = _dao.ParseColumnValue(dbResponse, "ClubNameJapanese").ToString(),
-                    ClubLocationName = _dao.ParseColumnValue(dbResponse, "ClubLocationName").ToString()
+                    ClubLocationName = _dao.ParseColumnValue(dbResponse, "ClubLocationName").ToString(),
+                    ClubLogo = _dao.ParseColumnValue(dbResponse, "ClubLogo").ToString()
                 });
             }
 
