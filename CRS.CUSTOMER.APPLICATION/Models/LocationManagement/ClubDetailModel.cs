@@ -97,6 +97,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string ExtensionFee { get; set; }
         public string Drink { get; set; }
         public string Tax { get; set; }
+        public string LastOrderTime { get; set; }
     }
     public class AllNoticeModel : NoticeModel
     {
