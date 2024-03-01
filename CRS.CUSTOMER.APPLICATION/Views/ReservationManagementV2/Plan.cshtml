@@ -3,6 +3,7 @@
     ViewBag.Title = "Plan";
     Layout = "~/Views/Shared/_Reservation-Layout-V2.cshtml";
     var ClubDetailModel = Model.ClubDetailModel;
+    
 }
 
 <div class="flex flex-col justify-between h-screen relative pb-8">
@@ -18,7 +19,7 @@
                     <div class="text-[11px] text-[#7E6D5E]">予約するプランを選んでください</div>
                 </div>
             </div>
-            <div onclick="window.location.href='@Url.Action("Index", "Dashboard")'">
+            <div onclick="window.history.back()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
                     <path d="M5.86328 4.69727L4.69531 5.86523L11.8301 13L4.69531 20.1348L5.86328 21.3027L12.998 14.168L20.1328 21.3027L21.3008 20.1348L14.166 13L21.3008 5.86523L20.1328 4.69727L12.998 11.832L5.86328 4.69727Z"
                           fill="#BCB08A" />
@@ -59,6 +60,7 @@
                         bool isFirstItem = true;
                         foreach (var item in Model.PlanDetailModel)
                         {
+                            var amount =Convert.ToDecimal( item.PlanPrice).ToString("#,##0");
                             <div class="plan-card">
                                 <input class="planid-class" value="@item.PlanId" hidden />
                                 @if (isFirstItem)
@@ -84,7 +86,7 @@
                                         }
                                     </div>
                                     <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class" data-info="@item.PlanPrice">
-                                        @string.Concat("¥", item.PlanPrice)
+                                        @string.Concat("¥",@amount )
                                     </div>
                                     <div class="flex items-center gap-2">
                                         <div class="flex items-center gap-1">
@@ -92,7 +94,7 @@
                                                 <i class="las la-clock"></i>
                                             </div>
                                             <div class="text-[11px] text-[#282828] font-futura PlanTime-class" data-info="@item.PlanTime">
-                                                @string.Concat(item.PlanTime, "分制")
+                                                @string.Concat(item.PlanTime.Replace("Minute", "").Trim(), "分制")
                                             </div>
                                         </div>
                                         <div class="flex items-center gap-1">
@@ -100,7 +102,7 @@
                                                 <i class="las la-glass-cheers"></i>
                                             </div>
                                             <div class="text-[11px] text-[#282828] font-futura PlanLiquor-class" data-info="@item.PlanLiquor">
-                                                @item.PlanLiquor
+                                                @item.PlanLiquorJapanese
                                             </div>
                                         </div>
                                         <div class="flex items-center gap-1">

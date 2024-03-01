@@ -172,7 +172,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = errorMessage,
                     Title = NotificationMessage.ERROR.ToString(),
                 }).ToArray();
-
+                TempData["ChangePWErrorMessage"] = notificationModels[0].Message;
                 //AddNotificationMessage(notificationModels);
                 //TempData["ChangePWErrorMessage"] = errorMessage;
                 return RedirectToAction("ChangePasswordV2", changePasswordModel);
