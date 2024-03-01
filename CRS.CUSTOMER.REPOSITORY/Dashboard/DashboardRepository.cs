@@ -1,5 +1,7 @@
 ﻿using CRS.CUSTOMER.SHARED.Dashboard;
+using CRS.CUSTOMER.SHARED.DashboardV2;
 using CRS.CUSTOMER.SHARED.SearchFilterManagement;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -98,7 +100,6 @@ namespace CRS.CUSTOMER.REPOSITORY.Dashboard
             if (dbResponse != null && dbResponse.Rows.Count > 0) Response = _dao.DataTableToListObject<HostSearchManagementResponseCommon>(dbResponse).ToList();
             return Response;
         }
-        #endregion
-
+        #endregion        
     }
 }

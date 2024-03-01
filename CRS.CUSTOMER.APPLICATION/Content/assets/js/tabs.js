@@ -1,5 +1,5 @@
 // tabs.js
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const tabs = document.querySelectorAll(".tab-content");
     const tabButtons = document.querySelectorAll(".tab-button");
 
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const tabs = document.querySelectorAll(".tab-content-plane");
     const tabButtons = document.querySelectorAll(".tab-button-plane");
 
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const tabs = document.querySelectorAll(".tab-content-chart");
     const tabButtons = document.querySelectorAll(".tab-button-chart");
 

@@ -12,6 +12,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
     {
         [Display(Name = "Nickname", ResourceType = typeof(Resource))]
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        //[RegularExpression("^\\p{L}\\p{N}._\\-]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
         [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
         [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]
         public string NickName { get; set; }
@@ -19,6 +20,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         [Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
         [MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
+        [RegularExpression("^(?![eE])[0-9]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
         //[MobileNumber(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
         //[RegularExpression(@"^(090|6490|3254)\d{8}$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
         public string MobileNumber { get; set; }
@@ -68,7 +70,9 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
     public class ForgotPasswordModel
     {
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        //[MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
+        [MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
+        [RegularExpression("^(?![eE])[0-9]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
+
         //[MobileNumber(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
         //[Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
         public string MobileNo { get; set; }

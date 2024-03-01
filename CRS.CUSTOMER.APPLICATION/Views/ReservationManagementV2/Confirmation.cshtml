@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Confirmation";
     Layout = "~/Views/Shared/_Reservation-Layout-V2.cshtml";
+    var DefaultHostId = ApplicationUtilities.EncryptParameter("0").ToString();
 }
 <div class="flex flex-col justify-between h-screen relative pb-8">
     <div>
@@ -64,17 +65,27 @@
                     <div class="flex -space-x-2  items-center relative">
                         @foreach (var item in Model.HostListModel)
                         {
-                            if (!string.IsNullOrEmpty(item.HostImage))
+                            if (!string.IsNullOrEmpty(item.HostId) && item.HostId == DefaultHostId)
                             {
                                 <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
-                                     src="@item.HostImage"
+                                     src="~/Content/assets/images/customer/default-host-image.jpg"
                                      alt="image">
                             }
                             else
                             {
-                                <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
-                                     src="~/Content/assets/images/customer/demo-image.jpeg"
-                                     alt="image">
+
+                                if (!string.IsNullOrEmpty(item.HostImage))
+                                {
+                                    <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                                         src="@item.HostImage"
+                                         alt="image">
+                                }
+                                else
+                                {
+                                    <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                                         alt="image">
+                                }
                             }
                         }
                     </div>

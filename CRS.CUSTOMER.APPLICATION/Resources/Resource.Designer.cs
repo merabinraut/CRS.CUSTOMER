@@ -1285,6 +1285,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to mobile number.
+        /// </summary>
+        public static string LoginPhoneNumber {
+            get {
+                return ResourceManager.GetString("LoginPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logout.
         /// </summary>
         public static string Logout {
@@ -1618,6 +1627,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 数字のみが許可されています.
+        /// </summary>
+        public static string Only_numbers_are_allowed {
+            get {
+                return ResourceManager.GetString("Only numbers are allowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to On-site Nomination.
         /// </summary>
         public static string OnSiteNomination {
@@ -1641,6 +1659,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         public static string Or {
             get {
                 return ResourceManager.GetString("Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Others.
+        /// </summary>
+        public static string Others {
+            get {
+                return ResourceManager.GetString("Others", resourceCulture);
             }
         }
         

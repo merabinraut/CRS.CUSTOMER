@@ -139,13 +139,13 @@
         }
 
             .ui-datepicker .ui-datepicker-next span {
-                background-image: url("../../../assets/images/navigate_next.svg");
+                background-image: url("../../Content/assets/images/navigate_next.svg");
                 background-repeat: no-repeat;
                 background-position: center;
             }
 
         .ui-datepicker .ui-datepicker-prev span {
-            background-image: url("../../../assets/images/navigate_before.svg");
+            background-image: url("../../Content/assets/images/navigate_before.svg");
             background-repeat: no-repeat;
             background-position: center;
         }
@@ -363,6 +363,14 @@
                 <div id="clubreservationpartialview-id">
 
                 </div>
+
+                <div id="locationfilterpopup-id">
+
+                </div>
+
+                <div id="preferencefilterpopUp-id">
+
+                </div>
             </div>
         </div>
         <!--Render Body section end-->
@@ -379,7 +387,7 @@
 
         </button>
         <!-- go up end  -->
-        @if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && ViewBag.ActionPageName == "Dashboard")
+        @if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && (ViewBag.ActionPageName == "Dashboard" || ViewBag.ActionPageName == "SearchFilter"))
         {
             <div>
                 <div class="py-4 px-[33px] bg-primary-100 flex justify-between items-center">
@@ -547,6 +555,7 @@
     </script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="~/Content/assets/js/reservation-common.js"></script>
+    <script src="~/Content/assets/js/search-filter-common.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

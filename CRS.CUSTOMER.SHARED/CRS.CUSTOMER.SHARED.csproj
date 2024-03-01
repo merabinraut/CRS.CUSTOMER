@@ -102,6 +102,9 @@
     <Compile Include="BookmarkManagement\BookmarkManagementCommon.cs" />
     <Compile Include="CommonDbResponse.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="DashboardV2\ClubAvailabilityCommon.cs" />
+    <Compile Include="DashboardV2\ClubHostDetailCommon.cs" />
+    <Compile Include="DashboardV2\DashboardV2Common.cs" />
     <Compile Include="Dashboard\BannerCommon.cs" />
     <Compile Include="Dashboard\DashboardPlanCommon.cs" />
     <Compile Include="Dashboard\DashboardRecommendedClubCommon.cs" />
@@ -140,6 +143,7 @@
     <Compile Include="SearchFilterManagement\HostSearchManagementCommon.cs" />
     <Compile Include="SearchFilterManagement\SearchFilterViewCommon.cs" />
     <Compile Include="ReservationHistoryManagementV2\ReservationHistoryManagementV2Common.cs" />
+    <Compile Include="Search\SearchCommon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -147,7 +151,6 @@
   <ItemGroup>
     <Folder Include="CommonManagement\" />
     <Folder Include="LogManagement\" />
-    <Folder Include="ReservationHistoryManagementV2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
