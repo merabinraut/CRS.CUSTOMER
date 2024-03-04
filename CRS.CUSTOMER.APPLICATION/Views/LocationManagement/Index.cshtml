@@ -413,26 +413,27 @@
             <div class="grid grid-cols-3 justify-center  hover:cursor-pointer  py-4 px-[8px] gap-2 ">
                 @foreach (var item in Model.HostListModel)
                 {
-                    <div class="h-auto flex flex-col justify-end  text-center relative">
-                        <div class="w-full flex">
+                    <div class="h-auto flex flex-col justify-end  text-center relative rounded-sm">
+
+                        <div class="w-full">
                             <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
                                 @if (!string.IsNullOrEmpty(item.HostImage))
                                 {
-                                    <img class=" w-full h-[157px]  object-fill rounded" src="@item.HostImage" />
+                                    <img class="w-full h-[157px]  object-cover rounded-sm" src="@item.HostImage" />
                                 }
                                 else
                                 {
-                                    <img class=" w-full h-[157px]  object-fill rounded" src="~/Content/assets/images/customer/demo-image.jpeg" />
+                                    <img class="w-full h-[157px]  object-cover rounded-sm" src="~/Content/assets/images/customer/demo-image.jpeg" />
                                 }
                             </a>
                         </div>
-                        <div class="absolute mb-[8px] w-full flex flex-row px-2 py-[2px]">
-                            <div style="border-radius:2px;  "
-                                 class="  w-full bg-[#ffffffe6]  p-1  justify-start rounded-b flex   flex-col   ">
-                                <div class=" flex flex-row   text-xs  ">
-                                    <div class="text-[12px] font-[700] pl-[2px] text-ellipsis-customer h-[18px]">@item.HostName</div>
+                        <div class="absolute w-full flex flex-row">
+
+                            <div style="background-color: #000000B2; " class=" rounded rounded-b-[2px] w-full  p-1  justify-start  flex   flex-col   ">
+                                <div class=" flex flex-row justify-center  text-xs  ">
+                                    <div class="text-[12px] font-[700] pl-[2px] text-[#FFFFFF]">後藤聖輝</div>
                                 </div>
-                                <div class="flex flex-row items-center   ">
+                                <div class="flex flex-row items-center justify-center   ">
                                     <div class=" font-[700] pl-[2px]">
                                         @if (!string.IsNullOrEmpty(item.ClubLogo))
                                         {
@@ -444,15 +445,55 @@
                                             <img class="h-[11px]  w-[11px] rounded-full" src="~/Content/assets/images/customer/demo-image.jpeg"
                                                  alt="club">
                                         }
-
                                     </div>
-                                    <div class="text-[10px] text-start ml-[4px] font-[400] h-[15px] text-ellipsis-customer h-[14px]">
+                                    <div class="text-[10px] text-[#FFFFFF] text-start ml-[4px] font-[400] h-[15px] overflow-hidden">
                                         @item.ClubName
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    @*<div class="h-auto flex flex-col justify-end  text-center relative">
+                            <div class="w-full flex">
+                                <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
+                                    @if (!string.IsNullOrEmpty(item.HostImage))
+                                    {
+                                        <img class=" w-full h-[157px]  object-fill rounded" src="@item.HostImage" />
+                                    }
+                                    else
+                                    {
+                                        <img class=" w-full h-[157px]  object-fill rounded" src="~/Content/assets/images/customer/demo-image.jpeg" />
+                                    }
+                                </a>
+                            </div>
+                            <div class="absolute mb-[8px] w-full flex flex-row px-2 py-[2px]">
+                                <div style="border-radius:2px;  "
+                                     class="  w-full bg-[#ffffffe6]  p-1  justify-start rounded-b flex   flex-col   ">
+                                    <div class=" flex flex-row   text-xs  ">
+                                        <div class="text-[12px] font-[700] pl-[2px] text-ellipsis-customer h-[18px]">@item.HostName</div>
+                                    </div>
+                                    <div class="flex flex-row items-center   ">
+                                        <div class=" font-[700] pl-[2px]">
+                                            @if (!string.IsNullOrEmpty(item.ClubLogo))
+                                            {
+                                                <img class="h-[11px]  w-[11px] rounded-full" src="@item.ClubLogo"
+                                                     alt="club">
+                                            }
+                                            else
+                                            {
+                                                <img class="h-[11px]  w-[11px] rounded-full" src="~/Content/assets/images/customer/demo-image.jpeg"
+                                                     alt="club">
+                                            }
+
+                                        </div>
+                                        <div class="text-[10px] text-start ml-[4px] font-[400] h-[15px] text-ellipsis-customer h-[14px]">
+                                            @item.ClubName
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
                 }
             </div>
             @*<div id="pagination-container" class="flex justify-between pagination-container-wrapper my-[7px] ">
