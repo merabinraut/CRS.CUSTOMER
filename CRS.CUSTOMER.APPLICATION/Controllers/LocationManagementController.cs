@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -200,6 +201,112 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
             return View(responseModel);
+        }
+
+
+        public ActionResult ClubDetail_V2(string LocationId, string ClubId, string[] ScheduleFilterDate = null)
+        {
+            var culture = Request.Cookies["culture"]?.Value;
+            culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
+            var FileLocationPath = "";
+            var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
+            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
+            string sFD = null;//!string.IsNullOrEmpty(ScheduleFilterDate[0]) ? ScheduleFilterDate : null;
+            if (ScheduleFilterDate != null)
+            {
+                sFD = ScheduleFilterDate[0].ToString();
+            }
+            if (string.IsNullOrEmpty(cId) || string.IsNullOrEmpty(lId))
+            {
+                AddNotificationMessage(new NotificationModel()
+                {
+                    NotificationType = NotificationMessage.WARNING,
+                    Message = "Invalid Details",
+                    Title = NotificationMessage.WARNING.ToString()
+                });
+                return RedirectToAction("Index", "Dashboard");
+            }
+            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+
+            string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
+
+            var clubDetailResp = _business.GetClubDetailById(cId, agentId);
+            var responseModel = clubDetailResp.MapObject<ClubDetailModel>();
+            responseModel.ClubId = responseModel.ClubId.EncryptParameter();
+            responseModel.LocationId = responseModel.LocationId.EncryptParameter();
+            var dbHostList = _business.GetHostList(lId, cId);
+            responseModel.HostListModels = dbHostList.MapObjects<LocationHostListModel>();
+            foreach (var item in responseModel.HostListModels)
+            {
+                item.ClubId = item.ClubId.EncryptParameter();
+                item.HostId = item.HostId.EncryptParameter();
+                item.LocationId = item.LocationId.EncryptParameter();
+                item.HostImage = FileLocationPath + item.HostImage;
+            }
+            var dbTopHostList = _business.GetHostList(lId, cId, "", "trhl");
+            responseModel.TopHostListModels = dbTopHostList.MapObjects<LocationHostListModel>();
+            foreach (var item in responseModel.TopHostListModels)
+            {
+                item.ClubId = item.ClubId.EncryptParameter();
+                item.HostId = item.HostId.EncryptParameter();
+                item.LocationId = item.LocationId.EncryptParameter();
+                item.HostImage = FileLocationPath + item.HostImage;
+            }
+            var clubGalleryImageDBResponse = _business.GetClubGalleryImage(responseModel.ClubId.DecryptParameter(), "A");
+            if (clubGalleryImageDBResponse != null && clubGalleryImageDBResponse.Count > 0)
+            {
+                responseModel.ClubGalleryImageList = clubGalleryImageDBResponse;
+            }
+            else responseModel.ClubGalleryImageList = new List<string>();
+            responseModel.ClubCoverPhoto = FileLocationPath + responseModel.ClubCoverPhoto;
+            responseModel.ClubLogo = FileLocationPath + responseModel.ClubLogo;
+            responseModel.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
+            var reviewDBResponse = _business.GetClubReviewAndRatings(cId);
+            if (reviewDBResponse != null && reviewDBResponse.Count > 0)
+            {
+                responseModel.ClubReviewsModel = reviewDBResponse.MapObjects<GetClubReviewsModel>();
+                responseModel.ClubReviewsModel.ForEach(x => x.CustomerImage = FileLocationPath + x.CustomerImage);
+                foreach (var item in responseModel.ClubReviewsModel)
+                {
+                    item.GetClubReviewRemarkList.ForEach(x => x.Remark = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishRemark : x.JapaneseRemark);
+                }
+                foreach (var item in responseModel.ClubReviewsModel)
+                {
+                    item.GetClubReviewHostList.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
+                }
+            }
+            var dbNoticeResponseInfo = _business.GetNoticeByClubId(cId);
+            responseModel.GetNoticeByClubId = dbNoticeResponseInfo.MapObjects<NoticeModel>();
+            var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);
+            responseModel.GetClubBasicInformation = dbBasicInfoResponse.MapObject<ClubBasicInformationModel>();
+            var dbAllNoticeResponse = _business.GetAllNoticeTabList(cId);
+            responseModel.GetAllNoticeTabList = dbAllNoticeResponse.MapObjects<AllNoticeModel>();
+            var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);
+            responseModel.GetAllScheduleTabList = dbScheduleResponse.MapObjects<AllScheduleModel>();
+            responseModel.GetScheduleDDL = GetScheduleList();
+            ViewBag.ActionPageName = "ClubHostDetailNavMenu";
+            ViewBag.FileLocationPath = FileLocationPath;
+            return View(responseModel);
+        }
+        private List<ScheduleDDLModel> GetScheduleList()
+        {
+            List<ScheduleDDLModel> scheduleList = new List<ScheduleDDLModel>();
+
+            DateTime currentDate = DateTime.Now;
+            DateTime endDate = currentDate.AddMonths(3);
+
+            while (currentDate <= endDate)
+            {
+                scheduleList.Add(new ScheduleDDLModel
+                {
+                    Value = currentDate.ToString("yyyy年 M月", CultureInfo.InvariantCulture),
+                    Text = currentDate.ToString("yyyy年 M月", CultureInfo.InvariantCulture)
+                });
+
+                currentDate = currentDate.AddMonths(1);
+            }
+
+            return scheduleList;
         }
         #endregion
         [HttpGet]
