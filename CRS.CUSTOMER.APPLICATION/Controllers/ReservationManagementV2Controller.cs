@@ -324,12 +324,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dbResponse = _buss.ReservationConfirmation(dbRequest);
             if (dbResponse.Code == ResponseCode.Success)
             {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.SUCCESS,
-                    Message = dbResponse.Message ?? "Success",
-                    Title = NotificationMessage.SUCCESS.ToString()
-                });
+                //AddNotificationMessage(new NotificationModel()
+                //{
+                //    NotificationType = NotificationMessage.SUCCESS,
+                //    Message = dbResponse.Message ?? "Success",
+                //    Title = NotificationMessage.SUCCESS.ToString()
+                //});
                 return RedirectToAction("Success", "ReservationManagementV2");
             }
             else
