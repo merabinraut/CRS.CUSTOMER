@@ -210,7 +210,8 @@
             const HostIdList = [];
             $('.host-detail-class .active .hostid-class').each(function () { HostIdList.push($(this).val()); });
             if (HostIdList === null || HostIdList === "" || HostIdList.length <= 0) {
-                toastr.info('Host is required');
+                /*toastr.info('Host is required');*/
+                toastr.info('ホストが必要です');
                 return false;
             }
             DataStorageFunction(HostIdList);

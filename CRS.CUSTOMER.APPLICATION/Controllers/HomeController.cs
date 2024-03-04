@@ -261,12 +261,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var dbResponse = _buss.SetRegistrationPassword(Common);
                 if (dbResponse.Code == 0)
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.SUCCESS,
-                        Message = dbResponse.Message ?? "Success",
-                        Title = NotificationMessage.SUCCESS.ToString(),
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.SUCCESS,
+                    //    Message = dbResponse.Message ?? "Success",
+                    //    Title = NotificationMessage.SUCCESS.ToString(),
+                    //});
                     return View("NewRegistration_SuccessView");
                 }
                 AddNotificationMessage(new NotificationModel()

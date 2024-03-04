@@ -116,7 +116,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         AddNotificationMessage(new NotificationModel()
                         {
-                            Message = dbResponseInfo.Message ?? " Your reservation time has been updated",
+                            Message = dbResponseInfo.Message ?? " 予約が更新されました",
                             NotificationType = NotificationMessage.SUCCESS,
                             Title = NotificationMessage.SUCCESS.ToString(),
                         });
@@ -281,7 +281,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     AddNotificationMessage(new NotificationModel()
                     {
-                        Message = dbResponseInfo.Message ?? " Your reservation has been Deleted",
+                        Message = dbResponseInfo.Message ?? " 予約が削除されました",
                         NotificationType = NotificationMessage.SUCCESS,
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
