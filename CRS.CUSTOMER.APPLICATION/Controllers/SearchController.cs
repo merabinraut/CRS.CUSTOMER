@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
-    public class SearchController : Controller
+    public class SearchController : CustomController
     {
         private readonly ISearchBusiness _searchBusiness;
         private readonly IDashboardBusiness _oldDashboardBusiness;
