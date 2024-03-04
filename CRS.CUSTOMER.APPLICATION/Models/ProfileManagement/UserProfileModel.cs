@@ -31,7 +31,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
         public string Gender { get; set; }
         public string PreferredLocation { get; set; }
-
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
         [RegularExpression(@"^\d{3}-\d{4}$", ErrorMessage = "無効な郵便番号")]
         public string PostalCode { get; set; }
         public string Prefecture { get; set; }
