@@ -294,7 +294,7 @@
                 @Html.HiddenFor(model => model.NickName)
                 <!-- for otp container -->
                 <div class="otpContainer ring-0 focus:ring-0 focus:ring-transparent">
-                    <input type="text" placeholder="認証コード" class="inputContainer w-full ring-0 focus:ring-0 focus:ring-transparent" name="OTPCode" onkeypress="return isNumber(event)" required>
+                    <input type="number" placeholder="認証コード" class="inputContainer w-full ring-0 focus:ring-0 focus:ring-transparent" name="OTPCode" oninput="limitInputLength(this, 6)" required>
                 </div>
                 <!-- for button group -->
                 <div class="flex justify-between items-center gap-4 mb-4">
@@ -458,7 +458,21 @@
 
     </script>
     <script>
+        $('#valCod').prop('disabled', true).css('opacity', '0.5');
         $('#waitingMessageWrapper').hide();
+        function limitInputLength(input, maxLength) {
+            var value = input.value;
+            var numericValue = value.replace(/\D/g, '');
+            var trimmedValue = numericValue.substring(0, maxLength);
+            // Update input value
+            input.value = trimmedValue;
+            if (input.value.length > 5) {
+                $('#valCod').prop('disabled', false).removeAttr('style');
+            }
+            else {
+                $('#valCod').prop('disabled', true).css('opacity', '0.5');
+            }
+        }
         var mobileNumber = "@Model.MobileNumber"; // Assuming Razor syntax
         // Function to mask the last four digits of the mobile number
         function maskLastFourDigits(number) {

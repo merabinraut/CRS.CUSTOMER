@@ -159,7 +159,7 @@ function initPeopleFunction() {
             }
         });
     });
-
+  
     document.querySelectorAll('.peopleList').forEach(item => {
         item.addEventListener('click', event => {
             document.querySelectorAll('.peopleList').forEach(item => {
@@ -173,6 +173,13 @@ function initPeopleFunction() {
                 var selectedPeopleDiv = document.getElementById("selected-noofpeople-id");
                 selectedPeopleDiv.innerText = peopleValue.trim();
                 $('#noofpeople-id').val(peopleValue.trim());
+                
+            }
+            if (parseInt($("#selected-noofpeople-id").text()) > 3) {
+                $("#waitingMessageWrapper").css("display", "block");
+            }
+            else {
+                $("#waitingMessageWrapper").css("display", "none");
             }
         });
     });

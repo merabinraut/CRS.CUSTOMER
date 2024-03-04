@@ -9,5 +9,6 @@
         public string PlanNomination { get; set; }
         public string PlanRemarks { get; set; }
         public string PlanLiquor { get; set; }
+        public string PlanLiquorJapanese { get; set; }
     }
 }
