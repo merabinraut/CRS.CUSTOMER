@@ -229,36 +229,52 @@
             </div>
             <div class="grid mt-[16px] mx-[16px] mb-[10px] grid-rows-7">
                 <div style="line-height: 140%;" class="text-[10px]">
-                    @if (!string.IsNullOrEmpty(@item.HostName))
-                    {
-                        <p class="font-[700] text-[13px]">@item.HostName </p>
-                    }
-                    @if (!string.IsNullOrEmpty(@item.FormattedDOB))
-                    {
-                        <p>誕生日 :<span> @item.FormattedDOB</span> </p>
-                    }
-                    @if (!string.IsNullOrEmpty(@item.HostHeight))
-                    {
-                        <p>身長 :<span> @item.HostHeight</span> </p>
-                    }
-                    @if (!string.IsNullOrEmpty(@item.HostBloodType))
-                    {
-                        <p>血液型 :<span> @item.HostBloodType</span> </p>
-                    }
-                    @if (!string.IsNullOrEmpty(@item.HostConstellationGroup))
-                    {
-                        <p>星座 :<span> @item.HostConstellationGroup</span> </p>
-                    }
-                    @if (!string.IsNullOrEmpty(@item.HostBirthPlace))
-                    {
-                        <p>出身地 :<span> @item.HostBirthPlace</span> </p>
-                    }
-                    @if (!string.IsNullOrEmpty(@item.Occupation))
-                    {
-                        <p>前職 :<span> @item.Occupation</span> </p>
-                    }
+                    @*@if (!string.IsNullOrEmpty(@item.HostName))
+                        {
+                            <p class="font-[700] text-[13px]">@item.HostName </p>
+                        }
+                        @if (!string.IsNullOrEmpty(@item.FormattedDOB))
+                        {
+                            <p>誕生日 :<span> @item.FormattedDOB</span> </p>
+                        }
+                        @if (!string.IsNullOrEmpty(@item.HostHeight))
+                        {
+                            <p>身長 :<span> @item.HostHeight</span> </p>
+                        }
+                        @if (!string.IsNullOrEmpty(@item.HostBloodType))
+                        {
+                            <p>血液型 :<span> @item.HostBloodType</span> </p>
+                        }
+                        @if (!string.IsNullOrEmpty(@item.HostConstellationGroup))
+                        {
+                            <p>星座 :<span> @item.HostConstellationGroup</span> </p>
+                        }
+                        @if (!string.IsNullOrEmpty(@item.HostBirthPlace))
+                        {
+                            <p>出身地 :<span> @item.HostBirthPlace</span> </p>
+                        }
+                        @if (!string.IsNullOrEmpty(@item.Occupation))
+                        {
+                            <p>前職 :<span> @item.Occupation</span> </p>
+                        }*@
+
+                    <p class="font-[700] text-[13px]">@item.HostName </p>
+
+                    <p>誕生日 :<span> @item.FormattedDOB</span> </p>
+
+                    <p>身長 :<span> @item.HostHeight</span> </p>
+
+                    <p>血液型 :<span> @item.HostBloodType</span> </p>
+
+                    <p>星座 :<span> @item.HostConstellationGroup</span> </p>
+
+                    <p>出身地 :<span> @item.HostBirthPlace</span> </p>
+
+                    <p>前職 :<span> @item.Occupation</span> </p>
+                    <p>お酒の強さ :<span> </span> </p>
+
                 </div>
-                <div class="flex flex-row gap-1 items-center mb-[8px]">
+                <div class="flex flex-row gap-1 items-center mb-[8px] mt-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                         <path d="M2.71459 7.28802L2.70677 7.27992L2.70002 7.27344L2.69991 7.27333L2.69977 7.2732L2.69972 7.27314L2.69946 7.2729L2.69551 7.26898C2.69096 7.26443 2.68308 7.25648 2.67238 7.24533C2.65094 7.223 2.6184 7.18812 2.57856 7.14233C2.49833 7.0501 2.39165 6.91721 2.28715 6.75669C2.06486 6.41524 1.87295 6.01061 1.87295 5.57856C1.87295 4.15772 3.00042 3.00912 4.34113 3.00912C5.48553 3.00912 6.23896 3.72054 6.56537 4.06389L7.00022 4.52129L7.43507 4.06389C7.76149 3.72054 8.51491 3.00912 9.65931 3.00912C11 3.00912 12.1275 4.15772 12.1275 5.57856C12.1275 6.01777 11.9411 6.4329 11.7225 6.76253C11.6159 6.92322 11.509 7.05249 11.4297 7.14051C11.3902 7.18425 11.3583 7.21705 11.3376 7.23769C11.3272 7.24799 11.3198 7.25519 11.3156 7.25915L11.3127 7.26192L11.3121 7.26241L11.3121 7.26247L11.3119 7.26261L11.3118 7.26271L11.2993 7.27409L11.2859 7.28802L7.00022 11.7279L2.71459 7.28802Z"
                               stroke="#D75A8B" stroke-width="1.2" />
