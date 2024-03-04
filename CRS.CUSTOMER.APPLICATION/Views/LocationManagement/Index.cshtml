@@ -215,6 +215,7 @@
                                 <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
                                      onclick="handleAddBookmarks('@item.ClubId','','club')">
                                     <img src="~/Content/assets/images/customer/bookmark-outlined.svg" class="h-[20px] w-[25px]" />
+                                    <span class='text-[9px] font-medium text-[#BCB08A]'>保存</span>
                                 </div>
                             }
                             else
@@ -222,6 +223,7 @@
                                 <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
                                      onclick="handleRemoveBookmarks('@item.ClubId','','club')">
                                     <img src="~/Content/assets/images/customer/bookmark-filled.svg" class="h-[20px] w-[25px]" />
+                                    <span class='text-[9px] font-medium text-[#BCB08A]'>保存</span>
                                 </div>
                             }
 
@@ -236,9 +238,7 @@
                                      class="aspect-square object-fill h-[182px] w-full" />
                             </div>
                         }
-
                     </section>
-
                     <!-- rating /commment -->
                     <section class=" flex justify-start flex-wrap align-top mt-2 px-4 gap-3">
                         <div class="flex items-center gap-0.5" title="club rank">
@@ -275,7 +275,6 @@
                                           fill="#BCB08A" />
                                 </svg>
                             </div>
-
                             <div class=" text-xs scale-110">@item.TotalComment</div>
                         </div>
                     </section>
@@ -628,8 +627,7 @@
     </script>
     <script src="~/Content/CustomHelper.js"></script>
     <!-- cursol script -->
-    <script>
-        function OpenImagePopup(ImageURL) {
+    <script>function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");
@@ -661,8 +659,7 @@
             })
 
             localStorage.clear();
-        })
-    </script>
+        })</script>
     <script>
         function ClubDetailActionFunction(i, j) {
             window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
@@ -736,14 +733,11 @@
              myDiv.style.display = "none";
          }
     </script>
-    <script>
-        const DataStorageFunction = (i, j) => {
+    <script>const DataStorageFunction = (i, j) => {
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
-        }
-    </script>
-    <script>
-        function ClubFunction(i) {
+        }</script>
+    <script>function ClubFunction(i) {
             $('#club-pagination-group-id').val(i);
             var form = document.getElementById("club-pagination-form-id");
             form.submit();
@@ -755,6 +749,5 @@
             $('#host-pagination-club-id').val(k);
             var form = document.getElementById("host-pagination-form-id");
             form.submit();
-        }
-    </script>
+        }</script>
 }
