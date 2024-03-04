@@ -31,7 +31,6 @@
                         <div class="relative">
                             <div class=" showTimeList2 h-[32px] w-[72px] px-3 py-1 bg-[#F6F6F6] rounded-[4px] text-[#666] text-xs flex justify-between items-center">
                                 <div id="selected-time-id2">
-                                    01:00
                                 </div>
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5" fill="none">
@@ -76,7 +75,7 @@
                         <div class="relative">
                             <div class=" showPeopleList2 cursor-pointer h-[32px] w-[72px] px-3 py-1 bg-[#F6F6F6] rounded-[4px] text-[#666] text-xs flex justify-between items-center">
                                 <div id="selected-noofpeople-id2">
-                                    1
+
                                 </div>
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5" fill="none">
@@ -125,7 +124,7 @@
 
 <form action="/Search/DateTimeFilter" method="get" id="date-time-filter-id">
     <input type="text" class="location-class" id="DateFilterLocationId" name="LocationId" value="" hidden />
-    <input type="text" id="date-id" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" hidden />
-    <input type="text" id="time-id2" name="Time" value="@ApplicationUtilities.EncryptParameter("00:00").ToString()" hidden />
-    <input type="text" id="noofpeople-id2" name="NoOfPeople" value="@ApplicationUtilities.EncryptParameter("1").ToString()" hidden />
+    <input type="text" id="date-id" name="Date" value="" hidden />
+    <input type="text" id="time-id2" name="Time" value="" hidden />
+    <input type="text" id="noofpeople-id2" name="NoOfPeople" value="" hidden />
 </form>

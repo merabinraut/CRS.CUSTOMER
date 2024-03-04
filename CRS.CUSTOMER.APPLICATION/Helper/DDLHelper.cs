@@ -65,5 +65,13 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
             }
             return dictionary.Select(kvp => new StaticDataModel { StaticValue = kvp.Key, StaticLabel = kvp.Value }).ToList();
         }
+
+        public static string GetValueForKey(Dictionary<string, string> dictionary, string key)
+        {
+            if (dictionary.TryGetValue(key, out string value))
+                return value;
+            else
+                return null;
+        }
     }
 }
