@@ -167,6 +167,10 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        .disable-click {
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="md:hidden">
@@ -197,165 +201,327 @@
 
             <!-- drawer init and toggle -->
             <!-- drawer component -->
-            <div id="drawer-right-example"
-                 class="fixed top-0 right-0 z-[60] h-screen  overflow-y-auto transition-transform translate-x-full bg-white w-[90%] "
-                 tabindex="-1" aria-labelledby="drawer-right-label">
-                <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
-                        class="fixed top-[16px] left-[1px] flex justify-center items-center h-[24px] w-[24px] rounded-full bg-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M13.3002 0.710001C12.9102 0.320001 12.2802 0.320001 11.8902 0.710001L7.00022 5.59L2.11022 0.700001C1.72022 0.310001 1.09021 0.310001 0.700215 0.700001C0.310215 1.09 0.310215 1.72 0.700215 2.11L5.59022 7L0.700215 11.89C0.310215 12.28 0.310215 12.91 0.700215 13.3C1.09021 13.69 1.72022 13.69 2.11022 13.3L7.00022 8.41L11.8902 13.3C12.2802 13.69 12.9102 13.69 13.3002 13.3C13.6902 12.91 13.6902 12.28 13.3002 11.89L8.41021 7L13.3002 2.11C13.6802 1.73 13.6802 1.09 13.3002 0.710001Z"
-                              fill="black" />
-                    </svg>
-                </button>
-                <div class="h-full flex flex-col justify-between  overflow-y-auto bg-gray-50 ">
-                    <div class=" font-medium">
-                        <div class="border-b border-[#E7E7E7] p-2">
-                            <a href="#" class="flex items-center px-4 pt-4 group">
+            @* <div id="drawer-right-example"
+                     class="fixed top-0 right-0 z-[60] h-screen  overflow-y-auto transition-transform translate-x-full bg-white w-[90%] "
+                     tabindex="-1" aria-labelledby="drawer-right-label">
+                    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
+                            class="fixed top-[16px] left-[1px] flex justify-center items-center h-[24px] w-[24px] rounded-full bg-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M13.3002 0.710001C12.9102 0.320001 12.2802 0.320001 11.8902 0.710001L7.00022 5.59L2.11022 0.700001C1.72022 0.310001 1.09021 0.310001 0.700215 0.700001C0.310215 1.09 0.310215 1.72 0.700215 2.11L5.59022 7L0.700215 11.89C0.310215 12.28 0.310215 12.91 0.700215 13.3C1.09021 13.69 1.72022 13.69 2.11022 13.3L7.00022 8.41L11.8902 13.3C12.2802 13.69 12.9102 13.69 13.3002 13.3C13.6902 12.91 13.6902 12.28 13.3002 11.89L8.41021 7L13.3002 2.11C13.6802 1.73 13.6802 1.09 13.3002 0.710001Z"
+                                  fill="black" />
+                        </svg>
+                    </button>
+                    <div class="h-full flex flex-col justify-between  overflow-y-auto bg-gray-50 ">
+                        <div class=" font-medium">
+                            <div class="border-b border-[#E7E7E7] p-2">
+                                <a href="#" class="flex items-center px-4 pt-4 group">
 
-                                @if ((Session["ProfileImage"] == null))
-                                {
-                                    <img class="rounded-full w-[40px] h-[40px] object-fill border border-[#E1E1E1]"
-                                         src="~/Content/assets/images/customer/demo-image.jpeg"
-                                         alt="ProfileImage" />
-                                }
-                                else
-                                {
-                                    <img class="rounded-full w-[40px] h-[40px] object-fill border border-[#E1E1E1]"
-                                         src="@Session["ProfileImage"]"
-                                         alt="ProfileImage">
-                                }
+                                    @if ((Session["ProfileImage"] == null))
+                                    {
+                                        <img class="rounded-full w-[40px] h-[40px] object-fill border border-[#E1E1E1]"
+                                             src="~/Content/assets/images/customer/demo-image.jpeg"
+                                             alt="ProfileImage" />
+                                    }
+                                    else
+                                    {
+                                        <img class="rounded-full w-[40px] h-[40px] object-fill border border-[#E1E1E1]"
+                                             src="@Session["ProfileImage"]"
+                                             alt="ProfileImage">
+                                    }
 
-                                <div class="flex flex-col">
-                                    <span class="ml-[12px] text-[14px] text-[#252525]  font-[700]">
-                                        @Session["Username"]
-                                    </span>
-                                    <span class="ml-[12px] text-[14px] text-[#252525] font-[400]">
-                                        @Session["EmailAddress"]
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="@Url.Action("Index", "ProfileManagement")" class="flex h-[48px]  items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 2.25C6.62402 2.25 2.25 6.62402 2.25 12C2.25 17.376 6.62402 21.75 12 21.75C17.376 21.75 21.75 17.376 21.75 12C21.75 6.62402 17.376 2.25 12 2.25ZM12 3.75C16.5645 3.75 20.25 7.43555 20.25 12C20.25 16.5645 16.5645 20.25 12 20.25C7.43555 20.25 3.75 16.5645 3.75 12C3.75 7.43555 7.43555 3.75 12 3.75ZM12 6C9.9375 6 8.25 7.6875 8.25 9.75C8.25 10.8867 8.78027 11.8975 9.58594 12.5859C7.89844 13.4619 6.75 15.2256 6.75 17.25H8.25C8.25 15.1699 9.91992 13.5 12 13.5C14.0801 13.5 15.75 15.1699 15.75 17.25H17.25C17.25 15.2256 16.1016 13.4619 14.4141 12.5859C15.2197 11.8975 15.75 10.8867 15.75 9.75C15.75 7.6875 14.0625 6 12 6ZM12 7.5C13.251 7.5 14.25 8.49902 14.25 9.75C14.25 11.001 13.251 12 12 12C10.749 12 9.75 11.001 9.75 9.75C9.75 8.49902 10.749 7.5 12 7.5Z"
-                                          fill="#E49797" />
-                                </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.MyProfile
-                                </span>
-                            </a>
-                        </div>
-                        <!-- is active  -->
-                        @*<div>
-                                <a href="#"
-                                   class="flex items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group bg-[#F0F0F0]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M12.5156 2.25L12.2812 2.46094L7.19531 7.5H3.75V19.5H16.3828C17.4404 19.5 18.3633 18.7529 18.5859 17.7188L20.2031 10.2188C20.499 8.83301 19.415 7.5 18 7.5H13.6875L13.8281 6.9375C13.9805 6.82031 14.0771 6.77051 14.2969 6.46875C14.6484 5.98828 15 5.24414 15 4.24219C15 3.17285 14.0332 2.25 12.8203 2.25H12.5156ZM13.0547 3.82031C13.3711 3.88184 13.5 4.01074 13.5 4.24219C13.5 4.91895 13.2949 5.33789 13.1016 5.60156C12.9082 5.86523 12.7734 5.92969 12.7734 5.92969L12.5156 6.07031L12.4219 6.375L11.9766 8.0625L11.7422 9H18C18.4951 9 18.8291 9.43066 18.7266 9.91406L17.1328 17.4141C17.0566 17.7656 16.7402 18 16.3828 18H8.25V8.55469L13.0547 3.82031ZM5.25 9H6.75V18H5.25V9Z"
-                                              fill="#E49797" />
-                                    </svg>
-                                    <span class="ml-[10px] text-[14px] font-[500]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ActivityLogs</span>
+                                    <div class="flex flex-col">
+                                        <span class="ml-[12px] text-[14px] text-[#252525]  font-[700]">
+                                            @Session["Username"]
+                                        </span>
+                                        <span class="ml-[12px] text-[14px] text-[#252525] font-[400]">
+                                            @Session["EmailAddress"]
+                                        </span>
+                                    </div>
                                 </a>
-                            </div>*@
-                        <div>
-                            <a href="@Url.Action("ReviewList", "ReviewManagement")" class="flex items-center h-[48px]  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M2.25 4.5V19.5H9.43945L12 22.0605L14.5605 19.5H21.75V4.5H2.25ZM3.75 6H20.25V18H13.9395L12 19.9395L10.0605 18H3.75V6ZM6.75 8.25V9.75H17.25V8.25H6.75ZM6.75 11.25V12.75H17.25V11.25H6.75ZM6.75 14.25V15.75H14.25V14.25H6.75Z"
-                                          fill="#E49797" />
-                                </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.ReviewAndComments
-                                </span>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="@Url.Action("ReservationHistory", "ReservationHistoryManagementV2")" class="flex h-[48px] items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 3C8.87402 3 6.11426 4.58496 4.5 7.00781V4.5H3V9.75H8.25V8.25H5.53125C6.82617 6.01465 9.22266 4.5 12 4.5C16.1514 4.5 19.5 7.84863 19.5 12C19.5 16.1514 16.1514 19.5 12 19.5C7.84863 19.5 4.5 16.1514 4.5 12H3C3 16.9629 7.03711 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.25 6V12.75H16.5V11.25H12.75V6H11.25Z"
-                                          fill="#E49797" />
-                                </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.BookingHistory
-                                </span>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="@Url.Action("Index", "BookmarkManagement")" class="flex h-[48px]  items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 14 18" fill="none">
-                                    <path d="M0.25 0.375V17.625L1.44531 16.7344L7 12.5625L12.5547 16.7344L13.75 17.625V0.375H0.25ZM1.75 1.875H12.25V14.625L7.44531 11.0156L7 10.6875L6.55469 11.0156L1.75 14.625V1.875Z"
-                                          fill="#E49797" />
-                                </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Bookmark
-                                </span>
-                            </a>
-                        </div>
-                        @*<div>
-                                <a href="/PaymentMethodManagement/Index" class="flex items-center h-[48px]  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                            </div>
+                            <div>
+                                <a href="@Url.Action("Index", "ProfileManagement")" class="flex h-[48px]  items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M1.5 5.25V18H22.5V5.25H1.5ZM4.5 6.75H19.5C19.5 7.57875 20.1712 8.25 21 8.25V15C20.1712 15 19.5 15.6713 19.5 16.5H4.5C4.5 15.6713 3.82875 15 3 15V8.25C3.82875 8.25 4.5 7.57875 4.5 6.75ZM12 8.25C10.3418 8.25 9 9.762 9 11.625C9 13.488 10.3418 15 12 15C13.6582 15 15 13.488 15 11.625C15 9.762 13.6582 8.25 12 8.25ZM12 9.75C12.8265 9.75 13.5 10.5908 13.5 11.625C13.5 12.6592 12.8265 13.5 12 13.5C11.1735 13.5 10.5 12.6592 10.5 11.625C10.5 10.5908 11.1735 9.75 12 9.75ZM6.375 10.5C5.754 10.5 5.25 11.004 5.25 11.625C5.25 12.246 5.754 12.75 6.375 12.75C6.996 12.75 7.5 12.246 7.5 11.625C7.5 11.004 6.996 10.5 6.375 10.5ZM17.625 10.5C17.004 10.5 16.5 11.004 16.5 11.625C16.5 12.246 17.004 12.75 17.625 12.75C18.246 12.75 18.75 12.246 18.75 11.625C18.75 11.004 18.246 10.5 17.625 10.5Z"
+                                        <path d="M12 2.25C6.62402 2.25 2.25 6.62402 2.25 12C2.25 17.376 6.62402 21.75 12 21.75C17.376 21.75 21.75 17.376 21.75 12C21.75 6.62402 17.376 2.25 12 2.25ZM12 3.75C16.5645 3.75 20.25 7.43555 20.25 12C20.25 16.5645 16.5645 20.25 12 20.25C7.43555 20.25 3.75 16.5645 3.75 12C3.75 7.43555 7.43555 3.75 12 3.75ZM12 6C9.9375 6 8.25 7.6875 8.25 9.75C8.25 10.8867 8.78027 11.8975 9.58594 12.5859C7.89844 13.4619 6.75 15.2256 6.75 17.25H8.25C8.25 15.1699 9.91992 13.5 12 13.5C14.0801 13.5 15.75 15.1699 15.75 17.25H17.25C17.25 15.2256 16.1016 13.4619 14.4141 12.5859C15.2197 11.8975 15.75 10.8867 15.75 9.75C15.75 7.6875 14.0625 6 12 6ZM12 7.5C13.251 7.5 14.25 8.49902 14.25 9.75C14.25 11.001 13.251 12 12 12C10.749 12 9.75 11.001 9.75 9.75C9.75 8.49902 10.749 7.5 12 7.5Z"
                                               fill="#E49797" />
                                     </svg>
                                     <span class="ml-[10px] text-[14px] font-[500]">
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.PaymentMethod
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.MyProfile
                                     </span>
                                 </a>
-                            </div>*@
-                        <div>
-                            <a href="@Url.Action("Index", "LanguageManagement")"
-                               class="flex items-center  py-[10px] px-4 border-b h-[48px]  border-[#E7E7E7] rounded-lg  group">
+                            </div>
+
+                            <div>
+                                <a href="@Url.Action("ReviewList", "ReviewManagement")" class="flex items-center h-[48px]  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M2.25 4.5V19.5H9.43945L12 22.0605L14.5605 19.5H21.75V4.5H2.25ZM3.75 6H20.25V18H13.9395L12 19.9395L10.0605 18H3.75V6ZM6.75 8.25V9.75H17.25V8.25H6.75ZM6.75 11.25V12.75H17.25V11.25H6.75ZM6.75 14.25V15.75H14.25V14.25H6.75Z"
+                                              fill="#E49797" />
+                                    </svg>
+                                    <span class="ml-[10px] text-[14px] font-[500]">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.ReviewAndComments
+                                    </span>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="@Url.Action("ReservationHistory", "ReservationHistoryManagementV2")" class="flex h-[48px] items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 3C8.87402 3 6.11426 4.58496 4.5 7.00781V4.5H3V9.75H8.25V8.25H5.53125C6.82617 6.01465 9.22266 4.5 12 4.5C16.1514 4.5 19.5 7.84863 19.5 12C19.5 16.1514 16.1514 19.5 12 19.5C7.84863 19.5 4.5 16.1514 4.5 12H3C3 16.9629 7.03711 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.25 6V12.75H16.5V11.25H12.75V6H11.25Z"
+                                              fill="#E49797" />
+                                    </svg>
+                                    <span class="ml-[10px] text-[14px] font-[500]">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.BookingHistory
+                                    </span>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="@Url.Action("Index", "BookmarkManagement")" class="flex h-[48px]  items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 14 18" fill="none">
+                                        <path d="M0.25 0.375V17.625L1.44531 16.7344L7 12.5625L12.5547 16.7344L13.75 17.625V0.375H0.25ZM1.75 1.875H12.25V14.625L7.44531 11.0156L7 10.6875L6.55469 11.0156L1.75 14.625V1.875Z"
+                                              fill="#E49797" />
+                                    </svg>
+                                    <span class="ml-[10px] text-[14px] font-[500]">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Bookmark
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div>
+                                <a href="@Url.Action("Index", "LanguageManagement")"
+                                   class="flex items-center  py-[10px] px-4 border-b h-[48px]  border-[#E7E7E7] rounded-lg  group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M3 3V16.5H7.5V21H21V7.5H16.5V3H3ZM4.5 4.5H15V7.92188L7.92188 15H4.5V4.5ZM8.25 6V6.75H6V8.25H9.70312C9.60645 9.11133 9.34277 9.79102 8.90625 10.2656C8.64844 10.1807 8.41699 10.0752 8.22656 9.96094C7.69922 9.64746 7.5 9.31348 7.5 9H6C6 9.89355 6.55078 10.6377 7.28906 11.1328C6.91992 11.2119 6.49219 11.25 6 11.25V12.75C7.33008 12.75 8.4375 12.4453 9.28125 11.8828C9.67383 11.9502 10.0723 12 10.5 12V10.5938C10.9072 9.91113 11.124 9.11426 11.2031 8.25H12V6.75H9.75V6H8.25ZM16.0781 9H19.5V19.5H9V16.0781L16.0781 9ZM15 10.3828L14.2969 12.5156L12.7969 17.0156L12.75 17.1328V18H14.25V17.3438L14.2734 17.25H15.7266L15.75 17.3438V18H17.25V17.1328L17.2031 17.0156L15.7031 12.5156L15 10.3828ZM15 15.0938L15.2109 15.75H14.7891L15 15.0938Z"
+                                              fill="#E49797" />
+                                    </svg>
+                                    <span class="ml-[10px] text-[14px] font-[500]">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.LanguagePreference
+                                    </span>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="@Url.Action("ChangePasswordV2", "ProfileManagement")" class="flex h-[48px]  items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M15 2.25C11.291 2.25 8.25 5.29102 8.25 9C8.25 9.38965 8.31445 9.73242 8.36719 10.0781L2.46094 15.9609L2.25 16.1953V21.75H7.5V19.5H9.75V17.25H12V15.0234C12.8848 15.457 13.916 15.75 15 15.75C18.709 15.75 21.75 12.709 21.75 9C21.75 5.29102 18.709 2.25 15 2.25ZM15 3.75C17.8916 3.75 20.25 6.1084 20.25 9C20.25 11.8916 17.8916 14.25 15 14.25C14.0918 14.25 13.1572 13.9834 12.4453 13.5938L12.2578 13.5H10.5V15.75H8.25V18H6V20.25H3.75V16.8281L9.67969 10.875L9.96094 10.6172L9.89062 10.2188C9.81445 9.76758 9.75 9.36621 9.75 9C9.75 6.1084 12.1084 3.75 15 3.75ZM16.5 6C15.6709 6 15 6.6709 15 7.5C15 8.3291 15.6709 9 16.5 9C17.3291 9 18 8.3291 18 7.5C18 6.6709 17.3291 6 16.5 6Z"
+                                              fill="#E49797" />
+                                    </svg>
+                                    <span class="ml-[10px] text-[14px] font-[500]">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.ChangePassword
+                                    </span>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="#" class="flex items-center  py-[10px] h-[48px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 3C8.75391 3 6 5.29102 6 8.25V10.5H10.5V8.25C10.5 8.13867 10.5674 7.97754 10.8281 7.80469C11.0889 7.63184 11.5137 7.5 12 7.5C12.4893 7.5 12.9141 7.63184 13.1719 7.80469C13.4297 7.97754 13.5 8.12695 13.5 8.25C13.5 8.68359 13.3594 8.98535 13.0781 9.32812C12.7969 9.6709 12.3604 10.0254 11.8828 10.4297C10.9248 11.2412 9.75 12.3721 9.75 14.25V15H14.25V14.25C14.25 13.9951 14.3438 13.8164 14.625 13.5234C14.9062 13.2305 15.3721 12.8848 15.8672 12.4688C16.8574 11.6367 18 10.3623 18 8.25C18 5.31738 15.252 3 12 3ZM12 4.5C14.5459 4.5 16.5 6.27539 16.5 8.25C16.5 9.8584 15.7676 10.5762 14.8828 11.3203C14.4404 11.6924 13.9688 12.0557 13.5469 12.4922C13.2861 12.7617 13.084 13.1133 12.9375 13.5H11.4844C11.7188 12.7412 12.1758 12.1641 12.8672 11.5781C13.3271 11.1914 13.8281 10.7871 14.25 10.2656C14.6719 9.74414 15 9.06152 15 8.25C15 7.5293 14.5723 6.93164 14.0156 6.5625C13.459 6.19336 12.7529 6 12 6C11.2441 6 10.5381 6.19336 9.98438 6.5625C9.43066 6.93164 9 7.53223 9 8.25V9H7.5V8.25C7.5 6.2373 9.44824 4.5 12 4.5ZM9.75 16.5V21H14.25V16.5H9.75ZM11.25 18H12.75V19.5H11.25V18Z"
+                                              fill="#E49797" />
+                                    </svg>
+                                    <span class="ml-[10px] text-[14px] font-[500]">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Help
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="flex items-center  py-[10px] h-[48px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M3 3V16.5H7.5V21H21V7.5H16.5V3H3ZM4.5 4.5H15V7.92188L7.92188 15H4.5V4.5ZM8.25 6V6.75H6V8.25H9.70312C9.60645 9.11133 9.34277 9.79102 8.90625 10.2656C8.64844 10.1807 8.41699 10.0752 8.22656 9.96094C7.69922 9.64746 7.5 9.31348 7.5 9H6C6 9.89355 6.55078 10.6377 7.28906 11.1328C6.91992 11.2119 6.49219 11.25 6 11.25V12.75C7.33008 12.75 8.4375 12.4453 9.28125 11.8828C9.67383 11.9502 10.0723 12 10.5 12V10.5938C10.9072 9.91113 11.124 9.11426 11.2031 8.25H12V6.75H9.75V6H8.25ZM16.0781 9H19.5V19.5H9V16.0781L16.0781 9ZM15 10.3828L14.2969 12.5156L12.7969 17.0156L12.75 17.1328V18H14.25V17.3438L14.2734 17.25H15.7266L15.75 17.3438V18H17.25V17.1328L17.2031 17.0156L15.7031 12.5156L15 10.3828ZM15 15.0938L15.2109 15.75H14.7891L15 15.0938Z"
-                                          fill="#E49797" />
+                                    <g opacity="0.6">
+                                        <path d="M12 3C7.81641 3 4.30664 5.87402 3.30469 9.75H4.85156C5.80957 6.70898 8.64844 4.5 12 4.5C16.1367 4.5 19.5 7.86328 19.5 12C19.5 16.1367 16.1367 19.5 12 19.5C8.64844 19.5 5.80957 17.291 4.85156 14.25H3.30469C4.30664 18.126 7.81641 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.5078 8.46094L10.4297 9.53906L12.1406 11.25H3V12.75H12.1406L10.4297 14.4609L11.5078 15.5391L14.5078 12.5391L15.0234 12L14.5078 11.4609L11.5078 8.46094Z" fill="#E49797" />
+                                    </g>
+                                </svg>
+                                <a class="ml-[10px]  text-[14px] font-[500]"
+                                   href="@Url.Action("LogOff", "Home")">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Logout
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>*@
+            <div id="drawer-right-example"
+                 class="fixed  top-0 right-0 z-[60] h-screen  overflow-y-auto transition-transform translate-x-1 bg-white w-[90%] translate-x-full"
+                 aria-labelledby="drawer-right-label">
+
+                <!-- <div id="drawer-right-example"
+                class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-80 dark:bg-gray-800"
+                tabindex="-1" aria-labelledby="drawer-right-label"> -->
+
+
+                <div class="h-full flex flex-col justify-between  overflow-y-auto bg-gray-50 ">
+                    <div class=" font-medium">
+                        <div class=" bg-[#EFEFEF] flex justify-between items-center pb-3">
+                            <a href="#" class="flex items-center px-4 pt-4 group">
+                                @if ((Session["ProfileImage"] == null))
+                                {
+                                    <img class="rounded-full w-[40px] h-[40px] object-cover border border-[#E1E1E1]"
+                                         src="~/Content/assets/images/customer/demo-image.jpeg" alt="profileimage">
+                                }
+                                else
+                                {
+                                    <img class="rounded-full w-[40px] h-[40px] object-cover border border-[#E1E1E1]"
+                                         src="@Session["ProfileImage"]" alt="profileimage">
+                                }
+                                <div class="flex flex-col">
+
+                                    <span class="ml-[12px] text-[14px] text-[#252525]  font-[700]"> @Session["Username"]</span>
+                                    <span class="ml-[12px] text-[#252525] text-[11px] font-normal">@Session["EmailAddress"]</span>
+                                    <span class="ml-[12px] flex justify-start gap-[2px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11"
+                                             fill="none">
+                                            <path d="M7.79167 0C6.96989 0 6.2251 0.153972 5.64323 0.44401C5.06136 0.73405 4.58333 1.20671 4.58333 1.83333V3.66667C4.58333 3.72575 4.60303 3.78304 4.61198 3.83854C4.18587 3.72754 3.71322 3.66667 3.20833 3.66667C2.38656 3.66667 1.64176 3.82064 1.0599 4.11068C0.478027 4.40072 0 4.87337 0 5.5V9.16667C0 9.79329 0.478027 10.266 1.0599 10.556C1.64176 10.846 2.38656 11 3.20833 11C4.03011 11 4.7749 10.846 5.35677 10.556C5.93864 10.266 6.41667 9.79329 6.41667 9.16667V8.98047C6.8374 9.09147 7.29753 9.16667 7.79167 9.16667C8.61344 9.16667 9.35824 9.0127 9.9401 8.72266C10.522 8.43262 11 7.95996 11 7.33333V1.83333C11 1.20671 10.522 0.73405 9.9401 0.44401C9.35824 0.153972 8.61344 0 7.79167 0ZM7.79167 0.916667C8.48991 0.916667 9.11117 1.06706 9.52474 1.27474C9.93831 1.48242 10.0833 1.70085 10.0833 1.83333C10.0833 1.96582 9.93831 2.18424 9.52474 2.39193C9.11117 2.59961 8.48991 2.75 7.79167 2.75C7.09342 2.75 6.47217 2.59961 6.05859 2.39193C5.64502 2.18424 5.5 1.96582 5.5 1.83333C5.5 1.70085 5.64502 1.48242 6.05859 1.27474C6.47217 1.06706 7.09342 0.916667 7.79167 0.916667ZM5.5 3.13672C5.54834 3.16357 5.5931 3.19759 5.64323 3.22266C6.2251 3.5127 6.96989 3.66667 7.79167 3.66667C8.61344 3.66667 9.35824 3.5127 9.9401 3.22266C9.99023 3.19759 10.035 3.16357 10.0833 3.13672V3.66667C10.0833 3.79915 9.93831 4.01758 9.52474 4.22526C9.11117 4.43294 8.48991 4.58333 7.79167 4.58333C7.09342 4.58333 6.47217 4.43294 6.05859 4.22526C5.64502 4.01758 5.5 3.79915 5.5 3.66667V3.13672ZM3.20833 4.58333C3.90658 4.58333 4.52783 4.73372 4.94141 4.94141C5.35498 5.14909 5.5 5.36751 5.5 5.5C5.5 5.63249 5.35498 5.85091 4.94141 6.05859C4.52783 6.26628 3.90658 6.41667 3.20833 6.41667C2.51009 6.41667 1.88883 6.26628 1.47526 6.05859C1.06169 5.85091 0.916667 5.63249 0.916667 5.5C0.916667 5.36751 1.06169 5.14909 1.47526 4.94141C1.88883 4.73372 2.51009 4.58333 3.20833 4.58333ZM10.0833 4.97005V5.5C10.0833 5.63249 9.93831 5.85091 9.52474 6.05859C9.11117 6.26628 8.48991 6.41667 7.79167 6.41667C7.27067 6.41667 6.79981 6.33073 6.41667 6.20182V5.5C6.41667 5.44092 6.39697 5.38363 6.38802 5.32812C6.81413 5.43913 7.28678 5.5 7.79167 5.5C8.61344 5.5 9.35824 5.34603 9.9401 5.05599C9.99023 5.03092 10.035 4.99691 10.0833 4.97005ZM0.916667 6.80339C0.965007 6.83024 1.00977 6.86426 1.0599 6.88932C1.64176 7.17936 2.38656 7.33333 3.20833 7.33333C4.03011 7.33333 4.7749 7.17936 5.35677 6.88932C5.4069 6.86426 5.45166 6.83024 5.5 6.80339V7.33333C5.5 7.46582 5.35498 7.68425 4.94141 7.89193C4.52783 8.09961 3.90658 8.25 3.20833 8.25C2.51009 8.25 1.88883 8.09961 1.47526 7.89193C1.06169 7.68425 0.916667 7.46582 0.916667 7.33333V6.80339ZM10.0833 6.80339V7.33333C10.0833 7.46582 9.93831 7.68425 9.52474 7.89193C9.11117 8.09961 8.48991 8.25 7.79167 8.25C7.27067 8.25 6.79981 8.1766 6.41667 8.04948V7.16146C6.8374 7.27246 7.29574 7.33333 7.79167 7.33333C8.61344 7.33333 9.35824 7.17936 9.9401 6.88932C9.99023 6.86426 10.035 6.83024 10.0833 6.80339ZM0.916667 8.63672C0.965007 8.66357 1.00977 8.69759 1.0599 8.72266C1.64176 9.0127 2.38656 9.16667 3.20833 9.16667C4.03011 9.16667 4.7749 9.0127 5.35677 8.72266C5.4069 8.69759 5.45166 8.66357 5.5 8.63672V9.16667C5.5 9.29915 5.35498 9.51758 4.94141 9.72526C4.52783 9.93294 3.90658 10.0833 3.20833 10.0833C2.51009 10.0833 1.88883 9.93294 1.47526 9.72526C1.06169 9.51758 0.916667 9.29915 0.916667 9.16667V8.63672Z"
+                                                  fill="#E3AB00" />
+                                        </svg>
+                                        <span class="text-[#E3AB00] text-[11px] font-medium">0 ポイント</span>
+                                    </span>
+                                </div>
+                            </a>
+                            <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
+                                    class=" flex flex-col justify-center items-center z-50 pr-[18px] pt-[6px]" onclick="NavCloseFunction();">
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <path
+                                        d="M13.3002 0.710001C12.9102 0.320001 12.2802 0.320001 11.8902 0.710001L7.00022 5.59L2.11022 0.700001C1.72022 0.310001 1.09021 0.310001 0.700215 0.700001C0.310215 1.09 0.310215 1.72 0.700215 2.11L5.59022 7L0.700215 11.89C0.310215 12.28 0.310215 12.91 0.700215 13.3C1.09021 13.69 1.72022 13.69 2.11022 13.3L7.00022 8.41L11.8902 13.3C12.2802 13.69 12.9102 13.69 13.3002 13.3C13.6902 12.91 13.6902 12.28 13.3002 11.89L8.41021 7L13.3002 2.11C13.6802 1.73 13.6802 1.09 13.3002 0.710001Z"
+                                        fill="black" />
+                                </svg> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                    <path d="M4.80859 18.3535L5.81229 19.4923L19.1889 7.18757L18.1852 6.04875L4.80859 18.3535Z"
+                                          fill="#BCB08A" />
+                                    <path d="M4.99926 7.25692L6.01562 6.12988L19.2538 18.5899L18.2374 19.717L4.99926 7.25692Z"
+                                          fill="#BCB08A" />
+                                </svg>
+                                <span class="text-[#BCB08A] text-[10px] font-normal leading-[18px]">close</span>
+                            </button>
+                        </div>
+                        <div>
+                            <a href="@Url.Action("Index", "ProfileManagement")" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 3.75C10.6084 3.75264 9.2746 4.30662 8.29061 5.29061C7.30661 6.2746 6.75264 7.60843 6.75 9C6.75114 9.86096 6.9632 10.7085 7.36763 11.4686C7.77207 12.2287 8.35656 12.8781 9.07 13.36C6.396 14.508 4.5 17.162 4.5 20.25H6C6 16.928 8.678 14.25 12 14.25C15.322 14.25 18 16.928 18 20.25H19.5C19.5 17.162 17.605 14.508 14.93 13.36C15.6436 12.8782 16.2281 12.2288 16.6326 11.4687C17.0371 10.7086 17.249 9.861 17.25 9C17.2474 7.60843 16.6934 6.2746 15.7094 5.29061C14.7254 4.30662 13.3916 3.75264 12 3.75ZM12 5.25C14.08 5.25 15.75 6.92 15.75 9C15.75 11.08 14.08 12.75 12 12.75C9.92 12.75 8.25 11.08 8.25 9C8.25 6.92 9.92 5.25 12 5.25Z"
+                                          fill="#D75A8B" />
                                 </svg>
                                 <span class="ml-[10px] text-[14px] font-[500]">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.LanguagePreference
+                                    プロフィール編集
+                                    <!-- edit profile -->
                                 </span>
                             </a>
                         </div>
-                        <div>
-                            <a href="@Url.Action("ChangePasswordV2", "ProfileManagement")" class="flex h-[48px]  items-center  py-[10px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                        <div class="py-[10px]">
+                            <a href="@Url.Action("ReservationHistory", "ReservationHistoryManagementV2")" class="flex items-center  py-[10px] px-4  rounded-lg  group ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 3C8.87402 3 6.11426 4.58496 4.5 7.00781V4.5H3V9.75H8.25V8.25H5.53125C6.82617 6.01465 9.22266 4.5 12 4.5C16.1514 4.5 19.5 7.84863 19.5 12C19.5 16.1514 16.1514 19.5 12 19.5C7.84863 19.5 4.5 16.1514 4.5 12H3C3 16.9629 7.03711 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.25 6V12.75H16.5V11.25H12.75V6H11.25Z"
+                                          fill="#D75A8B" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">予約確認・変更</span>
+                            </a>
+                        </div>
+                        <div class="py-[10px]">
+                            <a href="@Url.Action("ReviewList", "ReviewManagement")" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M2.25 4.5V19.5H9.43945L12 22.0605L14.5605 19.5H21.75V4.5H2.25ZM3.75 6H20.25V18H13.9395L12 19.9395L10.0605 18H3.75V6ZM6.75 8.25V9.75H17.25V8.25H6.75ZM6.75 11.25V12.75H17.25V11.25H6.75ZM6.75 14.25V15.75H14.25V14.25H6.75Z"
+                                          fill="#D75A8B" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">レビュー投稿</span>
+                            </a>
+                        </div>
+                        <div class="py-[10px]">
+                            <a href="@Url.Action("Index", "BookmarkManagement")" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18" fill="none">
+                                    <path d="M0.25 0.375V17.625L1.44531 16.7344L7 12.5625L12.5547 16.7344L13.75 17.625V0.375H0.25ZM1.75 1.875H12.25V14.625L7.44531 11.0156L7 10.6875L6.55469 11.0156L1.75 14.625V1.875Z"
+                                          fill="#D75A8B" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">ブックマーク</span>
+                            </a>
+                        </div>
+                        <div class="py-[10px]">
+                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M15.75 3C14.4053 3 13.1865 3.25195 12.2344 3.72656C11.2822 4.20117 10.5 4.97461 10.5 6V9C10.5 9.09668 10.5322 9.19043 10.5469 9.28125C9.84961 9.09961 9.07617 9 8.25 9C6.90527 9 5.68652 9.25195 4.73438 9.72656C3.78223 10.2012 3 10.9746 3 12V18C3 19.0254 3.78223 19.7988 4.73438 20.2734C5.68652 20.748 6.90527 21 8.25 21C9.59473 21 10.8135 20.748 11.7656 20.2734C12.7178 19.7988 13.5 19.0254 13.5 18V17.6953C14.1885 17.877 14.9414 18 15.75 18C17.0947 18 18.3135 17.748 19.2656 17.2734C20.2178 16.7988 21 16.0254 21 15V6C21 4.97461 20.2178 4.20117 19.2656 3.72656C18.3135 3.25195 17.0947 3 15.75 3ZM15.75 4.5C16.8926 4.5 17.9092 4.74609 18.5859 5.08594C19.2627 5.42578 19.5 5.7832 19.5 6C19.5 6.2168 19.2627 6.57422 18.5859 6.91406C17.9092 7.25391 16.8926 7.5 15.75 7.5C14.6074 7.5 13.5908 7.25391 12.9141 6.91406C12.2373 6.57422 12 6.2168 12 6C12 5.7832 12.2373 5.42578 12.9141 5.08594C13.5908 4.74609 14.6074 4.5 15.75 4.5ZM12 8.13281C12.0791 8.17676 12.1523 8.23242 12.2344 8.27344C13.1865 8.74805 14.4053 9 15.75 9C17.0947 9 18.3135 8.74805 19.2656 8.27344C19.3477 8.23242 19.4209 8.17676 19.5 8.13281V9C19.5 9.2168 19.2627 9.57422 18.5859 9.91406C17.9092 10.2539 16.8926 10.5 15.75 10.5C14.6074 10.5 13.5908 10.2539 12.9141 9.91406C12.2373 9.57422 12 9.2168 12 9V8.13281ZM8.25 10.5C9.39258 10.5 10.4092 10.7461 11.0859 11.0859C11.7627 11.4258 12 11.7832 12 12C12 12.2168 11.7627 12.5742 11.0859 12.9141C10.4092 13.2539 9.39258 13.5 8.25 13.5C7.10742 13.5 6.09082 13.2539 5.41406 12.9141C4.7373 12.5742 4.5 12.2168 4.5 12C4.5 11.7832 4.7373 11.4258 5.41406 11.0859C6.09082 10.7461 7.10742 10.5 8.25 10.5ZM19.5 11.1328V12C19.5 12.2168 19.2627 12.5742 18.5859 12.9141C17.9092 13.2539 16.8926 13.5 15.75 13.5C14.8975 13.5 14.127 13.3594 13.5 13.1484V12C13.5 11.9033 13.4678 11.8096 13.4531 11.7188C14.1504 11.9004 14.9238 12 15.75 12C17.0947 12 18.3135 11.748 19.2656 11.2734C19.3477 11.2324 19.4209 11.1768 19.5 11.1328ZM4.5 14.1328C4.5791 14.1768 4.65234 14.2324 4.73438 14.2734C5.68652 14.748 6.90527 15 8.25 15C9.59473 15 10.8135 14.748 11.7656 14.2734C11.8477 14.2324 11.9209 14.1768 12 14.1328V15C12 15.2168 11.7627 15.5742 11.0859 15.9141C10.4092 16.2539 9.39258 16.5 8.25 16.5C7.10742 16.5 6.09082 16.2539 5.41406 15.9141C4.7373 15.5742 4.5 15.2168 4.5 15V14.1328ZM19.5 14.1328V15C19.5 15.2168 19.2627 15.5742 18.5859 15.9141C17.9092 16.2539 16.8926 16.5 15.75 16.5C14.8975 16.5 14.127 16.3799 13.5 16.1719V14.7188C14.1885 14.9004 14.9385 15 15.75 15C17.0947 15 18.3135 14.748 19.2656 14.2734C19.3477 14.2324 19.4209 14.1768 19.5 14.1328ZM4.5 17.1328C4.5791 17.1768 4.65234 17.2324 4.73438 17.2734C5.68652 17.748 6.90527 18 8.25 18C9.59473 18 10.8135 17.748 11.7656 17.2734C11.8477 17.2324 11.9209 17.1768 12 17.1328V18C12 18.2168 11.7627 18.5742 11.0859 18.9141C10.4092 19.2539 9.39258 19.5 8.25 19.5C7.10742 19.5 6.09082 19.2539 5.41406 18.9141C4.7373 18.5742 4.5 18.2168 4.5 18V17.1328Z"
+                                          fill="#D17979" />
+                                </svg>
+
+                                <span class="ml-[10px] text-[14px] font-[500]">ポイント</span>
+                            </a>
+                        </div>
+                        <div class="py-[10px]">
+                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M3.75 4.5C2.5166 4.5 1.5 5.5166 1.5 6.75V17.25C1.5 18.4834 2.5166 19.5 3.75 19.5H20.25C21.4834 19.5 22.5 18.4834 22.5 17.25V6.75C22.5 5.5166 21.4834 4.5 20.25 4.5H3.75ZM3.75 6H20.25C20.6748 6 21 6.3252 21 6.75V8.25H3V9.75H21V17.25C21 17.6748 20.6748 18 20.25 18H3.75C3.3252 18 3 17.6748 3 17.25V6.75C3 6.3252 3.3252 6 3.75 6Z"
+                                          fill="#D75A8B" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">クレジットカード</span>
+                            </a>
+                        </div>
+                        <div class="py-[10px]">
+                            <a href="@Url.Action("ChangePasswordV2", "ProfileManagement")"
+                               class="flex items-center  py-[10px] px-4  rounded-lg  group">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M15 2.25C11.291 2.25 8.25 5.29102 8.25 9C8.25 9.38965 8.31445 9.73242 8.36719 10.0781L2.46094 15.9609L2.25 16.1953V21.75H7.5V19.5H9.75V17.25H12V15.0234C12.8848 15.457 13.916 15.75 15 15.75C18.709 15.75 21.75 12.709 21.75 9C21.75 5.29102 18.709 2.25 15 2.25ZM15 3.75C17.8916 3.75 20.25 6.1084 20.25 9C20.25 11.8916 17.8916 14.25 15 14.25C14.0918 14.25 13.1572 13.9834 12.4453 13.5938L12.2578 13.5H10.5V15.75H8.25V18H6V20.25H3.75V16.8281L9.67969 10.875L9.96094 10.6172L9.89062 10.2188C9.81445 9.76758 9.75 9.36621 9.75 9C9.75 6.1084 12.1084 3.75 15 3.75ZM16.5 6C15.6709 6 15 6.6709 15 7.5C15 8.3291 15.6709 9 16.5 9C17.3291 9 18 8.3291 18 7.5C18 6.6709 17.3291 6 16.5 6Z"
-                                          fill="#E49797" />
+                                          fill="#D17979" />
                                 </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.ChangePassword
-                                </span>
+                                <span class="ml-[10px] text-[14px] font-[500]">パスワード変更</span>
                             </a>
                         </div>
-                        <div>
-                            <a href="#" class="flex items-center  py-[10px] h-[48px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
+                        <div class="py-[10px]">
+                            <a href="@Url.Action("LogOff", "Home")"
+                               class="flex items-center  py-[10px] px-4  rounded-lg  group">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 3C8.75391 3 6 5.29102 6 8.25V10.5H10.5V8.25C10.5 8.13867 10.5674 7.97754 10.8281 7.80469C11.0889 7.63184 11.5137 7.5 12 7.5C12.4893 7.5 12.9141 7.63184 13.1719 7.80469C13.4297 7.97754 13.5 8.12695 13.5 8.25C13.5 8.68359 13.3594 8.98535 13.0781 9.32812C12.7969 9.6709 12.3604 10.0254 11.8828 10.4297C10.9248 11.2412 9.75 12.3721 9.75 14.25V15H14.25V14.25C14.25 13.9951 14.3438 13.8164 14.625 13.5234C14.9062 13.2305 15.3721 12.8848 15.8672 12.4688C16.8574 11.6367 18 10.3623 18 8.25C18 5.31738 15.252 3 12 3ZM12 4.5C14.5459 4.5 16.5 6.27539 16.5 8.25C16.5 9.8584 15.7676 10.5762 14.8828 11.3203C14.4404 11.6924 13.9688 12.0557 13.5469 12.4922C13.2861 12.7617 13.084 13.1133 12.9375 13.5H11.4844C11.7188 12.7412 12.1758 12.1641 12.8672 11.5781C13.3271 11.1914 13.8281 10.7871 14.25 10.2656C14.6719 9.74414 15 9.06152 15 8.25C15 7.5293 14.5723 6.93164 14.0156 6.5625C13.459 6.19336 12.7529 6 12 6C11.2441 6 10.5381 6.19336 9.98438 6.5625C9.43066 6.93164 9 7.53223 9 8.25V9H7.5V8.25C7.5 6.2373 9.44824 4.5 12 4.5ZM9.75 16.5V21H14.25V16.5H9.75ZM11.25 18H12.75V19.5H11.25V18Z"
-                                          fill="#E49797" />
+                                    <g opacity="0.6">
+                                        <path d="M12 3C7.81641 3 4.30664 5.87402 3.30469 9.75H4.85156C5.80957 6.70898 8.64844 4.5 12 4.5C16.1367 4.5 19.5 7.86328 19.5 12C19.5 16.1367 16.1367 19.5 12 19.5C8.64844 19.5 5.80957 17.291 4.85156 14.25H3.30469C4.30664 18.126 7.81641 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.5078 8.46094L10.4297 9.53906L12.1406 11.25H3V12.75H12.1406L10.4297 14.4609L11.5078 15.5391L14.5078 12.5391L15.0234 12L14.5078 11.4609L11.5078 8.46094Z"
+                                              fill="#BCB08A" />
+                                    </g>
                                 </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Help
-                                </span>
+                                <span class="ml-[10px] text-[14px] font-[500]">ログアウト</span>
                             </a>
                         </div>
-                        <div class="flex items-center  py-[10px] h-[48px] px-4 border-b border-[#E7E7E7] rounded-lg  group">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <g opacity="0.6">
-                                    <path d="M12 3C7.81641 3 4.30664 5.87402 3.30469 9.75H4.85156C5.80957 6.70898 8.64844 4.5 12 4.5C16.1367 4.5 19.5 7.86328 19.5 12C19.5 16.1367 16.1367 19.5 12 19.5C8.64844 19.5 5.80957 17.291 4.85156 14.25H3.30469C4.30664 18.126 7.81641 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.5078 8.46094L10.4297 9.53906L12.1406 11.25H3V12.75H12.1406L10.4297 14.4609L11.5078 15.5391L14.5078 12.5391L15.0234 12L14.5078 11.4609L11.5078 8.46094Z" fill="#E49797" />
-                                </g>
-                            </svg>
-                            <a class="ml-[10px]  text-[14px] font-[500]"
-                               href="@Url.Action("LogOff", "Home")">
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Logout
+                        <!-- divider -->
+                        <hr class="my-2">
+                        <div class="py-[10px]">
+                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4.5 2.25V21.75H19.5V7.195L19.29 6.961L14.79 2.461L14.555 2.25H4.5ZM6 3.75H13.5V8.25H18V20.25H6V3.75ZM15 4.828L16.922 6.75H15V4.828ZM8.25 9.75V11.25H15.75V9.75H8.25ZM8.25 12.75V14.25H15.75V12.75H8.25ZM8.25 15.75V17.25H15.75V15.75H8.25Z"
+                                          fill="#D75A8B" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">ヘルプ</span>
+                            </a>
+                        </div>
+                        <div class="py-[10px]">
+                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M1.5 3.75V15.75H4.5V19.57L5.719 18.586L9.258 15.75H16.5V3.75H1.5ZM3 5.25H15V14.25H8.742L8.532 14.414L6 16.43V14.25H3V5.25ZM18 6.75V8.25H21V17.25H18V19.43L15.258 17.25H9.633L7.758 18.75H14.742L19.5 22.57V18.75H22.5V6.75H18Z"
+                                          fill="#D75A8B" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">よくあるご質問</span>
+                            </a>
+                        </div>
+                        <div class="py-[10px]">
+                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M3.75 3.75V20.25H20.25V3.75H3.75ZM5.25 5.25H18.75V18.75H5.25V5.25ZM8.903 6.751C8.536 6.751 8.167 6.891 7.887 7.171L7.17 7.887C6.97747 8.0773 6.84322 8.31856 6.783 8.58248C6.72277 8.8464 6.73908 9.12202 6.83 9.377L6.863 9.475C6.987 9.852 7.276 10.735 8.223 12.135C8.681 12.815 9.213 13.453 9.795 14.021L9.971 14.197C10.5464 14.7861 11.18 15.3155 11.862 15.777C13.264 16.722 14.148 17.011 14.525 17.136L14.623 17.169C14.8781 17.2596 15.1537 17.2756 15.4176 17.2152C15.6815 17.1548 15.9227 17.0205 16.113 16.828L16.83 16.113C17.101 15.841 17.25 15.481 17.25 15.098C17.2506 14.9091 17.2138 14.722 17.1417 14.5475C17.0696 14.3729 16.9637 14.2144 16.83 14.081L15.967 13.221C15.424 12.678 14.478 12.678 13.935 13.221L12.655 14.501C12.0729 14.1027 11.5316 13.6478 11.039 13.143L10.852 12.955C10.3496 12.4642 9.89711 11.9249 9.501 11.345L10.781 10.065C11.053 9.795 11.201 9.432 11.201 9.048C11.201 8.665 11.053 8.305 10.781 8.033L9.917 7.17C9.78389 7.03684 9.62579 6.93129 9.45178 6.85938C9.27777 6.78748 9.09128 6.75065 8.903 6.751Z"
+                                          fill="#D75A8B" />
+                                </svg>
+                                <span class="ml-[10px] text-[14px] font-[500]">お問い合わせ</span>
                             </a>
                         </div>
                     </div>
 
+                    <!-- <div class="flex flex-col ">
+                        <div class="border-[1px] mb-[10px] h-[1px] w-full"> </div>
+                        <div class=" flex flex-row ml-2 mb-[40px]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 3C7.81641 3 4.30664 5.87402 3.30469 9.75H4.85156C5.80957 6.70898 8.64844 4.5 12 4.5C16.1367 4.5 19.5 7.86328 19.5 12C19.5 16.1367 16.1367 19.5 12 19.5C8.64844 19.5 5.80957 17.291 4.85156 14.25H3.30469C4.30664 18.126 7.81641 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.5078 8.46094L10.4297 9.53906L12.1406 11.25H3V12.75H12.1406L10.4297 14.4609L11.5078 15.5391L14.5078 12.5391L15.0234 12L14.5078 11.4609L11.5078 8.46094Z"
+                                    fill="black" />
+                            </svg>
+                            <span class="ml-[10px]  text-[14px] font-[500]">Logout</span>
+                        </div>
 
+                    </div> -->
                 </div>
 
+
             </div>
+
 
             <!-- #endregion -->
             <!----Render Body section start-->
             <div>
+                <input type="text" id="current-location-id" value="" hidden />
                 @RenderBody()
                 <div class="loader" id="loader-id-v2" style="display:none;">
                     <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
@@ -371,21 +537,24 @@
                 <div id="preferencefilterpopUp-id">
 
                 </div>
+                <div id="datetimefilterpopup-id">
+
+                </div>
             </div>
         </div>
         <!--Render Body section end-->
         <!-- #region Footer -->
         <!-- Go up section -->
-        <button onclick="topFunction()" id="myBtn">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g id="Frame">
-                    <path id="Vector"
-                          d="M18 3.375C9.936 3.375 3.375 9.936 3.375 18C3.375 26.064 9.936 32.625 18 32.625C26.064 32.625 32.625 26.064 32.625 18C32.625 9.936 26.064 3.375 18 3.375ZM18 5.625C19.6257 5.62303 21.2357 5.94177 22.738 6.56297C24.2403 7.18417 25.6053 8.09563 26.7548 9.24515C27.9044 10.3947 28.8158 11.7597 29.437 13.262C30.0582 14.7643 30.377 16.3743 30.375 18C30.377 19.6257 30.0582 21.2357 29.437 22.738C28.8158 24.2403 27.9044 25.6053 26.7548 26.7548C25.6053 27.9044 24.2403 28.8158 22.738 29.437C21.2357 30.0582 19.6257 30.377 18 30.375C16.3743 30.377 14.7643 30.0582 13.262 29.437C11.7597 28.8158 10.3947 27.9044 9.24515 26.7548C8.09563 25.6053 7.18417 24.2403 6.56297 22.738C5.94177 21.2357 5.62303 19.6257 5.625 18C5.62303 16.3743 5.94177 14.7643 6.56297 13.262C7.18417 11.7597 8.09563 10.3947 9.24515 9.24515C10.3947 8.09563 11.7597 7.18417 13.262 6.56297C14.7643 5.94177 16.3743 5.62303 18 5.625ZM18 9.984L10.7925 17.1915L12.375 18.8085L16.875 14.3085V25.875H19.125V14.31L23.625 18.81L25.2075 17.19L18 9.984Z"
-                          fill="#E3AB00" />
-                </g>
-            </svg>
+        @*   <button onclick="topFunction()" id="myBtn">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="Frame">
+                        <path id="Vector"
+                              d="M18 3.375C9.936 3.375 3.375 9.936 3.375 18C3.375 26.064 9.936 32.625 18 32.625C26.064 32.625 32.625 26.064 32.625 18C32.625 9.936 26.064 3.375 18 3.375ZM18 5.625C19.6257 5.62303 21.2357 5.94177 22.738 6.56297C24.2403 7.18417 25.6053 8.09563 26.7548 9.24515C27.9044 10.3947 28.8158 11.7597 29.437 13.262C30.0582 14.7643 30.377 16.3743 30.375 18C30.377 19.6257 30.0582 21.2357 29.437 22.738C28.8158 24.2403 27.9044 25.6053 26.7548 26.7548C25.6053 27.9044 24.2403 28.8158 22.738 29.437C21.2357 30.0582 19.6257 30.377 18 30.375C16.3743 30.377 14.7643 30.0582 13.262 29.437C11.7597 28.8158 10.3947 27.9044 9.24515 26.7548C8.09563 25.6053 7.18417 24.2403 6.56297 22.738C5.94177 21.2357 5.62303 19.6257 5.625 18C5.62303 16.3743 5.94177 14.7643 6.56297 13.262C7.18417 11.7597 8.09563 10.3947 9.24515 9.24515C10.3947 8.09563 11.7597 7.18417 13.262 6.56297C14.7643 5.94177 16.3743 5.62303 18 5.625ZM18 9.984L10.7925 17.1915L12.375 18.8085L16.875 14.3085V25.875H19.125V14.31L23.625 18.81L25.2075 17.19L18 9.984Z"
+                              fill="#E3AB00" />
+                    </g>
+                </svg>
 
-        </button>
+            </button>*@
         <!-- go up end  -->
         @if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && (ViewBag.ActionPageName == "Dashboard" || ViewBag.ActionPageName == "SearchFilter"))
         {
@@ -411,7 +580,7 @@
                 </div>
                 <div class="footer bg-footer">
                     <div class="footer-logo px-4 pt-[12px] pb-[16px]">
-                        <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo.svg" />
+                        <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo_2.svg" />
                     </div>
                     <div class="p-4">
                         <div class="footer-link text-white grid grid-cols-2 ">
@@ -465,6 +634,8 @@
             $('select').select2({
                 minimumResultsForSearch: Infinity
             });
+
+            setInterval(NotificationFunction, 20000);
         });
     </script>
     <!-- #endregion -->
@@ -516,27 +687,22 @@
         }
         }
     });
-        var notificationBell = document.getElementById("notification-bell-id");
-        if (notificationBell) {
             function NotificationFunction() {
                 $.ajax({
                     url: '/NotificationManagement/HasUnReadNotification',
                     type: 'POST',
                     success: function (result) {
                         if (result.HasUnReadNotification) {
-                            notificationBell.innerHTML = '<img src="/Content/assets/images/Customer/UnReadNotification.svg" class="h-[10px]" alt="notification"/>';
+                            document.getElementById("notification-bell-id").getElementsByTagName("span")[0].style.display = "block";
                         }
                         else {
-                            notificationBell.innerHTML = '';
                         }
                     },
                     error: function () {
-                        notificationBell.innerHTML = '';
                     }
                 });
             }
-            setInterval(NotificationFunction, 20000);
-        }
+
     </script>
 
     <script>
@@ -559,17 +725,21 @@
         //    }
         //}
         function OnLoadLoaderFunction() {
-            document.getElementById('loader-id-v2').style.display = 'block';
+            document.getElementById('loader-id-v2').style.display = 'flex';
             setTimeout(function () {
                 document.getElementById('loader-id-v2').style.display = 'none';
             }, 3000);
         }
 
         function EnableLoaderFunction() {
-            document.getElementById('loader-id-v2').style.display = 'block';
+            document.getElementById('loader-id-v2').style.display = 'flex';
         }
         function DisableLoaderFunction() {
             document.getElementById('loader-id-v2').style.display = 'none';
+        }
+
+        function NavCloseFunction() {
+            document.getElementById('drawer-right-example').classList.add('translate-x-full');
         }
     </script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>

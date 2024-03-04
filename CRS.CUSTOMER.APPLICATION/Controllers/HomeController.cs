@@ -23,7 +23,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             if (!string.IsNullOrEmpty(Username))
             {
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
@@ -59,7 +59,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             if (!string.IsNullOrEmpty(Username))
             {
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var Response = new RegistrationHoldModel();
             if (!string.IsNullOrEmpty(ReferCode))
@@ -333,7 +333,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
                 return View(Response);
             }
-            else return RedirectToAction("Index", "Dashboard");
+            else return RedirectToAction("Index", "DashboardV2");
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -402,7 +402,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Session["ProfileImage"] = ProfileImage;
                     Session["CreatedOn"] = response.ActionDate;
                     Session["SystemLinkModel"] = response.SystemLink;
-                    return new Tuple<string, string, bool>("Index", "Dashboard", true);
+                    return new Tuple<string, string, bool>("Index", "DashboardV2", true);
                 }
                 this.AddNotificationMessage(new NotificationModel()
                 {

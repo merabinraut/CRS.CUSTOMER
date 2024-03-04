@@ -60,7 +60,7 @@
     <a href="#">@Model.ClubNameEng</a>
 </div>
 <div>
-    <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[190px] w-full object-fill" />
+    <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[190px] w-full object-cover" />
 </div>
 <!-- section 1 -->
 <div class="px-2 pt-[12px] pb-2 flex gap-0.5">
@@ -90,7 +90,7 @@
     <div class="flex gap-[8px]">
         <div>
             <img src="@Model.ClubLogo"
-                 class="h-[48px] w-[48px] object-fill rounded-full" />
+                 class="h-[48px] w-[48px] object-cover rounded-full object-cover" />
         </div>
         <div>
             <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEng</div>
@@ -303,12 +303,12 @@
                                     @if (!string.IsNullOrEmpty(item.HostImage))
                                     {
                                         <img src="@item.HostImage"
-                                             class="w-[128px] h-[180px] object-fill rounded-[6px]" />
+                                             class="w-[128px] h-[180px] object-cover rounded-[6px] object-cover" />
                                     }
                                     else
                                     {
                                         <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                             class="w-[128px] h-[180px] object-fill rounded-[6px]" />
+                                             class="w-[128px] h-[180px] object-cover rounded-[6px]" />
                                     }
                                     <div class="pt-[5px]">
                                         <div class="text-xs  text-charcoalBlack">@item.HostName</div>
@@ -363,12 +363,12 @@
                         @if (!string.IsNullOrEmpty(item.HostImage))
                         {
                             <img src="@item.HostImage"
-                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
+                                 class="w-[104px] h-[104px] object-cover rounded-[6px] object-cover" />
                         }
                         else
                         {
                             <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
+                                 class="w-[104px] h-[104px] object-cover rounded-[6px]" />
                         }
                         <div class="pt-[5px]">
                             <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
@@ -561,7 +561,7 @@
             <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3">
                 @foreach (var item in Model.ClubGalleryImageList)
                 {
-                    <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] w-full object-fill " onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
+                    <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] w-full object-cover object-cover" onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
                 }
             </div>
         </div>

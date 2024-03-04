@@ -191,7 +191,7 @@
                             <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
                                 <div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                                     <img src="@item.ClubLogo" alt="" title="club logo"
-                                         class="w-full h-full" />
+                                         class="w-full h-full object-cover" />
                                 </div>
 
                                 <div class="flex flex-col ">
@@ -233,7 +233,7 @@
                         {
                             <div class=" " onclick="OpenImagePopup('@item2')">
                                 <img src="@item2"
-                                     class="aspect-square object-fill h-[182px] w-full" />
+                                     class="aspect-square  h-[182px] w-full object-cover" />
                             </div>
                         }
 
@@ -474,6 +474,29 @@
 
     </div>
 </div>
+<div class="flex flex-col ">
+    <div>
+    </div>
+    <div class=" ">
+        <div>
+        </div>
+        <div style="background-color: #FFFFFF;" class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]">
+            <div class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]" id="scrollToTopButton">
+
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M7.99996 2.34375L1.89062 8.45308L2.60929 9.15575L7.99996 3.76508L13.3906 9.15575L14.1093 8.45308L7.99996 2.34375ZM7.99996 5.84375L1.89062 11.9531L2.60929 12.6557L7.99996 7.26508L13.3906 12.6557L14.1093 11.9531L7.99996 5.84375Z"
+                              fill="#040000" />
+                    </svg>
+                </div>
+                <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
+                    トップに戻る
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <form action="/LocationManagement/Index" method="get" id="club-pagination-form-id">
     <input name="LocationId" value="@Model.RequestModel.LocationId" hidden />
     <input name="GroupId" value="" id="club-pagination-group-id" hidden />
@@ -665,7 +688,7 @@
     </script>
     <script>
         function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
+            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }
         function ClubReservationActionFunction(i, j, k) {
             DataStorageFunction(i, j);

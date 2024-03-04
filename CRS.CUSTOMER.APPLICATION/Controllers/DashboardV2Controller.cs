@@ -4,6 +4,7 @@ using CRS.CUSTOMER.APPLICATION.Models.CommonModel;
 using CRS.CUSTOMER.APPLICATION.Models.Dashboard;
 using CRS.CUSTOMER.APPLICATION.Models.DashboardV2;
 using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
+using CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2;
 using CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement;
 using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Dashboard;
@@ -20,7 +21,7 @@ using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
-    public class DashboardV2Controller : Controller
+    public class DashboardV2Controller : CustomController
     {
         private readonly IDashboardBusiness _oldDashboardBusiness;
         private readonly IRecommendedClubHostBusiness _recommendedClubHostBuss;
@@ -166,6 +167,19 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 responseData["Message"] = "Success";
                 responseData["PartialView"] = partialViewString;
             }
+            return Json(responseData, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult InitiateDateTimeFilterPopup()
+        {
+            var Response = new LocationClubHostModel();
+            var culture = Request.Cookies["culture"]?.Value ?? "ja";
+            var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
+            var partialViewString = RenderHelper.RenderPartialViewToString(this, "_DateTimeFilterPopUp", Response);
+            responseData["Code"] = 0;
+            responseData["Message"] = "Success";
+            responseData["PartialView"] = partialViewString;
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
         #endregion

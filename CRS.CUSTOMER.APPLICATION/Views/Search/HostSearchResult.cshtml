@@ -78,8 +78,7 @@
 
                     </div>
                     <div style="color: #666666 ; ">
-
-                        2024/01/01
+                        Date
                     </div>
                 </div>
                 <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
@@ -92,7 +91,7 @@
 
                     </div>
                     <div style="color: #666666">
-                        19:00
+                        Time
                     </div>
                 </div>
                 <div class="flex flex-row gap-[4px]  items-center  ">
@@ -151,9 +150,10 @@
             foreach (var item in Model.HostRecommendationModel)
             {
                 var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
+                var activeBoolValue = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? true : false;
                 <div class="hosts-that-match-you @activeClass">
                     <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
-                    <div class="like-host">
+                    <div class="like-host" onclick="ToggleBookmark('@item.ClubId','@item.HostId','host' , activeBoolValue)">
                         <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
                              viewBox="0 0 31 34" fill="none">
                             <g filter="url(#filter0_d_3058_46008)">
@@ -220,81 +220,93 @@
 </div>
 <div class="no-scrollbar flex flex-wrap flex-row gap-[8px] justify-center my-[12px] bg-[#FFFFFF]">
     @{
-        foreach (var item in Model.FilteredHostModel)
+        if (Model.FilteredHostModel.Count <= 0)
         {
-            var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
-            <div class="hosts-that-match-you @activeClass">
-                <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
-                <div class="like-host">
-                    <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
-                         viewBox="0 0 31 34" fill="none">
-                        <g filter="url(#filter0_d_3058_46008)">
-                            <circle cx="17" cy="17" r="10" fill="white" />
-                        </g>
-                        <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
-                              stroke="#E3A1A1" stroke-width="1.5" />
-                        <defs>
-                            <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
-                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                <feOffset />
-                                <feGaussianBlur stdDeviation="3.5" />
-                                <feComposite in2="hardAlpha" operator="out" />
-                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                <feBlend mode="normal" in2="BackgroundImageFix"
-                                         result="effect1_dropShadow_3058_46008" />
-                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
-                                         result="shape" />
-                            </filter>
-                        </defs>
-                    </svg>
-                    <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
-                         viewBox="0 0 31 34" fill="none">
-                        <g filter="url(#filter0_d_3058_39409)">
-                            <circle cx="17" cy="17" r="10" fill="#D75A8B" />
-                        </g>
-                        <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
-                              fill="white" />
-                        <defs>
-                            <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
-                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                <feOffset />
-                                <feGaussianBlur stdDeviation="3.5" />
-                                <feComposite in2="hardAlpha" operator="out" />
-                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                <feBlend mode="normal" in2="BackgroundImageFix"
-                                         result="effect1_dropShadow_3058_39409" />
-                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
-                                         result="shape" />
-                            </filter>
-                        </defs>
-                    </svg>
-
-                </div>
-                <div class="description">
-                    <div class="title">@item.HostNameEnglish</div>
-                    <div class="club-name"><img src="@item.ClubLogo" alt="club-logo" />@item.ClubNameEnglish</div>
+            <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center"
+                 style="height:calc(100vh - 47px)">
+                <div class="text-[#18181B] font-semibold mt-12 text-center">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
                 </div>
             </div>
+        }
+        else
+        {
+            foreach (var item in Model.FilteredHostModel)
+            {
+                var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
+                <div class="hosts-that-match-you @activeClass">
+                    <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
+                    <div class="like-host">
+                        <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                             viewBox="0 0 31 34" fill="none">
+                            <g filter="url(#filter0_d_3058_46008)">
+                                <circle cx="17" cy="17" r="10" fill="white" />
+                            </g>
+                            <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
+                                  stroke="#E3A1A1" stroke-width="1.5" />
+                            <defs>
+                                <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                                   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="3.5" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                             result="effect1_dropShadow_3058_46008" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
+                                             result="shape" />
+                                </filter>
+                            </defs>
+                        </svg>
+                        <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                             viewBox="0 0 31 34" fill="none">
+                            <g filter="url(#filter0_d_3058_39409)">
+                                <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                            </g>
+                            <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
+                                  fill="white" />
+                            <defs>
+                                <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
+                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                                   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                    <feOffset />
+                                    <feGaussianBlur stdDeviation="3.5" />
+                                    <feComposite in2="hardAlpha" operator="out" />
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix"
+                                             result="effect1_dropShadow_3058_39409" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
+                                             result="shape" />
+                                </filter>
+                            </defs>
+                        </svg>
+
+                    </div>
+                    <div class="description">
+                        <div class="title">@item.HostNameEnglish</div>
+                        <div class="club-name"><img src="@item.ClubLogo" alt="club-logo" />@item.ClubNameEnglish</div>
+                    </div>
+                </div>
+            }
         }
     }
 </div>
 <!-- for pagination -->
-<div class="flex justify-between bg-[#fff] px-[16px] pt-[4px]">
+<!--<div class="flex justify-between bg-[#fff] px-[16px] pt-[4px]">
     <div class="px-3 py-[10px]  flex justify-center items-center" style="border: 1px solid #F8F8F8;"
          onclick="leftPageinate()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
             <path d="M10.7075 1.65118C10.895 1.83871 11.0003 2.09302 11.0003 2.35818C11.0003 2.62335 10.895 2.87766 10.7075 3.06518L5.75754 8.01518L10.7075 12.9652C10.8897 13.1538 10.9905 13.4064 10.9882 13.6686C10.9859 13.9308 10.8808 14.1816 10.6954 14.367C10.5099 14.5524 10.2591 14.6576 9.99694 14.6599C9.73474 14.6621 9.48214 14.5613 9.29354 14.3792L3.63654 8.72218C3.44907 8.53466 3.34375 8.28035 3.34375 8.01518C3.34375 7.75002 3.44907 7.49571 3.63654 7.30819L9.29354 1.65118C9.48106 1.46371 9.73537 1.3584 10.0005 1.3584C10.2657 1.3584 10.52 1.46371 10.7075 1.65118Z"
                   fill="#959595" />
         </svg>
-    </div>
-    <!-- Pagination items will be generated dynamically based on the number of pages -->
-    <div id="pagination" class="flex justify-center items-center col-span-5"></div>
+    </div>-->
+<!-- Pagination items will be generated dynamically based on the number of pages -->
+<!--<div id="pagination" class="flex justify-center items-center col-span-5"></div>
     <div class="px-3 py-[10px]  flex justify-center items-center" style="border: 1px solid #F8F8F8;"
          onclick="rightPageinate()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
@@ -302,7 +314,7 @@
                   fill="#959595" />
         </svg>
     </div>
-</div>
+</div>-->
 <!-- pagination end -->
 <div class=" ">
     <div>
@@ -370,33 +382,33 @@
             }
         }
 
-        function updatePagination() {
-            // Remove all existing pagination items
-            document.getElementById('pagination').innerHTML = '';
+        //function updatePagination() {
+        //    // Remove all existing pagination items
+        //    document.getElementById('pagination').innerHTML = '';
 
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
+        //    const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-            for (let i = 1; i <= totalPages; i++) {
-                if (i === 1 || i === totalPages || (i >= currentPage - Math.floor(maxVisiblePages / 2) && i <= currentPage + Math.floor(maxVisiblePages / 2))) {
-                    const paginationItem = document.createElement('div');
-                    paginationItem.classList.add('px-3', 'py-[10px]', 'flex', 'justify-center', 'items-center', 'font-medium', 'leading-[24px]', 'text-[16px]');
-                    paginationItem.textContent = i;
-                    if (i === currentPage) {
-                        paginationItem.classList.add('active');
-                    }
-                    paginationItem.addEventListener('click', function () {
-                        currentPage = i;
-                        updatePagination();
-                    });
-                    document.getElementById('pagination').appendChild(paginationItem);
-                } else if (document.getElementById('pagination').lastElementChild.textContent !== '...') {
-                    const ellipsisItem = document.createElement('div');
-                    ellipsisItem.textContent = '...';
-                    ellipsisItem.classList.add('px-3', 'py-[10px]', 'flex', 'justify-center', 'items-center', 'font-medium', 'leading-[24px]', 'text-[16px]');
-                    document.getElementById('pagination').appendChild(ellipsisItem);
-                }
-            }
-        }
-        updatePagination();
+        //    for (let i = 1; i <= totalPages; i++) {
+        //        if (i === 1 || i === totalPages || (i >= currentPage - Math.floor(maxVisiblePages / 2) && i <= currentPage + Math.floor(maxVisiblePages / 2))) {
+        //            const paginationItem = document.createElement('div');
+        //            paginationItem.classList.add('px-3', 'py-[10px]', 'flex', 'justify-center', 'items-center', 'font-medium', 'leading-[24px]', 'text-[16px]');
+        //            paginationItem.textContent = i;
+        //            if (i === currentPage) {
+        //                paginationItem.classList.add('active');
+        //            }
+        //            paginationItem.addEventListener('click', function () {
+        //                currentPage = i;
+        //                updatePagination();
+        //            });
+        //            document.getElementById('pagination').appendChild(paginationItem);
+        //        } else if (document.getElementById('pagination').lastElementChild.textContent !== '...') {
+        //            const ellipsisItem = document.createElement('div');
+        //            ellipsisItem.textContent = '...';
+        //            ellipsisItem.classList.add('px-3', 'py-[10px]', 'flex', 'justify-center', 'items-center', 'font-medium', 'leading-[24px]', 'text-[16px]');
+        //            document.getElementById('pagination').appendChild(ellipsisItem);
+        //        }
+        //    }
+        //}
+        //updatePagination();
     </script>
 }

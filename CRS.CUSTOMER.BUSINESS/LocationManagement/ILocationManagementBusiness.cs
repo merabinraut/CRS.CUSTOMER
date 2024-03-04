@@ -24,6 +24,10 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
         #region Host view details
         ViewHostDetailCommon ViewHostDetails(string HostId, string customerId);
         ViewHostDetailCommonV2 ViewHostDetailsV2(string HostId, string customerId);
+        List<NoticeModelCommon> GetNoticeByClubId(string cId);
+        ClubBasicInformationModelCommon GetClubBasicInformation(string cId);
+        List<AllNoticeModelCommon> GetAllNoticeTabList(string cId);
+        List<AllScheduleModelCommon> GetAllScheduleTabList(string cId, string sFD);
         #endregion
     }
 }

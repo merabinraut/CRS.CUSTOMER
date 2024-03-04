@@ -22,16 +22,11 @@
     }
 
     input[type=radio]:checked {
-        /* The native appearance is hidden */
         appearance: none;
         -webkit-appearance: none;
-        /* For a circular appearance we need a border-radius. */
         border-radius: 50%;
-        /* The background will be the radio dot's color. */
         background: #D75A8B;
-        /* The border will be the spacing between the dot and the outer circle */
         border: 3px solid #FFF;
-        /* And by creating a box-shadow with no offset and no blur, we have an outer circle */
         box-shadow: 0 0 0 4px #D75A8B;
         width: 13px;
         height: 13px;
@@ -39,7 +34,10 @@
 
     input[type=radio] {
         box-shadow: 0 0 0 4px rgba(102, 102, 102, 0.2);
-        border: 1.5px solid rgba(102, 102, 102, 0.2);
+    /*    border: 1.5px solid rgba(102, 102, 102, 0.2);*/
+        appearance: none;
+        -webkit-appearance: none;
+        border-radius: 50%;
         width: 13px;
         height: 13px;
     }
@@ -145,19 +143,19 @@
                     <div class="text-[10px] text-[#E3A1A1]">@item.GroupName</div>
                 </div>
             </div>
-            <div class="flex flex-col justify-center items-center  p-1  scale-90">
+            <div class="flex flex-col  items-center   ">
                 @if (!string.IsNullOrEmpty(item.IsBookmarked.ToUpper()) && item.IsBookmarked.ToUpper() == "Y")
                 {
-                    <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
+                    <div class="flex flex-col  items-center px-3 hover:cursor-pointer"
                          onclick="handleRemoveBookmarks('@item.ClubId','','club')">
-                        <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[20px] w-[25px]" />
+                        <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[20px] w-[25px]" style="height:24px; width:24px" />
                     </div>
                 }
                 else
                 {
-                    <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
+                    <div class="flex flex-col  items-center px-3 hover:cursor-pointer"
                          onclick="handleAddBookmarks('@item.ClubId','','club')">
-                        <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[20px] w-[25px]" />
+                        <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[20px] w-[25px]"  style="height:24px; width:24px"/>
                     </div>
                 }
                 <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
@@ -249,7 +247,7 @@
                     }
                 }
             </div>
-            <button class="btn-gradient text-[14px] font-semibold tracking-[0.56px] leading-[21px]" onclick="alert('Booking Button');">
+            <button class="btn-gradient text-[14px] font-semibold tracking-[0.56px] leading-[21px]" onclick="InitiateClubReservationFunction('@item.ClubId')">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
             </button>
         </div>

@@ -58,6 +58,26 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
         {
             return _repo.ViewHostDetailsV2(HostId, customerId);
         }
+
+        public List<NoticeModelCommon> GetNoticeByClubId(string cId)
+        {
+            return _repo.GetNoticeByClubId(cId);
+        }
+
+        public ClubBasicInformationModelCommon GetClubBasicInformation(string cId)
+        {
+            return _repo.GetClubBasicInformation(cId);
+        }
+
+        public List<AllNoticeModelCommon> GetAllNoticeTabList(string cId)
+        {
+            return _repo.GetAllNoticeTabList(cId);
+        }
+
+        public List<AllScheduleModelCommon> GetAllScheduleTabList(string cId, string sFD)
+        {
+            return _repo.GetAllScheduleTabList(cId, sFD);
+        }
         #endregion
     }
 }
