@@ -377,8 +377,7 @@
 @section scripts
 {
     <script src="~/Content/CustomHelper.js"></script>
-    <script type="text/javascript">
-        function tag1() {
+    <script type="text/javascript">function tag1() {
             var x = document.getElementById("tag1");
             if (x.style.display === "none") {
                 x.style.display = "block";
@@ -403,8 +402,7 @@
             } else {
                 x.style.display = "none";
             }
-        }
-    </script>
+        }</script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
@@ -439,7 +437,7 @@
             window.location.href = searchUrl;
         }
         function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
+            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }
 
         function handleAddBookmarks(clubId, hostId, agentType) {

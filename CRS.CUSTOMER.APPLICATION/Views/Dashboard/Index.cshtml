@@ -199,8 +199,7 @@
         }
     </div>
 </div>
-<script>
-    $(document).ready(function () {
+<script>$(document).ready(function () {
         $('.owl-carousel').owlCarousel({
             center: true,
             items: 2,
@@ -214,8 +213,7 @@
                 }
             }
         })
-    })
-</script>
+    })</script>
 <!-- #endregion -->
 <!-- #region Club section -->
 <div class="border-t border-b border-[#EDEDED]">
@@ -557,8 +555,7 @@
 <!-- #endregion -->
 @section scripts
 {
-    <script>
-        const slideContainer = document.querySelector('.container');
+    <script>const slideContainer = document.querySelector('.container');
         const slide = document.querySelector('.slides');
         const nextBtn = document.getElementById('next-btn');
         const prevBtn = document.getElementById('prev-btn');
@@ -637,10 +634,8 @@
         startSlide();
 
         // Listen for window resize event
-        window.addEventListener('resize', updateSlideWidth);
-    </script>
-    <script>
-        $(document).ready(function () {
+        window.addEventListener('resize', updateSlideWidth);</script>
+    <script>$(document).ready(function () {
             localStorage.clear();
             GetRecommendedClubAndHost();
             ////LoaderFunction();
@@ -661,8 +656,7 @@
         //window.addEventListener("load", function () {
         //    // The entire page, including external resources, is fully loaded, hide the loader
         //    document.getElementById("loader-id").style.display = "none";
-        //});
-    </script>
+        //});</script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&libraries=geometry&callback=initMap" async defer></script>
     <script>
         var CurrentLocationId = 0;
@@ -765,7 +759,7 @@
         }
 
         function ClubDetailRedirectFunction(i,j) {
-            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
+            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }
         function HostDetailRedirectFunction(i) {
             window.location.href = "/LocationManagement/ViewHostDetail?HostId=" + i;

@@ -406,8 +406,7 @@
 {
     <script src="~/Content/CustomHelper.js"></script>
 
-    <script type="text/javascript">
-        //const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat']
+    <script type="text/javascript">//const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat']
         //days.map((day, i) => {
         //    console.log(day, 'weekdays')
         //    document.getElementById('weekdays').innerHTML = day
@@ -495,20 +494,16 @@
         }
 
         function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
+            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }
 
         function ClubReservationActionFunction(i, j, k) {
             DataStorageFunction(i, j);
             window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
-        }
+        }</script>
 
-    </script>
-
-    <script>
-        const DataStorageFunction = (i, j) => {
+    <script>const DataStorageFunction = (i, j) => {
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
-        }
-    </script>
+        }</script>
 }

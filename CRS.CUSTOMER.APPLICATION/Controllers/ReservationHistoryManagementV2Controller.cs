@@ -52,6 +52,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 cancelItem.ClubId = cancelItem.ClubId.EncryptParameter();
                 cancelItem.ReservationId = cancelItem.ReservationId.EncryptParameter();
                 cancelItem.CustomerId = cancelItem.CustomerId.EncryptParameter();
+                cancelItem.LocationId = cancelItem.LocationId.EncryptParameter();
             }
             #endregion
 
