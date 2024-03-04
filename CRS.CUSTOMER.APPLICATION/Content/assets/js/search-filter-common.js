@@ -77,7 +77,7 @@ function GetPreferenceFilterPopUp() {
         savedData = JSON.parse(savedData);
         document.getElementById('preferencefilterpopUp-id').innerHTML = savedData.content; // Render the HTML content
 
-        
+
         // Set input field values
         for (var inputId in savedData.inputValues) {
             if (inputId != "" && inputId != '') {
@@ -372,6 +372,7 @@ function ClubFilterSubmitButton() {
     ManagePreferenceFilterHTMLContent();
     var form = document.getElementById("club-filter-form-id");
     form.submit();
+    DisableLoaderFunction();
 }
 
 function HostFilterSubmitButton() {
@@ -389,6 +390,7 @@ function HostFilterSubmitButton() {
     ManagePreferenceFilterHTMLContent();
     var form = document.getElementById("host-filter-form-id");
     form.submit();
+    DisableLoaderFunction();
 }
 
 function getSelectedCheckboxValues(checkboxName, targetElementId, checkboxClass) {
@@ -451,7 +453,7 @@ function InitiateDateTimeFilterPopupFunction() {
         savedData = JSON.parse(savedData);
         document.getElementById('preferencefilterpopUp-id').innerHTML = savedData.content; // Render the HTML content
 
-        
+
         // Set input field values
         for (var inputId in savedData.inputValues) {
             if (inputId != "" && inputId != '') {
@@ -671,6 +673,7 @@ function SubmitDateTimeFilterFunction() {
     ManageDateTimeFilterHTMLContent();
     var form = document.getElementById("date-time-filter-id");
     form.submit();
+    DisableLoaderFunction();
 }
 //#endregion
 
