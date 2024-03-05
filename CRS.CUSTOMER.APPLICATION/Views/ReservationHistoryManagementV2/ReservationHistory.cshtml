@@ -1169,19 +1169,16 @@
     <script>var hour;
         var minute;
         function handleScroll(scrollContainer, shadowElement, targetIndex, callback) {
-            debugger
             const debouncedCallback = _.debounce(callback, 10);
             scrollContainer.addEventListener('scroll', function () {
                 const shadowRect = shadowElement.getBoundingClientRect();
 
                 const swiperSlides = scrollContainer.querySelectorAll('.swiper-slide');
                 const targetSlide = Array.from(swiperSlides).filter((slide, index) => {
-                    debugger
                     return index >= (targetIndex - 1) && index <= (targetIndex + 3) && slide.getBoundingClientRect().bottom >= shadowRect.bottom;
                 })[0];
 
                 if (targetSlide) {
-                    debugger
                     const value = targetSlide.textContent.trim();
                     debouncedCallback(value);
                 }
