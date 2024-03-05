@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
-    public class SearchController : Controller
+    public class SearchController : CustomController
     {
         private readonly ISearchBusiness _searchBusiness;
         private readonly IDashboardBusiness _oldDashboardBusiness;
@@ -64,14 +64,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
             });
 
+            //ViewBag.LocationId = LocationId;
+            //ViewBag.SearchFilter = SearchFilter;
+            //ViewBag.ClubCategory = ClubCategory;
+            //ViewBag.Price = Price;
+            //ViewBag.Shift = Shift;
+            //ViewBag.Time = Time;
+            //ViewBag.ClubAvailability = ClubAvailability;
             ViewBag.LocationId = LocationId;
-            ViewBag.SearchFilter = SearchFilter;
-            ViewBag.ClubCategory = ClubCategory;
-            ViewBag.Price = Price;
-            ViewBag.Shift = Shift;
-            ViewBag.Time = Time;
-            ViewBag.ClubAvailability = ClubAvailability;
-
+            ViewBag.LocationLabel = DDLHelper.GetValueForKey(DDLHelper.LoadDropdownList("1", lId), LocationId);
             return View(Response);
         }
 
@@ -108,9 +109,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
             });
             ViewBag.LocationId = LocationId;
+            ViewBag.LocationLabel = DDLHelper.GetValueForKey(DDLHelper.LoadDropdownList("1", lId), LocationId);
             ViewBag.Date = Date;
-            ViewBag.Time = Time;
-            ViewBag.NoOfPeople = NoOfPeople;
+            ViewBag.Time = string.IsNullOrEmpty(Time) ? string.Empty : Time.DecryptParameter();
+            ViewBag.NoOfPeople = string.IsNullOrEmpty(NoOfPeople) ? string.Empty : NoOfPeople.DecryptParameter();
             return View("ClubSearchResult", Response);
         }
 
@@ -162,6 +164,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Response.FilteredHostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
             }
             Response.FilteredHostModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.HostId = x.HostId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo); });
+            ViewBag.LocationId = LocationId;
+            ViewBag.LocationLabel = DDLHelper.GetValueForKey(DDLHelper.LoadDropdownList("1", lId), LocationId);
             return View(Response);
         }
     }

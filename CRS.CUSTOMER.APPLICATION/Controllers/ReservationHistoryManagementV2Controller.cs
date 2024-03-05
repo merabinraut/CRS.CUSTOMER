@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Mvc;
 using CRS.CUSTOMER.APPLICATION.Library;
@@ -28,7 +29,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 item.ClubId = item.ClubId.EncryptParameter();
                 item.ReservationId = item.ReservationId.EncryptParameter();
-                item.CustomerId = item.CustomerId.EncryptParameter();                
+                item.CustomerId = item.CustomerId.EncryptParameter();
             }
             #endregion
 
@@ -39,7 +40,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 visitedItem.ClubId = visitedItem.ClubId.EncryptParameter();
                 visitedItem.ReservationId = visitedItem.ReservationId.EncryptParameter();
-                visitedItem.CustomerId = visitedItem.CustomerId.EncryptParameter();                
+                visitedItem.CustomerId = visitedItem.CustomerId.EncryptParameter();
             }
             #endregion
 
@@ -50,7 +51,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 cancelItem.ClubId = cancelItem.ClubId.EncryptParameter();
                 cancelItem.ReservationId = cancelItem.ReservationId.EncryptParameter();
-                cancelItem.CustomerId = cancelItem.CustomerId.EncryptParameter();                
+                cancelItem.CustomerId = cancelItem.CustomerId.EncryptParameter();
+                cancelItem.LocationId = cancelItem.LocationId.EncryptParameter();
             }
             #endregion
 
@@ -61,7 +63,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 allItem.ClubId = allItem.ClubId.EncryptParameter();
                 allItem.ReservationId = allItem.ReservationId.EncryptParameter();
-                allItem.CustomerId = allItem.CustomerId.EncryptParameter();                
+                allItem.CustomerId = allItem.CustomerId.EncryptParameter();
             }
             #endregion
             if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
@@ -73,13 +75,27 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
         public ActionResult ViewHistoryDetail(string ReservationId = "")
         {
+            var FileLocationPath = "";
             string CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
             string reservationId = "";
+
+            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+
             if (!string.IsNullOrEmpty(ReservationId)) reservationId = ReservationId.DecryptParameter();
             ReservationHistoryDetailModel responseinfo = new ReservationHistoryDetailModel();
             var dbResponseInfo = _buss.GetReservationHistoryDetail(CustomerId, reservationId);
             responseinfo = dbResponseInfo.MapObject<ReservationHistoryDetailModel>();
-            responseinfo.HImages = !string.IsNullOrEmpty(responseinfo.HostImages)? responseinfo.HostImages.Split(','):null;
+            responseinfo.HImages = responseinfo.HostImages.Split(',');
+            responseinfo.ClubLogo = FileLocationPath + responseinfo.ClubLogo;
+            if (responseinfo.HImages != null)
+            {
+                List<string> updatedImages = new List<string>();
+                foreach (var item in responseinfo.HImages)
+                {
+                    updatedImages.Add(FileLocationPath + item);
+                }
+                responseinfo.HImages = updatedImages.ToArray();
+            }
             return View(responseinfo);
         }
         [HttpPost, ValidateAntiForgeryToken]
@@ -101,7 +117,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         AddNotificationMessage(new NotificationModel()
                         {
-                            Message = dbResponseInfo.Message ?? " Your reservation time has been updated",
+                            Message = dbResponseInfo.Message ?? " 予約が更新されました",
                             NotificationType = NotificationMessage.SUCCESS,
                             Title = NotificationMessage.SUCCESS.ToString(),
                         });
@@ -187,7 +203,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 return Json(JsonRequestBehavior.AllowGet);
             }
         }
-        [HttpPost,ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult RedoReservation(string RID = "")
         {
             string ReservationId = !string.IsNullOrEmpty(RID) ? ReservationId = RID.DecryptParameter() : null;
@@ -195,9 +211,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 AddNotificationMessage(new NotificationModel()
                 {
-                    Message="Invalid Reservation details",
-                    NotificationType=NotificationMessage.WARNING,
-                    Title=NotificationMessage.WARNING.ToString(),
+                    Message = "Invalid Reservation details",
+                    NotificationType = NotificationMessage.WARNING,
+                    Title = NotificationMessage.WARNING.ToString(),
                 });
                 return RedirectToAction("ReservationHistory", "ReservationHistoryManagementV2");
             }
@@ -239,9 +255,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Title = NotificationMessage.INFORMATION.ToString(),
                 });
                 return Json(JsonRequestBehavior.AllowGet);
-            }            
+            }
         }
-        [HttpPost,ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult DeleteReservation(string RID = "")
         {
             string ReservationId = !string.IsNullOrEmpty(RID) ? ReservationId = RID.DecryptParameter() : null;
@@ -266,7 +282,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     AddNotificationMessage(new NotificationModel()
                     {
-                        Message = dbResponseInfo.Message ?? " Your reservation has been Deleted",
+                        Message = dbResponseInfo.Message ?? " 予約が削除されました",
                         NotificationType = NotificationMessage.SUCCESS,
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });

@@ -50,6 +50,7 @@
                         </svg>
                     </div>
                     <div style="color: #666666" id="selected-locationlabel-id">
+                        @(string.IsNullOrEmpty(ViewBag.LocationLabel) ? "場所" : ViewBag.LocationLabel)
                     </div>
                 </div>
 
@@ -81,8 +82,8 @@
                         </svg>
 
                     </div>
-                    <div style="color: #666666;">
-                        @((string.IsNullOrEmpty(ViewBag.Date) || string.IsNullOrEmpty(ApplicationUtilities.DecryptParameter(ViewBag.Date))) ? "Date" : ApplicationUtilities.DecryptParameter(ViewBag.Date))
+                    <div style="color: #666666;" id="main-date-id">
+                        @(string.IsNullOrEmpty(ViewBag.Date) ? "日付" : ViewBag.Date)
                     </div>
                 </div>
                 <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
@@ -93,8 +94,8 @@
                                   fill="#B08194" />
                         </svg>
                     </div>
-                    <div style="color: #666666">
-                        @((string.IsNullOrEmpty(ViewBag.Time) || string.IsNullOrEmpty(ApplicationUtilities.DecryptParameter(ViewBag.Time))) ? "Time" : ApplicationUtilities.DecryptParameter(ViewBag.Time))
+                    <div style="color: #666666" id="main-time-id">
+                        @((string.IsNullOrEmpty(ViewBag.Time)) ? "時間" : ViewBag.Time)
                     </div>
                 </div>
                 <div class="flex flex-row gap-[4px]  items-center  ">
@@ -104,16 +105,20 @@
                                   fill="#B08194" />
                         </svg>
                     </div>
-                    <div style="color: #666666 ; margin-right:30px;">
-                        人数
+                    <div style="color: #666666 ; margin-right:30px;" id="main-noofpeople-id">
+                        @((string.IsNullOrEmpty(ViewBag.NoOfPeople)) ? "人数" : ViewBag.NoOfPeople)
                     </div>
                 </div>
             </div>
-            <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] disable-click" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
-                <div class="my-[12px] text-[12px] font-[700] text-[#FFF]">
-                    検索する
+            @{
+                var disableClickClass = "disable-click";
+                disableClickClass = (!string.IsNullOrEmpty(ViewBag.Date) || !string.IsNullOrEmpty(ViewBag.Time) || !string.IsNullOrEmpty(ViewBag.NoOfPeople)) ? "" : disableClickClass;
+                <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] @disableClickClass" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
+                    <div class="my-[12px] text-[12px] font-[700] text-[#FFF]">
+                        検索する
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>
@@ -278,6 +283,8 @@
                             {
                                 <div class=" ">
                                     <!-- onclick="OpenImagePopup('@item2')">-->
+
+
                                     <img src="@item2"
                                          class="aspect-square object-cover h-[120px] w-full" alt="host image" />
                                 </div>
@@ -395,9 +402,7 @@
 </div>
 @section scripts
 {
-    <script>
-        function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
-        }
-    </script>
+    <script>function ClubDetailActionFunction(i, j) {
+            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
+        }</script>
 }

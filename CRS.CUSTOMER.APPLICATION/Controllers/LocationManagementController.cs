@@ -224,7 +224,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid Details",
                     Title = NotificationMessage.WARNING.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
 

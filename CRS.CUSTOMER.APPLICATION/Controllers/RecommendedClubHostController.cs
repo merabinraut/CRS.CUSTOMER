@@ -49,7 +49,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.WARNING.ToString()
                 });
-                redirectToUrl = Url.Action("Index", "Dashboard");
+                redirectToUrl = Url.Action("Index", "DashboardV2");
                 return Json(new { Response, redirectToUrl }, JsonRequestBehavior.AllowGet);
             }
             if (string.IsNullOrEmpty(recommendedHostDBRequest.PositionId) || string.IsNullOrEmpty(recommendedHostDBRequest.LocationId)
@@ -61,7 +61,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.WARNING.ToString()
                 });
-                redirectToUrl = Url.Action("Index", "Dashboard");
+                redirectToUrl = Url.Action("Index", "DashboardV2");
                 return Json(new { Response, redirectToUrl }, JsonRequestBehavior.AllowGet);
             }
             var dbClubResponse = _recommendedClubHostBuss.GetRecommendedClub(recommendedClubDBRequest);

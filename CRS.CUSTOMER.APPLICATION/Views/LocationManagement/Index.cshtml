@@ -215,6 +215,7 @@
                                 <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
                                      onclick="handleAddBookmarks('@item.ClubId','','club')">
                                     <img src="~/Content/assets/images/customer/bookmark-outlined.svg" class="h-[20px] w-[25px]" />
+                                    <span class='text-[9px] font-medium text-[#BCB08A]'>保存</span>
                                 </div>
                             }
                             else
@@ -222,6 +223,7 @@
                                 <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
                                      onclick="handleRemoveBookmarks('@item.ClubId','','club')">
                                     <img src="~/Content/assets/images/customer/bookmark-filled.svg" class="h-[20px] w-[25px]" />
+                                    <span class='text-[9px] font-medium text-[#BCB08A]'>保存</span>
                                 </div>
                             }
 
@@ -236,9 +238,7 @@
                                      class="aspect-square  h-[182px] w-full object-cover" />
                             </div>
                         }
-
                     </section>
-
                     <!-- rating /commment -->
                     <section class=" flex justify-start flex-wrap align-top mt-2 px-4 gap-3">
                         <div class="flex items-center gap-0.5" title="club rank">
@@ -275,7 +275,6 @@
                                           fill="#BCB08A" />
                                 </svg>
                             </div>
-
                             <div class=" text-xs scale-110">@item.TotalComment</div>
                         </div>
                     </section>
@@ -414,26 +413,27 @@
             <div class="grid grid-cols-3 justify-center  hover:cursor-pointer  py-4 px-[8px] gap-2 ">
                 @foreach (var item in Model.HostListModel)
                 {
-                    <div class="h-auto flex flex-col justify-end  text-center relative">
-                        <div class="w-full flex">
+                    <div class="h-auto flex flex-col justify-end  text-center relative rounded-sm">
+
+                        <div class="w-full">
                             <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
                                 @if (!string.IsNullOrEmpty(item.HostImage))
                                 {
-                                    <img class=" w-full h-[157px]  object-fill rounded" src="@item.HostImage" />
+                                    <img class="w-full h-[157px]  object-cover rounded-sm" src="@item.HostImage" />
                                 }
                                 else
                                 {
-                                    <img class=" w-full h-[157px]  object-fill rounded" src="~/Content/assets/images/customer/demo-image.jpeg" />
+                                    <img class="w-full h-[157px]  object-cover rounded-sm" src="~/Content/assets/images/customer/demo-image.jpeg" />
                                 }
                             </a>
                         </div>
-                        <div class="absolute mb-[8px] w-full flex flex-row px-2 py-[2px]">
-                            <div style="border-radius:2px;  "
-                                 class="  w-full bg-[#ffffffe6]  p-1  justify-start rounded-b flex   flex-col   ">
-                                <div class=" flex flex-row   text-xs  ">
-                                    <div class="text-[12px] font-[700] pl-[2px] text-ellipsis-customer h-[18px]">@item.HostName</div>
+                        <div class="absolute w-full flex flex-row">
+
+                            <div style="background-color: #000000B2; " class=" rounded rounded-b-[2px] w-full  p-1  justify-start  flex   flex-col   ">
+                                <div class=" flex flex-row justify-center  text-xs  ">
+                                    <div class="text-[12px] font-[700] pl-[2px] text-[#FFFFFF]">後藤聖輝</div>
                                 </div>
-                                <div class="flex flex-row items-center   ">
+                                <div class="flex flex-row items-center justify-center   ">
                                     <div class=" font-[700] pl-[2px]">
                                         @if (!string.IsNullOrEmpty(item.ClubLogo))
                                         {
@@ -445,15 +445,55 @@
                                             <img class="h-[11px]  w-[11px] rounded-full" src="~/Content/assets/images/customer/demo-image.jpeg"
                                                  alt="club">
                                         }
-
                                     </div>
-                                    <div class="text-[10px] text-start ml-[4px] font-[400] h-[15px] text-ellipsis-customer h-[14px]">
+                                    <div class="text-[10px] text-[#FFFFFF] text-start ml-[4px] font-[400] h-[15px] overflow-hidden">
                                         @item.ClubName
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    @*<div class="h-auto flex flex-col justify-end  text-center relative">
+                            <div class="w-full flex">
+                                <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
+                                    @if (!string.IsNullOrEmpty(item.HostImage))
+                                    {
+                                        <img class=" w-full h-[157px]  object-fill rounded" src="@item.HostImage" />
+                                    }
+                                    else
+                                    {
+                                        <img class=" w-full h-[157px]  object-fill rounded" src="~/Content/assets/images/customer/demo-image.jpeg" />
+                                    }
+                                </a>
+                            </div>
+                            <div class="absolute mb-[8px] w-full flex flex-row px-2 py-[2px]">
+                                <div style="border-radius:2px;  "
+                                     class="  w-full bg-[#ffffffe6]  p-1  justify-start rounded-b flex   flex-col   ">
+                                    <div class=" flex flex-row   text-xs  ">
+                                        <div class="text-[12px] font-[700] pl-[2px] text-ellipsis-customer h-[18px]">@item.HostName</div>
+                                    </div>
+                                    <div class="flex flex-row items-center   ">
+                                        <div class=" font-[700] pl-[2px]">
+                                            @if (!string.IsNullOrEmpty(item.ClubLogo))
+                                            {
+                                                <img class="h-[11px]  w-[11px] rounded-full" src="@item.ClubLogo"
+                                                     alt="club">
+                                            }
+                                            else
+                                            {
+                                                <img class="h-[11px]  w-[11px] rounded-full" src="~/Content/assets/images/customer/demo-image.jpeg"
+                                                     alt="club">
+                                            }
+
+                                        </div>
+                                        <div class="text-[10px] text-start ml-[4px] font-[400] h-[15px] text-ellipsis-customer h-[14px]">
+                                            @item.ClubName
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
                 }
             </div>
             @*<div id="pagination-container" class="flex justify-between pagination-container-wrapper my-[7px] ">
@@ -651,8 +691,7 @@
     </script>
     <script src="~/Content/CustomHelper.js"></script>
     <!-- cursol script -->
-    <script>
-        function OpenImagePopup(ImageURL) {
+    <script>function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");
@@ -684,8 +723,7 @@
             })
 
             localStorage.clear();
-        })
-    </script>
+        })</script>
     <script>
         function ClubDetailActionFunction(i, j) {
             window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
@@ -759,14 +797,11 @@
              myDiv.style.display = "none";
          }
     </script>
-    <script>
-        const DataStorageFunction = (i, j) => {
+    <script>const DataStorageFunction = (i, j) => {
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
-        }
-    </script>
-    <script>
-        function ClubFunction(i) {
+        }</script>
+    <script>function ClubFunction(i) {
             $('#club-pagination-group-id').val(i);
             var form = document.getElementById("club-pagination-form-id");
             form.submit();
@@ -778,6 +813,5 @@
             $('#host-pagination-club-id').val(k);
             var form = document.getElementById("host-pagination-form-id");
             form.submit();
-        }
-    </script>
+        }</script>
 }

@@ -77,7 +77,7 @@ function GetPreferenceFilterPopUp() {
         savedData = JSON.parse(savedData);
         document.getElementById('preferencefilterpopUp-id').innerHTML = savedData.content; // Render the HTML content
 
-        
+
         // Set input field values
         for (var inputId in savedData.inputValues) {
             if (inputId != "" && inputId != '') {
@@ -372,6 +372,7 @@ function ClubFilterSubmitButton() {
     ManagePreferenceFilterHTMLContent();
     var form = document.getElementById("club-filter-form-id");
     form.submit();
+    DisableLoaderFunction();
 }
 
 function HostFilterSubmitButton() {
@@ -389,6 +390,7 @@ function HostFilterSubmitButton() {
     ManagePreferenceFilterHTMLContent();
     var form = document.getElementById("host-filter-form-id");
     form.submit();
+    DisableLoaderFunction();
 }
 
 function getSelectedCheckboxValues(checkboxName, targetElementId, checkboxClass) {
@@ -451,7 +453,7 @@ function InitiateDateTimeFilterPopupFunction() {
         savedData = JSON.parse(savedData);
         document.getElementById('preferencefilterpopUp-id').innerHTML = savedData.content; // Render the HTML content
 
-        
+
         // Set input field values
         for (var inputId in savedData.inputValues) {
             if (inputId != "" && inputId != '') {
@@ -525,9 +527,12 @@ function DateTimeFilterCommon() {
             onSelect: function (dateText, inst) {
                 inst.inline = true; // Set datepicker to inline mode
                 $('#date-id').val(dateText.trim());
+                $('#main-date-id').html(dateText.trim());
             }
         });
-
+        $("#datepicker2").datepicker({
+            defaultDate: null
+        });
         // Open the calendar by default
         $("#datepicker2").datepicker("show");
         // Update selected date in datevalue element
@@ -599,6 +604,7 @@ function initTimeFunction2() {
                 const timeValue = event.currentTarget.querySelector('.timeValue2').textContent;
                 var selectedTimeDiv = document.getElementById("selected-time-id2");
                 selectedTimeDiv.innerText = timeValue.trim();
+                $('#main-time-id').html(timeValue.trim());
                 const timeActualValue = event.currentTarget.querySelector('.timeValue2').getAttribute('data-info');
                 $('#time-id2').val(timeActualValue.trim());
             }
@@ -646,8 +652,9 @@ function initPeopleFunction2() {
                 //console.log('Time value:', peopleValue.trim());
                 var selectedPeopleDiv = document.getElementById("selected-noofpeople-id2");
                 selectedPeopleDiv.innerText = peopleValue.trim();
-                var selectedPeopleDiv2 = document.getElementById("main-date-id");
-                selectedPeopleDiv2.innerText = peopleValue.trim();
+                //var selectedPeopleDiv2 = document.getElementById("main-date-id");
+                //selectedPeopleDiv2.innerText = peopleValue.trim();
+                $('#main-noofpeople-id').html(peopleValue.trim());
                 const peopleActualValue = event.currentTarget.querySelector('.peopleValue2').getAttribute('data-info');
                 $('#noofpeople-id2').val(peopleActualValue.trim());
             }
@@ -663,6 +670,7 @@ function CloseInitiatedDateTimeFilterPopupFunction() {
 
 function SubmitDateTimeFilterFunction() {
     EnableLoaderFunction();
+    InitiateDateTimeFilterPopupFunction();
     let locationId = $('#filter-location-id').val();
     if (!locationId || locationId.trim() === '') {
         locationId = $('#current-location-id').val();
@@ -671,6 +679,7 @@ function SubmitDateTimeFilterFunction() {
     ManageDateTimeFilterHTMLContent();
     var form = document.getElementById("date-time-filter-id");
     form.submit();
+    DisableLoaderFunction();
 }
 //#endregion
 

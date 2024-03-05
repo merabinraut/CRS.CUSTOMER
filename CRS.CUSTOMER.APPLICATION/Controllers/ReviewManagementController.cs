@@ -278,7 +278,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                redirectToUrl = Url.Action("Index", "Dashboard");
+                redirectToUrl = Url.Action("Index", "DashboardV2");
                 return Json(new { redirectToUrl });
             }
 
@@ -312,7 +312,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse.Message ?? "Success",
                     Title = NotificationMessage.SUCCESS.ToString()
                 });
-                redirectToUrl = Url.Action("Index", "Dashboard");
+                redirectToUrl = Url.Action("Index", "DashboardV2");
                 return Json(new { redirectToUrl });
             }
             else
