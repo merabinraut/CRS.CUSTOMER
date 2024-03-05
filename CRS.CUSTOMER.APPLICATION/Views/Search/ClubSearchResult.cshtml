@@ -188,40 +188,48 @@
                 foreach (var item in Model.FilteredClubModel)
                 {
                     <div>
-                        <section class="tags flex flex-wrap pt-3 pb-2 gap-2 px-4 items-center ">
-                            @if (!string.IsNullOrEmpty(item.Tag1))
+                        <section class="tags flex flex-wrap flex-row pt-3 pb-2 gap-2 px-4 items-center ">
+                         @*   @if (!string.IsNullOrEmpty(item.Tag1))
                             {
-                                <div style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
+                                <span style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
                                     <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
                                     @item.Tag1
-                                </div>
+                                </span>
+                            }*@
+                        <div class=" flex self-center gap-0.5 no-scrollbar " style="overflow-x:scroll">
+                            @if (!string.IsNullOrEmpty(item.Tag1))
+                            {
+                                <span style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
+                                    <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
+                                    @item.Tag1
+                                </span>
                             }
-                            <div class=" flex self-center gap-0.5  ">
-                                @if (!string.IsNullOrEmpty(item.Tag2))
-                                {
-                                    <span class="  lg:text-[9px] text-xs   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
-                                        @item.Tag2
-                                    </span>
-                                }
-                                @if (!string.IsNullOrEmpty(item.Tag3))
-                                {
-                                    <span class="  lg:text-[9px] text-xs   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
-                                        @item.Tag3
-                                    </span>
-                                }
-                                @if (!string.IsNullOrEmpty(item.Tag4))
-                                {
-                                    <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
-                                        @item.Tag4
-                                    </span>
-                                }
-                                @if (!string.IsNullOrEmpty(item.Tag5))
-                                {
-                                    <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
-                                        @item.Tag5
-                                    </span>
-                                }
-                            </div>
+
+                            @if (!string.IsNullOrEmpty(item.Tag2))
+                            {
+                                <span class="  lg:text-[9px] text-xs   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
+                                    @item.Tag2
+                                </span>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Tag3))
+                            {
+                                <span class="  lg:text-[9px] text-xs   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
+                                    @item.Tag3
+                                </span>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Tag4))
+                            {
+                                <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
+                                    @item.Tag4
+                                </span>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Tag5))
+                            {
+                                <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
+                                    @item.Tag5
+                                </span>
+                            }
+                        </div>
                         </section>
 
                         <!-- club name -->
@@ -234,7 +242,7 @@
                                              class="w-full h-full" />
                                     </div>
 
-                                    <div class="flex flex-col ">
+                                    <div class="flex flex-col " style="gap:4px">
                                         <div class="flex gap-1 text-base items-center  font-semibold">
 
                                             <div style="line-height: 100%;" class="text-[14px] font-[700] items-start "
@@ -254,8 +262,8 @@
                             </a>
 
 
-                            <div class=" w-6 h-6 flex flex-col justify-center items-center  p-1  scale-90">
-                                <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer">
+                            <div class=" w-6 h-6 flex flex-col justify-center items-center   scale-90">
+                                <div class="flex flex-col justify-center items-center hover:cursor-pointer">
                                     @if (item.IsBookmarked.ToUpper() == "Y")
                                     {
                                         <div onclick="RemoveBookmark('@item.ClubId','','club')">
@@ -355,13 +363,13 @@
                                     </div>
                                     if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                                     {
-                                        <div class="bg-[#BCB08A] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
+                                        <div class="bg-[#BCB08A] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center" style="background: #BCB08A">
                                             @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
                                         </div>
                                     }
                                     else
                                     {
-                                        <div class="bg-[#D7D7D7] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
+                                        <div class="bg-[#D7D7D7] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center" style="background: #D7D7D7">
                                             @CRS.CUSTOMER.APPLICATION.Resources.Resource.Unreservable
                                         </div>
                                     }

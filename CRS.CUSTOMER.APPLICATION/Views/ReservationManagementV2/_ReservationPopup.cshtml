@@ -21,7 +21,7 @@
     }
 </style>
 <div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform"
-     tabindex="-1" aria-labelledby="drawer-bottom-label" aria-hidden="true">
+     tabindex="-1" aria-labelledby="drawer-bottom-label" aria-hidden="true" >
     <!-- <div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform translate-y-full
     " tabindex="-1" aria-labelledby="drawer-bottom-label"> -->
     <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
@@ -161,7 +161,8 @@
 
 <form action="/ReservationManagementV2/Plan" method="get" id="club-reservation-id">
     <input type="text" id="club-id" name="ClubId" value="@Model.ClubId" required hidden />
-    <input type="text" id="date-id" name="Date" value="" required hidden />
+    @*<input type="text" id="date-id" name="Date" value="" required hidden />*@
+    <input type="text" id="date-id" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" required hidden />
     <input type="text" id="time-id" name="Time" value="@Model.ClubReservableTimeModel[0].Time" required hidden />
     <input type="text" id="noofpeople-id" name="NoOfPeople" value="1" required hidden />
     <input type="text" name="SelectedHost" value="@Model.SelectedHost" hidden />

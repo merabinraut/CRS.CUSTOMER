@@ -272,7 +272,7 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             var dbResponseInfo = _dao.ExecuteDataTable(sp_name);
             if (dbResponseInfo != null) return _dao.DataTableToListObject<NoticeModelCommon>(dbResponseInfo).ToList();
             return new List<NoticeModelCommon>();
-                
+
         }
 
         public ClubBasicInformationModelCommon GetClubBasicInformation(string cId)
@@ -331,6 +331,15 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             if (dbResponseInfo != null && dbResponseInfo.Rows.Count > 0) return _dao.DataTableToListObject<AllScheduleModelCommon>(dbResponseInfo).ToList();
             return new List<AllScheduleModelCommon>();
 
+        }
+
+        public List<PlanDetailModelCommon> GetPlanDetail(string cId)
+        {
+            string sp_name = "sproc_customer_club_detail @Flag='gpdl'";
+            sp_name += ",@ClubId=" + _dao.FilterString(cId);
+            var dbresponse = _dao.ExecuteDataTable(sp_name);
+            if (dbresponse != null && dbresponse.Rows.Count > 0) return _dao.DataTableToListObject<PlanDetailModelCommon>(dbresponse).ToList();
+            return new List<PlanDetailModelCommon>();
         }
         #endregion
     }

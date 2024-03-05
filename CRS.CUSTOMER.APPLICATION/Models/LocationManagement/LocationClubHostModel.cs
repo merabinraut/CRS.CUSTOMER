@@ -54,6 +54,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string Occupation { get; set; }
         public string Rank { get; set; }
         public string ClubName { get; set; }
+        public string ClubNameJapanese { get; set; }
         public string HostImage { get; set; }
         public string IsBookmarked { get; set; }
         public string ClubLogo { get; set; }
@@ -65,6 +66,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string HostLoveCount { get; set; }
         public string HostBloodType { get; set; }
         public string HostConstellationGroup { get; set; }
+        public string LiquorStrength { get; set; }
     }
 
     public class ClubWeeklyScheduleModel

@@ -105,4 +105,13 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
         public string AgentId { get; set; }
         public string ScheduleImage { get; set; }
     }
+    public class PlanDetailModelCommon
+    {
+        public string Label { get; set; }
+        public string LabelValue { get; set; }
+        public string PlanName { get; set; }
+        public string ClubPlanTypeId { get; set; }
+        public string PlanListId { get; set; }
+        public string ClubId { get; set; }
+    }
 }

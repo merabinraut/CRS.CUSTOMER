@@ -284,6 +284,18 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);
             responseModel.GetAllScheduleTabList = dbScheduleResponse.MapObjects<AllScheduleModel>();
             responseModel.GetScheduleDDL = GetScheduleList();
+            var dbPlanDetailRes = _business.GetPlanDetail(cId);
+            responseModel.GetPlanDetailList = dbPlanDetailRes.MapObjects<PlanDetailModel>();
+            var groupedResults = responseModel.GetPlanDetailList
+    .GroupBy(planDetail => planDetail.PlanName)
+    .Select(group => new
+    {
+        PlanName = group.Key,
+        GetPlanGroupDetail = group.ToList()
+    })
+    .ToList();
+            ViewBag.PlanGroup = groupedResults.MapObjects<PlanGroup>();
+            ViewBag.PlanGroup1 = groupedResults.MapObjects<PlanGroup>();
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
             return View(responseModel);

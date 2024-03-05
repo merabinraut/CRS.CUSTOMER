@@ -64,20 +64,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
             });
 
-            //ViewBag.LocationId = LocationId;
-            //ViewBag.SearchFilter = SearchFilter;
-            //ViewBag.ClubCategory = ClubCategory;
-            //ViewBag.Price = Price;
-            //ViewBag.Shift = Shift;
-            //ViewBag.Time = Time;
-            //ViewBag.ClubAvailability = ClubAvailability;
             ViewBag.LocationId = LocationId;
             ViewBag.LocationLabel = DDLHelper.GetValueForKey(DDLHelper.LoadDropdownList("1", lId), LocationId);
             return View(Response);
         }
 
         [HttpGet]
-        public ActionResult DateTimeFilter(string LocationId, string Date, string Time, string NoOfPeople)
+        public ActionResult DateTimeFilter(string LocationId, string Date, string Time, string NoOfPeople, string ResultType = "", string FilteredTime = "")
         {
             ViewBag.ActionPageName = "SearchFilter";
             var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
@@ -97,7 +90,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Date = Date,
                 Time = string.IsNullOrEmpty(Time) ? string.Empty : Time.DecryptParameter(),
                 NoOfPeople = string.IsNullOrEmpty(NoOfPeople) ? string.Empty : NoOfPeople.DecryptParameter(),
-                CustomerId = CustomerId
+                CustomerId = CustomerId,
+                ResultType = ResultType?.DecryptParameter() ?? string.Empty,
+                FilteredTime = FilteredTime.Trim()
+
             };
             var dbResponse = _searchBusiness.ClubFilterViewDateTimeAndOthers(dbRequest);
             Response.FilteredClubModel = dbResponse.MapObjects<SearchFilterClubDetailModel>();
@@ -163,7 +159,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var dbHostResponse = _searchBusiness.HostPreferenceFilter(dbRequest);
                 Response.FilteredHostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
             }
-            Response.FilteredHostModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.HostId = x.HostId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo); });
+            Response.FilteredHostModel.ForEach(x =>
+            {
+                x.ClubId = x.ClubId.EncryptParameter();
+                x.HostId = x.HostId.EncryptParameter();
+                x.ClubLocationId = x.ClubLocationId.EncryptParameter();
+                x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
+                x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo);
+            });
             ViewBag.LocationId = LocationId;
             ViewBag.LocationLabel = DDLHelper.GetValueForKey(DDLHelper.LoadDropdownList("1", lId), LocationId);
             return View(Response);
