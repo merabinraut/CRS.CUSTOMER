@@ -106,12 +106,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ResponseModel.ClubDetailModel.ClubLogo = ImageHelper.ProcessedImage(ResponseModel.ClubDetailModel.ClubLogo);
             //Plan
             var dbResponse3 = _buss.GetPlans(cId, customerId);
-            if (dbResponse3.Item1 == ResponseCode.Failed)
+            if (dbResponse3.Item1 == ResponseCode.Failed || dbResponse3.Item1 == ResponseCode.Exception)
             {
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse.Item2 ?? "Invalid request",
+                    Message = dbResponse3.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return RedirectToAction("Index", "DashboardV2");
