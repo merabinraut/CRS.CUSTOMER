@@ -187,9 +187,9 @@
 <div class="">
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
         <div class="flex tab-container-plane no-scrollbar bg-white gap-[14px] overflow-x-auto">
-            <button id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap ">店舗トップ</button>
+            <button id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap active">店舗トップ</button>
             <button id="tab2Button" class="tab-button-plane tab-link  whitespace-nowrap">ホスト</button>
-            <button id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap active">レビュー</button>
+            <button id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap ">レビュー</button>
             <button id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap ">写真</button>
             <button id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap">スケジュール</button>
             <!-- notice button -->
@@ -1212,7 +1212,7 @@
                     for (int i = 0; i < Model.GetAllScheduleTabList.Count; i++)
                     {
                         <div class="flex justify-start items-center gap-[9px]">
-                            <div class="@(i % 2 == 0 ? "bg-[#EFEFEF]" : "bg-[#BFA3B6]") flex first:flex-1 flex-col  basis-0 px-[9px] py-[25px]"
+                            <div class="@(i % 2 == 0 ? "bg-[#EFEFEF]" : "bg-[#BFA3B6]") flex  flex-col  basis-0 px-[9px] py-[25px]"
                                  style="width: 33px;">
                                 <div class="text-[#333333] text-[13px] font-bold text-center leading-[20px]">
                                     01
@@ -1354,8 +1354,8 @@
     </div>
 </div>
 <!-- for position stickey at the bottom -->
-<div class="pl-[16px] pr-[10px] pt-[12px] sticky bottom-0  flex justify-between items-center  bg-[#FAFAFA] "
-     style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px">
+<div class="pl-[16px] pr-[10px] pt-[12px] fixed bottom-0 w-full  flex justify-between items-center  bg-[#FAFAFA] "
+     style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000; ">
     <div>
         <div class="flex justify-center items-center gap-1 pb-1">
             <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">

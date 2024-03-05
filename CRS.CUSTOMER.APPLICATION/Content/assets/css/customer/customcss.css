@@ -790,7 +790,7 @@ align-items: center;
 }
 
 .ui-datepicker {
-    width: 95%;
+    width: 95% !important;
     background-color: #fbf8f8;
     padding: 12px;
     position: relative !important;

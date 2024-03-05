@@ -189,6 +189,8 @@ function initPeopleFunction() {
 function CloseInitiatedClubReservationFunction() {
     var element = document.getElementById('drawer-date');
     element.classList.add('translate-y-full');
+    var removeElement = document.getElementById("ui-datepicker-div")
+    removeElement.style.setProperty("display", "none", "important");
 }
 
 function SubmitClubReservationFunction() {
