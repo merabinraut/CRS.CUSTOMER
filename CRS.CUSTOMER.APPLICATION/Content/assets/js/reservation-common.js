@@ -194,10 +194,10 @@ function CloseInitiatedClubReservationFunction() {
 function SubmitClubReservationFunction() {
     var form = document.getElementById('club-reservation-id');
     var requiredFields = form.querySelectorAll('[required]');
-
     for (var i = 0; i < requiredFields.length; i++) {
         if (!requiredFields[i].value) {
-            toastr.info('Please fill out all required fields.');
+            /*toastr.info('Please fill out all required fields.');*/
+            toastr.info('日付が必要です');
             return; // Prevent form submission
         }
     }
