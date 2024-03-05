@@ -78,6 +78,11 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
         {
             return _repo.GetAllScheduleTabList(cId, sFD);
         }
+
+        public List<PlanDetailModelCommon> GetPlanDetail(string cId)
+        {
+            return _repo.GetPlanDetail(cId);
+        }
         #endregion
     }
 }
