@@ -409,7 +409,7 @@ function ManagePreferenceFilterHTMLContent() {
     var inputValues = {};
     var checkboxStates = {};
     document.querySelectorAll('input').forEach(function (input) {
-        if (input.type === 'text') {
+        if (input.type === 'text' || input.type === 'search') {
             inputValues[input.id] = input.value; // Store input field values
         } else if (input.type === 'checkbox') {
             checkboxStates[input.id] = input.checked; // Store checkbox states
@@ -547,7 +547,7 @@ function ManageDateTimeFilterHTMLContent() {
     var inputValues = {};
     var checkboxStates = {};
     document.querySelectorAll('input').forEach(function (input) {
-        if (input.type === 'text') {
+        if (input.type === 'text' || input.type === 'search') {
             inputValues[input.id] = input.value; // Store input field values
         }
         else if (input.type === 'checkbox') {

@@ -311,7 +311,8 @@
                             var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
                             if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
                             {
-                                <div onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName','@item2.FullDate')">
+                                @*<div onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName','@item2.FullDate')">*@
+                                <div onclick="InitiateClubReservationFunction('@item.ClubId','@item2.FullDate' )">
                                     @item2.Date <div class="flex justify-center mt-1">
                                         <img src="@imageURL" class="h-[11px] w-[11px]">
                                     </div>
@@ -362,7 +363,8 @@
                         }
                     </div>
 
-                    <button class="btn-gradient" onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName')">
+                    @*<button class="btn-gradient" onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName')">*@
+                    <button class="btn-gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
                     </button>
                 </div>
@@ -377,7 +379,8 @@
 @section scripts
 {
     <script src="~/Content/CustomHelper.js"></script>
-    <script type="text/javascript">function tag1() {
+    <script type="text/javascript">
+        function tag1() {
             var x = document.getElementById("tag1");
             if (x.style.display === "none") {
                 x.style.display = "block";

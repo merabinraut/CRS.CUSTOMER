@@ -366,281 +366,281 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         #region Club Reservation
-        public ActionResult ClubReservation(string ClubId, string SelectedDate = "", string SelectedHost = "")
-        {
-            var culture = Request.Cookies["culture"]?.Value;
-            culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
-            var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
-            if (string.IsNullOrEmpty(cId))
-            {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.WARNING,
-                    Message = "Invalid Details",
-                    Title = NotificationMessage.WARNING.ToString()
-                });
-                return RedirectToAction("Index", "DashboardV2");
-            }
-            var clubDetailResponse = _business.GetClubDetailById(cId);
-            var responseModel = new ClubReservationModel()
-            {
-                ClubOpeningTime = clubDetailResponse.ClubOpeningTime,
-                ClubClosingTime = clubDetailResponse.ClubClosingTime,
-                ClubId = ClubId,
-                ClubName = clubDetailResponse.ClubNameEng.ToUpper()
-            };
-            ViewBag.AllowedNoOfPeopleList = ApplicationUtilities.LoadDropdownList("ALLOWEDNOOFPEOPLELIST") as Dictionary<string, string>;
-            ViewBag.ReservableTimeList = ApplicationUtilities.LoadDropdownList("RESERVABLETIMELIST", cId) as Dictionary<string, string>;
-            var scheduleDBResponse = _business.GetClubReservationSchedule(cId);
-            if (scheduleDBResponse != null && scheduleDBResponse.Count > 0)
-            {
-                responseModel.ClubWeeklyScheduleModel = scheduleDBResponse.MapObjects<ClubWeeklyScheduleModel>();
-                responseModel.ClubWeeklyScheduleModel.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
-                responseModel.ClubWeeklyScheduleModel.ForEach(x => x.DateLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.Date : x.JapaneseDate);
-            }
-            responseModel.SelectedDate = !string.IsNullOrEmpty(SelectedDate) ? SelectedDate : null;
-            responseModel.SelectedHost = !string.IsNullOrEmpty(SelectedHost) ? SelectedHost : null;
-            return View(responseModel);
-        }
+        //public ActionResult ClubReservation(string ClubId, string SelectedDate = "", string SelectedHost = "")
+        //{
+        //    var culture = Request.Cookies["culture"]?.Value;
+        //    culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
+        //    var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
+        //    if (string.IsNullOrEmpty(cId))
+        //    {
+        //        AddNotificationMessage(new NotificationModel()
+        //        {
+        //            NotificationType = NotificationMessage.WARNING,
+        //            Message = "Invalid Details",
+        //            Title = NotificationMessage.WARNING.ToString()
+        //        });
+        //        return RedirectToAction("Index", "DashboardV2");
+        //    }
+        //    var clubDetailResponse = _business.GetClubDetailById(cId);
+        //    var responseModel = new ClubReservationModel()
+        //    {
+        //        ClubOpeningTime = clubDetailResponse.ClubOpeningTime,
+        //        ClubClosingTime = clubDetailResponse.ClubClosingTime,
+        //        ClubId = ClubId,
+        //        ClubName = clubDetailResponse.ClubNameEng.ToUpper()
+        //    };
+        //    ViewBag.AllowedNoOfPeopleList = ApplicationUtilities.LoadDropdownList("ALLOWEDNOOFPEOPLELIST") as Dictionary<string, string>;
+        //    ViewBag.ReservableTimeList = ApplicationUtilities.LoadDropdownList("RESERVABLETIMELIST", cId) as Dictionary<string, string>;
+        //    var scheduleDBResponse = _business.GetClubReservationSchedule(cId);
+        //    if (scheduleDBResponse != null && scheduleDBResponse.Count > 0)
+        //    {
+        //        responseModel.ClubWeeklyScheduleModel = scheduleDBResponse.MapObjects<ClubWeeklyScheduleModel>();
+        //        responseModel.ClubWeeklyScheduleModel.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
+        //        responseModel.ClubWeeklyScheduleModel.ForEach(x => x.DateLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.Date : x.JapaneseDate);
+        //    }
+        //    responseModel.SelectedDate = !string.IsNullOrEmpty(SelectedDate) ? SelectedDate : null;
+        //    responseModel.SelectedHost = !string.IsNullOrEmpty(SelectedHost) ? SelectedHost : null;
+        //    return View(responseModel);
+        //}
         #endregion
 
         #region Plan Detail
-        [HttpGet]
-        public ActionResult PlanDetail(string ClubId)
-        {
-            var clubId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
-            if (string.IsNullOrEmpty(clubId))
-            {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.INFORMATION,
-                    Message = "Invalid club details",
-                    Title = NotificationMessage.INFORMATION.ToString()
-                });
-                return RedirectToAction("Index", "DashboardV2");
-            }
-            var responseModel = new ReservationPlanListModel()
-            {
-                ClubId = ClubId
-            };
-            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
-            var dbResponse = _reservationBuss.GetPlanList("", CustomerId, clubId);
-            if (dbResponse != null && dbResponse.First().Code.Trim() == "0")
-            {
-                if (dbResponse.Count > 0)
-                {
-                    responseModel.ReservationPlanDetailModel = dbResponse.MapObjects<ReservationPlanDetailModel>();
-                    foreach (var item in responseModel.ReservationPlanDetailModel) item.PlanId = item.PlanId.EncryptParameter();
-                    return View(responseModel);
-                }
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.INFORMATION,
-                    Message = "Invalid details",
-                    Title = NotificationMessage.INFORMATION.ToString()
-                });
-                return RedirectToAction("Index", "DashboardV2");
-            }
-            else
-            {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse.First().Message.ToString() ?? "Invalid details",
-                    Title = NotificationMessage.INFORMATION.ToString()
-                });
-                return RedirectToAction("Index", "DashboardV2");
-            }
+        //[HttpGet]
+        //public ActionResult PlanDetail(string ClubId)
+        //{
+        //    var clubId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
+        //    if (string.IsNullOrEmpty(clubId))
+        //    {
+        //        AddNotificationMessage(new NotificationModel()
+        //        {
+        //            NotificationType = NotificationMessage.INFORMATION,
+        //            Message = "Invalid club details",
+        //            Title = NotificationMessage.INFORMATION.ToString()
+        //        });
+        //        return RedirectToAction("Index", "DashboardV2");
+        //    }
+        //    var responseModel = new ReservationPlanListModel()
+        //    {
+        //        ClubId = ClubId
+        //    };
+        //    var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
+        //    var dbResponse = _reservationBuss.GetPlanList("", CustomerId, clubId);
+        //    if (dbResponse != null && dbResponse.First().Code.Trim() == "0")
+        //    {
+        //        if (dbResponse.Count > 0)
+        //        {
+        //            responseModel.ReservationPlanDetailModel = dbResponse.MapObjects<ReservationPlanDetailModel>();
+        //            foreach (var item in responseModel.ReservationPlanDetailModel) item.PlanId = item.PlanId.EncryptParameter();
+        //            return View(responseModel);
+        //        }
+        //        AddNotificationMessage(new NotificationModel()
+        //        {
+        //            NotificationType = NotificationMessage.INFORMATION,
+        //            Message = "Invalid details",
+        //            Title = NotificationMessage.INFORMATION.ToString()
+        //        });
+        //        return RedirectToAction("Index", "DashboardV2");
+        //    }
+        //    else
+        //    {
+        //        AddNotificationMessage(new NotificationModel()
+        //        {
+        //            NotificationType = NotificationMessage.INFORMATION,
+        //            Message = dbResponse.First().Message.ToString() ?? "Invalid details",
+        //            Title = NotificationMessage.INFORMATION.ToString()
+        //        });
+        //        return RedirectToAction("Index", "DashboardV2");
+        //    }
 
-        }
+        //}
         #endregion
 
         #region Host Details
-        public ActionResult HostDetail(HostDetailModel Model, string NoOfHost = "", string SelectedHost = "")
-        {
-            var clubId = !string.IsNullOrEmpty(Model.ClubId) ? Model.ClubId.DecryptParameter() : null;
-            if (!string.IsNullOrEmpty(NoOfHost))
-            {
-                string[] parts = NoOfHost.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                ViewBag.NoOfHost = parts[0];
-            }
-            else
-            {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.WARNING,
-                    Message = "Invalid host details",
-                    Title = NotificationMessage.WARNING.ToString()
-                });
-                return RedirectToAction("ClubDetail");
-            }
-            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
-            if (string.IsNullOrEmpty(clubId) || string.IsNullOrEmpty(CustomerId))
-            {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.WARNING,
-                    Message = "Invalid club details",
-                    Title = NotificationMessage.WARNING.ToString()
-                });
-                return RedirectToAction("ClubDetail");
-            }
-            var responseModel = Model.MapObject<HostDetailModel>();
-            var dbHostList = _business.GetHostList("", clubId, CustomerId);
-            responseModel.HostListModels = dbHostList.MapObjects<LocationHostListModel>();
-            foreach (var item in responseModel.HostListModels)
-            {
-                item.ClubId = item.ClubId.EncryptParameter();
-                item.HostId = item.HostId.EncryptParameter();
-                item.LocationId = item.LocationId.EncryptParameter();
-            }
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") ViewBag.FileLocationPath = "";
-            else ViewBag.FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-            return View(responseModel);
-        }
+        //public ActionResult HostDetail(HostDetailModel Model, string NoOfHost = "", string SelectedHost = "")
+        //{
+        //    var clubId = !string.IsNullOrEmpty(Model.ClubId) ? Model.ClubId.DecryptParameter() : null;
+        //    if (!string.IsNullOrEmpty(NoOfHost))
+        //    {
+        //        string[] parts = NoOfHost.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        //        ViewBag.NoOfHost = parts[0];
+        //    }
+        //    else
+        //    {
+        //        AddNotificationMessage(new NotificationModel()
+        //        {
+        //            NotificationType = NotificationMessage.WARNING,
+        //            Message = "Invalid host details",
+        //            Title = NotificationMessage.WARNING.ToString()
+        //        });
+        //        return RedirectToAction("ClubDetail");
+        //    }
+        //    var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
+        //    if (string.IsNullOrEmpty(clubId) || string.IsNullOrEmpty(CustomerId))
+        //    {
+        //        AddNotificationMessage(new NotificationModel()
+        //        {
+        //            NotificationType = NotificationMessage.WARNING,
+        //            Message = "Invalid club details",
+        //            Title = NotificationMessage.WARNING.ToString()
+        //        });
+        //        return RedirectToAction("ClubDetail");
+        //    }
+        //    var responseModel = Model.MapObject<HostDetailModel>();
+        //    var dbHostList = _business.GetHostList("", clubId, CustomerId);
+        //    responseModel.HostListModels = dbHostList.MapObjects<LocationHostListModel>();
+        //    foreach (var item in responseModel.HostListModels)
+        //    {
+        //        item.ClubId = item.ClubId.EncryptParameter();
+        //        item.HostId = item.HostId.EncryptParameter();
+        //        item.LocationId = item.LocationId.EncryptParameter();
+        //    }
+        //    if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") ViewBag.FileLocationPath = "";
+        //    else ViewBag.FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+        //    return View(responseModel);
+        //}
         #endregion
         #region Reservation Detail
-        [HttpGet]
-        public ActionResult ReservationDetail(string ClubId, string PlanId, string HostIdList)
-        {
-            var FileLocationPath = string.Empty;
-            var clubId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
-            var planId = !string.IsNullOrEmpty(PlanId) ? PlanId.DecryptParameter() : null;
-            if (string.IsNullOrEmpty(clubId) || string.IsNullOrEmpty(planId))
-            {
-                AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.WARNING, Message = "Invalid club details", Title = NotificationMessage.WARNING.ToString() });
-                return RedirectToAction("ClubDetail");
-            }
-            var ResponseModel = new ReservationDetailModel()
-            {
-                ClubId = ClubId,
-                PlanId = PlanId
-            };
-            var profileCommon = new UserProfileCommon()
-            {
-                ActionUserId = ApplicationUtilities.GetSessionValue("UserId").ToString().DecryptParameter(),
-                AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter(),
-                Session = Session.SessionID,
-            };
-            var profileDBResponse = _profileBuss.GetUserProfileDetail(profileCommon);
-            if (profileDBResponse != null) ResponseModel.CustomerDetailModel = profileDBResponse.MapObject<UserProfileModel>();
-            var clubDetailResp = _business.GetClubDetailById(clubId);
-            ResponseModel.ClubDetailModel = clubDetailResp.MapObject<LocationClubListModel>();
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-            ResponseModel.ClubDetailModel.ClubLogo = FileLocationPath + ResponseModel.ClubDetailModel.ClubLogo;
-            var HostIdListSplit = HostIdList.Split(',');
-            var HostIdListArray = HostIdListSplit.Select(x => x.DecryptParameter()).ToArray();
+        //[HttpGet]
+        //public ActionResult ReservationDetail(string ClubId, string PlanId, string HostIdList)
+        //{
+        //    var FileLocationPath = string.Empty;
+        //    var clubId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
+        //    var planId = !string.IsNullOrEmpty(PlanId) ? PlanId.DecryptParameter() : null;
+        //    if (string.IsNullOrEmpty(clubId) || string.IsNullOrEmpty(planId))
+        //    {
+        //        AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.WARNING, Message = "Invalid club details", Title = NotificationMessage.WARNING.ToString() });
+        //        return RedirectToAction("ClubDetail");
+        //    }
+        //    var ResponseModel = new ReservationDetailModel()
+        //    {
+        //        ClubId = ClubId,
+        //        PlanId = PlanId
+        //    };
+        //    var profileCommon = new UserProfileCommon()
+        //    {
+        //        ActionUserId = ApplicationUtilities.GetSessionValue("UserId").ToString().DecryptParameter(),
+        //        AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter(),
+        //        Session = Session.SessionID,
+        //    };
+        //    var profileDBResponse = _profileBuss.GetUserProfileDetail(profileCommon);
+        //    if (profileDBResponse != null) ResponseModel.CustomerDetailModel = profileDBResponse.MapObject<UserProfileModel>();
+        //    var clubDetailResp = _business.GetClubDetailById(clubId);
+        //    ResponseModel.ClubDetailModel = clubDetailResp.MapObject<LocationClubListModel>();
+        //    if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+        //    ResponseModel.ClubDetailModel.ClubLogo = FileLocationPath + ResponseModel.ClubDetailModel.ClubLogo;
+        //    var HostIdListSplit = HostIdList.Split(',');
+        //    var HostIdListArray = HostIdListSplit.Select(x => x.DecryptParameter()).ToArray();
 
-            var HostIdLists = HostIdListArray != null ? string.Join(",", HostIdListArray.ToArray()) : null;
-            if (HostIdLists != null && HostIdLists != "")
-            {
-                var dbResponse2 = _reservationBuss.GetHostDetailsForReservation(HostIdLists);
-                if (dbResponse2 != null && dbResponse2.Count > 0)
-                {
-                    ResponseModel.ReservationHostDetailModel = dbResponse2.MapObjects<ReservationHostDetailModel>();
-                    ResponseModel.ReservationHostDetailModel.ForEach(x => x.HostImagePath = FileLocationPath + x.HostImagePath);
-                }
-                else ResponseModel.ReservationHostDetailModel = new List<ReservationHostDetailModel>();
-            }
-            else ResponseModel.ReservationHostDetailModel = new List<ReservationHostDetailModel>();
-            return View(ResponseModel);
-        }
+        //    var HostIdLists = HostIdListArray != null ? string.Join(",", HostIdListArray.ToArray()) : null;
+        //    if (HostIdLists != null && HostIdLists != "")
+        //    {
+        //        var dbResponse2 = _reservationBuss.GetHostDetailsForReservation(HostIdLists);
+        //        if (dbResponse2 != null && dbResponse2.Count > 0)
+        //        {
+        //            ResponseModel.ReservationHostDetailModel = dbResponse2.MapObjects<ReservationHostDetailModel>();
+        //            ResponseModel.ReservationHostDetailModel.ForEach(x => x.HostImagePath = FileLocationPath + x.HostImagePath);
+        //        }
+        //        else ResponseModel.ReservationHostDetailModel = new List<ReservationHostDetailModel>();
+        //    }
+        //    else ResponseModel.ReservationHostDetailModel = new List<ReservationHostDetailModel>();
+        //    return View(ResponseModel);
+        //}
 
-        [HttpPost, ValidateAntiForgeryToken]
-        public JsonResult ReservationDetail(ReservationConfirmationModel Model, string[] HostIdList)
-        {
-            var clubId = !string.IsNullOrEmpty(Model.ClubId) ? Model.ClubId.DecryptParameter() : null;
-            var planId = !string.IsNullOrEmpty(Model.PlanId) ? Model.PlanId.DecryptParameter() : null;
-            var redirectToUrl = string.Empty;
-            if (string.IsNullOrEmpty(clubId) || string.IsNullOrEmpty(planId))
-            {
-                AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.WARNING, Message = "Invalid club details", Title = NotificationMessage.WARNING.ToString() });
-                redirectToUrl = Url.Action("ClubDetail", "LocationManagement");
-                return Json(new { redirectToUrl });
-            }
-            var reservationCommon = Model.MapObject<CreateReservationDetailCommon>();
-            reservationCommon.PlanId = planId;
-            reservationCommon.ClubId = clubId;
-            var hId = HostIdList.Select(x => x.DecryptParameter()).ToList();
-            reservationCommon.HostIdList = hId != null ? string.Join(",", hId.ToArray()) : null;
-            reservationCommon.CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
-            reservationCommon.ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString().DecryptParameter();
-            reservationCommon.ActionIP = ApplicationUtilities.GetIP();
-            reservationCommon.NoOfPeople = !string.IsNullOrEmpty(reservationCommon.NoOfPeople) ? reservationCommon.NoOfPeople.Replace("人", "").Trim() : "";
-            var dbResponse = _reservationBuss.CreateReservation(reservationCommon);
-            if (dbResponse.Code == ResponseCode.Success)
-            {
-                var ResponseModel = new PaymentMethodDetailModel
-                {
-                    ReservationId = dbResponse.Extra1.EncryptParameter(),
-                    CustomerDetail = dbResponse.Extra2,
-                    ReservationDetail = dbResponse.Extra3,
-                    PlannDetail = dbResponse.Extra4,
-                    TotalAmount = dbResponse.Extra5
-                };
-                redirectToUrl = Url.Action("PaymentMethod", "LocationManagement", ResponseModel);
-                return Json(new { redirectToUrl });
-            }
-            else
-            {
-                AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.WARNING, Message = "Invalid club details", Title = NotificationMessage.WARNING.ToString() });
-                redirectToUrl = Url.Action("ClubDetail", "LocationManagement");
-                return Json(new { redirectToUrl });
-            }
-        }
+        //[HttpPost, ValidateAntiForgeryToken]
+        //public JsonResult ReservationDetail(ReservationConfirmationModel Model, string[] HostIdList)
+        //{
+        //    var clubId = !string.IsNullOrEmpty(Model.ClubId) ? Model.ClubId.DecryptParameter() : null;
+        //    var planId = !string.IsNullOrEmpty(Model.PlanId) ? Model.PlanId.DecryptParameter() : null;
+        //    var redirectToUrl = string.Empty;
+        //    if (string.IsNullOrEmpty(clubId) || string.IsNullOrEmpty(planId))
+        //    {
+        //        AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.WARNING, Message = "Invalid club details", Title = NotificationMessage.WARNING.ToString() });
+        //        redirectToUrl = Url.Action("ClubDetail", "LocationManagement");
+        //        return Json(new { redirectToUrl });
+        //    }
+        //    var reservationCommon = Model.MapObject<CreateReservationDetailCommon>();
+        //    reservationCommon.PlanId = planId;
+        //    reservationCommon.ClubId = clubId;
+        //    var hId = HostIdList.Select(x => x.DecryptParameter()).ToList();
+        //    reservationCommon.HostIdList = hId != null ? string.Join(",", hId.ToArray()) : null;
+        //    reservationCommon.CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
+        //    reservationCommon.ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString().DecryptParameter();
+        //    reservationCommon.ActionIP = ApplicationUtilities.GetIP();
+        //    reservationCommon.NoOfPeople = !string.IsNullOrEmpty(reservationCommon.NoOfPeople) ? reservationCommon.NoOfPeople.Replace("人", "").Trim() : "";
+        //    var dbResponse = _reservationBuss.CreateReservation(reservationCommon);
+        //    if (dbResponse.Code == ResponseCode.Success)
+        //    {
+        //        var ResponseModel = new PaymentMethodDetailModel
+        //        {
+        //            ReservationId = dbResponse.Extra1.EncryptParameter(),
+        //            CustomerDetail = dbResponse.Extra2,
+        //            ReservationDetail = dbResponse.Extra3,
+        //            PlannDetail = dbResponse.Extra4,
+        //            TotalAmount = dbResponse.Extra5
+        //        };
+        //        redirectToUrl = Url.Action("PaymentMethod", "LocationManagement", ResponseModel);
+        //        return Json(new { redirectToUrl });
+        //    }
+        //    else
+        //    {
+        //        AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.WARNING, Message = "Invalid club details", Title = NotificationMessage.WARNING.ToString() });
+        //        redirectToUrl = Url.Action("ClubDetail", "LocationManagement");
+        //        return Json(new { redirectToUrl });
+        //    }
+        //}
         #endregion
         #region Payment Method
-        [HttpGet]
-        public ActionResult PaymentMethod(PaymentMethodDetailModel Model)
-        {
-            var reservationId = !string.IsNullOrEmpty(Model.ReservationId) ? Model.ReservationId.DecryptParameter() : null;
-            if (string.IsNullOrEmpty(reservationId))
-            {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.WARNING,
-                    Message = "Invalid details",
-                    Title = NotificationMessage.WARNING.ToString()
-                });
-                return RedirectToAction("ClubDetail");
-            }
-            var ResponseModel = Model.MapObject<PaymentMethodDetailModel>();
-            ViewBag.PaymentMethodList = ApplicationUtilities.LoadDropdownList("PAYMENTMETHODLIST") as Dictionary<string, string>;
-            return View(ResponseModel);
-        }
-        [HttpGet]
-        public ActionResult PaymentMethodConfirmation(string ReservationId, string PaymentType)
-        {
-            var rId = !string.IsNullOrEmpty(ReservationId) ? ReservationId.DecryptParameter() : null;
-            var pId = !string.IsNullOrEmpty(PaymentType) ? PaymentType.DecryptParameter() : null;
-            if (string.IsNullOrEmpty(rId) || string.IsNullOrEmpty(pId))
-            {
-                AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.WARNING, Message = "Invalid club details", Title = NotificationMessage.WARNING.ToString() });
-                return RedirectToAction("ClubDetail");
-            }
-            var dbRequestCommon = new ManageReservationDetailCommon()
-            {
-                CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter(),
-                PaymentType = pId,
-                ReservationId = rId,
-                ActionUser = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter(),
-                ActionPlatform = "Customer",
-                ActionIP = ApplicationUtilities.GetIP()
-            };
-            var dbResponse = _reservationBuss.ManageReservation(dbRequestCommon);
-            if (dbResponse == null || dbResponse.Code != ResponseCode.Success)
-            {
-                AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.WARNING, Message = "Invalid club details", Title = NotificationMessage.WARNING.ToString() });
-                return RedirectToAction("ReservationDetail");
-            }
-            AddNotificationMessage(new NotificationModel()
-            {
-                NotificationType = NotificationMessage.SUCCESS,
-                Message = dbResponse.Message,
-                Title = NotificationMessage.SUCCESS.ToString()
-            });
-            return RedirectToAction("History", "ReservationHistoryManagement");
-        }
+        //[HttpGet]
+        //public ActionResult PaymentMethod(PaymentMethodDetailModel Model)
+        //{
+        //    var reservationId = !string.IsNullOrEmpty(Model.ReservationId) ? Model.ReservationId.DecryptParameter() : null;
+        //    if (string.IsNullOrEmpty(reservationId))
+        //    {
+        //        AddNotificationMessage(new NotificationModel()
+        //        {
+        //            NotificationType = NotificationMessage.WARNING,
+        //            Message = "Invalid details",
+        //            Title = NotificationMessage.WARNING.ToString()
+        //        });
+        //        return RedirectToAction("ClubDetail");
+        //    }
+        //    var ResponseModel = Model.MapObject<PaymentMethodDetailModel>();
+        //    ViewBag.PaymentMethodList = ApplicationUtilities.LoadDropdownList("PAYMENTMETHODLIST") as Dictionary<string, string>;
+        //    return View(ResponseModel);
+        //}
+        //[HttpGet]
+        //public ActionResult PaymentMethodConfirmation(string ReservationId, string PaymentType)
+        //{
+        //    var rId = !string.IsNullOrEmpty(ReservationId) ? ReservationId.DecryptParameter() : null;
+        //    var pId = !string.IsNullOrEmpty(PaymentType) ? PaymentType.DecryptParameter() : null;
+        //    if (string.IsNullOrEmpty(rId) || string.IsNullOrEmpty(pId))
+        //    {
+        //        AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.WARNING, Message = "Invalid club details", Title = NotificationMessage.WARNING.ToString() });
+        //        return RedirectToAction("ClubDetail");
+        //    }
+        //    var dbRequestCommon = new ManageReservationDetailCommon()
+        //    {
+        //        CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter(),
+        //        PaymentType = pId,
+        //        ReservationId = rId,
+        //        ActionUser = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter(),
+        //        ActionPlatform = "Customer",
+        //        ActionIP = ApplicationUtilities.GetIP()
+        //    };
+        //    var dbResponse = _reservationBuss.ManageReservation(dbRequestCommon);
+        //    if (dbResponse == null || dbResponse.Code != ResponseCode.Success)
+        //    {
+        //        AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.WARNING, Message = "Invalid club details", Title = NotificationMessage.WARNING.ToString() });
+        //        return RedirectToAction("ReservationDetail");
+        //    }
+        //    AddNotificationMessage(new NotificationModel()
+        //    {
+        //        NotificationType = NotificationMessage.SUCCESS,
+        //        Message = dbResponse.Message,
+        //        Title = NotificationMessage.SUCCESS.ToString()
+        //    });
+        //    return RedirectToAction("History", "ReservationHistoryManagement");
+        //}
         #endregion
 
         #region "Search Filter"

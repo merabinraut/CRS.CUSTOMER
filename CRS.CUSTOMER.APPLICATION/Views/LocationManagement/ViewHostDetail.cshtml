@@ -424,7 +424,8 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
         </div>
         <button style="border-radius: 4px ;
                 background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%); border-radius: 4px;"
-                class=" flex w-[208px] justify-center items-center py-[9px] px-9 gap-[2px]" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEnglish', '@Model.HostId')">
+                @*class=" flex w-[208px] justify-center items-center py-[9px] px-9 gap-[2px]" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEnglish', '@Model.HostId')">*@
+                class=" flex w-[208px] justify-center items-center py-[9px] px-9 gap-[2px]" onclick="InitiateClubReservationFunction('@Model.ClubId','', '@Model.HostId')">
             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none"
                  class=" flex justify-center items-center">
                 <path d="M6.125 3.125V3.75H3.625V17.5H17.375V3.75H14.875V3.125H13.625V3.75H7.375V3.125H6.125ZM4.875 5H6.125V5.625H7.375V5H13.625V5.625H14.875V5H16.125V6.25H4.875V5ZM4.875 7.5H16.125V16.25H4.875V7.5ZM9.875 8.75V11.25H7.375V12.5H9.875V15H11.125V12.5H13.625V11.25H11.125V8.75H9.875Z"
@@ -498,7 +499,8 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="~/Content/CustomHelper.js"></script>
-    <script>const shareButton = document.querySelector("#shareButton");
+    <script>
+        const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -589,7 +591,8 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
         }</script>
-    <script>// Function to open a specific modal
+    <script>
+        // Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {

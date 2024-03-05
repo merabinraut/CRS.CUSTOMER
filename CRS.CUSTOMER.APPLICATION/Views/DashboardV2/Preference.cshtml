@@ -34,7 +34,7 @@
 
     input[type=radio] {
         box-shadow: 0 0 0 4px rgba(102, 102, 102, 0.2);
-    /*    border: 1.5px solid rgba(102, 102, 102, 0.2);*/
+        /*    border: 1.5px solid rgba(102, 102, 102, 0.2);*/
         appearance: none;
         -webkit-appearance: none;
         border-radius: 50%;
@@ -42,7 +42,7 @@
         height: 13px;
     }
 </style>
-<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="history.back()">
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="window.location.href='@Url.Action("Index","DashboardV2")'">
     <div class="flex gap-2 items-center absolute top-[12px] text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
             <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
@@ -61,17 +61,15 @@
                 <label for='click' class='font-medium text-[14px] cl'>今すぐ行けるお店</label>
             </div>
 
-            <div class='flex gap-[10px] items-center' onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("4").ToString()');">
-                <input name="radio-group" type="radio" id='click4' @types[4]>
-                <label for="click4" class=' font-medium text-[14px] cl'>女子会向き</label>
-            </div>
-
             <div class='flex gap-[10px] items-center' onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("2").ToString()');">
                 <input name="radio-group" type="radio" id='click2' @types[2]>
                 <label for="click2" class='font-medium text-[14px] cl'>在籍人数が多い</label>
             </div>
 
-
+            <div class='flex gap-[10px] items-center' onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("4").ToString()');">
+                <input name="radio-group" type="radio" id='click4' @types[4]>
+                <label for="click4" class=' font-medium text-[14px] cl'>女子会向き</label>
+            </div>
         </div>
 
         <div class='flex flex-col gap-2'>
@@ -155,7 +153,7 @@
                 {
                     <div class="flex flex-col  items-center px-3 hover:cursor-pointer"
                          onclick="handleAddBookmarks('@item.ClubId','','club')">
-                        <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[20px] w-[25px]"  style="height:24px; width:24px"/>
+                        <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[20px] w-[25px]" style="height:24px; width:24px" />
                     </div>
                 }
                 <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
@@ -248,7 +246,8 @@
                 }
             </div>
             <button class="btn-gradient text-[14px] font-semibold tracking-[0.56px] leading-[21px]" onclick="InitiateClubReservationFunction('@item.ClubId')">
-                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
+                今すぐ予約する
+                @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now*@
             </button>
         </div>
     </section>

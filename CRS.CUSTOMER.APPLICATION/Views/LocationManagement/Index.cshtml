@@ -384,7 +384,8 @@
                             }
                         </div>
 
-                        <button class="btn-gradient" onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName')">
+                        @*<button class="btn-gradient" onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName')">*@
+                        <button class="btn-gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
                             @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
                         </button>
 
@@ -691,7 +692,8 @@
     </script>
     <script src="~/Content/CustomHelper.js"></script>
     <!-- cursol script -->
-    <script>function OpenImagePopup(ImageURL) {
+    <script>
+    function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");
@@ -797,11 +799,13 @@
              myDiv.style.display = "none";
          }
     </script>
-    <script>const DataStorageFunction = (i, j) => {
+    <script>
+    const DataStorageFunction = (i, j) => {
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
         }</script>
-    <script>function ClubFunction(i) {
+    <script>
+    function ClubFunction(i) {
             $('#club-pagination-group-id').val(i);
             var form = document.getElementById("club-pagination-form-id");
             form.submit();

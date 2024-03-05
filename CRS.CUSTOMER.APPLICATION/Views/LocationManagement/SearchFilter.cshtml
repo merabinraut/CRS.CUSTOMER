@@ -183,7 +183,8 @@
                     <div class="grid grid-cols-3 gap-[6px] mx-4  my-[8px]">
                         @for (int club = 0; (club < Model.ClubModel.Count && club < 6); club++)
                         {
-                            <a onclick="window.location.href ='@Url.Action("ClubDetail","LocationManagement", new {LocationId= Model.ClubModel[club].ClubLocationId, ClubId= Model.ClubModel[club].ClubId })'">
+                            @*<a onclick="window.location.href ='@Url.Action("ClubDetail","LocationManagement", new {LocationId= Model.ClubModel[club].ClubLocationId, ClubId= Model.ClubModel[club].ClubId })'">*@
+                            <a onclick="window.location.href ='@Url.Action("ClubDetail_V2","LocationManagement", new {LocationId= Model.ClubModel[club].ClubLocationId, ClubId= Model.ClubModel[club].ClubId })'">
                                 <div class="flex">
                                     <div style="border-radius: 6px; border: 1px solid #EDEDED; background: #FFF;"
                                          class=" flex flex-col w-full   px-[8px] py-[10px]">
