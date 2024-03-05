@@ -1,9 +1,11 @@
-﻿@model CRS.CUSTOMER.APPLICATION.Models.LocationManagement.ClubDetailModel
+﻿@using CRS.CUSTOMER.APPLICATION.Library
+@model CRS.CUSTOMER.APPLICATION.Models.LocationManagement.ClubDetailModel
 @{
     ViewBag.Title = "Club Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     DateTime todayDate = DateTime.Now;
     string formattedDate = todayDate.ToString("yyyy年M月");
+
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script src="/Content/assets/js/tabs.js"></script>
@@ -607,37 +609,43 @@
                                     通常入店
                                 </td>
                                 <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
-                                    22:00 / L.O 21:00
+                                    @Model.GetClubBasicInformation.RegularEntry
+                                    @if (Model.GetClubBasicInformation.LastOrderTime != null)
+                                    {
+                                        <text>( / L.O. @Model.GetClubBasicInformation.LastOrderTime)</text>
+                                    }
+                                    @*@Model.GetClubBasicInformation.LastOrderTime / L.O 21:00*@
                                 </td>
                             </tr>
-                            @{
-                                foreach (var group in ViewBag.PlanGroup)
+
+                            @foreach (var group in ViewBag.PlanGroup)
+                            {
+                                var isFirstRow = true; // Flag to check if it's the first row in the group
+                                var lstgroupDetails = StaticData.GetPlanGroupLOT(group);
+                                foreach (var item in lstgroupDetails.GetPlanGroupDetail)
                                 {
-                                    var isFirstRow = true; // Flag to check if it's the first row in the group
-                                    foreach (var item in group.GetPlanGroupDetail)
-                                    {
-                                        <tr class="">
-                                            @if (isFirstRow)
+                                    <tr class="">
+                                        @if (isFirstRow)
+                                        {
+                                            <!-- Display PlanName only in the first row of the group -->
+                                            <td rowspan="1" class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                                @group.PlanName
+                                            </td>
                                             {
-                                                <!-- Display PlanName only in the first row of the group -->
-                                                <td rowspan="4" class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
-                                                    @group.PlanName
-                                                </td>
-                                                {
-                                                    isFirstRow = false; // Set the flag to false after displaying PlanName
-                                                }
+                                                isFirstRow = false; // Set the flag to false after displaying PlanName
                                             }
-                                            <!-- Display Label and LabelValue for each row -->
-                                            <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                        }
+                                        <!-- Display Label and LabelValue for each row -->
+                                        @*<td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
                                                 @item.Label
-                                            </td>
-                                            <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                                @item.LabelValue
-                                            </td>
-                                        </tr>
-                                    }
+                                            </td>*@
+                                        <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                            @item.LabelValue
+                                        </td>
+                                    </tr>
                                 }
                             }
+
                             @*<tr class="">
                                     <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
                                         エンジョイプラン
@@ -683,20 +691,18 @@
                 <div class="w-full">
                     <table class=" pb-[6px] w-full ">
                         <!-- for first row -->
-                        @*@foreach (var group in Model.GetPlanDetailList.GroupBy(item => item.PlanName))
-                            {
-                            }*@
                         @{
-                            foreach (var group in ViewBag.PlanGroup)
+                            foreach (var group in ViewBag.PlanGroup1)
                             {
                                 var isFirstRow = true; // Flag to check if it's the first row in the group
-                                foreach (var item in group.GetPlanGroupDetail)
+                                var lstgroupDetails = StaticData.GetPlanGroup(group);
+                                foreach (var item in lstgroupDetails.GetPlanGroupDetail)
                                 {
                                     <tr class="">
                                         @if (isFirstRow)
                                         {
                                             <!-- Display PlanName only in the first row of the group -->
-                                            <td rowspan="4" class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                            <td rowspan="2" class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
                                                 @group.PlanName
                                             </td>
                                             {
