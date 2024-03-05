@@ -32,11 +32,13 @@ body {
     margin: 0;
     box-shadow: none;
     height: 100vh;
+    -webkit-overflow-scrolling: touch;
 }
 
     body::-webkit-scrollbar {
         display: none;
     }
+
 
 .no-scrollbar::-webkit-scrollbar {
     display: none;

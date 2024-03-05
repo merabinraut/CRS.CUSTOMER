@@ -305,12 +305,12 @@
                                             @if (!string.IsNullOrEmpty(item.HostImage))
                                             {
                                                 <img src="@item.HostImage"
-                                                     class="w-[128px] h-[180px] object-fill rounded-[6px]" />
+                                                     class="w-[128px] h-[180px] object-cover rounded-[6px]" />
                                             }
                                             else
                                             {
                                                 <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                                     class="w-[128px] h-[180px] object-fill rounded-[6px]" />
+                                                     class="w-[128px] h-[180px] object-cover rounded-[6px]" />
                                             }
                                             @if (item.IsBookmarked.Trim().ToUpper() == "Y")
                                             {
@@ -812,12 +812,12 @@
                         @if (!string.IsNullOrEmpty(item.HostImage))
                         {
                             <img src="@item.HostImage"
-                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
+                                 class="w-[104px] h-[104px] object-cover rounded-[6px]" />
                         }
                         else
                         {
                             <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
+                                 class="w-[104px] h-[104px] object-cover rounded-[6px]" />
                         }
                         <div class="pt-[5px]">
                             <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
