@@ -150,7 +150,7 @@
             {
                 var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
                 var activeBoolValue = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? true : false;
-                <div class="hosts-that-match-you @activeClass">
+                <div class=" @activeClass">
                     <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
                     <div class="like-host" onclick="ToggleBookmark('@item.ClubId','@item.HostId','host' , activeBoolValue)">
                         <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
@@ -222,7 +222,7 @@
         if (Model.FilteredHostModel.Count <= 0)
         {
             <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center"
-                 style="height:calc(100vh - 47px)">
+                >
                 <div class="text-[#18181B] font-semibold mt-12 text-center">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
                 </div>
