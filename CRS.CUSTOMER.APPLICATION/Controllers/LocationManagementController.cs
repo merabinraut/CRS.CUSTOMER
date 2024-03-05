@@ -243,7 +243,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 item.LocationId = item.LocationId.EncryptParameter();
                 item.HostImage = FileLocationPath + item.HostImage;
             }
-            var dbTopHostList = _business.GetHostList(lId, cId, "", "trhl");
+            var dbTopHostList = _business.GetHostList(lId, cId, agentId, "trhl");
             responseModel.TopHostListModels = dbTopHostList.MapObjects<LocationHostListModel>();
             foreach (var item in responseModel.TopHostListModels)
             {
