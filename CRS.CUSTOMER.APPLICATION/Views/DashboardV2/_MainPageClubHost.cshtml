@@ -229,35 +229,6 @@
             </div>
             <div class="grid mt-[16px] mx-[16px] mb-[10px] grid-rows-7">
                 <div style="line-height: 140%;" class="text-[10px]">
-                    @*@if (!string.IsNullOrEmpty(@item.HostName))
-                        {
-                            <p class="font-[700] text-[13px]">@item.HostName </p>
-                        }
-                        @if (!string.IsNullOrEmpty(@item.FormattedDOB))
-                        {
-                            <p>誕生日 :<span> @item.FormattedDOB</span> </p>
-                        }
-                        @if (!string.IsNullOrEmpty(@item.HostHeight))
-                        {
-                            <p>身長 :<span> @item.HostHeight</span> </p>
-                        }
-                        @if (!string.IsNullOrEmpty(@item.HostBloodType))
-                        {
-                            <p>血液型 :<span> @item.HostBloodType</span> </p>
-                        }
-                        @if (!string.IsNullOrEmpty(@item.HostConstellationGroup))
-                        {
-                            <p>星座 :<span> @item.HostConstellationGroup</span> </p>
-                        }
-                        @if (!string.IsNullOrEmpty(@item.HostBirthPlace))
-                        {
-                            <p>出身地 :<span> @item.HostBirthPlace</span> </p>
-                        }
-                        @if (!string.IsNullOrEmpty(@item.Occupation))
-                        {
-                            <p>前職 :<span> @item.Occupation</span> </p>
-                        }*@
-
                     <p class="font-[700] text-[13px]">@item.HostName </p>
 
                     <p>誕生日 :<span> @item.FormattedDOB</span> </p>
@@ -271,7 +242,7 @@
                     <p>出身地 :<span> @item.HostBirthPlace</span> </p>
 
                     <p>前職 :<span> @item.Occupation</span> </p>
-                    <p>お酒の強さ :<span> </span> </p>
+                    <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
 
                 </div>
                 <div class="flex flex-row gap-1 items-center mb-[8px] mt-1">
@@ -283,17 +254,17 @@
                         @item.HostLoveCount
                     </p>
                 </div>
-                <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]" >
+                <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]">
                     <div>
                         <img style="border: 1px solid #F1EEEE;" class="object-cover h-[32px] w-[32px] rounded-full "
                              src="@item.ClubLogo" alt="clublogo">
                     </div>
                     <div class="flex flex-col justify-center ">
                         <p style="line-height: 100%;" class="text-[10px] text-[#292F33] font-[700]">
-                            @item.ClubName 
+                            @item.ClubName
                         </p>
                         <p style="line-height: 100%;" class="text-[8px] text-[#A09E91] font-[400]">
-                            @item.ClubName
+                            @item.ClubNameJapanese
                         </p>
 
                     </div>
