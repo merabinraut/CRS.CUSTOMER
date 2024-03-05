@@ -344,8 +344,17 @@
 
                                         </div>
                                         <div class="pt-[5px]">
-                                            <div class="text-[10px] font-bold text-primaryDark">@item.HostName</div>
-                                            <div class="text-xs  text-charcoalBlack">@Model.ClubNameEng</div>
+                                            <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
+                                            <div class="text-xs  text-charcoalBlack">
+                                                @if (string.IsNullOrEmpty(@item.HostNameJapanese))
+                                                {
+                                                    @item.HostName
+                                                }
+                                                else
+                                                {
+                                                    @item.HostNameJapanese
+                                                }
+                                                                                    </div>
                                         </div>
                                         @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
                                         {
@@ -890,7 +899,17 @@
                         }
                         <div class="pt-[5px]">
                             <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
-                            <div class="text-xs  text-charcoalBlack">@item.HostName</div>
+                            <div class="text-xs  text-charcoalBlack">
+                                @if (string.IsNullOrEmpty(@item.HostNameJapanese))
+                                {
+                                    @item.HostName
+                                }
+                                else
+                                {
+                                    @item.HostNameJapanese
+                                }
+
+                            </div>
                         </div>
                     </div>
                 }
@@ -1221,9 +1240,9 @@
                             <div class="@(i % 2 == 0 ? "bg-[#EFEFEF]" : "bg-[#BFA3B6]") flex  flex-col  basis-0 px-[9px] py-[25px]"
                                  style="width: 33px;">
                                 <div class="text-[#333333] text-[13px] font-bold text-center leading-[20px]">
-                                    01
+                                    @Model.GetAllScheduleTabList[i].ScheduleMonth
                                 </div>
-                                <div class="text-[8px] font-normal leading-0 text-center">Thu</div>
+                                <div class="text-[8px] font-normal leading-0 text-center"> @Model.GetAllScheduleTabList[i].ScheduleDay</div>
                             </div>
                             <!-- for image and information -->
                             <div class="flex justify-start gap-[9px] items-center">
@@ -1376,7 +1395,7 @@
             }
         </div>
         <div class="bg-[#BCB08A] rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px]">
-            来店予約
+            本日空席あり
         </div>
     </div>
     <!-- for share and map -->
