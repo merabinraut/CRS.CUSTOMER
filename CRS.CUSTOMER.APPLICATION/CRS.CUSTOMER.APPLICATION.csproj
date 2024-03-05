@@ -693,6 +693,7 @@
     <Content Include="Views\Search\ClubSearchResult.cshtml" />
     <Content Include="Views\Search\HostSearchResult.cshtml" />
     <Content Include="Views\Shared\_DateTimeFilterPopUp.cshtml" />
+    <Content Include="Views\LocationManagement\ClubDetail_V2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

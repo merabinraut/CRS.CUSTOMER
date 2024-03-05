@@ -169,13 +169,13 @@
                         </div>
                         if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                         {
-                            <div class="bg-[#BCB08A] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
+                            <div class="bg-[#BCB08A] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center" style="background: #BCB08A">
                                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
                             </div>
                         }
                         else
                         {
-                            <div class="bg-[#D7D7D7] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
+                            <div class="bg-[#D7D7D7] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center" style="background: #D7D7D7">
                                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Unreservable
                             </div>
                         }
@@ -283,14 +283,14 @@
                         @item.HostLoveCount
                     </p>
                 </div>
-                <div style="padding: 4px; width:144px; background:red" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]" >
+                <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]" >
                     <div>
                         <img style="border: 1px solid #F1EEEE;" class="object-cover h-[32px] w-[32px] rounded-full "
                              src="@item.ClubLogo" alt="clublogo">
                     </div>
                     <div class="flex flex-col justify-center ">
                         <p style="line-height: 100%;" class="text-[10px] text-[#292F33] font-[700]">
-                           @* @item.ClubName*@ testsd fasdhfjsbfjbfsadfh
+                            @item.ClubName 
                         </p>
                         <p style="line-height: 100%;" class="text-[8px] text-[#A09E91] font-[400]">
                             @item.ClubName
