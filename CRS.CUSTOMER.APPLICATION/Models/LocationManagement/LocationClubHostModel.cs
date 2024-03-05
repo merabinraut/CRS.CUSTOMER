@@ -58,6 +58,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string IsBookmarked { get; set; }
         public string ClubLogo { get; set; }
         public string HostPosition { get; set; }
+        public string HostNameJapanese { get; set; }
         public string FormattedDOB { get; set; }
         public string HostHeight { get; set; }
         public string HostBirthPlace { get; set; }

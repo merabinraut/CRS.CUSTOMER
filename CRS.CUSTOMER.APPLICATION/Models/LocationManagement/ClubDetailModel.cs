@@ -106,6 +106,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string ScheduleId { get; set; }
         public string ScheduleTitle { get; set; }
         public string ScheduleDate { get; set; }
+        public string ScheduleDay { get; set; }
+        public string ScheduleMonth { get; set; }
         public string ScheduleDescription { get; set; }
         public string EventType { get; set; }
         public string AgentId { get; set; }
