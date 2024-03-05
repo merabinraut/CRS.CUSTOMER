@@ -77,7 +77,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet]
-        public ActionResult DateTimeFilter(string LocationId, string Date, string Time, string NoOfPeople)
+        public ActionResult DateTimeFilter(string LocationId, string Date, string Time, string NoOfPeople, string ResultType = "", string FilteredTime = "")
         {
             ViewBag.ActionPageName = "SearchFilter";
             var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
@@ -97,7 +97,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Date = Date,
                 Time = string.IsNullOrEmpty(Time) ? string.Empty : Time.DecryptParameter(),
                 NoOfPeople = string.IsNullOrEmpty(NoOfPeople) ? string.Empty : NoOfPeople.DecryptParameter(),
-                CustomerId = CustomerId
+                CustomerId = CustomerId,
+                ResultType = ResultType?.DecryptParameter() ?? string.Empty,
+                FilteredTime = FilteredTime.Trim()
+
             };
             var dbResponse = _searchBusiness.ClubFilterViewDateTimeAndOthers(dbRequest);
             Response.FilteredClubModel = dbResponse.MapObjects<SearchFilterClubDetailModel>();

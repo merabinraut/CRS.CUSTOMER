@@ -117,7 +117,9 @@ namespace CRS.CUSTOMER.REPOSITORY.Search
         public List<SearchFilterClubDetailCommon> ClubFilterViewDateTimeAndOthers(ClubDateTimeAndOtherFilterRequest Request)
         {
             var Response = new List<SearchFilterClubDetailCommon>();
-            string SQL = $"EXEC sproc_cp_search_filter_management @Flag = '3', @LocationId= {_dao.FilterString(Request.LocationId)}, @Time= {_dao.FilterString(Request.Time)}, @Date = {_dao.FilterString(Request.Date)}, @CustomerId = {_dao.FilterString(Request.CustomerId)}, @NoOfPeople = {_dao.FilterString(Request.NoOfPeople)}";
+            var flag = (!string.IsNullOrEmpty(Request.ResultType) && Request.ResultType == "1") ? "4" : (!string.IsNullOrEmpty(Request.ResultType) && Request.ResultType == "2") ? "5" : "3";
+            var time = !string.IsNullOrEmpty(Request.FilteredTime) ? _dao.FilterString(Request.FilteredTime) : _dao.FilterString(Request.Time);
+            string SQL = $"EXEC sproc_cp_search_filter_management @Flag = '{flag}', @LocationId= {_dao.FilterString(Request.LocationId)}, @Time={time} , @Date = {_dao.FilterString(Request.Date)}, @CustomerId = {_dao.FilterString(Request.CustomerId)}, @NoOfPeople = {_dao.FilterString(Request.NoOfPeople)}";
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0)
             {

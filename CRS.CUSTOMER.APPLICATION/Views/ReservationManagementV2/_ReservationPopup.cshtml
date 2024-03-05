@@ -161,7 +161,8 @@
 
 <form action="/ReservationManagementV2/Plan" method="get" id="club-reservation-id">
     <input type="text" id="club-id" name="ClubId" value="@Model.ClubId" required hidden />
-    <input type="text" id="date-id" name="Date" value="" required hidden />
+    @*<input type="text" id="date-id" name="Date" value="" required hidden />*@
+    <input type="text" id="date-id" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" required hidden />
     <input type="text" id="time-id" name="Time" value="@Model.ClubReservableTimeModel[0].Time" required hidden />
     <input type="text" id="noofpeople-id" name="NoOfPeople" value="1" required hidden />
     <input type="text" name="SelectedHost" value="@Model.SelectedHost" hidden />

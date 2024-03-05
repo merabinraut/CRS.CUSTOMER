@@ -69,5 +69,7 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string Time { get; set; }
         public string NoOfPeople { get; set; }
         public string CustomerId { get; set; }
+        public string ResultType { get; set; }
+        public string FilteredTime { get; set; }
     }
 }
