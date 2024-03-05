@@ -374,7 +374,7 @@
                                 <span class="text-[#333] text-[12px] font-bold leading-[20px]">お知らせ</span>
                             </div>
                             <div class="flex justify-start items-center gap-[3px]">
-                                <span class="text-[10px] leading-[20px] font-normal text-[#333]"><a href="#">全て表示</a></span>
+                                <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                     <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
@@ -418,8 +418,8 @@
                                 </svg>
                                 <span class="text-[#333] text-[12px] font-bold leading-[20px]">スケジュール情報</span>
                             </div>
-                            <div class="flex justify-start items-center gap-[3px]">
-                                <span class="text-[10px] leading-[20px] font-normal text-[#333]"><a href="#">全て表示</a></span>
+                            <div class="flex justify-start items-center gap-[3px]" id="notice_id">
+                                <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                     <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
@@ -1336,7 +1336,7 @@
                                 </div>
                                 <!-- for the notice with mention -->
                                 <div class="text-[11px] font-medium leading-[16px] text-[#333]">
-                                    @notice.EventTitle <span class="text-[#D17979] ">田中裕二</span> @notice.EventDescription
+                                    <span class="text-[#D17979] ">@notice.EventDescription</span>
                                 </div>
                             </div>
                             <div class="h-[1px] bg-[#EFEFEF] w-full "></div>
@@ -1767,5 +1767,31 @@
                 });
             });
         });</script>
+    <script>$('#notice_id').click('click', function () {
+            //var activeElement = document.querySelector('.tab-link.active');
+
+            //// Remove the 'active' class from the found element
+            //if (activeElement) {
+            //    activeElement.classList.remove('active');
+            //}
+
+            //// Add the 'newActiveClass' to the desired element (replace 'newActiveClass' with the class you want to add)
+            //var newActiveElement = document.getElementById('tab6Button'); // Replace with the ID of the button you want to make active
+            //if (newActiveElement) {
+            //    newActiveElement.classList.add('active');
+            //}
+            ////$('#tab1').style.display = 'none';
+            ////$('#tab6').style.display = 'block';
+            //var hiddenElement = document.querySelector('.tab-content-plane.hidden');
+            //debugger
+            //if (hiddenElement) {
+            //    hiddenElement.classList.add('hidden');
+
+            //}
+            //var newHiddenElement = document.getElementById('tab6');
+            //if (newHiddenElement) {
+            //    newHiddenElement.classList.remove('hidden');
+            //}
+        })</script>
 
 }
