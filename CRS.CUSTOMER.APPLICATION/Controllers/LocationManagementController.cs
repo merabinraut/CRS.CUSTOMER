@@ -295,6 +295,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     })
     .ToList();
             ViewBag.PlanGroup = groupedResults.MapObjects<PlanGroup>();
+            ViewBag.PlanGroup1 = groupedResults.MapObjects<PlanGroup>();
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
             return View(responseModel);
