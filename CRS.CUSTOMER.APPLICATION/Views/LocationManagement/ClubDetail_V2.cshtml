@@ -1221,9 +1221,9 @@
                             <div class="@(i % 2 == 0 ? "bg-[#EFEFEF]" : "bg-[#BFA3B6]") flex first:flex-1 flex-col  basis-0 px-[9px] py-[25px]"
                                  style="width: 33px;">
                                 <div class="text-[#333333] text-[13px] font-bold text-center leading-[20px]">
-                                    01
+                                    @Model.GetAllScheduleTabList[i].Day
                                 </div>
-                                <div class="text-[8px] font-normal leading-0 text-center">Thu</div>
+                                <div class="text-[8px] font-normal leading-0 text-center">@Model.GetAllScheduleTabList[i].DayName</div>
                             </div>
                             <!-- for image and information -->
                             <div class="flex justify-start gap-[9px] items-center">
@@ -1336,7 +1336,7 @@
                                 </div>
                                 <!-- for the notice with mention -->
                                 <div class="text-[11px] font-medium leading-[16px] text-[#333]">
-                                    新しく <span class="text-[#D17979] ">田中裕二</span> @notice.EventTitle
+                                    @notice.EventTitle <span class="text-[#D17979] ">田中裕二</span> @notice.EventDescription
                                 </div>
                             </div>
                             <div class="h-[1px] bg-[#EFEFEF] w-full "></div>
