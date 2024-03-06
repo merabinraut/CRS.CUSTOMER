@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("click", function () {
     const tabs = document.querySelectorAll(".tab-content-plane");
     const tabButtons = document.querySelectorAll(".tab-button-plane");
-
     tabButtons.forEach((tabButton, index) => {
         tabButton.addEventListener("click", () => {
             // Hide all tabs and remove active class from buttons
