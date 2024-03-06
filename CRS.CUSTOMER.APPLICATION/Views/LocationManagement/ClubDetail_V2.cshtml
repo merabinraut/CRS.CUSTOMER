@@ -373,7 +373,7 @@
                                 </svg>
                                 <span class="text-[#333] text-[12px] font-bold leading-[20px]">お知らせ</span>
                             </div>
-                            <div class="flex justify-start items-center gap-[3px]">
+                            <div class="flex justify-start items-center gap-[3px]" id="schedule_id">
                                 <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                     <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
@@ -1768,30 +1768,26 @@
             });
         });</script>
     <script>$('#notice_id').click('click', function () {
-            //var activeElement = document.querySelector('.tab-link.active');
-
-            //// Remove the 'active' class from the found element
-            //if (activeElement) {
-            //    activeElement.classList.remove('active');
-            //}
-
-            //// Add the 'newActiveClass' to the desired element (replace 'newActiveClass' with the class you want to add)
-            //var newActiveElement = document.getElementById('tab6Button'); // Replace with the ID of the button you want to make active
-            //if (newActiveElement) {
-            //    newActiveElement.classList.add('active');
-            //}
-            ////$('#tab1').style.display = 'none';
-            ////$('#tab6').style.display = 'block';
-            //var hiddenElement = document.querySelector('.tab-content-plane.hidden');
-            //debugger
-            //if (hiddenElement) {
-            //    hiddenElement.classList.add('hidden');
-
-            //}
-            //var newHiddenElement = document.getElementById('tab6');
-            //if (newHiddenElement) {
-            //    newHiddenElement.classList.remove('hidden');
-            //}
-        })</script>
+            var activeElement = document.querySelector('.tab-link.active');
+            if (activeElement) {
+                activeElement.classList.remove('active');
+            }
+            var newActiveElement = document.getElementById('tab6Button');
+            if (newActiveElement) {
+                newActiveElement.classList.add('active');
+                $('#tab6Button').click();
+            }
+        });
+        $('#schedule_id').click('click', function () {
+            var activeElement = document.querySelector('.tab-link.active');
+            if (activeElement) {
+                activeElement.classList.remove('active');
+            }
+            var newActiveElement = document.getElementById('tab6Button');
+            if (newActiveElement) {
+                newActiveElement.classList.add('active');
+                $('#tab5Button').click();
+            }
+        });</script>
 
 }
