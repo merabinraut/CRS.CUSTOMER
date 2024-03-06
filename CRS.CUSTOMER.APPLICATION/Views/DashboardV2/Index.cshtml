@@ -485,7 +485,7 @@
                             <div class="text-warmgray-1 text-center  text-[10px] pb-[10px]">@item.Remarks</div>
                             <div>
                                 <div class="flex w-full items-center text-warmgray-1 text-[12px] gap-[6px]">
-                                    料金
+                                    <span style="width:25px">料金</span>
                                     <hr class="w-[191px] bg-[#A09E91]">
                                 </div>
                                 <div class="text-center">
@@ -495,8 +495,9 @@
                             </div>
                             <div>
                                 <div class="flex w-full items-center text-warmgray-1 text-[12px] gap-[6px] mb-4">
-                                    プラン
-                                    <hr class="w-[191px] bg-[#A09E91]">
+                                    
+                                    <span style="width:36px">プラン</span>
+                                    <hr class=" bg-[#A09E91]" style="width:180px"> 
                                 </div>
                                 <div class="flex justify-center gap-4 mb-[25px]">
                                     <div class="grid text-center w-full">
@@ -1162,10 +1163,10 @@
                                             </div>
                                             <div class="flex flex-col">
                                                 <div class="flex flex-row mt-[7px] justify-center">
-                                                    <p style="line-height: 100%;" class="font-[700] text-[10px]">${club.ClubNameEnglish}</p>
+                                                    <p style="line-height: 100%;" class="font-[700] text-[10px] text-clip">${club.ClubNameEnglish}</p>
                                                 </div>
                                                 <div class="flex flex-row mt-[4px] justify-center">
-                                                    <p style="line-height: 100%;" class="font-[400] text-[10px]">${club.ClubNameJapanese}</p>
+                                                    <p style="line-height: 100%;" class="font-[400] text-[10px] text-clip ">${club.ClubNameJapanese}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1192,10 +1193,10 @@
                                             </div>
 
                                             <div style="background-color:rgba(0, 0, 0, 0.70); left:0.25px" class="absolute w-[112px] h-[35px] rounded-[2px] flex flex-col right-[2px] left-[2px] py-[2px] px-[4px]">
-                                                <strong class="text-[12px] text-[#FFFFFF] font-bold text-center">${host.HostName}</strong>
-                                                <p style="font-weight:400; line-height:100%" class="flex items-center gap-1 text-[10px] justify-center text-[#FFFFFF]">
+                                                <strong class="text-[12px] text-[#FFFFFF] font-bold text-center text-clip">${host.HostName}</strong>
+                                                <p style="font-weight:400; line-height:100%" class="flex items-center gap-1 text-[10px] justify-center text-[#FFFFFF] text-clip">
                                                     <img src="${clubLogo}" alt="clublogo" class="h-[11px] w-[11px] rounded-full" />
-                                                    ${host.ClubNameEnglish}
+                                                   <span class="text-clip"> ${host.ClubNameEnglish}</span>
                                                 </p>
                                             </div>
                                         </div>

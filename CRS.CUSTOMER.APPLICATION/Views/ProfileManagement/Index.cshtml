@@ -440,6 +440,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Content/validation.js"></script>
     <script>
+        document.body.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        });
+    </script>
+    <script>
     const uploadProfileImage = () => {
         // Trigger the file input to open the file selection dialog
         const fileInput = document.getElementById('fileInput');
