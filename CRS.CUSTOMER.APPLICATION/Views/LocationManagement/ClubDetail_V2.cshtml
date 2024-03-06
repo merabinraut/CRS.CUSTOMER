@@ -1622,7 +1622,7 @@
                 autoWidth: true,
                 items: 4
             });
-            localStorage.clear();
+            //localStorage.clear();
         })</script>
     <script>function ClubReservationActionFunction(i, j, k) {
             DataStorageFunction(i, j);
@@ -1752,17 +1752,16 @@
     <script>$(document).ready(function () {
             $("#scheduleDropdown").change(function () {
                 var selectedValue = $(this).val();
+                debugger
                 $.ajax({
                     url: '/LocationManagement/ClubDetail_V2',
                     type: 'POST',
                     data: { ScheduleFilterDate: selectedValue },
                     success: function (result) {
                         window.location.reload();
-                        console.log(result);
                     },
                     error: function (error) {
                         window.location.reload();
-                        console.error(error);
                     }
                 });
             });
@@ -1788,6 +1787,25 @@
                 newActiveElement.classList.add('active');
                 $('#tab5Button').click();
             }
+        });</script>
+
+    <!--make clicked the tab after reload-->
+    <script>$('.tab-button-plane').click('click', function () {
+            var id = $(this).attr('id');
+            var name = $(this).text().trim();
+            localStorage.setItem("tablink-id", id);
+            localStorage.setItem("tablink-name", name);
+        });
+        $(document).ready(function () {
+            var id = localStorage.getItem("tablink-id");
+            var name = localStorage.getItem("tablink-name");
+            $('.tab-button-plane').each(function (index) {
+                var valueId = $(this).attr('id').trim();
+                var valueName = $(this).text().trim();
+                if (id == valueId && name == valueName) {
+                    $(this).click();
+                }
+            });
         });</script>
 
 }

@@ -308,6 +308,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.PlanGroup1 = groupedResults.MapObjects<PlanGroup>();
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
+            ViewBag.SFilterDate = ScheduleFilterDate;
             return View(responseModel);
         }
         private List<ScheduleDDLModel> GetScheduleList()
