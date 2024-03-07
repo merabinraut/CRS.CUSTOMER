@@ -33,6 +33,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.DashboardV2
         public string ClubLogo { get; set; }
         public string HostId { get; set; }
         public string HostNameEnglish { get; set; }
+        public string HostName { get; set; }
         public string HostNameJapanese { get; set; }
         public string HostLogo { get; set; }
         public string ClubLocationId { get; set; }

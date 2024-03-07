@@ -54,6 +54,7 @@ namespace CRS.CUSTOMER.SHARED.RecommendedClubHost
         public string ClubId { get; set; }
         public string HostId { get; set; }
         public string HostName { get; set; }
+        public string HostNameJapanese { get; set; }
         public string Occupation { get; set; }
         public string Rank { get; set; }
         public string ClubName { get; set; }

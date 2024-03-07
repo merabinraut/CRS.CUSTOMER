@@ -303,7 +303,7 @@
                                             }
                                             <div class="pl-6">@item.Rank</div>
                                         </div>
-                                        <div class="relative h-[180px] w-[128px]" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                                        <div class="relative h-[180px] w-[128px]" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId.EncryptParameter()'">
                                             @if (!string.IsNullOrEmpty(item.HostImage))
                                             {
                                                 <img src="@item.HostImage"

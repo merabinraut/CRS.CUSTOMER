@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Models.DashboardV2;
 using CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement;
+using CRS.CUSTOMER.SHARED.Search;
 using System.Collections.Generic;
 
 namespace CRS.CUSTOMER.APPLICATION.Models.Search
@@ -31,8 +32,13 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Search
         public int TotalComment { get; set; }
         public int AverageRating { get; set; }
         public List<string> HostGalleryImage { get; set; } = new List<string>();
+        //public List<HostSearchDetail> HostDetail { get; set; } = new List<HostSearchDetail>();
     }
-
+    //public class HostSearchDetail
+    //{
+    //    public string ImagePath { get; set; }
+    //    public string HostId { get; set; }
+    //}
     public class HostSearchResultModel
     {
         public List<DashboardV2HostDetailModel> FilteredHostModel { get; set; } = new List<DashboardV2HostDetailModel>();

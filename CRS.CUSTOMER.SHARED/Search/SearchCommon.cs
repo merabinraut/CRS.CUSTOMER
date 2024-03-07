@@ -35,8 +35,9 @@ namespace CRS.CUSTOMER.SHARED.Search
         public int TotalComment { get; set; }
         public int AverageRating { get; set; }
         public List<string> HostGalleryImage { get; set; } = new List<string>();
+        
     }
-
+    
     public class HostPreferenceFilterRequest
     {
         public string LocationId { get; set; }
@@ -57,6 +58,7 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string ClubLogo { get; set; }
         public string HostId { get; set; }
         public string HostNameEnglish { get; set; }
+        public string HostName { get; set; }
         public string HostNameJapanese { get; set; }
         public string HostLogo { get; set; }
         public string ClubLocationId { get; set; }
