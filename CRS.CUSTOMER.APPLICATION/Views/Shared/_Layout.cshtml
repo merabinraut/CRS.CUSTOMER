@@ -388,7 +388,7 @@
                                 </svg>
                                 <span class="text-[#BCB08A] text-[10px] font-normal leading-[18px]">
                                     @*close*@
-                                    近い
+                                    閉じる
                                 </span>
                             </button>
                         </div>
@@ -527,7 +527,7 @@
                 <input type="text" id="current-location-id" value="" hidden />
                 @RenderBody()
                 <div class="loader" id="loader-id-v2" style="display:none;">
-                    <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
+                    <img src="~/Content/assets/images/loader.gif" class="h-[150px]" style="opacity:100%" />
                 </div>
                 <div id="clubreservationpartialview-id">
 
@@ -729,16 +729,36 @@
         //}
         function OnLoadLoaderFunction() {
             document.getElementById('loader-id-v2').style.display = 'flex';
+            document.body.addEventListener('touchmove', preventDefault, { passive: false });
+            document.body.classList.add('no-scroll-loader');
             setTimeout(function () {
                 document.getElementById('loader-id-v2').style.display = 'none';
-            }, 3000);
+                document.body.removeEventListener('touchmove', preventDefault, { passive: false });
+                document.body.classList.remove('no-scroll-loader');
+            }, 10000);
         }
 
-        function EnableLoaderFunction() {
+        /*function EnableLoaderFunction() {
             document.getElementById('loader-id-v2').style.display = 'flex';
+            console.log("asdfasdfsadfasdfdasfsadf")
+            ocument.body.classList.add('no-scroll-loader');
         }
         function DisableLoaderFunction() {
             document.getElementById('loader-id-v2').style.display = 'none';
+            document.body.classList.remove('no-scroll-loader');
+        }*/
+        function preventDefault(event) {
+            event.preventDefault();
+        }
+        function EnableLoaderFunction() {
+            document.getElementById('loader-id-v2').style.display = 'flex';
+            document.body.addEventListener('touchmove', preventDefault, { passive: false });
+            document.body.classList.add('no-scroll-loader');
+        }
+        function DisableLoaderFunction() {
+            document.getElementById('loader-id-v2').style.display = 'none';
+            document.body.removeEventListener('touchmove', preventDefault, { passive: false });
+            document.body.classList.remove('no-scroll-loader');
         }
 
         function NavCloseFunction() {
