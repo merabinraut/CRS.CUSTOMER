@@ -70,6 +70,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string EventDescription { get; set; }
         public string EventType { get; set; }
         public string EventTitle { get; set; }
+        public string Day { get; set; }
     }
     public class ClubBasicInformationModel
     {
@@ -102,6 +103,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
     public class AllNoticeModel : NoticeModel
     {
         public string EventStatus { get; set; }
+        public string DayName { get; set; }
     }
     public class AllScheduleModel
     {
