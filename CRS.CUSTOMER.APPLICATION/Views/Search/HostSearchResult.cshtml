@@ -171,7 +171,7 @@
             {
                 var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
                 var activeBoolValue = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? true : false;
-                <div class="hosts-that-match-you @activeClass" style="width:112px; height:154px; border-radius:2px; position:relative; overflow:revert"  >
+                <div class="hosts-that-match-you @activeClass" style="width:112px; height:154px; border-radius:2px; position:relative; overflow:revert" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'" >
                     <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
                     @*<div class="like-host" onclick="ToggleBookmark('@item.ClubId','@item.HostId','host' , activeBoolValue)">
                             <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
