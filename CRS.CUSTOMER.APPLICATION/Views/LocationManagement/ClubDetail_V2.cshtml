@@ -382,8 +382,8 @@
                                 </svg>
                                 <span class="text-[#333] text-[12px] font-bold leading-[20px]">お知らせ</span>
                             </div>
-                            <div class="flex justify-start items-center gap-[3px]">
-                                <span class="text-[10px] leading-[20px] font-normal text-[#333]"><a href="#">全て表示</a></span>
+                            <div class="flex justify-start items-center gap-[3px]" id="notice_id">
+                                <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                     <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
@@ -402,7 +402,7 @@
                                         <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px]"
                                              style="line-height:20px">
                                             <div>@item.EventDate (水)</div>
-                                            <div>@item.EventTitle</div>
+                                            <div>@item.EventDescription</div>
                                         </div>
                                         <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
                                     }
@@ -427,8 +427,8 @@
                                 </svg>
                                 <span class="text-[#333] text-[12px] font-bold leading-[20px]">スケジュール情報</span>
                             </div>
-                            <div class="flex justify-start items-center gap-[3px]">
-                                <span class="text-[10px] leading-[20px] font-normal text-[#333]"><a href="#">全て表示</a></span>
+                            <div class="flex justify-start items-center gap-[3px]" id="schedule_id">
+                                <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                     <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
@@ -1355,7 +1355,7 @@
                                 </div>
                                 <!-- for the notice with mention -->
                                 <div class="text-[11px] font-medium leading-[16px] text-[#333]">
-                                    新しく <span class="text-[#D17979] ">田中裕二</span> @notice.EventTitle
+                                    <span class="text-[#D17979] ">@notice.EventDescription</span>
                                 </div>
                             </div>
                             <div class="h-[1px] bg-[#EFEFEF] w-full "></div>
@@ -1641,7 +1641,7 @@
                 autoWidth: true,
                 items: 4
             });
-            localStorage.clear();
+            //localStorage.clear();
         })</script>
     <script>function ClubReservationActionFunction(i, j, k) {
             DataStorageFunction(i, j);
@@ -1771,19 +1771,59 @@
     <script>$(document).ready(function () {
             $("#scheduleDropdown").change(function () {
                 var selectedValue = $(this).val();
+                debugger
                 $.ajax({
                     url: '/LocationManagement/ClubDetail_V2',
                     type: 'POST',
                     data: { ScheduleFilterDate: selectedValue },
                     success: function (result) {
                         window.location.reload();
-                        console.log(result);
                     },
                     error: function (error) {
                         window.location.reload();
-                        console.error(error);
                     }
                 });
+            });
+        });</script>
+    <script>$('#notice_id').click('click', function () {
+            var activeElement = document.querySelector('.tab-link.active');
+            if (activeElement) {
+                activeElement.classList.remove('active');
+            }
+            var newActiveElement = document.getElementById('tab6Button');
+            if (newActiveElement) {
+                newActiveElement.classList.add('active');
+                $('#tab6Button').click();
+            }
+        });
+        $('#schedule_id').click('click', function () {
+            var activeElement = document.querySelector('.tab-link.active');
+            if (activeElement) {
+                activeElement.classList.remove('active');
+            }
+            var newActiveElement = document.getElementById('tab6Button');
+            if (newActiveElement) {
+                newActiveElement.classList.add('active');
+                $('#tab5Button').click();
+            }
+        });</script>
+
+    <!--make clicked the tab after reload-->
+    <script>$('.tab-button-plane').click('click', function () {
+            var id = $(this).attr('id');
+            var name = $(this).text().trim();
+            localStorage.setItem("tablink-id", id);
+            localStorage.setItem("tablink-name", name);
+        });
+        $(document).ready(function () {
+            var id = localStorage.getItem("tablink-id");
+            var name = localStorage.getItem("tablink-name");
+            $('.tab-button-plane').each(function (index) {
+                var valueId = $(this).attr('id').trim();
+                var valueName = $(this).text().trim();
+                if (id == valueId && name == valueName) {
+                    $(this).click();
+                }
             });
         });</script>
 

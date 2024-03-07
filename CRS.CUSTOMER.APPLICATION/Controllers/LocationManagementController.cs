@@ -283,6 +283,16 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             responseModel.GetAllNoticeTabList = dbAllNoticeResponse.MapObjects<AllNoticeModel>();
             var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);
             responseModel.GetAllScheduleTabList = dbScheduleResponse.MapObjects<AllScheduleModel>();
+            foreach (var item_schedule in responseModel.GetAllScheduleTabList)
+            {
+                DateTime date = DateTime.ParseExact(item_schedule.ScheduleDate, "yyyy年MM月dd日", null);
+                string formattedDayOfWeek = date.ToString("dd");
+
+                // Get the day name (e.g., "Sunday")
+                string dayName = date.ToString("dddd");
+                item_schedule.Day = formattedDayOfWeek;
+                item_schedule.DayName = dayName;
+            }
             responseModel.GetScheduleDDL = GetScheduleList();
             var dbPlanDetailRes = _business.GetPlanDetail(cId);
             responseModel.GetPlanDetailList = dbPlanDetailRes.MapObjects<PlanDetailModel>();
@@ -298,6 +308,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.PlanGroup1 = groupedResults.MapObjects<PlanGroup>();
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
+            ViewBag.SFilterDate = ScheduleFilterDate;
             return View(responseModel);
         }
         private List<ScheduleDDLModel> GetScheduleList()

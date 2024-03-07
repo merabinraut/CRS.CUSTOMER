@@ -114,6 +114,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string EventType { get; set; }
         public string AgentId { get; set; }
         public string ScheduleImage { get; set; }
+        public string Day { get; set; }
+        public string DayName { get; set; }
     }
     public class ScheduleDDLModel
     {
