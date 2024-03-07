@@ -33,6 +33,7 @@
         public string ClubId { get; set; }
         public string HostId { get; set; }
         public string HostName { get; set; }
+        public string HostNameJapanese { get; set; }
         public string HostImage { get; set; }
         public string ClubNameEnglish { get; set; }
         public string ClubNameJapanese { get; set; }

@@ -214,7 +214,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             Response.ClubCategoryModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("2"));
             Response.HeightModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("6"));
             Response.PlanPriceModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("3"));
-            Response.OccupationModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("9"), true);
+            Response.OccupationModel = DDLHelper.ConvertDictionaryToListJapanese(DDLHelper.LoadDropdownList("9"), true);
             var HostConstellationGroup = _commonBusiness.GetDDL("023");
             HostConstellationGroup.ForEach(x => x.Value = x.Value.EncryptParameter());
             ViewBag.HostConstellationGroup = HostConstellationGroup;
