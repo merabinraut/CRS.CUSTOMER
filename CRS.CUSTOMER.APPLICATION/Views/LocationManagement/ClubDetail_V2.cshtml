@@ -1204,10 +1204,16 @@
                     @{
                         foreach (var item in Model.GetScheduleDDL)
                         {
-                            <option value="@item.Value">@item.Text</option>
+                            if (item.Value == ViewBag.SFilterDate)
+                            {
+                                <option value="@item.Value" selected>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+
                         }
-
-
                     }
                 </select>
             </div>
@@ -1751,17 +1757,18 @@
 
     <script>$(document).ready(function () {
             $("#scheduleDropdown").change(function () {
-                var selectedValue = $(this).val();
+                localStorage.setItem('SelectedDate', $(this).val());
+                var selectedValue = localStorage.getItem('SelectedDate');
                 debugger
                 $.ajax({
-                    url: '/LocationManagement/ClubDetail_V2',
+                    url: '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId',
                     type: 'POST',
                     data: { ScheduleFilterDate: selectedValue },
                     success: function (result) {
-                        window.location.reload();
+                        window.location.href = '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId';
                     },
                     error: function (error) {
-                        window.location.reload();
+                        window.location.href = '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId';
                     }
                 });
             });

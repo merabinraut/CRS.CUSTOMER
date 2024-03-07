@@ -204,7 +204,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
 
-        public ActionResult ClubDetail_V2(string LocationId, string ClubId, string[] ScheduleFilterDate = null)
+        public ActionResult ClubDetail_V2(string LocationId, string ClubId, string ScheduleFilterDate = null)
         {
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
@@ -214,7 +214,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             string sFD = null;//!string.IsNullOrEmpty(ScheduleFilterDate[0]) ? ScheduleFilterDate : null;
             if (ScheduleFilterDate != null)
             {
-                sFD = ScheduleFilterDate[0].ToString();
+                //sFD = ScheduleFilterDate;
+                DateTime date = DateTime.ParseExact(ScheduleFilterDate, "yyyy年 M月", null);
+                sFD = date.ToString("yyyy/MM");
             }
             if (string.IsNullOrEmpty(cId) || string.IsNullOrEmpty(lId))
             {
@@ -309,6 +311,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
             ViewBag.SFilterDate = ScheduleFilterDate;
+            ViewBag.ClubId = ClubId;
+            ViewBag.LocationId = LocationId;
             return View(responseModel);
         }
         private List<ScheduleDDLModel> GetScheduleList()
