@@ -289,7 +289,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 string formattedDayOfWeek = date.ToString("dd");
 
                 // Get the day name (e.g., "Sunday")
-                string dayName = date.ToString("dddd");
+                string dayName = date.ToString("ddd");
                 item_schedule.Day = formattedDayOfWeek;
                 item_schedule.DayName = dayName;
             }
