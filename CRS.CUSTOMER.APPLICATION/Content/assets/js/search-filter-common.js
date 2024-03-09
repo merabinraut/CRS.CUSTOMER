@@ -138,7 +138,6 @@ function PreferenceFilterCommon() {
             this.classList.add('active');
             var locationSelectValue = this.querySelector('.select-location-store .locationValue')
                 .textContent.trim();
-            console.log("locationSelectValue", locationSelectValue)
             // Set the value of the input field to the content of the <p> tag
             inputField.value = locationSelectValue;
 
@@ -219,32 +218,6 @@ function PreferenceFilterCommon() {
     });
     //#endregion
 
-    //#region 4
-    //#endregion
-
-    //#region 5
-    //
-    //const tabs = document.querySelector(".wrapper");
-    //const tabButton = document.querySelectorAll(".tab-button");
-    //const contents = document.querySelectorAll(".content");
-
-    //tabs.onclick = (e) => {
-    //    const id = e.target.dataset.id;
-    //    if (id) {
-    //        tabButton.forEach((btn) => {
-    //            btn.classList.remove("active");
-    //        });
-    //        e.target.classList.add("active");
-
-    //        contents.forEach((content) => {
-    //            content.classList.remove("active");
-    //        });
-    //        const element = document.getElementById(id);
-    //        element.classList.add("active");
-    //    }
-    //};
-    //#endregion
-
     //#region 6
     var showTimeLists = document.querySelectorAll('.showTimeList');
 
@@ -295,33 +268,6 @@ function PreferenceFilterCommon() {
     });
     //#endregion
 
-    //#region 7
-    function seemore() {
-        var x = document.getElementById("seemore");
-
-        if (x.style.display === "none") {
-            x.style.display = "grid";
-        } else {
-            x.style.display = "none";
-        }
-    }
-
-
-
-    //const checkboxes = document.querySelectorAll('input[name="myCheckbox"]');
-
-    //checkboxes.forEach((checkbox) => {
-    //    checkbox.addEventListener('change', function () {
-    //        if (this.checked) {
-    //            checkboxes.forEach((otherCheckbox) => {
-    //                if (otherCheckbox !== this) {
-    //                    otherCheckbox.checked = false;
-    //                }
-    //            });
-    //        }
-    //    });
-    //});
-    //#endregion
     //#region 8
     const tabs = document.querySelectorAll(".tab-preferance");
     const tabButtons = document.querySelectorAll(".preferance-tab");
@@ -342,7 +288,250 @@ function PreferenceFilterCommon() {
         });
     });
     //#endregion
+
+    loadGoogleMaps();
+
+    var map;
+    var marker;
+    var service;
+    var lastClickedCoordinates = null;
+    var infoWindows = [];
+    var trackUserInterval;
+
+    var customMarkerPosArray = [{
+        lat: 27.711603,
+        lng: 85.328818
+    },
+    {
+        lat: 27.712345,
+        lng: 85.329000
+    },
+    {
+        lat: 27.71058,
+        lng: 85.32849,
+        clubNameEnglish: "...α",
+        clubNameJapanese: "sdsd",
+        ratingScale: 4,
+        clubLogo: "../../../assets/images/demo-image.jpeg",
+        URL: "/test"
+    }, {
+        lat: 27.690756581231632,
+        lng: 85.33855395682303,
+        clubNameEnglish: "SINCE YOU...α",
+        clubNameJapanese: "シンスユーアルファ",
+        ratingScale: 4.8,
+        clubLogo: "../../../assets/images/demo-image.jpeg",
+        URL: "/test"
+
+    }
+        // Add more custom marker positions as needed
+        // Add more custom marker positions here
+    ];
+
+    function initMap2() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15, // Set the initial zoom level
+            disableDefaultUI: true // Disable default UI elements
+        });
+
+        // Loop through the array of custom marker positions
+        for (var i = 0; i < customMarkerPosArray.length; i++) {
+            var customMarkerPos = customMarkerPosArray[i];
+            createCustomMarker(customMarkerPos);
+        }
+        // Start tracking user's location
+        trackUserLocation();
+    }
+
+    function trackUserLocation() {
+        trackUserInterval = navigator.geolocation.watchPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            if (!marker) {
+                // Create marker for current location if not already created
+                var markerIcon = {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: '#d75a8b',
+                    fillOpacity: 1,
+                    strokeColor: '#FFF',
+                    strokeWeight: 2,
+                    scale: 10
+                };
+
+                marker = new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                    icon: markerIcon
+                });
+            } else {
+                // Update marker position
+                marker.setPosition(pos);
+            }
+
+            // Optionally, center the map on the user's position
+            map.setCenter(pos);
+        }, handleLocationError);
+    }
+
+    function stopTrackingUserLocation() {
+        if (trackUserInterval) {
+            navigator.geolocation.clearWatch(trackUserInterval);
+            trackUserInterval = null;
+        }
+    }
+
+    function searchNearby(location) {
+        service.nearbySearch({
+            location: location,
+            radius: 500, // Search radius in meters
+            type: ['restaurant'] // Only search for restaurants
+        }, processResults);
+    }
+
+    function processResults(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+                createMarker(results[i]);
+            }
+        }
+    }
+
+    function createMarker(place) {
+        var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location,
+            title: place.name,
+            icon: {
+                scaledSize: new google.maps.Size(100, 100) // Scaled size of the marker icon
+            }
+        });
+        // Add click listener to show place details
+        // Add click listener to show place details
+        google.maps.event.addListener(map, 'click', function (event) {
+            console.log("Clicked Location:", event);
+            var data = service.getDetails({
+                placeId: event.placeId // Change event.place_id to event.placeId
+            })
+            console.log({
+                data
+            })
+        });
+
+    }
+
+    function createCustomMarker(customMarkerPos) {
+        var customMarker = new google.maps.Marker({
+            position: customMarkerPos,
+            map: map,
+            title: 'Custom Marker',
+            icon: {
+                scaledSize: new google.maps.Size(100, 100) // Scaled size of the marker icon
+            }
+        });
+
+
+        // Create info window for the custom marker
+
+        // Add click event listener to show info window
+        customMarker.addListener('click', function () {
+            if (customMarkerPos.clubNameEnglish) {
+                var clubCard = document.getElementById('map-card');
+                clubCard.style.display = 'flex'; // Show the map card
+                var clubImage = document.getElementById('clubImage');
+                var clubNameEng = document.getElementById('clubNameEng');
+                var clubNameJpn = document.getElementById('clubNamejpn');
+                var rating = document.getElementById('rating');
+                var clubUrl = document.getElementById('clubUrl');
+
+            } else {
+                var clubCard = document.getElementById('map-card');
+                clubCard.style.display = 'none'; // Hide the map card if clubNameEng is empty
+            }
+
+
+            clubImage.src = customMarkerPos.clubLogo;
+            clubNameEng.textContent = customMarkerPos.clubNameEnglish;
+            clubNameJpn.textContent = customMarkerPos.clubNameJapanese;
+            rating.textContent = customMarkerPos.ratingScale;
+            clubUrl.href = customMarkerPos.URL;
+            console.log({
+                customMarkerPos
+
+            })
+
+        });
+
+    }
+
+    function handleLocationError(error) {
+        console.error("Error getting user's location:", error);
+    }
+
+    function closeAllInfoWindows() {
+        for (var i = 0; i < infoWindows.length; i++) {
+            infoWindows[i].close();
+        }
+    }
+
+    function closeAllInfoWindowsExcept(exceptInfoWindow) {
+        for (var i = 0; i < infoWindows.length; i++) {
+            if (infoWindows[i] !== exceptInfoWindow) {
+                infoWindows[i].close();
+            }
+        }
+    }
+
+    // Function to set user's current location
+    function setUserLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                map.setCenter(pos);
+                map.setZoom(15); // Set the zoom level to 24
+
+                // Create marker for current location
+                var markerIcon = {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: '#ff0000',
+                    fillOpacity: 0.8,
+                    strokeColor: '#FFF',
+                    strokeWeight: 2,
+                    scale: 10
+                };
+
+                if (marker) {
+                    marker.setPosition(pos);
+                } else {
+                    marker = new google.maps.Marker({
+                        position: pos,
+                        map: map,
+                        icon: markerIcon
+                    });
+                }
+            }, handleLocationError);
+        } else {
+            console.error("Geolocation is not supported by this browser");
+        }
+    }
 }
+
+function loadGoogleMaps() {
+    // This function loads the Google Maps API script dynamically
+    var script = document.createElement('script');
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap2";
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+}
+
+
 
 function ClosePreferenceFilterPopUp() {
     var element = document.getElementById('drawer-filter-location');
@@ -735,7 +924,7 @@ function RemoveBookmark(clubId, hostId, agentType) {
                 location.reload();
             } else {
                 // Handle failure, e.g., show an error message
-                console.log('Error: ' + result.message);
+                //console.log('Error: ' + result.message);
                 location.reload();
             }
         },

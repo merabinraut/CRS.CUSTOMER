@@ -1,0 +1,175 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.Search.HostSearchResultModel
+@{
+    ViewBag.Title = "Host Filter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="window.location.href='@Url.Action("Index","DashboardV2")'">
+    <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
+                  fill="#BCB08A" />
+        </svg>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
+    </div>
+    <div class="text-center w-full font-bold"></div>
+</div>
+<!-- search bar -->
+<div class=" border border-[#D6CEB4] flex my-2 mx-4 rounded-[4px] search-input" onclick="redirectToSearchPage()">
+    <span class=" mt-[10px] ml-3 material-icons-outlined text-[#D6CEB4]">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.125 1.875C11.5698 1.875 14.375 4.68018 14.375 8.125C14.375 9.62158 13.8501 10.9937 12.9688 12.0703L17.9492 17.0508L17.0508 17.9492L12.0703 12.9688C10.9937 13.8501 9.62158 14.375 8.125 14.375C4.68018 14.375 1.875 11.5698 1.875 8.125C1.875 4.68018 4.68018 1.875 8.125 1.875ZM8.125 3.125C5.35645 3.125 3.125 5.35645 3.125 8.125C3.125 10.8936 5.35645 13.125 8.125 13.125C10.8936 13.125 13.125 10.8936 13.125 8.125C13.125 5.35645 10.8936 3.125 8.125 3.125Z"
+                  fill="#BCB08A" />
+        </svg>
+    </span>
+    <input class="w-full text-xs text-[#BCB08A] "
+           title="Search"
+           type="text"
+           placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Filter_Placeholder" readonly />
+    <div class="group flex justify-end cursor-pointer p-3 rotate-90" title="Filter">
+        <a href="/Search/Index?LocationId=@ViewBag.LocationId">
+            <svg class="group-hover:bg-primaryLight w-4 h-4 text-[#BCB08A] " aria-hidden="true"
+                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                      d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2" />
+            </svg>
+        </a>
+    </div>
+
+</div>
+<div style="background-color: #E3E3E3;" class="flex flex-col  py-[12px] ">
+    <div class=" mx-[8px] grid grid-cols-1 justify-start">
+        <p class="text-[14px] pt-[8px] font-[700]">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_Recommended_for_you
+        </p>
+    </div>
+
+    <div style=" padding-bottom: 8px; "
+         class="grid grid-cols-3 gap-[4px]  mx-[8px] mt-[10px]   hover:cursor-pointer    ">
+
+        @{
+            foreach (var item in Model.HostRecommendationModel)
+            {
+                <div class="h-auto flex flex-col justify-end  text-center relative">
+                    <div class="w-full flex">
+                        <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
+                            <img class=" w-full h-[157px]  object-fill rounded" src="@item.HostLogo)" />
+                        </a>
+                    </div>
+                    <div class="absolute mb-[8px] w-full flex flex-row px-2 py-[2px]">
+                        <div style="border-radius:2px;  "
+                             class="  w-full bg-[#ffffffe6]  p-1  justify-start rounded-b flex   flex-col   ">
+                            <div class=" flex flex-row   text-xs  ">
+                                <div class="text-[12px] font-[700] pl-[2px]">@item.HostNameEnglish</div>
+                            </div>
+                            <div class="flex flex-row items-center   ">
+                                <div class=" font-[700] pl-[2px]">
+                                    <img class="h-[11px]  w-[11px] rounded-full" src="@item.ClubLogo"
+                                         alt="club">
+
+                                </div>
+                                <div class="text-[10px] text-start ml-[4px] font-[400] h-[15px] overflow-hidden">
+                                    @item.ClubNameEnglish
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+<!-- one row end  -->
+<!-- one row for club card  -->
+@if (Model.FilteredHostModel.Count <= 0)
+{
+    <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center">
+        <div class="text-[#18181B] font-semibold mt-12 text-center">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
+        </div>
+    </div>
+}
+else
+{
+    <div style=" padding-bottom: 8px; " class="grid grid-cols-3 gap-[4px]  mx-[8px] mt-[10px] hover:cursor-pointer">
+
+        @foreach (var item in Model.FilteredHostModel)
+        {
+            <div class="w-full h-auto flex flex-col justify-end  text-center relative">
+                <div class="w-full flex   ">
+                    <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
+                        <img class=" h-[154px]  object-cover rounded" src="@item.HostLogo" />
+                    </a>
+                </div>
+                <div class="absolute mb-[8px] w-full flex flex-row mx-[4px]">
+                    <div style="border-radius:2px; opacity: 0.9; margin-left: 2px;  "
+                         class="  w-[90%] bg-[#D9D9D9]    h-[34px] justify-start rounded-b flex   flex-col   ">
+                        <div class=" flex flex-row   text-xs  ">
+                            <div class="text-[12px] font-[700] pl-[2px]">@item.HostNameEnglish</div>
+                        </div>
+                        <div class="flex flex-row items-center  ">
+                            <div class=" font-[700] pl-[2px]">
+                                <img class="h-[11px]  w-[11px] rounded-full" src="@item.ClubLogo"
+                                     alt="club">
+                            </div>
+                            <div class="text-[10px] ml-[4px] font-[400]">
+                                @item.ClubNameEnglish
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        function tag1() {
+            var x = document.getElementById("tag1");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function tag2() {
+            var x = document.getElementById("tag2");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function tag3() {
+            var x = document.getElementById("tag3");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+    <script>
+        function HostReservationActionFunction() {
+            window.location.href = "/Dashboard/Index";
+        }
+
+     function redirectToSearchPage() {
+        var locationId = '@ViewBag.LocationId';
+         var searchUrl = `/Search/Index?locationId=${locationId}`;
+         window.location.href = searchUrl;
+     }
+
+        function redirectToSearchHomePage() {
+            var locationId = '@ViewBag.LocationId' ||'';
+            var searchUrl = `/LocationManagement/SearchFilter?&LocationId=${locationId}`
+
+            window.location.href = searchUrl;
+        }
+
+    </script>
+
+}

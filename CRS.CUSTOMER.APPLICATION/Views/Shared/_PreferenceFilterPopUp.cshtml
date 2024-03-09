@@ -21,6 +21,15 @@
         color: #d75a8b;
     }
 </style>
+<style>
+    .map-container #map {
+        height: 365px;
+    }
+
+    .gm-style div[aria-label="Google Map"] > div:last-child {
+        display: none;
+    }
+</style>
 <!------------------------------------------------------- #region PREFERENCE------------------------------------------------------->
 <!-- drawer component -->
 <div id="drawer-filter-location"
@@ -274,7 +283,7 @@
                                                     </svg>
                                                 </div>
                                                 <input type="search" id="host-search" name="SearchFilter" class="input-search block w-full h-[40px] focus-visible:outline-none" placeholder="ホスト名から探す" autocomplete="off">
-                                                <input type="text" class="location-class" id="LocationId_1" name="LocationId" value="" hidden />
+                                                <input type="text" class="location-class" id="LocationId_2" name="LocationId" value="" hidden />
                                                 <input type="text" id="host-height-id" name="Height" value="" hidden />
                                                 <input type="text" id="host-age-id" name="Age" value="" hidden />
                                                 <input type="text" id="host-bloodtype-id" name="BloodType" value="" hidden />
@@ -560,7 +569,7 @@
                             </div>
                             <div id="tab4" class="tab-content-plane  tab-preferance  hidden">
                                 <!----------------------------- #region MAP ---------------------------->
-                                <div class="flex items-center gap-1 text-[#d75a8b] text-[10px] px-[2px] py-3">
+                                <div class="flex items-center gap-1 text-[#d75a8b] text-[10px] px-[2px] py-3  w-max" onclick="setUserLocation()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                         <path d="M8.00156 1C5.29256 1 3.10156 3.191 3.10156 5.9C3.10156 9.575 8.00156 15 8.00156 15C8.00156 15 12.9016 9.575 12.9016 5.9C12.9016 3.191 10.7106 1 8.00156 1ZM4.50156 5.9C4.50156 3.968 6.06956 2.4 8.00156 2.4C9.93356 2.4 11.5016 3.968 11.5016 5.9C11.5016 7.916 9.48556 10.933 8.00156 12.816C6.54556 10.947 4.50156 7.895 4.50156 5.9Z"
                                               fill="#D75A8B" />
@@ -569,42 +578,45 @@
                                     </svg>
                                     現在地
                                 </div>
+                                <div class="map-container">
+                                    <div id="map"></div>
+                                </div>
 
-                                <div class="map-card mt-2 mx-4">
+                                <div class="map-card mt-2 mx-4" id="map-card" style="display: none;border-radius: 10px;">
                                     <div class="flex gap-1">
-                                        <img src="../../../assets/images/demo-image.jpeg" class="h-6 w-6 rounded-full border border-[#F1EEEE]" alt="">
+                                        <img src="" id="clubImage" class="h-6 w-6 rounded-full border border-[#F1EEEE]" alt="">
                                         <div class="text-[#333]">
-                                            <div class="text-[10px] text-ellipsis-customer h-[15px] w-[250px]">
-                                                SINCE SINCESINCE SINCE YOU SINCE YOUSINCE
-                                                YOUSINCE
-                                                YOUSINCE YOU
+                                            <div class="text-[10px] text-ellipsis-customer h-[15px] w-[250px]" id="clubNameEng">
                                             </div>
-                                            <div class="text-[8px]">シンスユーアルファ</div>
+                                            <div class="text-[8px]" id="clubNamejpn"></div>
                                             <div class="flex gap-1 items-center">
-                                                <span class="review-start text-[#F0D830] text-xs">
-                                                    <i class="las la-star"></i> <i class="las la-star"></i>
-                                                    <i class="las la-star"></i>
-                                                    <i class="las la-star"></i>
-                                                    <i class="las la-star-half-alt"></i>
+                                                <span class="review-start text-[#F0D830] text-xs" id="rating-label-id">
+                                                    @*<i class="las la-star"></i> <i class="las la-star"></i>
+                                                        <i class="las la-star"></i>
+                                                        <i class="las la-star"></i>
+                                                        <i class="las la-star-half-alt"></i>*@
                                                 </span>
-                                                <div class="text-[8px]">4.8</div>
+                                                <div class="text-[8px]" id="rating"></div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="flex flex-col justify-between">
                                         <div class="text-[10px]">50m</div>
-                                        <div class="text-[8px] border-b-[1px] border-[#D75A8B] text-[#D75A8B]">詳細を見る</div>
+                                        <a href="#" id="clubUrl">
+                                            <div class="text-[8px] border-b-[1px] border-[#D75A8B] text-[#D75A8B] w-max">詳細を見る</div>
+
+                                        </a>
 
                                     </div>
                                 </div>
-                                <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
-                                    <button class="btn btn-primary" style=" border-radius: 8px; ">
-                                        <a href="#" class="h-full w-full">
-                                            検索する
-                                        </a>
-                                    </button>
-                                </div>
+                                @*<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
+                                        <button class="btn btn-primary" style=" border-radius: 8px; ">
+                                            <a href="#" class="h-full w-full">
+                                                検索する
+                                            </a>
+                                        </button>
+                                    </div>*@
                                 <!----------------------------- #endregion ----------------------------->
                             </div>
                         </div>

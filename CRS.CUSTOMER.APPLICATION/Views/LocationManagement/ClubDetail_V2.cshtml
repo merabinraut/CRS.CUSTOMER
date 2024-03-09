@@ -1663,13 +1663,13 @@
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                        //console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                    //console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -1686,13 +1686,13 @@
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                        //console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                   // console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -1713,7 +1713,7 @@
                     title: "Share club details",
                     url: shareableLink,
                 }).then(() => {
-                    console.log('Thanks for sharing!');
+                    //console.log('Thanks for sharing!');
                 }).catch(console.error);
             } else {
                 toastr.info('Web Share API is not supported in this browser.');
@@ -1734,7 +1734,7 @@
         }</script>
 
     <script>function openModal() {
-            console.log("test");
+            //console.log("test");
         }</script>
     <script>// Function to open a specific modal
         function openModal(modalId) {
@@ -1777,11 +1777,11 @@
                     data: { ScheduleFilterDate: selectedValue },
                     success: function (result) {
                         window.location.reload();
-                        console.log(result);
+                        //console.log(result);
                     },
                     error: function (error) {
                         window.location.reload();
-                        console.error(error);
+                        //console.error(error);
                     }
                 });
             });

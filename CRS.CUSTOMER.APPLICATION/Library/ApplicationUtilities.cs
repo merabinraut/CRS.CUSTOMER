@@ -1094,5 +1094,11 @@ namespace CRS.CUSTOMER.APPLICATION.Library
                 return "";
             }
         }
+        public static string GetAddressFromUrl(string url)
+        {
+            if (string.IsNullOrEmpty(url)) return string.Empty;
+            Uri uri = new Uri(url);
+            return uri.GetLeftPart(UriPartial.Authority);
+        }
     }
 }

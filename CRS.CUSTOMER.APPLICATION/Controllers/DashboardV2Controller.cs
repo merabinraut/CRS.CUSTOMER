@@ -4,18 +4,15 @@ using CRS.CUSTOMER.APPLICATION.Models.CommonModel;
 using CRS.CUSTOMER.APPLICATION.Models.Dashboard;
 using CRS.CUSTOMER.APPLICATION.Models.DashboardV2;
 using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
-using CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2;
 using CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement;
 using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Dashboard;
 using CRS.CUSTOMER.BUSINESS.DashboardV2;
 using CRS.CUSTOMER.BUSINESS.RecommendedClubHost;
-using CRS.CUSTOMER.SHARED;
+using CRS.CUSTOMER.BUSINESS.Search;
 using CRS.CUSTOMER.SHARED.RecommendedClubHost;
 using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -27,9 +24,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IRecommendedClubHostBusiness _recommendedClubHostBuss;
         private readonly IDashboardV2Business _dashboardBusiness;
         private readonly ICommonManagementBusiness _commonBusiness;
+        private readonly ISearchBusiness _searchBusiness;
 
-        public DashboardV2Controller(IDashboardBusiness oldDashboardBusiness, IRecommendedClubHostBusiness recommendedClubHostBuss, IDashboardV2Business dashboardBusiness, ICommonManagementBusiness commonBusiness)
-          => (_oldDashboardBusiness, _recommendedClubHostBuss, _dashboardBusiness, _commonBusiness) = (oldDashboardBusiness, recommendedClubHostBuss, dashboardBusiness, commonBusiness);
+        public DashboardV2Controller(IDashboardBusiness oldDashboardBusiness, IRecommendedClubHostBusiness recommendedClubHostBuss, IDashboardV2Business dashboardBusiness, ICommonManagementBusiness commonBusiness, ISearchBusiness searchBusiness)
+          => (_oldDashboardBusiness, _recommendedClubHostBuss, _dashboardBusiness, _commonBusiness, _searchBusiness) = (oldDashboardBusiness, recommendedClubHostBuss, dashboardBusiness, commonBusiness, searchBusiness);
 
         #region DASHBOARD
         [HttpGet]

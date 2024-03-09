@@ -508,7 +508,7 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
                     title: "Share host details",
                     url: shareableLink,
                 }).then(() => {
-                    console.log('Thanks for sharing!');
+                    //console.log('Thanks for sharing!');
                 }).catch(console.error);
             } else {
                 toastr.info('Web Share API is not supported in this browser.');
@@ -539,13 +539,13 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                        //console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                    //console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -562,13 +562,13 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                        //console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                    //console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });

@@ -160,5 +160,16 @@ namespace CRS.CUSTOMER.REPOSITORY.Search
             }
             return Response;
         }
+        #region Club map details common
+        public List<ClubMapDetailCommon> GetClubMapDetail(string LocationId = "")
+        {
+            var response = new List<ClubMapDetailCommon>();
+            string SQL = $"EXEC sproc_cp_dashboard_v2 @flag='5', @LocationId = {_dao.FilterString(LocationId)}";
+            var dbResponse = _dao.ExecuteDataTable(SQL);
+            if (dbResponse != null && dbResponse.Rows.Count > 0)
+                response = _dao.DataTableToListObject<ClubMapDetailCommon>(dbResponse).ToList();
+            return response;
+        }
+        #endregion
     }
 }

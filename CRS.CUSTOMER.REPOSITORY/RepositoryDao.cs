@@ -123,7 +123,6 @@
             }
             catch (Exception ex)
             {
-                throw ex;
                 //throw ex;
                 DataTable objDt1 = new DataTable();
                 var GetCallingAssembly = Assembly.GetCallingAssembly();
@@ -140,6 +139,7 @@
                 ParseColumnValue(eRow, "id").ToString();
                 objDt1.Rows.Add(1, ConfigurationManager.AppSettings["phase"] != null && ConfigurationManager.AppSettings["phase"].ToString().ToUpper() == "DEVELOPMENT" ? ex.Message : "Something went wrong. Please contact support. Error Id:" + ParseColumnValue(eRow, "id").ToString(), ParseColumnValue(eRow, "id").ToString());
                 ds.Tables.Add(objDt1);
+                throw ex;
             }
             finally
             {

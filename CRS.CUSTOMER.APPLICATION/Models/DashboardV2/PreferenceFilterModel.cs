@@ -5,6 +5,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.DashboardV2
 {
     public class PreferenceFilterModel
     {
+        public List<StaticDataModel> LocationModel { get; set; } = new List<StaticDataModel>();
         public List<StaticDataModel> ClubCategoryModel { get; set; } = new List<StaticDataModel>();
         public List<StaticDataModel> PlanPriceModel { get; set; } = new List<StaticDataModel>();
         public List<StaticDataModel> ClubAvailabilityModel { get; set; } = new List<StaticDataModel>();

@@ -273,12 +273,15 @@
                 data: { clubId: clubId, hostId: hostId, agentType: agentType },
                 success: function (result) {
                     if (result.success) {
+                        DisableLoaderFunction();
                         location.reload();
                     } else {
+                        DisableLoaderFunction();
                         location.reload();
                     }
                 },
                 error: function () {
+                    DisableLoaderFunction();
                     location.reload();
                 }
             });
@@ -291,6 +294,7 @@
                 type: 'POST',
                 data: { clubId: clubId, hostId: hostId, agentType: agentType },
                 success: function (result) {
+                    DisableLoaderFunction();
                     if (result.success) {
                         location.reload();
                     } else {
@@ -298,6 +302,7 @@
                     }
                 },
                 error: function () {
+                    DisableLoaderFunction();
                     location.reload();
                 }
             });

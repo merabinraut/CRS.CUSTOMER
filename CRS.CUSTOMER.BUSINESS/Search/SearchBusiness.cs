@@ -28,5 +28,11 @@ namespace CRS.CUSTOMER.BUSINESS.Search
         {
             return _repo.ClubFilterViewDateTimeAndOthers(Request);
         }
+        #region Club map details common
+        public List<ClubMapDetailCommon> GetClubMapDetail(string LocationId = "")
+        {
+            return _repo.GetClubMapDetail(LocationId);
+        }
+        #endregion
     }
 }
