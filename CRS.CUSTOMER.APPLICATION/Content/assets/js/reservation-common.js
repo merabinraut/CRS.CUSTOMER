@@ -210,10 +210,26 @@ function SubmitClubReservationFunction() {
     form.submit();
 }
 
-function EnableLoaderFunction() {
+/*function EnableLoaderFunction() {
     document.getElementById('loader-id-v2').style.display = 'block';
+    
+    document.body.classList.add('no-scroll-loader');
 }
 function DisableLoaderFunction() {
     document.getElementById('loader-id-v2').style.display = 'none';
+    document.body.classList.remove('no-scroll-loader');
 }
-
+*/
+function preventDefault(event) {
+    event.preventDefault();
+}
+function EnableLoaderFunction() {
+    document.getElementById('loader-id-v2').style.display = 'flex';
+    document.body.addEventListener('touchmove', preventDefault, { passive: false });
+    document.body.classList.add('no-scroll-loader');
+}
+function DisableLoaderFunction() {
+    document.getElementById('loader-id-v2').style.display = 'none';
+    document.body.removeEventListener('touchmove', preventDefault, { passive: false });
+    document.body.classList.remove('no-scroll-loader');
+}

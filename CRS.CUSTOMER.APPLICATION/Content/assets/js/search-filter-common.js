@@ -613,12 +613,18 @@ function ManagePreferenceFilterHTMLContent() {
     localStorage.setItem('PreferenceFilterHTMLContent', JSON.stringify(savedData)); // Store the data
 }
 //#endregion
-
+function preventDefault(event) {
+    event.preventDefault();
+}
 function EnableLoaderFunction() {
     document.getElementById('loader-id-v2').style.display = 'flex';
+    document.body.addEventListener('touchmove', preventDefault, { passive: false });
+    document.body.classList.add('no-scroll-loader');
 }
 function DisableLoaderFunction() {
     document.getElementById('loader-id-v2').style.display = 'none';
+    document.body.removeEventListener('touchmove', preventDefault, { passive: false });
+    document.body.classList.remove('no-scroll-loader');
 }
 
 

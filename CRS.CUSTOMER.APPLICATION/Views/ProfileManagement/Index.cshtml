@@ -8,6 +8,13 @@
         max-width: 100%;
         width: 400px;
     }
+    input:focus {
+        border: 1px solid #d75a8b !important;
+    }
+    input:focus-visible {
+        border: 1px solid #d75a8b !important;
+        outline:none
+    }
 </style>
 <div class=" no-scrollbar overflow-y-auto">
 
@@ -44,15 +51,14 @@
                     <div class="text-[14px] font-[700]">
                         @Model.NickName
                     </div>
-                    <div class="text-[14px] ">
+                   @* <div class="text-[14px] ">
                         @Model.EmailAddress
-                    </div>
-                    <div class="border-[1px] px-[7px] mt-[10px] rounded-[3px] text-[#F89336] border-[#F89336] flex flex-row items-center rounded-[3px]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M5.38429 4.16667C4.90152 4.16667 4.40272 4.33947 4.00608 4.66797C3.60945 4.99648 3.33301 5.50158 3.33301 6.11112C3.33301 6.62761 3.56137 7.06815 3.84583 7.41754C4.13028 7.76693 4.47483 8.04227 4.79134 8.31381C5.42435 8.85688 5.89711 9.30312 5.89711 10C5.89711 10.0741 5.82099 10.2526 5.72083 10.395C5.62067 10.5374 5.52852 10.6228 5.52852 10.6228L6.2657 11.3064C6.2657 11.3064 6.42996 11.1507 6.58621 10.9267C6.72043 10.7349 6.86666 10.488 6.90673 10.1671C6.96482 10.3247 7.02091 10.4861 7.08301 10.638C7.43557 11.5001 7.84222 12.273 8.30096 12.8559C8.46722 13.0686 8.6395 13.2566 8.8298 13.418C7.77011 13.4901 6.92275 14.3256 6.92275 15.3472V15.8333H13.0766V15.3472C13.0766 14.3142 12.2132 13.4749 11.1375 13.418C11.3298 13.2566 11.5141 13.0667 11.6824 12.8559C12.1431 12.2749 12.5437 11.5001 12.9003 10.638C12.9664 10.4766 13.0305 10.3038 13.0926 10.1367C13.1267 10.4709 13.2749 10.7292 13.4131 10.9267C13.5694 11.1507 13.7336 11.3064 13.7336 11.3064L14.4708 10.6228C14.4708 10.6228 14.3787 10.5374 14.2785 10.395C14.1784 10.2526 14.1022 10.0741 14.1022 10C14.1022 9.30312 14.575 8.85688 15.208 8.31381C15.5245 8.04227 15.8691 7.76693 16.1535 7.41754C16.438 7.06815 16.6663 6.62761 16.6663 6.11112C16.6663 5.50158 16.3899 4.99648 15.9933 4.66797C15.5966 4.33947 15.0978 4.16667 14.6151 4.16667C13.96 4.16667 13.5113 4.4496 13.2689 4.65278H6.73044C6.48806 4.4496 6.03934 4.16667 5.38429 4.16667ZM5.38429 5.13889C5.62668 5.13889 5.78293 5.21105 5.89711 5.27561C5.91113 6.26682 6.09142 7.39096 6.37788 8.4961C6.10544 8.14671 5.7649 7.85618 5.46442 7.59983C5.1399 7.3226 4.84342 7.06625 4.64711 6.82509C4.4508 6.58394 4.35865 6.37506 4.35865 6.11112C4.35865 5.77122 4.49887 5.56044 4.69519 5.39714C4.8915 5.23384 5.16193 5.13889 5.38429 5.13889ZM14.6151 5.13889C14.8374 5.13889 15.1078 5.23384 15.3042 5.39714C15.5005 5.56044 15.6407 5.77122 15.6407 6.11112C15.6407 6.37506 15.5486 6.58394 15.3522 6.82509C15.1559 7.06625 14.8594 7.3226 14.5349 7.59983C14.2284 7.86188 13.8819 8.1638 13.6054 8.52648C13.8999 7.41374 14.0882 6.28012 14.1022 5.27561C14.2164 5.21105 14.3727 5.13889 14.6151 5.13889ZM6.98685 5.62501H13.0125C12.9344 7.07005 12.5397 8.8322 11.9388 10.2886C11.6062 11.0938 11.2216 11.7925 10.849 12.2635C10.4764 12.7344 10.1359 12.9167 9.98365 12.9167C9.83341 12.9167 9.50488 12.7344 9.13429 12.2635C8.7637 11.7925 8.37507 11.0957 8.04455 10.2886C7.44759 8.8303 7.06498 7.06245 6.98685 5.62501ZM9.48685 7.08334V9.51389H10.5125V7.08334H9.48685ZM8.97403 14.375H11.0253C11.3939 14.375 11.6463 14.5896 11.8266 14.8611H8.17275C8.35304 14.5896 8.60544 14.375 8.97403 14.375Z"
-                                  fill="#F89336" />
+                    </div>*@
+                    <div class=" rounded-[3px] text-[#F89336] border-[#F89336] flex flex-row items-center rounded-[3px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+                            <path d="M7.79167 0C6.96989 0 6.2251 0.153972 5.64323 0.44401C5.06136 0.73405 4.58333 1.20671 4.58333 1.83333V3.66667C4.58333 3.72575 4.60303 3.78304 4.61198 3.83854C4.18587 3.72754 3.71322 3.66667 3.20833 3.66667C2.38656 3.66667 1.64176 3.82064 1.0599 4.11068C0.478027 4.40072 0 4.87337 0 5.5V9.16667C0 9.79329 0.478027 10.266 1.0599 10.556C1.64176 10.846 2.38656 11 3.20833 11C4.03011 11 4.7749 10.846 5.35677 10.556C5.93864 10.266 6.41667 9.79329 6.41667 9.16667V8.98047C6.8374 9.09147 7.29753 9.16667 7.79167 9.16667C8.61344 9.16667 9.35824 9.0127 9.9401 8.72266C10.522 8.43262 11 7.95996 11 7.33333V1.83333C11 1.20671 10.522 0.73405 9.9401 0.44401C9.35824 0.153972 8.61344 0 7.79167 0ZM7.79167 0.916667C8.48991 0.916667 9.11117 1.06706 9.52474 1.27474C9.93831 1.48242 10.0833 1.70085 10.0833 1.83333C10.0833 1.96582 9.93831 2.18424 9.52474 2.39193C9.11117 2.59961 8.48991 2.75 7.79167 2.75C7.09342 2.75 6.47217 2.59961 6.05859 2.39193C5.64502 2.18424 5.5 1.96582 5.5 1.83333C5.5 1.70085 5.64502 1.48242 6.05859 1.27474C6.47217 1.06706 7.09342 0.916667 7.79167 0.916667ZM5.5 3.13672C5.54834 3.16357 5.5931 3.19759 5.64323 3.22266C6.2251 3.5127 6.96989 3.66667 7.79167 3.66667C8.61344 3.66667 9.35824 3.5127 9.9401 3.22266C9.99023 3.19759 10.035 3.16357 10.0833 3.13672V3.66667C10.0833 3.79915 9.93831 4.01758 9.52474 4.22526C9.11117 4.43294 8.48991 4.58333 7.79167 4.58333C7.09342 4.58333 6.47217 4.43294 6.05859 4.22526C5.64502 4.01758 5.5 3.79915 5.5 3.66667V3.13672ZM3.20833 4.58333C3.90658 4.58333 4.52783 4.73372 4.94141 4.94141C5.35498 5.14909 5.5 5.36751 5.5 5.5C5.5 5.63249 5.35498 5.85091 4.94141 6.05859C4.52783 6.26628 3.90658 6.41667 3.20833 6.41667C2.51009 6.41667 1.88883 6.26628 1.47526 6.05859C1.06169 5.85091 0.916667 5.63249 0.916667 5.5C0.916667 5.36751 1.06169 5.14909 1.47526 4.94141C1.88883 4.73372 2.51009 4.58333 3.20833 4.58333ZM10.0833 4.97005V5.5C10.0833 5.63249 9.93831 5.85091 9.52474 6.05859C9.11117 6.26628 8.48991 6.41667 7.79167 6.41667C7.27067 6.41667 6.79981 6.33073 6.41667 6.20182V5.5C6.41667 5.44092 6.39697 5.38363 6.38802 5.32812C6.81413 5.43913 7.28678 5.5 7.79167 5.5C8.61344 5.5 9.35824 5.34603 9.9401 5.05599C9.99023 5.03092 10.035 4.99691 10.0833 4.97005ZM0.916667 6.80339C0.965007 6.83024 1.00977 6.86426 1.0599 6.88932C1.64176 7.17936 2.38656 7.33333 3.20833 7.33333C4.03011 7.33333 4.7749 7.17936 5.35677 6.88932C5.4069 6.86426 5.45166 6.83024 5.5 6.80339V7.33333C5.5 7.46582 5.35498 7.68425 4.94141 7.89193C4.52783 8.09961 3.90658 8.25 3.20833 8.25C2.51009 8.25 1.88883 8.09961 1.47526 7.89193C1.06169 7.68425 0.916667 7.46582 0.916667 7.33333V6.80339ZM10.0833 6.80339V7.33333C10.0833 7.46582 9.93831 7.68425 9.52474 7.89193C9.11117 8.09961 8.48991 8.25 7.79167 8.25C7.27067 8.25 6.79981 8.1766 6.41667 8.04948V7.16146C6.8374 7.27246 7.29574 7.33333 7.79167 7.33333C8.61344 7.33333 9.35824 7.17936 9.9401 6.88932C9.99023 6.86426 10.035 6.83024 10.0833 6.80339ZM0.916667 8.63672C0.965007 8.66357 1.00977 8.69759 1.0599 8.72266C1.64176 9.0127 2.38656 9.16667 3.20833 9.16667C4.03011 9.16667 4.7749 9.0127 5.35677 8.72266C5.4069 8.69759 5.45166 8.66357 5.5 8.63672V9.16667C5.5 9.29915 5.35498 9.51758 4.94141 9.72526C4.52783 9.93294 3.90658 10.0833 3.20833 10.0833C2.51009 10.0833 1.88883 9.93294 1.47526 9.72526C1.06169 9.51758 0.916667 9.29915 0.916667 9.16667V8.63672Z" fill="#E3AB00" />
                         </svg>
-                        0 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Points
+                        <spam style="padding-left: 2px; font-size: 11px; font-weight: 500; color: #E3AB00 ">0 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Points</spam>
                     </div>
                 </div>
             </div>
@@ -74,7 +80,8 @@
         }
         @Html.HiddenFor(model => model.Gender)
         @Html.HiddenFor(model => model.NickName)
-<div class="flex flex-col mt-[16px] mx-[16px]">
+<div class="flex flex-col px-[16px]" style="background:#FAF7F9; padding-bottom:22px; padding-top:14px">
+
     <div class="input-field-common w-full flex flex-col">
         <label class="text-[14px] font-[700] uppercase mb-[10px]" for="fname">
             @CRS.CUSTOMER.APPLICATION.Resources.Resource.Nickname <span class="text-[#D32F2F]">*</span>
@@ -85,6 +92,21 @@
                value="@Model.NickName"
                disabled style="background-color:lightgrey">
 
+    </div>
+    <div class="input-field-common w-full flex flex-col">
+        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.PhoneNumber<span class="text-[#D32F2F]">*</span>
+        </label>
+        <input placeholder="+101761408054" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+               type="text" value="@Model.MobileNumber" name="MobileNumber" disabled style="background-color:lightgrey">
+    </div>
+
+</div>
+
+
+<div class="flex flex-col mx-[16px]">
+    <div style="padding-top: 21px;text-align: center; font-size: 13px; color: #7E6D5E ">
+        ホスログを便利に使うために登録しよう！
     </div>
 
     <div class="grid grid-cols-2 gap-[16px] mt-[12px] ">
@@ -117,92 +139,6 @@
             </div>
         </div>
     </div>
-    <div class="input-field-common w-full flex flex-col">
-        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
-            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email <span class="text-[#D32F2F]">*</span>
-        </label>
-        @if (!string.IsNullOrEmpty(Model.EmailAddress))
-        {
-            @Html.TextBoxFor(model => model.EmailAddress, new
-       {
-           @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
-           @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
-           id = "emailInput",
-           @autocomplete = "off",
-           @disabled= "disabled", @style = "background-color:lightgrey",
-           @type = "text"
-       })
-            @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
-            class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-            type="text"
-            value="@Model.EmailAddress"
-            id="emailInput"
-            name="EmailAddress"
-            disabled style="background-color:lightgrey">*@
-            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                @Html.ValidationMessageFor(m => m.EmailAddress)
-            </div>
-        }
-        else
-        {
-
-            @Html.TextBoxFor(model => model.EmailAddress, new
-       {
-           @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
-           @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
-           @id = "emailInput",
-           @autocomplete = "off"
-           ,@type = "text"
-       })
-            @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
-            class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-            type="text"
-            value="@Model.EmailAddress"
-            id="emailInput"
-            name="EmailAddress">*@
-            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                @Html.ValidationMessageFor(m => m.EmailAddress)
-            </div>
-        }
-
-    </div>
-
-    <div class="input-field-common w-full flex flex-col">
-        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
-            @CRS.CUSTOMER.APPLICATION.Resources.Resource.PhoneNumber<span class="text-[#D32F2F]">*</span>
-        </label>
-        <input placeholder="+101761408054" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-               type="text" value="@Model.MobileNumber" name="MobileNumber" disabled style="background-color:lightgrey">
-    </div>
-
-
-    <div class="input-field-common flex flex-col">
-        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
-            @CRS.CUSTOMER.APPLICATION.Resources.Resource.ToConfirmAge<span class="text-[#D32F2F]">*</span>
-        </label>
-        <div class="grid grid-cols-3  gap-[6px]">
-            <div>
-                @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "YYYY", @oninput = "yearvalidation(this, 6)", autocomplete = "off", @maxLength = '6' })
-                <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                    @Html.ValidationMessageFor(m => m.DOBYear)  
-                </div>
-            </div>
-            <div>
-                @Html.TextBoxFor(model => model.DOBMonth, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "MM", @oninput = "Monthvalidation(this, 4)", autocomplete = "off", @maxLength = '4' })
-                <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                    @Html.ValidationMessageFor(m => m.DOBMonth)
-                </div>
-            </div>
-            <div>
-                @Html.TextBoxFor(model => model.DOBDay, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "DD", @oninput = "Dayvalidation(this, 4)", autocomplete = "off", @maxLength = '4' })
-                <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                    @Html.ValidationMessageFor(m => m.DOBDay)
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Gender<span class="text-[#D32F2F]">*</span>
     </label>
@@ -278,7 +214,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="flex items-center ">
+                <div class="flex items-center " >
                     <p class="lang">
                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Others
                     </p>
@@ -286,6 +222,91 @@
             </div>
         </div>
     </div>
+
+
+    <div class="input-field-common w-full flex flex-col">
+        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email <span class="text-[#D32F2F]">*</span>
+        </label>
+        @if (!string.IsNullOrEmpty(Model.EmailAddress))
+        {
+            @Html.TextBoxFor(model => model.EmailAddress, new
+       {
+           @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
+           @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
+           id = "emailInput",
+           @autocomplete = "off",
+           @disabled = "disabled",
+                @style = "background-color:lightgrey",
+           @type = "text"
+       })
+            @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
+                class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                type="text"
+                value="@Model.EmailAddress"
+                id="emailInput"
+                name="EmailAddress"
+                disabled style="background-color:lightgrey">*@
+            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                @Html.ValidationMessageFor(m => m.EmailAddress)
+            </div>
+        }
+        else
+        {
+
+            @Html.TextBoxFor(model => model.EmailAddress, new
+       {
+           @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
+           @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
+           @id = "emailInput",
+           @autocomplete = "off"
+           ,
+                @type = "text"
+       })
+            @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
+                class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                type="text"
+                value="@Model.EmailAddress"
+                id="emailInput"
+                name="EmailAddress">*@
+            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                @Html.ValidationMessageFor(m => m.EmailAddress)
+            </div>
+        }
+
+    </div>
+
+
+    <div class="input-field-common flex flex-col" style="padding-bottom:12px">
+        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
+            生年月日
+            @*     @CRS.CUSTOMER.APPLICATION.Resources.Resource.ToConfirmAge*@
+            <span class="text-[#D32F2F]">*</span>
+        </label>
+        <div class="grid grid-cols-3  gap-[6px]">
+            <div>
+                @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "YYYY", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
+                <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                    @Html.ValidationMessageFor(m => m.DOBYear)
+                </div>
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.DOBMonth, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "MM", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
+                <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                    @Html.ValidationMessageFor(m => m.DOBMonth)
+                </div>
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.DOBDay, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "DD", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
+                <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                    @Html.ValidationMessageFor(m => m.DOBDay)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     @*<label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PreferredLocation</label>
         <div class="flex flex-col">
             <div class="input-field-common">
@@ -310,17 +331,29 @@
                 </select>
             </div>
         </div>*@
-<div>
-    <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]">*</span></label>
-    <div class="input-field-common mb-[10px]">
-        @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @placeholder = "〒", autocomplete = "off" })
-        <div class="validationMessage">
-            @Html.ValidationMessageFor(m => m.PostalCode)
+<div style="display: flex; justify-content:flex-start; align-items:center; gap:7px">
+
+    <div style="width:40%">
+        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]">*</span></label>
+        <div class="input-field-common mb-[10px]" >
+            @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]",@style="width:100%", @placeholder = "〒", autocomplete = "off" })
+            <div class="validationMessage">
+                @Html.ValidationMessageFor(m => m.PostalCode)
+            </div>
         </div>
-    </div>    
+    </div>
+    <div  style="width:60%">
+        @*<label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]">*</span></label>*@
+       @* <div class="input-field-common mb-[10px] mt-[12px]" style="padding-top:12px">
+            @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @style = "width:100%; background:#404040", @placeholder = "住所自動入力", autocomplete = "off" })
+            <div class="validationMessage">
+                @Html.ValidationMessageFor(m => m.PostalCode)
+            </div>
+        </div>*@
+    </div>
+
 </div>
-   
-    <div class="grid grid-cols-1 gap-[6px] ">
+    <div class="grid grid-cols-1 " style="padding-bottom:12px">
         <div class="input-field-common">
             <select id="default_select" style="width: 100%; font-size:15px"
                     class="default_select text-[#B7B7B7] h-[44px] select-common" name="PrefectureDDL">
@@ -343,7 +376,7 @@
             </select>
         </div>
     </div>
-    <div class="grid grid-cols-2 gap-[6px] mt-[10px] ">
+    <div class="grid grid-cols-2 gap-[6px]  " style="margin-bottom:12px">
 
         <div class="input-field-common">
             <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.City"
@@ -369,9 +402,9 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col gap-[6px] mt-[10px] pb-[61px]">
+    <div class="flex flex-col pb-[61px]">
 
-        <div class="input-field-common mt-[6px] ">
+        <div class="input-field-common ">
             <input placeholder="ビール名と部屋番号"
                    class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] w-full "
                    type="text"
@@ -392,6 +425,7 @@
 
 
 </div>
+        /*NABIN*/
         <div class="py-[12px] mt-[20px] px-[16px]  w-full grid grid-cols-1" style="box-shadow:0px 0px 7px 0px rgba(68,47,38,0.25)">
 
             <div class="grid grid-cols-1   ">
@@ -440,36 +474,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Content/validation.js"></script>
     <script>
-        function yearvalidation(input, maxLength) {
-            var value = input.value;
-            var pattern = /^\d{4} 年$/;
-            if (pattern.test(value))
-            {
-                var trimmedValue = numericValue.substring(0, maxLength);
-                input.value = trimmedValue;
-            }
-            
-        }
-
-          
-        function Monthvalidation(input, maxLength) {
-            var value = input.value;
-            var pattern = /^\d{2} 月$/;
-            if (pattern.test(value))
-            {
-                var trimmedValue = numericValue.substring(0, maxLength);
-                input.value = trimmedValue;
-            }
-        }
-        function Dayvalidation(input, maxLength) {
-            var value = input.value;
-            var pattern = /^\d{2} 日$/;
-            if (pattern.test(value))
-            {
-                var trimmedValue = numericValue.substring(0, maxLength);
-                input.value = trimmedValue;
-            }
-        }
+        document.body.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        });
+    </script>
+    <script>
     const uploadProfileImage = () => {
         // Trigger the file input to open the file selection dialog
         const fileInput = document.getElementById('fileInput');
@@ -510,23 +519,29 @@
         var genderValue = div.getAttribute('data-gender');
         var backEndGenderValue="@Model.Gender";
 
-        if (genderValue === backEndGenderValue)
-           div.classList.add('active');
-                else
+            if (genderValue === backEndGenderValue) {
+            div.classList.add('active');
+            $("div[data-gender='" + $(this).attr("data-gender") + "']").find('.lang').css("color", "#d75a8b");
+            }
+           else
             div.classList.remove('active');
             if ( "@Model.Gender" === "") {
 
-              $("div[data-gender='Female']").addClass("active");
+                $("div[data-gender='Female']").addClass("active");
+                $("div[data-gender='Female']").find('.lang').css("color", "#d75a8b");
+                //$("div[data-gender='Female']").css("color", "#d75a8b")
              }
-        div.addEventListener('click', function () {
+            div.addEventListener('click', function () {
             // Remove the 'bg-red' class from all divs
             divs.forEach(function (d) {
                 d.classList.remove('active');
+               
 
             });
             // Add the 'bg-red' class to the clicked div
-            this.classList.add('active');
-
+                this.classList.add('active');
+                $(".lang").css("color", "");
+                $("div[data-gender='" + $(this).attr("data-gender") + "']").find('.lang').css("color", "#d75a8b")
             var genderValue = this.getAttribute('data-gender');
             $('#Gender').val(genderValue);
         });
