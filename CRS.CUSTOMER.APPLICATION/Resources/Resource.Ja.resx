@@ -213,7 +213,11 @@
     <comment>_Layout</comment>
   </data>
   <data name="BookNow" xml:space="preserve">
-    <value>今予約する</value>
+    <value>今すぐ予約する</value>
+  </data>
+  <data name="BookNowSearch" xml:space="preserve">
+    <value>今すぐ予約する</value>
+    <comment>Search Filter</comment>
   </data>
   <data name="BookWithThisPlan" xml:space="preserve">
     <value>このプランで予約する</value>

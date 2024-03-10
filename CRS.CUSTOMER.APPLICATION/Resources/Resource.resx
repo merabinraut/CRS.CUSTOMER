@@ -215,6 +215,10 @@
   <data name="BookNow" xml:space="preserve">
     <value>Book Now</value>
   </data>
+  <data name="BookNowSearch" xml:space="preserve">
+    <value>Book Now</value>
+    <comment>Search Filter</comment>
+  </data>
   <data name="BookWithThisPlan" xml:space="preserve">
     <value>Book With This Plan</value>
     <comment>Dashboard Controller</comment>

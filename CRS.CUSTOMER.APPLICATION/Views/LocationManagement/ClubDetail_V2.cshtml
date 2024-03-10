@@ -303,7 +303,7 @@
                                             }
                                             <div class="pl-6">@item.Rank</div>
                                         </div>
-                                        <div class="relative h-[180px] w-[128px]">
+                                        <div class="relative h-[180px] w-[128px]" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
                                             @if (!string.IsNullOrEmpty(item.HostImage))
                                             {
                                                 <img src="@item.HostImage"
@@ -354,7 +354,7 @@
                                                 {
                                                     @item.HostNameJapanese
                                                 }
-                                                                                    </div>
+                                            </div>
                                         </div>
                                         @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
                                         {
@@ -382,8 +382,8 @@
                                 </svg>
                                 <span class="text-[#333] text-[12px] font-bold leading-[20px]">お知らせ</span>
                             </div>
-                            <div class="flex justify-start items-center gap-[3px]">
-                                <span class="text-[10px] leading-[20px] font-normal text-[#333]"><a href="#">全て表示</a></span>
+                            <div class="flex justify-start items-center gap-[3px]" id="notice_id">
+                                <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                     <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
@@ -402,7 +402,7 @@
                                         <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px]"
                                              style="line-height:20px">
                                             <div>@item.EventDate (水)</div>
-                                            <div>@item.EventTitle</div>
+                                            <div>@item.EventDescription</div>
                                         </div>
                                         <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
                                     }
@@ -427,8 +427,8 @@
                                 </svg>
                                 <span class="text-[#333] text-[12px] font-bold leading-[20px]">スケジュール情報</span>
                             </div>
-                            <div class="flex justify-start items-center gap-[3px]">
-                                <span class="text-[10px] leading-[20px] font-normal text-[#333]"><a href="#">全て表示</a></span>
+                            <div class="flex justify-start items-center gap-[3px]" id="schedule_id">
+                                <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                     <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
@@ -865,7 +865,8 @@
                 <!-- <div class="box mt-2"></div> -->
             </div>
             <!-- </div> -->
-            <script>$(document).ready(function () {
+            <script>
+    $(document).ready(function () {
                     $('.store-host-carousel').owlCarousel({
                         margin: 10,
                         loop: true,
@@ -1165,7 +1166,8 @@
                         <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
                     </div>
                 </div>*@
-            <script>// Function to open a specific modal
+            <script>
+    // Function to open a specific modal
                 function openModal(modalId) {
                     var modal = document.getElementById(modalId);
                     if (modal) {
@@ -1240,17 +1242,26 @@
                             <div class="@(i % 2 == 0 ? "bg-[#EFEFEF]" : "bg-[#BFA3B6]") flex  flex-col  basis-0 px-[9px] py-[25px]"
                                  style="width: 33px;">
                                 <div class="text-[#333333] text-[13px] font-bold text-center leading-[20px]">
-                                    @Model.GetAllScheduleTabList[i].ScheduleMonth
+                                    @Model.GetAllScheduleTabList[i].Day
                                 </div>
-                                <div class="text-[8px] font-normal leading-0 text-center"> @Model.GetAllScheduleTabList[i].ScheduleDay</div>
+                                <div class="text-[8px] font-normal leading-0 text-center"> @Model.GetAllScheduleTabList[i].DayName</div>
                             </div>
                             <!-- for image and information -->
                             <div class="flex justify-start gap-[9px] items-center">
                                 @if (Model.GetAllScheduleTabList[i].ScheduleImage != "" || Model.GetAllScheduleTabList[i].ScheduleImage != null)
                                 {
                                     <div class="h-[61px] aspect-square object-cover object-top rounded-[3px]">
-                                        <img style="height:61px; width:61px" src="@Model.GetAllScheduleTabList[i].ScheduleImage"
-                                             alt="" class="h-[61px] w-[61px] aspect-square object-cover object-top rounded-[3px]">
+                                        @if (!string.IsNullOrEmpty(@Model.GetAllScheduleTabList[i].ScheduleImage))
+                                        {
+                                            <img style="height:61px; width:61px" src= "@Url.Content("~/Images" + @Model.GetAllScheduleTabList[i].ScheduleImage)"
+                                                 alt="" class="h-[61px] w-[61px] aspect-square object-cover object-top rounded-[3px]">
+                                        }
+                                        @*else
+                                        {
+                                            <img style="height:61px; width:61px" src="@Model.GetAllScheduleTabList[i].ScheduleImage"
+                                                 alt="" class="h-[61px] w-[61px] aspect-square object-cover object-top rounded-[3px]">
+                                        }*@
+
                                     </div>
                                 }
 
@@ -1355,7 +1366,7 @@
                                 </div>
                                 <!-- for the notice with mention -->
                                 <div class="text-[11px] font-medium leading-[16px] text-[#333]">
-                                    新しく <span class="text-[#D17979] ">田中裕二</span> @notice.EventTitle
+                                    <span class="text-[#D17979] ">@notice.EventDescription</span>
                                 </div>
                             </div>
                             <div class="h-[1px] bg-[#EFEFEF] w-full "></div>
@@ -1380,7 +1391,7 @@
 </div>
 <!-- for position stickey at the bottom -->
 <div class="pl-[16px] pr-[10px] pt-[12px] fixed bottom-0 w-full  flex justify-between items-center  bg-[#FAFAFA] "
-     style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000; ">
+     style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000; " id="stickey_id">
     <div>
         <div class="flex justify-center items-center gap-1 pb-1">
             <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">
@@ -1624,7 +1635,8 @@
 @section scripts
 {
     <script src="~/Content/CustomHelper.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function () {
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";
         });
@@ -1641,9 +1653,10 @@
                 autoWidth: true,
                 items: 4
             });
-            localStorage.clear();
+            //localStorage.clear();
         })</script>
-    <script>function ClubReservationActionFunction(i, j, k) {
+    <script>
+    function ClubReservationActionFunction(i, j, k) {
             DataStorageFunction(i, j);
             window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
         }
@@ -1705,7 +1718,8 @@
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "none";
         }</script>
-    <script>const shareButton = document.querySelector("#shareButton");
+    <script>
+    const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -1719,7 +1733,8 @@
                 toastr.info('Web Share API is not supported in this browser.');
             }
         });</script>
-    <script>function OpenImagePopup(ImageURL) {
+    <script>
+    function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");
@@ -1736,7 +1751,8 @@
     <script>function openModal() {
             //console.log("test");
         }</script>
-    <script>// Function to open a specific modal
+    <script>
+    // Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -1768,20 +1784,22 @@
             }
         }</script>
 
-    <script>$(document).ready(function () {
+    <script>
+    $(document).ready(function () {
             $("#scheduleDropdown").change(function () {
                 var selectedValue = $(this).val();
+                debugger
                 $.ajax({
                     url: '/LocationManagement/ClubDetail_V2',
                     type: 'POST',
                     data: { ScheduleFilterDate: selectedValue },
                     success: function (result) {
                         window.location.reload();
-                        //console.log(result);
+                        console.log(result);
                     },
                     error: function (error) {
                         window.location.reload();
-                        //console.error(error);
+                        console.error(error);
                     }
                 });
             });

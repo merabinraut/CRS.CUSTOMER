@@ -97,6 +97,35 @@ namespace CRS.CUSTOMER.REPOSITORY.Search
                         }
                     }
                     item.HostGalleryImage = stringList;
+                    //List<HostSearchDetail> stringList = new List<HostSearchDetail>();
+                    //string hostImageSQL = "EXEC sproc_customer_club_and_host_management @Flag='ghgil'";
+                    //hostImageSQL += ",@ClubId=" + _dao.FilterString(item.ClubId);
+                    //var hostImageDBResponse = _dao.ExecuteDataTable(hostImageSQL);
+                    //if (hostImageDBResponse != null && hostImageDBResponse.Rows.Count > 0)
+                    //{
+                    //    if (hostImageDBResponse.Columns.Contains("ImagePath"))
+                    //    {
+                    //        foreach (DataRow item2 in hostImageDBResponse.Rows)
+                    //        {
+                    //            object imagePathValue = item2["ImagePath"];
+                    //            object HostId = item2["HostId"];
+                    //            if (imagePathValue != null)
+                    //            {
+                    //                string imagePath = imagePathValue.ToString();
+
+                    //                HostSearchDetail imageModel = new HostSearchDetail
+                    //                {
+                    //                    ImagePath = imagePath,
+                    //                    HostId = Convert.ToString(HostId)
+                    //                };
+                    //                stringList.Add(imageModel);
+
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //item.HostDetail = stringList;
+
                     #endregion
                 }
             }

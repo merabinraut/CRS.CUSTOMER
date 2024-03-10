@@ -182,19 +182,19 @@
         </label>
         <div class="grid grid-cols-3  gap-[6px]">
             <div>
-                @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "YYYY", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
+                @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "YYYY", @oninput = "yearvalidation(this, 6)", autocomplete = "off", @maxLength = '6' })
                 <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                    @Html.ValidationMessageFor(m => m.DOBYear)
+                    @Html.ValidationMessageFor(m => m.DOBYear)  
                 </div>
             </div>
             <div>
-                @Html.TextBoxFor(model => model.DOBMonth, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "MM", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
+                @Html.TextBoxFor(model => model.DOBMonth, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "MM", @oninput = "Monthvalidation(this, 4)", autocomplete = "off", @maxLength = '4' })
                 <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
                     @Html.ValidationMessageFor(m => m.DOBMonth)
                 </div>
             </div>
             <div>
-                @Html.TextBoxFor(model => model.DOBDay, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "DD", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
+                @Html.TextBoxFor(model => model.DOBDay, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "DD", @oninput = "Dayvalidation(this, 4)", autocomplete = "off", @maxLength = '4' })
                 <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
                     @Html.ValidationMessageFor(m => m.DOBDay)
                 </div>
@@ -440,6 +440,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Content/validation.js"></script>
     <script>
+        function yearvalidation(input, maxLength) {
+            var value = input.value;
+            var pattern = /^\d{4} 年$/;
+            if (pattern.test(value))
+            {
+                var trimmedValue = numericValue.substring(0, maxLength);
+                input.value = trimmedValue;
+            }
+            
+        }
+
+          
+        function Monthvalidation(input, maxLength) {
+            var value = input.value;
+            var pattern = /^\d{2} 月$/;
+            if (pattern.test(value))
+            {
+                var trimmedValue = numericValue.substring(0, maxLength);
+                input.value = trimmedValue;
+            }
+        }
+        function Dayvalidation(input, maxLength) {
+            var value = input.value;
+            var pattern = /^\d{2} 日$/;
+            if (pattern.test(value))
+            {
+                var trimmedValue = numericValue.substring(0, maxLength);
+                input.value = trimmedValue;
+            }
+        }
     const uploadProfileImage = () => {
         // Trigger the file input to open the file selection dialog
         const fileInput = document.getElementById('fileInput');
