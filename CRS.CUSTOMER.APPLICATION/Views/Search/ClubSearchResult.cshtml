@@ -196,10 +196,10 @@
                                     @item.Tag1
                                 </span>
                             }*@
-                        <div class=" flex self-center gap-0.5 no-scrollbar " style="overflow-x:scroll">
+                        <div class=" flex self-center gap-0.5 no-scrollbar " style="overflow-x:scroll; white-space:nowrap">
                             @if (!string.IsNullOrEmpty(item.Tag1))
                             {
-                                <span style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
+                                <span style="border-radius: 2px; border:1px solid #F6F6F6; font-size:10px" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
                                     <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
                                     @item.Tag1
                                 </span>
@@ -207,25 +207,25 @@
 
                             @if (!string.IsNullOrEmpty(item.Tag2))
                             {
-                                <span class="  lg:text-[9px] text-xs   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
+                                <span class="  lg:text-[9px] text-[10px]   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
                                     @item.Tag2
                                 </span>
                             }
                             @if (!string.IsNullOrEmpty(item.Tag3))
                             {
-                                <span class="  lg:text-[9px] text-xs   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
+                                <span class="  lg:text-[9px] text-[10px]   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
                                     @item.Tag3
                                 </span>
                             }
                             @if (!string.IsNullOrEmpty(item.Tag4))
                             {
-                                <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
+                                <span class="   lg:text-[9px] text-[10px]   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
                                     @item.Tag4
                                 </span>
                             }
                             @if (!string.IsNullOrEmpty(item.Tag5))
                             {
-                                <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
+                                <span class="   lg:text-[9px] text-[10px]   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
                                     @item.Tag5
                                 </span>
                             }
@@ -310,7 +310,7 @@
                                     }
                                     for (int i = 0; i < unratedScale; i++)
                                     {
-                                        <img src="~/Content/assets/images/ratingstar-notfilled.svg" class="h-[24px] w-[24px]" alt="unrated" />
+                                        <img src="~/Content/assets/images/ratingstar-notfilled.svg" class="h-[18px] w-[18px]" alt="unrated" />
                                     }
                                 }
                                 <div class=" text-xs scale-110" title="club rating">
