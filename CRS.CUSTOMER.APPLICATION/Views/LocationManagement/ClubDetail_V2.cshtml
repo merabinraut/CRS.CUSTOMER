@@ -1769,7 +1769,6 @@
             $("#scheduleDropdown").change(function () {
                 localStorage.setItem('SelectedDate', $(this).val());
                 var selectedValue = localStorage.getItem('SelectedDate');
-                debugger
                 $.ajax({
                     url: '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId',
                     type: 'POST',
