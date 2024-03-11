@@ -181,7 +181,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult Index(string LocationId)
         {
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
-            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId : string.Empty;
+            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : string.Empty;
             var Response = new PreferenceFilterModel();
             Response.LocationModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("1"));
             Response.AgeModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("7"));

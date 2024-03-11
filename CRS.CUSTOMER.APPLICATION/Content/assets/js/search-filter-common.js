@@ -63,6 +63,7 @@ function CloseLocationFilterPopUp() {
 //#region PREFERENCE FILTER POPUP
 function GetPreferenceFilterPopUp() {
     EnableLoaderFunction();
+    var CustomerCurrentLocationId = $('#current-location-id').val();
     var preferencefilterpopupContent = $('#preferencefilterpopUp-id').html();
     if (preferencefilterpopupContent.trim() !== '') {
         var element = document.getElementById('drawer-filter-location');
@@ -100,6 +101,7 @@ function GetPreferenceFilterPopUp() {
             url: '/DashboardV2/GetPreferenceFilterPopUp',
             dataType: 'json',
             data: {
+                LocationId: CustomerCurrentLocationId
             },
             success: function (data) {
                 if (!data || data.Code !== 0) {
@@ -109,6 +111,9 @@ function GetPreferenceFilterPopUp() {
                 }
                 $('#preferencefilterpopUp-id').html(data.PartialView);
                 PreferenceFilterCommon();
+                if (data.ClubDetailMapData != null) {
+                    LoadGoogleMaps(data.ClubDetailMapData);
+                }
                 DisableLoaderFunction();
                 return false;
             },
@@ -120,6 +125,42 @@ function GetPreferenceFilterPopUp() {
         });
     }
 }
+
+var map;
+var marker;
+var service;
+var lastClickedCoordinates = null;
+var infoWindows = [];
+var trackUserInterval;
+var customMarkerPosArray;
+
+//var customMarkerPosArray = [{
+//    lat: 27.711603,
+//    lng: 85.328818
+//},
+//{
+//    lat: 27.712345,
+//    lng: 85.329000
+//},
+//{
+//    lat: 27.71058,
+//    lng: 85.32849,
+//    clubNameEnglish: "...α",
+//    clubNameJapanese: "sdsd",
+//    ratingScale: 4,
+//    clubLogo: "../../../assets/images/demo-image.jpeg",
+//    URL: "/test"
+//}, {
+//    lat: 27.690756581231632,
+//    lng: 85.33855395682303,
+//    clubNameEnglish: "SINCE YOU...α",
+//    clubNameJapanese: "シンスユーアルファ",
+//    ratingScale: 4.8,
+//    clubLogo: "../../../assets/images/demo-image.jpeg",
+//    URL: "/test"
+
+//}
+//];
 
 function PreferenceFilterCommon() {
     //#region 1
@@ -287,251 +328,244 @@ function PreferenceFilterCommon() {
             tabButton.classList.add("active");
         });
     });
-    //#endregion
+    //#endregion    
+}
 
-    loadGoogleMaps();
+function initMap2() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15, // Set the initial zoom level
+        disableDefaultUI: true // Disable default UI elements
+    });
 
-    var map;
-    var marker;
-    var service;
-    var lastClickedCoordinates = null;
-    var infoWindows = [];
-    var trackUserInterval;
-
-    var customMarkerPosArray = [{
-        lat: 27.711603,
-        lng: 85.328818
-    },
-    {
-        lat: 27.712345,
-        lng: 85.329000
-    },
-    {
-        lat: 27.71058,
-        lng: 85.32849,
-        clubNameEnglish: "...α",
-        clubNameJapanese: "sdsd",
-        ratingScale: 4,
-        clubLogo: "../../../assets/images/demo-image.jpeg",
-        URL: "/test"
-    }, {
-        lat: 27.690756581231632,
-        lng: 85.33855395682303,
-        clubNameEnglish: "SINCE YOU...α",
-        clubNameJapanese: "シンスユーアルファ",
-        ratingScale: 4.8,
-        clubLogo: "../../../assets/images/demo-image.jpeg",
-        URL: "/test"
-
+    // Loop through the array of custom marker positions
+    for (var i = 0; i < customMarkerPosArray.length; i++) {
+        var customMarkerPos = customMarkerPosArray[i];
+        createCustomMarker(customMarkerPos);
     }
-        // Add more custom marker positions as needed
-        // Add more custom marker positions here
-    ];
+    // Start tracking user's location
+    trackUserLocation();
+}
 
-    function initMap2() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15, // Set the initial zoom level
-            disableDefaultUI: true // Disable default UI elements
-        });
+function trackUserLocation() {
+    trackUserInterval = navigator.geolocation.watchPosition(function (position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
 
-        // Loop through the array of custom marker positions
-        for (var i = 0; i < customMarkerPosArray.length; i++) {
-            var customMarkerPos = customMarkerPosArray[i];
-            createCustomMarker(customMarkerPos);
+        if (!marker) {
+            // Create marker for current location if not already created
+            var markerIcon = {
+                path: google.maps.SymbolPath.CIRCLE,
+                fillColor: '#d75a8b',
+                fillOpacity: 1,
+                strokeColor: '#FFF',
+                strokeWeight: 2,
+                scale: 10
+            };
+
+            marker = new google.maps.Marker({
+                position: pos,
+                map: map,
+                icon: markerIcon
+            });
+        } else {
+            // Update marker position
+            marker.setPosition(pos);
         }
-        // Start tracking user's location
-        trackUserLocation();
-    }
 
-    function trackUserLocation() {
-        trackUserInterval = navigator.geolocation.watchPosition(function (position) {
+        // Optionally, center the map on the user's position
+        map.setCenter(pos);
+    }, handleLocationError);
+}
+
+function stopTrackingUserLocation() {
+    if (trackUserInterval) {
+        navigator.geolocation.clearWatch(trackUserInterval);
+        trackUserInterval = null;
+    }
+}
+
+function searchNearby(location) {
+    service.nearbySearch({
+        location: location,
+        radius: 500, // Search radius in meters
+        type: ['restaurant'] // Only search for restaurants
+    }, processResults);
+}
+
+function processResults(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+        }
+    }
+}
+
+function createMarker(place) {
+    var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+        title: place.name,
+        icon: {
+            scaledSize: new google.maps.Size(100, 100) // Scaled size of the marker icon
+        }
+    });
+    // Add click listener to show place details
+    // Add click listener to show place details
+    google.maps.event.addListener(map, 'click', function (event) {
+        console.log("Clicked Location:", event);
+        var data = service.getDetails({
+            placeId: event.placeId // Change event.place_id to event.placeId
+        })
+        console.log({
+            data
+        })
+    });
+
+}
+
+function createCustomMarker(customMarkerPos) {
+    var customMarker = new google.maps.Marker({
+        position: customMarkerPos,
+        map: map,
+        title: 'Custom Marker',
+        icon: {
+            scaledSize: new google.maps.Size(100, 100) // Scaled size of the marker icon
+        }
+    });
+
+
+    // Create info window for the custom marker
+
+    // Add click event listener to show info window
+    customMarker.addListener('click', function () {
+        if (customMarkerPos.clubNameEnglish) {
+            var clubCard = document.getElementById('map-card');
+            clubCard.style.display = 'flex'; // Show the map card
+            var clubImage = document.getElementById('clubImage');
+            var clubNameEng = document.getElementById('clubNameEng');
+            var clubNameJpn = document.getElementById('clubNamejpn');
+            var rating = document.getElementById('rating');
+            var clubUrl = document.getElementById('clubUrl');
+
+        } else {
+            var clubCard = document.getElementById('map-card');
+            clubCard.style.display = 'none'; // Hide the map card if clubNameEng is empty
+        }
+
+
+        clubImage.src = customMarkerPos.clubLogo;
+        clubNameEng.textContent = customMarkerPos.clubNameEnglish;
+        clubNameJpn.textContent = customMarkerPos.clubNameJapanese;
+        rating.textContent = customMarkerPos.ratingScale;
+        clubUrl.href = customMarkerPos.URL;
+        console.log({
+            customMarkerPos
+
+        })
+
+    });
+
+}
+
+function handleLocationError(error) {
+    console.error("Error getting user's location:", error);
+}
+
+function closeAllInfoWindows() {
+    for (var i = 0; i < infoWindows.length; i++) {
+        infoWindows[i].close();
+    }
+}
+
+function closeAllInfoWindowsExcept(exceptInfoWindow) {
+    for (var i = 0; i < infoWindows.length; i++) {
+        if (infoWindows[i] !== exceptInfoWindow) {
+            infoWindows[i].close();
+        }
+    }
+}
+
+// Function to set user's current location
+function setUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
 
-            if (!marker) {
-                // Create marker for current location if not already created
-                var markerIcon = {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    fillColor: '#d75a8b',
-                    fillOpacity: 1,
-                    strokeColor: '#FFF',
-                    strokeWeight: 2,
-                    scale: 10
-                };
+            map.setCenter(pos);
+            map.setZoom(15); // Set the zoom level to 24
 
+            // Create marker for current location
+            var markerIcon = {
+                path: google.maps.SymbolPath.CIRCLE,
+                fillColor: '#ff0000',
+                fillOpacity: 0.8,
+                strokeColor: '#FFF',
+                strokeWeight: 2,
+                scale: 10
+            };
+
+            if (marker) {
+                marker.setPosition(pos);
+            } else {
                 marker = new google.maps.Marker({
                     position: pos,
                     map: map,
                     icon: markerIcon
                 });
-            } else {
-                // Update marker position
-                marker.setPosition(pos);
             }
-
-            // Optionally, center the map on the user's position
-            map.setCenter(pos);
         }, handleLocationError);
-    }
-
-    function stopTrackingUserLocation() {
-        if (trackUserInterval) {
-            navigator.geolocation.clearWatch(trackUserInterval);
-            trackUserInterval = null;
-        }
-    }
-
-    function searchNearby(location) {
-        service.nearbySearch({
-            location: location,
-            radius: 500, // Search radius in meters
-            type: ['restaurant'] // Only search for restaurants
-        }, processResults);
-    }
-
-    function processResults(results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
-                createMarker(results[i]);
-            }
-        }
-    }
-
-    function createMarker(place) {
-        var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location,
-            title: place.name,
-            icon: {
-                scaledSize: new google.maps.Size(100, 100) // Scaled size of the marker icon
-            }
-        });
-        // Add click listener to show place details
-        // Add click listener to show place details
-        google.maps.event.addListener(map, 'click', function (event) {
-            console.log("Clicked Location:", event);
-            var data = service.getDetails({
-                placeId: event.placeId // Change event.place_id to event.placeId
-            })
-            console.log({
-                data
-            })
-        });
-
-    }
-
-    function createCustomMarker(customMarkerPos) {
-        var customMarker = new google.maps.Marker({
-            position: customMarkerPos,
-            map: map,
-            title: 'Custom Marker',
-            icon: {
-                scaledSize: new google.maps.Size(100, 100) // Scaled size of the marker icon
-            }
-        });
-
-
-        // Create info window for the custom marker
-
-        // Add click event listener to show info window
-        customMarker.addListener('click', function () {
-            if (customMarkerPos.clubNameEnglish) {
-                var clubCard = document.getElementById('map-card');
-                clubCard.style.display = 'flex'; // Show the map card
-                var clubImage = document.getElementById('clubImage');
-                var clubNameEng = document.getElementById('clubNameEng');
-                var clubNameJpn = document.getElementById('clubNamejpn');
-                var rating = document.getElementById('rating');
-                var clubUrl = document.getElementById('clubUrl');
-
-            } else {
-                var clubCard = document.getElementById('map-card');
-                clubCard.style.display = 'none'; // Hide the map card if clubNameEng is empty
-            }
-
-
-            clubImage.src = customMarkerPos.clubLogo;
-            clubNameEng.textContent = customMarkerPos.clubNameEnglish;
-            clubNameJpn.textContent = customMarkerPos.clubNameJapanese;
-            rating.textContent = customMarkerPos.ratingScale;
-            clubUrl.href = customMarkerPos.URL;
-            console.log({
-                customMarkerPos
-
-            })
-
-        });
-
-    }
-
-    function handleLocationError(error) {
-        console.error("Error getting user's location:", error);
-    }
-
-    function closeAllInfoWindows() {
-        for (var i = 0; i < infoWindows.length; i++) {
-            infoWindows[i].close();
-        }
-    }
-
-    function closeAllInfoWindowsExcept(exceptInfoWindow) {
-        for (var i = 0; i < infoWindows.length; i++) {
-            if (infoWindows[i] !== exceptInfoWindow) {
-                infoWindows[i].close();
-            }
-        }
-    }
-
-    // Function to set user's current location
-    function setUserLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-
-                map.setCenter(pos);
-                map.setZoom(15); // Set the zoom level to 24
-
-                // Create marker for current location
-                var markerIcon = {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    fillColor: '#ff0000',
-                    fillOpacity: 0.8,
-                    strokeColor: '#FFF',
-                    strokeWeight: 2,
-                    scale: 10
-                };
-
-                if (marker) {
-                    marker.setPosition(pos);
-                } else {
-                    marker = new google.maps.Marker({
-                        position: pos,
-                        map: map,
-                        icon: markerIcon
-                    });
-                }
-            }, handleLocationError);
-        } else {
-            console.error("Geolocation is not supported by this browser");
-        }
+    } else {
+        console.error("Geolocation is not supported by this browser");
     }
 }
 
-function loadGoogleMaps() {
+function LoadGoogleMaps(ClubDetailMapData) {
     // This function loads the Google Maps API script dynamically
     var script = document.createElement('script');
     script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap2";
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
+    //console.log(ClubDetailMapData);
+    //var customMarkerPosArray1 = convertToCustomMarkerArray(ClubDetailMapData);
+    //console.log(customMarkerPosArray1);
+    //customMarkerPosArray = ClubDetailMapData;
+    customMarkerPosArray = convertToCustomMarkerArray(ClubDetailMapData);
 }
 
+function convertToCustomMarkerArray(data) {
+    var customMarkerPosArray = [];
+    var markerObj = {};
 
+    // Loop through JSON data and construct the marker object
+    data.forEach(function (item) {
+        if (item.Key === "lat") {
+            markerObj.lat = item.Value;
+        } else if (item.Key === "lng") {
+            markerObj.lng = item.Value;
+        } else if (item.Key === "clubNameEnglish") {
+            markerObj.clubNameEnglish = item.Value;
+        } else if (item.Key === "clubNameJapanese") {
+            markerObj.clubNameJapanese = item.Value;
+        } else if (item.Key === "ratingScale") {
+            markerObj.ratingScale = parseFloat(item.Value);
+        } else if (item.Key === "clubLogo") {
+            markerObj.clubLogo = item.Value;
+        } else if (item.Key === "URL") {
+            markerObj.URL = item.Value;
+        }
+    });
+
+    // Add the constructed marker object to the array
+    customMarkerPosArray.push(markerObj);
+
+    return customMarkerPosArray;
+}
 
 function ClosePreferenceFilterPopUp() {
     var element = document.getElementById('drawer-filter-location');

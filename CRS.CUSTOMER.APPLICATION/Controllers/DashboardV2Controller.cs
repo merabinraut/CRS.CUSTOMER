@@ -4,6 +4,7 @@ using CRS.CUSTOMER.APPLICATION.Models.CommonModel;
 using CRS.CUSTOMER.APPLICATION.Models.Dashboard;
 using CRS.CUSTOMER.APPLICATION.Models.DashboardV2;
 using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
+using CRS.CUSTOMER.APPLICATION.Models.Search;
 using CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement;
 using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Dashboard;
@@ -14,6 +15,7 @@ using CRS.CUSTOMER.SHARED.RecommendedClubHost;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
@@ -202,8 +204,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public JsonResult GetPreferenceFilterPopUp(string LocationId)
         {
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
-            var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
-            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId : string.Empty;
+            var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" }, { "ClubDetailMapData", "" } };
+            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : string.Empty;
             var Response = new PreferenceFilterModel();
             Response.AgeModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("7"));
             Response.ConstellationModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("8"));
@@ -222,9 +224,51 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dbHostResponse = _dashboardBusiness.GetNewHost(lId, CustomerId, "1");
             Response.HostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
             Response.HostModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.HostId = x.HostId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo); });
+
+            var ClubDetailMapModel = new List<ClubMapDetailModel>();
+            var ClubDetailDbResponse = _searchBusiness.GetClubMapDetail(lId);
+            ClubDetailMapModel = ClubDetailDbResponse.MapObjects<ClubMapDetailModel>();
+            string CurrentUrl = ApplicationUtilities.GetAddressFromUrl(System.Web.HttpContext.Current.Request.Url.AbsoluteUri);
+            List<dynamic> mappedData = new List<dynamic>();
+            foreach (var item in ClubDetailMapModel)
+            {
+                dynamic mappedItem = new System.Dynamic.ExpandoObject();
+                if (!string.IsNullOrEmpty(CurrentUrl))
+                {
+                    CurrentUrl = CurrentUrl + "/LocationManagement/ClubDetail_V2";
+                    var parameters = new List<string>();
+                    if (!string.IsNullOrEmpty(item.LocationId))
+                        parameters.Add($"LocationId={item.LocationId.EncryptParameter()}");
+
+                    if (!string.IsNullOrEmpty(item.ClubId))
+                        parameters.Add($"ClubId={item.ClubId.EncryptParameter()}");
+
+                    string queryString = string.Join("&", parameters);
+
+                    StringBuilder urlBuilder = new StringBuilder(CurrentUrl);
+                    urlBuilder.Append(CurrentUrl.Contains("?") ? "&" : "?");
+                    urlBuilder.Append(queryString);
+
+                    mappedItem.URL = urlBuilder.ToString();
+                }
+
+                if (float.TryParse(item.Latitude, out float latitude) && float.TryParse(item.Longitude, out float longitude))
+                {
+                    mappedItem.lat = latitude;
+                    mappedItem.lng = longitude;
+                }
+                else continue;
+                mappedItem.clubNameEnglish = item.ClubNameEnglish;
+                mappedItem.clubNameJapanese = item.ClubNameJapanese;
+                mappedItem.ratingScale = item.RatingScale;
+                mappedItem.clubLogo = ImageHelper.ProcessedImage(item.ClubLogo);
+
+                mappedData.Add(mappedItem);
+            }
             responseData["Code"] = 0;
             responseData["Message"] = "Success";
             responseData["PartialView"] = RenderHelper.RenderPartialViewToString(this, "_PreferenceFilterPopUp", Response);
+            responseData["ClubDetailMapData"] = mappedData;
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
 

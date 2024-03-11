@@ -123,23 +123,23 @@
             }
             catch (Exception ex)
             {
-                //throw ex;
-                DataTable objDt1 = new DataTable();
-                var GetCallingAssembly = Assembly.GetCallingAssembly();
-                var GetExecutingAssembly = Assembly.GetExecutingAssembly();
-                objDt1.Columns.Add("Code");
-                StackTrace stackTrace = new StackTrace();
-                MethodBase methodBase = stackTrace.GetFrame(stackTrace.FrameCount - 1).GetMethod(); // Not sure about the "- 1"
-                Console.WriteLine(methodBase.Name);
-                var x = stackTrace.GetFrame(1).GetMethod().Name;
-                objDt1.Columns.Add("Message");
-                objDt1.Columns.Add("id");
-                var eSql = "sproc_error_handler @error_code='1',@msg=" + FilterString(ex.Message) + ",@error_script=" + FilterString(sql) + ",@error_category=" + FilterString("SQL Query") + ",@error_source=" + FilterString("Application");
-                var eRow = ExecuteDataRow(eSql);
-                ParseColumnValue(eRow, "id").ToString();
-                objDt1.Rows.Add(1, ConfigurationManager.AppSettings["phase"] != null && ConfigurationManager.AppSettings["phase"].ToString().ToUpper() == "DEVELOPMENT" ? ex.Message : "Something went wrong. Please contact support. Error Id:" + ParseColumnValue(eRow, "id").ToString(), ParseColumnValue(eRow, "id").ToString());
-                ds.Tables.Add(objDt1);
                 throw ex;
+                //DataTable objDt1 = new DataTable();
+                //var GetCallingAssembly = Assembly.GetCallingAssembly();
+                //var GetExecutingAssembly = Assembly.GetExecutingAssembly();
+                //objDt1.Columns.Add("Code");
+                //StackTrace stackTrace = new StackTrace();
+                //MethodBase methodBase = stackTrace.GetFrame(stackTrace.FrameCount - 1).GetMethod(); // Not sure about the "- 1"
+                //Console.WriteLine(methodBase.Name);
+                //var x = stackTrace.GetFrame(1).GetMethod().Name;
+                //objDt1.Columns.Add("Message");
+                //objDt1.Columns.Add("id");
+                //var eSql = "sproc_error_handler @error_code='1',@msg=" + FilterString(ex.Message) + ",@error_script=" + FilterString(sql) + ",@error_category=" + FilterString("SQL Query") + ",@error_source=" + FilterString("Application");
+                //var eRow = ExecuteDataRow(eSql);
+                //ParseColumnValue(eRow, "id").ToString();
+                //objDt1.Rows.Add(1, ConfigurationManager.AppSettings["phase"] != null && ConfigurationManager.AppSettings["phase"].ToString().ToUpper() == "DEVELOPMENT" ? ex.Message : "Something went wrong. Please contact support. Error Id:" + ParseColumnValue(eRow, "id").ToString(), ParseColumnValue(eRow, "id").ToString());
+                //ds.Tables.Add(objDt1);
+                //throw ex;
             }
             finally
             {
