@@ -82,7 +82,9 @@ function GetPreferenceFilterPopUp() {
         // Set input field values
         for (var inputId in savedData.inputValues) {
             if (inputId != "" && inputId != '') {
-                document.getElementById(inputId).value = savedData.inputValues[inputId];
+                if (document.getElementById(inputId)) {
+                    document.getElementById(inputId).value = savedData.inputValues[inputId];
+                }
             }
         }
 
@@ -91,6 +93,11 @@ function GetPreferenceFilterPopUp() {
             document.getElementById(checkboxId).checked = savedData.checkboxStates[checkboxId];
         }
         PreferenceFilterCommon();
+        var ClubDetailMapData = localStorage.getItem('ClubDetailMapData');
+        if (ClubDetailMapData) {
+            ClubDetailMapData = JSON.parse(ClubDetailMapData);
+            LoadGoogleMaps(ClubDetailMapData);
+        }
         DisableLoaderFunction();
         return false;
     }
@@ -112,6 +119,7 @@ function GetPreferenceFilterPopUp() {
                 $('#preferencefilterpopUp-id').html(data.PartialView);
                 PreferenceFilterCommon();
                 if (data.ClubDetailMapData != null) {
+                    localStorage.setItem('ClubDetailMapData', JSON.stringify(data.ClubDetailMapData));
                     LoadGoogleMaps(data.ClubDetailMapData);
                 }
                 DisableLoaderFunction();
@@ -134,33 +142,7 @@ var infoWindows = [];
 var trackUserInterval;
 var customMarkerPosArray;
 
-//var customMarkerPosArray = [{
-//    lat: 27.711603,
-//    lng: 85.328818
-//},
-//{
-//    lat: 27.712345,
-//    lng: 85.329000
-//},
-//{
-//    lat: 27.71058,
-//    lng: 85.32849,
-//    clubNameEnglish: "...α",
-//    clubNameJapanese: "sdsd",
-//    ratingScale: 4,
-//    clubLogo: "../../../assets/images/demo-image.jpeg",
-//    URL: "/test"
-//}, {
-//    lat: 27.690756581231632,
-//    lng: 85.33855395682303,
-//    clubNameEnglish: "SINCE YOU...α",
-//    clubNameJapanese: "シンスユーアルファ",
-//    ratingScale: 4.8,
-//    clubLogo: "../../../assets/images/demo-image.jpeg",
-//    URL: "/test"
 
-//}
-//];
 
 function PreferenceFilterCommon() {
     //#region 1
@@ -414,12 +396,8 @@ function createMarker(place) {
     // Add click listener to show place details
     // Add click listener to show place details
     google.maps.event.addListener(map, 'click', function (event) {
-        console.log("Clicked Location:", event);
         var data = service.getDetails({
             placeId: event.placeId // Change event.place_id to event.placeId
-        })
-        console.log({
-            data
         })
     });
 
@@ -460,10 +438,6 @@ function createCustomMarker(customMarkerPos) {
         clubNameJpn.textContent = customMarkerPos.clubNameJapanese;
         rating.textContent = customMarkerPos.ratingScale;
         clubUrl.href = customMarkerPos.URL;
-        console.log({
-            customMarkerPos
-
-        })
 
     });
 
@@ -525,46 +499,27 @@ function setUserLocation() {
 }
 
 function LoadGoogleMaps(ClubDetailMapData) {
-    // This function loads the Google Maps API script dynamically
+    customMarkerPosArray = convertToCustomMarkerArray(ClubDetailMapData);
     var script = document.createElement('script');
     script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap2";
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
-    //console.log(ClubDetailMapData);
-    //var customMarkerPosArray1 = convertToCustomMarkerArray(ClubDetailMapData);
-    //console.log(customMarkerPosArray1);
-    //customMarkerPosArray = ClubDetailMapData;
-    customMarkerPosArray = convertToCustomMarkerArray(ClubDetailMapData);
+    //initMap2();
 }
 
 function convertToCustomMarkerArray(data) {
-    var customMarkerPosArray = [];
+    var customMarkerPosArray2 = [];
     var markerObj = {};
-
-    // Loop through JSON data and construct the marker object
-    data.forEach(function (item) {
-        if (item.Key === "lat") {
-            markerObj.lat = item.Value;
-        } else if (item.Key === "lng") {
-            markerObj.lng = item.Value;
-        } else if (item.Key === "clubNameEnglish") {
-            markerObj.clubNameEnglish = item.Value;
-        } else if (item.Key === "clubNameJapanese") {
-            markerObj.clubNameJapanese = item.Value;
-        } else if (item.Key === "ratingScale") {
-            markerObj.ratingScale = parseFloat(item.Value);
-        } else if (item.Key === "clubLogo") {
-            markerObj.clubLogo = item.Value;
-        } else if (item.Key === "URL") {
-            markerObj.URL = item.Value;
-        }
+    const finalData = data.map((val) => {
+        const newObj = {};
+        val.forEach((item) => {
+            newObj[item.Key] = item.Value;
+        });
+        return newObj;
     });
-
-    // Add the constructed marker object to the array
-    customMarkerPosArray.push(markerObj);
-
-    return customMarkerPosArray;
+    customMarkerPosArray2.push(...finalData);
+    return customMarkerPosArray2;
 }
 
 function ClosePreferenceFilterPopUp() {
@@ -878,7 +833,6 @@ function initPeopleFunction2() {
             // Store the value if timeList has active class
             if (event.currentTarget.classList.contains('active')) {
                 const peopleValue = event.currentTarget.querySelector('.peopleValue2').textContent;
-                //console.log('Time value:', peopleValue.trim());
                 var selectedPeopleDiv = document.getElementById("selected-noofpeople-id2");
                 selectedPeopleDiv.innerText = peopleValue.trim();
                 //var selectedPeopleDiv2 = document.getElementById("main-date-id");
@@ -946,8 +900,6 @@ function AddBookmark(clubId, hostId, agentType) {
             }
         },
         error: function () {
-            // Handle unexpected errors
-            //console.log('An unexpected error occurred.');
             location.reload();
         }
     });
@@ -963,14 +915,10 @@ function RemoveBookmark(clubId, hostId, agentType) {
             if (result.success) {
                 location.reload();
             } else {
-                // Handle failure, e.g., show an error message
-                //console.log('Error: ' + result.message);
                 location.reload();
             }
         },
         error: function () {
-            // Handle unexpected errors
-            //console.log('An unexpected error occurred.');
             location.reload();
         }
     });
