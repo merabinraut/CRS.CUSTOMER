@@ -1,5 +1,8 @@
 ﻿function InitiateClubReservationFunction(ClubId, SelectedDate = "", SelectedHost = "") {
     EnableLoaderFunction();
+    if (document.getElementById('club-bottom-tab-id')) {
+        document.getElementById('club-bottom-tab-id').style.display = 'none';
+    }
     $.ajax({
         type: 'GET',
         async: true,
@@ -193,7 +196,9 @@ function CloseInitiatedClubReservationFunction() {
     element.classList.add('translate-y-full');
     var removeElement = document.getElementById("ui-datepicker-div")
     removeElement.style.setProperty("display", "none", "important");
-
+    if (document.getElementById('club-bottom-tab-id')) {
+        document.getElementById('club-bottom-tab-id').style.display = '';
+    }
 }
 
 function SubmitClubReservationFunction() {
