@@ -72,10 +72,20 @@
 <!-- section 2 -->
 <div class="px-4 pb-[8px] flex justify-between ">
     <div class="flex gap-[8px]">
-        <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
-            <img src="@Model.ClubLogo"
-                 class="h-[48px] w-[48px] object-cover rounded-full border-[1px] border-[#FAFAFA]" />
-        </div>
+        @if (Model.ClubLogo != null || Model.ClubLogo != "")
+        {
+            <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                <img src="@Model.ClubLogo"
+                     class="h-[48px] w-[48px] object-cover rounded-full border-[1px] border-[#FAFAFA]" />
+            </div>
+        }
+        else
+        {
+            <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                <img src="/Content/assets/images/logo.svg"
+                     class="h-[48px] w-[48px] object-cover rounded-full border-[1px] border-[#FAFAFA]" />
+            </div>
+        }
         <div>
             <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEng</div>
             <div class='text-xs  text-[#404040] '>@Model.ClubNameJp</div>
@@ -920,7 +930,7 @@
                                     }
                                     else
                                     {
-                                        <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                        <img src="~/Content/assets/images/logo.svg"
                                              class="h-[48px] w-[48px] object-cover rounded-full" />
                                     }
                                 </div>
