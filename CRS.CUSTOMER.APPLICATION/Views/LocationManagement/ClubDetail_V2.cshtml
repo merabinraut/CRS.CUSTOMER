@@ -74,14 +74,14 @@
     <div class="flex gap-[8px]">
         @if (Model.ClubLogo != null || Model.ClubLogo != "")
         {
-            <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+            <div data-modal-target="" data-modal-toggle="">
                 <img src="@Model.ClubLogo"
                      class="h-[48px] w-[48px] object-cover rounded-full border-[1px] border-[#FAFAFA]" />
             </div>
         }
         else
         {
-            <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+            <div data-modal-target="" data-modal-toggle="">
                 <img src="/Content/assets/images/logo.svg"
                      class="h-[48px] w-[48px] object-cover rounded-full border-[1px] border-[#FAFAFA]" />
             </div>
@@ -326,30 +326,40 @@
                                             }
                                             @if (item.IsBookmarked.Trim().ToUpper() == "Y")
                                             {
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                                     class="absolute top-2 right-2">
-                                                    <g filter="url(#filter0_d_2488_112787)">
-                                                        <circle cx="20" cy="20" r="13" fill="#D75A8B" />
-                                                    </g>
-                                                    <path d="M16.752 15.001C14.6836 15.001 13.002 16.6955 13.002 18.7364C13.002 19.4484 13.3262 20.0652 13.627 20.5107C13.9277 20.9562 14.2363 21.2422 14.2363 21.2422L19.6426 26.643L20.002 27.001L20.3613 26.643L25.7676 21.2422C25.7676 21.2422 27.002 20.1586 27.002 18.7364C27.002 16.6955 25.3203 15.001 23.252 15.001C21.5352 15.001 20.4297 16.0302 20.002 16.464C19.5742 16.0302 18.4688 15.001 16.752 15.001Z"
-                                                          fill="white" />
-                                                    <defs>
-                                                        <filter id="filter0_d_2488_112787" x="0" y="0" width="40" height="40"
-                                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                                            <feColorMatrix in="SourceAlpha" type="matrix"
-                                                                           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                                            <feOffset />
-                                                            <feGaussianBlur stdDeviation="3.5" />
-                                                            <feComposite in2="hardAlpha" operator="out" />
-                                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                                            <feBlend mode="normal" in2="BackgroundImageFix"
-                                                                     result="effect1_dropShadow_2488_112787" />
-                                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2488_112787"
-                                                                     result="shape" />
-                                                        </filter>
-                                                    </defs>
-                                                </svg>
+                                                <div class="absolute top-2 right-2" style="width:40px; height:40px;" onclick="handleRemoveBookmarks('@item.ClubId','@item.HostId','host')">
+                                                    <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" />
+                                                </div>
+
+                                                @*<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                                         class="absolute top-2 right-2">
+                                                        <g filter="url(#filter0_d_2488_112787)">
+                                                            <circle cx="20" cy="20" r="13" fill="#D75A8B" />
+                                                        </g>
+                                                        <path d="M16.752 15.001C14.6836 15.001 13.002 16.6955 13.002 18.7364C13.002 19.4484 13.3262 20.0652 13.627 20.5107C13.9277 20.9562 14.2363 21.2422 14.2363 21.2422L19.6426 26.643L20.002 27.001L20.3613 26.643L25.7676 21.2422C25.7676 21.2422 27.002 20.1586 27.002 18.7364C27.002 16.6955 25.3203 15.001 23.252 15.001C21.5352 15.001 20.4297 16.0302 20.002 16.464C19.5742 16.0302 18.4688 15.001 16.752 15.001Z"
+                                                              fill="white" />
+                                                        <defs>
+                                                            <filter id="filter0_d_2488_112787" x="0" y="0" width="40" height="40"
+                                                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                                <feOffset />
+                                                                <feGaussianBlur stdDeviation="3.5" />
+                                                                <feComposite in2="hardAlpha" operator="out" />
+                                                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                                <feBlend mode="normal" in2="BackgroundImageFix"
+                                                                         result="effect1_dropShadow_2488_112787" />
+                                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2488_112787"
+                                                                         result="shape" />
+                                                            </filter>
+                                                        </defs>
+                                                    </svg>*@
+                                            }
+                                            else
+                                            {
+                                                <div class="absolute top-2 right-2" style="width: 40px; height: 40px;" onclick="handleAddBookmarks('@item.ClubId','@item.HostId','host')">
+                                                    <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" />
+                                                </div>
                                             }
 
                                         </div>
@@ -1229,7 +1239,7 @@
             </div>
             <!-- for the schecdule card -->
             <div class="flex flex-col mt-4 border-t-2 border-[#EFEFEF]">
-                @if (Model.GetAllScheduleTabList != null)
+                @if (Model.GetAllScheduleTabList.Count != 0)
                 {
                     for (int i = 0; i < Model.GetAllScheduleTabList.Count; i++)
                     {
@@ -1333,7 +1343,7 @@
             <!-- for the notice section  -->
             <!-- first section -->
             @{
-                if (Model.GetAllNoticeTabList != null)
+                if (Model.GetAllNoticeTabList.Count != 0)
                 {
                     foreach (var notice in Model.GetAllNoticeTabList)
                     {
