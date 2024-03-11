@@ -522,10 +522,14 @@ function convertToCustomMarkerArray(data) {
     return customMarkerPosArray2;
 }
 
+function preventDefault(event) {
+    event.preventDefault();
+}
 function ClosePreferenceFilterPopUp() {
     var element = document.getElementById('drawer-filter-location');
     if (element) {
         element.classList.add('translate-y-full');
+        document.body.addEventListener('touchmove', preventDefault, { passive: false });
         return false;
     }
 }

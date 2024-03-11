@@ -1350,3 +1350,10 @@ label {
     -webkit-overflow-scrolling: auto !important;
     scroll-behavior:revert;
 }
+.disable-click {
+    background: #F0F0F0;
+ 
+}
+    .disable-click > div {
+        color: #BEBEBE;
+    }
