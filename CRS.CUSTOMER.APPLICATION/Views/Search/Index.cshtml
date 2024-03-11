@@ -465,8 +465,7 @@
                                 {
                                     <div class="grid grid-cols-3 gap-2">
                                         @foreach (var item in Model.ClubModel)
-                                        {
-                                            <a href="#">
+                                        {<a onclick="ClubDetailActionFunction('@item.ClubLocationId', '@item.ClubId')">
                                                 <div class="new-host-card">
                                                     <div class="image">
                                                         <img src="@item.ClubLogo" alt="club-logo" />
@@ -484,7 +483,7 @@
                                         }
                                     </div>
                                     <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-1 ">
-                                        <div class="border-b-[1px] border-[#D75A8B] pb-[1px] ">
+                                        <div class="border-b-[1px] border-[#D75A8B] pb-[1px] " onclick="NewClubRenderFunction()">
                                             続きを見る
                                         </div>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
@@ -513,7 +512,7 @@
                                             foreach (var item in Model.HostModel)
                                             {
                                                 var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
-                                                <div class="hosts-that-match-you @activeClass">
+                                                <div class="hosts-that-match-you @activeClass" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
                                                     <img src="@item.HostLogo" alt="host-logo" />
                                                     <div class="like-host">
                                                         <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
@@ -1395,6 +1394,10 @@
 
         function ClearFunction() {
             window.location.reload();
+        }
+
+                function ClubDetailActionFunction(i, j) {
+            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }
     </script>
     <!--#endregion Button Submit Function-->

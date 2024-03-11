@@ -495,9 +495,9 @@
                             </div>
                             <div>
                                 <div class="flex w-full items-center text-warmgray-1 text-[12px] gap-[6px] mb-4">
-                                    
+
                                     <span style="width:36px">プラン</span>
-                                    <hr class=" bg-[#A09E91]" style="width:180px"> 
+                                    <hr class=" bg-[#A09E91]" style="width:180px">
                                 </div>
                                 <div class="flex justify-center gap-4 mb-[25px]">
                                     <div class="grid text-center w-full">
@@ -738,9 +738,9 @@
             </div>
         </div>
     </div>
-<div style="background-color: #e2e2e2; height:12px" class=" h-[12px]">
-    
-</div>
+    <div style="background-color: #e2e2e2; height:12px" class=" h-[12px]">
+
+    </div>
 </div>
 @*<div class="loader" id="loader-id">
         <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
@@ -1179,7 +1179,6 @@
                     if (ResponseModel != null && ResponseModel.RecommendedHostModel != null && ResponseModel.RecommendedHostModel.length > 0) {
                         let recommendedHostContentHTML = '';
                         const recommendedHostContentId = document.getElementById('recommended-host-content-id');
-
                         for (let i = 0; i < ResponseModel.RecommendedHostModel.length; i++) {
                             const host = ResponseModel.RecommendedHostModel[i];
                             const hostImage = host.HostImage || '~/Content/assets/images/customer/demo-image.jpeg';
@@ -1193,7 +1192,7 @@
                                             </div>
 
                                             <div style="background-color:rgba(0, 0, 0, 0.70); left:0.25px; border-radius: 0 0 2px 2px;" class="absolute w-[112px] h-[35px] flex flex-col right-[2px] left-[2px] py-[2px] px-[4px]">
-                                                <strong class="text-[12px] text-[#FFFFFF] font-bold text-center text-clip">${host.HostName}</strong>
+                                                <strong class="text-[12px] text-[#FFFFFF] font-bold text-center text-clip">${host.HostNameJapanese ? host.HostNameJapanese : (host.HostName ? host.HostName : '')}</strong>
                                                 <p style="font-weight:400; line-height:100%" class="flex items-center gap-1 text-[10px] justify-center text-[#FFFFFF] text-clip">
                                                     <img src="${clubLogo}" alt="clublogo" class="h-[11px] w-[11px] rounded-full" />
                                                    <span class="text-clip" style="width:inherit"> ${host.ClubNameEnglish}</span>

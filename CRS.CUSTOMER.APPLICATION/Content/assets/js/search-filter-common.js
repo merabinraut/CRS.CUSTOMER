@@ -90,7 +90,9 @@ function GetPreferenceFilterPopUp() {
 
         // Set checkbox states
         for (var checkboxId in savedData.checkboxStates) {
-            document.getElementById(checkboxId).checked = savedData.checkboxStates[checkboxId];
+            if (document.getElementById(checkboxId)) {
+                document.getElementById(checkboxId).checked = savedData.checkboxStates[checkboxId];
+            }
         }
         PreferenceFilterCommon();
         var ClubDetailMapData = localStorage.getItem('ClubDetailMapData');
@@ -283,7 +285,7 @@ function PreferenceFilterCommon() {
                 if (timeValueElement) {
                     var timeValue = timeValueElement.getAttribute('data-info');
                     var selectedTimeDiv = document.getElementById("selected-time-id");
-                    selectedTimeDiv.innerText = timeValue.trim();
+                    selectedTimeDiv.innerText = timeValueElement.innerHTML;
                     $('#time-id').val(timeValue.trim());
                 }
             }
@@ -645,13 +647,17 @@ function InitiateDateTimeFilterPopupFunction() {
         // Set input field values
         for (var inputId in savedData.inputValues) {
             if (inputId != "" && inputId != '') {
-                document.getElementById(inputId).value = savedData.inputValues[inputId];
+                if (document.getElementById(inputId)) {
+                    document.getElementById(inputId).value = savedData.inputValues[inputId];
+                }
             }
         }
 
         // Set checkbox states
         for (var checkboxId in savedData.checkboxStates) {
-            document.getElementById(checkboxId).checked = savedData.checkboxStates[checkboxId];
+            if (document.getElementById(checkboxId)) {
+                document.getElementById(checkboxId).checked = savedData.checkboxStates[checkboxId];
+            }
         }
         DateTimeFilterCommon();
         DisableLoaderFunction();
