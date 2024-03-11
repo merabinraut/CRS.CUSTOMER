@@ -20,6 +20,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string TransactionStatus { get; set; }
         public string ClubNameEng { get; set; }
         public string ClubNameJp { get; set; }
+        public string GroupName { get; set; }
         public string Price { get; set; }
         public string CustomerId { get; set; }
         public string ClubLogo { get; set; }
@@ -39,6 +40,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string TransactionStatus { get; set; }
         public string ClubNameEng { get; set; }
         public string ClubNameJp { get; set; }
+        public string GroupName { get; set; }
         public string Price { get; set; }
         public string CustomerId { get; set; }
         public string ClubLogo { get; set; }
@@ -57,6 +59,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string TransactionStatus { get; set; }
         public string ClubNameEng { get; set; }
         public string ClubNameJp { get; set; }
+        public string GroupName { get; set; }
         public string Price { get; set; }
         public string CustomerId { get; set; }
         public string ClubLogo { get; set; }
@@ -76,6 +79,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string TransactionStatus { get; set; }
         public string ClubNameEng { get; set; }
         public string ClubNameJp { get; set; }
+        public string GroupName { get; set; }
         public string Price { get; set; }
         public string CustomerId { get; set; }
         public string ClubLogo { get; set; }

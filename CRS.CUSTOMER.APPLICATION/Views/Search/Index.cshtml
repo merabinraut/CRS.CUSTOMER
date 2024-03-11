@@ -29,12 +29,12 @@
 <div class="relative">
     <!-- Nav bar -->
     <div class="flex items-center border-t-[2px] border-t-[#C8B477] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
-        <div class="flex gap-2 items-center absolute top-[12px] left-4 text-sm">
+        <div class="flex gap-2 items-center absolute top-[12px] left-4 text-sm" onclick="window.location.href='/LocationManagement/Index?LocationId=@FilteredLocationId'">
             <svg xmlns="http://www.w3.org/2000/svg"
                  width="22" height="23" viewBox="0 0 22 23" fill="none">
                 <path d="M15.2352 3.24084C14.786 2.79167 14.0618 2.79167 13.6127 3.24084L5.99518 10.8583C5.63768 11.2158 5.63768 11.7933 5.99518 12.1508L13.6127 19.7683C14.0618 20.2175 14.786 20.2175 15.2352 19.7683C15.6843 19.3192 15.6843 18.595 15.2352 18.1458L8.59851 11.5L15.2443 4.85417C15.6843 4.41417 15.6843 3.68084 15.2352 3.24084Z"
                       fill="#BCB08A" />
-            </svg> 戻る
+            </svg> @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
         </div>
         <div class="text-center w-full font-[700] text-[#333] text-sm ">
             検索フィルター
@@ -465,8 +465,7 @@
                                 {
                                     <div class="grid grid-cols-3 gap-2">
                                         @foreach (var item in Model.ClubModel)
-                                        {
-                                            <a href="#">
+                                        {<a onclick="ClubDetailActionFunction('@item.ClubLocationId', '@item.ClubId')">
                                                 <div class="new-host-card">
                                                     <div class="image">
                                                         <img src="@item.ClubLogo" alt="club-logo" />
@@ -484,7 +483,7 @@
                                         }
                                     </div>
                                     <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-1 ">
-                                        <div class="border-b-[1px] border-[#D75A8B] pb-[1px] ">
+                                        <div class="border-b-[1px] border-[#D75A8B] pb-[1px] " onclick="NewClubRenderFunction()">
                                             続きを見る
                                         </div>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
@@ -513,7 +512,7 @@
                                             foreach (var item in Model.HostModel)
                                             {
                                                 var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
-                                                <div class="hosts-that-match-you @activeClass">
+                                                <div class="hosts-that-match-you @activeClass" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
                                                     <img src="@item.HostLogo" alt="host-logo" />
                                                     <div class="like-host">
                                                         <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
@@ -1395,6 +1394,10 @@
 
         function ClearFunction() {
             window.location.reload();
+        }
+
+                function ClubDetailActionFunction(i, j) {
+            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }
     </script>
     <!--#endregion Button Submit Function-->

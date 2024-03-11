@@ -36,6 +36,12 @@
         border-color: #d75a8b;
         color: #d75a8b;
     }
+
+    .preferance > input[type="checkbox"] + label {
+        background-color: #fff !important;
+        /*  border-color: #d75a8b;*/
+        color: #000 !important;
+    }
 </style>
 <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] px-4 py-[10px] h-[44px]" onclick="history.back()">
     <div class="flex gap-2 items-center absolute top-[12px] text-sm">
@@ -171,7 +177,7 @@
             {
                 var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
                 var activeBoolValue = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? true : false;
-                <div class="hosts-that-match-you @activeClass" style="width:112px; height:154px; border-radius:2px; position:relative; overflow:revert" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'" >
+                <div class="hosts-that-match-you @activeClass" style="width:112px; height:154px; border-radius:2px; position:relative; overflow:revert" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
                     <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
                     @*<div class="like-host" onclick="ToggleBookmark('@item.ClubId','@item.HostId','host' , activeBoolValue)">
                             <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
@@ -337,8 +343,9 @@
                             {
                                 @item.HostName
                             }
-                            else{
-                            @item.HostNameJapanese
+                            else
+                            {
+                                @item.HostNameJapanese
                             }
 
                         </div>

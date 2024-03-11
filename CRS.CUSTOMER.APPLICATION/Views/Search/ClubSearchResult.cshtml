@@ -24,6 +24,12 @@
         border-color: #d75a8b;
         color: #d75a8b;
     }
+
+    .preferance > input[type="checkbox"] + label {
+        background-color: #fff !important;
+        /*  border-color: #d75a8b;*/
+        color: #000 !important;
+    }
 </style>
 <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="history.back()">
     <div class="flex gap-2 items-center absolute top-[12px] text-sm">
@@ -36,7 +42,7 @@
 </div>
 
 <!-- for search button -->
-<div class="bg-[#F1F1F1]  py-[12px]">
+<div class="bg-[#F1F1F1]  py-[12px]" style="background: #E3E3E3">
     <div class="flex flex-row justify-center">
         <div id="" style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.14);width:90%"
              class=" border-[1px] flex flex-col rounded-[8px] border-[#F1F1F1] bg-[#FCF8F9]  h-[196px]  mx-[16px]">
@@ -125,7 +131,7 @@
 
 <!-- divider -->
 <div class="bg-[#F1F1F1] mt-[8px]">
-    <div class="border-t border-b border-[#EDEDED]">
+    <div class="border-t border-b border-[#EDEDED]" style="background:#E3E3E3;">
         <div class="flex mt-[12px]  justify-start mx-[16px] flex-row">
             <div class="  flex flex-row justify-start items-center  ">
                 <div class="flex flex-col">
@@ -150,10 +156,10 @@
                                 </div>
                                 <div class="flex flex-col">
                                     <div class="flex flex-row mt-[7px] justify-center">
-                                        <p style="line-height: 100%;" class="font-[700] text-[10px]">@item.ClubNameEnglish</p>
+                                        <p style="line-height: 100%;" class="font-[700] text-[10px] text-clip">@item.ClubNameEnglish</p>
                                     </div>
                                     <div class="flex flex-row mt-[4px] justify-center">
-                                        <p style="line-height: 100%;" class="font-[400] text-[10px]">@item.ClubNameJapanese</p>
+                                        <p style="line-height: 100%;" class="font-[400] text-[10px] text-clip">@item.ClubNameJapanese</p>
                                     </div>
 
                                 </div>
@@ -189,52 +195,52 @@
                 {
                     <div>
                         <section class="tags flex flex-wrap flex-row pt-3 pb-2 gap-2 px-4 items-center ">
-                         @*   @if (!string.IsNullOrEmpty(item.Tag1))
-                            {
-                                <span style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
-                                    <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
-                                    @item.Tag1
-                                </span>
-                            }*@
-                        <div class=" flex self-center gap-0.5 no-scrollbar " style="overflow-x:scroll">
-                            @if (!string.IsNullOrEmpty(item.Tag1))
-                            {
-                                <span style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
-                                    <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
-                                    @item.Tag1
-                                </span>
-                            }
+                            @*   @if (!string.IsNullOrEmpty(item.Tag1))
+                                {
+                                    <span style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
+                                        <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
+                                        @item.Tag1
+                                    </span>
+                                }*@
+                            <div class=" flex self-center gap-0.5 no-scrollbar " style="overflow-x:scroll; white-space:nowrap">
+                                @if (!string.IsNullOrEmpty(item.Tag1))
+                                {
+                                    <span style="border-radius: 2px; border:1px solid #F6F6F6; font-size:10px" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
+                                        <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
+                                        @item.Tag1
+                                    </span>
+                                }
 
-                            @if (!string.IsNullOrEmpty(item.Tag2))
-                            {
-                                <span class="  lg:text-[9px] text-xs   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
-                                    @item.Tag2
-                                </span>
-                            }
-                            @if (!string.IsNullOrEmpty(item.Tag3))
-                            {
-                                <span class="  lg:text-[9px] text-xs   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
-                                    @item.Tag3
-                                </span>
-                            }
-                            @if (!string.IsNullOrEmpty(item.Tag4))
-                            {
-                                <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
-                                    @item.Tag4
-                                </span>
-                            }
-                            @if (!string.IsNullOrEmpty(item.Tag5))
-                            {
-                                <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
-                                    @item.Tag5
-                                </span>
-                            }
-                        </div>
+                                @if (!string.IsNullOrEmpty(item.Tag2))
+                                {
+                                    <span class="  lg:text-[9px] text-[10px]   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
+                                        @item.Tag2
+                                    </span>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Tag3))
+                                {
+                                    <span class="  lg:text-[9px] text-[10px]   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
+                                        @item.Tag3
+                                    </span>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Tag4))
+                                {
+                                    <span class="   lg:text-[9px] text-[10px]   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
+                                        @item.Tag4
+                                    </span>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Tag5))
+                                {
+                                    <span class="   lg:text-[9px] text-[10px]   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
+                                        @item.Tag5
+                                    </span>
+                                }
+                            </div>
                         </section>
 
                         <!-- club name -->
                         <section class="w-full flex px-4 pb-2 justify-between ">
-                            <a onClick={goToTop}>
+                            <a onclick="ClubDetailActionFunction('@item.ClubLocationId', '@item.ClubId')">
                                 <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
                                     <div style="border: 1px solid #FAFAFA;"
                                          class="h-12 w-12 rounded-full  bg-primary border overflow-hidden">
@@ -310,7 +316,7 @@
                                     }
                                     for (int i = 0; i < unratedScale; i++)
                                     {
-                                        <img src="~/Content/assets/images/ratingstar-notfilled.svg" class="h-[24px] w-[24px]" alt="unrated" />
+                                        <img src="~/Content/assets/images/ratingstar-notfilled.svg" class="h-[18px] w-[18px]" alt="unrated" />
                                     }
                                 }
                                 <div class=" text-xs scale-110" title="club rating">
@@ -410,7 +416,8 @@
 </div>
 @section scripts
 {
-    <script>function ClubDetailActionFunction(i, j) {
+    <script>
+        function ClubDetailActionFunction(i, j) {
             window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }</script>
 }

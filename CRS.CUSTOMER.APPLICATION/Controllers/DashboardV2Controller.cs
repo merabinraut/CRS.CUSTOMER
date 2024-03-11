@@ -235,7 +235,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 dynamic mappedItem = new System.Dynamic.ExpandoObject();
                 if (!string.IsNullOrEmpty(CurrentUrl))
                 {
-                    CurrentUrl = CurrentUrl + "/LocationManagement/ClubDetail_V2";
+                    if (!CurrentUrl.Contains("/LocationManagement/ClubDetail_V2"))
+                        CurrentUrl += "/LocationManagement/ClubDetail_V2";
                     var parameters = new List<string>();
                     if (!string.IsNullOrEmpty(item.LocationId))
                         parameters.Add($"LocationId={item.LocationId.EncryptParameter()}");
