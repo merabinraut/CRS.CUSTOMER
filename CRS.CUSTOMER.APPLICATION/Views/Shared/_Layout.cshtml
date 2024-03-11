@@ -695,7 +695,7 @@
                     url: '/NotificationManagement/HasUnReadNotification',
                     type: 'POST',
                     success: function (result) {
-                        if (result.HasUnReadNotification) {
+                        if (result.HasUnReadNotification && document.getElementById("notification-bell-id")) {
                             document.getElementById("notification-bell-id").getElementsByTagName("span")[0].style.display = "block";
                         }
                         else {

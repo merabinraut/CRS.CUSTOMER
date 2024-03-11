@@ -693,7 +693,7 @@
     <script src="~/Content/CustomHelper.js"></script>
     <!-- cursol script -->
     <script>
-    function OpenImagePopup(ImageURL) {
+        function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");
@@ -736,11 +736,9 @@
         }
 
         function redirectToSearchPage() {
-
            var locationId = '@ViewBag.LocationId';
-
-            var searchUrl = `/LocationManagement/SearchFilter?locationId=${locationId}`
-
+            //var searchUrl = `/LocationManagement/SearchFilter?locationId=${locationId}`
+            var searchUrl = `/Search/Index?LocationId=${locationId}`;
             window.location.href = searchUrl;
         }
 
@@ -755,13 +753,13 @@
                       location.reload();
                   } else {
                       // Handle failure, e.g., show an error message
-                      console.log('Error: ' + result.message);
+                     // console.log('Error: ' + result.message);
                       location.reload();
                   }
               },
               error: function () {
                   // Handle unexpected errors
-                  console.log('An unexpected error occurred.');
+                  //console.log('An unexpected error occurred.');
                   location.reload();
               }
           });
@@ -778,13 +776,13 @@
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                        //console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                    //console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -800,12 +798,12 @@
          }
     </script>
     <script>
-    const DataStorageFunction = (i, j) => {
+        const DataStorageFunction = (i, j) => {
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
         }</script>
     <script>
-    function ClubFunction(i) {
+        function ClubFunction(i) {
             $('#club-pagination-group-id').val(i);
             var form = document.getElementById("club-pagination-form-id");
             form.submit();

@@ -37,9 +37,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dob = !string.IsNullOrEmpty(viewModel.DateOfBirth) ? Convert.ToDateTime(viewModel.DateOfBirth) : DateTime.Now;
             if (!string.IsNullOrEmpty(viewModel.DateOfBirth))
             {
-                viewModel.DOBYear = dob.Year.ToString("D4");
-                viewModel.DOBMonth = dob.Month.ToString("D2");
-                viewModel.DOBDay = dob.Day.ToString("D2");
+                viewModel.DOBYear = dob.Year.ToString("D4") + " 年";
+                viewModel.DOBMonth = dob.Month.ToString("D2") + " 月";
+                viewModel.DOBDay = dob.Day.ToString("D2") + " 日";
             }
             viewModel.PreferredLocation = viewModel.PreferredLocation?.EncryptParameter();
             viewModel.Prefecture = viewModel.Prefecture?.EncryptParameter();
@@ -109,7 +109,55 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 common.Prefecture = PrefectureDDL?.DecryptParameter();
                 if (!string.IsNullOrEmpty(userProfileModel.DOBYear) && !string.IsNullOrEmpty(userProfileModel.DOBMonth) && !string.IsNullOrEmpty(userProfileModel.DOBDay))
                 {
-                    common.DateOfBirth = string.Concat(userProfileModel.DOBYear, "-", userProfileModel.DOBMonth, "-", userProfileModel.DOBDay);
+
+
+                    if (userProfileModel.DOBYear.Contains("年"))
+                    {
+                        userProfileModel.DOBYear = userProfileModel.DOBYear.Replace("年", "");
+                    }
+                    if (userProfileModel.DOBMonth.Contains("月"))
+                    {
+                        userProfileModel.DOBMonth = userProfileModel.DOBMonth.Replace("月", "");
+                    }
+                    if (userProfileModel.DOBDay.Contains("日"))
+                    {
+                        userProfileModel.DOBDay = userProfileModel.DOBDay.Replace("日", "");
+                    }
+                    int countYear = userProfileModel.DOBYear.Count(char.IsDigit);
+                    if (countYear < 4 || countYear >4)
+                    {
+                        AddNotificationMessage(new NotificationModel()
+                        {
+                            NotificationType = NotificationMessage.SUCCESS,
+                            Message = "長さは 4 文字である必要があります",
+                            Title = NotificationMessage.SUCCESS.ToString()
+                        });
+                        return RedirectToAction("Index");
+                    }
+                    int countMonth = userProfileModel.DOBMonth.Count(char.IsDigit);
+                    if (countMonth > 2 )
+                    {
+                        AddNotificationMessage(new NotificationModel()
+                        {
+                            NotificationType = NotificationMessage.SUCCESS,
+                            Message = "長さは 2 文字である必要があります",
+                            Title = NotificationMessage.SUCCESS.ToString()
+                        });
+                        return RedirectToAction("Index");
+                    }
+
+                    int countDay = userProfileModel.DOBDay.Count(char.IsDigit);
+                    if (countDay < 2)
+                    {
+                        AddNotificationMessage(new NotificationModel()
+                        {
+                            NotificationType = NotificationMessage.SUCCESS,
+                            Message = "長さは 2 文字である必要があります",
+                            Title = NotificationMessage.SUCCESS.ToString()
+                        });
+                        return RedirectToAction("Index");
+                    }
+                    common.DateOfBirth = string.Concat(userProfileModel.DOBYear.Trim(), "-", userProfileModel.DOBMonth.Trim(), "-", userProfileModel.DOBDay.Trim());
                 }
                 CommonDbResponse dbresp = _business.UpdateUserProfileDetail(common);
                 if (dbresp.Code == ResponseCode.Success)

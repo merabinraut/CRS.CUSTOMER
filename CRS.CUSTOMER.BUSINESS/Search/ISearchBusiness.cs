@@ -9,5 +9,8 @@ namespace CRS.CUSTOMER.BUSINESS.Search
         List<SearchFilterClubDetailCommon> ClubPreferenceFilter(ClubPreferenceFilterRequest Request);
         List<HostPreferenceFilterResponse> HostPreferenceFilter(HostPreferenceFilterRequest Request);
         List<SearchFilterClubDetailCommon> ClubFilterViewDateTimeAndOthers(ClubDateTimeAndOtherFilterRequest Request);
+        #region Club map details common
+        List<ClubMapDetailCommon> GetClubMapDetail(string LocationId = "");
+        #endregion
     }
 }

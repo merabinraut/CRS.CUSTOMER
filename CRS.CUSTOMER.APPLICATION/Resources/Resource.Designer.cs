@@ -295,6 +295,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Book Now.
+        /// </summary>
+        public static string BookNowSearch {
+            get {
+                return ResourceManager.GetString("BookNowSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Book With This Plan.
         /// </summary>
         public static string BookWithThisPlan {

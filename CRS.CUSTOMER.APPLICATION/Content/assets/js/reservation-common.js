@@ -7,10 +7,11 @@
         dataType: 'json',
         data: {
             ClubId,
-            SelectedDate,
+            SelectedDate: $('#date-id').val(),
             SelectedHost
         },
         success: function (data) {
+            $("#stickey_id").css("display","none")
             if (!data || data.Code !== 0) {
                 toastr.info(data?.Message);
                 DisableLoaderFunction();
@@ -187,10 +188,12 @@ function initPeopleFunction() {
 /////////////////////////////////////////////////////////////////////// People JS ///////////////////////////////////////////////////////////////////////
 
 function CloseInitiatedClubReservationFunction() {
+    $("#stickey_id").css("display", "")
     var element = document.getElementById('drawer-date');
     element.classList.add('translate-y-full');
     var removeElement = document.getElementById("ui-datepicker-div")
     removeElement.style.setProperty("display", "none", "important");
+    
 }
 
 function SubmitClubReservationFunction() {

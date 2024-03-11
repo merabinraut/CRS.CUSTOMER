@@ -204,7 +204,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         //}
 
 
-        public ActionResult ClubDetail_V2(string LocationId, string ClubId, string[] ScheduleFilterDate = null)
+        public ActionResult ClubDetail_V2(string LocationId, string ClubId, string ScheduleFilterDate = null)
         {
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
@@ -214,7 +214,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             string sFD = null;//!string.IsNullOrEmpty(ScheduleFilterDate[0]) ? ScheduleFilterDate : null;
             if (ScheduleFilterDate != null)
             {
-                sFD = ScheduleFilterDate[0].ToString();
+                //sFD = ScheduleFilterDate;
+                DateTime date = DateTime.ParseExact(ScheduleFilterDate, "yyyy年 M月", null);
+                sFD = date.ToString("yyyy/MM");
             }
             if (string.IsNullOrEmpty(cId) || string.IsNullOrEmpty(lId))
             {
@@ -277,12 +279,36 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             var dbNoticeResponseInfo = _business.GetNoticeByClubId(cId);
             responseModel.GetNoticeByClubId = dbNoticeResponseInfo.MapObjects<NoticeModel>();
+            foreach (var notice_item in responseModel.GetNoticeByClubId)
+            {
+                DateTime date = DateTime.ParseExact(notice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
+                // Get the day name
+                notice_item.Day = date.ToString("dddd");
+            }
             var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);
             responseModel.GetClubBasicInformation = dbBasicInfoResponse.MapObject<ClubBasicInformationModel>();
             var dbAllNoticeResponse = _business.GetAllNoticeTabList(cId);
             responseModel.GetAllNoticeTabList = dbAllNoticeResponse.MapObjects<AllNoticeModel>();
+            foreach (var allNotice_item in responseModel.GetAllNoticeTabList)
+            {
+                // Parse the date string using the specified format and culture
+                DateTime date = DateTime.ParseExact(allNotice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
+                // Get the day name
+                allNotice_item.DayName = date.ToString("dddd");
+
+            }
             var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);
             responseModel.GetAllScheduleTabList = dbScheduleResponse.MapObjects<AllScheduleModel>();
+            foreach (var item_schedule in responseModel.GetAllScheduleTabList)
+            {
+                DateTime date = DateTime.ParseExact(item_schedule.ScheduleDate, "yyyy年MM月dd日", null);
+                string formattedDayOfWeek = date.ToString("dd");
+
+                // Get the day name (e.g., "Sunday")
+                string dayName = date.ToString("ddd");
+                item_schedule.Day = formattedDayOfWeek;
+                item_schedule.DayName = dayName;
+            }
             responseModel.GetScheduleDDL = GetScheduleList();
             var dbPlanDetailRes = _business.GetPlanDetail(cId);
             responseModel.GetPlanDetailList = dbPlanDetailRes.MapObjects<PlanDetailModel>();
@@ -298,6 +324,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.PlanGroup1 = groupedResults.MapObjects<PlanGroup>();
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
+            ViewBag.SFilterDate = ScheduleFilterDate;
+            ViewBag.ClubId = ClubId;
+            ViewBag.LocationId = LocationId;
             return View(responseModel);
         }
         private List<ScheduleDDLModel> GetScheduleList()
@@ -656,149 +685,149 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region "Search Filter"
-        public ActionResult SearchFilter(string locationId = "")
-        {
-            var FileLocationPath = "";
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
-                FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+        //public ActionResult SearchFilter(string locationId = "")
+        //{
+        //    var FileLocationPath = "";
+        //    if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
+        //        FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
 
-            var Model = new SearchFilterViewModel();
-            ViewBag.LocationId = locationId;
-            ViewBag.LocationDDList = ApplicationUtilities.LoadDropdownList("LOCATIONDDL") as Dictionary<string, string>;
-            ViewBag.ClubCategory = ApplicationUtilities.LoadDropdownList("CLUBCATEGORY") as Dictionary<string, string>;
-            ViewBag.HostRanks = ApplicationUtilities.LoadDropdownList("HOSTRANK") as Dictionary<string, string>;
-            ViewBag.HostHeights = ApplicationUtilities.LoadDropdownList("HOSTHEIGHT") as Dictionary<string, string>;
-            ViewBag.HostBloodTypes = ApplicationUtilities.LoadDropdownList("HOSTBLOODTYPE") as Dictionary<string, string>;
-            ViewBag.HostLiquorStrengths = ApplicationUtilities.LoadDropdownList("LIQUORSTRENGTH") as Dictionary<string, string>;
-            ViewBag.HostPreviousOccupations = ApplicationUtilities.LoadDropdownList("HOSTPREVIOUSOCCUPATIONS") as Dictionary<string, string>;
-            ViewBag.AgeRangeDDL = ApplicationUtilities.LoadDropdownList("AGERANGEDDL") as Dictionary<string, string>;
-            ViewBag.HostConstellationGroup = _commonManagementBuss.GetDDL("023");
-            var clubListDBResponse = _searchBuss.GetNewClubList();
-            if (clubListDBResponse.Count > 0)
-            {
-                Model.ClubModel = clubListDBResponse.MapObjects<SearchFilterViewNewClubModel>();
-                Model.ClubModel.ForEach(x => x.ClubId = x.ClubId?.EncryptParameter());
-                Model.ClubModel.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
-                Model.ClubModel.ForEach(x => x.ClubLocationId = x.ClubLocationId?.EncryptParameter());
-            }
-            ViewBag.ActionPageName = "SearchNavMenu";
-            ViewBag.PageTitle = Resources.Resource.Search_Filter;
-            List<RecommendationLocationModel> locationsList = new List<RecommendationLocationModel>();
-            var locationServiceResp = _dashboardBuss.GetLocationList();
-            if (locationServiceResp != null && locationServiceResp.Count > 0)
-            {
-                locationServiceResp.ForEach(x => x.LocationID = x.LocationID?.EncryptParameter());
-                locationServiceResp.ForEach(x => x.LocationImage = FileLocationPath + x.LocationImage);
-            }
-            foreach (var item in locationServiceResp)
-            {
-                locationsList.Add(new RecommendationLocationModel { name = item.LocationName, lat = item.Latitude, lng = item.Longitude, id = item.LocationID });
-            }
-            ViewBag.JsonLocation = JsonConvert.SerializeObject(locationsList);
-            return View(Model);
-        }
-        #endregion
+        //    var Model = new SearchFilterViewModel();
+        //    ViewBag.LocationId = locationId;
+        //    ViewBag.LocationDDList = ApplicationUtilities.LoadDropdownList("LOCATIONDDL") as Dictionary<string, string>;
+        //    ViewBag.ClubCategory = ApplicationUtilities.LoadDropdownList("CLUBCATEGORY") as Dictionary<string, string>;
+        //    ViewBag.HostRanks = ApplicationUtilities.LoadDropdownList("HOSTRANK") as Dictionary<string, string>;
+        //    ViewBag.HostHeights = ApplicationUtilities.LoadDropdownList("HOSTHEIGHT") as Dictionary<string, string>;
+        //    ViewBag.HostBloodTypes = ApplicationUtilities.LoadDropdownList("HOSTBLOODTYPE") as Dictionary<string, string>;
+        //    ViewBag.HostLiquorStrengths = ApplicationUtilities.LoadDropdownList("LIQUORSTRENGTH") as Dictionary<string, string>;
+        //    ViewBag.HostPreviousOccupations = ApplicationUtilities.LoadDropdownList("HOSTPREVIOUSOCCUPATIONS") as Dictionary<string, string>;
+        //    ViewBag.AgeRangeDDL = ApplicationUtilities.LoadDropdownList("AGERANGEDDL") as Dictionary<string, string>;
+        //    ViewBag.HostConstellationGroup = _commonManagementBuss.GetDDL("023");
+        //    var clubListDBResponse = _searchBuss.GetNewClubList();
+        //    if (clubListDBResponse.Count > 0)
+        //    {
+        //        Model.ClubModel = clubListDBResponse.MapObjects<SearchFilterViewNewClubModel>();
+        //        Model.ClubModel.ForEach(x => x.ClubId = x.ClubId?.EncryptParameter());
+        //        Model.ClubModel.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
+        //        Model.ClubModel.ForEach(x => x.ClubLocationId = x.ClubLocationId?.EncryptParameter());
+        //    }
+        //    ViewBag.ActionPageName = "SearchNavMenu";
+        //    ViewBag.PageTitle = Resources.Resource.Search_Filter;
+        //    List<RecommendationLocationModel> locationsList = new List<RecommendationLocationModel>();
+        //    var locationServiceResp = _dashboardBuss.GetLocationList();
+        //    if (locationServiceResp != null && locationServiceResp.Count > 0)
+        //    {
+        //        locationServiceResp.ForEach(x => x.LocationID = x.LocationID?.EncryptParameter());
+        //        locationServiceResp.ForEach(x => x.LocationImage = FileLocationPath + x.LocationImage);
+        //    }
+        //    foreach (var item in locationServiceResp)
+        //    {
+        //        locationsList.Add(new RecommendationLocationModel { name = item.LocationName, lat = item.Latitude, lng = item.Longitude, id = item.LocationID });
+        //    }
+        //    ViewBag.JsonLocation = JsonConvert.SerializeObject(locationsList);
+        //    return View(Model);
+        //}
+        //#endregion
 
-        #region "Club Filter"
-        public ActionResult ClubFilter(string SearchText = "", string AgentId = "", string LocationId = "",
-                                            string ClubCategory = "", string Shift = "")
-        {
-            var culture = Request.Cookies["culture"]?.Value;
-            culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
-            var FileLocationPath = "";
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
-                FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+        //#region "Club Filter"
+        //public ActionResult ClubFilter(string SearchText = "", string AgentId = "", string LocationId = "",
+        //                                    string ClubCategory = "", string Shift = "")
+        //{
+        //    var culture = Request.Cookies["culture"]?.Value;
+        //    culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
+        //    var FileLocationPath = "";
+        //    if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
+        //        FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
 
-            var RequestModel = new ClubSearchManagementRequestModel()
-            {
-                SearchText = SearchText,
-                AgentId = AgentId?.DecryptParameter(),
-                LocationId = LocationId?.DecryptParameter(),
-                ClubCategory = ClubCategory?.DecryptParameter(),
-                Shift = Shift,
-                CustomerAgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter()
-            };
+        //    var RequestModel = new ClubSearchManagementRequestModel()
+        //    {
+        //        SearchText = SearchText,
+        //        AgentId = AgentId?.DecryptParameter(),
+        //        LocationId = LocationId?.DecryptParameter(),
+        //        ClubCategory = ClubCategory?.DecryptParameter(),
+        //        Shift = Shift,
+        //        CustomerAgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter()
+        //    };
 
-            var ResponseModel = new List<ClubSearchManagementResponseModel>();
-            var dbRequestCommon = RequestModel.MapObject<ClubSearchManagementRequestCommon>();
-            var dbResponse = _searchBuss.GetSearchedClub(dbRequestCommon);
-            if (dbResponse.Count > 0)
-            {
-                ResponseModel = dbResponse.MapObjects<ClubSearchManagementResponseModel>();
-                foreach (var item in ResponseModel)
-                {
-                    item.ClubId = item.ClubId?.EncryptParameter();
-                    item.LocationId = item.LocationId?.EncryptParameter();
-                    item.ClubLogo = FileLocationPath + item.ClubLogo;
-                    item.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
-                    item.HostGalleryImage = item.HostGalleryImage.Select(x => FileLocationPath + x).ToList();
-                }
-            }
-            ViewBag.LocationId = ResponseModel.FirstOrDefault()?.LocationId;
-            ViewBag.ActionPageName = "SearchNavMenu";
-            ViewBag.PageTitle = Resources.Resource.Search_Filter;
-            var ClubRecommendationResponse = new List<ClubRecommendationListModel>();
-            var clubRecommendationDBResponse = _searchBuss.GetRecommendedClub(LocationId?.DecryptParameter());
-            if (clubRecommendationDBResponse.Count > 0)
-            {
-                ClubRecommendationResponse = clubRecommendationDBResponse.MapObjects<ClubRecommendationListModel>();
-                ClubRecommendationResponse.ForEach(x => x.ClubId = x.ClubId.EncryptParameter());
-                ClubRecommendationResponse.ForEach(x => x.LocationId = x.LocationId.EncryptParameter());
-                ClubRecommendationResponse.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
-            }
-            ViewBag.ClubRecommendationModel = ClubRecommendationResponse;
-            return View(ResponseModel);
-        }
+        //    var ResponseModel = new List<ClubSearchManagementResponseModel>();
+        //    var dbRequestCommon = RequestModel.MapObject<ClubSearchManagementRequestCommon>();
+        //    var dbResponse = _searchBuss.GetSearchedClub(dbRequestCommon);
+        //    if (dbResponse.Count > 0)
+        //    {
+        //        ResponseModel = dbResponse.MapObjects<ClubSearchManagementResponseModel>();
+        //        foreach (var item in ResponseModel)
+        //        {
+        //            item.ClubId = item.ClubId?.EncryptParameter();
+        //            item.LocationId = item.LocationId?.EncryptParameter();
+        //            item.ClubLogo = FileLocationPath + item.ClubLogo;
+        //            item.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
+        //            item.HostGalleryImage = item.HostGalleryImage.Select(x => FileLocationPath + x).ToList();
+        //        }
+        //    }
+        //    ViewBag.LocationId = ResponseModel.FirstOrDefault()?.LocationId;
+        //    ViewBag.ActionPageName = "SearchNavMenu";
+        //    ViewBag.PageTitle = Resources.Resource.Search_Filter;
+        //    var ClubRecommendationResponse = new List<ClubRecommendationListModel>();
+        //    var clubRecommendationDBResponse = _searchBuss.GetRecommendedClub(LocationId?.DecryptParameter());
+        //    if (clubRecommendationDBResponse.Count > 0)
+        //    {
+        //        ClubRecommendationResponse = clubRecommendationDBResponse.MapObjects<ClubRecommendationListModel>();
+        //        ClubRecommendationResponse.ForEach(x => x.ClubId = x.ClubId.EncryptParameter());
+        //        ClubRecommendationResponse.ForEach(x => x.LocationId = x.LocationId.EncryptParameter());
+        //        ClubRecommendationResponse.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
+        //    }
+        //    ViewBag.ClubRecommendationModel = ClubRecommendationResponse;
+        //    return View(ResponseModel);
+        //}
         #endregion
 
         #region "Host Filter"
-        public ActionResult HostFilter(HostSearchManagementRequestModel Request)
-        {
-            var FileLocationPath = "";
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
-                FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-            var ResponseModel = new List<HostSearchManagementResponseModel>();
-            var dbRequestCommon = Request.MapObject<HostSearchManagementRequestCommon>();
-            dbRequestCommon.AgentId = !string.IsNullOrEmpty(dbRequestCommon.AgentId) ? dbRequestCommon.AgentId.DecryptParameter() : null;
-            dbRequestCommon.LocationId = !string.IsNullOrEmpty(dbRequestCommon.LocationId) ? dbRequestCommon.LocationId.DecryptParameter() : null;
-            dbRequestCommon.Rank = !string.IsNullOrEmpty(dbRequestCommon.Rank) ? dbRequestCommon.Rank.DecryptParameter() : null;
-            dbRequestCommon.Height = !string.IsNullOrEmpty(dbRequestCommon.Height) ? dbRequestCommon.Height.DecryptParameter() : null;
-            dbRequestCommon.BloodType = !string.IsNullOrEmpty(dbRequestCommon.BloodType) ? dbRequestCommon.BloodType.DecryptParameter() : null;
-            dbRequestCommon.ZodiacGroup = !string.IsNullOrEmpty(dbRequestCommon.ZodiacGroup) ? dbRequestCommon.ZodiacGroup.DecryptParameter() : null;
-            dbRequestCommon.LiquorStrength = !string.IsNullOrEmpty(dbRequestCommon.LiquorStrength) ? dbRequestCommon.LiquorStrength.DecryptParameter() : null;
-            dbRequestCommon.PreviousOccupation = !string.IsNullOrEmpty(dbRequestCommon.PreviousOccupation) ? dbRequestCommon.PreviousOccupation.DecryptParameter() : null;
-            dbRequestCommon.Handsomeness = !string.IsNullOrEmpty(dbRequestCommon.Handsomeness) ? dbRequestCommon.Handsomeness.DecryptParameter() : null;
-            dbRequestCommon.AgeRange = !string.IsNullOrEmpty(dbRequestCommon.AgeRange) ? dbRequestCommon.AgeRange.DecryptParameter() : null;
-            var dbResponse = _searchBuss.GetSearchedHost(dbRequestCommon);
-            if (dbResponse.Count > 0)
-            {
-                ResponseModel = dbResponse.MapObjects<HostSearchManagementResponseModel>();
-                foreach (var item in ResponseModel)
-                {
-                    item.ClubId = item.ClubId?.EncryptParameter();
-                    item.HostId = item.HostId?.EncryptParameter();
-                    item.LocationId = item.LocationId?.EncryptParameter();
-                    item.HostImage = FileLocationPath + item.HostImage;
-                    item.ClubLogo = FileLocationPath + item.ClubLogo;
-                }
-            }
-            ViewBag.LocationId = ResponseModel.FirstOrDefault()?.LocationId;
-            ViewBag.ActionPageName = "SearchNavMenu";
-            ViewBag.PageTitle = Resources.Resource.Search_Filter;
-            var HostRecommendationResponse = new List<HostRecommendationListModel>();
-            var hostRecommendationDBResponse = _searchBuss.GetRecommendedHost(Request.LocationId?.DecryptParameter());
-            if (hostRecommendationDBResponse.Count > 0)
-            {
-                HostRecommendationResponse = hostRecommendationDBResponse.MapObjects<HostRecommendationListModel>();
-                HostRecommendationResponse.ForEach(x => x.ClubId = x.ClubId.EncryptParameter());
-                HostRecommendationResponse.ForEach(x => x.HostId = x.HostId.EncryptParameter());
-                HostRecommendationResponse.ForEach(x => x.LocationId = x.LocationId.EncryptParameter());
-                HostRecommendationResponse.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
-                HostRecommendationResponse.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
-            }
-            ViewBag.HostRecommendationModel = HostRecommendationResponse;
-            return View(ResponseModel);
-        }
+        //public ActionResult HostFilter(HostSearchManagementRequestModel Request)
+        //{
+        //    var FileLocationPath = "";
+        //    if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
+        //        FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+        //    var ResponseModel = new List<HostSearchManagementResponseModel>();
+        //    var dbRequestCommon = Request.MapObject<HostSearchManagementRequestCommon>();
+        //    dbRequestCommon.AgentId = !string.IsNullOrEmpty(dbRequestCommon.AgentId) ? dbRequestCommon.AgentId.DecryptParameter() : null;
+        //    dbRequestCommon.LocationId = !string.IsNullOrEmpty(dbRequestCommon.LocationId) ? dbRequestCommon.LocationId.DecryptParameter() : null;
+        //    dbRequestCommon.Rank = !string.IsNullOrEmpty(dbRequestCommon.Rank) ? dbRequestCommon.Rank.DecryptParameter() : null;
+        //    dbRequestCommon.Height = !string.IsNullOrEmpty(dbRequestCommon.Height) ? dbRequestCommon.Height.DecryptParameter() : null;
+        //    dbRequestCommon.BloodType = !string.IsNullOrEmpty(dbRequestCommon.BloodType) ? dbRequestCommon.BloodType.DecryptParameter() : null;
+        //    dbRequestCommon.ZodiacGroup = !string.IsNullOrEmpty(dbRequestCommon.ZodiacGroup) ? dbRequestCommon.ZodiacGroup.DecryptParameter() : null;
+        //    dbRequestCommon.LiquorStrength = !string.IsNullOrEmpty(dbRequestCommon.LiquorStrength) ? dbRequestCommon.LiquorStrength.DecryptParameter() : null;
+        //    dbRequestCommon.PreviousOccupation = !string.IsNullOrEmpty(dbRequestCommon.PreviousOccupation) ? dbRequestCommon.PreviousOccupation.DecryptParameter() : null;
+        //    dbRequestCommon.Handsomeness = !string.IsNullOrEmpty(dbRequestCommon.Handsomeness) ? dbRequestCommon.Handsomeness.DecryptParameter() : null;
+        //    dbRequestCommon.AgeRange = !string.IsNullOrEmpty(dbRequestCommon.AgeRange) ? dbRequestCommon.AgeRange.DecryptParameter() : null;
+        //    var dbResponse = _searchBuss.GetSearchedHost(dbRequestCommon);
+        //    if (dbResponse.Count > 0)
+        //    {
+        //        ResponseModel = dbResponse.MapObjects<HostSearchManagementResponseModel>();
+        //        foreach (var item in ResponseModel)
+        //        {
+        //            item.ClubId = item.ClubId?.EncryptParameter();
+        //            item.HostId = item.HostId?.EncryptParameter();
+        //            item.LocationId = item.LocationId?.EncryptParameter();
+        //            item.HostImage = FileLocationPath + item.HostImage;
+        //            item.ClubLogo = FileLocationPath + item.ClubLogo;
+        //        }
+        //    }
+        //    ViewBag.LocationId = ResponseModel.FirstOrDefault()?.LocationId;
+        //    ViewBag.ActionPageName = "SearchNavMenu";
+        //    ViewBag.PageTitle = Resources.Resource.Search_Filter;
+        //    var HostRecommendationResponse = new List<HostRecommendationListModel>();
+        //    var hostRecommendationDBResponse = _searchBuss.GetRecommendedHost(Request.LocationId?.DecryptParameter());
+        //    if (hostRecommendationDBResponse.Count > 0)
+        //    {
+        //        HostRecommendationResponse = hostRecommendationDBResponse.MapObjects<HostRecommendationListModel>();
+        //        HostRecommendationResponse.ForEach(x => x.ClubId = x.ClubId.EncryptParameter());
+        //        HostRecommendationResponse.ForEach(x => x.HostId = x.HostId.EncryptParameter());
+        //        HostRecommendationResponse.ForEach(x => x.LocationId = x.LocationId.EncryptParameter());
+        //        HostRecommendationResponse.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
+        //        HostRecommendationResponse.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
+        //    }
+        //    ViewBag.HostRecommendationModel = HostRecommendationResponse;
+        //    return View(ResponseModel);
+        //}
         #endregion
     }
 }
