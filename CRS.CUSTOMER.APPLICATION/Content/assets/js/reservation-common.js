@@ -11,7 +11,7 @@
             SelectedHost
         },
         success: function (data) {
-            $("#stickey_id").css("display","none")
+            $("#stickey_id").css("display", "none")
             if (!data || data.Code !== 0) {
                 toastr.info(data?.Message);
                 DisableLoaderFunction();
@@ -160,7 +160,7 @@ function initPeopleFunction() {
             }
         });
     });
-  
+
     document.querySelectorAll('.peopleList').forEach(item => {
         item.addEventListener('click', event => {
             document.querySelectorAll('.peopleList').forEach(item => {
@@ -174,7 +174,7 @@ function initPeopleFunction() {
                 var selectedPeopleDiv = document.getElementById("selected-noofpeople-id");
                 selectedPeopleDiv.innerText = peopleValue.trim();
                 $('#noofpeople-id').val(peopleValue.trim());
-                
+
             }
             if (parseInt($("#selected-noofpeople-id").text()) > 3) {
                 $("#waitingMessageWrapper").css("display", "block");
@@ -193,7 +193,7 @@ function CloseInitiatedClubReservationFunction() {
     element.classList.add('translate-y-full');
     var removeElement = document.getElementById("ui-datepicker-div")
     removeElement.style.setProperty("display", "none", "important");
-    
+
 }
 
 function SubmitClubReservationFunction() {
