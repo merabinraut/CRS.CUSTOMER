@@ -86,6 +86,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string LocationURL { get; set; }
         public string MobileNumber { get; set; }
         public string NoOfPeople { get; set; }
+        public string LocationId { get; set; }
     }
     #region " Reservation History Detail Model"
     public class ReservationHistoryDetailModel

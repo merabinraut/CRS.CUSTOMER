@@ -64,6 +64,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 allItem.ClubId = allItem.ClubId.EncryptParameter();
                 allItem.ReservationId = allItem.ReservationId.EncryptParameter();
                 allItem.CustomerId = allItem.CustomerId.EncryptParameter();
+                allItem.LocationId = allItem.LocationId.EncryptParameter();
             }
             #endregion
             if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
