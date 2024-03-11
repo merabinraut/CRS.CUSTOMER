@@ -204,7 +204,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         //}
 
 
-        public ActionResult ClubDetail_V2(string LocationId, string ClubId, string[] ScheduleFilterDate = null)
+        public ActionResult ClubDetail_V2(string LocationId, string ClubId, string ScheduleFilterDate = null)
         {
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
@@ -214,7 +214,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             string sFD = null;//!string.IsNullOrEmpty(ScheduleFilterDate[0]) ? ScheduleFilterDate : null;
             if (ScheduleFilterDate != null)
             {
-                sFD = ScheduleFilterDate[0].ToString();
+                //sFD = ScheduleFilterDate;
+                DateTime date = DateTime.ParseExact(ScheduleFilterDate, "yyyy年 M月", null);
+                sFD = date.ToString("yyyy/MM");
             }
             if (string.IsNullOrEmpty(cId) || string.IsNullOrEmpty(lId))
             {
@@ -277,10 +279,24 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             var dbNoticeResponseInfo = _business.GetNoticeByClubId(cId);
             responseModel.GetNoticeByClubId = dbNoticeResponseInfo.MapObjects<NoticeModel>();
+            foreach (var notice_item in responseModel.GetNoticeByClubId)
+            {
+                DateTime date = DateTime.ParseExact(notice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
+                // Get the day name
+                notice_item.Day = date.ToString("dddd");
+            }
             var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);
             responseModel.GetClubBasicInformation = dbBasicInfoResponse.MapObject<ClubBasicInformationModel>();
             var dbAllNoticeResponse = _business.GetAllNoticeTabList(cId);
             responseModel.GetAllNoticeTabList = dbAllNoticeResponse.MapObjects<AllNoticeModel>();
+            foreach (var allNotice_item in responseModel.GetAllNoticeTabList)
+            {
+                // Parse the date string using the specified format and culture
+                DateTime date = DateTime.ParseExact(allNotice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
+                // Get the day name
+                allNotice_item.DayName = date.ToString("dddd");
+
+            }
             var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);
             responseModel.GetAllScheduleTabList = dbScheduleResponse.MapObjects<AllScheduleModel>();
             foreach (var item_schedule in responseModel.GetAllScheduleTabList)
@@ -309,6 +325,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = FileLocationPath;
             ViewBag.SFilterDate = ScheduleFilterDate;
+            ViewBag.ClubId = ClubId;
+            ViewBag.LocationId = LocationId;
             return View(responseModel);
         }
         private List<ScheduleDDLModel> GetScheduleList()

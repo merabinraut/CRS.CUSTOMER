@@ -72,10 +72,20 @@
 <!-- section 2 -->
 <div class="px-4 pb-[8px] flex justify-between ">
     <div class="flex gap-[8px]">
-        <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
-            <img src="@Model.ClubLogo"
-                 class="h-[48px] w-[48px] object-cover rounded-full border-[1px] border-[#FAFAFA]" />
-        </div>
+        @if (Model.ClubLogo != null || Model.ClubLogo != "")
+        {
+            <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                <img src="@Model.ClubLogo"
+                     class="h-[48px] w-[48px] object-cover rounded-full border-[1px] border-[#FAFAFA]" />
+            </div>
+        }
+        else
+        {
+            <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                <img src="/Content/assets/images/logo.svg"
+                     class="h-[48px] w-[48px] object-cover rounded-full border-[1px] border-[#FAFAFA]" />
+            </div>
+        }
         <div>
             <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEng</div>
             <div class='text-xs  text-[#404040] '>@Model.ClubNameJp</div>
@@ -188,10 +198,10 @@
 </div>
 <div class="">
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
-        <div class="flex tab-container-plane no-scrollbar bg-white gap-[14px] overflow-x-auto" style="overflow-y:hidden">
-            <button id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap active">店舗トップ</button>
+        <div class="flex tab-container-plane no-scrollbar bg-white gap-[14px] overflow-x-auto">
+            <button id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap ">店舗トップ</button>
             <button id="tab2Button" class="tab-button-plane tab-link  whitespace-nowrap">ホスト</button>
-            <button id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap ">レビュー</button>
+            <button id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap active">レビュー</button>
             <button id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap ">写真</button>
             <button id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap">スケジュール</button>
             <!-- notice button -->
@@ -199,7 +209,7 @@
         </div>
     </div>
 </div>
-<div class="relative" style="padding-bottom:65px">
+<div class="relative">
     <div class="bg-white">
         <div id="tab1" class="tab-content-plane   hidden">
             <Style>
@@ -303,16 +313,16 @@
                                             }
                                             <div class="pl-6">@item.Rank</div>
                                         </div>
-                                        <div class="relative h-[180px] w-[128px]" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                                        <div class="relative h-[180px] w-[128px]">
                                             @if (!string.IsNullOrEmpty(item.HostImage))
                                             {
                                                 <img src="@item.HostImage"
-                                                     class="w-[128px] h-[180px] object-cover rounded-[6px]" />
+                                                     class="w-[128px] h-[180px] object-fill rounded-[6px]" />
                                             }
                                             else
                                             {
                                                 <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                                     class="w-[128px] h-[180px] object-cover rounded-[6px]" />
+                                                     class="w-[128px] h-[180px] object-fill rounded-[6px]" />
                                             }
                                             @if (item.IsBookmarked.Trim().ToUpper() == "Y")
                                             {
@@ -344,17 +354,8 @@
 
                                         </div>
                                         <div class="pt-[5px]">
-                                            <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
-                                            <div class="text-xs  text-charcoalBlack">
-                                                @if (string.IsNullOrEmpty(@item.HostNameJapanese))
-                                                {
-                                                    @item.HostName
-                                                }
-                                                else
-                                                {
-                                                    @item.HostNameJapanese
-                                                }
-                                            </div>
+                                            <div class="text-[10px] font-bold text-primaryDark">@item.HostName</div>
+                                            <div class="text-xs  text-charcoalBlack">@Model.ClubNameEng</div>
                                         </div>
                                         @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
                                         {
@@ -401,7 +402,7 @@
                                     {
                                         <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px]"
                                              style="line-height:20px">
-                                            <div>@item.EventDate (水)</div>
+                                            <div>@item.EventDate ( @item.Day )</div>
                                             <div>@item.EventDescription</div>
                                         </div>
                                         <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
@@ -446,7 +447,7 @@
                                     {
                                         <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px]"
                                              style="line-height:20px">
-                                            <div>@item.EventDate (水)</div>
+                                            <div>@item.EventDate ( @item.Day )</div>
                                             <div>@item.EventTitle</div>
                                         </div>
                                         <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
@@ -865,8 +866,7 @@
                 <!-- <div class="box mt-2"></div> -->
             </div>
             <!-- </div> -->
-            <script>
-    $(document).ready(function () {
+            <script>$(document).ready(function () {
                     $('.store-host-carousel').owlCarousel({
                         margin: 10,
                         loop: true,
@@ -891,26 +891,16 @@
                         @if (!string.IsNullOrEmpty(item.HostImage))
                         {
                             <img src="@item.HostImage"
-                                 class="w-[104px] h-[104px] object-cover rounded-[6px]" />
+                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
                         }
                         else
                         {
                             <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                 class="w-[104px] h-[104px] object-cover rounded-[6px]" />
+                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
                         }
                         <div class="pt-[5px]">
                             <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
-                            <div class="text-xs  text-charcoalBlack">
-                                @if (string.IsNullOrEmpty(@item.HostNameJapanese))
-                                {
-                                    @item.HostName
-                                }
-                                else
-                                {
-                                    @item.HostNameJapanese
-                                }
-
-                            </div>
+                            <div class="text-xs  text-charcoalBlack">@item.HostName</div>
                         </div>
                     </div>
                 }
@@ -940,7 +930,7 @@
                                     }
                                     else
                                     {
-                                        <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                        <img src="~/Content/assets/images/logo.svg"
                                              class="h-[48px] w-[48px] object-cover rounded-full" />
                                     }
                                 </div>
@@ -1166,8 +1156,7 @@
                         <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
                     </div>
                 </div>*@
-            <script>
-    // Function to open a specific modal
+            <script>// Function to open a specific modal
                 function openModal(modalId) {
                     var modal = document.getElementById(modalId);
                     if (modal) {
@@ -1225,10 +1214,16 @@
                     @{
                         foreach (var item in Model.GetScheduleDDL)
                         {
-                            <option value="@item.Value">@item.Text</option>
+                            if (item.Value == ViewBag.SFilterDate)
+                            {
+                                <option value="@item.Value" selected>@item.Text</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+
                         }
-
-
                     }
                 </select>
             </div>
@@ -1239,29 +1234,20 @@
                     for (int i = 0; i < Model.GetAllScheduleTabList.Count; i++)
                     {
                         <div class="flex justify-start items-center gap-[9px]">
-                            <div class="@(i % 2 == 0 ? "bg-[#EFEFEF]" : "bg-[#BFA3B6]") flex  flex-col  basis-0 px-[9px] py-[25px]"
+                            <div class="@(i % 2 == 0 ? "bg-[#EFEFEF]" : "bg-[#BFA3B6]") flex first:flex-1 flex-col  basis-0 px-[9px] py-[25px]"
                                  style="width: 33px;">
                                 <div class="text-[#333333] text-[13px] font-bold text-center leading-[20px]">
                                     @Model.GetAllScheduleTabList[i].Day
                                 </div>
-                                <div class="text-[8px] font-normal leading-0 text-center"> @Model.GetAllScheduleTabList[i].DayName</div>
+                                <div class="text-[8px] font-normal leading-0 text-center">@Model.GetAllScheduleTabList[i].DayName</div>
                             </div>
                             <!-- for image and information -->
                             <div class="flex justify-start gap-[9px] items-center">
                                 @if (Model.GetAllScheduleTabList[i].ScheduleImage != "" || Model.GetAllScheduleTabList[i].ScheduleImage != null)
                                 {
                                     <div class="h-[61px] aspect-square object-cover object-top rounded-[3px]">
-                                        @if (!string.IsNullOrEmpty(@Model.GetAllScheduleTabList[i].ScheduleImage))
-                                        {
-                                            <img style="height:61px; width:61px" src= "@Url.Content("~/Images" + @Model.GetAllScheduleTabList[i].ScheduleImage)"
-                                                 alt="" class="h-[61px] w-[61px] aspect-square object-cover object-top rounded-[3px]">
-                                        }
-                                        @*else
-                                        {
-                                            <img style="height:61px; width:61px" src="@Model.GetAllScheduleTabList[i].ScheduleImage"
-                                                 alt="" class="h-[61px] w-[61px] aspect-square object-cover object-top rounded-[3px]">
-                                        }*@
-
+                                        <img style="height:61px; width:61px" src="@Model.GetAllScheduleTabList[i].ScheduleImage"
+                                             alt="" class="h-[61px] w-[61px] aspect-square object-cover object-top rounded-[3px]">
                                     </div>
                                 }
 
@@ -1356,7 +1342,7 @@
                                 <div class="flex justify-start items-center gap-[5px] ">
                                     <!-- for date -->
                                     <div class="text-[#33333399] opacity-[60%] text-[10px] font-normal leading-[16px] py-[2px]">
-                                        @notice.EventDate (水)
+                                        @notice.EventDate ( @notice.DayName )
                                     </div>
                                     <!-- for badge -->
                                     @if (notice.EventStatus.Trim().ToUpper() == "NEW")
@@ -1390,8 +1376,8 @@
     </div>
 </div>
 <!-- for position stickey at the bottom -->
-<div class="pl-[16px] pr-[10px] pt-[12px] fixed bottom-0 w-full  flex justify-between items-center  bg-[#FAFAFA] "
-     style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000; " id="stickey_id">
+<div class="pl-[16px] pr-[10px] pt-[12px] sticky bottom-0  flex justify-between items-center  bg-[#FAFAFA] "
+     style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px">
     <div>
         <div class="flex justify-center items-center gap-1 pb-1">
             <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">
@@ -1406,7 +1392,7 @@
             }
         </div>
         <div class="bg-[#BCB08A] rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px]">
-            本日空席あり
+            来店予約
         </div>
     </div>
     <!-- for share and map -->
@@ -1635,8 +1621,7 @@
 @section scripts
 {
     <script src="~/Content/CustomHelper.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    <script>document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";
         });
@@ -1655,8 +1640,7 @@
             });
             //localStorage.clear();
         })</script>
-    <script>
-    function ClubReservationActionFunction(i, j, k) {
+    <script>function ClubReservationActionFunction(i, j, k) {
             DataStorageFunction(i, j);
             window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
         }
@@ -1676,13 +1660,13 @@
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        //console.log('Error: ' + result.message);
+                        console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    //console.log('An unexpected error occurred.');
+                    console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -1699,13 +1683,13 @@
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        //console.log('Error: ' + result.message);
+                        console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                   // console.log('An unexpected error occurred.');
+                    console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -1718,8 +1702,7 @@
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "none";
         }</script>
-    <script>
-    const shareButton = document.querySelector("#shareButton");
+    <script>const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -1727,14 +1710,13 @@
                     title: "Share club details",
                     url: shareableLink,
                 }).then(() => {
-                    //console.log('Thanks for sharing!');
+                    console.log('Thanks for sharing!');
                 }).catch(console.error);
             } else {
                 toastr.info('Web Share API is not supported in this browser.');
             }
         });</script>
-    <script>
-    function OpenImagePopup(ImageURL) {
+    <script>function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");
@@ -1749,10 +1731,9 @@
         }</script>
 
     <script>function openModal() {
-            //console.log("test");
+            console.log("test");
         }</script>
-    <script>
-    // Function to open a specific modal
+    <script>// Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -1784,23 +1765,63 @@
             }
         }</script>
 
-    <script>
-    $(document).ready(function () {
+    <script>$(document).ready(function () {
             $("#scheduleDropdown").change(function () {
-                var selectedValue = $(this).val();
+                localStorage.setItem('SelectedDate', $(this).val());
+                var selectedValue = localStorage.getItem('SelectedDate');
+                debugger
                 $.ajax({
-                    url: '/LocationManagement/ClubDetail_V2',
+                    url: '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId',
                     type: 'POST',
                     data: { ScheduleFilterDate: selectedValue },
                     success: function (result) {
-                        window.location.reload();
-                        console.log(result);
+                        window.location.href = '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId';
                     },
                     error: function (error) {
-                        window.location.reload();
-                        console.error(error);
+                        window.location.href = '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId';
                     }
                 });
+            });
+        });</script>
+    <script>$('#notice_id').click('click', function () {
+            var activeElement = document.querySelector('.tab-link.active');
+            if (activeElement) {
+                activeElement.classList.remove('active');
+            }
+            var newActiveElement = document.getElementById('tab6Button');
+            if (newActiveElement) {
+                newActiveElement.classList.add('active');
+                $('#tab6Button').click();
+            }
+        });
+        $('#schedule_id').click('click', function () {
+            var activeElement = document.querySelector('.tab-link.active');
+            if (activeElement) {
+                activeElement.classList.remove('active');
+            }
+            var newActiveElement = document.getElementById('tab6Button');
+            if (newActiveElement) {
+                newActiveElement.classList.add('active');
+                $('#tab5Button').click();
+            }
+        });</script>
+
+    <!--make clicked the tab after reload-->
+    <script>$('.tab-button-plane').click('click', function () {
+            var id = $(this).attr('id');
+            var name = $(this).text().trim();
+            localStorage.setItem("tablink-id", id);
+            localStorage.setItem("tablink-name", name);
+        });
+        $(document).ready(function () {
+            var id = localStorage.getItem("tablink-id");
+            var name = localStorage.getItem("tablink-name");
+            $('.tab-button-plane').each(function (index) {
+                var valueId = $(this).attr('id').trim();
+                var valueName = $(this).text().trim();
+                if (id == valueId && name == valueName) {
+                    $(this).click();
+                }
             });
         });</script>
 
