@@ -308,6 +308,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 string dayName = date.ToString("ddd");
                 item_schedule.Day = formattedDayOfWeek;
                 item_schedule.DayName = dayName;
+                item_schedule.ScheduleImage = FileLocationPath + item_schedule.ScheduleImage;
             }
             responseModel.GetScheduleDDL = GetScheduleList();
             var dbPlanDetailRes = _business.GetPlanDetail(cId);
