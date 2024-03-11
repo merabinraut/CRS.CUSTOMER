@@ -17,7 +17,7 @@
                     <div class="text-[11px] text-[#7E6D5E]">予約するプランを選んでください</div>
                 </div>
             </div>
-            <div onclick="window.location.href='@Url.Action("Index", "Dashboard")'">
+            <div onclick="window.history.go(-4)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
                     <path d="M5.86328 4.69727L4.69531 5.86523L11.8301 13L4.69531 20.1348L5.86328 21.3027L12.998 14.168L20.1328 21.3027L21.3008 20.1348L14.166 13L21.3008 5.86523L20.1328 4.69727L12.998 11.832L5.86328 4.69727Z"
                           fill="#BCB08A" />
@@ -184,7 +184,7 @@
             const [hour, minute] = inputTimeString.split(':').map(Number);
 
             // Log parsed values for debugging
-            console.log('Parsed values:', year, month, day, hour, minute);
+            //console.log('Parsed values:', year, month, day, hour, minute);
 
             // Check for valid values
             if (isNaN(year) || isNaN(month) || isNaN(day) || isNaN(hour) || isNaN(minute)) {
@@ -231,7 +231,8 @@
                     PaymentType = 0;
                 }
                 else {
-                    toastr.info('Payment type is required');
+                    toastr.info('支払い方法が必要です');
+                    //toastr.info('Payment type is required');
                     return false;
                 }
             }

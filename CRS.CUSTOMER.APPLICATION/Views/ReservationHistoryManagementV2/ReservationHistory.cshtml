@@ -4,19 +4,20 @@
     Layout = "~/Views/Shared/_Reservation-Layout.cshtml";
 }
 <style>
-.modalWrapper {
-    background:rgba(27,27,27,0.5);
-    height:100%;
-    z-index:555;
-    position:fixed;
-    top:0px;
-}
-    .modalContentWrapper{
-        display:block;
-        width:100vw;
-        padding:0 16px;
-        top:50%;
-        margin-top:65%
+    .modalWrapper {
+        background: rgba(27,27,27,0.5);
+        height: 100%;
+        z-index: 555;
+        position: fixed;
+        top: 0px;
+    }
+
+    .modalContentWrapper {
+        display: block;
+        width: 100vw;
+        padding: 0 16px;
+        top: 50%;
+        margin-top: 65%
     }
 </style>
 <!DOCTYPE html>
@@ -24,7 +25,7 @@
 <body>
     @Html.AntiForgeryToken()
     <div class="flex items-center border-b-[2px] border-t-[#C8B477] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
-        <div class="flex gap-2 items-center absolute top-[9px] left-4 text-sm text-[#292F33]" onclick="window.location.href='@Url.Action("Index","Dashboard")'">
+        <div class="flex gap-2 items-center absolute top-[9px] left-4 text-sm text-[#292F33]" onclick="window.location.href='@Url.Action("Index","DashboardV2")'">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
                 <path d="M15.2352 3.24084C14.786 2.79167 14.0618 2.79167 13.6127 3.24084L5.99518 10.8583C5.63768 11.2158 5.63768 11.7933 5.99518 12.1508L13.6127 19.7683C14.0618 20.2175 14.786 20.2175 15.2352 19.7683C15.6843 19.3192 15.6843 18.595 15.2352 18.1458L8.59851 11.5L15.2443 4.85417C15.6843 4.41417 15.6843 3.68084 15.2352 3.24084Z"
                       fill="#BCB08A" />
@@ -39,8 +40,8 @@
                 <div class="flex tab-container-plane booking-tab bg-white justify-between w-full text-sm no-scrollbar">
                     <button id="tab1Button" class="tab-button-plane w-max flex-none tab-link  ">予約中</button>
                     <button id="tab2Button" class="tab-button-plane w-max flex-none tab-link pt-0">訪問済み</button>
-                    <button id="tab3Button" class="tab-button-plane w-max flex-none tab-link pt-0 active">キャンセル済</button>
-                    <button id="tab4Button" class="tab-button-plane w-max flex-none tab-link pt-0">全ての予約</button>
+                    <button id="tab3Button" class="tab-button-plane w-max flex-none tab-link pt-0 ">キャンセル済</button>
+                    <button id="tab4Button" class="tab-button-plane w-max flex-none tab-link pt-0 active">全ての予約</button>
                 </div>
             </div>
         </div>
@@ -57,7 +58,7 @@
                                         <div class="h-[82px] w-[82px] relative flex-none">
                                             <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
                                                  class="absolute top-[6px] left-[-5px]" />
-                                            <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] " alt="img" />
+                                            <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] club-border" alt="img" />
                                         </div>
                                         <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                             <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list">
@@ -212,7 +213,7 @@
                                     <div class="h-[82px] w-[82px] relative flex-none">
                                         <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
                                              class="absolute top-[6px] left-[-5px]" />
-                                        <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] " alt="img" />
+                                        <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] club-border" alt="img" />
                                     </div>
                                     <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                         <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list">
@@ -323,25 +324,26 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="py-[6px] px-2" disabled>
+                                    <div class="py-[6px] px-2 club-visited" disabled >
                                         <div class="flex justify-center mb-[2px]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <svg class="club-visited" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
-                                                      fill="#666666" />
+                                                      fill="";
+" />
                                             </svg>
                                         </div>
-                                        <div class="text-[#565656] text-[8px]">
+                                        <div class="text-[8px] ">
                                             時間変更
                                         </div>
                                     </div>
-                                    <div class="py-[6px] px-2" disabled>
+                                    <div class="py-[6px] px-2 club-visited" disabled>
                                         <div class="flex justify-center mb-[2px]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <svg class="club-visited" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M3.25167 4.38089L4.43019 3.19922L8.01261 6.79236L11.5694 3.22607L12.7468 4.40551L9.1889 7.97292L12.7992 11.5918L11.6218 12.7724L8.01261 9.15348L4.37662 12.7992L3.19922 11.6187L6.83409 7.97292L3.25167 4.38089Z"
-                                                      fill="#898783" />
+                                                      fill="" />
                                             </svg>
                                         </div>
-                                        <div class="text-[#565656] text-[8px]">
+                                        <div class="text-[8px]">
                                             キャンセル
                                         </div>
                                     </div>
@@ -361,7 +363,7 @@
                                         <div class="h-[82px] w-[82px] relative flex-none">
                                             <img src="/Content/assets/images/status-cancelled.svg" alt="reserved"
                                                  class="absolute top-[6px] left-[-5px]" />
-                                            <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] " alt="img" />
+                                            <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] club-border " alt="img" />
                                         </div>
                                         <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                             <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list overflow-hidden overflow-x-auto no-scrollbar w-full">
@@ -474,7 +476,7 @@
 
                                         </div>
                                         <div class="py-[6px] px-2">
-                                            <div class="flex justify-center mb-[2px]" onclick="openRedoModal('modal_redo','@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]" onclick="gotoClubDetail('@item.LocationId','@item.ClubId')">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                     <path d="M8 1.5C4.416 1.5 1.5 4.416 1.5 8C1.5 11.584 4.416 14.5 8 14.5C11.584 14.5 14.5 11.584 14.5 8H13.5C13.5009 8.72252 13.3592 9.43811 13.0831 10.1058C12.807 10.7735 12.4019 11.3801 11.891 11.891C11.3801 12.4019 10.7735 12.807 10.1058 13.0831C9.43811 13.3592 8.72252 13.5009 8 13.5C7.27748 13.5009 6.56189 13.3592 5.8942 13.0831C5.22652 12.807 4.61985 12.4019 4.10896 11.891C3.59806 11.3801 3.19297 10.7735 2.91688 10.1058C2.64079 9.43811 2.49912 8.72252 2.5 8C2.49912 7.27748 2.64079 6.56189 2.91688 5.8942C3.19297 5.22652 3.59806 4.61985 4.10896 4.10896C4.61985 3.59806 5.22652 3.19297 5.8942 2.91688C6.56189 2.64079 7.27748 2.49912 8 2.5C8.91612 2.49777 9.81815 2.72548 10.6234 3.16225C11.4287 3.59903 12.1116 4.23091 12.6093 5H10V6H14V2H13V3.86C12.392 3.12248 11.6285 2.52846 10.7641 2.12047C9.89971 1.71249 8.95583 1.50061 8 1.5Z"
                                                           fill="#F89336" />
@@ -512,9 +514,9 @@
                                     <div class="h-[82px] w-[82px] relative flex-none">
                                         <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
                                              class="absolute top-[6px] left-[-5px]" />
-                                        <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] " alt="img" />
+                                        <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] club-border" alt="img" />
                                     </div>
-                                    <div class="" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
+                                    <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                         <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list">
                                             <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
@@ -831,7 +833,7 @@
                 </div>
             </div>
             <div class="px-4 pt-6 pb-6 bg-white  " style="padding-top: 24px; border-radius: 6px 6px 0px 0px;">
-                <div class="text-sm text-[#333] font-bold mb-3">Select Working Hours</div>
+                <div class="text-sm text-[#333] font-bold mb-3">営業時間を選択する</div>
                 <div class=" relative">
                     <div id="reservation_id" value="" hidden></div>
                     <div class="flex justify-center gap-5 items-center h-[171px] py-6 ">
@@ -867,6 +869,7 @@
                         </div>
                         <div class="relative" style="height: 72px;">
                             <div class=" overflow-y-scroll   minute-scroll absolute " style="height: 72px;  top:30%">
+                                <div class="swiper-slide">30</div>
                                 <div class="swiper-slide">00</div>
                                 <div class="swiper-slide">30</div>
                                 <div class="swiper-slide">00</div>
@@ -891,8 +894,8 @@
         </div>
     </div>
     <!--warning pop up modal-->
-    <div id="modal2" class="modal h-screen "    style="display: none; position: fixed; top: 50%; width: 100%;  z-index: 500; background: rgba(27, 27, 27, 0.50);">
-        <div class="modal-content mx-auto" style="width:90%" >
+    <div id="modal2" class="modal h-screen " style="display: none; position: fixed; top: 50%; width: 100%;  z-index: 500; background: rgba(27, 27, 27, 0.50);">
+        <div class="modal-content mx-auto" style="width:90%">
             <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
                 <span class=" absolute  z-130 text-[#fff] text-[28px] top-0 cursor-pointer right-3" onclick="closeModal('modal2')"
                       style="top:-49px">&times;</span>
@@ -977,8 +980,8 @@
         </div>
     </div>
     <!--delete pop up modal-->
-    <div id="modal_delete" class="modal" style="display:none">
-        <div class="modal-content">
+    <div id="modal_delete" class="modal modalWrapper" style="display:none">
+        <div class="modal-content modalContentWrapper">
             <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
                 <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeDeleteModal('modal_delete')"
                       style="top:-49px">&times;</span>
@@ -1006,14 +1009,12 @@
         </div>
     </div>
     <!--modal 2 pop  up-->
-    <script>
-        function openModal2(modalid) {
+    <script>function openModal2(modalid) {
             var modal = document.getElementById(modalid);
             if (modal) {
                 modal.style.display = "block";
             }
-        }
-    </script>
+        }</script>
     <script>function closeDeleteModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -1056,6 +1057,9 @@
             if (modal) {
                 modal.style.display = "block";
             }
+        }
+        function gotoClubDetail(locationId, clubId) {
+            window.location.href = '/LocationManagement/ClubDetail_V2?LocationId=' + locationId + '&ClubId=' + clubId;
         }
         function RedoReservation() {
             var reservationId = $('#redo_id').val();
@@ -1183,7 +1187,7 @@
         //Function to handle hour value
         function handleHour(value) {
             hour = value;
-            //console.log('Hour:', hour);
+            ////console.log('Hour:', hour);
         }
         // Function to handle minute value
         function handleMinute(value) {

@@ -7,7 +7,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     {
         public ActionResult Index(string Id = "")
         {
-            if (string.IsNullOrEmpty(Id)) return RedirectToAction("Dashboard", "Home");
+            if (string.IsNullOrEmpty(Id)) return RedirectToAction("DashboardV2", "Home");
             ViewBag.ErrorId = Id;
             return View();
         }

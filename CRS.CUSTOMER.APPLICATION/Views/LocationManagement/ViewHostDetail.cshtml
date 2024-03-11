@@ -45,9 +45,9 @@
 </div>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="@Url.Action("Index","Dashboard")" class="active">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home</a>
+    <a href="@Url.Action("Index","DashboardV2")" class="active">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home</a>
     <i class="las la-angle-right"></i>
-    <a href="@Url.Action("ClubDetail","LocationManagement", new { LocationId = Model.LocationId, ClubId = Model.ClubId })" class="active">@Model.ClubNameJapanese</a>
+    <a href="@Url.Action("ClubDetail_V2","LocationManagement", new { LocationId = Model.LocationId, ClubId = Model.ClubId })" class="active">@Model.ClubNameJapanese</a>
     <i class="las la-angle-right"></i>
     <a href="#">@CRS.CUSTOMER.APPLICATION.Resources.Resource.HostDetail</a>
 
@@ -61,8 +61,8 @@
             {
                 <a href="#">
                     <div class="flex h-[413px] w-[294px] rounded ">
-                        <img class="object-fit rounded" src="@item"
-                             alt="modelimage">
+                        <img class="object-fit rounded object-cover" src="@item"
+                             alt="modelimage" style="width:100%">
                     </div>
                 </a>
             }
@@ -401,17 +401,8 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
 <div class="bg-[#FAFAFA]  py-[10px] mt-4 sticky bottom-0">
     <div class="flex flex-row px-[16px] gap-6  items-center justify-between">
         <div class="flex gap-6 items-center justify-start p-[4px]">
-            <div class="flex justify-center items-center flex-col flex-1">
-                <a href="@Model.LocationURL" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                        <path d="M12 0.5C9.79948 0.5 8 2.26051 8 4.41338C8 5.06051 8.25521 5.72038 8.58333 6.45159C8.91146 7.1828 9.32552 7.95732 9.75 8.67325C10.599 10.1051 11.4583 11.3025 11.4583 11.3025L12 12.0771L12.5417 11.3025C12.5417 11.3025 13.401 10.1051 14.25 8.67325C14.6745 7.95732 15.0885 7.1828 15.4167 6.45159C15.7448 5.72038 16 5.06051 16 4.41338C16 2.26051 14.2005 0.5 12 0.5ZM5.3125 1.76369L0 3.98535V16.1984C0 16.3415 0.145989 16.4383 0.277846 16.3826L5.35417 14.2376L10.6875 16.1943L16 13.9726V8.28599C15.5755 9.08344 15.1042 9.84777 14.6667 10.528V13.1166L11.3333 14.5025V13.4427L10.3542 12.0567C10.25 11.9089 10.1276 11.7331 10 11.5471V14.5637L6 13.0962V3.39427L6.72917 3.65924C6.79427 3.21847 6.91146 2.79299 7.08333 2.39554L5.3125 1.76369ZM12 1.80446C13.4792 1.80446 14.6667 2.96624 14.6667 4.41338C14.6667 4.66561 14.5052 5.26178 14.2083 5.92166C13.9115 6.58153 13.4922 7.33057 13.0833 8.02102C12.5391 8.93822 12.3047 9.26433 12 9.71274C11.6953 9.26433 11.4609 8.93822 10.9167 8.02102C10.5078 7.33057 10.0885 6.58153 9.79167 5.92166C9.49479 5.26178 9.33333 4.66561 9.33333 4.41338C9.33333 2.96624 10.5208 1.80446 12 1.80446ZM4.66667 3.43503V13.1166L1.33333 14.5025V4.8414L4.66667 3.43503ZM12 3.43503C11.4479 3.43503 11 3.87325 11 4.41338C11 4.9535 11.4479 5.39172 12 5.39172C12.5521 5.39172 13 4.9535 13 4.41338C13 3.87325 12.5521 3.43503 12 3.43503Z"
-                              fill="#D75A8B" />
-                    </svg>
-                    <span class="text-[#D75A8B] text-[9px] font-medium">地図</span>
-                </a>
-            </div>
             <div id="shareButton">
-                <div class="flex justify-center items-center flex-col">
+                <div class="flex justify-center items-center flex-col" style="line-height:52%">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <path d="M16.0972 3.05078L15.125 4.02295L17.9905 6.875H11.3438C9.25925 6.875 7.5625 8.57106 7.5625 10.6562C7.5625 12.7414 9.25925 14.4375 11.3438 14.4375H11.6875V13.0625H11.3438C10.0169 13.0625 8.9375 11.9831 8.9375 10.6562C8.9375 9.32938 10.0169 8.25 11.3438 8.25H17.9932L15.1304 11.1128L16.1025 12.085L20.625 7.5625L16.0972 3.05078ZM3.4375 3.4375V18.5625H18.5625V11.6875L17.1875 13.0625V17.1875H4.8125V4.8125H12.2743L13.6493 3.4375H3.4375Z"
                               fill="#D75A8B" />
@@ -419,11 +410,22 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
                     <span class="text-[#D75A8B] text-[9px] font-medium">共有</span>
                 </div>
             </div>
+            <div class="flex justify-center items-center flex-col" style="line-height:48%">
+                <a href="@Model.LocationURL" target="_blank" class="flex justify-center items-center flex-col">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 4C13.7995 4 12 5.76051 12 7.91338C12 8.56051 12.2552 9.22038 12.5833 9.95159C12.9115 10.6828 13.3255 11.4573 13.75 12.1732C14.599 13.6051 15.4583 14.8025 15.4583 14.8025L16 15.5771L16.5417 14.8025C16.5417 14.8025 17.401 13.6051 18.25 12.1732C18.6745 11.4573 19.0885 10.6828 19.4167 9.95159C19.7448 9.22038 20 8.56051 20 7.91338C20 5.76051 18.2005 4 16 4ZM9.3125 5.26369L4 7.48535V19.6984C4 19.8415 4.14599 19.9383 4.27785 19.8826L9.35417 17.7376L14.6875 19.6943L20 17.4726V11.786C19.5755 12.5834 19.1042 13.3478 18.6667 14.028V16.6166L15.3333 18.0025V16.9427L14.3542 15.5567C14.25 15.4089 14.1276 15.2331 14 15.0471V18.0637L10 16.5962V6.89427L10.7292 7.15924C10.7943 6.71847 10.9115 6.29299 11.0833 5.89554L9.3125 5.26369ZM16 5.30446C17.4792 5.30446 18.6667 6.46624 18.6667 7.91338C18.6667 8.16561 18.5052 8.76178 18.2083 9.42166C17.9115 10.0815 17.4922 10.8306 17.0833 11.521C16.5391 12.4382 16.3047 12.7643 16 13.2127C15.6953 12.7643 15.4609 12.4382 14.9167 11.521C14.5078 10.8306 14.0885 10.0815 13.7917 9.42166C13.4948 8.76178 13.3333 8.16561 13.3333 7.91338C13.3333 6.46624 14.5208 5.30446 16 5.30446ZM8.66667 6.93503V16.6166L5.33333 18.0025V8.3414L8.66667 6.93503ZM16 6.93503C15.4479 6.93503 15 7.37325 15 7.91338C15 8.4535 15.4479 8.89172 16 8.89172C16.5521 8.89172 17 8.4535 17 7.91338C17 7.37325 16.5521 6.93503 16 6.93503Z" fill="#D75A8B" />
+                    </svg>
+
+                    <span class="text-[#D75A8B] text-[9px] font-medium">地図</span>
+                </a>
+            </div>
+
 
         </div>
         <button style="border-radius: 4px ;
                 background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%); border-radius: 4px;"
-                class=" flex w-[208px] justify-center items-center py-[9px] px-9 gap-[2px]" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEnglish', '@Model.HostId')">
+                @*class=" flex w-[208px] justify-center items-center py-[9px] px-9 gap-[2px]" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEnglish', '@Model.HostId')">*@
+                class=" flex w-[208px] justify-center items-center py-[9px] px-9 gap-[2px]" onclick="InitiateClubReservationFunction('@Model.ClubId','', '@Model.HostId')">
             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none"
                  class=" flex justify-center items-center">
                 <path d="M6.125 3.125V3.75H3.625V17.5H17.375V3.75H14.875V3.125H13.625V3.75H7.375V3.125H6.125ZM4.875 5H6.125V5.625H7.375V5H13.625V5.625H14.875V5H16.125V6.25H4.875V5ZM4.875 7.5H16.125V16.25H4.875V7.5ZM9.875 8.75V11.25H7.375V12.5H9.875V15H11.125V12.5H13.625V11.25H11.125V8.75H9.875Z"
@@ -506,7 +508,7 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
                     title: "Share host details",
                     url: shareableLink,
                 }).then(() => {
-                    console.log('Thanks for sharing!');
+                    //console.log('Thanks for sharing!');
                 }).catch(console.error);
             } else {
                 toastr.info('Web Share API is not supported in this browser.');
@@ -537,13 +539,13 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                        //console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                    //console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -560,13 +562,13 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                        //console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                    //console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -588,8 +590,7 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
         const DataStorageFunction = (i, j) => {
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
-        }
-    </script>
+        }</script>
     <script>
         // Function to open a specific modal
         function openModal(modalId) {
@@ -628,8 +629,7 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
             if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
                 closeModal('modal1');
             }
-        }
-    </script>
+        }</script>
 
 
     <script>

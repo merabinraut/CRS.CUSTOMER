@@ -18,10 +18,10 @@
             ご予約ありがとうございます。 <br />
             ご変更は予約履歴からお願いいたします。
         </div>
-        <div class="rounded-[8px] bg-[#D75A8B] px-3 py-[14px] h-[40px] flex justify-center items-center w-full text-white text-sm mb-5" onclick="window.location.href='@Url.Action("Index", "Dashboard")'">
+        <div class="rounded-[8px] bg-[#D75A8B] px-3 py-[14px] h-[40px] flex justify-center items-center w-full text-white text-sm mb-5" onclick="window.location.href='@Url.Action("Index", "DashboardV2")'">
             予約履歴へ
         </div>
-        <div class="text-center text-[#333]  border-b-[1px] border-[#333] leading-[18px]" onclick="window.location.href='@Url.Action("Index", "Dashboard")'">
+        <div class="text-center text-[#333]  border-b-[1px] border-[#333] leading-[18px]" onclick="window.location.href='@Url.Action("Index", "DashboardV2")'">
             マイページへ
         </div>
     </div>
@@ -32,28 +32,23 @@
     <script>
         $(document).ready(function () {
             localStorage.clear();
+            setInterval(NotificationFunction, 20000);
         });
 
-        var notificationBell = document.getElementById("notification-bell-id");
-        if (notificationBell) {
-            function NotificationFunction() {
-                $.ajax({
-                    url: '/NotificationManagement/HasUnReadNotification',
-                    type: 'POST',
-                    success: function (result) {
-                        if (result.HasUnReadNotification) {
-                            notificationBell.innerHTML = '<img src="/Content/assets/images/Customer/UnReadNotification.svg" class="h-[10px]" alt="notification"/>';
-                        }
-                        else {
-                            notificationBell.innerHTML = '';
-                        }
-                    },
-                    error: function () {
-                        notificationBell.innerHTML = '';
+        function NotificationFunction() {
+            $.ajax({
+                url: '/NotificationManagement/HasUnReadNotification',
+                type: 'POST',
+                success: function (result) {
+                    if (result.HasUnReadNotification) {
+                        document.getElementById("notification-bell-id").getElementsByTagName("span")[0].style.display = "block";
                     }
-                });
-            }
-            setInterval(NotificationFunction, 20000);
+                    else {
+                    }
+                },
+                error: function () {
+                }
+            });
         }
     </script>
 }

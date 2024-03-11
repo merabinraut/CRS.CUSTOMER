@@ -7,10 +7,11 @@
         dataType: 'json',
         data: {
             ClubId,
-            SelectedDate,
+            SelectedDate: $('#date-id').val(),
             SelectedHost
         },
         success: function (data) {
+            $("#stickey_id").css("display","none")
             if (!data || data.Code !== 0) {
                 toastr.info(data?.Message);
                 DisableLoaderFunction();
@@ -159,7 +160,7 @@ function initPeopleFunction() {
             }
         });
     });
-
+  
     document.querySelectorAll('.peopleList').forEach(item => {
         item.addEventListener('click', event => {
             document.querySelectorAll('.peopleList').forEach(item => {
@@ -173,6 +174,13 @@ function initPeopleFunction() {
                 var selectedPeopleDiv = document.getElementById("selected-noofpeople-id");
                 selectedPeopleDiv.innerText = peopleValue.trim();
                 $('#noofpeople-id').val(peopleValue.trim());
+                
+            }
+            if (parseInt($("#selected-noofpeople-id").text()) > 3) {
+                $("#waitingMessageWrapper").css("display", "block");
+            }
+            else {
+                $("#waitingMessageWrapper").css("display", "none");
             }
         });
     });
@@ -180,17 +188,21 @@ function initPeopleFunction() {
 /////////////////////////////////////////////////////////////////////// People JS ///////////////////////////////////////////////////////////////////////
 
 function CloseInitiatedClubReservationFunction() {
+    $("#stickey_id").css("display", "")
     var element = document.getElementById('drawer-date');
     element.classList.add('translate-y-full');
+    var removeElement = document.getElementById("ui-datepicker-div")
+    removeElement.style.setProperty("display", "none", "important");
+    
 }
 
 function SubmitClubReservationFunction() {
     var form = document.getElementById('club-reservation-id');
     var requiredFields = form.querySelectorAll('[required]');
-
     for (var i = 0; i < requiredFields.length; i++) {
         if (!requiredFields[i].value) {
-            toastr.info('Please fill out all required fields.');
+            /*toastr.info('Please fill out all required fields.');*/
+            toastr.info('日付が必要です');
             return; // Prevent form submission
         }
     }
@@ -198,10 +210,26 @@ function SubmitClubReservationFunction() {
     form.submit();
 }
 
-function EnableLoaderFunction() {
+/*function EnableLoaderFunction() {
     document.getElementById('loader-id-v2').style.display = 'block';
+    
+    document.body.classList.add('no-scroll-loader');
 }
 function DisableLoaderFunction() {
     document.getElementById('loader-id-v2').style.display = 'none';
+    document.body.classList.remove('no-scroll-loader');
 }
-
+*/
+function preventDefault(event) {
+    event.preventDefault();
+}
+function EnableLoaderFunction() {
+    document.getElementById('loader-id-v2').style.display = 'flex';
+    document.body.addEventListener('touchmove', preventDefault, { passive: false });
+    document.body.classList.add('no-scroll-loader');
+}
+function DisableLoaderFunction() {
+    document.getElementById('loader-id-v2').style.display = 'none';
+    document.body.removeEventListener('touchmove', preventDefault, { passive: false });
+    document.body.classList.remove('no-scroll-loader');
+}

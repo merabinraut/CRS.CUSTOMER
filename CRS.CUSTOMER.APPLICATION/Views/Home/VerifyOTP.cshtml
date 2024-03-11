@@ -294,7 +294,7 @@
                 @Html.HiddenFor(model => model.NickName)
                 <!-- for otp container -->
                 <div class="otpContainer ring-0 focus:ring-0 focus:ring-transparent">
-                    <input type="text" placeholder="認証コード" class="inputContainer w-full ring-0 focus:ring-0 focus:ring-transparent" name="OTPCode" onkeypress="return isNumber(event)" required>
+                    <input type="number" placeholder="認証コード" class="inputContainer w-full ring-0 focus:ring-0 focus:ring-transparent" name="OTPCode" oninput="limitInputLength(this, 6)" required>
                 </div>
                 <!-- for button group -->
                 <div class="flex justify-between items-center gap-4 mb-4">
@@ -390,9 +390,20 @@
             }
         });
         function countdown(endtime) {
-            var countDownDate = new Date(endtime).getTime();
+            //var countDownDate = new Date(endtime).getTime();
+            var endtime = endtime
+            const dateParts = endtime.split(' ');
+            const date = dateParts[0];
+            const time = dateParts[1];
+            const [year, month, day] = date.split('-');
+            const [hours, minutes, seconds] = time.split(':');
+            const isoDate = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).toISOString();
+            const countDownDate = new Date(isoDate);
+
             var x = setInterval(function () {
-                var now = new Date().getTime();
+                /* var now = new Date().getTime();*/
+                var date2 = new Date().toISOString();
+                const now = new Date(date2);
                 var distance = countDownDate - now;
                 var days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -404,7 +415,7 @@
                     isValid = true;
                     var divElement = document.getElementById("resend-verification-code");
                     divElement.style.pointerEvents = "auto";
-                    divElement.style.opacity = 1; 
+                    divElement.style.opacity = 1;
                     var buttonsAndInputs = divElement.getElementsByTagName("button");
                     for (var i = 0; i < buttonsAndInputs.length; i++) {
                         buttonsAndInputs[i].disabled = false;
@@ -458,7 +469,21 @@
 
     </script>
     <script>
+        $('#valCod').prop('disabled', true).css('opacity', '0.5');
         $('#waitingMessageWrapper').hide();
+        function limitInputLength(input, maxLength) {
+            var value = input.value;
+            var numericValue = value.replace(/\D/g, '');
+            var trimmedValue = numericValue.substring(0, maxLength);
+            // Update input value
+            input.value = trimmedValue;
+            if (input.value.length > 5) {
+                $('#valCod').prop('disabled', false).removeAttr('style');
+            }
+            else {
+                $('#valCod').prop('disabled', true).css('opacity', '0.5');
+            }
+        }
         var mobileNumber = "@Model.MobileNumber"; // Assuming Razor syntax
         // Function to mask the last four digits of the mobile number
         function maskLastFourDigits(number) {

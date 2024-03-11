@@ -36,7 +36,7 @@
             var Username = Session["Username"]?.ToString();
             if (!string.IsNullOrEmpty(Username))
             {
-                url = Url.Action("Index", "Dashboard");
+                url = Url.Action("Index", "DashboardV2");
             }
             <div class="flex gap-[6px] items-center" onclick="window.location.href='@url'">
                 <div class="text-xl text-warmgray cursor-pointer"><i class="las la-angle-left"></i></div>

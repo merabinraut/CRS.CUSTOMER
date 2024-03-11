@@ -49,7 +49,7 @@
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="@Url.Action("Index","Dashboard")" class="active">
+    <a href="@Url.Action("Index","DashboardV2")" class="active">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Home
     </a>
     <i class="las la-angle-right"></i>
@@ -60,7 +60,7 @@
     <a href="#">@Model.ClubNameEng</a>
 </div>
 <div>
-    <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[190px] w-full object-fill" />
+    <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[190px] w-full object-cover" />
 </div>
 <!-- section 1 -->
 <div class="px-2 pt-[12px] pb-2 flex gap-0.5">
@@ -90,7 +90,7 @@
     <div class="flex gap-[8px]">
         <div>
             <img src="@Model.ClubLogo"
-                 class="h-[48px] w-[48px] object-fill rounded-full" />
+                 class="h-[48px] w-[48px] object-cover rounded-full object-cover" />
         </div>
         <div>
             <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEng</div>
@@ -176,7 +176,8 @@
             var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
             if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
             {
-                <div onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng','@item2.FullDate')">
+                @*<div onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng','@item2.FullDate')">*@
+                <div onclick="InitiateClubReservationFunction('@Model.ClubId','@item2.FullDate' )">
                     @item2.Date <div class="flex justify-center mt-1">
                         <img src="@imageURL" class="h-[11px] w-[11px]">
                     </div>
@@ -220,9 +221,9 @@
             }
             else
             {
-                <div class="bg-[#D7D7D7] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Unreservable
-                </div>
+    <div class="bg-[#D7D7D7] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center">
+        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
+    </div>
             }
         }
     </div>
@@ -303,12 +304,12 @@
                                     @if (!string.IsNullOrEmpty(item.HostImage))
                                     {
                                         <img src="@item.HostImage"
-                                             class="w-[128px] h-[180px] object-fill rounded-[6px]" />
+                                             class="w-[128px] h-[180px] object-cover rounded-[6px] object-cover" />
                                     }
                                     else
                                     {
                                         <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                             class="w-[128px] h-[180px] object-fill rounded-[6px]" />
+                                             class="w-[128px] h-[180px] object-cover rounded-[6px]" />
                                     }
                                     <div class="pt-[5px]">
                                         <div class="text-xs  text-charcoalBlack">@item.HostName</div>
@@ -363,12 +364,12 @@
                         @if (!string.IsNullOrEmpty(item.HostImage))
                         {
                             <img src="@item.HostImage"
-                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
+                                 class="w-[104px] h-[104px] object-cover rounded-[6px] object-cover" />
                         }
                         else
                         {
                             <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                 class="w-[104px] h-[104px] object-fill rounded-[6px]" />
+                                 class="w-[104px] h-[104px] object-cover rounded-[6px]" />
                         }
                         <div class="pt-[5px]">
                             <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
@@ -561,7 +562,7 @@
             <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3">
                 @foreach (var item in Model.ClubGalleryImageList)
                 {
-                    <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] w-full object-fill " onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
+                    <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] w-full object-cover object-cover" onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
                 }
             </div>
         </div>
@@ -1004,13 +1005,13 @@
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                        //console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                   // console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -1027,13 +1028,13 @@
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                        //console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                    //console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -1056,7 +1057,7 @@
                     title: "Share club details",
                     url: shareableLink,
                 }).then(() => {
-                    console.log('Thanks for sharing!');
+                    //console.log('Thanks for sharing!');
                 }).catch(console.error);
             } else {
                 toastr.info('Web Share API is not supported in this browser.');

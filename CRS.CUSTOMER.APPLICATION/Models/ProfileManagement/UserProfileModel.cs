@@ -31,8 +31,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
         public string Gender { get; set; }
         public string PreferredLocation { get; set; }
-
-        [RegularExpression(@"^\d{3}-\d{4}$", ErrorMessage = "Invalid Postal Code")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        [RegularExpression(@"^\d{3}-\d{4}$", ErrorMessage = "無効な郵便番号")]
         public string PostalCode { get; set; }
         public string Prefecture { get; set; }
 
@@ -54,15 +54,15 @@ namespace CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement
         public string Session { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [StringLength(4, MinimumLength = 4, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_4_characters")]
+        [StringLength(6, MinimumLength = 4, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_4_characters")]
         public string DOBYear { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [StringLength(2, MinimumLength = 2, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_2_characters")]
+        [StringLength(4, MinimumLength = 2, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_2_characters")]
         public string DOBMonth { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [StringLength(2, MinimumLength = 2, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_2_characters")]
+        [StringLength(4, MinimumLength = 2, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_2_characters")]
         public string DOBDay { get; set; }
     }
 }

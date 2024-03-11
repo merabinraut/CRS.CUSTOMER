@@ -15,13 +15,34 @@
         color: #D75A8B;
         background: #F3F3F3;
     }
+
+    .preferance > input[type="checkbox"] {
+        display: none;
+    }
+
+    /* Style the labels to look like bordered options */
+    label {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 5px;
+        border: 1px solid #d75a8b;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Style the labels when they are selected */
+    .preferance > input[type="checkbox"]:checked + label {
+        background-color: #fff;
+        border-color: #d75a8b;
+        color: #d75a8b;
+    }
 </style>
-<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] px-4 py-[10px] h-[44px]">
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] px-4 py-[10px] h-[44px]" onclick="history.back()">
     <div class="flex gap-2 items-center absolute top-[12px] text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
             <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
                   fill="#BCB08A" />
-        </svg>戻る
+        </svg>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
     </div>
     <div class="text-center w-full font-bold"></div>
 </div>
@@ -33,7 +54,7 @@
              class=" border-[1px] flex flex-col rounded-[8px] border-[#F1F1F1] bg-[#FCF8F9]  h-[196px]  mx-[16px]">
             <div style="background-color: #EEEEEE; margin-left:15px;margin-right:15px; margin-top:24px; "
                  class="grid grid-cols-2 text-[14px]  py-[8px] mx-[15px] rounded-[4px] border-black  ">
-                <div class="flex pr-[8px]  flex-row gap-[4px] items-center   ">
+                <div class="flex pr-[8px]  flex-row gap-[4px] items-center" onclick="GetLocationFilterPopUp();">
                     <div class="pl-[8px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
                             <path d="M7.5 2.39062C5.17625 2.39062 3.28125 4.28563 3.28125 6.60938C3.28125 7.26875 3.54875 8.025 3.91125 8.85063C4.27375 9.67625 4.74062 10.5531 5.215 11.37C5.81209 12.3945 6.44733 13.3962 7.11937 14.3731L7.5 14.9294L7.88125 14.3731C7.88125 14.3731 8.83687 13.005 9.785 11.37C10.2594 10.5531 10.7263 9.67625 11.0888 8.85063C11.4513 8.025 11.7188 7.26875 11.7188 6.60938C11.7188 4.28563 9.82375 2.39062 7.5 2.39062ZM7.5 3.32813C9.31875 3.32813 10.7812 4.79063 10.7812 6.60938C10.7812 6.98438 10.58 7.695 10.2394 8.47C9.89875 9.24438 9.42813 10.1031 8.96438 10.9013C8.22875 12.1719 7.77063 12.8444 7.5 13.245C7.22875 12.8444 6.77125 12.1719 6.035 10.9013C5.57188 10.1031 5.10125 9.24438 4.76063 8.47C4.42 7.695 4.21875 6.98438 4.21875 6.60938C4.21875 4.79063 5.68125 3.32813 7.5 3.32813ZM7.5 5.67188C7.25136 5.67188 7.0129 5.77065 6.83709 5.94646C6.66127 6.12228 6.5625 6.36073 6.5625 6.60938C6.5625 6.85802 6.66127 7.09647 6.83709 7.27229C7.0129 7.4481 7.25136 7.54688 7.5 7.54688C7.74864 7.54688 7.9871 7.4481 8.16291 7.27229C8.33873 7.09647 8.4375 6.85802 8.4375 6.60938C8.4375 6.36073 8.33873 6.12228 8.16291 5.94646C7.9871 5.77065 7.74864 5.67188 7.5 5.67188Z"
@@ -41,14 +62,13 @@
                         </svg>
 
                     </div>
-                    <div style="color: #666666">
-
-                        歌舞伎町/東京
+                    <div style="color: #666666" id="selected-locationlabel-id">
+                        @(string.IsNullOrEmpty(ViewBag.LocationLabel) ? "場所" : ViewBag.LocationLabel)
                     </div>
                 </div>
 
                 <div class="flex flex-row gap-[4px] pl-[8px] pr-[12px]   items-center "
-                     style="border-left:1px solid #D6D6D6">
+                     style="border-left:1px solid #D6D6D6" onclick="GetPreferenceFilterPopUp();">
                     <div>
                         <svg style="margin-left: 8px;" xmlns="http://www.w3.org/2000/svg" width="17" height="18"
                              viewBox="0 0 17 18" fill="none">
@@ -68,7 +88,7 @@
 
             </div>
             <div style="background-color: #EEEEEE;  margin-left:15px;margin-right:15px; margin-top:8px; "
-                 class="flex flex-row justify-between text-[14px] py-[8px] mx-[15px] rounded-[4px] border-black  ">
+                 class="flex flex-row justify-between text-[14px] py-[8px] mx-[15px] rounded-[4px] border-black" onclick="InitiateDateTimeFilterPopupFunction()">
                 <div class="flex flex-row gap-[4px] items-center  ">
                     <div class="pl-[8px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
@@ -77,9 +97,8 @@
                         </svg>
 
                     </div>
-                    <div style="color: #666666 ; ">
-
-                        2024/01/01
+                    <div style="color: #666666;" id="main-date-id">
+                        @(string.IsNullOrEmpty(ViewBag.Date) ? "日付" : ViewBag.Date)
                     </div>
                 </div>
                 <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
@@ -91,8 +110,8 @@
                         </svg>
 
                     </div>
-                    <div style="color: #666666">
-                        19:00
+                    <div style="color: #666666" id="main-time-id">
+                        @((string.IsNullOrEmpty(ViewBag.Time)) ? "時間" : ViewBag.Time)
                     </div>
                 </div>
                 <div class="flex flex-row gap-[4px]  items-center  ">
@@ -103,21 +122,21 @@
                         </svg>
 
                     </div>
-                    <div style="color: #666666 ; margin-right:30px;">
-                        人数
+                    <div style="color: #666666 ; margin-right:30px;" id="main-noofpeople-id">
+                        @((string.IsNullOrEmpty(ViewBag.NoOfPeople)) ? "人数" : ViewBag.NoOfPeople)
                     </div>
                 </div>
 
             </div>
-            <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px; "
-                 class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]  ">
-                <div class="my-[12px] text-[12px] font-[700] text-[#FFF]">
-                    検索する
-
+            @{
+                var disableClickClass = "disable-click";
+                disableClickClass = (!string.IsNullOrEmpty(ViewBag.Date) || !string.IsNullOrEmpty(ViewBag.Time) || !string.IsNullOrEmpty(ViewBag.NoOfPeople)) ? "" : disableClickClass;
+                <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] @disableClickClass" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
+                    <div class="my-[12px] text-[12px] font-[700] text-[#FFF]">
+                        検索する
+                    </div>
                 </div>
-
-            </div>
-
+            }
         </div>
 
     </div>
@@ -138,7 +157,7 @@
                     <stop offset="1" stop-color="#E7B282" />
                 </linearGradient>
             </defs>
-            <image x="7" y="5" width="16" height="16" xlink:href="../../../assets/images/customer/slippathsvg.svg" />
+            <image x="7" y="5" width="16" height="16" xlink:href="~/Content/assets/images/customer/slippathsvg.svg" />
             <text y="18" x="25" font-family="Arial" font-size="14" style="font-weight: 700; " fill="#FAFAFA">
 
                 あなたにマッチするホスト
@@ -151,59 +170,60 @@
             foreach (var item in Model.HostRecommendationModel)
             {
                 var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
-                <div class="hosts-that-match-you @activeClass">
+                var activeBoolValue = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? true : false;
+                <div class="hosts-that-match-you @activeClass" style="width:112px; height:154px; border-radius:2px; position:relative; overflow:revert" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'" >
                     <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
-                    <div class="like-host">
-                        <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
-                             viewBox="0 0 31 34" fill="none">
-                            <g filter="url(#filter0_d_3058_46008)">
-                                <circle cx="17" cy="17" r="10" fill="white" />
-                            </g>
-                            <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
-                                  stroke="#E3A1A1" stroke-width="1.5" />
-                            <defs>
-                                <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                    <feColorMatrix in="SourceAlpha" type="matrix"
-                                                   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                    <feOffset />
-                                    <feGaussianBlur stdDeviation="3.5" />
-                                    <feComposite in2="hardAlpha" operator="out" />
-                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                    <feBlend mode="normal" in2="BackgroundImageFix"
-                                             result="effect1_dropShadow_3058_46008" />
-                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
-                                             result="shape" />
-                                </filter>
-                            </defs>
-                        </svg>
-                        <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
-                             viewBox="0 0 31 34" fill="none">
-                            <g filter="url(#filter0_d_3058_39409)">
-                                <circle cx="17" cy="17" r="10" fill="#D75A8B" />
-                            </g>
-                            <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
-                                  fill="white" />
-                            <defs>
-                                <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
-                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                    <feColorMatrix in="SourceAlpha" type="matrix"
-                                                   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                    <feOffset />
-                                    <feGaussianBlur stdDeviation="3.5" />
-                                    <feComposite in2="hardAlpha" operator="out" />
-                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                    <feBlend mode="normal" in2="BackgroundImageFix"
-                                             result="effect1_dropShadow_3058_39409" />
-                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
-                                             result="shape" />
-                                </filter>
-                            </defs>
-                        </svg>
+                    @*<div class="like-host" onclick="ToggleBookmark('@item.ClubId','@item.HostId','host' , activeBoolValue)">
+                            <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                                 viewBox="0 0 31 34" fill="none">
+                                <g filter="url(#filter0_d_3058_46008)">
+                                    <circle cx="17" cy="17" r="10" fill="white" />
+                                </g>
+                                <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
+                                      stroke="#E3A1A1" stroke-width="1.5" />
+                                <defs>
+                                    <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                                       values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset />
+                                        <feGaussianBlur stdDeviation="3.5" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                                 result="effect1_dropShadow_3058_46008" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
+                                                 result="shape" />
+                                    </filter>
+                                </defs>
+                            </svg>
+                            <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                                 viewBox="0 0 31 34" fill="none">
+                                <g filter="url(#filter0_d_3058_39409)">
+                                    <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                                </g>
+                                <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
+                                      fill="white" />
+                                <defs>
+                                    <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                                       values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset />
+                                        <feGaussianBlur stdDeviation="3.5" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                                 result="effect1_dropShadow_3058_39409" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
+                                                 result="shape" />
+                                    </filter>
+                                </defs>
+                            </svg>
 
-                    </div>
+                        </div>*@
                     <div class="description">
                         <div class="title">@item.HostNameEnglish</div>
                         <div class="club-name"><img src="@item.ClubLogo" alt="club-logo" />@item.ClubNameEnglish</div>
@@ -220,81 +240,126 @@
 </div>
 <div class="no-scrollbar flex flex-wrap flex-row gap-[8px] justify-center my-[12px] bg-[#FFFFFF]">
     @{
-        foreach (var item in Model.FilteredHostModel)
+        if (Model.FilteredHostModel.Count <= 0)
         {
-            var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
-            <div class="hosts-that-match-you @activeClass">
-                <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
-                <div class="like-host">
-                    <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
-                         viewBox="0 0 31 34" fill="none">
-                        <g filter="url(#filter0_d_3058_46008)">
-                            <circle cx="17" cy="17" r="10" fill="white" />
-                        </g>
-                        <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
-                              stroke="#E3A1A1" stroke-width="1.5" />
-                        <defs>
-                            <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
-                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                <feOffset />
-                                <feGaussianBlur stdDeviation="3.5" />
-                                <feComposite in2="hardAlpha" operator="out" />
-                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                <feBlend mode="normal" in2="BackgroundImageFix"
-                                         result="effect1_dropShadow_3058_46008" />
-                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
-                                         result="shape" />
-                            </filter>
-                        </defs>
-                    </svg>
-                    <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
-                         viewBox="0 0 31 34" fill="none">
-                        <g filter="url(#filter0_d_3058_39409)">
-                            <circle cx="17" cy="17" r="10" fill="#D75A8B" />
-                        </g>
-                        <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
-                              fill="white" />
-                        <defs>
-                            <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
-                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                <feOffset />
-                                <feGaussianBlur stdDeviation="3.5" />
-                                <feComposite in2="hardAlpha" operator="out" />
-                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                <feBlend mode="normal" in2="BackgroundImageFix"
-                                         result="effect1_dropShadow_3058_39409" />
-                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
-                                         result="shape" />
-                            </filter>
-                        </defs>
-                    </svg>
-
-                </div>
-                <div class="description">
-                    <div class="title">@item.HostNameEnglish</div>
-                    <div class="club-name"><img src="@item.ClubLogo" alt="club-logo" />@item.ClubNameEnglish</div>
+            <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center">
+                <div class="text-[#18181B] font-semibold mt-12 text-center">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
                 </div>
             </div>
+        }
+        else
+        {
+            foreach (var item in Model.FilteredHostModel)
+            {
+                var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
+                <div class="hosts-that-match-you @activeClass" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                    <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
+                    @if (item.IsBookmarked.ToUpper() == "Y")
+                    {
+                        <div class="like-host" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                                <g filter="url(#filter0_d_4820_24085)">
+                                    <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                                </g>
+                                <path d="M14.5018 13.1543C12.9108 13.1543 11.6172 14.4578 11.6172 16.0277C11.6172 16.5754 11.8666 17.0498 12.098 17.3925C12.3293 17.7353 12.5667 17.9553 12.5667 17.9553L16.7254 22.1097L17.0018 22.3851L17.2782 22.1097L21.4369 17.9553C21.4369 17.9553 22.3864 17.1217 22.3864 16.0277C22.3864 14.4578 21.0928 13.1543 19.5018 13.1543C18.1812 13.1543 17.3308 13.946 17.0018 14.2797C16.6728 13.946 15.8224 13.1543 14.5018 13.1543Z" fill="white" />
+                                <defs>
+                                    <filter id="filter0_d_4820_24085" x="0" y="0" width="34" height="34" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset />
+                                        <feGaussianBlur stdDeviation="3.5" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4820_24085" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4820_24085" result="shape" />
+                                    </filter>
+                                </defs>
+                            </svg>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="like-host" onclick="AddBookmark('@item.ClubId','@item.HostId','host')">
+                            <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                                 viewBox="0 0 31 34" fill="none">
+                                <g filter="url(#filter0_d_3058_46008)">
+                                    <circle cx="17" cy="17" r="10" fill="white" />
+                                </g>
+                                <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
+                                      stroke="#E3A1A1" stroke-width="1.5" />
+                                <defs>
+                                    <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                                       values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset />
+                                        <feGaussianBlur stdDeviation="3.5" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                                 result="effect1_dropShadow_3058_46008" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
+                                                 result="shape" />
+                                    </filter>
+                                </defs>
+                            </svg>
+                            <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                                 viewBox="0 0 31 34" fill="none">
+                                <g filter="url(#filter0_d_3058_39409)">
+                                    <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                                </g>
+                                <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
+                                      fill="white" />
+                                <defs>
+                                    <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
+                                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                        <feColorMatrix in="SourceAlpha" type="matrix"
+                                                       values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                        <feOffset />
+                                        <feGaussianBlur stdDeviation="3.5" />
+                                        <feComposite in2="hardAlpha" operator="out" />
+                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                        <feBlend mode="normal" in2="BackgroundImageFix"
+                                                 result="effect1_dropShadow_3058_39409" />
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
+                                                 result="shape" />
+                                    </filter>
+                                </defs>
+                            </svg>
+                        </div>
+                    }
+                    <div class="description">
+                        <div class="title">
+                            @if (string.IsNullOrEmpty(@item.HostNameJapanese))
+                            {
+                                @item.HostName
+                            }
+                            else{
+                            @item.HostNameJapanese
+                            }
+
+                        </div>
+                        <div class="club-name"><img src="@item.ClubLogo" alt="club-logo" />@item.ClubNameEnglish</div>
+                    </div>
+                </div>
+            }
         }
     }
 </div>
 <!-- for pagination -->
-<div class="flex justify-between bg-[#fff] px-[16px] pt-[4px]">
+<!--<div class="flex justify-between bg-[#fff] px-[16px] pt-[4px]">
     <div class="px-3 py-[10px]  flex justify-center items-center" style="border: 1px solid #F8F8F8;"
          onclick="leftPageinate()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
             <path d="M10.7075 1.65118C10.895 1.83871 11.0003 2.09302 11.0003 2.35818C11.0003 2.62335 10.895 2.87766 10.7075 3.06518L5.75754 8.01518L10.7075 12.9652C10.8897 13.1538 10.9905 13.4064 10.9882 13.6686C10.9859 13.9308 10.8808 14.1816 10.6954 14.367C10.5099 14.5524 10.2591 14.6576 9.99694 14.6599C9.73474 14.6621 9.48214 14.5613 9.29354 14.3792L3.63654 8.72218C3.44907 8.53466 3.34375 8.28035 3.34375 8.01518C3.34375 7.75002 3.44907 7.49571 3.63654 7.30819L9.29354 1.65118C9.48106 1.46371 9.73537 1.3584 10.0005 1.3584C10.2657 1.3584 10.52 1.46371 10.7075 1.65118Z"
                   fill="#959595" />
         </svg>
-    </div>
-    <!-- Pagination items will be generated dynamically based on the number of pages -->
-    <div id="pagination" class="flex justify-center items-center col-span-5"></div>
+    </div>-->
+<!-- Pagination items will be generated dynamically based on the number of pages -->
+<!--<div id="pagination" class="flex justify-center items-center col-span-5"></div>
     <div class="px-3 py-[10px]  flex justify-center items-center" style="border: 1px solid #F8F8F8;"
          onclick="rightPageinate()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
@@ -302,7 +367,7 @@
                   fill="#959595" />
         </svg>
     </div>
-</div>
+</div>-->
 <!-- pagination end -->
 <div class=" ">
     <div>
@@ -370,33 +435,33 @@
             }
         }
 
-        function updatePagination() {
-            // Remove all existing pagination items
-            document.getElementById('pagination').innerHTML = '';
+        //function updatePagination() {
+        //    // Remove all existing pagination items
+        //    document.getElementById('pagination').innerHTML = '';
 
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
+        //    const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-            for (let i = 1; i <= totalPages; i++) {
-                if (i === 1 || i === totalPages || (i >= currentPage - Math.floor(maxVisiblePages / 2) && i <= currentPage + Math.floor(maxVisiblePages / 2))) {
-                    const paginationItem = document.createElement('div');
-                    paginationItem.classList.add('px-3', 'py-[10px]', 'flex', 'justify-center', 'items-center', 'font-medium', 'leading-[24px]', 'text-[16px]');
-                    paginationItem.textContent = i;
-                    if (i === currentPage) {
-                        paginationItem.classList.add('active');
-                    }
-                    paginationItem.addEventListener('click', function () {
-                        currentPage = i;
-                        updatePagination();
-                    });
-                    document.getElementById('pagination').appendChild(paginationItem);
-                } else if (document.getElementById('pagination').lastElementChild.textContent !== '...') {
-                    const ellipsisItem = document.createElement('div');
-                    ellipsisItem.textContent = '...';
-                    ellipsisItem.classList.add('px-3', 'py-[10px]', 'flex', 'justify-center', 'items-center', 'font-medium', 'leading-[24px]', 'text-[16px]');
-                    document.getElementById('pagination').appendChild(ellipsisItem);
-                }
-            }
-        }
-        updatePagination();
+        //    for (let i = 1; i <= totalPages; i++) {
+        //        if (i === 1 || i === totalPages || (i >= currentPage - Math.floor(maxVisiblePages / 2) && i <= currentPage + Math.floor(maxVisiblePages / 2))) {
+        //            const paginationItem = document.createElement('div');
+        //            paginationItem.classList.add('px-3', 'py-[10px]', 'flex', 'justify-center', 'items-center', 'font-medium', 'leading-[24px]', 'text-[16px]');
+        //            paginationItem.textContent = i;
+        //            if (i === currentPage) {
+        //                paginationItem.classList.add('active');
+        //            }
+        //            paginationItem.addEventListener('click', function () {
+        //                currentPage = i;
+        //                updatePagination();
+        //            });
+        //            document.getElementById('pagination').appendChild(paginationItem);
+        //        } else if (document.getElementById('pagination').lastElementChild.textContent !== '...') {
+        //            const ellipsisItem = document.createElement('div');
+        //            ellipsisItem.textContent = '...';
+        //            ellipsisItem.classList.add('px-3', 'py-[10px]', 'flex', 'justify-center', 'items-center', 'font-medium', 'leading-[24px]', 'text-[16px]');
+        //            document.getElementById('pagination').appendChild(ellipsisItem);
+        //        }
+        //    }
+        //}
+        //updatePagination();
     </script>
 }

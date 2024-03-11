@@ -55,7 +55,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var SessionCustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             if (string.IsNullOrEmpty(SessionCustomerId) || SessionCustomerId != CustomerId)
@@ -66,7 +66,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var dbRequest = Request.MapObject<ReviewReservationRequestCommon>();
             var dbResponse = _reviewBuss.GetReservationDetails(dbRequest);
@@ -85,7 +85,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Message = dbResponse.Message ?? "Invalid request",
                 Title = NotificationMessage.INFORMATION.ToString()
             });
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("Index", "DashboardV2");
         }
 
         [HttpGet]
@@ -104,7 +104,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var ResponseModel = new ReviewHostListByClubViewModel();
             ResponseModel.ReviewClubDetailModel = Request.MapObject<ReviewClubDetailModel>();
@@ -132,7 +132,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Message = dbResponse.Message ?? "Invalid request",
                 Title = NotificationMessage.INFORMATION.ToString()
             });
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("Index", "DashboardV2");
         }
 
         [HttpGet]
@@ -150,7 +150,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var culture = ApplicationUtilities.GetSessionValue("culture")?.ToString()?.ToLower();
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
@@ -163,7 +163,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             foreach (var item in dbResponse)
             {
@@ -193,7 +193,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var culture = ApplicationUtilities.GetSessionValue("culture")?.ToString()?.ToLower();
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
@@ -206,7 +206,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             foreach (var item in dbQuestionResponse)
             {
@@ -226,7 +226,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             foreach (var item in dbAnswerResponse)
             {
@@ -255,7 +255,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             return View(ResponseModel);
         }
@@ -278,7 +278,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                redirectToUrl = Url.Action("Index", "Dashboard");
+                redirectToUrl = Url.Action("Index", "DashboardV2");
                 return Json(new { redirectToUrl });
             }
 
@@ -312,7 +312,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse.Message ?? "Success",
                     Title = NotificationMessage.SUCCESS.ToString()
                 });
-                redirectToUrl = Url.Action("Index", "Dashboard");
+                redirectToUrl = Url.Action("Index", "DashboardV2");
                 return Json(new { redirectToUrl });
             }
             else

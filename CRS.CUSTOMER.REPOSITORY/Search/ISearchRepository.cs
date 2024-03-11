@@ -8,5 +8,9 @@ namespace CRS.CUSTOMER.REPOSITORY.Search
         List<SearchFilterClubDetailCommon> GetNewClub(string LocationId, string CustomerId);
         List<SearchFilterClubDetailCommon> ClubPreferenceFilter(ClubPreferenceFilterRequest Request);
         List<HostPreferenceFilterResponse> HostPreferenceFilter(HostPreferenceFilterRequest Request);
+        List<SearchFilterClubDetailCommon> ClubFilterViewDateTimeAndOthers(ClubDateTimeAndOtherFilterRequest Request);
+        #region Club map details common
+        List<ClubMapDetailCommon> GetClubMapDetail(string LocationId = "");
+        #endregion
     }
 }

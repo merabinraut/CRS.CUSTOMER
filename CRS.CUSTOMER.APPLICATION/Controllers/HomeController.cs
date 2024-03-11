@@ -23,7 +23,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             if (!string.IsNullOrEmpty(Username))
             {
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
@@ -59,7 +59,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             if (!string.IsNullOrEmpty(Username))
             {
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "DashboardV2");
             }
             var Response = new RegistrationHoldModel();
             if (!string.IsNullOrEmpty(ReferCode))
@@ -113,7 +113,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     };
                     TempData["ReferCode"] = ReferCode;
                     //Session["exptime"] = DateTime.Parse(dbResponse.Extra2.ToString());
-                    Session["exptime"] = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                    Session["exptime"] = DateTime.Parse(DateTime.UtcNow.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
                     return View("VerifyOTP", otpModel);
                 }
                 AddNotificationMessage(new NotificationModel()
@@ -261,12 +261,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var dbResponse = _buss.SetRegistrationPassword(Common);
                 if (dbResponse.Code == 0)
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.SUCCESS,
-                        Message = dbResponse.Message ?? "Success",
-                        Title = NotificationMessage.SUCCESS.ToString(),
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.SUCCESS,
+                    //    Message = dbResponse.Message ?? "Success",
+                    //    Title = NotificationMessage.SUCCESS.ToString(),
+                    //});
                     return View("NewRegistration_SuccessView");
                 }
                 AddNotificationMessage(new NotificationModel()
@@ -333,7 +333,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
                 return View(Response);
             }
-            else return RedirectToAction("Index", "Dashboard");
+            else return RedirectToAction("Index", "DashboardV2");
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -402,7 +402,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Session["ProfileImage"] = ProfileImage;
                     Session["CreatedOn"] = response.ActionDate;
                     Session["SystemLinkModel"] = response.SystemLink;
-                    return new Tuple<string, string, bool>("Index", "Dashboard", true);
+                    return new Tuple<string, string, bool>("Index", "DashboardV2", true);
                 }
                 this.AddNotificationMessage(new NotificationModel()
                 {
@@ -478,7 +478,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         MobileNumber = model.MobileNo,
                         NickName = dbresp.Extra3,
                     };
-                    Session["exptime"] = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");//DateTime.Parse(dbresp.Extra2.ToString());
+                    Session["exptime"] = DateTime.Parse(DateTime.UtcNow.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");//DateTime.Parse(dbresp.Extra2.ToString());
                     //Session["exptime"] = DateTime.Parse(starttime.ToString());
                     return View("ForgotPasswordOTP", otpModel);
                 }
@@ -636,32 +636,35 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var uId = !string.IsNullOrEmpty(Model.UserId) ? Model.UserId.DecryptParameter() : null;
                 if (string.IsNullOrEmpty(aId) || string.IsNullOrEmpty(mn) || string.IsNullOrEmpty(uId))
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.INFORMATION,
-                        Message = "Invalid request",
-                        Title = NotificationMessage.INFORMATION.ToString()
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.INFORMATION,
+                    //    Message = "Invalid request",
+                    //    Title = NotificationMessage.INFORMATION.ToString()
+                    //});
+                    TempData["ForgetPWErrorMessage"] = "Invalid request";
                     return RedirectToAction("Index", "Home");
                 }
                 if (Model.Password != Model.ConfirmPassword)
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.INFORMATION,
-                        Message = "Password and confirm password must match",
-                        Title = NotificationMessage.INFORMATION.ToString()
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.INFORMATION,
+                    //    Message = "Password and confirm password must match",
+                    //    Title = NotificationMessage.INFORMATION.ToString()
+                    //});
+                    TempData["ForgetPWErrorMessage"] = "Password and confirm password must match";
                     return View(Model);
                 }
                 if (Model.Password == null || Model.ConfirmPassword == null)
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.INFORMATION,
-                        Message = "Password is required",
-                        Title = NotificationMessage.INFORMATION.ToString()
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.INFORMATION,
+                    //    Message = "Password is required",
+                    //    Title = NotificationMessage.INFORMATION.ToString()
+                    //});
+                    TempData["ForgetPWErrorMessage"] = "Password is required";
                     return View(Model);
                 }
                 SetRegistrationPasswordCommon Common = Model.MapObject<SetRegistrationPasswordCommon>();
@@ -673,20 +676,21 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var dbResponse = _buss.SetNewPassword(Common);
                 if (dbResponse.Code == 0)
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.SUCCESS,
-                        Message = dbResponse.Message ?? "Success",
-                        Title = NotificationMessage.SUCCESS.ToString(),
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.SUCCESS,
+                    //    Message = dbResponse.Message ?? "Success",
+                    //    Title = NotificationMessage.SUCCESS.ToString(),
+                    //});
                     return View("ForgotPassword_SuccessView");
                 }
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse.Message ?? "Failed",
-                    Title = NotificationMessage.INFORMATION.ToString(),
-                });
+                //AddNotificationMessage(new NotificationModel()
+                //{
+                //    NotificationType = NotificationMessage.INFORMATION,
+                //    Message = dbResponse.Message ?? "Failed",
+                //    Title = NotificationMessage.INFORMATION.ToString(),
+                //});
+                TempData["ForgetPWErrorMessage"] = dbResponse.Message ?? "Failed";
                 return View(Model);
             }
             else

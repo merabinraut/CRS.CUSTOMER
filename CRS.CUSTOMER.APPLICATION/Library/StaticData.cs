@@ -1,4 +1,5 @@
 ﻿using CRS.CUSTOMER.APPLICATION.CustomHelpers;
+using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
 using CRS.CUSTOMER.SHARED;
 using System;
 using System.IO;
@@ -9,6 +10,52 @@ namespace CRS.CUSTOMER.APPLICATION.Library
 {
     public static class StaticData
     {
+
+        public static PlanGroup GetPlanGroup(PlanGroup model)
+        {
+            int index = 0;
+            string indexvalue = string.Empty;
+            for (int i = 0; i < model.GetPlanGroupDetail.Count; i++)
+            {
+                if (model.GetPlanGroupDetail[i].Label == "Last orderTime")
+                {
+                    index = i;
+
+                }
+                if (model.GetPlanGroupDetail[i].Label == "Last Entry Time")
+                {
+                    model.GetPlanGroupDetail[i].LabelValue = model.GetPlanGroupDetail[i].LabelValue + "(L.O. " + model.GetPlanGroupDetail[index].LabelValue + ")";
+                }
+            }
+            model.GetPlanGroupDetail.RemoveAt(index);
+            model.GetPlanGroupDetail.RemoveAt(0);
+
+            return model;
+
+        }
+        public static PlanGroup GetPlanGroupLOT(PlanGroup model)
+        {
+            int index = 0;
+            string indexvalue = string.Empty;
+            for (int i = 0; i < model.GetPlanGroupDetail.Count; i++)
+            {
+                if (model.GetPlanGroupDetail[i].Label == "Last orderTime")
+                {
+                    index = i;
+
+                }
+                if (model.GetPlanGroupDetail[i].Label == "Last Entry Time")
+                {
+                    model.GetPlanGroupDetail[i].LabelValue = model.GetPlanGroupDetail[i].LabelValue + "(L.O. " + model.GetPlanGroupDetail[index].LabelValue + ")";
+                }
+            }
+            model.GetPlanGroupDetail.RemoveAt(index);
+            model.GetPlanGroupDetail.RemoveAt(0);
+            model.GetPlanGroupDetail.RemoveAt(1);
+
+            return model;
+
+        }
         public static string GetUser()
         {
             var user = ReadSession("UserName", "");
@@ -172,4 +219,6 @@ namespace CRS.CUSTOMER.APPLICATION.Library
             throw new NotImplementedException();
         }
     }
+
+
 }

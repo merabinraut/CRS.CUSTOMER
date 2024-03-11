@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.SHARED.LocationManagement;
 using CRS.CUSTOMER.SHARED.ReviewManagement;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -262,6 +263,83 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
                 Response.HostIdentityDetailsModel = HostIdentityDetailsModelResponse;
             }
             return Response;
+        }
+
+        public List<NoticeModelCommon> GetNoticeByClubId(string cId)
+        {
+            string sp_name = "sproc_customer_club_detail @Flag='cdns'";
+            sp_name += ",@ClubId=" + _dao.FilterString(cId);
+            var dbResponseInfo = _dao.ExecuteDataTable(sp_name);
+            if (dbResponseInfo != null) return _dao.DataTableToListObject<NoticeModelCommon>(dbResponseInfo).ToList();
+            return new List<NoticeModelCommon>();
+
+        }
+
+        public ClubBasicInformationModelCommon GetClubBasicInformation(string cId)
+        {
+            string sp_name = "sproc_customer_club_detail @Flag='cbi'";
+            sp_name += ",@ClubId=" + _dao.FilterString(cId);
+            var dbResponseInfo = _dao.ExecuteDataRow(sp_name);
+            if (dbResponseInfo != null)
+            {
+                return new ClubBasicInformationModelCommon()
+                {
+                    ClubAddress = _dao.ParseColumnValue(dbResponseInfo, "ClubAddress").ToString(),
+                    ClubClosingTime = _dao.ParseColumnValue(dbResponseInfo, "ClubClosingTime").ToString(),
+                    ClubOpeningTime = _dao.ParseColumnValue(dbResponseInfo, "ClubOpeningTime").ToString(),
+                    CompanionFee = _dao.ParseColumnValue(dbResponseInfo, "CompanionFee").ToString(),
+                    DesignationFee = _dao.ParseColumnValue(dbResponseInfo, "DesignationFee").ToString(),
+                    EnjoyPlan = _dao.ParseColumnValue(dbResponseInfo, "EnjoyPlan").ToString(),
+                    Drink = _dao.ParseColumnValue(dbResponseInfo, "Drink").ToString(),
+                    EPLastEntryTime = _dao.ParseColumnValue(dbResponseInfo, "EPLastEntryTime").ToString(),
+                    EpMaxReservation = _dao.ParseColumnValue(dbResponseInfo, "EpMaxReservation").ToString(),
+                    ExtensionFee = _dao.ParseColumnValue(dbResponseInfo, "ExtensionFee").ToString(),
+                    GPLastEntryTime = _dao.ParseColumnValue(dbResponseInfo, "GPLastEntryTime").ToString(),
+                    GPMaxReservation = _dao.ParseColumnValue(dbResponseInfo, "GPMaxReservation").ToString(),
+                    GroupPlan = _dao.ParseColumnValue(dbResponseInfo, "GroupPlan").ToString(),
+                    Holiday = _dao.ParseColumnValue(dbResponseInfo, "Holiday").ToString(),
+                    InstagramLink = _dao.ParseColumnValue(dbResponseInfo, "InstagramLink").ToString(),
+                    LastEntryTime = _dao.ParseColumnValue(dbResponseInfo, "LastEntryTime").ToString(),
+                    LineNumber = _dao.ParseColumnValue(dbResponseInfo, "LineNumber").ToString(),
+                    RegularEntry = _dao.ParseColumnValue(dbResponseInfo, "RegularEntry").ToString(),
+                    RegularPrice = _dao.ParseColumnValue(dbResponseInfo, "RegularPrice").ToString(),
+                    Tax = _dao.ParseColumnValue(dbResponseInfo, "Tax").ToString(),
+                    TiktokLink = _dao.ParseColumnValue(dbResponseInfo, "TiktokLink").ToString(),
+                    TwitterLink = _dao.ParseColumnValue(dbResponseInfo, "TwitterLink").ToString(),
+                    VPLastEntryTiime = _dao.ParseColumnValue(dbResponseInfo, "VPLastEntryTiime").ToString(),
+                    VPMaxReservation = _dao.ParseColumnValue(dbResponseInfo, "VPMaxReservation").ToString()
+                };
+            }
+            return new ClubBasicInformationModelCommon();
+        }
+
+        public List<AllNoticeModelCommon> GetAllNoticeTabList(string cId)
+        {
+            string sp_name = "sproc_customer_club_detail @Flag='gan'";
+            sp_name += ",@ClubId=" + _dao.FilterString(cId);
+            var dbResponse = _dao.ExecuteDataTable(sp_name);
+            if (dbResponse != null && dbResponse.Rows.Count > 0) return _dao.DataTableToListObject<AllNoticeModelCommon>(dbResponse).ToList();
+            return new List<AllNoticeModelCommon>();
+        }
+
+        public List<AllScheduleModelCommon> GetAllScheduleTabList(string cId, string sFD)
+        {
+            string sp_name = "sproc_customer_club_detail @Flag='gas'";
+            sp_name += ",@ClubId=" + _dao.FilterString(cId);
+            sp_name += ",@FilterDate=" + _dao.FilterString(sFD);
+            var dbResponseInfo = _dao.ExecuteDataTable(sp_name);
+            if (dbResponseInfo != null && dbResponseInfo.Rows.Count > 0) return _dao.DataTableToListObject<AllScheduleModelCommon>(dbResponseInfo).ToList();
+            return new List<AllScheduleModelCommon>();
+
+        }
+
+        public List<PlanDetailModelCommon> GetPlanDetail(string cId)
+        {
+            string sp_name = "sproc_customer_club_detail @Flag='gpdl'";
+            sp_name += ",@ClubId=" + _dao.FilterString(cId);
+            var dbresponse = _dao.ExecuteDataTable(sp_name);
+            if (dbresponse != null && dbresponse.Rows.Count > 0) return _dao.DataTableToListObject<PlanDetailModelCommon>(dbresponse).ToList();
+            return new List<PlanDetailModelCommon>();
         }
         #endregion
     }

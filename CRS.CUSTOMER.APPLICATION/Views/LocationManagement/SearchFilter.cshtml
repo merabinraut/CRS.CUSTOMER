@@ -183,13 +183,14 @@
                     <div class="grid grid-cols-3 gap-[6px] mx-4  my-[8px]">
                         @for (int club = 0; (club < Model.ClubModel.Count && club < 6); club++)
                         {
-                            <a onclick="window.location.href ='@Url.Action("ClubDetail","LocationManagement", new {LocationId= Model.ClubModel[club].ClubLocationId, ClubId= Model.ClubModel[club].ClubId })'">
+                            @*<a onclick="window.location.href ='@Url.Action("ClubDetail","LocationManagement", new {LocationId= Model.ClubModel[club].ClubLocationId, ClubId= Model.ClubModel[club].ClubId })'">*@
+                            <a onclick="window.location.href ='@Url.Action("ClubDetail_V2","LocationManagement", new {LocationId= Model.ClubModel[club].ClubLocationId, ClubId= Model.ClubModel[club].ClubId })'">
                                 <div class="flex">
                                     <div style="border-radius: 6px; border: 1px solid #EDEDED; background: #FFF;"
                                          class=" flex flex-col w-full   px-[8px] py-[10px]">
                                         <div class="flex flex-row justify-center">
                                             <div class="h-[48px] w-[48px] object-fill   bg-[#ffffff]  flex flex-row justify-center">
-                                                <img class="h-[48px] w-[48px] object-fill border-[1px]  rounded-full "
+                                                <img class="h-[48px] w-[48px]  border-[1px]  rounded-full object-cover"
                                                      src="@Model.ClubModel[club].ClubLogo" alt="clublogo">
                                             </div>
                                         </div>
@@ -395,16 +396,16 @@
 
                         <form class="boxedconstellation mx-4">
                             <div class="flex flex-col   ">
-                                <div class="flex flex-row flex-wrap mb-[16px]  gap-[12px]">
+                                <div class="grid grid-cols-3  mb-[16px]  gap-4">
                                     @{
                                         var ConstellationImage = "";
                                         foreach (var item in ViewBag.HostConstellationGroup as List<CRS.CUSTOMER.SHARED.StaticDataCommon>)
                                         {
                                             ConstellationImage = "/Content/assets/images/customer/Constellation/" + item.ExtraData1.ToString().ToLower() + ".svg";
                                             <input type="radio" id="zodiac_@item.Value" name="hostConstellationGroup" value="@item.Value">
-                                            <label id="hostConstellationGroupLebal" for="zodiac_@item.Value">
+                                            <label id="hostConstellationGroupLebal" for="zodiac_@item.Value" style="font-size:12px; font-weight:400">
                                                 @item.Text <img class="h-[3px] w-[3px] object-fill  rounded-full "
-                                                                src="@ConstellationImage" alt="@item.ExtraData1.ToLower()">
+                                                                src="@ConstellationImage" alt="@item.ExtraData1.ToLower()" style="height:24px; width:24px" >
                                             </label>
                                         }
                                     }

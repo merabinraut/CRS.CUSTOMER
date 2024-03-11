@@ -50,6 +50,7 @@
                         </svg>
                     </div>
                     <div style="color: #666666" id="selected-locationlabel-id">
+                        @(string.IsNullOrEmpty(ViewBag.LocationLabel) ? "場所" : ViewBag.LocationLabel)
                     </div>
                 </div>
 
@@ -72,7 +73,7 @@
                 </div>
             </div>
             <div style="background-color: #EEEEEE;  margin-left:15px;margin-right:15px; margin-top:8px; "
-                 class="flex flex-row justify-between text-[14px] py-[8px] mx-[15px] rounded-[4px] border-black  ">
+                 class="flex flex-row justify-between text-[14px] py-[8px] mx-[15px] rounded-[4px] border-black" onclick="InitiateDateTimeFilterPopupFunction()">
                 <div class="flex flex-row gap-[4px] items-center  ">
                     <div class="pl-[8px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
@@ -81,8 +82,8 @@
                         </svg>
 
                     </div>
-                    <div style="color: #666666 ; ">
-                        2024/01/01
+                    <div style="color: #666666;" id="main-date-id">
+                        @(string.IsNullOrEmpty(ViewBag.Date) ? "日付" : ViewBag.Date)
                     </div>
                 </div>
                 <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
@@ -93,8 +94,8 @@
                                   fill="#B08194" />
                         </svg>
                     </div>
-                    <div style="color: #666666">
-                        19:00
+                    <div style="color: #666666" id="main-time-id">
+                        @((string.IsNullOrEmpty(ViewBag.Time)) ? "時間" : ViewBag.Time)
                     </div>
                 </div>
                 <div class="flex flex-row gap-[4px]  items-center  ">
@@ -104,17 +105,20 @@
                                   fill="#B08194" />
                         </svg>
                     </div>
-                    <div style="color: #666666 ; margin-right:30px;">
-                        人数
+                    <div style="color: #666666 ; margin-right:30px;" id="main-noofpeople-id">
+                        @((string.IsNullOrEmpty(ViewBag.NoOfPeople)) ? "人数" : ViewBag.NoOfPeople)
                     </div>
                 </div>
             </div>
-            <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px; "
-                 class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]  ">
-                <div class="my-[12px] text-[12px] font-[700] text-[#FFF]">
-                    検索する
+            @{
+                var disableClickClass = "disable-click";
+                disableClickClass = (!string.IsNullOrEmpty(ViewBag.Date) || !string.IsNullOrEmpty(ViewBag.Time) || !string.IsNullOrEmpty(ViewBag.NoOfPeople)) ? "" : disableClickClass;
+                <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] @disableClickClass" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
+                    <div class="my-[12px] text-[12px] font-[700] text-[#FFF]">
+                        検索する
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>
@@ -173,8 +177,7 @@
         @{
             if (Model.FilteredClubModel.Count <= 0)
             {
-                <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center"
-                     style="height:calc(100vh - 47px)">
+                <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center">
                     <div class="text-[#18181B] font-semibold mt-12 text-center">
                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
                     </div>
@@ -185,40 +188,48 @@
                 foreach (var item in Model.FilteredClubModel)
                 {
                     <div>
-                        <section class="tags flex flex-wrap pt-3 pb-2 gap-2 px-4 items-center ">
-                            @if (!string.IsNullOrEmpty(item.Tag1))
+                        <section class="tags flex flex-wrap flex-row pt-3 pb-2 gap-2 px-4 items-center ">
+                         @*   @if (!string.IsNullOrEmpty(item.Tag1))
                             {
-                                <div style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
+                                <span style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
                                     <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
                                     @item.Tag1
-                                </div>
+                                </span>
+                            }*@
+                        <div class=" flex self-center gap-0.5 no-scrollbar " style="overflow-x:scroll">
+                            @if (!string.IsNullOrEmpty(item.Tag1))
+                            {
+                                <span style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
+                                    <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
+                                    @item.Tag1
+                                </span>
                             }
-                            <div class=" flex self-center gap-0.5  ">
-                                @if (!string.IsNullOrEmpty(item.Tag2))
-                                {
-                                    <span class="  lg:text-[9px] text-xs   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
-                                        @item.Tag2
-                                    </span>
-                                }
-                                @if (!string.IsNullOrEmpty(item.Tag3))
-                                {
-                                    <span class="  lg:text-[9px] text-xs   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
-                                        @item.Tag3
-                                    </span>
-                                }
-                                @if (!string.IsNullOrEmpty(item.Tag4))
-                                {
-                                    <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
-                                        @item.Tag4
-                                    </span>
-                                }
-                                @if (!string.IsNullOrEmpty(item.Tag5))
-                                {
-                                    <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
-                                        @item.Tag5
-                                    </span>
-                                }
-                            </div>
+
+                            @if (!string.IsNullOrEmpty(item.Tag2))
+                            {
+                                <span class="  lg:text-[9px] text-xs   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
+                                    @item.Tag2
+                                </span>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Tag3))
+                            {
+                                <span class="  lg:text-[9px] text-xs   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
+                                    @item.Tag3
+                                </span>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Tag4))
+                            {
+                                <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
+                                    @item.Tag4
+                                </span>
+                            }
+                            @if (!string.IsNullOrEmpty(item.Tag5))
+                            {
+                                <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
+                                    @item.Tag5
+                                </span>
+                            }
+                        </div>
                         </section>
 
                         <!-- club name -->
@@ -231,7 +242,7 @@
                                              class="w-full h-full" />
                                     </div>
 
-                                    <div class="flex flex-col ">
+                                    <div class="flex flex-col " style="gap:4px">
                                         <div class="flex gap-1 text-base items-center  font-semibold">
 
                                             <div style="line-height: 100%;" class="text-[14px] font-[700] items-start "
@@ -251,18 +262,21 @@
                             </a>
 
 
-                            <div class=" w-6 h-6 flex flex-col justify-center items-center  p-1  scale-90">
-                                <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer">
-                                    <div>
-                                        @if (item.IsBookmarked.ToUpper() == "Y")
-                                        {
+                            <div class=" w-6 h-6 flex flex-col justify-center items-center   scale-90">
+                                <div class="flex flex-col justify-center items-center hover:cursor-pointer">
+                                    @if (item.IsBookmarked.ToUpper() == "Y")
+                                    {
+                                        <div onclick="RemoveBookmark('@item.ClubId','','club')">
                                             <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[24px] w-[24px]" alt="filled bookmark" />
-                                        }
-                                        else
-                                        {
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div onclick="AddBookmark('@item.ClubId','','club')">
                                             <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[24px] w-[24px]" alt="not filled bookmark" />
-                                        }
-                                    </div>
+                                        </div>
+                                    }
+
                                     <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
                                         保存
                                     </div>
@@ -272,11 +286,14 @@
 
                         <!-- photo -->
                         <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5">
+
                             @foreach (var item2 in item.HostGalleryImage)
                             {
                                 <div class=" ">
                                     <!-- onclick="OpenImagePopup('@item2')">-->
-                                    <img src="@item2"
+
+
+                                    <img src="@item2 "
                                          class="aspect-square object-cover h-[120px] w-full" alt="host image" />
                                 </div>
                             }
@@ -346,20 +363,20 @@
                                     </div>
                                     if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                                     {
-                                        <div class="bg-[#BCB08A] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
+                                        <div class="bg-[#BCB08A] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center" style="background: #BCB08A">
                                             @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
                                         </div>
                                     }
                                     else
                                     {
-                                        <div class="bg-[#D7D7D7] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center">
-                                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Unreservable
+                                        <div class="bg-[#D7D7D7] text-white rounded-[2px] text-xs w-[100px] h-[18px] flex items-center justify-center" style="background: #D7D7D7">
+                                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
                                         </div>
                                     }
                                 }
                             </div>
-                            <button class="btn-gradient">
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
+                            <button class="btn-gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.BookNowSearch
                             </button>
                         </div>
                         <!-- location -->
@@ -393,9 +410,7 @@
 </div>
 @section scripts
 {
-    <script>
-        function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
-        }
-    </script>
+    <script>function ClubDetailActionFunction(i, j) {
+            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
+        }</script>
 }

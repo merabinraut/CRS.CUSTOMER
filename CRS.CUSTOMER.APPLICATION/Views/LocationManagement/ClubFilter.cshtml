@@ -127,12 +127,12 @@
                                     <div class="h-[48px] w-[48px] object-fill   bg-[#ffffff]  flex flex-row justify-center">
                                         @if (!string.IsNullOrEmpty(item.ClubLogo))
                                         {
-                                            <img class="h-[48px] w-[48px] object-fill border-[1px]  rounded-full "
+                                            <img class="h-[48px] w-[48px]  border-[1px]  rounded-full object-cover "
                                                  src="@item.ClubLogo" alt="clublogo">
                                         }
                                         else
                                         {
-                                            <img class="h-[48px] w-[48px] object-fill border-[1px]  rounded-full "
+                                            <img class="h-[48px] w-[48px] object-cover border-[1px]  rounded-full "
                                                  src="~/Content/assets/images/customer/clublogo.jpeg" alt="clublogo">
                                         }
                                     </div>
@@ -163,7 +163,7 @@
     @if (Model.Count <= 0)
     {
         <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center"
-             style="height:calc(100vh - 47px)">
+           >
             <div class="text-[#18181B] font-semibold mt-12 text-center">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
             </div>
@@ -240,7 +240,7 @@
                     {
                         <div class=" " onclick="OpenImagePopup('@item2')">
                             <img src="@item2"
-                                 class="aspect-square object-fill h-[182px] w-full" />
+                                 class="aspect-square  h-[182px] w-full object-cover" />
                         </div>
                     }
 
@@ -311,7 +311,8 @@
                             var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
                             if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
                             {
-                                <div onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName','@item2.FullDate')">
+                                @*<div onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName','@item2.FullDate')">*@
+                                <div onclick="InitiateClubReservationFunction('@item.ClubId','@item2.FullDate' )">
                                     @item2.Date <div class="flex justify-center mt-1">
                                         <img src="@imageURL" class="h-[11px] w-[11px]">
                                     </div>
@@ -356,13 +357,14 @@
                             else
                             {
                                 <div class="bg-[#D7D7D7] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Unreservable
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
                                 </div>
                             }
                         }
                     </div>
 
-                    <button class="btn-gradient" onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName')">
+                    @*<button class="btn-gradient" onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName')">*@
+                    <button class="btn-gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
                     </button>
                 </div>
@@ -403,8 +405,7 @@
             } else {
                 x.style.display = "none";
             }
-        }
-    </script>
+        }</script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
@@ -439,7 +440,7 @@
             window.location.href = searchUrl;
         }
         function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail?LocationId=" + i + "&&ClubId=" + j;
+            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }
 
         function handleAddBookmarks(clubId, hostId, agentType) {
@@ -453,13 +454,13 @@
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                        //console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                   // console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });
@@ -476,13 +477,13 @@
                         location.reload();
                     } else {
                         // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
+                       // console.log('Error: ' + result.message);
                         location.reload();
                     }
                 },
                 error: function () {
                     // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
+                    //console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });

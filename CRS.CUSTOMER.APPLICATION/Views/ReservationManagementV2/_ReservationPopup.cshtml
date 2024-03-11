@@ -2,8 +2,26 @@
 <!-- drawer component -->
 @*<div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform "
     tabindex="-1" aria-labelledby="drawer-bottom-label">*@
+<style>
+    .waitingMessageWrapper {
+        border-radius: 4px;
+        background: #FFEDED;
+        margin-top: 16px;
+        /*display: none;*/
+    }
+
+    .waitingMessage {
+        color: #000;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: "Noto Sans";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+</style>
 <div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform"
-     tabindex="-1" aria-labelledby="drawer-bottom-label" aria-hidden="true">
+     tabindex="-1" aria-labelledby="drawer-bottom-label" aria-hidden="true" >
     <!-- <div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform translate-y-full
     " tabindex="-1" aria-labelledby="drawer-bottom-label"> -->
     <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
@@ -13,7 +31,7 @@
                 <i class="fa-solid fa-chevron-down"></i>
             </div>
         </div>
-        <div class="px-4 pt-6 pb-6 bg-white  " style="padding-top: 24px; border-radius: 6px 6px 0px 0px;">
+        <div class="px-4 pt-6 bg-white  " style="padding-top: 24px; border-radius: 6px 6px 0px 0px;">
             <div class="text-sm text-[#333] font-bold mb-3">カレンダー</div>
             <div class="pb-3 border-b-[1px] border-[#EFEFEF]">
                 <div id="datepicker" style="margin-top:10px"></div>
@@ -106,17 +124,34 @@
                             </div>
                         </div>
                         <!----------------------------------------------People--------------------------------------------------------------->
+
+
+
+                    </div>
+
+                    <div id="waitingMessageWrapper" style="display:none">
+                        <div class="flex p-2 gap-2 items-center waitingMessageWrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 1.5C4.416 1.5 1.5 4.416 1.5 8C1.5 11.584 4.416 14.5 8 14.5C11.584 14.5 14.5 11.584 14.5 8C14.5 4.416 11.584 1.5 8 1.5ZM8 2.5C8.72252 2.49912 9.43811 2.64079 10.1058 2.91688C10.7735 3.19297 11.3801 3.59806 11.891 4.10896C12.4019 4.61985 12.807 5.22652 13.0831 5.8942C13.3592 6.56189 13.5009 7.27748 13.5 8C13.5009 8.72252 13.3592 9.43811 13.0831 10.1058C12.807 10.7735 12.4019 11.3801 11.891 11.891C11.3801 12.4019 10.7735 12.807 10.1058 13.0831C9.43811 13.3592 8.72252 13.5009 8 13.5C7.27748 13.5009 6.56189 13.3592 5.8942 13.0831C5.22652 12.807 4.61985 12.4019 4.10896 11.891C3.59806 11.3801 3.19297 10.7735 2.91688 10.1058C2.64079 9.43811 2.49912 8.72252 2.5 8C2.49912 7.27748 2.64079 6.56189 2.91688 5.8942C3.19297 5.22652 3.59806 4.61985 4.10896 4.10896C4.61985 3.59806 5.22652 3.19297 5.8942 2.91688C6.56189 2.64079 7.27748 2.49912 8 2.5ZM7.5 5V6H8.5V5H7.5ZM7.5 7V11H8.5V7H7.5Z"
+                                      fill="black" />
+                            </svg>
+                            <p class="waitingMessage">
+                                注意: 3名以上のお客様の座席はクラブの座席管理に従って分けられる可能性があります。
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="flex items-center  gap-[6px] py-[11px] px-4"
                  style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
                 <button class="btn" type="button" onclick="CloseInitiatedClubReservationFunction();">
-                    キャンセル
+                    @*キャンセル*@
+                    戻る
                 </button>
                 <button class="btn btn-primary" onclick="SubmitClubReservationFunction();">
                     <a class="h-full w-full">
-                        検索
+                        @*検索*@
+                        次
                     </a>
                 </button>
             </div>
@@ -126,6 +161,7 @@
 
 <form action="/ReservationManagementV2/Plan" method="get" id="club-reservation-id">
     <input type="text" id="club-id" name="ClubId" value="@Model.ClubId" required hidden />
+    @*<input type="text" id="date-id" name="Date" value="" required hidden />*@
     <input type="text" id="date-id" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" required hidden />
     <input type="text" id="time-id" name="Time" value="@Model.ClubReservableTimeModel[0].Time" required hidden />
     <input type="text" id="noofpeople-id" name="NoOfPeople" value="1" required hidden />

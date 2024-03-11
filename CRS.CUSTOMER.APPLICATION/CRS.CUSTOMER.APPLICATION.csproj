@@ -284,6 +284,8 @@
     <Compile Include="Models\SearchFilterManagement\ClubSearchManagementModel.cs" />
     <Compile Include="Models\SearchFilterManagement\HostSearchManagementModel.cs" />
     <Compile Include="Models\SearchFilterManagement\SearchFilterViewModel.cs" />
+    <Compile Include="Models\Search\MapModel.cs" />
+    <Compile Include="Models\Search\SearchFilterModel.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
@@ -601,6 +603,7 @@
     <EmbeddedResource Include="Resources\Resource.Ja.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Ja.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -691,6 +694,11 @@
     <Content Include="Views\DashboardV2\Preference.cshtml" />
     <Content Include="Views\Search\ClubSearchResult.cshtml" />
     <Content Include="Views\Search\HostSearchResult.cshtml" />
+    <Content Include="Views\Shared\_DateTimeFilterPopUp.cshtml" />
+    <Content Include="Views\LocationManagement\ClubDetail_V2.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\ClubFilter.cshtml" />
+    <Content Include="Views\Search\HostFilter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
