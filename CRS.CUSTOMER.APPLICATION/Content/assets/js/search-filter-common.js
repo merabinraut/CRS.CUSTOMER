@@ -859,6 +859,8 @@ function initPeopleFunction2() {
 function CloseInitiatedDateTimeFilterPopupFunction() {
     var element = document.getElementById('drawer-date-time');
     element.classList.add('translate-y-full');
+    var removeElement = document.getElementById("ui-datepicker-div")
+    removeElement.style.setProperty("display", "none", "important");
 }
 
 function SubmitDateTimeFilterFunction() {

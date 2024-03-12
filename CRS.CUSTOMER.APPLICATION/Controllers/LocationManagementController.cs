@@ -1,4 +1,5 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
+using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.Dashboard;
 using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationHistory;
@@ -308,6 +309,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 string dayName = date.ToString("ddd");
                 item_schedule.Day = formattedDayOfWeek;
                 item_schedule.DayName = dayName;
+                item_schedule.ScheduleImage = ImageHelper.ProcessedImage(item_schedule.ScheduleImage);
             }
             responseModel.GetScheduleDDL = GetScheduleList();
             var dbPlanDetailRes = _business.GetPlanDetail(cId);
