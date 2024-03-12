@@ -177,9 +177,10 @@
         @foreach (var item2 in Model.ClubWeeklyScheduleList)
         {
             var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
-            if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
+            if (string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
             {
-                <div onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng','@item2.FullDate')">
+                @*<div onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng','@item2.FullDate')">*@
+                <div onclick="InitiateClubReservationFunction('@Model.ClubId','@item2.FullDate' )">
                     @item2.Date <div class="flex justify-center mt-1">
                         <img src="@imageURL" class="h-[11px] w-[11px]">
                     </div>
@@ -923,7 +924,8 @@
                 <!-- <div class="box mt-2"></div> -->
             </div>
             <!-- </div> -->
-            <script>$(document).ready(function () {
+            <script>
+                $(document).ready(function () {
                     $('.store-host-carousel').owlCarousel({
                         margin: 10,
                         loop: true,
@@ -1213,7 +1215,8 @@
                         <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
                     </div>
                 </div>*@
-            <script>// Function to open a specific modal
+            <script>
+                // Function to open a specific modal
                 function openModal(modalId) {
                     var modal = document.getElementById(modalId);
                     if (modal) {
@@ -1689,7 +1692,8 @@
 @section scripts
 {
     <script src="~/Content/CustomHelper.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function () {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";
         });
@@ -1708,14 +1712,15 @@
             });
             //localStorage.clear();
         })</script>
-    <script>function ClubReservationActionFunction(i, j, k) {
-            DataStorageFunction(i, j);
-            window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
-        }
-        const DataStorageFunction = (i, j) => {
-            localStorage.setItem("ClubId", EncryptParameter(i));
-            localStorage.setItem("ClubName", EncryptParameter(j));
-        }
+    <script>
+        //function ClubReservationActionFunction(i, j, k) {
+        //    DataStorageFunction(i, j);
+        //    window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
+        //}
+        //const DataStorageFunction = (i, j) => {
+        //    localStorage.setItem("ClubId", EncryptParameter(i));
+        //    localStorage.setItem("ClubName", EncryptParameter(j));
+        //}
 
         function handleAddBookmarks(clubId, hostId, agentType) {
             ActivateLoaderFunction();
@@ -1770,7 +1775,8 @@
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "none";
         }</script>
-    <script>const shareButton = document.querySelector("#shareButton");
+    <script>
+        const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -1784,7 +1790,8 @@
                 toastr.info('Web Share API is not supported in this browser.');
             }
         });</script>
-    <script>function OpenImagePopup(ImageURL) {
+    <script>
+        function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");
@@ -1798,10 +1805,12 @@
             modal.style.display = "none";
         }</script>
 
-    <script>function openModal() {
+    <script>
+        function openModal() {
             console.log("test");
         }</script>
-    <script>// Function to open a specific modal
+    <script>
+        // Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -1833,7 +1842,8 @@
             }
         }</script>
 
-    <script>$(document).ready(function () {
+    <script>
+$(document).ready(function () {
             $("#scheduleDropdown").change(function () {
                 localStorage.setItem('SelectedDate', $(this).val());
                 var selectedValue = localStorage.getItem('SelectedDate');
@@ -1850,7 +1860,8 @@
                 });
             });
         });</script>
-    <script>$('#notice_id').click('click', function () {
+    <script>
+        $('#notice_id').click('click', function () {
             var activeElement = document.querySelector('.tab-link.active');
             if (activeElement) {
                 activeElement.classList.remove('active');
@@ -1874,7 +1885,8 @@
         });</script>
 
     <!--make clicked the tab after reload-->
-    <script>$('.tab-button-plane').click('click', function () {
+    <script>
+        $('.tab-button-plane').click('click', function () {
             var id = $(this).attr('id');
             var name = $(this).text().trim();
             localStorage.setItem("tablink-id", id);
