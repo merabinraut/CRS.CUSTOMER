@@ -3,7 +3,7 @@
     ViewBag.Title = "Plan";
     Layout = "~/Views/Shared/_Reservation-Layout-V2.cshtml";
     var ClubDetailModel = Model.ClubDetailModel;
-    
+
 }
 
 <div class="flex flex-col justify-between h-screen relative pb-8">
@@ -60,7 +60,7 @@
                         bool isFirstItem = true;
                         foreach (var item in Model.PlanDetailModel)
                         {
-                            var amount =Convert.ToDecimal( item.PlanPrice).ToString("#,##0");
+                            var amount = Convert.ToDecimal(item.PlanPrice).ToString("#,##0");
                             <div class="plan-card">
                                 <input class="planid-class" value="@item.PlanId" hidden />
                                 @if (isFirstItem)
@@ -86,7 +86,7 @@
                                         }
                                     </div>
                                     <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class" data-info="@item.PlanPrice">
-                                        @string.Concat("¥",@amount )
+                                        @string.Concat("¥", @amount)
                                     </div>
                                     <div class="flex items-center gap-2">
                                         <div class="flex items-center gap-1">
@@ -94,7 +94,7 @@
                                                 <i class="las la-clock"></i>
                                             </div>
                                             <div class="text-[11px] text-[#282828] font-futura PlanTime-class" data-info="@item.PlanTime">
-                                                @string.Concat(item.PlanTime.Replace("Minute", "").Trim(), "分制")
+                                                @item.PlanTime
                                             </div>
                                         </div>
                                         <div class="flex items-center gap-1">
