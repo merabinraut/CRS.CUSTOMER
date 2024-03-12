@@ -307,11 +307,11 @@
                                 <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
                                 <p style="line-height:12px; " class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
                                     @*@Model.Location[i].LocationName*@
-                                    @beforeSlash
+                                    @afterSlash
                                     <br>
                                     <span style="line-height: 100%;margin-top:4px " class="locationdown text-[8px] leading-[8px] font-[500] pt-[4px]  text-center">
                                         @*( @Model.Location[i].LocationName )*@
-                                        ( @afterSlash )
+                                        ( @beforeSlash )
                                     </span>
                                 </p>
                             </div>
@@ -495,9 +495,9 @@
                             </div>
                             <div>
                                 <div class="flex w-full items-center text-warmgray-1 text-[12px] gap-[6px] mb-4">
-                                    
+
                                     <span style="width:36px">プラン</span>
-                                    <hr class=" bg-[#A09E91]" style="width:180px"> 
+                                    <hr class=" bg-[#A09E91]" style="width:180px">
                                 </div>
                                 <div class="flex justify-center gap-4 mb-[25px]">
                                     <div class="grid text-center w-full">
@@ -738,9 +738,9 @@
             </div>
         </div>
     </div>
-<div style="background-color: #e2e2e2; height:12px" class=" h-[12px]">
-    
-</div>
+    <div style="background-color: #e2e2e2; height:12px" class=" h-[12px]">
+
+    </div>
 </div>
 @*<div class="loader" id="loader-id">
         <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
@@ -1061,8 +1061,7 @@
 <!--#endregion-->
 @section scripts
 {
-    <script>
-        $(document).ready(function () {
+    <script>$(document).ready(function () {
             EnableLoaderFunction();
             $('.owl-carousel').owlCarousel({
                 center: true,
@@ -1096,8 +1095,7 @@
             GetRecommendedClubAndHost();
             GetMainPageClubHost();
             setTimeout(DisableLoaderFunction, 5000);
-        });
-    </script>
+        });</script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&libraries=geometry&callback=initMap" async defer></script>
     <script>
         var CurrentLocationId = 0;
@@ -1293,20 +1291,16 @@
     </script>
     <!----------------------------------------------------Location---------------------------------------------------->
     <!--#region 1-->
-    <script>
-        function LocationFunction(i) {
+    <script>function LocationFunction(i) {
             window.location.href = "/LocationManagement/Index?LocationId=" + i;
         }
         function ClubDetailActionFunction(i, j) {
             window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
-        }
-    </script>
+        }</script>
     <!--#endregion-->
 
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-    <script>
-
-        // Call the function for the hour and minute elements
+    <script>// Call the function for the hour and minute elements
         const hourScroll = document.querySelector('.hours-scroll');
         const hourShadow = document.getElementById('hourShadow');
         const hourShadow2 = document.getElementById('hourShadow2');
@@ -1357,8 +1351,6 @@
         // Function to handle minute value
         function handleMinute2(value) {
             $('#minuteShadowval2').val(value.trim());
-        }
-
-    </script>
+        }</script>
 }
 
