@@ -283,7 +283,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 DateTime date = DateTime.ParseExact(notice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
                 // Get the day name
-                notice_item.Day = date.ToString("dddd");
+                notice_item.Day = date.ToString("ddd");
             }
             var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);
             responseModel.GetClubBasicInformation = dbBasicInfoResponse.MapObject<ClubBasicInformationModel>();
@@ -294,7 +294,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 // Parse the date string using the specified format and culture
                 DateTime date = DateTime.ParseExact(allNotice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
                 // Get the day name
-                allNotice_item.DayName = date.ToString("dddd");
+                allNotice_item.DayName = date.ToString("ddd");
 
             }
             var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);
