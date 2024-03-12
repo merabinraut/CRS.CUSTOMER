@@ -52,7 +52,7 @@
                                  class="w-full h-full" />
                         </div>
 
-                        <div class="flex flex-col ">
+                        <div class="flex flex-col gap-1 ">
                             <div class="flex gap-1 text-base items-center  font-semibold">
 
                                 <div style="line-height: 100%;" class="text-[14px] font-[700] items-start "
@@ -77,13 +77,13 @@
                         @if (item.IsBookmarked.ToUpper() == "Y")
                         {
                             <div onclick="RemoveBookmark('@item.ClubId','','club')">
-                                <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[24px] w-[24px]" alt="filled bookmark" />
+                                <img src="~/Content/assets/images/customer/bookmark-filled.svg" class="h-[24px] w-[24px]" alt="filled bookmark" />
                             </div>
                         }
                         else
                         {
                             <div onclick="AddBookmark('@item.ClubId','','club')">
-                                <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[24px] w-[24px]" alt="not filled bookmark" />
+                                <img src="~/Content/assets/images/customer/bookmark-notfilled.svg" class="h-[24px] w-[24px]" alt="not filled bookmark" />
                             </div>
                         }
 
@@ -187,9 +187,9 @@
             </div>
             <!-- location -->
         </div>
-        @*<div style="background-color: #e8e8e8;" class=" h-[8px] my-[0px] py-[0px]">
+        <div style="background-color: #F8F8F8;" class=" h-[8px] my-[0px] py-[0px]">
 
-        </div>*@
+        </div>
     }
     <div style="background-color: #F6F6F6; height:42px"
          class="flex flex-row gap-[4px] justify-center h-[24px] items-center my-[0px] pb-[12px] ">

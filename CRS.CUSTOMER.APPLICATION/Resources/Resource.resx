@@ -545,6 +545,9 @@
     <value>Hosts recommended for you</value>
     <comment>Host Search</comment>
   </data>
+  <data name="HostClubList" xml:space="preserve">
+    <value>Host Club List</value>
+  </data>
   <data name="HostClubs" xml:space="preserve">
     <value>host clubs</value>
     <comment>Search Filter</comment>

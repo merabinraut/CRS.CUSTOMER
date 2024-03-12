@@ -256,7 +256,7 @@
 </div>
 <div class="h-[180px]  ">
 </div>
-<div style="height:12px; background-color: #e2e2e2;" class=" w-full">
+<div style="height:12px; background-color: #F8F8F8;" class=" w-full">
 </div>
 <div style="border-top: 1px solid #EDEDED;border-bottom: 1px solid #EDEDED;background: #FFF;">
     <div class="flex mx-[16px]   flex-row py-[12px]">
@@ -420,7 +420,7 @@
 <!----------------------------------------------------Plan Section---------------------------------------------------->
 <!-- #region Plan section -->
 <div class="flex flex-col overflow-hidden bg-[#EFDDE4]  py-[25px]">
-    <p class="text-[14px] pl-[16px] flex-none  font-[700]">
+    <p class="text-[14px] pl-[16px] flex-none  font-[700]" style="color:#000">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.HoslogLimitedPlan
     </p>
     <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-2 py-4 pt-[70px]">
@@ -541,7 +541,7 @@
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Top_Reviews
     </div>
 
-    <div style="background-color: #F8F8F8" class=" pb-[16px] flex overflow-x-auto no-scrollbar px-4 gap-4 mt-[12px]">
+    <div style="background-color: #FFF" class=" pb-[16px] flex overflow-x-auto no-scrollbar px-4 gap-4 mt-[12px]">
         <div style="border-radius: 6px; width: 313px; border: 1px solid #EAECF0;" class="  bg-[#F8F8F8] ">
             <div style="border-radius: 6px;border: 1px solid #EAECF0; background: #FFF;box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.04);"
                  class="w-[313px] h-full pb-[14px]">
@@ -613,6 +613,67 @@
                         <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">#イケメンがいた</div>
 
                     </div>
+                    @*test*@
+                <div class="px-4 py-[11px] ">
+                    <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
+                        <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
+                                <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
+                                      fill="#7E6D5E" />
+                            </svg>
+                        </span>
+                        <div id="tooltip-right" role="tooltip"
+                             class="absolute z-10 invisible inline-block px-[6px] py-[6px] font-medium text-white text-[7px] w-[200px] bg-gray-900 rounded-lg leading-[140%] opacity-0 tooltip "
+                             style="background: rgba(41, 47, 51, 0.95);">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon <div class="tooltip-arrow" data-popper-arrow>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
+
+
+                        <div>
+                            <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
+
+                                <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                     src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     alt="">
+
+
+                                <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
+                            </div>
+                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">@@後藤聖...</div>
+                        </div>
+
+
+                        <div id="tooltip-right" role="tooltip"
+                             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white text-[7px] w-[200px] rounded-lg leading-[140%] opacity-0 tooltip "
+                             style="background: rgba(41, 47, 51, 0.95);">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon<div class="tooltip-arrow" data-popper-arrow>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div class="relative flex justify-center items-center flex-col">
+                                <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                     src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     alt="">
+                            </div>
+                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center">@@エイト...</div>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div class="relative flex justify-center items-center flex-col">
+                                <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                     src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     alt="">
+                            </div>
+                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center">@@エイト...</div>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+                    @*test end*@
                     <div class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
                         <div>
                             <img src="~/Content/assets/images/customer/ACQUAFUKUOKA.jpg"
@@ -713,32 +774,79 @@
                         <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">#イケメンがいた</div>
 
                     </div>
-                    <div class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
-                        <div>
-                            <img src="~/Content/assets/images/customer/ACQUALABEL.jpg"
-                                 class="h-[28px] w-[28px]   rounded-full">
+                    <div class="px-4 py-[11px] ">
+                        <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
+                            <span>
+                            @*    <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">*@
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
+                                        <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
+                                              fill="#7E6D5E" />
+                                    </svg>
+                               @* </span>*@
+                            </span>
                         </div>
-                        <div>
-                            <div class="text-[10px] font-bold text-charcolBlack ">ACQUA LABEL</div>
-                            <div class="text-[8px] text-[#A09E91] flex gap-[2px] items-center">
-                                <svg class="svg-inline--fa fa-location-dot text-primary" aria-hidden="true"
-                                     focusable="false" data-prefix="fas" data-icon="location-dot" role="img"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-                                    <path fill="currentColor"
-                                          d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
-                                    </path>
-                                </svg>
-                                <!-- <i class="fa-solid fa-location-dot text-primary"></i> Font Awesome fontawesome.com -->
-                                歌舞伎町
+                        <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
+                            <div>
+                                <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
+
+                                    <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                                         alt="">
+
+
+                                    <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
+                                </div>
+                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">@@後藤聖...</div>
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <div class="relative flex justify-center items-center flex-col">
+                                    <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                                         alt="">
+                                </div>
+                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center">@@エイト...</div>
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <div class="relative flex justify-center items-center flex-col">
+                                    <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                                         alt="">
+                                </div>
+                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center">@@エイト...</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                        <div class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+
+                            <div>
+                                <img src="~/Content/assets/images/customer/ACQUALABEL.jpg"
+                                     class="h-[28px] w-[28px]   rounded-full">
+                            </div>
+                            <div>
+                                <div class="text-[10px] font-bold text-charcolBlack ">ACQUA LABEL</div>
+                                <div class="text-[8px] text-[#A09E91] flex gap-[2px] items-center">
+                                    <svg class="svg-inline--fa fa-location-dot text-primary" aria-hidden="true"
+                                         focusable="false" data-prefix="fas" data-icon="location-dot" role="img"
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                              d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
+                                        </path>
+                                    </svg>
+                                    <!-- <i class="fa-solid fa-location-dot text-primary"></i> Font Awesome fontawesome.com -->
+                                    歌舞伎町
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
             </div>
         </div>
     </div>
-    <div style="background-color: #e2e2e2; height:12px" class=" h-[12px]">
+    <div style="background-color: #F8F8F8; height:12px" class=" h-[12px]">
 
     </div>
 </div>
@@ -888,7 +996,7 @@
 <!-- search by preference   end  -->
 <!----------------------------------------------------Search by condtion---------------------------------------------------->
 <!----------------------------------------------------Other---------------------------------------------------->
-<div style="height:16px; background-color: #e2e2e2;" class=" w-full">
+<div style="height:16px; background-color: #F8F8F8;" class=" w-full">
 </div>
 <div class="flex flex-col ">
     <div>
@@ -1183,12 +1291,18 @@
                             const host = ResponseModel.RecommendedHostModel[i];
                             const hostImage = host.HostImage || '~/Content/assets/images/customer/demo-image.jpeg';
                             const clubLogo = host.ClubLogo || '~/Content/assets/images/customer/demo-image.jpeg';
+                            const unfilled = '/Content/assets/images/customer/favorite-unfilled.svg';
+                            const filled = '/Content/assets/images/customer/favorite-filled.svg';
                             recommendedHostContentHTML += `
                                 <a onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=${host.HostId}'">
                                     <div class="flex hover:cursor-pointer">
                                         <div style="border-radius: 4px; width:112px" class="w-[112px] h-auto flex flex-col justify-end text-center relative">
-                                            <div class="w-full flex justify-center">
+                                            <div class="w-full flex justify-center relative">
                                                 <img style="width:112px" class="w-[112px] h-[154px] object-cover rounded-[2px]" src="${hostImage}" alt="hostlogo" />
+                                                 <div class="absolute top-2 right-2" style="width: 24px; height: 24px;">
+                                                         <img src="${unfilled}" alt="unfilled"  style="width: 24px; height: 24px;" />
+                                                </div>
+     
                                             </div>
 
                                             <div style="background-color:rgba(0, 0, 0, 0.70); left:0.25px; border-radius: 0 0 2px 2px;" class="absolute w-[112px] h-[35px] flex flex-col right-[2px] left-[2px] py-[2px] px-[4px]">
