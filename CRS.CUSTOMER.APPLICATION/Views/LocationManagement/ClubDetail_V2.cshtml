@@ -37,7 +37,8 @@
 </div>
 <div class="h-[189px]">
     <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
-         style="height: 189px;" />
+        style="height: 189px;" />
+
 </div>
 <!-- section 1 -->
 <div class="px-2 pt-[12px] pb-2 flex gap-1">
@@ -198,7 +199,7 @@
 </div>
 <div class="">
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
-        <div class="flex tab-container-plane no-scrollbar bg-white gap-[14px] overflow-x-auto">
+        <div class="flex tab-container-plane no-scrollbar bg-white gap-[14px] overflow-x-auto" style="overflow-y:hidden">
             <button id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap active">店舗トップ</button>
             <button id="tab2Button" class="tab-button-plane tab-link  whitespace-nowrap">ホスト</button>
             <button id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap">レビュー</button>
@@ -1702,7 +1703,7 @@
         $(document).ready(function () {
             $('.owl-carousel').owlCarousel({
                 margin: 10,
-                loop: true,
+                loop: false,
                 autoWidth: true,
                 items: 4
             });

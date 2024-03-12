@@ -545,6 +545,9 @@
     <value>あなたにオススメのホスト</value>
     <comment>Host Search</comment>
   </data>
+  <data name="HostClubList" xml:space="preserve">
+    <value>ホストクラブ一覧</value>
+  </data>
   <data name="HostClubs" xml:space="preserve">
     <value>ホストクラブ</value>
     <comment>Search Filter</comment>
@@ -1042,7 +1045,7 @@
     <comment>Location Management/ Search Filter</comment>
   </data>
   <data name="Search Filter Placeholder" xml:space="preserve">
-    <value>店舗名、ホスト名、キーワードで検索</value>
+    <value>店舗名、ホスト名、キーワードで探す</value>
     <comment>Search Filter</comment>
   </data>
   <data name="Search Results" xml:space="preserve">
@@ -1058,7 +1061,7 @@
     <comment>Landing Page</comment>
   </data>
   <data name="See more" xml:space="preserve">
-    <value>もっと見る</value>
+    <value>続きを見る</value>
     <comment>Search Filter</comment>
   </data>
   <data name="Select" xml:space="preserve">

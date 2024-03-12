@@ -1087,6 +1087,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Host Club List.
+        /// </summary>
+        public static string HostClubList {
+            get {
+                return ResourceManager.GetString("HostClubList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to host clubs.
         /// </summary>
         public static string HostClubs {
