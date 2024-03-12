@@ -1110,7 +1110,7 @@
     <value>通り</value>
   </data>
   <data name="Strength of Alcohol" xml:space="preserve">
-    <value>お酒の強さ</value>
+    <value>お酒</value>
     <comment>Host Detail</comment>
   </data>
   <data name="Stripe" xml:space="preserve">
