@@ -86,6 +86,9 @@
     .owl-dots > .active {
         background: #E3A1A1;
     }
+    .locationSearch:focus{
+        outline:none;
+    }
 </style>
 <!-- #region Search -->
 <div class=" border border-[#D6CEB4] flex my-2 mx-4 rounded-[4px] search-input" onclick="redirectToSearchPage()">
@@ -95,7 +98,7 @@
                   fill="#BCB08A" />
         </svg>
     </span>
-    <input class="w-full text-xs text-[#BCB08A] "
+    <input class="w-full text-xs text-[#BCB08A] locationSearch "
            title="Search"
            type="text"
            placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Filter_Placeholder" readonly />
@@ -838,4 +841,27 @@
             var form = document.getElementById("host-pagination-form-id");
             form.submit();
         }</script>
+
+        <script>
+            $(document).ready(function () {
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 20) {
+                        $('#scrollToTopButton').fadeIn();
+                    } else {
+                        $('#scrollToTopButton').fadeOut();
+                    }
+                });
+
+            $('#scrollToTopButton').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+             });
+
+            $('.flex-col').on('click', function () {
+                $('.flex-col').removeClass('active');
+            $(this).addClass('active');
+             });
+         });
+    </script>
+   
 }
