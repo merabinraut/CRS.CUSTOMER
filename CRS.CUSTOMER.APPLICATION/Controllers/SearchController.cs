@@ -139,7 +139,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     HostNameJapanese = item.HostNameJapanese,
                     HostLogo = ImageHelper.ProcessedImage(item.HostImage),
                     ClubLocationId = item.LocationId.EncryptParameter(),
-                    //IsBookmarked = 
+                    IsBookmarked = item.IsBookmarked
                 });
             }
             if (NewHost)
