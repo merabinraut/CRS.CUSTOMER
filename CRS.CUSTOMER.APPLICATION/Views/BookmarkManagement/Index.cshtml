@@ -238,164 +238,166 @@
             {
                 foreach (var item in Model.BookmarkedHosts)
                 {
-                    <div class="flex flex-row gap-[16px] mx-[16px]">
-                        <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
-                            <div class="w-full flex justify-center" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
-                                <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
-                                     src="@item.HostImage" />
+                    <div class="flex flex-col border-b-[4px] border-[#E3E2DB] py-3  ">
+                        <div class="flex flex-row gap-[16px] mx-[16px]">
+                            <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
+                                <div class="w-full flex justify-center" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                                    <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
+                                         src="@item.HostImage" />
+                                </div>
+                                <div id="like" onclick="handleRemoveBookmarks('@item.ClubId','@item.HostId','host')">
+                                    <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                                </div>
                             </div>
-                            <div id="like" onclick="handleRemoveBookmarks('@item.ClubId','@item.HostId','host')">
-                                <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                            <div class="grid mt-[16px] mx-[16px] mb-[10px] grid-rows-7">
+                                <div style="line-height: 140%;" class="text-[10px]">
+                                    <p class="font-[700] text-[13px]">@item.HostName </p>
+
+                                    <p>誕生日 :<span> @item.DOB</span> </p>
+
+                                    <p>身長 :<span> @item.Height</span> </p>
+
+                                    <p>血液型 :<span> @item.BloodType</span> </p>
+
+                                    <p>星座 :<span> @item.ConstellationGroup</span> </p>
+
+                                    <p>出身地 :<span> @item.Address</span> </p>
+
+                                    <p>前職 :<span> @item.PreviousOccupation</span> </p>
+                                    <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
+
+                                </div>
+                                <div class="flex flex-row gap-1 items-center mb-[8px] mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+                                        <path d="M2.71459 7.28802L2.70677 7.27992L2.70002 7.27344L2.69991 7.27333L2.69977 7.2732L2.69972 7.27314L2.69946 7.2729L2.69551 7.26898C2.69096 7.26443 2.68308 7.25648 2.67238 7.24533C2.65094 7.223 2.6184 7.18812 2.57856 7.14233C2.49833 7.0501 2.39165 6.91721 2.28715 6.75669C2.06486 6.41524 1.87295 6.01061 1.87295 5.57856C1.87295 4.15772 3.00042 3.00912 4.34113 3.00912C5.48553 3.00912 6.23896 3.72054 6.56537 4.06389L7.00022 4.52129L7.43507 4.06389C7.76149 3.72054 8.51491 3.00912 9.65931 3.00912C11 3.00912 12.1275 4.15772 12.1275 5.57856C12.1275 6.01777 11.9411 6.4329 11.7225 6.76253C11.6159 6.92322 11.509 7.05249 11.4297 7.14051C11.3902 7.18425 11.3583 7.21705 11.3376 7.23769C11.3272 7.24799 11.3198 7.25519 11.3156 7.25915L11.3127 7.26192L11.3121 7.26241L11.3121 7.26247L11.3119 7.26261L11.3118 7.26271L11.2993 7.27409L11.2859 7.28802L7.00022 11.7279L2.71459 7.28802Z"
+                                              stroke="#D75A8B" stroke-width="1.2" />
+                                    </svg>
+                                    <p class="text-[10px]">
+                                        @item.LoveCount
+                                    </p>
+                                </div>
+                                <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]">
+                                    <div>
+                                        <img style="border: 1px solid #F1EEEE;" class="object-cover h-[32px] w-[32px] rounded-full "
+                                             src="@item.ClubLogo" alt="clublogo">
+                                    </div>
+                                    <div class="flex flex-col justify-center " style="width:55%">
+                                        <p style="line-height: 100%;" class="text-[10px] text-[#292F33] font-[700] text-clip ">
+                                            @item.ClubName
+                                        </p>
+                                        <p style="line-height: 100%;" class="text-[8px] text-[#A09E91] font-[400] text-clip ">
+                                            @item.ClubNameJap
+                                        </p>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="grid mt-[16px] mx-[16px] mb-[10px] grid-rows-7">
-                            <div style="line-height: 140%;" class="text-[10px]">
-                                <p class="font-[700] text-[13px]">@item.HostName </p>
-
-                                <p>誕生日 :<span> @item.DOB</span> </p>
-
-                                <p>身長 :<span> @item.Height</span> </p>
-
-                                <p>血液型 :<span> @item.BloodType</span> </p>
-
-                                <p>星座 :<span> @item.ConstellationGroup</span> </p>
-
-                                <p>出身地 :<span> @item.Address</span> </p>
-
-                                <p>前職 :<span> @item.PreviousOccupation</span> </p>
-                                <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
-
+                        </div>
+                        @*<div class="flex flex-col border-b-[4px] border-[#E3E2DB]  ">
+                        <div class="flex p-[16px] flex-row gap-[16px] ">
+                            <div id="hostcontainer">
+                                <div id="hostimage">
+                                    <img class="rounded-[6px] h-[180px] object-fill w-[128px]"
+                                         src="@host.HostImage" alt="host">
+                                </div>
+                                <div id="fav">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
+                                         fill="pink"
+                                         onclick="handleRemoveBookmarks('@host.ClubId','@host.HostId','host')"
+                                         class="cursor-pointer">
+                                        <g filter="url(#filter0_d_5748_18041)">
+                                            <circle cx="20" cy="20" r="13" fill="white" />
+                                        </g>
+                                        <path d="M14.7644 20.7106L14.7545 20.7007L14.7458 20.6927C14.7461 20.6929 14.746 20.6929 14.7457 20.6926L14.7456 20.6925L14.7407 20.6878C14.7353 20.6826 14.7258 20.6734 14.7129 20.6604C14.687 20.6344 14.6476 20.5937 14.5993 20.5402C14.5021 20.4323 14.3729 20.2772 14.2466 20.0901C13.9759 19.6891 13.75 19.2245 13.75 18.7354C13.75 17.109 15.0956 15.75 16.75 15.75C18.1523 15.75 19.0715 16.5896 19.4659 16.9896L20 17.5313L20.5341 16.9896C20.9285 16.5896 21.8477 15.75 23.25 15.75C24.9044 15.75 26.25 17.109 26.25 18.7354C26.25 19.2337 26.0301 19.7109 25.7649 20.0966C25.6361 20.2839 25.5067 20.4347 25.4106 20.5376C25.3628 20.5887 25.3242 20.6269 25.2992 20.6509C25.292 20.6579 25.2859 20.6636 25.2811 20.6681C25.2776 20.6713 25.2749 20.6739 25.2728 20.6758L25.2689 20.6793L25.2688 20.6794L25.2685 20.6796L25.2527 20.6936L25.2356 20.7106L20 25.9409L14.7644 20.7106Z"
+                                              stroke="#E3A1A1" stroke-width="1.5" />
+                                        <defs>
+                                            <filter id="filter0_d_5748_18041" x="0" y="0" width="40" height="40"
+                                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                <feOffset />
+                                                <feGaussianBlur stdDeviation="3.5" />
+                                                <feComposite in2="hardAlpha" operator="out" />
+                                                <feColorMatrix type="matrix"
+                                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                <feBlend mode="normal" in2="BackgroundImageFix"
+                                                         result="effect1_dropShadow_5748_18041" />
+                                                <feBlend mode="normal" in="SourceGraphic"
+                                                         in2="effect1_dropShadow_5748_18041" result="shape" />
+                                            </filter>
+                                        </defs>
+                                    </svg>
+                                </div>
                             </div>
-                            <div class="flex flex-row gap-1 items-center mb-[8px] mt-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
-                                    <path d="M2.71459 7.28802L2.70677 7.27992L2.70002 7.27344L2.69991 7.27333L2.69977 7.2732L2.69972 7.27314L2.69946 7.2729L2.69551 7.26898C2.69096 7.26443 2.68308 7.25648 2.67238 7.24533C2.65094 7.223 2.6184 7.18812 2.57856 7.14233C2.49833 7.0501 2.39165 6.91721 2.28715 6.75669C2.06486 6.41524 1.87295 6.01061 1.87295 5.57856C1.87295 4.15772 3.00042 3.00912 4.34113 3.00912C5.48553 3.00912 6.23896 3.72054 6.56537 4.06389L7.00022 4.52129L7.43507 4.06389C7.76149 3.72054 8.51491 3.00912 9.65931 3.00912C11 3.00912 12.1275 4.15772 12.1275 5.57856C12.1275 6.01777 11.9411 6.4329 11.7225 6.76253C11.6159 6.92322 11.509 7.05249 11.4297 7.14051C11.3902 7.18425 11.3583 7.21705 11.3376 7.23769C11.3272 7.24799 11.3198 7.25519 11.3156 7.25915L11.3127 7.26192L11.3121 7.26241L11.3121 7.26247L11.3119 7.26261L11.3118 7.26271L11.2993 7.27409L11.2859 7.28802L7.00022 11.7279L2.71459 7.28802Z"
-                                          stroke="#D75A8B" stroke-width="1.2" />
-                                </svg>
-                                <p class="text-[10px]">
-                                    @item.LoveCount
+
+                            <div class="flex flex-col text-[12px] text-[#404040]">
+                                <p class=" font-[700]">
+                                    @host.HostName
                                 </p>
-                            </div>
-                            <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]">
-                                <div>
-                                    <img style="border: 1px solid #F1EEEE;" class="object-cover h-[32px] w-[32px] rounded-full "
-                                         src="@item.ClubLogo" alt="clublogo">
+                                <p class=" mt-[6px] ">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Date_of_birth :<span>
+                                        @host.DOB
+                                    </span>
+                                </p>
+                                <p>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Height :<span>
+                                        @host.Height cm
+                                    </span>
+                                </p>
+                                <p>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Blood_Type :<span>
+                                        @host.BloodType
+                                    </span>
+                                </p>
+                                <p>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Constellation :<span>
+                                        @host.ConstellationGroup
+                                    </span>
+                                </p>
+                                <p>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Address :<span>
+                                        @host.Address
+                                    </span>
+                                </p>
+                                <p>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Former_Job :<span>
+                                        @host.PreviousOccupation
+                                    </span>
+                                </p>
+                                <p>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Strength_of_Alcohol :<span>
+                                        @host.LiquorStrength
+                                    </span>
+                                </p>
+                                <div class="flex flex-row mt-[10px]  items-center gap-[4px]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
+                                         fill="none">
+                                        <path d="M2.7141 6.78799L2.70628 6.77989L2.69953 6.77341L2.69942 6.77331L2.69929 6.77317L2.69923 6.77312L2.69897 6.77287L2.69502 6.76895C2.69047 6.7644 2.6826 6.75645 2.6719 6.7453C2.65045 6.72297 2.61791 6.68809 2.57808 6.6423C2.49784 6.55008 2.39116 6.41718 2.28666 6.25666C2.06437 5.91521 1.87246 5.51058 1.87246 5.07853C1.87246 3.65769 2.99993 2.50909 4.34064 2.50909C5.48504 2.50909 6.23847 3.22052 6.56488 3.56386L6.99973 4.02127L7.43458 3.56386C7.761 3.22052 8.51443 2.50909 9.65882 2.50909C10.9995 2.50909 12.127 3.65769 12.127 5.07853C12.127 5.51774 11.9406 5.93287 11.722 6.2625C11.6154 6.42319 11.5085 6.55246 11.4292 6.64048C11.3897 6.68422 11.3578 6.71703 11.3371 6.73766C11.3268 6.74796 11.3193 6.75517 11.3151 6.75913L11.3122 6.76189L11.3116 6.76238L11.3116 6.76244L11.3114 6.76259L11.3113 6.76268L11.2988 6.77406L11.2854 6.78799L6.99973 11.2279L2.7141 6.78799Z"
+                                              stroke="#D75A8B" stroke-width="1.2" />
+                                    </svg>
+                                    @host.LoveCount
                                 </div>
-                                <div class="flex flex-col justify-center ">
-                                    <p style="line-height: 100%;" class="text-[10px] text-[#292F33] font-[700]">
-                                        @item.ClubName
-                                    </p>
-                                    <p style="line-height: 100%;" class="text-[8px] text-[#A09E91] font-[400]">
-                                        @item.ClubNameJap
-                                    </p>
-
+                                <div class="flex flex-row items-center mt-[12px] gap-[4px]">
+                                    <img class="rounded-[42px] h-[26px] w-[26px]"
+                                         src="@host.ClubLogo" alt="">
+                                    <div class="flex flex-col text-[12px] ">
+                                        <p class="font-[700]">
+                                            @host.ClubName
+                                        </p>
+                                        <p class="font-[400]">
+                                            @host.ClubNameJap
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>*@
+                        }
+                        }
                     </div>
-                    @*<div class="flex flex-col border-b-[4px] border-[#E3E2DB]  ">
-                            <div class="flex p-[16px] flex-row gap-[16px] ">
-                                <div id="hostcontainer">
-                                    <div id="hostimage">
-                                        <img class="rounded-[6px] h-[180px] object-fill w-[128px]"
-                                             src="@host.HostImage" alt="host">
-                                    </div>
-                                    <div id="fav">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
-                                             fill="pink"
-                                             onclick="handleRemoveBookmarks('@host.ClubId','@host.HostId','host')"
-                                             class="cursor-pointer">
-                                            <g filter="url(#filter0_d_5748_18041)">
-                                                <circle cx="20" cy="20" r="13" fill="white" />
-                                            </g>
-                                            <path d="M14.7644 20.7106L14.7545 20.7007L14.7458 20.6927C14.7461 20.6929 14.746 20.6929 14.7457 20.6926L14.7456 20.6925L14.7407 20.6878C14.7353 20.6826 14.7258 20.6734 14.7129 20.6604C14.687 20.6344 14.6476 20.5937 14.5993 20.5402C14.5021 20.4323 14.3729 20.2772 14.2466 20.0901C13.9759 19.6891 13.75 19.2245 13.75 18.7354C13.75 17.109 15.0956 15.75 16.75 15.75C18.1523 15.75 19.0715 16.5896 19.4659 16.9896L20 17.5313L20.5341 16.9896C20.9285 16.5896 21.8477 15.75 23.25 15.75C24.9044 15.75 26.25 17.109 26.25 18.7354C26.25 19.2337 26.0301 19.7109 25.7649 20.0966C25.6361 20.2839 25.5067 20.4347 25.4106 20.5376C25.3628 20.5887 25.3242 20.6269 25.2992 20.6509C25.292 20.6579 25.2859 20.6636 25.2811 20.6681C25.2776 20.6713 25.2749 20.6739 25.2728 20.6758L25.2689 20.6793L25.2688 20.6794L25.2685 20.6796L25.2527 20.6936L25.2356 20.7106L20 25.9409L14.7644 20.7106Z"
-                                                  stroke="#E3A1A1" stroke-width="1.5" />
-                                            <defs>
-                                                <filter id="filter0_d_5748_18041" x="0" y="0" width="40" height="40"
-                                                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                                    <feColorMatrix in="SourceAlpha" type="matrix"
-                                                                   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                                    <feOffset />
-                                                    <feGaussianBlur stdDeviation="3.5" />
-                                                    <feComposite in2="hardAlpha" operator="out" />
-                                                    <feColorMatrix type="matrix"
-                                                                   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                                    <feBlend mode="normal" in2="BackgroundImageFix"
-                                                             result="effect1_dropShadow_5748_18041" />
-                                                    <feBlend mode="normal" in="SourceGraphic"
-                                                             in2="effect1_dropShadow_5748_18041" result="shape" />
-                                                </filter>
-                                            </defs>
-                                        </svg>
-                                    </div>
-                                </div>
-
-                                <div class="flex flex-col text-[12px] text-[#404040]">
-                                    <p class=" font-[700]">
-                                        @host.HostName
-                                    </p>
-                                    <p class=" mt-[6px] ">
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Date_of_birth :<span>
-                                            @host.DOB
-                                        </span>
-                                    </p>
-                                    <p>
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Height :<span>
-                                            @host.Height cm
-                                        </span>
-                                    </p>
-                                    <p>
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Blood_Type :<span>
-                                            @host.BloodType
-                                        </span>
-                                    </p>
-                                    <p>
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Constellation :<span>
-                                            @host.ConstellationGroup
-                                        </span>
-                                    </p>
-                                    <p>
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Address :<span>
-                                            @host.Address
-                                        </span>
-                                    </p>
-                                    <p>
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Former_Job :<span>
-                                            @host.PreviousOccupation
-                                        </span>
-                                    </p>
-                                    <p>
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Strength_of_Alcohol :<span>
-                                            @host.LiquorStrength
-                                        </span>
-                                    </p>
-                                    <div class="flex flex-row mt-[10px]  items-center gap-[4px]">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
-                                             fill="none">
-                                            <path d="M2.7141 6.78799L2.70628 6.77989L2.69953 6.77341L2.69942 6.77331L2.69929 6.77317L2.69923 6.77312L2.69897 6.77287L2.69502 6.76895C2.69047 6.7644 2.6826 6.75645 2.6719 6.7453C2.65045 6.72297 2.61791 6.68809 2.57808 6.6423C2.49784 6.55008 2.39116 6.41718 2.28666 6.25666C2.06437 5.91521 1.87246 5.51058 1.87246 5.07853C1.87246 3.65769 2.99993 2.50909 4.34064 2.50909C5.48504 2.50909 6.23847 3.22052 6.56488 3.56386L6.99973 4.02127L7.43458 3.56386C7.761 3.22052 8.51443 2.50909 9.65882 2.50909C10.9995 2.50909 12.127 3.65769 12.127 5.07853C12.127 5.51774 11.9406 5.93287 11.722 6.2625C11.6154 6.42319 11.5085 6.55246 11.4292 6.64048C11.3897 6.68422 11.3578 6.71703 11.3371 6.73766C11.3268 6.74796 11.3193 6.75517 11.3151 6.75913L11.3122 6.76189L11.3116 6.76238L11.3116 6.76244L11.3114 6.76259L11.3113 6.76268L11.2988 6.77406L11.2854 6.78799L6.99973 11.2279L2.7141 6.78799Z"
-                                                  stroke="#D75A8B" stroke-width="1.2" />
-                                        </svg>
-                                        @host.LoveCount
-                                    </div>
-                                    <div class="flex flex-row items-center mt-[12px] gap-[4px]">
-                                        <img class="rounded-[42px] h-[26px] w-[26px]"
-                                             src="@host.ClubLogo" alt="">
-                                        <div class="flex flex-col text-[12px] ">
-                                            <p class="font-[700]">
-                                                @host.ClubName
-                                            </p>
-                                            <p class="font-[400]">
-                                                @host.ClubNameJap
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
-                }
-            }
-        </div>
-    </div>
+                </div>
 </div>
 <div class="loader" id="loader-id">
     <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
