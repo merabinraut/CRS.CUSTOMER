@@ -37,7 +37,7 @@
 </div>
 <div class="h-[189px]">
     <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
-        style="height: 189px;" />
+         style="height: 189px;" />
 
 </div>
 <!-- section 1 -->
@@ -366,8 +366,8 @@
 
                                         </div>
                                         <div class="pt-[5px]">
-                                            <div class="text-[10px] font-bold text-primaryDark">@item.HostName</div>
-                                            <div class="text-xs  text-charcoalBlack">@Model.ClubNameEng</div>
+                                            <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
+                                            <div class="text-xs  text-charcoalBlack">@item.HostName</div>
                                         </div>
                                         @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
                                         {
