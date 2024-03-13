@@ -364,8 +364,23 @@
 
                                         </div>
                                         <div class="pt-[5px]">
-                                            <div class="text-[10px] font-bold text-primaryDark">@item.HostName</div>
-                                            <div class="text-xs  text-charcoalBlack">@Model.ClubNameEng</div>
+                                            @if (!string.IsNullOrEmpty(item.HostNameJapanese))
+                                            {
+                                                <div class="text-[10px] font-bold text-primaryDark">@item.HostNameJapanese</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="text-[10px] font-bold text-primaryDark">@item.HostName</div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(item.ClubNameJapanese))
+                                            {
+                                                <div class="text-xs  text-charcoalBlack">@item.ClubNameJapanese</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="text-xs  text-charcoalBlack">@item.ClubName</div>
+                                            }
+
                                         </div>
                                         @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
                                         {
