@@ -11,7 +11,7 @@
         right: 3px;
     }
 
-    .active {
+    .activeHostSearch {
         color: #D75A8B;
         background: #F3F3F3;
     }
@@ -175,7 +175,7 @@
         @{
             foreach (var item in Model.HostRecommendationModel)
             {
-                var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
+                var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "activeHostSearch" : string.Empty;
                 var activeBoolValue = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? true : false;
                 <div class="hosts-that-match-you @activeClass" style="width:112px; height:154px; border-radius:2px; position:relative; overflow:revert" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
                     <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
