@@ -859,7 +859,7 @@ label {
 
     .payment-option.active {
         border: 1px solid var(--primary, #d75a8b);
-        color: var(--primary);
+   /*     color: var(--primary);*/
         font-weight: 600;
     }
 
