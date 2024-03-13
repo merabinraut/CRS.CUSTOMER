@@ -287,6 +287,22 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);
             responseModel.GetClubBasicInformation = dbBasicInfoResponse.MapObject<ClubBasicInformationModel>();
+            if (!string.IsNullOrEmpty(responseModel.InstagramLink) && responseModel.InstagramLink != "#")
+            {
+                if (!responseModel.GetClubBasicInformation.InstagramLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.InstagramLink = "https://" + responseModel.GetClubBasicInformation.InstagramLink;
+            }
+            if (!string.IsNullOrEmpty(responseModel.GetClubBasicInformation.TwitterLink) && responseModel.GetClubBasicInformation.TwitterLink != "#")
+            {
+                if (!responseModel.GetClubBasicInformation.TwitterLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.TwitterLink = "https://" + responseModel.GetClubBasicInformation.TwitterLink;
+            }
+            if (!string.IsNullOrEmpty(responseModel.GetClubBasicInformation.TiktokLink) && responseModel.GetClubBasicInformation.TiktokLink != "#")
+            {
+                if (!responseModel.GetClubBasicInformation.TiktokLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.TiktokLink = "https://" + responseModel.GetClubBasicInformation.TiktokLink;
+            }
+            if (!string.IsNullOrEmpty(responseModel.GetClubBasicInformation.LineNumber) && responseModel.GetClubBasicInformation.LineNumber != "#")
+            {
+                if (!responseModel.GetClubBasicInformation.LineNumber.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.LineNumber = "https://" + responseModel.GetClubBasicInformation.LineNumber;
+            }
             var dbAllNoticeResponse = _business.GetAllNoticeTabList(cId);
             responseModel.GetAllNoticeTabList = dbAllNoticeResponse.MapObjects<AllNoticeModel>();
             foreach (var allNotice_item in responseModel.GetAllNoticeTabList)
