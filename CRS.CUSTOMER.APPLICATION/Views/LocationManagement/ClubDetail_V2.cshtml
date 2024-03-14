@@ -364,21 +364,21 @@
 
                                         </div>
                                         <div class="pt-[5px]">
+                                            @if (!string.IsNullOrEmpty(item.HostPosition))
+                                            {
+                                                <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="text-[10px] font-bold text-primaryDark"></div>
+                                            }
                                             @if (!string.IsNullOrEmpty(item.HostNameJapanese))
                                             {
-                                                <div class="text-[10px] font-bold text-primaryDark">@item.HostNameJapanese</div>
+                                                <div class="text-xs  text-charcoalBlack">@item.HostNameJapanese</div>
                                             }
                                             else
                                             {
-                                                <div class="text-[10px] font-bold text-primaryDark">@item.HostName</div>
-                                            }
-                                            @if (!string.IsNullOrEmpty(item.ClubNameJapanese))
-                                            {
-                                                <div class="text-xs  text-charcoalBlack">@item.ClubNameJapanese</div>
-                                            }
-                                            else
-                                            {
-                                                <div class="text-xs  text-charcoalBlack">@item.ClubName</div>
+                                                <div class="text-xs  text-charcoalBlack">@item.HostName</div>
                                             }
 
                                         </div>

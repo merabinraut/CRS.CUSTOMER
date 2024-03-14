@@ -919,7 +919,7 @@ function NewClubRenderFunction() {
         locationId = $('#current-location-id').val();
     }
     $('.location-class').val(locationId);
-    window.location.href = `/Search/ClubSearchResult?LocationId=${i}&NewClub=${true}`;
+    window.location.href = `/Search/ClubSearchResult?LocationId=${locationId}&NewClub=${true}`;
 }
 
 function NewHostRenderFunction() {
@@ -929,7 +929,7 @@ function NewHostRenderFunction() {
         locationId = $('#current-location-id').val();
     }
     $('.location-class').val(locationId);
-    window.location.href = `/Search/HostSearchResult?LocationId=${i}&NewHost=${true}`;
+    window.location.href = `/Search/HostSearchResult?LocationId=${locationId}&NewHost=${true}`;
 }
 
 function AddBookmark(clubId, hostId, agentType) {
