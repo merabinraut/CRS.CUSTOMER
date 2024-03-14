@@ -62,27 +62,41 @@
                                         </div>
                                         <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                             <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list">
-                                                <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                              d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
-                                                              fill="#D75A8B" />
-                                                    </svg>
-                                                    <span>歌舞伎町</span>
-                                                </div>
-                                                <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                    ランク10
-                                                </div>
-                                                <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                    プラチナ
-                                                </div>
-                                                <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                    優良店
-                                                </div>
-                                                <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                    大型店
-                                                </div>
-
+                                                @if (item.Tag1 != "" && item.Tag1 != null)
+                                                {
+                                                    <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                                  fill="#D75A8B" />
+                                                        </svg>
+                                                        <span>@item.Tag1</span>
+                                                    </div>
+                                                }
+                                                @if (item.Tag2 != "" && item.Tag2 != null)
+                                                {
+                                                    <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                        @item.Tag2
+                                                    </div>
+                                                }
+                                                @if (item.Tag3 != "" && item.Tag3 != null)
+                                                {
+                                                    <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                        @item.Tag3
+                                                    </div>
+                                                }
+                                                @if (item.Tag4 != "" && item.Tag4 != null)
+                                                {
+                                                    <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                        @item.Tag4
+                                                    </div>
+                                                }
+                                                @if (item.Tag5 != "" && item.Tag5 != null)
+                                                {
+                                                    <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                        @item.Tag5
+                                                    </div>
+                                                }
                                             </div>
                                             <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
                                                 @item.ClubNameEng
@@ -217,27 +231,41 @@
                                     </div>
                                     <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                         <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list">
-                                            <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                          d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
-                                                          fill="#D75A8B" />
-                                                </svg>
-                                                <span>歌舞伎町</span>
-                                            </div>
-                                            <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                ランク10
-                                            </div>
-                                            <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                プラチナ
-                                            </div>
-                                            <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                優良店
-                                            </div>
-                                            <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                大型店
-                                            </div>
-
+                                            @if (item.Tag1 != "" && item.Tag1 != null)
+                                            {
+                                                <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                              d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                              fill="#D75A8B" />
+                                                    </svg>
+                                                    <span>@item.Tag1</span>
+                                                </div>
+                                            }
+                                            @if (item.Tag2 != "" && item.Tag2 != null)
+                                            {
+                                                <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    @item.Tag2
+                                                </div>
+                                            }
+                                            @if (item.Tag3 != "" && item.Tag3 != null)
+                                            {
+                                                <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    @item.Tag3
+                                                </div>
+                                            }
+                                            @if (item.Tag4 != "" && item.Tag4 != null)
+                                            {
+                                                <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    @item.Tag4
+                                                </div>
+                                            }
+                                            @if (item.Tag5 != "" && item.Tag5 != null)
+                                            {
+                                                <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    @item.Tag5
+                                                </div>
+                                            }
                                         </div>
                                         <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
                                             @item.ClubNameEng
@@ -329,7 +357,7 @@
                                             <svg class="club-visited" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
                                                       fill="" ;
-                                                      "     />
+                                                      "                                   />
                                             </svg>
                                         </div>
                                         <div class="text-[8px] ">
@@ -367,27 +395,41 @@
                                         </div>
                                         <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                             <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list overflow-hidden overflow-x-auto no-scrollbar w-full">
-                                                <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                              d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
-                                                              fill="#D75A8B" />
-                                                    </svg>
-                                                    <span>歌舞伎町</span>
-                                                </div>
-                                                <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max flex-none text-[8px] rounded-[2px] text-white">
-                                                    ランク10
-                                                </div>
-                                                <div class="px-[5px] py-[1px] bg-[#697DBF] h-max flex-none text-[8px] rounded-[2px] text-white">
-                                                    プラチナ
-                                                </div>
-                                                <div class="px-[5px] py-[1px] bg-[#96B41F] h-max flex-none text-[8px] rounded-[2px] text-white">
-                                                    優良店
-                                                </div>
-                                                <div class="px-[5px] py-[1px] bg-[#EFB726] h-max flex-none text-[8px] rounded-[2px] text-white">
-                                                    大型店
-                                                </div>
-
+                                                @if (item.Tag1 != "" && item.Tag1 != null)
+                                                {
+                                                    <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                                  fill="#D75A8B" />
+                                                        </svg>
+                                                        <span>@item.Tag1</span>
+                                                    </div>
+                                                }
+                                                @if (item.Tag2 != "" && item.Tag2 != null)
+                                                {
+                                                    <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                        @item.Tag2
+                                                    </div>
+                                                }
+                                                @if (item.Tag3 != "" && item.Tag3 != null)
+                                                {
+                                                    <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                        @item.Tag3
+                                                    </div>
+                                                }
+                                                @if (item.Tag4 != "" && item.Tag4 != null)
+                                                {
+                                                    <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                        @item.Tag4
+                                                    </div>
+                                                }
+                                                @if (item.Tag5 != "" && item.Tag5 != null)
+                                                {
+                                                    <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                        @item.Tag5
+                                                    </div>
+                                                }
                                             </div>
                                             <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
                                                 @item.ClubNameEng
@@ -512,32 +554,55 @@
                             <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
                                 <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
                                     <div class="h-[82px] w-[82px] relative flex-none">
-                                        <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
-                                             class="absolute top-[6px] left-[-5px]" />
+                                        @if (item.TransactionStatus.Trim().ToUpper() == "P" || item.TransactionStatus.Trim().ToUpper() == "A")
+                                        {
+                                            <img src="/Content/assets/images/status-reserved.svg" alt="reserved"
+                                                 class="absolute top-[6px] left-[-5px]" />
+                                        }
+                                        @if (item.TransactionStatus.Trim().ToUpper() == "C")
+                                        {
+                                            <img src="/Content/assets/images/status-cancelled.svg" alt="reserved"
+                                                 class="absolute top-[6px] left-[-5px]" />
+                                        }
                                         <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] club-border" alt="img" />
                                     </div>
                                     <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                         <div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list">
-                                            <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                          d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
-                                                          fill="#D75A8B" />
-                                                </svg>
-                                                <span>歌舞伎町</span>
-                                            </div>
-                                            <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                ランク10
-                                            </div>
-                                            <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                プラチナ
-                                            </div>
-                                            <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                優良店
-                                            </div>
-                                            <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                大型店
-                                            </div>
+                                            @if (item.Tag1 != "" && item.Tag1 != null)
+                                            {
+                                                <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                                              d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                              fill="#D75A8B" />
+                                                    </svg>
+                                                    <span>@item.Tag1</span>
+                                                </div>
+                                            }
+                                            @if (item.Tag2 != "" && item.Tag2 != null)
+                                            {
+                                                <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    @item.Tag2
+                                                </div>
+                                            }
+                                            @if (item.Tag3 != "" && item.Tag3 != null)
+                                            {
+                                                <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    @item.Tag3
+                                                </div>
+                                            }
+                                            @if (item.Tag4 != "" && item.Tag4 != null)
+                                            {
+                                                <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    @item.Tag4
+                                                </div>
+                                            }
+                                            @if (item.Tag5 != "" && item.Tag5 != null)
+                                            {
+                                                <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                                    @item.Tag5
+                                                </div>
+                                            }
                                         </div>
                                         <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
                                             @item.ClubNameEng
@@ -622,7 +687,7 @@
                                             </div>
                                         </a>
                                     </div>
-                                    @if (item.TransactionStatus.Trim().ToUpper() == "P")
+                                    @if (item.TransactionStatus.Trim().ToUpper() == "P" || item.TransactionStatus.Trim().ToUpper() == "A")
                                     {
                                         <div class="py-[6px] px-2" data-drawer-target="drawer-date" data-drawer-show="drawer-date" data-drawer-placement="bottom" aria-controls="drawer-date" onclick="editTime('@item.ReservationId')">
                                             <div class="flex justify-center mb-[2px]">
@@ -650,7 +715,7 @@
                                     else if (item.TransactionStatus.Trim().ToUpper() == "C")
                                     {
                                         <div class="py-[6px] px-2">
-                                            <div class="flex justify-center mb-[2px]" onclick="openRedoModal('modal_redo','@item.ReservationId')">
+                                            <div class="flex justify-center mb-[2px]" onclick="gotoClubDetail('@item.LocationId','@item.ClubId')">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                     <path d="M8 1.5C4.416 1.5 1.5 4.416 1.5 8C1.5 11.584 4.416 14.5 8 14.5C11.584 14.5 14.5 11.584 14.5 8H13.5C13.5009 8.72252 13.3592 9.43811 13.0831 10.1058C12.807 10.7735 12.4019 11.3801 11.891 11.891C11.3801 12.4019 10.7735 12.807 10.1058 13.0831C9.43811 13.3592 8.72252 13.5009 8 13.5C7.27748 13.5009 6.56189 13.3592 5.8942 13.0831C5.22652 12.807 4.61985 12.4019 4.10896 11.891C3.59806 11.3801 3.19297 10.7735 2.91688 10.1058C2.64079 9.43811 2.49912 8.72252 2.5 8C2.49912 7.27748 2.64079 6.56189 2.91688 5.8942C3.19297 5.22652 3.59806 4.61985 4.10896 4.10896C4.61985 3.59806 5.22652 3.19297 5.8942 2.91688C6.56189 2.64079 7.27748 2.49912 8 2.5C8.91612 2.49777 9.81815 2.72548 10.6234 3.16225C11.4287 3.59903 12.1116 4.23091 12.6093 5H10V6H14V2H13V3.86C12.392 3.12248 11.6285 2.52846 10.7641 2.12047C9.89971 1.71249 8.95583 1.50061 8 1.5Z"
                                                           fill="#F89336" />

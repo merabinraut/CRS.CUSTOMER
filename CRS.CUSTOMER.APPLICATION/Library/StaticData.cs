@@ -17,18 +17,20 @@ namespace CRS.CUSTOMER.APPLICATION.Library
             string indexvalue = string.Empty;
             for (int i = 0; i < model.GetPlanGroupDetail.Count; i++)
             {
-                if (model.GetPlanGroupDetail[i].Label == "Last orderTime")
+                if (model.GetPlanGroupDetail[i].Label == "Last orderTime" || model.GetPlanGroupDetail[i].Label == "ラストオーダー時間")
                 {
                     index = i;
 
                 }
-                if (model.GetPlanGroupDetail[i].Label == "Last Entry Time")
+                if (model.GetPlanGroupDetail[i].Label == "Last Entry Time" || model.GetPlanGroupDetail[i].Label == "最終入店時間")
                 {
-                    model.GetPlanGroupDetail[i].LabelValue = model.GetPlanGroupDetail[i].LabelValue + "(L.O. " + model.GetPlanGroupDetail[index].LabelValue + ")";
+                    model.GetPlanGroupDetail[i].LabelValue = model.GetPlanGroupDetail[i].LabelValue + "(L.O. " + model.GetPlanGroupDetail[i + 1].LabelValue + ")";
                 }
             }
             model.GetPlanGroupDetail.RemoveAt(index);
-            model.GetPlanGroupDetail.RemoveAt(0);
+            //model.GetPlanGroupDetail.RemoveAt(0);
+            model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("プラン"));
+            model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("Plan"));
 
             return model;
 
@@ -39,18 +41,20 @@ namespace CRS.CUSTOMER.APPLICATION.Library
             string indexvalue = string.Empty;
             for (int i = 0; i < model.GetPlanGroupDetail.Count; i++)
             {
-                if (model.GetPlanGroupDetail[i].Label == "Last orderTime")
+                if (model.GetPlanGroupDetail[i].Label == "Last orderTime" || model.GetPlanGroupDetail[i].Label == "ラストオーダー時間")
                 {
                     index = i;
 
                 }
-                if (model.GetPlanGroupDetail[i].Label == "Last Entry Time")
+                if (model.GetPlanGroupDetail[i].Label == "Last Entry Time" || model.GetPlanGroupDetail[i].Label == "最終入店時間")
                 {
-                    model.GetPlanGroupDetail[i].LabelValue = model.GetPlanGroupDetail[i].LabelValue + "(L.O. " + model.GetPlanGroupDetail[index].LabelValue + ")";
+                    model.GetPlanGroupDetail[i].LabelValue = model.GetPlanGroupDetail[i].LabelValue + "(L.O. " + model.GetPlanGroupDetail[i + 1].LabelValue + ")";
                 }
             }
             model.GetPlanGroupDetail.RemoveAt(index);
-            model.GetPlanGroupDetail.RemoveAt(0);
+            //model.GetPlanGroupDetail.RemoveAt(0);
+            model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("プラン"));
+            model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("Plan"));
             model.GetPlanGroupDetail.RemoveAt(1);
 
             return model;

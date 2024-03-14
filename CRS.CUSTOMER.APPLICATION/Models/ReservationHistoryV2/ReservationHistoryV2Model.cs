@@ -27,6 +27,11 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string LocationURL { get; set; }
         public string MobileNumber { get; set; }
         public string NoOfPeople { get; set; }
+        public string Tag1 { get; set; }
+        public string Tag2 { get; set; }
+        public string Tag3 { get; set; }
+        public string Tag4 { get; set; }
+        public string Tag5 { get; set; }
 
     }
     public class VisitedHistoryModel
@@ -47,6 +52,11 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string LocationURL { get; set; }
         public string MobileNumber { get; set; }
         public string NoOfPeople { get; set; }
+        public string Tag1 { get; set; }
+        public string Tag2 { get; set; }
+        public string Tag3 { get; set; }
+        public string Tag4 { get; set; }
+        public string Tag5 { get; set; }
     }
     public class CancelledHistoryModel
     {
@@ -67,6 +77,11 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string MobileNumber { get; set; }
         public string NoOfPeople { get; set; }
         public string LocationId { get; set; }
+        public string Tag1 { get; set; }
+        public string Tag2 { get; set; }
+        public string Tag3 { get; set; }
+        public string Tag4 { get; set; }
+        public string Tag5 { get; set; }
     }
     public class AllHistoryModel
     {
@@ -86,6 +101,12 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string LocationURL { get; set; }
         public string MobileNumber { get; set; }
         public string NoOfPeople { get; set; }
+        public string LocationId { get; set; }
+        public string Tag1 { get; set; }
+        public string Tag2 { get; set; }
+        public string Tag3 { get; set; }
+        public string Tag4 { get; set; }
+        public string Tag5 { get; set; }
     }
     #region " Reservation History Detail Model"
     public class ReservationHistoryDetailModel
