@@ -23,6 +23,7 @@ namespace CRS.CUSTOMER.REPOSITORY.RecommendedClubHost
             SQL += !string.IsNullOrEmpty(Request.PositionId) ? ",@PositionId=" + Request.PositionId : "";
             SQL += ",@CustomerId=" + _dao.FilterString(Request.CustomerId);
             SQL += ",@LocationId=" + _dao.FilterString(Request.LocationId);
+            SQL += ",@PageType=" + _dao.FilterString(Request.PageType);
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0)
             {
@@ -98,6 +99,7 @@ namespace CRS.CUSTOMER.REPOSITORY.RecommendedClubHost
             SQL += !string.IsNullOrEmpty(Request.PositionId) ? ",@PositionId=" + Request.PositionId : "";
             SQL += ",@CustomerId=" + _dao.FilterString(Request.CustomerId);
             SQL += ",@LocationId=" + _dao.FilterString(Request.LocationId);
+            SQL += ",@PageType=" + _dao.FilterString(Request.PageType);
             SQL += !string.IsNullOrEmpty(Request.ClubId) ? ",@ClubId=" + _dao.FilterString(Request.ClubId) : "";
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0) return _dao.DataTableToListObject<RecommendedHostResponseCommon>(dbResponse).ToList();

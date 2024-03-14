@@ -13,7 +13,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Dashboard
         List<DashboardRecommendedHostCommon> GetRecommendedHost();
         List<DashboardRecommendedClubCommon> GetRecommendedClub();
         #region Recommendation Management
-        List<ClubRecommendationListCommon> GetRecommendedClub(string LocationId);
+        List<ClubRecommendationListCommon> GetRecommendedClub(string LocationId, string PageType = "");
         List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId);
         #endregion
     }

@@ -120,53 +120,55 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public JsonResult GetMainPageClubHost(string LocationId)
         {
             var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
-            //var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
-            //var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
-            //var Response = new LocationClubHostModel();
-            //#region Recommended Club
-            //var recommendedClubDBRequest = new RecommendedClubRequestCommon()
-            //{
-            //    LocationId = lId,
-            //    CustomerId = CustomerId
-            //};
-            //var dbClubResponse = _recommendedClubHostBuss.GetRecommendedClub(recommendedClubDBRequest);
-            //Response.ClubListModel = dbClubResponse.MapObjects<LocationClubListModel>();
-            //foreach (var item in Response.ClubListModel)
-            //{
-            //    item.ClubId = item.ClubId.EncryptParameter();
-            //    item.LocationId = item.LocationId.EncryptParameter();
-            //    item.ClubLogo = ImageHelper.ProcessedImage(item.ClubLogo);
-            //    item.ClubCoverPhoto = ImageHelper.ProcessedImage(item.ClubCoverPhoto);
-            //    item.HostGalleryImage = item.HostGalleryImage.Select(x => ImageHelper.ProcessedImage(x)).ToList();
-            //}
-            //#endregion
-            //#region Recommended Host
-            //if (Response.ClubListModel != null && Response.ClubListModel.Count > 0)
-            //{
-            //    var recommendedHostDBRequest = new RecommendedHostRequestCommon()
-            //    {
-            //        LocationId = lId,
-            //        CustomerId = CustomerId
-            //    };
-            //    var dbHostResponse = _recommendedClubHostBuss.GetRecommendedHost(recommendedHostDBRequest);
-            //    Response.HostListModel = dbHostResponse.MapObjects<LocationHostListModel>();
-            //    foreach (var item in Response.HostListModel)
-            //    {
-            //        item.ClubId = item.ClubId.EncryptParameter();
-            //        item.LocationId = item.LocationId.EncryptParameter();
-            //        item.HostId = item.HostId.EncryptParameter();
-            //        item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
-            //        item.ClubLogo = ImageHelper.ProcessedImage(item.ClubLogo);
-            //    }
-            //}
-            //#endregion
-            //if (Response.ClubListModel != null && Response.ClubListModel.Count > 0)
-            //{
-            //    var partialViewString = RenderHelper.RenderPartialViewToString(this, "_MainPageClubHost", Response);
-            //    responseData["Code"] = 0;
-            //    responseData["Message"] = "Success";
-            //    responseData["PartialView"] = partialViewString;
-            //}
+            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
+            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
+            var Response = new LocationClubHostModel();
+            #region Recommended Club
+            var recommendedClubDBRequest = new RecommendedClubRequestCommon()
+            {
+                LocationId = lId,
+                CustomerId = CustomerId,
+                PageType = "1"
+            };
+            var dbClubResponse = _recommendedClubHostBuss.GetRecommendedClub(recommendedClubDBRequest);
+            Response.ClubListModel = dbClubResponse.MapObjects<LocationClubListModel>();
+            foreach (var item in Response.ClubListModel)
+            {
+                item.ClubId = item.ClubId.EncryptParameter();
+                item.LocationId = item.LocationId.EncryptParameter();
+                item.ClubLogo = ImageHelper.ProcessedImage(item.ClubLogo);
+                item.ClubCoverPhoto = ImageHelper.ProcessedImage(item.ClubCoverPhoto);
+                item.HostGalleryImage = item.HostGalleryImage.Select(x => ImageHelper.ProcessedImage(x)).ToList();
+            }
+            #endregion
+            #region Recommended Host
+            if (Response.ClubListModel != null && Response.ClubListModel.Count > 0)
+            {
+                var recommendedHostDBRequest = new RecommendedHostRequestCommon()
+                {
+                    LocationId = lId,
+                    CustomerId = CustomerId,
+                    PageType = "1"
+                };
+                var dbHostResponse = _recommendedClubHostBuss.GetRecommendedHost(recommendedHostDBRequest);
+                Response.HostListModel = dbHostResponse.MapObjects<LocationHostListModel>();
+                foreach (var item in Response.HostListModel)
+                {
+                    item.ClubId = item.ClubId.EncryptParameter();
+                    item.LocationId = item.LocationId.EncryptParameter();
+                    item.HostId = item.HostId.EncryptParameter();
+                    item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
+                    item.ClubLogo = ImageHelper.ProcessedImage(item.ClubLogo);
+                }
+            }
+            #endregion
+            if (Response.ClubListModel != null && Response.ClubListModel.Count > 0)
+            {
+                var partialViewString = RenderHelper.RenderPartialViewToString(this, "_MainPageClubHost", Response);
+                responseData["Code"] = 0;
+                responseData["Message"] = "Success";
+                responseData["PartialView"] = partialViewString;
+            }
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
 

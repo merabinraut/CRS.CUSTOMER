@@ -157,7 +157,7 @@
             {
                 <div class="flex flex-col  gap-1 w-full   border-b-[4px] border-[#E5E5E5]">
                     <!-- location -->
-                    <section class="tags flex flex-wrap pt-3 pb-2 gap-2 px-4 items-center ">
+                    <section class="tags flex flex-wrap pt-3 pb-2 gap-2 px-4 items-center " onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                         @if (!string.IsNullOrEmpty(@item.Tag1))
                         {
                             <div class=" flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[20px]">
@@ -195,9 +195,10 @@
 
                     <!-- club name -->
                     <section class="w-full flex px-4 pb-2 justify-between ">
-                        <a onClick={goToTop}>
+                        <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                             <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
-                                <div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                                @*<div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">*@
+                                <div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden">
                                     <img src="@item.ClubLogo" alt="" title="club logo"
                                          class="w-full h-full object-cover" />
                                 </div>
@@ -238,10 +239,11 @@
                         </div>
                     </section>
                     <!-- photo -->
-                    <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5">
+                    <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                         @foreach (var item2 in item.HostGalleryImage)
                         {
-                            <div class=" " onclick="OpenImagePopup('@item2')">
+                            @*<div class=" " onclick="OpenImagePopup('@item2')">*@
+                            <div class="">
                                 <img src="@item2"
                                      class="aspect-square  h-[182px] w-full object-cover" />
                             </div>
@@ -289,7 +291,7 @@
 
                     <!-- club description -->
 
-                    <section class="flex flex-col gap-2 px-4 mb-3 ">
+                    <section class="flex flex-col gap-2 px-4 mb-3 " onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                         <p class="line-clamp-3 font-[Noto Sans] text-xs   text-[#333333]">
                             @item.ClubDescription
                         </p>

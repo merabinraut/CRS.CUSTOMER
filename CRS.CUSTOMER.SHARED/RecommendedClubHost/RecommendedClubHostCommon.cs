@@ -9,6 +9,7 @@ namespace CRS.CUSTOMER.SHARED.RecommendedClubHost
         public string PositionId { get; set; }
         public string LocationId { get; set; }
         public string CustomerId { get; set; }
+        public string PageType { get; set; }
     }
 
     public class RecommendedClubResponseCommon
@@ -47,6 +48,7 @@ namespace CRS.CUSTOMER.SHARED.RecommendedClubHost
         public string LocationId { get; set; }
         public string CustomerId { get; set; }
         public string ClubId { get; set; }
+        public string PageType { get; set; }
     }
     public class RecommendedHostResponseCommon
     {
