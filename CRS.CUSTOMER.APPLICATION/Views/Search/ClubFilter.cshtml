@@ -11,7 +11,7 @@
                   fill="#BCB08A" />
         </svg>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
     </div>
-    <div class="text-center w-full font-bold"></div>
+    <div class="text-center w-full font-bold">検索結果</div>
 </div>
 <!-- search bar -->
 <div class=" border border-[#D6CEB4] flex my-2 mx-4 rounded-[4px] search-input" onclick="redirectToSearchPage()">
@@ -58,10 +58,10 @@
                                 </div>
                                 <div class="flex flex-col">
                                     <div class="flex flex-row mt-[7px] justify-center">
-                                        <p style="line-height: 100%;" class="font-[700] text-[10px]">@item.ClubNameEnglish</p>
+                                        <p style="line-height: 100%;" class="font-[700] text-[10px] text-clip">@item.ClubNameEnglish</p>
                                     </div>
                                     <div class="flex flex-row mt-[4px] justify-center">
-                                        <p style="line-height: 100%;" class="font-[400] text-[10px]">@item.ClubNameJapanese</p>
+                                        <p style="line-height: 100%;" class="font-[400] text-[10px] text-clip">@item.ClubNameJapanese</p>
                                     </div>
 
                                 </div>
@@ -209,7 +209,7 @@
 
                 <!-- book now section  -->
 
-                <div class="px-4 py-[12px] flex justify-between items-center">
+                <div class="px-4 py-[12px] flex justify-between items-center border-b-[4px] border-[#E5E5E5]">
                     <div>
                         @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
                         {

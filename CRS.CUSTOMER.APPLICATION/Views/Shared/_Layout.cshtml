@@ -45,7 +45,7 @@
 
         gtag('config', 'G-Z189BCRTWP');
     </script>
-    <title>Hoslog | @ViewBag.Title</title>
+    <title>ホスログ | @ViewBag.Title</title>
     <style>
         .ui-datepicker {
             /* width: max-content; */
@@ -171,6 +171,36 @@
         .disable-click {
             pointer-events: none;
         }
+        .affiliation {
+            display: flex;
+            padding: 4px 0px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .affiliationText {
+            color: #999;
+            text-align: center;
+            font-family: "Noto Sans JP";
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 166%;
+        }
+
+        .dividerCol {
+            color: #999;
+            text-align: center;
+            font-family: "Noto Sans JP";
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 166%;
+            /* 18.26px */
+        }
+
     </style>
 </head>
 <body class="md:hidden">
@@ -589,44 +619,64 @@
                         <div class="footer-link text-white grid grid-cols-2 ">
                             <div class="grid gap-[8px]">
                                 <a href="#" class="text-xs">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.TopPage
+                                    サービス
+                                    @*service*@
+                                    @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.TopPage*@
                                 </a>
                                 <a href="#" class="text-xs">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.FindAHostClub
+                                    ホスログの使い方
+                                    @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.FindAHostClub*@
                                 </a>
                                 <a href="#" class="text-xs">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan
+                                    よくあるご質問
+                                    @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan*@
                                 </a>
                                 <a href="#" class="text-xs">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide
+                                    @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide*@
+                                    お問い合わせ
                                 </a>
-                                <a href="@Url.Action("faq","Footer")" class="text-xs">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
-                                </a>
+                                @* <a href="@Url.Action("faq","Footer")" class="text-xs">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
+                </a>*@
                             </div>
                             <div class="grid gap-[12px]">
                                 <a href="@Url.Action("inquery","Footer")" class="text-xs">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry
+                                    @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry*@
+                                    新規会員登録(無料)
                                 </a>
                                 <a href="@Url.Action("operatingcompany","Footer")" class="text-xs">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany
+                                    @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
+                                    運営会社
                                 </a>
                                 <a href="@Url.Action("privacypolicy","Footer")" class="text-xs">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy
+                                    プライバシーポリシー
+                                    @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy*@
                                 </a>
-                                <a href="https://affiliate.hoslog.jp/" class="text-xs">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Affiliate_Registration
+                                <a href="#" class="text-xs">
+                                    @*                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Affiliate_Registration*@
                                 </a>
-                                <a href="https://hoslog.jp/" class="text-xs">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
-                                </a>
+                                @*                                <a href="https://hoslog.jp/" class="text-xs">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
+                </a>*@
                             </div>
                         </div>
+
+                        @* divider*@
+                        <div style="border-top: 1px dashed #999; padding: 0 16px; margin-top:14px"></div>
+
+                        <div class="affiliation">
+                            <div class="affiliationText">
+                                <a href="http://43.207.72.221:93/" style="font-family: Noto Sans">アフィリエイター登録</a>
+                            </div>
+                            <div class="dividerCol">|</div>
+                            <div class="affiliationText"><a href="http://43.207.72.221:92/" style="font-family: Noto Sans"> 店舗オーナー登録 </a></div>
+                        </div>
+
 
                         <div class=" my-4 p-[8px] border rounded-[4px] border-[#393939] bg-[#232323] text-xs text-center text-white">
                             @CRS.CUSTOMER.APPLICATION.Resources.Resource.WarningNotes
                         </div>
-                        <div class='text-center text-sm text-white'>© 2023 - @DateTime.Now.Year-@CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog</div>
+                        <div class='text-center text-sm text-white'>© 2023 - @DateTime.Now.Year @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog</div>
                     </div>
                 </div>
             </div>

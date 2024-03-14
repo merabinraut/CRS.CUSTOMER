@@ -897,6 +897,10 @@
   <data name="Points" xml:space="preserve">
     <value>points</value>
   </data>
+  <data name="Policy" xml:space="preserve">
+    <value>Privecy Policy</value>
+    <comment>Login landing</comment>
+  </data>
   <data name="Popularity" xml:space="preserve">
     <value>Popular</value>
   </data>
@@ -1136,6 +1140,10 @@
   </data>
   <data name="Terms of Use and Privacy Policy" xml:space="preserve">
     <value>Terms of Use and Privacy Policy</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>Terms of Use</value>
+    <comment>Login landing</comment>
   </data>
   <data name="Thank you for your visit!" xml:space="preserve">
     <value>Thank you for your visit!</value>
