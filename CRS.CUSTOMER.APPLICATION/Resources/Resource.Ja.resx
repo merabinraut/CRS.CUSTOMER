@@ -897,6 +897,10 @@
   <data name="Points" xml:space="preserve">
     <value>ポイント</value>
   </data>
+  <data name="Policy" xml:space="preserve">
+    <value>プライバシーポリシー</value>
+    <comment>Login landing</comment>
+  </data>
   <data name="Popularity" xml:space="preserve">
     <value>人気</value>
   </data>
@@ -1136,6 +1140,10 @@
   </data>
   <data name="Terms of Use and Privacy Policy" xml:space="preserve">
     <value>利用規約 と プライバシーポリシー に</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>利用規約</value>
+    <comment>Login landing</comment>
   </data>
   <data name="Thank you for your visit!" xml:space="preserve">
     <value>ご来店ありがとうございました！</value>
