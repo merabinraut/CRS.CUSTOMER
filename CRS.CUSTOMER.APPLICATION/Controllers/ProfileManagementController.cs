@@ -37,9 +37,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dob = !string.IsNullOrEmpty(viewModel.DateOfBirth) ? Convert.ToDateTime(viewModel.DateOfBirth) : DateTime.Now;
             if (!string.IsNullOrEmpty(viewModel.DateOfBirth))
             {
-                viewModel.DOBYear = dob.Year.ToString("D4") + " 年";
-                viewModel.DOBMonth = dob.Month.ToString("D2") + " 月";
-                viewModel.DOBDay = dob.Day.ToString("D2") + " 日";
+                viewModel.DOBYear = dob.Year.ToString("D4") ;
+                viewModel.DOBMonth = dob.Month.ToString("D2");
+                viewModel.DOBDay = dob.Day.ToString("D2");
             }
             viewModel.PreferredLocation = viewModel.PreferredLocation?.EncryptParameter();
             viewModel.Prefecture = viewModel.Prefecture?.EncryptParameter();
