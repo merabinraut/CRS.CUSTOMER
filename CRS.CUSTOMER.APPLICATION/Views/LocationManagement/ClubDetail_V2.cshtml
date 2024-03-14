@@ -177,8 +177,8 @@
     <div class="text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
         @foreach (var item2 in Model.ClubWeeklyScheduleList)
         {
-            var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
-            if (string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
+            var imageURL = "/Content/assets/images/" + item2.ScheduleLabel + ".svg";
+            if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
             {
                 @*<div onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng','@item2.FullDate')">*@
                 <div onclick="InitiateClubReservationFunction('@Model.ClubId','@item2.FullDate' )">

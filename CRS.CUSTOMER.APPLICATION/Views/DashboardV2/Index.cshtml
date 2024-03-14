@@ -1293,6 +1293,7 @@
                             const clubLogo = host.ClubLogo || '~/Content/assets/images/customer/demo-image.jpeg';
                             const unfilled = '/Content/assets/images/customer/favorite-unfilled.svg';
                             const filled = '/Content/assets/images/customer/favorite-filled.svg';
+                            //var BookmarkLabel = host.is
                             recommendedHostContentHTML += `
                                 <a onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=${host.HostId}'">
                                     <div class="flex hover:cursor-pointer">
@@ -1300,7 +1301,7 @@
                                             <div class="w-full flex justify-center relative">
                                                 <img style="width:112px" class="w-[112px] h-[154px] object-cover rounded-[2px]" src="${hostImage}" alt="hostlogo" />
                                                  <div class="absolute top-2 right-2" style="width: 24px; height: 24px;">
-                                                         <img src="${unfilled}" alt="unfilled"  style="width: 24px; height: 24px;" />
+                                                        <!-- <img src="${unfilled}" alt="unfilled"  style="width: 24px; height: 24px;" /> -->
                                                 </div>
 
                                             </div>

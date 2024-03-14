@@ -30,7 +30,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var ResponseModel = new InitiateClubReservationCommonModel();
             var culture = Request.Cookies["culture"]?.Value ?? "ja";
             var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
-            var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" }, { "UnreservableDates", "" } };
+            var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" }, { "UnreservableDates", "" }, { "SelectedDate", "" } };
             var dbResponse = _buss.InitiateClubReservationProcess(cId, SelectedDate);
             if (dbResponse.Code == ResponseCode.Success || dbResponse.Code == ResponseCode.Exception)
             {
@@ -54,7 +54,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                                              .ToList();
 
                 responseData["UnreservableDates"] = Newtonsoft.Json.JsonConvert.SerializeObject(unReservableDateList);
-
+                if (!string.IsNullOrEmpty(SelectedDate))
+                    responseData["SelectedDate"] = SelectedDate;
             }
             else responseData["Message"] = dbResponse.Message ?? responseData["Message"];
             return Json(responseData, JsonRequestBehavior.AllowGet);

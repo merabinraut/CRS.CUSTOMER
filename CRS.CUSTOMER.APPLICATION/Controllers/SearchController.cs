@@ -313,7 +313,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     ClubLogo = ImageHelper.ProcessedImage(item.ClubLogo),
                     HostId = item.HostId.EncryptParameter(),
                     HostNameEnglish = item.HostName,
-                    HostNameJapanese = item.HostName,
+                    HostNameJapanese = item.HostNameJapanese,
                     HostLogo = ImageHelper.ProcessedImage(item.HostImage),
                     ClubLocationId = item.LocationId.EncryptParameter(),
                     //IsBookmarked = 
