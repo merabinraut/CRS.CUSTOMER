@@ -97,7 +97,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         if (!string.IsNullOrEmpty(item))
                         {
-                            updatedImages.Add(FileLocationPath + item);
+                            updatedImages.Add(FileLocationPath + item.Trim());
                         }
                         else
                         {
