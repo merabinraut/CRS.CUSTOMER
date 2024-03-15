@@ -97,7 +97,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         if (!string.IsNullOrEmpty(item))
                         {
-                            updatedImages.Add(FileLocationPath + item);
+                            updatedImages.Add(FileLocationPath + item.Trim());
                         }
                         else
                         {
@@ -122,7 +122,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(responseinfo);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult RescheduleReservation(string Selectedhour = "", string Selectedminute = "00", string ReservationID = "")
+        public ActionResult RescheduleReservation(string Selectedhour = "", string Selectedminute = "", string ReservationID = "")
         {
             var redirectToUrl = string.Empty;
             if (!string.IsNullOrEmpty(Selectedhour) && !string.IsNullOrEmpty(Selectedminute) && !string.IsNullOrEmpty(ReservationID))
