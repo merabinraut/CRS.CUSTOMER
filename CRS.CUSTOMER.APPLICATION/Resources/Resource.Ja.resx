@@ -439,7 +439,7 @@
     <comment>Add Card</comment>
   </data>
   <data name="Extended Course" xml:space="preserve">
-    <value>延長コース</value>
+    <value>コースを延長した</value>
     <comment>Dashboard</comment>
   </data>
   <data name="FAQ" xml:space="preserve">
@@ -1250,7 +1250,7 @@
     <comment>Host Detail</comment>
   </data>
   <data name="WarningNotes" xml:space="preserve">
-    <value>当サイトは18歳未満の方の閲覧を固くお断りいたします。また、20歳未満の飲酒は法律で禁じられています。</value>
+    <value>ホスログは20歳未満の方の閲覧・利用を固くお断りいたします。</value>
     <comment>_Layout</comment>
   </data>
   <data name="Wednesday" xml:space="preserve">

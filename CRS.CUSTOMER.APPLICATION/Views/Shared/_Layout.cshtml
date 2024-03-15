@@ -178,6 +178,7 @@
             align-items: center;
             gap: 8px;
             margin-top: 8px;
+            display:none;
         }
 
         .affiliationText {
@@ -198,6 +199,7 @@
             font-style: normal;
             font-weight: 700;
             line-height: 166%;
+            display:none
             /* 18.26px */
         }
 
@@ -377,11 +379,11 @@
 
                 <div class="h-full flex flex-col justify-between  overflow-y-auto bg-gray-50 ">
                     <div class=" font-medium">
-                        <div class=" bg-[#EFEFEF] flex justify-between items-center pb-3">
+                        <div class=" bg-[#EFEFEF] flex justify-between items-center pb-3" style="height:90px">
                             <a href="#" class="flex items-center px-4 pt-4 group">
                                 @if ((Session["ProfileImage"] == null))
                                 {
-                                    <img class="rounded-full w-[40px] h-[40px] object-cover border border-[#E1E1E1]"
+                                    <img class="rounded-full  object-cover border border-[#E1E1E1]" style="height:60px; width:60px"
                                          src="~/Content/assets/images/customer/demo-image.jpeg" alt="profileimage">
                                 }
                                 else
@@ -391,15 +393,15 @@
                                 }
                                 <div class="flex flex-col">
 
-                                    <span class="ml-[12px] text-[14px] text-[#252525]  font-[700]"> @Session["Username"]</span>
-                                    <span class="ml-[12px] text-[#252525] text-[11px] font-normal">@Session["EmailAddress"]</span>
+                                    <span class="ml-[12px] text-[#252525]  font-[700]" style="font-size:16px"> @Session["Username"]</span>
+                                    <span class="ml-[12px] text-[#252525]  font-normal" style="font-size:14px">@Session["EmailAddress"]</span>
                                     <span class="ml-[12px] flex justify-start gap-[2px] items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11"
+                                        @*<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11"
                                              fill="none">
                                             <path d="M7.79167 0C6.96989 0 6.2251 0.153972 5.64323 0.44401C5.06136 0.73405 4.58333 1.20671 4.58333 1.83333V3.66667C4.58333 3.72575 4.60303 3.78304 4.61198 3.83854C4.18587 3.72754 3.71322 3.66667 3.20833 3.66667C2.38656 3.66667 1.64176 3.82064 1.0599 4.11068C0.478027 4.40072 0 4.87337 0 5.5V9.16667C0 9.79329 0.478027 10.266 1.0599 10.556C1.64176 10.846 2.38656 11 3.20833 11C4.03011 11 4.7749 10.846 5.35677 10.556C5.93864 10.266 6.41667 9.79329 6.41667 9.16667V8.98047C6.8374 9.09147 7.29753 9.16667 7.79167 9.16667C8.61344 9.16667 9.35824 9.0127 9.9401 8.72266C10.522 8.43262 11 7.95996 11 7.33333V1.83333C11 1.20671 10.522 0.73405 9.9401 0.44401C9.35824 0.153972 8.61344 0 7.79167 0ZM7.79167 0.916667C8.48991 0.916667 9.11117 1.06706 9.52474 1.27474C9.93831 1.48242 10.0833 1.70085 10.0833 1.83333C10.0833 1.96582 9.93831 2.18424 9.52474 2.39193C9.11117 2.59961 8.48991 2.75 7.79167 2.75C7.09342 2.75 6.47217 2.59961 6.05859 2.39193C5.64502 2.18424 5.5 1.96582 5.5 1.83333C5.5 1.70085 5.64502 1.48242 6.05859 1.27474C6.47217 1.06706 7.09342 0.916667 7.79167 0.916667ZM5.5 3.13672C5.54834 3.16357 5.5931 3.19759 5.64323 3.22266C6.2251 3.5127 6.96989 3.66667 7.79167 3.66667C8.61344 3.66667 9.35824 3.5127 9.9401 3.22266C9.99023 3.19759 10.035 3.16357 10.0833 3.13672V3.66667C10.0833 3.79915 9.93831 4.01758 9.52474 4.22526C9.11117 4.43294 8.48991 4.58333 7.79167 4.58333C7.09342 4.58333 6.47217 4.43294 6.05859 4.22526C5.64502 4.01758 5.5 3.79915 5.5 3.66667V3.13672ZM3.20833 4.58333C3.90658 4.58333 4.52783 4.73372 4.94141 4.94141C5.35498 5.14909 5.5 5.36751 5.5 5.5C5.5 5.63249 5.35498 5.85091 4.94141 6.05859C4.52783 6.26628 3.90658 6.41667 3.20833 6.41667C2.51009 6.41667 1.88883 6.26628 1.47526 6.05859C1.06169 5.85091 0.916667 5.63249 0.916667 5.5C0.916667 5.36751 1.06169 5.14909 1.47526 4.94141C1.88883 4.73372 2.51009 4.58333 3.20833 4.58333ZM10.0833 4.97005V5.5C10.0833 5.63249 9.93831 5.85091 9.52474 6.05859C9.11117 6.26628 8.48991 6.41667 7.79167 6.41667C7.27067 6.41667 6.79981 6.33073 6.41667 6.20182V5.5C6.41667 5.44092 6.39697 5.38363 6.38802 5.32812C6.81413 5.43913 7.28678 5.5 7.79167 5.5C8.61344 5.5 9.35824 5.34603 9.9401 5.05599C9.99023 5.03092 10.035 4.99691 10.0833 4.97005ZM0.916667 6.80339C0.965007 6.83024 1.00977 6.86426 1.0599 6.88932C1.64176 7.17936 2.38656 7.33333 3.20833 7.33333C4.03011 7.33333 4.7749 7.17936 5.35677 6.88932C5.4069 6.86426 5.45166 6.83024 5.5 6.80339V7.33333C5.5 7.46582 5.35498 7.68425 4.94141 7.89193C4.52783 8.09961 3.90658 8.25 3.20833 8.25C2.51009 8.25 1.88883 8.09961 1.47526 7.89193C1.06169 7.68425 0.916667 7.46582 0.916667 7.33333V6.80339ZM10.0833 6.80339V7.33333C10.0833 7.46582 9.93831 7.68425 9.52474 7.89193C9.11117 8.09961 8.48991 8.25 7.79167 8.25C7.27067 8.25 6.79981 8.1766 6.41667 8.04948V7.16146C6.8374 7.27246 7.29574 7.33333 7.79167 7.33333C8.61344 7.33333 9.35824 7.17936 9.9401 6.88932C9.99023 6.86426 10.035 6.83024 10.0833 6.80339ZM0.916667 8.63672C0.965007 8.66357 1.00977 8.69759 1.0599 8.72266C1.64176 9.0127 2.38656 9.16667 3.20833 9.16667C4.03011 9.16667 4.7749 9.0127 5.35677 8.72266C5.4069 8.69759 5.45166 8.66357 5.5 8.63672V9.16667C5.5 9.29915 5.35498 9.51758 4.94141 9.72526C4.52783 9.93294 3.90658 10.0833 3.20833 10.0833C2.51009 10.0833 1.88883 9.93294 1.47526 9.72526C1.06169 9.51758 0.916667 9.29915 0.916667 9.16667V8.63672Z"
                                                   fill="#E3AB00" />
-                                        </svg>
-                                        <span class="text-[#E3AB00] text-[11px] font-medium">0 ポイント</span>
+                                        </svg>*@
+                                        @*<span class="text-[#E3AB00]  font-medium" style="font-size:14px">0 ポイント</span>*@
                                     </span>
                                 </div>
                             </a>
@@ -423,114 +425,112 @@
                             </button>
                         </div>
                         <div>
-                            <a href="@Url.Action("Index", "ProfileManagement")" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                            <a href="@Url.Action("Index", "ProfileManagement")" class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height:45px; font-weight:700" >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M12 3.75C10.6084 3.75264 9.2746 4.30662 8.29061 5.29061C7.30661 6.2746 6.75264 7.60843 6.75 9C6.75114 9.86096 6.9632 10.7085 7.36763 11.4686C7.77207 12.2287 8.35656 12.8781 9.07 13.36C6.396 14.508 4.5 17.162 4.5 20.25H6C6 16.928 8.678 14.25 12 14.25C15.322 14.25 18 16.928 18 20.25H19.5C19.5 17.162 17.605 14.508 14.93 13.36C15.6436 12.8782 16.2281 12.2288 16.6326 11.4687C17.0371 10.7086 17.249 9.861 17.25 9C17.2474 7.60843 16.6934 6.2746 15.7094 5.29061C14.7254 4.30662 13.3916 3.75264 12 3.75ZM12 5.25C14.08 5.25 15.75 6.92 15.75 9C15.75 11.08 14.08 12.75 12 12.75C9.92 12.75 8.25 11.08 8.25 9C8.25 6.92 9.92 5.25 12 5.25Z"
                                           fill="#D75A8B" />
                                 </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">
+                                <span class="ml-[10px] text-[14px]">
                                     プロフィール編集
                                     <!-- edit profile -->
                                 </span>
                             </a>
                         </div>
                         <div class="py-[10px]">
-                            <a href="@Url.Action("ReservationHistory", "ReservationHistoryManagementV2")" class="flex items-center  py-[10px] px-4  rounded-lg  group ">
+                            <a href="@Url.Action("ReservationHistory", "ReservationHistoryManagementV2")" class="flex items-center  py-[10px] px-4  rounded-lg  group " style="height: 45px; font-weight:700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M12 3C8.87402 3 6.11426 4.58496 4.5 7.00781V4.5H3V9.75H8.25V8.25H5.53125C6.82617 6.01465 9.22266 4.5 12 4.5C16.1514 4.5 19.5 7.84863 19.5 12C19.5 16.1514 16.1514 19.5 12 19.5C7.84863 19.5 4.5 16.1514 4.5 12H3C3 16.9629 7.03711 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.25 6V12.75H16.5V11.25H12.75V6H11.25Z"
                                           fill="#D75A8B" />
                                 </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">予約確認・変更</span>
+                                <span class="ml-[10px] text-[14px]">予約確認・変更</span>
                             </a>
                         </div>
                         <div class="py-[10px]">
-                            <a href="@Url.Action("ReviewList", "ReviewManagement")" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                            <a href="@Url.Action("ReviewList", "ReviewManagement")" class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M2.25 4.5V19.5H9.43945L12 22.0605L14.5605 19.5H21.75V4.5H2.25ZM3.75 6H20.25V18H13.9395L12 19.9395L10.0605 18H3.75V6ZM6.75 8.25V9.75H17.25V8.25H6.75ZM6.75 11.25V12.75H17.25V11.25H6.75ZM6.75 14.25V15.75H14.25V14.25H6.75Z"
                                           fill="#D75A8B" />
                                 </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">レビュー投稿</span>
+                                <span class="ml-[10px] text-[14px] ">レビュー投稿</span>
                             </a>
                         </div>
                         <div class="py-[10px]">
-                            <a href="@Url.Action("Index", "BookmarkManagement")" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                            <a href="@Url.Action("Index", "BookmarkManagement")" class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
                                 <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg" style=" margin-left: 5px;">
                                     <path id="Vector" d="M0.25 0.375V17.625L1.44531 16.7344L7 12.5625L12.5547 16.7344L13.75 17.625V0.375H0.25ZM1.75 1.875H12.25V14.625L7.44531 11.0156L7 10.6875L6.55469 11.0156L1.75 14.625V1.875Z" fill="#D75A8B" />
                                 </svg>
 
-                                <span class="ml-[10px] text-[14px] font-[500]">ブックマーク</span>
+                                <span class="ml-[10px] text-[14px] ">ブックマーク</span>
                             </a>
                         </div>
-                        <div class="py-[10px]">
-                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                       @* <div class="py-[10px]">
+                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M15.75 3C14.4053 3 13.1865 3.25195 12.2344 3.72656C11.2822 4.20117 10.5 4.97461 10.5 6V9C10.5 9.09668 10.5322 9.19043 10.5469 9.28125C9.84961 9.09961 9.07617 9 8.25 9C6.90527 9 5.68652 9.25195 4.73438 9.72656C3.78223 10.2012 3 10.9746 3 12V18C3 19.0254 3.78223 19.7988 4.73438 20.2734C5.68652 20.748 6.90527 21 8.25 21C9.59473 21 10.8135 20.748 11.7656 20.2734C12.7178 19.7988 13.5 19.0254 13.5 18V17.6953C14.1885 17.877 14.9414 18 15.75 18C17.0947 18 18.3135 17.748 19.2656 17.2734C20.2178 16.7988 21 16.0254 21 15V6C21 4.97461 20.2178 4.20117 19.2656 3.72656C18.3135 3.25195 17.0947 3 15.75 3ZM15.75 4.5C16.8926 4.5 17.9092 4.74609 18.5859 5.08594C19.2627 5.42578 19.5 5.7832 19.5 6C19.5 6.2168 19.2627 6.57422 18.5859 6.91406C17.9092 7.25391 16.8926 7.5 15.75 7.5C14.6074 7.5 13.5908 7.25391 12.9141 6.91406C12.2373 6.57422 12 6.2168 12 6C12 5.7832 12.2373 5.42578 12.9141 5.08594C13.5908 4.74609 14.6074 4.5 15.75 4.5ZM12 8.13281C12.0791 8.17676 12.1523 8.23242 12.2344 8.27344C13.1865 8.74805 14.4053 9 15.75 9C17.0947 9 18.3135 8.74805 19.2656 8.27344C19.3477 8.23242 19.4209 8.17676 19.5 8.13281V9C19.5 9.2168 19.2627 9.57422 18.5859 9.91406C17.9092 10.2539 16.8926 10.5 15.75 10.5C14.6074 10.5 13.5908 10.2539 12.9141 9.91406C12.2373 9.57422 12 9.2168 12 9V8.13281ZM8.25 10.5C9.39258 10.5 10.4092 10.7461 11.0859 11.0859C11.7627 11.4258 12 11.7832 12 12C12 12.2168 11.7627 12.5742 11.0859 12.9141C10.4092 13.2539 9.39258 13.5 8.25 13.5C7.10742 13.5 6.09082 13.2539 5.41406 12.9141C4.7373 12.5742 4.5 12.2168 4.5 12C4.5 11.7832 4.7373 11.4258 5.41406 11.0859C6.09082 10.7461 7.10742 10.5 8.25 10.5ZM19.5 11.1328V12C19.5 12.2168 19.2627 12.5742 18.5859 12.9141C17.9092 13.2539 16.8926 13.5 15.75 13.5C14.8975 13.5 14.127 13.3594 13.5 13.1484V12C13.5 11.9033 13.4678 11.8096 13.4531 11.7188C14.1504 11.9004 14.9238 12 15.75 12C17.0947 12 18.3135 11.748 19.2656 11.2734C19.3477 11.2324 19.4209 11.1768 19.5 11.1328ZM4.5 14.1328C4.5791 14.1768 4.65234 14.2324 4.73438 14.2734C5.68652 14.748 6.90527 15 8.25 15C9.59473 15 10.8135 14.748 11.7656 14.2734C11.8477 14.2324 11.9209 14.1768 12 14.1328V15C12 15.2168 11.7627 15.5742 11.0859 15.9141C10.4092 16.2539 9.39258 16.5 8.25 16.5C7.10742 16.5 6.09082 16.2539 5.41406 15.9141C4.7373 15.5742 4.5 15.2168 4.5 15V14.1328ZM19.5 14.1328V15C19.5 15.2168 19.2627 15.5742 18.5859 15.9141C17.9092 16.2539 16.8926 16.5 15.75 16.5C14.8975 16.5 14.127 16.3799 13.5 16.1719V14.7188C14.1885 14.9004 14.9385 15 15.75 15C17.0947 15 18.3135 14.748 19.2656 14.2734C19.3477 14.2324 19.4209 14.1768 19.5 14.1328ZM4.5 17.1328C4.5791 17.1768 4.65234 17.2324 4.73438 17.2734C5.68652 17.748 6.90527 18 8.25 18C9.59473 18 10.8135 17.748 11.7656 17.2734C11.8477 17.2324 11.9209 17.1768 12 17.1328V18C12 18.2168 11.7627 18.5742 11.0859 18.9141C10.4092 19.2539 9.39258 19.5 8.25 19.5C7.10742 19.5 6.09082 19.2539 5.41406 18.9141C4.7373 18.5742 4.5 18.2168 4.5 18V17.1328Z"
                                           fill="#D75A8B" />
                                 </svg>
 
-                                <span class="ml-[10px] text-[14px] font-[500]">ポイント</span>
+                                <span class="ml-[10px] text-[14px] ">ポイント</span>
                             </a>
-                        </div>
-                        <div class="py-[10px]">
-                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                        </div>*@
+                       @* <div class="py-[10px]">
+                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M3.75 4.5C2.5166 4.5 1.5 5.5166 1.5 6.75V17.25C1.5 18.4834 2.5166 19.5 3.75 19.5H20.25C21.4834 19.5 22.5 18.4834 22.5 17.25V6.75C22.5 5.5166 21.4834 4.5 20.25 4.5H3.75ZM3.75 6H20.25C20.6748 6 21 6.3252 21 6.75V8.25H3V9.75H21V17.25C21 17.6748 20.6748 18 20.25 18H3.75C3.3252 18 3 17.6748 3 17.25V6.75C3 6.3252 3.3252 6 3.75 6Z"
                                           fill="#D75A8B" />
                                 </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">クレジットカード</span>
+                                <span class="ml-[10px] text-[14px] ">クレジットカード</span>
                             </a>
-                        </div>
+                        </div>*@
                         <div class="py-[10px]">
                             <a href="@Url.Action("ChangePasswordV2", "ProfileManagement")"
-                               class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                               class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M15 2.25C11.291 2.25 8.25 5.29102 8.25 9C8.25 9.38965 8.31445 9.73242 8.36719 10.0781L2.46094 15.9609L2.25 16.1953V21.75H7.5V19.5H9.75V17.25H12V15.0234C12.8848 15.457 13.916 15.75 15 15.75C18.709 15.75 21.75 12.709 21.75 9C21.75 5.29102 18.709 2.25 15 2.25ZM15 3.75C17.8916 3.75 20.25 6.1084 20.25 9C20.25 11.8916 17.8916 14.25 15 14.25C14.0918 14.25 13.1572 13.9834 12.4453 13.5938L12.2578 13.5H10.5V15.75H8.25V18H6V20.25H3.75V16.8281L9.67969 10.875L9.96094 10.6172L9.89062 10.2188C9.81445 9.76758 9.75 9.36621 9.75 9C9.75 6.1084 12.1084 3.75 15 3.75ZM16.5 6C15.6709 6 15 6.6709 15 7.5C15 8.3291 15.6709 9 16.5 9C17.3291 9 18 8.3291 18 7.5C18 6.6709 17.3291 6 16.5 6Z"
                                           fill="#D75A8B" />
                                 </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">パスワード変更</span>
+                                <span class="ml-[10px] text-[14px] ">パスワード変更</span>
                             </a>
                         </div>
                         <div class="py-[10px]">
                             <a href="@Url.Action("LogOff", "Home")"
-                               class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                               class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <g opacity="0.6">
                                         <path d="M12 3C7.81641 3 4.30664 5.87402 3.30469 9.75H4.85156C5.80957 6.70898 8.64844 4.5 12 4.5C16.1367 4.5 19.5 7.86328 19.5 12C19.5 16.1367 16.1367 19.5 12 19.5C8.64844 19.5 5.80957 17.291 4.85156 14.25H3.30469C4.30664 18.126 7.81641 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.5078 8.46094L10.4297 9.53906L12.1406 11.25H3V12.75H12.1406L10.4297 14.4609L11.5078 15.5391L14.5078 12.5391L15.0234 12L14.5078 11.4609L11.5078 8.46094Z"
                                               fill="#BCB08A" />
                                     </g>
                                 </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">ログアウト</span>
+                                <span class="ml-[10px] text-[14px] ">ログアウト</span>
                             </a>
                         </div>
                         <!-- divider -->
                         <hr class="my-2">
-                        <div class="py-[10px]">
-                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                       @* <div class="py-[10px]">
+                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M4.5 2.25V21.75H19.5V7.195L19.29 6.961L14.79 2.461L14.555 2.25H4.5ZM6 3.75H13.5V8.25H18V20.25H6V3.75ZM15 4.828L16.922 6.75H15V4.828ZM8.25 9.75V11.25H15.75V9.75H8.25ZM8.25 12.75V14.25H15.75V12.75H8.25ZM8.25 15.75V17.25H15.75V15.75H8.25Z"
                                           fill="#D75A8B" />
                                 </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">ヘルプ</span>
+                                <span class="ml-[10px] text-[14px] ">ヘルプ</span>
                             </a>
-                        </div>
-                        <div class="py-[10px]">
-                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group">
+                        </div>*@
+                        @*<div class="py-[10px]">
+                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M1.5 3.75V15.75H4.5V19.57L5.719 18.586L9.258 15.75H16.5V3.75H1.5ZM3 5.25H15V14.25H8.742L8.532 14.414L6 16.43V14.25H3V5.25ZM18 6.75V8.25H21V17.25H18V19.43L15.258 17.25H9.633L7.758 18.75H14.742L19.5 22.57V18.75H22.5V6.75H18Z"
                                           fill="#D75A8B" />
                                 </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">よくあるご質問</span>
+                                <span class="ml-[10px] text-[14px] ">よくあるご質問</span>
                             </a>
-                        </div>
-                        <div class="py-[10px]">
-                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M3.75 3.75V20.25H20.25V3.75H3.75ZM5.25 5.25H18.75V18.75H5.25V5.25ZM8.903 6.751C8.536 6.751 8.167 6.891 7.887 7.171L7.17 7.887C6.97747 8.0773 6.84322 8.31856 6.783 8.58248C6.72277 8.8464 6.73908 9.12202 6.83 9.377L6.863 9.475C6.987 9.852 7.276 10.735 8.223 12.135C8.681 12.815 9.213 13.453 9.795 14.021L9.971 14.197C10.5464 14.7861 11.18 15.3155 11.862 15.777C13.264 16.722 14.148 17.011 14.525 17.136L14.623 17.169C14.8781 17.2596 15.1537 17.2756 15.4176 17.2152C15.6815 17.1548 15.9227 17.0205 16.113 16.828L16.83 16.113C17.101 15.841 17.25 15.481 17.25 15.098C17.2506 14.9091 17.2138 14.722 17.1417 14.5475C17.0696 14.3729 16.9637 14.2144 16.83 14.081L15.967 13.221C15.424 12.678 14.478 12.678 13.935 13.221L12.655 14.501C12.0729 14.1027 11.5316 13.6478 11.039 13.143L10.852 12.955C10.3496 12.4642 9.89711 11.9249 9.501 11.345L10.781 10.065C11.053 9.795 11.201 9.432 11.201 9.048C11.201 8.665 11.053 8.305 10.781 8.033L9.917 7.17C9.78389 7.03684 9.62579 6.93129 9.45178 6.85938C9.27777 6.78748 9.09128 6.75065 8.903 6.751Z"
-                                          fill="#D75A8B" />
-                                </svg>
-                                <span class="ml-[10px] text-[14px] font-[500]">お問い合わせ</span>
+                        </div>*@
+                       @* <div class="py-[10px]">
+                            <a href="#" class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
+                              
+                                <i class="las la-concierge-bell" style="font-size: 24px; color: #D75A8B"></i>
+                                <span class="ml-[10px] text-[14px] ">お問い合わせ</span>
                             </a>
-                        </div>
+                        </div>*@
                     </div>
 
                     <!-- <div class="flex flex-col ">
@@ -612,7 +612,7 @@
                     }
                 </div>
                 <div class="footer bg-footer">
-                    <div class="footer-logo px-4 pt-[12px] pb-[16px]">
+                    <div class="footer-logo px-4 pt-[12px] pb-[16px]" style="padding-top:30px">
                         <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo_2.svg" />
                     </div>
                     <div class="p-4">
@@ -676,7 +676,7 @@
                         <div class=" my-4 p-[8px] border rounded-[4px] border-[#393939] bg-[#232323] text-xs text-center text-white">
                             @CRS.CUSTOMER.APPLICATION.Resources.Resource.WarningNotes
                         </div>
-                        <div class='text-center text-sm text-white'>© 2023 - @DateTime.Now.Year @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog</div>
+                        <div class='text-center  text-white' style="font-size:12px">© 2019 @DateTime.Now.Year @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog</div>
                     </div>
                 </div>
             </div>

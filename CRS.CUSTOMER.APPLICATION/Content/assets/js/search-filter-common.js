@@ -285,7 +285,7 @@ function PreferenceFilterCommon() {
                 if (timeValueElement) {
                     var timeValue = timeValueElement.getAttribute('data-info');
                     var selectedTimeDiv = document.getElementById("selected-time-id");
-                    selectedTimeDiv.innerText = timeValueElement.innerHTML;
+                    selectedTimeDiv.innerText = timeValueElement.innerHTML.trim();
                     $('#time-id').val(timeValue.trim());
                 }
             }
@@ -531,7 +531,7 @@ function ClosePreferenceFilterPopUp() {
     var element = document.getElementById('drawer-filter-location');
     if (element) {
         element.classList.add('translate-y-full');
-        document.body.addEventListener('touchmove', preventDefault, { passive: false });
+        //document.body.addEventListener('touchmove', preventDefault, { passive: false });
         return false;
     }
 }
@@ -632,6 +632,7 @@ function InitiateDateTimeFilterPopupFunction() {
     if (locationfilterpopupContent.trim() !== '') {
         var element = document.getElementById('drawer-date-time');
         if (element) {
+            DateTimeFilterCommon();
             element.classList.remove('translate-y-full');
             DisableLoaderFunction();
             return false;
@@ -641,7 +642,7 @@ function InitiateDateTimeFilterPopupFunction() {
     var savedData = localStorage.getItem('DateTimeFilterHTMLContent');
     if (savedData) {
         savedData = JSON.parse(savedData);
-        document.getElementById('preferencefilterpopUp-id').innerHTML = savedData.content; // Render the HTML content
+        document.getElementById('datetimefilterpopup-id').innerHTML = savedData.content; // Render the HTML content
 
 
         // Set input field values
@@ -659,8 +660,8 @@ function InitiateDateTimeFilterPopupFunction() {
                 document.getElementById(checkboxId).checked = savedData.checkboxStates[checkboxId];
             }
         }
-        DateTimeFilterCommon();
         DisableLoaderFunction();
+        DateTimeFilterCommon();
         return false;
     }
 
@@ -715,20 +716,32 @@ function DateTimeFilterCommon() {
         $.datepicker.setDefaults($.datepicker.regional['ja']);
         var currentDate = new Date();
         var maxDate = new Date(currentDate.getTime() + (14 * 24 * 60 * 60 * 1000)); // 15 days from today
+
+        var selectedHtmlDate = $('#main-date-id').html();
+        var selectedDate = null;
+        if (selectedHtmlDate != null && selectedHtmlDate != '') {
+            $('#date-id').val(selectedHtmlDate.trim());
+            selectedDate = new Date(selectedHtmlDate);
+        }
+        else {
+            selectedDate = currentDate;
+        }
+
         $("#datepicker2").datepicker({
             minDate: currentDate,
             maxDate: maxDate,
+            defaultDate: selectedDate,
             onSelect: function (dateText, inst) {
                 inst.inline = true; // Set datepicker to inline mode
                 $('#date-id').val(dateText.trim());
                 $('#main-date-id').html(dateText.trim());
             }
         });
-        $("#datepicker2").datepicker({
-            defaultDate: null
-        });
-        // Open the calendar by default
         $("#datepicker2").datepicker("show");
+        //$("#datepicker2").datepicker({
+        //    defaultDate: null
+        //});
+        // Open the calendar by default
         // Update selected date in datevalue element
 
     });
@@ -738,6 +751,28 @@ function DateTimeFilterCommon() {
 
 function ManageDateTimeFilterHTMLContent() {
     var content = document.getElementById('datetimefilterpopup-id').innerHTML;
+
+    //test
+    // Create a temporary element to hold the content
+    var tempDiv = document.createElement('div');
+    tempDiv.innerHTML = content;
+
+    // Create a new div element to replace datepicker2
+    var newDatepicker2Element = document.createElement('div');
+    newDatepicker2Element.id = 'datepicker2';
+    newDatepicker2Element.style.marginTop = '10px';
+
+    // Replace the existing datepicker2 with the new div element
+    var oldDatepicker2Element = tempDiv.querySelector('#datepicker2');
+    if (oldDatepicker2Element) {
+        oldDatepicker2Element.parentNode.replaceChild(newDatepicker2Element, oldDatepicker2Element);
+    }
+
+    // Get the updated content (excluding datepicker2)
+    var updatedContent = tempDiv.innerHTML;
+    //test
+
+
     var inputValues = {};
     var checkboxStates = {};
     document.querySelectorAll('input').forEach(function (input) {
@@ -749,7 +784,8 @@ function ManageDateTimeFilterHTMLContent() {
         }
     });
     var savedData = {
-        content: content,
+        //content: content,
+        content: updatedContent,
         inputValues: inputValues,
         checkboxStates: checkboxStates
     };
@@ -865,7 +901,7 @@ function CloseInitiatedDateTimeFilterPopupFunction() {
 
 function SubmitDateTimeFilterFunction() {
     EnableLoaderFunction();
-    InitiateDateTimeFilterPopupFunction();
+    //InitiateDateTimeFilterPopupFunction();
     let locationId = $('#filter-location-id').val();
     if (!locationId || locationId.trim() === '') {
         locationId = $('#current-location-id').val();
