@@ -3,12 +3,12 @@
         <img src="~/Content/assets/images/logo.svg" class="h-[24px]" alt='logo' />
     </a>
     <div class="flex gap-4">
-        <div class="text-xl text-warmgray cursor-pointer" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
+        <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
             <i class="las la-bell relative" id="notification-bell-id">
                 <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
             </i>
         </div>
-        <div class="text-xl text-warmgray cursor-pointer" data-drawer-target="drawer-right-example"
+        <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" data-drawer-target="drawer-right-example"
              data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
             <i class="las la-bars"></i>
         </div>
