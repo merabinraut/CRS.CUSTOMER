@@ -61,7 +61,7 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
 
             if (HasSelect)
             {
-                dictionary.Add("0", "--- select ---");
+                dictionary.Add("0", "選択");
             }
             return dictionary.Select(kvp => new StaticDataModel { StaticValue = kvp.Key, StaticLabel = kvp.Value }).ToList();
         }
