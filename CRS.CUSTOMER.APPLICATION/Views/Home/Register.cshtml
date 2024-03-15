@@ -187,10 +187,11 @@
             border-radius: 8px;
             background: #D75A8B;
             padding: 8px 12px;
+            margin-top:30px;
         }
 
         .loginButton {
-            background: #FFF;
+            background: #FAFAFA;
             padding: 8px 12px;
             color: #666;
             font-weight: 600;
@@ -222,11 +223,12 @@
             color: #666;
             text-align: center;
             font-family: "Noto Sans";
-            font-size: 11px;
+            font-size: 12px;
             font-style: normal;
             font-weight: 500;
             line-height: 166%;
             padding: 0 13px;
+            white-space:nowrap;
         }
 
         .affiliation {
@@ -242,10 +244,11 @@
             color: #839AD6;
             text-align: center;
             font-family: "Noto Sans JP";
-            font-size: 11px;
+            font-size: 12px;
             font-style: normal;
             font-weight: 700;
             line-height: 166%;
+            display:none;
         }
 
         .dividerCol {
@@ -256,6 +259,7 @@
             font-style: normal;
             font-weight: 700;
             line-height: 166%;
+            display: none;
             /* 18.26px */
         }
 
@@ -268,7 +272,7 @@
             font-weight: 500;
             line-height: 16px;
             letter-spacing: 0.4px;
-            margin: 18px 0;
+            margin-top: 18px;
         }
 
         .checkBox {
@@ -305,7 +309,7 @@
                 @Html.AntiForgeryToken()
                 <input value="@ViewBag.ReferCode" name="ReferCode" hidden />
                 <div class="inputWrapper">
-                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ミクチャン", @oninput = "validateInput(this)", autocomplete = "off" ,@maxlength = "30" })
+                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @oninput = "validateInput(this)", autocomplete = "off" ,@maxlength = "30" })
                     @*<input type="text" value="" name="nickName"
                         class=" focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="ミクチャン"
                         required>*@
@@ -331,18 +335,18 @@
                     </div>
                 </div>
                 <!-- for sms message -->
-                <div class="smsText">
-                    SMSの受信拒否設定がされてないことを確認の上、以下のボタンを押してください
-                </div>
+        <div class="smsText">
+            SMSの受信設定をご確認の上、ボタンを押してください
+        </div>
                 <!-- for register  -->
                 <div>
                     <button id="FormSubmit" type="button" class="registerButton border rounded-lg  w-full">認証コードを受け取る</button>
                 </div>
             }
             <!-- for login -->
-            <div class="my-3 flex justify-center items-center">
+            <div class="mt-3 flex justify-center items-center">
                 <div class="border  spertator"></div>
-                <span class="otherAccotunt">すでにアカウントをお持ちの方?</span>
+                <span class="otherAccotunt">既にアカウントをお持ちですか？</span>
                 <div class="border  spertator"></div>
             </div>
             <!-- for login -->

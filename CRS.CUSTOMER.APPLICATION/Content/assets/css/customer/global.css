@@ -383,7 +383,7 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 4px;
-    background-color: rgba( 0, 0, 0, 0.3 ); /* Adjust the alpha (4th) value for transparency */
+    background-color: rgba( 0, 0, 0, 0.6 ); /* Adjust the alpha (4th) value for transparency */
 }
 /* form  */
 .input-field-common {

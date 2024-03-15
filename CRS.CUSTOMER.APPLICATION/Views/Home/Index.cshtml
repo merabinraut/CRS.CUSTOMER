@@ -212,7 +212,7 @@
 
         .rememberMe {
         color: #000;
-        font-size: 10px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 400;
         line-height: 16px;
@@ -233,7 +233,7 @@
         .forgetPassword {
         color: #839AD6;
         font-family: "Noto Sans";
-        font-size: 10px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 700;
         line-height: 16px;
@@ -247,7 +247,7 @@
         font-weight: 700;
         line-height: 24px;
         font-size: 14px;
-        margin-top: 18px;
+        margin-top: 30px;
         }
 
         .termsAndContion {
@@ -270,15 +270,16 @@
         color: #666;
         text-align: center;
         font-family: "Noto Sans";
-        font-size: 11px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 500;
         line-height: 166%;
         padding: 0 13px;
+       white-space:nowrap;
         }
 
         .registerButton {
-        background: #FFF;
+        background: #FBFBFB;
         padding: 8px 12px;
         color: #666;
         font-weight: 600;
@@ -290,32 +291,35 @@
         }
 
         .affiliation {
-        display: flex;
-        padding: 4px 0px;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        margin-top: 18px;
+            display: flex;
+            padding: 4px 0px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+            display: none
         }
 
         .affiliationText {
         color: #839AD6;
         text-align: center;
         font-family: "Noto Sans JP";
-        font-size: 11px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 700;
         line-height: 166%;
+        display:none
         }
 
         .dividerCol {
-        color: #999;
-        text-align: center;
-        font-size: 11px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 166%;
-        /* 18.26px */
+            color: #999;
+            text-align: center;
+            font-size: 11px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 166%;
+            display: none
+            /* 18.26px */
         }
 
         .touggleButton {
@@ -332,68 +336,83 @@
         font-size:12px;
         }
         input[type="password"] {
-            font-size: 12px;
+            font-size: 18px;
+            letter-spacing:0.5px;
         }
 
-        input[type="password"]:focus {
-            font-size: 12px;
-        }
+            input[type="password"]:focus {
+                font-size: 18px;
+                letter-spacing: 0.5px;
+            }
 
             input[type="password"]:focus-visible {
-                font-size: 12px;
+                font-size: 18px;
+                letter-spacing: 0.5px;
             }
     </style>
     <div class="  ">
-        <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[24px]">
-            <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+    
+        <div class=" px-[24px] flex justify-between border-b border-b-[#ECECEC] bg-white z-[10]" style="z-index:12; padding-bottom:10px">
+            <a class="flex gap-[6px] items-center" href="@Url.Action("Index","DashboardV2")">
+                <img src="~/Content/assets/images/logo.svg" class="h-[24px]" alt='logo' />
+            </a>
+            <div class="flex gap-4">
+                <div class="text-xl text-warmgray cursor-pointer" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
+                    @*<i class="las la-bell relative" id="notification-bell-id">
+                        <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
+                    </i>*@
+                </div>
+               @* <div class="text-xl text-warmgray cursor-pointer" data-drawer-target="drawer-right-example"
+                     data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+                    <i class="las la-bars"></i>
+                </div>*@
             </div>
-            <div class="text-center w-full font-bold"></div>
         </div>
         <div class="loginContainer">
             <div class="login">ログイン</div>
             @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
             {
-            @Html.AntiForgeryToken()
-            <div class="inputWrapper focus:text-[12px]" >
-                @Html.TextBoxFor(model => model.LoginId, new
-                {
-                @class = "contactNumber focus:outline-none border-none  w-full ring-0 focus:ring-0 focus:ring-transparent",
-                @placeholder = "携帯電話番号"
+                @Html.AntiForgeryToken()
+                <div class="inputWrapper focus:text-[12px]">
+                    @Html.TextBoxFor(model => model.LoginId, new
+                    {
+                    @class = "contactNumber focus:outline-none border-none  w-full ring-0 focus:ring-0 focus:ring-transparent",
+                    @placeholder = "携帯電話番号"
 
-                })
-                @*<span class="validationMessage ">
+                    })
+                    @*<span class="validationMessage ">
+                        @Html.ValidationMessageFor(m => m.LoginId)
+                    </span>*@
+                    <hr>
+                    <div class="relative">
+                        @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "16" })
+                        <i class="las la-eye password-eye absolute top-3 right-2 text-[2] " style="font-size: 24px; color: #A1A1AA" onclick="togglePassword()"></i>
+                    </div>
+                </div>
+
+                <div class="validationMessage  text-[10px] font-normal leading-[13.62px] mt-2">
                     @Html.ValidationMessageFor(m => m.LoginId)
-                </span>*@
-                <hr>
-                <div class="relative">
-                    @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "16" })
-                    <i class="las la-eye password-eye absolute top-3 right-2 text-[#]" onclick="togglePassword()"></i>
+                    @*      @Html.ValidationMessageFor(m => m.Password)*@
                 </div>
-            </div>
-        
-            <div class="validationMessage  text-[10px] font-normal leading-[13.62px] mt-2" >
-                @Html.ValidationMessageFor(m => m.LoginId)
-          @*      @Html.ValidationMessageFor(m => m.Password)*@
-            </div>
 
 
-            <!-- for check box -->
-            <div class="checkboxWrapper flex justify-between items-center mt-4">
-                <div>
-                    <input type="checkbox" name="RememberMe" value="Remember"
-                           class="checkBox focus:outline-none bg-transparent ring-offset-0 ring-0 focus:ring-0 focus:ring-transparent focus:ring-shadow-none"
-                           id="rememberMe">
-                    <label for="rememberMe" class="rememberMe">ログインしたままにする</label>
+                <!-- for check box -->
+                <div class="checkboxWrapper flex justify-between items-center">
+                    <div>
+                        <input type="checkbox" name="RememberMe" value="Remember"
+                               class="checkBox focus:outline-none bg-transparent ring-offset-0 ring-0 focus:ring-0 focus:ring-transparent focus:ring-shadow-none"
+                               id="rememberMe">
+                        <label for="rememberMe" class="rememberMe">ログインしたままにする</label>
+                    </div>
+                    <!-- for forget pasword -->
+                    <div>
+                        <a href="~/home/ForgotPassword" class="forgetPassword">パスワードをお忘れですか?</a>
+                    </div>
                 </div>
-                <!-- for forget pasword -->
+                <!-- for login  -->
                 <div>
-                    <a href="~/home/ForgotPassword" class="forgetPassword">パスワードをお忘れですか?</a>
+                    <button type="submit" class="loginButton border rounded-lg  w-full" id="FormSubmit" name="FormSubmit" value="Next">ログイン</button>
                 </div>
-            </div>
-            <!-- for login  -->
-            <div>
-                <button type="submit" class="loginButton border rounded-lg  w-full" id="FormSubmit" name="FormSubmit" value="Next">ログイン</button>
-            </div>
             }
             <!-- for term and condition -->
             <div class="mt-4 flex justify-center items-center flex-col">
