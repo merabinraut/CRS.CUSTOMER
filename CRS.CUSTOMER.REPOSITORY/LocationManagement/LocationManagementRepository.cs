@@ -307,7 +307,8 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
                     TiktokLink = _dao.ParseColumnValue(dbResponseInfo, "TiktokLink").ToString(),
                     TwitterLink = _dao.ParseColumnValue(dbResponseInfo, "TwitterLink").ToString(),
                     VPLastEntryTiime = _dao.ParseColumnValue(dbResponseInfo, "VPLastEntryTiime").ToString(),
-                    VPMaxReservation = _dao.ParseColumnValue(dbResponseInfo, "VPMaxReservation").ToString()
+                    VPMaxReservation = _dao.ParseColumnValue(dbResponseInfo, "VPMaxReservation").ToString(),
+                    WebsiteLink = _dao.ParseColumnValue(dbResponseInfo, "WebsiteLink").ToString()
                 };
             }
             return new ClubBasicInformationModelCommon();

@@ -670,26 +670,54 @@
                             </a>
                         </div>
                     }
-                    <div class="  bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex cursor-default">
-                        <a href="#" target="_blank" disabled="disabled" class="pointer-events-none">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="Frame" clip-path="url(#clip0_5545_77311)">
-                                    <path id="Vector" d="M8.00065 1.33301C6.23254 1.33301 4.53685 2.03539 3.28661 3.28563C2.03636 4.53587 1.33398 6.23156 1.33398 7.99967C1.33398 9.76778 2.03636 11.4635 3.28661 12.7137C4.53685 13.964 6.23254 14.6663 8.00065 14.6663C9.76876 14.6663 11.4645 13.964 12.7147 12.7137C13.9649 11.4635 14.6673 9.76778 14.6673 7.99967C14.6673 6.23156 13.9649 4.53587 12.7147 3.28563C11.4645 2.03539 9.76876 1.33301 8.00065 1.33301Z" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path id="Vector_2" d="M13.5 4.5C13.5 4.5 10.8513 5.5 8.5 5.5C6.14873 5.5 3 4.5 3 4.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path id="Vector_3" d="M2 8H14.6667" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path id="Vector_4" d="M3 11.5C3 11.5 5.64873 10.5 8 10.5C10.3513 10.5 13.5 11.5 13.5 11.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path id="Vector_5" d="M8 1.5C9.237 3.30394 10 5.27444 10 8C10 10.7256 9.237 12.6961 8 14.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path id="Vector_6" d="M8 1.5C6.71597 3.36762 5.99759 5.38196 6.00001 8C6.00001 10.7256 6.763 12.6961 8 14.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_5545_77311">
-                                        <rect width="16" height="16" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
+                    @if (Model.GetClubBasicInformation.WebsiteLink != null)
+                    {
 
-                        </a>
-                    </div>
+                        <div class="  bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex cursor-default">
+                            <a href="@Model.GetClubBasicInformation.WebsiteLink">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="Frame" clip-path="url(#clip0_5545_77311)">
+                                        <path id="Vector" d="M8.00065 1.33301C6.23254 1.33301 4.53685 2.03539 3.28661 3.28563C2.03636 4.53587 1.33398 6.23156 1.33398 7.99967C1.33398 9.76778 2.03636 11.4635 3.28661 12.7137C4.53685 13.964 6.23254 14.6663 8.00065 14.6663C9.76876 14.6663 11.4645 13.964 12.7147 12.7137C13.9649 11.4635 14.6673 9.76778 14.6673 7.99967C14.6673 6.23156 13.9649 4.53587 12.7147 3.28563C11.4645 2.03539 9.76876 1.33301 8.00065 1.33301Z" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path id="Vector_2" d="M13.5 4.5C13.5 4.5 10.8513 5.5 8.5 5.5C6.14873 5.5 3 4.5 3 4.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path id="Vector_3" d="M2 8H14.6667" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path id="Vector_4" d="M3 11.5C3 11.5 5.64873 10.5 8 10.5C10.3513 10.5 13.5 11.5 13.5 11.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path id="Vector_5" d="M8 1.5C9.237 3.30394 10 5.27444 10 8C10 10.7256 9.237 12.6961 8 14.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path id="Vector_6" d="M8 1.5C6.71597 3.36762 5.99759 5.38196 6.00001 8C6.00001 10.7256 6.763 12.6961 8 14.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_5545_77311">
+                                            <rect width="16" height="16" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="  bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex cursor-default">
+                            <a href="#" target="_blank" disabled="disabled" class="pointer-events-none">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="Frame" clip-path="url(#clip0_5545_77311)">
+                                        <path id="Vector" d="M8.00065 1.33301C6.23254 1.33301 4.53685 2.03539 3.28661 3.28563C2.03636 4.53587 1.33398 6.23156 1.33398 7.99967C1.33398 9.76778 2.03636 11.4635 3.28661 12.7137C4.53685 13.964 6.23254 14.6663 8.00065 14.6663C9.76876 14.6663 11.4645 13.964 12.7147 12.7137C13.9649 11.4635 14.6673 9.76778 14.6673 7.99967C14.6673 6.23156 13.9649 4.53587 12.7147 3.28563C11.4645 2.03539 9.76876 1.33301 8.00065 1.33301Z" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path id="Vector_2" d="M13.5 4.5C13.5 4.5 10.8513 5.5 8.5 5.5C6.14873 5.5 3 4.5 3 4.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path id="Vector_3" d="M2 8H14.6667" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path id="Vector_4" d="M3 11.5C3 11.5 5.64873 10.5 8 10.5C10.3513 10.5 13.5 11.5 13.5 11.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path id="Vector_5" d="M8 1.5C9.237 3.30394 10 5.27444 10 8C10 10.7256 9.237 12.6961 8 14.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path id="Vector_6" d="M8 1.5C6.71597 3.36762 5.99759 5.38196 6.00001 8C6.00001 10.7256 6.763 12.6961 8 14.5" stroke="black" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_5545_77311">
+                                            <rect width="16" height="16" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+
+                            </a>
+                        </div>
+                    }
+
                 </div>
             </div>
             <!-- for Last entry/last order -->
@@ -961,8 +989,7 @@
                 <!-- <div class="box mt-2"></div> -->
             </div>
             <!-- </div> -->
-            <script>
-                $(document).ready(function () {
+            <script>$(document).ready(function () {
                     $('.store-host-carousel').owlCarousel({
                         margin: 10,
                         loop: true,
@@ -1732,8 +1759,7 @@
 @section scripts
 {
     <script src="~/Content/CustomHelper.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    <script>document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";
         });
@@ -1752,8 +1778,7 @@
             });
             //localStorage.clear();
         })</script>
-    <script>
-        //function ClubReservationActionFunction(i, j, k) {
+    <script>//function ClubReservationActionFunction(i, j, k) {
         //    DataStorageFunction(i, j);
         //    window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
         //}
@@ -1815,8 +1840,7 @@
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "none";
         }</script>
-    <script>
-        const shareButton = document.querySelector("#shareButton");
+    <script>const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -1830,8 +1854,7 @@
                 toastr.info('Web Share API is not supported in this browser.');
             }
         });</script>
-    <script>
-        function OpenImagePopup(ImageURL) {
+    <script>function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");
@@ -1845,12 +1868,10 @@
             modal.style.display = "none";
         }</script>
 
-    <script>
-        function openModal() {
+    <script>function openModal() {
             console.log("test");
         }</script>
-    <script>
-        // Function to open a specific modal
+    <script>// Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -1900,8 +1921,7 @@ $(document).ready(function () {
                 });
             });
         });</script>
-    <script>
-        $('#notice_id').click('click', function () {
+    <script>$('#notice_id').click('click', function () {
             var activeElement = document.querySelector('.tab-link.active');
             if (activeElement) {
                 activeElement.classList.remove('active');
@@ -1925,8 +1945,7 @@ $(document).ready(function () {
         });</script>
 
     <!--make clicked the tab after reload-->
-    <script>
-        $('.tab-button-plane').click('click', function () {
+    <script>$('.tab-button-plane').click('click', function () {
             var id = $(this).attr('id');
             var name = $(this).text().trim();
             localStorage.setItem("tablink-id", id);
