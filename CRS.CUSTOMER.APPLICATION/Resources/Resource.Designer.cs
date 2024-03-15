@@ -1087,6 +1087,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Host Club List.
+        /// </summary>
+        public static string HostClubList {
+            get {
+                return ResourceManager.GetString("HostClubList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to host clubs.
         /// </summary>
         public static string HostClubs {
@@ -1933,6 +1942,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Privecy Policy.
+        /// </summary>
+        public static string Policy {
+            get {
+                return ResourceManager.GetString("Policy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Popular.
         /// </summary>
         public static string Popularity {
@@ -2505,6 +2523,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         public static string Terms_of_Use_and_Privacy_Policy {
             get {
                 return ResourceManager.GetString("Terms of Use and Privacy Policy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terms of Use.
+        /// </summary>
+        public static string TermsOfUse {
+            get {
+                return ResourceManager.GetString("TermsOfUse", resourceCulture);
             }
         }
         

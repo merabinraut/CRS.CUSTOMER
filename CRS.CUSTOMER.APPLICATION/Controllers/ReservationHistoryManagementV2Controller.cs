@@ -64,6 +64,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 allItem.ClubId = allItem.ClubId.EncryptParameter();
                 allItem.ReservationId = allItem.ReservationId.EncryptParameter();
                 allItem.CustomerId = allItem.CustomerId.EncryptParameter();
+                allItem.LocationId = allItem.LocationId.EncryptParameter();
             }
             #endregion
             if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
@@ -85,17 +86,39 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ReservationHistoryDetailModel responseinfo = new ReservationHistoryDetailModel();
             var dbResponseInfo = _buss.GetReservationHistoryDetail(CustomerId, reservationId);
             responseinfo = dbResponseInfo.MapObject<ReservationHistoryDetailModel>();
-            responseinfo.HImages = responseinfo.HostImages.Split(',');
-            responseinfo.ClubLogo = FileLocationPath + responseinfo.ClubLogo;
-            if (responseinfo.HImages != null)
+            if (responseinfo.ClubId != null && responseinfo.ClubId != "")
             {
-                List<string> updatedImages = new List<string>();
-                foreach (var item in responseinfo.HImages)
+                responseinfo.HImages = responseinfo.HostImages.Split(',');
+                responseinfo.ClubLogo = FileLocationPath + responseinfo.ClubLogo;
+                if (responseinfo.HImages != null)
                 {
-                    updatedImages.Add(FileLocationPath + item);
+                    List<string> updatedImages = new List<string>();
+                    foreach (var item in responseinfo.HImages)
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            updatedImages.Add(FileLocationPath + item);
+                        }
+                        else
+                        {
+                            updatedImages.Add(item);
+                        }
+
+                    }
+                    responseinfo.HImages = updatedImages.ToArray();
                 }
-                responseinfo.HImages = updatedImages.ToArray();
             }
+            else
+            {
+                AddNotificationMessage(new NotificationModel()
+                {
+                    Message = "Invalid Reservation Details",
+                    NotificationType = NotificationMessage.WARNING,
+                    Title = NotificationMessage.WARNING.ToString(),
+                });
+                return RedirectToAction("ReservationHistory", "ReservationHistoryManagementV2");
+            }
+
             return View(responseinfo);
         }
         [HttpPost, ValidateAntiForgeryToken]

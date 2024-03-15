@@ -127,7 +127,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var recommendedClubDBRequest = new RecommendedClubRequestCommon()
             {
                 LocationId = lId,
-                CustomerId = CustomerId
+                CustomerId = CustomerId,
+                PageType = "1"
             };
             var dbClubResponse = _recommendedClubHostBuss.GetRecommendedClub(recommendedClubDBRequest);
             Response.ClubListModel = dbClubResponse.MapObjects<LocationClubListModel>();
@@ -146,7 +147,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var recommendedHostDBRequest = new RecommendedHostRequestCommon()
                 {
                     LocationId = lId,
-                    CustomerId = CustomerId
+                    CustomerId = CustomerId,
+                    PageType = "1"
                 };
                 var dbHostResponse = _recommendedClubHostBuss.GetRecommendedHost(recommendedHostDBRequest);
                 Response.HostListModel = dbHostResponse.MapObjects<LocationHostListModel>();

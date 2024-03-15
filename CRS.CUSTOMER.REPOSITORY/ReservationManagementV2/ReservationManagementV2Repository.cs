@@ -24,9 +24,9 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
             SQL += ", @ClubId=" + _dao.FilterString(ClubId);
             SQL += !string.IsNullOrEmpty(SelectedDate) ? ", @SelectedDate=" + _dao.FilterString(SelectedDate) : "";
             var dbResponse = _dao.ExecuteDataRow(SQL);
-            if (dbResponse != null && _dao.ParseColumnValue(dbResponse, "Code").ToString().Trim() == "0")
+            if (dbResponse != null && (_dao.ParseColumnValue(dbResponse, "Code").ToString().Trim() == "0" || _dao.ParseColumnValue(dbResponse, "Code").ToString().Trim() == "9"))
             {
-                Response.Code = ResponseCode.Success;
+                Response.Code = _dao.ParseColumnValue(dbResponse, "Code").ToString().Trim() == "0" ? ResponseCode.Success : ResponseCode.Exception;
                 Response.Message = _dao.ParseColumnValue(dbResponse, "Message").ToString() ?? "Success";
                 Response.MaxNoOfPeopleAllowed = !string.IsNullOrEmpty(_dao.ParseColumnValue(dbResponse, "MaxNoOfPeopleAllowed").ToString()) ? Convert.ToInt32(_dao.ParseColumnValue(dbResponse, "MaxNoOfPeopleAllowed").ToString()) : 0;
                 Response.TotalNoOfPeople = !string.IsNullOrEmpty(_dao.ParseColumnValue(dbResponse, "TotalNoOfPeople").ToString()) ? Convert.ToInt32(_dao.ParseColumnValue(dbResponse, "TotalNoOfPeople").ToString()) : 0;

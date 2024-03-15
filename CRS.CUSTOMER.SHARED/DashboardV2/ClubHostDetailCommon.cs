@@ -19,5 +19,6 @@
         public string HostNameJapanese { get; set; }
         public string HostLogo { get; set; }
         public string ClubLocationId { get; set; }
+        public string IsBookmarked { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿﻿@model CRS.CUSTOMER.APPLICATION.Models.Home.LoginRequestModel
 @{
-    ViewBag.Title = "Hoslog | Sign In";
+    ViewBag.Title = "ホスログ | サインイン";
     Layout = null;
     var CallJavaScriptFunction = ViewBag.CallJavaScriptFunction;
 }
@@ -329,7 +329,19 @@
         input {
         --tw-ring-shadow: 0 0 #000 !important;
         background: none;
+        font-size:12px;
         }
+        input[type="password"] {
+            font-size: 12px;
+        }
+
+        input[type="password"]:focus {
+            font-size: 12px;
+        }
+
+            input[type="password"]:focus-visible {
+                font-size: 12px;
+            }
     </style>
     <div class="  ">
         <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[24px]">
@@ -342,7 +354,7 @@
             @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
             {
             @Html.AntiForgeryToken()
-            <div class="inputWrapper">
+            <div class="inputWrapper focus:text-[12px]" >
                 @Html.TextBoxFor(model => model.LoginId, new
                 {
                 @class = "contactNumber focus:outline-none border-none  w-full ring-0 focus:ring-0 focus:ring-transparent",
@@ -354,7 +366,7 @@
                 </span>*@
                 <hr>
                 <div class="relative">
-                    @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent", @type = "password", @placeholder = "******************", @maxlength = "16" })
+                    @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "16" })
                     <i class="las la-eye password-eye absolute top-3 right-2 text-[#]" onclick="togglePassword()"></i>
                 </div>
             </div>
@@ -407,10 +419,10 @@
             <!-- for affiliation -->
             <div class="affiliation">
                 <div class="affiliationText">
-                    <a href=@Model.affiliateURL>アフィリエイター登録</a>
+                    <a href=@Model.affiliateURL style="font-family: Noto Sans">アフィリエイター登録</a>
                 </div>
                 <div class="dividerCol">|</div>
-                <div class="affiliationText"><a href=@Model.clubURL> 店舗オーナー登録 </a></div>
+                <div class="affiliationText"><a href=@Model.clubURL style="font-family: Noto Sans"> 店舗オーナー登録 </a></div>
             </div>
         </div>
     </div>

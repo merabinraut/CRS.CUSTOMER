@@ -11,7 +11,7 @@
         right: 3px;
     }
 
-    .active {
+    .activeHostSearch {
         color: #D75A8B;
         background: #F3F3F3;
     }
@@ -175,10 +175,26 @@
         @{
             foreach (var item in Model.HostRecommendationModel)
             {
-                var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
+                var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "activeHostSearch" : string.Empty;
                 var activeBoolValue = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? true : false;
                 <div class="hosts-that-match-you @activeClass" style="width:112px; height:154px; border-radius:2px; position:relative; overflow:revert" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
-                    <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
+                    <img src="@item.HostLogo" alt="host-logo" style="width:112px" class="image-cover" />
+                    @*@if (!string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.ToUpper().Trim() == "N")
+                    {
+                        <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="handleAddBookmarks('@item.ClubId','@item.HostId','host')">
+                            <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="width: 24px; height: 24px;" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="handleRemoveBookmarks('@item.ClubId','@item.HostId','host')">
+                            <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="unfilled" style="width: 24px; height: 24px;" />
+                        </div>
+                    }*@
+                    @*  <img src="~/Content/assets/images/customer/demo-image.jpeg" alt="host-logo" style="width:112px" class="image-cover" />*@
+                    @*<div class="absolute top-2 right-2" style="width: 24px; height: 24px;">
+                        <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="width: 24px; height: 24px;" />
+                    </div>*@
                     @*<div class="like-host" onclick="ToggleBookmark('@item.ClubId','@item.HostId','host' , activeBoolValue)">
                             <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
                                  viewBox="0 0 31 34" fill="none">
@@ -231,8 +247,11 @@
 
                         </div>*@
                     <div class="description">
-                        <div class="title">@item.HostNameEnglish</div>
-                        <div class="club-name"><img src="@item.ClubLogo" alt="club-logo" />@item.ClubNameEnglish</div>
+                        <div class="title text-clip">@item.HostNameEnglish</div>
+                        <div class="club-name text-clip">
+                            <img src="@item.ClubLogo" alt="club-logo" />
+                            <span class="text-clip">@item.ClubNameEnglish</span>
+                        </div>
                     </div>
                 </div>
             }
@@ -260,7 +279,7 @@
             {
                 var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
                 <div class="hosts-that-match-you @activeClass" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
-                    <img src="@item.HostLogo" alt="host-logo" style="width:112px" />
+                    <img src="@item.HostLogo" alt="host-logo" style="width:112px" class="image-cover" />
                     @if (item.IsBookmarked.ToUpper() == "Y")
                     {
                         <div class="like-host" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
@@ -349,7 +368,7 @@
                             }
 
                         </div>
-                        <div class="club-name"><img src="@item.ClubLogo" alt="club-logo" />@item.ClubNameEnglish</div>
+                        <div class="club-name"><img src="@item.ClubLogo" alt="club-logo" class="image-cover" />@item.ClubNameEnglish</div>
                     </div>
                 </div>
             }

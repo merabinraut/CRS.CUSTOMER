@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Club";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var LocationId = !string.IsNullOrEmpty(ViewBag.LocationId) ? ViewBag.LocationId : (Model.FilteredClubModel != null && Model.FilteredClubModel.Count > 0) ? Model.FilteredClubModel[0].ClubLocationId : string.Empty;
 }
 <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="window.location.href='@Url.Action("Index","DashboardV2")'">
     <div class="flex gap-2 items-center absolute top-[12px] text-sm">
@@ -10,7 +11,7 @@
                   fill="#BCB08A" />
         </svg>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
     </div>
-    <div class="text-center w-full font-bold"></div>
+    <div class="text-center w-full font-bold">検索結果</div>
 </div>
 <!-- search bar -->
 <div class=" border border-[#D6CEB4] flex my-2 mx-4 rounded-[4px] search-input" onclick="redirectToSearchPage()">
@@ -25,7 +26,7 @@
            type="text"
            placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Filter_Placeholder" readonly />
     <div class="group flex justify-end cursor-pointer p-3 rotate-90" title="Filter">
-        <a href="/Search/Index?LocationId=@ViewBag.LocationId">
+        <a href="/Search/Index?LocationId=@LocationId">
             <svg class="group-hover:bg-primaryLight w-4 h-4 text-[#BCB08A] " aria-hidden="true"
                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
@@ -57,10 +58,10 @@
                                 </div>
                                 <div class="flex flex-col">
                                     <div class="flex flex-row mt-[7px] justify-center">
-                                        <p style="line-height: 100%;" class="font-[700] text-[10px]">@item.ClubNameEnglish</p>
+                                        <p style="line-height: 100%;" class="font-[700] text-[10px] text-clip">@item.ClubNameEnglish</p>
                                     </div>
                                     <div class="flex flex-row mt-[4px] justify-center">
-                                        <p style="line-height: 100%;" class="font-[400] text-[10px]">@item.ClubNameJapanese</p>
+                                        <p style="line-height: 100%;" class="font-[400] text-[10px] text-clip">@item.ClubNameJapanese</p>
                                     </div>
 
                                 </div>
@@ -208,7 +209,7 @@
 
                 <!-- book now section  -->
 
-                <div class="px-4 py-[12px] flex justify-between items-center">
+                <div class="px-4 py-[12px] flex justify-between items-center border-b-[4px] border-[#E5E5E5]">
                     <div>
                         @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
                         {
@@ -295,14 +296,12 @@
         });
 
      function redirectToSearchPage() {
-        var locationId = '@ViewBag.LocationId';
-         var searchUrl = `/Search/Index?locationId=${locationId}`;
+         var searchUrl = `/Search/Index?locationId=${'@LocationId'}`;
          window.location.href = searchUrl;
      }
 
         function redirectToSearchHomePage() {
-            var locationId = '@ViewBag.LocationId' ||'';
-            var searchUrl = `/LocationManagement/SearchFilter?&LocationId=${locationId}`
+            var searchUrl = `/LocationManagement/SearchFilter?&LocationId=${'@LocationId'}`
 
             window.location.href = searchUrl;
         }

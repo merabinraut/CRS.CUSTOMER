@@ -10,7 +10,7 @@
                   fill="#BCB08A" />
         </svg>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
     </div>
-    <div class="text-center w-full font-bold"></div>
+    <div class="text-center w-full font-bold">検索結果</div>
 </div>
 <!-- search bar -->
 <div class=" border border-[#D6CEB4] flex my-2 mx-4 rounded-[4px] search-input" onclick="redirectToSearchPage()">
@@ -51,14 +51,14 @@
                 <div class="h-auto flex flex-col justify-end  text-center relative">
                     <div class="w-full flex">
                         <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
-                            <img class=" w-full h-[157px]  object-fill rounded" src="@item.HostLogo)" />
+                            <img class=" w-full h-[157px]  object-fill rounded" src="@item.HostLogo" />
                         </a>
                     </div>
                     <div class="absolute mb-[8px] w-full flex flex-row px-2 py-[2px]">
                         <div style="border-radius:2px;  "
                              class="  w-full bg-[#ffffffe6]  p-1  justify-start rounded-b flex   flex-col   ">
                             <div class=" flex flex-row   text-xs  ">
-                                <div class="text-[12px] font-[700] pl-[2px]">@item.HostNameEnglish</div>
+                                <div class="text-[12px] font-[700] pl-[2px]">@item.HostNameJapanese</div>
                             </div>
                             <div class="flex flex-row items-center   ">
                                 <div class=" font-[700] pl-[2px]">
@@ -104,7 +104,7 @@ else
                     <div style="border-radius:2px; opacity: 0.9; margin-left: 2px;  "
                          class="  w-[90%] bg-[#D9D9D9]    h-[34px] justify-start rounded-b flex   flex-col   ">
                         <div class=" flex flex-row   text-xs  ">
-                            <div class="text-[12px] font-[700] pl-[2px]">@item.HostNameEnglish</div>
+                            <div class="text-[12px] font-[700] pl-[2px]">@item.HostNameJapanese</div>
                         </div>
                         <div class="flex flex-row items-center  ">
                             <div class=" font-[700] pl-[2px]">

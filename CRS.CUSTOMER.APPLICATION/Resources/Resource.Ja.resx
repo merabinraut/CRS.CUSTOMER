@@ -545,6 +545,9 @@
     <value>あなたにオススメのホスト</value>
     <comment>Host Search</comment>
   </data>
+  <data name="HostClubList" xml:space="preserve">
+    <value>ホストクラブ一覧</value>
+  </data>
   <data name="HostClubs" xml:space="preserve">
     <value>ホストクラブ</value>
     <comment>Search Filter</comment>
@@ -894,6 +897,10 @@
   <data name="Points" xml:space="preserve">
     <value>ポイント</value>
   </data>
+  <data name="Policy" xml:space="preserve">
+    <value>プライバシーポリシー</value>
+    <comment>Login landing</comment>
+  </data>
   <data name="Popularity" xml:space="preserve">
     <value>人気</value>
   </data>
@@ -1042,7 +1049,7 @@
     <comment>Location Management/ Search Filter</comment>
   </data>
   <data name="Search Filter Placeholder" xml:space="preserve">
-    <value>店舗名、ホスト名、キーワードで検索</value>
+    <value>店舗名、ホスト名、キーワードで探す</value>
     <comment>Search Filter</comment>
   </data>
   <data name="Search Results" xml:space="preserve">
@@ -1058,7 +1065,7 @@
     <comment>Landing Page</comment>
   </data>
   <data name="See more" xml:space="preserve">
-    <value>もっと見る</value>
+    <value>続きを見る</value>
     <comment>Search Filter</comment>
   </data>
   <data name="Select" xml:space="preserve">
@@ -1133,6 +1140,10 @@
   </data>
   <data name="Terms of Use and Privacy Policy" xml:space="preserve">
     <value>利用規約 と プライバシーポリシー に</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>利用規約</value>
+    <comment>Login landing</comment>
   </data>
   <data name="Thank you for your visit!" xml:space="preserve">
     <value>ご来店ありがとうございました！</value>

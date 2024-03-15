@@ -16,7 +16,7 @@
         <div class="text-center text-sm w-full font-[700] text-[#333] ">予約確認・変更…予約一覧</div>
     </div>
     <div class="flex flex-col justify-between h-screen relative pb-8">
-        @if (Model.ClubId != null)
+        @if (Model.ClubId != null && Model.ClubId != "")
         {
             <div>
                 <!-- header end  -->
@@ -55,9 +55,19 @@
                                 {
                                     foreach (var H_item in Model.HImages)
                                     {
-                                        <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
-                                             src="@H_item"
-                                             alt="">
+                                        if (!string.IsNullOrEmpty(H_item))
+                                        {
+                                            <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                                                 src="@H_item.Trim()"
+                                                 alt="">
+                                        }
+                                        else
+                                        {
+                                            <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                                                 src="/Content/assets/images/customer/demo-image.jpeg"
+                                                 alt="">
+                                        }
+
                                     }
                                 }
                             </div>

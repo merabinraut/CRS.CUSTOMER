@@ -83,6 +83,14 @@
             line-height: 24px; /* 150% */
             background: #F3F3F3;
         }
+
+    .owl-dots > .active {
+        background: #E3A1A1;
+    }
+
+    .locationSearch:focus {
+        outline: none;
+    }
 </style>
 <!-- #region Search -->
 <div class=" border border-[#D6CEB4] flex my-2 mx-4 rounded-[4px] search-input" onclick="redirectToSearchPage()">
@@ -92,7 +100,7 @@
                   fill="#BCB08A" />
         </svg>
     </span>
-    <input class="w-full text-xs text-[#BCB08A] "
+    <input class="w-full text-xs text-[#BCB08A] locationSearch "
            title="Search"
            type="text"
            placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Filter_Placeholder" readonly />
@@ -110,7 +118,7 @@
 
 <!-- #endregion -->
 <!-- #region Slider image -->
-<div class="owl-carousel owl-theme ">
+<div class="owl-carousel owl-theme " style="background: #EFEFEF; padding-top: 8px;">
     @foreach (var item in Model.Banners)
     {
         if (!string.IsNullOrEmpty(item.BannerImage))
@@ -134,7 +142,7 @@
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
         <div class="grid grid-cols-2 w-full tab-container-plane bg-white gap-[14px]">
             <button id="tab1Button" class="tab-button-plane tab-link active">
-                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Club
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.HostClubList
             </button>
             <button id="tab2Button" class="tab-button-plane tab-link">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host
@@ -149,7 +157,7 @@
             {
                 <div class="flex flex-col  gap-1 w-full   border-b-[4px] border-[#E5E5E5]">
                     <!-- location -->
-                    <section class="tags flex flex-wrap pt-3 pb-2 gap-2 px-4 items-center ">
+                    <section class="tags flex flex-wrap pt-3 pb-2 gap-2 px-4 items-center " onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                         @if (!string.IsNullOrEmpty(@item.Tag1))
                         {
                             <div class=" flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[20px]">
@@ -187,9 +195,10 @@
 
                     <!-- club name -->
                     <section class="w-full flex px-4 pb-2 justify-between ">
-                        <a onClick={goToTop}>
+                        <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                             <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
-                                <div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                                @*<div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">*@
+                                <div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden">
                                     <img src="@item.ClubLogo" alt="" title="club logo"
                                          class="w-full h-full object-cover" />
                                 </div>
@@ -209,12 +218,12 @@
                                 </div>
                             </div>
                         </a>
-                        <div class="flex flex-col justify-center items-center  p-1  scale-90">
+                        <div class="flex flex-col justify-start items-center">
                             @if (item.IsBookmarked.ToUpper() == "N")
                             {
                                 <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
                                      onclick="handleAddBookmarks('@item.ClubId','','club')">
-                                    <img src="~/Content/assets/images/customer/bookmark-outlined.svg" class="h-[20px] w-[25px]" />
+                                    <img src="~/Content/assets/images/customer/bookmark-outlined.svg" class="h-[24px] w-[24px]" />
                                     <span class='text-[9px] font-medium text-[#BCB08A]'>保存</span>
                                 </div>
                             }
@@ -222,7 +231,7 @@
                             {
                                 <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
                                      onclick="handleRemoveBookmarks('@item.ClubId','','club')">
-                                    <img src="~/Content/assets/images/customer/bookmark-filled.svg" class="h-[20px] w-[25px]" />
+                                    <img src="~/Content/assets/images/customer/bookmark-filled.svg" class="h-[24px] w-[24px]" />
                                     <span class='text-[9px] font-medium text-[#BCB08A]'>保存</span>
                                 </div>
                             }
@@ -230,10 +239,11 @@
                         </div>
                     </section>
                     <!-- photo -->
-                    <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5">
+                    <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                         @foreach (var item2 in item.HostGalleryImage)
                         {
-                            <div class=" " onclick="OpenImagePopup('@item2')">
+                            @*<div class=" " onclick="OpenImagePopup('@item2')">*@
+                            <div class="">
                                 <img src="@item2"
                                      class="aspect-square  h-[182px] w-full object-cover" />
                             </div>
@@ -281,7 +291,7 @@
 
                     <!-- club description -->
 
-                    <section class="flex flex-col gap-2 px-4 mb-3 ">
+                    <section class="flex flex-col gap-2 px-4 mb-3 " onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                         <p class="line-clamp-3 font-[Noto Sans] text-xs   text-[#333333]">
                             @item.ClubDescription
                         </p>
@@ -377,7 +387,7 @@
                                 }
                                 else
                                 {
-                                    <div class="bg-[#D7D7D7] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center" style="background: #D7D7D7">
+                                    <div class="bg-[#D7D7D7] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center" style="background: #D7D7D7; width:100%">
                                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
                                     </div>
                                 }
@@ -416,7 +426,7 @@
                 {
                     <div class="h-auto flex flex-col justify-end  text-center relative rounded-sm">
 
-                        <div class="w-full">
+                        <div class="w-full relative">
                             <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
                                 @if (!string.IsNullOrEmpty(item.HostImage))
                                 {
@@ -427,6 +437,19 @@
                                     <img class="w-full h-[157px]  object-cover rounded-sm" src="~/Content/assets/images/customer/demo-image.jpeg" />
                                 }
                             </a>
+                            @if (item.IsBookmarked.ToString().Trim() == "N")
+                            {
+                                <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="handleAddBookmarks('@item.ClubId','@item.HostId','host')">
+                                    <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="width: 24px; height: 24px;" />
+                                </div>
+                            }
+                            else
+                            {
+
+                                <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="handleRemoveBookmarks('@item.ClubId','@item.HostId','host')">
+                                    <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="width: 24px; height: 24px;" />
+                                </div>
+                            }
                         </div>
                         <div class="absolute w-full flex flex-row">
 
@@ -709,19 +732,32 @@
 
         $(document).ready(function () {
             $('.owl-carousel').owlCarousel({
+                /*  loop: true,
+                  margin: 10,
+                  responsive: {
+                      0: {
+                          items: 3
+                      },
+                      600: {
+                          items: 3
+                      },
+                      1000: {
+                          items: 5
+                      }
+                  }*/
+                center: true,
+                items: 1.25,
                 loop: true,
-                margin: 10,
+                margin: 8,
+                autoplay: true,
+                autoplayTimeout: 1000,
                 responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 5
+                    400: {
+                        items: 1.75,
+
                     }
                 }
+
             })
 
             localStorage.clear();
@@ -816,4 +852,27 @@
             var form = document.getElementById("host-pagination-form-id");
             form.submit();
         }</script>
+
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 20) {
+                    $('#scrollToTopButton').fadeIn();
+                } else {
+                    $('#scrollToTopButton').fadeOut();
+                }
+            });
+
+            $('#scrollToTopButton').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                return false;
+            });
+
+            $('.flex-col').on('click', function () {
+                $('.flex-col').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
+
 }

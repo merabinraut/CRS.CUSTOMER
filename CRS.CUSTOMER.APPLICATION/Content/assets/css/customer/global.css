@@ -270,7 +270,14 @@ body {
     color: var(--warmgray-1);
     position: relative;
 }
-
+.tab-button-plane-preference {
+    color: #667085;
+}
+.tab-container-plane .tab-button-plane-preference.active {
+    padding: 15px 4px 13px 4px !important;
+    color: #d75a8b;
+    border-bottom: 2px solid var(--primary-softrose) !important;
+}
 .tab-container-plane .active {
     /* padding: 15px 4px 13px 4px; */
     color: var(--charcoalBlack);
@@ -308,6 +315,7 @@ body {
     color: #d75a8b;
     /* border-bottom: 2px solid var(--primary-softrose); */
 }
+
 
 .tab-container-plane.booking-tab-club-detail .active {
     /* padding: 15px 4px 13px 4px; */
@@ -859,7 +867,7 @@ label {
 
     .payment-option.active {
         border: 1px solid var(--primary, #d75a8b);
-        color: var(--primary);
+   /*     color: var(--primary);*/
         font-weight: 600;
     }
 

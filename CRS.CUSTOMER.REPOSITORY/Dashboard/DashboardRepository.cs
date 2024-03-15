@@ -82,10 +82,11 @@ namespace CRS.CUSTOMER.REPOSITORY.Dashboard
         }
 
         #region Recommendation Management
-        public List<ClubRecommendationListCommon> GetRecommendedClub(string LocationId)
+        public List<ClubRecommendationListCommon> GetRecommendedClub(string LocationId, string PageType = "")
         {
             var Response = new List<ClubRecommendationListCommon>();
             string SQL = "EXEC sproc_get_customer_recommendation @Flag = 'ghpcrvl'";
+            SQL += ",@PageType=" + _dao.FilterString(PageType);
             SQL += ",@LocationId=" + _dao.FilterString(LocationId);
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0) Response = _dao.DataTableToListObject<ClubRecommendationListCommon>(dbResponse).ToList();

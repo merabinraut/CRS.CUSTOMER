@@ -33,7 +33,7 @@ namespace CRS.CUSTOMER.BUSINESS.Dashboard
         }
 
         #region Recommendation Management
-        public List<ClubRecommendationListCommon> GetRecommendedClub(string LocationId)
+        public List<ClubRecommendationListCommon> GetRecommendedClub(string LocationId, string PageType = "")
         {
             return _repository.GetRecommendedClub(LocationId);
         }

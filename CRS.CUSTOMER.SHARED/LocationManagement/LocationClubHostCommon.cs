@@ -50,6 +50,7 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
         public string DateValue { get; set; }
         public string JapaneseDate { get; set; }
         public string Schedule { get; set; }
+        public string ScheduleLabel { get; set; }
         public string JapaneseDay { get; set; }
         public string FullDate { get; set; }
     }

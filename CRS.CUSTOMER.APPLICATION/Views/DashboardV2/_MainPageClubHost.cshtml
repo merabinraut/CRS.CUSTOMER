@@ -1,7 +1,7 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.LocationManagement.LocationClubHostModel
 
-<!-- toggle section end  -->
-<!-- club section  -->
+@*toggle section end
+    club section*@
 <div id="tab1" class="tab-content-plane  ">
     @foreach (var item in Model.ClubListModel)
     {
@@ -42,7 +42,7 @@
                 </div>
             </section>
 
-            <!-- club name -->
+            @*club name*@
             <section class="w-full flex px-4 pb-2 justify-between ">
                 <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                     <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
@@ -94,7 +94,7 @@
                 </div>
             </section>
 
-            <!-- photo -->
+            @*photo*@
             <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5">
                 @foreach (var item2 in item.HostGalleryImage)
                 {
@@ -105,7 +105,7 @@
                 }
             </section>
 
-            <!-- rating /commment -->
+            @*rating /commment*@
             <section class=" flex justify-start flex-wrap align-top mt-2 px-4 gap-3">
                 <div class="flex items-center gap-0.5" title="club rank">
                     @{
@@ -138,7 +138,7 @@
                 </div>
             </section>
 
-            <!-- club description -->
+            @*club description*@
 
             <section class="flex flex-col gap-2 px-4 mb-3 ">
                 <p class="line-clamp-3 font-[Noto Sans] text-xs   text-[#333333]">
@@ -147,7 +147,7 @@
 
             </section>
 
-            <!-- club schedule  -->
+            @*club schedule*@
 
             <div class="px-4 py-[12px] flex justify-between items-center">
                 <div>
@@ -185,11 +185,11 @@
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
                 </button>
             </div>
-            <!-- location -->
+            @*location*@
         </div>
-        @*<div style="background-color: #e8e8e8;" class=" h-[8px] my-[0px] py-[0px]">
+        <div style="background-color: #e8e8e8;" class=" h-[8px] my-[0px] py-[0px]">
 
-        </div>*@
+        </div>
     }
     <div style="background-color: #F6F6F6; height:42px"
          class="flex flex-row gap-[4px] justify-center h-[24px] items-center my-[0px] pb-[12px] ">
@@ -203,8 +203,8 @@
         </div>
     </div>
 </div>
-<!-- club section end  -->
-<!-- Host image section  -->
+@*club section end
+    Host image section*@
 <div id="tab2" class="tab-content-plane  hidden ">
     @foreach (var item in Model.HostListModel)
     {
@@ -286,4 +286,4 @@
         </div>
     }
 </div>
-<!-- Host image section end  -->
+@*Host image section end*@

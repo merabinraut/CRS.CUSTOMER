@@ -76,6 +76,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string JapaneseDate { get; set; }
         public string DateLabel { get; set; }
         public string Schedule { get; set; }
+        public string ScheduleLabel { get; set; }
         public string JapaneseDay { get; set; }
         public string DayLabel { get; set; }
         public string DateValue { get; set; }

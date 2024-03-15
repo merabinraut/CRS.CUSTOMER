@@ -268,14 +268,36 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (reviewDBResponse != null && reviewDBResponse.Count > 0)
             {
                 responseModel.ClubReviewsModel = reviewDBResponse.MapObjects<GetClubReviewsModel>();
-                responseModel.ClubReviewsModel.ForEach(x => x.CustomerImage = FileLocationPath + x.CustomerImage);
+                //responseModel.ClubReviewsModel.ForEach(x => x.CustomerImage = FileLocationPath + x.CustomerImage);
+                foreach (var item in responseModel.ClubReviewsModel)
+                {
+                    if (!string.IsNullOrEmpty(item.CustomerImage))
+                    {
+                        item.CustomerImage = FileLocationPath + item.CustomerImage;
+                    }
+                    else
+                    {
+                        item.CustomerImage = "";
+                    }
+                }
                 foreach (var item in responseModel.ClubReviewsModel)
                 {
                     item.GetClubReviewRemarkList.ForEach(x => x.Remark = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishRemark : x.JapaneseRemark);
                 }
                 foreach (var item in responseModel.ClubReviewsModel)
                 {
-                    item.GetClubReviewHostList.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
+                    //item.GetClubReviewHostList.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
+                    foreach (var item_sec in item.GetClubReviewHostList)
+                    {
+                        if (!string.IsNullOrEmpty(item_sec.HostImage))
+                        {
+                            item_sec.HostImage = FileLocationPath + item_sec.HostImage;
+                        }
+                        else
+                        {
+                            item_sec.HostImage = "";
+                        }
+                    }
                 }
             }
             var dbNoticeResponseInfo = _business.GetNoticeByClubId(cId);
@@ -284,10 +306,26 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 DateTime date = DateTime.ParseExact(notice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
                 // Get the day name
-                notice_item.Day = date.ToString("dddd");
+                notice_item.Day = date.ToString("ddd");
             }
             var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);
             responseModel.GetClubBasicInformation = dbBasicInfoResponse.MapObject<ClubBasicInformationModel>();
+            if (!string.IsNullOrEmpty(responseModel.InstagramLink) && responseModel.InstagramLink != "#")
+            {
+                if (!responseModel.GetClubBasicInformation.InstagramLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.InstagramLink = "https://" + responseModel.GetClubBasicInformation.InstagramLink;
+            }
+            if (!string.IsNullOrEmpty(responseModel.GetClubBasicInformation.TwitterLink) && responseModel.GetClubBasicInformation.TwitterLink != "#")
+            {
+                if (!responseModel.GetClubBasicInformation.TwitterLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.TwitterLink = "https://" + responseModel.GetClubBasicInformation.TwitterLink;
+            }
+            if (!string.IsNullOrEmpty(responseModel.GetClubBasicInformation.TiktokLink) && responseModel.GetClubBasicInformation.TiktokLink != "#")
+            {
+                if (!responseModel.GetClubBasicInformation.TiktokLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.TiktokLink = "https://" + responseModel.GetClubBasicInformation.TiktokLink;
+            }
+            if (!string.IsNullOrEmpty(responseModel.GetClubBasicInformation.LineNumber) && responseModel.GetClubBasicInformation.LineNumber != "#")
+            {
+                if (!responseModel.GetClubBasicInformation.LineNumber.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.LineNumber = "https://" + responseModel.GetClubBasicInformation.LineNumber;
+            }
             var dbAllNoticeResponse = _business.GetAllNoticeTabList(cId);
             responseModel.GetAllNoticeTabList = dbAllNoticeResponse.MapObjects<AllNoticeModel>();
             foreach (var allNotice_item in responseModel.GetAllNoticeTabList)
@@ -295,7 +333,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 // Parse the date string using the specified format and culture
                 DateTime date = DateTime.ParseExact(allNotice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
                 // Get the day name
-                allNotice_item.DayName = date.ToString("dddd");
+                allNotice_item.DayName = date.ToString("ddd");
 
             }
             var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);

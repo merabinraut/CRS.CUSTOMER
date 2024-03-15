@@ -10,7 +10,8 @@
         dataType: 'json',
         data: {
             ClubId,
-            SelectedDate: $('#date-id').val(),
+            //SelectedDate: $('#date-id').val(),
+            SelectedDate,
             SelectedHost
         },
         success: function (data) {
@@ -46,6 +47,11 @@
                 $.datepicker.setDefaults($.datepicker.regional['ja']);
                 var currentDate = new Date();
                 var maxDate = new Date(currentDate.getTime() + (14 * 24 * 60 * 60 * 1000)); // 15 days from today
+                var selectedDate = null; //= currentDate;
+                if (data.SelectedDate != null && data.SelectedDate != '') {
+                    $('#date-id').val(data.SelectedDate.trim());
+                    selectedDate = new Date(data.SelectedDate);
+                }
                 var dateList = JSON.parse(data.UnreservableDates);
                 var formattedDates = [];
                 dateList.forEach(function (dateString) {
@@ -53,6 +59,13 @@
                         var dateParts = dateString.split('-');
                         if (dateParts.length === 3) {
                             var formattedDate = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2];
+                            const year = currentDate.getFullYear();
+                            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                            const day = String(currentDate.getDate()).padStart(2, '0');
+                            const formattedCurrentDate = `${year}-${month}-${day}`;
+                            if (formattedDate == formattedCurrentDate) {
+                                $('#date-id').val('');
+                            }
                             formattedDates.push(formattedDate);
                         }
                     }
@@ -60,6 +73,7 @@
                 $("#datepicker").datepicker({
                     minDate: currentDate,
                     maxDate: maxDate,
+                    defaultDate: selectedDate,
                     beforeShowDay: function (date) {
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         return [formattedDates.indexOf(string) == -1];
