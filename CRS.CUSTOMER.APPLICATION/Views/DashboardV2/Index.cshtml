@@ -26,7 +26,7 @@
 
     #child {
         position: absolute;
-        top: 170px;
+        top: 200px;
         width: 93.5%;
         margin-left: 16px;
         margin-right: 16px;
@@ -180,8 +180,8 @@
 <div class="flex flex-row justify-center">
     <div id="child" style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.14);"
          class=" border-[1px] flex flex-col rounded-[8px] border-[#F1F1F1] bg-[#FCF8F9]  h-[196px]  mx-[16px]">
-        <div style="background-color: #EEEEEE; margin-left:15px;margin-right:15px; margin-top:24px; "
-             class="grid grid-cols-2 text-[14px]  py-[8px] mx-[15px] rounded-[4px] border-black  ">
+        <div style="background-color: #EEEEEE; margin-left:15px;margin-right:15px; margin-top:24px; border-radius:3px "
+             class="grid grid-cols-2 text-[14px]  py-[8px] mx-[15px]  border-black  ">
             <div class="flex pr-[8px]  flex-row gap-[4px] items-center" onclick="GetLocationFilterPopUp();">
                 <div class="pl-[8px]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
@@ -210,8 +210,8 @@
                 </div>
             </div>
         </div>
-        <div style="background-color: #EEEEEE;  margin-left:15px;margin-right:15px; margin-top:8px; "
-             class="flex flex-row justify-between text-[14px] py-[8px] mx-[15px] rounded-[4px] border-black" onclick="InitiateDateTimeFilterPopupFunction()">
+        <div style="background-color: #EEEEEE;  margin-left:15px;margin-right:15px; margin-top:8px; border-radius:3px "
+             class="flex flex-row justify-between text-[14px] py-[8px] mx-[15px]  border-black" onclick="InitiateDateTimeFilterPopupFunction()">
             <div class="flex flex-row gap-[4px] items-center  ">
                 <div class="pl-[8px]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
@@ -261,8 +261,8 @@
 <div style="border-top: 1px solid #EDEDED;border-bottom: 1px solid #EDEDED;background: #FFF;">
     <div class="flex mx-[16px]   flex-row py-[12px]">
         <div class=" flex flex-row justify-start items-center w-[160px] ">
-            <i class="fa-solid fa-location-dot text-primary-100"></i>
-            <div class="ml-3 font-[700] text-black text-[14px] leading-[21px]">場所から選ぶ</div>
+            <span>   <i class="fa-solid fa-location-dot text-primary-100"></i></span>
+            <h2 class="ml-3 font-[700] text-black  leading-[21px]" style="font-size:16px">場所から選ぶ</h2>
         </div>
     </div>
     <div class="flex flex-col  gap-[6px] px-4 gap-[6px] pb-[16px]">
@@ -278,12 +278,12 @@
                         <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
                             <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                 <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location1">
-                                <p class="locationtext justify-center text-white font-[600] text-[12px] z-10">
+                                <p class="locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
                                     @*@Model.Location[i].LocationName*@
                                     @beforeSlash
                                     <br>
-                                    <span class="locationdown text-[8px] font-[500]  text-center">
-                                        ( @afterSlash )
+                                    <span class="locationdown  font-[500]  text-center" style="font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block">
+                                        (@afterSlash)
                                     </span>
                                 </p>
                             </div>
@@ -305,11 +305,11 @@
                         <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
                             <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                 <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
-                                <p style="line-height:12px; " class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
+                                <p style="line-height:12px; font-size:14px" class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
                                     @*@Model.Location[i].LocationName*@
                                     @afterSlash
                                     <br>
-                                    <span style="line-height: 100%;margin-top:4px " class="locationdown text-[8px] leading-[8px] font-[500] pt-[4px]  text-center">
+                                    <span style="line-height: 100%;margin-top:4px;font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block " class="locationdown leading-[8px] font-[500] pt-[4px]  text-center">
                                         @*( @Model.Location[i].LocationName )*@
                                         ( @beforeSlash )
                                     </span>
@@ -332,11 +332,11 @@
     <div class="flex mt-[12px]  justify-start mx-[16px] flex-row">
         <div class="  flex flex-row justify-start items-center  ">
             <div class="flex flex-col">
-                <div class="font-[700] text-[#333] text-[14px] leading-[20.27px]">オススメのホストクラブ</div>
+                <h2 class="font-[700] text-[#333]  leading-[20.27px]" style="font-size:16px">オススメのホストクラブ</h2>
             </div>
         </div>
     </div>
-    <div class="flex  overflow-x-auto flex-row gap-[8px] mx-[16px] my-[12px] no-scrollbar mb-[12px]" id="recommended-club-content-id">
+    <div class="flex  overflow-x-auto flex-row gap-[8px]  my-[12px] no-scrollbar mb-[12px]" style="margin-left:16px" id="recommended-club-content-id">
         <!--Ajax call-->
     </div>
 </div>
@@ -376,7 +376,7 @@
         </svg>
     </div>
     <!-- clippath end  -->
-    <div style="background-color :#F8F8F8; overflow-y:hidden" class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px] mx-[16px] my-[12px]" id="recommended-host-content-id">
+    <div style="background-color :#F8F8F8; overflow-y:hidden;margin-left:16px" class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px]  my-[12px]" id="recommended-host-content-id">
         <!--Ajax call-->
     </div>
 </div>
@@ -388,7 +388,7 @@
         <div>
             <button style="font-weight: 600;font-size: 12px; margin-left: 20px; " id="tab1Button"
                     class="tab-button-plane tab-link active ">
-                店舗ランキング
+                ホストクラブ
             </button>
         </div>
         <div>
@@ -489,8 +489,9 @@
                                     <hr class="w-[191px] bg-[#A09E91]">
                                 </div>
                                 <div class="text-center">
-                                    <div class="text-[36px] text-[#404040]">¥ @priceKey</div>
-                                    <div class="text-[10px] text-warmgray-1">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TaxIncluded</div>
+                                   
+                                <div class="text-[36px] text-[#404040]">¥ @priceKey</div>
+                                <div class="text-[10px] text-warmgray-1">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TaxIncluded</div>
                                 </div>
                             </div>
                             <div>
@@ -503,7 +504,7 @@
                                     <div class="grid text-center w-full">
                                         <i class="las la-clock text-[28px] text-primaryDark"></i>
                                         <div class="text-[10px] text-[#282828]">
-                                            <span class="text-[15px] font-futura font-bold">@item.PlanTime</span>
+                                            <span class="text-[15px] font-futura font-bold">@item.PlanTime.Trim()</span>
                                         </div>
                                         <div class="text-[10px] text-[#282828]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.HourSystem</div>
                                     </div>
@@ -554,7 +555,7 @@
                                 <p class=" font-[700] text-[11px] text-start flex">
                                     NecoYanagi
                                 </p>
-                                <div class=" flex gap-[2px] text-[9px]">
+                                <div class=" flex gap-[2px] text-[9px] items-center" style="color: #A09E91">
                                     <i class="las la-calendar text-[11px]"></i>
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_Date:2023/11/20 14:00
                                 </div>
@@ -564,9 +565,12 @@
                                     @for (int i = 0; i < 5; i++)
                                     {
                                         <div class="rating-review text-[11px]" id="stars">
-                                            <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                                <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
-                                                      fill="#F89336" />
+                                            @* <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
+                  fill="#F89336" />
+        </svg>*@
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11" fill="none">
+                                                <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z" fill="#F89336" />
                                             </svg>
 
                                         </div>
@@ -711,7 +715,7 @@
                                 <p class=" font-[700] text-[11px] text-start flex">
                                     NecoYanagi
                                 </p>
-                                <div class=" flex gap-[2px] text-[9px]">
+                                <div class=" flex gap-[2px] text-[9px] items-center" style="color: #A09E91">
                                     <i class="las la-calendar text-[11px]"></i>
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_Date:2023/12/15 14:00
                                 </div>
@@ -720,19 +724,19 @@
                                 @for (int i = 0; i < 4; i++)
                                 {
                                     <div class="rating-review text-[11px]" id="stars">
-                                        <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                            <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
-                                                  fill="#F89336" />
+                                        @*<svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
+                  fill="#F89336" />
+        </svg>*@
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11" fill="none">
+                                            <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z" fill="#F89336" />
                                         </svg>
 
                                     </div>
                                 }
-                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
-                                    <g opacity="0.3">
-                                        <path d="M9.44612 1.1453L8.95768 2.25692L7.20604 6.18126L2.928 6.63601L1.71533 6.77076L2.62484 7.5792L5.8081 10.4593L4.91544 14.67L4.6628 15.849L5.72389 15.2426L9.44612 13.0868L13.1684 15.2426L14.2294 15.849L13.9768 14.67L13.0841 10.4593L16.2674 7.5792L17.1769 6.77076L15.9642 6.63601L11.6862 6.18126L9.93456 2.25692L9.44612 1.1453ZM9.44612 3.7896L10.8272 6.9055L10.962 7.19182L11.2651 7.22551L14.6505 7.5792L12.1241 9.85296L11.8883 10.0719L11.9557 10.3751L12.6631 13.6931L9.7156 12.0088L9.44612 11.8404L9.17664 12.0088L6.22917 13.6931L6.93656 10.3751L7.00393 10.0719L6.76813 9.85296L4.24173 7.5792L7.62711 7.22551L7.93028 7.19182L8.06502 6.9055L9.44612 3.7896Z"
-                                              fill="#C8B477" />
-                                    </g>
-                                </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+                                <path d="M5.5 0L5.15251 0.831615L3.90632 3.76747L0.862745 4.10767L0 4.20848L0.647059 4.81329L2.91176 6.96793L2.27669 10.118L2.09695 11L2.85185 10.5464L5.5 8.93356L8.14815 10.5464L8.90305 11L8.72331 10.118L8.08823 6.96793L10.3529 4.81329L11 4.20848L10.1373 4.10767L7.09368 3.76747L5.84749 0.831615L5.5 0ZM5.5 1.97824L6.48257 4.30928L6.57843 4.52348L6.79412 4.54868L9.20261 4.81329L7.40523 6.51432L7.23747 6.67812L7.2854 6.90493L7.78867 9.38717L5.69172 8.12715L5.5 8.00115L5.30828 8.12715L3.21133 9.38717L3.7146 6.90493L3.76253 6.67812L3.59477 6.51432L1.79739 4.81329L4.20588 4.54868L4.42157 4.52348L4.51743 4.30928L5.5 1.97824Z" fill="#7E6D5E" />
+                            </svg>
                                 <div class="text-[11px] mt-[2px]">4.0</div>
                             </div>
                         </div>

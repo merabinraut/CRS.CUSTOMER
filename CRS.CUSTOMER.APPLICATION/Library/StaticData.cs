@@ -51,7 +51,10 @@ namespace CRS.CUSTOMER.APPLICATION.Library
                     model.GetPlanGroupDetail[i].LabelValue = model.GetPlanGroupDetail[i].LabelValue + "(L.O. " + model.GetPlanGroupDetail[i + 1].LabelValue + ")";
                 }
             }
-            model.GetPlanGroupDetail.RemoveAt(index);
+            if (index > 0)
+            {
+                model.GetPlanGroupDetail.RemoveAt(index);
+            }
             //model.GetPlanGroupDetail.RemoveAt(0);
             model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("プラン"));
             model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("Plan"));

@@ -116,9 +116,10 @@
     }
 
 .center-image-slider .owl-dots {
-    margin-top: -82px !important;
+    margin-top: -68px !important;
     z-index: 100;
     position: absolute;
+    width:100%;
     left: 50%;
     transform: translateX(-50%);
 }
