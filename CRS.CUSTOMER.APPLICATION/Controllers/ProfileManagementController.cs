@@ -20,7 +20,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ProfileManagementController(IProfileManagementBusiness business) => this._business = business;
 
         [HttpGet]
-        [Route("Profile")]
         public ActionResult Index()
         {
             var common = new UserProfileCommon()
@@ -201,7 +200,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet]
-        [Route("ChangePassword")]
         public ActionResult ChangePasswordV2()
         {
             ViewBag.ActionPageName = "NavMenu";

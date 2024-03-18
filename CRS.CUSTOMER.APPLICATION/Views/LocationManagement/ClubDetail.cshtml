@@ -211,7 +211,12 @@
                         <img src="~/Content/assets/images/customer/moon.svg" />
                     </div>
                 }
-                <div class="text-sm text-secondary-1">@Model.ClubOpeningTime~@Model.ClubClosingTime</div>
+                <div class="text-sm text-secondary-1 flex justify-center items-center">
+                    @Model.ClubOpeningTime <span>
+                        <img src="~/Content/assets/images/customer/time-duration.svg" style="height:9px; width:8px" />
+
+                    </span>@Model.ClubClosingTime
+                </div>
             </div>
             if (!string.IsNullOrEmpty(Model.TodaysClubSchedule) && Model.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
             {
@@ -221,9 +226,9 @@
             }
             else
             {
-    <div class="bg-[#D7D7D7] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center">
-        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
-    </div>
+                <div class="bg-[#D7D7D7] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
+                </div>
             }
         }
     </div>
@@ -1011,7 +1016,7 @@
                 },
                 error: function () {
                     // Handle unexpected errors
-                   // console.log('An unexpected error occurred.');
+                    // console.log('An unexpected error occurred.');
                     location.reload();
                 }
             });

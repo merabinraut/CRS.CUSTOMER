@@ -33,7 +33,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region DASHBOARD
         [HttpGet]
-        [Route("Dashboard")]
         public ActionResult Index()
         {
             var ResponseModel = new DashboardModel();

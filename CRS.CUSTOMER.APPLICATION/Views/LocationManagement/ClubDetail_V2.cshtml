@@ -167,6 +167,13 @@
                     @item2.DayLabel
                 </div>
             }
+            else if (!string.IsNullOrEmpty(item2.ScheduleLabel) && item2.ScheduleLabel.ToUpper().Trim() == "DAYOFF")
+            {
+
+                <div style="background: #D9D9D9; opacity:0.3">
+                    @item2.DayLabel
+                </div>
+            }
             else
             {
                 <div>
@@ -190,7 +197,7 @@
             }
             else
             {
-                <div>
+                <div style="background: #D9D9D9; opacity:0.3">
                     @item2.Date <div class="flex justify-center mt-1">
                         <img src="@imageURL" class="h-[11px] w-[11px]">
                     </div>
@@ -265,17 +272,20 @@
             <div class="px-[16px]">
                 <div class="mx-[8.5px] py-[6.54px] p-l-[22px] p-r-[10px] ">
                     <div class="customer-title">
-                        <h3 class="text-[#292F33] text-[16px] font-bold" style="line-height:140%">トップランキング</h3>
+                        <h2 class="text-[#292F33] text-[16px] font-bold" style="line-height:140%">トップランキング</h2>
                         <p>@formattedDate</p>
                     </div>
                 </div>
-                <div class=" pb-4 flex gap-[8px] " draggable="true">
-                    <div class="owl-carousel owl-theme store-host-carousel">
+                </div>
+@*draggable start*@
+                <div class=" pb-4 flex gap-[8px] " style="padding-left:16px">
+                  @*  <div class="owl-carousel owl-theme store-host-carousel">*@
+                    <div class="flex overflow-x-auto no-scrollbar  " style="gap:8px" >
                         @{
                             foreach (var item in Model.TopHostListModels)
                             {
                                 <div class="item" style="width:128px">
-                                    <div class=" relative flex-none" draggable="true">
+                                    <div class=" relative flex-none">
                                         <div class="flex pb-1">
                                             <div class="absolute top-1 left-0">
                                                 @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
@@ -329,8 +339,8 @@
                                             }
                                             @if (item.IsBookmarked.Trim().ToUpper() == "Y")
                                             {
-                                                <div class="absolute top-2 right-2" style="width:40px; height:40px;" onclick="handleRemoveBookmarks('@item.ClubId','@item.HostId','host')">
-                                                    <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" />
+                                                <div class="absolute top-2 right-2" style="width:26px; height:26px;" onclick="handleRemoveBookmarks('@item.ClubId','@item.HostId','host')">
+                                                    <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled"  style="height:26px; width:26px" />
                                                 </div>
 
                                                 @*<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -360,8 +370,8 @@
                                             }
                                             else
                                             {
-                                                <div class="absolute top-2 right-2" style="width: 40px; height: 40px;" onclick="handleAddBookmarks('@item.ClubId','@item.HostId','host')">
-                                                    <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" />
+                                                <div class="absolute top-2 right-2" style="width: 26px; height:26px;" onclick="handleAddBookmarks('@item.ClubId','@item.HostId','host')">
+                                                    <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height:26px; width:26px" />
                                                 </div>
                                             }
 
@@ -397,7 +407,8 @@
                         }
                     </div>
                 </div>
-            </div>
+@*draggale image end *@
+            
             <!-- Notice  -->
             <div class="px-[16px]">
                 <div class="mt-3 flex flex-col justify-start">
@@ -409,7 +420,7 @@
                                     <path d="M1.6875 2.8125V12.9375C1.6875 14.1812 2.69385 15.1875 3.9375 15.1875H14.0625C15.3062 15.1875 16.3125 14.1812 16.3125 12.9375V6.75H12.9375V2.8125H1.6875ZM2.8125 3.9375H11.8125V12.9375C11.8125 13.3484 11.9377 13.7307 12.1289 14.0625H3.9375C3.26733 14.0625 2.8125 13.6077 2.8125 12.9375V3.9375ZM3.9375 5.0625V7.875H10.6875V5.0625H3.9375ZM5.0625 6.1875H9.5625V6.75H5.0625V6.1875ZM12.9375 7.875H15.1875V12.9375C15.1875 13.6077 14.7327 14.0625 14.0625 14.0625C13.3923 14.0625 12.9375 13.6077 12.9375 12.9375V7.875ZM3.9375 8.4375V9.5625H6.75V8.4375H3.9375ZM7.875 8.4375V9.5625H10.6875V8.4375H7.875ZM3.9375 10.125V11.25H6.75V10.125H3.9375ZM7.875 10.125V11.25H10.6875V10.125H7.875ZM3.9375 11.8125V12.9375H6.75V11.8125H3.9375ZM7.875 11.8125V12.9375H10.6875V11.8125H7.875Z"
                                           fill="#BCB08A" />
                                 </svg>
-                                <span class="text-[#333] text-[12px] font-bold leading-[20px]">お知らせ</span>
+                                <h4 class="text-[#333] text-[12px] font-bold leading-[20px]">お知らせ</h4>
                             </div>
                             <div class="flex justify-start items-center gap-[3px]" id="notice_id">
                                 <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
@@ -454,7 +465,7 @@
                                     <path d="M1.6875 2.8125V12.9375C1.6875 14.1812 2.69385 15.1875 3.9375 15.1875H14.0625C15.3062 15.1875 16.3125 14.1812 16.3125 12.9375V6.75H12.9375V2.8125H1.6875ZM2.8125 3.9375H11.8125V12.9375C11.8125 13.3484 11.9377 13.7307 12.1289 14.0625H3.9375C3.26733 14.0625 2.8125 13.6077 2.8125 12.9375V3.9375ZM3.9375 5.0625V7.875H10.6875V5.0625H3.9375ZM5.0625 6.1875H9.5625V6.75H5.0625V6.1875ZM12.9375 7.875H15.1875V12.9375C15.1875 13.6077 14.7327 14.0625 14.0625 14.0625C13.3923 14.0625 12.9375 13.6077 12.9375 12.9375V7.875ZM3.9375 8.4375V9.5625H6.75V8.4375H3.9375ZM7.875 8.4375V9.5625H10.6875V8.4375H7.875ZM3.9375 10.125V11.25H6.75V10.125H3.9375ZM7.875 10.125V11.25H10.6875V10.125H7.875ZM3.9375 11.8125V12.9375H6.75V11.8125H3.9375ZM7.875 11.8125V12.9375H10.6875V11.8125H7.875Z"
                                           fill="#BCB08A" />
                                 </svg>
-                                <span class="text-[#333] text-[12px] font-bold leading-[20px]">スケジュール情報</span>
+                                <h4 class="text-[#333] text-[12px] font-bold leading-[20px]">スケジュール情報</h4>
                             </div>
                             <div class="flex justify-start items-center gap-[3px]" id="schedule_id">
                                 <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
@@ -498,7 +509,7 @@
                                 <path d="M14.0625 2.26758C13.6318 2.26758 13.21 2.43457 12.8848 2.75977L7.3125 8.31445L7.18945 8.4375L7.1543 8.61328L6.76758 10.582L6.5918 11.4082L7.41797 11.2324L9.38672 10.8457L9.5625 10.8105L9.68555 10.6875L15.2402 5.11523C15.8884 4.46704 15.8884 3.40796 15.2402 2.75977C14.915 2.43457 14.4932 2.26758 14.0625 2.26758ZM14.0625 3.35742C14.1943 3.35742 14.324 3.42554 14.4492 3.55078C14.6997 3.80127 14.6997 4.07373 14.4492 4.32422L9 9.77344L8.0332 9.9668L8.22656 9L13.6758 3.55078C13.801 3.42554 13.9307 3.35742 14.0625 3.35742ZM2.25 4.5V15.75H13.5V8.33203L12.375 9.45703V14.625H3.375V5.625H8.54297L9.66797 4.5H2.25Z"
                                       fill="#BCB08A" />
                             </svg>
-                            <span class="text-[12px] font-bold leading-[20px] text-[#333]">基本情報</span>
+                            <h4 class="text-[12px] font-bold leading-[20px] text-[#333]">基本情報</h4>
                         </div>
                     </div>
                 </div>
@@ -545,7 +556,7 @@
                         </tr>
                         <tr class="">
                             <td class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
-                                定休日
+                                木曜日
                             </td>
                             @if (Model.GetClubBasicInformation.Holiday != null)
                             {
@@ -989,7 +1000,8 @@
                 <!-- <div class="box mt-2"></div> -->
             </div>
             <!-- </div> -->
-            <script>$(document).ready(function () {
+            <script>
+    $(document).ready(function () {
                     $('.store-host-carousel').owlCarousel({
                         margin: 10,
                         loop: true,
@@ -1025,7 +1037,7 @@
                         }
                         <div class="pt-[5px]">
                             <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
-                            <div class="text-xs  text-charcoalBlack">@item.HostName</div>
+                            <h3 class="text-xs  text-charcoalBlack" style="font-size:13px; text-overflow:ellipsis;font-weight:bold">@item.HostName</h3>
                         </div>
                     </div>
                 }
@@ -1515,11 +1527,16 @@
             </div>
             @if (Model.GetClubBasicInformation.ClubClosingTime != null || Model.GetClubBasicInformation.ClubOpeningTime != null)
             {
-                <div class="text-sm text-secondary-1">@Model.GetClubBasicInformation.ClubOpeningTime ~ @Model.GetClubBasicInformation.ClubClosingTime</div>
-            }
+                <div class="text-sm text-secondary-1 flex justify-center items-center">
+                    @Model.GetClubBasicInformation.ClubOpeningTime <span>
+                    <img src="~/Content/assets/images/customer/time-duration.svg" style="height:9px; width:8px" />
+
+                </span> @Model.GetClubBasicInformation.ClubClosingTime
+            </div>
+        }
         </div>
-        <div class="bg-[#BCB08A] rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px]">
-            来店予約
+        <div class="bg-[#BCB08A] rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full">
+            本日空席あり
         </div>
     </div>
     <!-- for share and map -->
@@ -1759,7 +1776,8 @@
 @section scripts
 {
     <script src="~/Content/CustomHelper.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", function () {
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";
         });
@@ -1774,11 +1792,16 @@
                 margin: 10,
                 loop: false,
                 autoWidth: true,
-                items: 4
+                items: 4,
+                dots: false,
+                touchDrag: false,
+                rtl: true
+
             });
-            //localStorage.clear();
+            localStorage.clear();
         })</script>
-    <script>//function ClubReservationActionFunction(i, j, k) {
+    <script>
+    //function ClubReservationActionFunction(i, j, k) {
         //    DataStorageFunction(i, j);
         //    window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
         //}
@@ -1840,7 +1863,8 @@
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "none";
         }</script>
-    <script>const shareButton = document.querySelector("#shareButton");
+    <script>
+    const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -1854,7 +1878,8 @@
                 toastr.info('Web Share API is not supported in this browser.');
             }
         });</script>
-    <script>function OpenImagePopup(ImageURL) {
+    <script>
+    function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");
@@ -1868,10 +1893,12 @@
             modal.style.display = "none";
         }</script>
 
-    <script>function openModal() {
+    <script>
+    function openModal() {
             console.log("test");
         }</script>
-    <script>// Function to open a specific modal
+    <script>
+    // Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -1921,7 +1948,8 @@ $(document).ready(function () {
                 });
             });
         });</script>
-    <script>$('#notice_id').click('click', function () {
+    <script>
+    $('#notice_id').click('click', function () {
             var activeElement = document.querySelector('.tab-link.active');
             if (activeElement) {
                 activeElement.classList.remove('active');
@@ -1945,7 +1973,8 @@ $(document).ready(function () {
         });</script>
 
     <!--make clicked the tab after reload-->
-    <script>$('.tab-button-plane').click('click', function () {
+    <script>
+    $('.tab-button-plane').click('click', function () {
             var id = $(this).attr('id');
             var name = $(this).text().trim();
             localStorage.setItem("tablink-id", id);
