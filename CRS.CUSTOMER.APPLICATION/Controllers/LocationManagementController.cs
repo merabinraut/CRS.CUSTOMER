@@ -347,7 +347,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 string dayName = date.ToString("ddd");
                 item_schedule.Day = formattedDayOfWeek;
                 item_schedule.DayName = dayName;
-                item_schedule.ScheduleImage = ImageHelper.ProcessedImage(item_schedule.ScheduleImage);
+                if (!string.IsNullOrEmpty(item_schedule.ScheduleImage))
+                {
+                    item_schedule.ScheduleImage = ImageHelper.ProcessedImage(item_schedule.ScheduleImage, false);
+                }
+                else
+                {
+                    item_schedule.ScheduleImage = "";
+                }
             }
             responseModel.GetScheduleDDL = GetScheduleList();
             var dbPlanDetailRes = _business.GetPlanDetail(cId);
