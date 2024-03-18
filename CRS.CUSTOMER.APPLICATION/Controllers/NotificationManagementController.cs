@@ -16,7 +16,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public NotificationManagementController(INotificationManagementBusiness buss) => _buss = buss;
 
         [HttpGet]
-        [Route("Notification")]
         public ActionResult ViewAllNotifications()
         {
             var requestCommon = new ManageNotificationCommon()

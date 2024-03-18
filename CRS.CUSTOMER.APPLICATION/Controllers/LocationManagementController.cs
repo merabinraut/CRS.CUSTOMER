@@ -135,7 +135,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Club Detail
         [HttpGet]
-        [Route("ClubDetail")]
         public ActionResult ClubDetail_V2(string LocationId, string ClubId, string ScheduleFilterDate = null)
         {
             var culture = Request.Cookies["culture"]?.Value;
@@ -331,7 +330,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         [HttpGet]
-        [Route("HostDetail")]
         public ActionResult ViewHostDetail(string HostId)
         {
             var culture = Request.Cookies["culture"]?.Value;

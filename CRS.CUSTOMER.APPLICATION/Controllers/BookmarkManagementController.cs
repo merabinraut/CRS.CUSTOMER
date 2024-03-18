@@ -17,7 +17,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public BookmarkManagementController(IBookmarkManagementBusiness buss) => _buss = buss;
 
         [HttpGet]
-        [Route("Bookmark")]
         public ActionResult Index()
         {
             var culture = Request.Cookies["culture"]?.Value;
