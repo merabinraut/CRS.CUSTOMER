@@ -94,6 +94,18 @@ function GetPreferenceFilterPopUp() {
                 document.getElementById(checkboxId).checked = savedData.checkboxStates[checkboxId];
             }
         }
+
+        for (var dropdownId in savedData.dropdownValues) {
+            var selectDropdown = document.getElementById(dropdownId);
+            if (selectDropdown) {
+                for (var i = 0; i < selectDropdown.options.length; i++) {
+                    if (selectDropdown.options[i].value === savedData.dropdownValues[dropdownId]) {
+                        selectDropdown.options[i].selected = true;
+                        break;
+                    }
+                }
+            }
+        }
         PreferenceFilterCommon();
         var ClubDetailMapData = localStorage.getItem('ClubDetailMapData');
         if (ClubDetailMapData) {
@@ -594,15 +606,15 @@ function ManagePreferenceFilterHTMLContent() {
     var checkboxStates = {};
     var dropdownValues = {};
     document.querySelectorAll('input, select').forEach(function (input) {
-        if (element.tagName === 'INPUT') {
+        if (input.tagName === 'INPUT') {
             if (input.type === 'text' || input.type === 'search') {
                 inputValues[input.id] = input.value; // Store input field values
             } else if (input.type === 'checkbox') {
                 checkboxStates[input.id] = input.checked; // Store checkbox states
             }
         }
-        else if (element.tagName === 'SELECT') {
-            dropdownValues[element.id] = element.value; // Store dropdown values
+        else if (input.tagName === 'SELECT') {
+            dropdownValues[input.id] = input.value; // Store dropdown values
         }
     });
     var savedData = {
