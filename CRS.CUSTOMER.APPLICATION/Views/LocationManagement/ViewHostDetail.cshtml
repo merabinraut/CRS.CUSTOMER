@@ -233,11 +233,11 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
         </div>
         <!-- for button -->
         @*<button class="flex justify-center items-center gap-2 mt-[10px] "
-                style="background:linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%); border-radius:3px; color:#EDF1F6">
-            <span class="py-3 text-center text-[15px] font-semibold leading-[23px] "
-                  style="letter-spacing: -0.16px;">あなたとのマッチ度</span>
-            <span class="py-3 text-[20px] font-bold leading-[23px]" style="letter-spacing: 1px;">@Model.CustomerHostCompatibility</span>
-        </button>*@
+                    style="background:linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%); border-radius:3px; color:#EDF1F6">
+                <span class="py-3 text-center text-[15px] font-semibold leading-[23px] "
+                      style="letter-spacing: -0.16px;">あなたとのマッチ度</span>
+                <span class="py-3 text-[20px] font-bold leading-[23px]" style="letter-spacing: 1px;">@Model.CustomerHostCompatibility</span>
+            </button>*@
     </div>
 
     <!-- introduction  -->
@@ -376,7 +376,7 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
     </div>
 
     <!-- club info -->
-    <div class="mt-6 px-[12.5px] clubInfo flex justify-start items-center gap-2">
+    <div class="mt-6 px-[12.5px] clubInfo flex justify-start items-center gap-2" onclick="gotoClubDetail('@Model.ClubId','@Model.LocationId')">
         <!-- logo -->
         <div class="">
             <img class="object-cover h-[48px] w-[48px] rounded-full "
@@ -499,8 +499,7 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="~/Content/CustomHelper.js"></script>
-    <script>
-        const shareButton = document.querySelector("#shareButton");
+    <script>const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -591,8 +590,7 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
         }</script>
-    <script>
-        // Function to open a specific modal
+    <script>// Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -713,4 +711,9 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
         // Update the chart
         hostRadarChart.update();
     </script>
+    <script>function gotoClubDetail(clubid, locationid) {
+            if (clubid != null && locationid != null) {
+                window.location.href = '/LocationManagement/ClubDetail_V2?ClubId=' + clubid + '&LocationId=' + locationid;
+            }
+        }</script>
 }
