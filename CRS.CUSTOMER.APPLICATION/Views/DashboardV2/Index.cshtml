@@ -1948,7 +1948,9 @@
     let currentMonth = 1;
     let currentDay = 1;
     let yearSelector;
-    let monthSelector;
+        let monthSelector;
+        let yearSelector2;
+        let monthSelector2;
     let daySelector;
 
     yearSource = getYears();
@@ -1989,10 +1991,27 @@
             currentYear = selected.value;
             daySource = getDays(currentYear, currentMonth);
             $('#hourShadowval').val(yearSelector.value.trim());
-            //$('#hourShadowval2').val(yearSelector.value.trim());
+            //var hour1 = $('#hourShadowval').val();
+            //console.log(hour1);
         }
     });
-        yearSelector = new IosSelector({
+        monthSelector = new IosSelector({
+            el: '#month1',
+            type: 'infinite',
+            source: [{ value: "00", text: "00" },
+            { value: "30", text: "30" }],
+            count: 20,
+            onChange: (selected) => {
+                currentMonth = selected.value;
+
+                daySource = getDays(currentYear, currentMonth);
+                $('#minuteShadowval').val(monthSelector.value.trim());
+                //var min1 = $('#minuteShadowval').val()
+                //console.log(min1)
+                //monthSelector.value.clear()
+            }
+        });
+        yearSelector2 = new IosSelector({
         el: '#year2',
         type: 'infinite',
         source: [
@@ -2025,26 +2044,15 @@
         onChange: (selected) => {
             currentYear = selected.value;
             daySource = getDays(currentYear, currentMonth);
-            $('#hourShadowval').val(yearSelector.value.trim());
-            //$('#hourShadowval2').val(yearSelector.value.trim());
+            $('#hourShadowval2').val(yearSelector2.value.trim());
+            //var hour2 = $('#hourShadowval2').val()
+            //console.log(hour2)
+            //yearSelector.value.clear();
         }
     });
 
-    monthSelector = new IosSelector({
-        el: '#month1',
-        type: 'infinite',
-        source: [{ value: "00", text: "00" },
-        { value: "30", text: "30" }],
-        count: 20,
-        onChange: (selected) => {
-            currentMonth = selected.value;
 
-            daySource = getDays(currentYear, currentMonth);
-            //$('#minuteShadowval').val(monthSelector.value.trim());
-            $('#minuteShadowval2').val(monthSelector.value.trim());
-        }
-    });
-        monthSelector = new IosSelector({
+        monthSelector2 = new IosSelector({
         el: '#month2',
         type: 'infinite',
         source: [{ value: "00", text: "00" },
@@ -2054,8 +2062,10 @@
             currentMonth = selected.value;
 
             daySource = getDays(currentYear, currentMonth);
-            //$('#minuteShadowval').val(monthSelector.value.trim());
-            $('#minuteShadowval2').val(monthSelector.value.trim());
+            $('#minuteShadowval2').val(monthSelector2.value.trim());
+            //var min2 = $('#minuteShadowval2').val()
+            //console.log(min2)
+           // monthSelector.value.clear()
         }
     });
     let now = new Date();
