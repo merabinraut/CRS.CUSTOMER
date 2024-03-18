@@ -43,10 +43,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet]
         public ActionResult Review(ReviewReservationRequestModel Request)
         {
-            //var CustomerId = !string.IsNullOrEmpty(Request.CustomerId) ? Request.CustomerId.DecryptParameter() : null;
-            //var ReservationId = !string.IsNullOrEmpty(Request.ReservationId) ? Request.ReservationId.DecryptParameter() : null;
-            var CustomerId = Request.CustomerId;
-            var ReservationId = Request.ReservationId;
+            var CustomerId = !string.IsNullOrEmpty(Request.CustomerId) ? Request.CustomerId.DecryptParameter() : Request.CustomerId;
+            var ReservationId = !string.IsNullOrEmpty(Request.ReservationId) ? Request.ReservationId.DecryptParameter() : Request.ReservationId;
+            CustomerId = string.IsNullOrEmpty(CustomerId) ? Request.CustomerId : CustomerId;
+            ReservationId = string.IsNullOrEmpty(ReservationId) ? Request.ReservationId : ReservationId;
             if (string.IsNullOrEmpty(CustomerId) || string.IsNullOrEmpty(ReservationId))
             {
                 AddNotificationMessage(new NotificationModel()

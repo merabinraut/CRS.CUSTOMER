@@ -1,9 +1,9 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
+using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.NotificationManagement;
 using CRS.CUSTOMER.BUSINESS.NotificationManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.NotificationManagement;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -14,7 +14,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     {
         private readonly INotificationManagementBusiness _buss;
         public NotificationManagementController(INotificationManagementBusiness buss) => _buss = buss;
+
         [HttpGet]
+        [Route("Notification")]
         public ActionResult ViewAllNotifications()
         {
             var requestCommon = new ManageNotificationCommon()
@@ -33,6 +35,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ViewBag.PageTitle = $"{Resources.Resource.Notifications} ({responseModel.FirstOrDefault().UnReadNotification})";
             else
                 ViewBag.PageTitle = Resources.Resource.Notifications;
+            responseModel.ForEach(x =>
+            {
+                x.NotificationId = x.NotificationId.EncryptParameter();
+                x.NotificationURL = (!string.IsNullOrEmpty(x.NotificationURL) && x.NotificationURL.Trim() != "#") ? URLHelper.EncryptQueryParams(x.NotificationURL) : "#";
+            });
             return View(responseModel);
         }
 

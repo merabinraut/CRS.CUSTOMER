@@ -18,6 +18,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     {
         private readonly IProfileManagementBusiness _business;
         public ProfileManagementController(IProfileManagementBusiness business) => this._business = business;
+
+        [HttpGet]
+        [Route("Profile")]
         public ActionResult Index()
         {
             var common = new UserProfileCommon()
@@ -37,7 +40,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dob = !string.IsNullOrEmpty(viewModel.DateOfBirth) ? Convert.ToDateTime(viewModel.DateOfBirth) : DateTime.Now;
             if (!string.IsNullOrEmpty(viewModel.DateOfBirth))
             {
-                viewModel.DOBYear = dob.Year.ToString("D4") ;
+                viewModel.DOBYear = dob.Year.ToString("D4");
                 viewModel.DOBMonth = dob.Month.ToString("D2");
                 viewModel.DOBDay = dob.Day.ToString("D2");
             }
@@ -47,6 +50,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.PageTitle = Resources.Resource.ProfileInfo;
             return View(viewModel);
         }
+
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult DeleteCustomereAccount()
         {
@@ -124,7 +128,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         userProfileModel.DOBDay = userProfileModel.DOBDay.Replace("日", "");
                     }
                     int countYear = userProfileModel.DOBYear.Count(char.IsDigit);
-                    if (countYear < 4 || countYear >4)
+                    if (countYear < 4 || countYear > 4)
                     {
                         AddNotificationMessage(new NotificationModel()
                         {
@@ -135,7 +139,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         return RedirectToAction("Index");
                     }
                     int countMonth = userProfileModel.DOBMonth.Count(char.IsDigit);
-                    if (countMonth > 2 )
+                    if (countMonth > 2)
                     {
                         AddNotificationMessage(new NotificationModel()
                         {
@@ -196,6 +200,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return RedirectToAction("Index", userProfileModel);
         }
 
+        [HttpGet]
+        [Route("ChangePassword")]
         public ActionResult ChangePasswordV2()
         {
             ViewBag.ActionPageName = "NavMenu";

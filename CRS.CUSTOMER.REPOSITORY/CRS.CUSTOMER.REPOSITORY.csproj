@@ -134,8 +134,6 @@
     <Compile Include="SearchFilterManagement\SearchFilterManagementRepository.cs" />
     <Compile Include="Search\ISearchRepository.cs" />
     <Compile Include="Search\SearchRepository.cs" />
-    <Compile Include="UserManagement\IUserManagementRepository.cs" />
-    <Compile Include="UserManagement\UserManagementRepository.cs" />
     <Compile Include="ReservationHistoryManagementV2\IReservationHistoryManagementV2Repository.cs" />
     <Compile Include="ReservationHistoryManagementV2\ReservationHistoryManagementV2Repository.cs" />
   </ItemGroup>
