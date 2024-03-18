@@ -3,7 +3,6 @@ using CRS.CUSTOMER.APPLICATION.Models.NotificationManagement;
 using CRS.CUSTOMER.BUSINESS.NotificationManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.NotificationManagement;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -14,7 +13,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     {
         private readonly INotificationManagementBusiness _buss;
         public NotificationManagementController(INotificationManagementBusiness buss) => _buss = buss;
+
         [HttpGet]
+        [Route("Notification")]
         public ActionResult ViewAllNotifications()
         {
             var requestCommon = new ManageNotificationCommon()
