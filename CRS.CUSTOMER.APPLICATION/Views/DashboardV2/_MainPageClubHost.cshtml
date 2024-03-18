@@ -164,7 +164,12 @@
                                     <img src="~/Content/assets/images/customer/moon.svg" class="h-[12px] w-[12px]" alt="moon" />
                                 }
                             </div>
-                            <div class="text-sm text-secondary-1">@item.ClubOpeningTime~@item.ClubClosingTime</div>
+                            <div class="text-sm text-secondary-1 flex justify-center items-center">
+                                @item.ClubOpeningTime <span>
+                                    <img src="~/Content/assets/images/customer/time-duration.svg" style="height:9px; width:8px" />
+
+                                </span>@item.ClubClosingTime
+                            </div>
 
                         </div>
                         if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
@@ -281,9 +286,24 @@
                 </div>
             </div>
         </div>
-        <div class="bg-[#F6F6F6] h-[4px] mt-[16px]">
+        @* <div class="bg-[#F6F6F6] h-[4px] mt-[16px]">
+
+            </div>*@
+        <div style="background-color: #e8e8e8;" class=" h-[8px] my-[0px] py-[0px]">
 
         </div>
     }
+    <div style="background-color: #F6F6F6; height:42px"
+         class="flex flex-row gap-[4px] justify-center h-[24px] items-center my-[0px] pb-[12px] ">
+        <div style="line-height:18px;" class="text-[#D75A8B] underline text-[12px]"
+             @*onclick="CurrentLocationRedirectFunction();"*@>
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.See_more
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M4.5 9L7.5 6L4.5 3" stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+    </div>
 </div>
 @*Host image section end*@

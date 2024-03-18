@@ -306,6 +306,7 @@
     <Folder Include="Views\LogManagement\" />
     <Folder Include="Views\RecommendedClubHost\" />
     <Folder Include="Views\ReservationManagement\" />
+    <Folder Include="Views\UserManagement\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\artchart\anychart.min.css" />
@@ -416,6 +417,8 @@
     <Content Include="Content\assets\images\customer\sun.svg" />
     <Content Include="Content\assets\images\customer\tiktok-1.svg" />
     <Content Include="Content\assets\images\customer\tiktok.svg" />
+    <Content Include="Content\assets\images\customer\time-duration.svg" />
+    <Content Include="Content\assets\images\customer\timer.svg" />
     <Content Include="Content\assets\images\customer\twitter.svg" />
     <Content Include="Content\assets\images\customer\x.svg" />
     <Content Include="Content\assets\images\dashboard-active.svg" />
@@ -443,6 +446,7 @@
     <Content Include="Content\assets\images\location-arrow-solid.svg" />
     <Content Include="Content\assets\images\lock-active.svg" />
     <Content Include="Content\assets\images\lock.svg" />
+    <Content Include="Content\assets\images\login-banner-new.png" />
     <Content Include="Content\assets\images\login-banner.png" />
     <Content Include="Content\assets\images\logo.svg" />
     <Content Include="Content\assets\images\logout.svg" />
