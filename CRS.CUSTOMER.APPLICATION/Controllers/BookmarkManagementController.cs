@@ -96,7 +96,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResp?.Message ?? "Something went wrong",
                     Title = NotificationMessage.ERROR.ToString()
                 });
-                return Json(new { success = true, message = "Something went wrong" });
+                return Json(new { success = false, message = "Something went wrong" });
             }
 
             //if (dbResp != null && dbResp.Code == ResponseCode.Success)
@@ -160,7 +160,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResp?.Message ?? "Something went wrong",
                     Title = NotificationMessage.ERROR.ToString()
                 });
-                return Json(new { success = true, message = "Something went wrong" });
+                return Json(new { success = false, message = "Something went wrong" });
             }
             //if (dbResp != null && dbResp.Code == ResponseCode.Success)
             //{
