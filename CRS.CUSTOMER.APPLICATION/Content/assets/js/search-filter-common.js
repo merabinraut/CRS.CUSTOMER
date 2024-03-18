@@ -592,17 +592,24 @@ function ManagePreferenceFilterHTMLContent() {
     var content = document.getElementById('preferencefilterpopUp-id').innerHTML;
     var inputValues = {};
     var checkboxStates = {};
-    document.querySelectorAll('input').forEach(function (input) {
-        if (input.type === 'text' || input.type === 'search') {
-            inputValues[input.id] = input.value; // Store input field values
-        } else if (input.type === 'checkbox') {
-            checkboxStates[input.id] = input.checked; // Store checkbox states
+    var dropdownValues = {};
+    document.querySelectorAll('input, select').forEach(function (input) {
+        if (element.tagName === 'INPUT') {
+            if (input.type === 'text' || input.type === 'search') {
+                inputValues[input.id] = input.value; // Store input field values
+            } else if (input.type === 'checkbox') {
+                checkboxStates[input.id] = input.checked; // Store checkbox states
+            }
+        }
+        else if (element.tagName === 'SELECT') {
+            dropdownValues[element.id] = element.value; // Store dropdown values
         }
     });
     var savedData = {
         content: content,
         inputValues: inputValues,
-        checkboxStates: checkboxStates
+        checkboxStates: checkboxStates,
+        dropdownValues: dropdownValues
     };
     //localStorage.setItem('PreferenceFilterHTMLContent', content);
     localStorage.setItem('PreferenceFilterHTMLContent', JSON.stringify(savedData)); // Store the data
