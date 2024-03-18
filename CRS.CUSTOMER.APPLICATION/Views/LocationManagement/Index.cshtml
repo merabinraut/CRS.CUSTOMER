@@ -229,29 +229,35 @@
 
                     <!-- club name -->
                     <section class="w-full flex px-4 pb-2 justify-between ">
-                        <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
-                            <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
-                                @*<div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">*@
-                                <div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden">
-                                    <img src="@item.ClubLogo" alt="" title="club logo"
-                                         class="w-full h-full object-cover" />
-                                </div>
+                        <h3>
 
-                                <div class="flex flex-col ">
-                                    <div class="flex gap-1 text-base items-center  font-semibold">
-                                        <div class="text-base items-start " title="club name">
-                                            @item.ClubName
+                            <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                                <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
+                                    @*<div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">*@
+                                    <div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden">
+                                        <img src="@item.ClubLogo" alt="" title="club logo"
+                                             class="w-full h-full object-cover" />
+                                    </div>
+
+                                    <div class="flex flex-col ">
+                                        <div class="flex gap-1 text-base items-center  font-semibold">
+                                            <div class="text-base items-start " title="club name">
+                                                @item.ClubName
+                                            </div>
+                                        </div>
+                                        <div class="text-xs items-start " title="club ">
+                                            @item.ClubNameJapanese
+                                        </div>
+                                        <div class="text-[10px] items-start text-[#E3A1A1] " title="club group">
+                                            @item.GroupName
                                         </div>
                                     </div>
-                                    <div class="text-xs items-start " title="club ">
-                                        @item.ClubNameJapanese
-                                    </div>
-                                    <div class="text-[10px] items-start text-[#E3A1A1] " title="club group">
-                                        @item.GroupName
-                                    </div>
                                 </div>
-                            </div>
-                        </a>
+
+
+                            </a>
+                        </h3>
+
                         <div class="flex flex-col justify-start items-center">
                             @if (item.IsBookmarked.ToUpper() == "N")
                             {
@@ -330,70 +336,70 @@
                             @item.ClubDescription
                         </p>
                         @*<a href="#" class=" flex border justify-between pl-[40%] border-[#D75A8B] px-6 h-8 w-full items-center"
-                       title="see full comment" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                               title="see full comment" onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
 
-                        <div class="text-[10px] font-bold self-center flex  text-end text-primary see_more text-[#D75A8B]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.See_more
-                        </div>
-                        <i class="material-icons text-primary float-right">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
-                                <path d="M0.9375 11.8594L6.4375 6.35938L6.78125 6L6.4375 5.64063L0.937501 0.140625L0.21875 0.859375L5.35938 6L0.218749 11.1406L0.9375 11.8594Z"
-                                      fill="#E3A1A1" />
-                            </svg>
-                        </i>
-                    </a>*@
+                                <div class="text-[10px] font-bold self-center flex  text-end text-primary see_more text-[#D75A8B]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.See_more
+                                </div>
+                                <i class="material-icons text-primary float-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+                                        <path d="M0.9375 11.8594L6.4375 6.35938L6.78125 6L6.4375 5.64063L0.937501 0.140625L0.21875 0.859375L5.35938 6L0.218749 11.1406L0.9375 11.8594Z"
+                                              fill="#E3A1A1" />
+                                    </svg>
+                                </i>
+                            </a>*@
                     </section>
 
                     <!-- club schedule  -->
                     @*<div>
-                    <div class=" text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
-                        @foreach (var item2 in item.ClubWeeklyScheduleList)
-                        {
-                            if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SAT")
-                            {
-                                <div class="text-blue">
-                                    @item2.DayLabel
-                                </div>
-                            }
-                            else if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SUN")
-                            {
+                            <div class=" text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
+                                @foreach (var item2 in item.ClubWeeklyScheduleList)
+                                {
+                                    if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SAT")
+                                    {
+                                        <div class="text-blue">
+                                            @item2.DayLabel
+                                        </div>
+                                    }
+                                    else if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SUN")
+                                    {
 
-                                <div class="text-red">
-                                    @item2.DayLabel
-                                </div>
-                            }
-                            else
-                            {
-                                <div>
-                                    @item2.DayLabel
-                                </div>
-                            }
-                        }
-                    </div>
-                    <div class="text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
-                        @foreach (var item2 in item.ClubWeeklyScheduleList)
-                        {
-                            var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
-                            if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
-                            {
-                                <div onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName','@item2.FullDate')">
-                                    @item2.Date <div class="flex justify-center mt-1">
-                                        <img src="@imageURL" class="h-[11px] w-[11px]">
-                                    </div>
-                                </div>
-                            }
-                            else
-                            {
-                                <div>
-                                    @item2.Date <div class="flex justify-center mt-1">
-                                        <img src="@imageURL" class="h-[11px] w-[11px]">
-                                    </div>
-                                </div>
-                            }
-                        }
+                                        <div class="text-red">
+                                            @item2.DayLabel
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            @item2.DayLabel
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div class="text-[10px] flex border-t border-b border-[#EFEFEF] justify-between px-[17px] border-custom">
+                                @foreach (var item2 in item.ClubWeeklyScheduleList)
+                                {
+                                    var imageURL = "/Content/assets/images/" + item2.Schedule + ".svg";
+                                    if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
+                                    {
+                                        <div onclick="ClubReservationActionFunction('@item.ClubId', '@item.ClubName','@item2.FullDate')">
+                                            @item2.Date <div class="flex justify-center mt-1">
+                                                <img src="@imageURL" class="h-[11px] w-[11px]">
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            @item2.Date <div class="flex justify-center mt-1">
+                                                <img src="@imageURL" class="h-[11px] w-[11px]">
+                                            </div>
+                                        </div>
+                                    }
+                                }
 
-                    </div>
-                </div>*@
+                            </div>
+                        </div>*@
                     <div class="px-4 py-[12px] flex justify-between items-center">
                         <div>
                             @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
@@ -411,7 +417,12 @@
                                             <img src="~/Content/assets/images/customer/moon.svg" />
                                         </div>
                                     }
-                                    <div class="text-sm text-secondary-1">@item.ClubOpeningTime~@item.ClubClosingTime</div>
+                                    <div class="text-sm text-secondary-1 flex justify-center items-center">
+                                        @item.ClubOpeningTime <span>
+                                            <img src="~/Content/assets/images/customer/time-duration.svg" style="height:9px; width:8px" />
+
+                                        </span>@item.ClubClosingTime
+                                    </div>
                                 </div>
                                 if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                                 {
@@ -457,7 +468,7 @@
             <!--comming soon page start-->
             <div style="height:168px; margin:12px 0;padding:48px 16px; background:#fff; gap:4px;  align-self:stretch" class="px-4; flex flex-col justify-between items-center">
                 <span>
-                <img src="~/Content/assets/images/customer/timer.svg" style="height:48px; width:48px" />
+                    <img src="~/Content/assets/images/customer/timer.svg" style="height:48px; width:48px" />
                 </span>
                 <p style="height: 20px; width: 100%; text-align: center; color: #18181B; font-weight:600;font-family:14px; line-height:24px">Coming soon</p>
             </div>
@@ -522,60 +533,60 @@
                     </div>
 
                     @*<div class="h-auto flex flex-col justify-end  text-center relative">
-                    <div class="w-full flex">
-                        <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
-                            @if (!string.IsNullOrEmpty(item.HostImage))
-                            {
-                                <img class=" w-full h-[157px]  object-fill rounded" src="@item.HostImage" />
-                            }
-                            else
-                            {
-                                <img class=" w-full h-[157px]  object-fill rounded" src="~/Content/assets/images/customer/demo-image.jpeg" />
-                            }
-                        </a>
-                    </div>
-                    <div class="absolute mb-[8px] w-full flex flex-row px-2 py-[2px]">
-                        <div style="border-radius:2px;  "
-                             class="  w-full bg-[#ffffffe6]  p-1  justify-start rounded-b flex   flex-col   ">
-                            <div class=" flex flex-row   text-xs  ">
-                                <div class="text-[12px] font-[700] pl-[2px] text-ellipsis-customer h-[18px]">@item.HostName</div>
-                            </div>
-                            <div class="flex flex-row items-center   ">
-                                <div class=" font-[700] pl-[2px]">
-                                    @if (!string.IsNullOrEmpty(item.ClubLogo))
+                            <div class="w-full flex">
+                                <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
+                                    @if (!string.IsNullOrEmpty(item.HostImage))
                                     {
-                                        <img class="h-[11px]  w-[11px] rounded-full" src="@item.ClubLogo"
-                                             alt="club">
+                                        <img class=" w-full h-[157px]  object-fill rounded" src="@item.HostImage" />
                                     }
                                     else
                                     {
-                                        <img class="h-[11px]  w-[11px] rounded-full" src="~/Content/assets/images/customer/demo-image.jpeg"
-                                             alt="club">
+                                        <img class=" w-full h-[157px]  object-fill rounded" src="~/Content/assets/images/customer/demo-image.jpeg" />
                                     }
+                                </a>
+                            </div>
+                            <div class="absolute mb-[8px] w-full flex flex-row px-2 py-[2px]">
+                                <div style="border-radius:2px;  "
+                                     class="  w-full bg-[#ffffffe6]  p-1  justify-start rounded-b flex   flex-col   ">
+                                    <div class=" flex flex-row   text-xs  ">
+                                        <div class="text-[12px] font-[700] pl-[2px] text-ellipsis-customer h-[18px]">@item.HostName</div>
+                                    </div>
+                                    <div class="flex flex-row items-center   ">
+                                        <div class=" font-[700] pl-[2px]">
+                                            @if (!string.IsNullOrEmpty(item.ClubLogo))
+                                            {
+                                                <img class="h-[11px]  w-[11px] rounded-full" src="@item.ClubLogo"
+                                                     alt="club">
+                                            }
+                                            else
+                                            {
+                                                <img class="h-[11px]  w-[11px] rounded-full" src="~/Content/assets/images/customer/demo-image.jpeg"
+                                                     alt="club">
+                                            }
 
-                                </div>
-                                <div class="text-[10px] text-start ml-[4px] font-[400] h-[15px] text-ellipsis-customer h-[14px]">
-                                    @item.ClubName
+                                        </div>
+                                        <div class="text-[10px] text-start ml-[4px] font-[400] h-[15px] text-ellipsis-customer h-[14px]">
+                                            @item.ClubName
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>*@
+                        </div>*@
                 }
             </div>
             @*<div id="pagination-container" class="flex justify-between pagination-container-wrapper my-[7px] ">
-            <button id="prev-btn-second" class="next-prev-btn" disabled>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                    <path d="M10.707 2.13599C10.8945 2.32351 10.9998 2.57782 10.9998 2.84299C10.9998 3.10815 10.8945 3.36246 10.707 3.54999L5.75705 8.49999L10.707 13.45C10.8892 13.6386 10.99 13.8912 10.9877 14.1534C10.9854 14.4156 10.8803 14.6664 10.6949 14.8518C10.5095 15.0372 10.2586 15.1424 9.99645 15.1447C9.73425 15.1469 9.48165 15.0461 9.29305 14.864L3.63605 9.20699C3.44858 9.01946 3.34326 8.76515 3.34326 8.49999C3.34326 8.23482 3.44858 7.98052 3.63605 7.79299L9.29305 2.13599C9.48058 1.94852 9.73488 1.8432 10 1.8432C10.2652 1.8432 10.5195 1.94852 10.707 2.13599Z" fill="#959595" />
-                </svg>
-            </button>
-            <div id="page-numbers-second" class=" page-number-list flex justify-between w-full"></div>
-            <button id="next-btn-second" class="next-prev-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                    <path d="M5.29295 2.13605C5.10548 2.32358 5.00017 2.57788 5.00017 2.84305C5.00017 3.10821 5.10548 3.36252 5.29295 3.55005L10.243 8.50005L5.29295 13.45C5.11079 13.6387 5.01 13.8913 5.01228 14.1535C5.01456 14.4156 5.11973 14.6665 5.30513 14.8519C5.49054 15.0373 5.74135 15.1424 6.00355 15.1447C6.26575 15.147 6.51835 15.0462 6.70695 14.864L12.364 9.20705C12.5514 9.01952 12.6567 8.76521 12.6567 8.50005C12.6567 8.23488 12.5514 7.98058 12.364 7.79305L6.70695 2.13605C6.51942 1.94858 6.26512 1.84326 5.99995 1.84326C5.73479 1.84326 5.48048 1.94858 5.29295 2.13605Z" fill="#959595" />
-                </svg>
-            </button>
-        </div>*@
+                    <button id="prev-btn-second" class="next-prev-btn" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                            <path d="M10.707 2.13599C10.8945 2.32351 10.9998 2.57782 10.9998 2.84299C10.9998 3.10815 10.8945 3.36246 10.707 3.54999L5.75705 8.49999L10.707 13.45C10.8892 13.6386 10.99 13.8912 10.9877 14.1534C10.9854 14.4156 10.8803 14.6664 10.6949 14.8518C10.5095 15.0372 10.2586 15.1424 9.99645 15.1447C9.73425 15.1469 9.48165 15.0461 9.29305 14.864L3.63605 9.20699C3.44858 9.01946 3.34326 8.76515 3.34326 8.49999C3.34326 8.23482 3.44858 7.98052 3.63605 7.79299L9.29305 2.13599C9.48058 1.94852 9.73488 1.8432 10 1.8432C10.2652 1.8432 10.5195 1.94852 10.707 2.13599Z" fill="#959595" />
+                        </svg>
+                    </button>
+                    <div id="page-numbers-second" class=" page-number-list flex justify-between w-full"></div>
+                    <button id="next-btn-second" class="next-prev-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                            <path d="M5.29295 2.13605C5.10548 2.32358 5.00017 2.57788 5.00017 2.84305C5.00017 3.10821 5.10548 3.36252 5.29295 3.55005L10.243 8.50005L5.29295 13.45C5.11079 13.6387 5.01 13.8913 5.01228 14.1535C5.01456 14.4156 5.11973 14.6665 5.30513 14.8519C5.49054 15.0373 5.74135 15.1424 6.00355 15.1447C6.26575 15.147 6.51835 15.0462 6.70695 14.864L12.364 9.20705C12.5514 9.01952 12.6567 8.76521 12.6567 8.50005C12.6567 8.23488 12.5514 7.98058 12.364 7.79305L6.70695 2.13605C6.51942 1.94858 6.26512 1.84326 5.99995 1.84326C5.73479 1.84326 5.48048 1.94858 5.29295 2.13605Z" fill="#959595" />
+                        </svg>
+                    </button>
+                </div>*@
             <!-- one row end  -->
         </div>
 

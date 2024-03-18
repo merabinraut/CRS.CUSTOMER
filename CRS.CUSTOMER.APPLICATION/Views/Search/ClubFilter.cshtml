@@ -226,7 +226,12 @@
                                         <img src="~/Content/assets/images/customer/moon.svg" />
                                     </div>
                                 }
-                                <div class="text-sm text-secondary-1">@item.ClubOpeningTime~@item.ClubClosingTime</div>
+                                <div class="text-sm text-secondary-1 flex justify-center items-center">
+                                    @item.ClubOpeningTime <span>
+                                        <img src="~/Content/assets/images/customer/time-duration.svg" style="height:9px; width:8px" />
+
+                                    </span>@item.ClubClosingTime
+                                </div>
                             </div>
                             if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                             {
