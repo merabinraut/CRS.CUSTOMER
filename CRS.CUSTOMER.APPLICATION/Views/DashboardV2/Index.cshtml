@@ -10,7 +10,7 @@
         right: 3px;
     }
 
- /*   .inset-0 {
+    /*   .inset-0 {
         inset: 5rem !important;
     }*/
 </style>
@@ -474,11 +474,8 @@
     </p>
     <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-2 py-4 pt-[70px]">
         @{
-            var groupedByPrice = Model.PlanModel.OrderByDescending(p => p.Price)
-                .GroupBy(p => p.Price);
-            var HighestPrice = Model.PlanModel.OrderByDescending(p => p.Price)
-                .GroupBy(p => p.Price).First();
-
+            var groupedByPrice = Model.PlanModel.OrderBy(p => p.Price).GroupBy(p => p.Price);
+            var lowestPrice = groupedByPrice.First();
             foreach (var group in groupedByPrice)
             {
                 string priceKey = group.Key;
@@ -492,38 +489,38 @@
                         <div class="px-4">
                             <div class='flex'>
                                 <div class="">
-                                    @if (item.PlanId == HighestPrice.First().PlanId)
+                                    @if (item.PlanId == lowestPrice.First().PlanId)
                                     {
                                         <i class="las la-crown linear-gradient-text text-[23px]"></i>
                                         <div class="linear-gradient-text table text-[11px] mt-[-5px] font-bold tracking-[0.5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Popularity</div>
                                     }
                                 </div>
-                               @* <div class="flex ml-[35px] mt-[-70px]">
-                                    @if (!string.IsNullOrEmpty(item.PlanImage))
-                                    {
-                                        <img src="@item.PlanImage"
-                                             class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] rotate-[12deg] z-[3]"
-                                             style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
-                                    }
-                                    else
-                                    {
-                                        <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                             class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] rotate-[12deg] z-[3]"
-                                             style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
-                                    }
-                                    @if (!string.IsNullOrEmpty(item.PlanImage))
-                                    {
-                                        <img src="@item.PlanImage"
-                                             class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] z-[2] -ml-[25px] rotate-[12deg]"
-                                             style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
-                                    }
-                                    else
-                                    {
-                                        <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                             class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] rotate-[12deg] z-[3]"
-                                             style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
-                                    }
-                                </div>*@
+                                @* <div class="flex ml-[35px] mt-[-70px]">
+                                        @if (!string.IsNullOrEmpty(item.PlanImage))
+                                        {
+                                            <img src="@item.PlanImage"
+                                                 class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] rotate-[12deg] z-[3]"
+                                                 style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                                 class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] rotate-[12deg] z-[3]"
+                                                 style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.PlanImage))
+                                        {
+                                            <img src="@item.PlanImage"
+                                                 class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] z-[2] -ml-[25px] rotate-[12deg]"
+                                                 style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                                 class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] rotate-[12deg] z-[3]"
+                                                 style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
+                                        }
+                                    </div>*@
                             </div>
                         </div>
                         <div class="px-6">
@@ -667,99 +664,99 @@
 
                     </div>
                     @*test*@
-                <div class="px-4 py-[11px] ">
-                    <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
-                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
-                        <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
-                                      fill="#7E6D5E" />
-                            </svg>
-                        </span>
-                        <div id="tooltip-right" role="tooltip"
-                             class="absolute z-10 invisible inline-block px-[6px] py-[6px] font-medium text-white text-[7px] w-[200px] bg-gray-900 rounded-lg leading-[140%] opacity-0 tooltip "
-                             style="background: rgba(41, 47, 51, 0.95); border-radius:3px">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon <div class="tooltip-arrow" data-popper-arrow>
+                    <div class="px-4 py-[11px] ">
+                        <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
+                            <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
+                                    <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
+                                          fill="#7E6D5E" />
+                                </svg>
+                            </span>
+                            <div id="tooltip-right" role="tooltip"
+                                 class="absolute z-10 invisible inline-block px-[6px] py-[6px] font-medium text-white text-[7px] w-[200px] bg-gray-900 rounded-lg leading-[140%] opacity-0 tooltip "
+                                 style="background: rgba(41, 47, 51, 0.95); border-radius:3px">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon <div class="tooltip-arrow" data-popper-arrow>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
+                        <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
+                            <div>
+                                <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col" style="height:45px; width:45px">
+
+                                    <img class="inline-block  rounded-full "
+                                         style="width:45px; height:45px"
+                                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                                         alt="">
+
+
+                                    <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs " style=" top: -5px; left: 33px;"></i>
+                                </div>
+                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] " style="font-size: 10px; width: 45px; ">@@後藤聖...</div>
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <div class="relative flex justify-center items-center flex-col">
+                                    <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                         style="height:45px; width:45px"
+                                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                                         alt="">
+                                </div>
+                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <div class="relative flex justify-center items-center flex-col">
+                                    <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                         style="height:45px; width:45px"
+                                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                                         alt="">
+                                </div>
+                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center " style="font-size: 10px; width: 45px; ">@@エイト...</div>
+                            </div>
+                        </div>
+
+                        @*   <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
+
+
+                                <div>
+                                    <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
+
+                                        <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                             src="~/Content/assets/images/customer/demo-image.jpeg"
+                                             alt="">
+
+
+                                        <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
+                                    </div>
+                                    <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] " style="font-size: 10px; width: 45px; ">@@後藤聖...</div>
+                                </div>
+
+
+                                <div id="tooltip-right" role="tooltip"
+                                     class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white text-[7px] w-[200px] rounded-lg leading-[140%] opacity-0 tooltip "
+                                     style="background: rgba(41, 47, 51, 0.95);">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon<div class="tooltip-arrow" data-popper-arrow>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <div class="relative flex justify-center items-center flex-col">
+                                        <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                             src="~/Content/assets/images/customer/demo-image.jpeg"
+                                             alt="">
+                                    </div>
+                                    <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <div class="relative flex justify-center items-center flex-col">
+                                        <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                             src="~/Content/assets/images/customer/demo-image.jpeg"
+                                             alt="">
+                                    </div>
+                                    <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
+                                </div>
+                            </div>*@
                         <div>
-                            <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col" style="height:45px; width:45px">
-
-                                <img class="inline-block  rounded-full "
-                                     style="width:45px; height:45px"
-                                     src="~/Content/assets/images/customer/demo-image.jpeg"
-                                     alt="">
-
-
-                                <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs " style=" top: -5px; left: 33px;"></i>
-                            </div>
-                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] " style="font-size: 10px; width: 45px; ">@@後藤聖...</div>
-                        </div>
-                        <div class="flex flex-col justify-center">
-                            <div class="relative flex justify-center items-center flex-col">
-                                <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                     style="height:45px; width:45px"
-                                     src="~/Content/assets/images/customer/demo-image.jpeg"
-                                     alt="">
-                            </div>
-                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
-                        </div>
-                        <div class="flex flex-col justify-center">
-                            <div class="relative flex justify-center items-center flex-col">
-                                <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                     style="height:45px; width:45px"
-                                     src="~/Content/assets/images/customer/demo-image.jpeg"
-                                     alt="">
-                            </div>
-                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center " style="font-size: 10px; width: 45px; ">@@エイト...</div>
                         </div>
                     </div>
-
-                    @*   <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
-
-
-            <div>
-                <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
-
-                    <img class="inline-block h-[31px] w-[31px] rounded-full "
-                         src="~/Content/assets/images/customer/demo-image.jpeg"
-                         alt="">
-
-
-                    <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
-                </div>
-                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] " style="font-size: 10px; width: 45px; ">@@後藤聖...</div>
-            </div>
-
-
-            <div id="tooltip-right" role="tooltip"
-                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white text-[7px] w-[200px] rounded-lg leading-[140%] opacity-0 tooltip "
-                 style="background: rgba(41, 47, 51, 0.95);">
-                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon<div class="tooltip-arrow" data-popper-arrow>
-                </div>
-            </div>
-            <div class="flex flex-col justify-center">
-                <div class="relative flex justify-center items-center flex-col">
-                    <img class="inline-block h-[31px] w-[31px] rounded-full "
-                         src="~/Content/assets/images/customer/demo-image.jpeg"
-                         alt="">
-                </div>
-                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
-            </div>
-            <div class="flex flex-col justify-center">
-                <div class="relative flex justify-center items-center flex-col">
-                    <img class="inline-block h-[31px] w-[31px] rounded-full "
-                         src="~/Content/assets/images/customer/demo-image.jpeg"
-                         alt="">
-                </div>
-                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
-            </div>
-        </div>*@
-                    <div>
-                    </div>
-                </div>
                     @*test end*@
                     <div class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
                         <div>
@@ -827,7 +824,7 @@
 
                 </div>
                 <div class="px-3">
-                    <div class="text-[8px] font-bold bg-[#FFECEC] rounded-[2px] py-[4px] px-[6px] " >
+                    <div class="text-[8px] font-bold bg-[#FFECEC] rounded-[2px] py-[4px] px-[6px] ">
                         <p class="inline-flex p-[1px] mr-[2px]">
                             @CRS.CUSTOMER.APPLICATION.Resources.Resource.Met_handsome_host：
                             <img src="~/Content/assets/images/customer/red--emoji.svg" />
@@ -1319,8 +1316,7 @@
 <!--#endregion-->
 @section scripts
 {
-    <script>
-    $(document).ready(function () {
+    <script>$(document).ready(function () {
             EnableLoaderFunction();
             $('.owl-carousel').owlCarousel({
                 center: true,
@@ -1556,8 +1552,7 @@
     </script>
     <!----------------------------------------------------Location---------------------------------------------------->
     <!--#region 1-->
-    <script>
-    function LocationFunction(i) {
+    <script>function LocationFunction(i) {
             window.location.href = "/LocationManagement/Index?LocationId=" + i;
         }
         function ClubDetailActionFunction(i, j) {
