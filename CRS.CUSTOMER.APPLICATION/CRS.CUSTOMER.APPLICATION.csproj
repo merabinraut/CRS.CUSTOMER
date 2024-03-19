@@ -699,6 +699,7 @@
     <Content Include="Views\LocationManagement\ClubDetail_V2.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Search\ClubFilter.cshtml" />
+    <Content Include="Views\Search\HostFilter_BK.cshtml" />
     <Content Include="Views\Search\HostFilter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -94,6 +94,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public JsonResult GetRecommendedClubAndHost(string LocationId)
         {
             var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
+            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var Response = new RecommendedClubAndHostModel();
             var clubRecommendationDBResponse = _oldDashboardBusiness.GetRecommendedClub(lId);
             if (clubRecommendationDBResponse.Count > 0)
@@ -103,7 +104,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Response.RecommendedClubModel.ForEach(x => x.LocationId = x.LocationId.EncryptParameter());
                 Response.RecommendedClubModel.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
             }
-            var hostRecommendationDBResponse = _oldDashboardBusiness.GetRecommendedHost(lId);
+            var hostRecommendationDBResponse = _oldDashboardBusiness.GetRecommendedHost(lId, CustomerId);
             if (hostRecommendationDBResponse.Count > 0)
             {
                 Response.RecommendedHostModel = hostRecommendationDBResponse.MapObjects<HostRecommendationListModel>();

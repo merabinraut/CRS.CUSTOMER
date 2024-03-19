@@ -14,7 +14,7 @@ namespace CRS.CUSTOMER.REPOSITORY.DashboardV2
         public List<ClubDetailCommon> GetNewClub(string LocationId, string CustomerId, string Type = "")
         {
             string SQL = $"EXEC sproc_cp_dashboard_v2 @flag = '1', @LocationId = {_dao.FilterString(LocationId)}";
-            SQL += !string.IsNullOrEmpty(CustomerId) ? $", @CustomerId = {_dao.FilterString(Type)}" : string.Empty;
+            SQL += !string.IsNullOrEmpty(CustomerId) ? $", @CustomerId = {_dao.FilterString(CustomerId)}" : string.Empty;
             SQL += !string.IsNullOrEmpty(Type) ? $", @ResultType = {_dao.FilterString(Type)}" : string.Empty;
             var dbResponse = _dao.ExecuteDataTable(SQL);
             return dbResponse != null && dbResponse.Rows.Count > 0
@@ -24,7 +24,7 @@ namespace CRS.CUSTOMER.REPOSITORY.DashboardV2
         public List<HostDetailCommon> GetNewHost(string LocationId, string CustomerId, string Type = "")
         {
             string SQL = $"EXEC sproc_cp_dashboard_v2 @flag = '2', @LocationId = {_dao.FilterString(LocationId)}";
-            SQL += !string.IsNullOrEmpty(CustomerId) ? $", @CustomerId = {_dao.FilterString(Type)}" : string.Empty;
+            SQL += !string.IsNullOrEmpty(CustomerId) ? $", @CustomerId = {_dao.FilterString(CustomerId)}" : string.Empty;
             SQL += !string.IsNullOrEmpty(Type) ? $", @ResultType = {_dao.FilterString(Type)}" : string.Empty;
             var dbResponse = _dao.ExecuteDataTable(SQL);
             return dbResponse != null && dbResponse.Rows.Count > 0

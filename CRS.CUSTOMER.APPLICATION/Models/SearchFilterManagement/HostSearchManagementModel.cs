@@ -38,5 +38,6 @@
         public string ClubNameEnglish { get; set; }
         public string ClubNameJapanese { get; set; }
         public string ClubLogo { get; set; }
+        public string IsBookmarked { get; set; }
     }
 }

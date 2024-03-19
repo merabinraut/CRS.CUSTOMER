@@ -42,6 +42,11 @@
         }
     </style>
     <title>ホスログ/公式ホームページ</title>
+    <meta property="og:title" content="ホスログ/公式ホームページ">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://hoslog.jp/">
+    <meta property="og:image" content="https://hoslog.jp/Content/assets/images/customer/demo-image.jpeg">
+    <meta property="og:description" content="test">
     <style>
         .overlay-login {
             position: absolute;
@@ -82,31 +87,31 @@
         <div class="px-[36px] pb-[45px] z-10">
             @Html.AntiForgeryToken()
             @*<div class="flex justify-center pb-[29px]">
-            <img src="~/Content/assets/images/customer/logo-white.svg" />
-            <div class="input-field-common noofpeople-class absolute top-6 right-4">
-                <select id="default_select" style="width: 100%; font-size:15px"
-                        class="default_select text-[#B7B7B7] h-[44px] select-common" onchange="ChangeLanguageFunction();">
-                    @{
-                        string Language = ViewBag.Language;
-                        if (!string.IsNullOrEmpty(Language) && Language.ToString().Trim().ToLower() == "en")
-                        {
-                            <option value="en" selected>English</option>
-                            <option value="Ja">日本語</option>
-                        }
-                        else if (!string.IsNullOrEmpty(Language) && Language.ToString().Trim().ToLower() == "ja")
-                        {
-                            <option value="en">English</option>
-                            <option value="Ja" selected>日本語</option>
-                        }
-                        else
-                        {
-                            <option value="en">English</option>
-                            <option value="Ja">日本語</option>
-                        }
-                    }
-                </select>
-            </div>
-        </div>*@
+                    <img src="~/Content/assets/images/customer/logo-white.svg" />
+                    <div class="input-field-common noofpeople-class absolute top-6 right-4">
+                        <select id="default_select" style="width: 100%; font-size:15px"
+                                class="default_select text-[#B7B7B7] h-[44px] select-common" onchange="ChangeLanguageFunction();">
+                            @{
+                                string Language = ViewBag.Language;
+                                if (!string.IsNullOrEmpty(Language) && Language.ToString().Trim().ToLower() == "en")
+                                {
+                                    <option value="en" selected>English</option>
+                                    <option value="Ja">日本語</option>
+                                }
+                                else if (!string.IsNullOrEmpty(Language) && Language.ToString().Trim().ToLower() == "ja")
+                                {
+                                    <option value="en">English</option>
+                                    <option value="Ja" selected>日本語</option>
+                                }
+                                else
+                                {
+                                    <option value="en">English</option>
+                                    <option value="Ja">日本語</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>*@
             <div class="footer-logo px-4 pt-[12px] pb-[16px]" style="display:flex; justify-content:center">
                 <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo_2.svg" />
             </div>
@@ -115,9 +120,9 @@
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Login
                 </button>
                 <div class="mt-[14px] mb-2">
-                    <div class="text-[11px] font-semibold " style="color: rgba(255, 255, 255, 0.60)"  >
+                    <div class="text-[11px] font-semibold " style="color: rgba(255, 255, 255, 0.60)">
                         @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Terms_of_Use_and_Privacy_Policy*@
-                        <span  style="color: #839AD6">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TermsOfUse</span> と <span  style="color: #839AD6">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Policy</span> <span>に</span>
+                        <span style="color: #839AD6">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TermsOfUse</span> と <span style="color: #839AD6">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Policy</span> <span>に</span>
                     </div>
                     <div class="text-[11px] text-[#fff9] " style="font-weight:500">
                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.I_Agree_to_Continue
@@ -148,72 +153,72 @@
     </div>
 
     <div>
-      @*  <div class="py-4 px-[33px] bg-primary flex justify-between items-center">
-            @{
-                var SystemLinkModel = ApplicationUtilities.GetSessionValue("SystemLinkModel") as List<CRS.CUSTOMER.APPLICATION.Models.Home.SystemLinkModel>;
+        @*  <div class="py-4 px-[33px] bg-primary flex justify-between items-center">
+                @{
+                    var SystemLinkModel = ApplicationUtilities.GetSessionValue("SystemLinkModel") as List<CRS.CUSTOMER.APPLICATION.Models.Home.SystemLinkModel>;
 
-                if (SystemLinkModel != null && SystemLinkModel.Count > 0)
-                {
-                    int i = 0;
-                    foreach (var item in SystemLinkModel)
+                    if (SystemLinkModel != null && SystemLinkModel.Count > 0)
                     {
-                        <a href="@item.Link" target="_blank">
-                            <img class="h-[24px] w-[24px]" src="@item.PlatformImage" />
-                        </a>
-                        bool isLastItem = ++i == SystemLinkModel.Count;
-                        if (!isLastItem)
-                        {<div class="w-[1px] h-[16px] bg-[#ffffff99]"></div>}
+                        int i = 0;
+                        foreach (var item in SystemLinkModel)
+                        {
+                            <a href="@item.Link" target="_blank">
+                                <img class="h-[24px] w-[24px]" src="@item.PlatformImage" />
+                            </a>
+                            bool isLastItem = ++i == SystemLinkModel.Count;
+                            if (!isLastItem)
+                            {<div class="w-[1px] h-[16px] bg-[#ffffff99]"></div>}
+                        }
                     }
                 }
-            }
-        </div>*@
+            </div>*@
         <div class="footer bg-footer">
-           @* <div class="footer-logo px-4 pt-[12px] pb-[16px]">
-                <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo_2.svg" />
-            </div>*@
+            @* <div class="footer-logo px-4 pt-[12px] pb-[16px]">
+                    <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo_2.svg" />
+                </div>*@
             @*<div class="p-4">
-                <div class="footer-link text-white grid grid-cols-2 ">
-                    <div class="grid gap-[8px]">
-                        <a href="#" class="text-xs">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.TopPage
-                        </a>
-                        <a href="#" class="text-xs">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.SearchHostClub
-                        </a>
-                        <a href="#" class="text-xs">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan
-                        </a>
-                        <a href="#" class="text-xs">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide
-                        </a>
-                        <a href="@Url.Action("faq","Footer")" class="text-xs">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
-                        </a>
+                    <div class="footer-link text-white grid grid-cols-2 ">
+                        <div class="grid gap-[8px]">
+                            <a href="#" class="text-xs">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.TopPage
+                            </a>
+                            <a href="#" class="text-xs">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.SearchHostClub
+                            </a>
+                            <a href="#" class="text-xs">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan
+                            </a>
+                            <a href="#" class="text-xs">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide
+                            </a>
+                            <a href="@Url.Action("faq","Footer")" class="text-xs">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
+                            </a>
+                        </div>
+                        <div class="grid gap-[12px]">
+                            <a href="@Url.Action("inquery","Footer")" class="text-xs">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry
+                            </a>
+                            <a href="@Url.Action("operatingcompany","Footer")" class="text-xs">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany
+                            </a>
+                            <a href="@Url.Action("privacypolicy","Footer")" class="text-xs">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy
+                            </a>
+                            <a href="https://affiliate.hoslog.jp/" class="text-xs">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Affiliate_Registration
+                            </a>
+                            <a href="https://hoslog.jp/" class="text-xs">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
+                            </a>
+                        </div>
                     </div>
-                    <div class="grid gap-[12px]">
-                        <a href="@Url.Action("inquery","Footer")" class="text-xs">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry
-                        </a>
-                        <a href="@Url.Action("operatingcompany","Footer")" class="text-xs">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany
-                        </a>
-                        <a href="@Url.Action("privacypolicy","Footer")" class="text-xs">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy
-                        </a>
-                        <a href="https://affiliate.hoslog.jp/" class="text-xs">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Affiliate_Registration
-                        </a>
-                        <a href="https://hoslog.jp/" class="text-xs">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
-                        </a>
-                    </div>
-                </div>
 
-                <div class=" my-4 p-[8px] border rounded-[4px] border-[#393939] bg-[#232323] text-xs text-center text-white">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.WarningNotes
-                </div>
-                <div class='text-center text-sm text-white mb-4 font-[400]'>© 2023 - @DateTime.Now.Year @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog</div>
-            </div>*@
+                    <div class=" my-4 p-[8px] border rounded-[4px] border-[#393939] bg-[#232323] text-xs text-center text-white">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.WarningNotes
+                    </div>
+                    <div class='text-center text-sm text-white mb-4 font-[400]'>© 2023 - @DateTime.Now.Year @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog</div>
+                </div>*@
         </div>
     </div>
     <div class="loader" id="loader-id">
