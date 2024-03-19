@@ -1337,7 +1337,7 @@ label {
 }
 
 .image-cover {
-    object-fit: cover
+    object-fit: cover !important;
 }
 
 .club-border {
