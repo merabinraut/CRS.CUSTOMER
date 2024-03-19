@@ -422,6 +422,20 @@
 @section scripts
 {
     <script>
+        $(document).ready(function () {
+            var Value1 = @Html.Raw(Json.Encode(ViewBag.Date));
+            var Value2 = @Html.Raw(Json.Encode(ViewBag.Time));
+            var Value3 = @Html.Raw(Json.Encode(ViewBag.NoOfPeople));
+            if ((Value1 != null || Value1 != "") ||
+                (Value2 != null || Value2 != "") ||
+                (Value3 != null || Value3 != "")) {
+                InitiateDateTimeFilterPopupFunction();
+                var element = document.getElementById('drawer-date-time');
+                element.classList.add('translate-y-full');
+                initTimeFunction2();
+                initPeopleFunction2();
+            }
+        });
         function ClubDetailActionFunction(i, j) {
             window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }

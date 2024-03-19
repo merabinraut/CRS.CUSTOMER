@@ -111,8 +111,6 @@
     <Compile Include="SearchFilterManagement\SearchFilterManagementBusiness.cs" />
     <Compile Include="Search\ISearchBusiness.cs" />
     <Compile Include="Search\SearchBusiness.cs" />
-    <Compile Include="UserManagement\IUserManagementBusiness.cs" />
-    <Compile Include="UserManagement\UserManagementBusiness.cs" />
     <Compile Include="ReservationHistoryManagementV2\IReservationHistoryManagementV2Business.cs" />
     <Compile Include="ReservationHistoryManagementV2\ReservationHistoryManagementV2Business.cs" />
   </ItemGroup>

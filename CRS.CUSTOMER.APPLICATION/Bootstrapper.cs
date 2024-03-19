@@ -16,7 +16,6 @@ using CRS.CUSTOMER.BUSINESS.ReservationManagementV2;
 using CRS.CUSTOMER.BUSINESS.ReviewManagement;
 using CRS.CUSTOMER.BUSINESS.Search;
 using CRS.CUSTOMER.BUSINESS.SearchFilterManagement;
-using CRS.CUSTOMER.BUSINESS.UserManagement;
 using System.Web.Mvc;
 using Unity;
 using Unity.AspNet.Mvc;
@@ -35,7 +34,6 @@ namespace CRS.CUSTOMER.APPLICATION
         {
             var container = new UnityContainer();
             container.RegisterType<IHomeBusiness, HomeBusiness>();
-            container.RegisterType<IUserManagementBusiness, UserManagementBusiness>();
             container.RegisterType<IAPILogManagementBusiness, APILogManagementBusiness>();
             container.RegisterType<IEmailLogManagementBusiness, EmailLogManagementBusiness>();
             container.RegisterType<IErrorLogManagementBusiness, ErrorLogManagementBusiness>();

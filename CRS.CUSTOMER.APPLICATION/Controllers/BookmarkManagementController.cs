@@ -15,6 +15,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IBookmarkManagementBusiness _buss;
 
         public BookmarkManagementController(IBookmarkManagementBusiness buss) => _buss = buss;
+
+        [HttpGet]
         public ActionResult Index()
         {
             var culture = Request.Cookies["culture"]?.Value;
@@ -84,15 +86,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
             var dbResp = _buss.ManageBoookmark(common, agentType);
             if (dbResp != null && dbResp.Code == ResponseCode.Success)
-            {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.SUCCESS,
-                    Message = dbResp?.Message,
-                    Title = NotificationMessage.SUCCESS.ToString()
-                });
-                return Json(new { success = true, message = dbResp?.Message });
-            }
+                return Json(new { success = true, message = "" });
             else
             {
                 AddNotificationMessage(new NotificationModel()
@@ -101,8 +95,29 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResp?.Message ?? "Something went wrong",
                     Title = NotificationMessage.ERROR.ToString()
                 });
-                return Json(new { success = false, message = dbResp?.Message ?? "Something went wrong" });
+                return Json(new { success = false, message = "Something went wrong" });
             }
+
+            //if (dbResp != null && dbResp.Code == ResponseCode.Success)
+            //{
+            //    AddNotificationMessage(new NotificationModel()
+            //    {
+            //        NotificationType = NotificationMessage.SUCCESS,
+            //        Message = dbResp?.Message,
+            //        Title = NotificationMessage.SUCCESS.ToString()
+            //    });
+            //    return Json(new { success = true, message = dbResp?.Message });
+            //}
+            //else
+            //{
+            //    AddNotificationMessage(new NotificationModel()
+            //    {
+            //        NotificationType = NotificationMessage.ERROR,
+            //        Message = dbResp?.Message ?? "Something went wrong",
+            //        Title = NotificationMessage.ERROR.ToString()
+            //    });
+            //    return Json(new { success = false, message = dbResp?.Message ?? "Something went wrong" });
+            //}
 
         }
 
@@ -135,15 +150,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
             var dbResp = _buss.ManageBoookmark(common, agentType);
             if (dbResp != null && dbResp.Code == ResponseCode.Success)
-            {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.SUCCESS,
-                    Message = dbResp?.Message,
-                    Title = NotificationMessage.SUCCESS.ToString()
-                });
-                return Json(new { success = true, message = dbResp?.Message });
-            }
+                return Json(new { success = true, message = "" });
             else
             {
                 AddNotificationMessage(new NotificationModel()
@@ -152,8 +159,28 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResp?.Message ?? "Something went wrong",
                     Title = NotificationMessage.ERROR.ToString()
                 });
-                return Json(new { success = false, message = dbResp?.Message ?? "Something went wrong" });
+                return Json(new { success = false, message = "Something went wrong" });
             }
+            //if (dbResp != null && dbResp.Code == ResponseCode.Success)
+            //{
+            //    AddNotificationMessage(new NotificationModel()
+            //    {
+            //        NotificationType = NotificationMessage.SUCCESS,
+            //        Message = dbResp?.Message,
+            //        Title = NotificationMessage.SUCCESS.ToString()
+            //    });
+            //    return Json(new { success = true, message = dbResp?.Message });
+            //}
+            //else
+            //{
+            //    AddNotificationMessage(new NotificationModel()
+            //    {
+            //        NotificationType = NotificationMessage.ERROR,
+            //        Message = dbResp?.Message ?? "Something went wrong",
+            //        Title = NotificationMessage.ERROR.ToString()
+            //    });
+            //    return Json(new { success = false, message = dbResp?.Message ?? "Something went wrong" });
+            //}
         }
     }
 }

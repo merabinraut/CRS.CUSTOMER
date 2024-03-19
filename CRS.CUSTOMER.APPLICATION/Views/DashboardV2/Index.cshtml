@@ -49,117 +49,103 @@
     }
 </style>
 <style>
-    .minute-scroll::-webkit-scrollbar {
-        display: none;
-        /* Hide scrollbar for webkit browsers (Chrome, Safari) */
-    }
-
-    .minute-scroll {
-        scrollbar-width: none;
-    }
-
-    .hours-scroll::-webkit-scrollbar {
-        display: none;
-        /* Hide scrollbar for webkit browsers (Chrome, Safari) */
-    }
-
-    .hours-scroll {
-        scrollbar-width: none;
-    }
-
-    .picker {
+    .select-wrap {
         position: relative;
-        width: 300px;
-        overflow: hidden;
-        margin: 1rem auto 0;
-        outline: 1px solid #ccc;
-        padding: 0 30px;
-    }
-
-    .swiper-container {
-        width: 80px;
-        height: 210px;
-        float: left;
-    }
-
-    .swiper-slide {
-        color: #18181B;
+        height: 100%;
         text-align: center;
-        font-family: "Noto Sans";
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 28px;
-        letter-spacing: 0.35px;
-        padding: 5px 0;
+        overflow: hidden;
+        font-size: 20px;
+        color: #000;
     }
 
-    .swiper-slide-prev,
-    .swiper-slide-next {
-        cursor: pointer;
-    }
+        .select-wrap:before,
+        .select-wrap:after {
+            position: absolute;
+            z-index: 1;
+            display: block;
+            content: '';
+            width: 100%;
+            text-align: center;
+            height: 50%;
+        }
 
-    .swiper-slide-active {
-        opacity: 1;
-    }
+        .select-wrap:before {
+            top: 0;
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+            align-content: center;
+        }
 
-    .vizor {
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-        height: 70px;
+        .select-wrap:after {
+            bottom: 0;
+            text-align: center;
+            align-content: center;
+        }
+
+    .select-options {
         position: absolute;
         top: 50%;
-        left: 1rem;
-        right: 1rem;
-        transform: translateY(-50%);
-        font-size: 2rem;
-        line-height: 62px;
+        left: 0;
+        width: 100%;
+        height: 0;
+        transform-style: preserve-3d;
+        margin: 0 auto;
+        display: block;
+        transform: translateZ(-150px) rotateX(0deg);
+        -webkit-font-smoothing: subpixel-antialiased;
+        color: #000;
     }
 
-        .vizor:before,
-        .vizor:after {
-            content: ':';
-            display: inline-block;
-            line-height: inherit;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            transform: translateX(-50%);
-        }
+    .select-option {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
 
-        .vizor:before {
-            left: 95px;
-        }
+    .highlight {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        width: 100%;
+        height: 36px;
+        background-color: #7676801F;
+        font-size: 16px;
+        overflow: hidden;
+    }
 
-        .vizor:after {
-            left: 175px;
-        }
+    .highlight-list {
+        position: absolute;
+        width: 100%;
+        display: none;
+    }
 
-    .arrows .swiper-container:after,
-    .arrows .swiper-container:before {
-        content: "";
+    /* date */
+    .date-selector {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 4px;
-        border-color: transparent;
-        opacity: 0.5;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        width: 328px;
+        height: 158px;
     }
 
-    .arrows .swiper-container:before {
-        top: 0.5rem;
-        border-top-width: 0;
-        border-bottom-color: currentColor;
-    }
+        .date-selector div {
+            flex: 1;
+        }
 
-    .arrows .swiper-container:after {
-        bottom: 0.5rem;
-        border-bottom-width: 0;
-        border-top-color: currentColor;
-    }
+        .date-selector .select-wrap {
+            font-size: 18px;
+        }
+
+        .date-selector .highlight {
+            font-size: 20px;
+        }
 </style>
 <div id="parent" class="loop owl-carousel kiran owl-theme center-image-slider">
     @foreach (var item in Model.Banners)
@@ -1127,7 +1113,7 @@
 </div>
 <!----------------------------------------------------Other---------------------------------------------------->
 <!--#region Working hours-->
-<div id="working-hour-id" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform translate-y-full"
+<!--<div id="working-hour-id" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform translate-y-full"
      tabindex="-1" aria-labelledby="drawer-bottom-label">
     <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
         <div class="text-center text-white mb-2 text-2xl" onclick="WorkingHoursClosePopup();">
@@ -1198,13 +1184,73 @@
                 </a>
             </button>
 
-        </div>
+        </div>s
 
+    </div>
+</div>-->
+<div id="working-hour-id" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform translate-y-full"
+     tabindex="-1" aria-labelledby="drawer-bottom-label">
+    <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
+        <div class="text-center text-white mb-2 text-2xl" onclick="WorkingHoursClosePopup();">
+            <div>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+        <div class="px-4 pt-6 pb-6 bg-white " style="padding-top: 24px; border-radius: 6px 6px 0px 0px; ">
+            <div class="text-sm text-[#333] font-bold mb-3">営業時間を選択する</div>
+            <div class=" relative">
+                <div class="flex justify-center gap-5 items-center h-[171px] py-6 ">
+                    <div class="relative">
+                        <div class="date-selector" style="height:158px; width:320px;">
+                            <div class="year" id="year1"></div>
+                            <div class="month" id="month1"></div>
+                        </div>
+                    </div>
+                </div>
+                <input hidden id="hourShadowval" value="02" />
+                <input hidden id="minuteShadowval" value="00" />
+            </div>
+            <button class="btn btn-primary mt-3" style=" border-radius: 8px; " onclick="WorkingHoursSubmitFunction();">
+                <p class="h-full w-full">
+                    検索
+                </p>
+            </button>
+        </div>
     </div>
 </div>
 <!--#endregion-->
 <!--#region Last entry-->
 <div id="last-entry-id" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform translate-y-full"
+     tabindex="-1" aria-labelledby="drawer-bottom-label">
+    <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
+        <div class="text-center text-white mb-2 text-2xl" onclick="LastEntryClosePopup();">
+            <div>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+        <div class="px-4 pt-6 pb-6 bg-white " style="padding-top: 24px; border-radius: 6px 6px 0px 0px; ">
+            <div class="text-sm text-[#333] font-bold mb-3">営業時間を選択する</div>
+            <div class=" relative">
+                <div class="flex justify-center gap-5 items-center h-[171px] py-6 ">
+                    <div class="relative">
+                        <div class="date-selector" style="height:158px; width:320px;">
+                            <div class="year" id="year2"></div>
+                            <div class="month" id="month2"></div>
+                        </div>
+                    </div>
+                </div>
+                <input hidden id="hourShadowval2" value="11" />
+                <input hidden id="minuteShadowval2" value="00" />
+            </div>
+            <button class="btn btn-primary mt-3" style=" border-radius: 8px; " onclick="LastEntrySubmitFunction();">
+                <p class="h-full w-full">
+                    検索
+                </p>
+            </button>
+        </div>
+    </div>
+</div>
+<!--<div id="last-entry-id" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform translate-y-full"
      tabindex="-1" aria-labelledby="drawer-bottom-label">
     <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
         <div class="text-center text-white mb-2 text-2xl" onclick="LastEntryClosePopup();">
@@ -1269,7 +1315,7 @@
         </div>
 
     </div>
-</div>
+</div>-->
 <!--#endregion-->
 @section scripts
 {
@@ -1520,8 +1566,7 @@
     <!--#endregion-->
 
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-    <script>
-    // Call the function for the hour and minute elements
+    @*<script>// Call the function for the hour and minute elements
         const hourScroll = document.querySelector('.hours-scroll');
         const hourShadow = document.getElementById('hourShadow');
         const hourShadow2 = document.getElementById('hourShadow2');
@@ -1572,6 +1617,584 @@
         // Function to handle minute value
         function handleMinute2(value) {
             $('#minuteShadowval2').val(value.trim());
-        }</script>
+        }</script>*@
+
+    <script>
+
+    const easing = {
+        easeOutCubic: function (pos) {
+            return (Math.pow((pos - 1), 3) + 1);
+        },
+        easeOutQuart: function (pos) {
+            return -(Math.pow((pos - 1), 4) - 1);
+        },
+    };
+
+    class IosSelector {
+        constructor(options) {
+            let defaults = {
+                el: '', // dom
+                type: 'infinite',
+                count: 20,
+                sensitivity: 0.8,
+                source: [],
+                value: null,
+                onChange: null
+            };
+
+            this.options = Object.assign({}, defaults, options);
+            this.options.count = this.options.count - this.options.count % 4;
+            Object.assign(this, this.options);
+
+            this.halfCount = this.options.count / 2;
+            this.quarterCount = this.options.count / 4;
+            this.a = this.options.sensitivity * 10;
+            this.minV = Math.sqrt(1 / this.a);
+            this.selected = this.source[0];
+
+            this.exceedA = 10;
+            this.moveT = 0;
+            this.moving = false;
+
+            this.elems = {
+                el: document.querySelector(this.options.el),
+                circleList: null,
+                circleItems: null,
+
+                highlight: null,
+                highlightList: null,
+                highListItems: null
+            };
+            this.events = {
+                touchstart: null,
+                touchmove: null,
+                touchend: null
+            };
+            this.itemHeight = 36
+            this.itemAngle = 360 / this.options.count;
+            this.radius = this.itemHeight / Math.tan(this.itemAngle * Math.PI / 180);
+
+            this.scroll = 0;
+            this._init();
+        }
+
+        _init() {
+            this._create(this.options.source);
+
+            let touchData = {
+                startY: 0,
+                yArr: []
+            };
+
+            for (let eventName in this.events) {
+                this.events[eventName] = ((eventName) => {
+                    return (e) => {
+                        if (this.elems.el.contains(e.target) || e.target === this.elems.el) {
+                            e.preventDefault();
+                            if (this.source.length) {
+                                this['_' + eventName](e, touchData);
+                            }
+                        }
+                    };
+                })(eventName);
+            }
+
+            this.elems.el.addEventListener('touchstart', this.events.touchstart);
+            document.addEventListener('mousedown', this.events.touchstart);
+            this.elems.el.addEventListener('touchend', this.events.touchend);
+            document.addEventListener('mouseup', this.events.touchend);
+            if (this.source.length) {
+                this.value = this.value !== null ? this.value : this.source[0].value;
+                this.select(this.value);
+            }
+        }
+
+        _touchstart(e, touchData) {
+            this.elems.el.addEventListener('touchmove', this.events.touchmove);
+            document.addEventListener('mousemove', this.events.touchmove);
+            let eventY = e.clientY || e.touches[0].clientY;
+            touchData.startY = eventY;
+            touchData.yArr = [[eventY, new Date().getTime()]];
+            touchData.touchScroll = this.scroll;
+            this._stop();
+        }
+
+        _touchmove(e, touchData) {
+            let eventY = e.clientY || e.touches[0].clientY;
+            touchData.yArr.push([eventY, new Date().getTime()]);
+            if (touchData.length > 5) {
+                touchData.unshift();
+            }
+
+            let scrollAdd = (touchData.startY - eventY) / this.itemHeight;
+            let moveToScroll = scrollAdd + this.scroll;
+
+            if (this.type === 'normal') {
+                if (moveToScroll < 0) {
+                    moveToScroll *= 0.3;
+                } else if (moveToScroll > this.source.length) {
+                    moveToScroll = this.source.length + (moveToScroll - this.source.length) * 0.3;
+                }
+            } else {
+                moveToScroll = this._normalizeScroll(moveToScroll);
+            }
+
+            touchData.touchScroll = this._moveTo(moveToScroll);
+        }
+        _touchend(e, touchData) {
+            this.elems.el.removeEventListener('touchmove', this.events.touchmove);
+            document.removeEventListener('mousemove', this.events.touchmove);
+            let v;
+            if (touchData.yArr.length === 1) {
+                v = 0;
+            } else {
+                let startTime = touchData.yArr[touchData.yArr.length - 2][1];
+                let endTime = touchData.yArr[touchData.yArr.length - 1][1];
+                let startY = touchData.yArr[touchData.yArr.length - 2][0];
+                let endY = touchData.yArr[touchData.yArr.length - 1][0];
+
+                v = ((startY - endY) / this.itemHeight) * 1000 / (endTime - startTime);
+                let sign = v > 0 ? 1 : -1;
+
+                v = Math.abs(v) > 30 ? 30 * sign : v;
+            }
+
+            this.scroll = touchData.touchScroll;
+            this._animateMoveByInitV(v);
+        }
+
+        _create(source) {
+
+            if (!source.length) {
+                return;
+            }
+
+            let template = `
+        <div class="select-wrap">
+          <ul class="select-options" style="transform: translate3d(0, 0, ${-this.radius}px) rotateX(0deg); line-height: 39px;">
+            {{circleListHTML}}
+            <!-- <li class="select-option">a0</li> -->
+          </ul>
+          <div class="highlight">
+            <ul class="highlight-list">
+              <!-- <li class="highlight-item"></li> -->
+              {{highListHTML}}
+            </ul>
+          </div>
+        </div>
+      `;
+
+            if (this.options.type === 'infinite') {
+                let concatSource = [].concat(source);
+                while (concatSource.length < this.halfCount) {
+                    concatSource = concatSource.concat(source);
+                }
+                source = concatSource;
+            }
+            this.source = source;
+            let sourceLength = source.length;
+
+            let circleListHTML = '';
+            for (let i = 0; i < source.length; i++) {
+                circleListHTML += `<li class="select-option"
+                      style="
+                        top: ${this.itemHeight * -0.5}px;
+                        height: 36px;
+                        transform: rotateX(${-this.itemAngle * i}deg) translate3d(0, 0, ${this.radius}px);
+                      "
+                      data-index="${i}"
+                      >${source[i].text}</li>`
+            }
+            let highListHTML = '';
+            for (let i = 0; i < source.length; i++) {
+                highListHTML += `<li class="highlight-item" style="height: ${this.itemHeight}px; ">
+                          ${source[i].text}
+                        </li>`
+            }
+            if (this.options.type === 'infinite') {
+                for (let i = 0; i < this.quarterCount; i++) {
+
+                    circleListHTML = `<li class="select-option"
+                        style="
+                          top: ${this.itemHeight * -0.5}px;
+                          height: ${this.itemHeight}px;
+
+                          transform: rotateX(${this.itemAngle * (i + 1)}deg) translate3d(0, 0, ${this.radius}px);
+                        "
+                        data-index="${-i - 1}"
+                        >${source[sourceLength - i - 1].text}</li>` + circleListHTML;
+                    circleListHTML += `<li class="select-option"
+                        style="
+                          top: ${this.itemHeight * -0.5}px;
+                          height: ${this.itemHeight}px;
+
+                          transform: rotateX(${-this.itemAngle * (i + sourceLength)}deg) translate3d(0, 0, ${this.radius}px);
+                        "
+                        data-index="${i + sourceLength}"
+                        >${source[i].text}</li>`;
+                }
+
+                highListHTML = `<li class="highlight-item" style="height: ${this.itemHeight}px; ">
+                            ${source[sourceLength - 1].text}
+                        </li>` + highListHTML;
+                highListHTML += `<li class="highlight-item" style="height: ${this.itemHeight}px;">${source[0].text}</li>`
+            }
+
+            this.elems.el.innerHTML = template
+                .replace('{{circleListHTML}}', circleListHTML)
+                .replace('{{highListHTML}}', highListHTML);
+            this.elems.circleList = this.elems.el.querySelector('.select-options');
+            this.elems.circleItems = this.elems.el.querySelectorAll('.select-option');
+            this.elems.highlight = this.elems.el.querySelector('.highlight');
+            this.elems.highlightList = this.elems.el.querySelector('.highlight-list');
+            this.elems.highlightitems = this.elems.el.querySelectorAll('.highlight-item');
+
+            if (this.type === 'infinite') {
+                this.elems.highlightList.style.top = -this.itemHeight + 'px';
+            }
+            this.elems.highlight.style.height = '36px';
+            this.elems.highlight.style.lineHeight = '28px';
+
+        }
+        _normalizeScroll(scroll) {
+            let normalizedScroll = scroll;
+
+            while (normalizedScroll < 0) {
+                normalizedScroll += this.source.length;
+            }
+            normalizedScroll = normalizedScroll % this.source.length;
+            return normalizedScroll;
+        }
+        _moveTo(scroll) {
+            if (this.type === 'infinite') {
+                scroll = this._normalizeScroll(scroll);
+            }
+            this.elems.circleList.style.transform = `translate3d(0, 0, ${-this.radius}px) rotateX(${this.itemAngle * scroll}deg)`;
+            this.elems.highlightList.style.transform = `translate3d(0, ${-(scroll) * 28}px, 0)`;
+
+            [...this.elems.circleItems].forEach(itemElem => {
+                if (Math.abs(itemElem.dataset.index - scroll) > this.quarterCount) {
+                    itemElem.style.visibility = 'hidden';
+                } else {
+                    itemElem.style.visibility = 'visible';
+                }
+            });
+            return scroll;
+        }
+        async _animateMoveByInitV(initV) {
+            let initScroll;
+            let finalScroll;
+            let finalV;
+
+            let totalScrollLen;
+            let a;
+            let t;
+
+            if (this.type === 'normal') {
+
+                if (this.scroll < 0 || this.scroll > this.source.length - 1) {
+                    a = this.exceedA;
+                    initScroll = this.scroll;
+                    finalScroll = this.scroll < 0 ? 0 : this.source.length - 1;
+                    totalScrollLen = initScroll - finalScroll;
+
+                    t = Math.sqrt(Math.abs(totalScrollLen / a));
+                    initV = a * t;
+                    initV = this.scroll > 0 ? -initV : initV;
+                    finalV = 0;
+                    await this._animateToScroll(initScroll, finalScroll, t);
+                } else {
+                    initScroll = this.scroll;
+                    a = initV > 0 ? -this.a : this.a;
+                    t = Math.abs(initV / a);
+                    totalScrollLen = initV * t + a * t * t / 2;
+                    finalScroll = Math.round(this.scroll + totalScrollLen);
+                    finalScroll = finalScroll < 0 ? 0 : (finalScroll > this.source.length - 1 ? this.source.length - 1 : finalScroll);
+
+                    totalScrollLen = finalScroll - initScroll;
+                    t = Math.sqrt(Math.abs(totalScrollLen / a));
+                    await this._animateToScroll(this.scroll, finalScroll, t, 'easeOutQuart');
+                }
+
+            } else {
+                initScroll = this.scroll;
+
+                a = initV > 0 ? -this.a : this.a;
+                t = Math.abs(initV / a);
+                totalScrollLen = initV * t + a * t * t / 2;
+                finalScroll = Math.round(this.scroll + totalScrollLen);
+                await this._animateToScroll(this.scroll, finalScroll, t, 'easeOutQuart');
+            }
+
+            this._selectByScroll(this.scroll);
+        }
+
+        _animateToScroll(initScroll, finalScroll, t, easingName = 'easeOutQuart') {
+            if (initScroll === finalScroll || t === 0) {
+                this._moveTo(initScroll);
+                return;
+            }
+
+            let start = new Date().getTime() / 1000;
+            let pass = 0;
+            let totalScrollLen = finalScroll - initScroll;
+
+
+            return new Promise((resolve, reject) => {
+                this.moving = true;
+                let tick = () => {
+                    pass = new Date().getTime() / 1000 - start;
+
+                    if (pass < t) {
+                        this.scroll = this._moveTo(initScroll + easing[easingName](pass / t) * totalScrollLen);
+                        this.moveT = requestAnimationFrame(tick);
+                    } else {
+                        resolve();
+                        this._stop();
+                        this.scroll = this._moveTo(initScroll + totalScrollLen);
+                    }
+                };
+                tick();
+            });
+        }
+
+        _stop() {
+            this.moving = false;
+            cancelAnimationFrame(this.moveT);
+        }
+
+        _selectByScroll(scroll) {
+            scroll = this._normalizeScroll(scroll) | 0;
+            if (scroll > this.source.length - 1) {
+                scroll = this.source.length - 1;
+                this._moveTo(scroll);
+            }
+            this._moveTo(scroll);
+            this.scroll = scroll;
+            this.selected = this.source[scroll];
+            this.value = this.selected.value;
+            this.onChange && this.onChange(this.selected);
+        }
+
+        updateSource(source) {
+            this._create(source);
+
+            if (!this.moving) {
+                this._selectByScroll(this.scroll);
+            }
+        }
+
+        select(value) {
+            for (let i = 0; i < this.source.length; i++) {
+                if (this.source[i].value === value) {
+                    window.cancelAnimationFrame(this.moveT);
+                    // this.scroll = this._moveTo(i);
+                    let initScroll = this._normalizeScroll(this.scroll);
+                    let finalScroll = i;
+                    let t = Math.sqrt(Math.abs((finalScroll - initScroll) / this.a));
+                    this._animateToScroll(initScroll, finalScroll, t);
+                    setTimeout(() => this._selectByScroll(i));
+                    return;
+                }
+            }
+            throw new Error(`can not select value: ${value}, ${value} match nothing in current source`);
+        }
+
+        destroy() {
+            this._stop();
+            for (let eventName in this.events) {
+                this.elems.el.removeEventListener('eventName', this.events[eventName]);
+            }
+            document.removeEventListener('mousedown', this.events['touchstart']);
+            document.removeEventListener('mousemove', this.events['touchmove']);
+            document.removeEventListener('mouseup', this.events['touchend']);
+            this.elems.el.innerHTML = '';
+            this.elems = null;
+        }
+    }
+
+    function getYears() {
+        let currentYear = new Date().getFullYear();
+        let years = [];
+
+        for (let i = 0; i < 20; i++) {
+            years.push({
+                value: i,
+                text: i
+            });
+        }
+        return years;
+    }
+
+    function getMonths(year) {
+        let months = [];
+        for (let i = 1; i <= 12; i++) {
+            months.push({
+                value: i,
+                text: i
+            });
+        }
+        return months;
+    }
+
+    function getDays(year, month) {
+        let dayCount = new Date(year, month, 0).getDate();
+        let days = [];
+
+        for (let i = 1; i <= dayCount; i++) {
+            days.push({
+                value: i,
+                text: i
+            });
+        }
+        return days;
+    }
+
+    let currentYear = new Date().getFullYear();
+    let currentMonth = 1;
+    let currentDay = 1;
+    let yearSelector;
+        let monthSelector;
+        let yearSelector2;
+        let monthSelector2;
+    let daySelector;
+
+    yearSource = getYears();
+    monthSource = getMonths();
+    daySource = getDays(currentYear, currentMonth);
+
+    yearSelector = new IosSelector({
+        el: '#year1',
+        type: 'infinite',
+        source: [
+            { value: "01", text: "01" },
+            { value: "02", text: "02" },
+            { value: "03", text: "03" },
+            { value: "04", text: "04" },
+            { value: "05", text: "05" },
+            { value: "06", text: "06" },
+            { value: "07", text: "07" },
+            { value: "08", text: "08" },
+            {value:"09",text:"09"},
+            {value:"10",text:"10"},
+            {value:"11",text:"11"},
+            {value:"12",text:"12"},
+            {value:"13",text:"13"},
+            {value:"14",text:"14"},
+            {value:"15",text:"15"},
+            {value:"16",text:"16"},
+            {value:"17",text:"17"},
+            {value:"18",text:"18"},
+            {value:"19",text:"19"},
+            {value:"20",text:"20"},
+            {value:"21",text:"21"},
+            {value:"22",text:"22"},
+            {value:"23",text:"23"},
+            {value:"24",text:"24"}
+        ],
+        count: 24,
+        onChange: (selected) => {
+            currentYear = selected.value;
+            daySource = getDays(currentYear, currentMonth);
+            $('#hourShadowval').val(yearSelector.value.trim());
+            //var hour1 = $('#hourShadowval').val();
+            //console.log(hour1);
+        }
+    });
+        monthSelector = new IosSelector({
+            el: '#month1',
+            type: 'infinite',
+            source: [{ value: "00", text: "00" },
+            { value: "30", text: "30" }],
+            count: 20,
+            onChange: (selected) => {
+                currentMonth = selected.value;
+
+                daySource = getDays(currentYear, currentMonth);
+                $('#minuteShadowval').val(monthSelector.value.trim());
+                //var min1 = $('#minuteShadowval').val()
+                //console.log(min1)
+                //monthSelector.value.clear()
+            }
+        });
+        yearSelector2 = new IosSelector({
+        el: '#year2',
+        type: 'infinite',
+        source: [
+            { value: "01", text: "01" },
+            { value: "02", text: "02" },
+            { value: "03", text: "03" },
+            { value: "04", text: "04" },
+            { value: "05", text: "05" },
+            { value: "06", text: "06" },
+            { value: "07", text: "07" },
+            { value: "08", text: "08" },
+            {value:"09",text:"09"},
+            {value:"10",text:"10"},
+            {value:"11",text:"11"},
+            {value:"12",text:"12"},
+            {value:"13",text:"13"},
+            {value:"14",text:"14"},
+            {value:"15",text:"15"},
+            {value:"16",text:"16"},
+            {value:"17",text:"17"},
+            {value:"18",text:"18"},
+            {value:"19",text:"19"},
+            {value:"20",text:"20"},
+            {value:"21",text:"21"},
+            {value:"22",text:"22"},
+            {value:"23",text:"23"},
+            {value:"24",text:"24"}
+        ],
+        count: 24,
+        onChange: (selected) => {
+            currentYear = selected.value;
+            daySource = getDays(currentYear, currentMonth);
+            $('#hourShadowval2').val(yearSelector2.value.trim());
+            //var hour2 = $('#hourShadowval2').val()
+            //console.log(hour2)
+            //yearSelector.value.clear();
+        }
+    });
+
+
+        monthSelector2 = new IosSelector({
+        el: '#month2',
+        type: 'infinite',
+        source: [{ value: "00", text: "00" },
+        { value: "30", text: "30" }],
+        count: 20,
+        onChange: (selected) => {
+            currentMonth = selected.value;
+
+            daySource = getDays(currentYear, currentMonth);
+            $('#minuteShadowval2').val(monthSelector2.value.trim());
+            //var min2 = $('#minuteShadowval2').val()
+            //console.log(min2)
+           // monthSelector.value.clear()
+        }
+    });
+    let now = new Date();
+    setTimeout(function () {
+    });
+    // // time
+    let hours = new Array(24).fill(1).map((v, i) => {
+        return { value: i + 1, text: i + 1 }
+    });
+    let minutes = new Array(60).fill(1).forEach((v, i) => {
+        return { value: i + 1, text: i + 1 }
+    });
+
+    let hourSelector = new IosSelector({
+        el: '#hour',
+        type: 'normal',
+        source: hours,
+        count: 20,
+        onChange: (selected) => {
+            currentDay = selected.value;
+            //console.log(yearSelector.value, monthSelector.value, daySelector.value);
+        }
+    });
+    </script>
 }
 
