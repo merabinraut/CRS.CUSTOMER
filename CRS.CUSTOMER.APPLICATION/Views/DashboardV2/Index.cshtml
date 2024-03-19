@@ -412,11 +412,8 @@
     </h2>
     <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-2 py-4 pt-[70px]">
         @{
-            var groupedByPrice = Model.PlanModel.OrderByDescending(p => p.Price)
-                .GroupBy(p => p.Price);
-            var HighestPrice = Model.PlanModel.OrderByDescending(p => p.Price)
-                .GroupBy(p => p.Price).First();
-
+            var groupedByPrice = Model.PlanModel.OrderBy(p => p.Price).GroupBy(p => p.Price);
+            var lowestPrice = groupedByPrice.First();
             foreach (var group in groupedByPrice)
             {
                 string priceKey = group.Key;
@@ -430,7 +427,7 @@
                         <div class="px-4">
                             <div class='flex'>
                                 <div class="">
-                                    @if (item.PlanId == HighestPrice.First().PlanId)
+                                    @if (item.PlanId == lowestPrice.First().PlanId)
                                     {
                                         <i class="las la-crown linear-gradient-text text-[23px]"></i>
                                         <div class="linear-gradient-text table text-[11px] mt-[-5px] font-bold tracking-[0.5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Popularity</div>

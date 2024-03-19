@@ -114,7 +114,7 @@
 </div>
 <div class="px-4 py-[12px]">
     <div class="flex gap-[14px] pb-2">
-        <div class="flex  text-base  items-center">
+        <div class="flex  text-base  items-center" id="comment_ID">
             @{
                 var unratedScale = (5 - Model.AverageRating);
                 for (int i = 0; i < Model.AverageRating; i++)
@@ -1294,8 +1294,7 @@
                         <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
                     </div>
                 </div>*@
-            <script>
-                // Function to open a specific modal
+            <script>// Function to open a specific modal
                 function openModal(modalId) {
                     var modal = document.getElementById(modalId);
                     if (modal) {
@@ -2000,4 +1999,8 @@ $(document).ready(function () {
             });
         });</script>
 
+    <!--comment div clicked event-->
+    <script>$('#comment_ID').click('click', function () {
+            $('#tab3Button').click();
+        });</script>
 }
