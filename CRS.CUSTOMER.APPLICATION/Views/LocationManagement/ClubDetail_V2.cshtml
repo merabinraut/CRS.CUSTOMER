@@ -1057,7 +1057,7 @@
             {
                 foreach (var item in Model.ClubReviewsModel)
                 {
-                    <div class=" border-b-2 border-[#efefef]">
+                    <div class=" border-b-2 border-[#efefef]" style=" padding: 0 21px;">
                         <div class="px-4 py-[10px]">
                             <div class="flex gap-[8px] items-center ">
                                 <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
@@ -1123,7 +1123,7 @@
                                     }
                                 </div>
                             </div>
-                            <div class="px-4 py-[11px] bg-[#F6F6F6]">
+                            <div class=" bg-[#F6F6F6]" style=" margin-left: 10px; margin-right: 18px; height: 77px; padding: 4px 16px;">
                                 <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
                                     <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
@@ -1197,12 +1197,12 @@
                                 <div>
                                 </div>
                             </div>
-                            <div class="px-[24px] py-[9px] flex gap-[6px] justify-between">
-                                <div class="flex text-[#A09E91] gap-[2px] text-[9px] items-center">
+                            <div class=" py-[9px] flex gap-[6px] justify-between" style="padding-left:10px; padding-right:10px">
+                                <div class="flex text-[#A09E91] gap-[2px] items-center" style="font-size:8px">
                                     <i class="las la-calendar text-[#7E6D5E]"></i>
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_On :@item.VisitedOn
                                 </div>
-                                <div class="flex text-[#A09E91] gap-[2px] text-[9px] items-center">
+                                <div class="flex text-[#A09E91] gap-[2px] items-center" style="font-size:8px" >
                                     <i class="las la-clock text-[#7E6D5E]"></i>
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Commented_On :@item.CommentedOn
                                 </div>
