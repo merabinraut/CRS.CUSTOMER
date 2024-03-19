@@ -9,6 +9,7 @@ using CRS.CUSTOMER.BUSINESS.DashboardV2;
 using CRS.CUSTOMER.BUSINESS.Search;
 using CRS.CUSTOMER.BUSINESS.SearchFilterManagement;
 using CRS.CUSTOMER.SHARED.Search;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -352,10 +353,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.HostId = x.HostId.EncryptParameter();
                 x.ClubLocationId = x.ClubLocationId.EncryptParameter();
                 x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
-                x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo);                
+                x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo);
             });
             ViewBag.LocationId = Request.LocationId;
             Response.RequestModel = Request.MapObject<HostSearchFilterRequestModel>();
+            ViewBag.StartIndex = StartIndex;
+            ViewBag.TotalRecords = Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords);
             return View(Response);
         }
         #endregion
