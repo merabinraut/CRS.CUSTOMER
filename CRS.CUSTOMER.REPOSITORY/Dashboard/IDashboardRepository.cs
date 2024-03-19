@@ -1,5 +1,4 @@
 ﻿using CRS.CUSTOMER.SHARED.Dashboard;
-using CRS.CUSTOMER.SHARED.DashboardV2;
 using CRS.CUSTOMER.SHARED.SearchFilterManagement;
 using System.Collections.Generic;
 
@@ -14,7 +13,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Dashboard
         List<DashboardRecommendedClubCommon> GetRecommendedClub();
         #region Recommendation Management
         List<ClubRecommendationListCommon> GetRecommendedClub(string LocationId, string PageType = "");
-        List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId);
+        List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId, string CustomerId = "");
         #endregion
     }
 }

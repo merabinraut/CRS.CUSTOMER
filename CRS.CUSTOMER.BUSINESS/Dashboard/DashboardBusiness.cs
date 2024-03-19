@@ -37,9 +37,9 @@ namespace CRS.CUSTOMER.BUSINESS.Dashboard
         {
             return _repository.GetRecommendedClub(LocationId);
         }
-        public List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId)
+        public List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId, string CustomerId = "")
         {
-            return _repository.GetRecommendedHost(LocationId);
+            return _repository.GetRecommendedHost(LocationId, CustomerId);
         }
         #endregion
     }
