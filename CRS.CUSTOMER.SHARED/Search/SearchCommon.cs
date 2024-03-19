@@ -35,9 +35,9 @@ namespace CRS.CUSTOMER.SHARED.Search
         public int TotalComment { get; set; }
         public int AverageRating { get; set; }
         public List<string> HostGalleryImage { get; set; } = new List<string>();
-        
+
     }
-    
+
     public class HostPreferenceFilterRequest
     {
         public string LocationId { get; set; }
@@ -48,6 +48,9 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string ConstellationGroup { get; set; }
         public string Occupation { get; set; }
         public string CustomerId { get; set; }
+        public string Type { get; set; } = string.Empty;
+        public int Skip { get; set; } = 0;
+        public int Take { get; set; } = 12;
     }
 
     public class HostPreferenceFilterResponse
@@ -63,6 +66,7 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string HostLogo { get; set; }
         public string ClubLocationId { get; set; }
         public string IsBookmarked { get; set; }
+        public string TotalRecords { get; set; }
     }
     public class ClubDateTimeAndOtherFilterRequest
     {

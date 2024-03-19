@@ -9,6 +9,7 @@ using CRS.CUSTOMER.BUSINESS.DashboardV2;
 using CRS.CUSTOMER.BUSINESS.Search;
 using CRS.CUSTOMER.BUSINESS.SearchFilterManagement;
 using CRS.CUSTOMER.SHARED.Search;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -297,7 +298,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet]
-        public ActionResult HostFilter(HostSearchFilterRequestModel Request, bool NewHost = false)
+        public ActionResult HostFilter(HostSearchFilterRequestModel Request, bool NewHost = false, int StartIndex = 0, int PageSize = 12)
         {
             var Response = new HostSearchResultModel();
             Response.HostRecommendationModel = new List<DashboardV2HostDetailModel>();
@@ -338,7 +339,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     BloodType = !string.IsNullOrEmpty(Request.BloodType) ? string.Join(",", Request.BloodType.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,
                     ConstellationGroup = !string.IsNullOrEmpty(Request.ConstellationGroup) ? string.Join(",", Request.ConstellationGroup.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,
                     Occupation = (string.IsNullOrEmpty(Request.Occupation) || Request.Occupation.Trim() == "0") ? string.Empty : Request.Occupation.DecryptParameter(),
-                    CustomerId = CustomerId
+                    CustomerId = CustomerId,
+                    Type = "1",
+                    Skip = StartIndex,
+                    Take = PageSize,
                 };
                 var dbHostResponse = _searchBusiness.HostPreferenceFilter(dbRequest);
                 Response.FilteredHostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
@@ -352,6 +356,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo);
             });
             ViewBag.LocationId = Request.LocationId;
+            Response.RequestModel = Request.MapObject<HostSearchFilterRequestModel>();
+            ViewBag.StartIndex = StartIndex;
+            ViewBag.TotalRecords = Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords);
             return View(Response);
         }
         #endregion

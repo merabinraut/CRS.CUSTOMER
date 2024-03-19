@@ -74,8 +74,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 var ResponseModel = dbResponse.Data.MapObject<ReviewReservationResponseModel>();
                 ResponseModel.ClubId = ResponseModel.ClubId.EncryptParameter();
-                ResponseModel.CustomerId = ResponseModel.CustomerId.EncryptParameter();
-                ResponseModel.ReservationId = ResponseModel.ReservationId.EncryptParameter();
+                ResponseModel.CustomerId = CustomerId;
+                ResponseModel.ReservationId = ReservationId;
                 if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") ResponseModel.ClubLogo = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString() + ResponseModel.ClubLogo;
                 return View(ResponseModel);
             }

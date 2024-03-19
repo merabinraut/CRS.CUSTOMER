@@ -315,7 +315,7 @@
                         required>*@
                 </div>
                 <span class="validationMessage">
-                    @Html.ValidationMessageFor(m => m.NickName)
+                    @Html.ValidationMessageFor(m => m.NickName,"", new { @class = "error-validation-msg" })
                 </span>
                 <div class="inputWrapper mt-2">
                     @Html.TextBoxFor(model => model.MobileNumber, new { @class = "w-full ring-0 focus:ring-0 focus:ring-transparent",@type="number", @placeholder = "携帯電話番号", @minlength = "11", @maxlength = "11",   oninput = "limitInputLength(this, 11)", autocomplete = "off" })
@@ -323,7 +323,7 @@
                         class="w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="携帯電話番号" required>*@
                 </div>
                 <span class="validationMessage">
-                    @Html.ValidationMessageFor(m => m.MobileNumber)
+                    @Html.ValidationMessageFor(m => m.MobileNumber, "", new { @class = "error-validation-msg" })
                 </span>
                 <!-- for check box -->
                 <div class="checkbox mt-4">

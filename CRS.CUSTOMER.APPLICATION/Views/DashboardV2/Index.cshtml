@@ -342,7 +342,7 @@
 <div style="border: 1px solid #EDEDED;background: #FFF;">
 
     <!-- clippath -->
-    <div class="mx-[16px] mt-[8px]">
+    <div class=" mt-[8px]">
         <svg id="clippath" xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
             <path d="M0 4C0 1.79086 1.79086 0 4 0H215L202.675 14.4652L215 27H4C1.79086 27 0 25.2091 0 23V4Z"
                   fill="url(#paint0_linear_2051_57311)" />
@@ -410,7 +410,8 @@
     <h2 class="text-[14px] pl-[16px] flex-none  font-[700]" style="color:#000">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.HoslogLimitedPlan
     </h2>
-    <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-2 py-4 pt-[70px]">
+    <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-2 py-4 ">
+    @* <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-2 py-4 pt-[70px]">*@
         @{
             var groupedByPrice = Model.PlanModel.OrderBy(p => p.Price).GroupBy(p => p.Price);
             var lowestPrice = groupedByPrice.First();
@@ -698,11 +699,11 @@
                     @*test end*@
                     <h3 class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
                         <div>
-                            <img src="~/Content/assets/images/customer/ACQUAFUKUOKA.jpg"
+                            <img src="~/Content/assets/images/sinceYouHonten.jpg"
                                  class="h-[28px] w-[28px]  rounded-full object-cover">
                         </div>
                         <div>
-                            <div class="text-[10px] font-bold text-charcolBlack ">ACQUA FUKUOKA</div>
+                            <div class="text-[10px] font-bold text-charcolBlack ">SINCE YOU HONTEN</div>
                             <div class="text-[8px] text-[#A09E91] flex gap-[2px] items-center">
                                 <svg class="svg-inline--fa fa-location-dot text-primary" aria-hidden="true"
                                      focusable="false" data-prefix="fas" data-icon="location-dot" role="img"
@@ -848,11 +849,11 @@
                     <h3 class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
 
                         <div>
-                            <img src="~/Content/assets/images/customer/ACQUALABEL.jpg"
-                                 class="h-[28px] w-[28px]   rounded-full">
+                            <img src="~/Content/assets/images/sinceYouAlpha.jpg"
+                                 class="h-[28px] w-[28px]   rounded-full image-cover">
                         </div>
                         <div>
-                            <div class="text-[10px] font-bold text-charcolBlack ">ACQUA LABEL</div>
+                            <div class="text-[10px] font-bold text-charcolBlack ">SINCE YOU ALPHA</div>
                             <div class="text-[8px] text-[#A09E91] flex gap-[2px] items-center">
                                 <svg class="svg-inline--fa fa-location-dot text-primary" aria-hidden="true"
                                      focusable="false" data-prefix="fas" data-icon="location-dot" role="img"
@@ -2102,7 +2103,7 @@
             {value:"21",text:"21"},
             {value:"22",text:"22"},
             {value:"23",text:"23"},
-            {value:"24",text:"24"}
+            {value:"00",text:"00"}
         ],
         count: 24,
         onChange: (selected) => {

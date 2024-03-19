@@ -201,24 +201,48 @@ else
             }
     </div>
 }
+<form action="/Search/HostFilter" method="get" id="pagination-form-id" hidden>
+    <input name="LocationId" value="@Model.RequestModel.LocationId" hidden />
+    <input name="SearchFilter" value="@Model.RequestModel.SearchFilter" hidden />
+    <input name="Height" value="@Model.RequestModel.Height" hidden />
+    <input name="Age" value="@Model.RequestModel.Age" hidden />
+    <input name="BloodType" value="@Model.RequestModel.BloodType" hidden />
+    <input name="ConstellationGroup" value="@Model.RequestModel.ConstellationGroup" hidden />
+    <input name="Occupation" value="@Model.RequestModel.Occupation" hidden />
+    <input name="StartIndex" id="startindex-id" value="0" hidden />
+</form>
 <!-- for pagination -->
-<!--<div id="pagination-container" class="flex justify-between pagination-container-wrapper my-[7px] ">
-    <button id="prev-btn" class="next-prev-btn" disabled>
+<div id="pagination-container" class="flex justify-between pagination-container-wrapper my-[7px] ">
+    <button id="prev-btn" class="next-prev-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
             <path d="M10.707 2.13599C10.8945 2.32351 10.9998 2.57782 10.9998 2.84299C10.9998 3.10815 10.8945 3.36246 10.707 3.54999L5.75705 8.49999L10.707 13.45C10.8892 13.6386 10.99 13.8912 10.9877 14.1534C10.9854 14.4156 10.8803 14.6664 10.6949 14.8518C10.5095 15.0372 10.2586 15.1424 9.99645 15.1447C9.73425 15.1469 9.48165 15.0461 9.29305 14.864L3.63605 9.20699C3.44858 9.01946 3.34326 8.76515 3.34326 8.49999C3.34326 8.23482 3.44858 7.98052 3.63605 7.79299L9.29305 2.13599C9.48058 1.94852 9.73488 1.8432 10 1.8432C10.2652 1.8432 10.5195 1.94852 10.707 2.13599Z" fill="#959595" />
         </svg>
     </button>
     <div id="page-numbers" class=" page-number-list flex justify-between w-full">
-        <div class="active">1</div>
-        <div class="">2</div>
-        <div class="">3</div>
+        @{
+            int startIndex = ViewBag.StartIndex;
+            double currentPage = Math.Floor((double)ViewBag.StartIndex / 12) + 1; // Calculate current page number
+            double TotalPages = ViewBag.TotalRecords != null ? Math.Ceiling((double)ViewBag.TotalRecords / 12) : 0; // Calculate total pages
+            for (int i = 1; i <= TotalPages; i++)
+            {
+                if (i == currentPage)
+                {
+                    <div class="active">@i</div>
+                }
+                else
+                {
+                    <div onclick="PaginationFunction(@i);">@i</div>
+                }
+
+            }
+        }
     </div>
     <button id="next-btn" class="next-prev-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
             <path d="M5.29295 2.13605C5.10548 2.32358 5.00017 2.57788 5.00017 2.84305C5.00017 3.10821 5.10548 3.36252 5.29295 3.55005L10.243 8.50005L5.29295 13.45C5.11079 13.6387 5.01 13.8913 5.01228 14.1535C5.01456 14.4156 5.11973 14.6665 5.30513 14.8519C5.49054 15.0373 5.74135 15.1424 6.00355 15.1447C6.26575 15.147 6.51835 15.0462 6.70695 14.864L12.364 9.20705C12.5514 9.01952 12.6567 8.76521 12.6567 8.50005C12.6567 8.23488 12.5514 7.98058 12.364 7.79305L6.70695 2.13605C6.51942 1.94858 6.26512 1.84326 5.99995 1.84326C5.73479 1.84326 5.48048 1.94858 5.29295 2.13605Z" fill="#959595" />
         </svg>
     </button>
-</div>-->
+</div>
 <!-- pagination end -->
 <div class=" ">
     <div>
@@ -245,6 +269,24 @@ else
 @section scripts
 {
     <script>
+        let currentPage = Math.floor((@ViewBag.StartIndex) / 12) + 1; // Calculate current page number
+        const totalPages = @(ViewBag.TotalRecords != null ? Math.Ceiling(Convert.ToDouble(ViewBag.TotalRecords) / 12) : 0);
+
+        if (currentPage > 1) {
+            document.getElementById("prev-btn").removeAttribute("disabled");
+        }
+        else {
+            document.getElementById("prev-btn").setAttribute("disabled", "disabled");
+        }
+
+        if (currentPage >= totalPages ) {
+            document.getElementById("next-btn").setAttribute("disabled", "disabled");
+        }
+        else {
+            document.getElementById("next-btn").removeAttribute("disabled");
+        }
+
+
         $(document).ready(function () {
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 20) {
@@ -264,6 +306,28 @@ else
             var locationId = '@ViewBag.LocationId';
              var searchUrl = `/Search/Index?locationId=${locationId}`;
              window.location.href = searchUrl;
-         }
+        }
+
+        $('#prev-btn').on('click', function () {
+            if (currentPage > 1) {
+                currentPage--;
+                PaginationFunction(currentPage);
+            }
+        });
+
+        $('#next-btn').on('click', function () {
+            if (currentPage < totalPages) {
+                currentPage = Math.min(currentPage + 1, totalPages);
+                PaginationFunction(currentPage);
+            }
+        });
+
+        function PaginationFunction(currentPage) {
+            let page_size = 12;
+            const startIndex = (currentPage - 1) * page_size;
+            $('#startindex-id').val(startIndex);
+            var form = document.getElementById("pagination-form-id");
+            form.submit();
+        }
     </script>
 }

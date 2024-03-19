@@ -385,13 +385,13 @@
                     </span>*@
                     <hr>
                     <div class="relative">
-                        @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "16" })
+                        @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "32" })
                         <i class="las la-eye password-eye absolute top-3 right-2 text-[2] " style="font-size: 24px; color: #A1A1AA" onclick="togglePassword()"></i>
                     </div>
                 </div>
 
                 <div class="validationMessage  text-[10px] font-normal leading-[13.62px] mt-2">
-                    @Html.ValidationMessageFor(m => m.LoginId)
+                    @Html.ValidationMessageFor(m => m.LoginId,"", new { @class = "error-validation-msg" })
                     @*      @Html.ValidationMessageFor(m => m.Password)*@
                 </div>
 

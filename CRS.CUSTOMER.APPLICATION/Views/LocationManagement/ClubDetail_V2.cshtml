@@ -387,11 +387,12 @@
                                         }
                                         @if (!string.IsNullOrEmpty(item.HostNameJapanese))
                                         {
-                                            <div class="text-xs  text-charcoalBlack">@item.HostNameJapanese</div>
+                                            <h3 class="text-xs  text-charcoalBlack" style="font-weight:bold;font-size:13px; text-overflow:ellipsis">@item.HostNameJapanese</h3>
+                                           
                                         }
                                         else
                                         {
-                                            <div class="text-xs  text-charcoalBlack">@item.HostName</div>
+                                            <h3 class="text-xs  text-charcoalBlack" style="font-weight:bold;font-size:13px; text-overflow:ellipsis">@item.HostName</h3>
                                         }
 
                                     </div>
@@ -525,7 +526,7 @@
                             </td>
                             @if (Model.GetClubBasicInformation.ClubAddress != null)
                             {
-                                <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
+                                <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="white-space:normal">
                                     @Model.GetClubBasicInformation.ClubAddress
                                 </td>
                             }
@@ -1057,7 +1058,7 @@
             {
                 foreach (var item in Model.ClubReviewsModel)
                 {
-                    <div class=" border-b-2 border-[#efefef]">
+                    <div class=" border-b-2 border-[#efefef]" style=" padding: 0 21px;">
                         <div class="px-4 py-[10px]">
                             <div class="flex gap-[8px] items-center ">
                                 <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
@@ -1123,7 +1124,7 @@
                                     }
                                 </div>
                             </div>
-                            <div class="px-4 py-[11px] bg-[#F6F6F6]">
+                            <div class=" bg-[#F6F6F6]" style=" margin-left: 10px; margin-right: 18px; height: 77px; padding: 4px 16px;">
                                 <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
                                     <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
@@ -1197,12 +1198,12 @@
                                 <div>
                                 </div>
                             </div>
-                            <div class="px-[24px] py-[9px] flex gap-[6px] justify-between">
-                                <div class="flex text-[#A09E91] gap-[2px] text-[9px] items-center">
+                            <div class=" py-[9px] flex gap-[6px] justify-between" style="padding-left:10px; padding-right:10px">
+                                <div class="flex text-[#A09E91] gap-[2px] items-center" style="font-size:8px">
                                     <i class="las la-calendar text-[#7E6D5E]"></i>
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_On :@item.VisitedOn
                                 </div>
-                                <div class="flex text-[#A09E91] gap-[2px] text-[9px] items-center">
+                                <div class="flex text-[#A09E91] gap-[2px] items-center" style="font-size:8px" >
                                     <i class="las la-clock text-[#7E6D5E]"></i>
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Commented_On :@item.CommentedOn
                                 </div>
