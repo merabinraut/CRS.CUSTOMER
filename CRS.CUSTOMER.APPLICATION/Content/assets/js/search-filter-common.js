@@ -233,7 +233,10 @@ function PreferenceFilterCommon() {
     //var searchbybusinesshoursinputField = document.querySelector('input[name="searchbybusinesshours"]');
 
     // Add event listener to each searchbybusinesshours div
-    searchbybusinesshours.forEach(function (div) {
+
+    //modified
+
+/*    searchbybusinesshours.forEach(function (div) {
         div.addEventListener('click', function () {
             // Remove the 'active' class from all divs
             searchbybusinesshours.forEach(function (d) {
@@ -252,7 +255,43 @@ function PreferenceFilterCommon() {
             var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue');
             $('#time-type-id').val(searchbybusinesshoursSelectValue.getAttribute('data-info'));
         });
+    });*/
+
+    searchbybusinesshours.forEach(function (div) {
+        div.addEventListener('click', function () {
+            // Check if the clicked div already has the 'active' class
+            const isActive = this.classList.contains('active');
+
+            // Remove the 'active' class from all divs
+            searchbybusinesshours.forEach(function (d) {
+                d.classList.remove('active');
+            });
+
+            // Toggle the 'active' class based on its previous state
+            if (!isActive) {
+                this.classList.add('active');
+            }
+
+            // Conditionally display the 'time-div-id' based on the presence of 'active' and 'contains-time-class'
+            var div = document.getElementById('time-div-id');
+            if (this.classList.contains('active') && this.classList.contains('contains-time-class')) {
+                div.style.display = 'block';
+            } else {
+                div.style.display = 'none';
+            }
+
+            // Reset the value of '#time-type-id' if no div has 'active' class
+            var activeDivExists = Array.from(searchbybusinesshours).some(d => d.classList.contains('active'));
+            if (activeDivExists) {
+                // Get the text content of the specific element within the active div
+                var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue');
+                $('#time-type-id').val(searchbybusinesshoursSelectValue.getAttribute('data-info'));
+            } else {
+                $('#time-type-id').val(''); // Reset or set to a default value
+            }
+        });
     });
+
     //#endregion
 
     //#region 6
