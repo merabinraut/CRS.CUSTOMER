@@ -209,6 +209,7 @@ else
     <input name="BloodType" value="@Model.RequestModel.BloodType" hidden />
     <input name="ConstellationGroup" value="@Model.RequestModel.ConstellationGroup" hidden />
     <input name="Occupation" value="@Model.RequestModel.Occupation" hidden />
+    <input name="StartIndex" id="startindex-id" value="0" hidden />
 </form>
 <!-- for pagination -->
 <div id="pagination-container" class="flex justify-between pagination-container-wrapper my-[7px] ">
@@ -218,9 +219,23 @@ else
         </svg>
     </button>
     <div id="page-numbers" class=" page-number-list flex justify-between w-full">
-        <div class="active">1</div>
-        <div class="">2</div>
-        <div class="">3</div>
+        @{
+            int startIndex = ViewBag.StartIndex;
+            int currentPage = (int)Math.Ceiling((double)(startIndex) / 12);
+            int TotalPages = ViewBag.TotalRecords ?? 0;
+            for (int i = 1; i <= TotalPages / 12; i++)
+            {
+                if (i == currentPage)
+                {
+                    <div class="active">@i</div>
+                }
+                else
+                {
+                    <div onclick="PaginationFunction(@i);">@i</div>
+                }
+
+            }
+        }
     </div>
     <button id="next-btn" class="next-prev-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
@@ -254,6 +269,8 @@ else
 @section scripts
 {
     <script>
+        let currentPage = Math.ceil((@ViewBag.StartIndex + 1) / 12);
+        const totalPages = @ViewBag.TotalRecords??0;
         $(document).ready(function () {
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 20) {
@@ -275,8 +292,26 @@ else
              window.location.href = searchUrl;
         }
 
-        function PaginationFunction(currentPage) {
+        $('#prev-btn').on('click', function () {
+            if (currentPage > 1) {
+                currentPage--;
+                PaginationFunction(currentPage);
+            }
+        });
 
+        $('#next-btn').on('click', function () {
+            if (currentPage < totalPages) {
+                currentPage = Math.min(currentPage + 1, totalPages);
+                PaginationFunction(currentPage);
+            }
+        });
+
+        function PaginationFunction(currentPage) {
+            let page_size = 12;
+            const startIndex = currentPage * page_size;
+            $('#startindex-id').val(startIndex);
+            var form = document.getElementById("pagination-form-id");
+            form.submit();
         }
     </script>
 }
