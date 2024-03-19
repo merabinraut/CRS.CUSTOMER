@@ -152,9 +152,10 @@
                 const value = decryptAndGetValue(key);
                 switch (key) {
                     case "VisitDate":
-                        const VisitDateValue = value;
-                        const VisitTimeValue = decryptAndGetValue("VisitTime");
-                        const FormattedVisitDateTime = formatDateAndTime(VisitDateValue, VisitTimeValue);
+                        //const VisitDateValue = value;
+                        //const VisitTimeValue = decryptAndGetValue("VisitTime");
+                        //const FormattedVisitDateTime = formatDateAndTime(VisitDateValue, VisitTimeValue);
+                        const FormattedVisitDateTime = FormatCurrentDateTime();
                         $('#visitdatetime-id').html(FormattedVisitDateTime);
                         break;
                     case "PlanName":
@@ -176,52 +177,71 @@
 
         });
 
-        function formatDateAndTime(inputDateString, inputTimeString) {
-            // Split the date string into year, month, and day components
-            let [year, month, day] = inputDateString.split(/[-\/]/).map(Number);
+        // Function to format the current date and time
+        function FormatCurrentDateTime() {
+            const now = new Date();
 
-            // Split the time string into hour and minute components
-            const [hour, minute] = inputTimeString.split(':').map(Number);
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1; // getMonth() is zero-indexed
+            const day = now.getDate();
+            const hour = now.getHours();
+            const minute = now.getMinutes();
 
-            // Log parsed values for debugging
-            //console.log('Parsed values:', year, month, day, hour, minute);
+            // Padding single digits with a leading zero
+            const monthPadded = month.toString().padStart(2, '0');
+            const dayPadded = day.toString().padStart(2, '0');
+            const hourPadded = hour.toString().padStart(2, '0');
+            const minutePadded = minute.toString().padStart(2, '0');
 
-            // Check for valid values
-            if (isNaN(year) || isNaN(month) || isNaN(day) || isNaN(hour) || isNaN(minute)) {
-                console.error('Invalid input values');
-                return 'Invalid input values';
-            }
-
-            // Adjust month if it's in the wrong format (1-indexed for "-" format, 0-indexed for "/" format)
-            if (month > 12) {
-                // Assuming it's in the "yyyy-MM-dd" format
-                [day, month] = [month, day];
-            }
-
-            // Create a Date object with the provided components
-            const date = new Date(year, month - 1, day, hour, minute);
-
-            // Check if the date object is valid
-            if (isNaN(date.getTime())) {
-                console.error('Invalid date');
-                return 'Invalid date';
-            }
-
-            // Define options for formatting the date
-            const options = {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                weekday: 'long',
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: false,
-            };
-
-            // Format the date using Intl.DateTimeFormat
-            const formatter = new Intl.DateTimeFormat('ja-JP', options);
-            return formatter.format(date);
+            return `${year}年${monthPadded}月${dayPadded}日 ${hourPadded}:${minutePadded}時`;
         }
+
+        //function formatDateAndTime(inputDateString, inputTimeString) {
+        //    // Split the date string into year, month, and day components
+        //    let [year, month, day] = inputDateString.split(/[-\/]/).map(Number);
+
+        //    // Split the time string into hour and minute components
+        //    const [hour, minute] = inputTimeString.split(':').map(Number);
+
+        //    // Log parsed values for debugging
+        //    //console.log('Parsed values:', year, month, day, hour, minute);
+
+        //    // Check for valid values
+        //    if (isNaN(year) || isNaN(month) || isNaN(day) || isNaN(hour) || isNaN(minute)) {
+        //        console.error('Invalid input values');
+        //        return 'Invalid input values';
+        //    }
+
+        //    // Adjust month if it's in the wrong format (1-indexed for "-" format, 0-indexed for "/" format)
+        //    if (month > 12) {
+        //        // Assuming it's in the "yyyy-MM-dd" format
+        //        [day, month] = [month, day];
+        //    }
+
+        //    // Create a Date object with the provided components
+        //    const date = new Date(year, month - 1, day, hour, minute);
+
+        //    // Check if the date object is valid
+        //    if (isNaN(date.getTime())) {
+        //        console.error('Invalid date');
+        //        return 'Invalid date';
+        //    }
+
+        //    // Define options for formatting the date
+        //    const options = {
+        //        year: 'numeric',
+        //        month: 'long',
+        //        day: 'numeric',
+        //        weekday: 'long',
+        //        hour: 'numeric',
+        //        minute: 'numeric',
+        //        hour12: false,
+        //    };
+
+        //    // Format the date using Intl.DateTimeFormat
+        //    const formatter = new Intl.DateTimeFormat('ja-JP', options);
+        //    return formatter.format(date);
+        //}
 
 
         function SubmitFunction() {
