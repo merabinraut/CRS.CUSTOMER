@@ -57,14 +57,25 @@
 <div class="flex flex-row  relative">
     <div class="flex-col overflow-y-auto   ">
         <div class="flex  overflow-x-auto mx-[16px] no-scrollbar flex-row gap-[8px] ">
-            @foreach (var item in Model.HostGalleryImageList)
+            @if (Model.HostGalleryImageList != null && Model.HostGalleryImageList.Count > 0)
             {
-                <a href="#">
-                    <div class="flex h-[413px] w-[294px] rounded ">
-                        <img class="object-fit rounded object-cover" src="@item"
-                             alt="modelimage" style="width:100%">
-                    </div>
-                </a>
+                foreach (var item in Model.HostGalleryImageList)
+                {
+                    <a href="#">
+                        <div class="flex h-[413px] w-[294px] rounded ">
+                            <img class="object-fit rounded object-cover" src="@item"
+                                 alt="modelimage" style="width:100%">
+                        </div>
+                    </a>
+                }
+
+            }
+            else
+            {
+                <div class="flex h-[413px] w-[294px] rounded ">
+                    <img class="object-fit rounded object-cover" src="~/Content/assets/images/customer/demo-image.jpeg"
+                         alt="modelimage" style="width:100%">
+                </div>
             }
         </div>
     </div>
