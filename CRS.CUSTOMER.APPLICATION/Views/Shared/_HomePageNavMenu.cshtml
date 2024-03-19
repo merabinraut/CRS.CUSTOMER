@@ -1,7 +1,11 @@
 ﻿<div class="py-[10px] px-[16px] flex justify-between border-b border-b-[#ECECEC] sticky top-0 bg-white z-[10]" style="z-index:12">
-    <a class="flex gap-[6px] items-center" href="@Url.Action("Index","DashboardV2")">
-        <img src="~/Content/assets/images/logo.svg" class="h-[24px]" alt='logo' />
-    </a>
+    <h1>
+
+        <a class="flex gap-[6px] items-center" href="@Url.Action("Index","DashboardV2")">
+            <img src="~/Content/assets/images/logo.svg" class="h-[24px]" alt='logo' />
+        </a>
+    </h1>
+
     <div class="flex gap-4">
         <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
             <i class="las la-bell relative" id="notification-bell-id">
