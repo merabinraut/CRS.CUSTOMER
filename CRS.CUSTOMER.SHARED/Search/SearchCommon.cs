@@ -50,7 +50,7 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string CustomerId { get; set; }
         public string Type { get; set; } = string.Empty;
         public int Skip { get; set; } = 0;
-        public int Take { get; set; } = 10;
+        public int Take { get; set; } = 12;
     }
 
     public class HostPreferenceFilterResponse
@@ -66,6 +66,7 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string HostLogo { get; set; }
         public string ClubLocationId { get; set; }
         public string IsBookmarked { get; set; }
+        public string TotalRecords { get; set; }
     }
     public class ClubDateTimeAndOtherFilterRequest
     {

@@ -39,6 +39,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.DashboardV2
         public string HostLogo { get; set; }
         public string ClubLocationId { get; set; }
         public string IsBookmarked { get; set; }
+        public string TotalRecords { get; set; }
     }
 
     public class ClubAvailabilityDetailModel

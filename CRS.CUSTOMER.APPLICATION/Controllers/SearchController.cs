@@ -297,7 +297,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet]
-        public ActionResult HostFilter(HostSearchFilterRequestModel Request, bool NewHost = false, int StartIndex = 0, int PageSize = 10)
+        public ActionResult HostFilter(HostSearchFilterRequestModel Request, bool NewHost = false, int StartIndex = 0, int PageSize = 12)
         {
             var Response = new HostSearchResultModel();
             Response.HostRecommendationModel = new List<DashboardV2HostDetailModel>();
@@ -352,7 +352,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.HostId = x.HostId.EncryptParameter();
                 x.ClubLocationId = x.ClubLocationId.EncryptParameter();
                 x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
-                x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo);
+                x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo);                
             });
             ViewBag.LocationId = Request.LocationId;
             Response.RequestModel = Request.MapObject<HostSearchFilterRequestModel>();
