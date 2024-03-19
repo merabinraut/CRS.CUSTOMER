@@ -391,7 +391,7 @@
                 </div>
 
                 <div class="validationMessage  text-[10px] font-normal leading-[13.62px] mt-2">
-                    @Html.ValidationMessageFor(m => m.LoginId)
+                    @Html.ValidationMessageFor(m => m.LoginId,"", new { @class = "error-validation-msg" })
                     @*      @Html.ValidationMessageFor(m => m.Password)*@
                 </div>
 
