@@ -252,6 +252,17 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     });
                     return View(Model);
                 }
+
+                if (Model.Password == null || Model.ConfirmPassword == null)
+                {
+                    AddNotificationMessage(new NotificationModel()
+                    {
+                        NotificationType = NotificationMessage.INFORMATION,
+                        Message = "Password is required",
+                        Title = NotificationMessage.INFORMATION.ToString()
+                    });
+                    return View(Model);
+                }
                 SetRegistrationPasswordCommon Common = Model.MapObject<SetRegistrationPasswordCommon>();
                 Common.AgentId = Common.AgentId.DefaultDecryptParameter();
                 Common.UserId = Common.UserId.DefaultDecryptParameter();
@@ -261,12 +272,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var dbResponse = _buss.SetRegistrationPassword(Common);
                 if (dbResponse.Code == 0)
                 {
-                    //AddNotificationMessage(new NotificationModel()
-                    //{
-                    //    NotificationType = NotificationMessage.SUCCESS,
-                    //    Message = dbResponse.Message ?? "Success",
-                    //    Title = NotificationMessage.SUCCESS.ToString(),
-                    //});
+                    AddNotificationMessage(new NotificationModel()
+                    {
+                        NotificationType = NotificationMessage.SUCCESS,
+                        Message = dbResponse.Message ?? "Success",
+                        Title = NotificationMessage.SUCCESS.ToString(),
+                    });
                     return View("NewRegistration_SuccessView");
                 }
                 AddNotificationMessage(new NotificationModel()
@@ -277,9 +288,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 });
                 return View(Model);
             }
-            var errorMessages = ModelState.Where(x => x.Value.Errors.Count > 0)
+            else
+            {
+                var errorMessages = ModelState.Where(x => x.Value.Errors.Count > 0)
                                    .SelectMany(x => x.Value.Errors.Select(e => $"{x.Key}: {e.ErrorMessage}"))
                                    .ToList();
+                return View(Model);
+            }
+
             //var notificationModels = errorMessages.Select(errorMessage => new NotificationModel
             //{
             //    NotificationType = NotificationMessage.ERROR,
@@ -287,13 +303,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             //    Title = NotificationMessage.ERROR.ToString(),
             //}).ToArray();
             //AddNotificationMessage(notificationModels);
-            AddNotificationMessage(new NotificationModel()
-            {
-                NotificationType = NotificationMessage.INFORMATION,
-                Message = "Please fill all required fields",
-                Title = NotificationMessage.INFORMATION.ToString(),
-            });
-            return View(Model);
+            //AddNotificationMessage(new NotificationModel()
+            //{
+            //    NotificationType = NotificationMessage.INFORMATION,
+            //    Message = "Please fill all required fields",
+            //    Title = NotificationMessage.INFORMATION.ToString(),
+            //});
+
         }
         #endregion
 
@@ -302,10 +318,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             string phaseValue = ConfigurationManager.AppSettings["phase"];
-            
+
             if (string.IsNullOrEmpty(Username))
             {
-                
+
                 ViewBag.CallJavaScriptFunction = TempData["CallJavaScriptFunction"] ?? "False";
                 var HasLandingSession = Request.Cookies["HasLandingSession"]?.Value;
                 if (!string.IsNullOrEmpty(HasLandingSession) && HasLandingSession.Trim() == "True")

@@ -72,11 +72,11 @@
             <div class="mx-4 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
                 <div class="flex gap-[24px] w-full " style="border-bottom: 4px solid #F4F4F4;">
                     <div class="flex tab-container-plane booking-tab bg-white gap-6 w-full text-sm no-scrollbar">
-                        <button id="tab1Button" class="tab-button-plane w-max flex-none tab-link ">ホストクラブ</button>
+                        <button id="tab1Button" class="tab-button-plane w-max flex-none tab-link active">ホストクラブ</button>
                         <button id="tab2Button" class="tab-button-plane w-max flex-none tab-link pt-0 ">ホスト</button>
                         <button id="tab3Button" class="tab-button-plane w-max flex-none tab-link pt-0 ">新規店舗</button>
                         <button id="tab4Button"
-                                class="tab-button-plane w-max flex-none tab-link pt-0 active">
+                                class="tab-button-plane w-max flex-none tab-link pt-0">
                             現在地に近い店舗
                         </button>
                     </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="my-4">
                 <div class="bg-white pb-4  px-[16px] ">
-                    <div id="tab1" class="tab-content-plane  hidden ">
+                    <div id="tab1" class="tab-content-plane">
                         <form action="/Search/ClubFilter" method="get" id="club-filter-form-id" hidden>
                             <input type="search" id="club-search" name="SearchFilter" hidden>
                             <input type="text" class="location-class" id="LocationId_1" name="LocationId" value="" hidden />
@@ -160,7 +160,7 @@
                                 </div>
                                 <div class="border-y-[1px] border-[#EFEFEF] py-[10px]">
                                     <div class="text-sm text-[#333] font-bold mb-2">
-                                        料金
+                                        営業時間から探す
                                     </div>
                                     <div class="flex flex-row mt-[8px] gap-6 mb-4">
                                         <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm">
@@ -630,7 +630,7 @@
                         </div>
                         <!--#endregion new-store.php-->
                     </div>
-                    <div id="tab4" class="tab-content-plane ">
+                    <div id="tab4" class="tab-content-plane hidden">
                         <!--#region near-location.php-->
                         <div class="pb-12">
                             <div class="bg-white ">
@@ -763,10 +763,8 @@
 @section scripts
 {
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap">
-    </script>
-    <script>
-        // Get all the div elements
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap"></script>
+    <script>// Get all the div elements
 
         var divs = document.querySelectorAll('.select-location-store');
         var seleclLocationCLub = document.querySelectorAll('.select-location-club');
@@ -795,11 +793,9 @@
                 this.classList.add('active');
 
             });
-        });
-    </script>
+        });</script>
 
-    <script type="text/javascript">
-        // see more
+    <script type="text/javascript">// see more
         function seemore() {
             var x = document.getElementById("seemore");
 
@@ -844,11 +840,9 @@
                     });
                 }
             });
-        });
-    </script>
+        });</script>
     <!--#region host-club.php js-->
-    <script>
-        // Get all the div elements
+    <script>// Get all the div elements
 
         var divs = document.querySelectorAll('.select-location-store');
         var inputField = document.querySelector('input[name="selectLocationStore"]'); // Select by name attribute
@@ -864,11 +858,9 @@
                 // Add the 'bg-red' class to the clicked div
                 this.classList.add('active');
             });
-        });
-    </script>
+        });</script>
 
-    <script>
-        // Define searchbybusinesshours
+    <script>// Define searchbybusinesshours
         var multiSelectValues = [];
 
         var multiSelect = document.querySelectorAll('.multi-select ');
@@ -906,10 +898,8 @@
                 }
                 $('#clubavailability-id').val(multiSelectValues);
             });
-        });
-    </script>
-    <script>
-        // Define searchbybusinesshours
+        });</script>
+    <script>// Define searchbybusinesshours
         var searchbybusinesshours = document.querySelectorAll('.search-by-business-hours');
 
         // Add event listener to each searchbybusinesshours div
@@ -932,10 +922,8 @@
                 var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue');
                 $('#time-type-id').val(searchbybusinesshoursSelectValue.getAttribute('data-info'));
             });
-        });
-    </script>
-    <script type="text/javascript">
-        // see more
+        });</script>
+    <script type="text/javascript">// see more
         function seemore() {
             var x = document.getElementById("seemore");
 
@@ -980,12 +968,10 @@
                     });
                 }
             });
-        });
-    </script>
+        });</script>
     <!--#endregion host-club.php js-->
     <!--#region club.php JS-->
-    <script>
-        // Get all the div elements
+    <script>// Get all the div elements
 
         var selectlocationstorehostsection = document.querySelectorAll('.select-location-store-host-section');
         // Add click event listeners to each div
@@ -999,22 +985,18 @@
                 // Add the 'bg-red' class to the clicked div
                 this.classList.add('active');
             });
-        });
-    </script>
+        });</script>
     <!--#endregion club.php JS-->
     <!--#region new-store.php JS-->
-    <script>
-        var hosts = document.querySelectorAll('.hosts-that-match-you');
+    <script>var hosts = document.querySelectorAll('.hosts-that-match-you');
         hosts.forEach(function (host) {
             host.addEventListener('click', function () {
                 this.classList.toggle('active');
             });
-        });
-    </script>
+        });</script>
     <!--#endregion new-store.php JS-->
     <!--#region near-location.php JS-->
-    <script>
-        const tabs = document.querySelector(".wrapper");
+    <script>const tabs = document.querySelector(".wrapper");
         const tabButton = document.querySelectorAll(".tab-button");
         const contents = document.querySelectorAll(".content");
 
@@ -1032,10 +1014,8 @@
                 const element = document.getElementById(id);
                 element.classList.add("active");
             }
-        };
-    </script>
-    <script>
-        // Get all the div elements
+        };</script>
+    <script>// Get all the div elements
 
         var selectnearlocation = document.querySelectorAll('.select-near-location');
 
@@ -1051,8 +1031,7 @@
                 this.classList.add('active');
 
             });
-        });
-    </script>
+        });</script>
     <!--#endregion near-location.php JS-->
     <!--#region map.php JS-->
     <script>
@@ -1280,8 +1259,7 @@
     </script>
     <!--#endregion map.php JS-->
     <!--#region time-index.php-->
-    <script>
-        var showTimeLists = document.querySelectorAll('.showTimeList');
+    <script>var showTimeLists = document.querySelectorAll('.showTimeList');
 
         showTimeLists.forEach(function (showTimeList) {
             showTimeList.addEventListener('click', function (event) {
@@ -1305,10 +1283,8 @@
                     timeList.style.display = "none";
                 }
             });
-        });
-    </script>
-    <script>
-        document.querySelectorAll('.timeList').forEach(item => {
+        });</script>
+    <script>document.querySelectorAll('.timeList').forEach(item => {
             item.addEventListener('click', event => {
                 if (event.currentTarget.classList.contains('disabled')) {
                     return;
@@ -1330,8 +1306,7 @@
                     }
                 }
             });
-        });
-    </script>
+        });</script>
     <!--#endregion time-index.php-->
     <!--#region Button Submit Function-->
     <script>
