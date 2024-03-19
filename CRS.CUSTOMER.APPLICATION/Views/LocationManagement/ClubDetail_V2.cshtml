@@ -387,11 +387,12 @@
                                         }
                                         @if (!string.IsNullOrEmpty(item.HostNameJapanese))
                                         {
-                                            <div class="text-xs  text-charcoalBlack">@item.HostNameJapanese</div>
+                                            <h3 class="text-xs  text-charcoalBlack" style="font-weight:bold;font-size:13px; text-overflow:ellipsis">@item.HostNameJapanese</h3>
+                                           
                                         }
                                         else
                                         {
-                                            <div class="text-xs  text-charcoalBlack">@item.HostName</div>
+                                            <h3 class="text-xs  text-charcoalBlack" style="font-weight:bold;font-size:13px; text-overflow:ellipsis">@item.HostName</h3>
                                         }
 
                                     </div>
