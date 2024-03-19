@@ -297,7 +297,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet]
-        public ActionResult HostFilter(HostSearchFilterRequestModel Request, bool NewHost = false)
+        public ActionResult HostFilter(HostSearchFilterRequestModel Request, bool NewHost = false, int StartIndex = 0, int PageSize = 10)
         {
             var Response = new HostSearchResultModel();
             Response.HostRecommendationModel = new List<DashboardV2HostDetailModel>();
@@ -338,7 +338,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     BloodType = !string.IsNullOrEmpty(Request.BloodType) ? string.Join(",", Request.BloodType.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,
                     ConstellationGroup = !string.IsNullOrEmpty(Request.ConstellationGroup) ? string.Join(",", Request.ConstellationGroup.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,
                     Occupation = (string.IsNullOrEmpty(Request.Occupation) || Request.Occupation.Trim() == "0") ? string.Empty : Request.Occupation.DecryptParameter(),
-                    CustomerId = CustomerId
+                    CustomerId = CustomerId,
+                    Type = "1",
+                    Skip = StartIndex,
+                    Take = PageSize,
                 };
                 var dbHostResponse = _searchBusiness.HostPreferenceFilter(dbRequest);
                 Response.FilteredHostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
@@ -352,6 +355,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo);
             });
             ViewBag.LocationId = Request.LocationId;
+            Response.RequestModel = Request.MapObject<HostSearchFilterRequestModel>();
             return View(Response);
         }
         #endregion
