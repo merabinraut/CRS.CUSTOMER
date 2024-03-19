@@ -1365,3 +1365,11 @@ label {
     .disable-click > div {
         color: #BEBEBE;
     }*/
+
+.error-validation-msg {
+    color: #B12D23;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

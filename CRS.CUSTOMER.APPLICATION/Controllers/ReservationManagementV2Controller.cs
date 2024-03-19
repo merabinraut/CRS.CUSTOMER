@@ -326,6 +326,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 VisitTime = Model.VisitTime,
                 NoOfPeople = Model.NoOfPeople,
                 HostIdList = HostIdLists,
+                PaymentType = (string.IsNullOrEmpty(Model.PaymentType) || Model.PaymentType.Trim() == "0") ? "0" : Model.PaymentType.DecryptParameter(),
                 ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString(),
                 ActionIP = ApplicationUtilities.GetIP()
             };

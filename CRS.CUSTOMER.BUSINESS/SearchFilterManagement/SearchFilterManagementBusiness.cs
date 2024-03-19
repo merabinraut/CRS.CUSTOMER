@@ -28,9 +28,9 @@ namespace CRS.CUSTOMER.BUSINESS.SearchFilterManagement
         {
             return _repo.GetRecommendedClub(LocationId);
         }
-        public List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId)
+        public List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId, string CustomerId)
         {
-            return _repo.GetRecommendedHost(LocationId);
+            return _repo.GetRecommendedHost(LocationId, CustomerId);
         }
         #endregion
     }

@@ -155,9 +155,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="h-[37px] rounded-[5px] mt-[9px] border border-[#E3AB00] text-[#E3AB00] font-bold flex justify-center items-center text-sm gap-[2px]" style="background: #fffaf5;">
-                    <i class="las la-coins text-[18px]"></i> 500ポイント獲得できます！
-                </div>
+                @*<div class="h-[37px] rounded-[5px] mt-[9px] border border-[#E3AB00] text-[#E3AB00] font-bold flex justify-center items-center text-sm gap-[2px]" style="background: #fffaf5;">
+                        <i class="las la-coins text-[18px]"></i> 500ポイント獲得できます！
+                    </div>*@
             </div>
         </div>
     </div>
@@ -268,12 +268,20 @@
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
-                weekday: 'long',
+                weekday: 'short',
                 hour: 'numeric',
                 minute: 'numeric',
-                hour12: false,
+                hour12: false
             };
-
+            //const options = {
+            //    year: 'numeric',
+            //    month: 'long',
+            //    day: 'numeric',
+            //    weekday: 'long',
+            //    hour: 'numeric',
+            //    minute: 'numeric',
+            //    hour12: false,
+            //};
             // Format the date using Intl.DateTimeFormat
             const formatter = new Intl.DateTimeFormat('ja-JP', options);
             return formatter.format(date);

@@ -93,11 +93,12 @@ namespace CRS.CUSTOMER.REPOSITORY.Dashboard
             return Response;
         }
 
-        public List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId)
+        public List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId, string CustomerId = "")
         {
             var Response = new List<HostSearchManagementResponseCommon>();
             string SQL = "EXEC sproc_get_customer_recommendation @Flag = 'ghphrvl'";
             SQL += ",@LocationId=" + _dao.FilterString(LocationId);
+            SQL += !string.IsNullOrEmpty(CustomerId) ? ",@CustomerId=" + _dao.FilterString(CustomerId) : string.Empty;
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0) Response = _dao.DataTableToListObject<HostSearchManagementResponseCommon>(dbResponse).ToList();
             return Response;

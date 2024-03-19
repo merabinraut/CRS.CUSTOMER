@@ -10,7 +10,7 @@ namespace CRS.CUSTOMER.REPOSITORY.SearchFilterManagement
         List<HostSearchManagementResponseCommon> GetSearchedHost(HostSearchManagementRequestCommon Request);
         #region Recommendation Management
         List<ClubRecommendationListCommon> GetRecommendedClub(string LocationId);
-        List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId);
+        List<HostSearchManagementResponseCommon> GetRecommendedHost(string LocationId, string CustomerId);
         #endregion
     }
 }

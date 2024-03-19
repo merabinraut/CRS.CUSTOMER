@@ -126,7 +126,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             Response.HostRecommendationModel = new List<DashboardV2HostDetailModel>();
             var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
-            var hostRecommendationDBResponse = _oldDashboardBusiness.GetRecommendedHost(lId);
+            var hostRecommendationDBResponse = _oldDashboardBusiness.GetRecommendedHost(lId, CustomerId);
             var HostRecommendationModel = new List<DashboardV2HostDetailModel>();
             foreach (var item in hostRecommendationDBResponse)
             {
@@ -303,7 +303,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             Response.HostRecommendationModel = new List<DashboardV2HostDetailModel>();
             var lId = !string.IsNullOrEmpty(Request.LocationId) ? Request.LocationId.DecryptParameter() : null;
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
-            var hostRecommendationDBResponse = _searchBusinessOld.GetRecommendedHost(lId);
+            var hostRecommendationDBResponse = _searchBusinessOld.GetRecommendedHost(lId, CustomerId);
             var HostRecommendationModel = new List<DashboardV2HostDetailModel>();
             foreach (var item in hostRecommendationDBResponse)
             {
@@ -318,7 +318,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     HostNameJapanese = item.HostNameJapanese,
                     HostLogo = ImageHelper.ProcessedImage(item.HostImage),
                     ClubLocationId = item.LocationId.EncryptParameter(),
-                    //IsBookmarked = 
+                    IsBookmarked = item.IsBookmarked
                 });
             }
             if (NewHost)

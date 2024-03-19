@@ -1,0 +1,330 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.Search.HostSearchResultModel
+@{
+    ViewBag.Title = "Host Filter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #like {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+    }
+</style>
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="window.location.href='@Url.Action("Index","DashboardV2")'">
+    <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
+                  fill="#BCB08A" />
+        </svg>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
+    </div>
+    <div class="text-center w-full font-bold"> 検索結果</div>
+</div>
+<!-- search bar -->
+<div class=" border border-[#D6CEB4] flex my-2 mx-4 rounded-[4px] search-input" onclick="redirectToSearchPage()">
+    <span class=" mt-[10px] ml-3 material-icons-outlined text-[#D6CEB4]">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.125 1.875C11.5698 1.875 14.375 4.68018 14.375 8.125C14.375 9.62158 13.8501 10.9937 12.9688 12.0703L17.9492 17.0508L17.0508 17.9492L12.0703 12.9688C10.9937 13.8501 9.62158 14.375 8.125 14.375C4.68018 14.375 1.875 11.5698 1.875 8.125C1.875 4.68018 4.68018 1.875 8.125 1.875ZM8.125 3.125C5.35645 3.125 3.125 5.35645 3.125 8.125C3.125 10.8936 5.35645 13.125 8.125 13.125C10.8936 13.125 13.125 10.8936 13.125 8.125C13.125 5.35645 10.8936 3.125 8.125 3.125Z"
+                  fill="#BCB08A" />
+        </svg>
+    </span>
+    <input class="w-full text-xs text-[#BCB08A] "
+           title="Search"
+           type="text"
+           placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Filter_Placeholder" readonly />
+    <div class="group flex justify-end cursor-pointer p-3 rotate-90" title="Filter">
+        <a onclick="redirectToSearchPage()">
+            <svg class="group-hover:bg-primaryLight w-4 h-4 text-[#BCB08A] " aria-hidden="true"
+                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                      d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2" />
+            </svg>
+        </a>
+    </div>
+
+</div>
+<div style="background-color: #E3E3E3;" class="flex flex-col  py-[12px] ">
+    <div class=" mx-[8px] grid grid-cols-1 justify-start">
+        <p class="text-[14px] pt-[8px] font-[700]">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_Recommended_for_you
+        </p>
+    </div>
+
+    <div style=" padding-bottom: 8px; "
+         class="grid grid-cols-3 gap-[4px]  mx-[8px] mt-[10px]   hover:cursor-pointer    ">
+        @{
+            foreach (var item in Model.HostRecommendationModel)
+            {
+                <div class="h-auto flex flex-col justify-end  text-center relative">
+                    <div class="w-full flex">
+                        <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
+                            <img class=" w-full h-[157px]  object-fill rounded" src="@item.HostLogo" />
+                            @if (item.IsBookmarked.ToUpper() == "Y")
+                            {
+                                <div class="like-host" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                                        <g filter="url(#filter0_d_4820_24085)">
+                                            <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                                        </g>
+                                        <path d="M14.5018 13.1543C12.9108 13.1543 11.6172 14.4578 11.6172 16.0277C11.6172 16.5754 11.8666 17.0498 12.098 17.3925C12.3293 17.7353 12.5667 17.9553 12.5667 17.9553L16.7254 22.1097L17.0018 22.3851L17.2782 22.1097L21.4369 17.9553C21.4369 17.9553 22.3864 17.1217 22.3864 16.0277C22.3864 14.4578 21.0928 13.1543 19.5018 13.1543C18.1812 13.1543 17.3308 13.946 17.0018 14.2797C16.6728 13.946 15.8224 13.1543 14.5018 13.1543Z" fill="white" />
+                                        <defs>
+                                            <filter id="filter0_d_4820_24085" x="0" y="0" width="34" height="34" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                <feOffset />
+                                                <feGaussianBlur stdDeviation="3.5" />
+                                                <feComposite in2="hardAlpha" operator="out" />
+                                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4820_24085" />
+                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4820_24085" result="shape" />
+                                            </filter>
+                                        </defs>
+                                    </svg>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="like-host" onclick="AddBookmark('@item.ClubId','@item.HostId','host')">
+                                    <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                                         viewBox="0 0 31 34" fill="none">
+                                        <g filter="url(#filter0_d_3058_46008)">
+                                            <circle cx="17" cy="17" r="10" fill="white" />
+                                        </g>
+                                        <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
+                                              stroke="#E3A1A1" stroke-width="1.5" />
+                                        <defs>
+                                            <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
+                                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                <feOffset />
+                                                <feGaussianBlur stdDeviation="3.5" />
+                                                <feComposite in2="hardAlpha" operator="out" />
+                                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                <feBlend mode="normal" in2="BackgroundImageFix"
+                                                         result="effect1_dropShadow_3058_46008" />
+                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
+                                                         result="shape" />
+                                            </filter>
+                                        </defs>
+                                    </svg>
+                                    <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                                         viewBox="0 0 31 34" fill="none">
+                                        <g filter="url(#filter0_d_3058_39409)">
+                                            <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                                        </g>
+                                        <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
+                                              fill="white" />
+                                        <defs>
+                                            <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
+                                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                                               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                                <feOffset />
+                                                <feGaussianBlur stdDeviation="3.5" />
+                                                <feComposite in2="hardAlpha" operator="out" />
+                                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                                <feBlend mode="normal" in2="BackgroundImageFix"
+                                                         result="effect1_dropShadow_3058_39409" />
+                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
+                                                         result="shape" />
+                                            </filter>
+                                        </defs>
+                                    </svg>
+                                </div>
+                            }
+                        </a>
+                    </div>
+                    <div class="absolute mb-[8px] w-full flex flex-row px-2 py-[2px]">
+                        <div style="border-radius:2px;  "
+                             class="  w-full bg-[#ffffffe6]  p-1  justify-start rounded-b flex   flex-col   ">
+                            <div class=" flex flex-row   text-xs  ">
+                                <div class="text-[12px] font-[700] pl-[2px]">@item.HostNameJapanese </div>
+                            </div>
+                            <div class="flex flex-row items-center   ">
+                                <div class=" font-[700] pl-[2px]">
+                                    <img class="h-[11px]  w-[11px] rounded-full" src="@item.ClubLogo"
+                                         alt="club">
+
+                                </div>
+                                <div class="text-[10px] text-start ml-[4px] font-[400] h-[15px] overflow-hidden">
+                                    @item.ClubNameEnglish
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<!-- one row end -->
+<!-- one row for club card -->
+@if (Model.FilteredHostModel.Count <= 0)
+{
+    <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center">
+        <div class="text-[#18181B] font-semibold mt-12 text-center">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
+        </div>
+    </div>
+}
+else
+{
+    <div style=" padding-bottom: 8px; " class="grid grid-cols-3 gap-[4px]  mx-[8px] mt-[10px] hover:cursor-pointer">
+        @foreach (var item in Model.FilteredHostModel)
+        {
+            <div class="flex flex-col justify-end  text-center relative">
+                <div class="w-full flex   ">
+                    <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
+                        <img class=" h-[154px]  object-cover rounded" src="@item.HostLogo" />
+                        @if (item.IsBookmarked.ToUpper() == "Y")
+                        {
+                            <div class="like-host" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                                    <g filter="url(#filter0_d_4820_24085)">
+                                        <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                                    </g>
+                                    <path d="M14.5018 13.1543C12.9108 13.1543 11.6172 14.4578 11.6172 16.0277C11.6172 16.5754 11.8666 17.0498 12.098 17.3925C12.3293 17.7353 12.5667 17.9553 12.5667 17.9553L16.7254 22.1097L17.0018 22.3851L17.2782 22.1097L21.4369 17.9553C21.4369 17.9553 22.3864 17.1217 22.3864 16.0277C22.3864 14.4578 21.0928 13.1543 19.5018 13.1543C18.1812 13.1543 17.3308 13.946 17.0018 14.2797C16.6728 13.946 15.8224 13.1543 14.5018 13.1543Z" fill="white" />
+                                    <defs>
+                                        <filter id="filter0_d_4820_24085" x="0" y="0" width="34" height="34" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset />
+                                            <feGaussianBlur stdDeviation="3.5" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_4820_24085" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_4820_24085" result="shape" />
+                                        </filter>
+                                    </defs>
+                                </svg>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="like-host" onclick="AddBookmark('@item.ClubId','@item.HostId','host')">
+                                <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                                     viewBox="0 0 31 34" fill="none">
+                                    <g filter="url(#filter0_d_3058_46008)">
+                                        <circle cx="17" cy="17" r="10" fill="white" />
+                                    </g>
+                                    <path d="M13.0968 17.4266L13.0868 17.4167L13.0784 17.4089L13.0783 17.4088L13.0763 17.4068C13.0729 17.4036 13.0665 17.3974 13.0575 17.3883C13.0393 17.3701 13.011 17.3408 12.976 17.302C12.9051 17.2235 12.8112 17.1105 12.7196 16.9748C12.5183 16.6767 12.3672 16.3544 12.3672 16.0296C12.3672 14.8742 13.3248 13.9062 14.5018 13.9062C15.5079 13.9062 16.1721 14.5083 16.4677 14.8082L17.0018 15.3499L17.5359 14.8082C17.8316 14.5083 18.4957 13.9062 19.5018 13.9062C20.6789 13.9062 21.6364 14.8742 21.6364 16.0296C21.6364 16.3638 21.4878 16.6965 21.2937 16.9787C21.2005 17.1141 21.1068 17.2235 21.0373 17.2977C21.0029 17.3345 20.9754 17.3617 20.9582 17.3783C20.9497 17.3865 20.9437 17.392 20.9409 17.3946C20.9404 17.3951 20.94 17.3954 20.9397 17.3957C20.9395 17.3959 20.9393 17.396 20.9392 17.3961L20.9239 17.4095L20.9068 17.4266L17.0018 21.3277L13.0968 17.4266Z"
+                                          stroke="#E3A1A1" stroke-width="1.5" />
+                                    <defs>
+                                        <filter id="filter0_d_3058_46008" x="0" y="0" width="34" height="34"
+                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset />
+                                            <feGaussianBlur stdDeviation="3.5" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix"
+                                                     result="effect1_dropShadow_3058_46008" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_46008"
+                                                     result="shape" />
+                                        </filter>
+                                    </defs>
+                                </svg>
+                                <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
+                                     viewBox="0 0 31 34" fill="none">
+                                    <g filter="url(#filter0_d_3058_39409)">
+                                        <circle cx="17" cy="17" r="10" fill="#D75A8B" />
+                                    </g>
+                                    <path d="M14.5018 13.1562C12.9108 13.1562 11.6172 14.4598 11.6172 16.0296C11.6172 16.5774 11.8666 17.0518 12.098 17.3945C12.3293 17.7372 12.5667 17.9572 12.5667 17.9572L16.7254 22.1117L17.0018 22.387L17.2782 22.1117L21.4369 17.9572C21.4369 17.9572 22.3864 17.1236 22.3864 16.0296C22.3864 14.4598 21.0928 13.1562 19.5018 13.1562C18.1812 13.1562 17.3308 13.9479 17.0018 14.2817C16.6728 13.9479 15.8224 13.1562 14.5018 13.1562Z"
+                                          fill="white" />
+                                    <defs>
+                                        <filter id="filter0_d_3058_39409" x="0" y="0" width="34" height="34"
+                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                                           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+                                            <feOffset />
+                                            <feGaussianBlur stdDeviation="3.5" />
+                                            <feComposite in2="hardAlpha" operator="out" />
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                                            <feBlend mode="normal" in2="BackgroundImageFix"
+                                                     result="effect1_dropShadow_3058_39409" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3058_39409"
+                                                     result="shape" />
+                                        </filter>
+                                    </defs>
+                                </svg>
+                            </div>
+                        }
+                    </a>
+                </div>
+                <div class="absolute mb-[8px] w-full flex flex-row mx-[4px]">
+                    <div style="border-radius:2px; opacity: 0.9; margin-left: 2px;  "
+                         class="  w-[90%] bg-[#D9D9D9]    h-[34px] justify-start rounded-b flex   flex-col   ">
+                        <div class=" flex flex-row   text-xs  ">
+                            <div class="text-[12px] font-[700] pl-[2px]">@item.HostNameJapanese </div>
+                        </div>
+                        <div class="flex flex-row items-center  ">
+                            <div class=" font-[700] pl-[2px]">
+                                <img class="h-[11px]  w-[11px] rounded-full" src="@item.ClubLogo"
+                                     alt="club">
+                            </div>
+                            <div class="text-[10px] ml-[4px] font-[400]">
+                                @item.ClubNameEnglish
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        function tag1() {
+            var x = document.getElementById("tag1");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function tag2() {
+            var x = document.getElementById("tag2");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function tag3() {
+            var x = document.getElementById("tag3");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+    <script>
+        function HostReservationActionFunction() {
+            window.location.href = "/Dashboard/Index";
+        }
+
+     function redirectToSearchPage() {
+        var locationId = '@ViewBag.LocationId';
+         var searchUrl = `/Search/Index?locationId=${locationId}`;
+         window.location.href = searchUrl;
+     }
+
+        function redirectToSearchHomePage() {
+            var locationId = '@ViewBag.LocationId' ||'';
+            var searchUrl = `/LocationManagement/SearchFilter?&LocationId=${locationId}`
+
+            window.location.href = searchUrl;
+        }
+
+    </script>
+
+}
