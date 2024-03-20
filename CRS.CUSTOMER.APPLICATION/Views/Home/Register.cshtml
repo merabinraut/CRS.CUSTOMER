@@ -330,7 +330,10 @@
                     <div class="flex justify-start items-start gap-2">
                         <input type="checkbox" name="policy" id="policy" class="checkBox focus:outline-none bg-none ring-offset-0 ring-0 focus:ring-0 focus:ring-transparent focus:ring-shadow-none">
                         <label for="policy" class="policy ">
-                            <span>利用規約</span> と <span>プライバシーポリ</span> シー に同意したものとみなします
+                            @*<a href="@Url.Action("termsAndCondition","Footer")" class="termLink">利用規約</a><span>と</span>
+                            <a href="@Url.Action("privacypolicy","Footer")" class="termLink">プライバシーポリシ</a>
+                            <span>ー に</span>*@
+                            <span>  <a href="@Url.Action("termsAndCondition","Footer")"> 利用規約 </a></span> と <span> <a href="@Url.Action("privacypolicy","Footer")"> プライバシーポリ</a></span> シー に同意したものとみなします
                         </label>
                     </div>
                 </div>
