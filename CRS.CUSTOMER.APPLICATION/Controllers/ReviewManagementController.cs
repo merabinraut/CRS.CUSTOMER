@@ -69,13 +69,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 return RedirectToAction("Index", "DashboardV2");
             }
             var dbRequest = Request.MapObject<ReviewReservationRequestCommon>();
+            dbRequest.CustomerId = CustomerId;
+            dbRequest.ReservationId = ReservationId;
             var dbResponse = _reviewBuss.GetReservationDetails(dbRequest);
             if (dbResponse.Code == ResponseCode.Success)
             {
                 var ResponseModel = dbResponse.Data.MapObject<ReviewReservationResponseModel>();
                 ResponseModel.ClubId = ResponseModel.ClubId.EncryptParameter();
-                ResponseModel.CustomerId = CustomerId;
-                ResponseModel.ReservationId = ReservationId;
+                ResponseModel.CustomerId = ResponseModel.CustomerId.EncryptParameter();
+                ResponseModel.ReservationId = ResponseModel.ReservationId.EncryptParameter();
                 if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") ResponseModel.ClubLogo = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString() + ResponseModel.ClubLogo;
                 return View(ResponseModel);
             }
