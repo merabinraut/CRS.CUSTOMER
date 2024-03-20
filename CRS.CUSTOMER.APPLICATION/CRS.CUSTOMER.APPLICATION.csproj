@@ -466,6 +466,8 @@
     <Content Include="Content\assets\images\review-active.svg" />
     <Content Include="Content\assets\images\review.svg" />
     <Content Include="Content\assets\images\save-check.svg" />
+    <Content Include="Content\assets\images\sinceYouAlpha.jpg" />
+    <Content Include="Content\assets\images\sinceYouHonten.jpg" />
     <Content Include="Content\assets\images\sucess.svg" />
     <Content Include="Content\assets\images\superadmin\arrow-up.svg" />
     <Content Include="Content\assets\images\superadmin\calendar-week-solid.svg" />
