@@ -25,5 +25,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             return View();
         }
+        public ActionResult termsAndCondition()
+        {
+            return View();
+        }
     }
 }

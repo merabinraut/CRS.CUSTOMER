@@ -703,6 +703,7 @@
     <Content Include="Views\Search\ClubFilter.cshtml" />
     <Content Include="Views\Search\HostFilter_BK.cshtml" />
     <Content Include="Views\Search\HostFilter.cshtml" />
+    <Content Include="Views\Footer\termsAndCondition.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

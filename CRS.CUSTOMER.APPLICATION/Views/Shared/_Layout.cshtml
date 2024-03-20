@@ -45,7 +45,8 @@
 
         gtag('config', 'G-Z189BCRTWP');
     </script>
-    <title>ホスログ | @ViewBag.Title</title>
+  @*  <title>ホスログ | @ViewBag.Title</title>*@
+    <title>@ViewBag.Title</title>
     <style>
         .ui-datepicker {
             /* width: max-content; */
@@ -618,20 +619,20 @@
                     <div class="p-4">
                         <div class="footer-link text-white grid grid-cols-2 ">
                             <div class="grid gap-[8px]">
-                                <a href="#" class="text-xs">
-                                    サービス
+                                <!--<a href="#" class="text-xs">
+                                    サービス-->
                                     @*service*@
                                     @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.TopPage*@
-                                </a>
+                                <!--</a>-->
                                 <a href="#" class="text-xs">
                                     ホスログの使い方
                                     @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.FindAHostClub*@
                                 </a>
-                                <a href="#" class="text-xs">
+                                <a href="@Url.Action("faq","Footer")" class="text-xs">
                                     よくあるご質問
                                     @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan*@
                                 </a>
-                                <a href="#" class="text-xs">
+                                <a href="@Url.Action("inquery","Footer")" class="text-xs">
                                     @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide*@
                                     お問い合わせ
                                 </a>
@@ -640,10 +641,10 @@
                 </a>*@
                             </div>
                             <div class="grid gap-[12px]">
-                                <a href="@Url.Action("inquery","Footer")" class="text-xs">
+                                <!--<a href="@Url.Action("Register","Home")" class="text-xs">-->
                                     @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry*@
-                                    新規会員登録(無料)
-                                </a>
+                                    <!--新規会員登録(無料)
+                                </a>-->
                                 <a href="@Url.Action("operatingcompany","Footer")" class="text-xs">
                                     @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
                                     運営会社
@@ -652,8 +653,8 @@
                                     プライバシーポリシー
                                     @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy*@
                                 </a>
-                                <a href="#" class="text-xs">
-                                    @*                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Affiliate_Registration*@
+                                <a href="@Url.Action("termsAndCondition","Footer")" class="text-xs">
+                                    @* terms and condition*@
                                     ホスログ利用規約
                                 </a>
                                 @*                                <a href="https://hoslog.jp/" class="text-xs">
