@@ -102,7 +102,7 @@
                 },
                 success: function (result) {
                     if (result.Code === "0") {
-                        toastr.success(result.Message);
+                        //toastr.success(result.Message);
                         pageLabel.innerHTML = result.PageTitle;
                         markAllRead.innerHTML = '';
                         notificationListItems.forEach(function (item) {
