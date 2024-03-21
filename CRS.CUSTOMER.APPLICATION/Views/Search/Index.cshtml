@@ -728,7 +728,7 @@
                                         </div>
 
                                         <div class="flex flex-col justify-between">
-                                            <div class="text-[10px]">50m</div>
+                                            @*<div class="text-[10px]"></div>*@
                                             <a href="#" id="clubUrl">
                                                 <div class="text-[8px] border-b-[1px] border-[#D75A8B] text-[#D75A8B] w-max">詳細を見る</div>
 
@@ -903,26 +903,26 @@
         var searchbybusinesshours = document.querySelectorAll('.search-by-business-hours');
 
         // Add event listener to each searchbybusinesshours div
-     /*   searchbybusinesshours.forEach(function (div) {
-            div.addEventListener('click', function () {
-                // Remove the 'active' class from all divs
-                searchbybusinesshours.forEach(function (d) {
-                    d.classList.remove('active');
-                });
-                // Add the 'active' class to the clicked div
-                this.classList.add('active');
-                if (this.classList.contains('contains-time-class')) {
-                    var div = document.getElementById('time-div-id');
-                    div.style.display = 'block';
-                } else {
-                    var div = document.getElementById('time-div-id');
-                    div.style.display = 'none';
-                }
-                // Get the text content of the specific element within the clicked div
-                var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue');
-                $('#time-type-id').val(searchbybusinesshoursSelectValue.getAttribute('data-info'));
-            });
-        });*/
+        /*   searchbybusinesshours.forEach(function (div) {
+               div.addEventListener('click', function () {
+                   // Remove the 'active' class from all divs
+                   searchbybusinesshours.forEach(function (d) {
+                       d.classList.remove('active');
+                   });
+                   // Add the 'active' class to the clicked div
+                   this.classList.add('active');
+                   if (this.classList.contains('contains-time-class')) {
+                       var div = document.getElementById('time-div-id');
+                       div.style.display = 'block';
+                   } else {
+                       var div = document.getElementById('time-div-id');
+                       div.style.display = 'none';
+                   }
+                   // Get the text content of the specific element within the clicked div
+                   var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue');
+                   $('#time-type-id').val(searchbybusinesshoursSelectValue.getAttribute('data-info'));
+               });
+           });*/
         searchbybusinesshours.forEach(function (div) {
             div.addEventListener('click', function () {
                 // Check if the clicked div already has the 'active' class
@@ -956,9 +956,7 @@
                     $('#time-type-id').val(''); // Reset or set to a default value
                 }
             });
-        });
-
-    </script>
+        });</script>
     <script type="text/javascript">// see more
         function seemore() {
             var x = document.getElementById("seemore");
@@ -1210,6 +1208,7 @@
                 rating.textContent = customMarkerPos.ratingScale;
                 clubUrl.href = customMarkerPos.URL;
                 ratingElement.innerHTML = generateStarIcons(customMarkerPos.ratingScale);
+                console.log("Rating stars Count: " + customMarkerPos.ratingScale);
                 //console.log({
                 //    customMarkerPos
 
@@ -1232,9 +1231,9 @@
                 starsHTML += '<i class="las la-star-half-alt"></i>';
             }
             for (let i = 0; i < emptyStars; i++) {
-                starsHTML += '<i class="las la-star"></i>';
-            }
+                starsHTML += '<i class="lar la-star"></i>';
 
+            }
             return starsHTML;
         }
 
