@@ -220,6 +220,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageManagementController.cs" />
     <Compile Include="Controllers\LocationManagementController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogManagementController.cs" />
     <Compile Include="Controllers\NotificationManagementController.cs" />
     <Compile Include="Controllers\PaymentMethodManagementController.cs" />
@@ -704,6 +705,7 @@
     <Content Include="Views\Search\HostFilter_BK.cshtml" />
     <Content Include="Views\Search\HostFilter.cshtml" />
     <Content Include="Views\Footer\termsAndCondition.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

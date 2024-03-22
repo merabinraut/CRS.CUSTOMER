@@ -11,7 +11,6 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             HttpContext ctx = HttpContext.Current;
-            // If the browser session or authentication session has expired...
             if (ctx.Session["Username"] == null)
             {
                 filterContext.Result = new RedirectToRouteResult(
@@ -20,6 +19,30 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                         { "Action", "LogOff" }
                         });
             }
+            //var controllerName = string.Empty;
+            //var actionName = string.Empty;
+            //var routeValues = HttpContext.Current.Request.RequestContext.RouteData.Values;
+            //var dataTokens = HttpContext.Current.Request.RequestContext.RouteData.DataTokens;
+            //if (routeValues != null)
+            //{
+            //    if (routeValues.ContainsKey("action")) actionName = routeValues["action"].ToString().ToUpper();
+            //    if (routeValues.ContainsKey("controller")) controllerName = routeValues["controller"].ToString().ToUpper();
+            //    var functions = new List<string>();
+            //    if (functions.Count > 0)
+            //    {
+            //        var func = functions.ConvertAll(x => x.ToUpper());
+            //        var actionURL = $"/{controllerName}/{actionName}";
+            //        if (func.Contains(actionURL) == true && func.Equals(actionURL) == true)
+            //        {
+            //            filterContext.Result = new RedirectToRouteResult(
+            //                new RouteValueDictionary
+            //                {
+            //                    { "Controller", ""},
+            //                    { "Action", ""}
+            //                });
+            //        }
+            //    }
+            //}
             base.OnActionExecuting(filterContext);
         }
     }
