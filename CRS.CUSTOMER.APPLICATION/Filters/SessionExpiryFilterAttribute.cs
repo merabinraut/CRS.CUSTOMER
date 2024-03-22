@@ -30,20 +30,27 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                 if (routeValues.ContainsKey("action")) actionName = routeValues["action"].ToString().ToUpper();
                 if (routeValues.ContainsKey("controller")) controllerName = routeValues["controller"].ToString().ToUpper();
                 var functions = new List<string>();
-                functions.Add("/DashboardV2/GetLocationFilterPopUp");
+                functions.Add("/DashboardV2/InitiateDateTimeFilterPopup");
+                //functions.Add("/Home/HomePage");
+                //functions.Add("/Home/Register");
                 if (functions.Count > 0)
                 {
                     var func = functions.ConvertAll(x => x.ToUpper());
                     var actionURL = $"/{controllerName}/{actionName}";
-                    // Get the current URL to use as the return URL
-                    var returnUrl = HttpContext.Current.Request.Url.PathAndQuery;
+                    if (func.Contains(actionURL))
+                    {
+                        // Get the current URL to use as the return URL
+                        var returnUrl = HttpContext.Current.Request.Url.PathAndQuery;
 
-                    // Append the return URL as a query parameter to the redirect URL
-                    var redirectUrl = new UriBuilder(HttpContext.Current.Request.Url.Scheme,
-                                                     HttpContext.Current.Request.Url.Host,
-                                                     HttpContext.Current.Request.Url.Port,
-                                                     "/Login/Index");
-                    redirectUrl.Query = $"ReturnURL={HttpUtility.UrlEncode(returnUrl)}&TargetURL={referringUrl}";
+                        // Append the return URL as a query parameter to the redirect URL
+                        var redirectUrl = new UriBuilder(HttpContext.Current.Request.Url.Scheme,
+                                                         HttpContext.Current.Request.Url.Host,
+                                                         HttpContext.Current.Request.Url.Port,
+                                                         "/Home/HomePage");
+                        //redirectUrl.Query = $"ReturnURL={referringUrl}&TargetURL={HttpUtility.UrlEncode(returnUrl)}";
+                        filterContext.Result = new RedirectResult(redirectUrl.Uri.ToString());
+                        return;
+                    }
                     //if (func.Contains(actionURL))
                     //{
                     //    filterContext.Result = new RedirectToRouteResult(
