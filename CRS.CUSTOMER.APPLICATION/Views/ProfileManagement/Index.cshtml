@@ -8,12 +8,14 @@
         max-width: 100%;
         width: 400px;
     }
+
     input:focus {
         border: 1px solid #d75a8b !important;
     }
+
     input:focus-visible {
         border: 1px solid #d75a8b !important;
-        outline:none
+        outline: none
     }
 </style>
 <div class=" no-scrollbar overflow-y-auto">
@@ -51,9 +53,9 @@
                     <div class="text-[14px] font-[700]">
                         @Model.NickName
                     </div>
-                   @* <div class="text-[14px] ">
-                        @Model.EmailAddress
-                    </div>*@
+                    @* <div class="text-[14px] ">
+                            @Model.EmailAddress
+                        </div>*@
                     <div class=" rounded-[3px] text-[#F89336] border-[#F89336] flex flex-row items-center rounded-[3px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
                             <path d="M7.79167 0C6.96989 0 6.2251 0.153972 5.64323 0.44401C5.06136 0.73405 4.58333 1.20671 4.58333 1.83333V3.66667C4.58333 3.72575 4.60303 3.78304 4.61198 3.83854C4.18587 3.72754 3.71322 3.66667 3.20833 3.66667C2.38656 3.66667 1.64176 3.82064 1.0599 4.11068C0.478027 4.40072 0 4.87337 0 5.5V9.16667C0 9.79329 0.478027 10.266 1.0599 10.556C1.64176 10.846 2.38656 11 3.20833 11C4.03011 11 4.7749 10.846 5.35677 10.556C5.93864 10.266 6.41667 9.79329 6.41667 9.16667V8.98047C6.8374 9.09147 7.29753 9.16667 7.79167 9.16667C8.61344 9.16667 9.35824 9.0127 9.9401 8.72266C10.522 8.43262 11 7.95996 11 7.33333V1.83333C11 1.20671 10.522 0.73405 9.9401 0.44401C9.35824 0.153972 8.61344 0 7.79167 0ZM7.79167 0.916667C8.48991 0.916667 9.11117 1.06706 9.52474 1.27474C9.93831 1.48242 10.0833 1.70085 10.0833 1.83333C10.0833 1.96582 9.93831 2.18424 9.52474 2.39193C9.11117 2.59961 8.48991 2.75 7.79167 2.75C7.09342 2.75 6.47217 2.59961 6.05859 2.39193C5.64502 2.18424 5.5 1.96582 5.5 1.83333C5.5 1.70085 5.64502 1.48242 6.05859 1.27474C6.47217 1.06706 7.09342 0.916667 7.79167 0.916667ZM5.5 3.13672C5.54834 3.16357 5.5931 3.19759 5.64323 3.22266C6.2251 3.5127 6.96989 3.66667 7.79167 3.66667C8.61344 3.66667 9.35824 3.5127 9.9401 3.22266C9.99023 3.19759 10.035 3.16357 10.0833 3.13672V3.66667C10.0833 3.79915 9.93831 4.01758 9.52474 4.22526C9.11117 4.43294 8.48991 4.58333 7.79167 4.58333C7.09342 4.58333 6.47217 4.43294 6.05859 4.22526C5.64502 4.01758 5.5 3.79915 5.5 3.66667V3.13672ZM3.20833 4.58333C3.90658 4.58333 4.52783 4.73372 4.94141 4.94141C5.35498 5.14909 5.5 5.36751 5.5 5.5C5.5 5.63249 5.35498 5.85091 4.94141 6.05859C4.52783 6.26628 3.90658 6.41667 3.20833 6.41667C2.51009 6.41667 1.88883 6.26628 1.47526 6.05859C1.06169 5.85091 0.916667 5.63249 0.916667 5.5C0.916667 5.36751 1.06169 5.14909 1.47526 4.94141C1.88883 4.73372 2.51009 4.58333 3.20833 4.58333ZM10.0833 4.97005V5.5C10.0833 5.63249 9.93831 5.85091 9.52474 6.05859C9.11117 6.26628 8.48991 6.41667 7.79167 6.41667C7.27067 6.41667 6.79981 6.33073 6.41667 6.20182V5.5C6.41667 5.44092 6.39697 5.38363 6.38802 5.32812C6.81413 5.43913 7.28678 5.5 7.79167 5.5C8.61344 5.5 9.35824 5.34603 9.9401 5.05599C9.99023 5.03092 10.035 4.99691 10.0833 4.97005ZM0.916667 6.80339C0.965007 6.83024 1.00977 6.86426 1.0599 6.88932C1.64176 7.17936 2.38656 7.33333 3.20833 7.33333C4.03011 7.33333 4.7749 7.17936 5.35677 6.88932C5.4069 6.86426 5.45166 6.83024 5.5 6.80339V7.33333C5.5 7.46582 5.35498 7.68425 4.94141 7.89193C4.52783 8.09961 3.90658 8.25 3.20833 8.25C2.51009 8.25 1.88883 8.09961 1.47526 7.89193C1.06169 7.68425 0.916667 7.46582 0.916667 7.33333V6.80339ZM10.0833 6.80339V7.33333C10.0833 7.46582 9.93831 7.68425 9.52474 7.89193C9.11117 8.09961 8.48991 8.25 7.79167 8.25C7.27067 8.25 6.79981 8.1766 6.41667 8.04948V7.16146C6.8374 7.27246 7.29574 7.33333 7.79167 7.33333C8.61344 7.33333 9.35824 7.17936 9.9401 6.88932C9.99023 6.86426 10.035 6.83024 10.0833 6.80339ZM0.916667 8.63672C0.965007 8.66357 1.00977 8.69759 1.0599 8.72266C1.64176 9.0127 2.38656 9.16667 3.20833 9.16667C4.03011 9.16667 4.7749 9.0127 5.35677 8.72266C5.4069 8.69759 5.45166 8.66357 5.5 8.63672V9.16667C5.5 9.29915 5.35498 9.51758 4.94141 9.72526C4.52783 9.93294 3.90658 10.0833 3.20833 10.0833C2.51009 10.0833 1.88883 9.93294 1.47526 9.72526C1.06169 9.51758 0.916667 9.29915 0.916667 9.16667V8.63672Z" fill="#E3AB00" />
@@ -80,357 +82,357 @@
         }
         @Html.HiddenFor(model => model.Gender)
         @Html.HiddenFor(model => model.NickName)
-<div class="flex flex-col px-[16px]" style="background:#FAF7F9; padding-bottom:22px; padding-top:14px">
+        <div class="flex flex-col px-[16px]" style="background:#FAF7F9; padding-bottom:22px; padding-top:14px">
 
-    <div class="input-field-common w-full flex flex-col">
-        <label class="text-[14px] font-[700] uppercase mb-[10px]" for="fname">
-            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Nickname <span class="text-[#D32F2F]">*</span>
-        </label>
-        <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Nickname"
-               class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-               type="text"
-               value="@Model.NickName"
-               disabled style="background-color:lightgrey">
+            <div class="input-field-common w-full flex flex-col">
+                <label class="text-[14px] font-[700] uppercase mb-[10px]" for="fname">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Nickname <span class="text-[#D32F2F]">*</span>
+                </label>
+                <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Nickname"
+                       class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                       type="text"
+                       value="@Model.NickName"
+                       disabled style="background-color:lightgrey">
 
-    </div>
-    <div class="input-field-common w-full flex flex-col">
-        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
-            @CRS.CUSTOMER.APPLICATION.Resources.Resource.PhoneNumber<span class="text-[#D32F2F]">*</span>
-        </label>
-        <input placeholder="+101761408054" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-               type="text" value="@Model.MobileNumber" name="MobileNumber" disabled style="background-color:lightgrey">
-    </div>
-
-</div>
-
-
-<div class="flex flex-col mx-[16px]">
-    <div style="padding-top: 21px;text-align: center; font-size: 13px; color: #7E6D5E ">
-        ホスログを便利に使うために登録しよう！
-    </div>
-
-    <div class="grid grid-cols-2 gap-[16px] mt-[12px] ">
-        <div class="flex flex-col input-field-common">
-            <label class="text-[14px] font-[700] uppercase mb-[10px]" for="fname">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Surname <span class="text-[#D32F2F]">*</span></label>
-            <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Surname"
-                   class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ="
-                   name="LastName"
-                   type="text"
-                   data-val="true"
-                   data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
-                   value="@Model.LastName"
-                   id="Surname">
-            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "error-validation-msg" })
             </div>
-        </div>
-        <div class="flex flex-col input-field-common">
-            <label class="text-[14px] font-[700] uppercase mb-[10px]" for="fname">@CRS.CUSTOMER.APPLICATION.Resources.Resource.GivenName </label>
-            <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.GivenName"
-                   class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ="
-                   type="text"
-                   data-val="true"
-                   data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
-                   value="@Model.FirstName"
-                   name="FirstName"
-                   id="GivenName">
-            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "error-validation-msg" })
+            <div class="input-field-common w-full flex flex-col">
+                <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.PhoneNumber<span class="text-[#D32F2F]">*</span>
+                </label>
+                <input placeholder="+101761408054" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                       type="text" value="@Model.MobileNumber" name="MobileNumber" disabled style="background-color:lightgrey">
             </div>
-        </div>
-    </div>
-    <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">
-        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Gender<span class="text-[#D32F2F]">*</span>
-    </label>
-    <div class="grid grid-cols-3 gap-[8px]">
 
-        <div class="language-option  h-[40px]" data-gender="Female">
-            <div class="flex flex-row w-full  ">
-                <div class="flex items-center ">
-                    <div class="flex flex-row items-center">
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
-                                 fill="none">
-                                <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
-                                      fill="#ECECEC" />
-                            </svg>
+        </div>
+
+
+        <div class="flex flex-col mx-[16px]">
+            <div style="padding-top: 21px;text-align: center; font-size: 13px; color: #7E6D5E ">
+                ホスログを便利に使うために登録しよう！
+            </div>
+
+            <div class="grid grid-cols-2 gap-[16px] mt-[12px] ">
+                <div class="flex flex-col input-field-common">
+                    <label class="text-[14px] font-[700] uppercase mb-[10px]" for="fname">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Surname <span class="text-[#D32F2F]">*</span></label>
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Surname"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ="
+                           name="LastName"
+                           type="text"
+                           data-val="true"
+                           data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
+                           value="@Model.LastName"
+                           id="Surname">
+                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "error-validation-msg" })
+                    </div>
+                </div>
+                <div class="flex flex-col input-field-common">
+                    <label class="text-[14px] font-[700] uppercase mb-[10px]" for="fname">@CRS.CUSTOMER.APPLICATION.Resources.Resource.GivenName </label>
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.GivenName"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ="
+                           type="text"
+                           data-val="true"
+                           data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
+                           value="@Model.FirstName"
+                           name="FirstName"
+                           id="GivenName">
+                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "error-validation-msg" })
+                    </div>
+                </div>
+            </div>
+            <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Gender<span class="text-[#D32F2F]">*</span>
+            </label>
+            <div class="grid grid-cols-3 gap-[8px]">
+
+                <div class="language-option  h-[40px]" data-gender="Female">
+                    <div class="flex flex-row w-full  ">
+                        <div class="flex items-center ">
+                            <div class="flex flex-row items-center">
+                                <div class="circle">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
+                                         fill="none">
+                                        <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                              fill="#ECECEC" />
+                                    </svg>
+                                </div>
+                                <div class="circle-active">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
+                                         fill="none">
+                                        <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                              fill="#ECECEC" />
+                                        <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
+                                              fill="#D75A8B" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="lang">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Female
+                            </p>
                         </div>
-                        <div class="circle-active">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
-                                 fill="none">
-                                <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
-                                      fill="#ECECEC" />
-                                <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
-                                      fill="#D75A8B" />
-                            </svg>
+                    </div>
+                </div>
+                <div class="language-option  h-[40px]" data-gender="Male">
+                    <div class="flex flex-row w-full  ">
+                        <div class="flex flex-row items-center">
+                            <div class="circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                    <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                          fill="#ECECEC" />
+                                </svg>
+                            </div>
+                            <div class="circle-active">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                    <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                          fill="#ECECEC" />
+                                    <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
+                                          fill="#D75A8B" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-center ">
+                            <p class="lang">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Male
+                            </p>
                         </div>
                     </div>
-                    <p class="lang">
-                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Female
-                    </p>
                 </div>
-            </div>
-        </div>
-        <div class="language-option  h-[40px]" data-gender="Male">
-            <div class="flex flex-row w-full  ">
-                <div class="flex flex-row items-center">
-                    <div class="circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                            <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
-                                  fill="#ECECEC" />
-                        </svg>
-                    </div>
-                    <div class="circle-active">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                            <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
-                                  fill="#ECECEC" />
-                            <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
-                                  fill="#D75A8B" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="flex items-center ">
-                    <p class="lang">
-                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Male
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="language-option  h-[40px]" data-gender="Others">
-            <div class="flex flex-row w-full  ">
-                <div class="flex flex-row items-center">
-                    <div class="circle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                            <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
-                                  fill="#ECECEC" />
-                        </svg>
-                    </div>
-                    <div class="circle-active">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                            <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
-                                  fill="#ECECEC" />
-                            <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
-                                  fill="#D75A8B" />
-                        </svg>
+                <div class="language-option  h-[40px]" data-gender="Others">
+                    <div class="flex flex-row w-full  ">
+                        <div class="flex flex-row items-center">
+                            <div class="circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                    <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                          fill="#ECECEC" />
+                                </svg>
+                            </div>
+                            <div class="circle-active">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                    <path d="M11 5C7.688 5 5 7.688 5 11C5 14.312 7.688 17 11 17C14.312 17 17 14.312 17 11C17 7.688 14.312 5 11 5ZM11 15.8C8.354 15.8 6.2 13.646 6.2 11C6.2 8.354 8.354 6.2 11 6.2C13.646 6.2 15.8 8.354 15.8 11C15.8 13.646 13.646 15.8 11 15.8Z"
+                                          fill="#ECECEC" />
+                                    <path d="M11 7C8.792 7 7 8.792 7 11C7 13.208 8.792 15 11 15C13.208 15 15 13.208 15 11C15 8.792 13.208 7 11 7Z"
+                                          fill="#D75A8B" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex items-center ">
+                            <p class="lang">
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Others
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="flex items-center " >
-                    <p class="lang">
-                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Others
-                    </p>
-                </div>
             </div>
-        </div>
-    </div>
 
 
-    <div class="input-field-common w-full flex flex-col">
-        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
-            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email <span class="text-[#D32F2F]">*</span>
-        </label>
-        @if (!string.IsNullOrEmpty(Model.EmailAddress))
-        {
-            @Html.TextBoxFor(model => model.EmailAddress, new
-       {
-           @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
-           @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
-           id = "emailInput",
-           @autocomplete = "off",
-           @disabled = "disabled",
-                @style = "background-color:lightgrey",
-           @type = "text"
-       })
-            @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
-                class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-                type="text"
-                value="@Model.EmailAddress"
-                id="emailInput"
-                name="EmailAddress"
-                disabled style="background-color:lightgrey">*@
-            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
-            </div>
-        }
-        else
-        {
-
-            @Html.TextBoxFor(model => model.EmailAddress, new
-       {
-           @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
-           @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
-           @id = "emailInput",
-           @autocomplete = "off"
-           ,
-                @type = "text"
-       })
-            @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
-                class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-                type="text"
-                value="@Model.EmailAddress"
-                id="emailInput"
-                name="EmailAddress">*@
-            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
-            </div>
-        }
-
-    </div>
-
-
-    <div class="input-field-common flex flex-col" style="padding-bottom:12px">
-        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
-            生年月日
-            @*     @CRS.CUSTOMER.APPLICATION.Resources.Resource.ToConfirmAge*@
-            <span class="text-[#D32F2F]">*</span>
-        </label>
-        <div class="grid grid-cols-3  gap-[6px]">
-            <div class="relative">
-                @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE] ", @placeholder = "YYYY", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
-                <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">年</span>
-                <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                    @Html.ValidationMessageFor(m => m.DOBYear, "", new { @class = "error-validation-msg" })
-                </div>
-            </div>
-            <div class="relative">
-                @Html.TextBoxFor(model => model.DOBMonth, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "MM", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
-                <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">月</span>
-                <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                    @Html.ValidationMessageFor(m => m.DOBMonth, "", new { @class = "error-validation-msg" })
-                </div>
-            </div>
-            <div class="relative">
-                @Html.TextBoxFor(model => model.DOBDay, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "DD", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
-                <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">日</span>
-                <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                    @Html.ValidationMessageFor(m => m.DOBDay, "", new { @class = "error-validation-msg" })
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    @*<label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PreferredLocation</label>
-        <div class="flex flex-col">
-            <div class="input-field-common">
-                <select id="default_select" style="width: 100%; font-size:15px"
-                        class="default_select text-[#B7B7B7] h-[44px] select-common" name="PreferredLocationDDL">
-                    @foreach (KeyValuePair<string, string> item in ViewBag.LocationDDL as Dictionary<string, string>)
-                    {
-                        var selectedId = ViewBag.PreferredLocationKey as string;
-                        if (item.Key == selectedId)
-                        {
-                            <option value="@item.Key" selected>
-                                @item.Value
-                            </option>
-                        }
-                        else
-                        {
-                            <option value="@item.Key">
-                                @item.Value
-                            </option>
-                        }
-                    }
-                </select>
-            </div>
-        </div>*@
-<div style="display: flex; justify-content:flex-start; align-items:center; gap:7px">
-
-    <div style="width:40%">
-        <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]">*</span></label>
-        <div class="input-field-common mb-[10px] relative">
-            <div style="position: absolute; top: 10px; left: 10px; color: #6A6A6A" lang="">〒</div>
-            @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @style = "width:100%; padding-left:34px", @placeholder = "〒", autocomplete = "off" })
-
-            <div class="validationMessage">
-                @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "error-validation-msg" })
-            </div>
-        </div>
-    </div>
-    <div  style="width:60%">
-        @*<label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]">*</span></label>*@
-       @* <div class="input-field-common mb-[10px] mt-[12px]" style="padding-top:12px">
-            @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @style = "width:100%; background:#404040", @placeholder = "住所自動入力", autocomplete = "off" })
-            <div class="validationMessage">
-                @Html.ValidationMessageFor(m => m.PostalCode)
-            </div>
-        </div>*@
-    </div>
-
-</div>
-    <div class="grid grid-cols-1 " style="padding-bottom:12px">
-        <div class="input-field-common">
-            <select id="default_select" style="width: 100%; font-size:15px"
-                    class="default_select text-[#B7B7B7] h-[44px] select-common" name="PrefectureDDL">
-                @foreach (KeyValuePair<string, string> item in ViewBag.PrefectureDDL as Dictionary<string, string>)
+            <div class="input-field-common w-full flex flex-col">
+                <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email <span class="text-[#D32F2F]">*</span>
+                </label>
+                @if (!string.IsNullOrEmpty(Model.EmailAddress))
                 {
-                    var selectedId = ViewBag.PrefectureKey as string;
-                    if (item.Key == selectedId)
-                    {
-                        <option value="@item.Key" selected>
-                            @item.Value
-                        </option>
-                    }
-                    else
-                    {
-                        <option value="@item.Key">
-                            @item.Value
-                        </option>
-                    }
+                    @Html.TextBoxFor(model => model.EmailAddress, new
+               {
+                   @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
+                   @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
+                   id = "emailInput",
+                   @autocomplete = "off",
+                   @disabled = "disabled",
+                        @style = "background-color:lightgrey",
+                   @type = "text"
+               })
+                    @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
+                        class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                        type="text"
+                        value="@Model.EmailAddress"
+                        id="emailInput"
+                        name="EmailAddress"
+                        disabled style="background-color:lightgrey">*@
+                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
+                    </div>
                 }
-            </select>
-        </div>
-    </div>
-    <div class="grid grid-cols-2 gap-[6px]  " style="margin-bottom:12px">
+                else
+                {
 
-        <div class="input-field-common">
-            <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.City"
-                   class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] h-[40px] w-full"
-                   value="@Model.City"
-                   type="text"
-                   data-val="true"
-                   data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
-                   name="City">
-            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                @Html.ValidationMessageFor(m => m.City, "", new { @class = "error-validation-msg" })
+                    @Html.TextBoxFor(model => model.EmailAddress, new
+               {
+                   @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
+                   @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
+                   @id = "emailInput",
+                   @autocomplete = "off"
+                   ,
+                        @type = "text"
+               })
+                    @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
+                        class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
+                        type="text"
+                        value="@Model.EmailAddress"
+                        id="emailInput"
+                        name="EmailAddress">*@
+                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
+                    </div>
+                }
+
             </div>
-        </div>
-        <div class="input-field-common">
-            <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Street" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] w-full"
-                   value="@Model.Street"
-                   type="text"
-                   data-val="true"
-                   data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
-                   name="Street">
-            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                @Html.ValidationMessageFor(m => m.Street, "", new { @class = "error-validation-msg" })
+
+
+            <div class="input-field-common flex flex-col" style="padding-bottom:12px">
+                <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
+                    生年月日
+                    @*     @CRS.CUSTOMER.APPLICATION.Resources.Resource.ToConfirmAge*@
+                    <span class="text-[#D32F2F]">*</span>
+                </label>
+                <div class="grid grid-cols-3  gap-[6px]">
+                    <div class="relative">
+                        @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE] ", @placeholder = "YYYY", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
+                        <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">年</span>
+                        <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                            @Html.ValidationMessageFor(m => m.DOBYear, "", new { @class = "error-validation-msg" })
+                        </div>
+                    </div>
+                    <div class="relative">
+                        @Html.TextBoxFor(model => model.DOBMonth, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "MM", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
+                        <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">月</span>
+                        <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                            @Html.ValidationMessageFor(m => m.DOBMonth, "", new { @class = "error-validation-msg" })
+                        </div>
+                    </div>
+                    <div class="relative">
+                        @Html.TextBoxFor(model => model.DOBDay, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "DD", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
+                        <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">日</span>
+                        <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                            @Html.ValidationMessageFor(m => m.DOBDay, "", new { @class = "error-validation-msg" })
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="flex flex-col pb-[61px]">
 
-        <div class="input-field-common ">
-            <input placeholder="ビール名と部屋番号"
-                   class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] w-full "
-                   type="text"
-                   data-val="true"
-                   data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
-                   name="ResidenceNumber"
-                   value="@Model.ResidenceNumber">
-            <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                @Html.ValidationMessageFor(m => m.ResidenceNumber, "", new { @class = "error-validation-msg" })
+
+
+            @*<label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PreferredLocation</label>
+                <div class="flex flex-col">
+                    <div class="input-field-common">
+                        <select id="default_select" style="width: 100%; font-size:15px"
+                                class="default_select text-[#B7B7B7] h-[44px] select-common" name="PreferredLocationDDL">
+                            @foreach (KeyValuePair<string, string> item in ViewBag.LocationDDL as Dictionary<string, string>)
+                            {
+                                var selectedId = ViewBag.PreferredLocationKey as string;
+                                if (item.Key == selectedId)
+                                {
+                                    <option value="@item.Key" selected>
+                                        @item.Value
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Key">
+                                        @item.Value
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>*@
+            <div style="display: flex; justify-content:flex-start; align-items:center; gap:7px">
+
+                <div style="width:40%">
+                    <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]">*</span></label>
+                    <div class="input-field-common mb-[10px] relative">
+                        <div style="position: absolute; top: 10px; left: 10px; color: #6A6A6A" lang="">〒</div>
+                        @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @style = "width:100%; padding-left:34px", @placeholder = "〒", autocomplete = "off" })
+
+                        <div class="validationMessage">
+                            @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "error-validation-msg" })
+                        </div>
+                    </div>
+                </div>
+                <div style="width:60%">
+                    @*<label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]">*</span></label>*@
+                    @* <div class="input-field-common mb-[10px] mt-[12px]" style="padding-top:12px">
+                            @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @style = "width:100%; background:#404040", @placeholder = "住所自動入力", autocomplete = "off" })
+                            <div class="validationMessage">
+                                @Html.ValidationMessageFor(m => m.PostalCode)
+                            </div>
+                        </div>*@
+                </div>
+
             </div>
+            <div class="grid grid-cols-1 " style="padding-bottom:12px">
+                <div class="input-field-common">
+                    <select id="default_select" style="width: 100%; font-size:15px"
+                            class="default_select text-[#B7B7B7] h-[44px] select-common" name="PrefectureDDL">
+                        @foreach (KeyValuePair<string, string> item in ViewBag.PrefectureDDL as Dictionary<string, string>)
+                        {
+                            var selectedId = ViewBag.PrefectureKey as string;
+                            if (item.Key == selectedId)
+                            {
+                                <option value="@item.Key" selected>
+                                    @item.Value
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@item.Key">
+                                    @item.Value
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-[6px]  " style="margin-bottom:12px">
+
+                <div class="input-field-common">
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.City"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] h-[40px] w-full"
+                           value="@Model.City"
+                           type="text"
+                           data-val="true"
+                           data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
+                           name="City">
+                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                        @Html.ValidationMessageFor(m => m.City, "", new { @class = "error-validation-msg" })
+                    </div>
+                </div>
+                <div class="input-field-common">
+                    <input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Street" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] w-full"
+                           value="@Model.Street"
+                           type="text"
+                           data-val="true"
+                           data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
+                           name="Street">
+                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                        @Html.ValidationMessageFor(m => m.Street, "", new { @class = "error-validation-msg" })
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col pb-[61px]">
+
+                <div class="input-field-common ">
+                    <input placeholder="ビール名と部屋番号"
+                           class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] w-full "
+                           type="text"
+                           data-val="true"
+                           data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
+                           name="ResidenceNumber"
+                           value="@Model.ResidenceNumber">
+                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                        @Html.ValidationMessageFor(m => m.ResidenceNumber, "", new { @class = "error-validation-msg" })
+                    </div>
+                </div>
+
+                @*<span class="text-[12px] font-[400] text-[#BDBDBD] ">
+                        山田
+                    </span>*@
+            </div>
+            <div class="text-[11px] text-[#D17979] underline leading-[16px] mt-[61px] mb-[19px]" style="margin-top:61px" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</div>
+
+
         </div>
 
-        @*<span class="text-[12px] font-[400] text-[#BDBDBD] ">
-                山田
-            </span>*@
-    </div>
-    <div class="text-[11px] text-[#D17979] underline leading-[16px] mt-[61px] mb-[19px]" style="margin-top:61px" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</div>
-
-
-</div>
-     
         <div class="py-[12px] mt-[20px] px-[16px]  w-full grid grid-cols-1" style="box-shadow:0px 0px 7px 0px rgba(68,47,38,0.25)">
 
             <div class="grid grid-cols-1   ">
@@ -445,12 +447,12 @@
         </div>
     }
 </div>
-<div id="modal1" class="modal">
+<!--<div id="modal1" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
-        <div class="relative bg-white rounded-lg shadow overflow-hidden">
+        <div class="relative bg-white rounded-lg shadow overflow-hidden">-->
             <!-- Modal content -->
-            <div class="bg-[#FFF]  w-full rounded-b-lg shadow">
+            <!--<div class="bg-[#FFF]  w-full rounded-b-lg shadow">
                 <div class="grid gap-[12px] pb-[18px]">
                     <div>
                         <div class="flex flex-row justify-center">
@@ -470,7 +472,81 @@
             </div>
         </div>
     </div>
+</div>-->
+
+<div id="modal1" class="modal modalWrapper" style="display:none">
+    <div class="modal-content modalContentWrapper">
+        <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
+            <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('modal1')"
+                  style="top:-49px">&times;</span>
+            <div id="cancel_id" value="" hidden></div>
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow py-6 flex  flex-col">
+                <!-- Modal header -->
+                <div class="text-center pt-2 pb-4 px-2 border-b border-[#DCDCDC] flex flex-col justify-center gap-1 ">
+                    <div class=" text-[16px] font-semibold text-[#1A1C1E]">アカウント削除</div>
+                    <div class=" text-[12px] font-normal text-[#1A1C1E]">ご以下の情報が全て失われます</div>
+                </div>
+                <!-- Modal body -->
+                <div style="border-radius: 4px; background: #EFEFEF;">
+                    <ul style="color: #292F33; font-size: 11px; font-style: normal; font-weight: 400; line-height: 100%; list-style-type: circle;">
+                        <li>プロフィール情報</li>
+                        <li>お支払い情報</li>
+                        <li>予約情報</li>
+                        <li>
+                            ブックマーク
+                        </li>
+                        <li>
+                            保有ポイント
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid gap-4 p-6 pt-4 grid-cols-2">
+
+                    <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeModal('modal1')"
+                            data-modal-hide="defaultModal">
+                        キャンセル
+                    </button>
+                    <button class=" btn-primary rounded h-[40px]  text-[#FFFFFF] font-medium text-[14px]  leading-[24px]" onclick="nextPopup()"
+                            data-modal-hide="defaultModal">
+                        削除する
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+@*second popup*@
+
+<div id="modal2" class="modal modalWrapper" style="display:none">
+    <div class="modal-content modalContentWrapper">
+        <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
+            <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('modal2')"
+                  style="top:-49px">&times;</span>
+            <div id="cancel_id" value="" hidden></div>
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow py-6 flex  flex-col">
+                <!-- Modal header -->
+                <div class="text-center pt-2 pb-4 px-2 border-b border-[#DCDCDC] flex flex-col justify-center gap-1 ">
+                    <div class=" text-[16px] font-semibold text-[#1A1C1E]">最終確認</div>
+                    <div class=" text-[12px] font-normal text-[#1A1C1E]">本当に削除してもよろしいですか？</div>
+                </div>
+                <!-- Modal body -->
+                <div class="grid gap-4 p-6 pt-4 grid-cols-2">
+                    <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeModal('modal2')"
+                            data-modal-hide="defaultModal">
+                        キャンセル
+                    </button>
+                    <button class=" btn-primary rounded h-[40px]  text-[#FFFFFF] font-medium text-[14px]  leading-[24px]" onclick="DeleteAccount()"
+                            data-modal-hide="defaultModal">
+                        削除する
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section scripts
 {
     <script src="~/Content/assets/js/modal.js"></script>
@@ -540,7 +616,7 @@
             // Remove the 'bg-red' class from all divs
             divs.forEach(function (d) {
                 d.classList.remove('active');
-               
+
 
             });
             // Add the 'bg-red' class to the clicked div
@@ -576,6 +652,14 @@
         }
         window.onload = function () {
             closeModal('modal1');
+        }
+
+        function nextPopup() {
+            $('#modal2').show();
+            $('#modal2').css("display","flex");
+
+            $('#modal1').hide();
+            
         }
     </script>
 }
