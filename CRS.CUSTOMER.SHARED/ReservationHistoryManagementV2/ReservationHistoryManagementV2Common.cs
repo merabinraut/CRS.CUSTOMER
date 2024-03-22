@@ -118,6 +118,7 @@ namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
         public string NoOfPeople { get; set; }
         public string PlanTime { get; set; }
         public string Nomination { get; set; }
+        public string HostId { get; set; }
     }
 
     #endregion

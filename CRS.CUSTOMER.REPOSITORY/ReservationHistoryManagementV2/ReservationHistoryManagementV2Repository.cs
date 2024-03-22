@@ -79,6 +79,7 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationHistoryManagementV2
                     NoOfPeople = _dao.ParseColumnValue(dbResponse, "NoOfPeople").ToString(),
                     PlanTime = _dao.ParseColumnValue(dbResponse, "PlanTime").ToString(),
                     Nomination = _dao.ParseColumnValue(dbResponse, "Nomination").ToString(),
+                    HostId = _dao.ParseColumnValue(dbResponse, "HostId").ToString(),
                 };
             }
             return new ReservationHistoryDetailModelCommon();
