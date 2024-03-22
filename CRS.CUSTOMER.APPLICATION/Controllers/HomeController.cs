@@ -314,14 +314,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Login Management
-        public ActionResult Index()
+        public ActionResult Index(string ReturnURL = "", string TargetURL = "")
         {
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             string phaseValue = ConfigurationManager.AppSettings["phase"];
 
             if (string.IsNullOrEmpty(Username))
             {
-
                 ViewBag.CallJavaScriptFunction = TempData["CallJavaScriptFunction"] ?? "False";
                 var HasLandingSession = Request.Cookies["HasLandingSession"]?.Value;
                 if (!string.IsNullOrEmpty(HasLandingSession) && HasLandingSession.Trim() == "True")
@@ -347,13 +346,16 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
+
+                if (!string.IsNullOrEmpty(ReturnURL)) ViewBag.ReturnUrl = ReturnURL;
+                if (!string.IsNullOrEmpty(TargetURL)) ViewBag.TargetURL = TargetURL;
                 return View(Response);
             }
             else return RedirectToAction("Index", "DashboardV2");
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Index(LoginRequestModel Model, bool RememberMe = false)
+        public ActionResult Index(LoginRequestModel Model, bool RememberMe = false, string ReturnURL = "", string TargetURL = "")
         {
             if (ModelState.IsValid)
             {
@@ -374,6 +376,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Expires = DateTime.Now.AddMonths(-1)
                     });
+                }
+                if (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL))
+                {
+                    if (!string.IsNullOrEmpty(TargetURL))
+                    {
+                        ReturnURL += $"&targetUrl={HttpUtility.UrlEncode(TargetURL)}";
+                    }
+                    return Redirect(ReturnURL);
                 }
                 return RedirectToAction(loginResponse.Item1, loginResponse.Item2);
             }

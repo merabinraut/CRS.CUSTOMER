@@ -1,1 +1,35 @@
-﻿
+﻿﻿@model CRS.CUSTOMER.APPLICATION.Models.Home.LoginRequestModel
+<div id="login-form-id" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform"
+     tabindex="-1" aria-labelledby="drawer-bottom-label">
+    <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
+        <div class="text-center text-white mb-2 text-2xl">
+            <div>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+        <div class="px-4 pt-6 pb-6 bg-white " style="padding-top: 24px; border-radius: 6px 6px 0px 0px; ">
+            <div class="text-sm text-[#333] font-bold mb-3">Login</div>
+            <div class=" relative">
+                @Html.AntiForgeryToken()
+                <div class="inputWrapper focus:text-[12px]">
+                    @Html.TextBoxFor(model => model.LoginId, new
+                    {
+                    @class = "contactNumber focus:outline-none border-none  w-full ring-0 focus:ring-0 focus:ring-transparent",
+                    @placeholder = "携帯電話番号"
+
+                    })
+                    <hr>
+                    <div class="relative">
+                        @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "32" })
+                        <i class="las la-eye password-eye absolute top-3 right-2 text-[2] " style="font-size: 24px; color: #A1A1AA"></i>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary mt-3" style=" border-radius: 8px; ">
+                <p class="h-full w-full">
+                    検索
+                </p>
+            </button>
+        </div>
+    </div>
+</div>
