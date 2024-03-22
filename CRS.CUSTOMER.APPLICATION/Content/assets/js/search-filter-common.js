@@ -236,26 +236,26 @@ function PreferenceFilterCommon() {
 
     //modified
 
-/*    searchbybusinesshours.forEach(function (div) {
-        div.addEventListener('click', function () {
-            // Remove the 'active' class from all divs
-            searchbybusinesshours.forEach(function (d) {
-                d.classList.remove('active');
+    /*    searchbybusinesshours.forEach(function (div) {
+            div.addEventListener('click', function () {
+                // Remove the 'active' class from all divs
+                searchbybusinesshours.forEach(function (d) {
+                    d.classList.remove('active');
+                });
+                // Add the 'active' class to the clicked div
+                this.classList.add('active');
+                if (this.classList.contains('contains-time-class')) {
+                    var div = document.getElementById('time-div-id');
+                    div.style.display = 'block';
+                } else {
+                    var div = document.getElementById('time-div-id');
+                    div.style.display = 'none';
+                }
+                // Get the text content of the specific element within the clicked div
+                var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue');
+                $('#time-type-id').val(searchbybusinesshoursSelectValue.getAttribute('data-info'));
             });
-            // Add the 'active' class to the clicked div
-            this.classList.add('active');
-            if (this.classList.contains('contains-time-class')) {
-                var div = document.getElementById('time-div-id');
-                div.style.display = 'block';
-            } else {
-                var div = document.getElementById('time-div-id');
-                div.style.display = 'none';
-            }
-            // Get the text content of the specific element within the clicked div
-            var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue');
-            $('#time-type-id').val(searchbybusinesshoursSelectValue.getAttribute('data-info'));
-        });
-    });*/
+        });*/
 
     searchbybusinesshours.forEach(function (div) {
         div.addEventListener('click', function () {
@@ -479,6 +479,7 @@ function createCustomMarker(customMarkerPos) {
             var clubNameJpn = document.getElementById('clubNamejpn');
             var rating = document.getElementById('rating');
             var clubUrl = document.getElementById('clubUrl');
+            var ratingElement = document.getElementById('rating-label-id');
 
         } else {
             var clubCard = document.getElementById('map-card');
@@ -491,9 +492,28 @@ function createCustomMarker(customMarkerPos) {
         clubNameJpn.textContent = customMarkerPos.clubNameJapanese;
         rating.textContent = customMarkerPos.ratingScale;
         clubUrl.href = customMarkerPos.URL;
-
+        ratingElement.innerHTML = generateStarIcons(customMarkerPos.ratingScale);
     });
 
+}
+
+function generateStarIcons(rating) {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 !== 0;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+    let starsHTML = '';
+    for (let i = 0; i < fullStars; i++) {
+        starsHTML += '<i class="las la-star"></i>';
+    }
+    if (halfStar) {
+        starsHTML += '<i class="las la-star-half-alt"></i>';
+    }
+    for (let i = 0; i < emptyStars; i++) {
+        starsHTML += '<i class="lar la-star"></i>';
+    }
+
+    return starsHTML;
 }
 
 function handleLocationError(error) {

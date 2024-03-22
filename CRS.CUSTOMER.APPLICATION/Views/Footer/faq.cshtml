@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "faq";
+    ViewBag.Title = "よくあるご質問 ‖ ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
 }
 
@@ -44,9 +44,9 @@
 </style>
 <!-- breadcrum -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="#" class="active">トップ</a>
+    <a href="#" class="active">ホーム</a>
     <i class="las la-angle-right"></i>
-    <a href="#">利用者の声</a>
+    <a href="#">よくある質問</a>
 </div>
 
 <div class="grid  mx-[16px] mt-[12px] mb-[16px]">
@@ -476,7 +476,11 @@
                 </div>
                 <button style="background-color: #D75A8B; color: #ffffff; border-radius: 8px; z-index:10"
                         class="p-2 mt-[16px]">
-                    お問い合わせを！
+                    <a href="@Url.Action("inquery","Footer")">
+
+                        お問い合わせを！
+                    </a>
+
                 </button>
             </div>
 
