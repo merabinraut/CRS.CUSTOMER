@@ -201,7 +201,7 @@
     <comment>Bookmark Management</comment>
   </data>
   <data name="Book Now" xml:space="preserve">
-    <value>今予約する</value>
+    <value>今すぐ予約する</value>
     <comment>Location Management Index</comment>
   </data>
   <data name="BookingHistory" xml:space="preserve">
