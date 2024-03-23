@@ -127,6 +127,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string NoOfPeople { get; set; }
         public string PlanTime { get; set; }
         public string Nomination { get; set; }
+        public string HostId { get; set; }
+        public string[] HostIdList { get; set; }
         public string[] HImages { get; set; }
     }
 

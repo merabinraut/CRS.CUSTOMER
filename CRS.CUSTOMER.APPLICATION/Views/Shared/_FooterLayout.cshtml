@@ -27,10 +27,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <title>Hoslog | @ViewBag.Title</title>
+    <title> @ViewBag.Title</title>
 </head>
 <body class="md:hidden">
-    <div class="py-[10px] px-[16px] flex justify-between border-b border-b-[#ECECEC] sticky top-0 bg-white z-[10]" style="z-index:12">
+    <div class="py-[10px] px-[16px] flex justify-between border-b border-b-[#ECECEC] sticky top-0 bg-white z-[10]" style="z-index:10">
         @{
             var url = "/Home/HomePage";
             var Username = Session["Username"]?.ToString();
@@ -38,7 +38,7 @@
             {
                 url = Url.Action("Index", "DashboardV2");
             }
-            <div class="flex gap-[6px] items-center" onclick="window.location.href='@url'">
+            <div class="flex gap-[6px] items-center" onclick="window.history.back(-1)">
                 <div class="text-xl text-warmgray cursor-pointer"><i class="las la-angle-left"></i></div>
                 <div class="text-charcoalBlack text-sm">戻る</div>
             </div>

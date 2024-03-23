@@ -90,6 +90,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 responseinfo.HImages = responseinfo.HostImages.Split(',');
                 responseinfo.ClubLogo = FileLocationPath + responseinfo.ClubLogo;
+                responseinfo.HostIdList = responseinfo.HostId.Split(',');
                 if (responseinfo.HImages != null)
                 {
                     List<string> updatedImages = new List<string>();
@@ -106,6 +107,21 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
                     }
                     responseinfo.HImages = updatedImages.ToArray();
+                }
+                if (!string.IsNullOrEmpty(responseinfo.HostId))
+                {
+                    List<string> UpdatedHostIdList = new List<string>();
+                    foreach (var item in responseinfo.HostIdList)
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            UpdatedHostIdList.Add(item.Trim());
+                        }
+                        else
+                        {
+                            //UpdatedHostIdList.Add(item.Trim());
+                        }
+                    }
                 }
             }
             else

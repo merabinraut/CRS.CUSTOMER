@@ -17,6 +17,24 @@
         border: 1px solid #d75a8b !important;
         outline: none
     }
+    ul.delete-confirm {
+        list-style-type: circle;
+        width: 80%;
+        margin: 14px auto;
+        color: #292F33;
+    }
+    ul li {
+        text-align: start;
+        gap: 5px;
+        margin-bottom: 5px;
+        padding-left: 12px;
+        color: #292F33;
+    }
+    li::marker {
+        content: "\25CF"; 
+        color: #292F33;
+        font-size: 0.5em;
+    }
 </style>
 <div class=" no-scrollbar overflow-y-auto">
 
@@ -489,7 +507,7 @@
                 </div>
                 <!-- Modal body -->
                 <div style="border-radius: 4px; background: #EFEFEF;">
-                    <ul style="color: #292F33; font-size: 11px; font-style: normal; font-weight: 400; line-height: 100%; list-style-type: circle;">
+                    <ul style="color: #292F33; font-size: 11px; font-style: normal; font-weight: 400; line-height: 100%; list-style-type: circle;" class="delete-confirm">
                         <li>プロフィール情報</li>
                         <li>お支払い情報</li>
                         <li>予約情報</li>
@@ -503,7 +521,7 @@
                 </div>
                 <div class="grid gap-4 p-6 pt-4 grid-cols-2">
 
-                    <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeModal('modal1')"
+                    <button class=" h-[40px]  text-[14px] font-medium leading-[24px] underline " style="color: #292F33; font-size:14px; line-height:24px; font-weight:500 " onclick="closeModal('modal1')"
                             data-modal-hide="defaultModal">
                         キャンセル
                     </button>
