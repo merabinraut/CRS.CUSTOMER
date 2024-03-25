@@ -101,7 +101,6 @@
     });
 }
 
-
 /////////////////////////////////////////////////////////////////////// Time JS ///////////////////////////////////////////////////////////////////////
 function initTimeFunction() {
     var showTimeLists = document.querySelectorAll('.showTimeList');
@@ -229,16 +228,6 @@ function SubmitClubReservationFunction() {
     form.submit();
 }
 
-/*function EnableLoaderFunction() {
-    document.getElementById('loader-id-v2').style.display = 'block';
-    
-    document.body.classList.add('no-scroll-loader');
-}
-function DisableLoaderFunction() {
-    document.getElementById('loader-id-v2').style.display = 'none';
-    document.body.classList.remove('no-scroll-loader');
-}
-*/
 function preventDefault(event) {
     event.preventDefault();
 }

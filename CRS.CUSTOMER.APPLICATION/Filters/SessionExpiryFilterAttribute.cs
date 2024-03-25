@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace CRS.CUSTOMER.APPLICATION.Filters
 {
@@ -20,6 +19,47 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
             //            { "Action", "LogOff" }
             //            });
             //}
+            //var referringUrl = HttpContext.Current.Request.UrlReferrer;
+            //var controllerName = string.Empty;
+            //var actionName = string.Empty;
+            //var routeValues = HttpContext.Current.Request.RequestContext.RouteData.Values;
+            //var dataTokens = HttpContext.Current.Request.RequestContext.RouteData.DataTokens;
+            //if (routeValues != null)
+            //{
+            //    if (routeValues.ContainsKey("action")) actionName = routeValues["action"].ToString().ToUpper();
+            //    if (routeValues.ContainsKey("controller")) controllerName = routeValues["controller"].ToString().ToUpper();
+            //    var functions = new List<string>();
+            //    functions.Add("/DashboardV2/InitiateDateTimeFilterPopup");
+            //    //functions.Add("/Home/HomePage");
+            //    //functions.Add("/Home/Register");
+            //    if (functions.Count > 0)
+            //    {
+            //        var func = functions.ConvertAll(x => x.ToUpper());
+            //        var actionURL = $"/{controllerName}/{actionName}";
+            //        if (func.Contains(actionURL))
+            //        {
+            //            // Get the current URL to use as the return URL
+            //            var returnUrl = HttpContext.Current.Request.Url.PathAndQuery;
+
+            //            // Append the return URL as a query parameter to the redirect URL
+            //            var redirectUrl = new UriBuilder(HttpContext.Current.Request.Url.Scheme,
+            //                                             HttpContext.Current.Request.Url.Host,
+            //                                             HttpContext.Current.Request.Url.Port,
+            //                                             "/Home/HomePage");
+            //            //redirectUrl.Query = $"ReturnURL={referringUrl}&TargetURL={HttpUtility.UrlEncode(returnUrl)}";
+            //            filterContext.Result = new RedirectResult(redirectUrl.Uri.ToString());
+            //            return;
+            //        }
+            //        //if (func.Contains(actionURL))
+            //        //{
+            //        //    filterContext.Result = new RedirectToRouteResult(
+            //        //        new RouteValueDictionary {
+            //        //            { "Controller", "Home" },
+            //        //            { "Action", "LogOff" }
+            //        //        });
+            //        //}
+            //    }
+            //}
             var referringUrl = HttpContext.Current.Request.UrlReferrer;
             var controllerName = string.Empty;
             var actionName = string.Empty;
@@ -31,34 +71,37 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                 if (routeValues.ContainsKey("controller")) controllerName = routeValues["controller"].ToString().ToUpper();
                 var functions = new List<string>();
                 functions.Add("/DashboardV2/InitiateDateTimeFilterPopup");
-                //functions.Add("/Home/HomePage");
-                //functions.Add("/Home/Register");
                 if (functions.Count > 0)
                 {
                     var func = functions.ConvertAll(x => x.ToUpper());
                     var actionURL = $"/{controllerName}/{actionName}";
                     if (func.Contains(actionURL))
                     {
-                        // Get the current URL to use as the return URL
-                        var returnUrl = HttpContext.Current.Request.Url.PathAndQuery;
-
-                        // Append the return URL as a query parameter to the redirect URL
+                        var returnUrl = HttpContext.Current.Request.Url.PathAndQuery;// Get the current URL to use as the return URL                        
                         var redirectUrl = new UriBuilder(HttpContext.Current.Request.Url.Scheme,
                                                          HttpContext.Current.Request.Url.Host,
                                                          HttpContext.Current.Request.Url.Port,
-                                                         "/Home/HomePage");
-                        //redirectUrl.Query = $"ReturnURL={referringUrl}&TargetURL={HttpUtility.UrlEncode(returnUrl)}";
-                        filterContext.Result = new RedirectResult(redirectUrl.Uri.ToString());
-                        return;
+                                                         "/Home/Index");// Append the return URL as a query parameter to the redirect URL
+                        redirectUrl.Query = $"ReturnURL={referringUrl}&TargetURL={HttpUtility.UrlEncode(returnUrl)}";
+                        if (filterContext.HttpContext.Request.IsAjaxRequest())
+                        {
+                            filterContext.Result = new JsonResult
+                            {
+                                Data = new
+                                {
+                                    Code = 999,
+                                    RedirectURL = redirectUrl
+                                },
+                                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                            };
+                            return;
+                        }
+                        else
+                        {
+                            filterContext.Result = new RedirectResult(redirectUrl.Uri.ToString());
+                            return;
+                        }
                     }
-                    //if (func.Contains(actionURL))
-                    //{
-                    //    filterContext.Result = new RedirectToRouteResult(
-                    //        new RouteValueDictionary {
-                    //            { "Controller", "Home" },
-                    //            { "Action", "LogOff" }
-                    //        });
-                    //}
                 }
             }
             base.OnActionExecuting(filterContext);

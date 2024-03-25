@@ -751,6 +751,11 @@ function InitiateDateTimeFilterPopupFunction() {
         data: {
         },
         success: function (data) {
+            debugger;
+            if (data.Code == "999" && data.RedirectURL) {
+                window.location.href = data.RedirectURL;
+                return;
+            }
             if (!data || data.Code !== 0) {
                 toastr.info(data?.Message);
                 DisableLoaderFunction();
