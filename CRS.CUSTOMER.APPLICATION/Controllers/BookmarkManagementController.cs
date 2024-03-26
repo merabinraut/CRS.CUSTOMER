@@ -38,8 +38,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.ClubLogo = FileLocationPath + x.ClubLogo;
                 x.ClubWeeklyScheduleList.ForEach(y => y.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? y.EnglishDay : y.JapaneseDay);
                 x.HostGalleryImage = x.HostGalleryImage.Select(y => FileLocationPath + y).ToList();
-                //x.HostGalleryImage.Take(3).ToList().ForEach(y => y = FileLocationPath + y);
-                //for (int i = 0; i < x.ClubGalleryImage.Count; i++) x.ClubGalleryImage[i] = FileLocationPath + x.ClubGalleryImage[i];
             });
 
             var bookmarkedHosts = _buss.GetBookmarkedHostList(agentId);
