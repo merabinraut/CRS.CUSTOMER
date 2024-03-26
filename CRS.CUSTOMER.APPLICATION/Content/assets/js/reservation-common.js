@@ -15,6 +15,7 @@
             SelectedHost
         },
         success: function (data) {
+            CheckIfHasRedirectURL(data);
             $("#stickey_id").css("display", "none")
             if (!data || data.Code !== 0) {
                 toastr.info(data?.Message);

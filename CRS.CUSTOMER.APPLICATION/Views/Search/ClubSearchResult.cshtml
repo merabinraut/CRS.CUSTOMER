@@ -272,13 +272,13 @@
                                 <div class="flex flex-col justify-center items-center hover:cursor-pointer">
                                     @if (item.IsBookmarked.ToUpper() == "Y")
                                     {
-                                        <div onclick="RemoveBookmark('@item.ClubId','','club')">
+                                        <div onclick="ManageBookmark('@item.ClubId','','club')">
                                             <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[24px] w-[24px]" alt="filled bookmark" />
                                         </div>
                                     }
                                     else
                                     {
-                                        <div onclick="AddBookmark('@item.ClubId','','club')">
+                                        <div onclick="ManageBookmark('@item.ClubId','','club')">
                                             <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[24px] w-[24px]" alt="not filled bookmark" />
                                         </div>
                                     }

@@ -118,8 +118,7 @@ namespace CRS.CUSTOMER.REPOSITORY.BookmarkManagement
             sql += " ,@CustomerId=" + _dao.FilterString(manageClubBookmark.AgentId);
             sql += " ,@AgentType=" + _dao.FilterString(manageFor);
             sql += " ,@ClubId=" + _dao.FilterString(manageClubBookmark.ClubId);
-            sql += " ,@Status=" + _dao.FilterString(manageClubBookmark.Status);
-
+            //sql += " ,@Status=" + _dao.FilterString(manageClubBookmark.Status);
             if (!string.IsNullOrEmpty(manageClubBookmark.HostId))
                 sql += " ,@HostId=" + _dao.FilterString(manageClubBookmark.HostId);
 

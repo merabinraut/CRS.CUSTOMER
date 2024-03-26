@@ -57,11 +57,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
-        public JsonResult AddBookmarks(string clubId, string hostId, string agentType)
+        [HttpPost, ValidateAntiForgeryToken]
+        public JsonResult ManageBookmark(string clubId, string hostId, string agentType)
         {
             var agentTypes = new List<string>() { "CLUB", "HOST" };
-
             var cId = string.IsNullOrEmpty(clubId) ? string.Empty : clubId.DecryptParameter();
             var hId = string.IsNullOrEmpty(hostId) ? string.Empty : hostId.DecryptParameter();
             if (string.IsNullOrEmpty(cId)
@@ -80,8 +79,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter(),
                 ClubId = cId,
-                HostId = hId,
-                Status = "A"
+                HostId = hId
             };
 
             var dbResp = _buss.ManageBoookmark(common, agentType);
@@ -97,90 +95,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 });
                 return Json(new { success = false, message = "Something went wrong" });
             }
-
-            //if (dbResp != null && dbResp.Code == ResponseCode.Success)
-            //{
-            //    AddNotificationMessage(new NotificationModel()
-            //    {
-            //        NotificationType = NotificationMessage.SUCCESS,
-            //        Message = dbResp?.Message,
-            //        Title = NotificationMessage.SUCCESS.ToString()
-            //    });
-            //    return Json(new { success = true, message = dbResp?.Message });
-            //}
-            //else
-            //{
-            //    AddNotificationMessage(new NotificationModel()
-            //    {
-            //        NotificationType = NotificationMessage.ERROR,
-            //        Message = dbResp?.Message ?? "Something went wrong",
-            //        Title = NotificationMessage.ERROR.ToString()
-            //    });
-            //    return Json(new { success = false, message = dbResp?.Message ?? "Something went wrong" });
-            //}
-
-        }
-
-        [HttpPost]
-        public JsonResult RemoveBookmarks(string clubId, string hostId, string agentType)
-        {
-            var agentTypes = new List<string>() { "CLUB", "HOST" };
-
-            var cId = string.IsNullOrEmpty(clubId) ? string.Empty : clubId.DecryptParameter();
-            var hId = string.IsNullOrEmpty(hostId) ? string.Empty : hostId.DecryptParameter();
-            if (string.IsNullOrEmpty(cId)
-                || !agentTypes.Contains(agentType.ToUpper()))
-            {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.WARNING,
-                    Message = "Invalid Details",
-                    Title = NotificationMessage.WARNING.ToString()
-                });
-                return Json(new { success = false, message = "Invalid Details" });
-            }
-
-            var common = new ClubHostManagementCommon()
-            {
-                AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter(),
-                ClubId = cId,
-                HostId = hId,
-                Status = "B"
-            };
-
-            var dbResp = _buss.ManageBoookmark(common, agentType);
-            if (dbResp != null && dbResp.Code == ResponseCode.Success)
-                return Json(new { success = true, message = "" });
-            else
-            {
-                AddNotificationMessage(new NotificationModel()
-                {
-                    NotificationType = NotificationMessage.ERROR,
-                    Message = dbResp?.Message ?? "Something went wrong",
-                    Title = NotificationMessage.ERROR.ToString()
-                });
-                return Json(new { success = false, message = "Something went wrong" });
-            }
-            //if (dbResp != null && dbResp.Code == ResponseCode.Success)
-            //{
-            //    AddNotificationMessage(new NotificationModel()
-            //    {
-            //        NotificationType = NotificationMessage.SUCCESS,
-            //        Message = dbResp?.Message,
-            //        Title = NotificationMessage.SUCCESS.ToString()
-            //    });
-            //    return Json(new { success = true, message = dbResp?.Message });
-            //}
-            //else
-            //{
-            //    AddNotificationMessage(new NotificationModel()
-            //    {
-            //        NotificationType = NotificationMessage.ERROR,
-            //        Message = dbResp?.Message ?? "Something went wrong",
-            //        Title = NotificationMessage.ERROR.ToString()
-            //    });
-            //    return Json(new { success = false, message = dbResp?.Message ?? "Something went wrong" });
-            //}
         }
     }
 }

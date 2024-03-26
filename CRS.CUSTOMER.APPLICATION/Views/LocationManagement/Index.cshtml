@@ -267,7 +267,7 @@
                                 @if (item.IsBookmarked.ToUpper() == "N")
                                 {
                                     <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
-                                         onclick="handleAddBookmarks('@item.ClubId','','club')">
+                                         onclick="ManageBookmark('@item.ClubId','','club')">
                                         <img src="~/Content/assets/images/customer/bookmark-outlined.svg" class="h-[24px] w-[24px]" />
                                         <span class='text-[9px] font-medium text-[#BCB08A]'>保存</span>
                                     </div>
@@ -275,7 +275,7 @@
                                 else
                                 {
                                     <div class="flex flex-col justify-center items-center px-3 hover:cursor-pointer"
-                                         onclick="handleRemoveBookmarks('@item.ClubId','','club')">
+                                         onclick="ManageBookmark('@item.ClubId','','club')">
                                         <img src="~/Content/assets/images/customer/bookmark-filled.svg" class="h-[24px] w-[24px]" />
                                         <span class='text-[9px] font-medium text-[#BCB08A]'>保存</span>
                                     </div>
@@ -505,14 +505,14 @@
                                 </a>
                                 @if (item.IsBookmarked.ToString().Trim() == "N")
                                 {
-                                    <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="handleAddBookmarks('@item.ClubId','@item.HostId','host')">
+                                    <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
                                         <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="width: 24px; height: 24px;" />
                                     </div>
                                 }
                                 else
                                 {
 
-                                    <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="handleRemoveBookmarks('@item.ClubId','@item.HostId','host')">
+                                    <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
                                         <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="width: 24px; height: 24px;" />
                                     </div>
                                 }
@@ -673,10 +673,6 @@
             let currentPage = @Model.RequestModel.GroupId??1;
             const totalPages = @ViewBag.TotalGroupCount??0; // Define the total number of pages
             let currentPageSecond = @Model.RequestModel.PageNo?? 1;
-            @*var tuplesJson = @Html.Raw(Json.Encode(ViewBag.TuplesJson));
-            var tuples = JSON.parse(tuplesJson);*@
-            //const tuplesCount = tuples.length;
-            //const totalPagesSecond = tuplesCount; // Define the total number of pages
 
             function updatePagination() {
                 // Clear existing page numbers
@@ -707,40 +703,6 @@
                 // Show "next" button and update its disabled state
                 $('#next-btn').prop('disabled', currentPage === totalPages);
             }
-
-            @*// Initial rendering
-            function updatePaginationSecond() {
-                // Clear existing page numbers
-                $('#page-numbers-second').empty();
-
-                // Show "prev" button and update its disabled state
-                $('#prev-btn-second').prop('disabled', currentPageSecond === 1);
-
-                // Show page numbers based on current page
-                for (let i = currentPageSecond; i <= Math.min(currentPageSecond + 4, totalPagesSecond); i++) {
-
-                    let sum = totalPagesSecond - currentPageSecond;
-                    if (sum < 4 && currentPageSecond === totalPagesSecond - sum && i === currentPageSecond) {
-                        for (let j = 6; j < 10; j++) {
-                            if (totalPagesSecond - sum <= j) {
-                                break
-                            }
-                            const pageElement = $('<div>' + j + '</div>');
-                            $('#page-numbers-second').append(pageElement);
-                        }
-                    }
-                    const clubIdValue = tuples[i-1]?.Item2;
-                    const pageElement = $("<div onclick=HostFunction('" + i + "','" + @Model.RequestModel.GroupId + "','" + clubIdValue + "');>" + i + "</div>");
-                    // Add "active" class to the current page
-                    if (i === currentPageSecond) {
-                        pageElement.addClass('active');
-                    }
-                    $('#page-numbers-second').append(pageElement);
-                }
-                // Show "next" button and update its disabled state
-                $('#next-btn-second').prop('disabled', currentPageSecond === totalPagesSecond);
-            }*@
-
             updatePagination();
           /*  updatePaginationSecond();*/
             // Handle "prev" button click
@@ -752,13 +714,6 @@
                 }
             });
 
-            //$('#prev-btn-second').on('click', function () {
-            //    if (currentPageSecond > 1) {
-            //        currentPageSecond--;
-            //        updatePaginationSecond();
-            //    }
-            //});
-
             // Handle "next" button click
             $('#next-btn').on('click', function () {
                 if (currentPage < totalPages) {
@@ -767,12 +722,7 @@
                     updatePagination();
                 }
             });
-            //$('#next-btn-second').on('click', function () {
-            //    if (currentPageSecond < totalPagesSecond) {
-            //        currentPageSecond = Math.min(currentPageSecond + 1, totalPagesSecond);
-            //        updatePaginationSecond();
-            //    }
-            //});
+
             setTimeout(LoaderFunction, 2000);
         });
         function LoaderFunction() {
@@ -799,19 +749,6 @@
 
         $(document).ready(function () {
             $('.owl-carousel').owlCarousel({
-                /*  loop: true,
-                  margin: 10,
-                  responsive: {
-                      0: {
-                          items: 3
-                      },
-                      600: {
-                          items: 3
-                      },
-                      1000: {
-                          items: 5
-                      }
-                  }*/
                 center: true,
                 items: 1.25,
                 loop: true,
@@ -840,55 +777,8 @@
 
         function redirectToSearchPage() {
            var locationId = '@ViewBag.LocationId';
-            //var searchUrl = `/LocationManagement/SearchFilter?locationId=${locationId}`
             var searchUrl = `/Search/Index?LocationId=${locationId}`;
             window.location.href = searchUrl;
-        }
-
-        function handleAddBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-              url: '/BookmarkManagement/AddBookmarks',
-              type: 'POST',
-              data: { clubId: clubId, hostId: hostId, agentType: agentType },
-              success: function (result) {
-                  if (result.success) {
-                      location.reload();
-                  } else {
-                      // Handle failure, e.g., show an error message
-                     // console.log('Error: ' + result.message);
-                      location.reload();
-                  }
-              },
-              error: function () {
-                  // Handle unexpected errors
-                  //console.log('An unexpected error occurred.');
-                  location.reload();
-              }
-          });
-        }
-
-        function handleRemoveBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/RemoveBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        // Handle failure, e.g., show an error message
-                        //console.log('Error: ' + result.message);
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    //console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
         }
 
          function ActivateLoaderFunction() {

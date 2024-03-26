@@ -82,13 +82,13 @@
     <!-- favourite icon -->
     @if (Model.IsBookmarked.ToUpper() == "N")
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="handleAddBookmarks('@Model.ClubId','@Model.HostId','host')">
+        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host')">
             <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" />
         </div>
     }
     else
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="handleRemoveBookmarks('@Model.ClubId','@Model.HostId','host')">
+        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host')">
             <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" />
         </div>
     }
@@ -538,51 +538,6 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
             document.getElementById("loader-id").style.display = "none";
         });
 
-        function handleAddBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/AddBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        // Handle failure, e.g., show an error message
-                        //console.log('Error: ' + result.message);
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    //console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
-        }
-
-        function handleRemoveBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/RemoveBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        // Handle failure, e.g., show an error message
-                        //console.log('Error: ' + result.message);
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    //console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
-        }
         function ActivateLoaderFunction() {
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "flex";

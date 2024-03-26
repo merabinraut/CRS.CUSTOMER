@@ -96,7 +96,7 @@
     </div>
     @if (Model.IsBookmarked.Trim().ToUpper() == "N")
     {
-        <div class="flex items-center flex-col" onclick="handleAddBookmarks('@Model.ClubId', '', 'club')">
+        <div class="flex items-center flex-col" onclick="ManageBookmark('@Model.ClubId', '', 'club')">
             <div class="p-1">
                 <img src="~/Content/assets/images/customer/bookmark-outlined.svg" class="h-[20px] w-[25px]" />
             </div>
@@ -105,7 +105,7 @@
     }
     else
     {
-        <div class="flex items-center flex-col" onclick="handleRemoveBookmarks('@Model.ClubId', '', 'club')">
+        <div class="flex items-center flex-col" onclick="ManageBookmark('@Model.ClubId', '', 'club')">
             <img src="~/Content/assets/images/customer/bookmark-filled.svg" class="h-[20px] w-[25px]">
             <span class="text-[#BCB08A] text-[9px] font-medium" style="line-height: 100%;">保存</span>
         </div>
@@ -341,7 +341,7 @@
                                         }
                                         @if (item.IsBookmarked.Trim().ToUpper() == "Y")
                                         {
-                                            <div class="absolute top-2 right-2" style="width:26px; height:26px;" onclick="handleRemoveBookmarks('@item.ClubId','@item.HostId','host')">
+                                            <div class="absolute top-2 right-2" style="width:26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
                                                 <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="height:26px; width:26px" />
                                             </div>
 
@@ -372,7 +372,7 @@
                                         }
                                         else
                                         {
-                                            <div class="absolute top-2 right-2" style="width: 26px; height:26px;" onclick="handleAddBookmarks('@item.ClubId','@item.HostId','host')">
+                                            <div class="absolute top-2 right-2" style="width: 26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
                                                 <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height:26px; width:26px" />
                                             </div>
                                         }
@@ -1819,60 +1819,6 @@
             localStorage.clear();
         })</script>
     <script>
-        //function ClubReservationActionFunction(i, j, k) {
-        //    DataStorageFunction(i, j);
-        //    window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
-        //}
-        //const DataStorageFunction = (i, j) => {
-        //    localStorage.setItem("ClubId", EncryptParameter(i));
-        //    localStorage.setItem("ClubName", EncryptParameter(j));
-        //}
-
-        function handleAddBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/AddBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
-        }
-
-        function handleRemoveBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/RemoveBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        // Handle failure, e.g., show an error message
-                        console.log('Error: ' + result.message);
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
-        }
         function ActivateLoaderFunction() {
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "flex";
