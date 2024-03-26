@@ -768,24 +768,6 @@
     </script>
 
     <script>
-        //function limitInputLength(input, maxLength) {
-        //    var value = input.value;
-        //    // Remove non-numeric characters
-        //    var numericValue = value.replace(/\D/g, '');
-        //    // Trim to maximum length
-        //    var trimmedValue = numericValue.substring(0, maxLength);
-        //    // Update input value
-        //    input.value = trimmedValue;
-        //}
-        //function validateInput(input) {
-        //    // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
-        //    var regex = /^[a-zA-Z0-9_\.\-\u3040-\u309f\u30a0-\u30ff]*$/u;
-        //    // Check if the input value matches the pattern
-        //    if (!regex.test(input.value)) {
-        //        // Clear the input value if it doesn't match the pattern
-        //        input.value = input.value.replace(/[^a-zA-Z0-9_\.\-\u3040-\u309f\u30a0-\u30ff]/gu, '');
-        //    }
-        //}
         function OnLoadLoaderFunction() {
             document.getElementById('loader-id-v2').style.display = 'flex';
             document.body.addEventListener('touchmove', preventDefault, { passive: false });
@@ -797,15 +779,6 @@
             }, 10000);
         }
 
-        /*function EnableLoaderFunction() {
-            document.getElementById('loader-id-v2').style.display = 'flex';
-            console.log("asdfasdfsadfasdfdasfsadf")
-            ocument.body.classList.add('no-scroll-loader');
-        }
-        function DisableLoaderFunction() {
-            document.getElementById('loader-id-v2').style.display = 'none';
-            document.body.classList.remove('no-scroll-loader');
-        }*/
         function preventDefault(event) {
             event.preventDefault();
         }
@@ -827,6 +800,7 @@
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="~/Content/assets/js/reservation-common.js"></script>
     <script src="~/Content/assets/js/search-filter-common.js"></script>
+    <script src="~/Content/assets/js/BookmarkManagement.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

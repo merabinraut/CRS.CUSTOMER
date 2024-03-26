@@ -82,13 +82,13 @@
     <!-- favourite icon -->
     @if (Model.IsBookmarked.ToUpper() == "N")
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="handleAddBookmarks('@Model.ClubId','@Model.HostId','host')">
+        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="AddBookmark('@Model.ClubId','@Model.HostId','host')">
             <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" />
         </div>
     }
     else
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="handleRemoveBookmarks('@Model.ClubId','@Model.HostId','host')">
+        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="RemoveBookmark('@Model.ClubId','@Model.HostId','host')">
             <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" />
         </div>
     }
@@ -242,13 +242,6 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
                 </p>
             }
         </div>
-        <!-- for button -->
-        @*<button class="flex justify-center items-center gap-2 mt-[10px] "
-                    style="background:linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%); border-radius:3px; color:#EDF1F6">
-                <span class="py-3 text-center text-[15px] font-semibold leading-[23px] "
-                      style="letter-spacing: -0.16px;">あなたとのマッチ度</span>
-                <span class="py-3 text-[20px] font-bold leading-[23px]" style="letter-spacing: 1px;">@Model.CustomerHostCompatibility</span>
-            </button>*@
     </div>
 
     <!-- introduction  -->
@@ -446,61 +439,7 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
                 来店予約
             </p>
         </button>
-
     </div>
-
-    <!--<div id="modal2" class="modal">
-        <div class="modal-content">-->
-    <!-- <span class="close-btn"  >&times;</span> -->
-    <!--<div class="fixed bottom-0 w-[100%] left-0 right-0 bg-white z-20">
-
-                <div class="py-[10px] px-4 border-b border-b-[#EDEDED] flex justify-between bg-white">
-                    <h5 id="drawer-bottom-label" class="text-sm text-secondary-1">
-                        共有
-                    </h5>
-                    <button onclick="closeModal('modal2')" type="button" data-drawer-hide="drawer-bottom-example"
-                            aria-controls="drawer-bottom-example" class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                            <path d="M13.3 0.710032C12.91 0.320032 12.28 0.320032 11.89 0.710032L6.99997 5.59003L2.10997 0.700032C1.71997 0.310032 1.08997 0.310032 0.699971 0.700032C0.309971 1.09003 0.309971 1.72003 0.699971 2.11003L5.58997 7.00003L0.699971 11.89C0.309971 12.28 0.309971 12.91 0.699971 13.3C1.08997 13.69 1.71997 13.69 2.10997 13.3L6.99997 8.41003L11.89 13.3C12.28 13.69 12.91 13.69 13.3 13.3C13.69 12.91 13.69 12.28 13.3 11.89L8.40997 7.00003L13.3 2.11003C13.68 1.73003 13.68 1.09003 13.3 0.710032Z"
-                                  fill="black" />
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="py-[12px] px-4 bg-white">
-                    <div class="flex py-[12px] px-4 gap-[12px] items-center">
-                        <img src="~/Content/assets/images/customer/line-1.svg" alt="img" class="h-[22px] w-[22px]" />
-                        <div class="text-sm text-secondary-1">LINE</div>
-                    </div>
-                    <div class="flex py-[12px] px-4 gap-[12px] items-center">
-                        <img src="~/Content/assets/images/customer/tiktok-1.svg" alt="img" class="h-[22px] w-[22px]" />
-
-                        <div class="text-sm text-secondary-1">Tiktok</div>
-
-                    </div>
-                    <div class="flex py-[12px] px-4 gap-[12px] items-center">
-                        <img src="~/Content/assets/images/customer/insta.svg" alt="img" class="h-[22px] w-[22px]" />
-
-                        <div class="text-sm text-secondary-1">Instagram</div>
-
-                    </div>
-                    <div class="flex py-[12px] px-4 gap-[12px] items-center">
-                        <img src="~/Content/assets/images/customer/x.svg" alt="img" class="h-[22px] w-[22px]" />
-
-                        <div class="text-sm text-secondary-1">Twitter</div>
-
-                    </div>
-                    <div class="flex py-[12px] px-4 gap-[12px] items-center">
-                        <img src="~/Content/assets/images/customer/copy.svg" alt="img" class="h-[22px] w-[22px]" />
-
-                        <div class="text-sm text-secondary-1">シェアリンクをコピー</div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>-->
 </div>
 <div class="loader" id="loader-id">
     <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
@@ -538,51 +477,6 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
             document.getElementById("loader-id").style.display = "none";
         });
 
-        function handleAddBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/AddBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        // Handle failure, e.g., show an error message
-                        //console.log('Error: ' + result.message);
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    //console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
-        }
-
-        function handleRemoveBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/RemoveBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        // Handle failure, e.g., show an error message
-                        //console.log('Error: ' + result.message);
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    //console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
-        }
         function ActivateLoaderFunction() {
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "flex";
@@ -627,10 +521,6 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
             }
         }
 
-        // Open the first modal automatically when the page loads
-        // window.onload = function() {
-        //     openModal('modal1');
-        // }
         // Close the modal only if the overlay is clicked outside of modal1
         window.onclick = function (event) {
             var modal1 = document.getElementById('modal1');
