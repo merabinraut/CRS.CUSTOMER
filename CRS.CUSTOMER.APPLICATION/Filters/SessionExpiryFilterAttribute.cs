@@ -24,8 +24,7 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                 Functions.Add("/NotificationManagement/ViewAllNotifications");
                 Functions.Add("/BookmarkManagement/Index");
                 Functions.Add("/ReservationManagementV2/InitiateClubReservationProcess");
-                Functions.Add("/BookmarkManagement/AddBookmarks");
-                Functions.Add("/BookmarkManagement/RemoveBookmarks");
+                Functions.Add("/BookmarkManagement/ManageBookmark");
                 Functions.Add("/LOCATIONMANAGEMENT/CLUBDETAIL_V2");
                 if (Functions.Count > 0)
                 {
@@ -39,7 +38,11 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                             "/Home/Index");
                         if (filterContext.HttpContext.Request.IsAjaxRequest())
                         {
-                            var queryString = HttpContext.Current.Request.Url.Query;
+                            var queryString = string.Empty;
+                            if (HttpContext.Current.Request.RequestType == "POST")
+                                queryString = HttpContext.Current.Request.Form.ToString();
+                            else
+                                queryString = HttpContext.Current.Request.Url.Query;
                             if (queryString.StartsWith("?"))
                                 queryString = queryString.Substring(1);
                             var dynamicParameters = queryString;
@@ -47,7 +50,8 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                             if (string.IsNullOrEmpty(ReturnURL) || ReturnURL.Trim() == "/")
                                 ReturnURL = "/DashboardV2/Index";
 
-                            ReturnURL += $"?IsRedirectURL=true&FunctionName=InitiateClubReservationFunction&{dynamicParameters}";
+                            //ReturnURL += $"?IsRedirectURL=true&FunctionName=InitiateClubReservationFunction&{dynamicParameters}";
+                            ReturnURL += $"?IsRedirectURL=true&FunctionName=ManageBookmark&{dynamicParameters}";
                             RedirectURL.Query = $"ReturnURL={HttpUtility.UrlEncode(ReturnURL)}";
 
                             filterContext.Result = new JsonResult
@@ -71,18 +75,5 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
             }
             base.OnActionExecuting(filterContext);
         }
-        //public override void OnActionExecuting(ActionExecutingContext filterContext)
-        //{
-        //    HttpContext ctx = HttpContext.Current;
-        //    if (ctx.Session["Username"] == null)
-        //    {
-        //        filterContext.Result = new RedirectToRouteResult(
-        //                new RouteValueDictionary {
-        //                { "Controller", "Home" },
-        //                { "Action", "LogOff" }
-        //                });
-        //    }
-        //    base.OnActionExecuting(filterContext);
-        //}
     }
 }

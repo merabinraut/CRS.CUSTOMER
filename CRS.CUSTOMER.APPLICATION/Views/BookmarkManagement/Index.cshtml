@@ -140,7 +140,7 @@
                             <div class=" w-6 h-6 flex flex-col justify-center items-center  scale-90">
                                 <div class="flex flex-col justify-center items-center hover:cursor-pointer">
 
-                                    <div onclick="ManageBookmark('@club.ClubId','','club')">
+                                    <div onclick="ManageBookmark('@club.ClubId','','club', this)">
                                         <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[24px] w-[24px] image-cover" alt="filled bookmark" />
                                     </div>
 
@@ -300,7 +300,7 @@
                                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                                          src="@item.HostImage" />
                                 </div>
-                                <div id="like" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
+                                <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                     <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                                 </div>
                             </div>

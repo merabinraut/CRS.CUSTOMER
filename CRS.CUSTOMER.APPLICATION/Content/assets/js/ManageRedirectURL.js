@@ -17,6 +17,8 @@ function IsSameDomain(url) {
 function CheckIfHasRedirectURL(Data) {
     if (Data != null && Data.Code == 999 && Data.RedirectURL && IsValidURL(Data.RedirectURL) && IsSameDomain(Data.RedirectURL)) {
         window.location.href = Data.RedirectURL;
+        window.location.replace(Data.RedirectURL);
+        window.history.replaceState(null, '', Data.RedirectURL);
         return;
     }
 }

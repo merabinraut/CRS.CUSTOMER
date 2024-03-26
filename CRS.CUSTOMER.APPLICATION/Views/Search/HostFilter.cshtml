@@ -126,13 +126,13 @@
                         </div>
                         @if (item.IsBookmarked.ToUpper() == "Y")
                         {
-                            <div id="like" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
+                            <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                 <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
                         else
                         {
-                            <div id="like" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
+                            <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                 <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
@@ -177,13 +177,13 @@ else
                         </div>
                         @if (item.IsBookmarked.ToUpper() == "Y")
                         {
-                            <div id="like" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
+                            <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                 <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
                         else
                         {
-                            <div id="like" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
+                            <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                 <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }

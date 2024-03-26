@@ -516,7 +516,7 @@
                                                     <img src="@item.HostLogo" alt="host-logo" />
                                                     @if (item.IsBookmarked.ToUpper() == "Y")
                                                     {
-                                                        <div class="like-host" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
+                                                        <div class="like-host" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
                                                                 <g filter="url(#filter0_d_4820_24085)">
                                                                     <circle cx="17" cy="17" r="10" fill="#D75A8B" />
@@ -539,7 +539,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <div class="like-host" onclick="ManageBookmark('@item.ClubId','@item.HostId','host')">
+                                                        <div class="like-host" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                                             <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
                                                                  viewBox="0 0 31 34" fill="none">
                                                                 <g filter="url(#filter0_d_3058_46008)">
@@ -764,7 +764,8 @@
 {
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap"></script>
-    <script>// Get all the div elements
+    <script>
+    // Get all the div elements
 
         var divs = document.querySelectorAll('.select-location-store');
         var seleclLocationCLub = document.querySelectorAll('.select-location-club');
@@ -795,7 +796,8 @@
             });
         });</script>
 
-    <script type="text/javascript">// see more
+    <script type="text/javascript">
+    // see more
         function seemore() {
             var x = document.getElementById("seemore");
 
@@ -842,7 +844,8 @@
             });
         });</script>
     <!--#region host-club.php js-->
-    <script>// Get all the div elements
+    <script>
+    // Get all the div elements
 
         var divs = document.querySelectorAll('.select-location-store');
         var inputField = document.querySelector('input[name="selectLocationStore"]'); // Select by name attribute
@@ -860,7 +863,8 @@
             });
         });</script>
 
-    <script>// Define searchbybusinesshours
+    <script>
+    // Define searchbybusinesshours
         var multiSelectValues = [];
 
         var multiSelect = document.querySelectorAll('.multi-select ');
@@ -899,30 +903,31 @@
                 $('#clubavailability-id').val(multiSelectValues);
             });
         });</script>
-    <script>// Define searchbybusinesshours
+    <script>
+    // Define searchbybusinesshours
         var searchbybusinesshours = document.querySelectorAll('.search-by-business-hours');
 
         // Add event listener to each searchbybusinesshours div
-     /*   searchbybusinesshours.forEach(function (div) {
-            div.addEventListener('click', function () {
-                // Remove the 'active' class from all divs
-                searchbybusinesshours.forEach(function (d) {
-                    d.classList.remove('active');
-                });
-                // Add the 'active' class to the clicked div
-                this.classList.add('active');
-                if (this.classList.contains('contains-time-class')) {
-                    var div = document.getElementById('time-div-id');
-                    div.style.display = 'block';
-                } else {
-                    var div = document.getElementById('time-div-id');
-                    div.style.display = 'none';
-                }
-                // Get the text content of the specific element within the clicked div
-                var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue');
-                $('#time-type-id').val(searchbybusinesshoursSelectValue.getAttribute('data-info'));
-            });
-        });*/
+        /*   searchbybusinesshours.forEach(function (div) {
+               div.addEventListener('click', function () {
+                   // Remove the 'active' class from all divs
+                   searchbybusinesshours.forEach(function (d) {
+                       d.classList.remove('active');
+                   });
+                   // Add the 'active' class to the clicked div
+                   this.classList.add('active');
+                   if (this.classList.contains('contains-time-class')) {
+                       var div = document.getElementById('time-div-id');
+                       div.style.display = 'block';
+                   } else {
+                       var div = document.getElementById('time-div-id');
+                       div.style.display = 'none';
+                   }
+                   // Get the text content of the specific element within the clicked div
+                   var searchbybusinesshoursSelectValue = this.querySelector('.searchbybusinesshoursValue');
+                   $('#time-type-id').val(searchbybusinesshoursSelectValue.getAttribute('data-info'));
+               });
+           });*/
         searchbybusinesshours.forEach(function (div) {
             div.addEventListener('click', function () {
                 // Check if the clicked div already has the 'active' class
@@ -959,7 +964,8 @@
         });
 
     </script>
-    <script type="text/javascript">// see more
+    <script type="text/javascript">
+    // see more
         function seemore() {
             var x = document.getElementById("seemore");
 
@@ -1007,7 +1013,8 @@
         });</script>
     <!--#endregion host-club.php js-->
     <!--#region club.php JS-->
-    <script>// Get all the div elements
+    <script>
+    // Get all the div elements
 
         var selectlocationstorehostsection = document.querySelectorAll('.select-location-store-host-section');
         // Add click event listeners to each div
@@ -1024,7 +1031,8 @@
         });</script>
     <!--#endregion club.php JS-->
     <!--#region new-store.php JS-->
-    <script>var hosts = document.querySelectorAll('.hosts-that-match-you');
+    <script>
+    var hosts = document.querySelectorAll('.hosts-that-match-you');
         hosts.forEach(function (host) {
             host.addEventListener('click', function () {
                 this.classList.toggle('active');
@@ -1032,7 +1040,8 @@
         });</script>
     <!--#endregion new-store.php JS-->
     <!--#region near-location.php JS-->
-    <script>const tabs = document.querySelector(".wrapper");
+    <script>
+    const tabs = document.querySelector(".wrapper");
         const tabButton = document.querySelectorAll(".tab-button");
         const contents = document.querySelectorAll(".content");
 
@@ -1051,7 +1060,8 @@
                 element.classList.add("active");
             }
         };</script>
-    <script>// Get all the div elements
+    <script>
+    // Get all the div elements
 
         var selectnearlocation = document.querySelectorAll('.select-near-location');
 
@@ -1295,7 +1305,8 @@
     </script>
     <!--#endregion map.php JS-->
     <!--#region time-index.php-->
-    <script>var showTimeLists = document.querySelectorAll('.showTimeList');
+    <script>
+    var showTimeLists = document.querySelectorAll('.showTimeList');
 
         showTimeLists.forEach(function (showTimeList) {
             showTimeList.addEventListener('click', function (event) {
@@ -1320,7 +1331,8 @@
                 }
             });
         });</script>
-    <script>document.querySelectorAll('.timeList').forEach(item => {
+    <script>
+    document.querySelectorAll('.timeList').forEach(item => {
             item.addEventListener('click', event => {
                 if (event.currentTarget.classList.contains('disabled')) {
                     return;

@@ -1299,7 +1299,7 @@
                                                 <div class="w-full flex justify-center relative">
                                                     <img style="width:112px" class="w-[112px] h-[154px] object-cover rounded-[2px]" src="${hostImage}" alt="hostlogo" />
                                                      <div class="absolute top-2 right-2" style="width: 24px; height: 24px;">
-                                                             <img src="${BookmarkLabel}" alt="unfilled"  style="width: 24px; height: 24px;" onclick="${host.IsBookmarked.trim().toUpperCase() == 'Y' ? 'ManageBookmark' : 'ManageBookmark'}('${host.ClubId}', '${host.HostId}', 'host')" />
+                                                             <img src="${BookmarkLabel}" alt="unfilled"  style="width: 24px; height: 24px;" onclick="${host.IsBookmarked.trim().toUpperCase() == 'Y' ? 'ManageBookmark' : 'ManageBookmark'}('${host.ClubId}', '${host.HostId}', 'host', ${this})" />
                                                     </div>
 
                                                 </div>

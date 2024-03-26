@@ -82,13 +82,13 @@
     <!-- favourite icon -->
     @if (Model.IsBookmarked.ToUpper() == "N")
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host')">
+        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
             <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" />
         </div>
     }
     else
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host')">
+        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
             <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" />
         </div>
     }
@@ -510,7 +510,8 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="~/Content/CustomHelper.js"></script>
-    <script>const shareButton = document.querySelector("#shareButton");
+    <script>
+    const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -556,7 +557,8 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
         }</script>
-    <script>// Function to open a specific modal
+    <script>
+    // Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -677,7 +679,8 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
         // Update the chart
         hostRadarChart.update();
     </script>
-    <script>function gotoClubDetail(clubid, locationid) {
+    <script>
+    function gotoClubDetail(clubid, locationid) {
             if (clubid != null && locationid != null) {
                 window.location.href = '/LocationManagement/ClubDetail_V2?ClubId=' + clubid + '&LocationId=' + locationid;
             }

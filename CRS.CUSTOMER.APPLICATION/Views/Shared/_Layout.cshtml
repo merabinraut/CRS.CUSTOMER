@@ -347,6 +347,7 @@
             <!----Render Body section start-->
             <div>
                 <input type="text" id="current-location-id" value="" hidden />
+                @Html.AntiForgeryToken()
                 @RenderBody()
                 <div class="loader" id="loader-id-v2" style="display:none;">
                     <img src="~/Content/assets/images/loader.gif" class="h-[150px]" style="opacity:100%" />
