@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.REPOSITORY.CommonManagement;
 using CRS.CUSTOMER.SHARED;
+using CRS.CUSTOMER.SHARED.CommonManagement;
 using System.Collections.Generic;
 
 namespace CRS.CUSTOMER.BUSINESS.CommonManagement
@@ -25,6 +26,10 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         public List<StaticDataCommon> GetDropDown_V2(string Flag, string SearchField1 = "", string SearchField2 = "")
         {
             return _REPO.GetDropDown_V2(Flag, SearchField1, SearchField2);
+        }
+        public List<PrivilegesCommon> GetCustomerPrivileges()
+        {
+            return _REPO.GetCustomerPrivileges();
         }
     }
 }

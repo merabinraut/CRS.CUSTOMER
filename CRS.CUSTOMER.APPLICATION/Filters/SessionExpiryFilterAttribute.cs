@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CRS.CUSTOMER.APPLICATION.Library;
+using CRS.CUSTOMER.BUSINESS.CommonManagement;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace CRS.CUSTOMER.APPLICATION.Filters
 {
@@ -11,7 +13,7 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var Functions = new List<string>();
+            var Functions = new List<Privileges>();
             HttpContext httpContext = HttpContext.Current;
             string ControllerName = string.Empty;
             string ActionName = string.Empty;
@@ -19,19 +21,23 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
             var DataTokens = HttpContext.Current.Request.RequestContext.RouteData.DataTokens;
             if (RouteValues != null)
             {
+                Functions = httpContext.Session["Functions"] as List<Privileges>;
+                if (Functions == null || Functions.Count <= 0)
+                {
+                    var CommonBusiness = new CommonManagementBusiness();
+                    var GetCustomerPrivileges = CommonBusiness.GetCustomerPrivileges();
+                    Functions = GetCustomerPrivileges.MapObjects<Privileges>();
+                    httpContext.Session["Functions"] = Functions;
+                }
                 if (RouteValues.ContainsKey("action")) ActionName = RouteValues["action"].ToString().ToUpper();
                 if (RouteValues.ContainsKey("controller")) ControllerName = RouteValues["controller"].ToString().ToUpper();
-                Functions.Add("/NotificationManagement/ViewAllNotifications");
-                Functions.Add("/BookmarkManagement/Index");
-                Functions.Add("/ReservationManagementV2/InitiateClubReservationProcess");
-                Functions.Add("/BookmarkManagement/ManageBookmark");
-                //Functions.Add("/LOCATIONMANAGEMENT/CLUBDETAIL_V2");
                 if (Functions.Count > 0)
                 {
-                    var Function = Functions.ConvertAll(x => x.ToUpper());
+                    Functions.ForEach(x => x.FunctionURL = x.FunctionURL.ToUpper());
                     var ActionURL = $"/{ControllerName}/{ActionName}";
-                    if (Function.Contains(ActionURL) && httpContext.Session["UserName"] == null)
+                    if (Functions.Any(x => x.FunctionURL.Contains(ActionURL)) && httpContext.Session["UserName"] == null)
                     {
+                        var FunctionName = Functions.FirstOrDefault(x => x.FunctionURL == ActionURL);
                         var RedirectURL = new UriBuilder(HttpContext.Current.Request.Url.Scheme,
                             HttpContext.Current.Request.Url.Host,
                             HttpContext.Current.Request.Url.Port,
@@ -49,12 +55,12 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                             var ReturnURL = HttpContext.Current.Request.UrlReferrer?.PathAndQuery;
                             if (string.IsNullOrEmpty(ReturnURL) || ReturnURL.Trim() == "/")
                                 ReturnURL = "/DashboardV2/Index";
-
-                            //ReturnURL += $"?IsRedirectURL=true&FunctionName=InitiateClubReservationFunction&{dynamicParameters}";
-                            var separator = ReturnURL.Contains("?") ? "&" : "?";
-                            ReturnURL += $"{separator}IsRedirectURL=true&FunctionName=ManageBookmark&{dynamicParameters}";
+                            if (!string.IsNullOrEmpty(FunctionName.AdditionalValue))
+                            {
+                                var separator = ReturnURL.Contains("?") ? "&" : "?";
+                                ReturnURL += $"{separator}IsRedirectURL=true&FunctionName={FunctionName.AdditionalValue}&{dynamicParameters}";
+                            }
                             RedirectURL.Query = $"ReturnURL={HttpUtility.UrlEncode(ReturnURL)}";
-
                             filterContext.Result = new JsonResult
                             {
                                 Data = new
@@ -75,6 +81,11 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                 }
             }
             base.OnActionExecuting(filterContext);
+        }
+        private class Privileges
+        {
+            public string FunctionURL { get; set; }
+            public string AdditionalValue { get; set; }
         }
     }
 }

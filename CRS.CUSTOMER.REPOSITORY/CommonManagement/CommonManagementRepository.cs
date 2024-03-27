@@ -1,4 +1,5 @@
 ﻿using CRS.CUSTOMER.SHARED;
+using CRS.CUSTOMER.SHARED.CommonManagement;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -48,5 +49,13 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
                 : new List<StaticDataCommon>();
         }
 
+        public List<PrivilegesCommon> GetCustomerPrivileges()
+        {
+            string SQL = $"EXEC sproc_get_function @Flag = 'gcfl'";
+            var dbResponse = _DAO.ExecuteDataTable(SQL);
+            if (dbResponse != null && dbResponse.Rows.Count > 0)
+                return _DAO.DataTableToListObject<PrivilegesCommon>(dbResponse).ToList();
+            return new List<PrivilegesCommon>();
+        }
     }
 }

@@ -262,7 +262,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
         }
 
-        [HttpPost, OverrideActionFilters]
+        [HttpPost]
         public JsonResult ChangeProfileImage(HttpPostedFileBase file)
         {
             var common = new UserProfileCommon();
