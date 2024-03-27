@@ -25,7 +25,7 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                 Functions.Add("/BookmarkManagement/Index");
                 Functions.Add("/ReservationManagementV2/InitiateClubReservationProcess");
                 Functions.Add("/BookmarkManagement/ManageBookmark");
-                Functions.Add("/LOCATIONMANAGEMENT/CLUBDETAIL_V2");
+                //Functions.Add("/LOCATIONMANAGEMENT/CLUBDETAIL_V2");
                 if (Functions.Count > 0)
                 {
                     var Function = Functions.ConvertAll(x => x.ToUpper());
@@ -46,12 +46,13 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                             if (queryString.StartsWith("?"))
                                 queryString = queryString.Substring(1);
                             var dynamicParameters = queryString;
-                            var ReturnURL = HttpContext.Current.Request.UrlReferrer.PathAndQuery;
+                            var ReturnURL = HttpContext.Current.Request.UrlReferrer?.PathAndQuery;
                             if (string.IsNullOrEmpty(ReturnURL) || ReturnURL.Trim() == "/")
                                 ReturnURL = "/DashboardV2/Index";
 
                             //ReturnURL += $"?IsRedirectURL=true&FunctionName=InitiateClubReservationFunction&{dynamicParameters}";
-                            ReturnURL += $"?IsRedirectURL=true&FunctionName=ManageBookmark&{dynamicParameters}";
+                            var separator = ReturnURL.Contains("?") ? "&" : "?";
+                            ReturnURL += $"{separator}IsRedirectURL=true&FunctionName=ManageBookmark&{dynamicParameters}";
                             RedirectURL.Query = $"ReturnURL={HttpUtility.UrlEncode(ReturnURL)}";
 
                             filterContext.Result = new JsonResult

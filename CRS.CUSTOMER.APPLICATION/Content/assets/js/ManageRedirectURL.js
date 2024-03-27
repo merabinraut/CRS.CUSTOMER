@@ -27,14 +27,25 @@ function CheckIfHasRedirectFunction() {
     var QueryData = ParseQueryString(window.location.href);
     var IsRedirectURL = QueryData['IsRedirectURL'];
     var FunctionName = QueryData['FunctionName'];
+
     if (IsRedirectURL && FunctionName && typeof window[FunctionName] === 'function') {
         var queryString = window.location.search.substring(1);
-        var queryParams = ParseQueryString(queryString);
+        var startIndex = queryString.indexOf("IsRedirectURL=true") + "IsRedirectURL=true".length + 1;
+        var remainingParams = queryString.substring(startIndex);
+
+        var allParams = ParseQueryString(remainingParams);
+
         const paramsToIgnore = ['IsRedirectURL', 'FunctionName'];
         const params = Object.fromEntries(
-            Object.entries(queryParams).filter(([key]) => !paramsToIgnore.includes(key))
+            Object.entries(allParams).filter(([key]) => !paramsToIgnore.includes(key))
         );
+
         window[FunctionName].apply(null, Object.values(params));
+        var urlString = window.location.href;
+        var index = urlString.indexOf('IsRedirectURL=true&FunctionName');
+        var filteredUrl = urlString.substring(0, index);
+        //history.replaceState({}, document.title, filteredUrl);
+        window.history.replaceState(null, '', filteredUrl);
     }
 }
 
