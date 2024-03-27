@@ -38,7 +38,7 @@
             {
                 url = Url.Action("Index", "DashboardV2");
             }
-            <div class="flex gap-[6px] items-center" onclick="window.history.back(-1)">
+            <div class="flex gap-[6px] items-center" onclick="WindowHistoryBack();">
                 <div class="text-xl text-warmgray cursor-pointer"><i class="las la-angle-left"></i></div>
                 <div class="text-charcoalBlack text-sm">戻る</div>
             </div>
@@ -48,4 +48,19 @@
         @RenderBody()
 
     </div>
+    <script>
+        function WindowHistoryBack() {
+            var previousUrl = document.referrer;
+            if (isLoginPageWithReturnUrl(previousUrl)) {
+                window.location.href = '/DashboardV2/Index';
+            }
+            else {
+                window.history.back();
+            }
+        }
+
+        function isLoginPageWithReturnUrl(url) {
+            return url.includes("ReturnURL");
+        }
+    </script>
 </body>

@@ -574,6 +574,21 @@
     <script src="~/Content/assets/js/search-filter-common.js"></script>
     <script src="~/Content/assets/js/ManageRedirectURL.js"></script>
     <script src="~/Content/assets/js/BookmarkManagement.js"></script>
+    <script>
+        function WindowHistoryBack() {
+            var previousUrl = document.referrer;
+            if (isLoginPageWithReturnUrl(previousUrl)) {
+                window.location.href = '/DashboardV2/Index';
+            }
+            else {
+                window.history.back();
+            }
+        }
+
+        function isLoginPageWithReturnUrl(url) {
+            return url.includes("ReturnURL");
+        }
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
