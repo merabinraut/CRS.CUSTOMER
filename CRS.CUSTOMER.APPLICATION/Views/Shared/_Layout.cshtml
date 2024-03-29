@@ -624,14 +624,9 @@
                     <div class="p-4">
                         <div class="footer-link text-white grid grid-cols-2 ">
                             <div class="grid gap-[8px]">
-                                <!--<a href="#" class="text-xs">
-                                    サービス-->
-                                @*service*@
-                                @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.TopPage*@
-                                <!--</a>-->
-                                <a href="#" class="text-xs">
-                                    ホスログの使い方
-                                    @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.FindAHostClub*@
+                                <a href="@Url.Action("operatingcompany","Footer")" class="text-xs">
+                                    @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
+                                    運営会社
                                 </a>
                                 <a href="@Url.Action("faq","Footer")" class="text-xs">
                                     よくあるご質問
@@ -646,16 +641,16 @@
                                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
                                     </a>*@
                             </div>
-                            <div class="grid gap-[12px]">
+                            <div class="grid gap-[8px]">
 
                                 <!--<a href="@Url.Action("Register","Home")" class="text-xs">-->
                                 @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry*@
                                 <!--新規会員登録(無料)
                                 </a>-->
-                                <a href="@Url.Action("operatingcompany","Footer")" class="text-xs">
-                                    @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
-                                    運営会社
-                                </a>
+                                <!--<a href="@Url.Action("operatingcompany","Footer")" class="text-xs">-->
+                                @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
+                                <!--運営会社
+                                </a>-->
                                 <a href="@Url.Action("privacypolicy","Footer")" class="text-xs">
                                     プライバシーポリシー
                                     @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy*@
@@ -663,6 +658,9 @@
                                 <a href="@Url.Action("termsAndCondition","Footer")" class="text-xs">
                                     @* terms and condition*@
                                     ホスログ利用規約
+                                </a>
+                                <a href="" class="text-xs" style="height:16px">
+                                   @* 運営会社*@   
                                 </a>
                                 @*                                <a href="https://hoslog.jp/" class="text-xs">
                                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
