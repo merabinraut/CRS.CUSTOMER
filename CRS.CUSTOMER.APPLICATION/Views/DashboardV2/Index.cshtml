@@ -1081,7 +1081,7 @@
                         </div>
                     </div>
                 </div>
-                <input hidden id="hourShadowval" value="02" />
+                <input hidden id="hourShadowval" value="01" />
                 <input hidden id="minuteShadowval" value="00" />
             </div>
             <button class="btn btn-primary mt-3" style=" border-radius: 8px; " onclick="WorkingHoursSubmitFunction();">
@@ -1899,6 +1899,7 @@
         el: '#year1',
         type: 'infinite',
         source: [
+            { value: "01", text: "01" },
             { value: "02", text: "02" },
             { value: "03", text: "03" },
             { value: "04", text: "04" },
