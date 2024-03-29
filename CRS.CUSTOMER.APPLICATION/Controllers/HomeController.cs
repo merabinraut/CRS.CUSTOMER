@@ -314,6 +314,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Login Management
+        [HttpGet]
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(string ReturnURL = "")
         {
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
@@ -354,6 +356,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(LoginRequestModel Model, bool RememberMe = false, string ReturnURL = "")
         {
             if (ModelState.IsValid)
