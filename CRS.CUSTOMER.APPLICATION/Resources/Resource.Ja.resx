@@ -1007,7 +1007,7 @@
     <comment>Location Management Controller (Club Detail View)</comment>
   </data>
   <data name="ReviewAndComments" xml:space="preserve">
-    <value>レビューとコメント</value>
+    <value>レビュー</value>
     <comment>_Layout</comment>
   </data>
   <data name="ReviewClub" xml:space="preserve">
@@ -1301,7 +1301,7 @@
     <comment>Notification Controller</comment>
   </data>
   <data name="YouHaveNoReviewCommentsYet" xml:space="preserve">
-    <value>まだレビューとコメントがありません</value>
+    <value>まだレビュがありません</value>
     <comment>Review Nav</comment>
   </data>
 </root>

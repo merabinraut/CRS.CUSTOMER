@@ -32,6 +32,7 @@ body {
     margin: 0;
     box-shadow: none;
     height: 100vh;
+    letter-spacing:0.5px
     /*overscroll-behavior: none;*/
 /*    touch-action: pan-y;
     -webkit-overflow-scrolling: touch;*/

@@ -314,7 +314,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Login Management
-        public ActionResult Index()
+        [HttpGet]
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
+        public ActionResult Index(string ReturnURL = "")
         {
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             string phaseValue = ConfigurationManager.AppSettings["phase"];
@@ -347,13 +349,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
+                ViewBag.ReturnURL = (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL)) ? ReturnURL : string.Empty;
                 return View(Response);
             }
             else return RedirectToAction("Index", "DashboardV2");
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Index(LoginRequestModel Model, bool RememberMe = false)
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
+        public ActionResult Index(LoginRequestModel Model, bool RememberMe = false, string ReturnURL = "")
         {
             if (ModelState.IsValid)
             {
@@ -375,12 +379,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Expires = DateTime.Now.AddMonths(-1)
                     });
                 }
+                if (loginResponse.Item3)
+                    if (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL))
+                        return Redirect(ReturnURL);
                 return RedirectToAction(loginResponse.Item1, loginResponse.Item2);
             }
             else
             {
                 var errorMessages = ModelState.Where(x => x.Value.Errors.Count > 0)
-                                    //.SelectMany(x => x.Value.Errors.Select(e => $"{x.Key}: {e.ErrorMessage}"))
                                     .SelectMany(x => x.Value.Errors.Select(e => $"{e.ErrorMessage}"))
                                     .ToList();
 

@@ -82,14 +82,14 @@
     <!-- favourite icon -->
     @if (Model.IsBookmarked.ToUpper() == "N")
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="handleAddBookmarks('@Model.ClubId','@Model.HostId','host')">
-            <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" />
+        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
+            <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height:59px;width:60px;" />
         </div>
     }
     else
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="handleRemoveBookmarks('@Model.ClubId','@Model.HostId','host')">
-            <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" />
+        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
+            <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="height:59px;width:60px;" />
         </div>
     }
 </div>
@@ -510,7 +510,8 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="~/Content/CustomHelper.js"></script>
-    <script>const shareButton = document.querySelector("#shareButton");
+    <script>
+        const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -538,51 +539,6 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
             document.getElementById("loader-id").style.display = "none";
         });
 
-        function handleAddBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/AddBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        // Handle failure, e.g., show an error message
-                        //console.log('Error: ' + result.message);
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    //console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
-        }
-
-        function handleRemoveBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/RemoveBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        // Handle failure, e.g., show an error message
-                        //console.log('Error: ' + result.message);
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    //console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
-        }
         function ActivateLoaderFunction() {
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "flex";
@@ -601,7 +557,8 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
         }</script>
-    <script>// Function to open a specific modal
+    <script>
+        // Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -722,7 +679,8 @@ height: 16px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox
         // Update the chart
         hostRadarChart.update();
     </script>
-    <script>function gotoClubDetail(clubid, locationid) {
+    <script>
+        function gotoClubDetail(clubid, locationid) {
             if (clubid != null && locationid != null) {
                 window.location.href = '/LocationManagement/ClubDetail_V2?ClubId=' + clubid + '&LocationId=' + locationid;
             }

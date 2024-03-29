@@ -59,13 +59,13 @@
                     <div class=" font-semibold mt-12 text-center" style="color:#000; font-size:12px; font-weight:500; line-height:14px; text-align:center">まだブックマークされたクラブがありません。</div>
                     @*<div style="margin-left:24px; margin-right:24px">
 
-                    <div style="border-radius: 8px; background: var(--Darker_Primary, #D75A8B); padding:8px 20px; font-size:14px; color:#fff; font-weight:500; line-height:inherit; width:100%; margin-top:24px; text-align:center">
-                        マイページヘ
-                    </div>
-                </div>*@
+                            <div style="border-radius: 8px; background: var(--Darker_Primary, #D75A8B); padding:8px 20px; font-size:14px; color:#fff; font-weight:500; line-height:inherit; width:100%; margin-top:24px; text-align:center">
+                                マイページヘ
+                            </div>
+                        </div>*@
 
                 </div>
-                <div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] disable-click" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
+                <div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='@Url.Action("Index", "DashboardV2")'" id="DateTimeFilter-Id">
                     <div class="my-[12px] text-[12px] font-[700] text-[#FFF] text-center " style="width:100%">
                         マイページヘ
                     </div>
@@ -140,7 +140,7 @@
                             <div class=" w-6 h-6 flex flex-col justify-center items-center  scale-90">
                                 <div class="flex flex-col justify-center items-center hover:cursor-pointer">
 
-                                    <div onclick="handleRemoveBookmarks('@club.ClubId','','club')">
+                                    <div onclick="ManageBookmark('@club.ClubId','','club', this)">
                                         <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[24px] w-[24px] image-cover" alt="filled bookmark" />
                                     </div>
 
@@ -262,8 +262,8 @@
             @if (Model.BookmarkedHosts.Count <= 0)
             {
                 @* <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center">
-                <div class="text-[#18181B] font-semibold mt-12 text-center">まだブックマークされたホストがありません。</div>
-            </div>*@
+                        <div class="text-[#18181B] font-semibold mt-12 text-center">まだブックマークされたホストがありません。</div>
+                    </div>*@
                 <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0]  justify-center items-center " style="padding-top:64px">
                     @*<div>*@
                     <div style="display:flex; justify-content:center; align-items:center">
@@ -277,13 +277,13 @@
                     <div class=" font-semibold mt-12 text-center" style="color:#000; font-size:12px; font-weight:500; line-height:14px; text-align:center">まだブックマークされたホストがありません。</div>
                     @*<div style="margin-left:24px; margin-right:24px">
 
-                    <div style="border-radius: 8px; background: var(--Darker_Primary, #D75A8B); padding:8px 20px; font-size:14px; color:#fff; font-weight:500; line-height:inherit; width:100%; margin-top:24px; text-align:center">
-                        マイページヘ
-                    </div>
-                </div>*@
+                            <div style="border-radius: 8px; background: var(--Darker_Primary, #D75A8B); padding:8px 20px; font-size:14px; color:#fff; font-weight:500; line-height:inherit; width:100%; margin-top:24px; text-align:center">
+                                マイページヘ
+                            </div>
+                        </div>*@
 
                 </div>
-                <div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] disable-click" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
+                <div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='@Url.Action("Index", "DashboardV2")'" id="DateTimeFilter-Id">
                     <div class="my-[12px] text-[12px] font-[700] text-[#FFF] text-center " style="width:100%">
                         マイページヘ
                     </div>
@@ -300,7 +300,7 @@
                                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                                          src="@item.HostImage" />
                                 </div>
-                                <div id="like" onclick="handleRemoveBookmarks('@item.ClubId','@item.HostId','host')">
+                                <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                     <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                                 </div>
                             </div>
@@ -349,106 +349,6 @@
                             </div>
                         </div>
                     </div>
-                    @*<div class="flex flex-col border-b-[4px] border-[#E3E2DB]  ">
-                    <div class="flex p-[16px] flex-row gap-[16px] ">
-                        <div id="hostcontainer">
-                            <div id="hostimage">
-                                <img class="rounded-[6px] h-[180px] object-fill w-[128px]"
-                                     src="@host.HostImage" alt="host">
-                            </div>
-                            <div id="fav">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
-                                     fill="pink"
-                                     onclick="handleRemoveBookmarks('@host.ClubId','@host.HostId','host')"
-                                     class="cursor-pointer">
-                                    <g filter="url(#filter0_d_5748_18041)">
-                                        <circle cx="20" cy="20" r="13" fill="white" />
-                                    </g>
-                                    <path d="M14.7644 20.7106L14.7545 20.7007L14.7458 20.6927C14.7461 20.6929 14.746 20.6929 14.7457 20.6926L14.7456 20.6925L14.7407 20.6878C14.7353 20.6826 14.7258 20.6734 14.7129 20.6604C14.687 20.6344 14.6476 20.5937 14.5993 20.5402C14.5021 20.4323 14.3729 20.2772 14.2466 20.0901C13.9759 19.6891 13.75 19.2245 13.75 18.7354C13.75 17.109 15.0956 15.75 16.75 15.75C18.1523 15.75 19.0715 16.5896 19.4659 16.9896L20 17.5313L20.5341 16.9896C20.9285 16.5896 21.8477 15.75 23.25 15.75C24.9044 15.75 26.25 17.109 26.25 18.7354C26.25 19.2337 26.0301 19.7109 25.7649 20.0966C25.6361 20.2839 25.5067 20.4347 25.4106 20.5376C25.3628 20.5887 25.3242 20.6269 25.2992 20.6509C25.292 20.6579 25.2859 20.6636 25.2811 20.6681C25.2776 20.6713 25.2749 20.6739 25.2728 20.6758L25.2689 20.6793L25.2688 20.6794L25.2685 20.6796L25.2527 20.6936L25.2356 20.7106L20 25.9409L14.7644 20.7106Z"
-                                          stroke="#E3A1A1" stroke-width="1.5" />
-                                    <defs>
-                                        <filter id="filter0_d_5748_18041" x="0" y="0" width="40" height="40"
-                                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                            <feColorMatrix in="SourceAlpha" type="matrix"
-                                                           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                            <feOffset />
-                                            <feGaussianBlur stdDeviation="3.5" />
-                                            <feComposite in2="hardAlpha" operator="out" />
-                                            <feColorMatrix type="matrix"
-                                                           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                                            <feBlend mode="normal" in2="BackgroundImageFix"
-                                                     result="effect1_dropShadow_5748_18041" />
-                                            <feBlend mode="normal" in="SourceGraphic"
-                                                     in2="effect1_dropShadow_5748_18041" result="shape" />
-                                        </filter>
-                                    </defs>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col text-[12px] text-[#404040]">
-                            <p class=" font-[700]">
-                                @host.HostName
-                            </p>
-                            <p class=" mt-[6px] ">
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Date_of_birth :<span>
-                                    @host.DOB
-                                </span>
-                            </p>
-                            <p>
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Height :<span>
-                                    @host.Height cm
-                                </span>
-                            </p>
-                            <p>
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Blood_Type :<span>
-                                    @host.BloodType
-                                </span>
-                            </p>
-                            <p>
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Constellation :<span>
-                                    @host.ConstellationGroup
-                                </span>
-                            </p>
-                            <p>
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Address :<span>
-                                    @host.Address
-                                </span>
-                            </p>
-                            <p>
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Former_Job :<span>
-                                    @host.PreviousOccupation
-                                </span>
-                            </p>
-                            <p>
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Strength_of_Alcohol :<span>
-                                    @host.LiquorStrength
-                                </span>
-                            </p>
-                            <div class="flex flex-row mt-[10px]  items-center gap-[4px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
-                                     fill="none">
-                                    <path d="M2.7141 6.78799L2.70628 6.77989L2.69953 6.77341L2.69942 6.77331L2.69929 6.77317L2.69923 6.77312L2.69897 6.77287L2.69502 6.76895C2.69047 6.7644 2.6826 6.75645 2.6719 6.7453C2.65045 6.72297 2.61791 6.68809 2.57808 6.6423C2.49784 6.55008 2.39116 6.41718 2.28666 6.25666C2.06437 5.91521 1.87246 5.51058 1.87246 5.07853C1.87246 3.65769 2.99993 2.50909 4.34064 2.50909C5.48504 2.50909 6.23847 3.22052 6.56488 3.56386L6.99973 4.02127L7.43458 3.56386C7.761 3.22052 8.51443 2.50909 9.65882 2.50909C10.9995 2.50909 12.127 3.65769 12.127 5.07853C12.127 5.51774 11.9406 5.93287 11.722 6.2625C11.6154 6.42319 11.5085 6.55246 11.4292 6.64048C11.3897 6.68422 11.3578 6.71703 11.3371 6.73766C11.3268 6.74796 11.3193 6.75517 11.3151 6.75913L11.3122 6.76189L11.3116 6.76238L11.3116 6.76244L11.3114 6.76259L11.3113 6.76268L11.2988 6.77406L11.2854 6.78799L6.99973 11.2279L2.7141 6.78799Z"
-                                          stroke="#D75A8B" stroke-width="1.2" />
-                                </svg>
-                                @host.LoveCount
-                            </div>
-                            <div class="flex flex-row items-center mt-[12px] gap-[4px]">
-                                <img class="rounded-[42px] h-[26px] w-[26px]"
-                                     src="@host.ClubLogo" alt="">
-                                <div class="flex flex-col text-[12px] ">
-                                    <p class="font-[700]">
-                                        @host.ClubName
-                                    </p>
-                                    <p class="font-[400]">
-                                        @host.ClubNameJap
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
                 }
             }
         </div>
@@ -463,29 +363,6 @@
     <script src="~/Content/CustomHelper.js"></script>
 
     <script type="text/javascript">
-        //const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat']
-        //days.map((day, i) => {
-        //    console.log(day, 'weekdays')
-        //    document.getElementById('weekdays').innerHTML = day
-        //})
-        //const tabs = document.querySelector(".wrapper");
-        //const tabButton = document.querySelectorAll(".tab-button");
-        //const contents = document.querySelectorAll(".content");
-        //tabs.onclick = e => {
-        //    const id = e.target.dataset.id;
-        //    if (id) {
-        //        tabButton.forEach(btn => {
-        //            btn.classList.remove("active");
-        //        });
-        //        e.target.classList.add("active");
-        //        contents.forEach(content => {
-        //            content.classList.remove("active");
-        //        });
-        //        const element = document.getElementById(id);
-        //        element.classList.add("active");
-        //    }
-        //}
-
         document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";
@@ -496,50 +373,6 @@
             // The entire page, including external resources, is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";
         });
-
-        function handleAddBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/AddBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    //console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
-        }
-
-        function handleRemoveBookmarks(clubId, hostId, agentType) {
-            ActivateLoaderFunction();
-            $.ajax({
-                url: '/BookmarkManagement/RemoveBookmarks',
-                type: 'POST',
-                data: { clubId: clubId, hostId: hostId, agentType: agentType },
-                success: function (result) {
-                    if (result.success) {
-                        location.reload();
-                    } else {
-                        // Handle failure, e.g., show an error message
-                        //console.log('Error: ' + result.message);
-                        location.reload();
-                    }
-                },
-                error: function () {
-                    // Handle unexpected errors
-                    //console.log('An unexpected error occurred.');
-                    location.reload();
-                }
-            });
-        }
 
         function ActivateLoaderFunction() {
             var myDiv = document.getElementById("loader-id");
@@ -553,15 +386,5 @@
         function ClubDetailActionFunction(i, j) {
             window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }
-
-        function ClubReservationActionFunction(i, j, k) {
-            DataStorageFunction(i, j);
-            window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
-        }</script>
-
-    <script>
-        const DataStorageFunction = (i, j) => {
-            localStorage.setItem("ClubId", EncryptParameter(i));
-            localStorage.setItem("ClubName", EncryptParameter(j));
-        }</script>
+    </script>
 }

@@ -42,7 +42,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(responseModel);
         }
 
-        [HttpPost, OverrideActionFilters]
+        [HttpPost]
         public JsonResult HasUnReadNotification()
         {
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString();
@@ -58,7 +58,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(new { HasUnReadNotification = false });
         }
 
-        [HttpPost, ValidateAntiForgeryToken, OverrideActionFilters]
+        [HttpPost, ValidateAntiForgeryToken]
         public JsonResult ManageNotificationReadStatus()
         {
             var dbRequest = new Common()
