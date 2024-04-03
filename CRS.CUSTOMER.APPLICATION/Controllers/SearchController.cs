@@ -358,7 +358,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.LocationId = Request.LocationId;
             Response.RequestModel = Request.MapObject<HostSearchFilterRequestModel>();
             ViewBag.StartIndex = StartIndex;
-            ViewBag.TotalRecords = Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords);
+            ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords))? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
             return View(Response);
         }
         #endregion
