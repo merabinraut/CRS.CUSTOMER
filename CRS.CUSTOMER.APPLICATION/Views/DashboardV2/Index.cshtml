@@ -384,13 +384,13 @@
     <div class="flex tab-container-plane justify-between bg-white gap-[14px]">
         <div>
             <button style="font-weight: 600;font-size: 12px; margin-left: 20px; " onclick="handleFirstTab()" id="tab1Button"
-                    class="tab-button-plane tab-link active ">
+                    class="tab-button-plane tab-link exclude-class active ">
                 ホストクラブ
             </button>
         </div>
         <div>
             <button style="font-weight: 600;font-size: 12px; margin-right: 20px; " id="tab2Button" onclick="handleSecondTab()"
-                    class="tab-button-plane tab-link ">
+                    class="tab-button-plane exclude-class tab-link ">
                 ホストのランキング
             </button>
         </div>
@@ -2017,10 +2017,13 @@
         function handleFirstTab() {
             document.getElementById('tab2').style.display = 'none';
             document.getElementById('tab1').style.display = '';
+			document.getElementById('tab1Button').classList.add('active');
+			document.getElementById('tab2Button').classList.remove('active');
         } function handleSecondTab() {
-           
             document.getElementById('tab1').style.display = 'none';
             document.getElementById('tab2').style.display = '';
+			document.getElementById('tab1Button').classList.remove('active');
+			document.getElementById('tab2Button').classList.add('active');
         }
     </script>
 }

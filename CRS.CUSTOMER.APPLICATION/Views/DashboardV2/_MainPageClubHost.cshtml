@@ -2,7 +2,7 @@
 
 @*toggle section end
     club section*@
-<div id="tab1" class="tab-content-plane">
+<div id="tab1" class="tab-content-plane exclude-class">
     @foreach (var item in Model.ClubListModel)
     {
         <div>
@@ -210,7 +210,7 @@
 </div>
 @*club section end
     Host image section*@
-<div id="tab2" class="tab-content-plane" style="display:none;">
+<div id="tab2" class="tab-content-plane exclude-class" style="display:none;">
     @foreach (var item in Model.HostListModel)
     {
         <div class="flex flex-row gap-[16px] mx-[16px]">
