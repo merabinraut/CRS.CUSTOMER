@@ -126,13 +126,13 @@
                         </div>
                         @if (item.IsBookmarked.ToUpper() == "Y")
                         {
-                            <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
+                            <div id="like" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
                                 <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
                         else
                         {
-                            <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
+                            <div id="like" onclick="AddBookmark('@item.ClubId','@item.HostId','host')">
                                 <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
@@ -177,13 +177,13 @@ else
                         </div>
                         @if (item.IsBookmarked.ToUpper() == "Y")
                         {
-                            <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
+                            <div id="like" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
                                 <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
                         else
                         {
-                            <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
+                            <div id="like" onclick="AddBookmark('@item.ClubId','@item.HostId','host')">
                                 <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
@@ -219,13 +219,42 @@ else
         </svg>
     </button>
     <div id="page-numbers" class=" page-number-list flex justify-between w-full">
+        @*@{
+                int startIndex = ViewBag.StartIndex;
+                double currentPage = Math.Floor((double)ViewBag.StartIndex / 12) + 1; // Calculate current page number
+                double TotalPages = ViewBag.TotalRecords != null ? Math.Ceiling((double)ViewBag.TotalRecords / 12) : 0; // Calculate total pages
+                for (int i = 1; i <= TotalPages; i++)
+                {
+                    if (i == currentPage)
+                    {
+                        <div class="active">@i</div>
+                    }
+                    else
+                    {
+
+                        <div onclick="PaginationFunction(@i);">@i</div>
+                    }
+
+                }
+            }*@
         @{
             int startIndex = ViewBag.StartIndex;
-            double currentPage = Math.Floor((double)ViewBag.StartIndex / 12) + 1; // Calculate current page number
-            double TotalPages = ViewBag.TotalRecords != null ? Math.Ceiling((double)ViewBag.TotalRecords / 12) : 0; // Calculate total pages
-            for (int i = 1; i <= TotalPages; i++)
+            double currentPage = Math.Floor((double)startIndex / 12) + 1; // Calculate current page number
+            double totalPages = ViewBag.TotalRecords != null ? Math.Ceiling((double)ViewBag.TotalRecords / 12) : 0; // Calculate total pages
+            int maxPagesToShow = 3; // Maximum number of page links to display
+
+            // Calculate the start and end pages to display
+            int startPage = Math.Max(1, (int)currentPage - (maxPagesToShow / 2));
+            int endPage = Math.Min((int)totalPages, startPage + maxPagesToShow - 1);
+            if (endPage - startPage + 1 < maxPagesToShow)
             {
-                if (i == currentPage)
+                startPage = Math.Max(1, endPage - maxPagesToShow + 1);
+            }
+
+            // Display page links
+            for (int i = startPage; i <= endPage; i++)
+            {
+                if (i == (int)currentPage)
                 {
                     <div class="active">@i</div>
                 }
@@ -233,9 +262,9 @@ else
                 {
                     <div onclick="PaginationFunction(@i);">@i</div>
                 }
-
             }
         }
+
     </div>
     <button id="next-btn" class="next-prev-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
