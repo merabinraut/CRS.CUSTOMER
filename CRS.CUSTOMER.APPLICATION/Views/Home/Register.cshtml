@@ -111,7 +111,8 @@
 
         .loginContainer {
             padding: 0 24px;
-
+            background: #fdfdfd;
+            height: 100vh;
         }
 
         .register {
@@ -178,8 +179,9 @@
             letter-spacing: 0.4px;
         }
 
+    
         .registerButton {
-            color: #FFF;
+            color: #fff;
             font-family: "Noto Sans";
             font-size: 14px;
             font-style: normal;
@@ -188,11 +190,37 @@
             border-radius: 8px;
             background: #D75A8B;
             padding: 8px 12px;
-            margin-top:30px;
+            margin-top: 30px;
         }
+/*FOR NEW */
+        /*   .registerButton {
+        color: #ACA9A9;
+        font-family: "Noto Sans";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px;
+        border-radius: 8px;
+        background: #F0F0F0;
+        padding: 8px 12px;
+        margin-top: 30px;
+    }*/
+     /*   .activeRegister {
+            color: #fff;
+            font-family: "Noto Sans";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 24px;
+            border-radius: 8px;
+             background: #D75A8B;
+            padding: 8px 12px;
+            margin-top: 30px;
+        }*/
 
+/*FOR NEW END*/
         .loginButton {
-            background: #FAFAFA;
+            background: #FFF;
             padding: 8px 12px;
             color: #666;
             font-weight: 600;
@@ -202,7 +230,21 @@
             border: 1px solid #F1F1F1;
             letter-spacing: -0.165px;
         }
-
+/**/
+/*new */
+/*
+        .loginButton {
+            background: #fff;
+            padding: 8px 12px;
+            color: #666;
+            font-weight: 600;
+            line-height: 23px;
+            font-size: 14px;
+            margin-top: 18px;
+            border: 1px solid #D75A8B;
+            letter-spacing: -0.165px;
+        }
+*/
         .termsAndContion {
             color: rgba(24, 24, 27, 0.60);
             font-weight: 700;
@@ -310,18 +352,18 @@
                 @Html.AntiForgeryToken()
                 <input value="@ViewBag.ReferCode" name="ReferCode" hidden />
                 <div class="inputWrapper">
-                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @oninput = "validateInput(this)", autocomplete = "off" ,@maxlength = "30" })
+                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @oninput = "validateInput(this)", autocomplete = "off", @maxlength = "30" })
                     @*<input type="text" value="" name="nickName"
-                        class=" focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="ミクチャン"
-                        required>*@
+                class=" focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="ミクチャン"
+                required>*@
                 </div>
                 <span class="validationMessage">
-                    @Html.ValidationMessageFor(m => m.NickName,"", new { @class = "error-validation-msg" })
+                    @Html.ValidationMessageFor(m => m.NickName, "", new { @class = "error-validation-msg" })
                 </span>
                 <div class="inputWrapper mt-2">
-                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "w-full ring-0 focus:ring-0 focus:ring-transparent",@type="number", @placeholder = "携帯電話番号", @minlength = "11", @maxlength = "11",   oninput = "limitInputLength(this, 11)", autocomplete = "off" })
+                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "w-full ring-0 focus:ring-0 focus:ring-transparent", @type = "number", @placeholder = "携帯電話番号", @minlength = "11", @maxlength = "11", oninput = "limitInputLength(this, 11)", autocomplete = "off" })
                     @*<input type="number" name="contactNumber" value=""
-                        class="w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="携帯電話番号" required>*@
+                class="w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="携帯電話番号" required>*@
                 </div>
                 <span class="validationMessage">
                     @Html.ValidationMessageFor(m => m.MobileNumber, "", new { @class = "error-validation-msg" })
@@ -332,19 +374,19 @@
                         <input type="checkbox" name="policy" id="policy" class="checkBox focus:outline-none bg-none ring-offset-0 ring-0 focus:ring-0 focus:ring-transparent focus:ring-shadow-none">
                         <label for="policy" class="policy ">
                             @*<a href="@Url.Action("termsAndCondition","Footer")" class="termLink">利用規約</a><span>と</span>
-                            <a href="@Url.Action("privacypolicy","Footer")" class="termLink">プライバシーポリシ</a>
-                            <span>ー に</span>*@
+                        <a href="@Url.Action("privacypolicy","Footer")" class="termLink">プライバシーポリシ</a>
+                        <span>ー に</span>*@
                             <span>  <a href="@Url.Action("termsAndCondition","Footer")"> 利用規約 </a></span> と <span> <a href="@Url.Action("privacypolicy","Footer")"> プライバシーポリシー </a></span> に同意したものとみなします
                         </label>
                     </div>
                 </div>
                 <!-- for sms message -->
-        <div class="smsText">
-            SMSの受信設定をご確認の上、ボタンを押してください
-        </div>
+                <div class="smsText">
+                    SMSの受信設定をご確認の上、ボタンを押してください
+                </div>
                 <!-- for register  -->
                 <div>
-                    <button id="FormSubmit" type="button" class="registerButton border rounded-lg  w-full">認証コードを受け取る</button>
+                    <button id="FormSubmit" type="button" class="registerButton border rounded-lg  w-full disabled">認証コードを受け取る</button>
                 </div>
             }
             <!-- for login -->
@@ -353,10 +395,27 @@
                 <span class="otherAccotunt" style="text-transform:uppercase ">既にアカウントをお持ちですか <span style="font-size:14px">?</span></span>
                 <div class="border  spertator"></div>
             </div>
-            <!-- for login -->  
+            <!-- for login -->
             <div onclick="window.location.href='@Url.Action("Index","Home")'">
                 <button type="submit" class="loginButton border rounded-lg  w-full">ログイン</button>
             </div>
+
+            @*FOR NEW REGISTRATION BUTTON *@
+
+            <!-- for login -->
+        <!--<div class="  " style="border: 1px solid #FFEAF5; border-radius: 3px; background: #FFFBFD;margin-top:36px ">
+            <div class="flex justify-center items-center mx-4" style="margin-top:15px">
+                <div class="border  spertator"></div>
+                <span class="otherAccotunt" style="text-transform:uppercase ">既にアカウントをお持ちですか <span style="font-size:14px">?</span></span>
+                <div class="border  spertator"></div>
+            </div>-->
+            <!-- for login -->
+            <!--<div onclick="window.location.href='@Url.Action("Index","Home")'" class="mx-4" style="margin-bottom:18px">
+                <button type="submit" class="loginButton border rounded-lg  w-full">ログイン</button>
+            </div>
+            </div>-->
+
+            @*REGISTRATION BUTTON END*@
             <!-- for affiliation -->
             <div class="affiliation">
                 <div class="affiliationText"><a href="#" style="font-family: Noto Sans">アフィリエイター登録</a></div>

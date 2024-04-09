@@ -152,14 +152,14 @@
         }
 
         .registerButton {
-            background: #FBFBFB;
+            background: #FFF;
             padding: 8px 12px;
-            color: #666;
+            color: #D75A8B;
             font-weight: 600;
             line-height: 23px;
             font-size: 14px;
             margin-top: 18px;
-            border: 1px solid #F1F1F1;
+            border: 1px solid #D75A8B;
             letter-spacing: -0.165px;
         }
 
@@ -256,8 +256,8 @@
 
                     })
                     @*<span class="validationMessage ">
-                            @Html.ValidationMessageFor(m => m.LoginId)
-                        </span>*@
+                    @Html.ValidationMessageFor(m => m.LoginId)
+                </span>*@
                     <hr>
                     <div class="relative">
                         @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "32" })
@@ -301,15 +301,20 @@
                 </div>
             </div>
             <!-- for other account -->
-            <div class="mt-16 flex justify-center items-center">
-                <div class="border  spertator"></div>
-                <span class="otherAccotunt" style="text-transform:uppercase">初めてホスログをご利用ですか <span style="font-size:14px">?</span></span>
-                <div class="border  spertator"></div>
+            <!-- for other account new -->
+            <div class=" mt-16 " style="border: 1px solid #FFEAF5; border-radius: 3px; background: #FFFBFD ">
+                <div class="flex justify-center items-center mx-4" style="margin-top:15px">
+                    <div class="border  spertator"></div>
+                    <span class="otherAccotunt" style="text-transform:uppercase">初めてホスログをご利用ですか <span style="font-size:14px">?</span></span>
+                    <div class="border  spertator"></div>
+                </div>
+                <!-- for new registration -->
+                <div class="mx-4" style="margin-bottom:18px">
+                    <button type="submit" class="registerButton border rounded-lg  w-full " id="RegisterId">新しくホスログを始める</button>
+                </div>
             </div>
-            <!-- for new registration -->
-            <div>
-                <button type="submit" class="registerButton border rounded-lg  w-full" id="RegisterId">新しくホスログを始める</button>
-            </div>
+          
+            <!-- for other account new end -->
             <!-- for affiliation -->
             <div class="affiliation">
                 <div class="affiliationText">
@@ -380,6 +385,9 @@
         localStorage.clear();
         }
         }
+    </script>
+    <script>
+
     </script>
     <script src="~/Content/validation.js"></script>
 </body>
