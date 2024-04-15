@@ -1,8 +1,6 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Office2016.Excel;
-using System.Reflection;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CRS.CUSTOMER.REPOSITORY.Home
