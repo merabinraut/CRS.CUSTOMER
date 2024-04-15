@@ -352,7 +352,7 @@
                 @Html.AntiForgeryToken()
                 <input value="@ViewBag.ReferCode" name="ReferCode" hidden />
                 <div class="inputWrapper">
-                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @oninput = "validateInput(this)", autocomplete = "off", @maxlength = "30" })
+                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @oninput = "validateInput(this)", autocomplete = "off", @maxlength = "20" })
                     @*<input type="text" value="" name="nickName"
                 class=" focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="ミクチャン"
                 required>*@
@@ -463,12 +463,15 @@
         });
 
         function validateInput(input) {
+
             // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
-            var regex = /^[a-zA-Z0-9_\.\-\u3040-\u309f\u30a0-\u30ff]*$/u;
+            var regex = /^[a-zA-Z0-9\u3040-\u309f\u30a0-\u30ff]{4,}$/u;
+           
+
             // Check if the input value matches the pattern
             if (!regex.test(input.value)) {
                 // Clear the input value if it doesn't match the pattern
-                input.value = input.value.replace(/[^a-zA-Z0-9_\.\-\u3040-\u309f\u30a0-\u30ff]/gu, '');
+                input.value = input.value.replace(/[^a-zA-Z0-9\u3040-\u309f\u30a0-\u30ff]/gu, "");
             }
         }
     </script>

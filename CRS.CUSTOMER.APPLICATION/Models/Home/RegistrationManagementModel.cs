@@ -13,8 +13,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         [Display(Name = "Nickname", ResourceType = typeof(Resource))]
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
         //[RegularExpression("^\\p{L}\\p{N}._\\-]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
-        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
-        [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]
+        [MinLength(4, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_4_characters")]
+        [MaxLength(20, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_20_characters")]
         public string NickName { get; set; }
 
         [Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
