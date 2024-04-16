@@ -52,12 +52,13 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string AgentId { get; set; }
         public string UserId { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Required")]
-        [MaxLength(16, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_16_characters")]
-        [RegularExpression(@"^.*(?=.{8,16})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be of length 8 to 16 and must contain a-z,A-Z,0-9,@#$%^&+=")]
+        //[MaxLength(32, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_16_characters")]
+        [MaxLength(32, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_32_characters")]
+        [RegularExpression(@"^.*(?=.{8,32})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be of length 8 to 32 and must contain a-z,A-Z,0-9,@#$%^&+=")]
         //[MinLength(8, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_8_characters")]
         public string Password { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Required")]
-        [MaxLength(16, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_16_characters")]
+        [MaxLength(32, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_16_characters")]
         //[RegularExpression(@"^.*(?=.{8,16})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be of length 8 to 16 and must contain a-z,A-Z,0-9,@#$%^&+=")]
         //[MinLength(8, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_8_characters")]
         [Compare("Password", ErrorMessage = "Password  Mismatch")]

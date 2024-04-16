@@ -670,6 +670,10 @@
   <data name="Maximum length is 20 characters" xml:space="preserve">
     <value>最大長は 20 文字です</value>
   </data>
+  <data name="Maximum length is 32 characters" xml:space="preserve">
+    <value>最大長は 32 文字です</value>
+    <comment>Password</comment>
+  </data>
   <data name="Maximum length is 4 characters" xml:space="preserve">
     <value>最大長は 4 文字です</value>
   </data>
