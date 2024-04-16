@@ -1384,6 +1384,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum length is 30 characters.
+        /// </summary>
+        public static string Maximum_length_is_30_characters {
+            get {
+                return ResourceManager.GetString("Maximum length is 30 characters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum length is 32 characters.
         /// </summary>
         public static string Maximum_length_is_32_characters {
