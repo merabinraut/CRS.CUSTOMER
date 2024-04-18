@@ -382,7 +382,7 @@
 
 <div class="flex flex-col px-[24px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
     <div class="flex tab-container-plane justify-between bg-white gap-[14px]">
-        <div>
+       @* <div>
             <button style="font-weight: 600;font-size: 12px; margin-left: 20px; " onclick="handleFirstTab()" id="tab1Button"
                     class="tab-button-plane tab-link exclude-class active ">
                 ホストクラブ
@@ -393,19 +393,33 @@
                     class="tab-button-plane exclude-class tab-link ">
                 ホスト
             </button>
+        </div>*@
+
+        @*new tab*@
+        <div class="grid grid-cols-2 w-full tab-container-plane bg-white gap-[14px]">
+            <button id="tab1Button" class="tab-button-plane exclude-class tab-link active" onclick="handleFirstTab()">
+                ホストクラブ
+            </button>
+            <button id="tab2Button" class="tab-button-plane exclude-class tab-link" onclick="handleSecondTab()">
+                ホスト
+            </button>
         </div>
+
+
+        @*new tab end*@
+
         @* <div>
-                <button style="font-weight: 600;font-size: 12px; margin-left: 20px; " id="tab1Button"
-                        class="tab-link active ">
-                    店舗ランキング
-                </button>
-            </div>
-            <div>
-                <button style="font-weight: 600;font-size: 12px; margin-right: 20px; " id="tab2Button"
-                        class="tab-link ">
-                    ホストランキング
-                </button>
-            </div>*@
+            <button style="font-weight: 600;font-size: 12px; margin-left: 20px; " id="tab1Button"
+                    class="tab-link active ">
+                店舗ランキング
+            </button>
+        </div>
+        <div>
+            <button style="font-weight: 600;font-size: 12px; margin-right: 20px; " id="tab2Button"
+                    class="tab-link ">
+                ホストランキング
+            </button>
+        </div>*@
     </div>
 </div>
 
