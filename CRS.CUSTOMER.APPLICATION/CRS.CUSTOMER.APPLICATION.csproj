@@ -367,6 +367,7 @@
     <Content Include="Content\assets\images\club\download-solid.svg" />
     <Content Include="Content\assets\images\club\up-down-arrow.svg" />
     <Content Include="Content\assets\images\cn.svg" />
+    <Content Include="Content\assets\images\comment.svg" />
     <Content Include="Content\assets\images\crown-solid.svg" />
     <Content Include="Content\assets\images\customer.svg" />
     <Content Include="Content\assets\images\customerActive.svg" />
@@ -444,6 +445,7 @@
     <Content Include="Content\assets\images\loader.gif" />
     <Content Include="Content\assets\images\location-active.svg" />
     <Content Include="Content\assets\images\location-arrow-solid.svg" />
+    <Content Include="Content\assets\images\location_icon.svg" />
     <Content Include="Content\assets\images\lock-active.svg" />
     <Content Include="Content\assets\images\lock.svg" />
     <Content Include="Content\assets\images\login-banner-new.png" />

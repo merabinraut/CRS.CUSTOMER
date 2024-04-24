@@ -137,6 +137,7 @@
             width: calc((100% - 185px)/2);
             height: 1px;
             background-color: #A1A1AA;
+            opacity:0.2
         }
 
         .otherAccotunt {
@@ -261,7 +262,7 @@
                     <hr>
                     <div class="relative">
                         @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "32" })
-                        <i class="las la-eye password-eye absolute top-3 right-2 text-[2] " style="font-size: 24px; color: #A1A1AA" onclick="togglePassword()"></i>
+                        <i class="las la-eye password-eye absolute top-2 right-2 text-[2] " style="font-size: 24px; color: #A1A1AA" onclick="togglePassword()"></i>
                     </div>
                 </div>
 
@@ -304,9 +305,9 @@
             <!-- for other account new -->
             <div class=" mt-16 " style="border: 1px solid #FFEAF5; border-radius: 3px; background: #FFFBFD ">
                 <div class="flex justify-center items-center mx-4" style="margin-top:15px">
-                    <div class="border  spertator"></div>
+                    <div class="  spertator"></div>
                     <span class="otherAccotunt" style="text-transform:uppercase">初めてホスログをご利用ですか <span style="font-size:14px">?</span></span>
-                    <div class="border  spertator"></div>
+                    <div class="  spertator"></div>
                 </div>
                 <!-- for new registration -->
                 <div class="mx-4" style="margin-bottom:18px">
