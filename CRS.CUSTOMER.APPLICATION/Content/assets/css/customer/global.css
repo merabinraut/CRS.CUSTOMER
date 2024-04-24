@@ -1374,3 +1374,11 @@ label {
     font-weight: 400;
     line-height: normal;
 }
+
+.body-no-scroll {
+    overflow: hidden; /* Prevents scrolling */
+    position: fixed; /* Keeps the position */
+    width: 100%; /* Full width */
+    top: 0; /* Top position */
+    left: 0; /* Left position */
+}

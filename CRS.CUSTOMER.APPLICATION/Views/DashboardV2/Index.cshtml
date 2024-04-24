@@ -1402,8 +1402,14 @@
             window.location.href = `/LocationManagement/Index?LocationId=${CurrentLocationId}&RenderId=${RenderId}`;
         }
 
-        const WorkingHoursShowPopup = () => document.getElementById('working-hour-id').classList.remove('translate-y-full');
-        const WorkingHoursClosePopup = () => document.getElementById('working-hour-id').classList.add('translate-y-full');
+        const WorkingHoursShowPopup = () => {
+            document.body.classList.add('body-no-scroll');
+            document.getElementById('working-hour-id').classList.remove('translate-y-full');
+        }
+        const WorkingHoursClosePopup = () => {
+            document.getElementById('working-hour-id').classList.add('translate-y-full');
+             document.body.classList.remove('body-no-scroll');
+        }
 
         function WorkingHoursSubmitFunction() {
             var hourValue = $("#hourShadowval").val();
@@ -1415,8 +1421,14 @@
             window.location.href = "/Search/DateTimeFilter?LocationId=" + CurrentLocationId + "&&FilteredTime=" + concatenatedTime + "&&ResultType='1'";
         }
 
-        const LastEntryShowPopup = () => document.getElementById('last-entry-id').classList.remove('translate-y-full');
-        const LastEntryClosePopup = () => document.getElementById('last-entry-id').classList.add('translate-y-full');
+        const LastEntryShowPopup = () => {
+            document.getElementById('last-entry-id').classList.remove('translate-y-full');
+            document.body.classList.add('body-no-scroll');
+        }
+        const LastEntryClosePopup = () => {
+            document.getElementById('last-entry-id').classList.add('translate-y-full');
+             document.body.classList.remove('body-no-scroll');
+        }
 
         function LastEntrySubmitFunction() {
             var hourValue = $("#hourShadowval2").val();
