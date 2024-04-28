@@ -71,51 +71,57 @@
                                 {
                                     <input class="ispopularplan-class" value="n" hidden />
                                 }
-                                <div>
-                                    <div class="flex items-center gap-2 mb-[6px]">
-                                        <div class="text-[13px] text-[#404040] font-bold leading-[24px] PlanName-class" data-info="@item.PlanName">
-                                            @item.PlanName
-                                        </div>
-                                        @if (isFirstItem)
-                                        {
-                                            isFirstItem = false;
-                                            <span class="popularity">
-                                                <i class="las la-crown linear-gradient-text"></i>
-                                                <div class="linear-gradient-text tracking-[1.26px] pl-1">人気</div>
-                                            </span>
-                                        }
+                            <div>
+                                <div class="flex items-center gap-2 mb-[6px]">
+                                    <div class="text-[13px] text-[#404040] font-bold leading-[24px] PlanName-class" data-info="@item.PlanName">
+                                        @item.PlanName
                                     </div>
+                                    @if (isFirstItem)
+                                    {
+                                        isFirstItem = false;
+                                        <span class="popularity">
+                                            <i class="las la-crown linear-gradient-text"></i>
+                                            <div class="linear-gradient-text tracking-[1.26px] pl-1">人気</div>
+                                        </span>
+                                    }
+                                </div>
+                                <div class="strikethrough-wrapper">
                                     <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class" data-info="@item.PlanPrice">
                                         @string.Concat("¥", @amount)
                                     </div>
-                                    <div class="flex items-center gap-2">
-                                        <div class="flex items-center gap-1">
-                                            <div class="text-[#D17979] text-[13px]">
-                                                <i class="las la-clock"></i>
-                                            </div>
-                                            <div class="text-[11px] text-[#282828] font-futura PlanTime-class" data-info="@item.PlanTime">
-                                                @item.PlanTime
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-1">
-                                            <div class="text-[#D17979] text-[13px]">
-                                                <i class="las la-glass-cheers"></i>
-                                            </div>
-                                            <div class="text-[11px] text-[#282828] font-futura PlanLiquor-class" data-info="@item.PlanLiquor">
-                                                @item.PlanLiquorJapanese
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-1">
-                                            <div class="text-[#D17979] text-[13px]">
-                                                <i class="las la-user"></i>
-                                            </div>
-                                            <div class="text-[11px] text-[#282828] font-futura PlanNomination-class" data-info="@item.PlanNomination">
-                                                @string.Concat("場内指名", @item.PlanNomination, "名まで")
-                                            </div>
-                                        </div>
-
+                                    <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class strikethrough" data-info="@item.PlanPrice">
+                                        @string.Concat("¥", @amount)
                                     </div>
+                                    <span>キャンペーン中</span>
                                 </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex items-center gap-1">
+                                        <div class="text-[#D17979] text-[13px]">
+                                            <i class="las la-clock"></i>
+                                        </div>
+                                        <div class="text-[11px] text-[#282828] font-futura PlanTime-class" data-info="@item.PlanTime">
+                                            @item.PlanTime
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <div class="text-[#D17979] text-[13px]">
+                                            <i class="las la-glass-cheers"></i>
+                                        </div>
+                                        <div class="text-[11px] text-[#282828] font-futura PlanLiquor-class" data-info="@item.PlanLiquor">
+                                            @item.PlanLiquorJapanese
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <div class="text-[#D17979] text-[13px]">
+                                            <i class="las la-user"></i>
+                                        </div>
+                                        <div class="text-[11px] text-[#282828] font-futura PlanNomination-class" data-info="@item.PlanNomination">
+                                            @string.Concat("場内指名", @item.PlanNomination, "名まで")
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                                 <div class="plan-check-icon">
                                     <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                          viewBox="0 0 40 40" fill="none">

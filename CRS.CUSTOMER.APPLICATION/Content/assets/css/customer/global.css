@@ -1382,3 +1382,20 @@ label {
     top: 0; /* Top position */
     left: 0; /* Left position */
 }
+
+/*For text-linetrought*/
+.strikethrough {
+    text-decoration:line-through;
+}
+.strikethrough-wrapper {
+    display: flex;
+    gap: 4px;
+    font-size: 16px;
+}
+    .strikethrough-wrapper > span {
+        color: #D17979;
+        font-family: Futura;
+        font-weight: 500;
+        letter-spacing: -0.6px;
+        font-size: 14px
+    }
