@@ -1375,6 +1375,32 @@ label {
     line-height: normal;
 }
 
+.body-no-scroll {
+    overflow: hidden; /* Prevents scrolling */
+    position: fixed; /* Keeps the position */
+    width: 100%; /* Full width */
+    top: 0; /* Top position */
+    left: 0; /* Left position */
+}
+
+/*For text-linetrought*/
+.strikethrough {
+    text-decoration:line-through;
+}
+.strikethrough-wrapper {
+    display: flex;
+    gap: 4px;
+    font-size: 16px;
+}
+    .strikethrough-wrapper > span {
+        color: #D17979;
+        font-family: Futura;
+        font-weight: 500;
+        letter-spacing: -0.6px;
+        font-size: 14px
+    }
+}
+
 /*@charset "utf-8";*/
 /* reset */ /*:where([hidden]:not([hidden='until-found'])) {
     display: none !important;
@@ -1555,3 +1581,352 @@ a {
 button {
     border-radius: 3px;
 }*/
+
+/*FOR RECOMMANDATION PART */
+.disabled {
+    color: #aaaaaa !important;
+    background: #d7d7d7 !important;
+}
+
+.gradient {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(96deg, #99aefb 10%, #f04aa4 61.32%, #e7b282 98.78%);
+}
+/* list area */
+.list_wrap {
+    width: 100%;
+    height: auto;
+    display: block;
+    float: left;
+    background: #efefef;
+}
+
+.club_content {
+    width: 100%;
+    height: auto;
+    margin: 10px 0 0 0;
+    padding: 20px 0 0 0;
+    display: block;
+    float: left;
+    border-bottom: 1px solid #efefef;
+    background: #fcfcfc;
+}
+
+    .club_content:first-child {
+        margin-top: 0;
+    }
+
+    .club_content:last-child {
+        margin-bottom: 0;
+    }
+
+    .club_content a {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+ul.club_tags, .club_header, .club_rate, .club_pr {
+    padding: 0 15px;
+}
+/* tags */
+ul.club_tags {
+    width: 100%;
+    height: auto;
+    margin: 0 0 10px 0;
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+    ul.club_tags li {
+        width: auto;
+        height: auto;
+        margin: 5px 0 0 5px;
+        padding: 4px 8px;
+        display: inline-flex;
+        align-items: center;
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 600;
+        border-radius: 3px;
+    }
+
+        ul.club_tags li:first-child {
+            margin-left: 0;
+        }
+
+        ul.club_tags li.tag_location {
+            padding: 0;
+            color: #aaaaaa;
+            font-size: 0.8rem;
+        }
+
+        ul.club_tags li.tag_rank {
+            background: #BFA3B6;
+        }
+
+        ul.club_tags li.tag_gold {
+            background: #d4b78a;
+        }
+
+        ul.club_tags li.tag_good {
+            background: #96b41f;
+        }
+
+        ul.club_tags li.tag_platinum {
+            background: #697DBF;
+        }
+
+        ul.club_tags li.tag_big {
+            background: #efb726;
+        }
+/* hostclub info */
+.club_header {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.club_logo {
+    width: 45px;
+    height: 45px;
+    margin: 0 10px 0 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+    .club_logo img {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #e5e7eb;
+        border-radius: 50%;
+        background: #efefef;
+        object-fit: cover;
+    }
+
+.club_info {
+    width: calc(100% - 100px);
+    height: auto;
+    max-height: 45px; /* as 「.club_logo」height */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+h3.club_name, p.club_kana, p.club_group {
+    display: inline-flex;
+    align-items: center;
+}
+
+.club_info h3, .club_info p {
+    width: 100%;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+h3.club_name {
+    height: 19px;
+    font-size: 0.9rem;
+}
+
+p.club_kana, p.club_group {
+    height: 13px;
+    color: #aaaaaa;
+}
+
+p.club_group {
+    color: #e3a1a1;
+    font-weight: normal;
+}
+
+.action_keep {
+    width: 45px;
+    height: 45px;
+    padding: 6px;
+    display: inline-flex;
+    flex-flow: wrap-reverse;
+}
+
+    .action_keep img {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1 / 1;
+    }
+/* hostclub thumb */
+ul.club_thumb {
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+    ul.club_thumb li {
+        width: calc(100% / 3);
+        height: auto;
+        margin: 0;
+        padding: 0 0 0 2px;
+        display: inline-flex;
+        aspect-ratio: 1 / 1;
+    }
+
+        ul.club_thumb li:first-child {
+            padding: 0;
+        }
+
+        ul.club_thumb li img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            background: #efefef;
+        }
+/* rate */
+.club_rate, ul.rate_stars, ul.rate_stars li, ul.rate_review {
+    height: 18px; /* as 「ul.rate_stars li」 width */
+}
+
+.club_rate {
+    width: 100%;
+    height: 18px;
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: 1.1rem;
+}
+
+ul.rate_stars {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+    ul.rate_stars li {
+        width: 18px;
+        margin: 0 0 0 2px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+    }
+
+        ul.rate_stars li:first-child {
+            margin: 0;
+        }
+
+        ul.rate_stars li img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+        }
+
+        ul.rate_stars li.rate_value {
+            width: auto;
+            height: 18px;
+            margin: 0 0 0 8px;
+            padding: 2px 0 0 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0;
+        }
+
+ul.rate_review {
+    width: auto;
+    margin: 0 0 0 10px;
+    display: inline-flex;
+}
+
+    ul.rate_review li.comment_value {
+        width: auto;
+        height: 18px;
+        margin: 0 0 0 5px;
+        padding: 4px 0 0 0;
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.8rem;
+    }
+
+    ul.rate_review li:first-child {
+        width: 18px;
+        height: 18px;
+    }
+
+.rate_review img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+p.club_pr {
+    width: 100%;
+    height: 50px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 0.75rem;
+    overflow: hidden;
+}
+/* hostclub footer */
+.club_footer {
+    width: 100%;
+    height: auto;
+    margin: 10px 0 0 0;
+    padding: 15px 15px 20px 15px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #e5e7eb;
+}
+
+.club_status {
+    width: 120px;
+    height: auto;
+    margin: 0;
+    display: inline-flex;
+    flex-flow: column;
+}
+
+.opening_hours {
+    width: 140px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02rem;
+}
+
+    .opening_hours img {
+        width: 18px;
+        height: 18px;
+        margin: 0 5px 0 0;
+        display: inline-flex;
+        align-items: center;
+    }
+
+.available {
+    width: 100%;
+    height: auto;
+    margin: 5px 0 0 0;
+    padding: 1.4px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 3px;
+    background: #d4b78a;
+}
+
+.club_footer .rsv_btn {
+    width: calc(100% - 160px);
+    height: 45px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    display: inline-flex;
+}

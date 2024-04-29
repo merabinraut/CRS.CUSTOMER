@@ -5,8 +5,8 @@
 
 <style>
 
-        /*@@charset "utf-8";*/
-        /* reset */ /*:where([hidden]:not([hidden='until-found'])) {
+    /*@@charset "utf-8";*/
+    /* reset */ /*:where([hidden]:not([hidden='until-found'])) {
       display: none !important;
     }
     :where(html) {
@@ -103,8 +103,8 @@
       white-space: nowrap !important;
       border: 0 !important;
     }*/
-        /* base */
-        /*html, body {
+    /* base */
+    /*html, body {
       width: 100%;
       height: 100%;
       margin: 0;
@@ -115,7 +115,7 @@
     }
     html {
       font-size: 62.5%;*/ /* 10px */
-        /*}
+    /*}
     body {
       width: 100%;
       height: auto !important;
@@ -155,541 +155,541 @@
     button {
       border-radius: 3px;
     }*/
-        /* decorate */
-        .disabled {
-            color: #aaaaaa !important;
-            background: #d7d7d7 !important;
+    /* decorate */
+    .disabled {
+        color: #aaaaaa !important;
+        background: #d7d7d7 !important;
+    }
+
+    .gradient {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(96deg, #99aefb 10%, #f04aa4 61.32%, #e7b282 98.78%);
+    }
+    /* list area */
+    .list_wrap {
+        width: 100%;
+        height: auto;
+        display: block;
+        float: left;
+        background: #efefef;
+    }
+
+    .club_content {
+        width: 100%;
+        height: auto;
+        margin: 10px 0 0 0;
+        padding: 20px 0 0 0;
+        display: block;
+        float: left;
+        border-bottom: 1px solid #efefef;
+        background: #fcfcfc;
+    }
+
+        .club_content:first-child {
+            margin-top: 0;
         }
 
-        .gradient {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(96deg, #99aefb 10%, #f04aa4 61.32%, #e7b282 98.78%);
+        .club_content:last-child {
+            margin-bottom: 0;
         }
-        /* list area */
-        .list_wrap {
+
+        .club_content a {
             width: 100%;
-            height: auto;
+            height: 100%;
             display: block;
-            float: left;
-            background: #efefef;
         }
 
-        .club_content {
-            width: 100%;
-            height: auto;
-            margin: 10px 0 0 0;
-            padding: 20px 0 0 0;
-            display: block;
-            float: left;
-            border-bottom: 1px solid #efefef;
-            background: #fcfcfc;
-        }
+    ul.club_tags, .club_header, .club_rate, .club_pr {
+        padding: 0 15px;
+    }
+    /* tags */
+    ul.club_tags {
+        width: 100%;
+        height: auto;
+        margin: 0 0 10px 0;
+        display: inline-flex;
+        flex-wrap: wrap;
+    }
 
-            .club_content:first-child {
-                margin-top: 0;
-            }
-
-            .club_content:last-child {
-                margin-bottom: 0;
-            }
-
-            .club_content a {
-                width: 100%;
-                height: 100%;
-                display: block;
-            }
-
-        ul.club_tags, .club_header, .club_rate, .club_pr {
-            padding: 0 15px;
-        }
-        /* tags */
-        ul.club_tags {
-            width: 100%;
-            height: auto;
-            margin: 0 0 10px 0;
-            display: inline-flex;
-            flex-wrap: wrap;
-        }
-
-            ul.club_tags li {
-                width: auto;
-                height: auto;
-                margin: 5px 0 0 5px;
-                padding: 4px 8px;
-                display: inline-flex;
-                align-items: center;
-                color: #ffffff;
-                font-size: 10px;
-                font-weight: 600;
-                border-radius: 3px;
-            }
-
-                ul.club_tags li:first-child {
-                    margin-left: 0;
-                }
-
-                ul.club_tags li.tag_location {
-                    padding: 0;
-                    color: #aaaaaa;
-                    font-size: 0.8rem;
-                }
-
-                ul.club_tags li.tag_rank {
-                    background: #BFA3B6;
-                }
-
-                ul.club_tags li.tag_gold {
-                    background: #d4b78a;
-                }
-
-                ul.club_tags li.tag_good {
-                    background: #96b41f;
-                }
-
-                ul.club_tags li.tag_platinum {
-                    background: #697DBF;
-                }
-
-                ul.club_tags li.tag_big {
-                    background: #efb726;
-                }
-        /* hostclub info */
-        .club_header {
-            width: 100%;
-            height: auto;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-start;
-        }
-
-        .club_logo {
-            width: 45px;
-            height: 45px;
-            margin: 0 10px 0 0;
-            padding: 0;
-            display: inline-flex;
-        }
-
-            .club_logo img {
-                width: 100%;
-                height: 100%;
-                border: 1px solid #e5e7eb;
-                border-radius: 50%;
-                background: #efefef;
-                object-fit:cover;
-            }
-
-        .club_info {
-            width: calc(100% - 100px);
-            height: auto;
-            max-height: 45px; /* as 「.club_logo」height */
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        h3.club_name, p.club_kana, p.club_group {
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .club_info h3, .club_info p {
-            width: 100%;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        h3.club_name {
-            height: 19px;
-            font-size: 0.9rem;
-        }
-
-        p.club_kana, p.club_group {
-            height: 13px;
-            color: #aaaaaa;
-        }
-
-        p.club_group {
-            color: #e3a1a1;
-            font-weight: normal;
-        }
-
-        .action_keep {
-            width: 45px;
-            height: 45px;
-            padding: 6px;
-            display: inline-flex;
-            flex-flow: wrap-reverse;
-        }
-
-            .action_keep img {
-                width: 100%;
-                height: 100%;
-                aspect-ratio: 1 / 1;
-            }
-        /* hostclub thumb */
-        ul.club_thumb {
-            width: 100%;
-            height: auto;
-            margin: 10px 0;
-            display: flex;
-            flex-wrap: nowrap;
-        }
-
-            ul.club_thumb li {
-                width: calc(100% / 3);
-                height: auto;
-                margin: 0;
-                padding: 0 0 0 2px;
-                display: inline-flex;
-                aspect-ratio: 1 / 1;
-            }
-
-                ul.club_thumb li:first-child {
-                    padding: 0;
-                }
-
-                ul.club_thumb li img {
-                    width: 100%;
-                    height: 100%;
-                    aspect-ratio: 1 / 1;
-                    object-fit: cover;
-                    background: #efefef;
-                }
-        /* rate */
-        .club_rate, ul.rate_stars, ul.rate_stars li, ul.rate_review {
-            height: 18px; /* as 「ul.rate_stars li」 width */
-        }
-
-        .club_rate {
-            width: 100%;
-            height: 18px;
-            display: flex;
-            flex-wrap: nowrap;
-            font-size: 1.1rem;
-        }
-
-        ul.rate_stars {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-            ul.rate_stars li {
-                width: 18px;
-                margin: 0 0 0 2px;
-                padding: 0;
-                display: inline-flex;
-                align-items: center;
-            }
-
-                ul.rate_stars li:first-child {
-                    margin: 0;
-                }
-
-                ul.rate_stars li img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    aspect-ratio: 1 / 1;
-                }
-
-                ul.rate_stars li.rate_value {
-                    width: auto;
-                    height: 18px;
-                    margin: 0 0 0 8px;
-                    padding: 2px 0 0 0;
-                    font-size: 1.2rem;
-                    font-weight: 600;
-                    letter-spacing: 0;
-                }
-
-        ul.rate_review {
+        ul.club_tags li {
             width: auto;
-            margin: 0 0 0 10px;
+            height: auto;
+            margin: 5px 0 0 5px;
+            padding: 4px 8px;
             display: inline-flex;
+            align-items: center;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 600;
+            border-radius: 3px;
         }
 
-            ul.rate_review li.comment_value {
-                width: auto;
-                height: 18px;
-                margin: 0 0 0 5px;
-                padding: 4px 0 0 0;
-                display: inline-flex;
-                align-items: center;
+            ul.club_tags li:first-child {
+                margin-left: 0;
+            }
+
+            ul.club_tags li.tag_location {
+                padding: 0;
+                color: #aaaaaa;
                 font-size: 0.8rem;
             }
 
-            ul.rate_review li:first-child {
-                width: 18px;
-                height: 18px;
+            ul.club_tags li.tag_rank {
+                background: #BFA3B6;
             }
 
-        .rate_review img {
+            ul.club_tags li.tag_gold {
+                background: #d4b78a;
+            }
+
+            ul.club_tags li.tag_good {
+                background: #96b41f;
+            }
+
+            ul.club_tags li.tag_platinum {
+                background: #697DBF;
+            }
+
+            ul.club_tags li.tag_big {
+                background: #efb726;
+            }
+    /* hostclub info */
+    .club_header {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .club_logo {
+        width: 45px;
+        height: 45px;
+        margin: 0 10px 0 0;
+        padding: 0;
+        display: inline-flex;
+    }
+
+        .club_logo img {
             width: 100%;
             height: 100%;
-            aspect-ratio: 1 / 1;
+            border: 1px solid #e5e7eb;
+            border-radius: 50%;
+            background: #efefef;
             object-fit: cover;
         }
 
-        p.club_pr {
-            width: 100%;
-            height: 50px;
-            display: inline-flex;
-            flex-wrap: wrap;
-            align-items: center;
-            font-size: 0.75rem;
-            overflow: hidden;
-        }
-        /* hostclub footer */
-        .club_footer {
-            width: 100%;
-            height: auto;
-            margin: 10px 0 0 0;
-            padding: 15px 15px 20px 15px;
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px solid #e5e7eb;
-        }
+    .club_info {
+        width: calc(100% - 100px);
+        height: auto;
+        max-height: 45px; /* as 「.club_logo」height */
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
 
-        .club_status {
-            width: 120px;
+    h3.club_name, p.club_kana, p.club_group {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .club_info h3, .club_info p {
+        width: 100%;
+        font-size: 0.7rem;
+        font-weight: 600;
+    }
+
+    h3.club_name {
+        height: 19px;
+        font-size: 0.9rem;
+    }
+
+    p.club_kana, p.club_group {
+        height: 13px;
+        color: #aaaaaa;
+    }
+
+    p.club_group {
+        color: #e3a1a1;
+        font-weight: normal;
+    }
+
+    .action_keep {
+        width: 45px;
+        height: 45px;
+        padding: 6px;
+        display: inline-flex;
+        flex-flow: wrap-reverse;
+    }
+
+        .action_keep img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+        }
+    /* hostclub thumb */
+    ul.club_thumb {
+        width: 100%;
+        height: auto;
+        margin: 10px 0;
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+        ul.club_thumb li {
+            width: calc(100% / 3);
             height: auto;
             margin: 0;
+            padding: 0 0 0 2px;
             display: inline-flex;
-            flex-flow: column;
+            aspect-ratio: 1 / 1;
         }
 
-        .opening_hours {
-            width: 140px;
-            height: 18px;
-            display: inline-flex;
-            align-items: center;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.02rem;
-        }
-
-            .opening_hours img {
-                width: 18px;
-                height: 18px;
-                margin: 0 5px 0 0;
-                display: inline-flex;
-                align-items: center;
+            ul.club_thumb li:first-child {
+                padding: 0;
             }
 
-        .available {
-            width: 100%;
-            height: auto;
-            margin: 5px 0 0 0;
-            padding: 1.4px;
+            ul.club_thumb li img {
+                width: 100%;
+                height: 100%;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                background: #efefef;
+            }
+    /* rate */
+    .club_rate, ul.rate_stars, ul.rate_stars li, ul.rate_review {
+        height: 18px; /* as 「ul.rate_stars li」 width */
+    }
+
+    .club_rate {
+        width: 100%;
+        height: 18px;
+        display: flex;
+        flex-wrap: nowrap;
+        font-size: 1.1rem;
+    }
+
+    ul.rate_stars {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+        ul.rate_stars li {
+            width: 18px;
+            margin: 0 0 0 2px;
+            padding: 0;
             display: inline-flex;
-            justify-content: center;
             align-items: center;
-            color: #ffffff;
-            font-size: 0.8rem;
-            font-weight: 600;
-            border-radius: 3px;
-            background: #d4b78a;
         }
 
-        .club_footer .rsv_btn {
-            width: calc(100% - 160px);
-            height: 45px;
-            color: #ffffff;
-            font-size: 1rem;
-            font-weight: bold;
+            ul.rate_stars li:first-child {
+                margin: 0;
+            }
+
+            ul.rate_stars li img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                aspect-ratio: 1 / 1;
+            }
+
+            ul.rate_stars li.rate_value {
+                width: auto;
+                height: 18px;
+                margin: 0 0 0 8px;
+                padding: 2px 0 0 0;
+                font-size: 1.2rem;
+                font-weight: 600;
+                letter-spacing: 0;
+            }
+
+    ul.rate_review {
+        width: auto;
+        margin: 0 0 0 10px;
+        display: inline-flex;
+    }
+
+        ul.rate_review li.comment_value {
+            width: auto;
+            height: 18px;
+            margin: 0 0 0 5px;
+            padding: 4px 0 0 0;
             display: inline-flex;
+            align-items: center;
+            font-size: 0.8rem;
         }
+
+        ul.rate_review li:first-child {
+            width: 18px;
+            height: 18px;
+        }
+
+    .rate_review img {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+
+    p.club_pr {
+        width: 100%;
+        height: 50px;
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        font-size: 0.75rem;
+        overflow: hidden;
+    }
+    /* hostclub footer */
+    .club_footer {
+        width: 100%;
+        height: auto;
+        margin: 10px 0 0 0;
+        padding: 15px 15px 20px 15px;
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .club_status {
+        width: 120px;
+        height: auto;
+        margin: 0;
+        display: inline-flex;
+        flex-flow: column;
+    }
+
+    .opening_hours {
+        width: 140px;
+        height: 18px;
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.02rem;
+    }
+
+        .opening_hours img {
+            width: 18px;
+            height: 18px;
+            margin: 0 5px 0 0;
+            display: inline-flex;
+            align-items: center;
+        }
+
+    .available {
+        width: 100%;
+        height: auto;
+        margin: 5px 0 0 0;
+        padding: 1.4px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border-radius: 3px;
+        background: #d4b78a;
+    }
+
+    .club_footer .rsv_btn {
+        width: calc(100% - 160px);
+        height: 45px;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: bold;
+        display: inline-flex;
+    }
 </style>
 
 <div id="tab1" class="tab-content-plane  exclude-class">
     <div class="list_wrap">
-    @foreach (var item in Model.ClubListModel)
-    {
-        /* new improvememnt*/
-        <div class="club_content">
-            <!-- s/link -->
-            <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
-                <!-- s/club_tag -->
-                <ul class="club_tags">
-                    @if (!string.IsNullOrEmpty(@item.Tag1))
-                    {
-                        <!-- s/tag -->
-                        <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
-                        <!-- e/tag -->
-                    }
-                    @if (!string.IsNullOrEmpty(@item.Tag2))
-                    {
-                        <!-- s/tag -->
-                        <li class="tag_rank"> @item.Tag2</li>
-                    }
-                    <!-- e/tag -->
-                    <!-- s/tag -->
-                    @if (!string.IsNullOrEmpty(@item.Tag3))
-                    {
-                        <li class="tag_platinum">  @item.Tag3</li>
-                    }
-
-                    @if (!string.IsNullOrEmpty(@item.Tag4))
-                    {
+        @foreach (var item in Model.ClubListModel)
+        {
+            /* new improvememnt*/
+            <div class="club_content">
+                <!-- s/link -->
+                <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                    <!-- s/club_tag -->
+                    <ul class="club_tags">
+                        @if (!string.IsNullOrEmpty(@item.Tag1))
+                        {
+                            <!-- s/tag -->
+                            <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
+                            <!-- e/tag -->
+                        }
+                        @if (!string.IsNullOrEmpty(@item.Tag2))
+                        {
+                            <!-- s/tag -->
+                            <li class="tag_rank"> @item.Tag2</li>
+                        }
                         <!-- e/tag -->
                         <!-- s/tag -->
-                        <li class="tag_good">@item.Tag4</li>
-                    }
-                    @if (!string.IsNullOrEmpty(@item.Tag5))
-                    {
-                        <li class="tag_big">  @item.Tag5</li>
-                    }
-                    <!-- e/tag -->
-                </ul>
-                <!-- e/club_tag -->
-                <!-- s/club header -->
-                <div class="club_header">
-                    <!-- s/club logo -->
-                    <div class="club_logo"><img class="logo" alt="ロゴ" src="@item.ClubLogo"></div>
-                    <!-- e/club logo -->
-                    <!-- s/club info -->
-                    <div class="club_info">
-                        <!-- s/club_name -->
-                        <h3 class="club_name">@item.ClubName</h3>
-                        <!-- e/club_name -->
-                        <!-- s/club kana -->
-                        <p class="club_kana">@item.ClubNameJapanese</p>
-                        <!-- e/club kana -->
-                        <!-- s/club group -->
-                        <p class="club_group">@item.GroupName</p>
-                        <!-- e/club group -->
-                    </div>
-                    <!-- e/club info -->
-                    <!-- s/action btn -->
-                    @if (item.IsBookmarked.ToUpper() == "Y")
-                    {
-                        <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
-                    }
-                    else
-                    {
-                        <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
-                    }
-                    <!-- e/action btn -->
-                </div>
-                <!-- e/club header -->
-                <!-- s/thumb area -->
-                <ul class="club_thumb">
-                    <!-- s/club thumb -->
-                    @foreach (var item2 in item.HostGalleryImage)
-                    {
-                        <li><img alt="@item.ClubName ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
-                    }
-                    <!-- e/club thumb -->
-                    <!-- s/club thumb -->
-                    @* <li><img alt="[club]([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="images/Content/UserUpload/Host/Gallery/GalleryImage_202404041520250819.jpg"></li>*@
-                    <!-- e/club thumb -->
-                    <!-- s/club thumb -->
-                    @*<li><img alt="[club]([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="images/Content/UserUpload/Host/Gallery/GalleryImage_202404041519587224.jpg"></li>*@
-                    <!-- e/club thumb -->
-                </ul>
-                <!-- e/thumb area -->
-                <!-- s/club rate -->
-                <div class="club_rate">
-                    <!-- s/club rank -->
-                    <ul class="rate_stars">
-                        <!-- s/rank star -->
-                        @{
-                            var unratedScale = (5 - item.AverageRating);
-                            for (int i = 0; i < item.AverageRating; i++)
-                            {
-                                <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
-                            }
-                            for (int i = 0; i < unratedScale; i++)
-                            {
-                                <!-- e/rank star -->
-                                <!-- s/rank star -->
-                                <li><img src="~/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>
-                            }
-                        }
-                        <!-- e/rank star -->
-                        <!-- s/rank star -->
-                        @*<li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
-                        <!-- e/rank star -->
-                        <!-- s/rank star -->
-                        @* <li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
-                        <!-- e/rank star -->
-                        <!-- s/rank star -->
-                        @*<li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
-                        <!-- e/rank star -->
-                        <!-- s/rank star -->
-                        <li class="rate_value"> @item.AverageRating</li>
-                        <!-- e/rank star -->
-                    </ul>
-                    <!-- e/club rank -->
-                    <!-- s/club review -->
-                    <ul class="rate_review">
-                        <!-- s/comment frame -->
-                        <li><img src="~/Content/assets/images/comment.svg" alt="コメント"></li>
-                        <!-- e/comment frame -->
-                        <!-- s/comment value -->
-                        <li class="comment_value">@item.TotalComment</li>
-                        <!-- e/comment value -->
-                    </ul>
-                    <!-- e/club review -->
-                </div>
-                <!-- e/club rate -->
-                <!-- s/club pr -->
-                <p class="club_pr"> @item.ClubDescription</p>
-                <!-- e/club pr -->
-            </a>
-            <!-- e/link -->
-            <!-- s/club footer -->
-            <div class="club_footer">
-                <!-- s/club status -->
-                <div class="club_status">
-                    <!-- s/opening hours -->
-                    @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
-                    {
-                        if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                        @if (!string.IsNullOrEmpty(@item.Tag3))
                         {
-                            <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
-                        }
-                        else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
-                        {
-                            <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                            <li class="tag_platinum">  @item.Tag3</li>
                         }
 
-                        <!-- e/opening hours -->
-                        <!-- s/available -->
-                        if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                        @if (!string.IsNullOrEmpty(@item.Tag4))
                         {
-                            <div class="available">本日空席あり</div>
+                            <!-- e/tag -->
+                            <!-- s/tag -->
+                            <li class="tag_good">@item.Tag4</li>
+                        }
+                        @if (!string.IsNullOrEmpty(@item.Tag5))
+                        {
+                            <li class="tag_big">  @item.Tag5</li>
+                        }
+                        <!-- e/tag -->
+                    </ul>
+                    <!-- e/club_tag -->
+                    <!-- s/club header -->
+                    <div class="club_header">
+                        <!-- s/club logo -->
+                        <div class="club_logo"><img class="logo" alt="ロゴ" src="@item.ClubLogo"></div>
+                        <!-- e/club logo -->
+                        <!-- s/club info -->
+                        <div class="club_info">
+                            <!-- s/club_name -->
+                            <h3 class="club_name">@item.ClubName</h3>
+                            <!-- e/club_name -->
+                            <!-- s/club kana -->
+                            <p class="club_kana">@item.ClubNameJapanese</p>
+                            <!-- e/club kana -->
+                            <!-- s/club group -->
+                            <p class="club_group">@item.GroupName</p>
+                            <!-- e/club group -->
+                        </div>
+                        <!-- e/club info -->
+                        <!-- s/action btn -->
+                        @if (item.IsBookmarked.ToUpper() == "Y")
+                        {
+                            <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                         }
                         else
                         {
-                            <div class="available disabled">本日空席あり</div>
+                            <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
                         }
-                    }
-                    <!-- e/available -->
+                        <!-- e/action btn -->
+                    </div>
+                    <!-- e/club header -->
+                    <!-- s/thumb area -->
+                    <ul class="club_thumb">
+                        <!-- s/club thumb -->
+                        @foreach (var item2 in item.HostGalleryImage)
+                        {
+                            <li><img alt="@item.ClubName ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
+                        }
+                        <!-- e/club thumb -->
+                        <!-- s/club thumb -->
+                        @* <li><img alt="[club]([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="images/Content/UserUpload/Host/Gallery/GalleryImage_202404041520250819.jpg"></li>*@
+                        <!-- e/club thumb -->
+                        <!-- s/club thumb -->
+                        @*<li><img alt="[club]([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="images/Content/UserUpload/Host/Gallery/GalleryImage_202404041519587224.jpg"></li>*@
+                        <!-- e/club thumb -->
+                    </ul>
+                    <!-- e/thumb area -->
+                    <!-- s/club rate -->
+                    <div class="club_rate">
+                        <!-- s/club rank -->
+                        <ul class="rate_stars">
+                            <!-- s/rank star -->
+                            @{
+                                var unratedScale = (5 - item.AverageRating);
+                                for (int i = 0; i < item.AverageRating; i++)
+                                {
+                                    <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
+                                }
+                                for (int i = 0; i < unratedScale; i++)
+                                {
+                                    <!-- e/rank star -->
+                                    <!-- s/rank star -->
+                                    <li><img src="~/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>
+                                }
+                            }
+                            <!-- e/rank star -->
+                            <!-- s/rank star -->
+                            @*<li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
+                            <!-- e/rank star -->
+                            <!-- s/rank star -->
+                            @* <li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
+                            <!-- e/rank star -->
+                            <!-- s/rank star -->
+                            @*<li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
+                            <!-- e/rank star -->
+                            <!-- s/rank star -->
+                            <li class="rate_value"> @item.AverageRating</li>
+                            <!-- e/rank star -->
+                        </ul>
+                        <!-- e/club rank -->
+                        <!-- s/club review -->
+                        <ul class="rate_review">
+                            <!-- s/comment frame -->
+                            <li><img src="~/Content/assets/images/comment.svg" alt="コメント"></li>
+                            <!-- e/comment frame -->
+                            <!-- s/comment value -->
+                            <li class="comment_value">@item.TotalComment</li>
+                            <!-- e/comment value -->
+                        </ul>
+                        <!-- e/club review -->
+                    </div>
+                    <!-- e/club rate -->
+                    <!-- s/club pr -->
+                    <p class="club_pr"> @item.ClubDescription</p>
+                    <!-- e/club pr -->
+                </a>
+                <!-- e/link -->
+                <!-- s/club footer -->
+                <div class="club_footer">
+                    <!-- s/club status -->
+                    <div class="club_status">
+                        <!-- s/opening hours -->
+                        @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
+                        {
+                            if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                            {
+                                <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                            }
+                            else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                            {
+                                <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                            }
+
+                            <!-- e/opening hours -->
+                            <!-- s/available -->
+                            if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                            {
+                                <div class="available">本日空席あり</div>
+                            }
+                            else
+                            {
+                                <div class="available disabled">本日空席あり</div>
+                            }
+                        }
+                        <!-- e/available -->
+                    </div>
+                    <!-- e/club status -->
+                    <!-- s/reservation btn -->
+                    <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
+                        @* 今すぐ予約する*@
+                    </button>
+                    <!-- e/reservation btn -->
                 </div>
-                <!-- e/club status -->
-                <!-- s/reservation btn -->
-                <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
-                    @* 今すぐ予約する*@
-                </button>
-                <!-- e/reservation btn -->
+                <!-- e/club footer -->
+
             </div>
-            <!-- e/club footer -->
-           
-        </div>
-        /* new improvememnt end*/
+            /* new improvememnt end*/
 
 
-        <div style="background-color: #e8e8e8;" class=" h-[8px] my-[0px] py-[0px]">
+            <div style="background-color: #e8e8e8;" class=" h-[8px] my-[0px] py-[0px]">
 
-        </div>
-    }
-         </div>
+            </div>
+        }
+    </div>
     <div style="background-color: #F6F6F6; height:42px; display:flex; width:100%"
          class="flex flex-row gap-[4px] justify-center h-[24px] items-center my-[0px] pb-[12px] ">
         <div style="line-height:18px;" class="text-[#D75A8B] underline text-[12px]" onclick="CurrentLocationRedirectFunction();">

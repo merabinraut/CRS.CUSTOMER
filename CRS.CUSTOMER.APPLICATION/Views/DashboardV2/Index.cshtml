@@ -283,7 +283,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="overlay"></div>
+                            <div class="overlay" style="background:#fff; opacity:0.8"></div>
                         </div>
                     }
                 }
@@ -311,7 +311,7 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="overlay"></div>
+                            <div class="overlay" style="background:#fff; opacity:0.8"></div>
                         </div>
                     }
                 }
@@ -500,16 +500,25 @@
                                     <span style="width:25px">料金</span>
                                     <hr class="w-[191px] bg-[#A09E91]">
                                 </div>
-                                <div class="text-center">
+                                <div class="text-center  ">
+                                    <div class="flex justify-center gap-2">
 
-                                    <div class="text-[36px] text-[#404040]">¥ @priceKey</div>
+                                        <del class="text-[36px] text-[#404040]" style="text-decoration: line-through; font-size: 26px; color: #545659; opacity:0.6">¥ @priceKey</del>
+                                        <div class="text-[36px] text-[#404040]" style="font-size:26px">
+                                            ¥
+                                            @*  @priceKey*@ 0
+                                        </div>
+                                        <span style="color: #D17979; font-size:8px; align-content:end">キャンペーン中</span>
+                                    </div>
                                     <div class="text-[10px] text-warmgray-1">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TaxIncluded</div>
+
                                 </div>
+
                             </div>
                             <div>
                                 <div class="flex w-full items-center text-warmgray-1 text-[12px] gap-[6px] mb-4">
 
-                                    <span style="width:36px">プラン</span>
+                                    <span style="width:36px; white-space:nowrap">プラン</span>
                                     <hr class=" bg-[#A09E91]" style="width:180px">
                                 </div>
                                 <div class="flex justify-center gap-4 mb-[25px]">
@@ -1402,8 +1411,14 @@
             window.location.href = `/LocationManagement/Index?LocationId=${CurrentLocationId}&RenderId=${RenderId}`;
         }
 
-        const WorkingHoursShowPopup = () => document.getElementById('working-hour-id').classList.remove('translate-y-full');
-        const WorkingHoursClosePopup = () => document.getElementById('working-hour-id').classList.add('translate-y-full');
+        const WorkingHoursShowPopup = () => {
+            document.body.classList.add('body-no-scroll');
+            document.getElementById('working-hour-id').classList.remove('translate-y-full');
+        }
+        const WorkingHoursClosePopup = () => {
+            document.getElementById('working-hour-id').classList.add('translate-y-full');
+             document.body.classList.remove('body-no-scroll');
+        }
 
         function WorkingHoursSubmitFunction() {
             var hourValue = $("#hourShadowval").val();
@@ -1415,8 +1430,14 @@
             window.location.href = "/Search/DateTimeFilter?LocationId=" + CurrentLocationId + "&&FilteredTime=" + concatenatedTime + "&&ResultType='1'";
         }
 
-        const LastEntryShowPopup = () => document.getElementById('last-entry-id').classList.remove('translate-y-full');
-        const LastEntryClosePopup = () => document.getElementById('last-entry-id').classList.add('translate-y-full');
+        const LastEntryShowPopup = () => {
+            document.getElementById('last-entry-id').classList.remove('translate-y-full');
+            document.body.classList.add('body-no-scroll');
+        }
+        const LastEntryClosePopup = () => {
+            document.getElementById('last-entry-id').classList.add('translate-y-full');
+             document.body.classList.remove('body-no-scroll');
+        }
 
         function LastEntrySubmitFunction() {
             var hourValue = $("#hourShadowval2").val();
