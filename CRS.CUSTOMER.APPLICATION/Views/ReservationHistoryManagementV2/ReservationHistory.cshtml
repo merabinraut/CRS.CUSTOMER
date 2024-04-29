@@ -100,7 +100,7 @@
                                                     }
                                                 </div>*@
                                             @*new design *@
-                                            <ul class="club_tags">
+                                            <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px; overflow-x: scroll">
                                                 @if (!string.IsNullOrEmpty(@item.Tag1))
                                                 {
                                                     <!-- s/tag -->
@@ -266,7 +266,7 @@
                     {
                         foreach (var item in Model.GetVisitedHistoryList)
                         {
-                            <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
+                            <div class=" pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
                                 <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
                                     <div class="h-[82px] w-[82px] relative flex-none">
                                         <img src="/Content/assets/images/visited_status_new.svg" alt="reserved"
@@ -311,7 +311,7 @@
                                                     </div>
                                                 }
                                             </div>*@
-                                        <ul class="club_tags">
+                                        <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px; overflow-x: scroll ">
                                             @if (!string.IsNullOrEmpty(@item.Tag1))
                                             {
                                                 <!-- s/tag -->
@@ -517,7 +517,7 @@
                                                         </div>
                                                     }
                                                 </div>*@
-                                            <ul class="club_tags">
+                                            <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px; overflow-x: scroll " >
                                                 @if (!string.IsNullOrEmpty(@item.Tag1))
                                                 {
                                                     <!-- s/tag -->
@@ -739,7 +739,7 @@
                                                 }
                                             </div>*@
 
-                                        <ul class="club_tags">
+                                        <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px;overflow-x:scroll">
                                             @if (!string.IsNullOrEmpty(@item.Tag1))
                                             {
                                                 <!-- s/tag -->
