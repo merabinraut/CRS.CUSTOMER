@@ -184,7 +184,6 @@
 
             keys.forEach(key => {
                 const value = decryptAndGetValue(key);
-                debugger
                 if (value !== "") {
                     switch (key) {
                         case "VisitDate":
@@ -201,11 +200,11 @@
                             break;
                         case "PlanPrice":
                             const StrikePrice = decryptAndGetValue("StrikePrice");
-                            if (StrikePrice != null && StrikePrice != "") {
-                                $('#PlanAmount-Id').html("<div class='strikethrough'> ¥" + StrikePrice + "¥" + value + "</div><span>キャンペーン中</span>");
+                            if (StrikePrice != null && StrikePrice != "" && StrikePrice != "y" && StrikePrice != "y") {
+                                $('#PlanAmount-Id').html("<div class='strikethrough'> ¥" + StrikePrice + "</div>" + " <div style='font-weight:600'> ¥" + value + "</div>" + "<span>キャンペーン中</span>");
                             }
                             else {
-                                $('#PlanAmount-Id').html("¥" + value + "<div class='strike-out'> ¥" + value + "</div> " + "<span>キャンペーン中</span> </div>");
+                                $('#PlanAmount-Id').html(" <div style='font-weight:600'> ¥" + value+ "</div> ");
                             }
 
                             break;

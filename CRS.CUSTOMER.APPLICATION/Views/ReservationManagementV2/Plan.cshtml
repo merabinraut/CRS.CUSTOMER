@@ -255,7 +255,6 @@
                 return acc;
             }, {});
             //console.log('Data Attributes:', dataAttributes);
-            debugger
             const IsPopularPlan = activeElement.querySelector('.ispopularplan-class').value;
             DataStorageFunction(PlanId, ...Object.values(dataAttributes), IsPopularPlan);
             var clubDetail = @Html.Raw(Json.Encode(@ClubDetailModel));
