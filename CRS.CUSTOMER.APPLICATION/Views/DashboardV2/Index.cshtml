@@ -523,10 +523,11 @@
                                     <div class="flex justify-center gap-1">
                                         @{if (item.IsStrikeOut == "A")
                                             {
-                                                <del class="text-[36px] text-[#404040]" style="text-decoration: line-through; align-content: end; font-size: 18px; color: #545659; opacity: 0.6; white-space: nowrap">¥ @priceKey</del>
+                                                <del class="text-[36px] text-[#404040]" style="text-decoration: line-through; align-content: end; font-size: 18px; color: #545659; opacity: 0.6; white-space: nowrap">¥  @item.StrikePrice</del>
                                                 <div class="text-[36px] text-[#404040]" style="font-size: 24px; white-space: nowrap; align-content: end; vertical-align: baseline; line-height:100% ">
                                                     ¥
-                                                    @item.StrikePrice
+                                                    @priceKey
+
                                                 </div>
 
 
