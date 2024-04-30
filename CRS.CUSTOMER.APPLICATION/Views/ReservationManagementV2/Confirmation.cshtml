@@ -200,8 +200,13 @@
                             $('#PlanName-Id').html(value);
                             break;
                         case "PlanPrice":
-                            /*  $('#PlanAmount-Id').html("¥" + value +"<div class='strike-out'> ¥"+value+"</div> "+"<span>キャンペーン中</span> </div>");*/
-                            $('#PlanAmount-Id').html("<div class='strikethrough'> ¥" + value + "¥" + value +  "</div><span>キャンペーン中</span>");
+                            const StrikePrice = decryptAndGetValue("StrikePrice");
+                            if (StrikePrice != null && StrikePrice != "") {
+                                $('#PlanAmount-Id').html("<div class='strikethrough'> ¥" + StrikePrice + "¥" + value + "</div><span>キャンペーン中</span>");
+                            }
+                            else {
+                                $('#PlanAmount-Id').html("¥" + value + "<div class='strike-out'> ¥" + value + "</div> " + "<span>キャンペーン中</span> </div>");
+                            }
 
                             break;
                         case "PlanTime":

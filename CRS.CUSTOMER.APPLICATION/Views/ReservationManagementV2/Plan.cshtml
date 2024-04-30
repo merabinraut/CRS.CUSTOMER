@@ -99,7 +99,7 @@
                                                 <div class="IsStrikeOut" value="@item.IsStrikeOut" hidden></div>
                                             }
                                             <div class="strikethrough-wrapper">
-                                                <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class strikethrough" data-info="@item.StrikePrice">
+                                                <div class="text-[#D75A8B] font-futura pb-[6px] StrikePrice-class strikethrough" data-info="@item.StrikePrice">
                                                     @string.Concat("¥", @sAmount)
                                                 </div>
                                                 <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class" style="font-size:16px; font-weight:600" data-info="@item.PlanPrice">
@@ -246,7 +246,7 @@
                 return false;
             }
 
-            const dataAttributes = ['PlanName', 'PlanPrice', 'PlanTime', 'PlanLiquor', 'PlanNomination','StrikePrice','IsStrikeOut'].reduce((acc, attr) => {
+            const dataAttributes = ['PlanName', 'PlanPrice', 'PlanTime', 'PlanLiquor', 'PlanNomination','StrikePrice'].reduce((acc, attr) => {
                 const element = activeElement.querySelector(`.${attr}-class`);
                 if (element) {
                     const value = element.getAttribute('data-info');
@@ -264,7 +264,7 @@
             window.location.href = url;
         }
 
-        const DataStorageFunction = (PlanId, PlanName, PlanPrice, PlanTime, PlanLiquor, PlanNomination, IsPopularPlan) => {
+        const DataStorageFunction = (PlanId, PlanName, PlanPrice, PlanTime, PlanLiquor, PlanNomination, StrikePrice, IsPopularPlan) => {
             const encryptedData = {
                 ClubId: '@Model.ClubDetailModel.ClubId',
                 PlanId: PlanId,
@@ -273,7 +273,8 @@
                 PlanTime: PlanTime? EncryptParameter(PlanTime) : '',
                 PlanLiquor: PlanLiquor? EncryptParameter(PlanLiquor) : '',
                 PlanNomination: PlanNomination? EncryptParameter(PlanNomination) : '',
-                IsPopularPlan: IsPopularPlan? EncryptParameter(IsPopularPlan) : '',
+                PlanNomination: PlanNomination? EncryptParameter(PlanNomination) : '',
+                StrikePrice: StrikePrice ? EncryptParameter(StrikePrice) : '',
                 SelectedHost: '@ViewBag.SelectedHost',
                 VisitDate: '@ViewBag.VisitDate' ? EncryptParameter('@ViewBag.VisitDate') : '',
                 VisitTime: '@ViewBag.VisitTime' ? EncryptParameter('@ViewBag.VisitTime') : '',
