@@ -1385,22 +1385,26 @@ label {
 
 /*For text-linetrought*/
 .strikethrough {
-    text-decoration:line-through;
-    white-space:nowrap
+    text-decoration: line-through;
+    white-space: nowrap;
+    font-weight: 500;
 }
 .strikethrough-wrapper {
     display: flex;
     gap: 4px;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight:500;
+    align-items:center;
 }
     .strikethrough-wrapper > span {
         color: #D17979;
         font-family: Futura;
         font-weight: 500;
         letter-spacing: -0.6px;
-        font-size: 14px
+        font-size: 10px;
+        font-weight:500;
     }
-}
+
 
 /*@charset "utf-8";*/
 /* reset */ /*:where([hidden]:not([hidden='until-found'])) {

@@ -184,6 +184,7 @@
 
             keys.forEach(key => {
                 const value = decryptAndGetValue(key);
+                debugger
                 if (value !== "") {
                     switch (key) {
                         case "VisitDate":
@@ -200,7 +201,7 @@
                             break;
                         case "PlanPrice":
                             /*  $('#PlanAmount-Id').html("¥" + value +"<div class='strike-out'> ¥"+value+"</div> "+"<span>キャンペーン中</span> </div>");*/
-                            $('#PlanAmount-Id').html("¥" + value + "<div class='strikethrough'> ¥" + value + "</div><span>キャンペーン中</span>");
+                            $('#PlanAmount-Id').html("<div class='strikethrough'> ¥" + value + "¥" + value +  "</div><span>キャンペーン中</span>");
 
                             break;
                         case "PlanTime":
