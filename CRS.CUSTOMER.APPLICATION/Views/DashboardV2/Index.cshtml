@@ -271,20 +271,41 @@
                         var locationParts = Model.Location[i].LocationDisplayName.Split('/');
                         var beforeSlash = locationParts[0];
                         var afterSlash = locationParts.Length > 1 ? locationParts[1] : "";
-                        <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
-                            <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
-                                <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location1">
-                                <p class="locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
-                                    @*@Model.Location[i].LocationName*@
-                                    @beforeSlash
-                                    <br>
-                                    <span class="locationdown  font-[500]  text-center" style="font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block">
-                                        (@afterSlash)
-                                    </span>
-                                </p>
+                        if (Model.Location[i].LocationStatus == "A")
+                        {
+                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
+                                <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
+                                    <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location1">
+                                    <p class="locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
+                                        @*@Model.Location[i].LocationName*@
+                                        @beforeSlash
+                                        <br>
+                                        <span class="locationdown  font-[500]  text-center" style="font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block">
+                                            (@afterSlash)
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="overlay"></div>
                             </div>
-                            <div class="overlay" style="background:#fff; opacity:0.8"></div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
+                                <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
+                                    <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location1">
+                                    <p class="locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
+                                        @*@Model.Location[i].LocationName*@
+                                        @beforeSlash
+                                        <br>
+                                        <span class="locationdown  font-[500]  text-center" style="font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block">
+                                            (@afterSlash)
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="overlay" style="background:#fff; opacity:0.8"></div>
+                            </div>
+
+                        }
                     }
                 }
             }
@@ -298,21 +319,45 @@
                         var locationParts = Model.Location[i].LocationDisplayName.Split('/');
                         var beforeSlash = locationParts[0];
                         var afterSlash = locationParts.Length > 1 ? locationParts[1] : "";
-                        <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
-                            <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
-                                <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
-                                <p style="line-height:12px; font-size:14px" class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
-                                    @*@Model.Location[i].LocationName*@
-                                    @afterSlash
-                                    <br>
-                                    <span style="line-height: 100%;margin-top:4px;font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block " class="locationdown leading-[8px] font-[500] pt-[4px]  text-center">
-                                        @*( @Model.Location[i].LocationName )*@
-                                        (@beforeSlash)
-                                    </span>
-                                </p>
+
+                        if (Model.Location[i].LocationStatus == "A")
+                        {
+                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
+                                <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
+                                    <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
+                                    <p style="line-height:12px; font-size:14px" class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
+                                        @Model.Location[i].LocationName
+                                        @afterSlash
+                                        <br>
+                                        <span style="line-height: 100%;margin-top:4px;font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block " class="locationdown leading-[8px] font-[500] pt-[4px]  text-center">
+                                            ( @Model.Location[i].LocationName )
+                                            (@beforeSlash)
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="overlay"></div>
                             </div>
-                            <div class="overlay" style="background:#fff; opacity:0.8"></div>
-                        </div>
+
+                        }
+                        else
+                        {
+                            <div class="relative">
+                                <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
+                                    <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
+                                    <p style="line-height:12px; font-size:14px" class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
+                                        @Model.Location[i].LocationName
+                                        @afterSlash
+                                        <br>
+                                        <span style="line-height: 100%;margin-top:4px;font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block " class="locationdown leading-[8px] font-[500] pt-[4px]  text-center">
+                                            ( @Model.Location[i].LocationName )
+                                            (@beforeSlash)
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="overlay" style="background:#fff; opacity:0.8"></div>
+                            </div>
+
+                        }
                     }
                 }
             }
@@ -382,18 +427,18 @@
 
 <div class="flex flex-col  gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
     <div class="flex tab-container-plane justify-between bg-white gap-[14px]">
-       @* <div>
-            <button style="font-weight: 600;font-size: 12px; margin-left: 20px; " onclick="handleFirstTab()" id="tab1Button"
-                    class="tab-button-plane tab-link exclude-class active ">
-                ホストクラブ
-            </button>
-        </div>
-        <div>
-            <button style="font-weight: 600;font-size: 12px; margin-right: 20px; " id="tab2Button" onclick="handleSecondTab()"
-                    class="tab-button-plane exclude-class tab-link ">
-                ホスト
-            </button>
-        </div>*@
+        @* <div>
+                <button style="font-weight: 600;font-size: 12px; margin-left: 20px; " onclick="handleFirstTab()" id="tab1Button"
+                        class="tab-button-plane tab-link exclude-class active ">
+                    ホストクラブ
+                </button>
+            </div>
+            <div>
+                <button style="font-weight: 600;font-size: 12px; margin-right: 20px; " id="tab2Button" onclick="handleSecondTab()"
+                        class="tab-button-plane exclude-class tab-link ">
+                    ホスト
+                </button>
+            </div>*@
 
         @*new tab*@
         <div class="grid grid-cols-2 w-full tab-container-plane bg-white gap-[14px]">
@@ -409,25 +454,25 @@
         @*new tab end*@
 
         @* <div>
-            <button style="font-weight: 600;font-size: 12px; margin-left: 20px; " id="tab1Button"
-                    class="tab-link active ">
-                店舗ランキング
-            </button>
-        </div>
-        <div>
-            <button style="font-weight: 600;font-size: 12px; margin-right: 20px; " id="tab2Button"
-                    class="tab-link ">
-                ホストランキング
-            </button>
-        </div>*@
+                <button style="font-weight: 600;font-size: 12px; margin-left: 20px; " id="tab1Button"
+                        class="tab-link active ">
+                    店舗ランキング
+                </button>
+            </div>
+            <div>
+                <button style="font-weight: 600;font-size: 12px; margin-right: 20px; " id="tab2Button"
+                        class="tab-link ">
+                    ホストランキング
+                </button>
+            </div>*@
     </div>
 </div>
 
 <div class="bg-white" id="mainpageclubhost-id">
- @*   <div id="tab1" class="tab-content-plane" onclick="handleFirstTab()" >
-    </div>
-    <div id="tab2" class="tab-content-plane " onclick="handleSecondTab()">
-    </div>*@
+    @*   <div id="tab1" class="tab-content-plane" onclick="handleFirstTab()" >
+        </div>
+        <div id="tab2" class="tab-content-plane " onclick="handleSecondTab()">
+        </div>*@
 </div>
 
 
@@ -461,32 +506,6 @@
                                         <div class="linear-gradient-text table text-[11px] mt-[-5px] font-bold tracking-[0.5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Popularity</div>
                                     }
                                 </div>
-                                @* <div class="flex ml-[35px] mt-[-70px]">
-                                        @if (!string.IsNullOrEmpty(item.PlanImage))
-                                        {
-                                            <img src="@item.PlanImage"
-                                                 class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] rotate-[12deg] z-[3]"
-                                                 style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
-                                        }
-                                        else
-                                        {
-                                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                                 class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] rotate-[12deg] z-[3]"
-                                                 style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
-                                        }
-                                        @if (!string.IsNullOrEmpty(item.PlanImage))
-                                        {
-                                            <img src="@item.PlanImage"
-                                                 class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] z-[2] -ml-[25px] rotate-[12deg]"
-                                                 style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
-                                        }
-                                        else
-                                        {
-                                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                                 class="w-[80px] h-[100px] object-fit-cover border border-white rounded-[5px] rotate-[12deg] z-[3]"
-                                                 style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));" alt="plan-image" />
-                                        }
-                                    </div>*@
                             </div>
                         </div>
                         <div class="px-6">
@@ -501,14 +520,30 @@
                                     <hr class="w-[191px] bg-[#A09E91]">
                                 </div>
                                 <div class="text-center  ">
-                                    <div class="flex justify-center gap-2">
+                                    <div class="flex justify-center gap-1">
+                                        @{if (item.IsStrikeOut == "A")
+                                            {
+                                                <del class="text-[36px] text-[#404040]" style="text-decoration: line-through; align-content: end; font-size: 18px; color: #545659; opacity: 0.6; white-space: nowrap">¥ @priceKey</del>
+                                                <div class="text-[36px] text-[#404040]" style="font-size: 24px; white-space: nowrap; align-content: end; vertical-align: baseline; line-height:100% ">
+                                                    ¥
+                                                    @item.StrikePrice
+                                                </div>
 
-                                        <del class="text-[36px] text-[#404040]" style="text-decoration: line-through; font-size: 26px; color: #545659; opacity:0.6; white-space:nowrap">¥ @priceKey</del>
-                                        <div class="text-[36px] text-[#404040]" style="font-size: 26px; white-space: nowrap">
-                                            ¥
-                                            @*  @priceKey*@ 0
+
+                                                <span style="color: #D17979; font-size: 8px; align-content: end; white-space: nowrap; padding-bottom:">キャンペーン中</span>
+                                            }
+                                            else
+                                            {
+                                                <div class="text-[36px] text-[#404040]" style=" font-size: 26px; color: #545659; ">¥ @priceKey</div>
+                                            }
+                                        }
+
+                                        <!--<div class="text-[36px] text-[#404040]" style="font-size: 26px; white-space: nowrap">
+                                        ¥-->
+                                        @*  @priceKey*@
+                                        <!--0
                                         </div>
-                                        <span style="color: #D17979; font-size:8px; align-content:end">キャンペーン中</span>
+                                        <span style="color: #D17979; font-size:8px; align-content:end">キャンペーン中</span>-->
                                     </div>
                                     <div class="text-[10px] text-warmgray-1">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TaxIncluded</div>
 
@@ -560,220 +595,31 @@
 <!-- Review section -->
 <div style="background-color: #FFF ;">
     <div style="height:16px; background:#F8F8F8"></div>
-   @* <h2 style="background-color: #FFF ;font-weight:700; padding-top:16px" class='pl-[16px] overflow-x-auto text-sm'>
-        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Top_Reviews
-    </h2>*@
+    @* <h2 style="background-color: #FFF ;font-weight:700; padding-top:16px" class='pl-[16px] overflow-x-auto text-sm'>
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Top_Reviews
+        </h2>*@
 
-   @* <div style="background-color: #FFF" class=" pb-[16px] flex overflow-x-auto no-scrollbar px-4 gap-4 mt-[12px]">*@
-        <!--<div style="border-radius: 6px; width: 313px; border: 1px solid #EAECF0;" class="  bg-[#F8F8F8] ">
-            <div style="border-radius: 6px;border: 1px solid #EAECF0; background: #FFF;box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.04);"
-                 class="w-[313px] h-full pb-[14px]">
-                <div style="padding: 24px 16px;" class="flex w-full  justify-between flex-row">
-                    <div class="flex flex-row items-center w-full">
-                        <img src="~/Content/assets/images/customer/CustomerImage.jpg"
-                             class="h-[30px] w-[30px] rounded-full  " alt="profileimg">
-                        <div class="flex flex-col pl-2 leading-[11px] w-full">
-                            <div class="flex justify-between items-center ">
-                                <p class=" font-[700] text-[11px] text-start flex">
-                                    NecoYanagi
-                                </p>
-                                <div class=" flex gap-[2px] text-[9px] items-center" style="color: #A09E91">
-                                    <i class="las la-calendar text-[11px]"></i>
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_Date:2023/11/20 14:00
-                                </div>
-                            </div>
-                            <div class="flex gap-1 items-center">
-                                <div class="rating-review text-[11px]" id="stars">
-                                    @for (int i = 0; i < 5; i++)
-                                    {
-                                        <div class="rating-review text-[11px]" id="stars">
-                                          
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11" fill="none">
-                                                <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z" fill="#F89336" />
-                                            </svg>
-
-                                        </div>
-                                    }
-                                </div>
-                                <div class="text-[11px] mt-[2px]">5.0</div>
+    @* <div style="background-color: #FFF" class=" pb-[16px] flex overflow-x-auto no-scrollbar px-4 gap-4 mt-[12px]">*@
+    <!--<div style="border-radius: 6px; width: 313px; border: 1px solid #EAECF0;" class="  bg-[#F8F8F8] ">
+        <div style="border-radius: 6px;border: 1px solid #EAECF0; background: #FFF;box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.04);"
+             class="w-[313px] h-full pb-[14px]">
+            <div style="padding: 24px 16px;" class="flex w-full  justify-between flex-row">
+                <div class="flex flex-row items-center w-full">
+                    <img src="~/Content/assets/images/customer/CustomerImage.jpg"
+                         class="h-[30px] w-[30px] rounded-full  " alt="profileimg">
+                    <div class="flex flex-col pl-2 leading-[11px] w-full">
+                        <div class="flex justify-between items-center ">
+                            <p class=" font-[700] text-[11px] text-start flex">
+                                NecoYanagi
+                            </p>
+                            <div class=" flex gap-[2px] text-[9px] items-center" style="color: #A09E91">
+                                <i class="las la-calendar text-[11px]"></i>
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_Date:2023/11/20 14:00
                             </div>
                         </div>
-                    </div>
-
-                </div>
-                <div class="px-3">
-                    <div class="text-[8px] font-bold bg-[#FFECEC] rounded-[2px] py-[4px] px-[6px] ">
-                        <p class="inline-flex p-[1px] mr-[2px]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Met_handsome_host：
-                            <img src="~/Content/assets/images/customer/red--emoji.svg" />
-                        </p>
-                        <p class="inline-flex p-[1px] mr-[2px]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Service：
-                            <img src="~/Content/assets/images/customer/blue-emoji.svg" />
-
-                        </p>
-                        <p class="inline-flex p-[1px] mr-[2px]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Wish_to_revisit：
-                            <img src="~/Content/assets/images/customer/green-emoji.svg" />
-
-                        </p>
-                        <p class="inline-flex p-[1px] mr-[2px]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Cozy：
-                            <img src="~/Content/assets/images/customer/green-emoji.svg" />
-                        </p>
-
-                    </div>
-                    <div class="flex gap-1 items-center mt-2">
-                        <div class="text-[11px] font-bold ">#推しが見つかった</div>
-                        <div class="linear-gradient rounded-[2px] text-[8px] text-white px-4">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Extended_Course
-                        </div>
-                    </div>
-                    <div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#推しに会えた</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#トークが上手い</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#店内が綺麗</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">#イケメンがいた</div>
-
-                    </div>
-                    <div class="px-4 py-[11px] ">
-                        <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
-                            <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                    <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
-                                          fill="#7E6D5E" />
-                                </svg>
-                            </span>
-                            <div id="tooltip-right" role="tooltip"
-                                 class="absolute z-10 invisible inline-block px-[6px] py-[6px] font-medium text-white text-[7px] w-[200px] bg-gray-900 rounded-lg leading-[140%] opacity-0 tooltip "
-                                 style="background: rgba(41, 47, 51, 0.95); border-radius:3px">
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon <div class="tooltip-arrow" data-popper-arrow>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
-                            <div>
-                                <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col" style="height:45px; width:45px">
-
-                                    <img class="inline-block  rounded-full "
-                                         style="width:45px; height:45px"
-                                         src="~/Content/assets/images/customer/demo-image.jpeg"
-                                         alt="">
-
-
-                                    <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs " style=" top: -5px; left: 33px;"></i>
-                                </div>
-                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] " style="font-size: 10px; width: 45px; ">@@後藤聖...</div>
-                            </div>
-                            <div class="flex flex-col justify-center">
-                                <div class="relative flex justify-center items-center flex-col">
-                                    <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                         style="height:45px; width:45px"
-                                         src="~/Content/assets/images/customer/demo-image.jpeg"
-                                         alt="">
-                                </div>
-                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
-                            </div>
-                            <div class="flex flex-col justify-center">
-                                <div class="relative flex justify-center items-center flex-col">
-                                    <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                         style="height:45px; width:45px"
-                                         src="~/Content/assets/images/customer/demo-image.jpeg"
-                                         alt="">
-                                </div>
-                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center " style="font-size: 10px; width: 45px; ">@@エイト...</div>
-                            </div>
-                        </div>-->
-
-                        @*   <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
-
-
-                                <div>
-                                    <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
-
-                                        <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                             src="~/Content/assets/images/customer/demo-image.jpeg"
-                                             alt="">
-
-
-                                        <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
-                                    </div>
-                                    <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] " style="font-size: 10px; width: 45px; ">@@後藤聖...</div>
-                                </div>
-
-
-                                <div id="tooltip-right" role="tooltip"
-                                     class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white text-[7px] w-[200px] rounded-lg leading-[140%] opacity-0 tooltip "
-                                     style="background: rgba(41, 47, 51, 0.95);">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon<div class="tooltip-arrow" data-popper-arrow>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col justify-center">
-                                    <div class="relative flex justify-center items-center flex-col">
-                                        <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                             src="~/Content/assets/images/customer/demo-image.jpeg"
-                                             alt="">
-                                    </div>
-                                    <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
-                                </div>
-                                <div class="flex flex-col justify-center">
-                                    <div class="relative flex justify-center items-center flex-col">
-                                        <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                             src="~/Content/assets/images/customer/demo-image.jpeg"
-                                             alt="">
-                                    </div>
-                                    <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
-                                </div>
-                            </div>*@
-                        <!--<div>
-                        </div>
-                    </div>-->
-                    @*test end*@
-                    <!--<h3 class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
-                        <div>
-                            <img src="~/Content/assets/images/sinceYouHonten.jpg"
-                                 class="h-[28px] w-[28px]  rounded-full object-cover">
-                        </div>
-                        <div>
-                            <div class="text-[10px] font-bold text-charcolBlack ">SINCE YOU HONTEN</div>
-                            <div class="text-[8px] text-[#A09E91] flex gap-[2px] items-center">
-                                <svg class="svg-inline--fa fa-location-dot text-primary" aria-hidden="true"
-                                     focusable="false" data-prefix="fas" data-icon="location-dot" role="img"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-                                    <path fill="currentColor"
-                                          d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
-                                    </path>
-                                </svg>-->
-                                <!-- <i class="fa-solid fa-location-dot text-primary"></i> Font Awesome fontawesome.com -->
-                                <!--歌舞伎町
-                            </div>
-                        </div>
-                    </h3>
-                </div>
-
-            </div>
-        </div>-->
-
-        <!--<div style="border-radius: 6px; width: 313px; border: 1px solid #EAECF0;" class="  bg-[#F8F8F8] ">
-            <div style="border-radius: 6px;border: 1px solid #EAECF0; background: #FFF;box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.04);"
-                 class="w-[313px] h-full pb-[14px]">
-                <div style="padding: 24px 16px;" class="flex w-full  justify-between flex-row">
-                    <div class="flex flex-row items-center w-full">
-                        <img src="~/Content/assets/images/customer/CustomerImage.jpg"
-                             class="h-[30px] w-[30px] rounded-full  " alt="profileimg">
-                        <div class="flex flex-col pl-2 leading-[11px] w-full">
-                            <div class="flex justify-between items-center ">
-                                <p class=" font-[700] text-[11px] text-start flex">
-                                    NecoYanagi
-                                </p>
-                                <div class=" flex gap-[2px] text-[9px] items-center" style="color: #A09E91">
-                                    <i class="las la-calendar text-[11px]"></i>
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_Date:2023/12/15 14:00
-                                </div>
-                            </div>
-                            <div class="flex gap-1 items-center">
-                                @for (int i = 0; i < 4; i++)
+                        <div class="flex gap-1 items-center">
+                            <div class="rating-review text-[11px]" id="stars">
+                                @for (int i = 0; i < 5; i++)
                                 {
                                     <div class="rating-review text-[11px]" id="stars">
 
@@ -783,122 +629,309 @@
 
                                     </div>
                                 }
-                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
-                                    <path d="M5.5 0L5.15251 0.831615L3.90632 3.76747L0.862745 4.10767L0 4.20848L0.647059 4.81329L2.91176 6.96793L2.27669 10.118L2.09695 11L2.85185 10.5464L5.5 8.93356L8.14815 10.5464L8.90305 11L8.72331 10.118L8.08823 6.96793L10.3529 4.81329L11 4.20848L10.1373 4.10767L7.09368 3.76747L5.84749 0.831615L5.5 0ZM5.5 1.97824L6.48257 4.30928L6.57843 4.52348L6.79412 4.54868L9.20261 4.81329L7.40523 6.51432L7.23747 6.67812L7.2854 6.90493L7.78867 9.38717L5.69172 8.12715L5.5 8.00115L5.30828 8.12715L3.21133 9.38717L3.7146 6.90493L3.76253 6.67812L3.59477 6.51432L1.79739 4.81329L4.20588 4.54868L4.42157 4.52348L4.51743 4.30928L5.5 1.97824Z" fill="#7E6D5E" />
-                                </svg>
-                                <div class="text-[11px] mt-[2px]">4.0</div>
                             </div>
+                            <div class="text-[11px] mt-[2px]">5.0</div>
                         </div>
                     </div>
-
-                </div>
-                <div class="px-3">
-                    <div class="text-[8px] font-bold bg-[#FFECEC] rounded-[2px] py-[4px] px-[6px] ">
-                        <p class="inline-flex p-[1px] mr-[2px]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Met_handsome_host：
-                            <img src="~/Content/assets/images/customer/red--emoji.svg" />
-                        </p>
-                        <p class="inline-flex p-[1px] mr-[2px]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Service：
-                            <img src="~/Content/assets/images/customer/blue-emoji.svg" />
-
-                        </p>
-                        <p class="inline-flex p-[1px] mr-[2px]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Wish_to_revisit：
-                            <img src="~/Content/assets/images/customer/green-emoji.svg" />
-
-                        </p>
-                        <p class="inline-flex p-[1px] mr-[2px]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Cozy：
-                            <img src="~/Content/assets/images/customer/green-emoji.svg" />
-                        </p>
-
-                    </div>
-                    <div class="flex gap-1 items-center mt-2">
-                        <div class="text-[11px] font-bold ">#推しが見つかった</div>
-                        <div class="linear-gradient rounded-[2px] text-[8px] text-white px-4">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Extended_Course
-                        </div>
-                    </div>
-                    <div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#推しに会えた</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#トークが上手い</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] active">#店内が綺麗</div>
-                        <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">#イケメンがいた</div>
-
-                    </div>
-                    <div class="px-4 py-[11px] ">
-                        <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                    <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
-                                          fill="#7E6D5E" />
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
-                            <div>
-                                <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col" style="height:45px; width:45px">
-
-                                    <img class="inline-block  rounded-full "
-                                         style="width:45px; height:45px"
-                                         src="~/Content/assets/images/customer/demo-image.jpeg"
-                                         alt="">
-
-
-                                    <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs " style=" top: -5px; left: 33px;"></i>
-                                </div>
-                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] " style="font-size: 10px; width: 45px; ">@@後藤聖...</div>
-                            </div>
-                            <div class="flex flex-col justify-center">
-                                <div class="relative flex justify-center items-center flex-col">
-                                    <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                         style="height:45px; width:45px"
-                                         src="~/Content/assets/images/customer/demo-image.jpeg"
-                                         alt="">
-                                </div>
-                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
-                            </div>
-                            <div class="flex flex-col justify-center">
-                                <div class="relative flex justify-center items-center flex-col">
-                                    <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                         style="height:45px; width:45px"
-                                         src="~/Content/assets/images/customer/demo-image.jpeg"
-                                         alt="">
-                                </div>
-                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center " style="font-size: 10px; width: 45px; ">@@エイト...</div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <h3 class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
-
-                        <div>
-                            <img src="~/Content/assets/images/sinceYouAlpha.jpg"
-                                 class="h-[28px] w-[28px]   rounded-full image-cover">
-                        </div>
-                        <div>
-                            <div class="text-[10px] font-bold text-charcolBlack ">SINCE YOU ALPHA</div>
-                            <div class="text-[8px] text-[#A09E91] flex gap-[2px] items-center">
-                                <svg class="svg-inline--fa fa-location-dot text-primary" aria-hidden="true"
-                                     focusable="false" data-prefix="fas" data-icon="location-dot" role="img"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-                                    <path fill="currentColor"
-                                          d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
-                                    </path>
-                                </svg>-->
-                                <!-- <i class="fa-solid fa-location-dot text-primary"></i> Font Awesome fontawesome.com -->
-                                <!--歌舞伎町
-                            </div>
-                        </div>
-                    </h3>
                 </div>
 
             </div>
-        </div>-->
+            <div class="px-3">
+                <div class="text-[8px] font-bold bg-[#FFECEC] rounded-[2px] py-[4px] px-[6px] ">
+                    <p class="inline-flex p-[1px] mr-[2px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Met_handsome_host：
+                        <img src="~/Content/assets/images/customer/red--emoji.svg" />
+                    </p>
+                    <p class="inline-flex p-[1px] mr-[2px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Service：
+                        <img src="~/Content/assets/images/customer/blue-emoji.svg" />
+
+                    </p>
+                    <p class="inline-flex p-[1px] mr-[2px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Wish_to_revisit：
+                        <img src="~/Content/assets/images/customer/green-emoji.svg" />
+
+                    </p>
+                    <p class="inline-flex p-[1px] mr-[2px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Cozy：
+                        <img src="~/Content/assets/images/customer/green-emoji.svg" />
+                    </p>
+
+                </div>
+                <div class="flex gap-1 items-center mt-2">
+                    <div class="text-[11px] font-bold ">#推しが見つかった</div>
+                    <div class="linear-gradient rounded-[2px] text-[8px] text-white px-4">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Extended_Course
+                    </div>
+                </div>
+                <div>
+                    <div class="review-experience h-[19px] mb-0 text-[10px] active">#推しに会えた</div>
+                    <div class="review-experience h-[19px] mb-0 text-[10px] active">#トークが上手い</div>
+                    <div class="review-experience h-[19px] mb-0 text-[10px] active">#店内が綺麗</div>
+                    <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">#イケメンがいた</div>
+
+                </div>
+                <div class="px-4 py-[11px] ">
+                    <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
+                        <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
+                                <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
+                                      fill="#7E6D5E" />
+                            </svg>
+                        </span>
+                        <div id="tooltip-right" role="tooltip"
+                             class="absolute z-10 invisible inline-block px-[6px] py-[6px] font-medium text-white text-[7px] w-[200px] bg-gray-900 rounded-lg leading-[140%] opacity-0 tooltip "
+                             style="background: rgba(41, 47, 51, 0.95); border-radius:3px">
+                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon <div class="tooltip-arrow" data-popper-arrow>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
+                        <div>
+                            <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col" style="height:45px; width:45px">
+
+                                <img class="inline-block  rounded-full "
+                                     style="width:45px; height:45px"
+                                     src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     alt="">
+
+
+                                <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs " style=" top: -5px; left: 33px;"></i>
+                            </div>
+                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] " style="font-size: 10px; width: 45px; ">@@後藤聖...</div>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div class="relative flex justify-center items-center flex-col">
+                                <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                     style="height:45px; width:45px"
+                                     src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     alt="">
+                            </div>
+                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div class="relative flex justify-center items-center flex-col">
+                                <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                     style="height:45px; width:45px"
+                                     src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     alt="">
+                            </div>
+                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center " style="font-size: 10px; width: 45px; ">@@エイト...</div>
+                        </div>
+                    </div>-->
+    @*   <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
+
+
+            <div>
+                <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
+
+                    <img class="inline-block h-[31px] w-[31px] rounded-full "
+                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                         alt="">
+
+
+                    <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
+                </div>
+                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] " style="font-size: 10px; width: 45px; ">@@後藤聖...</div>
+            </div>
+
+
+            <div id="tooltip-right" role="tooltip"
+                 class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white text-[7px] w-[200px] rounded-lg leading-[140%] opacity-0 tooltip "
+                 style="background: rgba(41, 47, 51, 0.95);">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon<div class="tooltip-arrow" data-popper-arrow>
+                </div>
+            </div>
+            <div class="flex flex-col justify-center">
+                <div class="relative flex justify-center items-center flex-col">
+                    <img class="inline-block h-[31px] w-[31px] rounded-full "
+                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                         alt="">
+                </div>
+                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
+            </div>
+            <div class="flex flex-col justify-center">
+                <div class="relative flex justify-center items-center flex-col">
+                    <img class="inline-block h-[31px] w-[31px] rounded-full "
+                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                         alt="">
+                </div>
+                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
+            </div>
+        </div>*@
+    <!--<div>
+        </div>
+    </div>-->
+    @*test end*@
+    <!--<h3 class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+        <div>
+            <img src="~/Content/assets/images/sinceYouHonten.jpg"
+                 class="h-[28px] w-[28px]  rounded-full object-cover">
+        </div>
+        <div>
+            <div class="text-[10px] font-bold text-charcolBlack ">SINCE YOU HONTEN</div>
+            <div class="text-[8px] text-[#A09E91] flex gap-[2px] items-center">
+                <svg class="svg-inline--fa fa-location-dot text-primary" aria-hidden="true"
+                     focusable="false" data-prefix="fas" data-icon="location-dot" role="img"
+                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+                    <path fill="currentColor"
+                          d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
+                    </path>
+                </svg>-->
+    <!-- <i class="fa-solid fa-location-dot text-primary"></i> Font Awesome fontawesome.com -->
+    <!--歌舞伎町
+                        </div>
+                    </div>
+                </h3>
+            </div>
+
+        </div>
+    </div>-->
+    <!--<div style="border-radius: 6px; width: 313px; border: 1px solid #EAECF0;" class="  bg-[#F8F8F8] ">
+        <div style="border-radius: 6px;border: 1px solid #EAECF0; background: #FFF;box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.04);"
+             class="w-[313px] h-full pb-[14px]">
+            <div style="padding: 24px 16px;" class="flex w-full  justify-between flex-row">
+                <div class="flex flex-row items-center w-full">
+                    <img src="~/Content/assets/images/customer/CustomerImage.jpg"
+                         class="h-[30px] w-[30px] rounded-full  " alt="profileimg">
+                    <div class="flex flex-col pl-2 leading-[11px] w-full">
+                        <div class="flex justify-between items-center ">
+                            <p class=" font-[700] text-[11px] text-start flex">
+                                NecoYanagi
+                            </p>
+                            <div class=" flex gap-[2px] text-[9px] items-center" style="color: #A09E91">
+                                <i class="las la-calendar text-[11px]"></i>
+                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_Date:2023/12/15 14:00
+                            </div>
+                        </div>
+                        <div class="flex gap-1 items-center">
+                            @for (int i = 0; i < 4; i++)
+                            {
+                                <div class="rating-review text-[11px]" id="stars">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11" fill="none">
+                                        <path d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z" fill="#F89336" />
+                                    </svg>
+
+                                </div>
+                            }
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+                                <path d="M5.5 0L5.15251 0.831615L3.90632 3.76747L0.862745 4.10767L0 4.20848L0.647059 4.81329L2.91176 6.96793L2.27669 10.118L2.09695 11L2.85185 10.5464L5.5 8.93356L8.14815 10.5464L8.90305 11L8.72331 10.118L8.08823 6.96793L10.3529 4.81329L11 4.20848L10.1373 4.10767L7.09368 3.76747L5.84749 0.831615L5.5 0ZM5.5 1.97824L6.48257 4.30928L6.57843 4.52348L6.79412 4.54868L9.20261 4.81329L7.40523 6.51432L7.23747 6.67812L7.2854 6.90493L7.78867 9.38717L5.69172 8.12715L5.5 8.00115L5.30828 8.12715L3.21133 9.38717L3.7146 6.90493L3.76253 6.67812L3.59477 6.51432L1.79739 4.81329L4.20588 4.54868L4.42157 4.52348L4.51743 4.30928L5.5 1.97824Z" fill="#7E6D5E" />
+                            </svg>
+                            <div class="text-[11px] mt-[2px]">4.0</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="px-3">
+                <div class="text-[8px] font-bold bg-[#FFECEC] rounded-[2px] py-[4px] px-[6px] ">
+                    <p class="inline-flex p-[1px] mr-[2px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Met_handsome_host：
+                        <img src="~/Content/assets/images/customer/red--emoji.svg" />
+                    </p>
+                    <p class="inline-flex p-[1px] mr-[2px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Service：
+                        <img src="~/Content/assets/images/customer/blue-emoji.svg" />
+
+                    </p>
+                    <p class="inline-flex p-[1px] mr-[2px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Wish_to_revisit：
+                        <img src="~/Content/assets/images/customer/green-emoji.svg" />
+
+                    </p>
+                    <p class="inline-flex p-[1px] mr-[2px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Cozy：
+                        <img src="~/Content/assets/images/customer/green-emoji.svg" />
+                    </p>
+
+                </div>
+                <div class="flex gap-1 items-center mt-2">
+                    <div class="text-[11px] font-bold ">#推しが見つかった</div>
+                    <div class="linear-gradient rounded-[2px] text-[8px] text-white px-4">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Extended_Course
+                    </div>
+                </div>
+                <div>
+                    <div class="review-experience h-[19px] mb-0 text-[10px] active">#推しに会えた</div>
+                    <div class="review-experience h-[19px] mb-0 text-[10px] active">#トークが上手い</div>
+                    <div class="review-experience h-[19px] mb-0 text-[10px] active">#店内が綺麗</div>
+                    <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">#イケメンがいた</div>
+
+                </div>
+                <div class="px-4 py-[11px] ">
+                    <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
+                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
+                                <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
+                                      fill="#7E6D5E" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
+                        <div>
+                            <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col" style="height:45px; width:45px">
+
+                                <img class="inline-block  rounded-full "
+                                     style="width:45px; height:45px"
+                                     src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     alt="">
+
+
+                                <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs " style=" top: -5px; left: 33px;"></i>
+                            </div>
+                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] " style="font-size: 10px; width: 45px; ">@@後藤聖...</div>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div class="relative flex justify-center items-center flex-col">
+                                <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                     style="height:45px; width:45px"
+                                     src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     alt="">
+                            </div>
+                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center" style="font-size: 10px; width: 45px; ">@@エイト...</div>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div class="relative flex justify-center items-center flex-col">
+                                <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                     style="height:45px; width:45px"
+                                     src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     alt="">
+                            </div>
+                            <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] text-center " style="font-size: 10px; width: 45px; ">@@エイト...</div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <h3 class="flex gap-[8px] mt-[9px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+
+                    <div>
+                        <img src="~/Content/assets/images/sinceYouAlpha.jpg"
+                             class="h-[28px] w-[28px]   rounded-full image-cover">
+                    </div>
+                    <div>
+                        <div class="text-[10px] font-bold text-charcolBlack ">SINCE YOU ALPHA</div>
+                        <div class="text-[8px] text-[#A09E91] flex gap-[2px] items-center">
+                            <svg class="svg-inline--fa fa-location-dot text-primary" aria-hidden="true"
+                                 focusable="false" data-prefix="fas" data-icon="location-dot" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+                                <path fill="currentColor"
+                                      d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
+                                </path>
+                            </svg>-->
+    <!-- <i class="fa-solid fa-location-dot text-primary"></i> Font Awesome fontawesome.com -->
+    <!--歌舞伎町
+                        </div>
+                    </div>
+                </h3>
+            </div>
+
+        </div>
+    </div>-->
     @*</div>*@
     @*top review section end*@
     <div style="background-color: #F8F8F8; height:12px" class=" h-[12px]">
@@ -1391,7 +1424,7 @@
                         return false;
                     }
                     $('#mainpageclubhost-id').html(data.PartialView);
-                    
+
                 },
                 error: function (xhr, status, error) {
                     return false;
@@ -2044,13 +2077,13 @@
         function handleFirstTab() {
             document.getElementById('tab2').style.display = 'none';
             document.getElementById('tab1').style.display = '';
-			document.getElementById('tab1Button').classList.add('active');
-			document.getElementById('tab2Button').classList.remove('active');
+            document.getElementById('tab1Button').classList.add('active');
+            document.getElementById('tab2Button').classList.remove('active');
         } function handleSecondTab() {
             document.getElementById('tab1').style.display = 'none';
             document.getElementById('tab2').style.display = '';
-			document.getElementById('tab1Button').classList.remove('active');
-			document.getElementById('tab2Button').classList.add('active');
+            document.getElementById('tab1Button').classList.remove('active');
+            document.getElementById('tab2Button').classList.add('active');
         }
     </script>
 }
