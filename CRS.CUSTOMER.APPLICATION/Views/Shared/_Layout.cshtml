@@ -209,63 +209,90 @@
             display: none
             /* 18.26px */
         }
-        #child{
-            
+
+        #child {
         }
-     @@media (min-width: 640px) {
-        body {
-            /* background-image: url('../../content/assets/images/sprinkle.png');
+
+        #leftcontent {
+            display: none;
+        }
+
+        @@media (min-width: 640px) {
+            body {
+                /* background-image: url('../../content/assets/images/sprinkle.png');
             background-repeat: no-repeat;
             background-size: cover;*/
-            background: url('../../content/assets/images/sprinkle.png') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
+                background: url('../../content/assets/images/sprinkle.png') no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
 
-        #test {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            
-        }
-        #innersec {
-            background-color: #FFFFFF;
-            max-width: 640px;
-            height: 100%;
-            width: 100%;
-            overflow-y: auto;
-        }
+            #test {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
 
-}
+            #innersec {
+                background-color: #FFFFFF;
+                max-width: 360px;
+                height: 100%;
+                width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                overflow-y: auto;
+                box-shadow: 0px 0px 24px 0px #0D102E40;
+            }
+
+            #leftcontent {
+                display: flex;
+            }
+            #rightcontent{
+                display: flex;
+            }
+
+            .transform-none {
+                left: 50%;
+                transform: translate(-50%);
+                max-width: 360px;
+                width: 100%
+            }
+        }
     </style>
+   
+    
+
 </head>
 <body  >
     <!-- #endregion -->
     <!-- #region Navbar -->
     <div id="test">
-        <div style="margin-top:212px;" class="flex flex-col items-center ">
-            <div>
-                <img src="../../content/assets/images/bglogo.png" />
-            </div>
-            <div>
-                <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
-            </div>
-            <div style="width: 300px; height: 57px; background-color: #D75A8B ;border-radius:2px " class="flex flex-row justify-center items-center text-center">
-                <div>
-                    <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+        <div id="leftcontent" style="margin-top:30%;" class="flex  flex-col items-center ">
+            <div class="fixed">
+                <div class="flex flex-row justify-center">
+                    <img src="../../content/assets/images/bglogo.png" />
+                </div>
+                <div class="flex flex-row justify-center">   
+                    <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
+                </div>
+                <div style="width: 300px; height: 57px; background-color: #D75A8B ;border-radius:2px " class="flex flex-row justify-center items-center text-center">
+                    <div>
+                        <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+                    </div>
+                </div>
+                <div style="width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
+                    </div>
+                </div>
+                <div style="width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
+                    </div>
                 </div>
             </div>
-            <div style="width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
-                <div>
-                    <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
-                </div>
-            </div>
-            <div style="width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
-                <div>
-                    <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
-                </div>
-            </div>
+          
 
 
         </div>
@@ -517,7 +544,27 @@
                 </div>
             }
         </div>
-        <div>
+        <div id="rightcontent" style="margin-top:10%" class="flex flex-col items-center">
+            <div class="fixed flex flex-col gap-2">
+                <div>
+                    <img src="../../content/assets/images/hpi1.jpeg" />
+                </div>
+                <div>
+                    <img src="../../content/assets/images/hpi2.jpeg" />
+                </div>
+                <div>
+                    <img src="../../content/assets/images/hpi3.jpeg" />
+                </div>
+                <div>
+                    <img src="../../content/assets/images/hpi4.jpeg" />
+                </div>
+                <div>
+                    <img src="../../content/assets/images/hpi5.jpeg" />
+                </div>
+                <div>
+                    <img src="../../content/assets/images/hpi6.jpeg" />
+                </div>
+            </div>
 
         </div>
 
