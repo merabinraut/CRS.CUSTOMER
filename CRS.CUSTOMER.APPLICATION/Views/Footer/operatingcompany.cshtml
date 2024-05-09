@@ -4,121 +4,183 @@
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
 }
 <!-- breadcrum -->
-<div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="@Url.Action("HomePage", "Home")" class="active">ホーム</a>
-    <i class="las la-angle-right"></i>
-    <a href="#">運営会社</a>
-</div>
-<div class="grid mx-[16px]">
-    <div class=" my-[8px] flex flex-row justify-center font-[600] mt-[12px] text-[24px] leading-[38px] text-[#101828]" style="background-color: #FBFBFB; padding: 10px; height:62px;">
-        運営会社
+
+<style>
+    #innersec{
+        height:100vh
+    }
+</style>
+<div id="test">
+    <div id="leftcontent" style="margin-top: 30%; " class="flex  flex-col items-center ">
+        <div id="leftfix" class="fixed">
+            <div class="flex flex-row justify-center">
+                <img src="../../content/assets/images/bglogo.png" />
+            </div>
+            <div id="siteurl" class="flex flex-row justify-center">
+                <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
+            </div>
+            <div style="max-width: 300px; height: 57px; background-color: #D75A8B ;border-radius:2px " class="flex flex-row justify-center items-center text-center">
+                <div>
+                    <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+                </div>
+            </div>
+            <div style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                <div>
+                    <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
+                </div>
+            </div>
+            <div style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                <div>
+                    <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
-    <div class="grid my-[16px] gap-[16px] mt-[16px] px-4">
-        <!-- 1st row -->
-        <div class="grid  grid-cols-2 gap-[32px]">
-            <div class="flex flex-col gap-[4px] text-[12px]">
-                <div class="text-[#D75A8B] font-[700]" style="font-weight:700;">
-                    事業者名
-                </div>
-                <div class=" font-[400]"  style="color:#333">
-                    株式会社JOY CREATE
-                </div>
-            </div>
-            <div class="flex flex-col gap-[4px] text-[12px]">
-                <div class="text-[#D75A8B] font-[700] ">
-                    設立
-                </div>
-                <div class="text-justify font-[400]" style="color:#333">
-                    令和3年6月10日
-                </div>
-            </div>
-        </div>
 
-        <!-- 2nd row  -->
-        <div class="grid  grid-cols-2 gap-[32px]">
-            <div class="flex flex-col gap-[4px] text-[12px]">
-                <div class="text-[#D75A8B] font-[700] ">
-                    資本金
-                </div>
-                <div class=" font-[400]" style="color:#333">
-                    800万円 
-                </div>
-            </div>
-            <div class="flex flex-col gap-[4px] text-[12px]">
-                <div class="text-[#D75A8B] font-[700] ">
-                    代表取締役
-                </div>
-                <div class="text-justify font-[400]" style="color:#333">
-                    鷲尾裕司
-                </div>
-            </div>
+    <div id="innersec">
+        <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
+            <a href="@Url.Action("HomePage", "Home")" class="active">ホーム</a>
+            <i class="las la-angle-right"></i>
+            <a href="#">運営会社</a>
         </div>
-
-        <!-- 3rd row  -->
-        <div class="grid  grid-cols-1 gap-[32px]">
-            <div class="flex flex-col gap-[4px] text-[12px]">
-                <div class="text-[#D75A8B] font-[700] ">
-                    所在地
-                </div>
-                <div class=" font-[400]; " style="color:#333; font-weight:400">
-                    東京都新宿区歌舞伎町2-31-7 3階
-                </div>
+        <div class="grid mx-[16px]">
+            <div class=" my-[8px] flex flex-row justify-center font-[600] mt-[12px] text-[24px] leading-[38px] text-[#101828]" style="background-color: #FBFBFB; padding: 10px; height:62px;">
+                運営会社
             </div>
-            @*<div class="flex flex-col gap-[4px] text-[12px]">
-                <div class="text-[#D75A8B] font-[700] ">
-                    担当者直通ダイヤル
+            <div class="grid my-[16px] gap-[16px] mt-[16px] px-4">
+                <!-- 1st row -->
+                <div class="grid  grid-cols-2 gap-[32px]">
+                    <div class="flex flex-col gap-[4px] text-[12px]">
+                        <div class="text-[#D75A8B] font-[700]" style="font-weight:700;">
+                            事業者名
+                        </div>
+                        <div class=" font-[400]" style="color:#333">
+                            株式会社JOY CREATE
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-[4px] text-[12px]">
+                        <div class="text-[#D75A8B] font-[700] ">
+                            設立
+                        </div>
+                        <div class="text-justify font-[400]" style="color:#333">
+                            令和3年6月10日
+                        </div>
+                    </div>
                 </div>
-                <div class=" font-[400]">
-                    080-4920-2323/15:00〜23:00受付 
-                </div>
-            </div>*@
-        </div>
 
-        <!-- 4th row  -->
-       @* <div class="grid  grid-cols-1 gap-[32px]">
-            <div class="flex flex-col gap-[4px] text-[12px]">
-                <div class="text-[#D75A8B] font-[700] ">
+                <!-- 2nd row  -->
+                <div class="grid  grid-cols-2 gap-[32px]">
+                    <div class="flex flex-col gap-[4px] text-[12px]">
+                        <div class="text-[#D75A8B] font-[700] ">
+                            資本金
+                        </div>
+                        <div class=" font-[400]" style="color:#333">
+                            800万円 
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-[4px] text-[12px]">
+                        <div class="text-[#D75A8B] font-[700] ">
+                            代表取締役
+                        </div>
+                        <div class="text-justify font-[400]" style="color:#333">
+                            鷲尾裕司
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3rd row  -->
+                <div class="grid  grid-cols-1 gap-[32px]">
+                    <div class="flex flex-col gap-[4px] text-[12px]">
+                        <div class="text-[#D75A8B] font-[700] ">
+                            所在地
+                        </div>
+                        <div class=" font-[400]; " style="color:#333; font-weight:400">
+                            東京都新宿区歌舞伎町2-31-7 3階
+                        </div>
+                    </div>
+                    @*<div class="flex flex-col gap-[4px] text-[12px]">
+                            <div class="text-[#D75A8B] font-[700] ">
+                                担当者直通ダイヤル
+                            </div>
+                            <div class=" font-[400]">
+                                080-4920-2323/15:00〜23:00受付 
+                            </div>
+                        </div>*@
+                </div>
+
+                <!-- 4th row  -->
+                @* <div class="grid  grid-cols-1 gap-[32px]">
+                    <div class="flex flex-col gap-[4px] text-[12px]">
+                        <div class="text-[#D75A8B] font-[700] ">
+                            事業内容
+                        </div>
+                        <div class=" font-[400]">
+                            <p>
+                                ホストクラブトータルサポート
+                            </p>
+                            <p>
+                                キャリアコンサルティング
+                            </p>
+                            <p>
+                                ホスト人材育成事業
+                            </p>
+                            <p>
+                                ホスト求人サイト運営(ホストの求人窓口)
+
+
+                            </p>
+                        </div>
+                    </div>*@
+                @*<div class="flex flex-col gap-[4px] text-[12px]">
+                        <div class="text-[#D75A8B] font-[700] ">
+                            店舗掲載・パートナー提携
+                        </div>
+                        <div class=" font-[400]">
+                            『経営者』『関係者』専用コンタクトフォーム 
+                        </div>
+                    </div>*@
+            </div>
+            <!-- 5th: -->
+            <div class=" grid gap-[4px] px-4">
+                <div class="text-[#D75A8B] font-[700] text-[12px] ">
                     事業内容
                 </div>
-                <div class=" font-[400]">
-                    <p>
-                        ホストクラブトータルサポート
-                    </p>
-                    <p>
-                        キャリアコンサルティング
-                    </p>
-                    <p>
-                        ホスト人材育成事業
-                    </p>
-                    <p>
-                        ホスト求人サイト運営(ホストの求人窓口)
-
-
-                    </p>
+                <div style="margin-left:50px; font-size:12px; font-weight:400; color:#333">
+                    ホストクラブトータルサポート<br>
+                    キャリアコンサルティング<br>
+                    ホスト人材育成事業<br>
+                    ホスト求人サイト運営(ホストの求人窓口)
+                    <br />
                 </div>
-            </div>*@
-            @*<div class="flex flex-col gap-[4px] text-[12px]">
-                <div class="text-[#D75A8B] font-[700] ">
-                    店舗掲載・パートナー提携
-                </div>
-                <div class=" font-[400]">
-                    『経営者』『関係者』専用コンタクトフォーム 
-                </div>
-            </div>*@
-        </div>
-        <!-- 5th: -->
-        <div class=" grid gap-[4px] px-4">
-            <div class="text-[#D75A8B] font-[700] text-[12px] ">
-                事業内容
-            </div>
-            <div style="margin-left:50px; font-size:12px; font-weight:400; color:#333">
-                ホストクラブトータルサポート<br>
-                キャリアコンサルティング<br>
-                ホスト人材育成事業<br>
-                ホスト求人サイト運営(ホストの求人窓口)
-                <br />
             </div>
         </div>
+
+    </div>
+    <div id="rightcontent" style="margin-top: 10%; " class="flex flex-col items-center">
+        <div id="innerfixed" class="fixed   flex flex-col gap-2">
+            @* <div >*@
+            <img src="../../content/assets/images/hpi1.jpeg" style="width:inherit" />
+            @* </div>
+                <div>*@
+            <img src="../../content/assets/images/hpi2.jpeg" style="width:inherit" />
+            @*  </div>
+                <div>*@
+            <img src="../../content/assets/images/hpi3.jpeg" style="width:inherit" />
+            @*</div>
+                <div>*@
+            <img src="../../content/assets/images/hpi4.jpeg" style="width:inherit" />
+            @*  </div>
+                <div>*@
+            <img src="../../content/assets/images/hpi5.jpeg" style="width:inherit" />
+            @* </div>
+                <div>*@
+            <img src="../../content/assets/images/hpi6.jpeg" style="width:inherit" />
+            @*  </div>*@
+        </div>
+
     </div>
 
 </div>
