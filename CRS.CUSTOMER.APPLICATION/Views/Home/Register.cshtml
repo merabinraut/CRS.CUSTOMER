@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/Content/assets/css/tailwind.css">
     <link rel="stylesheet" href="/Content/assets/css/customer/global.css">
     <link rel="stylesheet" href="/Content/assets/css/customer/club.css">
+    <link rel="stylesheet" href="/Content/assets/css/customer/responsive.css">
     <link rel="stylesheet" href="/Content/assets/css/customer/customcss.css">
     <link rel="stylesheet" href="/Content/assets/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="/Content/assets/css/owl-carousel/owl.theme.default.min.css">
@@ -290,79 +291,143 @@
         input {
             --tw-ring-shadow: 0 0 #000 !important;
         }
+        @@media (min-width: 640px) {
+            #innersec {
+                margin-top: 13px !important;
+            }
+        }
+      
     </style>
-    <div class="borderTop  ">
-        <!-- for back button -->
-        <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
-            <div class="flex gap-2 items-center absolute top-[12px] text-sm" onclick="window.location.href='@Url.Action("Index","Home")'">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
-                          fill="#BCB08A" />
-                </svg>戻る
-            </div>
-            <div class="text-center w-full font-bold"></div>
-        </div>
-        <!-- back button end -->
-        <div class="loginContainer">
-            <div class="register">新しくホスログを始める</div>
-            @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
-            {
-                @Html.AntiForgeryToken()
-                <input value="@ViewBag.ReferCode" name="ReferCode" hidden />
-                <div class="inputWrapper">
-                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @oninput = "validateInput(this)", autocomplete = "off" ,@maxlength = "30" })
-                    @*<input type="text" value="" name="nickName"
-                        class=" focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="ミクチャン"
-                        required>*@
+    <div id="test">
+        <div id="leftcontent" style="margin-top: 30%; " class="flex  flex-col items-center ">
+            <div id="leftfix" class="fixed">
+                <div class="flex flex-row justify-center">
+                    <img src="../../content/assets/images/bglogo.png" />
                 </div>
-                <span class="validationMessage">
-                    @Html.ValidationMessageFor(m => m.NickName,"", new { @class = "error-validation-msg" })
-                </span>
-                <div class="inputWrapper mt-2">
-                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "w-full ring-0 focus:ring-0 focus:ring-transparent",@type="number", @placeholder = "携帯電話番号", @minlength = "11", @maxlength = "11",   oninput = "limitInputLength(this, 11)", autocomplete = "off" })
-                    @*<input type="number" name="contactNumber" value=""
-                        class="w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="携帯電話番号" required>*@
+                <div id="siteurl" class="flex flex-row justify-center">
+                    <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
                 </div>
-                <span class="validationMessage">
-                    @Html.ValidationMessageFor(m => m.MobileNumber, "", new { @class = "error-validation-msg" })
-                </span>
-                <!-- for check box -->
-                <div class="checkbox mt-4">
-                    <div class="flex justify-start items-start gap-2">
-                        <input type="checkbox" name="policy" id="policy" class="checkBox focus:outline-none bg-none ring-offset-0 ring-0 focus:ring-0 focus:ring-transparent focus:ring-shadow-none">
-                        <label for="policy" class="policy ">
-                            @*<a href="@Url.Action("termsAndCondition","Footer")" class="termLink">利用規約</a><span>と</span>
-                            <a href="@Url.Action("privacypolicy","Footer")" class="termLink">プライバシーポリシ</a>
-                            <span>ー に</span>*@
-                            <span>  <a href="@Url.Action("termsAndCondition","Footer")"> 利用規約 </a></span> と <span> <a href="@Url.Action("privacypolicy","Footer")"> プライバシーポリシー </a></span> に同意したものとみなします
-                        </label>
+                <div style="max-width: 300px; height: 57px; background-color: #D75A8B ;border-radius:2px " class="flex flex-row justify-center items-center text-center">
+                    <div>
+                        <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
                     </div>
                 </div>
-                <!-- for sms message -->
-        <div class="smsText">
-            SMSの受信設定をご確認の上、ボタンを押してください
-        </div>
-                <!-- for register  -->
-                <div>
-                    <button id="FormSubmit" type="button" class="registerButton border rounded-lg  w-full">認証コードを受け取る</button>
+                <div style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
+                    </div>
                 </div>
-            }
-            <!-- for login -->
-            <div class="mt-3 flex justify-center items-center">
-                <div class="border  spertator"></div>
-                <span class="otherAccotunt" style="text-transform:uppercase ">既にアカウントをお持ちですか <span style="font-size:14px">?</span></span>
-                <div class="border  spertator"></div>
+                <div style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
+                    </div>
+                </div>
             </div>
-            <!-- for login -->  
-            <div onclick="window.location.href='@Url.Action("Index","Home")'">
-                <button type="submit" class="loginButton border rounded-lg  w-full">ログイン</button>
+
+
+
+        </div>
+        <div id="innersec">
+
+
+
+            <div class="borderTop  ">
+                <!-- for back button -->
+                <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
+                    <div class="flex gap-2 items-center absolute top-[12px] text-sm" onclick="window.location.href='@Url.Action("Index","Home")'">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                            <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
+                                  fill="#BCB08A" />
+                        </svg>戻る
+                    </div>
+                    <div class="text-center w-full font-bold"></div>
+                </div>
+                <!-- back button end -->
+                <div class="loginContainer">
+                    <div class="register">新しくホスログを始める</div>
+                    @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input value="@ViewBag.ReferCode" name="ReferCode" hidden />
+                        <div class="inputWrapper">
+                            @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @oninput = "validateInput(this)", autocomplete = "off", @maxlength = "30" })
+                            @*<input type="text" value="" name="nickName"
+                            class=" focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="ミクチャン"
+                            required>*@
+                        </div>
+                        <span class="validationMessage">
+                            @Html.ValidationMessageFor(m => m.NickName, "", new { @class = "error-validation-msg" })
+                        </span>
+                        <div class="inputWrapper mt-2">
+                            @Html.TextBoxFor(model => model.MobileNumber, new { @class = "w-full ring-0 focus:ring-0 focus:ring-transparent", @type = "number", @placeholder = "携帯電話番号", @minlength = "11", @maxlength = "11", oninput = "limitInputLength(this, 11)", autocomplete = "off" })
+                            @*<input type="number" name="contactNumber" value=""
+                            class="w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="携帯電話番号" required>*@
+                        </div>
+                        <span class="validationMessage">
+                            @Html.ValidationMessageFor(m => m.MobileNumber, "", new { @class = "error-validation-msg" })
+                        </span>
+                        <!-- for check box -->
+                        <div class="checkbox mt-4">
+                            <div class="flex justify-start items-start gap-2">
+                                <input type="checkbox" name="policy" id="policy" class="checkBox focus:outline-none bg-none ring-offset-0 ring-0 focus:ring-0 focus:ring-transparent focus:ring-shadow-none">
+                                <label for="policy" class="policy ">
+                                    @*<a href="@Url.Action("termsAndCondition","Footer")" class="termLink">利用規約</a><span>と</span>
+                                    <a href="@Url.Action("privacypolicy","Footer")" class="termLink">プライバシーポリシ</a>
+                                    <span>ー に</span>*@
+                                    <span>  <a href="@Url.Action("termsAndCondition","Footer")"> 利用規約 </a></span> と <span> <a href="@Url.Action("privacypolicy","Footer")"> プライバシーポリシー </a></span> に同意したものとみなします
+                                </label>
+                            </div>
+                        </div>
+                        <!-- for sms message -->
+                        <div class="smsText">
+                            SMSの受信設定をご確認の上、ボタンを押してください
+                        </div>
+                        <!-- for register  -->
+                        <div>
+                            <button id="FormSubmit" type="button" class="registerButton border rounded-lg  w-full">認証コードを受け取る</button>
+                        </div>
+                    }
+                    <!-- for login -->
+                    <div class="mt-3 flex justify-center items-center">
+                        <div class="border  spertator"></div>
+                        <span class="otherAccotunt" style="text-transform:uppercase ">既にアカウントをお持ちですか <span style="font-size:14px">?</span></span>
+                        <div class="border  spertator"></div>
+                    </div>
+                    <!-- for login -->
+                    <div onclick="window.location.href='@Url.Action("Index","Home")'">
+                        <button type="submit" class="loginButton border rounded-lg  w-full">ログイン</button>
+                    </div>
+                    <!-- for affiliation -->
+                    <div class="affiliation">
+                        <div class="affiliationText"><a href="#" style="font-family: Noto Sans">アフィリエイター登録</a></div>
+                        <div class="dividerCol">|</div>
+                        <div class="affiliationText" style="font-family: Noto Sans">店舗オーナー登録</div>
+                    </div>
+                </div>
             </div>
-            <!-- for affiliation -->
-            <div class="affiliation">
-                <div class="affiliationText"><a href="#" style="font-family: Noto Sans">アフィリエイター登録</a></div>
-                <div class="dividerCol">|</div>
-                <div class="affiliationText" style="font-family: Noto Sans">店舗オーナー登録</div>
+        </div>
+        <div id="rightcontent" style="margin-top: 10%; " class="flex flex-col items-center">
+            <div id="innerfixed" class="fixed   flex flex-col gap-2">
+                @* <div >*@
+                <img src="../../content/assets/images/hpi1.jpeg" style="width:inherit" />
+                @* </div>
+                <div>*@
+                <img src="../../content/assets/images/hpi2.jpeg" style="width:inherit" />
+                @*  </div>
+                <div>*@
+                <img src="../../content/assets/images/hpi3.jpeg" style="width:inherit" />
+                @*</div>
+                <div>*@
+                <img src="../../content/assets/images/hpi4.jpeg" style="width:inherit" />
+                @*  </div>
+                <div>*@
+                <img src="../../content/assets/images/hpi5.jpeg" style="width:inherit" />
+                @* </div>
+                <div>*@
+                <img src="../../content/assets/images/hpi6.jpeg" style="width:inherit" />
+                @*  </div>*@
             </div>
+
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
