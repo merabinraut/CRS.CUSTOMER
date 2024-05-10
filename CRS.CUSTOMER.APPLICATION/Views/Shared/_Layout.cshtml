@@ -472,7 +472,14 @@
                                               fill="#BCB08A" />
                                     </g>
                                 </svg>
-                                <span class="ml-[10px] text-[14px] ">ログアウト</span>
+                               @{ 
+                                   var label = "ログアウト";
+                                   if (Session["Username"] == null)
+                                   {
+                                       label = "ログイン";
+                                   }
+                                <span class="ml-[10px] text-[14px] ">@label</span>
+                               }
                             </a>
                         </div>
                         <!-- divider -->
