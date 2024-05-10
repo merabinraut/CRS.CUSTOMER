@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.CommonManagement;
+using CRS.CUSTOMER.SHARED.Home;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -57,5 +58,15 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
                 return _DAO.DataTableToListObject<PrivilegesCommon>(dbResponse).ToList();
             return new List<PrivilegesCommon>();
         }
+        #region System Links
+        public List<SystemLinkCommon> GetSystemLink()
+        {
+            string SQL = "EXEC sproc_system_links_management";
+            var dbResponse = _DAO.ExecuteDataTable(SQL);
+            if (dbResponse != null && dbResponse.Rows.Count > 0)
+                return _DAO.DataTableToListObject<SystemLinkCommon>(dbResponse).ToList();
+            return new List<SystemLinkCommon>();
+        }
+        #endregion
     }
 }

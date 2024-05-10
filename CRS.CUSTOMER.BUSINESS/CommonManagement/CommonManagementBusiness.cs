@@ -1,6 +1,7 @@
 ﻿using CRS.CUSTOMER.REPOSITORY.CommonManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.CommonManagement;
+using CRS.CUSTOMER.SHARED.Home;
 using System.Collections.Generic;
 
 namespace CRS.CUSTOMER.BUSINESS.CommonManagement
@@ -31,5 +32,11 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         {
             return _REPO.GetCustomerPrivileges();
         }
+        #region System Links
+        public List<SystemLinkCommon> GetSystemLink()
+        {
+            return _REPO.GetSystemLink();
+        }
+        #endregion
     }
 }

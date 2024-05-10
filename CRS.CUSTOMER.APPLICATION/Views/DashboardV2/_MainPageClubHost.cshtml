@@ -2,7 +2,7 @@
 
 @*toggle section end
     club section*@
-<div id="tab1" class="tab-content-plane">
+<div id="tab1" class="tab-content-plane exclude-class">
     @foreach (var item in Model.ClubListModel)
     {
         <div>
@@ -49,7 +49,7 @@
                         <div style="border: 1px solid #FAFAFA;"
                              class="h-12 w-12 rounded-full  bg-primary border overflow-hidden">
                             <img src="@item.ClubLogo" alt="" title="club logo"
-                                 class="w-full h-full" />
+                                 class="w-full image-cover h-full" />
                         </div>
 
                         <div class="flex flex-col ">
@@ -210,7 +210,7 @@
 </div>
 @*club section end
     Host image section*@
-<div id="tab2" class="tab-content-plane hidden">
+<div id="tab2" class="tab-content-plane exclude-class" style="display:none;">
     @foreach (var item in Model.HostListModel)
     {
         <div class="flex flex-row gap-[16px] mx-[16px]">

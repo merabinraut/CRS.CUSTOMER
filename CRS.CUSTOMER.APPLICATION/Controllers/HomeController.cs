@@ -112,8 +112,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         NickName = Model.NickName
                     };
                     TempData["ReferCode"] = ReferCode;
-                    //Session["exptime"] = DateTime.Parse(dbResponse.Extra2.ToString());
-                    Session["exptime"] = DateTime.Parse(DateTime.UtcNow.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                    Session["exptime"] = DateTime.Parse(dbResponse.Extra2.ToString());
+                    //Session["exptime"] = DateTime.Parse(DateTime.UtcNow.AddMinutes(10).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
                     return View("VerifyOTP", otpModel);
                 }
                 AddNotificationMessage(new NotificationModel()
@@ -206,8 +206,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 //    Title = NotificationMessage.SUCCESS.ToString(),
                 //});
                 message = dbResponse.Message ?? "SUCCESS";
-                var ExpTime = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
-                //var ExpTime = !string.IsNullOrEmpty(dbResponse.Extra2) ? DateTime.Parse(dbResponse.Extra2.ToString()).ToString("yyyy-MM-dd HH:mm:ss") : DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss"); ;
+                //var ExpTime = DateTime.Parse(DateTime.Now.AddMinutes(10).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                var ExpTime = !string.IsNullOrEmpty(dbResponse.Extra2) ? DateTime.Parse(dbResponse.Extra2.ToString()).ToString("yyyy-MM-dd HH:mm:ss") : DateTime.Parse(DateTime.Now.AddMinutes(10).ToString()).ToString("yyyy-MM-dd HH:mm:ss"); ;
                 return Json(new { code = "0", message, ExpTime }, JsonRequestBehavior.AllowGet);
             }
             message = dbResponse.Message ?? "Failed";
@@ -500,8 +500,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         MobileNumber = model.MobileNo,
                         NickName = dbresp.Extra3,
                     };
-                    Session["exptime"] = DateTime.Parse(DateTime.UtcNow.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");//DateTime.Parse(dbresp.Extra2.ToString());
+                    //Session["exptime"] = DateTime.Parse(DateTime.UtcNow.AddMinutes(10).ToString()).ToString("yyyy-MM-dd HH:mm:ss");//DateTime.Parse(dbresp.Extra2.ToString());
                     //Session["exptime"] = DateTime.Parse(starttime.ToString());
+                    Session["exptime"] = DateTime.Parse(dbresp.Extra2.ToString());
                     return View("ForgotPasswordOTP", otpModel);
                 }
                 else
@@ -604,7 +605,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 //});
                 message = dbResponse.Message ?? "SUCCESS";
                 //var ExpTime = !string.IsNullOrEmpty(dbResponse.Extra2) ? DateTime.Parse(dbResponse.Extra2.ToString()).ToString("yyyy-MM-dd HH:mm:ss") : DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
-                var ExpTime = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                //var ExpTime = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                var ExpTime = DateTime.Parse(dbResponse.Extra2.ToString());
                 return Json(new { code = "0", message, ExpTime }, JsonRequestBehavior.AllowGet);
             }
             //else

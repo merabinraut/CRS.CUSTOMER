@@ -3,6 +3,7 @@ using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.CommonModel;
 using CRS.CUSTOMER.APPLICATION.Models.Dashboard;
 using CRS.CUSTOMER.APPLICATION.Models.DashboardV2;
+using CRS.CUSTOMER.APPLICATION.Models.Home;
 using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
 using CRS.CUSTOMER.APPLICATION.Models.Search;
 using CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement;
@@ -36,6 +37,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult Index()
         {
             var ResponseModel = new DashboardModel();
+            if (Session["SystemLinkModel"] == null)
+            {
+                var systemLinkModel = new List<SystemLinkModel>();
+                systemLinkModel = _commonBusiness.GetSystemLink().MapObjects<SystemLinkModel>();
+                Session["SystemLinkModel"] = systemLinkModel;
+            }
             var bannerServiceResp = _oldDashboardBusiness.GetBanners();
             if (bannerServiceResp != null && bannerServiceResp.Count > 0)
             {
