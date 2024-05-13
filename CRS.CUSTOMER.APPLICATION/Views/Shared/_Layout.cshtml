@@ -229,7 +229,12 @@
                 background-size: cover;
                 background-color:none;
             }
-
+            #toast-container {
+                max-width:375px !important !important;
+                width: 100% !important;
+                left: 50%;
+                transform: translate(-35%);
+            }
 
            
             
@@ -243,7 +248,7 @@
 
             #innersec {
                 background-color: #FFFFFF;
-                width: 360px;
+                width: 375px;
                 height: 100%;
                
                 margin-left: auto;
@@ -262,7 +267,7 @@
             .transform-none {
                 left: 50%;
                 transform: translate(-50%);
-                width: 360px;
+                width: 375px;
              
             }
             #rightcontent img{
@@ -279,6 +284,7 @@
             #innerfixed {
                max-width:300px;
                width:100%;
+               top:35%
                
             }
           
@@ -287,6 +293,7 @@
         #leftfix {
             max-width: 140px;
             width: 100%;
+            top: 35%
         }
             #leftfix img {
                 max-width: 130px;
@@ -305,9 +312,12 @@
 
         @@media(min-width: 1005px){
             #leftfix {
+                top:10%;
                 max-width: 300px;
             }
+
             #innerfixed {
+                top: 10%;
                 max-width: 300px;
             }
 
