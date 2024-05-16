@@ -1100,5 +1100,27 @@ namespace CRS.CUSTOMER.APPLICATION.Library
             Uri uri = new Uri(url);
             return uri.GetLeftPart(UriPartial.Authority);
         }
+        public static T GetAppDataJsonConfigValue<T>(string keyName)
+        {
+            string path = HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings[keyName].ToString());
+            try
+            {
+                using (StreamReader s = new StreamReader(path))
+                {
+                    string json = s.ReadToEnd();
+                    return json.ToModel<T>();
+                }
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+        }
+        public static T ToModel<T>(this string json)
+        {
+            T model = default(T);
+            model = JsonConvert.DeserializeObject<T>(json);
+            return model;
+        }
     }
 }

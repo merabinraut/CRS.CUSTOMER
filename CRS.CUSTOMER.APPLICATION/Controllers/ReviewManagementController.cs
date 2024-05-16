@@ -1,4 +1,5 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
+using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.ReviewManagement;
 using CRS.CUSTOMER.BUSINESS.ReviewManagement;
 using CRS.CUSTOMER.SHARED;
@@ -27,11 +28,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var dbResponse = _reviewBuss.GetCustomerReviewedList(AgentId);
             if (dbResponse != null && dbResponse.Count > 0)
-            {
-                var FileLocation = "";
-                if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocation = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+            {                
                 Response = dbResponse.MapObjects<CustomerReviewedListModel>();
-                Response.ForEach(x => x.ClubLogo = FileLocation + x.ClubLogo);
+                Response.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
                 Response.ForEach(x => x.ClubId = x.ClubId.EncryptParameter());
                 Response.ForEach(x => x.ClubLocationId = x.ClubLocationId.EncryptParameter());
                 Response.ForEach(x => x.ReviewId = x.ReviewId.EncryptParameter());
@@ -78,7 +77,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ResponseModel.ClubId = ResponseModel.ClubId.EncryptParameter();
                 ResponseModel.CustomerId = ResponseModel.CustomerId.EncryptParameter();
                 ResponseModel.ReservationId = ResponseModel.ReservationId.EncryptParameter();
-                if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") ResponseModel.ClubLogo = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString() + ResponseModel.ClubLogo;
+                 ResponseModel.ClubLogo =  ImageHelper.ProcessedImage(ResponseModel.ClubLogo);
                 return View(ResponseModel);
             }
             AddNotificationMessage(new NotificationModel()
@@ -117,14 +116,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dbResponse = _reviewBuss.GetHostListByClub(dbRequest);
             if (dbResponse.Code == ResponseCode.Success)
             {
-                ResponseModel.ReviewHostListModel = dbResponse.Data?.MapObjects<ReviewHostListByClubResponseModel>();
-                var ImageVirtualPath = string.Empty;
-                if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") ImageVirtualPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+                ResponseModel.ReviewHostListModel = dbResponse.Data?.MapObjects<ReviewHostListByClubResponseModel>();                
                 foreach (var item in ResponseModel.ReviewHostListModel)
                 {
                     item.ClubId = item.ClubId.EncryptParameter();
                     item.HostId = item.HostId.EncryptParameter();
-                    item.HostImage = ImageVirtualPath + item.HostImage;
+                    item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
                 }
                 return View(ResponseModel);
             }
