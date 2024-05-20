@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ForgotPassword_SuccessView";
+    ViewBag.Title = "登録完了‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
 }
 
 <html lang="ja">
@@ -32,7 +32,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
-    <title>HosLog | New Password Changed</title>
+    <title>@ViewBag.Title</title>
 </head>
 <body>
     <style>
@@ -65,7 +65,6 @@
             line-height: 24px;
             font-size: 14px;
             margin-top: 18px;
-/*            text-align:center*/
         }
 
         .registrationCompelete {
@@ -118,7 +117,7 @@
                         @ViewBag.NickName
                     </div>
                     <div class="registrationCompelete">
-                        パスワードを変更しました
+                        新規会員登録を完了しました
                     </div>
                 </div>
                 <div class="w-full">

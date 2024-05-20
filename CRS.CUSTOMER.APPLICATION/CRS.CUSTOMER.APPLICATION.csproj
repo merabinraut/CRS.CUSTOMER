@@ -707,6 +707,8 @@
     <Content Include="Views\Search\ClubFilter.cshtml" />
     <Content Include="Views\Search\HostFilter.cshtml" />
     <Content Include="Views\Footer\termsAndCondition.cshtml" />
+    <Content Include="Views\Home\ForgotPasswordSuccessView.cshtml" />
+    <Content Include="Views\Home\RegisterSuccessView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

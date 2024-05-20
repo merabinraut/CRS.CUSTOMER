@@ -340,6 +340,21 @@
                                 </a>
                             </div>
                         }
+                        else
+                        {
+                            <div class="">
+                                <a href="/login"
+                                   class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <g opacity="0.6">
+                                            <path d="M12 3C7.81641 3 4.30664 5.87402 3.30469 9.75H4.85156C5.80957 6.70898 8.64844 4.5 12 4.5C16.1367 4.5 19.5 7.86328 19.5 12C19.5 16.1367 16.1367 19.5 12 19.5C8.64844 19.5 5.80957 17.291 4.85156 14.25H3.30469C4.30664 18.126 7.81641 21 12 21C16.9629 21 21 16.9629 21 12C21 7.03711 16.9629 3 12 3ZM11.5078 8.46094L10.4297 9.53906L12.1406 11.25H3V12.75H12.1406L10.4297 14.4609L11.5078 15.5391L14.5078 12.5391L15.0234 12L14.5078 11.4609L11.5078 8.46094Z"
+                                                  fill="#BCB08A" />
+                                        </g>
+                                    </svg>
+                                    <span class="ml-[10px] text-[14px] ">ログイン</span>
+                                </a>
+                            </div>
+                        }
 
                         <!-- divider -->
                         <hr class="my-2">
@@ -584,7 +599,7 @@
         function WindowHistoryBack() {
             var previousUrl = document.referrer;
             if (isLoginPageWithReturnUrl(previousUrl)) {
-                window.location.href = '/DashboardV2/Index';
+                window.location.href = '/';
             }
             else {
                 window.history.back();

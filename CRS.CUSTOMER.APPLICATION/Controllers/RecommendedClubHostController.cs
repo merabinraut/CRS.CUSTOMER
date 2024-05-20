@@ -24,7 +24,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var redirectToUrl = string.Empty;
             var culture = ApplicationUtilities.GetSessionValue("culture")?.ToString()?.ToLower();
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
-            ViewBag.ActionPageName = "Dashboard";            
+            ViewBag.ActionPageName = "Dashboard";
             var Response = new LocationClubHostModel();
             var recommendedClubDBRequest = new RecommendedClubRequestCommon()
             {
@@ -47,7 +47,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.WARNING.ToString()
                 });
-                redirectToUrl = Url.Action("Index", "DashboardV2");
+                redirectToUrl = "/";
                 return Json(new { Response, redirectToUrl }, JsonRequestBehavior.AllowGet);
             }
             if (string.IsNullOrEmpty(recommendedHostDBRequest.PositionId) || string.IsNullOrEmpty(recommendedHostDBRequest.LocationId)
@@ -59,7 +59,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.WARNING.ToString()
                 });
-                redirectToUrl = Url.Action("Index", "DashboardV2");
+                redirectToUrl = "/";
                 return Json(new { Response, redirectToUrl }, JsonRequestBehavior.AllowGet);
             }
             var dbClubResponse = _recommendedClubHostBuss.GetRecommendedClub(recommendedClubDBRequest);

@@ -33,7 +33,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
           => (_oldDashboardBusiness, _recommendedClubHostBuss, _dashboardBusiness, _commonBusiness, _searchBusiness) = (oldDashboardBusiness, recommendedClubHostBuss, dashboardBusiness, commonBusiness, searchBusiness);
 
         #region DASHBOARD
-        [HttpGet]
+        [HttpGet, Route("")]
         public ActionResult Index()
         {
             var ResponseModel = new DashboardModel();

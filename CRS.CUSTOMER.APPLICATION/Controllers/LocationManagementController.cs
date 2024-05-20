@@ -65,7 +65,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid location details",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             var agentId = ApplicationUtilities.GetSessionValue("AgentId")?.ToString()?.DecryptParameter();
             var Model = new LocationClubHostModel();
@@ -153,7 +153,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid Details",
                     Title = NotificationMessage.WARNING.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
 
@@ -335,7 +335,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid Details",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
 
             string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
@@ -373,7 +373,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Message = "Something went wrong.",
                 Title = NotificationMessage.INFORMATION.ToString()
             });
-            return RedirectToAction("Index", "DashboardV2");
+            return Redirect("/");
         }
     }
 }

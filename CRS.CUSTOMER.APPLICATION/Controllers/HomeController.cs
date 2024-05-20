@@ -1,4 +1,5 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
+using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.Home;
 using CRS.CUSTOMER.BUSINESS.Home;
 using CRS.CUSTOMER.SHARED;
@@ -22,9 +23,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             if (!string.IsNullOrEmpty(Username))
-            {
-                return RedirectToAction("Index", "DashboardV2");
-            }
+                return Redirect("/");
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
             ViewBag.Language = culture;
@@ -53,14 +52,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Register Management
-        [HttpGet]
+        [HttpGet, Route("user/register")]
         public ActionResult Register(string ReferCode = "")
         {
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             if (!string.IsNullOrEmpty(Username))
-            {
-                return RedirectToAction("Index", "DashboardV2");
-            }
+                return Redirect("/");
             var Response = new RegistrationHoldModel();
             if (!string.IsNullOrEmpty(ReferCode))
             {
@@ -93,7 +90,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(Response);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, Route("user/register"), ValidateAntiForgeryToken]
         public ActionResult Register(RegistrationHoldModel Model, string ReferCode = "")
         {
             ViewBag.ReferCode = ReferCode;
@@ -278,7 +275,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return View("NewRegistration_SuccessView");
+                    return Redirect("/user/register/complete");
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -295,21 +292,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                                    .ToList();
                 return View(Model);
             }
+        }
 
-            //var notificationModels = errorMessages.Select(errorMessage => new NotificationModel
-            //{
-            //    NotificationType = NotificationMessage.ERROR,
-            //    Message = errorMessage,
-            //    Title = NotificationMessage.ERROR.ToString(),
-            //}).ToArray();
-            //AddNotificationMessage(notificationModels);
-            //AddNotificationMessage(new NotificationModel()
-            //{
-            //    NotificationType = NotificationMessage.INFORMATION,
-            //    Message = "Please fill all required fields",
-            //    Title = NotificationMessage.INFORMATION.ToString(),
-            //});
-
+        [HttpGet, Route("user/register/complete"), OverrideActionFilters]
+        public ActionResult RegisterSuccessView()
+        {
+            return View();
         }
         #endregion
 
@@ -352,7 +340,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ViewBag.ReturnURL = (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL)) ? ReturnURL : string.Empty;
                 return View(Response);
             }
-            else return RedirectToAction("Index", "DashboardV2");
+            else return Redirect("/");
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -363,7 +351,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (ModelState.IsValid)
             {
                 var loginResponse = Login(Model);
-                if (loginResponse.Item3 && !string.IsNullOrEmpty(Model.LoginId) && RememberMe)
+                if (loginResponse.Item2 && !string.IsNullOrEmpty(Model.LoginId) && RememberMe)
                 {
                     HttpContext.Response.Cookies.Add(new HttpCookie("CRS-CUSTOMER-LOGINID", Model.LoginId.DefaultEncryptParameter())
                     {
@@ -380,10 +368,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Expires = DateTime.Now.AddMonths(-1)
                     });
                 }
-                if (loginResponse.Item3)
+                if (loginResponse.Item2)
                     if (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL))
                         return Redirect(ReturnURL);
-                return RedirectToAction(loginResponse.Item1, loginResponse.Item2);
+                return Redirect(loginResponse.Item1);
             }
             else
             {
@@ -403,7 +391,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
         }
 
-        public Tuple<string, string, bool> Login(LoginRequestModel Model)
+        public Tuple<string, bool> Login(LoginRequestModel Model)
         {
             LoginRequestCommon commonRequest = Model.MapObject<LoginRequestCommon>();
             commonRequest.SessionId = Session.SessionID;
@@ -421,11 +409,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Session["AgentId"] = response.AgentId.EncryptParameter();
                     Session["Username"] = response.NickName;
                     Session["EmailAddress"] = response.EmailAddress;
-                    var ProfileImage = !string.IsNullOrEmpty(response.ProfileImage) ? FileLocationPath + response.ProfileImage : "/Content/assets/images/customer/demo-image.jpeg";
-                    Session["ProfileImage"] = ProfileImage;
+                    Session["ProfileImage"] = ImageHelper.ProcessedImage(response.ProfileImage);
                     Session["CreatedOn"] = response.ActionDate;
                     Session["SystemLinkModel"] = response.SystemLink;
-                    return new Tuple<string, string, bool>("Index", "DashboardV2", true);
+                    return new Tuple<string, bool>("/", true);
                 }
                 this.AddNotificationMessage(new NotificationModel()
                 {
@@ -433,7 +420,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse.Message,
                     Title = NotificationMessage.INFORMATION.ToString(),
                 });
-                return new Tuple<string, string, bool>("Index", "Home", false);
+                return new Tuple<string, bool>("login", false);
             }
             catch (Exception)
             {
@@ -444,7 +431,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Title = NotificationMessage.INFORMATION.ToString(),
                 });
 
-                return new Tuple<string, string, bool>("Index", "Home", false);
+                return new Tuple<string, bool>("login", false);
             }
         }
 
@@ -455,18 +442,19 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             Session["AgentId"] = null;
             Session["Username"] = null;
             Session["HasLandingSession"] = null;
-            return RedirectToAction("Index", "Home");
+            return Redirect("/login");
         }
         #endregion
 
         #region Forgot Password
+        [HttpGet, Route("user/remind")]
         public ActionResult ForgotPassword()
         {
             Session.Clear();
             ForgotPasswordModel model = new ForgotPasswordModel();
             return View(model);
         }
-        [HttpPost]
+        [HttpPost, Route("user/remind")]
         [ValidateAntiForgeryToken]
         public ActionResult ForgotPassword(ForgotPasswordModel model, string timet)
         {
@@ -584,44 +572,18 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var message = string.Empty;
             if (string.IsNullOrEmpty(dbRequest.AgentId) || string.IsNullOrEmpty(dbRequest.MobileNumber))
             {
-                //AddNotificationMessage(new NotificationModel()
-                //{
-                //    NotificationType = NotificationMessage.INFORMATION,
-                //    Message = "Invalid detail",
-                //    Title = NotificationMessage.INFORMATION.ToString(),
-                //});
-                //return Json("Invalid detail", JsonRequestBehavior.AllowGet);
                 message = "Invalid detail";
                 return Json(new { code = "1", message }, JsonRequestBehavior.AllowGet);
             }
             CommonDbResponse dbResponse = _buss.ResendForgotPasswordOTP(dbRequest);
             if (dbResponse != null && dbResponse.Code == ResponseCode.Success)
             {
-                //Session["exptime"] = !string.IsNullOrEmpty(dbResponse.Extra2) ? DateTime.Parse(dbResponse.Extra2.ToString()) : DateTime.Parse(DateTime.Now.AddMinutes(2).ToString());
-                //AddNotificationMessage(new NotificationModel()
-                //{
-                //    NotificationType = NotificationMessage.SUCCESS,
-                //    Message = dbResponse.Message ?? "SUCCESS",
-                //    Title = NotificationMessage.SUCCESS.ToString(),
-                //});
                 message = dbResponse.Message ?? "SUCCESS";
-                //var ExpTime = !string.IsNullOrEmpty(dbResponse.Extra2) ? DateTime.Parse(dbResponse.Extra2.ToString()).ToString("yyyy-MM-dd HH:mm:ss") : DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
-                //var ExpTime = DateTime.Parse(DateTime.Now.AddMinutes(2).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
                 var ExpTime = DateTime.Parse(dbResponse.Extra2.ToString());
                 return Json(new { code = "0", message, ExpTime }, JsonRequestBehavior.AllowGet);
             }
-            //else
-            //{
-            //    AddNotificationMessage(new NotificationModel()
-            //    {
-            //        NotificationType = NotificationMessage.INFORMATION,
-            //        Message = dbResponse.Message ?? "Failed",
-            //        Title = NotificationMessage.INFORMATION.ToString(),
-            //    });
-            //}
             message = dbResponse.Message ?? "Failed";
             return Json(new { code = "1", message }, JsonRequestBehavior.AllowGet);
-            //return Json(dbResponse.Message, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -640,7 +602,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("login");
             }
             var response = new SetRegistrationPasswordModel()
             {
@@ -661,34 +623,16 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var uId = !string.IsNullOrEmpty(Model.UserId) ? Model.UserId.DecryptParameter() : null;
                 if (string.IsNullOrEmpty(aId) || string.IsNullOrEmpty(mn) || string.IsNullOrEmpty(uId))
                 {
-                    //AddNotificationMessage(new NotificationModel()
-                    //{
-                    //    NotificationType = NotificationMessage.INFORMATION,
-                    //    Message = "Invalid request",
-                    //    Title = NotificationMessage.INFORMATION.ToString()
-                    //});
                     TempData["ForgetPWErrorMessage"] = "Invalid request";
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("login");
                 }
                 if (Model.Password != Model.ConfirmPassword)
                 {
-                    //AddNotificationMessage(new NotificationModel()
-                    //{
-                    //    NotificationType = NotificationMessage.INFORMATION,
-                    //    Message = "Password and confirm password must match",
-                    //    Title = NotificationMessage.INFORMATION.ToString()
-                    //});
                     TempData["ForgetPWErrorMessage"] = "Password and confirm password must match";
                     return View(Model);
                 }
                 if (Model.Password == null || Model.ConfirmPassword == null)
                 {
-                    //AddNotificationMessage(new NotificationModel()
-                    //{
-                    //    NotificationType = NotificationMessage.INFORMATION,
-                    //    Message = "Password is required",
-                    //    Title = NotificationMessage.INFORMATION.ToString()
-                    //});
                     TempData["ForgetPWErrorMessage"] = "Password is required";
                     return View(Model);
                 }
@@ -701,20 +645,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var dbResponse = _buss.SetNewPassword(Common);
                 if (dbResponse.Code == 0)
                 {
-                    //AddNotificationMessage(new NotificationModel()
-                    //{
-                    //    NotificationType = NotificationMessage.SUCCESS,
-                    //    Message = dbResponse.Message ?? "Success",
-                    //    Title = NotificationMessage.SUCCESS.ToString(),
-                    //});
-                    return View("ForgotPassword_SuccessView");
+                    return Redirect("/user/remind/complete");
                 }
-                //AddNotificationMessage(new NotificationModel()
-                //{
-                //    NotificationType = NotificationMessage.INFORMATION,
-                //    Message = dbResponse.Message ?? "Failed",
-                //    Title = NotificationMessage.INFORMATION.ToString(),
-                //});
                 TempData["ForgetPWErrorMessage"] = dbResponse.Message ?? "Failed";
                 return View(Model);
             }
@@ -732,6 +664,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(notificationModels);
                 return View(Model);
             }
+        }
+
+        [HttpGet, Route("user/remind/complete"), OverrideActionFilters]
+        public ActionResult ForgotPasswordSuccessView()
+        {
+            return View();
         }
         #endregion
     }
