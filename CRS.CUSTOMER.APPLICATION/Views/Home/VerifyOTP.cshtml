@@ -268,7 +268,7 @@
             <!-- for message -->
             <div class="displayMessage">
                 @*+ 81- @Model.MobileNumber 宛にSMSを送信しました、メッセージに記載された
-                6桁の数字を確認し、入力してください*@
+                    6桁の数字を確認し、入力してください*@
             </div>
             <input type="hidden" name="exptime" id="exptime" value='@Html.Raw(Session["exptime"]!=null?Session["exptime"].ToString():"")' />
             <div class="flex justify-end items-end remainigTime" id="otp-code-timer">
@@ -282,7 +282,7 @@
                               fill="black" />
                     </svg>
                     <p class="waitingMessage">
-                        2分まで、認証コードを再送信できません。
+                        10分まで、認証コードを再送信できません。
                     </p>
                 </div>
             </div>
@@ -383,7 +383,7 @@
             countdown($("#exptime").val());
             var divElement = document.getElementById("resend-verification-code");
             divElement.style.pointerEvents = "none";
-            divElement.style.opacity = 0.5; 
+            divElement.style.opacity = 0.5;
             var buttonsAndInputs = divElement.getElementsByTagName("button");
             for (var i = 0; i < buttonsAndInputs.length; i++) {
                 buttonsAndInputs[i].disabled = true;
@@ -395,9 +395,11 @@
             const dateParts = endtime.split(' ');
             const date = dateParts[0];
             const time = dateParts[1];
-            const [year, month, day] = date.split('-');
+            //const [year, month, day] = date.split('-');
+            const [year, month, day] = date.split(/[-\/]/);
             const [hours, minutes, seconds] = time.split(':');
-            const isoDate = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).toISOString();
+            const isoDate = new Date(year, month - 1, day, hours, minutes, seconds).toISOString();
+            //const isoDate = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).toISOString();
             const countDownDate = new Date(isoDate);
 
             var x = setInterval(function () {
@@ -434,7 +436,7 @@
             $('#waitingMessageWrapper').show();
             var divElement = document.getElementById("resend-verification-code");
             divElement.style.pointerEvents = "none";
-            divElement.style.opacity = 0.5; 
+            divElement.style.opacity = 0.5;
             var buttonsAndInputs = divElement.getElementsByTagName("button");
             for (var i = 0; i < buttonsAndInputs.length; i++) {
                 buttonsAndInputs[i].disabled = true;
@@ -501,7 +503,7 @@
             var message = "+ 81-" + maskLastFourDigits(mobileNumber) + " 宛にSMSを送信しました、メッセージに記載された6桁の数字を確認し、入力してください";
             $(".displayMessage").text(message);
         }
-       
+
     </script>
 </body>
 </html>

@@ -13,8 +13,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         [Display(Name = "Nickname", ResourceType = typeof(Resource))]
         [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
         //[RegularExpression("^\\p{L}\\p{N}._\\-]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
-        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
-        [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]
+        [MinLength(4, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_4_characters")]
+        [MaxLength(20, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_20_characters")]
         public string NickName { get; set; }
 
         [Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
@@ -52,12 +52,15 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string AgentId { get; set; }
         public string UserId { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Required")]
-        [MaxLength(16, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_16_characters")]
-        [RegularExpression(@"^.*(?=.{8,16})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be of length 8 to 16 and must contain a-z,A-Z,0-9,@#$%^&+=")]
+        //[MaxLength(32, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_16_characters")]
+        [MaxLength(32, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_32_characters")]
+        //[RegularExpression(@"^.*(?=.{8,32})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be of length 8 to 32 and must contain a-z,A-Z,0-9,@#$%^&+=")]
+        //[RegularExpression(@"^.*(?=.{8,32})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$", ErrorMessage = "Must be of length 8 to 32 and must contain a-z, A-Z, and 0-9")]
         //[MinLength(8, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_8_characters")]
+        [RegularExpression(@"^.*(?=.{8,32})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$", ErrorMessage = "Must be of length 8 to 32 and must contain a-z, A-Z, and 0-9")]
         public string Password { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Required")]
-        [MaxLength(16, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_16_characters")]
+        [MaxLength(32, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_32_characters")]
         //[RegularExpression(@"^.*(?=.{8,16})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be of length 8 to 16 and must contain a-z,A-Z,0-9,@#$%^&+=")]
         //[MinLength(8, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_8_characters")]
         [Compare("Password", ErrorMessage = "Password  Mismatch")]

@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    const tabs = document.querySelectorAll(".tab-content-plane");
-    const tabButtons = document.querySelectorAll(".tab-button-plane");
+    const tabs = document.querySelectorAll(".tab-content-plane:not(.exclude-class)");
+    const tabButtons = document.querySelectorAll(".tab-button-plane:not(.exclude-class)");
 
     tabButtons.forEach((tabButton, index) => {
         tabButton.addEventListener("click", () => {
@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("click", function () {
-    const tabs = document.querySelectorAll(".tab-content-plane");
-    const tabButtons = document.querySelectorAll(".tab-button-plane");
+    const tabs = document.querySelectorAll(".tab-content-plane:not(.exclude-class)");
+    const tabButtons = document.querySelectorAll(".tab-button-plane:not(.exclude-class)");
     tabButtons.forEach((tabButton, index) => {
         tabButton.addEventListener("click", () => {
             // Hide all tabs and remove active class from buttons

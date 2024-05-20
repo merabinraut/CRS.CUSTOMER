@@ -16,7 +16,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
 
         [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "PasswordRequired")]
         [Display(Name = "Password")]
-        [MaxLength(16, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_16_characters")]
+        [MaxLength(32, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_32_characters")]
         //[MinLength(8, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_8_characters")]
         public string Password { get; set; }
         public string SessionId { get; set; }
