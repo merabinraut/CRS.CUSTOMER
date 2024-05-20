@@ -9,5 +9,6 @@
         public string Latitude { get; set; }
         public string Longitude { get; set; }
         public string LocationDisplayName { get; set; }
+        public string LocationStatus { get; set; }
     }
 }

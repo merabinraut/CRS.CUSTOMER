@@ -1,4 +1,5 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
+using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationHistory;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationManagement;
 using CRS.CUSTOMER.BUSINESS.ReservationManagement;
@@ -19,7 +20,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet]
         public ActionResult History()
         {
-            var FileLocationPath = "";
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
             var dbResponse = _reservationManagementBuss.GetReservationHistory(CustomerId);
             var ResponseModel = dbResponse.MapObjects<ReservationHistoryModel>();
@@ -29,9 +29,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 item.ReservationId = item.ReservationId.EncryptParameter();
                 item.CustomerId = item.CustomerId.EncryptParameter();
                 item.InvoiceId = item.InvoiceId.EncryptParameter();
-            }
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-            ResponseModel.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
+            }            
+            ResponseModel.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
             return View(ResponseModel);
         }
 
@@ -47,14 +46,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 responseInfo = customerDbResponseInfo.MapObject<CustomerReservationDetailModel>();
                 if (responseInfo != null && !string.IsNullOrEmpty(responseInfo.NickName))
                 {
-                    var FileLocationPath = "";
-                    if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-                    responseInfo.LogoImage = FileLocationPath + responseInfo.LogoImage;
+                    
+                    
+                    responseInfo.LogoImage = ImageHelper.ProcessedImage(responseInfo.LogoImage);
                     var dbResponse2 = _reservationManagementBuss.GetReservationHostDetails(reservationId);
                     if (dbResponse2 != null && dbResponse2.Count > 0)
                     {
                         responseInfo.ReservationHostDetailModel = dbResponse2.MapObjects<ReservationHostDetailModel>();
-                        responseInfo.ReservationHostDetailModel.ForEach(x => x.HostImagePath = FileLocationPath + x.HostImagePath);
+                        responseInfo.ReservationHostDetailModel.ForEach(x => x.HostImagePath = ImageHelper.ProcessedImage(x.HostImagePath));
                         return View(responseInfo);
                     }
                 }
