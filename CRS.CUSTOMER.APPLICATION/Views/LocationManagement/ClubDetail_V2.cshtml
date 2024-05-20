@@ -1271,7 +1271,7 @@
             <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3">
                 @foreach (var item in Model.ClubGalleryImageList)
                 {
-                    <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] object-cover" onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
+                    <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] object-cover" style="width:117px" onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
                 }
             </div>
             @*<div id="modal2" class="modal">
@@ -1760,7 +1760,7 @@
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " onclick="closeImagePopup();">&times;</span>
+        <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " style="right:20px" onclick="closeImagePopup();">&times;</span>
         <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " id="img01" />
     </div>
 </div>
