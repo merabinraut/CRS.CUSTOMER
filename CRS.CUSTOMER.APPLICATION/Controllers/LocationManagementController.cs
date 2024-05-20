@@ -56,9 +56,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.ActionPageName = "Dashboard";
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
-            var FileLocationPath = "";
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
-                FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
             var id = !string.IsNullOrEmpty(RequestModel.LocationId) ? RequestModel.LocationId.DecryptParameter() : null;
             if (string.IsNullOrEmpty(id))
             {
@@ -77,7 +74,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 Model.Banners = bannerServiceResp.MapObjects<BannersModel>();
                 Model.Banners.ForEach(x => x.BannerId = x.BannerId?.EncryptParameter());
-                Model.Banners.ForEach(x => x.BannerImage = FileLocationPath + x.BannerImage);
+                Model.Banners.ForEach(x => x.BannerImage = ImageHelper.ProcessedImage(x.BannerImage));
             }
 
             var recommendedClubDBRequest = new RecommendedClubRequestCommon()
@@ -93,10 +90,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 item.ClubId = item.ClubId.EncryptParameter();
                 item.LocationId = item.LocationId.EncryptParameter();
-                item.ClubLogo = FileLocationPath + item.ClubLogo;
-                item.ClubCoverPhoto = FileLocationPath + item.ClubCoverPhoto;
+                item.ClubLogo = ImageHelper.ProcessedImage(item.ClubLogo);
+                item.ClubCoverPhoto = ImageHelper.ProcessedImage(item.ClubCoverPhoto);
                 //item.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
-                item.HostGalleryImage = item.HostGalleryImage.Select(x => FileLocationPath + x).ToList();
+                item.HostGalleryImage = item.HostGalleryImage.Select(x => ImageHelper.ProcessedImage(x)).ToList();
             }
             if (Model.ClubListModel != null && Model.ClubListModel.Count > 0)
             {
@@ -113,8 +110,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     item.ClubId = item.ClubId.EncryptParameter();
                     item.LocationId = item.LocationId.EncryptParameter();
                     item.HostId = item.HostId.EncryptParameter();
-                    item.HostImage = FileLocationPath + item.HostImage;
-                    item.ClubLogo = FileLocationPath + item.ClubLogo;
+                    item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
+                    item.ClubLogo = ImageHelper.ProcessedImage(item.ClubLogo);
                 }
                 RequestModel.ClubId = recommendedHostDBRequest.ClubId?.EncryptParameter();
             }
@@ -139,7 +136,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
-            var FileLocationPath = "";
             var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
             var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
             string sFD = null;//!string.IsNullOrEmpty(ScheduleFilterDate[0]) ? ScheduleFilterDate : null;
@@ -159,8 +155,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 });
                 return RedirectToAction("Index", "DashboardV2");
             }
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-
             string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
 
             var clubDetailResp = _business.GetClubDetailById(cId, agentId);
@@ -174,7 +168,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 item.ClubId = item.ClubId.EncryptParameter();
                 item.HostId = item.HostId.EncryptParameter();
                 item.LocationId = item.LocationId.EncryptParameter();
-                item.HostImage = FileLocationPath + item.HostImage;
+                item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
             }
             var dbTopHostList = _business.GetHostList(lId, cId, agentId, "trhl");
             responseModel.TopHostListModels = dbTopHostList.MapObjects<LocationHostListModel>();
@@ -183,7 +177,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 item.ClubId = item.ClubId.EncryptParameter();
                 item.HostId = item.HostId.EncryptParameter();
                 item.LocationId = item.LocationId.EncryptParameter();
-                item.HostImage = FileLocationPath + item.HostImage;
+                item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
             }
             var clubGalleryImageDBResponse = _business.GetClubGalleryImage(responseModel.ClubId.DecryptParameter(), "A");
             if (clubGalleryImageDBResponse != null && clubGalleryImageDBResponse.Count > 0)
@@ -191,19 +185,18 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 responseModel.ClubGalleryImageList = clubGalleryImageDBResponse;
             }
             else responseModel.ClubGalleryImageList = new List<string>();
-            responseModel.ClubCoverPhoto = FileLocationPath + responseModel.ClubCoverPhoto;
-            responseModel.ClubLogo = FileLocationPath + responseModel.ClubLogo;
+            responseModel.ClubCoverPhoto = ImageHelper.ProcessedImage(responseModel.ClubCoverPhoto);
+            responseModel.ClubLogo = ImageHelper.ProcessedImage(responseModel.ClubLogo);
             responseModel.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
             var reviewDBResponse = _business.GetClubReviewAndRatings(cId);
             if (reviewDBResponse != null && reviewDBResponse.Count > 0)
             {
                 responseModel.ClubReviewsModel = reviewDBResponse.MapObjects<GetClubReviewsModel>();
-                //responseModel.ClubReviewsModel.ForEach(x => x.CustomerImage = FileLocationPath + x.CustomerImage);
                 foreach (var item in responseModel.ClubReviewsModel)
                 {
                     if (!string.IsNullOrEmpty(item.CustomerImage))
                     {
-                        item.CustomerImage = FileLocationPath + item.CustomerImage;
+                        item.CustomerImage = ImageHelper.ProcessedImage(item.CustomerImage);
                     }
                     else
                     {
@@ -216,12 +209,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 foreach (var item in responseModel.ClubReviewsModel)
                 {
-                    //item.GetClubReviewHostList.ForEach(x => x.HostImage = FileLocationPath + x.HostImage);
                     foreach (var item_sec in item.GetClubReviewHostList)
                     {
                         if (!string.IsNullOrEmpty(item_sec.HostImage))
                         {
-                            item_sec.HostImage = FileLocationPath + item_sec.HostImage;
+                            item_sec.HostImage = ImageHelper.ProcessedImage(item_sec.HostImage);
                         }
                         else
                         {
@@ -300,7 +292,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.PlanGroup = groupedResults.MapObjects<PlanGroup>();
             ViewBag.PlanGroup1 = groupedResults.MapObjects<PlanGroup>();
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
-            ViewBag.FileLocationPath = FileLocationPath;
+            ViewBag.FileLocationPath = "";
             ViewBag.SFilterDate = ScheduleFilterDate;
             ViewBag.ClubId = ClubId;
             ViewBag.LocationId = LocationId;
@@ -334,7 +326,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
-            var FileLocationPath = "";
             var hId = string.IsNullOrEmpty(HostId) ? string.Empty : HostId.DecryptParameter();
             if (string.IsNullOrEmpty(hId))
             {
@@ -346,7 +337,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 });
                 return RedirectToAction("Index", "DashboardV2");
             }
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+
             string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
             var dbResponse = _business.ViewHostDetailsV2(hId, agentId);
             if (dbResponse != null)
@@ -355,7 +346,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ResponseModel.ClubId = ResponseModel.ClubId.EncryptParameter();
                 ResponseModel.HostId = ResponseModel.HostId.EncryptParameter();
                 ResponseModel.LocationId = ResponseModel.LocationId.EncryptParameter();
-                ResponseModel.ClubLogo = FileLocationPath + ResponseModel.ClubLogo;
+                ResponseModel.ClubLogo = ImageHelper.ProcessedImage(ResponseModel.ClubLogo);
                 if (!string.IsNullOrEmpty(ResponseModel.HostInstagramLink) && ResponseModel.HostInstagramLink != "#")
                 {
                     if (!ResponseModel.HostInstagramLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostInstagramLink = "https://" + ResponseModel.HostInstagramLink;
@@ -372,7 +363,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     if (!ResponseModel.HostLine.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostLine = "https://" + ResponseModel.HostLine;
                 }
-                for (int i = 0; i < ResponseModel.HostGalleryImageList.Count; i++) ResponseModel.HostGalleryImageList[i] = FileLocationPath + ResponseModel.HostGalleryImageList[i];
+                for (int i = 0; i < ResponseModel.HostGalleryImageList.Count; i++) ResponseModel.HostGalleryImageList[i] = ImageHelper.ProcessedImage(ResponseModel.HostGalleryImageList[i]);
                 ResponseModel.HostIdentityDetailsModel.ForEach(x => x.Label = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.LabelEnglish : x.LabelJapanese);
                 return View(ResponseModel);
             }

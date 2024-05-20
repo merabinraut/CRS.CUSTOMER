@@ -1,4 +1,6 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
+using CRS.CUSTOMER.APPLICATION.Library;
+using CRS.CUSTOMER.APPLICATION.Models;
 using CRS.CUSTOMER.APPLICATION.Models.ProfileManagement;
 using CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement;
 using CRS.CUSTOMER.BUSINESS.ProfileManagement;
@@ -9,6 +11,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -32,8 +35,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var viewModel = data.MapObject<UserProfileModel>();
             ViewBag.LocationDDL = ApplicationUtilities.LoadDropdownList("LOCATIONDDL", "", "") as Dictionary<string, string>;
             ViewBag.PrefectureDDL = ApplicationUtilities.LoadDropdownList("PREFECTUREDDL", "", "") as Dictionary<string, string>;
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") ViewBag.FileLocationPath = "";
-            else ViewBag.FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+            //if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") ViewBag.FileLocationPath = "";
+            //else ViewBag.FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+            if (viewModel.ProfileImage != null)
+                viewModel.ProfileImage = ImageHelper.ProcessedImage(viewModel.ProfileImage);
             ViewBag.PrefectureKey = viewModel.Prefecture?.EncryptParameter();
             ViewBag.PreferredLocationKey = viewModel.PreferredLocation?.EncryptParameter();
             var dob = !string.IsNullOrEmpty(viewModel.DateOfBirth) ? Convert.ToDateTime(viewModel.DateOfBirth) : DateTime.Now;
@@ -263,19 +268,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost]
-        public JsonResult ChangeProfileImage(HttpPostedFileBase file)
+        public  async Task<JsonResult> ChangeProfileImage(HttpPostedFileBase file)
         {
             var common = new UserProfileCommon();
-
-            string FileLocation = "/Content/userupload/customer/";
-            string FileLocationPath = "/Content/userupload/customer/";
-            string ImageVirtualPath = "";
-            if (ConfigurationManager.AppSettings["Phase"] != null
-                && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
-            {
-                FileLocation = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString() + FileLocationPath;
-                ImageVirtualPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-            }
+            string fileName = string.Empty;          
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 file = Request.Files[i];
@@ -285,13 +281,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var contentType = file.ContentType;
                 var allowedContentType = AllowedImageContentType();
                 var ext = Path.GetExtension(file.FileName);
-                string filepath;
                 if (allowedContentType.Contains(contentType.ToLower()))
                 {
-                    string date = DateTime.Now.ToString("yyyyMMddHHmmssffff");
-                    string myfilename = date + ext.ToLower();
-                    filepath = Path.Combine(Server.MapPath(FileLocation), myfilename);
-                    common.ProfileImage = FileLocationPath + myfilename;
+                    fileName= $"{AWSBucketFolderNameModel.CUSTOMER}/ProfileImage_{DateTime.Now.ToString("yyyyMMddHHmmssffff")}{ext.ToLower()}";
+                    common.ProfileImage = $"/{fileName}";                 
                 }
                 else
                 {
@@ -309,8 +302,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var dbresp = _business.ChangeProfileImage(common);
                 if (dbresp.Code == ResponseCode.Success)
                 {
-                    ApplicationUtilities.ResizeImage(file, filepath);
-                    Session["ProfileImage"] = ImageVirtualPath + common.ProfileImage;
+                    if (file != null) await ImageHelper.ImageUpload(fileName, file);
+                    Session["ProfileImage"] = ImageHelper.ProcessedImage(common.ProfileImage);// ImageVirtualPath + common.ProfileImage;
                     AddNotificationMessage(new NotificationModel()
                     {
                         NotificationType = NotificationMessage.SUCCESS,

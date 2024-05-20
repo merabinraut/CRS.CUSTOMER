@@ -1,4 +1,5 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
+using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.BookmarkManagement;
 using CRS.CUSTOMER.BUSINESS.BookmarkManagement;
 using CRS.CUSTOMER.SHARED;
@@ -34,10 +35,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 x.ClubId = x.ClubId.EncryptParameter();
                 x.LocationId = x.LocationId.EncryptParameter();
-                x.ClubCoverPhoto = FileLocationPath + x.ClubCoverPhoto;
-                x.ClubLogo = FileLocationPath + x.ClubLogo;
+                x.ClubCoverPhoto = ImageHelper.ProcessedImage(x.ClubCoverPhoto);
+                x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
                 x.ClubWeeklyScheduleList.ForEach(y => y.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? y.EnglishDay : y.JapaneseDay);
-                x.HostGalleryImage = x.HostGalleryImage.Select(y => FileLocationPath + y).ToList();
+                x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
                 //x.HostGalleryImage.Take(3).ToList().ForEach(y => y = FileLocationPath + y);
                 //for (int i = 0; i < x.ClubGalleryImage.Count; i++) x.ClubGalleryImage[i] = FileLocationPath + x.ClubGalleryImage[i];
             });
@@ -49,8 +50,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.ClubId = x.ClubId.EncryptParameter();
                 x.HostId = x.HostId.EncryptParameter();
                 x.LocationId = x.LocationId.EncryptParameter();
-                x.ClubLogo = FileLocationPath + x.ClubLogo;
-                x.HostImage = FileLocationPath + x.HostImage;
+                x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
+                x.HostImage = ImageHelper.ProcessedImage(x.HostImage);
             });
             ViewBag.ActionPageName = "NavMenu";
             ViewBag.PageTitle = Resources.Resource.Bookmark;
