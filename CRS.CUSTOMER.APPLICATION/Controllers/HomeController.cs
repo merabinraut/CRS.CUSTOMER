@@ -1,13 +1,13 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.Home;
 using CRS.CUSTOMER.BUSINESS.Home;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
+using System;
+using System.Configuration;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
@@ -314,7 +314,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Login Management
-        [HttpGet]
+        [HttpGet, Route("login")]
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(string ReturnURL = "")
         {
@@ -356,6 +356,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
+        [Route("login")]
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(LoginRequestModel Model, bool RememberMe = false, string ReturnURL = "")
         {

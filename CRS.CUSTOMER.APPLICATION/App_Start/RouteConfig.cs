@@ -11,11 +11,16 @@ namespace CRS.CUSTOMER.APPLICATION
 
             routes.MapMvcAttributeRoutes(); // Enable Attribute Routing
 
+           // routes.MapRoute(
+           //    name: "LoginRoute",
+           //    url: "login",
+           //    defaults: new { controller = "Home", action = "Index" }
+           //);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "DashboardV2", action = "Index", id = UrlParameter.Optional }
-                //defaults: new { controller = "Home", action = "HomePage", id = UrlParameter.Optional }
             );
         }
     }
