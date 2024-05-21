@@ -8,7 +8,6 @@ using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ProfileManagement;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +21,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IProfileManagementBusiness _business;
         public ProfileManagementController(IProfileManagementBusiness business) => this._business = business;
 
-        [HttpGet]
+        [HttpGet, Route("user/account/profile")]
         public ActionResult Index()
         {
             var common = new UserProfileCommon()
@@ -35,8 +34,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var viewModel = data.MapObject<UserProfileModel>();
             ViewBag.LocationDDL = ApplicationUtilities.LoadDropdownList("LOCATIONDDL", "", "") as Dictionary<string, string>;
             ViewBag.PrefectureDDL = ApplicationUtilities.LoadDropdownList("PREFECTUREDDL", "", "") as Dictionary<string, string>;
-            //if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") ViewBag.FileLocationPath = "";
-            //else ViewBag.FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
             if (viewModel.ProfileImage != null)
                 viewModel.ProfileImage = ImageHelper.ProcessedImage(viewModel.ProfileImage);
             ViewBag.PrefectureKey = viewModel.Prefecture?.EncryptParameter();
@@ -204,7 +201,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return RedirectToAction("Index", userProfileModel);
         }
 
-        [HttpGet]
+        [HttpGet, Route("user/account/password/edit")]
         public ActionResult ChangePasswordV2()
         {
             ViewBag.ActionPageName = "NavMenu";
@@ -230,10 +227,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Title = NotificationMessage.ERROR.ToString(),
                 }).ToArray();
                 TempData["ChangePWErrorMessage"] = notificationModels[0].Message;
-                //AddNotificationMessage(notificationModels);
-                //TempData["ChangePWErrorMessage"] = errorMessage;
                 return RedirectToAction("ChangePasswordV2", changePasswordModel);
-                //return View(changePasswordModel);
             }
             else
             {
@@ -244,12 +238,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 passwordCommon.IPAddress = ApplicationUtilities.GetIP().ToString();
                 passwordCommon.BrowserInfo = ApplicationUtilities.GetBrowserInfo().ToString();
                 passwordCommon.Session = Session.SessionID;
-
                 var dbResp = _business.ChangePassword(passwordCommon);
-
                 if (dbResp.Code == ResponseCode.Failed)
                 {
-                    //AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.ERROR, Message = dbResp.Message });
                     TempData["ChangePWErrorMessage"] = dbResp.Message;
                     return RedirectToAction("ChangePasswordV2", changePasswordModel);
                 }
@@ -268,10 +259,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost]
-        public  async Task<JsonResult> ChangeProfileImage(HttpPostedFileBase file)
+        public async Task<JsonResult> ChangeProfileImage(HttpPostedFileBase file)
         {
             var common = new UserProfileCommon();
-            string fileName = string.Empty;          
+            string fileName = string.Empty;
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 file = Request.Files[i];
@@ -283,8 +274,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var ext = Path.GetExtension(file.FileName);
                 if (allowedContentType.Contains(contentType.ToLower()))
                 {
-                    fileName= $"{AWSBucketFolderNameModel.CUSTOMER}/ProfileImage_{DateTime.Now.ToString("yyyyMMddHHmmssffff")}{ext.ToLower()}";
-                    common.ProfileImage = $"/{fileName}";                 
+                    fileName = $"{AWSBucketFolderNameModel.CUSTOMER}/ProfileImage_{DateTime.Now.ToString("yyyyMMddHHmmssffff")}{ext.ToLower()}";
+                    common.ProfileImage = $"/{fileName}";
                 }
                 else
                 {

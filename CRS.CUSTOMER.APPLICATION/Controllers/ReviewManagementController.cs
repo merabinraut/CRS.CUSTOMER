@@ -20,7 +20,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             _reviewBuss = reviewBuss;
         }
         #region
-        [HttpGet]
+        [HttpGet, Route("user/account/review")]
         public ActionResult ReviewList()
         {
             var Response = new List<CustomerReviewedListModel>();

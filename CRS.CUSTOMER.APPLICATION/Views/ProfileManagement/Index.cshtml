@@ -1,6 +1,6 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement.UserProfileModel
 @{
-    ViewBag.Title = "Profile Management";
+    ViewBag.Title = "プロフィール編集 ‖ ホスログ《 ホストクラブ初回来店・ネット予約》";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
@@ -17,12 +17,14 @@
         border: 1px solid #d75a8b !important;
         outline: none
     }
+
     ul.delete-confirm {
         list-style-type: circle;
         width: 80%;
         margin: 14px auto;
         color: #292F33;
     }
+
     ul li {
         text-align: start;
         gap: 5px;
@@ -30,8 +32,9 @@
         padding-left: 12px;
         color: #292F33;
     }
+
     li::marker {
-        content: "\25CF"; 
+        content: "\25CF";
         color: #292F33;
         font-size: 0.5em;
     }
@@ -469,8 +472,8 @@
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
         <div class="relative bg-white rounded-lg shadow overflow-hidden">-->
-            <!-- Modal content -->
-            <!--<div class="bg-[#FFF]  w-full rounded-b-lg shadow">
+<!-- Modal content -->
+<!--<div class="bg-[#FFF]  w-full rounded-b-lg shadow">
                 <div class="grid gap-[12px] pb-[18px]">
                     <div>
                         <div class="flex flex-row justify-center">
@@ -677,7 +680,7 @@
             $('#modal2').css("display","flex");
 
             $('#modal1').hide();
-            
+
         }
     </script>
 }
