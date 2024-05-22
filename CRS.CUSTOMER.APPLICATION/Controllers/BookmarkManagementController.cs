@@ -5,7 +5,6 @@ using CRS.CUSTOMER.BUSINESS.BookmarkManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.BookmarkManagement;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -17,42 +16,44 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         public BookmarkManagementController(IBookmarkManagementBusiness buss) => _buss = buss;
 
-        [HttpGet]
-        public ActionResult Index()
+        [HttpGet, Route("user/account/bookmark")]
+        public ActionResult Index(string bmktab = "01")
         {
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
             var viewModel = new BookmarkManagementModel();
             string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString();
             agentId = agentId.DecryptParameter();
-            var FileLocationPath = "";
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
-                FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
 
-            var bookmarkedClubs = _buss.GetBookmarkedClubList(agentId);
-            viewModel.BookmarkedClubs = bookmarkedClubs.MapObjects<BookmarkedClubModel>();
-            viewModel.BookmarkedClubs.ForEach(x =>
+            if (!string.IsNullOrEmpty(bmktab) && bmktab.Trim() == "02")
             {
-                x.ClubId = x.ClubId.EncryptParameter();
-                x.LocationId = x.LocationId.EncryptParameter();
-                x.ClubCoverPhoto = ImageHelper.ProcessedImage(x.ClubCoverPhoto);
-                x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
-                x.ClubWeeklyScheduleList.ForEach(y => y.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? y.EnglishDay : y.JapaneseDay);
-                x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
-                //x.HostGalleryImage.Take(3).ToList().ForEach(y => y = FileLocationPath + y);
-                //for (int i = 0; i < x.ClubGalleryImage.Count; i++) x.ClubGalleryImage[i] = FileLocationPath + x.ClubGalleryImage[i];
-            });
-
-            var bookmarkedHosts = _buss.GetBookmarkedHostList(agentId);
-            viewModel.BookmarkedHosts = bookmarkedHosts.MapObjects<BookmarkedHostModel>();
-            viewModel.BookmarkedHosts.ForEach(x =>
+                viewModel.bmktab = "02";
+                var bookmarkedHosts = _buss.GetBookmarkedHostList(agentId);
+                viewModel.BookmarkedHosts = bookmarkedHosts.MapObjects<BookmarkedHostModel>();
+                viewModel.BookmarkedHosts.ForEach(x =>
+                {
+                    x.ClubId = x.ClubId.EncryptParameter();
+                    x.HostId = x.HostId.EncryptParameter();
+                    x.LocationId = x.LocationId.EncryptParameter();
+                    x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
+                    x.HostImage = ImageHelper.ProcessedImage(x.HostImage);
+                });
+            }
+            else
             {
-                x.ClubId = x.ClubId.EncryptParameter();
-                x.HostId = x.HostId.EncryptParameter();
-                x.LocationId = x.LocationId.EncryptParameter();
-                x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
-                x.HostImage = ImageHelper.ProcessedImage(x.HostImage);
-            });
+                viewModel.bmktab = "01";
+                var bookmarkedClubs = _buss.GetBookmarkedClubList(agentId);
+                viewModel.BookmarkedClubs = bookmarkedClubs.MapObjects<BookmarkedClubModel>();
+                viewModel.BookmarkedClubs.ForEach(x =>
+                {
+                    x.ClubId = x.ClubId.EncryptParameter();
+                    x.LocationId = x.LocationId.EncryptParameter();
+                    x.ClubCoverPhoto = ImageHelper.ProcessedImage(x.ClubCoverPhoto);
+                    x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
+                    x.ClubWeeklyScheduleList.ForEach(y => y.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? y.EnglishDay : y.JapaneseDay);
+                    x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
+                });
+            }
             ViewBag.ActionPageName = "NavMenu";
             ViewBag.PageTitle = Resources.Resource.Bookmark;
             return View(viewModel);
