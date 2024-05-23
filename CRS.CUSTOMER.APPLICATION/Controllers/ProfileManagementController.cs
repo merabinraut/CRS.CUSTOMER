@@ -6,6 +6,7 @@ using CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement;
 using CRS.CUSTOMER.BUSINESS.ProfileManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ProfileManagement;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +25,19 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet, Route("user/account/profile")]
         public ActionResult Index()
         {
+            ViewBag.LocationDDL = ApplicationUtilities.LoadDropdownList("LOCATIONDDL", "", "") as Dictionary<string, string>;
+            ViewBag.PrefectureDDL = ApplicationUtilities.LoadDropdownList("PREFECTUREDDL", "", "") as Dictionary<string, string>;
+            ViewBag.ActionPageName = "NavMenu";
+            ViewBag.PageTitle = Resources.Resource.ProfileInfo;
+            if (TempData["UserProfileModel"] != null)
+            {
+                var userProfileJson = TempData["UserProfileModel"].ToString();
+                var userProfileModel = JsonConvert.DeserializeObject<UserProfileModel>(userProfileJson);
+                ViewBag.PrefectureKey = userProfileModel.Prefecture;
+                ViewBag.PreferredLocationKey = userProfileModel.PreferredLocation;
+                userProfileModel.ProfileImage = ImageHelper.ProcessedImage(userProfileModel.ProfileImage);
+                return View(userProfileModel);
+            }
             var common = new UserProfileCommon()
             {
                 ActionUserId = ApplicationUtilities.GetSessionValue("UserId").ToString().DecryptParameter(),
@@ -32,8 +46,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             };
             var data = _business.GetUserProfileDetail(common);
             var viewModel = data.MapObject<UserProfileModel>();
-            ViewBag.LocationDDL = ApplicationUtilities.LoadDropdownList("LOCATIONDDL", "", "") as Dictionary<string, string>;
-            ViewBag.PrefectureDDL = ApplicationUtilities.LoadDropdownList("PREFECTUREDDL", "", "") as Dictionary<string, string>;
             if (viewModel.ProfileImage != null)
                 viewModel.ProfileImage = ImageHelper.ProcessedImage(viewModel.ProfileImage);
             ViewBag.PrefectureKey = viewModel.Prefecture?.EncryptParameter();
@@ -47,8 +59,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             viewModel.PreferredLocation = viewModel.PreferredLocation?.EncryptParameter();
             viewModel.Prefecture = viewModel.Prefecture?.EncryptParameter();
-            ViewBag.ActionPageName = "NavMenu";
-            ViewBag.PageTitle = Resources.Resource.ProfileInfo;
             return View(viewModel);
         }
 
@@ -104,6 +114,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult UpdateUserProfileDetail(UserProfileModel userProfileModel, string PreferredLocationDDL, string PrefectureDDL)
         {
+            userProfileModel.Prefecture = PrefectureDDL;
+            userProfileModel.PreferredLocation = PreferredLocationDDL;
+            TempData["UserProfileModel"] = JsonConvert.SerializeObject(userProfileModel);
             if (ModelState.IsValid)
             {
                 var common = userProfileModel.MapObject<UserProfileCommon>();
@@ -114,8 +127,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 common.Prefecture = PrefectureDDL?.DecryptParameter();
                 if (!string.IsNullOrEmpty(userProfileModel.DOBYear) && !string.IsNullOrEmpty(userProfileModel.DOBMonth) && !string.IsNullOrEmpty(userProfileModel.DOBDay))
                 {
-
-
                     if (userProfileModel.DOBYear.Contains("年"))
                     {
                         userProfileModel.DOBYear = userProfileModel.DOBYear.Replace("年", "");
@@ -137,7 +148,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             Message = "長さは 4 文字である必要があります",
                             Title = NotificationMessage.SUCCESS.ToString()
                         });
-                        return RedirectToAction("Index");
+                        return Redirect("/user/account/profile");
                     }
                     int countMonth = userProfileModel.DOBMonth.Count(char.IsDigit);
                     if (countMonth > 2)
@@ -148,7 +159,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             Message = "長さは 2 文字である必要があります",
                             Title = NotificationMessage.SUCCESS.ToString()
                         });
-                        return RedirectToAction("Index");
+                        return Redirect("/user/account/profile");
                     }
 
                     int countDay = userProfileModel.DOBDay.Count(char.IsDigit);
@@ -160,7 +171,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             Message = "長さは 2 文字である必要があります",
                             Title = NotificationMessage.SUCCESS.ToString()
                         });
-                        return RedirectToAction("Index");
+                        return Redirect("/user/account/profile");
                     }
                     common.DateOfBirth = string.Concat(userProfileModel.DOBYear.Trim(), "-", userProfileModel.DOBMonth.Trim(), "-", userProfileModel.DOBDay.Trim());
                 }
@@ -168,29 +179,29 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 if (dbresp.Code == ResponseCode.Success)
                 {
                     Session["EmailAddress"] = common.EmailAddress;
-                    Session["EmailAddress"] = common.EmailAddress;
                     AddNotificationMessage(new NotificationModel()
                     {
                         NotificationType = NotificationMessage.SUCCESS,
                         Message = dbresp.Message,
                         Title = NotificationMessage.SUCCESS.ToString()
                     });
+                    return Redirect("/user/account/profile");
                 }
                 else
+                {
                     AddNotificationMessage(new NotificationModel()
                     {
                         NotificationType = NotificationMessage.ERROR,
                         Message = dbresp.Message,
                         Title = NotificationMessage.ERROR.ToString()
                     });
-
-                return RedirectToAction("Index");
+                    return Redirect("/user/account/profile");
+                }
 
             }
             var errorMessages = ModelState.Where(x => x.Value.Errors.Count > 0)
                                     .SelectMany(x => x.Value.Errors.Select(e => $"{x.Key}: {e.ErrorMessage}"))
                                     .ToList();
-
 
             AddNotificationMessage(new NotificationModel()
             {
@@ -198,7 +209,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Message = Resources.Resource.All_fields_are_required,
                 Title = NotificationMessage.ERROR.ToString()
             });
-            return RedirectToAction("Index", userProfileModel);
+            return Redirect("/user/account/profile");
         }
 
         [HttpGet, Route("user/account/password/edit")]

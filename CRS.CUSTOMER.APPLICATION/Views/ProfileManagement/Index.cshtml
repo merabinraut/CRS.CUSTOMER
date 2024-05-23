@@ -614,8 +614,7 @@
 
 
     // Get all the div elements
-    var divs = document.querySelectorAll('.language-option');
-
+        var divs = document.querySelectorAll('.language-option');
     // Add click event listeners to each div
         divs.forEach(function (div) {
         var genderValue = div.getAttribute('data-gender');
@@ -629,9 +628,8 @@
             div.classList.remove('active');
             if ( "@Model.Gender" === "") {
 
-                $("div[data-gender='Female']").addClass("active");
-                $("div[data-gender='Female']").find('.lang').css("color", "#d75a8b");
-                //$("div[data-gender='Female']").css("color", "#d75a8b")
+                //$("div[data-gender='Female']").addClass("active");
+                //$("div[data-gender='Female']").find('.lang').css("color", "#d75a8b");
              }
             div.addEventListener('click', function () {
             // Remove the 'bg-red' class from all divs
