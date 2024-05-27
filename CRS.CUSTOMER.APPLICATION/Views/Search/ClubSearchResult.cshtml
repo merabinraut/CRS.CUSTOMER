@@ -270,10 +270,6 @@
                                 }
                                 <!-- e/club thumb -->
                                 <!-- s/club thumb -->
-                                @* <li><img alt="[club]([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="images/Content/UserUpload/Host/Gallery/GalleryImage_202404041520250819.jpg"></li>*@
-                                <!-- e/club thumb -->
-                                <!-- s/club thumb -->
-                                @*<li><img alt="[club]([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="images/Content/UserUpload/Host/Gallery/GalleryImage_202404041519587224.jpg"></li>*@
                                 <!-- e/club thumb -->
                             </ul>
                             <!-- e/thumb area -->
@@ -297,13 +293,6 @@
                                     }
                                     <!-- e/rank star -->
                                     <!-- s/rank star -->
-                                    @*<li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
-                                    <!-- e/rank star -->
-                                    <!-- s/rank star -->
-                                    @* <li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
-                                    <!-- e/rank star -->
-                                    <!-- s/rank star -->
-                                    @*<li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
                                     <!-- e/rank star -->
                                     <!-- s/rank star -->
                                     <li class="rate_value"> @item.AverageRating</li>
@@ -366,10 +355,7 @@
                         </div>
                         <!-- e/club footer -->
                     </div>
-
                     /*New design end*/
-
-
                     <div style="background-color: #e8e8e8;" class=" h-[8px] my-[0px] py-[0px]">
                     </div>
                 }
@@ -377,7 +363,6 @@
         }
         <div class=" ">
             <div>
-
             </div>
             <div style="background-color: #FFFFFF;"
                  class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]">
@@ -404,9 +389,9 @@
             var Value1 = @Html.Raw(Json.Encode(ViewBag.Date));
             var Value2 = @Html.Raw(Json.Encode(ViewBag.Time));
             var Value3 = @Html.Raw(Json.Encode(ViewBag.NoOfPeople));
-            if ((Value1 != null || Value1 != "") ||
-                (Value2 != null || Value2 != "") ||
-                (Value3 != null || Value3 != "")) {
+            if ((Value1 != null && Value1 != "") ||
+                (Value2 != null && Value2 != "") ||
+                (Value3 != null && Value3 != "")) {
                 InitiateDateTimeFilterPopupFunction();
                 var element = document.getElementById('drawer-date-time');
                 element.classList.add('translate-y-full');
