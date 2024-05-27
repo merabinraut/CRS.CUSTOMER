@@ -41,7 +41,7 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                         var RedirectURL = new UriBuilder(HttpContext.Current.Request.Url.Scheme,
                             HttpContext.Current.Request.Url.Host,
                             HttpContext.Current.Request.Url.Port,
-                            "/Home/Index");
+                            "/login");
                         if (filterContext.HttpContext.Request.IsAjaxRequest())
                         {
                             var queryString = string.Empty;
@@ -54,7 +54,7 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                             var dynamicParameters = queryString;
                             var ReturnURL = HttpContext.Current.Request.UrlReferrer?.PathAndQuery;
                             if (string.IsNullOrEmpty(ReturnURL) || ReturnURL.Trim() == "/")
-                                ReturnURL = "/DashboardV2/Index";
+                                ReturnURL = "/";
                             if (!string.IsNullOrEmpty(FunctionName.AdditionalValue))
                             {
                                 var separator = ReturnURL.Contains("?") ? "&" : "?";

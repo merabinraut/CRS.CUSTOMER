@@ -5,8 +5,9 @@ namespace CRS.CUSTOMER.APPLICATION.Models.BookmarkManagement
 {
     public class BookmarkManagementModel
     {
-        public List<BookmarkedClubModel> BookmarkedClubs { get; set; }
-        public List<BookmarkedHostModel> BookmarkedHosts { get; set; }
+        public string bmktab { get; set; }
+        public List<BookmarkedClubModel> BookmarkedClubs { get; set; } = new List<BookmarkedClubModel>();
+        public List<BookmarkedHostModel> BookmarkedHosts { get; set; } = new List<BookmarkedHostModel>();
     }
 
     public class BookmarkedClubModel

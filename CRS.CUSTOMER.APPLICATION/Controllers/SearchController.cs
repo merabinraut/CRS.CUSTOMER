@@ -11,7 +11,6 @@ using CRS.CUSTOMER.BUSINESS.SearchFilterManagement;
 using CRS.CUSTOMER.SHARED.Search;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
@@ -91,10 +90,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.ClubId = x.ClubId.EncryptParameter();
                 x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
             });
+            var filterDate = DateTime.Today.ToString("yyyy-MM-dd");
+            if (DateTime.TryParse(Date, out DateTime date))
+            {
+                filterDate = Date;
+            }
             var dbRequest = new ClubDateTimeAndOtherFilterRequest
             {
                 LocationId = lId,
-                Date = Date,
+                Date = filterDate,
                 Time = string.IsNullOrEmpty(Time) ? string.Empty : Time.DecryptParameter(),
                 NoOfPeople = string.IsNullOrEmpty(NoOfPeople) ? string.Empty : NoOfPeople.DecryptParameter(),
                 CustomerId = CustomerId,
@@ -113,7 +117,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             });
             ViewBag.LocationId = LocationId;
             ViewBag.LocationLabel = DDLHelper.GetValueForKey(DDLHelper.LoadDropdownList("1", lId), LocationId);
-            ViewBag.Date = Date;
+            ViewBag.Date = filterDate;
             ViewBag.Time = string.IsNullOrEmpty(Time) ? string.Empty : Time.DecryptParameter();
             ViewBag.NoOfPeople = string.IsNullOrEmpty(NoOfPeople) ? string.Empty : NoOfPeople.DecryptParameter();
             return View("ClubSearchResult", Response);
@@ -358,7 +362,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.LocationId = Request.LocationId;
             Response.RequestModel = Request.MapObject<HostSearchFilterRequestModel>();
             ViewBag.StartIndex = StartIndex;
-            ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords))? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
+            ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
             return View(Response);
         }
         #endregion
