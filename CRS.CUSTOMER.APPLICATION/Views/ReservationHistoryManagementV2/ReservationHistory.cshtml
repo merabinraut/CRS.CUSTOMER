@@ -47,8 +47,10 @@
         </div>
         <div class="my-4">
             <div class="bg-white pb-4  px-[16px] ">
-                <div id="tab1" class="tab-content-plane hidden ">
-                    @if (Model.GetReservedList != null)
+                <div id="tab1" class="tab-content-plane hidden">
+
+
+                    @if (Model.GetReservedList.Count > 0)
                     {
                         foreach (var item in Model.GetReservedList)
                         {
@@ -259,10 +261,28 @@
                             </div>
                         }
                     }
+                    else
+                    {
+                <div class=" mt-[89px]">
+                    <div class=" w-[100%] flex justify-center">
+
+                        <div class="border rounded-full w-[72px] flex justify-center p-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path d="M5 5V9.57031L1.25 14.5703V15C1.25 17.0557 2.94434 18.75 5 18.75V35H25V23.75H27.5V35H35V18.75C37.0557 18.75 38.75 17.0557 38.75 15V14.5703L35 9.57031V5H5ZM7.5 7.5H32.5V8.75H7.5V7.5ZM6.875 11.25H33.125L36.1328 15.2734C35.9961 15.8154 35.5859 16.25 35 16.25C34.3066 16.25 33.75 15.6934 33.75 15H31.25C31.25 15.6934 30.6934 16.25 30 16.25C29.3066 16.25 28.75 15.6934 28.75 15H26.25C26.25 15.6934 25.6934 16.25 25 16.25C24.3066 16.25 23.75 15.6934 23.75 15H21.25C21.25 15.6934 20.6934 16.25 20 16.25C19.3066 16.25 18.75 15.6934 18.75 15H16.25C16.25 15.6934 15.6934 16.25 15 16.25C14.3066 16.25 13.75 15.6934 13.75 15H11.25C11.25 15.6934 10.6934 16.25 10 16.25C9.30664 16.25 8.75 15.6934 8.75 15H6.25C6.25 15.6934 5.69336 16.25 5 16.25C4.41406 16.25 4.00391 15.8154 3.86719 15.2734L6.875 11.25ZM7.5 17.7734C8.16406 18.374 9.04297 18.75 10 18.75C10.957 18.75 11.8359 18.374 12.5 17.7734C13.1641 18.374 14.043 18.75 15 18.75C15.957 18.75 16.8359 18.374 17.5 17.7734C18.1641 18.374 19.043 18.75 20 18.75C20.957 18.75 21.8359 18.374 22.5 17.7734C23.1641 18.374 24.043 18.75 25 18.75C25.957 18.75 26.8359 18.374 27.5 17.7734C28.1641 18.374 29.043 18.75 30 18.75C30.957 18.75 31.8359 18.374 32.5 17.7734V32.5H30V21.25H22.5V32.5H7.5V17.7734ZM10 21.25V30H20V21.25H10ZM12.5 23.75H17.5V27.5H12.5V23.75Z" fill="#C8C8C8" />
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="text-[12px] mt-4 flex justify-center text-[#000]">
+                        No clubs reserved yet.
+                    </span>
+                </div>
+
+
+                    }
 
                 </div>
-                <div id="tab2" class="tab-content-plane hidden ">
-                    @if (Model.GetVisitedHistoryList != null)
+                <div id="tab2" class="tab-content-plane hidden">
+                    @if (Model.GetVisitedHistoryList.Count > 0)
                     {
                         foreach (var item in Model.GetVisitedHistoryList)
                         {
@@ -275,42 +295,42 @@
                                     </div>
                                     <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                         @*<div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list overflow-x-scroll no-scrollbar">
-                                                @if (item.Tag1 != "" && item.Tag1 != null)
-                                                {
-                                                    <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                  d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
-                                                                  fill="#D75A8B" />
-                                                        </svg>
-                                                        <span>@item.Tag1</span>
-                                                    </div>
-                                                }
-                                                @if (item.Tag2 != "" && item.Tag2 != null)
-                                                {
-                                                    <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                        @item.Tag2
-                                                    </div>
-                                                }
-                                                @if (item.Tag3 != "" && item.Tag3 != null)
-                                                {
-                                                    <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                        @item.Tag3
-                                                    </div>
-                                                }
-                                                @if (item.Tag4 != "" && item.Tag4 != null)
-                                                {
-                                                    <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                        @item.Tag4
-                                                    </div>
-                                                }
-                                                @if (item.Tag5 != "" && item.Tag5 != null)
-                                                {
-                                                    <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                        @item.Tag5
-                                                    </div>
-                                                }
-                                            </div>*@
+                                @if (item.Tag1 != "" && item.Tag1 != null)
+                                {
+                                    <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                  fill="#D75A8B" />
+                                        </svg>
+                                        <span>@item.Tag1</span>
+                                    </div>
+                                }
+                                @if (item.Tag2 != "" && item.Tag2 != null)
+                                {
+                                    <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                        @item.Tag2
+                                    </div>
+                                }
+                                @if (item.Tag3 != "" && item.Tag3 != null)
+                                {
+                                    <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                        @item.Tag3
+                                    </div>
+                                }
+                                @if (item.Tag4 != "" && item.Tag4 != null)
+                                {
+                                    <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                        @item.Tag4
+                                    </div>
+                                }
+                                @if (item.Tag5 != "" && item.Tag5 != null)
+                                {
+                                    <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                        @item.Tag5
+                                    </div>
+                                }
+                            </div>*@
                                         <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px; overflow-x: scroll ">
                                             @if (!string.IsNullOrEmpty(@item.Tag1))
                                             {
@@ -345,12 +365,12 @@
 
 
                                         @* <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
-                                                @item.ClubNameEng
+                                @item.ClubNameEng
 
-                                            </h3>
-                                            <div class="text-[8px] text-[#E3A1A1] mt-1">
-                                                @item.GroupName
-                                            </div>*@
+                            </h3>
+                            <div class="text-[8px] text-[#E3A1A1] mt-1">
+                                @item.GroupName
+                            </div>*@
                                         <div class="club_info" style="width:100%">
                                             <!-- s/club_name -->
                                             <h3 class="club_name">@item.ClubNameEng</h3>
@@ -443,7 +463,7 @@
                                             <svg class="club-visited" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
                                                       fill="" ;
-                                                      "                                                                                                   />
+                                                      "                                                                                                      />
                                             </svg>
                                         </div>
                                         <div class="text-[8px] ">
@@ -465,9 +485,25 @@
                             </div>
                         }
                     }
+                    else
+                    {
+                        <div class=" mt-[89px]">
+                            <div class=" w-[100%] flex justify-center">
+
+                                <div class="border rounded-full w-[72px] flex justify-center p-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                        <path d="M5 5V9.57031L1.25 14.5703V15C1.25 17.0557 2.94434 18.75 5 18.75V35H25V23.75H27.5V35H35V18.75C37.0557 18.75 38.75 17.0557 38.75 15V14.5703L35 9.57031V5H5ZM7.5 7.5H32.5V8.75H7.5V7.5ZM6.875 11.25H33.125L36.1328 15.2734C35.9961 15.8154 35.5859 16.25 35 16.25C34.3066 16.25 33.75 15.6934 33.75 15H31.25C31.25 15.6934 30.6934 16.25 30 16.25C29.3066 16.25 28.75 15.6934 28.75 15H26.25C26.25 15.6934 25.6934 16.25 25 16.25C24.3066 16.25 23.75 15.6934 23.75 15H21.25C21.25 15.6934 20.6934 16.25 20 16.25C19.3066 16.25 18.75 15.6934 18.75 15H16.25C16.25 15.6934 15.6934 16.25 15 16.25C14.3066 16.25 13.75 15.6934 13.75 15H11.25C11.25 15.6934 10.6934 16.25 10 16.25C9.30664 16.25 8.75 15.6934 8.75 15H6.25C6.25 15.6934 5.69336 16.25 5 16.25C4.41406 16.25 4.00391 15.8154 3.86719 15.2734L6.875 11.25ZM7.5 17.7734C8.16406 18.374 9.04297 18.75 10 18.75C10.957 18.75 11.8359 18.374 12.5 17.7734C13.1641 18.374 14.043 18.75 15 18.75C15.957 18.75 16.8359 18.374 17.5 17.7734C18.1641 18.374 19.043 18.75 20 18.75C20.957 18.75 21.8359 18.374 22.5 17.7734C23.1641 18.374 24.043 18.75 25 18.75C25.957 18.75 26.8359 18.374 27.5 17.7734C28.1641 18.374 29.043 18.75 30 18.75C30.957 18.75 31.8359 18.374 32.5 17.7734V32.5H30V21.25H22.5V32.5H7.5V17.7734ZM10 21.25V30H20V21.25H10ZM12.5 23.75H17.5V27.5H12.5V23.75Z" fill="#C8C8C8" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-[12px] mt-4 flex justify-center text-[#000]">
+                                No clubs reserved yet.
+                            </span>
+                        </div>
+                    }
                 </div>
                 <div id="tab3" class="tab-content-plane  hidden">
-                    @if (Model.GetCancelledHistoryList != null)
+                    @if (Model.GetCancelledHistoryList.Count > 0)
                     {
                         foreach (var item in Model.GetCancelledHistoryList)
                         {
@@ -481,43 +517,43 @@
                                         </div>
                                         <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                             @*<div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list overflow-hidden overflow-x-auto no-scrollbar w-full">
-                                                    @if (item.Tag1 != "" && item.Tag1 != null)
-                                                    {
-                                                        <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
-                                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                      d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
-                                                                      fill="#D75A8B" />
-                                                            </svg>
-                                                            <span>@item.Tag1</span>
-                                                        </div>
-                                                    }
-                                                    @if (item.Tag2 != "" && item.Tag2 != null)
-                                                    {
-                                                        <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                            @item.Tag2
-                                                        </div>
-                                                    }
-                                                    @if (item.Tag3 != "" && item.Tag3 != null)
-                                                    {
-                                                        <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                            @item.Tag3
-                                                        </div>
-                                                    }
-                                                    @if (item.Tag4 != "" && item.Tag4 != null)
-                                                    {
-                                                        <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                            @item.Tag4
-                                                        </div>
-                                                    }
-                                                    @if (item.Tag5 != "" && item.Tag5 != null)
-                                                    {
-                                                        <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                            @item.Tag5
-                                                        </div>
-                                                    }
-                                                </div>*@
-                                            <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px; overflow-x: scroll " >
+                                    @if (item.Tag1 != "" && item.Tag1 != null)
+                                    {
+                                        <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                      d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                      fill="#D75A8B" />
+                                            </svg>
+                                            <span>@item.Tag1</span>
+                                        </div>
+                                    }
+                                    @if (item.Tag2 != "" && item.Tag2 != null)
+                                    {
+                                        <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                            @item.Tag2
+                                        </div>
+                                    }
+                                    @if (item.Tag3 != "" && item.Tag3 != null)
+                                    {
+                                        <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                            @item.Tag3
+                                        </div>
+                                    }
+                                    @if (item.Tag4 != "" && item.Tag4 != null)
+                                    {
+                                        <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                            @item.Tag4
+                                        </div>
+                                    }
+                                    @if (item.Tag5 != "" && item.Tag5 != null)
+                                    {
+                                        <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                            @item.Tag5
+                                        </div>
+                                    }
+                                </div>*@
+                                            <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px; overflow-x: scroll ">
                                                 @if (!string.IsNullOrEmpty(@item.Tag1))
                                                 {
                                                     <!-- s/tag -->
@@ -550,12 +586,12 @@
                                             </ul>
 
                                             @*<h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
-                                                    @item.ClubNameEng
+                                    @item.ClubNameEng
 
-                                                </h3>
-                                                <div class="text-[8px] text-[#E3A1A1] mt-1">
-                                                    @item.GroupName
-                                                </div>*@
+                                </h3>
+                                <div class="text-[8px] text-[#E3A1A1] mt-1">
+                                    @item.GroupName
+                                </div>*@
 
                                             <div class="club_info" style="width:100%">
                                                 <!-- s/club_name -->
@@ -672,10 +708,26 @@
                             </div>
                         }
                     }
+                    else
+                    {
+                        <div class=" mt-[89px]">
+                            <div class=" w-[100%] flex justify-center">
+
+                                <div class="border rounded-full w-[72px] flex justify-center p-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                        <path d="M5 5V9.57031L1.25 14.5703V15C1.25 17.0557 2.94434 18.75 5 18.75V35H25V23.75H27.5V35H35V18.75C37.0557 18.75 38.75 17.0557 38.75 15V14.5703L35 9.57031V5H5ZM7.5 7.5H32.5V8.75H7.5V7.5ZM6.875 11.25H33.125L36.1328 15.2734C35.9961 15.8154 35.5859 16.25 35 16.25C34.3066 16.25 33.75 15.6934 33.75 15H31.25C31.25 15.6934 30.6934 16.25 30 16.25C29.3066 16.25 28.75 15.6934 28.75 15H26.25C26.25 15.6934 25.6934 16.25 25 16.25C24.3066 16.25 23.75 15.6934 23.75 15H21.25C21.25 15.6934 20.6934 16.25 20 16.25C19.3066 16.25 18.75 15.6934 18.75 15H16.25C16.25 15.6934 15.6934 16.25 15 16.25C14.3066 16.25 13.75 15.6934 13.75 15H11.25C11.25 15.6934 10.6934 16.25 10 16.25C9.30664 16.25 8.75 15.6934 8.75 15H6.25C6.25 15.6934 5.69336 16.25 5 16.25C4.41406 16.25 4.00391 15.8154 3.86719 15.2734L6.875 11.25ZM7.5 17.7734C8.16406 18.374 9.04297 18.75 10 18.75C10.957 18.75 11.8359 18.374 12.5 17.7734C13.1641 18.374 14.043 18.75 15 18.75C15.957 18.75 16.8359 18.374 17.5 17.7734C18.1641 18.374 19.043 18.75 20 18.75C20.957 18.75 21.8359 18.374 22.5 17.7734C23.1641 18.374 24.043 18.75 25 18.75C25.957 18.75 26.8359 18.374 27.5 17.7734C28.1641 18.374 29.043 18.75 30 18.75C30.957 18.75 31.8359 18.374 32.5 17.7734V32.5H30V21.25H22.5V32.5H7.5V17.7734ZM10 21.25V30H20V21.25H10ZM12.5 23.75H17.5V27.5H12.5V23.75Z" fill="#C8C8C8" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-[12px] mt-4 flex justify-center text-[#000]">
+                                No clubs reserved yet.
+                            </span>
+                        </div>
+                    }
 
                 </div>
                 <div id="tab4" class="tab-content-plane">
-                    @if (Model.GetAllHistoryList != null)
+                    @if (Model.GetAllHistoryList.Count > 0)
                     {
                         foreach (var item in Model.GetAllHistoryList)
                         {
@@ -702,42 +754,42 @@
                                     </div>
                                     <div class="pl-4" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                         @*<div class="pr-2 pb-2 flex gap-1 text-[8px] booking-top-list overflow-x-scroll no-scrollbar" >
-                                                @if (item.Tag1 != "" && item.Tag1 != null)
-                                                {
-                                                    <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                  d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
-                                                                  fill="#D75A8B" />
-                                                        </svg>
-                                                        <span>@item.Tag1</span>
-                                                    </div>
-                                                }
-                                                @if (item.Tag2 != "" && item.Tag2 != null)
-                                                {
-                                                    <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                        @item.Tag2
-                                                    </div>
-                                                }
-                                                @if (item.Tag3 != "" && item.Tag3 != null)
-                                                {
-                                                    <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                        @item.Tag3
-                                                    </div>
-                                                }
-                                                @if (item.Tag4 != "" && item.Tag4 != null)
-                                                {
-                                                    <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                        @item.Tag4
-                                                    </div>
-                                                }
-                                                @if (item.Tag5 != "" && item.Tag5 != null)
-                                                {
-                                                    <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
-                                                        @item.Tag5
-                                                    </div>
-                                                }
-                                            </div>*@
+                                @if (item.Tag1 != "" && item.Tag1 != null)
+                                {
+                                    <div class="px-[10px] border-[1px] border-[#f1f1f1] text-[8px] flex-none rounded-[2px] text-[#A09E91] flex justify-start items-center	 self-start gap-[2px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                  d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
+                                                  fill="#D75A8B" />
+                                        </svg>
+                                        <span>@item.Tag1</span>
+                                    </div>
+                                }
+                                @if (item.Tag2 != "" && item.Tag2 != null)
+                                {
+                                    <div class="px-[5px] py-[1px] bg-[#BFA3B6] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                        @item.Tag2
+                                    </div>
+                                }
+                                @if (item.Tag3 != "" && item.Tag3 != null)
+                                {
+                                    <div class="px-[5px] py-[1px] bg-[#697DBF] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                        @item.Tag3
+                                    </div>
+                                }
+                                @if (item.Tag4 != "" && item.Tag4 != null)
+                                {
+                                    <div class="px-[5px] py-[1px] bg-[#96B41F] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                        @item.Tag4
+                                    </div>
+                                }
+                                @if (item.Tag5 != "" && item.Tag5 != null)
+                                {
+                                    <div class="px-[5px] py-[1px] bg-[#EFB726] h-max text-[8px] flex-none rounded-[2px] text-white">
+                                        @item.Tag5
+                                    </div>
+                                }
+                            </div>*@
 
                                         <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px;overflow-x:scroll">
                                             @if (!string.IsNullOrEmpty(@item.Tag1))
@@ -771,12 +823,12 @@
                                             <!-- e/tag -->
                                         </ul>
                                         @*
-                                            <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
-                                                @item.ClubNameEng
-                                            </h3>
-                                            <div class="text-[8px] text-[#E3A1A1] mt-1">
-                                                @item.GroupName
-                                            </div>*@
+                            <h3 class="text-sm font-bold h-[14px] overflow-hidden leading-[14px] text-ellipsis-customer">
+                                @item.ClubNameEng
+                            </h3>
+                            <div class="text-[8px] text-[#E3A1A1] mt-1">
+                                @item.GroupName
+                            </div>*@
 
                                         <div class="club_info" style="width:100%">
                                             <!-- s/club_name -->
@@ -941,6 +993,22 @@
                                 </div>
                             </div>
                         }
+                    }
+                    else
+                    {
+                        <div class=" mt-[89px]">
+                            <div class=" w-[100%] flex justify-center">
+
+                                <div class="border rounded-full w-[72px] flex justify-center p-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                        <path d="M5 5V9.57031L1.25 14.5703V15C1.25 17.0557 2.94434 18.75 5 18.75V35H25V23.75H27.5V35H35V18.75C37.0557 18.75 38.75 17.0557 38.75 15V14.5703L35 9.57031V5H5ZM7.5 7.5H32.5V8.75H7.5V7.5ZM6.875 11.25H33.125L36.1328 15.2734C35.9961 15.8154 35.5859 16.25 35 16.25C34.3066 16.25 33.75 15.6934 33.75 15H31.25C31.25 15.6934 30.6934 16.25 30 16.25C29.3066 16.25 28.75 15.6934 28.75 15H26.25C26.25 15.6934 25.6934 16.25 25 16.25C24.3066 16.25 23.75 15.6934 23.75 15H21.25C21.25 15.6934 20.6934 16.25 20 16.25C19.3066 16.25 18.75 15.6934 18.75 15H16.25C16.25 15.6934 15.6934 16.25 15 16.25C14.3066 16.25 13.75 15.6934 13.75 15H11.25C11.25 15.6934 10.6934 16.25 10 16.25C9.30664 16.25 8.75 15.6934 8.75 15H6.25C6.25 15.6934 5.69336 16.25 5 16.25C4.41406 16.25 4.00391 15.8154 3.86719 15.2734L6.875 11.25ZM7.5 17.7734C8.16406 18.374 9.04297 18.75 10 18.75C10.957 18.75 11.8359 18.374 12.5 17.7734C13.1641 18.374 14.043 18.75 15 18.75C15.957 18.75 16.8359 18.374 17.5 17.7734C18.1641 18.374 19.043 18.75 20 18.75C20.957 18.75 21.8359 18.374 22.5 17.7734C23.1641 18.374 24.043 18.75 25 18.75C25.957 18.75 26.8359 18.374 27.5 17.7734C28.1641 18.374 29.043 18.75 30 18.75C30.957 18.75 31.8359 18.374 32.5 17.7734V32.5H30V21.25H22.5V32.5H7.5V17.7734ZM10 21.25V30H20V21.25H10ZM12.5 23.75H17.5V27.5H12.5V23.75Z" fill="#C8C8C8" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-[12px] mt-4 flex justify-center text-[#000]">
+                                No clubs reserved yet.
+                            </span>
+                        </div>
                     }
                 </div>
             </div>

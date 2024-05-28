@@ -183,6 +183,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (clubGalleryImageDBResponse != null && clubGalleryImageDBResponse.Count > 0)
             {
                 responseModel.ClubGalleryImageList = clubGalleryImageDBResponse;
+                responseModel.ClubGalleryImageList.ForEach(x => x = ImageHelper.ProcessedImage(x));
             }
             else responseModel.ClubGalleryImageList = new List<string>();
             responseModel.ClubCoverPhoto = ImageHelper.ProcessedImage(responseModel.ClubCoverPhoto);

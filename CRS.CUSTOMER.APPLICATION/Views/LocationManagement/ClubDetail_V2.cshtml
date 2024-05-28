@@ -296,111 +296,129 @@
                 </div>
             </div>
             @*draggable start*@
-            <div class=" pb-4 flex gap-[8px] " style="padding-left:16px">
-                @*  <div class="owl-carousel owl-theme store-host-carousel">*@
-                <div class="flex overflow-x-auto no-scrollbar  " style="gap:8px">
-                    @{
-                        foreach (var item in Model.TopHostListModels)
-                        {
-                            <div class="item" style="width:128px">
-                                <div class=" relative flex-none">
-                                    <div class="flex pb-1">
-                                        <div class="absolute top-1 left-0">
-                                            @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
+            @if (Model.TopHostListModels != null && Model.TopHostListModels.Count != 0)
+            {
+                <div class=" pb-4 flex gap-[8px] " style="padding-left:16px">
+
+                    @*  <div class="owl-carousel owl-theme store-host-carousel">*@
+                    <div class="flex overflow-x-auto no-scrollbar  " style="gap:8px">
+                        @{
+
+                            foreach (var item in Model.TopHostListModels)
+                            {
+                                <div class="item" style="width:128px">
+                                    <div class=" relative flex-none">
+                                        <div class="flex pb-1">
+                                            <div class="absolute top-1 left-0">
+                                                @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
+                                                {
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
+                                                         viewBox="0 0 19 31" fill="none">
+                                                        <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
+                                                              fill="#E3AB00" />
+                                                        <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#E3AB00" />
+                                                    </svg>
+                                                }
+                                                else if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "2")
+                                                {
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
+                                                         viewBox="0 0 19 31" fill="none">
+                                                        <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
+                                                              fill="#C9CACA" />
+                                                        <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#C9CACA" />
+                                                    </svg>
+                                                }
+                                                else if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "3")
+                                                {
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
+                                                         viewBox="0 0 19 31" fill="none">
+                                                        <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
+                                                              fill="#BD764B" />
+                                                        <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#BD764B" />
+                                                    </svg>
+                                                }
+                                                else
+                                                {
+                                                    <svg></svg>
+                                                }
+                                            </div>
+                                            @if (string.IsNullOrEmpty(@item.Rank))
                                             {
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
-                                                     viewBox="0 0 19 31" fill="none">
-                                                    <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
-                                                          fill="#E3AB00" />
-                                                    <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#E3AB00" />
-                                                </svg>
+                                                <div class="pl-6">-</div>
                                             }
-                                            else if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "2")
+                                            <div class="pl-6">@item.Rank</div>
+                                        </div>
+                                        <div class="relative h-[180px] w-[128px]">
+                                            @if (!string.IsNullOrEmpty(item.HostImage))
                                             {
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
-                                                     viewBox="0 0 19 31" fill="none">
-                                                    <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
-                                                          fill="#C9CACA" />
-                                                    <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#C9CACA" />
-                                                </svg>
-                                            }
-                                            else if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "3")
-                                            {
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
-                                                     viewBox="0 0 19 31" fill="none">
-                                                    <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
-                                                          fill="#BD764B" />
-                                                    <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#BD764B" />
-                                                </svg>
+                                                <img src="@item.HostImage"
+                                                     class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
                                             }
                                             else
                                             {
-                                                <svg></svg>
+                                                <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                                     class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" />
                                             }
+                                            @if (item.IsBookmarked.Trim().ToUpper() == "Y")
+                                            {
+                                                <div class="absolute top-2 right-2" style="width:26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                                                    <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="height:26px; width:26px" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="absolute top-2 right-2" style="width: 26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                                                    <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height:26px; width:26px" />
+                                                </div>
+                                            }
+
                                         </div>
-                                        @if (string.IsNullOrEmpty(@item.Rank))
+                                        <div class="pt-[5px]">
+                                            @if (!string.IsNullOrEmpty(item.HostPosition))
+                                            {
+                                                <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
+                                            }
+                                            else
+                                            {
+                                                <div class="text-[10px] font-bold text-primaryDark"></div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(item.HostNameJapanese))
+                                            {
+                                                <h3 class="text-xs  text-charcoalBlack" style="font-weight: bold; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@item.HostNameJapanese</h3>
+
+                                            }
+                                            else
+                                            {
+                                                <h3 class="text-xs  text-charcoalBlack" style="font-weight: bold; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@item.HostName</h3>
+                                            }
+
+                                        </div>
+                                        @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
                                         {
-                                            <div class="pl-6">-</div>
-                                        }
-                                        <div class="pl-6">@item.Rank</div>
-                                    </div>
-                                    <div class="relative h-[180px] w-[128px]">
-                                        @if (!string.IsNullOrEmpty(item.HostImage))
-                                        {
-                                            <img src="@item.HostImage"
-                                                 class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
-                                        }
-                                        else
-                                        {
-                                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                                 class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" />
-                                        }
-                                        @if (item.IsBookmarked.Trim().ToUpper() == "Y")
-                                        {
-                                            <div class="absolute top-2 right-2" style="width:26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                                                <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="height:26px; width:26px" />
+                                            <div class=" store-top-image-title">
+                                                新人王 売上No.1
                                             </div>
                                         }
-                                        else
-                                        {
-                                            <div class="absolute top-2 right-2" style="width: 26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                                                <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height:26px; width:26px" />
-                                            </div>
-                                        }
-
                                     </div>
-                                    <div class="pt-[5px]">
-                                        @if (!string.IsNullOrEmpty(item.HostPosition))
-                                        {
-                                            <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
-                                        }
-                                        else
-                                        {
-                                            <div class="text-[10px] font-bold text-primaryDark"></div>
-                                        }
-                                        @if (!string.IsNullOrEmpty(item.HostNameJapanese))
-                                        {
-                                            <h3 class="text-xs  text-charcoalBlack" style="font-weight: bold; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@item.HostNameJapanese</h3>
-
-                                        }
-                                        else
-                                        {
-                                            <h3 class="text-xs  text-charcoalBlack" style="font-weight: bold; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@item.HostName</h3>
-                                        }
-
-                                    </div>
-                                    @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
-                                    {
-                                        <div class=" store-top-image-title">
-                                            新人王 売上No.1
-                                        </div>
-                                    }
                                 </div>
-                            </div>
+                            }
                         }
-                    }
+                    </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <div class="flex justify-center items-center flex-col gap-3 py-[25px]">
+                    <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
+                            <path d="M20.5 6.25C15.6807 6.25 11.75 10.1807 11.75 15C11.75 18.0127 13.2881 20.6885 15.6172 22.2656C11.1592 24.1797 8 28.6035 8 33.75H10.5C10.5 28.2129 14.9629 23.75 20.5 23.75C26.0371 23.75 30.5 28.2129 30.5 33.75H33C33 28.6035 29.8408 24.1797 25.3828 22.2656C27.7119 20.6885 29.25 18.0127 29.25 15C29.25 10.1807 25.3193 6.25 20.5 6.25ZM20.5 8.75C23.9668 8.75 26.75 11.5332 26.75 15C26.75 18.4668 23.9668 21.25 20.5 21.25C17.0332 21.25 14.25 18.4668 14.25 15C14.25 11.5332 17.0332 8.75 20.5 8.75Z" fill="#E0E0E0" />
+                        </svg>
+                    </div>
+                    <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだホストが追加されていません。</div>
+                </div>
+            }
+            <div style="height:6px; background:#efefef; width:100%"></div>
+
             @*draggale image end *@
 
             <!-- Notice  -->
@@ -793,8 +811,8 @@
                                         }
                                         <!-- Display Label and LabelValue for each row -->
                                         @*<td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                                @item.Label
-                                            </td>*@
+                                        @item.Label
+                                    </td>*@
                                         <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
                                             @item.LabelValue
                                         </td>
@@ -803,21 +821,21 @@
                             }
 
                             @*<tr class="">
-                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
-                                        エンジョイプラン
-                                    </td>
-                                    <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
-                                        22:00 / L.O 21:00
-                                    </td>
-                                </tr>
-                                <tr class="">
-                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
-                                        グループプラン
-                                    </td>
-                                    <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
-                                        21:00 / L.O 20:00
-                                    </td>
-                                </tr>*@
+                            <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
+                                エンジョイプラン
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
+                                22:00 / L.O 21:00
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
+                                グループプラン
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
+                                21:00 / L.O 20:00
+                            </td>
+                        </tr>*@
                         </table>
                     </div>
                     <div class="box"></div>
@@ -879,47 +897,47 @@
                             }
                         }
                         <!--<tr class="">
-                            <td rowspan="2"
-                                class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
-                                test
-                                1
-                            </td>
-                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                test 2
-                            </td>
-                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                22:00 ( L.O 21:00 )
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                最終入店時間
-                            </td>
-                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
-                                最終入店時間
-                            </td>
-                        </tr>-->
+                    <td rowspan="2"
+                        class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                        test
+                        1
+                    </td>
+                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                        test 2
+                    </td>
+                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                        22:00 ( L.O 21:00 )
+                    </td>
+                </tr>
+                <tr class="">
+                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                        最終入店時間
+                    </td>
+                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
+                        最終入店時間
+                    </td>
+                </tr>-->
                         <!-- for decond row -->
                         <!--<tr class="">
-                            <td rowspan="2"
-                                class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
-                                グループプラン
-                            </td>
-                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
-                                最終入店時間
-                            </td>
-                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                22:00 ( L.O 21:00 )
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                予約最大人数
-                            </td>
-                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                1名
-                            </td>
-                        </tr>-->
+                    <td rowspan="2"
+                        class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                        グループプラン
+                    </td>
+                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
+                        最終入店時間
+                    </td>
+                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                        22:00 ( L.O 21:00 )
+                    </td>
+                </tr>
+                <tr class="">
+                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                        予約最大人数
+                    </td>
+                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                        1名
+                    </td>
+                </tr>-->
                     </table>
                 </div>
             </div>
@@ -1028,6 +1046,8 @@
 
                 })</script>
         </div>
+
+
         <div id="tab2" class="tab-content-plane  hidden ">
             <div class="px-[16px]">
                 <div class="mx-[8px] py-[6.54px] p-l-[22px] p-r-[10px] ">
@@ -1037,27 +1057,46 @@
                     </div>
                 </div>
             </div>
-            <div class="p-[10px] grid grid-cols-3 gap-3 px-[16px] bg-[#EFEFEF]">
-                @foreach (var item in Model.HostListModels)
-                {
-                    <div onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
-                        @if (!string.IsNullOrEmpty(item.HostImage))
-                        {
-                            <img src="@item.HostImage"
-                                 class="w-[104px] h-[104px] object-fill rounded-[6px] image-cover" />
-                        }
-                        else
-                        {
-                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                 class="w-[104px] h-[104px] object-fill rounded-[6px] image-cover" />
-                        }
-                        <div class="pt-[5px]">
-                            <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
-                            <h3 class="text-xs  text-charcoalBlack" style="font-size: 13px; text-overflow: ellipsis; font-weight: bold; white-space: nowrap; overflow: hidden;">@item.HostNameJapanese</h3>
+            @if (Model.HostListModels != null && Model.HostListModels.Count != 0)
+            {
+                <div class="p-[10px] grid grid-cols-3 gap-3 px-[16px] bg-[#EFEFEF]">
+                    @foreach (var item in Model.HostListModels)
+                    {
+                        <div onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                            @if (!string.IsNullOrEmpty(item.HostImage))
+                            {
+                                <img src="@item.HostImage"
+                                     class="w-[104px] h-[104px] object-fill rounded-[6px] image-cover" />
+                            }
+                            else
+                            {
+
+                                <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                     class="w-[104px] h-[104px] object-fill rounded-[6px] image-cover" />
+                            }
+                            <div class="pt-[5px]">
+                                <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
+                                <h3 class="text-xs  text-charcoalBlack" style="font-size: 13px; text-overflow: ellipsis; font-weight: bold; white-space: nowrap; overflow: hidden;">@item.HostNameJapanese</h3>
+                            </div>
                         </div>
+                    }
+
+
+
+                </div>
+            }
+            else
+            {
+                <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
+                    <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
+                            <path d="M20.5 6.25C15.6807 6.25 11.75 10.1807 11.75 15C11.75 18.0127 13.2881 20.6885 15.6172 22.2656C11.1592 24.1797 8 28.6035 8 33.75H10.5C10.5 28.2129 14.9629 23.75 20.5 23.75C26.0371 23.75 30.5 28.2129 30.5 33.75H33C33 28.6035 29.8408 24.1797 25.3828 22.2656C27.7119 20.6885 29.25 18.0127 29.25 15C29.25 10.1807 25.3193 6.25 20.5 6.25ZM20.5 8.75C23.9668 8.75 26.75 11.5332 26.75 15C26.75 18.4668 23.9668 21.25 20.5 21.25C17.0332 21.25 14.25 18.4668 14.25 15C14.25 11.5332 17.0332 8.75 20.5 8.75Z" fill="#E0E0E0" />
+                        </svg>
                     </div>
-                }
-            </div>
+                    <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだホストが追加されていません。</div>
+                </div>
+            }
+
             @* </div>*@
         </div>
         <div id="tab3" class="tab-content-plane  hidden">
@@ -1298,20 +1337,33 @@
                     <p>@CRS.CUSTOMER.APPLICATION.Resources.Resource.OverallClubGallery</p>
                 </div>
             </div>
-           @* <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3 gallery"  >*@
-            <div class="bg-[#3A3A3A]  gallery"  >
-                @foreach (var item in Model.ClubGalleryImageList)
-                {
-                   @* <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] object-cover" style="width:117px" onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />*@
-                    <img src="@ViewBag.FileLocationPath@item" alt="img"  onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
-                }
-            </div>
-            @*<div id="modal2" class="modal">
-                    <div class="modal-content">
-                        <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " onclick="closeModal('modal2')">&times;</span>
-                        <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
+            @if (Model.ClubGalleryImageList != null && Model.ClubGalleryImageList.Count != 0)
+            {
+                <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3">
+                    @foreach (var item in Model.ClubGalleryImageList)
+                    {
+                        <img src="@item" alt="img" class="h-[117px] object-cover" onclick="OpenImagePopup('@item')" />
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
+                    <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
+                            <path d="M4.13672 7.27246V32.727H36.864V7.27246H4.13672ZM6.47438 9.58651H34.5263V25.6764L28.3534 19.5297L27.5133 18.6981L22.2171 23.9409L15.4963 17.2156L14.6562 16.384L6.47438 24.4832V9.58651ZM29.851 11.9006C28.5589 11.9006 27.5133 12.9356 27.5133 14.2146C27.5133 15.4937 28.5589 16.5287 29.851 16.5287C31.1431 16.5287 32.1887 15.4937 32.1887 14.2146C32.1887 12.9356 31.1431 11.9006 29.851 11.9006ZM14.6562 19.6743L25.3948 30.413H6.47438V27.7735L14.6562 19.6743ZM27.5133 21.9884L34.5263 28.9305V30.413H28.7187L23.8607 25.5679L27.5133 21.9884Z" fill="#E0E0E0" />
+                        </svg>
                     </div>
-                </div>*@
+                    <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだ画像が追加されていません</div>
+                </div>
+            }
+
+            @*<div id="modal2" class="modal">
+            <div class="modal-content">
+                <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " onclick="closeModal('modal2')">&times;</span>
+                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
+            </div>
+        </div>*@
             <script>
                 // Function to open a specific modal
                 function openModal(modalId) {
