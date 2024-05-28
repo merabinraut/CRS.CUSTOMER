@@ -220,6 +220,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(new ChangePasswordModel());
         }
 
+        [Route("user/account/password/edit")]
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult ChangePasswordV2(ChangePasswordModel changePasswordModel)
         {
