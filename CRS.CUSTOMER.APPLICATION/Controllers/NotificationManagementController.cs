@@ -38,6 +38,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 x.NotificationId = x.NotificationId.EncryptParameter();
                 x.NotificationURL = (!string.IsNullOrEmpty(x.NotificationURL) && x.NotificationURL.Trim() != "#") ? URLHelper.EncryptQueryParams(x.NotificationURL) : "#";
+                x.NotificationImage = ImageHelper.ProcessedImage(x.NotificationImage);
             });
             return View(responseModel);
         }

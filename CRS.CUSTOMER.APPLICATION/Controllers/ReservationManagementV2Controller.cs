@@ -78,7 +78,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             //check if the customer can proceed with the reservation process
             var dbResponse = _buss.IsReservationProcessValid(cId, customerId, Date, Time, NoOfPeople);
@@ -90,7 +90,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             //check if the customer can proceed with the reservation process
             //check Verify club and get club details
@@ -103,7 +103,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             //check Verify club and get club details
             var FileLocationPath = string.Empty;
@@ -122,7 +122,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse3.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             else if (dbResponse3.Item1 == ResponseCode.Success)
             {
@@ -152,7 +152,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             var ResponseModel = new HostViewV2Model();
             ResponseModel.ClubDetailModel = ClubDetail.MapObject<ClubBasicDetailModel>();
@@ -185,7 +185,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             var ResponseModel = new ConfirmationViewModel();
             ResponseModel.ClubDetailModel = ClubDetail.MapObject<ClubBasicDetailModel>();
@@ -200,7 +200,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             if (HostIdLists != null && HostIdLists.Trim() == "0")
             {
@@ -250,7 +250,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             #region check if the customer can proceed with the reservation process
             var dbResponse = _buss.IsReservationProcessValid(cId, customerId, VisitDate, VisitTime, NoOfPeople);
@@ -262,7 +262,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             #endregion
             #region get customer reservation billing details
@@ -283,7 +283,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             var ResponseModel = new BillingViewModel();
             ResponseModel = dbResponse2.Item3.MapObject<BillingViewModel>();
@@ -312,7 +312,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.ERROR.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
             var HostIdListSplit = HostIdList.Split(',');
             var HostIdListArray = HostIdListSplit.Select(x => x.DecryptParameter()).ToArray();
@@ -332,15 +332,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             };
             var dbResponse = _buss.ReservationConfirmation(dbRequest);
             if (dbResponse.Code == ResponseCode.Success)
-            {
-                //AddNotificationMessage(new NotificationModel()
-                //{
-                //    NotificationType = NotificationMessage.SUCCESS,
-                //    Message = dbResponse.Message ?? "Success",
-                //    Title = NotificationMessage.SUCCESS.ToString()
-                //});
                 return RedirectToAction("Success", "ReservationManagementV2");
-            }
             else
             {
                 AddNotificationMessage(new NotificationModel()
@@ -349,7 +341,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse.Message ?? "Invalid request",
                     Title = NotificationMessage.ERROR.ToString()
                 });
-                return RedirectToAction("Index", "DashboardV2");
+                return Redirect("/");
             }
         }
         #endregion

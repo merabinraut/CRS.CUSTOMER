@@ -343,3 +343,6 @@ ASALocalRun/
 /CRS.CUSTOMER.APPLICATION/Web.config
 /CRS.CUSTOMER.APPLICATION/Web.Debug.config
 /CRS.CUSTOMER.APPLICATION/Web.Release.config
+
+
+AmazonConfigruation.json

@@ -1,6 +1,6 @@
 ﻿﻿@model CRS.CUSTOMER.APPLICATION.Models.Home.LoginRequestModel
 @{
-    ViewBag.Title = "ホスログ | サインイン";
+    ViewBag.Title = "パスワードの再設定‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = null;
     var CallJavaScriptFunction = ViewBag.CallJavaScriptFunction;
 }
@@ -137,6 +137,7 @@
             width: calc((100% - 185px)/2);
             height: 1px;
             background-color: #A1A1AA;
+            opacity: 0.2
         }
 
         .otherAccotunt {
@@ -227,24 +228,17 @@
     <div class="  ">
 
         <div class=" px-[24px] flex justify-between border-b border-b-[#ECECEC] bg-white z-[10]" style="z-index:12; padding-bottom:10px">
-            <a class="flex gap-[6px] items-center" href="@Url.Action("Index","DashboardV2")">
+            <a class="flex gap-[6px] items-center" href="/">
                 <img src="~/Content/assets/images/logo.svg" class="h-[24px]" alt='logo' />
             </a>
             <div class="flex gap-4">
                 <div class="text-xl text-warmgray cursor-pointer" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
-                    @*<i class="las la-bell relative" id="notification-bell-id">
-                            <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
-                        </i>*@
                 </div>
-                @* <div class="text-xl text-warmgray cursor-pointer" data-drawer-target="drawer-right-example"
-                         data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
-                        <i class="las la-bars"></i>
-                    </div>*@
             </div>
         </div>
         <div class="loginContainer">
             <div class="login">ログイン</div>
-            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { @role = "form", @id = "Form" }))
             {
                 @Html.AntiForgeryToken()
                 <input name="ReturnURL" value="@ViewBag.ReturnURL" hidden />
@@ -253,24 +247,16 @@
                     {
                     @class = "contactNumber focus:outline-none border-none  w-full ring-0 focus:ring-0 focus:ring-transparent",
                     @placeholder = "携帯電話番号"
-
                     })
-                    @*<span class="validationMessage ">
-                    @Html.ValidationMessageFor(m => m.LoginId)
-                </span>*@
                     <hr>
                     <div class="relative">
                         @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "32" })
-                        <i class="las la-eye password-eye absolute top-3 right-2 text-[2] " style="font-size: 24px; color: #A1A1AA" onclick="togglePassword()"></i>
+                        <i class="las la-eye password-eye absolute top-2 right-2 text-[2] " style="font-size: 24px; color: #A1A1AA" onclick="togglePassword()"></i>
                     </div>
                 </div>
-
                 <div class="validationMessage  text-[10px] font-normal leading-[13.62px] mt-2">
                     @Html.ValidationMessageFor(m => m.LoginId, "", new { @class = "error-validation-msg" })
-                    @*      @Html.ValidationMessageFor(m => m.Password)*@
                 </div>
-
-
                 <!-- for check box -->
                 <div class="checkboxWrapper flex justify-between items-center">
                     <div>
@@ -281,7 +267,7 @@
                     </div>
                     <!-- for forget pasword -->
                     <div>
-                        <a href="~/home/ForgotPassword" class="forgetPassword" style="text-transform:uppercase ">パスワードをお忘れですか <span style="font-size:14px">?</span></a>
+                        <a href="@Url.Action("remind", "user")" class="forgetPassword" style="text-transform:uppercase ">パスワードをお忘れですか <span style="font-size:14px">?</span></a>
                     </div>
                 </div>
                 <!-- for login  -->
@@ -304,16 +290,16 @@
             <!-- for other account new -->
             <div class=" mt-16 " style="border: 1px solid #FFEAF5; border-radius: 3px; background: #FFFBFD ">
                 <div class="flex justify-center items-center mx-4" style="margin-top:15px">
-                    <div class="border  spertator"></div>
+                    <div class="  spertator"></div>
                     <span class="otherAccotunt" style="text-transform:uppercase">初めてホスログをご利用ですか <span style="font-size:14px">?</span></span>
-                    <div class="border  spertator"></div>
+                    <div class="  spertator"></div>
                 </div>
                 <!-- for new registration -->
                 <div class="mx-4" style="margin-bottom:18px">
                     <button type="submit" class="registerButton border rounded-lg  w-full " id="RegisterId">新しくホスログを始める</button>
                 </div>
             </div>
-          
+
             <!-- for other account new end -->
             <!-- for affiliation -->
             <div class="affiliation">
@@ -350,7 +336,7 @@
             else $('#rememberMe').val(false);
         });
         document.getElementById("RegisterId").onclick = function () {
-            location.href = "/Home/Register";
+            location.href = "/user/register";
         };
     </script>
     <script>
@@ -362,32 +348,29 @@
         //For toaster Notification
         $(function () {
         {
-@if (TempData["Notifications"] != null)
-        {
-        var messages = (List<CRS.CUSTOMER.SHARED.NotificationModel>)TempData["Notifications"];
-        foreach (var note in messages)
-        {
-<text>showNotification("@note.Message", "@note.Title", "@note.NotificationType");</text>
-        }
-        }
-@{
-        ViewBag.Notifications = string.Empty;
-}
-        }
+            @if (TempData["Notifications"] != null)
+                    {
+                    var messages = (List<CRS.CUSTOMER.SHARED.NotificationModel>)TempData["Notifications"];
+                    foreach (var note in messages)
+                    {
+            <text>showNotification("@note.Message", "@note.Title", "@note.NotificationType");</text>
+                    }
+                    }
+            @{
+                    ViewBag.Notifications = string.Empty;
+            }
+            }
         });
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-        clearLocalStorage();
-        });
-        function clearLocalStorage() {
-        if ('@CallJavaScriptFunction' === "True") {
-        localStorage.clear();
+            clearLocalStorage();
+            });
+            function clearLocalStorage() {
+            if ('@CallJavaScriptFunction' === "True") {
+            localStorage.clear();
+            }
         }
-        }
-    </script>
-    <script>
-
     </script>
     <script src="~/Content/validation.js"></script>
 </body>

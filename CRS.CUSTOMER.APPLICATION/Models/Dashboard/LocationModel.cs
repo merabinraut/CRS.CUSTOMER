@@ -16,6 +16,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Dashboard
         public string Longitude { get; set; }
         public string Action { get; set; }
         public string LocationDisplayName { get; set; }
+        public string LocationStatus { get; set; }
     }
 
     public class RecommendationLocationModel

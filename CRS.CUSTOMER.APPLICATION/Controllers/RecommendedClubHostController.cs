@@ -1,4 +1,5 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
+using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
 using CRS.CUSTOMER.BUSINESS.RecommendedClubHost;
 using CRS.CUSTOMER.SHARED;
@@ -24,9 +25,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var culture = ApplicationUtilities.GetSessionValue("culture")?.ToString()?.ToLower();
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
             ViewBag.ActionPageName = "Dashboard";
-            var FileLocationPath = "";
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
-                FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
             var Response = new LocationClubHostModel();
             var recommendedClubDBRequest = new RecommendedClubRequestCommon()
             {
@@ -49,7 +47,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.WARNING.ToString()
                 });
-                redirectToUrl = Url.Action("Index", "DashboardV2");
+                redirectToUrl = "/";
                 return Json(new { Response, redirectToUrl }, JsonRequestBehavior.AllowGet);
             }
             if (string.IsNullOrEmpty(recommendedHostDBRequest.PositionId) || string.IsNullOrEmpty(recommendedHostDBRequest.LocationId)
@@ -61,7 +59,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.WARNING.ToString()
                 });
-                redirectToUrl = Url.Action("Index", "DashboardV2");
+                redirectToUrl = "/";
                 return Json(new { Response, redirectToUrl }, JsonRequestBehavior.AllowGet);
             }
             var dbClubResponse = _recommendedClubHostBuss.GetRecommendedClub(recommendedClubDBRequest);
@@ -72,9 +70,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 item.ClubId = item.ClubId.EncryptParameter();
                 item.LocationId = item.LocationId.EncryptParameter();
-                item.ClubLogo = FileLocationPath + item.ClubLogo;
-                item.ClubCoverPhoto = FileLocationPath + item.ClubCoverPhoto;
-                for (int i = 0; i < item.ClubGalleryImage.Count(); i++) item.ClubGalleryImage[i] = FileLocationPath + item.ClubGalleryImage[i];
+                item.ClubLogo = ImageHelper.ProcessedImage(item.ClubLogo);
+                item.ClubCoverPhoto = ImageHelper.ProcessedImage(item.ClubCoverPhoto);
+                for (int i = 0; i < item.ClubGalleryImage.Count(); i++) item.ClubGalleryImage[i] = ImageHelper.ProcessedImage(item.ClubGalleryImage[i]);
                 item.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
             }
             foreach (var item in Response.HostListModel)
@@ -82,7 +80,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 item.ClubId = item.ClubId.EncryptParameter();
                 item.LocationId = item.LocationId.EncryptParameter();
                 item.HostId = item.HostId.EncryptParameter();
-                item.HostImage = FileLocationPath + item.HostImage;
+                item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
             }
             return Json(new { Response, redirectToUrl }, JsonRequestBehavior.AllowGet);
         }

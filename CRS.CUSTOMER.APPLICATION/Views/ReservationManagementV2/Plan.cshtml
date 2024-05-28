@@ -61,6 +61,8 @@
                         foreach (var item in Model.PlanDetailModel)
                         {
                             var amount = Convert.ToDecimal(item.PlanPrice).ToString("#,##0");
+                            var sAmount = Convert.ToDecimal(item.StrikePrice).ToString("#,##0");
+
                             <div class="plan-card">
                                 <input class="planid-class" value="@item.PlanId" hidden />
                                 @if (isFirstItem)
@@ -85,9 +87,44 @@
                                             </span>
                                         }
                                     </div>
-                                    <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class" data-info="@item.PlanPrice">
-                                        @string.Concat("¥", @amount)
-                                    </div>
+                                    @{
+                                        if (item.IsStrikeOut == "A")
+                                        {
+                                            if (item.IsStrikeOut == "A")
+                                            {
+                                                <div class="IsStrikeOut" value="@item.IsStrikeOut" hidden></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="IsStrikeOut" value="@item.IsStrikeOut" hidden></div>
+                                            }
+                                            <div class="strikethrough-wrapper">
+                                                <div class="text-[#D75A8B] font-futura pb-[6px] StrikePrice-class strikethrough" data-info="@item.StrikePrice">
+                                                    @string.Concat("¥", @sAmount)
+                                                </div>
+                                                <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class" style="font-size:16px; font-weight:600" data-info="@item.PlanPrice">
+                                                    @string.Concat("¥", @amount)
+                                                </div>
+
+                                                <span>キャンペーン中</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class" style="font-size:16px; font-weight:600" data-info="@item.PlanPrice">
+                                                @string.Concat("¥", @amount)
+                                            </div>
+                                        }
+                                    }
+                                    @* <div class="strikethrough-wrapper">
+                                            <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class" data-info="@item.PlanPrice">
+                                                @string.Concat("¥", @amount)
+                                            </div>
+                                            <div class="text-[#D75A8B] font-futura pb-[6px] PlanPrice-class strikethrough" data-info="@item.PlanPrice">
+                                                @string.Concat("¥", @amount)
+                                            </div>
+                                            <span>キャンペーン中</span>
+                                        </div>*@
                                     <div class="flex items-center gap-2">
                                         <div class="flex items-center gap-1">
                                             <div class="text-[#D17979] text-[13px]">
@@ -209,7 +246,7 @@
                 return false;
             }
 
-            const dataAttributes = ['PlanName', 'PlanPrice', 'PlanTime', 'PlanLiquor', 'PlanNomination'].reduce((acc, attr) => {
+            const dataAttributes = ['PlanName', 'PlanPrice', 'PlanTime', 'PlanLiquor', 'PlanNomination','StrikePrice'].reduce((acc, attr) => {
                 const element = activeElement.querySelector(`.${attr}-class`);
                 if (element) {
                     const value = element.getAttribute('data-info');
@@ -226,7 +263,7 @@
             window.location.href = url;
         }
 
-        const DataStorageFunction = (PlanId, PlanName, PlanPrice, PlanTime, PlanLiquor, PlanNomination, IsPopularPlan) => {
+        const DataStorageFunction = (PlanId, PlanName, PlanPrice, PlanTime, PlanLiquor, PlanNomination, StrikePrice, IsPopularPlan) => {
             const encryptedData = {
                 ClubId: '@Model.ClubDetailModel.ClubId',
                 PlanId: PlanId,
@@ -235,7 +272,8 @@
                 PlanTime: PlanTime? EncryptParameter(PlanTime) : '',
                 PlanLiquor: PlanLiquor? EncryptParameter(PlanLiquor) : '',
                 PlanNomination: PlanNomination? EncryptParameter(PlanNomination) : '',
-                IsPopularPlan: IsPopularPlan? EncryptParameter(IsPopularPlan) : '',
+                PlanNomination: PlanNomination? EncryptParameter(PlanNomination) : '',
+                StrikePrice: StrikePrice ? EncryptParameter(StrikePrice) : '',
                 SelectedHost: '@ViewBag.SelectedHost',
                 VisitDate: '@ViewBag.VisitDate' ? EncryptParameter('@ViewBag.VisitDate') : '',
                 VisitTime: '@ViewBag.VisitTime' ? EncryptParameter('@ViewBag.VisitTime') : '',

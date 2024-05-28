@@ -1,6 +1,7 @@
 ﻿//#region LOCATION FILTER POPUP
 function GetLocationFilterPopUp() {
     EnableLoaderFunction();
+    document.body.classList.add('body-no-scroll');
     var locationfilterpopupContent = $('#locationfilterpopup-id').html();
     if (locationfilterpopupContent.trim() !== '') {
         var element = document.getElementById('drawer-search-by-area');
@@ -53,6 +54,7 @@ function GetLocationFilterPopUp() {
 
 function CloseLocationFilterPopUp() {
     var element = document.getElementById('drawer-search-by-area');
+    document.body.classList.remove('body-no-scroll');
     if (element) {
         element.classList.add('translate-y-full');
         return false;
@@ -63,11 +65,14 @@ function CloseLocationFilterPopUp() {
 //#region PREFERENCE FILTER POPUP
 function GetPreferenceFilterPopUp() {
     EnableLoaderFunction();
+    document.body.classList.add('body-no-scroll');
+    /* document.body.classList.remove('body-no-scroll');*/
     var CustomerCurrentLocationId = $('#current-location-id').val();
     var preferencefilterpopupContent = $('#preferencefilterpopUp-id').html();
     if (preferencefilterpopupContent.trim() !== '') {
         var element = document.getElementById('drawer-filter-location');
         if (element) {
+
             element.classList.remove('translate-y-full');
             DisableLoaderFunction();
             return false;
@@ -599,6 +604,7 @@ function preventDefault(event) {
     event.preventDefault();
 }
 function ClosePreferenceFilterPopUp() {
+    document.body.classList.remove('body-no-scroll');
     var element = document.getElementById('drawer-filter-location');
     if (element) {
         element.classList.add('translate-y-full');
@@ -703,8 +709,9 @@ function DisableLoaderFunction() {
 
 
 //#region date/time filter
-function InitiateDateTimeFilterPopupFunction() {
+async function InitiateDateTimeFilterPopupFunction() {
     EnableLoaderFunction();
+    document.body.classList.add('body-no-scroll');
     document.getElementById("DateTimeFilter-Id").classList.remove("disable-click");
     var locationfilterpopupContent = $('#datetimefilterpopup-id').html();
     if (locationfilterpopupContent.trim() !== '') {
@@ -972,6 +979,7 @@ function initPeopleFunction2() {
 
 function CloseInitiatedDateTimeFilterPopupFunction() {
     var element = document.getElementById('drawer-date-time');
+    document.body.classList.remove('body-no-scroll');
     element.classList.add('translate-y-full');
     var removeElement = document.getElementById("ui-datepicker-div")
     removeElement.style.setProperty("display", "none", "important");

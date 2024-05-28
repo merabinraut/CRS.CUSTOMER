@@ -1,14 +1,17 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
+using CRS.CUSTOMER.APPLICATION.Library;
+using CRS.CUSTOMER.APPLICATION.Models;
 using CRS.CUSTOMER.APPLICATION.Models.ProfileManagement;
 using CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement;
 using CRS.CUSTOMER.BUSINESS.ProfileManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ProfileManagement;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,9 +22,22 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IProfileManagementBusiness _business;
         public ProfileManagementController(IProfileManagementBusiness business) => this._business = business;
 
-        [HttpGet]
+        [HttpGet, Route("user/account/profile")]
         public ActionResult Index()
         {
+            ViewBag.LocationDDL = ApplicationUtilities.LoadDropdownList("LOCATIONDDL", "", "") as Dictionary<string, string>;
+            ViewBag.PrefectureDDL = ApplicationUtilities.LoadDropdownList("PREFECTUREDDL", "", "") as Dictionary<string, string>;
+            ViewBag.ActionPageName = "NavMenu";
+            ViewBag.PageTitle = Resources.Resource.ProfileInfo;
+            if (TempData["UserProfileModel"] != null)
+            {
+                var userProfileJson = TempData["UserProfileModel"].ToString();
+                var userProfileModel = JsonConvert.DeserializeObject<UserProfileModel>(userProfileJson);
+                ViewBag.PrefectureKey = userProfileModel.Prefecture;
+                ViewBag.PreferredLocationKey = userProfileModel.PreferredLocation;
+                userProfileModel.ProfileImage = ImageHelper.ProcessedImage(userProfileModel.ProfileImage);
+                return View(userProfileModel);
+            }
             var common = new UserProfileCommon()
             {
                 ActionUserId = ApplicationUtilities.GetSessionValue("UserId").ToString().DecryptParameter(),
@@ -30,10 +46,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             };
             var data = _business.GetUserProfileDetail(common);
             var viewModel = data.MapObject<UserProfileModel>();
-            ViewBag.LocationDDL = ApplicationUtilities.LoadDropdownList("LOCATIONDDL", "", "") as Dictionary<string, string>;
-            ViewBag.PrefectureDDL = ApplicationUtilities.LoadDropdownList("PREFECTUREDDL", "", "") as Dictionary<string, string>;
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() == "DEVELOPMENT") ViewBag.FileLocationPath = "";
-            else ViewBag.FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+            if (viewModel.ProfileImage != null)
+                viewModel.ProfileImage = ImageHelper.ProcessedImage(viewModel.ProfileImage);
             ViewBag.PrefectureKey = viewModel.Prefecture?.EncryptParameter();
             ViewBag.PreferredLocationKey = viewModel.PreferredLocation?.EncryptParameter();
             var dob = !string.IsNullOrEmpty(viewModel.DateOfBirth) ? Convert.ToDateTime(viewModel.DateOfBirth) : DateTime.Now;
@@ -45,8 +59,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             viewModel.PreferredLocation = viewModel.PreferredLocation?.EncryptParameter();
             viewModel.Prefecture = viewModel.Prefecture?.EncryptParameter();
-            ViewBag.ActionPageName = "NavMenu";
-            ViewBag.PageTitle = Resources.Resource.ProfileInfo;
             return View(viewModel);
         }
 
@@ -102,6 +114,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult UpdateUserProfileDetail(UserProfileModel userProfileModel, string PreferredLocationDDL, string PrefectureDDL)
         {
+            userProfileModel.Prefecture = PrefectureDDL;
+            userProfileModel.PreferredLocation = PreferredLocationDDL;
+            TempData["UserProfileModel"] = JsonConvert.SerializeObject(userProfileModel);
             if (ModelState.IsValid)
             {
                 var common = userProfileModel.MapObject<UserProfileCommon>();
@@ -112,8 +127,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 common.Prefecture = PrefectureDDL?.DecryptParameter();
                 if (!string.IsNullOrEmpty(userProfileModel.DOBYear) && !string.IsNullOrEmpty(userProfileModel.DOBMonth) && !string.IsNullOrEmpty(userProfileModel.DOBDay))
                 {
-
-
                     if (userProfileModel.DOBYear.Contains("年"))
                     {
                         userProfileModel.DOBYear = userProfileModel.DOBYear.Replace("年", "");
@@ -135,7 +148,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             Message = "長さは 4 文字である必要があります",
                             Title = NotificationMessage.SUCCESS.ToString()
                         });
-                        return RedirectToAction("Index");
+                        return Redirect("/user/account/profile");
                     }
                     int countMonth = userProfileModel.DOBMonth.Count(char.IsDigit);
                     if (countMonth > 2)
@@ -146,7 +159,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             Message = "長さは 2 文字である必要があります",
                             Title = NotificationMessage.SUCCESS.ToString()
                         });
-                        return RedirectToAction("Index");
+                        return Redirect("/user/account/profile");
                     }
 
                     int countDay = userProfileModel.DOBDay.Count(char.IsDigit);
@@ -158,7 +171,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             Message = "長さは 2 文字である必要があります",
                             Title = NotificationMessage.SUCCESS.ToString()
                         });
-                        return RedirectToAction("Index");
+                        return Redirect("/user/account/profile");
                     }
                     common.DateOfBirth = string.Concat(userProfileModel.DOBYear.Trim(), "-", userProfileModel.DOBMonth.Trim(), "-", userProfileModel.DOBDay.Trim());
                 }
@@ -166,29 +179,29 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 if (dbresp.Code == ResponseCode.Success)
                 {
                     Session["EmailAddress"] = common.EmailAddress;
-                    Session["EmailAddress"] = common.EmailAddress;
                     AddNotificationMessage(new NotificationModel()
                     {
                         NotificationType = NotificationMessage.SUCCESS,
                         Message = dbresp.Message,
                         Title = NotificationMessage.SUCCESS.ToString()
                     });
+                    return Redirect("/user/account/profile");
                 }
                 else
+                {
                     AddNotificationMessage(new NotificationModel()
                     {
                         NotificationType = NotificationMessage.ERROR,
                         Message = dbresp.Message,
                         Title = NotificationMessage.ERROR.ToString()
                     });
-
-                return RedirectToAction("Index");
+                    return Redirect("/user/account/profile");
+                }
 
             }
             var errorMessages = ModelState.Where(x => x.Value.Errors.Count > 0)
                                     .SelectMany(x => x.Value.Errors.Select(e => $"{x.Key}: {e.ErrorMessage}"))
                                     .ToList();
-
 
             AddNotificationMessage(new NotificationModel()
             {
@@ -196,10 +209,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Message = Resources.Resource.All_fields_are_required,
                 Title = NotificationMessage.ERROR.ToString()
             });
-            return RedirectToAction("Index", userProfileModel);
+            return Redirect("/user/account/profile");
         }
 
-        [HttpGet]
+        [HttpGet, Route("user/account/password/edit")]
         public ActionResult ChangePasswordV2()
         {
             ViewBag.ActionPageName = "NavMenu";
@@ -225,10 +238,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Title = NotificationMessage.ERROR.ToString(),
                 }).ToArray();
                 TempData["ChangePWErrorMessage"] = notificationModels[0].Message;
-                //AddNotificationMessage(notificationModels);
-                //TempData["ChangePWErrorMessage"] = errorMessage;
                 return RedirectToAction("ChangePasswordV2", changePasswordModel);
-                //return View(changePasswordModel);
             }
             else
             {
@@ -239,12 +249,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 passwordCommon.IPAddress = ApplicationUtilities.GetIP().ToString();
                 passwordCommon.BrowserInfo = ApplicationUtilities.GetBrowserInfo().ToString();
                 passwordCommon.Session = Session.SessionID;
-
                 var dbResp = _business.ChangePassword(passwordCommon);
-
                 if (dbResp.Code == ResponseCode.Failed)
                 {
-                    //AddNotificationMessage(new NotificationModel() { NotificationType = NotificationMessage.ERROR, Message = dbResp.Message });
                     TempData["ChangePWErrorMessage"] = dbResp.Message;
                     return RedirectToAction("ChangePasswordV2", changePasswordModel);
                 }
@@ -263,19 +270,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost]
-        public JsonResult ChangeProfileImage(HttpPostedFileBase file)
+        public async Task<JsonResult> ChangeProfileImage(HttpPostedFileBase file)
         {
             var common = new UserProfileCommon();
-
-            string FileLocation = "/Content/userupload/customer/";
-            string FileLocationPath = "/Content/userupload/customer/";
-            string ImageVirtualPath = "";
-            if (ConfigurationManager.AppSettings["Phase"] != null
-                && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT")
-            {
-                FileLocation = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString() + FileLocationPath;
-                ImageVirtualPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-            }
+            string fileName = string.Empty;
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 file = Request.Files[i];
@@ -285,13 +283,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var contentType = file.ContentType;
                 var allowedContentType = AllowedImageContentType();
                 var ext = Path.GetExtension(file.FileName);
-                string filepath;
                 if (allowedContentType.Contains(contentType.ToLower()))
                 {
-                    string date = DateTime.Now.ToString("yyyyMMddHHmmssffff");
-                    string myfilename = date + ext.ToLower();
-                    filepath = Path.Combine(Server.MapPath(FileLocation), myfilename);
-                    common.ProfileImage = FileLocationPath + myfilename;
+                    fileName = $"{AWSBucketFolderNameModel.CUSTOMER}/ProfileImage_{DateTime.Now.ToString("yyyyMMddHHmmssffff")}{ext.ToLower()}";
+                    common.ProfileImage = $"/{fileName}";
                 }
                 else
                 {
@@ -309,8 +304,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var dbresp = _business.ChangeProfileImage(common);
                 if (dbresp.Code == ResponseCode.Success)
                 {
-                    ApplicationUtilities.ResizeImage(file, filepath);
-                    Session["ProfileImage"] = ImageVirtualPath + common.ProfileImage;
+                    if (file != null) await ImageHelper.ImageUpload(fileName, file);
+                    Session["ProfileImage"] = ImageHelper.ProcessedImage(common.ProfileImage);// ImageVirtualPath + common.ProfileImage;
                     AddNotificationMessage(new NotificationModel()
                     {
                         NotificationType = NotificationMessage.SUCCESS,

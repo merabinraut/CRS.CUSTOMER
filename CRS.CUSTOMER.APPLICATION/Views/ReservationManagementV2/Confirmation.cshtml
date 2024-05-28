@@ -128,7 +128,7 @@
                     </div>
                     <div>
 
-                        <div class="text-[#D75A8B] font-futura pb-1" id="PlanAmount-Id">
+                        <div class="text-[#D75A8B] font-futura pb-1 strikethrough-wrapper" id="PlanAmount-Id">
                         </div>
                         <div class="flex items-center gap-2">
                             <div class="flex items-center gap-1">
@@ -199,7 +199,14 @@
                             $('#PlanName-Id').html(value);
                             break;
                         case "PlanPrice":
-                            $('#PlanAmount-Id').html('¥' + value);
+                            const StrikePrice = decryptAndGetValue("StrikePrice");
+                            if (StrikePrice != null && StrikePrice != "" && StrikePrice != "y" && StrikePrice != "y") {
+                                $('#PlanAmount-Id').html("<div class='strikethrough'> ¥" + StrikePrice + "</div>" + " <div style='font-weight:600'> ¥" + value + "</div>" + "<span>キャンペーン中</span>");
+                            }
+                            else {
+                                $('#PlanAmount-Id').html(" <div style='font-weight:600'> ¥" + value+ "</div> ");
+                            }
+
                             break;
                         case "PlanTime":
                             $('#PlanTime-Id').html(value);
