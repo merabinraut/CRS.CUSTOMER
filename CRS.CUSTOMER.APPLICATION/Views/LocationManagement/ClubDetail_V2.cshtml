@@ -22,6 +22,22 @@
     .tab-container-plane .active {
         border-bottom: 2px solid #E3A1A1;
     }
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        max-width: 1200px;
+        width: 100%;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        box-sizing: border-box;
+    }
+
+        .gallery img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover; /* Ensures image covers the div while maintaining aspect ratio */
+        }
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
@@ -1309,15 +1325,11 @@
             </div>
             @if (Model.ClubGalleryImageList != null && Model.ClubGalleryImageList.Count != 0)
             {
-
                 <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3">
                     @foreach (var item in Model.ClubGalleryImageList)
                     {
-                        <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] object-cover" onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
+                        <img src="@item" alt="img" class="h-[117px] object-cover" onclick="OpenImagePopup('@item')" />
                     }
-
-
-
                 </div>
             }
             else
@@ -1818,7 +1830,7 @@
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " onclick="closeImagePopup();">&times;</span>
+        <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " style="right:20px" onclick="closeImagePopup();">&times;</span>
         <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " id="img01" />
     </div>
 </div>
