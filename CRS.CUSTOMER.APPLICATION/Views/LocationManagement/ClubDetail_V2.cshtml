@@ -22,6 +22,22 @@
     .tab-container-plane .active {
         border-bottom: 2px solid #E3A1A1;
     }
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        max-width: 1200px;
+        width: 100%;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        box-sizing: border-box;
+    }
+
+        .gallery img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover; /* Ensures image covers the div while maintaining aspect ratio */
+        }
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
@@ -1268,10 +1284,12 @@
                     <p>@CRS.CUSTOMER.APPLICATION.Resources.Resource.OverallClubGallery</p>
                 </div>
             </div>
-            <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3">
+           @* <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3 gallery"  >*@
+            <div class="bg-[#3A3A3A]  gallery"  >
                 @foreach (var item in Model.ClubGalleryImageList)
                 {
-                    <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] object-cover" style="width:117px" onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
+                   @* <img src="@ViewBag.FileLocationPath@item" alt="img" class="h-[117px] object-cover" style="width:117px" onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />*@
+                    <img src="@ViewBag.FileLocationPath@item" alt="img"  onclick="OpenImagePopup('@ViewBag.FileLocationPath@item')" />
                 }
             </div>
             @*<div id="modal2" class="modal">
