@@ -103,22 +103,22 @@
                      class="h-[48px] w-[48px] object-cover rounded-full border-[1px] border-[#FAFAFA]" />
             </div>
         }
-    <div>
-        @* <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEng</div>
-        <div class='text-xs  text-[#404040] '>@Model.ClubNameJp</div>
-        <div class="text-[10px] text-[#E3A1A1]">@Model.GroupName</div>*@
-        <div class="club_info" style="width:auto;">
-            <!-- s/club_name -->
-            <h3 class="club_name">@Model.ClubNameEng</h3>
-            <!-- e/club_name -->
-            <!-- s/club kana -->
-            <p class="club_kana">@Model.ClubNameJp</p>
-            <!-- e/club kana -->
-            <!-- s/club group -->
-            <p class="club_group">@Model.GroupName</p>
-            <!-- e/club group -->
+        <div>
+            @* <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEng</div>
+                <div class='text-xs  text-[#404040] '>@Model.ClubNameJp</div>
+                <div class="text-[10px] text-[#E3A1A1]">@Model.GroupName</div>*@
+            <div class="club_info" style="width:auto;">
+                <!-- s/club_name -->
+                <h3 class="club_name">@Model.ClubNameEng</h3>
+                <!-- e/club_name -->
+                <!-- s/club kana -->
+                <p class="club_kana">@Model.ClubNameJp</p>
+                <!-- e/club kana -->
+                <!-- s/club group -->
+                <p class="club_group">@Model.GroupName</p>
+                <!-- e/club group -->
+            </div>
         </div>
-    </div>
     </div>
     @if (Model.IsBookmarked.Trim().ToUpper() == "N")
     {
@@ -1390,10 +1390,10 @@
             </div>
             @if (Model.ClubGalleryImageList != null && Model.ClubGalleryImageList.Count != 0)
             {
-                <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3">
+                <div class="bg-[#3A3A3A] gallery">
                     @foreach (var item in Model.ClubGalleryImageList)
                     {
-                        <img src="@item" alt="img" class="h-[117px] object-cover" onclick="OpenImagePopup('@item')" />
+                        <img src="@item" alt="img" onclick="OpenImagePopup('@item')" />
                     }
                 </div>
             }
