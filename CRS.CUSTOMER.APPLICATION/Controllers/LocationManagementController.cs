@@ -183,6 +183,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (clubGalleryImageDBResponse != null && clubGalleryImageDBResponse.Count > 0)
             {
                 responseModel.ClubGalleryImageList = clubGalleryImageDBResponse;
+                responseModel.ClubGalleryImageList.ForEach(x => x = ImageHelper.ProcessedImage(x));
             }
             else responseModel.ClubGalleryImageList = new List<string>();
             responseModel.ClubCoverPhoto = ImageHelper.ProcessedImage(responseModel.ClubCoverPhoto);
@@ -232,7 +233,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);
             responseModel.GetClubBasicInformation = dbBasicInfoResponse.MapObject<ClubBasicInformationModel>();
-            if (!string.IsNullOrEmpty(responseModel.InstagramLink) && responseModel.InstagramLink != "#")
+            if (!string.IsNullOrEmpty(responseModel.GetClubBasicInformation.InstagramLink) && responseModel.GetClubBasicInformation.InstagramLink != "#")
             {
                 if (!responseModel.GetClubBasicInformation.InstagramLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.InstagramLink = "https://" + responseModel.GetClubBasicInformation.InstagramLink;
             }
