@@ -56,7 +56,7 @@
 
 <div class="flex flex-row relative fixed" style="overscroll-behavior:none;">
     <div class="flex-col overflow-y-auto   ">
-        <div class="flex  overflow-x-auto mx-[16px] no-scrollbar flex-row gap-[8px] ">
+        <div class="flex owl-carousel owl-theme overflow-x-auto mx-[16px] no-scrollbar flex-row gap-[8px] ">
             @if (Model.HostGalleryImageList != null && Model.HostGalleryImageList.Count > 0)
             {
                 foreach (var item in Model.HostGalleryImageList)
@@ -771,4 +771,39 @@
                 window.location.href = '/LocationManagement/ClubDetail_V2?ClubId=' + clubid + '&LocationId=' + locationid;
             }
         }</script>
+
+      <script>
+      function OpenImagePopup(ImageURL) {
+          if (ImageURL != '' && ImageURL != null) {
+              var modalImg = document.getElementById("img01");
+              var modal = document.getElementById("myModal");
+              modal.style.display = "block";
+              modalImg.src = ImageURL;
+          }
+      }
+
+      function closeImagePopup() {
+          var modal = document.getElementById("myModal");
+          modal.style.display = "none";
+      }
+
+      $(document).ready(function () {
+          $('.owl-carousel').owlCarousel({
+              center: true,
+              items: 1.25,
+              loop: true,
+              margin: 8,
+              autoplay: true,
+              autoplayTimeout: 3000,
+              responsive: {
+                  400: {
+                      items: 1.75,
+
+                  }
+              }
+
+          })
+
+          localStorage.clear();
+      })</script>
 }
