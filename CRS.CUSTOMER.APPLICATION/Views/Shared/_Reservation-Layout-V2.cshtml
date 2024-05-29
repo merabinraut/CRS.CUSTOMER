@@ -133,7 +133,7 @@
         function WindowHistoryBack() {
             var previousUrl = document.referrer;
             if (isLoginPageWithReturnUrl(previousUrl)) {
-                window.location.href = '/DashboardV2/Index';
+                window.location.href = '/';
             }
             else {
                 window.history.back();

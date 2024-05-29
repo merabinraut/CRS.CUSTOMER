@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Mvc;
+using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2;
 using CRS.CUSTOMER.BUSINESS.ReservationHistoryManagementV2;
@@ -18,7 +19,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
         public ActionResult ReservationHistory()
         {
-            var FileLocationPath = "";
             ReservationCommonModel responseInfo = new ReservationCommonModel();
             var customerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
 
@@ -67,20 +67,17 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 allItem.LocationId = allItem.LocationId.EncryptParameter();
             }
             #endregion
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
-            responseInfo.GetReservedList.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
-            responseInfo.GetVisitedHistoryList.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
-            responseInfo.GetCancelledHistoryList.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
-            responseInfo.GetAllHistoryList.ForEach(x => x.ClubLogo = FileLocationPath + x.ClubLogo);
+
+            responseInfo.GetReservedList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
+            responseInfo.GetVisitedHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
+            responseInfo.GetCancelledHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
+            responseInfo.GetAllHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
             return View(responseInfo);
         }
         public ActionResult ViewHistoryDetail(string ReservationId = "")
         {
-            var FileLocationPath = "";
             string CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
-            string reservationId = "";
-
-            if (ConfigurationManager.AppSettings["Phase"] != null && ConfigurationManager.AppSettings["Phase"].ToString().ToUpper() != "DEVELOPMENT") FileLocationPath = ConfigurationManager.AppSettings["ImageVirtualPath"].ToString();
+            string reservationId = "";            
 
             if (!string.IsNullOrEmpty(ReservationId)) reservationId = ReservationId.DecryptParameter();
             ReservationHistoryDetailModel responseinfo = new ReservationHistoryDetailModel();
@@ -89,7 +86,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (responseinfo.ClubId != null && responseinfo.ClubId != "")
             {
                 responseinfo.HImages = responseinfo.HostImages.Split(',');
-                responseinfo.ClubLogo = FileLocationPath + responseinfo.ClubLogo;
+                responseinfo.ClubLogo = ImageHelper.ProcessedImage(responseinfo.ClubLogo);
                 responseinfo.HostIdList = responseinfo.HostId.Split(',');
                 if (responseinfo.HImages != null)
                 {
@@ -98,7 +95,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         if (!string.IsNullOrEmpty(item))
                         {
-                            updatedImages.Add(FileLocationPath + item.Trim());
+                            updatedImages.Add(ImageHelper.ProcessedImage(item));
                         }
                         else
                         {

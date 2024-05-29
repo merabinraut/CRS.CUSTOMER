@@ -7,6 +7,8 @@
         public string PlanType { get; set; }
         public string PlanTime { get; set; }
         public string Price { get; set; }
+        public string StrikePrice { get; set; }
+        public string IsStrikeOut { get; set; }
         public string Liquor { get; set; }
         public string Nomination { get; set; }
         public string Remarks { get; set; }

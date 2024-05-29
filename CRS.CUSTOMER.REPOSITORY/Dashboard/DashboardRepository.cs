@@ -50,7 +50,8 @@ namespace CRS.CUSTOMER.REPOSITORY.Dashboard
                         LocationURl = item["LocationURL"].ToString(),
                         Latitude = item["Latitude"].ToString(),
                         Longitude = item["Longitude"].ToString(),
-                        LocationDisplayName = item["LocationDisplayName"].ToString()
+                        LocationDisplayName = item["LocationDisplayName"].ToString(),
+                        LocationStatus = item["LocationStatus"].ToString(),
                     });
                 }
             }

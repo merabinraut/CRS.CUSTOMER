@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     int clubCount = @Model.BookmarkedClubs.Count;
     int hostCount = Model.BookmarkedHosts.Count;
+    var bmktabVal = Model.bmktab;
 }
 <style>
     #like {
@@ -20,10 +21,10 @@
 <div class="">
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
         <div class="grid grid-cols-2 w-full tab-container-plane bg-white gap-[14px]">
-            <button id="tab1Button" class="tab-button-plane tab-link active">
+            <button id="tab1Button" class="tab-button-plane tab-link @(bmktabVal == "01" ? "active" : "")" onclick="window.location.href='/user/account/bookmark/?bmktab=01'">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Club
             </button>
-            <button id="tab2Button" class="tab-button-plane tab-link">
+            <button id="tab2Button" class="tab-button-plane tab-link @(bmktabVal == "02" ? "active" : "")" onclick="window.location.href='/user/account/bookmark/?bmktab=02'">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host
             </button>
         </div>
@@ -31,7 +32,7 @@
 </div>
 <div>
     <div class="bg-white">
-        <div id="tab1" class="tab-content-plane">
+        <div id="tab1" class="tab-content-plane @(bmktabVal == "02" ? "hidden" : "")">
 
             <div class="flex flex-row items-center bg-[#E5E5E5] h-[32px]">
                 <p class="pl-[16px] text-[14px] font-[500] ">
@@ -41,7 +42,6 @@
             @if (Model.BookmarkedClubs.Count <= 0)
             {
                 <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0]  justify-center items-center " style="padding-top:64px">
-                    @*<div>*@
                     <div style="display:flex; justify-content:center; align-items:center">
                         <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="80" cy="80" r="79" stroke="#F4F4F4" stroke-width="2" />
@@ -57,15 +57,8 @@
 
                     </div>
                     <div class=" font-semibold mt-12 text-center" style="color:#000; font-size:12px; font-weight:500; line-height:14px; text-align:center">まだブックマークされたクラブがありません。</div>
-                    @*<div style="margin-left:24px; margin-right:24px">
-
-                            <div style="border-radius: 8px; background: var(--Darker_Primary, #D75A8B); padding:8px 20px; font-size:14px; color:#fff; font-weight:500; line-height:inherit; width:100%; margin-top:24px; text-align:center">
-                                マイページヘ
-                            </div>
-                        </div>*@
-
                 </div>
-                <div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='@Url.Action("Index", "DashboardV2")'" id="DateTimeFilter-Id">
+                <div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='/'" id="DateTimeFilter-Id">
                     <div class="my-[12px] text-[12px] font-[700] text-[#FFF] text-center " style="width:100%">
                         マイページヘ
                     </div>
@@ -241,8 +234,6 @@
                                     }
                                 }
                             </div>
-
-                            @*<button class="btn-gradient" onclick="ClubReservationActionFunction('@club.ClubId', '@club.ClubName')">*@
                             <button class="btn-gradient" onclick="InitiateClubReservationFunction('@club.ClubId')">
                                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
                             </button>
@@ -253,7 +244,7 @@
                 }
             }
         </div>
-        <div id="tab2" class="tab-content-plane hidden">
+        <div id="tab2" class="tab-content-plane @(bmktabVal == "01" ? "hidden" : "")">
             <div class="flex flex-row items-center bg-[#E5E5E5] h-[32px]">
                 <p class="pl-[16px] text-[14px] font-[500] ">
                     @hostCount @CRS.CUSTOMER.APPLICATION.Resources.Resource.Items
@@ -261,11 +252,7 @@
             </div>
             @if (Model.BookmarkedHosts.Count <= 0)
             {
-                @* <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center">
-                        <div class="text-[#18181B] font-semibold mt-12 text-center">まだブックマークされたホストがありません。</div>
-                    </div>*@
                 <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0]  justify-center items-center " style="padding-top:64px">
-                    @*<div>*@
                     <div style="display:flex; justify-content:center; align-items:center">
                         <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="80" cy="80" r="79" stroke="#F4F4F4" stroke-width="2" />
@@ -275,15 +262,8 @@
 
                     </div>
                     <div class=" font-semibold mt-12 text-center" style="color:#000; font-size:12px; font-weight:500; line-height:14px; text-align:center">まだブックマークされたホストがありません。</div>
-                    @*<div style="margin-left:24px; margin-right:24px">
-
-                            <div style="border-radius: 8px; background: var(--Darker_Primary, #D75A8B); padding:8px 20px; font-size:14px; color:#fff; font-weight:500; line-height:inherit; width:100%; margin-top:24px; text-align:center">
-                                マイページヘ
-                            </div>
-                        </div>*@
-
                 </div>
-                <div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='@Url.Action("Index", "DashboardV2")'" id="DateTimeFilter-Id">
+                <div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='/'" id="DateTimeFilter-Id">
                     <div class="my-[12px] text-[12px] font-[700] text-[#FFF] text-center " style="width:100%">
                         マイページヘ
                     </div>

@@ -1,6 +1,6 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.Home.RegistrationHoldModel
 @{
-    ViewBag.Title = "Customer Registration";
+    ViewBag.Title = "新規会員登録‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = "";
 }
 
@@ -36,74 +36,10 @@
     <script src="/Content/js/NotificationMessageToaster.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <title>Hoslog | @ViewBag.Title</title>
+    <title>@ViewBag.Title</title>
 </head>
 
 <body class="md:hidden">
-    <!--<div class="mx-[16px]">-->
-    @*<div class="flex justify-start flex-row mt-5" onclick="window.location.href='@Url.Action("HomePage","Home")'">
-            <div class="flex justify-center items-center">
-                <div class="pr-2 cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
-                        <path d="M10.2352 0.740836C9.78601 0.29167 9.06184 0.29167 8.61268 0.740836L0.995176 8.35834C0.637676 8.71584 0.637676 9.29333 0.995176 9.65084L8.61268 17.2683C9.06184 17.7175 9.78601 17.7175 10.2352 17.2683C10.6843 16.8192 10.6843 16.095 10.2352 15.6458L3.59851 9L10.2443 2.35417C10.6843 1.91417 10.6843 1.18084 10.2352 0.740836Z" fill="#BCB08A" />
-                    </svg>
-                </div>
-                <a class="text-[#292F33]">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
-                </a>
-            </div>
-        </div>*@
-    <!--<!--<div class="flex flex-col">-->
-    <!--@* @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
-    {
-        @Html.AntiForgeryToken()
-        <input value="@ViewBag.ReferCode" name="ReferCode" hidden />
-        <p class="font-semibold mt-[50px] uppercase">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Nickname <span class="text-[#D32F2F] pl-1 font-bold">*</span></p>
-        <div class="flex flex-row justify-center items-center mt-4 input-field-common">
-            @Html.TextBoxFor(model => model.NickName, new { @class = "text-sm w-full p-2.5 border border-[#BEBEBE] rounded-[3px] focus:border-[#d75a8b]", @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Enter_nickname, @onkeypress = "return isAlphabateOnly(event)", autocomplete = "off" })
-        </div>
-        <span class="validationMessage">
-            @Html.ValidationMessageFor(m => m.NickName)
-        </span>
-
-        <p class="font-semibold mt-[16px]">
-            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Mobile <span class="text-[#D32F2F] pl-1 font-bold">*</span>
-        </p>
-        <div class="input-field-common w-full mt-4 login-number">
-            <div class="number-input">
-                <div class="flag-section">
-                    <div class="japan-flag rounded-[2px] border border-[#BDBDBD h-[14px]">
-                        <div class="!h-[6px] !w-[6px]"></div>
-                    </div>
-                    @*<div>
-                            +81
-                        </div>
-        <div class="line-y">
-        </div>
-    </div>
-                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "rounded-none w-full focus:border-[#d75a8b]", @placeholder = CRS.CUSTOMER.APPLICATION.Resources.Resource.Phone_no, @minlength = "11", @maxlength = "11", @onkeypress = "return isNumber(event)", autocomplete = "off" })
-                </div>
-
-                <span class="validationMessage">
-                    @Html.ValidationMessageFor(m => m.MobileNumber)
-                </span>
-            </div>
-            <div class="flex justify-center pt-[30px]">
-                <p class="font-semibold text-[14px]">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.The_code_will_be_sent_through_SMS
-                </p>
-            </div>
-
-            <div class="px-4">
-                <button class="flex w-full focus-visible:outline-none rounded-full cursor-pointer justify-center items-center text-white h-[48px] mt-[25px] bg-[#D75A8B]"
-                        type="submit">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Next
-                </button>
-            </div>
-        }*@-->
-    <!--</div>-->
-    <!--</div>-->
-
     <style>
         .borderTop {
             border-top: 1px solid #ECECEC;
@@ -179,7 +115,7 @@
             letter-spacing: 0.4px;
         }
 
-    
+
         .registerButton {
             color: #fff;
             font-family: "Noto Sans";
@@ -192,33 +128,8 @@
             padding: 8px 12px;
             margin-top: 30px;
         }
-/*FOR NEW */
-        /*   .registerButton {
-        color: #ACA9A9;
-        font-family: "Noto Sans";
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 24px;
-        border-radius: 8px;
-        background: #F0F0F0;
-        padding: 8px 12px;
-        margin-top: 30px;
-    }*/
-     /*   .activeRegister {
-            color: #fff;
-            font-family: "Noto Sans";
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 24px;
-            border-radius: 8px;
-             background: #D75A8B;
-            padding: 8px 12px;
-            margin-top: 30px;
-        }*/
 
-/*FOR NEW END*/
+        /*FOR NEW END*/
         .loginButton {
             background: #FFF;
             padding: 8px 12px;
@@ -230,21 +141,7 @@
             border: 1px solid #F1F1F1;
             letter-spacing: -0.165px;
         }
-/**/
-/*new */
-/*
-        .loginButton {
-            background: #fff;
-            padding: 8px 12px;
-            color: #666;
-            font-weight: 600;
-            line-height: 23px;
-            font-size: 14px;
-            margin-top: 18px;
-            border: 1px solid #D75A8B;
-            letter-spacing: -0.165px;
-        }
-*/
+
         .termsAndContion {
             color: rgba(24, 24, 27, 0.60);
             font-weight: 700;
@@ -271,7 +168,7 @@
             font-weight: 500;
             line-height: 166%;
             padding: 0 13px;
-            white-space:nowrap;
+            white-space: nowrap;
         }
 
         .affiliation {
@@ -291,7 +188,7 @@
             font-style: normal;
             font-weight: 700;
             line-height: 166%;
-            display:none;
+            display: none;
         }
 
         .dividerCol {
@@ -336,7 +233,7 @@
     <div class="borderTop  ">
         <!-- for back button -->
         <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
-            <div class="flex gap-2 items-center absolute top-[12px] text-sm" onclick="window.location.href='@Url.Action("Index","Home")'">
+            <div class="flex gap-2 items-center absolute top-[12px] text-sm" onclick="window.location.href='/login'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                     <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
                           fill="#BCB08A" />
@@ -347,23 +244,18 @@
         <!-- back button end -->
         <div class="loginContainer">
             <div class="register">新しくホスログを始める</div>
-            @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @role = "form", @id = "Form" }))
+            @using (Html.BeginForm("register", "user", FormMethod.Post, new { @role = "form", @id = "Form" }))
             {
                 @Html.AntiForgeryToken()
                 <input value="@ViewBag.ReferCode" name="ReferCode" hidden />
                 <div class="inputWrapper">
                     @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @oninput = "validateInput(this)", autocomplete = "off", @maxlength = "20" })
-                    @*<input type="text" value="" name="nickName"
-                class=" focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="ミクチャン"
-                required>*@
                 </div>
                 <span class="validationMessage">
                     @Html.ValidationMessageFor(m => m.NickName, "", new { @class = "error-validation-msg" })
                 </span>
                 <div class="inputWrapper mt-2">
                     @Html.TextBoxFor(model => model.MobileNumber, new { @class = "w-full ring-0 focus:ring-0 focus:ring-transparent", @type = "number", @placeholder = "携帯電話番号", @minlength = "11", @maxlength = "11", oninput = "limitInputLength(this, 11)", autocomplete = "off" })
-                    @*<input type="number" name="contactNumber" value=""
-                class="w-full ring-0 focus:ring-0 focus:ring-transparent" placeholder="携帯電話番号" required>*@
                 </div>
                 <span class="validationMessage">
                     @Html.ValidationMessageFor(m => m.MobileNumber, "", new { @class = "error-validation-msg" })
@@ -373,9 +265,6 @@
                     <div class="flex justify-start items-start gap-2">
                         <input type="checkbox" name="policy" id="policy" class="checkBox focus:outline-none bg-none ring-offset-0 ring-0 focus:ring-0 focus:ring-transparent focus:ring-shadow-none">
                         <label for="policy" class="policy ">
-                            @*<a href="@Url.Action("termsAndCondition","Footer")" class="termLink">利用規約</a><span>と</span>
-                        <a href="@Url.Action("privacypolicy","Footer")" class="termLink">プライバシーポリシ</a>
-                        <span>ー に</span>*@
                             <span>  <a href="@Url.Action("termsAndCondition","Footer")"> 利用規約 </a></span> と <span> <a href="@Url.Action("privacypolicy","Footer")"> プライバシーポリシー </a></span> に同意したものとみなします
                         </label>
                     </div>
@@ -396,25 +285,11 @@
                 <div class="border  spertator"></div>
             </div>
             <!-- for login -->
-            <div onclick="window.location.href='@Url.Action("Index","Home")'">
+            <div onclick="window.location.href='/login'">
                 <button type="submit" class="loginButton border rounded-lg  w-full">ログイン</button>
             </div>
 
             @*FOR NEW REGISTRATION BUTTON *@
-
-            <!-- for login -->
-        <!--<div class="  " style="border: 1px solid #FFEAF5; border-radius: 3px; background: #FFFBFD;margin-top:36px ">
-            <div class="flex justify-center items-center mx-4" style="margin-top:15px">
-                <div class="border  spertator"></div>
-                <span class="otherAccotunt" style="text-transform:uppercase ">既にアカウントをお持ちですか <span style="font-size:14px">?</span></span>
-                <div class="border  spertator"></div>
-            </div>-->
-            <!-- for login -->
-            <!--<div onclick="window.location.href='@Url.Action("Index","Home")'" class="mx-4" style="margin-bottom:18px">
-                <button type="submit" class="loginButton border rounded-lg  w-full">ログイン</button>
-            </div>
-            </div>-->
-
             @*REGISTRATION BUTTON END*@
             <!-- for affiliation -->
             <div class="affiliation">
@@ -426,7 +301,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript">
-       
+
         $("#FormSubmit").click(function (event) {
             event.preventDefault();
             var MobileNumber = $('#MobileNumber').val();
@@ -466,7 +341,7 @@
 
             // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
             var regex = /^[a-zA-Z0-9\u3040-\u309f\u30a0-\u30ff]{4,}$/u;
-           
+
 
             // Check if the input value matches the pattern
             if (!regex.test(input.value)) {

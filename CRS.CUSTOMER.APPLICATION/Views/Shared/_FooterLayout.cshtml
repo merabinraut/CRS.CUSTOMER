@@ -36,7 +36,7 @@
             var Username = Session["Username"]?.ToString();
             if (!string.IsNullOrEmpty(Username))
             {
-                url = Url.Action("Index", "DashboardV2");
+                url = "/";
             }
             <div class="flex gap-[6px] items-center" onclick="WindowHistoryBack();">
                 <div class="text-xl text-warmgray cursor-pointer"><i class="las la-angle-left"></i></div>
@@ -52,7 +52,7 @@
         function WindowHistoryBack() {
             var previousUrl = document.referrer;
             if (isLoginPageWithReturnUrl(previousUrl)) {
-                window.location.href = '/DashboardV2/Index';
+                window.location.href = '/';
             }
             else {
                 window.history.back();
