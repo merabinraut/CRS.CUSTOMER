@@ -22,6 +22,7 @@
     .tab-container-plane .active {
         border-bottom: 2px solid #E3A1A1;
     }
+
     .gallery {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -204,7 +205,6 @@
             var imageURL = "/Content/assets/images/" + item2.ScheduleLabel + ".svg";
             if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
             {
-                @*<div onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng','@item2.FullDate')">*@
                 <div onclick="InitiateClubReservationFunction('@Model.ClubId','@item2.FullDate' )">
                     @item2.Date <div class="flex justify-center mt-1">
                         <img src="@imageURL" class="h-[11px] w-[11px]">
@@ -797,8 +797,8 @@
                                         }
                                         <!-- Display Label and LabelValue for each row -->
                                         @*<td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                        @item.Label
-                                    </td>*@
+                                                @item.Label
+                                            </td>*@
                                         <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
                                             @item.LabelValue
                                         </td>
@@ -807,21 +807,21 @@
                             }
 
                             @*<tr class="">
-                            <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
-                                エンジョイプラン
-                            </td>
-                            <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
-                                22:00 / L.O 21:00
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
-                                グループプラン
-                            </td>
-                            <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
-                                21:00 / L.O 20:00
-                            </td>
-                        </tr>*@
+                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
+                                        エンジョイプラン
+                                    </td>
+                                    <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
+                                        22:00 / L.O 21:00
+                                    </td>
+                                </tr>
+                                <tr class="">
+                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
+                                        グループプラン
+                                    </td>
+                                    <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
+                                        21:00 / L.O 20:00
+                                    </td>
+                                </tr>*@
                         </table>
                     </div>
                     <div class="box"></div>
@@ -883,47 +883,47 @@
                             }
                         }
                         <!--<tr class="">
-                    <td rowspan="2"
-                        class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
-                        test
-                        1
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        test 2
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        22:00 ( L.O 21:00 )
-                    </td>
-                </tr>
-                <tr class="">
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        最終入店時間
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
-                        最終入店時間
-                    </td>
-                </tr>-->
+                            <td rowspan="2"
+                                class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                test
+                                1
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                test 2
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                22:00 ( L.O 21:00 )
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                最終入店時間
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
+                                最終入店時間
+                            </td>
+                        </tr>-->
                         <!-- for decond row -->
                         <!--<tr class="">
-                    <td rowspan="2"
-                        class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
-                        グループプラン
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
-                        最終入店時間
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        22:00 ( L.O 21:00 )
-                    </td>
-                </tr>
-                <tr class="">
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        予約最大人数
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        1名
-                    </td>
-                </tr>-->
+                            <td rowspan="2"
+                                class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                グループプラン
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
+                                最終入店時間
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                22:00 ( L.O 21:00 )
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                予約最大人数
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                1名
+                            </td>
+                        </tr>-->
                     </table>
                 </div>
             </div>
@@ -1345,11 +1345,11 @@
             }
 
             @*<div id="modal2" class="modal">
-            <div class="modal-content">
-                <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " onclick="closeModal('modal2')">&times;</span>
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
-            </div>
-        </div>*@
+                    <div class="modal-content">
+                        <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " onclick="closeModal('modal2')">&times;</span>
+                        <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
+                    </div>
+                </div>*@
             <script>
                 // Function to open a specific modal
                 function openModal(modalId) {
