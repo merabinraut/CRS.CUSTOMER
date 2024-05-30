@@ -30,51 +30,64 @@
         font-weight: 400;
         line-height: 100%;
     }
-    .owl-theme .owl-dots{
-        width:100%;
-        margin:0;
-        display:flex;
-        justify-content:center;
-        gap:5px;
+    .owl-stage .owl-item.active {
+        width: 295px !important ;
+        margin-left:16px;
+    }
+    .owl-item active{
+    }
+    .owl-theme .owl-dots {
+        
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
     }
     .owl-carousel.owl-loaded{
         margin-top:10px;
-        margin-left:5px;
+ /*       margin-left:5px;*/
     }
     .owl-theme .owl-nav.disabled + .owl-dots {
         margin-top: 5px !important;
-        width: 98%;
+        width: calc(100vw - 50px);
+        margin-left:21px;
     }
+
     .owl-theme .owl-dots .owl-dot {
         gap: 5px;
     }
 
         .owl-theme .owl-dots .owl-dot span {
             width:100%;
-            max-width: 50px;
+          /*  max-width: 50px;*/
+          margin:0;
             background: #E0E0E0;
             height: 5px;
             border: 1px solid #CDCDCD
         }
         .owl-theme .owl-dots .owl-dot.active span {
-            width: 50px;
+            width: 100%;
+          /*  max-width: 50px;*/
             background: #E3A1A1;
             height: 5px;
             border: 1px solid #E39696
         }
+    .owl-carousel .owl-item img {
+        display: block;
+        width: 100%;
+        object-fit: fill !important;
+    }
 
-
-
+    /*
     .owl-item .item img {
         width: 298px;
     }
 
     .owl-carousel .owl-item {
         width: 298px;
-    }
-
-    .owl-carousel{
-        position:relative;
+    }*/
+    .owl-carousel {
+        position: relative;
     }
     .owl-theme .owl-dots{
         position:absolute;
@@ -115,10 +128,10 @@
                 foreach (var item in Model.HostGalleryImageList)
                 {
                     @* <a href="#">*@
-                    <div class="flex h-[413px] w-[195px] rounded ">
-                        <img class="object-fit rounded object-cover" src="@item"
-                             alt="modelimage" style="width:100%">
-                    </div>
+@*                    <div class="flex h-[413px] w-[195px] rounded ">*@
+                        <img class="object-fit rounded object-cover h-[413px]" src="@item"
+                             alt="modelimage"  >
+                    @*</div>*@
                     @* </a>*@
                 }
 
@@ -844,11 +857,16 @@
             $('.owl-carousel').owlCarousel({
                 center: false,
                 startPosition:0,
-                items: 1.25,
+                items: 1,
                 loop: true,
                 margin: 8,
+                
                 autoplay: false,
                 autoplayTimeout: 3000,
+                responsive: {
+                    items: 1,
+                    stagePadding:'25%'
+                }
                 /* responsive: {
                      400: {
                          items: 1.75,
