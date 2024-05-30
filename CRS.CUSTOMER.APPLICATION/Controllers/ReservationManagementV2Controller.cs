@@ -52,8 +52,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                                              .Where(item => !string.IsNullOrEmpty(item.Schedule) && item.Schedule.Trim().ToUpper() == "UNRESERVABLE")
                                              .Select(item => item.Date)
                                              .ToList();
-
+                var dayOff = ResponseModel.ClubReservationScheduleModel
+                                .Where(item => !string.IsNullOrEmpty(item.ScheduleLabel) && item.ScheduleLabel.Trim().ToLower() == "DAYOFF")
+                                .Select(item => item.Date)
+                                .ToList();
                 responseData["UnreservableDates"] = Newtonsoft.Json.JsonConvert.SerializeObject(unReservableDateList);
+                responseData["Dayoff"] = Newtonsoft.Json.JsonConvert.SerializeObject(dayOff);
                 if (!string.IsNullOrEmpty(SelectedDate))
                     responseData["SelectedDate"] = SelectedDate;
             }
@@ -345,6 +349,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
         }
         #endregion
+#endregion
 
         #region Reservation Success
         public ActionResult Success()
