@@ -30,6 +30,57 @@
         font-weight: 400;
         line-height: 100%;
     }
+    .owl-theme .owl-dots{
+        width:100%;
+        margin:0;
+        display:flex;
+        justify-content:center;
+        gap:5px;
+    }
+    .owl-carousel.owl-loaded{
+        margin-top:10px;
+        margin-left:5px;
+    }
+    .owl-theme .owl-nav.disabled + .owl-dots {
+        margin-top: 5px !important;
+    }
+    .owl-theme .owl-dots .owl-dot {
+        gap: 5px;
+    }
+
+        .owl-theme .owl-dots .owl-dot span {
+            width: 50px;
+            background: #E0E0E0;
+            height: 5px;
+            border: 1px solid #CDCDCD
+        }
+        .owl-theme .owl-dots .owl-dot.active span {
+            width: 50px;
+            background: #E3A1A1;
+            height: 5px;
+            border: 1px solid #E39696
+        }
+
+
+
+    .owl-item .item img {
+        width: 298px;
+    }
+
+    .owl-carousel .owl-item {
+        width: 298px;
+    }
+
+    .owl-carousel{
+        position:relative;
+    }
+    .owl-theme .owl-dots{
+        position:absolute;
+        top:0
+    }
+    .owl-theme .owl-dots button {
+       width:50px
+    }
 </style>
 
 <!-- back button -->
@@ -54,19 +105,19 @@
 </div>
 <!-- host image  -->
 
-<div class="flex flex-row relative fixed" style="overscroll-behavior:none;">
-    <div class="flex-col overflow-y-auto   ">
-        <div class="flex  overflow-x-auto mx-[16px] no-scrollbar flex-row gap-[8px] ">
+<div class="relative" >
+    <div class="  ">
+        <div class=" owl-carousel owl-theme no-scrollbar ">
             @if (Model.HostGalleryImageList != null && Model.HostGalleryImageList.Count > 0)
             {
                 foreach (var item in Model.HostGalleryImageList)
                 {
-                    <a href="#">
-                        <div class="flex h-[413px] w-[294px] rounded ">
-                            <img class="object-fit rounded object-cover" src="@item"
-                                 alt="modelimage" style="width:100%">
-                        </div>
-                    </a>
+                    @* <a href="#">*@
+                    <div class="flex h-[413px] w-[195px] rounded ">
+                        <img class="object-fit rounded object-cover" src="@item"
+                             alt="modelimage" style="width:100%">
+                    </div>
+                    @* </a>*@
                 }
 
             }
@@ -82,7 +133,7 @@
     <!-- favourite icon -->
     @if (Model.IsBookmarked.ToUpper() == "N")
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
+        <div class="absolute  right-3" style="bottom: -1.75rem; z-index:100" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
             <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height:59px;width:60px;" />
         </div>
     }
@@ -354,7 +405,7 @@
         <div class="w-full h-[1px] bg-[#FDFBFA]"></div>
         @if (!string.IsNullOrEmpty(Model.HostIntroduction))
         {
-            <div class="text-[#404040] pt-[5px] text-[12px] font-normal leading-[16.8px]">
+            <div class="text-[#404040] pt-[5px] text-[12px] font-normal leading-[16.8px]" style="white-space:normal; text-overflow:ellipsis; overflow:hidden">
                 @Model.HostIntroduction
             </div>
         }
@@ -771,4 +822,40 @@
                 window.location.href = '/LocationManagement/ClubDetail_V2?ClubId=' + clubid + '&LocationId=' + locationid;
             }
         }</script>
+
+    <script>
+        function OpenImagePopup(ImageURL) {
+            if (ImageURL != '' && ImageURL != null) {
+                var modalImg = document.getElementById("img01");
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+                modalImg.src = ImageURL;
+            }
+        }
+
+        function closeImagePopup() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                center: false,
+                startPosition:0,
+                items: 1.25,
+                loop: true,
+                margin: 8,
+                autoplay: false,
+                autoplayTimeout: 3000,
+                /* responsive: {
+                     400: {
+                         items: 1.75,
+
+                     }
+                 }*/
+
+            })
+
+            localStorage.clear();
+        })</script>
 }
