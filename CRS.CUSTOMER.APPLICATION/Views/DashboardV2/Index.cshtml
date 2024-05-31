@@ -41,11 +41,13 @@
 
 
     .owl-item .item img {
-        width: 298px;
+        width:100%;
+        min-width: 298px;
     }
 
     .owl-carousel .owl-item {
-        width: 298px;
+        width: 100%;
+        min-width: 298px;
     }
 </style>
 <style>
@@ -784,10 +786,10 @@
                 autoplay: true,
                 autoplayTimeout: 3000,
                 responsive: {
-                    400: {
+                   /* 400: {*/
                         items: 1.75,
 
-                    }
+                   /* }*/
                 }
             });
 
