@@ -48,6 +48,8 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
             if (!useDefaultImage && !string.IsNullOrEmpty(imageURL))
                 if (imageURL.ToLower().Contains("/content/"))
                     response = $"{ConfigurationManager.AppSettings["ImageVirtualPath"].ToString()}/{imageURL.TrimStart('/')}";
+                else if (imageURL.ToLower().Contains(_AmazonS3Configruation.BaseURL))
+                    response = imageURL;
                 else
                     response = $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{imageURL.TrimStart('/')}";
             return response;

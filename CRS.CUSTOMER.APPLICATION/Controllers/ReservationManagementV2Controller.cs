@@ -48,12 +48,17 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 responseData["Code"] = 0;
                 responseData["Message"] = "Success";
                 responseData["PartialView"] = partialViewString;
-                var unReservableDateList = ResponseModel.ClubReservationScheduleModel
-                                             .Where(item => !string.IsNullOrEmpty(item.Schedule) && item.Schedule.Trim().ToUpper() == "UNRESERVABLE")
-                                             .Select(item => item.Date)
-                                             .ToList();
+                //var unReservableDateList = ResponseModel.ClubReservationScheduleModel
+                //                             .Where(item => !string.IsNullOrEmpty(item.Schedule) && item.Schedule.Trim().ToUpper() == "UNRESERVABLE")
+                //                             .Select(item => item.Date)
+                //                             .ToList();
+                var dayOff = ResponseModel.ClubReservationScheduleModel
+                                .Where(item => !string.IsNullOrEmpty(item.Schedule) && item.Schedule.Trim().ToUpper() == "DAYOFF")
+                                .Select(item => item.Date)
+                                .ToList();
 
-                responseData["UnreservableDates"] = Newtonsoft.Json.JsonConvert.SerializeObject(unReservableDateList);
+                //responseData["UnreservableDates"] = Newtonsoft.Json.JsonConvert.SerializeObject(unReservableDateList);
+                responseData["Dayoff"] = Newtonsoft.Json.JsonConvert.SerializeObject(dayOff);
                 if (!string.IsNullOrEmpty(SelectedDate))
                     responseData["SelectedDate"] = SelectedDate;
             }
@@ -345,6 +350,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
         }
         #endregion
+
 
         #region Reservation Success
         public ActionResult Success()
