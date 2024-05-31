@@ -21,10 +21,11 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
             var DataTokens = HttpContext.Current.Request.RequestContext.RouteData.DataTokens;
             if (RouteValues != null)
             {
+                var CommonBusiness = new CommonManagementBusiness();
                 Functions = httpContext.Session["Functions"] as List<Privileges>;
                 if (Functions == null || Functions.Count <= 0)
                 {
-                    var CommonBusiness = new CommonManagementBusiness();
+
                     var GetCustomerPrivileges = CommonBusiness.GetCustomerPrivileges();
                     Functions = GetCustomerPrivileges.MapObjects<Privileges>();
                     httpContext.Session["Functions"] = Functions;
@@ -35,8 +36,36 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                 {
                     Functions.ForEach(x => x.FunctionURL = x.FunctionURL.ToUpper());
                     var ActionURL = $"/{ControllerName}/{ActionName}";
+                    bool redirectToLogin = false;
                     if (Functions.Any(x => x.FunctionURL.Contains(ActionURL)) && httpContext.Session["UserName"] == null)
+                        redirectToLogin = true;
+                    if (!redirectToLogin && Functions.Any(x => x.FunctionURL.Contains(ActionURL)) && httpContext.Session["UserName"] != null)
                     {
+                        var userId = Convert.ToString(httpContext.Session["UserId"]);
+                        if (!string.IsNullOrEmpty(userId))
+                        {
+                            var IsForceFulLogout = CommonBusiness.GetForceFulLogout(userId.DecryptParameter());
+                            if (IsForceFulLogout == "Y")
+                            {
+                                filterContext.Controller.TempData["JavaScriptFunction"] = "True";
+                                httpContext.Session["AgentId"] = null;
+                                httpContext.Session["Username"] = null;
+                                httpContext.Session["HasLandingSession"] = null;
+                                redirectToLogin = true;
+                            }
+                        }
+                    }
+                    if (redirectToLogin)
+                    {
+                        //var userId = Convert.ToString(httpContext.Session["UserId"]);
+                        //if (!string.IsNullOrEmpty(userId))
+                        //{
+                        //    var IsForceFulLogout = CommonBusiness.GetForceFulLogout(userId.DecryptParameter());
+                        //    if (IsForceFulLogout == "Y")
+                        //    {
+
+                        //    }
+                        //}
                         var FunctionName = Functions.FirstOrDefault(x => x.FunctionURL == ActionURL);
                         var RedirectURL = new UriBuilder(HttpContext.Current.Request.Url.Scheme,
                             HttpContext.Current.Request.Url.Host,
