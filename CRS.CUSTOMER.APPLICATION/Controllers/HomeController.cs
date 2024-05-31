@@ -412,6 +412,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Session["ProfileImage"] = ImageHelper.ProcessedImage(response.ProfileImage);
                     Session["CreatedOn"] = response.ActionDate;
                     Session["SystemLinkModel"] = response.SystemLink;
+                    Session["Amount"] = response.Amount;
                     return new Tuple<string, bool>("/", true);
                 }
                 this.AddNotificationMessage(new NotificationModel()

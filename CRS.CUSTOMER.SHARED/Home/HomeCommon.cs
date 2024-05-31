@@ -48,6 +48,7 @@ namespace CRS.CUSTOMER.SHARED.Home
         public string ProfileImage { get; set; }
         public string SessionId { get; set; }
         public string ActionDate { get; set; }
+        public string Amount { get; set; }
         public List<SystemLinkCommon> SystemLink { get; set; } = new List<SystemLinkCommon>();
     }
 
