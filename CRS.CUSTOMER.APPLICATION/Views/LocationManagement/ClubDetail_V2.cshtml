@@ -22,6 +22,7 @@
     .tab-container-plane .active {
         border-bottom: 2px solid #E3A1A1;
     }
+
     .gallery {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -57,36 +58,34 @@
 
 </div>
 <!-- section 1 -->
-<div class="px-2 pt-[12px] pb-2 flex gap-1">
-    @if (!string.IsNullOrEmpty(Model.Tag1))
-    {
 
-        <div class="px-[10px] border-[1px] border-[#A09E91] text-[10px] rounded-[2px] text-[#A09E91] flex justify-start items-center self-start gap-[2px]" style="border-radius: 2px; border:1px solid #F6F6F6">
-            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z"
-                      fill="#D75A8B" />
-            </svg>
-            <span>@Model.Tag1</span>
-        </div>
-    }
-    @if (!string.IsNullOrEmpty(Model.Tag2))
-    {
-        <div class="px-[5px] py-[1px] bg-[#BFA3B6] text-[10px] rounded-[2px] text-white">@Model.Tag2</div>
-    }
-    @if (!string.IsNullOrEmpty(Model.Tag3))
-    {
-        <div class="px-[5px] py-[1px] bg-[#697DBF] text-[10px] rounded-[2px] text-white">@Model.Tag3</div>
-    }
-    @if (!string.IsNullOrEmpty(Model.Tag4))
-    {
-        <div class="px-[5px] py-[1px] bg-[#96B41F] text-[10px] rounded-[2px] text-white">@Model.Tag4</div>
-    }
-    @if (!string.IsNullOrEmpty(Model.Tag5))
-    {
-        <div class="px-[5px] py-[1px] bg-[#EFB726] text-[10px] rounded-[2px] text-white">@Model.Tag5</div>
-    }
+<div class="pt-[20px]">
+
+    <ul class="club_tags">
+        @if (!string.IsNullOrEmpty(Model.Tag1))
+        {
+
+            <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @Model.Tag1</li>
+        }
+        @if (!string.IsNullOrEmpty(Model.Tag2))
+        {
+            <li class="tag_rank"> @Model.Tag2</li>
+        }
+        @if (!string.IsNullOrEmpty(Model.Tag3))
+        {
+            <li class="tag_platinum">@Model.Tag3</li>
+        }
+        @if (!string.IsNullOrEmpty(Model.Tag4))
+        {
+            <li class="tag_good">@Model.Tag4</li>
+        }
+        @if (!string.IsNullOrEmpty(Model.Tag5))
+        {
+            <li class="tag_big">@Model.Tag5</li>
+        }
+    </ul>
 </div>
+
 <!-- section 2 -->
 <div class="px-4 pb-[8px] flex justify-between ">
     <div class="flex gap-[8px]">
@@ -105,63 +104,116 @@
             </div>
         }
         <div>
-            <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEng</div>
-            <div class='text-xs  text-[#404040] '>@Model.ClubNameJp</div>
-            <div class="text-[10px] text-[#E3A1A1]">@Model.GroupName</div>
+            @* <div class='text-sm font-bold text-charcolBlack '>@Model.ClubNameEng</div>
+                <div class='text-xs  text-[#404040] '>@Model.ClubNameJp</div>
+                <div class="text-[10px] text-[#E3A1A1]">@Model.GroupName</div>*@
+            <div class="club_info" style="width:auto;">
+                <!-- s/club_name -->
+                <h3 class="club_name">@Model.ClubNameEng</h3>
+                <!-- e/club_name -->
+                <!-- s/club kana -->
+                <p class="club_kana">@Model.ClubNameJp</p>
+                <!-- e/club kana -->
+                <!-- s/club group -->
+                <p class="club_group">@Model.GroupName</p>
+                <!-- e/club group -->
+            </div>
         </div>
     </div>
     @if (Model.IsBookmarked.Trim().ToUpper() == "N")
     {
         <div class="flex items-center flex-col" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)">
             <div class="p-1">
-                <img src="~/Content/assets/images/customer/bookmark-outlined.svg" class="h-[20px] w-[25px]" />
+                <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
             </div>
-            <span class="text-[#BCB08A] text-[9px] font-medium" style="line-height: 100%;">保存</span>
         </div>
     }
     else
     {
         <div class="flex items-center flex-col" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)">
-            <img src="~/Content/assets/images/customer/bookmark-filled.svg" class="h-[20px] w-[25px]">
-            <span class="text-[#BCB08A] text-[9px] font-medium" style="line-height: 100%;">保存</span>
+            <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+
         </div>
     }
 
 </div>
 <div class="px-4 py-[12px]">
-    <div class="flex gap-[14px] pb-2">
-        <div class="flex  text-base  items-center" id="comment_ID">
+    @*  <div class="flex gap-[14px] pb-2">
+            <div class="flex  text-base  items-center" id="comment_ID">
+                @{
+                    var unratedScale = (5 - Model.AverageRating);
+                    for (int i = 0; i < Model.AverageRating; i++)
+                    {
+                        <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
+                                  fill="#F89336" />
+                        </svg>
+                    }
+                    for (int i = 0; i < unratedScale; i++)
+                    {
+                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                            <g opacity="0.3">
+                                <path d="M9.44612 1.1453L8.95768 2.25692L7.20604 6.18126L2.928 6.63601L1.71533 6.77076L2.62484 7.5792L5.8081 10.4593L4.91544 14.67L4.6628 15.849L5.72389 15.2426L9.44612 13.0868L13.1684 15.2426L14.2294 15.849L13.9768 14.67L13.0841 10.4593L16.2674 7.5792L17.1769 6.77076L15.9642 6.63601L11.6862 6.18126L9.93456 2.25692L9.44612 1.1453ZM9.44612 3.7896L10.8272 6.9055L10.962 7.19182L11.2651 7.22551L14.6505 7.5792L12.1241 9.85296L11.8883 10.0719L11.9557 10.3751L12.6631 13.6931L9.7156 12.0088L9.44612 11.8404L9.17664 12.0088L6.22917 13.6931L6.93656 10.3751L7.00393 10.0719L6.76813 9.85296L4.24173 7.5792L7.62711 7.22551L7.93028 7.19182L8.06502 6.9055L9.44612 3.7896Z"
+                                      fill="#C8B477" />
+                            </g>
+                        </svg>
+                    }
+                }
+
+                <div class="text-[#333] text-[12px] font-normal " style="line-height: 18px;">@Model.AverageRating</div>
+            </div>
+            <div class="flex gap-1 text-base items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    <path d="M1.52539 2.90918V12.8488H6.35188L8.07085 14.5455L9.78981 12.8488H14.6163V2.90918H1.52539ZM2.53238 3.90314H13.6093V11.8549H9.37286L8.07085 13.14L6.76884 11.8549H2.53238V3.90314ZM4.54637 5.39409V6.38805H11.5953V5.39409H4.54637ZM4.54637 7.38202V8.37598H11.5953V7.38202H4.54637ZM4.54637 9.36994V10.3639H9.58134V9.36994H4.54637Z"
+                          fill="#BCB08A" />
+                </svg>
+                <div class="text-[#333] text-[12px] font-normal">@Model.TotalComment</div>
+            </div>
+        </div>*@
+    <div class="club_rate" style="padding:0;">
+        <!-- s/club rank -->
+        <ul class="rate_stars">
+            <!-- s/rank star -->
             @{
                 var unratedScale = (5 - Model.AverageRating);
                 for (int i = 0; i < Model.AverageRating; i++)
                 {
-                    <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                        <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
-                              fill="#F89336" />
-                    </svg>
+                    <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
                 }
                 for (int i = 0; i < unratedScale; i++)
                 {
-                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
-                        <g opacity="0.3">
-                            <path d="M9.44612 1.1453L8.95768 2.25692L7.20604 6.18126L2.928 6.63601L1.71533 6.77076L2.62484 7.5792L5.8081 10.4593L4.91544 14.67L4.6628 15.849L5.72389 15.2426L9.44612 13.0868L13.1684 15.2426L14.2294 15.849L13.9768 14.67L13.0841 10.4593L16.2674 7.5792L17.1769 6.77076L15.9642 6.63601L11.6862 6.18126L9.93456 2.25692L9.44612 1.1453ZM9.44612 3.7896L10.8272 6.9055L10.962 7.19182L11.2651 7.22551L14.6505 7.5792L12.1241 9.85296L11.8883 10.0719L11.9557 10.3751L12.6631 13.6931L9.7156 12.0088L9.44612 11.8404L9.17664 12.0088L6.22917 13.6931L6.93656 10.3751L7.00393 10.0719L6.76813 9.85296L4.24173 7.5792L7.62711 7.22551L7.93028 7.19182L8.06502 6.9055L9.44612 3.7896Z"
-                                  fill="#C8B477" />
-                        </g>
-                    </svg>
+                    <!-- e/rank star -->
+                    <!-- s/rank star -->
+                    <li><img src="~/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>
                 }
             }
-
-            <div class="text-[#333] text-[12px] font-normal " style="line-height: 18px;">@Model.AverageRating</div>
-        </div>
-        <div class="flex gap-1 text-base items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
-                <path d="M1.52539 2.90918V12.8488H6.35188L8.07085 14.5455L9.78981 12.8488H14.6163V2.90918H1.52539ZM2.53238 3.90314H13.6093V11.8549H9.37286L8.07085 13.14L6.76884 11.8549H2.53238V3.90314ZM4.54637 5.39409V6.38805H11.5953V5.39409H4.54637ZM4.54637 7.38202V8.37598H11.5953V7.38202H4.54637ZM4.54637 9.36994V10.3639H9.58134V9.36994H4.54637Z"
-                      fill="#BCB08A" />
-            </svg>
-            <div class="text-[#333] text-[12px] font-normal">@Model.TotalComment</div>
-        </div>
+            <!-- e/rank star -->
+            <!-- s/rank star -->
+            @*<li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
+            <!-- e/rank star -->
+            <!-- s/rank star -->
+            @* <li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
+            <!-- e/rank star -->
+            <!-- s/rank star -->
+            @*<li><img src="/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>*@
+            <!-- e/rank star -->
+            <!-- s/rank star -->
+            <li class="rate_value"> @Model.AverageRating</li>
+            <!-- e/rank star -->
+        </ul>
+        <!-- e/club rank -->
+        <!-- s/club review -->
+        <ul class="rate_review">
+            <!-- s/comment frame -->
+            <li><img src="~/Content/assets/images/comment.svg" alt="コメント"></li>
+            <!-- e/comment frame -->
+            <!-- s/comment value -->
+            <li class="comment_value">@Model.TotalComment</li>
+            <!-- e/comment value -->
+        </ul>
+        <!-- e/club review -->
     </div>
-    <div class="text-[12px] font-normal leading-[18px] self-stretch	text-[#333]">
+    <div class="text-[12px] font-normal pt-2 leading-[18px] self-stretch	text-[#333]">
         @Model.ClubDescription
     </div>
 </div>
@@ -204,7 +256,6 @@
             var imageURL = "/Content/assets/images/" + item2.ScheduleLabel + ".svg";
             if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
             {
-                @*<div onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEng','@item2.FullDate')">*@
                 <div onclick="InitiateClubReservationFunction('@Model.ClubId','@item2.FullDate' )">
                     @item2.Date <div class="flex justify-center mt-1">
                         <img src="@imageURL" class="h-[11px] w-[11px]">
@@ -811,8 +862,8 @@
                                         }
                                         <!-- Display Label and LabelValue for each row -->
                                         @*<td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                        @item.Label
-                                    </td>*@
+                                                @item.Label
+                                            </td>*@
                                         <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
                                             @item.LabelValue
                                         </td>
@@ -821,21 +872,21 @@
                             }
 
                             @*<tr class="">
-                            <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
-                                エンジョイプラン
-                            </td>
-                            <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
-                                22:00 / L.O 21:00
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
-                                グループプラン
-                            </td>
-                            <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
-                                21:00 / L.O 20:00
-                            </td>
-                        </tr>*@
+                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
+                                        エンジョイプラン
+                                    </td>
+                                    <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
+                                        22:00 / L.O 21:00
+                                    </td>
+                                </tr>
+                                <tr class="">
+                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
+                                        グループプラン
+                                    </td>
+                                    <td class=" border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
+                                        21:00 / L.O 20:00
+                                    </td>
+                                </tr>*@
                         </table>
                     </div>
                     <div class="box"></div>
@@ -897,47 +948,47 @@
                             }
                         }
                         <!--<tr class="">
-                    <td rowspan="2"
-                        class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
-                        test
-                        1
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        test 2
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        22:00 ( L.O 21:00 )
-                    </td>
-                </tr>
-                <tr class="">
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        最終入店時間
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
-                        最終入店時間
-                    </td>
-                </tr>-->
+                            <td rowspan="2"
+                                class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                test
+                                1
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                test 2
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                22:00 ( L.O 21:00 )
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                最終入店時間
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
+                                最終入店時間
+                            </td>
+                        </tr>-->
                         <!-- for decond row -->
                         <!--<tr class="">
-                    <td rowspan="2"
-                        class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
-                        グループプラン
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
-                        最終入店時間
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        22:00 ( L.O 21:00 )
-                    </td>
-                </tr>
-                <tr class="">
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        予約最大人数
-                    </td>
-                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                        1名
-                    </td>
-                </tr>-->
+                            <td rowspan="2"
+                                class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                グループプラン
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px] " style="padding-left:13px">
+                                最終入店時間
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                22:00 ( L.O 21:00 )
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                予約最大人数
+                            </td>
+                            <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                1名
+                            </td>
+                        </tr>-->
                     </table>
                 </div>
             </div>
@@ -1339,10 +1390,10 @@
             </div>
             @if (Model.ClubGalleryImageList != null && Model.ClubGalleryImageList.Count != 0)
             {
-                <div class="bg-[#3A3A3A] px-[2px] py-1 grid gap-[2px] grid-cols-3">
+                <div class="bg-[#3A3A3A] gallery">
                     @foreach (var item in Model.ClubGalleryImageList)
                     {
-                        <img src="@item" alt="img" class="h-[117px] object-cover" onclick="OpenImagePopup('@item')" />
+                        <img src="@item" alt="img" onclick="OpenImagePopup('@item')" />
                     }
                 </div>
             }
@@ -1359,11 +1410,11 @@
             }
 
             @*<div id="modal2" class="modal">
-            <div class="modal-content">
-                <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " onclick="closeModal('modal2')">&times;</span>
-                <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
-            </div>
-        </div>*@
+                    <div class="modal-content">
+                        <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " onclick="closeModal('modal2')">&times;</span>
+                        <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " />
+                    </div>
+                </div>*@
             <script>
                 // Function to open a specific modal
                 function openModal(modalId) {

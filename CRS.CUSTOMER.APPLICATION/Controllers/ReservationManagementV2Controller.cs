@@ -327,7 +327,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 NoOfPeople = Model.NoOfPeople,
                 HostIdList = HostIdLists,
                 PaymentType = (string.IsNullOrEmpty(Model.PaymentType) || Model.PaymentType.Trim() == "0") ? "0" : Model.PaymentType.DecryptParameter(),
-                ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString(),
+                ActionUser = ApplicationUtilities.GetSessionValue("UserId")?.ToString()?.DecryptParameter(),
                 ActionIP = ApplicationUtilities.GetIP()
             };
             var dbResponse = _buss.ReservationConfirmation(dbRequest);
