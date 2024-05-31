@@ -30,27 +30,31 @@
         font-weight: 400;
         line-height: 100%;
     }
+
     .owl-stage .owl-item.active {
-        width: 295px !important ;
-        margin-left:16px;
+        width: 295px !important;
+        margin-left: 16px;
     }
-    .owl-item active{
+
+    .owl-item active {
     }
+
     .owl-theme .owl-dots {
-        
         margin: 0;
         display: flex;
         justify-content: center;
         gap: 5px;
     }
-    .owl-carousel.owl-loaded{
-        margin-top:10px;
- /*       margin-left:5px;*/
+
+    .owl-carousel.owl-loaded {
+        margin-top: 10px;
+        /*       margin-left:5px;*/
     }
+
     .owl-theme .owl-nav.disabled + .owl-dots {
         margin-top: 5px !important;
         width: calc(100vw - 50px);
-        margin-left:21px;
+        margin-left: 21px;
     }
 
     .owl-theme .owl-dots .owl-dot {
@@ -58,20 +62,22 @@
     }
 
         .owl-theme .owl-dots .owl-dot span {
-            width:100%;
-          /*  max-width: 50px;*/
-          margin:0;
+            width: 100%;
+            /*  max-width: 50px;*/
+            margin: 0;
             background: #E0E0E0;
-            height: 5px;
+            height: 2px;
             border: 1px solid #CDCDCD
         }
+
         .owl-theme .owl-dots .owl-dot.active span {
             width: 100%;
-          /*  max-width: 50px;*/
+            /*  max-width: 50px;*/
             background: #E3A1A1;
-            height: 5px;
+            height: 2px;
             border: 1px solid #E39696
         }
+
     .owl-carousel .owl-item img {
         display: block;
         width: 100%;
@@ -89,13 +95,15 @@
     .owl-carousel {
         position: relative;
     }
-    .owl-theme .owl-dots{
-        position:absolute;
-        top:0
+
+    .owl-theme .owl-dots {
+        position: absolute;
+        top: 0
     }
-    .owl-theme .owl-dots button {
-       width:50px
-    }
+
+        .owl-theme .owl-dots button {
+            width: 50px
+        }
 </style>
 
 <!-- back button -->
@@ -120,7 +128,7 @@
 </div>
 <!-- host image  -->
 
-<div class="relative" >
+<div class="relative">
     <div class="  ">
         <div class=" owl-carousel owl-theme no-scrollbar ">
             @if (Model.HostGalleryImageList != null && Model.HostGalleryImageList.Count > 0)
@@ -128,9 +136,9 @@
                 foreach (var item in Model.HostGalleryImageList)
                 {
                     @* <a href="#">*@
-@*                    <div class="flex h-[413px] w-[195px] rounded ">*@
-                        <img class="object-fit rounded object-cover h-[413px]" src="@item"
-                             alt="modelimage"  >
+                    @*                    <div class="flex h-[413px] w-[195px] rounded ">*@
+                    <img class="object-fit rounded object-cover h-[413px]" src="@item"
+                         alt="modelimage">
                     @*</div>*@
                     @* </a>*@
                 }
@@ -148,14 +156,14 @@
     <!-- favourite icon -->
     @if (Model.IsBookmarked.ToUpper() == "N")
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem; z-index:100" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
-            <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height:59px;width:60px;" />
+        <div class="absolute  right-3" style="bottom: -1.75rem; z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
+            <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height: 59px; width: 60px; z-index: 1" />
         </div>
     }
     else
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
-            <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="height:59px;width:60px;" />
+        <div class="absolute  right-3" style="bottom: -1.75rem;z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
+            <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="height: 59px; width: 60px; z-index: 1 " />
         </div>
     }
 </div>
@@ -856,16 +864,16 @@
         $(document).ready(function () {
             $('.owl-carousel').owlCarousel({
                 center: false,
-                startPosition:0,
+                startPosition: 0,
                 items: 1,
-                loop: true,
+                loop: false,
                 margin: 8,
-                
+
                 autoplay: false,
                 autoplayTimeout: 3000,
                 responsive: {
                     items: 1,
-                    stagePadding:'25%'
+                    stagePadding: '25%'
                 }
                 /* responsive: {
                      400: {

@@ -39,6 +39,24 @@
             aspect-ratio: 1;
             object-fit: cover; /* Ensures image covers the div while maintaining aspect ratio */
         }
+    .galleryHost {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        max-width: 1200px;
+        width: 100%;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        box-sizing: border-box;
+    }
+
+        .galleryHost img {
+            width: 100%;
+            aspect-ratio: 1;
+            min-height:104px;
+            min-width:104px
+            object-fit: cover; /* Ensures image covers the div while maintaining aspect ratio */
+        }
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
@@ -1110,14 +1128,15 @@
             </div>
             @if (Model.HostListModels != null && Model.HostListModels.Count != 0)
             {
-                <div class="p-[10px] grid grid-cols-3 gap-3 px-[16px] bg-[#EFEFEF]">
+                @*<div class="p-[10px] grid grid-cols-3 gap-3 px-[16px] bg-[#EFEFEF]">*@
+                    <div class="p-[10px] galleryHost bg-[#EFEFEF]">
                     @foreach (var item in Model.HostListModels)
                     {
                         <div onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
                             @if (!string.IsNullOrEmpty(item.HostImage))
                             {
                                 <img src="@item.HostImage"
-                                     class="w-[104px] h-[104px] object-fill rounded-[6px] image-cover" />
+                                     class=" object-fill rounded-[6px] image-cover" />
                             }
                             else
                             {
