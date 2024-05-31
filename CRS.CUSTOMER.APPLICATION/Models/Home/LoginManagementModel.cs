@@ -32,6 +32,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string ProfileImage { get; set; }
         public string SessionId { get; set; }
         public string ActionDate { get; set; }
+        public int Amount { get; set; }
         public List<SystemLinkModel> SystemLink { get; set; } = new List<SystemLinkModel>();
     }
     public class SystemLinkModel
