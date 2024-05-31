@@ -21,6 +21,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string Password { get; set; }
         public string SessionId { get; set; }
         public string clubURL { get; set; }
+        public string ReturnURL { get; set; }
         public string affiliateURL { get; set; }
     }
     public class LoginResponseModel

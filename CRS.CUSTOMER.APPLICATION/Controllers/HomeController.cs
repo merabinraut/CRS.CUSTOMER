@@ -306,6 +306,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(string ReturnURL = "")
         {
+            ViewBag.ReturnURL = (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL)) ? ReturnURL : string.Empty;
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             string phaseValue = ConfigurationManager.AppSettings["phase"];
 
@@ -326,6 +327,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else this.ClearSessionData();
                 LoginRequestModel Response = new LoginRequestModel();
+                
+                
                 if (phaseValue.ToUpper() == "DEVELOPMENT")
                 {
                     Response.affiliateURL = "http://43.207.72.221:93/";
@@ -338,7 +341,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
-                ViewBag.ReturnURL = (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL)) ? ReturnURL : string.Empty;
+                
                 return View(Response);
             }
             else return Redirect("/");
@@ -349,6 +352,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(LoginRequestModel Model, bool RememberMe = false, string ReturnURL = "")
         {
+            ViewBag.ReturnURL = (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL)) ? ReturnURL : string.Empty;
             if (ModelState.IsValid)
             {
                 var loginResponse = Login(Model);
@@ -377,7 +381,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     if (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL))
                         return Redirect(ReturnURL);
 
-                return Redirect(loginResponse.Item1);
+                //return Redirect(loginResponse.Item1,new { ReturnURL });
+                return Redirect(loginResponse.Item1 + "?ReturnURL=" +  Uri.EscapeDataString(ReturnURL));
+
             }
             else
             {
