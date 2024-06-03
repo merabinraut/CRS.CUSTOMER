@@ -68,178 +68,111 @@
             {
                 foreach (var club in Model.BookmarkedClubs)
                 {
-                    <div class="flex flex-col  gap-1 w-full   border-b-[4px] border-[#E5E5E5]">
-                        <!-- location -->
-                        <section class="tags flex flex-wrap pt-3 pb-2 gap-2 px-4 items-center ">
-                            @if (!string.IsNullOrEmpty(club.Tag1))
-                            {
-                                <div style="border-radius: 2px; border:1px solid #F6F6F6" class="px-[2px] flex items-center justify-center gap-[2px] text-[#A09E91] text-[10px] leading-[16px]">
-                                    <i class="fa-solid fa-location-dot text-[10px] text-[#D75A8B]"></i>
-                                    @club.Tag1
+                    <div class="club_content">
+                        <!-- s/link -->
+                        <a onclick="ClubDetailActionFunction('@club.LocationId', '@club.ClubId')">
+                            <ul class="club_tags">
+                                @if (!string.IsNullOrEmpty(@club.Tag1))
+                                {
+                                    <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @club.Tag1</li>
+                                }
+                                @if (!string.IsNullOrEmpty(@club.Tag2))
+                                {
+                                    <li class="tag_rank"> @club.Tag2</li>
+                                }
+                                @if (!string.IsNullOrEmpty(@club.Tag3))
+                                {
+                                    <li class="tag_platinum">  @club.Tag3</li>
+                                }
+
+                                @if (!string.IsNullOrEmpty(@club.Tag4))
+                                {
+                                    <li class="tag_good">@club.Tag4</li>
+                                }
+                                @if (!string.IsNullOrEmpty(@club.Tag5))
+                                {
+                                    <li class="tag_big">  @club.Tag5</li>
+                                }
+                            </ul>
+                            <div class="club_header">
+                                <div class="club_logo"><img class="logo" alt="ロゴ" src="@club.ClubLogo"></div>
+                                <div class="club_info">
+                                    <h3 class="club_name">@club.ClubName</h3>
+                                    <p class="club_kana">@club.ClubNameJapanese</p>
+                                    <p class="club_group">@club.GroupName</p>
                                 </div>
-                            }
-                            <div class=" flex self-center gap-0.5  ">
-                                @if (!string.IsNullOrEmpty(club.Tag2))
-                                {
-                                    <span class="  lg:text-[9px] text-xs   self-center   px-2 rounded-sm  bg-[#BFA3B6] text-[#FFFFFF]">
-                                        @club.Tag2
-                                    </span>
-                                }
-                                @if (!string.IsNullOrEmpty(club.Tag3))
-                                {
-                                    <span class="  lg:text-[9px] text-xs   self-center    px-2 rounded-sm  bg-[#697DBF] text-[#FFFFFF]">
-                                        @club.Tag3
-                                    </span>
-                                }
-                                @if (!string.IsNullOrEmpty(club.Tag4))
-                                {
-                                    <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm  text-[#FFFFFF] bg-[#96B41F]">
-                                        @club.Tag4
-                                    </span>
-                                }
-                                @if (!string.IsNullOrEmpty(club.Tag5))
-                                {
-                                    <span class="   lg:text-[9px] text-xs   self-center    px-2 rounded-sm   text-[#FFFFFF] bg-[#EFB726]">
-                                        @club.Tag5
-                                    </span>
-                                }
+
+                                    <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@club.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                             </div>
-                        </section>
-
-                        <!-- club name -->
-                        <section class="w-full flex px-4 pb-2 justify-between ">
-                            <a onClick={goToTop}>
-                                <div class="flex gap-2  hover:cursor-pointer transition-all delay-150">
-                                    <div class="h-12 w-12 rounded-full border-borderColor bg-primary border overflow-hidden" onclick="ClubDetailActionFunction('@club.LocationId', '@club.ClubId')">
-                                        <img src="@club.ClubLogo" alt="" title="club logo"
-                                             class="w-full h-full image-cover" />
-                                    </div>
-
-                                    <div class="flex flex-col ">
-                                        <div class="flex gap-1 text-base items-center  font-semibold">
-                                            <div class="text-base items-start " title="club name">
-                                                @club.ClubName
-                                            </div>
-                                        </div>
-                                        <div class="text-xs items-start " title="club ">
-                                            @club.ClubNameJapanese
-                                        </div>
-                                        <div class="text-[10px] items-start text-[#E3A1A1] " title="club group">
-                                            @club.GroupName
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class=" w-6 h-6 flex flex-col justify-center items-center  scale-90">
-                                <div class="flex flex-col justify-center items-center hover:cursor-pointer">
-
-                                    <div onclick="ManageBookmark('@club.ClubId','','club', this)">
-                                        <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[24px] w-[24px] image-cover" alt="filled bookmark" />
-                                    </div>
-
-                                    <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
-                                        保存
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- photo -->
-                        <section class="h-auto w-full grid grid-cols-3 bg-light gap-0.5">
-                            @foreach (var item2 in club.HostGalleryImage)
-                            {
-                                <div class=" " onclick="OpenImagePopup('@item2')">
-                                    <img src="@item2"
-                                         class="aspect-square image-cover h-[120px] w-full" />
-                                </div>
-                            }
-
-                        </section>
-
-                        <!-- rating /commment -->
-                        <section class=" flex justify-start flex-wrap align-top mt-2 px-4 gap-3">
-                            <div class="flex items-center gap-0.5" title="club rank">
-                                @{
-                                    var unratedScale = (5 - club.AverageRating);
-                                    for (int i = 0; i < club.AverageRating; i++)
-                                    {
-                                        <img src="~/Content/assets/images/ratingstar-filled.svg" class="h-[18px] w-[18px]" alt="rated" />
-                                    }
-                                    for (int i = 0; i < unratedScale; i++)
-                                    {
-                                        <img src="~/Content/assets/images/ratingstar-notfilled.svg" class="h-[18px] w-[18px]" alt="unrated" />
-                                    }
-                                }
-                                <div class=" text-xs scale-110" title="club rating">
-                                    @club.AverageRating
-                                </div>
-                            </div>
-
-                            <div class="flex items-center gap-1 scale-75">
-                                <div class="flex items-center  " title="comment">
-
-                                    <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16"
-                                         fill="none">
-                                        <path d="M1.52429 2.90909V12.8487H6.35078L8.06975 14.5455L9.78872 12.8487H14.6152V2.90909H1.52429ZM2.53129 3.90305H13.6082V11.8548H9.37176L8.06975 13.1399L6.76774 11.8548H2.53129V3.90305ZM4.54527 5.394V6.38796H11.5942V5.394H4.54527ZM4.54527 7.38192V8.37589H11.5942V7.38192H4.54527ZM4.54527 9.36985V10.3638H9.58024V9.36985H4.54527Z"
-                                              fill="#BCB08A" />
-                                    </svg>
-                                </div>
-
-                                <div class=" text-xs scale-110">@club.TotalComment</div>
-                            </div>
-                        </section>
-
-                        <!-- club description -->
-
-                        <section class="flex flex-col gap-2 px-4 mb-3 ">
-                            <p class="line-clamp-3 font-[Noto Sans] text-xs   text-[#333333]">
-                                @club.ClubDescription
-                            </p>
-                        </section>
-
-                        <div class="px-4 py-[12px] flex justify-between items-center">
-                            <div>
-                                @if (!string.IsNullOrEmpty(club.ClubOpeningTime) && !string.IsNullOrEmpty(club.ClubClosingTime))
+                            <ul class="club_thumb">
+                                @foreach (var item2 in club.HostGalleryImage)
                                 {
-                                    <div class="flex justify-center items-center gap-1 pb-1">
-                                        @if (!string.IsNullOrEmpty(club.ClubTimePeriod) && club.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                                    <li><img alt="@club.ClubName ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
+                                }
+
+                            </ul>
+                            <div class="club_rate">
+                                <ul class="rate_stars">
+                                    @{
+                                        var unratedScale = (5 - club.AverageRating);
+                                        for (int i = 0; i < club.AverageRating; i++)
                                         {
-                                            <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">
-                                                <img src="~/Content/assets/images/customer/sun.svg" />
-                                            </div>
+                                            <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
                                         }
-                                        else if (!string.IsNullOrEmpty(club.ClubTimePeriod) && club.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                                        for (int i = 0; i < unratedScale; i++)
                                         {
-                                            <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">
-                                                <img src="~/Content/assets/images/customer/moon.svg" />
-                                            </div>
+                                            <li><img src="~/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>
                                         }
-                                        <div class="text-sm text-secondary-1 flex justify-center items-center">
-                                            @club.ClubOpeningTime <span>
-                                                <img src="~/Content/assets/images/customer/time-duration.svg" style="height:9px; width:8px" />
+                                    }
 
-                                            </span>@club.ClubClosingTime
-                                        </div>
-                                    </div>
+                                    <li class="rate_value"> @club.AverageRating</li>
+                                </ul>
+                                <ul class="rate_review">
+                                    <li><img src="~/Content/assets/images/comment.svg" alt="コメント"></li>
+                                    <li class="comment_value">@club.TotalComment</li>
+                                </ul>
+                            </div>
+                            <p class="club_pr"> @club.ClubDescription</p>
+                        </a>
+                        <!-- e/link -->
+                        <!-- s/club footer -->
+                        <div class="club_footer">
+                            <!-- s/club status -->
+                            <div class="club_status">
+                                <!-- s/opening hours -->
+                                @if (!string.IsNullOrEmpty(@club.ClubOpeningTime) && !string.IsNullOrEmpty(@club.ClubClosingTime))
+                                {
+                                    if (!string.IsNullOrEmpty(@club.ClubTimePeriod) && @club.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                                    {
+                                        <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime</div>
+                                    }
+                                    else if (!string.IsNullOrEmpty(@club.ClubTimePeriod) && @club.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                                    {
+                                        <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@club.ClubOpeningTime &#xff5e; @club.ClubClosingTime</div>
+                                    }
+
+                                    <!-- e/opening hours -->
+                                    <!-- s/available -->
                                     if (!string.IsNullOrEmpty(club.TodaysClubSchedule) && club.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                                     {
-                                        <div class="bg-[#BCB08A] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center">
-                                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
-                                        </div>
+                                        <div class="available">本日空席あり</div>
                                     }
                                     else
                                     {
-                                        <div class="bg-[#D7D7D7] text-white w-max px-2 rounded-[2px] text-xs h-[18px] flex items-center justify-center" style="background: #D7D7D7;  width:100%">
-                                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
-                                        </div>
+                                        <div class="available disabled">本日空席あり</div>
                                     }
                                 }
+                                <!-- e/available -->
                             </div>
-                            <button class="btn-gradient" onclick="InitiateClubReservationFunction('@club.ClubId')">
+                            <!-- e/club status -->
+                            <!-- s/reservation btn -->
+                            <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@club.ClubId')">
                                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
+                                @* 今すぐ予約する*@
                             </button>
-
+                            <!-- e/reservation btn -->
                         </div>
-
+                        <!-- e/club footer -->
                     </div>
                 }
             }
