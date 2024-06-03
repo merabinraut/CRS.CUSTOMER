@@ -37,6 +37,11 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         {
             return _REPO.GetSystemLink();
         }
+
         #endregion
+        public string GetForceFulLogout(string UserId)
+        {
+            return _REPO.GetForceFulLogout(UserId);
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2
     {
         public string Date { get; set; }
         public string Schedule { get; set; }
+        public string ScheduleLabel { get; set; }
     }
 
     public class ClubReservableTimeModel

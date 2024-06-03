@@ -14,5 +14,6 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         #region System Links
         List<SystemLinkCommon> GetSystemLink();
         #endregion
+        string GetForceFulLogout(string UserId);
     }
 }

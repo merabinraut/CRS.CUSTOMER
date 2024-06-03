@@ -53,7 +53,7 @@
                     $('#date-id').val(data.SelectedDate.trim());
                     selectedDate = new Date(data.SelectedDate);
                 }
-                var dateList = JSON.parse(data.UnreservableDates);
+                var dateList = JSON.parse(data.Dayoff);
                 var formattedDates = [];
                 dateList.forEach(function (dateString) {
                     if (dateString !== undefined) {
@@ -71,13 +71,23 @@
                         }
                     }
                 });
+                var holidayDates = data.Dayoff;
                 $("#datepicker").datepicker({
                     minDate: currentDate,
                     maxDate: maxDate,
                     defaultDate: selectedDate,
                     beforeShowDay: function (date) {
+                        //var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                        //return [formattedDates.indexOf(string) == -1];
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                        return [formattedDates.indexOf(string) == -1];
+                        if (formattedDates.indexOf(string) != -1) {
+                            return [false]; // Unreservable date
+                        } else if (holidayDates.indexOf(string) == -1) {
+                            return [true, 'Dayoff']; // Dayoff date
+                        }
+                        else {
+                            return [true];
+                        }
                     },
                     onSelect: function (dateText, inst) {
                         inst.inline = true; // Set datepicker to inline mode

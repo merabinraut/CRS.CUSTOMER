@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -100,12 +101,15 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
                     var loginResponse = new LoginResponseCommon()
                     {
                         NickName = _dao.ParseColumnValue(dbResponse, "NickName").ToString(),
+                        IsPasswordForceful = _dao.ParseColumnValue(dbResponse, "IsPasswordForceful").ToString(),
+                        MobileNumber = _dao.ParseColumnValue(dbResponse, "MobileNumber").ToString(),
                         AgentId = _dao.ParseColumnValue(dbResponse, "AgentId").ToString(),
                         UserId = _dao.ParseColumnValue(dbResponse, "UserId").ToString(),
                         EmailAddress = _dao.ParseColumnValue(dbResponse, "EmailAddress").ToString(),
                         ProfileImage = _dao.ParseColumnValue(dbResponse, "ProfileImage").ToString(),
                         SessionId = _dao.ParseColumnValue(dbResponse, "SessionId").ToString(),
-                        ActionDate = _dao.ParseColumnValue(dbResponse, "ActionDate").ToString()
+                        ActionDate = _dao.ParseColumnValue(dbResponse, "ActionDate").ToString(),
+                        Amount =  Convert.ToInt32(_dao.ParseColumnValue(dbResponse, "Amount").ToString())
                     };
 
                     string SQL2 = "EXEC sproc_system_links_management";
@@ -156,6 +160,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
             SQL += ",@ActionUser=" + _dao.FilterString(common.ActionUser);
             SQL += ",@ActionPlatform=" + _dao.FilterString(common.ActionPlatform);
             SQL += ",@ActionIP=" + _dao.FilterString(common.ActionIP);
+            SQL += ",@IsPasswordForceful="+ _dao.FilterString(common.IsPasswordForceful); 
             return _dao.ParseCommonDbResponse(SQL);
         }
 
