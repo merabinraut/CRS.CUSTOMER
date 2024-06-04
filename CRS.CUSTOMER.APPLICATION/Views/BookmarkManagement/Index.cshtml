@@ -102,7 +102,7 @@
                                     <p class="club_group">@club.GroupName</p>
                                 </div>
 
-                                    <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@club.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                                <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@club.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                             </div>
                             <ul class="club_thumb">
                                 @foreach (var item2 in club.HostGalleryImage)
@@ -298,6 +298,29 @@
 
         function ClubDetailActionFunction(i, j) {
             window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
+        }
+    </script>
+    <script>
+        function ManageBookmark(ClubId, HostId, AgentType, ClickedElement) {
+            EnableLoaderFunction();
+            $.ajax({
+                url: '/BookmarkManagement/ManageBookmark',
+                type: 'POST',
+                async: true,
+                dataType: 'json',
+                data: { clubId: ClubId, hostId: HostId, agentType: AgentType },
+                success: function (data) {
+                    if (!data.success) {
+                        toastr.info(data.message ?? "Failed", "Information");
+                    }
+                    location.reload();
+                    DisableLoaderFunction();
+                },
+                error: function () {
+                    toastr.info(message, title);
+                    DisableLoaderFunction();
+                }
+            })
         }
     </script>
 }

@@ -39,6 +39,7 @@
             aspect-ratio: 1;
             object-fit: cover; /* Ensures image covers the div while maintaining aspect ratio */
         }
+
     .galleryHost {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -53,9 +54,8 @@
         .galleryHost img {
             width: 100%;
             aspect-ratio: 1;
-            min-height:104px;
-            min-width:104px
-            object-fit: cover; /* Ensures image covers the div while maintaining aspect ratio */
+            min-height: 104px;
+            min-width: 104px object-fit: cover; /* Ensures image covers the div while maintaining aspect ratio */
         }
 </style>
 <!-- breadcrumb  -->
@@ -138,7 +138,7 @@
             </div>
         </div>
     </div>
-    @if (Model.IsBookmarked.Trim().ToUpper() == "N")
+    @if (string.IsNullOrEmpty(Model.IsBookmarked) || Model.IsBookmarked.Trim().ToUpper() == "N")
     {
         <div class="flex items-center flex-col" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)">
             <div class="p-1">
@@ -1129,7 +1129,7 @@
             @if (Model.HostListModels != null && Model.HostListModels.Count != 0)
             {
                 @*<div class="p-[10px] grid grid-cols-3 gap-3 px-[16px] bg-[#EFEFEF]">*@
-                    <div class="p-[10px] galleryHost bg-[#EFEFEF]">
+                <div class="p-[10px] galleryHost bg-[#EFEFEF]">
                     @foreach (var item in Model.HostListModels)
                     {
                         <div onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
