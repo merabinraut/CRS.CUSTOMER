@@ -1,6 +1,4 @@
 ﻿using CRS.CUSTOMER.SHARED;
-using CRS.CUSTOMER.SHARED.LocationManagement;
-using CRS.CUSTOMER.SHARED.ReservationHistoryManagement;
 using CRS.CUSTOMER.SHARED.ReservationManagementV2;
 using System;
 using System.Collections.Generic;

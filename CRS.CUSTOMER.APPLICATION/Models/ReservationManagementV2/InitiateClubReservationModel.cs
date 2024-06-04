@@ -23,5 +23,6 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2
     {
         public string Time { get; set; }
         public string TimeStatus { get; set; }
+        public string LastEntryTime { get; set; }
     }
 }

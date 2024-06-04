@@ -1,4 +1,11 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2.InitiateClubReservationCommonModel
+
+
+@{
+    var disabledClassLabel = string.Empty;
+    string firstActiveTime = null;
+
+}
 <!-- drawer component -->
 @*<div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform "
     tabindex="-1" aria-labelledby="drawer-bottom-label">*@
@@ -52,8 +59,6 @@
                                 <div id="selected-time-id">
                                     @*@Model.ClubReservableTimeModel[0].Time*@
                                     @{
-                                        var disabledClassLabel = string.Empty;
-                                        string firstActiveTime = null;
                                         foreach (var item in Model.ClubReservableTimeModel)
                                         {
                                             DateTime itemTime;
@@ -61,14 +66,14 @@
                                             disabledClassLabel = (!isValidTime || itemTime < DateTime.Now ||
                                                                   (!string.IsNullOrEmpty(item.TimeStatus) && item.TimeStatus.Trim().ToUpper() != "ACTIVE"))
                                                                   ? "disabled" : string.Empty;
-                                            
+
                                             if (string.IsNullOrEmpty(disabledClassLabel) && firstActiveTime == null)
                                             {
                                                 firstActiveTime = item.Time;
                                             }
                                         }
                                     }
-                                   @firstActiveTime
+                                    @firstActiveTime
                                 </div>
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5" fill="none">
@@ -103,16 +108,19 @@
                                                               (!string.IsNullOrEmpty(item.TimeStatus) && item.TimeStatus.Trim().ToUpper() != "ACTIVE"))
                                                               ? "disabled" : string.Empty;
 
-                                        <div class="timeList @disabledClassLabel h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center">
-                                            <div class="timeValue">
-                                                @item.Time
+                                        if (item.LastEntryTime.FirstOrDefault().ToString() != item.Time)
+                                        {
+                                            <div class="timeList @disabledClassLabel h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center">
+                                                <div class="timeValue">
+                                                    @item.Time
+                                                </div>
+                                                <div class="activeTime">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                        <path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z" fill="#666666" />
+                                                    </svg>
+                                                </div>
                                             </div>
-                                            <div class="activeTime">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                                    <path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z" fill="#666666" />
-                                                </svg>
-                                            </div>
-                                        </div>
+                                        }
                                     }
                                 }
                             </div>
