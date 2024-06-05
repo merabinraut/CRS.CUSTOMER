@@ -67,9 +67,19 @@
                                                                   (!string.IsNullOrEmpty(item.TimeStatus) && item.TimeStatus.Trim().ToUpper() != "ACTIVE"))
                                                                   ? "disabled" : string.Empty;
 
+                                            DateTime statocLastEntryTime = DateTime.ParseExact(Model.ClubReservableTimeModel[0].LastEntryTime.ToString(), "HH:mm", null);
+                                            DateTime staticCurrentTime = DateTime.ParseExact(item.Time.ToString(), "HH:mm", null);
+
                                             if (string.IsNullOrEmpty(disabledClassLabel) && firstActiveTime == null)
                                             {
-                                                firstActiveTime = item.Time;
+                                                if (staticCurrentTime >= statocLastEntryTime)
+                                                {
+                                                    firstActiveTime = "";
+                                                }
+                                                else
+                                                {
+                                                    firstActiveTime = item.Time;
+                                                }
                                             }
                                         }
                                     }
