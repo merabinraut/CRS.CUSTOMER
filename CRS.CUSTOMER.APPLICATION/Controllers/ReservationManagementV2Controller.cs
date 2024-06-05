@@ -24,7 +24,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             _buss = buss;
         }
-        [HttpGet]
+        [HttpGet, Route("ReservationManagementV2/InitiateClubReservationProcess")]
         public JsonResult InitiateClubReservationProcess(string ClubId, string SelectedDate = "", string SelectedHost = "")
         {
             var ResponseModel = new InitiateClubReservationCommonModel();
@@ -67,7 +67,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         #region Plan Management
-        [HttpGet]
+        [HttpGet, Route("ReservationManagementV2/Plan")]
         public ActionResult Plan(string ClubId, string Date, string Time, string NoOfPeople, string SelectedHost = "")
         {
             var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
@@ -144,7 +144,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Host Management
-        [HttpGet]
+        [HttpGet, Route("ReservationManagementV2/Host")]
         public ActionResult Host(string ClubId, string ClubDetailModel)
         {
             var ClubDetail = JsonConvert.DeserializeObject<ClubBasicDetailModel>(HttpUtility.UrlDecode(ClubDetailModel));
@@ -177,7 +177,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Reservation confirmation
-        [HttpGet]
+        [HttpGet, Route("ReservationManagementV2/Confirmation")]
         public ActionResult Confirmation(string ClubId, string HostIdList, string ClubDetailModel)
         {
             var ClubDetail = JsonConvert.DeserializeObject<ClubBasicDetailModel>(HttpUtility.UrlDecode(ClubDetailModel));
@@ -237,7 +237,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region
-        [HttpGet]
+        [HttpGet, Route("ReservationManagementV2/Billing")]
         public ActionResult Billing(string ClubId, string PlanId, string VisitDate, string VisitTime, string NoOfPeople)
         {
             var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
@@ -298,7 +298,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Reservation Confirmation
-        [HttpGet]
+        [HttpGet, Route("ReservationManagementV2/ReservationConfirmation")]
         public ActionResult ReservationConfirmation(ReservationConfirmationRequestModel Model, string HostIdList)
         {
             var clubId = !string.IsNullOrEmpty(Model.ClubId) ? Model.ClubId.DecryptParameter() : null;
@@ -353,6 +353,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
 
         #region Reservation Success
+        [HttpGet, Route("ReservationManagementV2/Success")]
         public ActionResult Success()
         {
             return View();

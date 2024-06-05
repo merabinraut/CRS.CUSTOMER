@@ -62,7 +62,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(viewModel);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("ProfileManagement/DeleteCustomereAccount")]
         public ActionResult DeleteCustomereAccount()
         {
             string customerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
@@ -111,7 +111,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(1);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("ProfileManagement/UpdateUserProfileDetail")]
         public ActionResult UpdateUserProfileDetail(UserProfileModel userProfileModel, string PreferredLocationDDL, string PrefectureDDL)
         {
             userProfileModel.Prefecture = PrefectureDDL;
@@ -270,7 +270,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, Route("ProfileManagement/ChangeProfileImage")]
         public async Task<JsonResult> ChangeProfileImage(HttpPostedFileBase file)
         {
             var common = new UserProfileCommon();

@@ -15,7 +15,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly INotificationManagementBusiness _buss;
         public NotificationManagementController(INotificationManagementBusiness buss) => _buss = buss;
 
-        [HttpGet]
+        [HttpGet, Route("NotificationManagement/ViewAllNotifications")]
         public ActionResult ViewAllNotifications()
         {
             var requestCommon = new ManageNotificationCommon()
@@ -43,7 +43,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(responseModel);
         }
 
-        [HttpPost]
+        [HttpPost, Route("NotificationManagement/HasUnReadNotification")]
         public JsonResult HasUnReadNotification()
         {
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString();
@@ -59,7 +59,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(new { HasUnReadNotification = false });
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("NotificationManagement/ManageNotificationReadStatus")]
         public JsonResult ManageNotificationReadStatus()
         {
             var dbRequest = new Common()

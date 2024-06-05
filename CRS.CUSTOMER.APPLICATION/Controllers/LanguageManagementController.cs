@@ -6,13 +6,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
     public class LanguageManagementController : CustomController
     {
+        [HttpGet, Route("LanguageManagement/Index")]
         public ActionResult Index()
         {
             ViewBag.ActionPageName = "NavMenu";
             ViewBag.PageTitle = Resources.Resource.Langauge;
             return View();
         }
-        [HttpPost]
+
+        [HttpPost, Route("LanguageManagement/Index")]
         public JsonResult Index(string lang)
         {
             try

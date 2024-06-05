@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Web.Mvc;
-using CRS.CUSTOMER.APPLICATION.Helper;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2;
 using CRS.CUSTOMER.BUSINESS.ReservationHistoryManagementV2;
 using CRS.CUSTOMER.SHARED;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
@@ -17,6 +15,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             _buss = buss;
         }
+        [HttpGet, Route("ReservationHistoryManagementV2/ReservationHistory")]
         public ActionResult ReservationHistory()
         {
             ReservationCommonModel responseInfo = new ReservationCommonModel();
@@ -74,10 +73,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             responseInfo.GetAllHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
             return View(responseInfo);
         }
+        [HttpGet, Route("ReservationHistoryManagementV2/ViewHistoryDetail")]
         public ActionResult ViewHistoryDetail(string ReservationId = "")
         {
             string CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
-            string reservationId = "";            
+            string reservationId = "";
 
             if (!string.IsNullOrEmpty(ReservationId)) reservationId = ReservationId.DecryptParameter();
             ReservationHistoryDetailModel responseinfo = new ReservationHistoryDetailModel();
@@ -134,7 +134,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
             return View(responseinfo);
         }
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("ReservationHistoryManagementV2/RescheduleReservation")]
         public ActionResult RescheduleReservation(string Selectedhour = "", string Selectedminute = "", string ReservationID = "")
         {
             var redirectToUrl = string.Empty;
@@ -185,7 +185,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(new { redirectToUrl });
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("ReservationHistoryManagementV2/CancelReservation")]
         public ActionResult CancelReservation(string RID = "")
         {
             string ReservationId = !string.IsNullOrEmpty(RID) ? ReservationId = RID.DecryptParameter() : null;
@@ -239,7 +239,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 return Json(JsonRequestBehavior.AllowGet);
             }
         }
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("ReservationHistoryManagementV2/RedoReservation")]
         public ActionResult RedoReservation(string RID = "")
         {
             string ReservationId = !string.IsNullOrEmpty(RID) ? ReservationId = RID.DecryptParameter() : null;
@@ -293,7 +293,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 return Json(JsonRequestBehavior.AllowGet);
             }
         }
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("ReservationHistoryManagementV2/DeleteReservation")]
         public ActionResult DeleteReservation(string RID = "")
         {
             string ReservationId = !string.IsNullOrEmpty(RID) ? ReservationId = RID.DecryptParameter() : null;

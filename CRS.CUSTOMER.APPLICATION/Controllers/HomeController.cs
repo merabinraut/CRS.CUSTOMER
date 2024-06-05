@@ -18,7 +18,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IHomeBusiness _buss;
         public HomeController(IHomeBusiness buss) => _buss = buss;
         #region Landing Page
-        [HttpGet]
+        [HttpGet, Route("Home/HomePage")]
         public ActionResult HomePage()
         {
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
@@ -30,7 +30,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("Home/ChangeLanguage")]
         public JsonResult ChangeLanguage(string lang)
         {
             try
@@ -125,7 +125,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(Model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("Home/VerifyOTP")]
         public ActionResult VerifyOTP(RegistrationModel Model)
         {
             var ReferCode = string.Empty;
@@ -171,7 +171,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(Model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("Home/ResendOTP")]
         public ActionResult ResendOTP(string AgentId, string MobileNumber)
         {
             var dbRequest = new ResendRegistrationOTPCommon()
@@ -221,7 +221,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             //return Json(dbResponse.Message, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpGet, Route("Home/SetRegistrationPassword")]
         public ActionResult SetRegistrationPassword(string AgentId, string UserId, string MobileNumber, string NickName)
         {
             var response = new SetRegistrationPasswordModel()
@@ -234,7 +234,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(response);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("Home/SetRegistrationPassword")]
         public ActionResult SetRegistrationPassword(SetRegistrationPasswordModel Model)
         {
             if (ModelState.IsValid)
@@ -327,8 +327,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else this.ClearSessionData();
                 LoginRequestModel Response = new LoginRequestModel();
-                
-                
+
+
                 if (phaseValue.ToUpper() == "DEVELOPMENT")
                 {
                     Response.affiliateURL = "http://43.207.72.221:93/";
@@ -341,7 +341,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
-                
+
                 return View(Response);
             }
             else return Redirect("/");
@@ -373,8 +373,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Expires = DateTime.Now.AddMonths(-1)
                     });
                 }
-                string IsPasswordForceful =Convert.ToString( Session["IsPasswordForceful"]);
-                if(!string.IsNullOrEmpty(IsPasswordForceful) && IsPasswordForceful=="Y")
+                string IsPasswordForceful = Convert.ToString(Session["IsPasswordForceful"]);
+                if (!string.IsNullOrEmpty(IsPasswordForceful) && IsPasswordForceful == "Y")
                     return RedirectToAction("SetNewPasswordV2", "Home", new { AgentId = Session["AgentId"], MobileNumber = Session["MobileNumber"], UserID = Session["UserId"], NickName = Session["Username"], ReturnUrl = ReturnURL });
 
                 if (loginResponse.Item2)
@@ -382,7 +382,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         return Redirect(ReturnURL);
 
                 //return Redirect(loginResponse.Item1,new { ReturnURL });
-                return Redirect(loginResponse.Item1 + "?ReturnURL=" +  Uri.EscapeDataString(ReturnURL));
+                return Redirect(loginResponse.Item1 + "?ReturnURL=" + Uri.EscapeDataString(ReturnURL));
 
             }
             else
@@ -450,7 +450,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
         }
 
-        [OverrideActionFilters]
+        [OverrideActionFilters, Route("Home/LogOff")]
         public ActionResult LogOff()
         {
             TempData["CallJavaScriptFunction"] = "True";
@@ -522,7 +522,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             return View(model);
         }
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("Home/VerifyforgotpasswordOTP")]
         public ActionResult VerifyforgotpasswordOTP(RegistrationModel Model)
         {
             if (ModelState.IsValid)
@@ -576,7 +576,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return RedirectToAction("ForgotPassword", "Home");
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("Home/ResendFPOTP")]
         public ActionResult ResendFPOTP(string AgentId, string MobileNumber)
         {
             var dbRequest = new ResendRegistrationOTPCommon()
@@ -603,7 +603,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Set new Password
-        [HttpGet]
+        [HttpGet, Route("Home/SetNewPasswordV2")]
         public ActionResult SetNewPasswordV2(string AgentId, string MobileNumber, string UserID, string NickName, string ReturnUrl = null)
         {
             TempData["returnURLAfterReset"] = null;
@@ -633,7 +633,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             return View(response);
         }
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("Home/SetNewPasswordV2")]
         public ActionResult SetNewPasswordV2(SetRegistrationPasswordModel Model)
         {
             if (ModelState.IsValid)
@@ -662,9 +662,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
                 ViewBag.NickName = Model.NickName;
-                if (!string.IsNullOrEmpty(Convert.ToString( TempData["returnURLAfterReset"])))
+                if (!string.IsNullOrEmpty(Convert.ToString(TempData["returnURLAfterReset"])))
                 {
-                    
+
                     Model.IsPasswordForceful = "N";
                 }
                 Common.IsPasswordForceful = Model.IsPasswordForceful;

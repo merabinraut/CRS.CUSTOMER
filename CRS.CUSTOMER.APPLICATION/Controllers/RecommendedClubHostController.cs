@@ -4,7 +4,6 @@ using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
 using CRS.CUSTOMER.BUSINESS.RecommendedClubHost;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.RecommendedClubHost;
-using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -17,7 +16,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             _recommendedClubHostBuss = recommendedClubHostBuss;
         }
-        [HttpGet]
+        [HttpGet, Route("RecommendedClubHost/GetRecommendedClubAndHost")]
         public JsonResult GetRecommendedClubAndHost(string PositionId, string LocationId)
         {
             ViewBag.LocationId = LocationId;

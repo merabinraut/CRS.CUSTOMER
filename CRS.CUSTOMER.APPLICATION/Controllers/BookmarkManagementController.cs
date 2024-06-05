@@ -59,7 +59,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+        [HttpPost, Route("BookmarkManagement/ManageBookmark")]
         public JsonResult ManageBookmark(string clubId, string hostId, string agentType)
         {
             var agentTypes = new List<string>() { "CLUB", "HOST" };

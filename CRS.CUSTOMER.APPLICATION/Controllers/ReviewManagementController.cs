@@ -38,7 +38,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
         #endregion
 
-        [HttpGet]
+        [HttpGet, Route("ReviewManagement/Review")]
         public ActionResult Review(ReviewReservationRequestModel Request)
         {
             var CustomerId = !string.IsNullOrEmpty(Request.CustomerId) ? Request.CustomerId.DecryptParameter() : Request.CustomerId;
@@ -88,7 +88,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Redirect("/");
         }
 
-        [HttpGet]
+        [HttpGet, Route("ReviewManagement/Review2")]
         public ActionResult Review2(ReviewClubDetailModel Request, string RequestString = "")
         {
             if ((Request == null || string.IsNullOrEmpty(Request.ClubId)) && !string.IsNullOrEmpty(RequestString))
@@ -133,7 +133,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Redirect("/");
         }
 
-        [HttpGet]
+        [HttpGet, Route("ReviewManagement/Review3")]
         public ActionResult Review3(string Request)
         {
             var reviewDetail = JsonConvert.DeserializeObject<ReviewClubDetailModel>(HttpUtility.UrlDecode(Request));
@@ -176,7 +176,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(ResponseModel);
         }
 
-        [HttpGet]
+        [HttpGet, Route("ReviewManagement/Review4")]
         public ActionResult Review4(string Request)
         {
             var reviewDetail = JsonConvert.DeserializeObject<ReviewClubDetailModel>(HttpUtility.UrlDecode(Request));
@@ -238,7 +238,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(ResponseModel);
         }
 
-        [HttpGet]
+        [HttpGet, Route("ReviewManagement/ReviewDetails")]
         public ActionResult ReviewDetails(string Request)
         {
             var reviewDetail = JsonConvert.DeserializeObject<ReviewClubDetailModel>(HttpUtility.UrlDecode(Request));
@@ -258,7 +258,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(ResponseModel);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, Route("ReviewManagement/ReviewDetails")]
         public JsonResult ReviewDetails(string Request, string ReviewMVPHostId, string[] ReviewDichotomousQAIdList, string[] ReviewRemarkIdList, string[] ReviewHostIdList, int RatingScale)
         {
             var redirectToUrl = string.Empty;

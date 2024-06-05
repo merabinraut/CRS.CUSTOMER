@@ -97,7 +97,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(ResponseModel);
         }
 
-        [HttpGet]
+        [HttpGet, Route("DashboardV2/GetRecommendedClubAndHost")]
         public JsonResult GetRecommendedClubAndHost(string LocationId)
         {
             var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
@@ -124,7 +124,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(Response, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpGet, Route("DashboardV2/GetMainPageClubHost")]
         public JsonResult GetMainPageClubHost(string LocationId)
         {
             var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
@@ -180,7 +180,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpGet, Route("DashboardV2/InitiateDateTimeFilterPopup")]
         public JsonResult InitiateDateTimeFilterPopup()
         {
             var Response = new LocationClubHostModel();
@@ -195,7 +195,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Filter
-        [HttpGet]
+        [HttpGet, Route("DashboardV2/GetLocationFilterPopUp")]
         public JsonResult GetLocationFilterPopUp()
         {
             var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
@@ -210,7 +210,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpGet, Route("DashboardV2/GetPreferenceFilterPopUp")]
         public JsonResult GetPreferenceFilterPopUp(string LocationId)
         {
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
@@ -284,7 +284,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         #region Preference
-        [HttpGet]
+        [HttpGet, Route("DashboardV2/Preference")]
         public ActionResult Preference(string LocationId, string Type)
         {
             var TypeValue = !string.IsNullOrEmpty(Type) ? Type.DecryptParameter() : string.Empty;

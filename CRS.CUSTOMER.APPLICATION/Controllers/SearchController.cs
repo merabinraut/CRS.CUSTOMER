@@ -26,7 +26,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly ISearchFilterManagementBusiness _searchBusinessOld;
         public SearchController(ISearchBusiness searchBusiness, IDashboardBusiness oldDashboardBusiness, IDashboardV2Business dashboardBusiness, ICommonManagementBusiness commonBusiness, ISearchFilterManagementBusiness searchBusinessOld) =>
             (_searchBusiness, _oldDashboardBusiness, _dashboardBusiness, _commonBusiness, _searchBusinessOld) = (searchBusiness, oldDashboardBusiness, dashboardBusiness, commonBusiness, searchBusinessOld);
-        [HttpGet]
+        [HttpGet, Route("Search/ClubSearchResult")]
         public ActionResult ClubSearchResult(string LocationId, string SearchFilter, string ClubCategory, string Price, string Shift, string Time, string ClubAvailability, bool NewClub = false)
         {
             ViewBag.ActionPageName = "SearchFilter";
@@ -75,7 +75,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(Response);
         }
 
-        [HttpGet]
+        [HttpGet, Route("Search/DateTimeFilter")]
         public ActionResult DateTimeFilter(string LocationId, string Date, string Time, string NoOfPeople, string ResultType = "", string FilteredTime = "")
         {
             ViewBag.ActionPageName = "SearchFilter";
@@ -123,7 +123,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View("ClubSearchResult", Response);
         }
 
-        [HttpGet]
+        [HttpGet, Route("Search/HostSearchResult")]
         public ActionResult HostSearchResult(string LocationId, string SearchFilter, string Height, string Age, string BloodType, string ConstellationGroup, string Occupation, bool NewHost = false)
         {
             ViewBag.ActionPageName = "SearchFilter";
@@ -184,7 +184,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         #region Club/Host Search filter V2 
-        [HttpGet]
+        [HttpGet, Route("Search/Index")]
         public ActionResult Index(string LocationId)
         {
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
@@ -255,7 +255,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(Response);
         }
 
-        [HttpGet]
+        [HttpGet, Route("Search/ClubFilter")]
         public ActionResult ClubFilter(ClubSearchFilterRequestModel Request, bool NewClub = false)
         {
             var lId = !string.IsNullOrEmpty(Request.LocationId) ? Request.LocationId.DecryptParameter() : null;
@@ -301,7 +301,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(Response);
         }
 
-        [HttpGet]
+        [HttpGet, Route("Search/HostFilter")]
         public ActionResult HostFilter(HostSearchFilterRequestModel Request, bool NewHost = false, int StartIndex = 0, int PageSize = 12)
         {
             var Response = new HostSearchResultModel();
