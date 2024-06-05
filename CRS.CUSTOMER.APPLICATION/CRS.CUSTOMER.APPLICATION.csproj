@@ -219,7 +219,6 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\BookmarkManagementController.cs" />
     <Compile Include="Controllers\CustomController.cs" />
-    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DashboardV2Controller.cs" />
     <Compile Include="Controllers\ErrorManagementController.cs" />
     <Compile Include="Controllers\FooterController.cs" />
@@ -231,7 +230,6 @@
     <Compile Include="Controllers\PaymentMethodManagementController.cs" />
     <Compile Include="Controllers\ProfileManagementController.cs" />
     <Compile Include="Controllers\RecommendedClubHostController.cs" />
-    <Compile Include="Controllers\ReservationHistoryManagementController.cs" />
     <Compile Include="Controllers\ReservationManagementV2Controller.cs" />
     <Compile Include="Controllers\ReviewManagementController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -313,7 +311,6 @@
     <Folder Include="Models\RecommendedClubHost\" />
     <Folder Include="Views\LogManagement\" />
     <Folder Include="Views\RecommendedClubHost\" />
-    <Folder Include="Views\ReservationManagement\" />
     <Folder Include="Views\UserManagement\" />
   </ItemGroup>
   <ItemGroup>
@@ -647,7 +644,6 @@
     <Content Include="Views\Home\HomePage.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\VerifyOTP.cshtml" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\SetRegistrationPassword.cshtml" />
     <Content Include="Views\LocationManagement\Index.cshtml" />
     <Content Include="Views\Shared\_Reservation-Layout.cshtml" />
