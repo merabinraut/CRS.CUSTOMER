@@ -623,6 +623,10 @@
         function isLoginPageWithReturnUrl(url) {
             return url.includes("ReturnURL");
         }
+
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            document.body.style.overscrollBehaviorY = 'contain';
+        }
     </script>
     @RenderSection("scripts", required: false)
 </body>
