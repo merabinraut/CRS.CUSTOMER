@@ -114,7 +114,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ResponseModel.ClubDetailModel.ClubId = ResponseModel.ClubDetailModel.ClubId.EncryptParameter();
             ResponseModel.ClubDetailModel.ClubLogo = ImageHelper.ProcessedImage(ResponseModel.ClubDetailModel.ClubLogo);
             //Plan
-            var dbResponse3 = _buss.GetPlans(cId, customerId);
+            var dbResponse3 = _buss.GetPlans(cId, customerId, Date, Time);
             if (dbResponse3.Item1 == ResponseCode.Failed || dbResponse3.Item1 == ResponseCode.Exception)
             {
                 AddNotificationMessage(new NotificationModel()

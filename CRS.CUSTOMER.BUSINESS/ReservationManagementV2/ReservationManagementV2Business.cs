@@ -36,9 +36,9 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
         #endregion
 
         #region Plan 
-        public Tuple<ResponseCode, string, List<PlanV2Common>> GetPlans(string ClubId, string CustomerId)
+        public Tuple<ResponseCode, string, List<PlanV2Common>> GetPlans(string ClubId, string CustomerId, string SelectedDate, string SelectedTime)
         {
-            return _repo.GetPlans(ClubId, CustomerId);
+            return _repo.GetPlans(ClubId, CustomerId, SelectedDate, SelectedTime);
         }
         #endregion
 
@@ -68,6 +68,7 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
         {
             return _repo.ReservationConfirmation(Request);
         }
+
         #endregion
     }
 }

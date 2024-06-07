@@ -91,9 +91,9 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
         #endregion
 
         #region Plan 
-        public Tuple<ResponseCode, string, List<PlanV2Common>> GetPlans(string ClubId, string CustomerId)
+        public Tuple<ResponseCode, string, List<PlanV2Common>> GetPlans(string ClubId, string CustomerId, string SelectedDate, string SelectedTime)
         {
-            string SQL = $"EXEC sproc_cp_reservation_management @Flag = 'gpl', @ClubId={_dao.FilterString(ClubId)}, @CustomerId={_dao.FilterString(CustomerId)}";
+            string SQL = $"EXEC sproc_cp_reservation_management @Flag = 'gpl', @ClubId={_dao.FilterString(ClubId)}, @CustomerId={_dao.FilterString(CustomerId)}, @SelectedDate={_dao.FilterString(SelectedDate)}, @SelectedTime={_dao.FilterString(SelectedTime)}";
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0)
             {
@@ -155,6 +155,7 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
             string SQL = $"EXEC sproc_cp_reservation_transaction_management @Flag = 'rc', @ClubId={_dao.FilterString(Request.ClubId)}, @CustomerId={_dao.FilterString(Request.CustomerId)}, @PlanId={_dao.FilterString(Request.PlanId)}, @NoOfPeople={_dao.FilterString(Request.NoOfPeople)}, @VisitDate={_dao.FilterString(Request.VisitDate)}, @VisitTime={_dao.FilterString(Request.VisitTime)}, @PaymentType={_dao.FilterString(Request.PaymentType)}, @HostIdList={_dao.FilterString(Request.HostIdList)}, @ActionUser=N{_dao.FilterString(Request.ActionUser)}, @ActionPlatform={_dao.FilterString(Request.ActionPlatform)}, @ActionIP={_dao.FilterString(Request.ActionIP)}";
             return _dao.ParseCommonDbResponse(SQL);
         }
+
         #endregion
     }
 }
