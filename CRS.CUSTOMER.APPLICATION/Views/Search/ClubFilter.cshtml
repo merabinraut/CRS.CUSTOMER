@@ -145,13 +145,18 @@
                         </div>
                         <!-- e/club info -->
                         <!-- s/action btn -->
-                        @if (item.IsBookmarked.ToUpper() == "Y")
+                        @*(item.IsBookmarked.ToUpper() == "Y")*@
+                        @if (!string.IsNullOrEmpty(item.IsBookmarked.ToUpper()) && item.IsBookmarked.ToUpper() == "Y")
                         {
-                            <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                            <div class="action_keep"
+                                 onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)">
+                        <img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                         }
                         else
                         {
-                            <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                            <div class="action_keep"
+                                  onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)">
+                        <img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
                         }
                         <!-- e/action btn -->
                     </div>
