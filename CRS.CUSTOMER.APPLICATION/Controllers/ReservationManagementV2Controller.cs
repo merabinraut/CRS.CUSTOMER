@@ -1,14 +1,10 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
-using CRS.CUSTOMER.APPLICATION.Models.ReservationHistory;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2;
-using CRS.CUSTOMER.APPLICATION.Models.ReviewManagement;
 using CRS.CUSTOMER.BUSINESS.ReservationManagementV2;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ReservationManagementV2;
 using Newtonsoft.Json;
-using Syncfusion.CompoundFile.XlsIO.Native;
-using Syncfusion.XlsIO.Implementation.PivotAnalysis;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
