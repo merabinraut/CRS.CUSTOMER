@@ -144,21 +144,21 @@
             <div class="flex flex-col  items-center   ">
                 @if (!string.IsNullOrEmpty(item.IsBookmarked.ToUpper()) && item.IsBookmarked.ToUpper() == "Y")
                 {
-                    <div class="flex flex-col  items-center px-3 hover:cursor-pointer"
+                    <div class="action_keep"
                          onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)">
-                        <img src="~/Content/assets/images/bookmark-filled.svg" class="h-[20px] w-[25px]" style="height:24px; width:24px" />
+                        <img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg">
                     </div>
                 }
                 else
                 {
-                    <div class="flex flex-col  items-center px-3 hover:cursor-pointer"
+                    <div class="action_keep"
                          onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)">
-                        <img src="~/Content/assets/images/bookmark-notfilled.svg" class="h-[20px] w-[25px]" style="height:24px; width:24px" />
+                        <img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg">
                     </div>
                 }
-                <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
+               @* <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
                     保存
-                </div>
+                </div>*@
             </div>
         </div>
 
@@ -238,19 +238,21 @@
                     </div>
                     if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                     {
-                        <div class="bg-[#BCB08A] text-white text-xs h-[18px] flex items-center justify-center">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
-                        </div>
+            <div class="available">
+                本日空席あり
+                @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable*@
+            </div>
                     }
                     else
                     {
-                        <div class="bg-[#D7D7D7] text-white text-xs h-[18px] flex items-center justify-center">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable
-                        </div>
+            <div class="available disabled">
+                本日空席あり
+                @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable*@
+            </div>
                     }
                 }
             </div>
-            <button class="btn-gradient text-[14px] font-semibold tracking-[0.56px] leading-[21px]" onclick="InitiateClubReservationFunction('@item.ClubId')">
+            <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
                 今すぐ予約する
                 @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now*@
             </button>
