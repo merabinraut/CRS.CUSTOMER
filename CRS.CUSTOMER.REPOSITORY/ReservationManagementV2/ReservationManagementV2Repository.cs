@@ -108,7 +108,7 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
                     return new Tuple<ResponseCode, string, List<PlanV2Common>>(ResponseCode.Failed, _dao.ParseColumnValue(dbResponse.Rows[0], "Message").ToString() ?? "Invalid request", new List<PlanV2Common>());
                 }
             }
-            return new Tuple<ResponseCode, string, List<PlanV2Common>>(ResponseCode.Failed, "Invalid request", new List<PlanV2Common>());
+            return new Tuple<ResponseCode, string, List<PlanV2Common>>(ResponseCode.Failed, "現在利用可能なプランはありません", new List<PlanV2Common>());
         }
         #endregion
 
