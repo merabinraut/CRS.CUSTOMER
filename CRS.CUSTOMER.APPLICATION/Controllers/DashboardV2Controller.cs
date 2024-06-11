@@ -285,7 +285,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         #region Preference
-        [HttpGet]
+        [HttpGet, Route("location/{prefectures}/{area}/{TopSearch}")]
         public ActionResult Preference(string LocationId, string Type)
         {
             var TypeValue = !string.IsNullOrEmpty(Type) ? Type.DecryptParameter() : string.Empty;

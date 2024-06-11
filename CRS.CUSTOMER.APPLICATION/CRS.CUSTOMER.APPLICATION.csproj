@@ -235,6 +235,7 @@
     <Compile Include="Controllers\ReservationManagementV2Controller.cs" />
     <Compile Include="Controllers\ReviewManagementController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SearchV2Controller.cs" />
     <Compile Include="CustomHelpers\CustomHtmlHelpers.cs" />
     <Compile Include="CustomValidations\MobileNumberAttribute.cs" />
     <Compile Include="Filters\ActivityLogFilter.cs" />
@@ -291,6 +292,7 @@
     <Compile Include="Models\SearchFilterManagement\ClubSearchManagementModel.cs" />
     <Compile Include="Models\SearchFilterManagement\HostSearchManagementModel.cs" />
     <Compile Include="Models\SearchFilterManagement\SearchFilterViewModel.cs" />
+    <Compile Include="Models\SearchV2\SearchV2FilterModel.cs" />
     <Compile Include="Models\Search\MapModel.cs" />
     <Compile Include="Models\Search\SearchFilterModel.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
@@ -709,6 +711,13 @@
     <Content Include="Views\Footer\termsAndCondition.cshtml" />
     <Content Include="Views\Home\ForgotPasswordSuccessView.cshtml" />
     <Content Include="Views\Home\RegisterSuccessView.cshtml" />
+    <Content Include="Views\SearchV2\Index.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterTab1.cshtml" />
+    <Content Include="Views\SearchV2\ClubFilter.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterTab2.cshtml" />
+    <Content Include="Views\SearchV2\HostFilter.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterTab3.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterTab4.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

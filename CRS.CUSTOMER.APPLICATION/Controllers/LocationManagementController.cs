@@ -2,10 +2,6 @@
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.Dashboard;
 using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
-using CRS.CUSTOMER.APPLICATION.Models.ReservationHistory;
-using CRS.CUSTOMER.APPLICATION.Models.ReservationManagement;
-using CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement;
-using CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement;
 using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Dashboard;
 using CRS.CUSTOMER.BUSINESS.LocationManagement;
@@ -14,14 +10,9 @@ using CRS.CUSTOMER.BUSINESS.RecommendedClubHost;
 using CRS.CUSTOMER.BUSINESS.ReservationManagement;
 using CRS.CUSTOMER.BUSINESS.SearchFilterManagement;
 using CRS.CUSTOMER.SHARED;
-using CRS.CUSTOMER.SHARED.ProfileManagement;
 using CRS.CUSTOMER.SHARED.RecommendedClubHost;
-using CRS.CUSTOMER.SHARED.ReservationManagement;
-using CRS.CUSTOMER.SHARED.SearchFilterManagement;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
@@ -50,8 +41,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             this._recommendedClubHostBuss = recommendedClubHostBuss;
             this._commonManagementBuss = commonManagementBuss;
         }
-        [HttpGet]
-        public ActionResult Index(LocationClubHostRequestModel RequestModel, string RenderId = "")
+        [HttpGet, Route("location/{prefectures}/{area}")]
+        public ActionResult Index(string prefectures, string area, LocationClubHostRequestModel RequestModel, string RenderId = "")
         {
             ViewBag.ActionPageName = "Dashboard";
             var culture = Request.Cookies["culture"]?.Value;
@@ -131,7 +122,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         #region Club Detail
-        [HttpGet]
+        [HttpGet, Route("location/{prefectures}/{area}/hostclub/{id}")]
         public ActionResult ClubDetail_V2(string LocationId, string ClubId, string ScheduleFilterDate = null)
         {
             var culture = Request.Cookies["culture"]?.Value;
@@ -322,7 +313,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
         #endregion
 
-        [HttpGet]
+        [HttpGet, Route("location/{prefectures}/{area}/hostclub/{id}/host")]
         public ActionResult ViewHostDetail(string HostId)
         {
             var culture = Request.Cookies["culture"]?.Value;
