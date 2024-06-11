@@ -55,6 +55,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
                 //responseData["UnreservableDates"] = Newtonsoft.Json.JsonConvert.SerializeObject(unReservableDateList);
                 responseData["Dayoff"] = Newtonsoft.Json.JsonConvert.SerializeObject(dayOff);
+
+                var timeIntervalBySelectedDate = ResponseModel.ClubReservableTimeModel;
+                responseData["TimeIntervalBySelectedDate"] = Newtonsoft.Json.JsonConvert.SerializeObject(timeIntervalBySelectedDate);
+
                 if (!string.IsNullOrEmpty(SelectedDate))
                     responseData["SelectedDate"] = SelectedDate;
             }

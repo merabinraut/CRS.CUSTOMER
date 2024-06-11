@@ -72,6 +72,7 @@
                     }
                 });
                 var holidayDates = data.Dayoff;
+                var timeIntervalBySelectedDate = JSON.parse(data.TimeIntervalBySelectedDate);
                 $("#datepicker").datepicker({
                     minDate: currentDate,
                     maxDate: maxDate,
@@ -89,9 +90,12 @@
                             return [true];
                         }
                     },
+
                     onSelect: function (dateText, inst) {
                         inst.inline = true; // Set datepicker to inline mode
                         $('#date-id').val(dateText.trim());
+                        getTimeIntervalByDayWise(dateText, timeIntervalBySelectedDate);
+                        initTimeFunction();
                     }
                 });
 
@@ -112,7 +116,36 @@
     });
 }
 
+function getTimeIntervalByDayWise(date, timeInterval) {
+    var timeListHtml = '';
+    var selectedDate = new Date(date);
 
+    timeInterval.forEach(function (item) {
+        var itemTime = new Date(selectedDate.toDateString() + ' ' + item.Time);
+        var currentTime = new Date();
+        var disabledClassLabel = '';
+        if (itemTime < currentTime) {
+            disabledClassLabel = 'disabled';
+        }
+        var lastEntryTime = new Date(selectedDate.toDateString() + ' ' + item.LastEntryTime);
+        if (itemTime >= lastEntryTime) {
+            disabledClassLabel = 'disabled';
+        }
+        if (['00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00'].includes(item.Time)) {
+            disabledClassLabel = 'disabled';
+        }
+        timeListHtml += '<div class="timeList ' + disabledClassLabel + ' h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center">';
+        timeListHtml += '<div class="timeValue">' + item.Time + '</div>';
+        timeListHtml += '<div class="activeTime">';
+        timeListHtml += '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">';
+        timeListHtml += '<path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z" fill="#666666" />';
+        timeListHtml += '</svg>';
+        timeListHtml += '</div>';
+        timeListHtml += '</div>';
+    });
+    $('#timeListContainer').html(timeListHtml);
+    initTimeFunction();
+}
 /////////////////////////////////////////////////////////////////////// Time JS ///////////////////////////////////////////////////////////////////////
 function initTimeFunction() {
     var showTimeLists = document.querySelectorAll('.showTimeList');
