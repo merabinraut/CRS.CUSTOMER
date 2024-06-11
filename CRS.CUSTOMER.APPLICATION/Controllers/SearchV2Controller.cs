@@ -19,6 +19,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
     public class SearchV2Controller : Controller
     {
+        private readonly Dictionary<string, string> LocationHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Location");
         private readonly ISearchFilterManagementBusiness _searchBusinessOld;
         private readonly ISearchBusiness _searchBusiness;
         private readonly ICommonManagementBusiness _commonBusiness;
@@ -34,11 +35,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet, Route("search/{prefectures}/{area}")]
         public ActionResult Index(string prefectures, string area, string scftab = "01")
         {
-            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
-            var locationId = "1";
-            var Response = new SearchV2FilterRequestModel();
             ViewBag.scftab = scftab ?? "01";
             ViewBag.PrefecturesArea = $"/{prefectures}/{area}";
+            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
+            var locationId = ApplicationUtilities.GetKeyValueFromDictionary(LocationHelper, ViewBag.PrefecturesArea);
+            var Response = new SearchV2FilterRequestModel();
             if (!string.IsNullOrEmpty(scftab) && scftab.Trim() == "02")
             {
                 ViewBag.scftab = "02";
@@ -123,9 +124,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpPost, Route("search/{prefectures}/{area}")]
         public ActionResult Index(string prefectures, string area, string scftab = "01", SearchV2FilterTab1RequestModel Tab1Request = null, bool NewClub = false, SearchV2FilterTab2RequestModel Tab2Request = null, bool NewHost = false)
         {
-            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
-            var locationId = "1";
             ViewBag.PrefecturesArea = $"/{prefectures}/{area}";
+            var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
+            var locationId = ApplicationUtilities.GetKeyValueFromDictionary(LocationHelper, ViewBag.PrefecturesArea);
             if ((!string.IsNullOrEmpty(scftab) && scftab.Trim() == "02") || NewHost)
             {
                 ViewBag.scftab = "02";

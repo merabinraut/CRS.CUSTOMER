@@ -296,6 +296,7 @@
     <Compile Include="Models\Search\MapModel.cs" />
     <Compile Include="Models\Search\SearchFilterModel.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
+    <Compile Include="Models\URLManagementConfigruationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -608,6 +609,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Data\Configuration.json" />
     <Content Include="App_Data\AmazonConfigruation.json" />
+    <Content Include="App_Data\URLManagementConfigruation.json" />
     <None Include="packages.config" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
