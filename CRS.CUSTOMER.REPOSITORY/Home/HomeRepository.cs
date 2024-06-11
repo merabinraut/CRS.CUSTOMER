@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -107,7 +108,8 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
                         EmailAddress = _dao.ParseColumnValue(dbResponse, "EmailAddress").ToString(),
                         ProfileImage = _dao.ParseColumnValue(dbResponse, "ProfileImage").ToString(),
                         SessionId = _dao.ParseColumnValue(dbResponse, "SessionId").ToString(),
-                        ActionDate = _dao.ParseColumnValue(dbResponse, "ActionDate").ToString()
+                        ActionDate = _dao.ParseColumnValue(dbResponse, "ActionDate").ToString(),
+                        Amount =  Convert.ToInt32(_dao.ParseColumnValue(dbResponse, "Amount").ToString())
                     };
 
                     string SQL2 = "EXEC sproc_system_links_management";

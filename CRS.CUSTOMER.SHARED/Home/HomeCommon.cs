@@ -51,6 +51,7 @@ namespace CRS.CUSTOMER.SHARED.Home
         public string ActionDate { get; set; }
         public string IsPasswordForceful { get; set; }
         public string MobileNumber { get; set; }
+        public int Amount { get; set; }
         public List<SystemLinkCommon> SystemLink { get; set; } = new List<SystemLinkCommon>();
     }
 

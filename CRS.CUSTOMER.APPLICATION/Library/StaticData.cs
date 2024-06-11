@@ -25,13 +25,13 @@ namespace CRS.CUSTOMER.APPLICATION.Library
                 if (model.GetPlanGroupDetail[i].Label == "Last Entry Time" || model.GetPlanGroupDetail[i].Label == "最終入店時間")
                 {
                     model.GetPlanGroupDetail[i].LabelValue = model.GetPlanGroupDetail[i].LabelValue + "(L.O. " + model.GetPlanGroupDetail[i + 1].LabelValue + ")";
-                }
+                }                
             }
             model.GetPlanGroupDetail.RemoveAt(index);
             //model.GetPlanGroupDetail.RemoveAt(0);
             model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("プラン"));
             model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("Plan"));
-
+            model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("Status"));
             return model;
 
         }
@@ -59,6 +59,7 @@ namespace CRS.CUSTOMER.APPLICATION.Library
             model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("プラン"));
             model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("Plan"));
             model.GetPlanGroupDetail.RemoveAt(1);
+            model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("Status"));
 
             return model;
 

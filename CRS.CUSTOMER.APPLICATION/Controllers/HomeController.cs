@@ -426,6 +426,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Session["SystemLinkModel"] = response.SystemLink;
                     Session["IsPasswordForceful"] = response.IsPasswordForceful;
                     Session["MobileNumber"] = response.MobileNumber.EncryptParameter();
+                    Session["Amount"] = response.Amount;
                     return new Tuple<string, bool>("/", true);
                 }
                 this.AddNotificationMessage(new NotificationModel()
