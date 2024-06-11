@@ -48,5 +48,14 @@ namespace CRS.CUSTOMER.REPOSITORY.NotificationManagement
             SQL += ",@ActionUser=" + _dao.FilterString(Request.ActionUser);
             return _dao.ParseCommonDbResponse(SQL);
         }
+        public CommonDbResponse ManageReservationCancelRemark(Common Request, string NotificationId, string CustomerRemarks)
+        {
+            string SQL = "sproc_customer_notification_management @Flag='urc'";
+            SQL += ",@AgentId=" + _dao.FilterString(Request.AgentId);
+            SQL += ",@ActionUser=" + _dao.FilterString(Request.ActionUser);
+            SQL += ",@NotificationId=" + _dao.FilterString(NotificationId);
+            SQL += ",@CustomerRemarks=" + _dao.FilterString(CustomerRemarks);
+            return _dao.ParseCommonDbResponse(SQL);
+        }
     }
 }

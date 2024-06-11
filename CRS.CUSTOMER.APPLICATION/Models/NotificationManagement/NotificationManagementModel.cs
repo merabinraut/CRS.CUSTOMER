@@ -16,5 +16,6 @@
         public string NotificationURL { get; set; }
         public string NotificationImage { get; set; }
         public string UnReadNotification { get; set; }
+        public string IsRemarksDone { get; set; }
     }
 }
