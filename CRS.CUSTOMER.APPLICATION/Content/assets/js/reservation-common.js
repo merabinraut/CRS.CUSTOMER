@@ -120,6 +120,13 @@ function getTimeIntervalByDayWise(date, timeInterval) {
     var timeListHtml = '';
     var selectedDate = new Date(date);
 
+    var lastElement = timeInterval[timeInterval.length - 1];
+    var lastEntryTimeStr = lastElement.LastEntryTime; 
+    var endTimeStr = lastElement.Time;
+
+    var startDisabledTime = parseTimeString(selectedDate, lastEntryTimeStr);
+    var endDisabledTime = parseTimeString(selectedDate, endTimeStr);
+
     timeInterval.forEach(function (item) {
         var itemTime = new Date(selectedDate.toDateString() + ' ' + item.Time);
         var currentTime = new Date();
@@ -127,11 +134,10 @@ function getTimeIntervalByDayWise(date, timeInterval) {
         if (itemTime < currentTime) {
             disabledClassLabel = 'disabled';
         }
-        var lastEntryTime = new Date(selectedDate.toDateString() + ' ' + item.LastEntryTime);
-        if (itemTime >= lastEntryTime) {
+        if (itemTime >= startDisabledTime) {
             disabledClassLabel = 'disabled';
         }
-        if (['00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00'].includes(item.Time)) {
+        if (itemTime >= startDisabledTime || itemTime <= endDisabledTime) {
             disabledClassLabel = 'disabled';
         }
         timeListHtml += '<div class="timeList ' + disabledClassLabel + ' h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center">';
@@ -145,6 +151,14 @@ function getTimeIntervalByDayWise(date, timeInterval) {
     });
     $('#timeListContainer').html(timeListHtml);
     initTimeFunction();
+}
+function parseTimeString(date, timeString) {
+    var timeParts = timeString.split(':');
+    var hours = parseInt(timeParts[0], 10);
+    var minutes = parseInt(timeParts[1], 10);
+    var newDate = new Date(date);
+    newDate.setHours(hours, minutes, 0, 0); 
+    return newDate;
 }
 /////////////////////////////////////////////////////////////////////// Time JS ///////////////////////////////////////////////////////////////////////
 function initTimeFunction() {
