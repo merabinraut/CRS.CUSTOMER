@@ -131,4 +131,13 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchV2
         public string ConstellationGroup { get; set; }
         public string Occupation { get; set; }
     }
+
+    public class SearchV2ClubDateTimeFilterRequestModel
+    {
+        public string Date { get; set; }
+        public string Time { get; set; }
+        public string NoOfPeople { get; set; }
+        public string ResultType { get; set; }
+        public string FilteredTime { get; set; }
+    }
 }

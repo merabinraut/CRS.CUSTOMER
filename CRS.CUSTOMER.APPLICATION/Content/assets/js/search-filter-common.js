@@ -632,6 +632,7 @@ function ClubFilterSubmitButton() {
     $('.location-class').val(locationId);
     ManagePreferenceFilterHTMLContent();
     var form = document.getElementById("club-filter-form-id");
+    form.action = "/search" + locationId + "/?scftab=01";
     form.submit();
     DisableLoaderFunction();
 }
@@ -650,6 +651,7 @@ function HostFilterSubmitButton() {
     $('#host-occupation-id').val($('#host-occupation-ddl-id').val());
     ManagePreferenceFilterHTMLContent();
     var form = document.getElementById("host-filter-form-id");
+    form.action = "/search" + locationId + "/?scftab=02";
     form.submit();
     DisableLoaderFunction();
 }
@@ -995,6 +997,7 @@ function SubmitDateTimeFilterFunction() {
     $('.location-class').val(locationId);
     ManageDateTimeFilterHTMLContent();
     var form = document.getElementById("date-time-filter-id");
+    form.action = "/search" + locationId;
     form.submit();
     DisableLoaderFunction();
 }
@@ -1007,7 +1010,8 @@ function NewClubRenderFunction() {
         locationId = $('#current-location-id').val();
     }
     $('.location-class').val(locationId);
-    window.location.href = `/Search/ClubSearchResult?LocationId=${locationId}&NewClub=${true}`;
+    window.location.href = `/Search${locationId}/?scftab=03&NewClub=${true}`;
+    //window.location.href = `/Search/ClubSearchResult?LocationId=${locationId}&NewClub=${true}`;
 }
 
 function NewHostRenderFunction() {
@@ -1017,5 +1021,6 @@ function NewHostRenderFunction() {
         locationId = $('#current-location-id').val();
     }
     $('.location-class').val(locationId);
-    window.location.href = `/Search/HostSearchResult?LocationId=${locationId}&NewHost=${true}`;
+    window.location.href = `/Search${locationId}/?scftab=03&NewHost=${true}`;
+    //window.location.href = `/Search/HostSearchResult?LocationId=${locationId}&NewHost=${true}`;
 }
