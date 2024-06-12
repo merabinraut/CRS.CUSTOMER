@@ -720,6 +720,10 @@
     <Content Include="Views\SearchV2\HostFilter.cshtml" />
     <Content Include="Views\SearchV2\_SearchFilterTab3.cshtml" />
     <Content Include="Views\SearchV2\_SearchFilterTab4.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterClubTab.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterHostTab.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterNewTab.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterMapTab.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
