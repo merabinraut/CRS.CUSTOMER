@@ -33,9 +33,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet, Route("search/{prefectures}/{area}")]
-        public ActionResult Index(string prefectures, string area, string scftab = "01")
+        public ActionResult Index(string prefectures, string area, string scftab)
         {
-            ViewBag.scftab = scftab ?? "01";
+            scftab = string.IsNullOrEmpty(scftab) ? "01" : scftab;
+            ViewBag.scftab = scftab;
             ViewBag.PrefecturesArea = $"/{prefectures}/{area}";
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var locationId = ApplicationUtilities.GetKeyValueFromDictionary(LocationHelper, ViewBag.PrefecturesArea);
@@ -57,10 +58,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 ViewBag.scftab = "03";
                 var dbClubResponse = _dashboardBusiness.GetNewClub(locationId, CustomerId, "1");
-                Response.SearchV2FilterTab3Model.ClubModel = dbClubResponse.MapObjects<DashboardV2ClubDetailModel>();
+                Response.SearchV2FilterTab3Model.ClubModel = ApplicationUtilities.MapObjects<DashboardV2ClubDetailModel>(dbClubResponse);
                 Response.SearchV2FilterTab3Model.ClubModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); });
                 var dbHostResponse = _dashboardBusiness.GetNewHost(locationId, CustomerId, "1");
-                Response.SearchV2FilterTab3Model.HostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
+                Response.SearchV2FilterTab3Model.HostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
                 Response.SearchV2FilterTab3Model.HostModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.HostId = x.HostId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo); });
             }
             else if (!string.IsNullOrEmpty(scftab) && scftab.Trim() == "04")
@@ -69,7 +70,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Response.SearchV2FilterTab4Model.LocationModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("10"));
                 var ClubDetailMapModel = new List<ClubMapDetailModel>();
                 var ClubDetailDbResponse = _searchBusiness.GetClubMapDetail(locationId);
-                ClubDetailMapModel = ClubDetailDbResponse.MapObjects<ClubMapDetailModel>();
+                ClubDetailMapModel = ApplicationUtilities.MapObjects<ClubMapDetailModel>(ClubDetailDbResponse);
                 string CurrentUrl = ApplicationUtilities.GetAddressFromUrl(System.Web.HttpContext.Current.Request.Url.AbsoluteUri);
                 List<dynamic> mappedData = new List<dynamic>();
                 foreach (var item in ClubDetailMapModel)
@@ -122,8 +123,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, Route("search/{prefectures}/{area}")]
-        public ActionResult Index(string prefectures, string area, string scftab = "01", SearchV2FilterTab1RequestModel Tab1Request = null, bool NewClub = false, SearchV2FilterTab2RequestModel Tab2Request = null, bool NewHost = false)
+        public ActionResult Index(string prefectures, string area, string scftab, SearchV2FilterTab1RequestModel Tab1Request = null, bool NewClub = false, SearchV2FilterTab2RequestModel Tab2Request = null, bool NewHost = false)
         {
+            scftab = string.IsNullOrEmpty(scftab) ? "01" : scftab;
             ViewBag.PrefecturesArea = $"/{prefectures}/{area}";
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var locationId = ApplicationUtilities.GetKeyValueFromDictionary(LocationHelper, ViewBag.PrefecturesArea);
@@ -152,7 +154,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     ViewBag.scftab = "03";
                     var dbHostResponse = _dashboardBusiness.GetNewHost(locationId, CustomerId);
-                    Response.FilteredHostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
+                    Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
                 }
                 else
                 {
@@ -171,7 +173,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Take = Tab2Request.PageSize,
                     };
                     var dbHostResponse = _searchBusiness.HostPreferenceFilter(dbRequest);
-                    Response.FilteredHostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
+                    Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
                 }
                 Response.FilteredHostModel.ForEach(x =>
                 {
@@ -181,7 +183,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
                     x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo);
                 });
-                Response.RequestModel = Tab2Request.MapObject<HostSearchFilterRequestModel>();
+                Response.RequestModel = ApplicationUtilities.MapObject<HostSearchFilterRequestModel>(Tab2Request);
                 ViewBag.StartIndex = Tab2Request.StartIndex;
                 ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
                 return View("HostFilter", Response);
@@ -191,7 +193,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ViewBag.scftab = "01";
                 var Response = new SearchV2FilterTab1ResponseModel();
                 var clubRecommendationDBResponse = _searchBusinessOld.GetRecommendedClub(locationId);
-                Response.RecommendedClubModel = clubRecommendationDBResponse.MapObjects<ClubRecommendationListModel>();
+                Response.RecommendedClubModel = ApplicationUtilities.MapObjects<ClubRecommendationListModel>(clubRecommendationDBResponse);
                 Response.RecommendedClubModel.ForEach(x =>
                 {
                     x.LocationId = x.LocationId.EncryptParameter();
@@ -202,7 +204,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     ViewBag.scftab = "03";
                     var dbResponse = _searchBusiness.GetNewClub(locationId, CustomerId);
-                    Response.FilteredClubModel = dbResponse.MapObjects<CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchFilterClubDetailModel>();
+                    Response.FilteredClubModel = ApplicationUtilities.MapObjects<CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
                 }
                 else
                 {
@@ -219,7 +221,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         CustomerId = CustomerId
                     };
                     var dbResponse = _searchBusiness.ClubPreferenceFilter(dbRequest);
-                    Response.FilteredClubModel = dbResponse.MapObjects<CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchFilterClubDetailModel>();
+                    Response.FilteredClubModel = ApplicationUtilities.MapObjects<CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
                 }
                 Response.FilteredClubModel.ForEach(x =>
                 {
