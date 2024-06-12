@@ -714,16 +714,14 @@
     <Content Include="Views\Home\ForgotPasswordSuccessView.cshtml" />
     <Content Include="Views\Home\RegisterSuccessView.cshtml" />
     <Content Include="Views\SearchV2\Index.cshtml" />
-    <Content Include="Views\SearchV2\_SearchFilterTab1.cshtml" />
     <Content Include="Views\SearchV2\ClubFilter.cshtml" />
-    <Content Include="Views\SearchV2\_SearchFilterTab2.cshtml" />
     <Content Include="Views\SearchV2\HostFilter.cshtml" />
-    <Content Include="Views\SearchV2\_SearchFilterTab3.cshtml" />
-    <Content Include="Views\SearchV2\_SearchFilterTab4.cshtml" />
     <Content Include="Views\SearchV2\_SearchFilterClubTab.cshtml" />
     <Content Include="Views\SearchV2\_SearchFilterHostTab.cshtml" />
     <Content Include="Views\SearchV2\_SearchFilterNewTab.cshtml" />
     <Content Include="Views\SearchV2\_SearchFilterMapTab.cshtml" />
+    <Content Include="Views\SearchV2\ClubSearchResult.cshtml" />
+    <Content Include="Views\SearchV2\HostSearchResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
