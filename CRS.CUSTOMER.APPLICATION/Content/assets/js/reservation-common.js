@@ -137,7 +137,7 @@ function getTimeIntervalByDayWise(date, timeInterval) {
         if (itemTime >= startDisabledTime) {
             disabledClassLabel = 'disabled';
         }
-        if (itemTime >= startDisabledTime || itemTime <= endDisabledTime) {
+        if (itemTime <= endDisabledTime) {
             disabledClassLabel = 'disabled';
         }
         timeListHtml += '<div class="timeList ' + disabledClassLabel + ' h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center">';
