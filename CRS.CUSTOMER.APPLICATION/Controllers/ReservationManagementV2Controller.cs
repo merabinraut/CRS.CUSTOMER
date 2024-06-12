@@ -285,7 +285,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse.Item2 ?? "Invalid request",
+                    Message = dbResponse2.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
