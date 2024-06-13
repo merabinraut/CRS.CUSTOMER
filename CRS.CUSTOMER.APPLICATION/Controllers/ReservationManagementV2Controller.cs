@@ -55,6 +55,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
                 //responseData["UnreservableDates"] = Newtonsoft.Json.JsonConvert.SerializeObject(unReservableDateList);
                 responseData["Dayoff"] = Newtonsoft.Json.JsonConvert.SerializeObject(dayOff);
+
+                var timeIntervalBySelectedDate = ResponseModel.ClubReservableTimeModel;
+                responseData["TimeIntervalBySelectedDate"] = Newtonsoft.Json.JsonConvert.SerializeObject(timeIntervalBySelectedDate);
+
                 if (!string.IsNullOrEmpty(SelectedDate))
                     responseData["SelectedDate"] = SelectedDate;
             }
@@ -114,7 +118,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ResponseModel.ClubDetailModel.ClubId = ResponseModel.ClubDetailModel.ClubId.EncryptParameter();
             ResponseModel.ClubDetailModel.ClubLogo = ImageHelper.ProcessedImage(ResponseModel.ClubDetailModel.ClubLogo);
             //Plan
-            var dbResponse3 = _buss.GetPlans(cId, customerId);
+            var dbResponse3 = _buss.GetPlans(cId, customerId, Date, Time);
             if (dbResponse3.Item1 == ResponseCode.Failed || dbResponse3.Item1 == ResponseCode.Exception)
             {
                 AddNotificationMessage(new NotificationModel()
@@ -281,7 +285,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse.Item2 ?? "Invalid request",
+                    Message = dbResponse2.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
