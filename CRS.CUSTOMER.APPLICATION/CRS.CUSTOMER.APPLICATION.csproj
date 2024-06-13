@@ -722,6 +722,7 @@
     <Content Include="Views\SearchV2\_SearchFilterMapTab.cshtml" />
     <Content Include="Views\SearchV2\ClubSearchResult.cshtml" />
     <Content Include="Views\SearchV2\HostSearchResult.cshtml" />
+    <Content Include="Views\SearchV2\Preference.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -41,7 +41,7 @@
 
 
     .owl-item .item img {
-        width:100%;
+        width: 100%;
         min-width: 298px;
     }
 
@@ -625,7 +625,7 @@
     </div>
     <div class="flex flex-col  gap-[6px] px-4 gap-[6px] pb-[16px]">
         <div class="grid  grid-cols-2 gap-[6px]">
-            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("0").ToString()');">
+            <div class="relative" onclick="PreferenceRedirect('s00001');">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/ShopsYouCanVisit.jpg" alt="location1">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -635,7 +635,7 @@
                 <div class="overlay"></div>
 
             </div>
-            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("1").ToString()');">
+            <div class="relative" onclick="PreferenceRedirect('s00002');">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden  rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/PrivateReservation.jpg" alt="location2">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -647,7 +647,7 @@
             </div>
         </div>
         <div class="grid grid-cols-3 gap-[6px]">
-            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("2").ToString()');">
+            <div class="relative" onclick="PreferenceRedirect('s00003');">
                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/LargeNumber.jpg" alt="location3">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -657,7 +657,7 @@
                 </div>
                 <div class="overlay"></div>
             </div>
-            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("3").ToString()');">
+            <div class="relative" onclick="PreferenceRedirect('s00004');">
                 <div class="innercontainer h-[100px] flex flex-row text-center  justify-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/VIPRoomsAvailable.jpg" alt="loction4">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -667,7 +667,7 @@
                 </div>
                 <div class="overlay"></div>
             </div>
-            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("4").ToString()');">
+            <div class="relative" onclick="PreferenceRedirect('s00005');">
                 <div class="innercontainer h-[100px] flex flex-row text-center justify-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/GirlsNightOut.jpg" alt="location5">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -786,10 +786,10 @@
                 autoplay: true,
                 autoplayTimeout: 3000,
                 responsive: {
-                   /* 400: {*/
-                        items: 1.75,
+                    /* 400: {*/
+                    items: 1.75,
 
-                   /* }*/
+                    /* }*/
                 }
             });
 
@@ -813,7 +813,7 @@
         });</script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&libraries=geometry&callback=initMap" async defer></script>
     <script>
-        var CurrentLocationId = 0;
+        var CurrentLocationId = '/tokyo/kabukicho';
 
         function initMap() {
            function findNearestLocation(userLocation, locations) {
@@ -1037,7 +1037,14 @@
         }
 
         function PreferenceRedirect(Type) {
-            window.location.href = `/DashboardV2/Preference?LocationId=${CurrentLocationId}&Type=${Type}`;
+            debugger;
+            var locationId = $('#current-location-id').val();
+            var searchUrl = `/search${locationId}/?TopSearch=${Type}`;
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = searchUrl;
+            document.body.appendChild(form);
+            form.submit();
         }
 
         function CurrentLocationRedirectFunction(RenderId = "") {

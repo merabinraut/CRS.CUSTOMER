@@ -21,6 +21,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     public class SearchV2Controller : Controller
     {
         private readonly Dictionary<string, string> _locationHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Location");
+        private readonly Dictionary<string, string> _sceneHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Scene");
         private readonly ISearchFilterManagementBusiness _searchBusinessOld;
         private readonly ISearchBusiness _searchBusiness;
         private readonly ICommonManagementBusiness _commonBusiness;
@@ -126,7 +127,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, Route("search/{prefectures}/{area}")]
-        public ActionResult Index(string prefectures, string area, string target, string scftab, SearchV2FilterClubTabRequestModel ClubTabRequest = null, bool NewClub = false, SearchV2FilterHostTabRequestModel HostTabRequest = null, bool NewHost = false, SearchV2ClubDateTimeFilterRequestModel ClubDateTimeTabRequest = null)
+        public ActionResult Index(string prefectures, string area, string target, string scftab, string TopSearch, SearchV2FilterClubTabRequestModel ClubTabRequest = null, bool NewClub = false, SearchV2FilterHostTabRequestModel HostTabRequest = null, bool NewHost = false, SearchV2ClubDateTimeFilterRequestModel ClubDateTimeTabRequest = null)
         {
             ViewBag.PrefecturesArea = $"/{prefectures}/{area}";
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
@@ -381,6 +382,29 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ViewBag.Time = string.IsNullOrEmpty(ClubDateTimeTabRequest.Time) ? string.Empty : ClubDateTimeTabRequest.Time.DecryptParameter();
                 ViewBag.NoOfPeople = string.IsNullOrEmpty(ClubDateTimeTabRequest.NoOfPeople) ? string.Empty : ClubDateTimeTabRequest.NoOfPeople.DecryptParameter();
                 return View("ClubSearchResult", Response);
+            }
+            else if (!string.IsNullOrEmpty(TopSearch))
+            {
+                var TypeValue = ApplicationUtilities.GetKeyValueFromDictionary(_sceneHelper, TopSearch);
+                if (!string.IsNullOrEmpty(TopSearch))
+                {
+                    ViewBag.ActionPageName = "SearchFilter";
+                    ViewBag.TypeValue = TopSearch;
+                    var Response = new List<Models.SearchV2.SearchFilterClubDetailModel>();
+                    var dbResponse = _dashboardBusiness.GetAvailabilityClub(locationId, CustomerId, TypeValue);
+                    if (dbResponse != null && dbResponse.Count > 0)
+                    {
+                        Response = ApplicationUtilities.MapObjects<Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
+                        Response.ForEach(x =>
+                        {
+                            x.ClubId = x.ClubId.EncryptParameter();
+                            x.ClubLocationId = x.ClubLocationId.EncryptParameter();
+                            x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
+                            x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
+                        });
+                    }
+                    return View("Preference", Response);
+                }
             }
             return Redirect("/");
         }
