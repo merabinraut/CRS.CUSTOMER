@@ -10,5 +10,6 @@ namespace CRS.CUSTOMER.REPOSITORY.NotificationManagement
         List<NotificationDetailCommon> GetAllNotification(ManageNotificationCommon Request);
         bool HasUnReadNotification(string AgentId);
         CommonDbResponse ManageNotificationReadStatus(Common Request);
+        CommonDbResponse ManageReservationCancelRemark(Common Request, string NotificationId, string CustomerRemarks);
     }
 }
