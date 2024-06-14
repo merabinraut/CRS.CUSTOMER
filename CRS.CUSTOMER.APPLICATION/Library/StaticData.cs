@@ -48,7 +48,7 @@ namespace CRS.CUSTOMER.APPLICATION.Library
                 }
                 if (model.GetPlanGroupDetail[i].Label == "Last Entry Time" || model.GetPlanGroupDetail[i].Label == "最終入店時間")
                 {
-                    model.GetPlanGroupDetail[i].LabelValue = model.GetPlanGroupDetail[i].LabelValue + "(L.O. " + model.GetPlanGroupDetail[i + 1].LabelValue + ")";
+                    model.GetPlanGroupDetail[i].LabelValue = model.GetPlanGroupDetail[i].LabelValue + " / L.O. " + model.GetPlanGroupDetail[i + 1].LabelValue + "";
                 }
             }
             if (index > 0)
