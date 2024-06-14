@@ -310,6 +310,8 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
                     VPMaxReservation = _dao.ParseColumnValue(dbResponseInfo, "VPMaxReservation").ToString(),
                     WebsiteLink = _dao.ParseColumnValue(dbResponseInfo, "WebsiteLink").ToString(),
                     LastOrderTime = _dao.ParseColumnValue(dbResponseInfo, "LastOrderTime").ToString(),
+                    ClubTimePeriod = _dao.ParseColumnValue(dbResponseInfo, "ClubTimePeriod").ToString(),
+                    TodaysClubSchedule = _dao.ParseColumnValue(dbResponseInfo, "TodaysClubSchedule").ToString(),
                 };
             }
             return new ClubBasicInformationModelCommon();
