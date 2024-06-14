@@ -668,7 +668,7 @@
 
         function redirectToSearchPage() {
            var locationId = '@ViewBag.LocationId';
-            var searchUrl = `/Search/Index?LocationId=${locationId}`;
+            var searchUrl = `/search${locationId}/?target=club`;
             window.location.href = searchUrl;
         }
 

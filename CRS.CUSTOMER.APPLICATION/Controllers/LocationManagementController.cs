@@ -11,6 +11,7 @@ using CRS.CUSTOMER.BUSINESS.ReservationManagement;
 using CRS.CUSTOMER.BUSINESS.SearchFilterManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.RecommendedClubHost;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,7 +29,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IDashboardBusiness _dashboardBuss;
         private readonly IRecommendedClubHostBusiness _recommendedClubHostBuss;
         private readonly ICommonManagementBusiness _commonManagementBuss;
-
+        private readonly Dictionary<string, string> _locationHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Location");
 
         public LocationManagementController(ILocationManagementBusiness business, IReservationManagementBusiness reservationBuss, IProfileManagementBusiness profileBuss
             , ISearchFilterManagementBusiness searchBuss, IDashboardBusiness dashboardBuss, IRecommendedClubHostBusiness recommendedClubHostBuss, ICommonManagementBusiness commonManagementBuss)
@@ -41,14 +42,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             this._recommendedClubHostBuss = recommendedClubHostBuss;
             this._commonManagementBuss = commonManagementBuss;
         }
-        [HttpGet, Route("location/{prefectures}/{area}")]
-        public ActionResult Index(string prefectures, string area, LocationClubHostRequestModel RequestModel, string RenderId = "")
+        [HttpGet]
+        public ActionResult Index(LocationClubHostRequestModel RequestModel, string RenderId = "")
         {
+            var locationId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, RequestModel.LocationId);
             ViewBag.ActionPageName = "Dashboard";
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
-            var id = !string.IsNullOrEmpty(RequestModel.LocationId) ? RequestModel.LocationId.DecryptParameter() : null;
-            if (string.IsNullOrEmpty(id))
+            //var id = !string.IsNullOrEmpty(RequestModel.LocationId) ? RequestModel.LocationId.DecryptParameter() : null;
+            if (string.IsNullOrEmpty(locationId))
             {
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -71,7 +73,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var recommendedClubDBRequest = new RecommendedClubRequestCommon()
             {
                 PositionId = RequestModel.GroupId.ToString(),
-                LocationId = !string.IsNullOrEmpty(RequestModel.LocationId) ? RequestModel.LocationId.DecryptParameter() : null,
+                LocationId = locationId,//!string.IsNullOrEmpty(RequestModel.LocationId) ? RequestModel.LocationId.DecryptParameter() : null,
                 CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter()
             };
 
@@ -91,7 +93,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var recommendedHostDBRequest = new RecommendedHostRequestCommon()
                 {
                     PositionId = RequestModel.GroupId.ToString(),
-                    LocationId = !string.IsNullOrEmpty(RequestModel.LocationId) ? RequestModel.LocationId.DecryptParameter() : null,
+                    LocationId = locationId,//!string.IsNullOrEmpty(RequestModel.LocationId) ? RequestModel.LocationId.DecryptParameter() : null,
                     CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter()
                 };
                 var dbHostResponse = _recommendedClubHostBuss.GetRecommendedHost(recommendedHostDBRequest);
@@ -122,7 +124,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         #region Club Detail
-        [HttpGet, Route("location/{prefectures}/{area}/hostclub/{id}")]
+        [HttpGet]
         public ActionResult ClubDetail_V2(string LocationId, string ClubId, string ScheduleFilterDate = null)
         {
             var culture = Request.Cookies["culture"]?.Value;
@@ -317,7 +319,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
         #endregion
 
-        [HttpGet, Route("location/{prefectures}/{area}/hostclub/{id}/host")]
+        [HttpGet]
         public ActionResult ViewHostDetail(string HostId)
         {
             var culture = Request.Cookies["culture"]?.Value;
