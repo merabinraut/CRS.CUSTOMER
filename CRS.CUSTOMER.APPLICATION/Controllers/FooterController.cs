@@ -11,31 +11,31 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View();
         }
 
-        [HttpGet, Route("Footer/faq")]
+        [HttpGet, Route("faq")]
         public ActionResult faq()
         {
             return View();
         }
 
-        [HttpGet, Route("Footer/inquery")]
+        [HttpGet, Route("support")]
         public ActionResult inquery()
         {
             return View();
         }
 
-        [HttpGet, Route("Footer/operatingcompany")]
+        [HttpGet, Route("company")]
         public ActionResult operatingcompany()
         {
             return View();
         }
 
-        [HttpGet, Route("Footer/privacypolicy")]
+        [HttpGet, Route("policy")]
         public ActionResult privacypolicy()
         {
             return View();
         }
 
-        [HttpGet, Route("Footer/termsAndCondition")]
+        [HttpGet, Route("rule")]
         public ActionResult termsAndCondition()
         {
             return View();
