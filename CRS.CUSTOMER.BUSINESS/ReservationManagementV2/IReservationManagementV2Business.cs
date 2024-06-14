@@ -20,7 +20,7 @@ namespace CRS.CUSTOMER.BUSINESS.ReservationManagementV2
         #endregion
 
         #region Plan 
-        Tuple<ResponseCode, string, List<PlanV2Common>> GetPlans(string ClubId, string CustomerId);
+        Tuple<ResponseCode, string, List<PlanV2Common>> GetPlans(string ClubId, string CustomerId, string SelectedDate, string SelectedTime);
         #endregion
 
         #region Host

@@ -641,7 +641,7 @@
                             </tr>
                             <tr class="">
                                 <td class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
-                                    木曜日
+                                    定休日
                                 </td>
                                 @if (Model.GetClubBasicInformation.Holiday != null)
                                 {
@@ -855,7 +855,7 @@
                                     @Model.GetClubBasicInformation.RegularEntry
                                     @if (Model.GetClubBasicInformation.LastOrderTime != null)
                                     {
-                                        <text>( / L.O. @Model.GetClubBasicInformation.LastOrderTime)</text>
+                                        <text> / L.O. @Model.GetClubBasicInformation.LastOrderTime</text>
                                     }
                                     @*@Model.GetClubBasicInformation.LastOrderTime / L.O 21:00*@
                                 </td>
@@ -1136,7 +1136,7 @@
                             @if (!string.IsNullOrEmpty(item.HostImage))
                             {
                                 <img src="@item.HostImage"
-                                     class=" object-fill rounded-[6px] image-cover" />
+                                     class=" object-fill rounded-[6px] image-cover " style="object-position:top" />
                             }
                             else
                             {

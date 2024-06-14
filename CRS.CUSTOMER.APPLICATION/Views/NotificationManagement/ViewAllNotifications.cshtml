@@ -27,6 +27,16 @@
         .notification-list .circle {
             display: none;
         }
+
+    .btn-notification {
+        display: flex;
+        height: 31px;
+        padding: 4px 12px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        width: 26%;
+    }
 </style>
 <div class="flex flex-col gap-4 p-4">
     @Html.AntiForgeryToken()
@@ -68,6 +78,24 @@
                                         <div class='text-sm font-bold text-charcolBlack notification-title pb-1 '>@item.NotificationSubject</div>
                                         <div class='text-xs  text-[#667085] pb-1'>@item.NotificationBody</div>
                                         <div class='text-[10px]  text-[#A1A1AA] pb-1'>@item.FormattedDate</div>
+
+                                        @if (@item.NotificationType.ToLower() == "no visit code" &&  string.IsNullOrEmpty(@item.IsRemarksDone.ToLower()) )
+                                        {
+                                            @*<input type="hidden" name="NotificationId" value="@item.NotificationId"/>*@
+                                            <div class="flex items-center  gap-[6px] py-[11px]">
+                                                <button class="btn-notification btn-primary" onclick="ReservationCancelFunction('@item.NotificationId','Y');">
+                                                    <a class="h-full w-full">
+                                                        Yes
+                                                    </a>
+                                                </button>
+                                                <button class="btn-notification" type="button" style="border-radius: 4px;
+                                                    border: 1px solid #A1A1AA;" onclick="ReservationCancelFunction('@item.NotificationId','N');">
+                                                    No
+                                                </button>
+
+                                            </div>
+                                        }
+
                                     </div>
                                 </div>
                                 <div class="circle flex-none">
@@ -90,6 +118,36 @@
             }
             else return false;
         });
+        function ReservationCancelFunction(NotificationId, CustomerRemarks) {
+            debugger;
+            $.ajax({
+                url: '/NotificationManagement/CustomerReservationCancelRemark',
+                type: 'POST',
+                data: {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(), NotificationId: NotificationId, CustomerRemarks: CustomerRemarks
+                },
+                success: function (result) {
+                    if (result.Code === "0") {
+                        toastr.info(result.Message);
+                        //toastr.success(result.Message);
+                        //pageLabel.innerHTML = result.PageTitle;
+                        //markAllRead.innerHTML = '';
+                        //notificationListItems.forEach(function (item) {
+                        //    if (item.classList.contains('active')) {
+                        //        item.classList.remove('active');
+                        //    }
+                        //});
+                    }
+                    else {
+                        toastr.info(result.Message);
+                    }
+                },
+                error: function () {
+                    toastr.error("Something went wrong. Please try again later.");
+                }
+            });
+        };
+
         var notificationListItems = document.querySelectorAll('.notification-list');
         var pageLabel = document.getElementById("page-label-id");
         var markAllRead = document.getElementById("markAllRead");

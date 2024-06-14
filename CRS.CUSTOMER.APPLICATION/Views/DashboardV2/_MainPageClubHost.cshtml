@@ -713,15 +713,15 @@
                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                          src="@item.HostImage" />
                 </div>
-                @if (item.IsBookmarked.ToUpper() == "Y")
+                @if (!string.IsNullOrEmpty(item.IsBookmarked.ToUpper()) && item.IsBookmarked.ToUpper() == "Y")
                 {
-                    <div id="like" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                    <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','@item.HostId','host', this)">
                         <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                     </div>
                 }
                 else
                 {
-                    <div id="like" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                    <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','@item.HostId','host', this)">
                         <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                     </div>
                 }
