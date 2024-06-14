@@ -226,6 +226,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageManagementController.cs" />
     <Compile Include="Controllers\LocationManagementController.cs" />
+    <Compile Include="Controllers\LocationManagementV2Controller.cs" />
     <Compile Include="Controllers\LogManagementController.cs" />
     <Compile Include="Controllers\NotificationManagementController.cs" />
     <Compile Include="Controllers\PaymentMethodManagementController.cs" />
@@ -265,6 +266,8 @@
     <Compile Include="Models\Dashboard\LocationModel.cs" />
     <Compile Include="Models\Home\LoginManagementModel.cs" />
     <Compile Include="Models\Home\RegistrationManagementModel.cs" />
+    <Compile Include="Models\LocationManagementV2\ClubDetailModel.cs" />
+    <Compile Include="Models\LocationManagementV2\LocationManagementModel.cs" />
     <Compile Include="Models\LocationManagement\ClubDetailModel.cs" />
     <Compile Include="Models\LocationManagement\ClubReservationModel.cs" />
     <Compile Include="Models\LocationManagement\ClubReviewManagementModel.cs" />
@@ -723,6 +726,8 @@
     <Content Include="Views\SearchV2\ClubSearchResult.cshtml" />
     <Content Include="Views\SearchV2\HostSearchResult.cshtml" />
     <Content Include="Views\SearchV2\Preference.cshtml" />
+    <Content Include="Views\LocationManagementV2\Index.cshtml" />
+    <Content Include="Views\LocationManagementV2\ClubDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

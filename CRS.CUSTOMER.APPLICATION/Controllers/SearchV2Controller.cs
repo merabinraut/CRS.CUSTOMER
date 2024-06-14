@@ -18,7 +18,7 @@ using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
-    public class SearchV2Controller : Controller
+    public class SearchV2Controller : CustomController
     {
         private readonly Dictionary<string, string> _locationHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Location");
         private readonly Dictionary<string, string> _sceneHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Scene");
