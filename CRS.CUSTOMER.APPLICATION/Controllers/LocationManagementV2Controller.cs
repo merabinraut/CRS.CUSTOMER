@@ -95,9 +95,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(response);
         }
 
-        [HttpGet, Route("area/{prefectures}/{area}/hostclub/{ClubId}")]
-        public ActionResult ClubDetail(string prefectures, string area, string ClubId, string ScheduleFilterDate = null)
-        {
+        [HttpGet, Route("area/{prefectures}/{area}/hostclub/{ClubId}/{target?}")]
+        public ActionResult ClubDetail(string prefectures, string area, string ClubId, string target = "", string ScheduleFilterDate = null)
+         {
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
             var PrefecturesArea = $"/{prefectures}/{area}";
@@ -108,7 +108,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 DateTime date = DateTime.ParseExact(ScheduleFilterDate, "yyyy年 M月", null);
                 sFD = date.ToString("yyyy/MM");
             }
-            if (string.IsNullOrEmpty(ClubId) || string.IsNullOrEmpty(locationId))
+            var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
+            if (string.IsNullOrEmpty(cId) || string.IsNullOrEmpty(locationId))
             {
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -119,80 +120,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 return Redirect("/");
             }
             string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
-            var clubDetailResp = _business.GetClubDetailById(ClubId, agentId);
-            var responseModel = clubDetailResp.MapObject<Models.LocationManagementV2.ClubDetailModel>();
+            var responseModel = new Models.LocationManagementV2.ClubDetailModel();
+            var clubDetailResp = _business.GetClubDetailById(cId, agentId);
+            responseModel = clubDetailResp.MapObject<Models.LocationManagementV2.ClubDetailModel>();
             responseModel.ClubId = responseModel.ClubId.EncryptParameter();
             responseModel.LocationId = responseModel.LocationId.EncryptParameter();
-            var dbHostList = _business.GetHostList(locationId, ClubId);
-            responseModel.HostListModels = dbHostList.MapObjects<LocationV2HostListModel>();
-            foreach (var item in responseModel.HostListModels)
-            {
-                item.ClubId = item.ClubId.EncryptParameter();
-                item.HostId = item.HostId.EncryptParameter();
-                item.LocationId = item.LocationId.EncryptParameter();
-                item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
-            }
-            var dbTopHostList = _business.GetHostList(locationId, ClubId, agentId, "trhl");
-            responseModel.TopHostListModels = dbTopHostList.MapObjects<LocationV2HostListModel>();
-            foreach (var item in responseModel.TopHostListModels)
-            {
-                item.ClubId = item.ClubId.EncryptParameter();
-                item.HostId = item.HostId.EncryptParameter();
-                item.LocationId = item.LocationId.EncryptParameter();
-                item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
-            }
-            var clubGalleryImageDBResponse = _business.GetClubGalleryImage(responseModel.ClubId.DecryptParameter(), "A");
-            if (clubGalleryImageDBResponse != null && clubGalleryImageDBResponse.Count > 0)
-            {
-                responseModel.ClubGalleryImageList = clubGalleryImageDBResponse;
-                responseModel.ClubGalleryImageList.ForEach(x => x = ImageHelper.ProcessedImage(x));
-            }
-            else responseModel.ClubGalleryImageList = new List<string>();
             responseModel.ClubCoverPhoto = ImageHelper.ProcessedImage(responseModel.ClubCoverPhoto);
             responseModel.ClubLogo = ImageHelper.ProcessedImage(responseModel.ClubLogo);
-            responseModel.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
-            var reviewDBResponse = _business.GetClubReviewAndRatings(ClubId);
-            if (reviewDBResponse != null && reviewDBResponse.Count > 0)
-            {
-                responseModel.ClubReviewsModel = reviewDBResponse.MapObjects<GetClubReviewsModel>();
-                foreach (var item in responseModel.ClubReviewsModel)
-                {
-                    if (!string.IsNullOrEmpty(item.CustomerImage))
-                    {
-                        item.CustomerImage = ImageHelper.ProcessedImage(item.CustomerImage);
-                    }
-                    else
-                    {
-                        item.CustomerImage = "";
-                    }
-                }
-                foreach (var item in responseModel.ClubReviewsModel)
-                {
-                    item.GetClubReviewRemarkList.ForEach(x => x.Remark = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishRemark : x.JapaneseRemark);
-                }
-                foreach (var item in responseModel.ClubReviewsModel)
-                {
-                    foreach (var item_sec in item.GetClubReviewHostList)
-                    {
-                        if (!string.IsNullOrEmpty(item_sec.HostImage))
-                        {
-                            item_sec.HostImage = ImageHelper.ProcessedImage(item_sec.HostImage);
-                        }
-                        else
-                        {
-                            item_sec.HostImage = "";
-                        }
-                    }
-                }
-            }
-            var dbNoticeResponseInfo = _business.GetNoticeByClubId(ClubId);
-            responseModel.GetNoticeByClubId = dbNoticeResponseInfo.MapObjects<Models.LocationManagementV2.NoticeModel>();
-            foreach (var notice_item in responseModel.GetNoticeByClubId)
-            {
-                DateTime date = DateTime.ParseExact(notice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
-                notice_item.Day = date.ToString("ddd");
-            }
-            var dbBasicInfoResponse = _business.GetClubBasicInformation(ClubId);
+            ViewBag.target = target;
+            var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);
             responseModel.GetClubBasicInformation = dbBasicInfoResponse.MapObject<Models.LocationManagementV2.ClubBasicInformationModel>();
             if (!string.IsNullOrEmpty(responseModel.GetClubBasicInformation.InstagramLink) && responseModel.GetClubBasicInformation.InstagramLink != "#")
             {
@@ -214,49 +150,155 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 if (!responseModel.GetClubBasicInformation.WebsiteLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.WebsiteLink = "https://" + responseModel.GetClubBasicInformation.WebsiteLink;
             }
-            var dbAllNoticeResponse = _business.GetAllNoticeTabList(ClubId);
-            responseModel.GetAllNoticeTabList = dbAllNoticeResponse.MapObjects<Models.LocationManagementV2.AllNoticeModel>();
-            foreach (var allNotice_item in responseModel.GetAllNoticeTabList)
+            #region TAB
+            #region TAB 2
+            if (!string.IsNullOrEmpty(target) && target.Trim() == "host")
             {
-                // Parse the date string using the specified format and culture
-                DateTime date = DateTime.ParseExact(allNotice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
-                // Get the day name
-                allNotice_item.DayName = date.ToString("ddd");
-
-            }
-            var dbScheduleResponse = _business.GetAllScheduleTabList(ClubId, sFD);
-            responseModel.GetAllScheduleTabList = dbScheduleResponse.MapObjects<Models.LocationManagementV2.AllScheduleModel>();
-            foreach (var item_schedule in responseModel.GetAllScheduleTabList)
-            {
-                DateTime date = DateTime.ParseExact(item_schedule.ScheduleDate, "yyyy年MM月dd日", null);
-                string formattedDayOfWeek = date.ToString("dd");
-
-                // Get the day name (e.g., "Sunday")
-                string dayName = date.ToString("ddd");
-                item_schedule.Day = formattedDayOfWeek;
-                item_schedule.DayName = dayName;
-                if (!string.IsNullOrEmpty(item_schedule.ScheduleImage))
+                ViewBag.target = "host";
+                var dbHostList = _business.GetHostList(locationId, cId);
+                responseModel.HostListModels = dbHostList.MapObjects<LocationV2HostListModel>();
+                foreach (var item in responseModel.HostListModels)
                 {
-                    item_schedule.ScheduleImage = ImageHelper.ProcessedImage(item_schedule.ScheduleImage, false);
-                }
-                else
-                {
-                    item_schedule.ScheduleImage = "";
+                    item.ClubId = item.ClubId.EncryptParameter();
+                    item.HostId = item.HostId.EncryptParameter();
+                    item.LocationId = item.LocationId.EncryptParameter();
+                    item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
                 }
             }
-            responseModel.GetScheduleDDL = GetScheduleList();
-            var dbPlanDetailRes = _business.GetPlanDetail(ClubId);
-            responseModel.GetPlanDetailList = dbPlanDetailRes.MapObjects<Models.LocationManagementV2.PlanDetailModel>();
-            var groupedResults = responseModel.GetPlanDetailList
-            .GroupBy(planDetail => planDetail.PlanName)
-            .Select(group => new
+            #endregion
+            #region TAB 3
+            else if (!string.IsNullOrEmpty(target) && target.Trim() == "review")
             {
-                PlanName = group.Key,
-                GetPlanGroupDetail = group.ToList()
-            })
-            .ToList();
-            ViewBag.PlanGroup = groupedResults.MapObjects<Models.LocationManagementV2.PlanGroup>();
-            ViewBag.PlanGroup1 = groupedResults.MapObjects<Models.LocationManagementV2.PlanGroup>();
+                ViewBag.target = "review";
+                var reviewDBResponse = _business.GetClubReviewAndRatings(cId);
+                if (reviewDBResponse != null && reviewDBResponse.Count > 0)
+                {
+                    responseModel.ClubReviewsModel = reviewDBResponse.MapObjects<GetClubReviewsModel>();
+                    foreach (var item in responseModel.ClubReviewsModel)
+                    {
+                        if (!string.IsNullOrEmpty(item.CustomerImage))
+                        {
+                            item.CustomerImage = ImageHelper.ProcessedImage(item.CustomerImage);
+                        }
+                        else
+                        {
+                            item.CustomerImage = "";
+                        }
+                    }
+                    foreach (var item in responseModel.ClubReviewsModel)
+                    {
+                        item.GetClubReviewRemarkList.ForEach(x => x.Remark = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishRemark : x.JapaneseRemark);
+                    }
+                    foreach (var item in responseModel.ClubReviewsModel)
+                    {
+                        foreach (var item_sec in item.GetClubReviewHostList)
+                        {
+                            if (!string.IsNullOrEmpty(item_sec.HostImage))
+                            {
+                                item_sec.HostImage = ImageHelper.ProcessedImage(item_sec.HostImage);
+                            }
+                            else
+                            {
+                                item_sec.HostImage = "";
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region TAB 4
+            else if (!string.IsNullOrEmpty(target) && target.Trim() == "gallery")
+            {
+                ViewBag.target = "gallery";
+                var clubGalleryImageDBResponse = _business.GetClubGalleryImage(responseModel.ClubId.DecryptParameter(), "A");
+                if (clubGalleryImageDBResponse != null && clubGalleryImageDBResponse.Count > 0)
+                {
+                    responseModel.ClubGalleryImageList = clubGalleryImageDBResponse;
+                    responseModel.ClubGalleryImageList.ForEach(x => x = ImageHelper.ProcessedImage(x));
+                }
+                else responseModel.ClubGalleryImageList = new List<string>();
+            }
+            #endregion 
+            #region TAB 5
+            else if (!string.IsNullOrEmpty(target) && target.Trim() == "schedule")
+            {
+                ViewBag.target = "schedule";
+                responseModel.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
+                responseModel.GetScheduleDDL = GetScheduleList();
+                var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);
+                responseModel.GetAllScheduleTabList = dbScheduleResponse.MapObjects<Models.LocationManagementV2.AllScheduleModel>();
+                foreach (var item_schedule in responseModel.GetAllScheduleTabList)
+                {
+                    DateTime date = DateTime.ParseExact(item_schedule.ScheduleDate, "yyyy年MM月dd日", null);
+                    string formattedDayOfWeek = date.ToString("dd");
+
+                    // Get the day name (e.g., "Sunday")
+                    string dayName = date.ToString("ddd");
+                    item_schedule.Day = formattedDayOfWeek;
+                    item_schedule.DayName = dayName;
+                    if (!string.IsNullOrEmpty(item_schedule.ScheduleImage))
+                    {
+                        item_schedule.ScheduleImage = ImageHelper.ProcessedImage(item_schedule.ScheduleImage, false);
+                    }
+                    else
+                    {
+                        item_schedule.ScheduleImage = "";
+                    }
+                }
+            }
+            #endregion
+            #region TAB 6
+            else if (!string.IsNullOrEmpty(target) && target.Trim() == "notice")
+            {
+                ViewBag.target = "notice";
+                var dbAllNoticeResponse = _business.GetAllNoticeTabList(cId);
+                responseModel.GetAllNoticeTabList = dbAllNoticeResponse.MapObjects<Models.LocationManagementV2.AllNoticeModel>();
+                foreach (var allNotice_item in responseModel.GetAllNoticeTabList)
+                {
+                    // Parse the date string using the specified format and culture
+                    DateTime date = DateTime.ParseExact(allNotice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
+                    // Get the day name
+                    allNotice_item.DayName = date.ToString("ddd");
+                }
+            }
+            #endregion
+            #region TAB 1
+            else
+            {
+                var dbTopHostList = _business.GetHostList(locationId, cId, agentId, "trhl");
+                ViewBag.target = "";
+                responseModel.TopHostListModels = dbTopHostList.MapObjects<LocationV2HostListModel>();
+                foreach (var item in responseModel.TopHostListModels)
+                {
+                    item.ClubId = item.ClubId.EncryptParameter();
+                    item.HostId = item.HostId.EncryptParameter();
+                    item.LocationId = item.LocationId.EncryptParameter();
+                    item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
+                }
+
+                var dbNoticeResponseInfo = _business.GetNoticeByClubId(cId);
+                responseModel.GetNoticeByClubId = dbNoticeResponseInfo.MapObjects<Models.LocationManagementV2.NoticeModel>();
+                foreach (var notice_item in responseModel.GetNoticeByClubId)
+                {
+                    DateTime date = DateTime.ParseExact(notice_item.EventDate, "yyyy年MM月dd日", CultureInfo.InvariantCulture);
+                    notice_item.Day = date.ToString("ddd");
+                }
+
+                var dbPlanDetailRes = _business.GetPlanDetail(cId);
+                responseModel.GetPlanDetailList = dbPlanDetailRes.MapObjects<Models.LocationManagementV2.PlanDetailModel>();
+                var groupedResults = responseModel.GetPlanDetailList
+                .GroupBy(planDetail => planDetail.PlanName)
+                .Select(group => new
+                {
+                    PlanName = group.Key,
+                    GetPlanGroupDetail = group.ToList()
+                })
+                .ToList();
+                ViewBag.PlanGroup = groupedResults.MapObjects<Models.LocationManagementV2.PlanGroup>();
+                ViewBag.PlanGroup1 = groupedResults.MapObjects<Models.LocationManagementV2.PlanGroup>();
+            }
+            #endregion
+            #endregion
             ViewBag.ActionPageName = "ClubHostDetailNavMenu";
             ViewBag.FileLocationPath = "";
             ViewBag.SFilterDate = ScheduleFilterDate;

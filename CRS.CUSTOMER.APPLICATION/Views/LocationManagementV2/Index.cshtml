@@ -216,7 +216,7 @@
                     /*New design */
                     <div class="club_content">
                         <!-- s/link -->
-                        <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                        <a onclick="ClubDetailActionFunction('@item.ClubId')">
                             <ul class="club_tags">
                                 @if (!string.IsNullOrEmpty(@item.Tag1))
                                 {
@@ -604,8 +604,12 @@
             localStorage.clear();
         })</script>
     <script>
-        function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
+        function ClubDetailActionFunction(i) {
+            var locationId = '@ViewBag.LocationId';
+            var target = '';
+            var url = `/area${locationId}/hostclub/${encodeURIComponent(i)}/${target}`;
+            window.location.href = url;
+            //window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }
         function ClubReservationActionFunction(i, j, k) {
             DataStorageFunction(i, j);

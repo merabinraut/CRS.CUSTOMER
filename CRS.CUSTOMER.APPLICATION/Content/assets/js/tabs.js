@@ -35,8 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             // Show the selected tab and set active class on the clicked button
-            tabs[index].classList.remove("hidden");
-            tabButton.classList.add("active");
+            if (tabs[index]) {
+                tabs[index].classList.remove("hidden");
+                tabButton.classList.add("active");
+            }
         });
     });
 });
