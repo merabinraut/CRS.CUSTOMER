@@ -627,6 +627,16 @@
         if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
             document.body.style.overscrollBehaviorY = 'contain';
         }
+
+        function HostDetailRedirectFunction(HostCode, ClubCode, PrefecturesArea) {
+            var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/${HostCode}`;
+            window.location.href = url;
+        }
+
+        function ClubDetailRedirectFunction(ClubCode, PrefecturesArea) {
+            var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
+            window.location.href = url;
+        }
     </script>
     @RenderSection("scripts", required: false)
 </body>

@@ -11,5 +11,7 @@
         public string Longitude { get; set; }
         public string URL { get; set; }
         public string RatingScale { get; set; }
+        public string ClubCode { get; set; }
+        public string LocationURL { get; set; }
     }
 }
