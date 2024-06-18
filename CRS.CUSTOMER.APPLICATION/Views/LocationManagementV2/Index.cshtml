@@ -216,7 +216,7 @@
                     /*New design */
                     <div class="club_content">
                         <!-- s/link -->
-                        <a onclick="ClubDetailActionFunction('@item.ClubId')">
+                        <a onclick="ClubDetailActionFunction('@item.ClubCode')">
                             <ul class="club_tags">
                                 @if (!string.IsNullOrEmpty(@item.Tag1))
                                 {
@@ -350,7 +350,8 @@
                     {
                         <div class="h-auto flex flex-col justify-end  text-center relative rounded-sm">
                             <div class="w-full relative">
-                                <a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
+                                @*<a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">*@
+                                <a class="" onclick="HostDetailFunction('@item.HostCode', '@item.ClubCode');">
                                     @if (!string.IsNullOrEmpty(item.HostImage))
                                     {
                                         <img class="w-full h-[157px]  object-cover rounded-sm" src="@item.HostImage" />
@@ -675,6 +676,12 @@
                 $(this).addClass('active');
             });
         });
+
+        function HostDetailFunction(HostId, ClubId) {
+            var locationId = '@ViewBag.LocationId';
+            var url = `/area${locationId}/hostclub/${encodeURIComponent(ClubId)}/${HostId}`;
+            window.location.href = url;
+        }
     </script>
 
 }

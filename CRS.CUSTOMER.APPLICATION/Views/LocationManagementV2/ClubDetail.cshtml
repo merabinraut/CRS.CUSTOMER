@@ -63,11 +63,11 @@
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="@Url.Action("Index", "Dashboard")" class="active">
+    <a href="/" class="active">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Home
     </a>
     <i class="las la-angle-right"></i>
-    <a href="@Url.Action("Index", "LocationManagement", new { LocationId = Model.LocationId })" class="active">
+    <a class="active" onclick="RedirectToLocation();">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Clubs
     </a>
     <i class="las la-angle-right"></i>
@@ -1815,6 +1815,13 @@
             var prefecturesArea = '@ViewBag.LocationId';
             var clubId = '@ViewBag.ClubId';
             var url = `/area${prefecturesArea}/hostclub/${clubId}/${tab}`;
+            window.location.href = url;
+            return false;
+        }
+
+        function RedirectToLocation() {
+            var prefecturesArea = '@ViewBag.LocationId';
+            var url = `/area${prefecturesArea}`;
             window.location.href = url;
             return false;
         }

@@ -728,6 +728,7 @@
     <Content Include="Views\SearchV2\Preference.cshtml" />
     <Content Include="Views\LocationManagementV2\Index.cshtml" />
     <Content Include="Views\LocationManagementV2\ClubDetail.cshtml" />
+    <Content Include="Views\LocationManagementV2\HostDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

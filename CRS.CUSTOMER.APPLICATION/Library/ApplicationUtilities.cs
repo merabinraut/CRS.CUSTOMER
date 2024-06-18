@@ -1137,10 +1137,18 @@ namespace CRS.CUSTOMER.APPLICATION.Library
         public static string GetKeyValueFromDictionary(Dictionary<string, string> dict, string key)
         {
             string response = string.Empty;
-            string value;       
+            string value;
             if (dict.TryGetValue(key, out value))
                 response = value;
             return response;
+        }
+        public static bool IsPureString(string request)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(request, @"^[a-zA-Z]+$");
+        }
+        public static bool IsAlphanumeric(string request)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(request, @"^[a-zA-Z0-9]+$");
         }
     }
 }
