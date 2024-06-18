@@ -1033,7 +1033,9 @@
         }
 
         function ClubHostRedirectFunction(RenderId) {
-            window.location.href = `/LocationManagement/Index?LocationId=${CurrentLocationId}&RenderId=${RenderId}`;
+            var locationId = $('#current-location-id').val();
+            window.location.href = `/area${locationId}/?RenderId=${RenderId}`;
+            //window.location.href = `/LocationManagement/Index?LocationId=${CurrentLocationId}&RenderId=${RenderId}`;
         }
 
         function PreferenceRedirect(Type) {
@@ -1065,8 +1067,22 @@
             var concatenatedTime = concatenateTime(hourValue, minuteValue).trim();
             if (concatenatedTime === null || concatenatedTime === "") {
                 toastr.info("Invalid time");
+                return false;
             }
-            window.location.href = "/Search/DateTimeFilter?LocationId=" + CurrentLocationId + "&&FilteredTime=" + concatenatedTime + "&&ResultType='1'";
+            let today = new Date();
+            // Get the day, month, and year
+            let day = today.getDate(); // Get the day of the month (1-31)
+            let month = today.getMonth() + 1; // Get the month (0-11, add 1 to get 1-12)
+            let year = today.getFullYear(); // Get the full year (YYYY)
+            let formattedTodayDate = `${year}-${month}-${day}`;
+            //window.location.href = "/Search/DateTimeFilter?LocationId=" + CurrentLocationId + "&&FilteredTime=" + concatenatedTime + "&&ResultType='1'";
+            var prefecturesArea = $('#current-location-id').val();
+            var searchUrl = `/search${prefecturesArea}/?FilteredTime=${concatenatedTime}&&ResultType=@ApplicationUtilities.EncryptParameter("1").ToString()&&Date=${formattedTodayDate}`;
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = searchUrl;
+            document.body.appendChild(form);
+            form.submit();
         }
 
         const LastEntryShowPopup = () => {
@@ -1085,7 +1101,20 @@
             if (concatenatedTime === null || concatenatedTime === "") {
                 toastr.info("Invalid time");
             }
-            window.location.href = `/Search/DateTimeFilter?LocationId=${CurrentLocationId}&&FilteredTime=${concatenatedTime}&&ResultType=${'@ApplicationUtilities.EncryptParameter("2").ToString()'}`;
+            var prefecturesArea = $('#current-location-id').val();
+            let today = new Date();
+            // Get the day, month, and year
+            let day = today.getDate(); // Get the day of the month (1-31)
+            let month = today.getMonth() + 1; // Get the month (0-11, add 1 to get 1-12)
+            let year = today.getFullYear(); // Get the full year (YYYY)
+            let formattedTodayDate = `${year}-${month}-${day}`;
+            //window.location.href = `/Search/DateTimeFilter?LocationId=${CurrentLocationId}&&FilteredTime=${concatenatedTime}&&ResultType=${'@ApplicationUtilities.EncryptParameter("2").ToString()'}`;
+            var searchUrl = `/search${prefecturesArea}/?FilteredTime=${concatenatedTime}&&ResultType=@ApplicationUtilities.EncryptParameter("2").ToString()&&Date=${formattedTodayDate}`;
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = searchUrl;
+            document.body.appendChild(form);
+            form.submit();
         }
 
         function concatenateTime(hourValue, minuteValue) {

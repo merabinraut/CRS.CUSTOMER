@@ -385,19 +385,21 @@
 @section scripts
 {
     <script>
-        $(document).ready(function () {
+        $(document).ready(async function () {
             var Value1 = @Html.Raw(Json.Encode(ViewBag.Date));
             var Value2 = @Html.Raw(Json.Encode(ViewBag.Time));
             var Value3 = @Html.Raw(Json.Encode(ViewBag.NoOfPeople));
             if ((Value1 != null && Value1 != "") ||
                 (Value2 != null && Value2 != "") ||
                 (Value3 != null && Value3 != "")) {
-                InitiateDateTimeFilterPopupFunction();
-                var element = document.getElementById('drawer-date-time');
-                element.classList.add('translate-y-full');
+                const result = await InitiateDateTimeFilterPopupFunction();
                 document.body.classList.remove('body-no-scroll');
                 initTimeFunction2();
                 initPeopleFunction2();
+                var element = document.getElementById('drawer-date-time');
+                if (element) {
+                    element.classList.add('translate-y-full');
+                }
             }
         });
         function ClubDetailActionFunction(i, j) {
