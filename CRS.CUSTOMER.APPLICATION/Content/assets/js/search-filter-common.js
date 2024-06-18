@@ -616,7 +616,8 @@ function ClosePreferenceFilterPopUp() {
 
 //#region 1
 function LocationFunction(i) {
-    window.location.href = "/LocationManagement/Index?LocationId=" + i;
+    //window.location.href = "/LocationManagement/Index?LocationId=" + i;
+    window.location.href = "/area" + i;
 }
 //#endregion
 
