@@ -885,9 +885,9 @@ a.ui-button:active,
     color: #d75a8b;
 }
 
-.ui-datepicker th:nth-last-child(2) {
+/*.ui-datepicker th:nth-last-child(2) {
     color: #697dbf;
-}
+}*/
 
 #selectedDateBtn {
     margin-top: 10px;

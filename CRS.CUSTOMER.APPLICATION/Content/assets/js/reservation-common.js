@@ -36,8 +36,8 @@
                         '7月', '8月', '9月', '10月', '11月', '12月'
                     ],
                     dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
-                    dayNamesShort: ['月', '火', '水', '木', '金', '土', '日',],
-                    dayNamesMin: ['月', '火', '水', '木', '金', '土', '日',],
+                    dayNamesShort: ['日', '月', '火', '水', '木', '金', '土',],
+                    dayNamesMin: ['日', '月', '火', '水', '木', '金', '土',],
                     weekHeader: '週',
                     dateFormat: 'yy/mm/dd',
                     firstDay: 0,
@@ -81,10 +81,14 @@
                         //var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         //return [formattedDates.indexOf(string) == -1];
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                        if (formattedDates.indexOf(string) != -1) {
-                            return [false]; // Unreservable date
-                        } else if (holidayDates.indexOf(string) == -1) {
-                            return [true, 'Dayoff']; // Dayoff date
+                        if (date.getDay() === 0) { // Sunday
+                            return [false,'Sunday']; // Make Sunday unselectable
+                        }
+                        //else if (formattedDates.indexOf(string) != -1) {
+                        //    return [false]; // Unreservable date
+                        //}
+                        else if (holidayDates.indexOf(string) != -1) {
+                            return [false, 'Dayoff']; // Dayoff date
                         }
                         else {
                             return [true];
@@ -121,7 +125,7 @@ function getTimeIntervalByDayWise(date, timeInterval) {
     var selectedDate = new Date(date);
 
     var lastElement = timeInterval[timeInterval.length - 1];
-    var lastEntryTimeStr = lastElement.LastEntryTime; 
+    var lastEntryTimeStr = lastElement.LastEntryTime;
     var endTimeStr = lastElement.Time;
 
     var startDisabledTime = parseTimeString(selectedDate, lastEntryTimeStr);
@@ -157,7 +161,7 @@ function parseTimeString(date, timeString) {
     var hours = parseInt(timeParts[0], 10);
     var minutes = parseInt(timeParts[1], 10);
     var newDate = new Date(date);
-    newDate.setHours(hours, minutes, 0, 0); 
+    newDate.setHours(hours, minutes, 0, 0);
     return newDate;
 }
 /////////////////////////////////////////////////////////////////////// Time JS ///////////////////////////////////////////////////////////////////////
