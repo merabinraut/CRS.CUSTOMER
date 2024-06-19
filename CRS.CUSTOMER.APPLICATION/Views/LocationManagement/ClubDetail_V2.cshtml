@@ -155,7 +155,7 @@
     }
 
 </div>
-<div class="px-4 py-[12px]">
+<div class="px-4 pb-[12px]">
     @*  <div class="flex gap-[14px] pb-2">
             <div class="flex  text-base  items-center" id="comment_ID">
                 @{
@@ -492,9 +492,9 @@
 
             <!-- Notice  -->
             <div class="px-[16px]">
-                <div class="mt-3 flex flex-col justify-start">
+                <div class=" flex flex-col justify-start">
                     <div>
-                        <div class="flex justify-between gap-[2px] items-center ">
+                        <div class="flex justify-between gap-[2px] items-center " style="height:36px">
                             <div class="flex justify-start items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18"
                                      height="18" viewBox="0 0 18 18" fill="none">
@@ -538,9 +538,9 @@
             <div style="height:6px; background:#efefef; width:100%"></div>
             <div class="px-[16px]">
                 <!-- for event notification -->
-                <div class="mt-3 flex flex-col justify-start">
+                <div class="flex flex-col justify-start">
                     <div class="">
-                        <div class="flex justify-between gap-[2px] items-center">
+                        <div class="flex justify-between gap-[2px] items-center" style="height:36px">
                             <div class="flex justify-start items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                                     <path d="M5.0625 2.25V2.8125H2.8125V15.1875H15.1875V2.8125H12.9375V2.25H11.8125V2.8125H6.1875V2.25H5.0625ZM3.9375 3.9375H5.0625V4.5H6.1875V3.9375H11.8125V4.5H12.9375V3.9375H14.0625V5.0625H3.9375V3.9375ZM3.9375 6.1875H14.0625V14.0625H3.9375V6.1875ZM7.3125 7.3125V8.4375H8.4375V7.3125H7.3125ZM9.5625 7.3125V8.4375H10.6875V7.3125H9.5625ZM11.8125 7.3125V8.4375H12.9375V7.3125H11.8125ZM5.0625 9.5625V10.6875H6.1875V9.5625H5.0625ZM7.3125 9.5625V10.6875H8.4375V9.5625H7.3125ZM9.5625 9.5625V10.6875H10.6875V9.5625H9.5625ZM11.8125 9.5625V10.6875H12.9375V9.5625H11.8125ZM5.0625 11.8125V12.9375H6.1875V11.8125H5.0625ZM7.3125 11.8125V12.9375H8.4375V11.8125H7.3125ZM9.5625 11.8125V12.9375H10.6875V11.8125H9.5625Z" fill="#BCB08A" />
@@ -588,17 +588,21 @@
                 <div class="mt-3 flex flex-col justify-start">
                     <!-- for top bar -->
                     <div class="flex justify-between gap-[2px] items-center">
-                        <div class="flex justify-start items-center mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                <path d="M14.0625 2.26758C13.6318 2.26758 13.21 2.43457 12.8848 2.75977L7.3125 8.31445L7.18945 8.4375L7.1543 8.61328L6.76758 10.582L6.5918 11.4082L7.41797 11.2324L9.38672 10.8457L9.5625 10.8105L9.68555 10.6875L15.2402 5.11523C15.8884 4.46704 15.8884 3.40796 15.2402 2.75977C14.915 2.43457 14.4932 2.26758 14.0625 2.26758ZM14.0625 3.35742C14.1943 3.35742 14.324 3.42554 14.4492 3.55078C14.6997 3.80127 14.6997 4.07373 14.4492 4.32422L9 9.77344L8.0332 9.9668L8.22656 9L13.6758 3.55078C13.801 3.42554 13.9307 3.35742 14.0625 3.35742ZM2.25 4.5V15.75H13.5V8.33203L12.375 9.45703V14.625H3.375V5.625H8.54297L9.66797 4.5H2.25Z"
-                                      fill="#BCB08A" />
-                            </svg>
+                        <div class="flex justify-start items-center ">
+                            <span style="margin-bottom:6px">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <path d="M14.0625 2.26758C13.6318 2.26758 13.21 2.43457 12.8848 2.75977L7.3125 8.31445L7.18945 8.4375L7.1543 8.61328L6.76758 10.582L6.5918 11.4082L7.41797 11.2324L9.38672 10.8457L9.5625 10.8105L9.68555 10.6875L15.2402 5.11523C15.8884 4.46704 15.8884 3.40796 15.2402 2.75977C14.915 2.43457 14.4932 2.26758 14.0625 2.26758ZM14.0625 3.35742C14.1943 3.35742 14.324 3.42554 14.4492 3.55078C14.6997 3.80127 14.6997 4.07373 14.4492 4.32422L9 9.77344L8.0332 9.9668L8.22656 9L13.6758 3.55078C13.801 3.42554 13.9307 3.35742 14.0625 3.35742ZM2.25 4.5V15.75H13.5V8.33203L12.375 9.45703V14.625H3.375V5.625H8.54297L9.66797 4.5H2.25Z"
+                                          fill="#BCB08A" />
+                                </svg>
+                            </span>
+
 
                             <h4 class="text-[12px] font-bold leading-[20px] text-[#333]">基本情報</h4>
                         </div>
                     </div>
                 </div>
-                @* </div>*@
+                 </div>
                 <!-- for table  -->
                 <div class="flex flex-col">
                     <div>
@@ -610,7 +614,7 @@
                                 </td>
                                 @if (Model.GetClubBasicInformation.ClubAddress != null)
                                 {
-                                    <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="white-space:normal">
+                                    <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[16px]" style="white-space:normal">
                                         @Model.GetClubBasicInformation.ClubAddress
                                     </td>
                                 }
@@ -654,10 +658,10 @@
                         </table>
                     </div>
                 </div>
-                <div class="box"></div>
+              @*  <div class="box"></div>*@
             </div>
             <!-- for social media icon -->
-            <div class=" my-[6px] social-icon bg-[#EFEFEF] py-[8px] ">
+            <div class=" mb-[6px] social-icon bg-[#EFEFEF] py-[8px] ">
                 <div class="flex flex-row items-center justify-center gap-[10px]">
                     <!-- line  -->
                     @if (!string.IsNullOrWhiteSpace(Model.GetClubBasicInformation.LineNumber))
@@ -867,11 +871,11 @@
                                 var lstgroupDetails = StaticData.GetPlanGroupLOT(group);
                                 foreach (var item in lstgroupDetails.GetPlanGroupDetail)
                                 {
-                                    <tr class="">
+                                    <tr class="" style="height:24px">
                                         @if (isFirstRow)
                                         {
                                             <!-- Display PlanName only in the first row of the group -->
-                                            <td rowspan="1" class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                            <td rowspan="1" class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[16px]" style="padding-left:13px">
                                                 @group.PlanName
                                             </td>
                                             {
@@ -882,7 +886,7 @@
                                         @*<td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
                                                 @item.Label
                                             </td>*@
-                                        <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                        <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[16px]" style="padding-left:16px">
                                             @item.LabelValue
                                         </td>
                                     </tr>
@@ -947,7 +951,7 @@
                                         @if (isFirstRow)
                                         {
                                             <!-- Display PlanName only in the first row of the group -->
-                                            <td rowspan="2" class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                            <td rowspan="2" class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[16px]" style="padding-left:13px">
                                                 @group.PlanName
                                             </td>
                                             {
@@ -955,10 +959,10 @@
                                             }
                                         }
                                         <!-- Display Label and LabelValue for each row -->
-                                        <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                        <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[16px]" style="padding-left:13px">
                                             @item.Label
                                         </td>
-                                        <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                        <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[16px]" style="padding-left:13px">
                                             @item.LabelValue
                                         </td>
                                     </tr>
@@ -1010,11 +1014,11 @@
                     </table>
                 </div>
             </div>
-            <div class="box mt-2"></div>
+            @*<div class="box mt-2"></div>*@
             <div style="height:6px; background:#efefef; width:100%"></div>
 
             <!-- for Pricing -->
-            <div class="mt-3 flex flex-col justify-start">
+            <div class=" flex flex-col justify-start">
                 <!-- for top bar -->
                 <div class="flex justify-between gap-[2px] items-center px-4">
                     <div class="flex justify-start items-center my-2" style="gap:4px">
@@ -1033,10 +1037,10 @@
                             @if (Model.GetClubBasicInformation.RegularPrice != null)
                             {
                                 <tr class="">
-                                    <td class=" border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] pl-[13px] text-[#333]" style="padding-left:13px">
+                                    <td class=" border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] pl-[16px] text-[#333]" style="padding-left:13px">
                                         通常料金
                                     </td>
-                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px]  text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px]  text-[#333] whitespace-nowrap pl-[16px]" style="padding-left:13px">
                                         @Model.GetClubBasicInformation.RegularPrice 円 / 1時間
                                     </td>
                                 </tr>
@@ -1044,10 +1048,10 @@
                             @if (Model.GetClubBasicInformation.DesignationFee != null)
                             {
                                 <tr class="">
-                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px] " style="padding-left:13px">
+                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[16px] " style="padding-left:13px">
                                         指名料金
                                     </td>
-                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[16px]" style="padding-left:13px">
                                         @Model.GetClubBasicInformation.DesignationFee 円 / 1時間
                                     </td>
                                 </tr>
@@ -1055,10 +1059,10 @@
                             @if (Model.GetClubBasicInformation.CompanionFee != null)
                             {
                                 <tr class="">
-                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[16px]" style="padding-left:13px">
                                         同伴料金
                                     </td>
-                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[16px]" style="padding-left:13px">
                                         @Model.GetClubBasicInformation.CompanionFee 円 / 1時間
                                     </td>
                                 </tr>
@@ -1066,10 +1070,10 @@
                             @if (Model.GetClubBasicInformation.ExtensionFee != null)
                             {
                                 <tr class="">
-                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[16px]" style="padding-left:13px">
                                         延長料金
                                     </td>
-                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[16px]" style="padding-left:13px">
                                         @Model.GetClubBasicInformation.ExtensionFee / 1時間
                                     </td>
                                 </tr>
@@ -1077,10 +1081,10 @@
                             @if (Model.GetClubBasicInformation.Drink != null)
                             {
                                 <tr class="">
-                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[16px]" style="padding-left:13px">
                                         ドリンク
                                     </td>
-                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[16px]" style="padding-left:13px">
                                         @Model.GetClubBasicInformation.Drink 円
                                     </td>
                                 </tr>
@@ -1088,10 +1092,10 @@
                             @if (Model.GetClubBasicInformation.Tax != null)
                             {
                                 <tr class="">
-                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                    <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[16px]" style="padding-left:13px">
                                         TAX
                                     </td>
-                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                    <td class=" border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[16px]" style="padding-left:13px">
                                         @Model.GetClubBasicInformation.Tax %
                                     </td>
                                 </tr>

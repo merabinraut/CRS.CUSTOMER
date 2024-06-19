@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    @*<script src="https://code.jquery.com/jquery-3.6.0.js"></script>*@
+    @*<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>*@
+    <script src="~/Content/assets/js/external/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet"
@@ -21,14 +22,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    @* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <script src="~/Content/assets/js/owl.carousel.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/external/toastr.min.css" rel="stylesheet" />
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="~/Content/js/NotificationMessageToaster.js"></script>
     <link rel="stylesheet"
@@ -122,7 +124,6 @@
             font-style: normal;
             font-weight: 500;
             line-height: 20px;
-            /* 142.857% */
             letter-spacing: 0.1px;
             padding: 10px 8px;
         }
@@ -207,7 +208,6 @@
             font-weight: 700;
             line-height: 166%;
             display: none
-            /* 18.26px */
         }
     </style>
 </head>
@@ -272,7 +272,6 @@
 
                                         </div>
                                     }
-                                    @*<span class="ml-[12px] text-[#252525]  font-normal text-clip" style="font-size:14px; width:178px">@Session["Amount"]</span>*@
                                     <span class="ml-[12px] flex justify-start gap-[2px] items-center">
                                     </span>
                                 </div>
@@ -429,56 +428,6 @@
                         <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo_2.svg" />
                     </div>
                     <div class="p-4">
-                        <!--#region need to uncomment-->
-                        <!--  <div class="footer-link text-white grid grid-cols-2 ">
-                        <!--      <div class="grid gap-[8px]">
-                        <!--          <a href="@Url.Action("operatingcompany","Footer")" class="text-xs">
-                        <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
-                        <!--              運営会社
-                        <!--          </a>
-                        <!--          <a href="@Url.Action("faq","Footer")" class="text-xs">
-                        <!--              よくあるご質問
-                        <!--              @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan*@
-                        <!--          </a>
-                        <!--          <a href="@Url.Action("inquery","Footer")" class="text-xs">
-                        <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide*@
-                        <!--              お問い合わせ
-                        <!--          </a>
-                        <!--
-                        <!--          @* <a href="@Url.Action("faq","Footer")" class="text-xs">
-                        <!--                  @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
-                        <!--              </a>*@
-                        <!--      </div>
-                        <!--      <div class="grid gap-[8px]">
-                        <!--
-                        <!--          <!--<a href="@Url.Action("Register","Home")" class="text-xs">-->
-                        <!--          @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry*@
-                        <!--          <!--新規会員登録(無料)
-                        <!--          </a>-->
-                        <!--          <!--<a href="@Url.Action("operatingcompany","Footer")" class="text-xs">-->
-                        <!--          @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
-                        <!--          <!--運営会社
-                        <!--          </a>-->
-                        <!--          <a href="@Url.Action("privacypolicy","Footer")" class="text-xs">
-                        <!--              プライバシーポリシー
-                        <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy*@
-                        <!--          </a>
-                        <!--          <a href="@Url.Action("termsAndCondition","Footer")" class="text-xs">
-                        <!--              @* terms and condition*@
-                        <!--              ホスログ利用規約
-                        <!--          </a>
-                        <!--          <a href="" class="text-xs" style="height:16px">
-                        <!--              @* 運営会社*@
-                        <!--          </a>
-                        <!--          @*                                <a href="https://hoslog.jp/" class="text-xs">
-                        <!--                  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
-                        <!--              </a>*@
-                        <!--      </div>
-                        <!--  </div>
-                        <!--
-                        <!--  @* divider*@
-                        <!--  <div style="border-top: 1px dashed #999; padding: 0 16px; margin-top:14px"></div>
-                         <!--#endregion need to uncomment-->
 
                         <div class="affiliation">
                             <div class="affiliationText">
@@ -605,10 +554,10 @@
         }
     </script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <script src="~/Content/assets/js/reservation-common.js"></script>
-    <script src="~/Content/assets/js/search-filter-common.js"></script>
-    <script src="~/Content/assets/js/ManageRedirectURL.js"></script>
-    <script src="~/Content/assets/js/BookmarkManagement.js"></script>
+    <script src="~/Content/assets/js/reservation-common.js" defer></script>
+    <script src="~/Content/assets/js/search-filter-common.js" defer></script>
+    <script src="~/Content/assets/js/ManageRedirectURL.js" defer></script>
+    <script src="~/Content/assets/js/BookmarkManagement.js" defer></script>
     <script>
         function WindowHistoryBack() {
             var previousUrl = document.referrer;
