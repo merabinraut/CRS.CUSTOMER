@@ -41,7 +41,7 @@
 
 
     .owl-item .item img {
-        width:100%;
+        width: 100%;
         min-width: 298px;
     }
 
@@ -786,10 +786,10 @@
                 autoplay: true,
                 autoplayTimeout: 3000,
                 responsive: {
-                   /* 400: {*/
-                        items: 1.75,
+                    /* 400: {*/
+                    items: 1.75,
 
-                   /* }*/
+                    /* }*/
                 }
             });
 
@@ -940,14 +940,14 @@
                                 if (host.IsBookmarked != "" && host.IsBookmarked != null && host.IsBookmarked.trim().toUpperCase() == "Y") {
                                     BookmarkLabel = filled;
                                 }
-                                recommendedHostContentHTML += `
+                              /*  recommendedHostContentHTML += `
                                     <a onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=${host.HostId}'">
                                         <div class="flex hover:cursor-pointer">
                                             <div style="border-radius: 4px; width:112px" class="w-[112px] h-auto flex flex-col justify-end text-center relative">
                                                 <div class="w-full flex justify-center relative">
                                                     <img style="width:112px" class="w-[112px] h-[154px] object-cover rounded-[2px]" src="${hostImage}" alt="hostlogo" />
                                                      <div class="absolute top-2 right-2" style="width: 24px; height: 24px;">
-                                                             <img src="${BookmarkLabel}" alt="unfilled"  style="width: 24px; height: 24px;" onclick="${host.IsBookmarked.trim().toUpperCase() == 'Y' ? 'ManageBookmark' : 'ManageBookmark'}('${host.ClubId}', '${host.HostId}', 'host', ${this})" />
+                                                             <img src="${BookmarkLabel}" alt="unfilled"  style="width: 24px; height: 24px;" onclick="e.stopPropagation();${host.IsBookmarked.trim().toUpperCase() == 'Y' ? 'ManageBookmark' : 'ManageBookmark'}('${host.ClubId}', '${host.HostId}', 'host', ${this})" />
                                                     </div>
 
                                                 </div>
@@ -961,7 +961,33 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>`;
+                                    </a>`;*/
+                                recommendedHostContentHTML += `
+                                      <a onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=${host.HostId}'">
+                                        <div class="flex hover:cursor-pointer">
+                                          <div style="border-radius: 4px; width:112px" class="w-[112px] h-auto flex flex-col justify-end text-center relative">
+                                            <div class="w-full flex justify-center relative">
+                                              <img style="width:112px" class="w-[112px] h-[154px] object-cover rounded-[2px]" src="${hostImage}" alt="hostlogo" />
+                                              <div class="absolute top-2 right-2" style="width: 24px; height: 24px;">
+                                                <img src="${BookmarkLabel}" alt="unfilled" style="width: 24px; height: 24px;" 
+                                                     onclick="event.stopPropagation(); ${host.IsBookmarked.trim().toUpperCase() == 'Y' ? 'ManageBookmark' : 'ManageBookmark'}('${host.ClubId}', '${host.HostId}', 'host', this)" />
+                                              </div>
+                                            </div>
+                                            <div style="background-color:rgba(0, 0, 0, 0.70); left:0.25px; border-radius: 0 0 2px 2px;" 
+                                                 class="absolute w-[112px] h-[35px] flex flex-col right-[2px] left-[2px] py-[2px] px-[4px]">
+                                              <strong class="text-[12px] text-[#FFFFFF] font-bold text-center text-clip">
+                                                ${host.HostNameJapanese ? host.HostNameJapanese : (host.HostName ? host.HostName : '')}
+                                              </strong>
+                                              <p style="font-weight:400; line-height:100%" 
+                                                 class="flex items-center gap-1 text-[10px] justify-center text-[#FFFFFF] text-clip">
+                                                <img src="${clubLogo}" alt="clublogo" class="h-[11px] w-[11px] rounded-full" />
+                                                <span class="text-clip" style="width:inherit"> ${host.ClubNameEnglish}</span>
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </a>`;
+
                             }
                         }
                         else {

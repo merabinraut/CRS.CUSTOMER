@@ -68,6 +68,27 @@
             border-radius: 8px;
         }
 
+        .modal-content {
+            max-width: 100%;
+            width: 312px;
+            background:#fff;
+        }
+
+        .log-outButton {
+            border-radius: 8px;
+            background: #D75A8B;
+            color: #FFF;
+            text-align: center;
+            font-family: "Noto Sans JP";
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 15px; /* 100% */
+            padding-left: 25px;
+            padding-right: 25px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
 
         .ui-state-default {
             display: flex !important;
@@ -343,8 +364,8 @@
                         </div>
                         @if (Session["Username"] != null)
                         {
-                            <div class="">
-                                <a href="@Url.Action("LogOff", "Home")"
+                            <div class="" onclick="openModal('modal2')">
+                                <div
                                    class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height: 45px; font-weight:700">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <g opacity="0.6">
@@ -353,7 +374,7 @@
                                         </g>
                                     </svg>
                                     <span class="ml-[10px] text-[14px] ">ログアウト</span>
-                                </a>
+                                </div>
                             </div>
                         }
                         else
@@ -500,6 +521,32 @@
             </div>
         }
     </div>
+
+
+
+
+
+
+    <div id="modal2" class="modal modalWrapper bg-[#fff] " style="display:none; border-radius:12px; z-index:10000;">
+        <div class="modal-content flex gap-[24px] flex-col">
+            <div class="font-normal text-[16px] text-[#1A1C1E]">
+            ログアウトしてもよろしいですか？
+            </div>
+
+            <div class="flex gap-3 justify-center">
+                <a href="@Url.Action("LogOff", "Home")" class="log-outButton w-[120px]">
+                    はい
+                </a> 
+                <div onclick="closeModal('modal2')" class="flex justify-center items-center underline w-[120px]">
+                    いいえ
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <script>
         $(document).ready(function () {
             $('select').select2({
@@ -511,6 +558,8 @@
     </script>
     <!-- #endregion -->
     <!-- #region Fotter-links -->
+    <script src="~/Content/assets/js/modal.js"></script>
+
     <script src="~/Content/assets/js/slider.js"></script>
     <script src="~/Content/assets/js/tabs.js"></script>
     <script src="~/Content/assets/js/toogle.js"></script>
