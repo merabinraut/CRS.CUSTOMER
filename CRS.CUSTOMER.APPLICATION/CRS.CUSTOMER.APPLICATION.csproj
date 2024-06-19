@@ -317,6 +317,8 @@
     <Folder Include="Views\UserManagement\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\css\external\toastr.min.css" />
+    <Content Include="Content\assets\css\font-awesome.min.css" />
     <Content Include="Content\assets\css\artchart\anychart.min.css" />
     <Content Include="Content\assets\css\club\booking.css" />
     <Content Include="Content\assets\css\club\club-management.css" />
@@ -499,6 +501,7 @@
     <Content Include="Content\assets\js\anychart-ui.min.js" />
     <Content Include="Content\assets\js\anychat-exports.min.js" />
     <Content Include="Content\assets\js\BookmarkManagement.js" />
+    <Content Include="Content\assets\js\external\jquery-3.6.0.min.js" />
     <Content Include="Content\assets\js\filter.js" />
     <Content Include="Content\assets\js\image-upload.js" />
     <Content Include="Content\assets\js\jquery.min.js" />

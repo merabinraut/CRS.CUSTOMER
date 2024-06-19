@@ -10,12 +10,6 @@
         right: 3px;
     }
 
-    /*   .inset-0 {
-        inset: 5rem !important;
-    }*/
-</style>
-<!----------------------------------------------------Location---------------------------------------------------->
-<style>
     #parent {
         position: relative;
     }
@@ -30,7 +24,6 @@
         width: 93.5%;
         margin-left: 16px;
         margin-right: 16px;
-        /* left: 0; */
         z-index: 1;
     }
 
@@ -393,7 +386,7 @@
                 </linearGradient>
             </defs>
             <image x="7" y="5" width="16" height="16" xlink:href="~/Content/assets/images/customer/slippathsvg.svg" />
-            <text y="18" x="25" font-family="Arial" font-size="14" style="font-weight: 700; " fill="#FAFAFA">
+            <text y="18" x="25"  font-size="14" style="font-weight: 700; " fill="#FAFAFA">
 
                 あなたにマッチするホスト
             </text>
@@ -1631,9 +1624,7 @@
 
                 daySource = getDays(currentYear, currentMonth);
                 $('#minuteShadowval').val(monthSelector.value.trim());
-                //var min1 = $('#minuteShadowval').val()
-                //console.log(min1)
-                //monthSelector.value.clear()
+             
             }
         });
         yearSelector2 = new IosSelector({

@@ -34,18 +34,18 @@
   text-transform: uppercase;
 }
 
-.booking-card .booking-card-total {
-  color: var(--gray-900);
-  font-family: Noto Sans;
-  font-size: 21px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 32px; /* 152.381% */
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-}
+    .booking-card .booking-card-total {
+        color: var(--gray-900);
+        /* font-family: Noto Sans;*/
+        font-size: 21px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 32px; /* 152.381% */
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+    }
 .booking-card .booking-card-total span {
   display: flex;
   align-items: center;
@@ -275,17 +275,17 @@
   border-right: none;
 }
 .plan-a {
-  border-radius: 16px;
-  background: #ecfdf3;
-  padding: 2px 8px 2px 6px;
-  color: #027a48;
-  text-align: center;
-  font-family: Noto Sans;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  width: fit-content;
+    border-radius: 16px;
+    background: #ecfdf3;
+    padding: 2px 8px 2px 6px;
+    color: #027a48;
+    text-align: center;
+    /* font-family: Noto Sans;*/
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    width: fit-content;
 }
 .plan-b {
   border-radius: 16px;
