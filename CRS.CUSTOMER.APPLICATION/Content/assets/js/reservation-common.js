@@ -6,7 +6,7 @@
     $.ajax({
         type: 'GET',
         async: true,
-        url: '/ReservationManagementV2/InitiateClubReservationProcess',
+        url: '/ReservationManagementV3/InitiateClubReservationProcess',
         dataType: 'json',
         data: {
             ClubId,

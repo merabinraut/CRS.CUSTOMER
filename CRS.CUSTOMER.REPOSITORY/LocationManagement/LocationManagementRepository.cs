@@ -15,7 +15,8 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
         public ClubDetailCommon GetClubDetailById(string clubId, string CustomerId = "")
         {
             string sql = "sproc_customer_club_and_host_management @Flag='cd'";
-            sql += " ,@ClubCode=" + _dao.FilterString(clubId);
+            sql += " ,@ClubId=" + _dao.FilterString(clubId);
+            //sql += " ,@ClubCode=" + _dao.FilterString(clubId);
             sql += " ,@customerAgentId=" + _dao.FilterString(CustomerId);
             var dbResp = _dao.ExecuteDataTable(sql);
             if (dbResp != null && dbResp.Rows.Count == 1)

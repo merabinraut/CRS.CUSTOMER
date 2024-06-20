@@ -38,6 +38,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet, Route("")]
         public ActionResult Index()
         {
+            Session["ReservationPage1Model"] = null;
+            Session["ReservationPage2Model"] = null;
+            Session["ReservationPage3Model"] = null;
+            Session["ReservationPage4Model"] = null;
             var ResponseModel = new DashboardModel();
             if (Session["SystemLinkModel"] == null)
             {

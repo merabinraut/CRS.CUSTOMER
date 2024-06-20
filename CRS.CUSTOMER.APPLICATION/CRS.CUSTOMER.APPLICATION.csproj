@@ -234,6 +234,7 @@
     <Compile Include="Controllers\RecommendedClubHostController.cs" />
     <Compile Include="Controllers\ReservationHistoryManagementController.cs" />
     <Compile Include="Controllers\ReservationManagementV2Controller.cs" />
+    <Compile Include="Controllers\ReservationManagementV3Controller.cs" />
     <Compile Include="Controllers\ReviewManagementController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SearchV2Controller.cs" />
@@ -285,6 +286,7 @@
     <Compile Include="Models\ReservationManagementV2\InitiateClubReservationModel.cs" />
     <Compile Include="Models\ReservationManagementV2\PlanV2Model.cs" />
     <Compile Include="Models\ReservationManagementV2\ReservationConfirmationModel.cs" />
+    <Compile Include="Models\ReservationManagementV3\ReservationManagementModel.cs" />
     <Compile Include="Models\ReservationManagement\ReservationDetailModel.cs" />
     <Compile Include="Models\ReservationManagement\ReservationPlanModel.cs" />
     <Compile Include="Models\ReviewManagement\CustomerReviewedDetailModel.cs" />
@@ -729,6 +731,12 @@
     <Content Include="Views\LocationManagementV2\Index.cshtml" />
     <Content Include="Views\LocationManagementV2\ClubDetail.cshtml" />
     <Content Include="Views\LocationManagementV2\HostDetail.cshtml" />
+    <Content Include="Views\ReservationManagementV3\Plan.cshtml" />
+    <Content Include="Views\ReservationManagementV3\Host.cshtml" />
+    <Content Include="Views\ReservationManagementV3\Confirmation.cshtml" />
+    <Content Include="Views\ReservationManagementV3\Billing.cshtml" />
+    <Content Include="Views\ReservationManagementV3\_ReservationPopup.cshtml" />
+    <Content Include="Views\ReservationManagementV3\Success.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
