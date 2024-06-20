@@ -156,9 +156,9 @@
                         <img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg">
                     </div>
                 }
-               @* <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
-                    保存
-                </div>*@
+                @* <div style="line-height: 100%;" class="text-[9px] text-[#BCB08A] ">
+                        保存
+                    </div>*@
             </div>
         </div>
 
@@ -238,17 +238,17 @@
                     </div>
                     if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                     {
-            <div class="available">
-                本日空席あり
-                @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable*@
-            </div>
+                        <div class="available">
+                            本日空席あり
+                            @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable*@
+                        </div>
                     }
                     else
                     {
-            <div class="available disabled">
-                本日空席あり
-                @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable*@
-            </div>
+                        <div class="available disabled">
+                            本日空席あり
+                            @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.Reservable*@
+                        </div>
                     }
                 }
             </div>
