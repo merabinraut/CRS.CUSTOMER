@@ -512,7 +512,7 @@
             /* new improvememnt*/
             <div class="club_content">
                 <!-- s/link -->
-                <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
                     <!-- s/club_tag -->
                     <ul class="club_tags">
                         @if (!string.IsNullOrEmpty(@item.Tag1))
@@ -709,7 +709,8 @@
     {
         <div class="flex flex-row gap-[16px] mx-[16px]">
             <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
-                <div class="w-full flex justify-center" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                @*<div class="w-full flex justify-center" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">*@
+                <div class="w-full flex justify-center" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                          src="@item.HostImage" />
                 </div>

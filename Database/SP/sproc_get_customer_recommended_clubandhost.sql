@@ -1,7 +1,7 @@
 ﻿USE [CRS_V2]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sproc_get_customer_recommended_clubandhost]    Script Date: 6/18/2024 11:26:58 AM ******/
+/****** Object:  StoredProcedure [dbo].[sproc_get_customer_recommended_clubandhost]    Script Date: 6/19/2024 12:33:59 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -145,6 +145,18 @@ BEGIN
 					THEN 'Y'
 				ELSE 'N'
 				END AS IsBookmarked
+			,CASE 
+				WHEN c.OrderId = 1
+					THEN '/tokyo/kabukicho'
+				WHEN c.OrderId = 2
+					THEN '/osaka/kita_minami'
+				WHEN c.OrderId = 3
+					THEN '/aichi/nagoya'
+				WHEN c.OrderId = 4
+					THEN '/hokkaido/susukino'
+				WHEN c.OrderId = 5
+					THEN '/fukuoka/nakasu'
+				END AS LocationURL
 		INTO #temp_grcl
 		FROM dbo.tbl_club_details a WITH (NOLOCK)
 		LEFT JOIN dbo.tbl_tag_detail b WITH (NOLOCK) ON b.ClubId = a.AgentId
@@ -306,6 +318,18 @@ BEGIN
 				,ISNULL(e.StaticDataLabel, '') AS HostBloodType
 				,ISNULL(f.StaticDataLabel, '') AS HostConstellationGroup
 				,ISNULL(g.StaticDataLabel, '') AS LiquorStrength
+				,CASE 
+					WHEN i.OrderId = 1
+						THEN '/tokyo/kabukicho'
+					WHEN i.OrderId = 2
+						THEN '/osaka/kita_minami'
+					WHEN i.OrderId = 3
+						THEN '/aichi/nagoya'
+					WHEN i.OrderId = 4
+						THEN '/hokkaido/susukino'
+					WHEN i.OrderId = 5
+						THEN '/fukuoka/nakasu'
+					END AS LocationURL
 			FROM dbo.tbl_club_details a WITH (NOLOCK)
 			INNER JOIN dbo.tbl_host_details b WITH (NOLOCK) ON b.AgentId = a.AgentId
 				AND ISNULL(a.[Status], '') = 'A'
@@ -324,6 +348,7 @@ BEGIN
 			LEFT JOIN dbo.tbl_users h WITH (NOLOCK) ON h.AgentId = a.AgentId
 				AND h.RoleType = 4
 				AND ISNULL(h.STATUS, '') = 'A'
+			LEFT JOIN dbo.tbl_location i WITH (NOLOCK) ON i.LocationId = a.LocationId
 			WHERE a.AgentId IN (
 					SELECT AgentId
 					FROM CTE WITH (NOLOCK)
@@ -461,6 +486,18 @@ BEGIN
 				,ISNULL(e.StaticDataLabel, '') AS HostBloodType
 				,ISNULL(f.StaticDataLabel, '') AS HostConstellationGroup
 				,ISNULL(g.StaticDataLabel, '') AS LiquorStrength
+				,CASE 
+					WHEN i.OrderId = 1
+						THEN '/tokyo/kabukicho'
+					WHEN i.OrderId = 2
+						THEN '/osaka/kita_minami'
+					WHEN i.OrderId = 3
+						THEN '/aichi/nagoya'
+					WHEN i.OrderId = 4
+						THEN '/hokkaido/susukino'
+					WHEN i.OrderId = 5
+						THEN '/fukuoka/nakasu'
+					END AS LocationURL
 			FROM dbo.tbl_club_details a WITH (NOLOCK)
 			INNER JOIN dbo.tbl_host_details b WITH (NOLOCK) ON b.AgentId = a.AgentId
 				AND ISNULL(a.[Status], '') = 'A'
@@ -479,6 +516,7 @@ BEGIN
 			LEFT JOIN dbo.tbl_users h WITH (NOLOCK) ON h.AgentId = a.AgentId
 				AND h.RoleType = 4
 				AND ISNULL(h.STATUS, '') = 'A'
+			LEFT JOIN dbo.tbl_location i WITH (NOLOCK) ON i.LocationId = a.LocationId
 			WHERE b.HostId IN (
 					SELECT HostId
 					FROM CTE WITH (NOLOCK)

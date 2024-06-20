@@ -49,7 +49,7 @@
                 @{
                     foreach (var item in Model.RecommendedClubModel)
                     {
-                        <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                        <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@ViewBag.PrefecturesArea')">
                             <div class="flex  w-[118px]">
                                 <div style="border-radius: 6px; border: 1px solid #EDEDED; background: #FFF;"
                                      class=" flex flex-col w-[118px]  px-[8px] py-[10px]">
@@ -96,7 +96,7 @@
             {
                 <div class="club_content">
                     <!-- s/link -->
-                    <a onclick="ClubDetailActionFunction('@item.ClubLocationId', '@item.ClubId')">
+                    <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
                         <!-- s/club_tag -->
                         <ul class="club_tags">
                             @if (!string.IsNullOrEmpty(@item.Tag1))
@@ -325,10 +325,6 @@
             var target = '@ViewBag.target';
             var searchUrl = `/search${prefecturesArea}/?target=${target}`;
             window.location.href = searchUrl;
-        }
-
-        function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         }
         </script>
     }

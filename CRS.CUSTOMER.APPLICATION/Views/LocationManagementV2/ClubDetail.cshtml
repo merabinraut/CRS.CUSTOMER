@@ -289,7 +289,8 @@
                     <div class="p-[10px] galleryHost bg-[#EFEFEF]">
                         @foreach (var item in Model.HostListModels)
                         {
-                            <div onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                            @*<div onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">*@
+                            <div onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@PrefecturesArea')">
                                 @if (!string.IsNullOrEmpty(item.HostImage))
                                 {
                                     <img src="@item.HostImage"
@@ -887,8 +888,8 @@
                                             <div class="relative h-[180px] w-[128px]">
                                                 @if (!string.IsNullOrEmpty(item.HostImage))
                                                 {
-                                                    <img src="@item.HostImage"
-                                                         class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                                                    @*<img src="@item.HostImage" class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">*@
+                                                    <img src="@item.HostImage" class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@PrefecturesArea');">
                                                 }
                                                 else
                                                 {

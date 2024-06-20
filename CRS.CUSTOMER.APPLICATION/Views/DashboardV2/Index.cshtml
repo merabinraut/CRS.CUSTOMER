@@ -867,7 +867,7 @@
                                 let club = ResponseModel.RecommendedClubModel[i];
                                 let clubLogoSrc = club.ClubLogo ? club.ClubLogo : '~/Content/assets/images/customer/demo-image.jpeg';
                                 recommendedClubContentHTML += `
-                                    <a onclick="ClubDetailActionFunction('${club.LocationId}', '${club.ClubId}')">
+                                    <a onclick="ClubDetailRedirectFunction('${club.ClubCode}', '${club.LocationURL}')">
                                         <div class="flex w-[118px]">
                                             <div style="border-radius: 6px; border: 1px solid #F3F3F3; background: #FFF;" class="flex flex-col w-[118px] px-[8px] py-[10px]">
                                                 <div class="flex flex-row justify-center">
@@ -940,8 +940,9 @@
                                 if (host.IsBookmarked != "" && host.IsBookmarked != null && host.IsBookmarked.trim().toUpperCase() == "Y") {
                                     BookmarkLabel = filled;
                                 }
+                                /*<a onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=${host.HostId}'">*/
                                 recommendedHostContentHTML += `
-                                    <a onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=${host.HostId}'">
+                                     <a onclick="HostDetailRedirectFunction('${club.HostCode}', '${club.ClubCode}', '${host.LocationURL}')">
                                         <div class="flex hover:cursor-pointer">
                                             <div style="border-radius: 4px; width:112px" class="w-[112px] h-auto flex flex-col justify-end text-center relative">
                                                 <div class="w-full flex justify-center relative">
@@ -1141,9 +1142,10 @@
         function LocationFunction(i) {
             window.location.href = "/area" + i;
         }
-        function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
-        }</script>
+        //function ClubDetailActionFunction(i, j) {
+        //    window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
+        //}
+    </script>
     <!--#endregion-->
 
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>

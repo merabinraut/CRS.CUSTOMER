@@ -1,7 +1,7 @@
 ﻿USE [CRS_V2]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sproc_cp_dashboard_v2]    Script Date: 6/18/2024 4:08:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[sproc_cp_dashboard_v2]    Script Date: 6/19/2024 5:15:52 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -28,6 +28,9 @@ BEGIN
 			INSERT INTO #temp_1 (AgentId)
 			SELECT TOP (6) a.AgentId
 			FROM dbo.tbl_club_details a WITH (NOLOCK)
+			INNER JOIN dbo.tbl_users b WITH (NOLOCK) ON b.AgentId = a.AgentId
+				AND b.RoleType = 4
+				AND ISNULL(b.STATUS, 'A') = 'A'
 			WHERE (
 					a.LocationId = @LocationId
 					OR (
@@ -52,6 +55,9 @@ BEGIN
 			INSERT INTO #temp_1 (AgentId)
 			SELECT a.AgentId
 			FROM dbo.tbl_club_details a WITH (NOLOCK)
+			INNER JOIN dbo.tbl_users b WITH (NOLOCK) ON b.AgentId = a.AgentId
+				AND b.RoleType = 4
+				AND ISNULL(b.STATUS, 'A') = 'A'
 			WHERE (
 					a.LocationId = @LocationId
 					OR (
@@ -89,7 +95,24 @@ BEGIN
 					THEN 'Y'
 				ELSE 'N'
 				END AS IsBookmarked
+			,b.LoginId AS ClubCode
+			,CASE 
+				WHEN c.OrderId = 1
+					THEN '/tokyo/kabukicho'
+				WHEN c.OrderId = 2
+					THEN '/osaka/kita_minami'
+				WHEN c.OrderId = 3
+					THEN '/aichi/nagoya'
+				WHEN c.OrderId = 4
+					THEN '/hokkaido/susukino'
+				WHEN c.OrderId = 5
+					THEN '/fukuoka/nakasu'
+				END AS LocationURL
 		FROM dbo.tbl_club_details a WITH (NOLOCK)
+		INNER JOIN dbo.tbl_users b WITH (NOLOCK) ON b.AgentId = a.AgentId
+			AND b.RoleType = 4
+			AND ISNULL(b.STATUS, 'A') = 'A'
+		LEFT JOIN dbo.tbl_location c WITH (NOLOCK) ON c.LocationId = a.LocationId
 		WHERE a.AgentId IN (
 				SELECT AgentId
 				FROM #temp_1 WITH (NOLOCK)
@@ -109,6 +132,9 @@ BEGIN
 			INSERT INTO #temp_2 (AgentId)
 			SELECT TOP (6) a.AgentId
 			FROM dbo.tbl_club_details a WITH (NOLOCK)
+			INNER JOIN dbo.tbl_users b WITH (NOLOCK) ON b.AgentId = a.AgentId
+				AND b.RoleType = 4
+				AND ISNULL(b.STATUS, 'A') = 'A'
 			WHERE (
 					a.LocationId = @LocationId
 					OR (
@@ -133,6 +159,9 @@ BEGIN
 			INSERT INTO #temp_2 (AgentId)
 			SELECT a.AgentId
 			FROM dbo.tbl_club_details a WITH (NOLOCK)
+			INNER JOIN dbo.tbl_users b WITH (NOLOCK) ON b.AgentId = a.AgentId
+				AND b.RoleType = 4
+				AND ISNULL(b.STATUS, 'A') = 'A'
 			WHERE (
 					a.LocationId = @LocationId
 					OR (
@@ -178,8 +207,26 @@ BEGIN
 						THEN 'Y'
 					ELSE 'N'
 					END AS IsBookmarked
+				,a.HostCode
+				,c.LoginId AS ClubCode
+				,CASE 
+					WHEN d.OrderId = 1
+						THEN '/tokyo/kabukicho'
+					WHEN d.OrderId = 2
+						THEN '/osaka/kita_minami'
+					WHEN d.OrderId = 3
+						THEN '/aichi/nagoya'
+					WHEN d.OrderId = 4
+						THEN '/hokkaido/susukino'
+					WHEN d.OrderId = 5
+						THEN '/fukuoka/nakasu'
+					END AS LocationURL
 			FROM dbo.tbl_host_details a WITH (NOLOCK)
 			INNER JOIN dbo.tbl_club_details b WITH (NOLOCK) ON a.AgentId = b.AgentId
+			INNER JOIN dbo.tbl_users c WITH (NOLOCK) ON c.AgentId = b.AgentId
+				AND c.RoleType = 4
+				AND ISNULL(c.STATUS, 'A') = 'A'
+			LEFT JOIN dbo.tbl_location d WITH (NOLOCK) ON d.LocationId = b.LocationId
 			WHERE a.AgentId IN (
 					SELECT AgentId
 					FROM #temp_2 WITH (NOLOCK)
@@ -333,11 +380,28 @@ BEGIN
 					END AS TodaysClubSchedule
 				,a.Description AS ClubDescription
 				,a.GroupName
+				,CASE 
+					WHEN t1.OrderId = 1
+						THEN '/tokyo/kabukicho'
+					WHEN t1.OrderId = 2
+						THEN '/osaka/kita_minami'
+					WHEN t1.OrderId = 3
+						THEN '/aichi/nagoya'
+					WHEN t1.OrderId = 4
+						THEN '/hokkaido/susukino'
+					WHEN t1.OrderId = 5
+						THEN '/fukuoka/nakasu'
+					END AS LocationURL
+				,tu.LoginId AS ClubCode
 			FROM dbo.tbl_club_details a WITH (NOLOCK)
+			INNER JOIN dbo.tbl_users tu WITH (NOLOCK) ON tu.AgentId = a.AgentId
+				AND tu.RoleType = 4
+				AND ISNULL(tu.STATUS, 'A') = 'A'
 			LEFT JOIN dbo.tbl_tag_detail d WITH (NOLOCK) ON d.ClubId = a.AgentId
-			LEFT JOIN dbo.tbl_location t1 WITH (NOLOCK) ON t1.LocationId = d.Tag1Location
-				AND ISNULL(d.Tag1Status, '') = 'A'
-				AND ISNULL(t1.[Status], '') = 'A'
+			LEFT JOIN dbo.tbl_location t1 WITH (NOLOCK) ON t1.LocationId = a.LocationId
+			--LEFT JOIN dbo.tbl_location t1 WITH (NOLOCK) ON t1.LocationId = a.Tag1Location
+			--	AND ISNULL(d.Tag1Status, '') = 'A'
+			--	AND ISNULL(t1.[Status], '') = 'A'
 			LEFT JOIN dbo.tbl_static_data t2 WITH (NOLOCK) ON t2.StaticDataType = 14
 				AND t2.StaticDataValue = d.Tag2RankName
 				AND ISNULL(t2.STATUS, '') = 'A'
@@ -367,6 +431,9 @@ BEGIN
 		AS (
 			SELECT a.AgentId
 			FROM dbo.tbl_club_details a WITH (NOLOCK)
+			INNER JOIN dbo.tbl_users b WITH (NOLOCK) ON b.AgentId = a.AgentId
+				AND b.RoleType = 4
+				AND ISNULL(b.STATUS, 'A') = 'A'
 			WHERE (
 					a.LocationId = @LocationId
 					OR (
@@ -442,7 +509,23 @@ BEGIN
 				END AS TodaysClubSchedule
 			,a.Description AS ClubDescription
 			,a.GroupName
+			,tu.LoginId AS ClubCode
+			,CASE 
+				WHEN t1.OrderId = 1
+					THEN '/tokyo/kabukicho'
+				WHEN t1.OrderId = 2
+					THEN '/osaka/kita_minami'
+				WHEN t1.OrderId = 3
+					THEN '/aichi/nagoya'
+				WHEN t1.OrderId = 4
+					THEN '/hokkaido/susukino'
+				WHEN t1.OrderId = 5
+					THEN '/fukuoka/nakasu'
+				END AS LocationURL
 		FROM dbo.tbl_club_details a WITH (NOLOCK)
+		INNER JOIN dbo.tbl_users tu WITH (NOLOCK) ON tu.AgentId = a.AgentId
+			AND tu.RoleType = 4
+			AND ISNULL(tu.STATUS, 'A') = 'A'
 		LEFT JOIN dbo.tbl_tag_detail d WITH (NOLOCK) ON d.ClubId = a.AgentId
 		LEFT JOIN dbo.tbl_location t1 WITH (NOLOCK) ON t1.LocationId = d.Tag1Location
 			AND ISNULL(d.Tag1Status, '') = 'A'
@@ -478,6 +561,18 @@ BEGIN
 			,a.Longitude
 			,ISNULL(c.RatingScale, 0) AS RatingScale
 			,b.LoginId AS ClubCode
+			,CASE 
+				WHEN d.OrderId = 1
+					THEN '/tokyo/kabukicho'
+				WHEN d.OrderId = 2
+					THEN '/osaka/kita_minami'
+				WHEN d.OrderId = 3
+					THEN '/aichi/nagoya'
+				WHEN d.OrderId = 4
+					THEN '/hokkaido/susukino'
+				WHEN d.OrderId = 5
+					THEN '/fukuoka/nakasu'
+				END AS LocationURL
 		FROM dbo.tbl_club_details a WITH (NOLOCK)
 		INNER JOIN dbo.tbl_users b WITH (NOLOCK) ON b.AgentId = a.AgentId
 			AND b.RoleType = 4
@@ -490,6 +585,7 @@ BEGIN
 			WHERE ISNULL(STATUS, '') = 'A'
 			GROUP BY ClubId
 			) c ON c.ClubId = a.AgentId
+		LEFT JOIN dbo.tbl_location d WITH (NOLOCK) ON d.LocationId = a.LocationId
 		WHERE (
 				@LocationId IS NULL
 				OR a.LocationId = @LocationId

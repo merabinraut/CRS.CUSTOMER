@@ -117,7 +117,8 @@
     <div class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px] my-[12px]">
         @foreach (var item in Model.HostRecommendationModel)
         {
-            <a href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
+            @*<a href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">*@
+            <a onclick="HostDetailRedirectFunction('@item.host');">
                 <div class="flex  hover:cursor-pointer">
                     <div style="border-radius: 4px; width:112px" class="w-[112px]  h-auto flex flex-col justify-end text-center relative">
                         <div class="w-full flex justify-center">
@@ -168,7 +169,8 @@ else
     <div class="no-scrollbar flex flex-wrap flex-row gap-[8px] justify-center my-[12px] bg-[##FFFFFF#FFFFFF]">
         @foreach (var item in Model.FilteredHostModel)
         {
-            <a href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">
+            @*<a href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">*@
+            <a onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@ViewBag.PrefecturesArea');">
                 <div class="flex  hover:cursor-pointer">
                     <div style="border-radius: 4px; width:112px" class="w-[112px]  h-auto flex flex-col justify-end text-center relative">
                         <div class="w-full flex justify-center">

@@ -20,6 +20,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.DashboardV2
     public class DashboardV2ClubDetailModel
     {
         public string ClubId { get; set; }
+        public string ClubCode { get; set; }
+        public string LocationURL { get; set; }
         public string ClubName { get; set; }
         public string ClubNameJapanese { get; set; }
         public string ClubLogo { get; set; }
@@ -29,10 +31,12 @@ namespace CRS.CUSTOMER.APPLICATION.Models.DashboardV2
     public class DashboardV2HostDetailModel
     {
         public string ClubId { get; set; }
+        public string ClubCode { get; set; }
         public string ClubNameEnglish { get; set; }
         public string ClubNameJapanese { get; set; }
         public string ClubLogo { get; set; }
         public string HostId { get; set; }
+        public string HostCode { get; set; }
         public string HostNameEnglish { get; set; }
         public string HostName { get; set; }
         public string HostNameJapanese { get; set; }
@@ -40,6 +44,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.DashboardV2
         public string ClubLocationId { get; set; }
         public string IsBookmarked { get; set; }
         public string TotalRecords { get; set; }
+        public string LocationURL { get; set; }
     }
 
     public class ClubAvailabilityDetailModel

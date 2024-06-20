@@ -43,6 +43,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchV2
     public class SearchFilterClubDetailModel
     {
         public string ClubId { get; set; }
+        public string ClubCode { get; set; }
+        public string LocationURL { get; set; }
         public string ClubLocationId { get; set; }
         public string ClubNameEnglish { get; set; }
         public string ClubNameJapanese { get; set; }
