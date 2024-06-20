@@ -31,6 +31,8 @@ namespace CRS.CUSTOMER.APPLICATION.Library
             //model.GetPlanGroupDetail.RemoveAt(0);
             model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("プラン"));
             model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("Plan"));
+            model.GetPlanGroupDetail.RemoveAll(item => item.LabelValue.Contains("A"));
+            model.GetPlanGroupDetail.RemoveAll(item => item.LabelValue.Contains("B"));
 
             return model;
 
@@ -58,6 +60,8 @@ namespace CRS.CUSTOMER.APPLICATION.Library
             //model.GetPlanGroupDetail.RemoveAt(0);
             model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("プラン"));
             model.GetPlanGroupDetail.RemoveAll(item => item.Label.Contains("Plan"));
+            model.GetPlanGroupDetail.RemoveAll(item => item.LabelValue.Contains("A"));
+            model.GetPlanGroupDetail.RemoveAll(item => item.LabelValue.Contains("B"));
             model.GetPlanGroupDetail.RemoveAt(1);
 
             return model;

@@ -647,6 +647,9 @@
                     <!-- s/club status -->
                     <div class="club_status">
                         <!-- s/opening hours -->
+                        @{
+                            DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:mm"));
+                        }
                         @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
                         {
                             if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
@@ -660,7 +663,9 @@
 
                             <!-- e/opening hours -->
                             <!-- s/available -->
-                            if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+
+
+                            if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubOpeningTime) < currentTime && DateTime.Parse(item.ClubClosingTime) > currentTime)
                             {
                                 <div class="available">本日空席あり</div>
                             }
