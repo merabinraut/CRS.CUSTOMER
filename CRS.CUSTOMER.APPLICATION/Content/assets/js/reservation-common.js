@@ -82,7 +82,7 @@
                         //return [formattedDates.indexOf(string) == -1];
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         if (date.getDay() === 0) { // Sunday
-                            return [false,'Sunday']; // Make Sunday unselectable
+                            return [true,'Sunday']; // Make Sunday unselectable
                         }
                         //else if (formattedDates.indexOf(string) != -1) {
                         //    return [false]; // Unreservable date
