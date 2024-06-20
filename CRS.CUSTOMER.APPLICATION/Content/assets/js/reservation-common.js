@@ -82,7 +82,7 @@
                         //return [formattedDates.indexOf(string) == -1];
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         if (date.getDay() === 0) { // Sunday
-                            return [true,'Sunday']; // Make Sunday unselectable
+                            return [true, 'Sunday']; // Make Sunday unselectable
                         }
                         //else if (formattedDates.indexOf(string) != -1) {
                         //    return [false]; // Unreservable date
@@ -132,16 +132,23 @@ function getTimeIntervalByDayWise(date, timeInterval) {
     var endDisabledTime = parseTimeString(selectedDate, endTimeStr);
 
     timeInterval.forEach(function (item) {
+        debugger;
         var itemTime = new Date(selectedDate.toDateString() + ' ' + item.Time);
         var currentTime = new Date();
         var disabledClassLabel = '';
         if (itemTime < currentTime) {
             disabledClassLabel = 'disabled';
         }
-        if (itemTime >= startDisabledTime) {
+        //if (itemTime >= startDisabledTime) {
+        //    disabledClassLabel = 'disabled';
+        //}
+        //if (itemTime <= endDisabledTime) {
+        //    disabledClassLabel = 'disabled';
+        //}
+        if (startDisabledTime >= itemTime) {
             disabledClassLabel = 'disabled';
         }
-        if (itemTime <= endDisabledTime) {
+        if (endDisabledTime <= itemTime) {
             disabledClassLabel = 'disabled';
         }
         timeListHtml += '<div class="timeList ' + disabledClassLabel + ' h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center">';
