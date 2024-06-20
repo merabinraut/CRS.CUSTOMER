@@ -34,10 +34,15 @@
   --error: #959595;
 }
 body {
-  padding: 0;
-  margin: 0;
-  box-shadow: none;
-  height: 100vh;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    height: 100vh;
+    overscroll-behavior-y: contain;
+    overflow-y: auto;
+}
+::-webkit-scrollbar {
+    background-color:red; /* Set the background color */
 }
 body::-webkit-scrollbar {
   display: none;

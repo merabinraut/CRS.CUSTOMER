@@ -1,7 +1,15 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2.InitiateClubReservationCommonModel
+
+
+@{
+    var disabledClassLabel = string.Empty;
+    string firstActiveTime = null;
+
+}
 <!-- drawer component -->
 @*<div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform "
     tabindex="-1" aria-labelledby="drawer-bottom-label">*@
+
 <style>
     .waitingMessageWrapper {
         border-radius: 4px;
@@ -21,7 +29,7 @@
     }
 </style>
 <div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform"
-     tabindex="-1" aria-labelledby="drawer-bottom-label" aria-hidden="true" >
+     tabindex="-1" aria-labelledby="drawer-bottom-label" aria-hidden="true">
     <!-- <div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform translate-y-full
     " tabindex="-1" aria-labelledby="drawer-bottom-label"> -->
     <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
@@ -49,7 +57,33 @@
                         <div class="relative">
                             <div class=" showTimeList h-[32px] w-[72px] px-3 py-1 bg-[#F6F6F6] rounded-[4px] text-[#666] text-xs flex justify-between items-center">
                                 <div id="selected-time-id">
-                                    @Model.ClubReservableTimeModel[0].Time
+                                    @*@Model.ClubReservableTimeModel[0].Time*@
+                                    @{
+                                        foreach (var item in Model.ClubReservableTimeModel)
+                                        {
+                                            DateTime itemTime;
+                                            bool isValidTime = DateTime.TryParse(item.Time, out itemTime);
+                                            disabledClassLabel = (!isValidTime || itemTime < DateTime.Now ||
+                                                                  (!string.IsNullOrEmpty(item.TimeStatus) && item.TimeStatus.Trim().ToUpper() != "ACTIVE"))
+                                                                  ? "disabled" : string.Empty;
+
+                                            DateTime statocLastEntryTime = DateTime.ParseExact(Model.ClubReservableTimeModel[0].LastEntryTime.ToString(), "HH:mm", null);
+                                            DateTime staticCurrentTime = DateTime.ParseExact(item.Time.ToString(), "HH:mm", null);
+
+                                            if (string.IsNullOrEmpty(disabledClassLabel) && firstActiveTime == null)
+                                            {
+                                                if (staticCurrentTime >= statocLastEntryTime)
+                                                {
+                                                    firstActiveTime = "";
+                                                }
+                                                else
+                                                {
+                                                    firstActiveTime = item.Time;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    @firstActiveTime
                                 </div>
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5" fill="none">
@@ -59,22 +93,60 @@
                             </div>
                             <div id="timeListContainer" class=" timeListContainer rounded-[4px] bg-[#F6F6F6] w-[72px]" style="display: none;">
                                 @{
-                                    var disabledClassLabel = string.Empty;
+                                    @*var disabledClassLabel = string.Empty;
+                                        foreach (var item in Model.ClubReservableTimeModel)
+                                        {
+                                            disabledClassLabel = (!string.IsNullOrEmpty(item.TimeStatus) && item.TimeStatus.Trim().ToUpper() != "ACTIVE") ? "disabled" : string.Empty;
+                                            <div class="timeList @disabledClassLabel h-[32px]  px-3 py-1 text-[#666] text-xs flex justify-between items-center">
+                                                <div class="timeValue">
+                                                    @item.Time
+                                                </div>
+                                                <div class="activeTime">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                        <path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z"
+                                                              fill="#666666" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            disabledClassLabel = string.Empty;
+                                        }*@
                                     foreach (var item in Model.ClubReservableTimeModel)
                                     {
-                                        disabledClassLabel = (!string.IsNullOrEmpty(item.TimeStatus) && item.TimeStatus.Trim().ToUpper() != "ACTIVE") ? "disabled" : string.Empty;
-                                        <div class="timeList @disabledClassLabel h-[32px]  px-3 py-1 text-[#666] text-xs flex justify-between items-center">
-                                            <div class="timeValue">
-                                                @item.Time
+                                        DateTime itemTime;
+                                        bool isValidTime = DateTime.TryParse(item.Time, out itemTime);
+                                        disabledClassLabel = (!isValidTime || itemTime < DateTime.Now ||
+                                                              (!string.IsNullOrEmpty(item.TimeStatus) && item.TimeStatus.Trim().ToUpper() != "ACTIVE"))
+                                                              ? "disabled" : string.Empty;
+
+                                        DateTime lastEntryTime = DateTime.ParseExact(Model.ClubReservableTimeModel[0].LastEntryTime.ToString(), "HH:mm", null);
+                                        DateTime currentTime = DateTime.ParseExact(item.Time.ToString(), "HH:mm", null);
+
+                                        if (currentTime >= lastEntryTime)
+                                        {
+                                            <div class="timeList h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center disabled">
+                                                <div class="timeValue">
+                                                    @item.Time
+                                                </div>
+                                                <div class="activeTime">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                        <path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z" fill="#666666" />
+                                                    </svg>
+                                                </div>
                                             </div>
-                                            <div class="activeTime">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                                    <path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z"
-                                                          fill="#666666" />
-                                                </svg>
+                                        }
+                                        else
+                                        {
+                                            <div class="timeList @disabledClassLabel h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center">
+                                                <div class="timeValue">
+                                                    @item.Time
+                                                </div>
+                                                <div class="activeTime">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                        <path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z" fill="#666666" />
+                                                    </svg>
+                                                </div>
                                             </div>
-                                        </div>
-                                        disabledClassLabel = string.Empty;
+                                        }
                                     }
                                 }
                             </div>
@@ -124,11 +196,7 @@
                             </div>
                         </div>
                         <!----------------------------------------------People--------------------------------------------------------------->
-
-
-
                     </div>
-
                     <div id="waitingMessageWrapper" style="display:none">
                         <div class="flex p-2 gap-2 items-center waitingMessageWrapper">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -163,7 +231,7 @@
     <input type="text" id="club-id" name="ClubId" value="@Model.ClubId" required hidden />
     @*<input type="text" id="date-id" name="Date" value="" required hidden />*@
     <input type="text" id="date-id" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" required hidden />
-    <input type="text" id="time-id" name="Time" value="@Model.ClubReservableTimeModel[0].Time" required hidden />
+    <input type="text" id="time-id" name="Time" value="@firstActiveTime" required hidden />
     <input type="text" id="noofpeople-id" name="NoOfPeople" value="1" required hidden />
     <input type="text" name="SelectedHost" value="@Model.SelectedHost" hidden />
 </form>

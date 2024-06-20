@@ -306,13 +306,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(string ReturnURL = "")
         {
+            ViewBag.ReturnURL = (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL)) ? ReturnURL : string.Empty;
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
             string phaseValue = ConfigurationManager.AppSettings["phase"];
 
             if (string.IsNullOrEmpty(Username))
             {
 
-                ViewBag.CallJavaScriptFunction = TempData["CallJavaScriptFunction"] ?? "False";
+                //ViewBag.CallJavaScriptFunction = TempData["CallJavaScriptFunction"] ?? "False";
+                ViewBag.CallJavaScriptFunction = TempData["CallJavaScriptFunction"] ?? "True";
                 var HasLandingSession = Request.Cookies["HasLandingSession"]?.Value;
                 if (!string.IsNullOrEmpty(HasLandingSession) && HasLandingSession.Trim() == "True")
                 {
@@ -325,6 +327,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else this.ClearSessionData();
                 LoginRequestModel Response = new LoginRequestModel();
+                
+                
                 if (phaseValue.ToUpper() == "DEVELOPMENT")
                 {
                     Response.affiliateURL = "http://43.207.72.221:93/";
@@ -337,7 +341,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
-                ViewBag.ReturnURL = (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL)) ? ReturnURL : string.Empty;
+                
                 return View(Response);
             }
             else return Redirect("/");
@@ -348,6 +352,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(LoginRequestModel Model, bool RememberMe = false, string ReturnURL = "")
         {
+            ViewBag.ReturnURL = (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL)) ? ReturnURL : string.Empty;
             if (ModelState.IsValid)
             {
                 var loginResponse = Login(Model);
@@ -368,10 +373,17 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Expires = DateTime.Now.AddMonths(-1)
                     });
                 }
+                string IsPasswordForceful =Convert.ToString( Session["IsPasswordForceful"]);
+                if(!string.IsNullOrEmpty(IsPasswordForceful) && IsPasswordForceful=="Y")
+                    return RedirectToAction("SetNewPasswordV2", "Home", new { AgentId = Session["AgentId"], MobileNumber = Session["MobileNumber"], UserID = Session["UserId"], NickName = Session["Username"], ReturnUrl = ReturnURL });
+
                 if (loginResponse.Item2)
                     if (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL))
                         return Redirect(ReturnURL);
-                return Redirect(loginResponse.Item1);
+
+                //return Redirect(loginResponse.Item1,new { ReturnURL });
+                return Redirect(loginResponse.Item1 + "?ReturnURL=" +  Uri.EscapeDataString(ReturnURL));
+
             }
             else
             {
@@ -412,6 +424,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Session["ProfileImage"] = ImageHelper.ProcessedImage(response.ProfileImage);
                     Session["CreatedOn"] = response.ActionDate;
                     Session["SystemLinkModel"] = response.SystemLink;
+                    Session["IsPasswordForceful"] = response.IsPasswordForceful;
+                    Session["MobileNumber"] = response.MobileNumber.EncryptParameter();
                     Session["Amount"] = response.Amount;
                     return new Tuple<string, bool>("/", true);
                 }
@@ -590,8 +604,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Set new Password
         [HttpGet]
-        public ActionResult SetNewPasswordV2(string AgentId, string MobileNumber, string UserID, string NickName)
+        public ActionResult SetNewPasswordV2(string AgentId, string MobileNumber, string UserID, string NickName, string ReturnUrl = null)
         {
+            TempData["returnURLAfterReset"] = null;
             var aId = !string.IsNullOrEmpty(AgentId) ? AgentId.DecryptParameter() : null;
             var mn = !string.IsNullOrEmpty(MobileNumber) ? MobileNumber.DecryptParameter() : null;
             var uId = !string.IsNullOrEmpty(UserID) ? UserID.DecryptParameter() : null;
@@ -612,6 +627,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 MobileNumber = MobileNumber,
                 NickName = NickName,
             };
+            if (!string.IsNullOrEmpty(ReturnUrl))
+            {
+                TempData["returnURLAfterReset"] = ReturnUrl;
+            }
             return View(response);
         }
         [HttpPost, ValidateAntiForgeryToken]
@@ -643,9 +662,22 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
                 ViewBag.NickName = Model.NickName;
+                if (!string.IsNullOrEmpty(Convert.ToString( TempData["returnURLAfterReset"])))
+                {
+                    
+                    Model.IsPasswordForceful = "N";
+                }
+                Common.IsPasswordForceful = Model.IsPasswordForceful;
                 var dbResponse = _buss.SetNewPassword(Common);
                 if (dbResponse.Code == 0)
                 {
+                    if (!string.IsNullOrEmpty(Convert.ToString(Model.IsPasswordForceful)))
+                    {
+                        var returnurl = TempData["returnURLAfterReset"];
+                        TempData["returnURLAfterReset"] = null;
+                        this.ClearSessionData();
+                        return RedirectToAction("Index", "Home", new { ReturnURL = returnurl });
+                    }
                     return Redirect("/user/remind/complete");
                 }
                 TempData["ForgetPWErrorMessage"] = dbResponse.Message ?? "Failed";

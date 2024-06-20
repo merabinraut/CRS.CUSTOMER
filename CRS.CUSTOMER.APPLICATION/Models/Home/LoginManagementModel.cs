@@ -21,6 +21,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string Password { get; set; }
         public string SessionId { get; set; }
         public string clubURL { get; set; }
+        public string ReturnURL { get; set; }
         public string affiliateURL { get; set; }
     }
     public class LoginResponseModel
@@ -28,6 +29,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string AgentId { get; set; }
         public string UserId { get; set; }
         public string NickName { get; set; }
+        public string IsPasswordForceful { get; set; }
+        public string MobileNumber { get; set; }
         public string EmailAddress { get; set; }
         public string ProfileImage { get; set; }
         public string SessionId { get; set; }

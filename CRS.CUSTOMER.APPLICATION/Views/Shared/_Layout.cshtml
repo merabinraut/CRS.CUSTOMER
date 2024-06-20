@@ -291,7 +291,7 @@
                             </button>
                         </div>
                         <div>
-                            <a href="user/account/profile" class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height:45px; font-weight:700">
+                            <a href="/user/account/profile" class="flex items-center  py-[10px] px-4  rounded-lg  group" style="height:45px; font-weight:700">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M12 3.75C10.6084 3.75264 9.2746 4.30662 8.29061 5.29061C7.30661 6.2746 6.75264 7.60843 6.75 9C6.75114 9.86096 6.9632 10.7085 7.36763 11.4686C7.77207 12.2287 8.35656 12.8781 9.07 13.36C6.396 14.508 4.5 17.162 4.5 20.25H6C6 16.928 8.678 14.25 12 14.25C15.322 14.25 18 16.928 18 20.25H19.5C19.5 17.162 17.605 14.508 14.93 13.36C15.6436 12.8782 16.2281 12.2288 16.6326 11.4687C17.0371 10.7086 17.249 9.861 17.25 9C17.2474 7.60843 16.6934 6.2746 15.7094 5.29061C14.7254 4.30662 13.3916 3.75264 12 3.75ZM12 5.25C14.08 5.25 15.75 6.92 15.75 9C15.75 11.08 14.08 12.75 12 12.75C9.92 12.75 8.25 11.08 8.25 9C8.25 6.92 9.92 5.25 12 5.25Z"
                                           fill="#D75A8B" />
@@ -622,6 +622,10 @@
 
         function isLoginPageWithReturnUrl(url) {
             return url.includes("ReturnURL");
+        }
+
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            document.body.style.overscrollBehaviorY = 'contain';
         }
     </script>
     @RenderSection("scripts", required: false)

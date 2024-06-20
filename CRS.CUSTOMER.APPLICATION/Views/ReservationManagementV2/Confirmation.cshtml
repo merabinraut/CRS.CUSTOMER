@@ -200,7 +200,7 @@
                             break;
                         case "PlanPrice":
                             const StrikePrice = decryptAndGetValue("StrikePrice");
-                            if (StrikePrice != null && StrikePrice != "" && StrikePrice != "y" && StrikePrice != "y") {
+                            if (StrikePrice != null && StrikePrice != "" && StrikePrice != "y" && StrikePrice != "y" && StrikePrice != "n") {
                                 $('#PlanAmount-Id').html("<div class='strikethrough'> ¥" + StrikePrice + "</div>" + " <div style='font-weight:600'> ¥" + value + "</div>" + "<span>キャンペーン中</span>");
                             }
                             else {

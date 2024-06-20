@@ -67,6 +67,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string ConfirmPassword { get; set; }
         public string MobileNumber { get; set; }
         public string NickName { get; set; }
+        public string IsPasswordForceful { get; set; }
     }
     #endregion
     #region Forgot Password

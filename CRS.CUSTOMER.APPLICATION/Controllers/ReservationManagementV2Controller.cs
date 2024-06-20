@@ -1,14 +1,10 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
-using CRS.CUSTOMER.APPLICATION.Models.ReservationHistory;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2;
-using CRS.CUSTOMER.APPLICATION.Models.ReviewManagement;
 using CRS.CUSTOMER.BUSINESS.ReservationManagementV2;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ReservationManagementV2;
 using Newtonsoft.Json;
-using Syncfusion.CompoundFile.XlsIO.Native;
-using Syncfusion.XlsIO.Implementation.PivotAnalysis;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -48,12 +44,21 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 responseData["Code"] = 0;
                 responseData["Message"] = "Success";
                 responseData["PartialView"] = partialViewString;
-                var unReservableDateList = ResponseModel.ClubReservationScheduleModel
-                                             .Where(item => !string.IsNullOrEmpty(item.Schedule) && item.Schedule.Trim().ToUpper() == "UNRESERVABLE")
-                                             .Select(item => item.Date)
-                                             .ToList();
+                //var unReservableDateList = ResponseModel.ClubReservationScheduleModel
+                //                             .Where(item => !string.IsNullOrEmpty(item.Schedule) && item.Schedule.Trim().ToUpper() == "UNRESERVABLE")
+                //                             .Select(item => item.Date)
+                //                             .ToList();
+                var dayOff = ResponseModel.ClubReservationScheduleModel
+                                .Where(item => !string.IsNullOrEmpty(item.Schedule) && item.Schedule.Trim().ToUpper() == "DAYOFF")
+                                .Select(item => item.Date)
+                                .ToList();
 
-                responseData["UnreservableDates"] = Newtonsoft.Json.JsonConvert.SerializeObject(unReservableDateList);
+                //responseData["UnreservableDates"] = Newtonsoft.Json.JsonConvert.SerializeObject(unReservableDateList);
+                responseData["Dayoff"] = Newtonsoft.Json.JsonConvert.SerializeObject(dayOff);
+
+                var timeIntervalBySelectedDate = ResponseModel.ClubReservableTimeModel;
+                responseData["TimeIntervalBySelectedDate"] = Newtonsoft.Json.JsonConvert.SerializeObject(timeIntervalBySelectedDate);
+
                 if (!string.IsNullOrEmpty(SelectedDate))
                     responseData["SelectedDate"] = SelectedDate;
             }
@@ -113,7 +118,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ResponseModel.ClubDetailModel.ClubId = ResponseModel.ClubDetailModel.ClubId.EncryptParameter();
             ResponseModel.ClubDetailModel.ClubLogo = ImageHelper.ProcessedImage(ResponseModel.ClubDetailModel.ClubLogo);
             //Plan
-            var dbResponse3 = _buss.GetPlans(cId, customerId);
+            var dbResponse3 = _buss.GetPlans(cId, customerId, Date, Time);
             if (dbResponse3.Item1 == ResponseCode.Failed || dbResponse3.Item1 == ResponseCode.Exception)
             {
                 AddNotificationMessage(new NotificationModel()
@@ -280,7 +285,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse.Item2 ?? "Invalid request",
+                    Message = dbResponse2.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
@@ -345,6 +350,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
         }
         #endregion
+
 
         #region Reservation Success
         public ActionResult Success()

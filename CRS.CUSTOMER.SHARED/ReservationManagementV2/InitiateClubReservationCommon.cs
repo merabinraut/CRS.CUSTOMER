@@ -16,11 +16,13 @@ namespace CRS.CUSTOMER.SHARED.ReservationManagementV2
     {
         public string Date { get; set; }
         public string Schedule { get; set; }
+        public string ScheduleLabel { get; set; }
     }
 
     public class ClubReservableTimeCommon
     {
         public string Time { get; set; }
         public string TimeStatus { get; set; }
+        public string LastEntryTime { get; set; }
     }
 }
