@@ -400,7 +400,9 @@
                     <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]">*</span></label>
                     <div class="input-field-common mb-[10px] relative">
                         <div style="position: absolute; top: 10px; left: 10px; color: #6A6A6A" lang="">〒</div>
-                        @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @style = "width:100%; padding-left:34px", @placeholder = "〒", autocomplete = "off" })
+                       @* @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @style = "width:100%; padding-left:34px", @placeholder = "〒", autocomplete = "off" })*@
+                        @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @style = "width:100%; padding-left:34px", @placeholder = "〒", autocomplete = "off" })
+
 
                         <div class="validationMessage">
                             @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "error-validation-msg" })
@@ -499,7 +501,7 @@
                         <p class="ml-2 text-[14px] text-[#B7B7B7]" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</p>
                     </div>*@
                 <div onclick="openModal('save_Modal')" class="flex rounded-[4px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  ">
-                    <button type="button"  class="ml-2 text-[14px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile</button>
+                    <button type="button" class="ml-2 text-[14px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile</button>
                 </div>
             </div>
         </div>
@@ -761,18 +763,16 @@
     </script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const postalCodeInput = document.querySelector('input[name="PostalCode"]');
+        document.addEventListener('DOMContentLoaded', function () {
+            const postalCodeInput = document.querySelector('input[name="PostalCode"]');
 
-        postalCodeInput.addEventListener('input', function () {
-            let value = postalCodeInput.value.replace(/-/g, '');
-            if (value.length > 3) {
-                value = value.slice(0, 3) + '-' + value.slice(3);
-            }
-            postalCodeInput.value = value;
+            postalCodeInput.addEventListener('input', function () {
+                let value = postalCodeInput.value.replace(/-/g, '');
+                if (value.length > 3) {
+                    value = value.slice(0, 3) + '-' + value.slice(3);
+                }
+                postalCodeInput.value = value;
+            });
         });
-    });
-</script>
-
-
+    </script>
 }
