@@ -759,4 +759,20 @@
             closeModal('save_Modal')
         }
     </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const postalCodeInput = document.querySelector('input[name="PostalCode"]');
+
+        postalCodeInput.addEventListener('input', function () {
+            let value = postalCodeInput.value.replace(/-/g, '');
+            if (value.length > 3) {
+                value = value.slice(0, 3) + '-' + value.slice(3);
+            }
+            postalCodeInput.value = value;
+        });
+    });
+</script>
+
+
 }
