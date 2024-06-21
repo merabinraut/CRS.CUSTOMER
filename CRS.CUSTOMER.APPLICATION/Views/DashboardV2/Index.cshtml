@@ -262,7 +262,7 @@
                         var afterSlash = locationParts.Length > 1 ? locationParts[1] : "";
                         if (Model.Location[i].LocationStatus == "A")
                         {
-                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
+                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationURL')">
                                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                     <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location1">
                                     <p class="locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
@@ -309,7 +309,7 @@
 
                         if (Model.Location[i].LocationStatus == "A")
                         {
-                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
+                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationURL')">
                                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                     <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
                                     <p style="line-height:12px; font-size:14px" class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
