@@ -1,8 +1,8 @@
 ﻿@model List<CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchFilterClubDetailModel>
 @{
-    ViewBag.Title = "Preference";
-    Layout = "~/Views/Shared/_Layout.cshtml";
     var TypeValue = ViewBag.TypeValue?.ToString();
+    ViewBag.Title = $"{TypeValue}からホストクラブを探す(★★★件)‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
     input[type=radio]:checked + label {
