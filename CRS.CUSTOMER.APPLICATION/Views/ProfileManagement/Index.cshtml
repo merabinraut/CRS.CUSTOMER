@@ -8,13 +8,15 @@
         max-width: 100%;
         width: 400px;
     }
+
     .save_modal-content {
-        background:#fff;
+        background: #fff;
         max-width: 100%;
         width: 312px;
         padding-top: 32px;
         padding-bottom: 32px;
     }
+
     .modal_header {
         color: var(--1_Darker_Primary, #D17979);
         text-align: center;
@@ -25,15 +27,16 @@
         line-height: 100%; /* 14px */
     }
 
-    .save_cont{
-        margin-top:18px;
+    .save_cont {
+        margin-top: 18px;
     }
+
     .savebtn {
         color: #FFF;
         font-size: 14px;
         font-weight: 500;
         display: flex;
-        align-items:center;
+        align-items: center;
         padding-top: 14px;
         padding-bottom: 14px;
         padding-right: 32px;
@@ -128,7 +131,7 @@
         </div>
     </div>
 
-    @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post))
+    @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post, new { id = "submitId" }))
     {
         @Html.AntiForgeryToken()
         if (!string.IsNullOrEmpty(Model.EmailAddress))
@@ -495,8 +498,8 @@
                          class="flex rounded-[4px] justify-center items-center text-white h-[48px]    ">
                         <p class="ml-2 text-[14px] text-[#B7B7B7]" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</p>
                     </div>*@
-                <div class="flex rounded-[4px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  ">
-                    <button onclick="openModal('save_Modal')"  class="ml-2 text-[14px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile</button>
+                <div onclick="openModal('save_Modal')" class="flex rounded-[4px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  ">
+                    <button type="button"  class="ml-2 text-[14px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile</button>
                 </div>
             </div>
         </div>
@@ -531,7 +534,7 @@
 
 
 
-<div id="save_Modal" class="modal modalWrapper" 
+<div id="save_Modal" class="modal modalWrapper"
      style="display:none;">
     <div class="save_modal-content relative" style="max-width: 312px; border-radius: 15px;">
         <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('save_Modal')"
@@ -553,7 +556,7 @@
             <div onclick="closeModal('save_Modal')" class="flex justify-center items-center underline px-8 w-[135px]">
                 キャンセル
             </div>
-            <button onclick="closeModal('save_Modal')" type="submit" class="savebtn w-[135px]">
+            <button onclick="SubmitButton();" type="submit" class="savebtn w-[135px]">
                 削除する
             </button>
         </div>
@@ -749,6 +752,11 @@
 
             $('#modal1').hide();
 
+        }
+
+        function SubmitButton() {
+            document.getElementById('submitId').submit();
+            closeModal('save_Modal')
         }
     </script>
 }
