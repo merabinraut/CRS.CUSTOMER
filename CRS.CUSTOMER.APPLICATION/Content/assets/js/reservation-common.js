@@ -132,7 +132,6 @@ function getTimeIntervalByDayWise(date, timeInterval) {
     var endDisabledTime = parseTimeString(selectedDate, endTimeStr);
 
     timeInterval.forEach(function (item) {
-        debugger;
         var itemTime = new Date(selectedDate.toDateString() + ' ' + item.Time);
         var currentTime = new Date();
         var disabledClassLabel = '';
