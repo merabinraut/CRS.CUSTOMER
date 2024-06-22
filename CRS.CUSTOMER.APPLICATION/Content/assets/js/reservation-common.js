@@ -124,6 +124,7 @@ function getTimeIntervalByDayWise(date, timeInterval) {
     var timeListHtml = '';
     var selectedDate = new Date(date);
 
+    var firstElement = new Date(selectedDate.toDateString() + ' ' + timeInterval[0].Time);
     var lastElement = timeInterval[timeInterval.length - 1];
     var lastEntryTimeStr = lastElement.LastEntryTime;
     var endTimeStr = lastElement.Time;
@@ -132,25 +133,18 @@ function getTimeIntervalByDayWise(date, timeInterval) {
     var endDisabledTime = parseTimeString(selectedDate, endTimeStr);
 
     timeInterval.forEach(function (item) {
-        debugger;
         var itemTime = new Date(selectedDate.toDateString() + ' ' + item.Time);
         var currentTime = new Date();
         var disabledClassLabel = '';
         if (itemTime < currentTime) {
             disabledClassLabel = 'disabled';
         }
-        //if (itemTime >= startDisabledTime) {
-        //    disabledClassLabel = 'disabled';
-        //}
+        if (itemTime > startDisabledTime || itemTime < firstElement) {
+            disabledClassLabel = 'disabled';
+        }
         //if (itemTime <= endDisabledTime) {
         //    disabledClassLabel = 'disabled';
         //}
-        if (startDisabledTime >= itemTime) {
-            disabledClassLabel = 'disabled';
-        }
-        if (endDisabledTime <= itemTime) {
-            disabledClassLabel = 'disabled';
-        }
         timeListHtml += '<div class="timeList ' + disabledClassLabel + ' h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center">';
         timeListHtml += '<div class="timeValue">' + item.Time + '</div>';
         timeListHtml += '<div class="activeTime">';
