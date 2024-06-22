@@ -7,7 +7,7 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
     public interface ILocationManagementRepository
     {
         List<LocationManagementCommon> GetLocations();
-        ClubDetailCommon GetClubDetailById(string clubId, string CustomerId = "");
+        ClubDetailCommon GetClubDetailById(string clubId, string CustomerId = "", string clubcode = "");
         #region Club/Host list via location
         List<LocationClubListCommon> GetClubListViaLoaction(string LocationId, string customerId);
 

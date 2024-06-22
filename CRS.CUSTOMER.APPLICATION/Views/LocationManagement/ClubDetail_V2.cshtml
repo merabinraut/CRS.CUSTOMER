@@ -61,7 +61,7 @@
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="@Url.Action("Index", "Dashboard")" class="active">
+    <a href="/" class="active">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Home
     </a>
     <i class="las la-angle-right"></i>
@@ -463,12 +463,12 @@
                                             }
 
                                         </div>
-                                        @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
-                                        {
-                                            <div class=" store-top-image-title">
-                                                新人王 売上No.1
-                                            </div>
-                                        }
+                                        @*@if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
+                                            {
+                                                <div class=" store-top-image-title">
+                                                    新人王 売上No.1
+                                                </div>
+                                            }*@
                                     </div>
                                 </div>
                             }

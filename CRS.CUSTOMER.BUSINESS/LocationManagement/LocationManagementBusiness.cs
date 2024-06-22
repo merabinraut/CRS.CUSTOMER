@@ -11,9 +11,9 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
 
         public LocationManagementBusiness(LocationManagementRepository repo) => this._repo = repo;
 
-        public ClubDetailCommon GetClubDetailById(string clubId, string CustomerId = "")
+        public ClubDetailCommon GetClubDetailById(string clubId, string CustomerId = "", string clubcode = "")
         {
-            return _repo.GetClubDetailById(clubId, CustomerId);
+            return _repo.GetClubDetailById(clubId, CustomerId, clubcode);
         }
 
         public List<LocationManagementCommon> GetLocations()
