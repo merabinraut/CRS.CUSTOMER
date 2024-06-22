@@ -121,7 +121,7 @@
                                         DateTime lastEntryTime = DateTime.ParseExact(Model.ClubReservableTimeModel[0].LastEntryTime.ToString(), "HH:mm", null);
                                         DateTime currentTime = DateTime.ParseExact(item.Time.ToString(), "HH:mm", null);
 
-                                        if (currentTime >= lastEntryTime)
+                                        if (currentTime > lastEntryTime)
                                         {
                                             <div class="timeList h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center disabled">
                                                 <div class="timeValue">
