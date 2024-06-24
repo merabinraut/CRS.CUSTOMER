@@ -326,7 +326,7 @@ input:focus {
   position: absolute;
   top: 50%;
   left: 16px;
-  transform: translatey(-50%);
+  transform: translateY(-50%);
   color: #a6a6a6;
   cursor: pointer;
   height: auto;

@@ -61,7 +61,7 @@
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="/" class="active">
+    <a href="@Url.Action("Index", "Dashboard")" class="active">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Home
     </a>
     <i class="las la-angle-right"></i>
@@ -88,7 +88,7 @@
         }
         @if (!string.IsNullOrEmpty(Model.Tag2))
         {
-            <li class="tag_rank">ランク @Model.Tag2</li>
+            <li class="tag_rank"> @Model.Tag2</li>
         }
         @if (!string.IsNullOrEmpty(Model.Tag3))
         {
@@ -463,12 +463,12 @@
                                             }
 
                                         </div>
-                                        @*@if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
-                                            {
-                                                <div class=" store-top-image-title">
-                                                    新人王 売上No.1
-                                                </div>
-                                            }*@
+                                        @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
+                                        {
+                                            <div class=" store-top-image-title">
+                                                新人王 売上No.1
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             }
@@ -1011,7 +1011,7 @@
                     </table>
                 </div>
             </div>
-            <div class="box mt-2"></div>
+           @* <div class="box mt-2"></div>*@
             <div style="height:6px; background:#efefef; width:100%"></div>
 
             <!-- for Pricing -->
@@ -1147,7 +1147,7 @@
                             }
                             <div class="pt-[5px]">
                                 <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
-                                <h3 class="text-xs  text-charcoalBlack" style="font-size: 13px; width:90px; text-overflow: ellipsis; font-weight: bold; white-space: nowrap; overflow: hidden;">@item.HostNameJapanese</h3>
+                                <h3 class="text-xs  text-charcoalBlack" style="font-size: 13px; text-overflow: ellipsis; font-weight: bold; white-space: nowrap; overflow: hidden;">@item.HostNameJapanese</h3>
                             </div>
                         </div>
                     }
@@ -1660,34 +1660,25 @@
      style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000" id="club-bottom-tab-id">
     <div>
         <div class="flex justify-center items-center gap-1 pb-1">
-            @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "DAY")
-            {
-                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
-            }
-            else if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
-            {
-                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
-            }
-            @*@if (Model.GetClubBasicInformation.ClubClosingTime != null || Model.GetClubBasicInformation.ClubOpeningTime != null)
-                {
-                    <div class="text-sm text-secondary-1 flex justify-center items-center">
-                        @Model.GetClubBasicInformation.ClubOpeningTime <span>
-                            <img src="~/Content/assets/images/customer/time-duration.svg" style="height:9px; width:8px" />
-
-                        </span> @Model.GetClubBasicInformation.ClubClosingTime
-                    </div>
-                }*@
-        </div>
-        @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.TodaysClubSchedule) && Model.GetClubBasicInformation.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
-        {
-            <div class="bg-[#BCB08A] rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full">
-                本日空席あり
+            <div class="h-4 w-4 rounded-[2px] bg-[#F89336] flex justify-center items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M3.14182 2.35068L2.16 1.36986L1.39091 2.14247L2.36727 3.12329L3.14182 2.35068ZM0 5.45205H1.63636V6.54794H0V5.45205ZM5.45455 0H6.54545V1.61644H5.45455V0ZM9.84 1.36712L10.608 2.13808L9.63164 3.1189L8.86418 2.3474L9.84 1.36712ZM8.85818 9.64931L9.83455 10.6356L10.6036 9.86301L9.62182 8.88219L8.85818 9.64931ZM10.3636 5.45205H12V6.54794H10.3636V5.45205ZM6 2.71233C4.19455 2.71233 2.72727 4.1863 2.72727 6C2.72727 7.8137 4.19455 9.28767 6 9.28767C7.80545 9.28767 9.27273 7.8137 9.27273 6C9.27273 4.1863 7.80545 2.71233 6 2.71233ZM6 8.19178C4.79455 8.19178 3.81818 7.21096 3.81818 6C3.81818 4.78904 4.79455 3.80822 6 3.80822C7.20545 3.80822 8.18182 4.78904 8.18182 6C8.18182 7.21096 7.20545 8.19178 6 8.19178ZM5.45455 10.3836H6.54545V12H5.45455V10.3836ZM1.39091 9.85753L2.16 10.6301L3.13636 9.64384L2.36727 8.87123L1.39091 9.85753Z"
+                          fill="white" />
+                </svg>
             </div>
-        }
-        else
-        {
-            <div class="available disabled">本日空席あり</div>
-        }
+            @if (Model.GetClubBasicInformation.ClubClosingTime != null || Model.GetClubBasicInformation.ClubOpeningTime != null)
+            {
+                <div class="text-sm text-secondary-1 flex justify-center items-center">
+                    @Model.GetClubBasicInformation.ClubOpeningTime <span>
+                        <img src="~/Content/assets/images/customer/time-duration.svg" style="height:9px; width:8px" />
+
+                    </span> @Model.GetClubBasicInformation.ClubClosingTime
+                </div>
+            }
+        </div>
+        <div class="bg-[#BCB08A] rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full">
+            本日空席あり
+        </div>
     </div>
     <!-- for share and map -->
     <div class="flex gap-[9px] items-center"></div>

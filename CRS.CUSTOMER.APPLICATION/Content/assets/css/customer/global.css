@@ -1615,7 +1615,8 @@ button {
     display: block;
     float: left;
     border-bottom: 1px solid #efefef;
-    background: #fcfcfc;
+   /* background: #fcfcfc;*/
+    background: #fff;
 }
 
     .club_content:first-child {
