@@ -1300,9 +1300,13 @@
                 }
 
                 /* Media queries for responsive design */
-                @@media (max-width: 600px) {
+                @@media (max-width: 500px) {
                     .modal-content {
                         max-width: 90%;
+                    }
+                }  @@media (max-width: 360px) {
+                    .modal-content {
+                        max-width: 360px;
                     }
                 }
             </style>
@@ -1513,11 +1517,11 @@
         <div class="flex justify-center items-center gap-1 pb-1">
             @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "DAY")
             {
-                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
+                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="~/Content/assets/images/customer/sun.svg" alt="夜" style="margin-right: 5px; margin-bottom: 2px"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
             }
             else if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
             {
-                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
+                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
             }
         </div>
         @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.TodaysClubSchedule) && Model.GetClubBasicInformation.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
@@ -1763,7 +1767,7 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " style="right:20px" onclick="closeImagePopup();">&times;</span>
-        <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-[294px] object-cover " id="img01" />
+        <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-auto object-cover " style="margin:0 auto;" id="img01" />
     </div>
 </div>
 <div class="loader" id="loader-id">
