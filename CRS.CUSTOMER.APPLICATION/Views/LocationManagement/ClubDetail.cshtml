@@ -1539,11 +1539,11 @@
         <div class="flex justify-center items-center gap-1 pb-1">
             @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "DAY")
             {
-                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
+                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="~/Content/assets/images/customer/sun.svg" alt="夜" style="margin-right:5px"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
             }
             else if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
             {
-                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
+                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
             }
             @*@if (Model.GetClubBasicInformation.ClubClosingTime != null || Model.GetClubBasicInformation.ClubOpeningTime != null)
                 {

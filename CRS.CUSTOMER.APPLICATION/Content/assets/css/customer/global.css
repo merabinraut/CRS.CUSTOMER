@@ -1614,8 +1614,9 @@ button {
     padding: 20px 0 0 0;
     display: block;
     float: left;
-    border-bottom: 1px solid #efefef;
-    background: #fcfcfc;
+    border-bottom: 4px solid #fafafa;
+    /* background: #fcfcfc;*/
+    background: #fff;
 }
 
     .club_content:first-child {

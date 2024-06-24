@@ -1,5 +1,6 @@
 ﻿function InitiateClubReservationFunction(ClubId, SelectedDate = "", SelectedHost = "") {
     EnableLoaderFunction();
+    document.body.classList.add('body-no-scroll');
     if (document.getElementById('club-bottom-tab-id')) {
         document.getElementById('club-bottom-tab-id').style.display = 'none';
     }
@@ -268,6 +269,7 @@ function initPeopleFunction() {
 /////////////////////////////////////////////////////////////////////// People JS ///////////////////////////////////////////////////////////////////////
 
 function CloseInitiatedClubReservationFunction() {
+    document.body.classList.remove('body-no-scroll');
     $("#stickey_id").css("display", "")
     var element = document.getElementById('drawer-date');
     element.classList.add('translate-y-full');
