@@ -90,7 +90,7 @@ function ManageBookmark(ClubId, HostId, AgentType, ClickedElement) {
                             }
                             else {
                                 imageElement.src = '/Content/assets/images/customer/favorite-unfilled.svg';
-                               // imageElement.src = HostNotFilledImgURL;
+                                // imageElement.src = HostNotFilledImgURL;
                             }
                         }
                         else if (AgentType == 'club') {

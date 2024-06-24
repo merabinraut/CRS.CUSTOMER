@@ -606,6 +606,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Data\Configuration.json" />
     <Content Include="App_Data\AmazonConfigruation.json" />
+    <Content Include="App_Data\URLManagementConfigruation.json" />
     <None Include="packages.config" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
@@ -709,6 +710,7 @@
     <Content Include="Views\Footer\termsAndCondition.cshtml" />
     <Content Include="Views\Home\ForgotPasswordSuccessView.cshtml" />
     <Content Include="Views\Home\RegisterSuccessView.cshtml" />
+    <Content Include="Views\LocationManagement\ClubDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -756,6 +758,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties app_3data_4urlmanagementconfigruation_1json__JsonSchema="{" />
     </VisualStudio>
     <MonoDevelop>
       <Properties>

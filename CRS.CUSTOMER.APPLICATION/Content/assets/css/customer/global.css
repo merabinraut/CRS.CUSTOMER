@@ -1,5 +1,5 @@
 ﻿:root {
-    font-family: "Noto Sans", sans-serif;
+    font-family: "yu-gothic-pr6n", sans-serif;
     color: #292f33;
     font-size: 16px;
     width: 100%;
@@ -21,9 +21,8 @@
 }
 
 @font-face {
-    font-family: "Futura";
-    src: url("../../futura/futur.ttf") format("ttf");
-    font-weight: normal;
+    font-family: "yu-gothic-pr6n", sans-serif;
+    font-weight: 400;
     font-style: normal;
 }
 
@@ -1615,8 +1614,9 @@ button {
     padding: 20px 0 0 0;
     display: block;
     float: left;
-    border-bottom: 1px solid #efefef;
-    background: #fcfcfc;
+    border-bottom: 4px solid #fafafa;
+    /* background: #fcfcfc;*/
+    background: #fff;
 }
 
     .club_content:first-child {

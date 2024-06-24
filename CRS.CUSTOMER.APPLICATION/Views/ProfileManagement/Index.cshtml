@@ -8,6 +8,40 @@
         max-width: 100%;
         width: 400px;
     }
+    .save_modal-content {
+        background:#fff;
+        max-width: 100%;
+        width: 312px;
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+    .modal_header {
+        color: var(--1_Darker_Primary, #D17979);
+        text-align: center;
+        font-family: "Noto Sans";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 100%; /* 14px */
+    }
+
+    .save_cont{
+        margin-top:18px;
+    }
+    .savebtn {
+        color: #FFF;
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        align-items:center;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        padding-right: 32px;
+        padding-left: 32px;
+        gap: 12px;
+        border-radius: 4px;
+        background: var(--Darker_Primary, #D75A8B);
+    }
 
     input:focus {
         border: 1px solid #d75a8b !important;
@@ -129,7 +163,7 @@
 
         <div class="flex flex-col mx-[16px]">
             <div style="padding-top: 21px;text-align: center; font-size: 13px; color: #7E6D5E ">
-                ホスログを便利に使うために登録しよう！
+                ホスログを便利に使うために登録しよう！12
             </div>
 
             <div class="grid grid-cols-2 gap-[16px] mt-[12px] ">
@@ -462,7 +496,7 @@
                         <p class="ml-2 text-[14px] text-[#B7B7B7]" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</p>
                     </div>*@
                 <div class="flex rounded-[4px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  ">
-                    <button type="submit" class="ml-2 text-[14px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile</button>
+                    <button onclick="openModal('save_Modal')"  class="ml-2 text-[14px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile</button>
                 </div>
             </div>
         </div>
@@ -494,6 +528,42 @@
         </div>
     </div>
 </div>-->
+
+
+
+<div id="save_Modal" class="modal modalWrapper" 
+     style="display:none;">
+    <div class="save_modal-content relative" style="max-width: 312px; border-radius: 15px;">
+        <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('save_Modal')"
+              style="top:-49px">&times;</span>
+        <div class="flex flex-col gap-1">
+
+            <div class="modal_header">
+                最終確認
+            </div>
+
+            <div class="text-[12px] flex justify-center mb-2">
+                本当に削除してもよろしいですか？
+            </div>
+        </div>
+
+        <div class="border"></div>
+
+        <div class="save_cont flex gap-2 justify-center mt-4">
+            <div onclick="closeModal('save_Modal')" class="flex justify-center items-center underline px-8 w-[135px]">
+                キャンセル
+            </div>
+            <button onclick="closeModal('save_Modal')" type="submit" class="savebtn w-[135px]">
+                削除する
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 <div id="modal1" class="modal modalWrapper" style="display:none">
     <div class="modal-content modalContentWrapper">

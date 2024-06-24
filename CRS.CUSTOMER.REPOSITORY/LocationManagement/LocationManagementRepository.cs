@@ -12,10 +12,13 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
         private readonly RepositoryDao _dao;
         public LocationManagementRepository(RepositoryDao dao) => _dao = dao;
 
-        public ClubDetailCommon GetClubDetailById(string clubId, string CustomerId = "")
+        public ClubDetailCommon GetClubDetailById(string clubId, string CustomerId = "", string clubcode = "")
         {
             string sql = "sproc_customer_club_and_host_management @Flag='cd'";
-            sql += " ,@ClubId=" + _dao.FilterString(clubId);
+            if (string.IsNullOrEmpty(clubcode))
+                sql += " ,@ClubId=" + _dao.FilterString(clubId);
+            else
+                sql += " ,@ClubCode=" + _dao.FilterString(clubcode);
             sql += " ,@customerAgentId=" + _dao.FilterString(CustomerId);
             var dbResp = _dao.ExecuteDataTable(sql);
             if (dbResp != null && dbResp.Rows.Count == 1)
@@ -310,6 +313,8 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
                     VPMaxReservation = _dao.ParseColumnValue(dbResponseInfo, "VPMaxReservation").ToString(),
                     WebsiteLink = _dao.ParseColumnValue(dbResponseInfo, "WebsiteLink").ToString(),
                     LastOrderTime = _dao.ParseColumnValue(dbResponseInfo, "LastOrderTime").ToString(),
+                    ClubTimePeriod = _dao.ParseColumnValue(dbResponseInfo, "ClubTimePeriod").ToString(),
+                    TodaysClubSchedule = _dao.ParseColumnValue(dbResponseInfo, "TodaysClubSchedule").ToString(),
                 };
             }
             return new ClubBasicInformationModelCommon();

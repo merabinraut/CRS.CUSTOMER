@@ -1122,5 +1122,34 @@ namespace CRS.CUSTOMER.APPLICATION.Library
             model = JsonConvert.DeserializeObject<T>(json);
             return model;
         }
+
+        public static Dictionary<string, string> MapJsonDataToDictionaryViaKeyName(string keyName, string key)
+        {
+            string path = HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings[keyName].ToString());
+            using (StreamReader r = new StreamReader(path))
+            {
+                string json = r.ReadToEnd();
+                dynamic data = JsonConvert.DeserializeObject(json);
+                if (data[key] == null)
+                    return new Dictionary<string, string>();
+                return data[key].ToObject<Dictionary<string, string>>();
+            }
+        }
+        public static string GetKeyValueFromDictionary(Dictionary<string, string> dict, string key)
+        {
+            string response = string.Empty;
+            string value;
+            if (dict.TryGetValue(key, out value))
+                response = value;
+            return response;
+        }
+        public static bool IsPureString(string request)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(request, @"^[a-zA-Z]+$");
+        }
+        public static bool IsAlphanumeric(string request)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(request, @"^[a-zA-Z0-9]+$");
+        }
     }
 }

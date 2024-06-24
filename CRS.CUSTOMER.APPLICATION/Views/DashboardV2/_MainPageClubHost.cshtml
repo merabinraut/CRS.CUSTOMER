@@ -184,7 +184,8 @@
         display: block;
         float: left;
         border-bottom: 1px solid #efefef;
-        background: #fcfcfc;
+     /*   background: #fcfcfc;*/
+     background:#fff;
     }
 
         .club_content:first-child {
@@ -567,11 +568,11 @@
                         <!-- s/action btn -->
                         @if (item.IsBookmarked.ToUpper() == "Y")
                         {
-                            <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                            <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                         }
                         else
                         {
-                            <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                            <div class="action_keep"  onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
                         }
                         <!-- e/action btn -->
                     </div>
@@ -647,6 +648,9 @@
                     <!-- s/club status -->
                     <div class="club_status">
                         <!-- s/opening hours -->
+                        @{
+                            DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:mm"));
+                        }
                         @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
                         {
                             if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
@@ -660,7 +664,9 @@
 
                             <!-- e/opening hours -->
                             <!-- s/available -->
-                            if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+
+
+                            if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubOpeningTime) < currentTime && DateTime.Parse(item.ClubClosingTime) > currentTime)
                             {
                                 <div class="available">本日空席あり</div>
                             }

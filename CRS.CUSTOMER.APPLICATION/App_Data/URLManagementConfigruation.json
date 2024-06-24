@@ -1,0 +1,16 @@
+{
+  "Location": {
+    "/tokyo/kabukicho": "1",
+    "/osaka/kita_minami": "3",
+    "/hokkaido/susukino": "7",
+    "/aichi/nagoya": "5",
+    "/fukuoka/nakasu": "9"
+  },
+  "Scene": {
+    "s00001": "0",
+    "s00002": "1",
+    "s00003": "2",
+    "s00004": "3",
+    "s00005": "4"
+  }
+}
