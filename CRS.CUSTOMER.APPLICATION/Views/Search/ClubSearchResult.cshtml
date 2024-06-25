@@ -177,7 +177,7 @@
     <span>検索結果</span>
     <span>@Model.FilteredClubModel.Count 件</span>
 </div>
-<div class="bg-white">
+<div class="" style="background: #fafafa">
     <!-- club section  -->
     <div id="tab1" class="tab-content-plane  ">
         @{
@@ -209,7 +209,7 @@
                                 @if (!string.IsNullOrEmpty(@item.Tag2))
                                 {
                                     <!-- s/tag -->
-                                    <li class="tag_rank"> @item.Tag2</li>
+                                    <li class="tag_rank">ランク @item.Tag2</li>
                                 }
                                 <!-- e/tag -->
                                 <!-- s/tag -->

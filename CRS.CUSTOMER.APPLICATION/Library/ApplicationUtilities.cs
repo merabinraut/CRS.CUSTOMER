@@ -1122,6 +1122,7 @@ namespace CRS.CUSTOMER.APPLICATION.Library
             model = JsonConvert.DeserializeObject<T>(json);
             return model;
         }
+
         public static Dictionary<string, string> MapJsonDataToDictionaryViaKeyName(string keyName, string key)
         {
             string path = HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings[keyName].ToString());

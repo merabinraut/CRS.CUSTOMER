@@ -1,5 +1,6 @@
 ﻿function InitiateClubReservationFunction(ClubId, SelectedDate = "", SelectedHost = "") {
     EnableLoaderFunction();
+    document.body.classList.add('body-no-scroll');
     if (document.getElementById('club-bottom-tab-id')) {
         document.getElementById('club-bottom-tab-id').style.display = 'none';
     }
@@ -36,8 +37,8 @@
                         '7月', '8月', '9月', '10月', '11月', '12月'
                     ],
                     dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
-                    dayNamesShort: ['月', '火', '水', '木', '金', '土', '日',],
-                    dayNamesMin: ['月', '火', '水', '木', '金', '土', '日',],
+                    dayNamesShort: ['日', '月', '火', '水', '木', '金', '土',],
+                    dayNamesMin: ['日', '月', '火', '水', '木', '金', '土',],
                     weekHeader: '週',
                     dateFormat: 'yy/mm/dd',
                     firstDay: 0,
@@ -81,10 +82,14 @@
                         //var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         //return [formattedDates.indexOf(string) == -1];
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                        if (formattedDates.indexOf(string) != -1) {
-                            return [false]; // Unreservable date
-                        } else if (holidayDates.indexOf(string) == -1) {
-                            return [true, 'Dayoff']; // Dayoff date
+                        if (date.getDay() === 0) { // Sunday
+                            return [true, 'Sunday']; // Make Sunday unselectable
+                        }
+                        //else if (formattedDates.indexOf(string) != -1) {
+                        //    return [false]; // Unreservable date
+                        //}
+                        else if (holidayDates.indexOf(string) != -1) {
+                            return [false, 'Dayoff']; // Dayoff date
                         }
                         else {
                             return [true];
@@ -120,8 +125,9 @@ function getTimeIntervalByDayWise(date, timeInterval) {
     var timeListHtml = '';
     var selectedDate = new Date(date);
 
+    var firstElement = new Date(selectedDate.toDateString() + ' ' + timeInterval[0].Time);
     var lastElement = timeInterval[timeInterval.length - 1];
-    var lastEntryTimeStr = lastElement.LastEntryTime; 
+    var lastEntryTimeStr = lastElement.LastEntryTime;
     var endTimeStr = lastElement.Time;
 
     var startDisabledTime = parseTimeString(selectedDate, lastEntryTimeStr);
@@ -134,12 +140,12 @@ function getTimeIntervalByDayWise(date, timeInterval) {
         if (itemTime < currentTime) {
             disabledClassLabel = 'disabled';
         }
-        if (itemTime >= startDisabledTime) {
+        if (itemTime > startDisabledTime || itemTime < firstElement) {
             disabledClassLabel = 'disabled';
         }
-        if (itemTime <= endDisabledTime) {
-            disabledClassLabel = 'disabled';
-        }
+        //if (itemTime <= endDisabledTime) {
+        //    disabledClassLabel = 'disabled';
+        //}
         timeListHtml += '<div class="timeList ' + disabledClassLabel + ' h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center">';
         timeListHtml += '<div class="timeValue">' + item.Time + '</div>';
         timeListHtml += '<div class="activeTime">';
@@ -157,7 +163,7 @@ function parseTimeString(date, timeString) {
     var hours = parseInt(timeParts[0], 10);
     var minutes = parseInt(timeParts[1], 10);
     var newDate = new Date(date);
-    newDate.setHours(hours, minutes, 0, 0); 
+    newDate.setHours(hours, minutes, 0, 0);
     return newDate;
 }
 /////////////////////////////////////////////////////////////////////// Time JS ///////////////////////////////////////////////////////////////////////
@@ -263,6 +269,7 @@ function initPeopleFunction() {
 /////////////////////////////////////////////////////////////////////// People JS ///////////////////////////////////////////////////////////////////////
 
 function CloseInitiatedClubReservationFunction() {
+    document.body.classList.remove('body-no-scroll');
     $("#stickey_id").css("display", "")
     var element = document.getElementById('drawer-date');
     element.classList.add('translate-y-full');

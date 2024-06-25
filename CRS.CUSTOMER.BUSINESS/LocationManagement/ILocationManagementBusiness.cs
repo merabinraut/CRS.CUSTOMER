@@ -8,7 +8,7 @@ namespace CRS.CUSTOMER.BUSINESS.LocationManagement
     {
         List<LocationManagementCommon> GetLocations();
 
-        ClubDetailCommon GetClubDetailById(string clubId, string CustomerId = "");
+        ClubDetailCommon GetClubDetailById(string clubId, string CustomerId = "", string clubcode = "");
 
         #region "Club Reservation"
         List<TimeIntervalListCommon> GetTimeInterval();
