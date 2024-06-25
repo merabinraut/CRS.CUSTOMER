@@ -104,7 +104,7 @@
                         @if (!string.IsNullOrEmpty(@item.Tag2))
                         {
                             <!-- s/tag -->
-                            <li class="tag_rank"> @item.Tag2</li>
+                            <li class="tag_rank"> ランク @item.Tag2 </li>
                         }
                         <!-- e/tag -->
                         <!-- s/tag -->
@@ -150,13 +150,15 @@
                         {
                             <div class="action_keep"
                                  onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)">
-                        <img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                                <img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg">
+                            </div>
                         }
                         else
                         {
                             <div class="action_keep"
-                                  onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)">
-                        <img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                                 onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)">
+                                <img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg">
+                            </div>
                         }
                         <!-- e/action btn -->
                     </div>
