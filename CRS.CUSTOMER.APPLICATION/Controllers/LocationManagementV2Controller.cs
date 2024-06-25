@@ -162,7 +162,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     return Redirect("/");
                 }
                 var responseModel = new Models.LocationManagementV2.ClubDetailModel();
-                var clubDetailResp = _business.GetClubDetailById(ClubId, agentId);
+                var clubDetailResp = _business.GetClubDetailById("", agentId, ClubId);
                 responseModel = clubDetailResp.MapObject<Models.LocationManagementV2.ClubDetailModel>();
                 responseModel.ClubId = responseModel.ClubId.EncryptParameter();
                 responseModel.LocationId = responseModel.LocationId.EncryptParameter();
