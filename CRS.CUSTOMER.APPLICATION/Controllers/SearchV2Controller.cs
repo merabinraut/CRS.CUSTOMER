@@ -35,6 +35,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet, Route("search/{prefectures}/{area}")]
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(string prefectures, string area, string target)
         {
             ViewBag.PrefecturesArea = $"/{prefectures}/{area}";
@@ -237,15 +238,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Response.HostRecommendationModel.Add(new DashboardV2HostDetailModel
                         {
-                            ClubId = item.ClubId.EncryptParameter(),
+                            ClubId = ApplicationUtilities.EncryptParameter(item.ClubId),
                             ClubNameEnglish = item.ClubNameEnglish,
                             ClubNameJapanese = item.ClubNameJapanese,
                             ClubLogo = ImageHelper.ProcessedImage(item.ClubLogo),
-                            HostId = item.HostId.EncryptParameter(),
+                            HostId = ApplicationUtilities.EncryptParameter(item.HostId),
                             HostNameEnglish = item.HostName,
                             HostNameJapanese = item.HostNameJapanese,
                             HostLogo = ImageHelper.ProcessedImage(item.HostImage),
-                            ClubLocationId = item.LocationId.EncryptParameter(),
+                            ClubLocationId = ApplicationUtilities.EncryptParameter(item.LocationId),
                             IsBookmarked = item.IsBookmarked
                         });
                     }
