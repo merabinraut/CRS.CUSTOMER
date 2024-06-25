@@ -60,7 +60,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (locationServiceResp != null && locationServiceResp.Count > 0)
             {
                 ResponseModel.Location = locationServiceResp.MapObjects<LocationListModel>();
-                //ResponseModel.Location.ForEach(x => x.LocationID = x.LocationID?.EncryptParameter());
+                ResponseModel.Location.ForEach(x => x.LocationID = x.LocationID?.EncryptParameter());
                 ResponseModel.Location.ForEach(x => x.LocationImage = ImageHelper.ProcessedImage(x.LocationImage));
             }
             var planListDBResponse = _oldDashboardBusiness.GetPlansList();
@@ -96,7 +96,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             List<RecommendationLocationModel> locationsList = new List<RecommendationLocationModel>();
             foreach (var item in ResponseModel.Location)
-                locationsList.Add(new RecommendationLocationModel { name = item.LocationName, lat = item.Latitude, lng = item.Longitude, id = item.LocationID });
+                locationsList.Add(new RecommendationLocationModel { name = item.LocationName, lat = item.Latitude, lng = item.Longitude, id = item.LocationURl });
 
             ViewBag.JsonLocation = JsonConvert.SerializeObject(locationsList);
             ViewBag.ActionPageName = "Dashboard";

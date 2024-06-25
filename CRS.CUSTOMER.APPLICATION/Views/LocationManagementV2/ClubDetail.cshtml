@@ -8,6 +8,7 @@
     DateTime todayDate = DateTime.Now;
     string formattedDate = todayDate.ToString("yyyy年M月");
     var target = ViewBag.target;
+    var PlanGroupList = ViewBag.PlanGroup;
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script src="/Content/assets/js/tabs.js"></script>
@@ -1326,8 +1327,7 @@
                                         @*@Model.GetClubBasicInformation.LastOrderTime / L.O 21:00*@
                                     </td>
                                 </tr>
-
-                                @foreach (var group in ViewBag.PlanGroup)
+                                @foreach (var group in PlanGroupList)
                                 {
                                     var isFirstRow = true; // Flag to check if it's the first row in the group
                                     var lstgroupDetails = StaticData.GetPlanGroupLOT(group);
@@ -1345,9 +1345,6 @@
                                                 }
                                             }
                                             <!-- Display Label and LabelValue for each row -->
-                                            @*<td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                                    @item.Label
-                                                </td>*@
                                             <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
                                                 @item.LabelValue
                                             </td>

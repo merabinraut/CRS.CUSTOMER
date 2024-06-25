@@ -336,8 +336,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         GetPlanGroupDetail = group.ToList()
                     })
                     .ToList();
-                    ViewBag.PlanGroup = groupedResults.MapObjects<Models.LocationManagementV2.PlanGroup>();
-                    ViewBag.PlanGroup1 = groupedResults.MapObjects<Models.LocationManagementV2.PlanGroup>();
+                    ViewBag.PlanGroup = groupedResults.MapObjects<Models.LocationManagement.PlanGroup>();
+                    ViewBag.PlanGroup1 = groupedResults.MapObjects<Models.LocationManagement.PlanGroup>();
                 }
                 #endregion
                 #endregion
