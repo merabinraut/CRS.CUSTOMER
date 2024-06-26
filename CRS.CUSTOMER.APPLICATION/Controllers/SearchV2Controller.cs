@@ -10,10 +10,12 @@ using CRS.CUSTOMER.BUSINESS.Search;
 using CRS.CUSTOMER.BUSINESS.SearchFilterManagement;
 using CRS.CUSTOMER.SHARED.Search;
 using DocumentFormat.OpenXml.Spreadsheet;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
@@ -114,8 +116,56 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, Route("search/{prefectures}/{area}")]
-        public ActionResult Index(string prefectures, string area, string target, string scftab, string TopSearch, SearchV2FilterClubTabRequestModel ClubTabRequest = null, bool NewClub = false, SearchV2FilterHostTabRequestModel HostTabRequest = null, bool NewHost = false, SearchV2ClubDateTimeFilterRequestModel ClubDateTimeTabRequest = null)
+        public ActionResult Index(string prefectures, string area, string target, string scftab, string TopSearch, SearchV2FilterClubTabRequestModel ClubTabRequest = null, bool NewClub = false,
+            SearchV2FilterHostTabRequestModel HostTabRequest = null, bool NewHost = false, SearchV2ClubDateTimeFilterRequestModel ClubDateTimeTabRequest = null,
+            string ClubTabRequestString = "", string HostTabRequestString = "", string ClubDateTimeTabRequestString = "")
         {
+            if (!string.IsNullOrEmpty(ClubTabRequestString))
+            {
+                ClubTabRequest = JsonConvert.DeserializeObject<SearchV2FilterClubTabRequestModel>(ClubTabRequestString);
+            }
+            if (!string.IsNullOrEmpty(HostTabRequestString))
+            {
+                HostTabRequest = JsonConvert.DeserializeObject<SearchV2FilterHostTabRequestModel>(HostTabRequestString);
+            }
+            if (!string.IsNullOrEmpty(ClubDateTimeTabRequestString))
+            {
+                ClubDateTimeTabRequest = JsonConvert.DeserializeObject<SearchV2ClubDateTimeFilterRequestModel>(ClubDateTimeTabRequestString);
+            }
+            var url = $"/search/{prefectures}/{area}";
+            var queryParams = HttpUtility.ParseQueryString(string.Empty);
+            if (!string.IsNullOrEmpty(target))
+            {
+                queryParams["target"] = target;
+            }
+            if (!string.IsNullOrEmpty(scftab))
+            {
+                queryParams["scftab"] = scftab;
+            }
+            if (!string.IsNullOrEmpty(TopSearch))
+            {
+                queryParams["TopSearch"] = TopSearch;
+            }
+            if (ClubTabRequest != null)
+            {
+                queryParams["ClubTabRequestString"] = JsonConvert.SerializeObject(ClubTabRequest);
+            }
+            queryParams["NewClub"] = NewClub.ToString();
+            if (HostTabRequest != null)
+            {
+                queryParams["HostTabRequestString"] = JsonConvert.SerializeObject(HostTabRequest);
+            }
+            queryParams["NewHost"] = NewHost.ToString();
+            if (ClubDateTimeTabRequest != null)
+            {
+                queryParams["ClubDateTimeTabRequestString"] = JsonConvert.SerializeObject(ClubDateTimeTabRequest);
+            }
+            var queryString = queryParams.ToString();
+            if (!string.IsNullOrEmpty(queryString))
+            {
+                url += $"?{queryString}";
+                ViewBag.PostURL = url;
+            }
             ViewBag.PrefecturesArea = $"/{prefectures}/{area}";
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var locationId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, ViewBag.PrefecturesArea);
@@ -309,7 +359,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             SearchFilter = ClubTabRequest.SearchFilter,
                             ClubCategory = !string.IsNullOrEmpty(ClubTabRequest.ClubCategory) ? string.Join(",", ClubTabRequest.ClubCategory.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,
                             Price = !string.IsNullOrEmpty(ClubTabRequest.Price) ? string.Join(",", ClubTabRequest.Price.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,
-                            Shift = string.IsNullOrEmpty(ClubTabRequest.Shift) ? string.Empty : ClubTabRequest.Shift.DecryptParameter(),
+                            Shift = string.IsNullOrEmpty(ClubTabRequest.Shift) ? string.Empty : ApplicationUtilities.DecryptParameter(ClubTabRequest.Shift),
                             Time = !string.IsNullOrEmpty(ClubTabRequest.Time) ? string.Join(",", ClubTabRequest.Time.Split(',').Select(x => x.DecryptParameter()).Where(x => x != null)).Trim(',')
                                : string.Empty,
                             ClubAvailability = !string.IsNullOrEmpty(ClubTabRequest.ClubAvailability) ? string.Join(",", ClubTabRequest.ClubAvailability.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,

@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Club";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var PostURL = ViewBag.PostURL;
 }
 <style>
     .preferance > input[type="checkbox"] {
@@ -252,11 +253,11 @@
                                 <!-- s/action btn -->
                                 @if (item.IsBookmarked.ToUpper() == "Y")
                                 {
-                                    <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                                    <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this, '@PostURL')"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                                 }
                                 else
                                 {
-                                    <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                                    <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this, '@PostURL')"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
                                 }
                                 <!-- e/action btn -->
                             </div>
@@ -347,7 +348,7 @@
                             </div>
                             <!-- e/club status -->
                             <!-- s/reservation btn -->
-                            <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
+                            <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId', '','','@PostURL')">
                                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
                                 @* 今すぐ予約する*@
                             </button>

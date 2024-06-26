@@ -3,6 +3,7 @@
     var TypeValue = ViewBag.TypeValue?.ToString();
     ViewBag.Title = $"{TypeValue}からホストクラブを探す(★★★件)‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var PostURL = ViewBag.PostURL;
 }
 <style>
     input[type=radio]:checked + label {
@@ -238,7 +239,7 @@
                     }
                 }
             </div>
-            <button class="btn-gradient text-[14px] font-semibold tracking-[0.56px] leading-[21px]" onclick="InitiateClubReservationFunction('@item.ClubId')">
+            <button class="btn-gradient text-[14px] font-semibold tracking-[0.56px] leading-[21px]" onclick="InitiateClubReservationFunction('@item.ClubId', '','','@PostURL')">
                 今すぐ予約する
             </button>
         </div>

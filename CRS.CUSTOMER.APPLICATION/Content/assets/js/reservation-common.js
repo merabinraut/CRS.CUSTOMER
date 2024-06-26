@@ -1,4 +1,4 @@
-﻿function InitiateClubReservationFunction(ClubId, SelectedDate = "", SelectedHost = "") {
+﻿function InitiateClubReservationFunction(ClubId, SelectedDate = "", SelectedHost = "", PostData = "") {
     EnableLoaderFunction();
     document.body.classList.add('body-no-scroll');
     if (document.getElementById('club-bottom-tab-id')) {
@@ -16,7 +16,7 @@
             SelectedHost
         },
         success: function (data) {
-            CheckIfHasRedirectURL(data);
+            CheckIfHasRedirectURL(data, PostData);
             $("#stickey_id").css("display", "none")
             if (!data || data.Code !== 0) {
                 toastr.info(data?.Message);

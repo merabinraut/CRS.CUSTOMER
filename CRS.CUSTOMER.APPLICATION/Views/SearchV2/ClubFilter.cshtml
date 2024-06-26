@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var LocationId = !string.IsNullOrEmpty(ViewBag.LocationId) ? ViewBag.LocationId : (Model.FilteredClubModel != null && Model.FilteredClubModel.Count > 0) ? Model.FilteredClubModel[0].ClubLocationId : string.Empty;
     var target = ViewBag.target;
+    var PostURL = ViewBag.PostURL;
 }
 
 @if (!string.IsNullOrEmpty(target))
@@ -153,14 +154,14 @@
                             @if (!string.IsNullOrEmpty(item.IsBookmarked.ToUpper()) && item.IsBookmarked.ToUpper() == "Y")
                             {
                                 <div class="action_keep"
-                                     onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)">
+                                     onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this, '@PostURL')">
                                     <img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg">
                                 </div>
                             }
                             else
                             {
                                 <div class="action_keep"
-                                     onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)">
+                                     onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this, '@PostURL')">
                                     <img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg">
                                 </div>
                             }
@@ -264,7 +265,7 @@
                         </div>
                         <!-- e/club status -->
                         <!-- s/reservation btn -->
-                        <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
+                        <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId', '','','@PostURL')">
                             @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
                             @* 今すぐ予約する*@
                         </button>

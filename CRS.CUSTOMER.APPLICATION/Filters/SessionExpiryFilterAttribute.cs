@@ -73,6 +73,10 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                                 queryString = queryString.Substring(1);
                             var dynamicParameters = queryString;
                             var ReturnURL = HttpContext.Current.Request.UrlReferrer?.PathAndQuery;
+                            if (ReturnURL.Contains("/search/"))
+                            {
+                                ReturnURL = "/";
+                            }
                             if (string.IsNullOrEmpty(ReturnURL) || ReturnURL.Trim() == "/")
                                 ReturnURL = "/";
                             if (!string.IsNullOrEmpty(FunctionName.AdditionalValue))
