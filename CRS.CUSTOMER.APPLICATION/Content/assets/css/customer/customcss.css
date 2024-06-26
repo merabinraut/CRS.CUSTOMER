@@ -661,7 +661,7 @@ align-items: center;
         height: 154px;
         border-radius: 2px;
         overflow: hidden;
-        object-fit: fill;
+        /*object-fit: fill;*/
         width: 100%;
     }
 
