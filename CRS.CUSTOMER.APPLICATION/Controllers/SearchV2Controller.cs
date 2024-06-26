@@ -180,16 +180,19 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Response.HostRecommendationModel.Add(new DashboardV2HostDetailModel
                         {
-                            ClubId = item.ClubId.EncryptParameter(),
+                            ClubId = ApplicationUtilities.EncryptParameter(item.ClubId),
                             ClubNameEnglish = item.ClubNameEnglish,
                             ClubNameJapanese = item.ClubNameJapanese,
                             ClubLogo = ImageHelper.ProcessedImage(item.ClubLogo),
-                            HostId = item.HostId.EncryptParameter(),
+                            HostId = ApplicationUtilities.EncryptParameter(item.HostId),
                             HostNameEnglish = item.HostName,
                             HostNameJapanese = item.HostNameJapanese,
                             HostLogo = ImageHelper.ProcessedImage(item.HostImage),
-                            ClubLocationId = item.LocationId.EncryptParameter(),
-                            IsBookmarked = item.IsBookmarked
+                            ClubLocationId = ApplicationUtilities.EncryptParameter(item.LocationId),
+                            IsBookmarked = item.IsBookmarked,
+                            HostCode = item.HostCode,
+                            LocationURL = item.LocationURL,
+                            ClubCode = item.ClubCode
                         });
                     }
                     if (NewHost)
@@ -297,7 +300,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             HostNameJapanese = item.HostNameJapanese,
                             HostLogo = ImageHelper.ProcessedImage(item.HostImage),
                             ClubLocationId = ApplicationUtilities.EncryptParameter(item.LocationId),
-                            IsBookmarked = item.IsBookmarked
+                            IsBookmarked = item.IsBookmarked,
+                            HostCode = item.HostCode,
+                            LocationURL = item.LocationURL,
+                            ClubCode = item.ClubCode
                         });
                     }
                     if (NewHost)

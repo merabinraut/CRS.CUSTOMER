@@ -362,7 +362,7 @@
                         <div class="h-auto flex flex-col justify-end  text-center relative rounded-sm">
                             <div class="w-full relative">
                                 @*<a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">*@
-                                <a class="" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@ViewBag.PrefecturesArea');">
+                                <a class="" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@ViewBag.LocationId');">
                                     @if (!string.IsNullOrEmpty(item.HostImage))
                                     {
                                         <img class="w-full h-[157px]  object-cover rounded-sm" src="@item.HostImage" />
