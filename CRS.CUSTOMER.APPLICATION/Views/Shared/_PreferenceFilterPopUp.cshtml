@@ -444,7 +444,7 @@
                                             <div class="grid grid-cols-3 gap-2">
                                                 @foreach (var item in Model.ClubModel)
                                                 {
-                                                    <a href="#">
+                                                    <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
                                                         <div class="new-host-card">
                                                             <div class="image">
                                                                 <img src="@item.ClubLogo" alt="club-logo" />
@@ -491,7 +491,7 @@
                                                     foreach (var item in Model.HostModel)
                                                     {
                                                         var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
-                                                        <div class="hosts-that-match-you @activeClass">
+                                                        <div class="hosts-that-match-you @activeClass" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                                                             <img src="@item.HostLogo" alt="host-logo" />
                                                             @if (item.IsBookmarked.ToUpper() == "Y")
                                                             {

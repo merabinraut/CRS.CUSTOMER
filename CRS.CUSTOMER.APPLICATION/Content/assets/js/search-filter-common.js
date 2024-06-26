@@ -1005,23 +1005,35 @@ function SubmitDateTimeFilterFunction() {
 //#endregion
 
 function NewClubRenderFunction() {
+    debugger;
     EnableLoaderFunction();
     let locationId = $('#filter-location-id').val();
     if (!locationId || locationId.trim() === '') {
         locationId = $('#current-location-id').val();
     }
     $('.location-class').val(locationId);
-    window.location.href = `/Search${locationId}/?scftab=03&NewClub=${true}`;
-    //window.location.href = `/Search/ClubSearchResult?LocationId=${locationId}&NewClub=${true}`;
+    var searchUrl = `/Search${locationId}/?target=new&NewClub=${true}`;
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = searchUrl;
+    document.body.appendChild(form);
+    form.submit();
+    DisableLoaderFunction();
 }
 
 function NewHostRenderFunction() {
+    debugger;
     EnableLoaderFunction();
     let locationId = $('#filter-location-id').val();
     if (!locationId || locationId.trim() === '') {
         locationId = $('#current-location-id').val();
     }
     $('.location-class').val(locationId);
-    window.location.href = `/Search${locationId}/?scftab=03&NewHost=${true}`;
-    //window.location.href = `/Search/HostSearchResult?LocationId=${locationId}&NewHost=${true}`;
+    var searchUrl = `/Search${locationId}/?target=new&NewHost=${true}`;
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = searchUrl;
+    document.body.appendChild(form);
+    form.submit();
+    DisableLoaderFunction();
 }
