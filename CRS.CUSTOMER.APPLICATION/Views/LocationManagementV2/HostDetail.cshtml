@@ -153,7 +153,7 @@
         </div>
     </div>
     <!-- favourite icon -->
-    @if (Model.IsBookmarked.ToUpper() == "N")
+    @if (!string.IsNullOrEmpty(Model.IsBookmarked) && Model.IsBookmarked.ToUpper() == "N")
     {
         <div class="absolute  right-3" style="bottom: -1.75rem; z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
             <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height: 59px; width: 60px; z-index: 1" />

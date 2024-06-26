@@ -129,7 +129,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         if (!ResponseModel.HostLine.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) ResponseModel.HostLine = "https://" + ResponseModel.HostLine;
                     }
-                    for (int i = 0; i < ResponseModel.HostGalleryImageList.Count; i++) ResponseModel.HostGalleryImageList[i] = ImageHelper.ProcessedImage(ResponseModel.HostGalleryImageList[i]);
+                    if (ResponseModel.HostGalleryImageList != null && ResponseModel.HostGalleryImageList.Count > 0)
+                    {
+                        for (int i = 0; i < ResponseModel.HostGalleryImageList.Count; i++) ResponseModel.HostGalleryImageList[i] = ImageHelper.ProcessedImage(ResponseModel.HostGalleryImageList[i]);
+                    }
                     ResponseModel.HostIdentityDetailsModel.ForEach(x => x.Label = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.LabelEnglish : x.LabelJapanese);
                     return View("HostDetail", ResponseModel);
                 }
