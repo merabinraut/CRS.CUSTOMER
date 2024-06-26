@@ -1005,7 +1005,6 @@ function SubmitDateTimeFilterFunction() {
 //#endregion
 
 function NewClubRenderFunction() {
-    debugger;
     EnableLoaderFunction();
     let locationId = $('#filter-location-id').val();
     if (!locationId || locationId.trim() === '') {
@@ -1022,7 +1021,6 @@ function NewClubRenderFunction() {
 }
 
 function NewHostRenderFunction() {
-    debugger;
     EnableLoaderFunction();
     let locationId = $('#filter-location-id').val();
     if (!locationId || locationId.trim() === '') {
