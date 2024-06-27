@@ -1935,3 +1935,6 @@ p.club_pr {
     font-weight: bold;
     display: inline-flex;
 }
+img{
+    object-fit:cover !important
+}
