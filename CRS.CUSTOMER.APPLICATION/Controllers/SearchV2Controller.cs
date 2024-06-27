@@ -24,6 +24,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     {
         private readonly Dictionary<string, string> _locationHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Location");
         private readonly Dictionary<string, string> _sceneHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Scene");
+        private readonly Dictionary<string, string> _locationJapaneseLabelHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "LocationJapaneseLabel");
         private readonly ISearchFilterManagementBusiness _searchBusinessOld;
         private readonly ISearchBusiness _searchBusiness;
         private readonly ICommonManagementBusiness _commonBusiness;
@@ -41,6 +42,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult Index(string prefectures, string area, string target)
         {
             ViewBag.PrefecturesArea = $"/{prefectures}/{area}";
+            var LocationJapaneseLabel = ApplicationUtilities.GetKeyValueFromDictionary(_locationJapaneseLabelHelper, ViewBag.PrefecturesArea);
+            ViewBag.LocationJapaneseLabel = string.IsNullOrEmpty(LocationJapaneseLabel) ? ViewBag.PrefecturesArea : LocationJapaneseLabel;
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var locationId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, ViewBag.PrefecturesArea);
             var Response = new SearchV2FilterRequestModel();
@@ -120,6 +123,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             SearchV2FilterHostTabRequestModel HostTabRequest = null, bool NewHost = false, SearchV2ClubDateTimeFilterRequestModel ClubDateTimeTabRequest = null,
             string ClubTabRequestString = "", string HostTabRequestString = "", string ClubDateTimeTabRequestString = "")
         {
+            ViewBag.PrefecturesArea = $"/{prefectures}/{area}";
+            var LocationJapaneseLabel = ApplicationUtilities.GetKeyValueFromDictionary(_locationJapaneseLabelHelper, ViewBag.PrefecturesArea);
+            ViewBag.LocationJapaneseLabel = string.IsNullOrEmpty(LocationJapaneseLabel) ? ViewBag.PrefecturesArea : LocationJapaneseLabel;
             if (!string.IsNullOrEmpty(ClubTabRequestString))
             {
                 ClubTabRequest = JsonConvert.DeserializeObject<SearchV2FilterClubTabRequestModel>(ClubTabRequestString);
@@ -166,7 +172,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 url += $"?{queryString}";
                 ViewBag.PostURL = url;
             }
-            ViewBag.PrefecturesArea = $"/{prefectures}/{area}";
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var locationId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, ViewBag.PrefecturesArea);
             if (!string.IsNullOrEmpty(target) || (!string.IsNullOrEmpty(target) && NewHost) || (!string.IsNullOrEmpty(target) || NewClub))
