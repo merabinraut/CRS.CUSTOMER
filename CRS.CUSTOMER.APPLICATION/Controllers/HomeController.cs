@@ -266,6 +266,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
                 ViewBag.NickName = Model.NickName;
+                ViewBag.NickName1 = Model.NickName.EncryptParameter();
                 var dbResponse = _buss.SetRegistrationPassword(Common);
                 if (dbResponse.Code == 0)
                 {
@@ -275,7 +276,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return Redirect("/user/register/complete");
+                    //return Redirect("/user/register/complete");
+                    return Redirect("/user/remind/complete?nickname=" + ViewBag.NickName1);
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -664,6 +666,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
                 ViewBag.NickName = Model.NickName;
+                ViewBag.NickName1 = Model.NickName.EncryptParameter();
                 if (!string.IsNullOrEmpty(Convert.ToString(TempData["returnURLAfterReset"])))
                 {
 
@@ -680,7 +683,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         this.ClearSessionData();
                         return RedirectToAction("Index", "Home", new { ReturnURL = returnurl });
                     }
-                    return Redirect("/user/remind/complete");
+                    //return Redirect("/user/remind/complete?nickname ='" + ViewBag.NickName + "'");
+                    return Redirect("/user/remind/complete?nickname=" + ViewBag.NickName1);
                 }
                 TempData["ForgetPWErrorMessage"] = dbResponse.Message ?? "Failed";
                 return View(Model);
@@ -702,8 +706,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet, Route("user/remind/complete"), OverrideActionFilters]
-        public ActionResult ForgotPasswordSuccessView()
+        public ActionResult ForgotPasswordSuccessView(string nickname)
         {
+            ViewBag.NickName = nickname.DecryptParameter();
             return View();
         }
         #endregion
