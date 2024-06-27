@@ -257,7 +257,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 dynamic mappedItem = new System.Dynamic.ExpandoObject();
                 if (!string.IsNullOrEmpty(CurrentUrl))
                 {
-                    CurrentUrl = $"{item.LocationURL}/hostclub/{item.ClubCode}/";
+                    CurrentUrl = $"/area{item.LocationURL}/hostclub/{item.ClubCode}/";
                     mappedItem.URL = CurrentUrl.ToString();
                     //if (!CurrentUrl.Contains("/LocationManagement/ClubDetail_V2"))
                     //    CurrentUrl += "/LocationManagement/ClubDetail_V2";

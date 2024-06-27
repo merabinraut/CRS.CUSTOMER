@@ -24,8 +24,12 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
                 string encryptedValue = ApplicationUtilities.EncryptParameter(paramValue);
                 encryptedQueryString += $"{paramName}={encryptedValue}&";
             }
-            string encryptedUrl = url.Replace(queryString, encryptedQueryString.TrimEnd('&'));
-            return encryptedUrl;
+            if (!string.IsNullOrEmpty(queryString) && !string.IsNullOrEmpty(encryptedQueryString))
+            {
+                string encryptedUrl = url.Replace(queryString, encryptedQueryString.TrimEnd('&'));
+                return encryptedUrl;
+            }
+            return url;
         }
     }
 }
