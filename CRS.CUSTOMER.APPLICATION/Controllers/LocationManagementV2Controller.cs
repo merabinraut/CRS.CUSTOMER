@@ -171,6 +171,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 responseModel.LocationId = responseModel.LocationId.EncryptParameter();
                 responseModel.ClubCoverPhoto = ImageHelper.ProcessedImage(responseModel.ClubCoverPhoto);
                 responseModel.ClubLogo = ImageHelper.ProcessedImage(responseModel.ClubLogo);
+                if (!string.IsNullOrEmpty(responseModel.LocationURL) && responseModel.LocationURL != "#")
+                {
+                    if (!responseModel.LocationURL.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.LocationURL = "https://" + responseModel.LocationURL;
+                }
                 var cId = clubDetailResp.ClubId;
                 ViewBag.target = target;
                 var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);

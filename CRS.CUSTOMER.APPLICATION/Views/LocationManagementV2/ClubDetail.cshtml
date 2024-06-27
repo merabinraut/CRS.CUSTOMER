@@ -1788,13 +1788,13 @@
 {
     <script src="~/Content/CustomHelper.js"></script>
     <script>
-        var isFirstTimeLoad = true;
+        //var isFirstTimeLoad = false;
         $(document).ready(function () {
             $('#tab1Button, #tab2Button, #tab3Button, #tab4Button, #tab5Button, #tab6Button').click(function () {
-                if (isFirstTimeLoad) {
-                    isFirstTimeLoad = false;
-                    return false;
-                }
+                //if (isFirstTimeLoad) {
+                //    isFirstTimeLoad = false;
+                //    return false;
+                //}
 
                 var tab = '';
                 if (this.id === 'tab2Button') tab = 'host';
