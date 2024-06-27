@@ -266,6 +266,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
                 ViewBag.NickName = Model.NickName;
+                ViewBag.NickName1 = Model.NickName.EncryptParameter();
                 var dbResponse = _buss.SetRegistrationPassword(Common);
                 if (dbResponse.Code == 0)
                 {
@@ -275,7 +276,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return Redirect("/user/register/complete");
+                    //return Redirect("/user/register/complete");
+                    return Redirect("/user/remind/complete?nickname=" + ViewBag.NickName1);
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -327,8 +329,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else this.ClearSessionData();
                 LoginRequestModel Response = new LoginRequestModel();
-                
-                
+
+
                 if (phaseValue.ToUpper() == "DEVELOPMENT")
                 {
                     Response.affiliateURL = "http://43.207.72.221:93/";
@@ -341,7 +343,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
-                
+
                 return View(Response);
             }
             else return Redirect("/");
@@ -373,8 +375,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Expires = DateTime.Now.AddMonths(-1)
                     });
                 }
-                string IsPasswordForceful =Convert.ToString( Session["IsPasswordForceful"]);
-                if(!string.IsNullOrEmpty(IsPasswordForceful) && IsPasswordForceful=="Y")
+                string IsPasswordForceful = Convert.ToString(Session["IsPasswordForceful"]);
+                if (!string.IsNullOrEmpty(IsPasswordForceful) && IsPasswordForceful == "Y")
                     return RedirectToAction("SetNewPasswordV2", "Home", new { AgentId = Session["AgentId"], MobileNumber = Session["MobileNumber"], UserID = Session["UserId"], NickName = Session["Username"], ReturnUrl = ReturnURL });
 
                 if (loginResponse.Item2)
@@ -382,7 +384,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         return Redirect(ReturnURL);
 
                 //return Redirect(loginResponse.Item1,new { ReturnURL });
-                return Redirect(loginResponse.Item1 + "?ReturnURL=" +  Uri.EscapeDataString(ReturnURL));
+                return Redirect(loginResponse.Item1 + "?ReturnURL=" + Uri.EscapeDataString(ReturnURL));
 
             }
             else
@@ -662,9 +664,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
                 ViewBag.NickName = Model.NickName;
-                if (!string.IsNullOrEmpty(Convert.ToString( TempData["returnURLAfterReset"])))
+                ViewBag.NickName1 = Model.NickName.EncryptParameter();
+                if (!string.IsNullOrEmpty(Convert.ToString(TempData["returnURLAfterReset"])))
                 {
-                    
+
                     Model.IsPasswordForceful = "N";
                 }
                 Common.IsPasswordForceful = Model.IsPasswordForceful;
@@ -678,7 +681,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         this.ClearSessionData();
                         return RedirectToAction("Index", "Home", new { ReturnURL = returnurl });
                     }
-                    return Redirect("/user/remind/complete");
+                    //return Redirect("/user/remind/complete?nickname ='" + ViewBag.NickName + "'");
+                    return Redirect("/user/remind/complete?nickname=" + ViewBag.NickName1);
                 }
                 TempData["ForgetPWErrorMessage"] = dbResponse.Message ?? "Failed";
                 return View(Model);
@@ -700,8 +704,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet, Route("user/remind/complete"), OverrideActionFilters]
-        public ActionResult ForgotPasswordSuccessView()
+        public ActionResult ForgotPasswordSuccessView(string nickname)
         {
+            ViewBag.NickName = nickname.DecryptParameter();
             return View();
         }
         #endregion

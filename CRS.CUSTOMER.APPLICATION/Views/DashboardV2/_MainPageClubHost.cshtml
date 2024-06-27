@@ -184,8 +184,8 @@
         display: block;
         float: left;
         border-bottom: 1px solid #efefef;
-     /*   background: #fcfcfc;*/
-     background:#fff;
+        /*   background: #fcfcfc;*/
+        background: #fff;
     }
 
         .club_content:first-child {
@@ -525,9 +525,9 @@
                         @if (!string.IsNullOrEmpty(@item.Tag2))
                         {
                             <!-- s/tag -->
-                    <li class="tag_rank">
-                        ランク @item.Tag2
-                    </li>
+                            <li class="tag_rank">
+                                ランク @item.Tag2
+                            </li>
                         }
                         <!-- e/tag -->
                         <!-- s/tag -->
@@ -574,7 +574,7 @@
                         }
                         else
                         {
-                            <div class="action_keep"  onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                            <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
                         }
                         <!-- e/action btn -->
                     </div>
@@ -749,9 +749,10 @@
                     </p>
 
                     <p>誕生日 :<span> @item.FormattedDOB</span> </p>
-
-                    <p>身長 :<span> @item.HostHeight</span> </p>
-
+                    @if (!string.IsNullOrEmpty(item.HostHeight))
+                    {
+                        <p>身長 :<span> @item.HostHeight</span> </p>
+                    }
                     <p>血液型 :<span> @item.HostBloodType</span> </p>
 
                     <p>星座 :<span> @item.HostConstellationGroup</span> </p>
