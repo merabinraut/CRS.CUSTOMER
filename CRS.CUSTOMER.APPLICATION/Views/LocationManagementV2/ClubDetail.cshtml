@@ -2,8 +2,9 @@
 @model CRS.CUSTOMER.APPLICATION.Models.LocationManagementV2.ClubDetailModel
 @{
     var PrefecturesArea = ViewBag.LocationId;
+    var ClubId = ViewBag.ClubId;
     string[] PrefecturesAreaPart = PrefecturesArea.Split('/');
-    ViewBag.Title = $"club([ruby])‖{PrefecturesAreaPart[2]}({PrefecturesAreaPart[1]})のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》";
+    ViewBag.Title = $"club({ClubId})‖{PrefecturesAreaPart[2]}({PrefecturesAreaPart[1]})のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》";
     Layout = "~/Views/Shared/_Layout.cshtml";
     DateTime todayDate = DateTime.Now;
     string formattedDate = todayDate.ToString("yyyy年M月");
@@ -1788,13 +1789,13 @@
 {
     <script src="~/Content/CustomHelper.js"></script>
     <script>
-        //var isFirstTimeLoad = false;
-        $(document).ready(function () {
+        var isFirstTimeLoad = true;
+        $(document).ready(function (event) {
             $('#tab1Button, #tab2Button, #tab3Button, #tab4Button, #tab5Button, #tab6Button').click(function () {
-                //if (isFirstTimeLoad) {
-                //    isFirstTimeLoad = false;
-                //    return false;
-                //}
+                if (isFirstTimeLoad) {
+                    isFirstTimeLoad = false;
+                    return false;
+                }
 
                 var tab = '';
                 if (this.id === 'tab2Button') tab = 'host';
@@ -1806,6 +1807,9 @@
                 redirectToTab(tab);
                 return false;
             });
+            event.stopPropagation();
+            isFirstTimeLoad = false;
+            return false;
         });
 
         function redirectToTab(tab) {

@@ -146,7 +146,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             else
             {
-
                 var locationId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, PrefecturesArea);
                 string sFD = null;
                 if (ScheduleFilterDate != null)
