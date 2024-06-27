@@ -214,7 +214,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 NoOfPeople = NoOfPeople
             };
             Session["ReservationPage1Model"] = ReservationManagementCommonModel;
-            string redirectURL = $"/reservation?resvpg=${"01"}";
+            string redirectURL = $"/reservation?resvpg=01";
             return Redirect(redirectURL);
         }
         #endregion
@@ -254,7 +254,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 HostListModel = ResponseModel.HostListModel.MapObjects<HostListV2Model>()
             };
             Session["ReservationPage2Model"] = ReservationManagementCommonModel;
-            string redirectURL = $"/reservation?resvpg=${"02"}";
+            string redirectURL = $"/reservation?resvpg=02";
             return Redirect(redirectURL);
         }
         #endregion
@@ -321,7 +321,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 HostListModel = ResponseModel.HostListModel.MapObjects<HostListV2Model>()
             };
             Session["ReservationPage3Model"] = ReservationManagementCommonModel;
-            string redirectURL = $"/reservation?resvpg=${"03"}";
+            string redirectURL = $"/reservation?resvpg=03";
             return Redirect(redirectURL);
         }
         #endregion
@@ -388,7 +388,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 BillingViewModel = ResponseModel.MapObject<BillingViewModel>()
             };
             Session["ReservationPage4Model"] = ReservationManagementCommonModel;
-            string redirectURL = $"/reservation?resvpg=${"04"}";
+            string redirectURL = $"/reservation?resvpg=04";
             return Redirect(redirectURL);
         }
         #endregion
