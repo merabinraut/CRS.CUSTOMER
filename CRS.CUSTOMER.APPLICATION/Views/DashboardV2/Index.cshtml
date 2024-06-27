@@ -831,8 +831,10 @@
                         nearestDistance = distance;
                         nearestLocation = locations[i];
                     }
-                }
-               CurrentLocationId = nearestLocation.id;
+               }
+               if (nearestLocation != null && nearestLocation != "") {
+                 CurrentLocationId = nearestLocation.id;
+               }
                $('#current-location-id').val(CurrentLocationId);
             }
             var userLocation = { lat: 0, lng: 0 }; // User's location
@@ -944,7 +946,7 @@
                                 }
                                 /*<a onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=${host.HostId}'">*/
                                 recommendedHostContentHTML += `
-                                     <a onclick="HostDetailRedirectFunction('${club.HostCode}', '${club.ClubCode}', '${host.LocationURL}')">
+                                     <a onclick="HostDetailRedirectFunction('${host.HostCode}', '${host.ClubCode}', '${host.LocationURL}')">
                                         <div class="flex hover:cursor-pointer">
                                           <div style="border-radius: 4px; width:112px" class="w-[112px] h-auto flex flex-col justify-end text-center relative">
                                             <div class="w-full flex justify-center relative">
