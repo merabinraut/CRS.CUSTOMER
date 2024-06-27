@@ -706,7 +706,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet, Route("user/remind/complete"), OverrideActionFilters]
         public ActionResult ForgotPasswordSuccessView(string nickname)
         {
-            ViewBag.NickName = nickname.DecryptParameter();
+            TempData["CallJavaScriptFunction"] = "True";
+            Session["AgentId"] = null;
+            Session["Username"] = null;
+            Session["HasLandingSession"] = null;
+            ViewBag.NickName = !string.IsNullOrEmpty(nickname) ? nickname.DecryptParameter() : "";
             return View();
         }
         #endregion
