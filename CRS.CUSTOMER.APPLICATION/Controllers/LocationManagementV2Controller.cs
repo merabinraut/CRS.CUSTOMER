@@ -146,6 +146,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             else
             {
+
                 var locationId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, PrefecturesArea);
                 string sFD = null;
                 if (ScheduleFilterDate != null)
@@ -175,6 +176,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     if (!responseModel.LocationURL.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.LocationURL = "https://" + responseModel.LocationURL;
                 }
+                responseModel.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
                 var cId = clubDetailResp.ClubId;
                 ViewBag.target = target;
                 var dbBasicInfoResponse = _business.GetClubBasicInformation(cId);
@@ -271,8 +273,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 #region TAB 5
                 else if (!string.IsNullOrEmpty(target) && target.Trim() == "schedule")
                 {
-                    ViewBag.target = "schedule";
-                    responseModel.ClubWeeklyScheduleList.ForEach(x => x.DayLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.EnglishDay : x.JapaneseDay);
+                    ViewBag.target = "schedule";                    
                     responseModel.GetScheduleDDL = GetScheduleList();
                     var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);
                     responseModel.GetAllScheduleTabList = dbScheduleResponse.MapObjects<Models.LocationManagementV2.AllScheduleModel>();
