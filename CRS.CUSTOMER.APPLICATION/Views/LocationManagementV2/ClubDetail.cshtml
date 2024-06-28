@@ -2,9 +2,12 @@
 @model CRS.CUSTOMER.APPLICATION.Models.LocationManagementV2.ClubDetailModel
 @{
     var PrefecturesArea = ViewBag.LocationId;
+    var LocationJapaneseLabel = ViewBag.LocationJapaneseLabel;
     var ClubId = ViewBag.ClubId;
+    var ClubNameLabel = ViewBag.ClubName;
     string[] PrefecturesAreaPart = PrefecturesArea.Split('/');
-    ViewBag.Title = $"club({ClubId})‖{PrefecturesAreaPart[2]}({PrefecturesAreaPart[1]})のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》";
+    string[] PrefecturesAreaJapnesePart = LocationJapaneseLabel.Split('/');
+    ViewBag.Title = $"{ClubNameLabel}‖{PrefecturesAreaJapnesePart[0]}({PrefecturesAreaJapnesePart[1]})のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》";
     Layout = "~/Views/Shared/_Layout.cshtml";
     DateTime todayDate = DateTime.Now;
     string formattedDate = todayDate.ToString("yyyy年M月");
@@ -888,7 +891,7 @@
                                                 @if (!string.IsNullOrEmpty(item.HostImage))
                                                 {
                                                     <img src="@item.HostImage"
-                                                         class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                                                         class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@PrefecturesArea')">
                                                 }
                                                 else
                                                 {

@@ -438,6 +438,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     ViewBag.ActionPageName = "SearchFilter";
                     ViewBag.TypeValue = TopSearch;
+                    ViewBag.TotalClubCount = "0";
                     var Response = new List<Models.SearchV2.SearchFilterClubDetailModel>();
                     var dbResponse = _dashboardBusiness.GetAvailabilityClub(locationId, CustomerId, TypeValue);
                     if (dbResponse != null && dbResponse.Count > 0)
@@ -450,6 +451,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
                             x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
                         });
+                        ViewBag.TotalClubCount = Response?.FirstOrDefault()?.TotalClubCount;
                     }
                     return View("Preference", Response);
                 }

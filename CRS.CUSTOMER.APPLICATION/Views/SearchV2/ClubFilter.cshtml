@@ -1,6 +1,6 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchV2FilterClubTabResponseModel
 @{
-    ViewBag.Title = "Club";
+    ViewBag.Title = "検索フィルター‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var LocationId = !string.IsNullOrEmpty(ViewBag.LocationId) ? ViewBag.LocationId : (Model.FilteredClubModel != null && Model.FilteredClubModel.Count > 0) ? Model.FilteredClubModel[0].ClubLocationId : string.Empty;
     var target = ViewBag.target;
