@@ -354,6 +354,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 #endregion
                 #endregion
                 ViewBag.ActionPageName = "ClubHostDetailNavMenu";
+                ViewBag.BackButtonURL = "/";
                 ViewBag.FileLocationPath = "";
                 ViewBag.SFilterDate = ScheduleFilterDate;
                 ViewBag.ClubId = ClubId;
