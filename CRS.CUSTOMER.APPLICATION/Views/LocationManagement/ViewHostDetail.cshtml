@@ -81,7 +81,7 @@
     .owl-carousel .owl-item img {
         display: block;
         width: 100%;
-       /* object-fit: fill !important;*/
+        /* object-fit: fill !important;*/
     }
 
     /*
@@ -447,13 +447,13 @@
             @if (!string.IsNullOrEmpty(@Model.HostLiquorStrength))
             {
                 <p style="line-height: 180%;">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Strength_of_Alcohol :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostLiquorStrength</span>
+                    お酒の強さ :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostLiquorStrength</span>
                 </p>
             }
             else
             {
                 <p style="line-height: 180%;">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Strength_of_Alcohol :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span>
+                    お酒の強さ :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span>
                 </p>
             }
         </div>

@@ -595,20 +595,63 @@
                             @item.HostNameJapanese
                         }
                     </p>
+                    @if (!string.IsNullOrEmpty(item.FormattedDOB))
+                    {
+                        <p>誕生日 :<span> @item.FormattedDOB</span> </p>
+                    }
+                    else
+                    {
+                        <p>誕生日 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.HostBirthPlace))
+                    {
+                        <p>出身地 :<span> @item.HostBirthPlace</span> </p>
+                    }
+                    else
+                    {
+                        <p>出身地 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.HostBloodType))
+                    {
+                        <p>血液型 :<span> @item.HostBloodType</span> </p>
+                    }
+                    else
+                    {
+                        <p>血液型 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.HostConstellationGroup))
+                    {
+                        <p>星座 :<span> @item.HostConstellationGroup</span> </p>
+                    }
+                    else
+                    {
+                        <p>星座 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Occupation))
+                    {
+                        <p>前職 :<span> @item.Occupation</span> </p>
+                    }
+                    else
+                    {
+                        <p>前職 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
 
-                    <p>誕生日 :<span> @item.FormattedDOB</span> </p>
                     @if (!string.IsNullOrEmpty(item.HostHeight))
                     {
                         <p>身長 :<span> @item.HostHeight</span> </p>
                     }
-                    <p>血液型 :<span> @item.HostBloodType</span> </p>
-
-                    <p>星座 :<span> @item.HostConstellationGroup</span> </p>
-
-                    <p>出身地 :<span> @item.HostBirthPlace</span> </p>
-
-                    <p>前職 :<span> @item.Occupation</span> </p>
-                    <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
+                    else
+                    {
+                        <p>身長 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.LiquorStrength))
+                    {
+                        <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
+                    }
+                    else
+                    {
+                        <p>お酒の強さ :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
 
                 </div>
                 <div class="flex flex-row gap-1 items-center mb-[8px] mt-1">

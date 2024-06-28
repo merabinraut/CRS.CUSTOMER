@@ -11,9 +11,9 @@
     </form>
     <!--#region host.php-->
     <div class="pb-12">
-        <div class="text-xs text-[#333]">
-            こだわりから探す
-        </div>
+        @*<div class="text-xs text-[#333]">
+                こだわりから探す
+            </div>*@
         <div class="flex flex-col gap-[13px]">
             <div class="py-2">
                 <div class="text-sm text-[#333] font-bold mb-[13px]">
@@ -158,8 +158,7 @@
     </div>
     <!--#endregion host.php-->
 </div>
-<script>
-    var selectlocationstorehostsection = document.querySelectorAll('.select-location-store-host-section');
+<script>var selectlocationstorehostsection = document.querySelectorAll('.select-location-store-host-section');
     // Add click event listeners to each div
     selectlocationstorehostsection.forEach(function (div) {
         div.addEventListener('click', function () {
@@ -171,5 +170,4 @@
             // Add the 'bg-red' class to the clicked div
             this.classList.add('active');
         });
-    });
-</script>
+    });</script>
