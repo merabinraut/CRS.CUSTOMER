@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2010.ExcelAc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2
 {
@@ -20,6 +19,6 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2
         public string PlanRemarks { get; set; }
         public string PlanLiquor { get; set; }
         public string PlanLiquorJapanese { get; set; }
-         
+
     }
 }

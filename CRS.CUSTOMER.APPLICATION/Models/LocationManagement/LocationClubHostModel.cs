@@ -20,7 +20,9 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
     public class LocationClubListModel
     {
         public string ClubId { get; set; }
+        public string ClubCode { get; set; }
         public string LocationId { get; set; }
+        public string LocationURL { get; set; }
         public string ClubName { get; set; }
         public string ClubNameJapanese { get; set; }
         public string GroupName { get; set; }
@@ -48,8 +50,11 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
     public class LocationHostListModel
     {
         public string LocationId { get; set; }
+        public string LocationURL { get; set; }
         public string ClubId { get; set; }
+        public string ClubCode { get; set; }
         public string HostId { get; set; }
+        public string HostCode { get; set; }
         public string HostName { get; set; }
         public string Occupation { get; set; }
         public string Rank { get; set; }

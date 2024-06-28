@@ -4,6 +4,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
 {
     public class ReservationCommonModel
     {
+        public string rsvtab { get; set; }
         public List<ReservationHistoryV2Model> GetReservedList { get; set; }
         public List<VisitedHistoryModel> GetVisitedHistoryList { get; set; }
         public List<CancelledHistoryModel> GetCancelledHistoryList { get; set; }

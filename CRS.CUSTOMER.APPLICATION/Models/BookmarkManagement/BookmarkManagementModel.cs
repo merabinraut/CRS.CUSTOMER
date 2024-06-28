@@ -13,7 +13,9 @@ namespace CRS.CUSTOMER.APPLICATION.Models.BookmarkManagement
     public class BookmarkedClubModel
     {
         public string ClubId { get; set; }
+        public string ClubCode { get; set; }
         public string LocationId { get; set; }
+        public string LocationURL { get; set; }
         public string ClubName { get; set; }
         public string ClubNameJapanese { get; set; }
         public string GroupName { get; set; }
@@ -41,8 +43,11 @@ namespace CRS.CUSTOMER.APPLICATION.Models.BookmarkManagement
     public class BookmarkedHostModel
     {
         public string LocationId { get; set; }
+        public string LocationURL { get; set; }
         public string ClubId { get; set; }
+        public string ClubCode { get; set; }
         public string HostId { get; set; }
+        public string HostCode { get; set; }
         public string HostName { get; set; }
         public string PreviousOccupation { get; set; }
         public string Rank { get; set; }

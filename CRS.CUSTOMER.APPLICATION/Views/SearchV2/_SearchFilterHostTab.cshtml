@@ -1,0 +1,175 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchV2FilterHostTabModel
+<div id="tab2" class="tab-content-plane">
+    <form method="post" id="host-filter-form-id" hidden>
+        <input type="search" id="host-search" name="SearchFilter" hidden>
+        <input type="text" class="location-class" id="LocationId_2" name="LocationId" value="" hidden />
+        <input type="text" id="host-height-id" name="Height" value="" hidden />
+        <input type="text" id="host-age-id" name="Age" value="" hidden />
+        <input type="text" id="host-bloodtype-id" name="BloodType" value="" hidden />
+        <input type="text" id="host-constellationgroup-id" name="ConstellationGroup" value="" hidden />
+        <input type="text" id="host-occupation-id" name="Occupation" value="" hidden />
+    </form>
+    <!--#region host.php-->
+    <div class="pb-12">
+        <div class="text-xs text-[#333]">
+            こだわりから探す
+        </div>
+        <div class="flex flex-col gap-[13px]">
+            <div class="py-2">
+                <div class="text-sm text-[#333] font-bold mb-[13px]">
+                    エリアから探す
+                </div>
+                <div class="flex flex-col mt-[8px] gap-[13px]">
+                    @foreach (var item in Model.LocationModel)
+                    {
+                        var Label = item.StaticLabel.Split('/');
+                        var activeClass = (!string.IsNullOrEmpty(ViewBag.PrefecturesArea) && item.StaticValue.Trim() == ViewBag.PrefecturesArea) ? "active" : string.Empty;
+                        <div class="select-location-store-host-section select-loaction-host text-[#333] text-sm @activeClass" id="host-location-id">
+                            <div class="square">
+                            </div>
+                            <div class="flex gap-1">
+                                <div class="locationValue font-bold" data-info="@item.StaticValue" data-info-2="@Label[0]">@Label[0]/</div>
+                                <span>@Label[1]</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- 身長を選ぶ -->
+            <div class="">
+                <div class="text-sm text-[#333] font-bold mb-2">
+                    身長を選ぶ
+                </div>
+                <form class="search-field-selection">
+                    <div class="flex flex-col   w-full ">
+                        <div class="flex flex-row flex-wrap  gap-[16px]">
+                            @foreach (var item in Model.HeightModel)
+                            {
+                                <div class="preferance">
+                                    <input type="checkbox" id="HeightModel_@item.StaticValue" name="choose-your-height" class="host-height" value="@item.StaticValue">
+                                    <label for="HeightModel_@item.StaticValue">@item.StaticLabel</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="">
+                <div class="text-sm text-[#333] font-bold mb-2">
+                    年齢を選ぶ
+                </div>
+                <form class="search-field-selection">
+                    <div class="flex flex-col   w-full ">
+                        <div class="flex flex-row flex-wrap gap-[16px]">
+                            @foreach (var item in Model.AgeModel)
+                            {
+                                <div class="preferance">
+                                    <input type="checkbox" id="AgeModel_@item.StaticValue" name="select-age" class="host-age" value="@item.StaticValue">
+                                    <label class="w-[64px]" for="AgeModel_@item.StaticValue">@item.StaticLabel</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="">
+                <div class="text-sm text-[#333] font-bold mb-2">
+                    血液型を選ぶ
+                </div>
+                <form class="search-field-selection">
+                    <div class="flex flex-col   w-full ">
+                        <div class="flex flex-row flex-wrap gap-[16px]">
+                            @foreach (var item in Model.BloodTypeModel)
+                            {
+                                <div class="preferance">
+                                    <input type="checkbox" id="BloodTypeModel_@item.StaticValue" name="choose-blood-type" class="host-blood-type" value="@item.StaticValue">
+                                    <label class="w-[64px]" for="BloodTypeModel_@item.StaticValue">@item.StaticLabel</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="">
+                <div class="text-sm text-[#333] font-bold mb-2">
+                    星座を選ぶ
+                </div>
+                <form class="search-field-selection">
+                    <div class="flex flex-col   w-full ">
+                        <div class="flex flex-row flex-wrap gap-[24px]">
+                            @{
+                                var ConstellationImage = "/Content/assets/images/customer/Constellation/";
+                                foreach (var item in ViewBag.HostConstellationGroup as List<CRS.CUSTOMER.SHARED.StaticDataCommon>)
+                                {
+                                    ConstellationImage = "/Content/assets/images/customer/Constellation/" + item.ExtraData1.ToString().ToLower() + ".svg";
+                                    <div class="preferance">
+                                        <input type="checkbox" id="zodiac_@item.Value" name="hostConstellationGroup" class="host-constellation-group-class" value="@item.Value">
+                                        <label class="w-[92px] gap-[6px]" for="zodiac_@item.Value">
+                                            @item.Text
+                                            <img class="h-[3px] w-[3px] object-fill  rounded-full "
+                                                 src="@ConstellationImage" alt="img">
+                                        </label>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="">
+                <div class="text-sm text-[#333] font-bold mb-2">
+                    前職を選ぶ
+                </div>
+                <div class="input-field-common">
+                    <select id="host-occupation-ddl-id" style="width: 100%;" class="text-[#B7B7B7] h-[44px]">
+                        @foreach (var item in Model.OccupationModel)
+                        {
+                            if (!string.IsNullOrEmpty(item.StaticValue) && item.StaticValue.Trim() == "0")
+                            {
+                                <option value="@item.StaticValue" selected>
+                                    @item.StaticLabel
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@item.StaticValue">
+                                    @item.StaticLabel
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="flex gap-4 py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
+        <button class="btn bg-[#E4E4E4] " onclick="ClearFunction();">
+            条件をクリア
+        </button>
+        <button class="btn btn-primary" onclick="HostFilterSubmitButton();">
+
+            <a class="h-full w-full">
+                検索する
+            </a>
+        </button>
+    </div>
+    <!--#endregion host.php-->
+</div>
+<script>
+    var selectlocationstorehostsection = document.querySelectorAll('.select-location-store-host-section');
+    // Add click event listeners to each div
+    selectlocationstorehostsection.forEach(function (div) {
+        div.addEventListener('click', function () {
+            // Remove the 'bg-red' class from all selectlocationstorehostsection
+            selectlocationstorehostsection.forEach(function (d) {
+                d.classList.remove('active');
+
+            });
+            // Add the 'bg-red' class to the clicked div
+            this.classList.add('active');
+        });
+    });
+</script>

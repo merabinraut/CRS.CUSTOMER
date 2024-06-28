@@ -68,11 +68,13 @@
             border-radius: 8px;
         }
 
-        /* .modal-content {
+        .modal-content-logout {
             max-width: 100%;
             width: 312px;
             background: #fff;
-        }*/
+            padding: 16px;
+            border-radius: 4px
+        }
 
         .log-outButton {
             border-radius: 8px;
@@ -465,20 +467,20 @@
                         <!--#region need to uncomment-->
                         <!--  <div class="footer-link text-white grid grid-cols-2 ">
                         <!--      <div class="grid gap-[8px]">
-                        <!--          <a href="@Url.Action("operatingcompany","Footer")" class="text-xs">
+                        <!--          <a href="/company" class="text-xs">
                         <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
                         <!--              運営会社
                         <!--          </a>
-                        <!--          <a href="@Url.Action("faq","Footer")" class="text-xs">
+                        <!--          <a href="/faq" class="text-xs">
                         <!--              よくあるご質問
                         <!--              @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan*@
                         <!--          </a>
-                        <!--          <a href="@Url.Action("inquery","Footer")" class="text-xs">
+                        <!--          <a href="/support" class="text-xs">
                         <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide*@
                         <!--              お問い合わせ
                         <!--          </a>
                         <!--
-                        <!--          @* <a href="@Url.Action("faq","Footer")" class="text-xs">
+                        <!--          @* <a href="/faq" class="text-xs">
                         <!--                  @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
                         <!--              </a>*@
                         <!--      </div>
@@ -488,15 +490,15 @@
                         <!--          @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry*@
                         <!--          <!--新規会員登録(無料)
                         <!--          </a>-->
-                        <!--          <!--<a href="@Url.Action("operatingcompany","Footer")" class="text-xs">-->
+                        <!--          <!--<a href="/company" class="text-xs">-->
                         <!--          @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
                         <!--          <!--運営会社
                         <!--          </a>-->
-                        <!--          <a href="@Url.Action("privacypolicy","Footer")" class="text-xs">
+                        <!--          <a href="/policy" class="text-xs">
                         <!--              プライバシーポリシー
                         <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy*@
                         <!--          </a>
-                        <!--          <a href="@Url.Action("termsAndCondition","Footer")" class="text-xs">
+                        <!--          <a href="/rule" class="text-xs">
                         <!--              @* terms and condition*@
                         <!--              ホスログ利用規約
                         <!--          </a>
@@ -537,8 +539,8 @@
 
 
 
-    <div id="modal2" class="modal modalWrapper bg-[#fff] " style="display:none; border-radius:12px; z-index:10000;">
-        <div class="modal-content flex gap-[24px] flex-col">
+    <div id="modal2" class="modal modalWrapper bg-[#fff] w-[132px]" style="display:none; border-radius:12px; z-index:10000;">
+        <div class="modal-content-logout flex gap-[24px] flex-col">
             <div class="font-normal text-[16px] text-[#1A1C1E]">
                 ログアウトしてもよろしいですか？
             </div>
@@ -563,8 +565,88 @@
                 minimumResultsForSearch: Infinity
             });
             setInterval(NotificationFunction, 20000);
-            CheckIfHasRedirectFunction();
+            // Get current URL
+            var currentUrl = window.location.href;
+            // Parse query string from current URL
+            var QueryData = ParseQueryString(currentUrl);
+            var PostURL = QueryData['PostURL'];
+            if (PostURL) {
+                var IsRedirectURL = QueryData['IsRedirectURL'];
+                var FunctionName = QueryData['FunctionName'];
+                var ClubId = QueryData['ClubId'];
+                var SelectedDate = QueryData['SelectedDate'];
+                var SelectedHost = QueryData['SelectedHost'];
+                var hostId = QueryData['hostId'];
+                var agentType = QueryData['agentType'];
+                var dynamicParams = {};
+
+                // Iterate over QueryData to populate dynamicParams
+                Object.keys(QueryData).forEach(key => {
+                    // Exclude 'PostURL' from dynamicParams
+                    if (key !== 'PostURL') {
+                        dynamicParams[key] = QueryData[key];
+                    }
+                });
+
+                // Create a form element
+                var form = document.createElement('form');
+                form.method = 'POST';
+                var actionURL = new URL(PostURL, window.location.origin);
+                if (IsRedirectURL) {
+                    actionURL.searchParams.append('IsRedirectURL', IsRedirectURL);
+                }
+                if (FunctionName) {
+                    actionURL.searchParams.append('FunctionName', FunctionName);
+                }
+
+                if (ClubId) {
+                    actionURL.searchParams.append('ClubId', ClubId);
+                }
+
+                if (SelectedDate) {
+                    actionURL.searchParams.append('SelectedDate', SelectedDate);
+                }
+
+                if (SelectedHost) {
+                    actionURL.searchParams.append('SelectedHost', SelectedHost);
+                }
+
+                if (hostId) {
+                    actionURL.searchParams.append('hostId', hostId);
+                }
+
+                if (agentType) {
+                    actionURL.searchParams.append('agentType', agentType);
+                }
+                form.action = actionURL.toString();
+
+                // Append dynamicParams as hidden form inputs
+                Object.keys(dynamicParams).forEach(key => {
+                    var input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = dynamicParams[key];
+                    form.appendChild(input);
+                });
+
+                // Append the form to the document body and submit it
+                document.body.appendChild(form);
+                form.submit();
+            }
+            else {
+                CheckIfHasRedirectFunction();
+            }
         });
+
+        function ParseQueryString(url) {
+            let queryString = url.split('?')[1] || '';
+            let queryObject = {};
+            queryString.split('&').forEach(function (part) {
+                let item = part.split('=');
+                queryObject[item[0]] = decodeURIComponent(item[1]);
+            });
+            return queryObject;
+        }
     </script>
     <!-- #endregion -->
     <!-- #region Fotter-links -->
@@ -689,6 +771,16 @@
 
         if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
             document.body.style.overscrollBehaviorY = 'contain';
+        }
+
+        function HostDetailRedirectFunction(HostCode, ClubCode, PrefecturesArea) {
+            var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/${HostCode}`;
+            window.location.href = url;
+        }
+
+        function ClubDetailRedirectFunction(ClubCode, PrefecturesArea) {
+            var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
+            window.location.href = url;
         }
     </script>
     @RenderSection("scripts", required: false)

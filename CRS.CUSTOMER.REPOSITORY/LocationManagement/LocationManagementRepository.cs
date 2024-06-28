@@ -24,12 +24,13 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             if (dbResp != null && dbResp.Rows.Count == 1)
             {
                 var response = _dao.DataTableToListObject<ClubDetailCommon>(dbResp).ToList();
+                var cId = response.FirstOrDefault().ClubId;
                 string SQL2 = "EXEC sproc_club_schedule_management @Flag ='gcws'";
-                SQL2 += ",@ClubId=" + _dao.FilterString(clubId);
+                SQL2 += ",@ClubId=" + _dao.FilterString(cId);
                 var dbResponse2 = _dao.ExecuteDataTable(SQL2);
 
                 string sql3 = "sproc_customer_club_and_host_management @Flag='gce'";
-                sql3 += " ,@ClubId=" + _dao.FilterString(clubId);
+                sql3 += " ,@ClubId=" + _dao.FilterString(cId);
                 var dbResp3 = _dao.ExecuteDataTable(sql3);
                 foreach (var item in response)
                 {
@@ -223,17 +224,18 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             return Response;
         }
 
-        public ViewHostDetailCommonV2 ViewHostDetailsV2(string HostId, string customerId)
+        public ViewHostDetailCommonV2 ViewHostDetailsV2(string HostCode, string customerId)
         {
             var Response = new ViewHostDetailCommonV2();
             string SQL = "EXEC sproc_cpanel_host_management @Flag='ghd'";
-            SQL += ",@HostId=" + _dao.FilterString(HostId);
+            SQL += ",@HostCode=" + _dao.FilterString(HostCode);
             SQL += ",@CustomerAgentId=" + _dao.FilterString(customerId);
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count == 1)
             {
                 var ResponseMapper = _dao.DataTableToListObject<ViewHostDetailCommonV2>(dbResponse).ToList();
                 Response = ResponseMapper[0];
+                var HostId = Response.HostId;
                 string SQL2 = "EXEC sproc_cpanel_host_management @Flag='ghgil'";
                 SQL2 += ",@HostId=" + _dao.FilterString(HostId);
                 var dbResponse2 = _dao.ExecuteDataTable(SQL2);

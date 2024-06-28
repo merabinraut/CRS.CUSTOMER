@@ -1,0 +1,684 @@
+﻿@using CRS.CUSTOMER.APPLICATION.Library
+@model CRS.CUSTOMER.APPLICATION.Models.LocationManagementV2.LocationV2ClubHostModel
+@{
+    var PrefecturesArea = ViewBag.LocationId;
+    string[] PrefecturesAreaPart = PrefecturesArea.Split('/');
+    ViewBag.Title = $"{PrefecturesAreaPart[2]}({PrefecturesAreaPart[1]})のホストクラブ‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    /* The Modal (background) */
+    .my-custom-modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 150px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    }
+
+    .loader {
+        position: fixed;
+        z-index: 20;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 99%;
+        margin-top: 1px;
+        background-color: #3E3E3E;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Modal Content (image) */
+    .my-modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    /* The Close Button */
+    .close {
+        position: absolute;
+        top: 50px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<style>
+
+    .next-prev-btn {
+        border: 1px solid #F8F8F8;
+        display: flex;
+        width: 44px;
+        height: 44px;
+        justify-content: center;
+        align-items: center;
+        flex: none;
+        cursor: pointer
+    }
+
+    .page-number-list div {
+        border: 1px solid #F8F8F8;
+        display: flex;
+        height: 44px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px; /* 150% */
+        cursor: default;
+        max-width: 51px;
+        width: 100%;
+    }
+
+        .page-number-list div.active {
+            color: #D75A8B;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px; /* 150% */
+            background: #F3F3F3;
+        }
+
+    .owl-dots > .active {
+        background: #E3A1A1;
+    }
+
+    .locationSearch:focus {
+        outline: none;
+    }
+</style>
+<!-- #region Search -->
+<div class=" border border-[#D6CEB4] flex my-2 mx-4 rounded-[4px] search-input" onclick="redirectToSearchPage()">
+    <span class=" mt-[10px] ml-3 material-icons-outlined text-[#D6CEB4]">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.125 1.875C11.5698 1.875 14.375 4.68018 14.375 8.125C14.375 9.62158 13.8501 10.9937 12.9688 12.0703L17.9492 17.0508L17.0508 17.9492L12.0703 12.9688C10.9937 13.8501 9.62158 14.375 8.125 14.375C4.68018 14.375 1.875 11.5698 1.875 8.125C1.875 4.68018 4.68018 1.875 8.125 1.875ZM8.125 3.125C5.35645 3.125 3.125 5.35645 3.125 8.125C3.125 10.8936 5.35645 13.125 8.125 13.125C10.8936 13.125 13.125 10.8936 13.125 8.125C13.125 5.35645 10.8936 3.125 8.125 3.125Z"
+                  fill="#BCB08A" />
+        </svg>
+    </span>
+    <input class="w-full text-xs text-[#BCB08A] locationSearch "
+           title="Search"
+           type="text"
+           placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Filter_Placeholder" readonly />
+    <div class="group flex justify-end cursor-pointer p-3 rotate-90" title="Filter">
+        <a onclick="redirectToSearchPage()">
+            <svg class="group-hover:bg-primaryLight w-4 h-4 text-[#BCB08A] " aria-hidden="true"
+                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                      d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2" />
+            </svg>
+        </a>
+    </div>
+
+</div>
+
+<!-- #endregion -->
+<!-- #region Slider image -->
+<div class="owl-carousel owl-theme " style="background: #EFEFEF; padding-top: 8px;">
+    @foreach (var item in Model.Banners)
+    {
+        if (!string.IsNullOrEmpty(item.BannerImage))
+        {
+            <div class="item ">
+                <img src="@item.BannerImage" class="h-[152px] object-cover" alt="slider">
+            </div>
+        }
+        else
+        {
+            <div class="item ">
+                <img src="~/Content/assets/images/customer/demo-image.jpeg" class="h-[152px] object-cover" alt="slider">
+            </div>
+        }
+    }
+</div>
+<!-- #endregion -->
+<!-- #region Tab -->
+
+<div class="">
+    <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
+        <div class="grid grid-cols-2 w-full tab-container-plane bg-white gap-[14px]">
+            <button id="tab1Button" class="tab-button-plane tab-link active">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.HostClubList
+            </button>
+            <button id="tab2Button" class="tab-button-plane tab-link">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host
+            </button>
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="bg-white">
+        <div id="tab1" class="tab-content-plane">
+            <div class="list_wrap">
+
+                @if (Model.ClubListModel == null || Model.ClubListModel.Count <= 0)
+                {
+                    <!--comming soon page start-->
+                    <div style="height:168px; margin:12px 0;padding:48px 16px; background:#fff; gap:4px;  align-self:stretch" class="px-4; flex flex-col justify-between items-center">
+                        <span>
+                            <span>
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <mask id="path-1-inside-1_17_34" fill="white">
+                                        <path d="M42 24C42 33.9411 33.9411 42 24 42C14.0589 42 6 33.9411 6 24C6 14.0589 14.0589 6 24 6C33.9411 6 42 14.0589 42 24Z" />
+                                    </mask>
+                                    <path d="M42 24C42 33.9411 33.9411 42 24 42C14.0589 42 6 33.9411 6 24C6 14.0589 14.0589 6 24 6C33.9411 6 42 14.0589 42 24Z" fill="white" />
+                                    <path d="M41 24C41 33.3888 33.3888 41 24 41V43C34.4934 43 43 34.4934 43 24H41ZM24 41C14.6112 41 7 33.3888 7 24H5C5 34.4934 13.5066 43 24 43V41ZM7 24C7 14.6112 14.6112 7 24 7V5C13.5066 5 5 13.5066 5 24H7ZM24 7C33.3888 7 41 14.6112 41 24H43C43 13.5066 34.4934 5 24 5V7Z" fill="#F2F2F2" mask="url(#path-1-inside-1_17_34)" />
+                                    <path d="M18 18V19.8282L16.5 21.8282V22.0001C16.5 22.8224 17.1778 23.5002 18 23.5002V30.0004H26.0003V25.5002H27.0003V30.0004H30.0004V23.5002C30.8227 23.5002 31.5005 22.8224 31.5005 22.0001V21.8282L30.0004 19.8282V18H18ZM19.0001 19H29.0004V19.5H19.0001V19ZM18.7501 20.5001H29.2504L30.4536 22.1095C30.3989 22.3263 30.2348 22.5001 30.0004 22.5001C29.7231 22.5001 29.5004 22.2775 29.5004 22.0001H28.5004C28.5004 22.2775 28.2777 22.5001 28.0004 22.5001C27.723 22.5001 27.5004 22.2775 27.5004 22.0001H26.5003C26.5003 22.2775 26.2777 22.5001 26.0003 22.5001C25.723 22.5001 25.5003 22.2775 25.5003 22.0001H24.5003C24.5003 22.2775 24.2776 22.5001 24.0002 22.5001C23.7229 22.5001 23.5002 22.2775 23.5002 22.0001H22.5002C22.5002 22.2775 22.2775 22.5001 22.0002 22.5001C21.7228 22.5001 21.5002 22.2775 21.5002 22.0001H20.5001C20.5001 22.2775 20.2775 22.5001 20.0001 22.5001C19.7228 22.5001 19.5001 22.2775 19.5001 22.0001H18.5001C18.5001 22.2775 18.2774 22.5001 18 22.5001C17.7657 22.5001 17.6016 22.3263 17.5469 22.1095L18.7501 20.5001ZM19.0001 23.1095C19.2657 23.3498 19.6173 23.5002 20.0001 23.5002C20.3829 23.5002 20.7345 23.3498 21.0001 23.1095C21.2658 23.3498 21.6174 23.5002 22.0002 23.5002C22.383 23.5002 22.7346 23.3498 23.0002 23.1095C23.2658 23.3498 23.6174 23.5002 24.0002 23.5002C24.3831 23.5002 24.7346 23.3498 25.0003 23.1095C25.2659 23.3498 25.6175 23.5002 26.0003 23.5002C26.3831 23.5002 26.7347 23.3498 27.0003 23.1095C27.266 23.3498 27.6175 23.5002 28.0004 23.5002C28.3832 23.5002 28.7348 23.3498 29.0004 23.1095V29.0004H28.0004V24.5002H25.0003V29.0004H19.0001V23.1095ZM20.0001 24.5002V28.0003H24.0002V24.5002H20.0001ZM21.0001 25.5002H23.0002V27.0003H21.0001V25.5002Z" fill="#C8C8C8" />
+                                    <g clip-path="url(#clip0_17_34)">
+                                        <rect x="30" y="30" width="12" height="12" rx="6" fill="white" />
+                                        <path d="M36.0013 30.668C33.0603 30.668 30.668 33.0603 30.668 36.0013C30.668 38.9423 33.0603 41.3346 36.0013 41.3346C38.9423 41.3346 41.3346 38.9423 41.3346 36.0013C41.3346 33.0603 38.9423 30.668 36.0013 30.668ZM36.0013 31.5569C38.4614 31.5569 40.4457 33.5412 40.4457 36.0013C40.4457 38.4614 38.4614 40.4457 36.0013 40.4457C33.5412 40.4457 31.5569 38.4614 31.5569 36.0013C31.5569 33.5412 33.5412 31.5569 36.0013 31.5569ZM35.5569 32.4457V36.4457H38.668V35.5569H36.4457V32.4457H35.5569Z" fill="url(#paint0_linear_17_34)" />
+                                    </g>
+                                    <rect x="30.5" y="30.5" width="11" height="11" rx="5.5" stroke="white" />
+                                    <defs>
+                                        <linearGradient id="paint0_linear_17_34" x1="31.7346" y1="31.7346" x2="42.0845" y2="32.8214" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#99AEFB" />
+                                            <stop offset="0.578125" stop-color="#F04AA4" />
+                                            <stop offset="1" stop-color="#E7B282" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_17_34">
+                                            <rect x="30" y="30" width="12" height="12" rx="6" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+
+                            </span>
+
+                        </span>
+                        <p style="height: 20px; width: 100%; text-align: center; color: #18181B; font-weight:600;font-family:14px; line-height:24px">Coming soon</p>
+                    </div>
+                    <!--comming soon page end-->
+                }
+                else
+                {
+
+                    foreach (var item in Model.ClubListModel)
+                    {
+                        /*New design */
+                        <div class="club_content">
+                            <!-- s/link -->
+                            <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@ViewBag.LocationId')">
+                                <ul class="club_tags">
+                                    @if (!string.IsNullOrEmpty(@item.Tag1))
+                                    {
+                                        <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(@item.Tag2))
+                                    {
+                                        <li class="tag_rank">
+                                            ランク @item.Tag2
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(@item.Tag3))
+                                    {
+                                        <li class="tag_platinum">  @item.Tag3</li>
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(@item.Tag4))
+                                    {
+                                        <li class="tag_good">@item.Tag4</li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(@item.Tag5))
+                                    {
+                                        <li class="tag_big">  @item.Tag5</li>
+                                    }
+                                </ul>
+                                <div class="club_header">
+                                    <div class="club_logo"><img class="logo" alt="ロゴ" src="@item.ClubLogo"></div>
+                                    <div class="club_info">
+                                        <h3 class="club_name">@item.ClubName</h3>
+                                        <p class="club_kana">@item.ClubNameJapanese</p>
+                                        <p class="club_group">@item.GroupName</p>
+                                    </div>
+                                    @if (item.IsBookmarked.ToUpper() == "Y")
+                                    {
+                                        <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                                    }
+                                </div>
+                                <ul class="club_thumb">
+                                    @foreach (var item2 in item.HostGalleryImage)
+                                    {
+                                        <li><img alt="@item.ClubName ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
+                                    }
+
+                                </ul>
+                                <div class="club_rate">
+                                    <ul class="rate_stars">
+                                        @{
+                                            var unratedScale = (5 - item.AverageRating);
+                                            for (int i = 0; i < item.AverageRating; i++)
+                                            {
+                                                <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
+                                            }
+                                            for (int i = 0; i < unratedScale; i++)
+                                            {
+                                                <li><img src="~/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>
+                                            }
+                                        }
+
+                                        <li class="rate_value"> @item.AverageRating</li>
+                                    </ul>
+                                    <ul class="rate_review">
+                                        <li><img src="~/Content/assets/images/comment.svg" alt="コメント"></li>
+                                        <li class="comment_value">@item.TotalComment</li>
+                                    </ul>
+                                </div>
+                                <p class="club_pr"> @item.ClubDescription</p>
+                            </a>
+                            <!-- e/link -->
+                            <!-- s/club footer -->
+                            <div class="club_footer">
+                                <!-- s/club status -->
+                                <div class="club_status">
+                                    @{
+                                        DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:ss"));
+                                    }
+                                    <!-- s/opening hours -->
+                                    @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
+                                    {
+                                        if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                                        {
+                                            <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                                        }
+                                        else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                                        {
+                                            <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                                        }
+
+                                        <!-- e/opening hours -->
+                                        <!-- s/available -->
+
+                                        if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubOpeningTime) < currentTime && DateTime.Parse(item.ClubClosingTime) > currentTime)
+                                        {
+                                            <div class="available">本日空席あり</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="available disabled">本日空席あり</div>
+                                        }
+                                    }
+                                    <!-- e/available -->
+                                </div>
+                                <!-- e/club status -->
+                                <!-- s/reservation btn -->
+                                <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId')">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
+                                    @* 今すぐ予約する*@
+                                </button>
+                                <!-- e/reservation btn -->
+                            </div>
+                            <!-- e/club footer -->
+                        </div>
+                        /*Old Design*/
+                    }
+                }
+            </div>
+        </div>
+        <div id="tab2" class="tab-content-plane hidden">
+            @if (Model.HostListModel == null || Model.HostListModel.Count <= 0)
+            {
+                <!--comming soon page start-->
+                <div style="height:168px; margin:12px 0;padding:48px 16px; background:#fff; gap:4px;  align-self:stretch" class="px-4; flex flex-col justify-between items-center">
+                    <span>
+                        <img src="~/Content/assets/images/customer/timer.svg" style="height:48px; width:48px" />
+                    </span>
+                    <p style="height: 20px; width: 100%; text-align: center; color: #18181B; font-weight:600;font-family:14px; line-height:24px">Coming soon</p>
+                </div>
+                <!--comming soon page end-->
+                <!--comming soon page end-->
+            }
+            else
+            {
+                <!-- one row for club card  -->
+                <div class="grid grid-cols-3 justify-center  hover:cursor-pointer  py-4 px-[8px] gap-2 ">
+                    @foreach (var item in Model.HostListModel)
+                    {
+                        <div class="h-auto flex flex-col justify-end  text-center relative rounded-sm">
+                            <div class="w-full relative">
+                                @*<a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">*@
+                                <a class="" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@ViewBag.LocationId');">
+                                    @if (!string.IsNullOrEmpty(item.HostImage))
+                                    {
+                                        <img class="w-full h-[157px]  object-cover rounded-sm" src="@item.HostImage" />
+                                    }
+                                    else
+                                    {
+                                        <img class="w-full h-[157px]  object-cover rounded-sm" src="~/Content/assets/images/customer/demo-image.jpeg" />
+                                    }
+                                </a>
+                                @if (item.IsBookmarked.ToString().Trim() == "N")
+                                {
+                                    <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                                        <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="width: 24px; height: 24px;" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                                        <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="width: 24px; height: 24px;" />
+                                    </div>
+                                }
+                            </div>
+                            <div class="absolute w-full flex flex-row">
+
+                                <div style="background-color: #000000B2; " class=" rounded rounded-b-[2px] w-full  p-1  justify-start  flex   flex-col   ">
+                                    <div class=" flex flex-row justify-center  text-xs  ">
+                                        <div class="text-[12px] font-[700] pl-[2px] text-[#FFFFFF]">@item.HostNameJapanese</div>
+                                    </div>
+                                    <div class="flex flex-row items-center justify-center   ">
+                                        <div class=" font-[700] pl-[2px]">
+                                            @if (!string.IsNullOrEmpty(item.ClubLogo))
+                                            {
+                                                <img class="h-[11px]  w-[11px] rounded-full" src="@item.ClubLogo"
+                                                     alt="club">
+                                            }
+                                            else
+                                            {
+                                                <img class="h-[11px]  w-[11px] rounded-full" src="~/Content/assets/images/customer/demo-image.jpeg"
+                                                     alt="club">
+                                            }
+                                        </div>
+                                        <div class="text-[10px] text-[#FFFFFF] text-start ml-[4px] font-[400] h-[15px] overflow-hidden">
+                                            @item.ClubName
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+<div id="pagination-container" class="flex justify-between pagination-container-wrapper my-[7px] " style="width:100%">
+    <button id="prev-btn" class="next-prev-btn" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+            <path d="M10.707 2.13599C10.8945 2.32351 10.9998 2.57782 10.9998 2.84299C10.9998 3.10815 10.8945 3.36246 10.707 3.54999L5.75705 8.49999L10.707 13.45C10.8892 13.6386 10.99 13.8912 10.9877 14.1534C10.9854 14.4156 10.8803 14.6664 10.6949 14.8518C10.5095 15.0372 10.2586 15.1424 9.99645 15.1447C9.73425 15.1469 9.48165 15.0461 9.29305 14.864L3.63605 9.20699C3.44858 9.01946 3.34326 8.76515 3.34326 8.49999C3.34326 8.23482 3.44858 7.98052 3.63605 7.79299L9.29305 2.13599C9.48058 1.94852 9.73488 1.8432 10 1.8432C10.2652 1.8432 10.5195 1.94852 10.707 2.13599Z" fill="#959595" />
+        </svg>
+    </button>
+    <div id="page-numbers" class=" page-number-list flex  w-full" style="justify-content:space-evenly"></div>
+    <button id="next-btn" class="next-prev-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+            <path d="M5.29295 2.13605C5.10548 2.32358 5.00017 2.57788 5.00017 2.84305C5.00017 3.10821 5.10548 3.36252 5.29295 3.55005L10.243 8.50005L5.29295 13.45C5.11079 13.6387 5.01 13.8913 5.01228 14.1535C5.01456 14.4156 5.11973 14.6665 5.30513 14.8519C5.49054 15.0373 5.74135 15.1424 6.00355 15.1447C6.26575 15.147 6.51835 15.0462 6.70695 14.864L12.364 9.20705C12.5514 9.01952 12.6567 8.76521 12.6567 8.50005C12.6567 8.23488 12.5514 7.98058 12.364 7.79305L6.70695 2.13605C6.51942 1.94858 6.26512 1.84326 5.99995 1.84326C5.73479 1.84326 5.48048 1.94858 5.29295 2.13605Z" fill="#959595" />
+        </svg>
+    </button>
+</div>
+
+<div class=" ">
+    <div>
+    </div>
+    <div class=" ">
+        <div>
+        </div>
+        <div style="background-color: #FFFFFF;" class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]">
+            <div class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]" id="scrollToTopButton">
+
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M7.99996 2.34375L1.89062 8.45308L2.60929 9.15575L7.99996 3.76508L13.3906 9.15575L14.1093 8.45308L7.99996 2.34375ZM7.99996 5.84375L1.89062 11.9531L2.60929 12.6557L7.99996 7.26508L13.3906 12.6557L14.1093 11.9531L7.99996 5.84375Z"
+                              fill="#040000" />
+                    </svg>
+                </div>
+                <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
+                    トップに戻る
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form method="get" id="club-pagination-form-id">
+    <input name="GroupId" value="" id="club-pagination-group-id" hidden />
+</form>
+<form method="get" id="host-pagination-form-id">
+    <input name="GroupId" value="" id="host-pagination-group-id" hidden />
+    <input name="ClubId" value="" id="host-pagination-club-id" hidden />
+    <input name="PageNo" value="" id="host-pagination-page-id" hidden />
+</form>
+<!-- The Modal -->
+<div id="myModal" class="my-custom-modal">
+    <span class="close" onclick="closeImagePopup();">&times;</span>
+    <img class="my-modal-content" id="img01">
+</div>
+<div class="loader" id="loader-id">
+    <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
+</div>
+<!-- #endregion -->
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+           var RenderValue = '@ViewBag.RenderValue';
+            var tab1Button = document.getElementById("tab1Button");
+            var tab2Button = document.getElementById("tab2Button");
+
+            if (RenderValue && (RenderValue === "host" || RenderValue === "club")) {
+                if (RenderValue === "host") {
+                    tab1Button.classList.remove("active");
+                    tab2Button.classList.add("active");
+                    tab1.classList.add("hidden");
+                    tab2.classList.remove("hidden");
+                } else {
+                    tab2Button.classList.remove("active");
+                    tab1Button.classList.add("active");
+                    tab2.classList.add("hidden");
+                    tab1.classList.remove("hidden");
+                }
+            }
+
+            let currentPage = @Model.RequestModel.GroupId??1;
+            const totalPages = @ViewBag.TotalGroupCount??0; // Define the total number of pages
+            let currentPageSecond = @Model.RequestModel.PageNo?? 1
+
+            function updatePagination() {
+
+                $('#page-numbers').empty();
+
+                // Show "prev" button and update its disabled state
+                $('#prev-btn').prop('disabled', currentPage === 1);
+
+                // Determine the range of page numbers to display
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, currentPage + 2);
+
+                // Adjust range if there are fewer than 5 pages at the start or end
+                if (currentPage - 2 < 1) {
+                    endPage = Math.min(5, totalPages);
+                }
+                if (currentPage + 2 > totalPages) {
+                    startPage = Math.max(1, totalPages - 4);
+                }
+
+                // Add the first page and ellipsis if necessary
+                if (startPage > 1) {
+                    $('#page-numbers').append(createPageElement(1));
+                    if (startPage > 2) {
+                        $('#page-numbers').append(createEllipsis());
+                    }
+                }
+
+                // Show page numbers based on current page
+                for (let i = startPage; i <= endPage; i++) {
+                    const pageElement = createPageElement(i);
+                    if (i === currentPage) {
+                        pageElement.addClass('active');  // Add "active" class to the current page
+                    }
+                    $('#page-numbers').append(pageElement);
+                }
+
+                // Add ellipsis and the last page if necessary
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        $('#page-numbers').append(createEllipsis());
+                    }
+                    $('#page-numbers').append(createPageElement(totalPages));
+                }
+
+                // Show "next" button and update its disabled state
+                $('#next-btn').prop('disabled', currentPage === totalPages);
+            }
+
+            function createPageElement(page) {
+                return $('<div>', {
+                    text: page,
+                    click: function () { ClubFunction(page); }
+                });
+            }
+
+            function createEllipsis() {
+                return $('<div>', { text: '...' });
+            }
+
+            updatePagination();  // Call the function to set up the pagination
+
+
+          /*  updatePaginationSecond();*/
+            // Handle "prev" button click
+            $('#prev-btn').on('click', function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    ClubFunction(currentPage);
+                    updatePagination();
+                }
+            });
+
+            // Handle "next" button click
+            $('#next-btn').on('click', function () {
+                if (currentPage < totalPages) {
+                    currentPage = Math.min(currentPage + 1, totalPages);
+                    ClubFunction(currentPage);
+                    updatePagination();
+                }
+            });
+
+            setTimeout(LoaderFunction, 1000);
+        });
+        function LoaderFunction() {
+            var myDiv = document.getElementById("loader-id");
+            myDiv.style.display = "none";
+        }
+    </script>
+    <script src="~/Content/CustomHelper.js"></script>
+    <!-- cursol script -->
+    <script>
+        function OpenImagePopup(ImageURL) {
+            if (ImageURL != '' && ImageURL != null) {
+                var modalImg = document.getElementById("img01");
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+                modalImg.src = ImageURL;
+            }
+        }
+
+        function closeImagePopup() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                center: true,
+                items: 1.25,
+                loop: true,
+                margin: 8,
+                autoplay: true,
+                autoplayTimeout: 3000,
+            })
+
+            localStorage.clear();
+        })</script>
+    <script>
+        function ClubReservationActionFunction(i, j, k) {
+            DataStorageFunction(i, j);
+            window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedDate=" + k;
+        }
+
+        function redirectToSearchPage() {
+           var locationId = '@ViewBag.LocationId';
+            var searchUrl = `/search${locationId}/?target=club`;
+            window.location.href = searchUrl;
+        }
+
+         function ActivateLoaderFunction() {
+             var myDiv = document.getElementById("loader-id");
+             myDiv.style.display = "flex";
+        }
+        function DeactivateLoaderFunction() {
+             var myDiv = document.getElementById("loader-id");
+             myDiv.style.display = "none";
+         }
+    </script>
+    <script>
+        const DataStorageFunction = (i, j) => {
+            localStorage.setItem("ClubId", EncryptParameter(i));
+            localStorage.setItem("ClubName", EncryptParameter(j));
+        }</script>
+    <script>
+        function ClubFunction(i) {
+            $('#club-pagination-group-id').val(i);
+            var locationId = '@ViewBag.LocationId';
+            var form = document.getElementById("club-pagination-form-id");
+            form.action = "/area" + locationId;
+            form.submit();
+
+        }
+        function HostFunction(i, j, k) {
+            $('#host-pagination-page-id').val(i);
+            $('#host-pagination-group-id').val(j);
+            $('#host-pagination-club-id').val(k);
+            var locationId = '@ViewBag.LocationId';
+            var form = document.getElementById("host-pagination-form-id");
+            form.action = "/area" + locationId;
+            form.submit();
+        }</script>
+
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 20) {
+                    $('#scrollToTopButton').fadeIn();
+                } else {
+                    $('#scrollToTopButton').fadeOut();
+                }
+            });
+
+            $('#scrollToTopButton').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                return false;
+            });
+
+            $('.flex-col').on('click', function () {
+                $('.flex-col').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
+}

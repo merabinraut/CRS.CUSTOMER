@@ -1,0 +1,299 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2.ConfirmationViewModel
+@{
+    ViewBag.Title = "予約内容確認‖ ホスログ《 ホストクラブ初回来店・ネット予約》";
+    Layout = "~/Views/Shared/_Reservation-Layout-V2.cshtml";
+    var DefaultHostId = ApplicationUtilities.EncryptParameter("0").ToString();
+}
+<div class="flex flex-col justify-between h-screen relative pb-8">
+    <div>
+        <!-- header  -->
+        <div class="flex items-center justify-between  pt-[13px] px-[14px] pb-[9px] border-b border-b-[#DCDCDC]">
+            <div class="flex items-center gap-[10px] ">
+                <div class="circle-border circle-third-quater ">
+                    <div class="text tracking-tight	">3/<span>4</span></div>
+                </div>
+                <div>
+                    <div class="text-[13px] font-bold pb-[5px]">予約内容の確認</div>
+                    <div class="text-[11px] text-[#7E6D5E]">ご予約の内容を確認してください</div>
+                </div>
+            </div>
+            <div onclick="window.history.go(-3)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                    <path d="M5.86328 4.69727L4.69531 5.86523L11.8301 13L4.69531 20.1348L5.86328 21.3027L12.998 14.168L20.1328 21.3027L21.3008 20.1348L14.166 13L21.3008 5.86523L20.1328 4.69727L12.998 11.832L5.86328 4.69727Z"
+                          fill="#BCB08A" />
+                </svg>
+            </div>
+        </div>
+        <!-- header end  -->
+        <div style="height: calc(100vh - 140px);" class="no-scrollbar overflow-y-scroll pb-4 ">
+            <!-- image  -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+                    <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                        @if (!string.IsNullOrEmpty(Model.ClubDetailModel.ClubLogo))
+                        {
+                            <img src="@Model.ClubDetailModel.ClubLogo"
+                                 class="h-[48px] w-[48px] object-cover rounded-full border-[2px] border-[#EAEAEA]" alt="image" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                 class="h-[48px] w-[48px] object-cover rounded-full border-[2px] border-[#EAEAEA]" alt="image" />
+                        }
+                    </div>
+                    <div>
+                        <div class='text-sm font-bold text-charcolBlack '>@Model.ClubDetailModel.ClubNameEnglish</div>
+                        <div class='text-xs  text-[#404040] '>@Model.ClubDetailModel.ClubNameJapanese</div>
+                        <div class="text-[10px] text-[#A09E91] flex gap-[2px] items-center">
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            @Model.ClubDetailModel.ClubLocationName
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Selected host -->
+            <div class="px-[14px] py-3 grid gap-3">
+                <div class="flex flex-col gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        選択中のホスト
+                        <span class="text-primary cursor-pointer">
+                            @*<i class="las la-pen"></i><span class="border-b border-primary ">編集</span>*@
+                        </span>
+                    </div>
+
+                    <div class="flex -space-x-2  items-center relative">
+                        @foreach (var item in Model.HostListModel)
+                        {
+                            if (!string.IsNullOrEmpty(item.HostId) && item.HostId == DefaultHostId)
+                            {
+                                <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                                     src="~/Content/assets/images/customer/default-host-image.jpg"
+                                     alt="image">
+                            }
+                            else
+                            {
+
+                                if (!string.IsNullOrEmpty(item.HostImage))
+                                {
+                                    <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                                         src="@item.HostImage"
+                                         alt="image">
+                                }
+                                else
+                                {
+                                    <img class="inline-block h-7 w-7 rounded-full border-2 border-white"
+                                         src="~/Content/assets/images/customer/demo-image.jpeg"
+                                         alt="image">
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- Reservation details -->
+            <div class="border border-y-[1px] border-[#E3E3E3]  bg-[#fff] pl-[14px] pr-[28px] py-3">
+                <div class="flex justify-between items-center text-[13px] text-[#404040] font-bold pb-2 ">
+                    ご予約内容
+                    <span class="text-primary cursor-pointer">
+                        @*<i class="las la-pen"></i><span class="border-b border-primary ">編集</span>*@
+                    </span>
+                </div>
+                <div class="text-[12px] text=[#333] pb-[2px]">
+                    来店日時：<span id="visitdatetime-id"></span>
+                </div>
+                <div class="text-[12px] text=[#333]">
+                    来店人数：<span id="noofvisitor-id"></span>
+                </div>
+            </div>
+            <!-- プラン内容 -->
+            <div class="px-[14px] py-3 ">
+                <div class="text-[#404040] text-[13px] font-bold pb-2">
+                    プラン内容
+                </div>
+                <div class="flex flex-col p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
+
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        <div class="flex items-center gap-2">
+                            <div class="text-[13px] text-[#404040] font-bold leading-[24px]" id="PlanName-Id">
+                            </div>
+                            <div id="ispopularity-id">
+
+                            </div>
+
+                        </div>
+                        <span class="text-primary cursor-pointer">
+                            @*<i class="las la-pen"></i><span class="border-b border-primary ">編集</span>*@
+                        </span>
+                    </div>
+                    <div>
+
+                        <div class="text-[#D75A8B] font-futura pb-1 strikethrough-wrapper" id="PlanAmount-Id">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-1">
+                                <div class="text-[#D17979] text-[11px]">
+                                    <i class="las la-clock"></i>
+                                </div>
+                                <div class="text-[11px] text-[#282828] font-futura" id="PlanTime-Id">
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="text-[#D17979] text-[11px]">
+                                    <i class="las la-glass-cheers"></i>
+                                </div>
+                                <div class="text-[11px] text-[#282828] font-futura" id="PlanLiquor-Id">
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <div class="text-[#D17979] text-[11px]">
+                                    <i class="las la-user"></i>
+                                </div>
+                                <div class="text-[11px] text-[#282828] font-futura" id="PlanNomination-Id">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="h-[37px] rounded-[5px] mt-[9px] border border-[#E3AB00] text-[#E3AB00] font-bold flex justify-center items-center text-sm gap-[2px]" style="background: #fffaf5;">
+                        <i class="las la-coins text-[18px]"></i> 500ポイント獲得できます！
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
+     style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
+    <button class="btn" onclick="WindowHistoryBack();">
+        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
+    </button>
+    <button class="btn btn-primary" onclick="SubmitFunction();">
+        <a class="h-full w-full">
+            次
+        </a>
+    </button>
+</div>
+@section scripts
+{
+    <script src="~/Content/CustomHelper.js"></script>
+    <script>
+        const decryptAndGetValue = key => localStorage.getItem(key) ? DecryptParameter(localStorage.getItem(key)) : "";
+
+        $(document).ready(function () {
+            const keys = ["VisitDate", "VisitTime", "NoOfPeople", "PlanName", "PlanPrice", "PlanTime", "PlanLiquor", "PlanNomination", "IsPopularPlan"];
+
+            keys.forEach(key => {
+                const value = decryptAndGetValue(key);
+                if (value !== "") {
+                    switch (key) {
+                        case "VisitDate":
+                            const VisitDateValue = value;
+                            const VisitTimeValue = decryptAndGetValue("VisitTime");
+                            const FormattedVisitDateTime = formatDateAndTime(VisitDateValue, VisitTimeValue);
+                            $('#visitdatetime-id').html(FormattedVisitDateTime);
+                            break;
+                        case "NoOfPeople":
+                            $('#noofvisitor-id').html(value + '名');
+                            break;
+                        case "PlanName":
+                            $('#PlanName-Id').html(value);
+                            break;
+                        case "PlanPrice":
+                            const StrikePrice = decryptAndGetValue("StrikePrice");
+                            if (StrikePrice != null && StrikePrice != "" && StrikePrice != "y" && StrikePrice != "y" && StrikePrice != "n") {
+                                $('#PlanAmount-Id').html("<div class='strikethrough'> ¥" + StrikePrice + "</div>" + " <div style='font-weight:600'> ¥" + value + "</div>" + "<span>キャンペーン中</span>");
+                            }
+                            else {
+                                $('#PlanAmount-Id').html(" <div style='font-weight:600'> ¥" + value+ "</div> ");
+                            }
+
+                            break;
+                        case "PlanTime":
+                            $('#PlanTime-Id').html(value);
+                            break;
+                        case "PlanLiquor":
+                            $('#PlanLiquor-Id').html(value);
+                            break;
+                        case "PlanNomination":
+                            $('#PlanNomination-Id').html('場内指名' + value + '名まで');
+                            break;
+                        case "IsPopularPlan":
+                            if (value != "" && value === "y") {
+                                $('#ispopularity-id').html(`<span class="popularity"> <i class="las la-crown linear-gradient-text"></i> <div class="linear-gradient-text tracking-[1.26px] pl-1">人気</div> </span>`);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+        });
+
+        function SubmitFunction() {
+            const ClubId = localStorage.getItem("ClubId") || "";
+            const PlanId = localStorage.getItem("PlanId") || "";
+            const VisitDate = decryptAndGetValue("VisitDate");
+            const VisitTime = decryptAndGetValue("VisitTime");
+            const NoOfPeople = decryptAndGetValue("NoOfPeople");
+             const url = `@Url.Action("Billing", "ReservationManagementV3")?ClubId=${ClubId}&PlanId=${PlanId}&VisitDate=${VisitDate}&VisitTime=${VisitTime}&NoOfPeople=${NoOfPeople}`;
+             window.location.href = url;
+        }
+
+        function formatDateAndTime(inputDateString, inputTimeString) {
+            // Split the date string into year, month, and day components
+            let [year, month, day] = inputDateString.split(/[-\/]/).map(Number);
+
+            // Split the time string into hour and minute components
+            const [hour, minute] = inputTimeString.split(':').map(Number);
+
+            // Log parsed values for debugging
+            //console.log('Parsed values:', year, month, day, hour, minute);
+
+            // Check for valid values
+            if (isNaN(year) || isNaN(month) || isNaN(day) || isNaN(hour) || isNaN(minute)) {
+                console.error('Invalid input values');
+                return 'Invalid input values';
+            }
+
+            // Adjust month if it's in the wrong format (1-indexed for "-" format, 0-indexed for "/" format)
+            if (month > 12) {
+                // Assuming it's in the "yyyy-MM-dd" format
+                [day, month] = [month, day];
+            }
+
+            // Create a Date object with the provided components
+            const date = new Date(year, month - 1, day, hour, minute);
+
+            // Check if the date object is valid
+            if (isNaN(date.getTime())) {
+                console.error('Invalid date');
+                return 'Invalid date';
+            }
+
+            // Define options for formatting the date
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'short',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: false
+            };
+            //const options = {
+            //    year: 'numeric',
+            //    month: 'long',
+            //    day: 'numeric',
+            //    weekday: 'long',
+            //    hour: 'numeric',
+            //    minute: 'numeric',
+            //    hour12: false,
+            //};
+            // Format the date using Intl.DateTimeFormat
+            const formatter = new Intl.DateTimeFormat('ja-JP', options);
+            return formatter.format(date);
+        }
+
+    </script>
+
+}

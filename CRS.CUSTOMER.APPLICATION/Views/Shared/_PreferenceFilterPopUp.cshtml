@@ -32,6 +32,10 @@
         /*  border-color: #d75a8b;
         color: */ /*#d75a8b;*/
     }
+
+    img {
+        object-fit: cover;
+    }
 </style>
 <style>
     .map-container #map {
@@ -89,7 +93,7 @@
                                         <div class="text-xs text-[#333]">
                                             こだわりから探す
                                         </div>
-                                        <form action="/Search/ClubSearchResult" method="get" id="club-filter-form-id">
+                                        <form method="post" id="club-filter-form-id">
                                             <div class="relative input-search-wrapper h-[40px] my-4 ">
                                                 <div class="absolute inset-y-0 left-0 flex items-center pt-[5pxa] pl-[16px] pointer-events-none">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -286,7 +290,7 @@
                                         <div class="text-xs text-[#333]">
                                             こだわりから探す
                                         </div>
-                                        <form action="/Search/HostSearchResult" method="get" id="host-filter-form-id">
+                                        <form method="post" id="host-filter-form-id">
                                             <div class="relative input-search-wrapper h-[40px] my-4 ">
                                                 <div class="absolute inset-y-0 left-0 flex items-center pt-[5pxa] pl-[16px] pointer-events-none">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -440,7 +444,7 @@
                                             <div class="grid grid-cols-3 gap-2">
                                                 @foreach (var item in Model.ClubModel)
                                                 {
-                                                    <a href="#">
+                                                    <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
                                                         <div class="new-host-card">
                                                             <div class="image">
                                                                 <img src="@item.ClubLogo" alt="club-logo" />
@@ -487,7 +491,7 @@
                                                     foreach (var item in Model.HostModel)
                                                     {
                                                         var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
-                                                        <div class="hosts-that-match-you @activeClass">
+                                                        <div class="hosts-that-match-you @activeClass" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                                                             <img src="@item.HostLogo" alt="host-logo" />
                                                             @if (item.IsBookmarked.ToUpper() == "Y")
                                                             {

@@ -258,13 +258,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 if (dbResp.Code == ResponseCode.Success)
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.SUCCESS,
-                        Message = dbResp.Message,
-                        Title = NotificationMessage.SUCCESS.ToString()
-                    });
-                    return RedirectToAction("LogOff", "Home");
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.SUCCESS,
+                    //    Message = dbResp.Message,
+                    //    Title = NotificationMessage.SUCCESS.ToString()
+                    //});
+                    return Redirect("/user/remind/complete?nickname=" + dbResp.Extra1.EncryptParameter());
+                    //return Redirect("user/remind/complete", "Home",new { nickname = dbResp.Extra1.EncryptParameter() });
+
                 }
                 return RedirectToAction("ChangePasswordV2", changePasswordModel);
             }
