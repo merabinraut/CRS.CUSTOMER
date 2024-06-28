@@ -62,14 +62,16 @@
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
     <a href="/" class="active">
-        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Home
+        @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home*@
+        ホームページ
     </a>
     <i class="las la-angle-right"></i>
     <a href="@Url.Action("Index", "LocationManagement", new { LocationId = Model.LocationId })" class="active">
-        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Clubs
+        @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Clubs*@
+        店舗/ホスト一覧
     </a>
     <i class="las la-angle-right"></i>
-    <a href="#">@Model.ClubNameEng</a>
+    <a href="#">@Model.ClubNameJp</a>
 </div>
 <div class="h-[189px]">
     <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
@@ -1009,8 +1011,7 @@
                 <!-- <div class="box mt-2"></div> -->
             </div>
             <!-- </div> -->
-            <script>
-                $(document).ready(function () {
+            <script>$(document).ready(function () {
                     $('.store-host-carousel').owlCarousel({
                         margin: 10,
                         loop: true,
@@ -1304,7 +1305,9 @@
                     .modal-content {
                         max-width: 90%;
                     }
-                }  @@media (max-width: 360px) {
+                }
+
+                @@media (max-width: 360px) {
                     .modal-content {
                         max-width: 360px;
                     }
@@ -1338,8 +1341,7 @@
                 </div>
             }
 
-            <script>
-                // Function to open a specific modal
+            <script>// Function to open a specific modal
                 function openModal(modalId) {
                     var modal = document.getElementById(modalId);
                     if (modal) {
@@ -1776,8 +1778,7 @@
 @section scripts
 {
     <script src="~/Content/CustomHelper.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
+    <script>document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";
         });
@@ -1799,8 +1800,7 @@
 
             });
         })</script>
-    <script>
-        function ActivateLoaderFunction() {
+    <script>function ActivateLoaderFunction() {
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "flex";
         }
@@ -1808,8 +1808,7 @@
             var myDiv = document.getElementById("loader-id");
             myDiv.style.display = "none";
         }</script>
-    <script>
-        const shareButton = document.querySelector("#shareButton");
+    <script>const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -1823,8 +1822,7 @@
                 toastr.info('Web Share API is not supported in this browser.');
             }
         });</script>
-    <script>
-        function OpenImagePopup(ImageURL) {
+    <script>function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");
@@ -1838,12 +1836,10 @@
             modal.style.display = "none";
         }</script>
 
-    <script>
-        function openModal() {
+    <script>function openModal() {
             console.log("test");
         }</script>
-    <script>
-        // Function to open a specific modal
+    <script>// Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -1893,8 +1889,7 @@ $(document).ready(function () {
                 });
             });
         });</script>
-    <script>
-        $('#notice_id').click('click', function () {
+    <script>$('#notice_id').click('click', function () {
             var activeElement = document.querySelector('.tab-link.active');
             if (activeElement) {
                 activeElement.classList.remove('active');
@@ -1918,8 +1913,7 @@ $(document).ready(function () {
         });</script>
 
     <!--make clicked the tab after reload-->
-    <script>
-        $('.tab-button-plane').click('click', function () {
+    <script>$('.tab-button-plane').click('click', function () {
             var id = $(this).attr('id');
             var name = $(this).text().trim();
             localStorage.setItem("tablink-id", id);
@@ -1938,8 +1932,7 @@ $(document).ready(function () {
         });</script>
 
     <!--comment div clicked event-->
-    <script>
-        $('#comment_ID').click('click', function () {
+    <script>$('#comment_ID').click('click', function () {
             $('#tab3Button').click();
         });</script>
 }

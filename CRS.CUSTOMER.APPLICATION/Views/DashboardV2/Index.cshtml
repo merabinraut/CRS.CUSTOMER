@@ -180,7 +180,7 @@
 
                 </div>
                 <div style="color: #666666" id="selected-locationlabel-id" data-info="">
-                    場所
+                    エリア
                 </div>
             </div>
             <div class="flex flex-row gap-[4px] pl-[8px] pr-[12px]   items-center " style="border-left:1px solid #D6D6D6" onclick="GetPreferenceFilterPopUp();">
@@ -207,7 +207,7 @@
                     </svg>
                 </div>
                 <div style="color: #666666 ; " id="main-date-id">
-                    日付
+                    予約日
                 </div>
             </div>
             <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
@@ -753,7 +753,7 @@
             </div>
         </div>
         <div class="px-4 pt-6 pb-6 bg-white " style="padding-top: 24px; border-radius: 6px 6px 0px 0px; ">
-            <div class="text-sm text-[#333] font-bold mb-3">営業時間を選択する</div>
+            <div class="text-sm text-[#333] font-bold mb-3">最終入店時間から探す</div>
             <div class=" relative">
                 <div class="flex justify-center gap-5 items-center h-[171px] py-6 ">
                     <div class="relative">
@@ -777,8 +777,7 @@
 <!--#endregion-->
 @section scripts
 {
-    <script>
-        $(document).ready(function () {
+    <script>$(document).ready(function () {
             EnableLoaderFunction();
             $('.owl-carousel').owlCarousel({
                 center: true,
@@ -1715,8 +1714,7 @@
         }
     });
     </script>
-    <script>
-        function handleFirstTab() {
+    <script>function handleFirstTab() {
             document.getElementById('tab2').style.display = 'none';
             document.getElementById('tab1').style.display = '';
             document.getElementById('tab1Button').classList.add('active');
@@ -1726,7 +1724,6 @@
             document.getElementById('tab2').style.display = '';
             document.getElementById('tab1Button').classList.remove('active');
             document.getElementById('tab2Button').classList.add('active');
-        }
-    </script>
+        }</script>
 }
 
