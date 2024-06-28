@@ -1,6 +1,8 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.LocationManagement.ViewHostDetailModelV2
 @{
-    ViewBag.Title = "Host Detail";
+    var ClubId = ViewBag.ClubName;
+    var HostName = ViewBag.HostName;
+    ViewBag.Title = $"{HostName}のプロフィール‖{ClubId}‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var HostSkillsModel = @Model.HostIdentityDetailsModel.Where(x => x.LabelType.Trim().ToUpper() == "SKILLS").ToList();
 }

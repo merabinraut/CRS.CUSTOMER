@@ -20,6 +20,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     public class LocationManagementV2Controller : CustomController
     {
         private readonly Dictionary<string, string> _locationHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Location");
+        private readonly Dictionary<string, string> _locationJapaneseLabelHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "LocationJapaneseLabel");
         private readonly IDashboardBusiness _dashboardBuss;
         private readonly IRecommendedClubHostBusiness _recommendedClubHostBuss;
         private readonly ILocationManagementBusiness _business;
@@ -98,10 +99,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet, Route("area/{prefectures}/{area}/hostclub/{ClubId}/{target?}")]
         public ActionResult ClubDetail(string prefectures, string area, string ClubId, string target = "", string ScheduleFilterDate = null)
         {
-            var culture = Request.Cookies["culture"]?.Value;
-            culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
             var PrefecturesArea = $"/{prefectures}/{area}";
             ViewBag.LocationId = PrefecturesArea;
+            var LocationJapaneseLabel = ApplicationUtilities.GetKeyValueFromDictionary(_locationJapaneseLabelHelper, PrefecturesArea);
+            ViewBag.LocationJapaneseLabel = string.IsNullOrEmpty(LocationJapaneseLabel) ? PrefecturesArea : LocationJapaneseLabel;
+            var culture = Request.Cookies["culture"]?.Value;
+            culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
             string agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
             if (!string.IsNullOrEmpty(target) && (ApplicationUtilities.IsAlphanumeric(target) && !ApplicationUtilities.IsPureString(target)))
             {
@@ -134,6 +137,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         for (int i = 0; i < ResponseModel.HostGalleryImageList.Count; i++) ResponseModel.HostGalleryImageList[i] = ImageHelper.ProcessedImage(ResponseModel.HostGalleryImageList[i]);
                     }
                     ResponseModel.HostIdentityDetailsModel.ForEach(x => x.Label = (!string.IsNullOrEmpty(culture) && culture == "en") ? x.LabelEnglish : x.LabelJapanese);
+                    ViewBag.ClubName = !string.IsNullOrEmpty(ResponseModel.ClubNameJapanese) ? ResponseModel.ClubNameJapanese : ResponseModel.ClubNameEnglish;
+                    ViewBag.HostName = !string.IsNullOrEmpty(ResponseModel.HostNameJapanese) ? ResponseModel.HostNameJapanese : ResponseModel.HostNameEnglish;
                     return View("HostDetail", ResponseModel);
                 }
                 AddNotificationMessage(new NotificationModel()
@@ -272,7 +277,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 #region TAB 5
                 else if (!string.IsNullOrEmpty(target) && target.Trim() == "schedule")
                 {
-                    ViewBag.target = "schedule";                    
+                    ViewBag.target = "schedule";
                     responseModel.GetScheduleDDL = GetScheduleList();
                     var dbScheduleResponse = _business.GetAllScheduleTabList(cId, sFD);
                     responseModel.GetAllScheduleTabList = dbScheduleResponse.MapObjects<Models.LocationManagementV2.AllScheduleModel>();
@@ -352,6 +357,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ViewBag.FileLocationPath = "";
                 ViewBag.SFilterDate = ScheduleFilterDate;
                 ViewBag.ClubId = ClubId;
+                ViewBag.ClubName = !string.IsNullOrEmpty(responseModel.ClubNameJp) ? responseModel.ClubNameJp : responseModel.ClubNameEng;
                 return View(responseModel);
             }
         }

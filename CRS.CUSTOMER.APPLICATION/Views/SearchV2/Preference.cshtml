@@ -1,7 +1,29 @@
 ﻿@model List<CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchFilterClubDetailModel>
 @{
     var TypeValue = ViewBag.TypeValue?.ToString();
-    ViewBag.Title = $"{TypeValue}からホストクラブを探す(★★★件)‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
+    var filter = "";
+    if (TypeValue == "s00001")
+    {
+        filter = "今すぐ行けるお店";
+    }
+    else if (TypeValue == "s00002")
+    {
+        filter = "貸し切りOK";
+    }
+    else if (TypeValue == "s00003")
+    {
+        filter = "在籍人数が多い";
+    }
+    else if (TypeValue == "s00004")
+    {
+        filter = "VIPルームあり";
+    }
+    else if (TypeValue == "s00005")
+    {
+        filter = "女子会向き";
+    }
+    var TotalClubCount = ViewBag.TotalClubCount;
+    ViewBag.Title = $"{filter}からホストクラブを探す({TotalClubCount}件)‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var PostURL = ViewBag.PostURL;
 }

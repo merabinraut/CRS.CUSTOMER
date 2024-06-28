@@ -26,5 +26,6 @@ namespace CRS.CUSTOMER.SHARED.DashboardV2
         public List<string> HostGalleryImage { get; set; } = new List<string>();
         public string ClubCode { get; set; }
         public string LocationURL { get; set; }
+        public string TotalClubCount { get; set; }
     }
 }
