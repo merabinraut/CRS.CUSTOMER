@@ -457,6 +457,7 @@
 </div>
 <form method="get" id="club-pagination-form-id">
     <input name="GroupId" value="" id="club-pagination-group-id" hidden />
+    <input name="RenderId" value="club" id="club-pagination-render-id" hidden />
 </form>
 <form method="get" id="host-pagination-form-id">
     <input name="GroupId" value="" id="host-pagination-group-id" hidden />
@@ -645,6 +646,15 @@
         function ClubFunction(i) {
             $('#club-pagination-group-id').val(i);
             var locationId = '@ViewBag.LocationId';
+            const tab1Button = document.getElementById('tab1Button');
+            const tab2Button = document.getElementById('tab2Button');
+            if (tab1Button.classList.contains('active')) {
+                $('#club-pagination-render-id').val('club');
+            }
+            if (tab2Button.classList.contains('active')) {
+                $('#club-pagination-render-id').val('host');
+            }
+
             var form = document.getElementById("club-pagination-form-id");
             form.action = "/area" + locationId;
             form.submit();
