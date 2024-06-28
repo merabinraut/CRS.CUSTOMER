@@ -30,7 +30,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 99%;
+        height: 100%;
         margin-top: 1px;
         background-color: #3E3E3E;
         display: flex;
@@ -468,14 +468,15 @@
     <span class="close" onclick="closeImagePopup();">&times;</span>
     <img class="my-modal-content" id="img01">
 </div>
-<div class="loader" id="loader-id">
+@*<div class="loader" id="loader-id">
     <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
-</div>
+</div>*@
 <!-- #endregion -->
 @section scripts
 {
     <script>
         $(document).ready(function () {
+            EnableLoaderFunction();
            var RenderValue = '@ViewBag.RenderValue';
             var tab1Button = document.getElementById("tab1Button");
             var tab2Button = document.getElementById("tab2Button");
@@ -578,13 +579,14 @@
                     updatePagination();
                 }
             });
-
-            setTimeout(LoaderFunction, 1000);
+            setTimeout(DisableLoaderFunction, 1000);
+            //setTimeout(LoaderFunction, 1000);
         });
-        function LoaderFunction() {
-            var myDiv = document.getElementById("loader-id");
-            myDiv.style.display = "none";
-        }
+        //function LoaderFunction() {
+        //    var myDiv = document.getElementById("loader-id");
+        //    myDiv.style.display = "none";
+        //    document.body.classList.remove('body-no-scroll');
+        //}
     </script>
     <script src="~/Content/CustomHelper.js"></script>
     <!-- cursol script -->
