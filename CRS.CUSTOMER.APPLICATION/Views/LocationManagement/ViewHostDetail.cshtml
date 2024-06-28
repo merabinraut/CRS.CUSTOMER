@@ -119,11 +119,16 @@
 </div>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="/" class="active">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home</a>
+    <a href="/" class="active">
+        @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home*@
+        ホームページ
+    </a>
+    <i class="las la-angle-right"></i>
+    <a href="/" class="active">店舗/ホスト一覧</a>
     <i class="las la-angle-right"></i>
     <a href="@Url.Action("ClubDetail_V2","LocationManagement", new { LocationId = Model.LocationId, ClubId = Model.ClubId })" class="active">@Model.ClubNameJapanese</a>
     <i class="las la-angle-right"></i>
-    <a href="#">@CRS.CUSTOMER.APPLICATION.Resources.Resource.HostDetail</a>
+    <a href="#">@Model.HostNameJapanese</a>
 
 </div>
 <!-- host image  -->
@@ -359,10 +364,24 @@
                     </span>
                 </p>
             }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Birthdate :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
+                    </span>
+                </p>
+            }
             @if (!string.IsNullOrEmpty(@Model.HostBirthPlace))
             {
                 <p style="line-height: 180%;">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.BirthPlace :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostBirthPlace</span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.BirthPlace :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span>
                 </p>
             }
             @if (!string.IsNullOrEmpty(@Model.HostBloodType))
@@ -371,11 +390,25 @@
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Blood_Type :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostBloodType </span>
                 </p>
             }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Blood_Type :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答 </span>
+                </p>
+            }
             @if (!string.IsNullOrEmpty(@Model.HostConstellationGroup))
             {
                 <p style="line-height: 180%;">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Constellation :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1">
                         @Model.HostConstellationGroup
+                    </span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Constellation :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
                     </span>
                 </p>
             }
@@ -387,6 +420,14 @@
                     </span>
                 </p>
             }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Former_Job :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
+                    </span>
+                </p>
+            }
             @if (!string.IsNullOrEmpty(@Model.HostHeight))
             {
                 <p style="line-height: 180%;">
@@ -395,10 +436,24 @@
                     </span>
                 </p>
             }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Height :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
+                    </span>
+                </p>
+            }
             @if (!string.IsNullOrEmpty(@Model.HostLiquorStrength))
             {
                 <p style="line-height: 180%;">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Strength_of_Alcohol :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostLiquorStrength</span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Strength_of_Alcohol :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span>
                 </p>
             }
         </div>
@@ -670,8 +725,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="~/Content/CustomHelper.js"></script>
-    <script>
-        const shareButton = document.querySelector("#shareButton");
+    <script>const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -717,8 +771,7 @@
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
         }</script>
-    <script>
-        // Function to open a specific modal
+    <script>// Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -839,15 +892,13 @@
         // Update the chart
         hostRadarChart.update();
     </script>
-    <script>
-        function gotoClubDetail(clubid, locationid) {
+    <script>function gotoClubDetail(clubid, locationid) {
             if (clubid != null && locationid != null) {
                 window.location.href = '/LocationManagement/ClubDetail_V2?ClubId=' + clubid + '&LocationId=' + locationid;
             }
         }</script>
 
-    <script>
-        function OpenImagePopup(ImageURL) {
+    <script>function OpenImagePopup(ImageURL) {
             if (ImageURL != '' && ImageURL != null) {
                 var modalImg = document.getElementById("img01");
                 var modal = document.getElementById("myModal");

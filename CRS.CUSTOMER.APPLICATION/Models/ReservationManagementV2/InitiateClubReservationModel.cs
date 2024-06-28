@@ -10,6 +10,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2
         public string SelectedHost { get; set; }
         public List<ClubReservationScheduleModel> ClubReservationScheduleModel { get; set; } = new List<ClubReservationScheduleModel>();
         public List<ClubReservableTimeModel> ClubReservableTimeModel { get; set; } = new List<ClubReservableTimeModel>();
+        public List<ReservedTimeSlotModel> ReservedTimeSlotModel { get; set; } = new List<ReservedTimeSlotModel>();
     }
 
     public class ClubReservationScheduleModel
@@ -24,5 +25,10 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2
         public string Time { get; set; }
         public string TimeStatus { get; set; }
         public string LastEntryTime { get; set; }
+    }
+    public class ReservedTimeSlotModel : ClubReservableTimeModel
+    {
+
+        public string Date { get; set; }
     }
 }

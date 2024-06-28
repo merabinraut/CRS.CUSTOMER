@@ -74,6 +74,7 @@
                 });
                 var holidayDates = data.Dayoff;
                 var timeIntervalBySelectedDate = JSON.parse(data.TimeIntervalBySelectedDate);
+                var reservedTimeSlot = JSON.parse(data.ReservedTimeSlot);
                 $("#datepicker").datepicker({
                     minDate: currentDate,
                     maxDate: maxDate,
@@ -99,7 +100,7 @@
                     onSelect: function (dateText, inst) {
                         inst.inline = true; // Set datepicker to inline mode
                         $('#date-id').val(dateText.trim());
-                        getTimeIntervalByDayWise(dateText, timeIntervalBySelectedDate);
+                        getTimeIntervalByDayWise(dateText, timeIntervalBySelectedDate, reservedTimeSlot);
                         initTimeFunction();
                     }
                 });
@@ -121,7 +122,7 @@
     });
 }
 
-function getTimeIntervalByDayWise(date, timeInterval) {
+function getTimeIntervalByDayWise(date, timeInterval, reservedTimeSlot) {
     var timeListHtml = '';
     var selectedDate = new Date(date);
 
@@ -133,7 +134,9 @@ function getTimeIntervalByDayWise(date, timeInterval) {
     var startDisabledTime = parseTimeString(selectedDate, lastEntryTimeStr);
     var endDisabledTime = parseTimeString(selectedDate, endTimeStr);
 
-    timeInterval.forEach(function (item) {
+    var filteredTimeInterval = timeInterval.filter(interval => interval.Time !== reservedTimeSlot.Time);
+
+    filteredTimeInterval.forEach(function (item) {
         var itemTime = new Date(selectedDate.toDateString() + ' ' + item.Time);
         var currentTime = new Date();
         var disabledClassLabel = '';

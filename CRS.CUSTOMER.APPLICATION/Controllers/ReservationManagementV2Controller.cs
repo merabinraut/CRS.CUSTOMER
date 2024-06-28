@@ -5,6 +5,7 @@ using CRS.CUSTOMER.BUSINESS.ReservationManagementV2;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ReservationManagementV2;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -58,6 +59,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
                 var timeIntervalBySelectedDate = ResponseModel.ClubReservableTimeModel;
                 responseData["TimeIntervalBySelectedDate"] = Newtonsoft.Json.JsonConvert.SerializeObject(timeIntervalBySelectedDate);
+
+                var reservedTimeSlot = ResponseModel.ReservedTimeSlotModel;
+                responseData["ReservedTimeSlot"] = Newtonsoft.Json.JsonConvert.SerializeObject(reservedTimeSlot);
+
 
                 if (!string.IsNullOrEmpty(SelectedDate))
                     responseData["SelectedDate"] = SelectedDate;
