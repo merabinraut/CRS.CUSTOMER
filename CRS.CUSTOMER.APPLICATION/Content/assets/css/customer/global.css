@@ -1725,6 +1725,7 @@ ul.club_tags {
 h3.club_name, p.club_kana, p.club_group {
     display: inline-flex;
     align-items: center;
+    
 }
 
 .club_info h3, .club_info p {
@@ -1736,16 +1737,25 @@ h3.club_name, p.club_kana, p.club_group {
 h3.club_name {
     height: 19px;
     font-size: 0.9rem;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
 }
 
 p.club_kana, p.club_group {
     height: 13px;
     color: #aaaaaa;
+    
 }
 
 p.club_group {
     color: #e3a1a1;
     font-weight: normal;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
 }
 
 .action_keep {

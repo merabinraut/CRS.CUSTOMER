@@ -249,13 +249,13 @@
                 @Html.AntiForgeryToken()
                 <input value="@ViewBag.ReferCode" name="ReferCode" hidden />
                 <div class="inputWrapper">
-                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @oninput = "validateInput(this)", autocomplete = "off", @maxlength = "20" })
+                    @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @id= "japaneseInput", @oninput = "validateInput(this)", autocomplete = "off", @maxlength = "20" })
                 </div>
                 <span class="validationMessage">
                     @Html.ValidationMessageFor(m => m.NickName, "", new { @class = "error-validation-msg" })
                 </span>
                 <div class="inputWrapper mt-2">
-                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "w-full ring-0 focus:ring-0 focus:ring-transparent", @type = "number", @placeholder = "携帯電話番号", @minlength = "11", @maxlength = "11", oninput = "limitInputLength(this, 11)", autocomplete = "off" })
+                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "w-full ring-0 focus:ring-0 focus:ring-transparent", @type = "number", @placeholder = "携帯電話番号", @minlength = "11", @id = "numberInput", @maxlength = "11", oninput = "limitInputLength(this, 11)", autocomplete = "off" })
                 </div>
                 <span class="validationMessage">
                     @Html.ValidationMessageFor(m => m.MobileNumber, "", new { @class = "error-validation-msg" })
@@ -337,7 +337,7 @@
             }
         });
 
-        function validateInput(input) {
+     /*   function validateInput(input) {
 
             // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
             var regex = /^[a-zA-Z0-9\u3040-\u309f\u30a0-\u30ff]{4,}$/u;
@@ -348,7 +348,115 @@
                 // Clear the input value if it doesn't match the pattern
                 input.value = input.value.replace(/[^a-zA-Z0-9\u3040-\u309f\u30a0-\u30ff]/gu, "");
             }
+        }*/
+        let isComposing = false;
+
+       /* function validateInput(input) {
+            // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
+            var regex = /[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]/u;
+
+            // Check if currently composing text (IME active)
+            if (!isComposing) {
+                debugger
+                // Check if the input value matches the pattern
+                if (!regex.test(input.value)) {
+                    // Clear the input value if it doesn't match the pattern
+                    input.value = input.value.replace(/[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-　]/gu, "");
+                }
+            }
+
+
+            // Event listener for composition events to track IME state
+            document.addEventListener('compositionstart', function () {
+                isComposing = true;
+            });
+
+            document.addEventListener('compositionend', function () {
+                isComposing = false;
+                // Trigger validation after composition ends
+                validateInput(document.getElementById('japaneseInput'));
+            });
+
+            // Event listener for input field changes
+            document.getElementById('japaneseInput').addEventListener('input', function () {
+                validateInput(this);
+            });
+        }*/
+
+       /* let isComposing = false;*/
+
+        function validateInput(input) {
+            // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
+            var regex = /^[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]+$/u;
+
+            // Check if currently composing text (IME active)
+            if (!isComposing) {
+                // Check if the input value matches the pattern
+                if (!regex.test(input.value)) {
+                    // Clear the input value if it doesn't match the pattern
+                    input.value = input.value.replace(/[^一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]/gu, "");
+                }
+            }
         }
+
+        // Event listener for composition events to track IME state
+        document.addEventListener('compositionstart', function () {
+            isComposing = true;
+        });
+
+        document.addEventListener('compositionend', function () {
+            isComposing = false;
+            // Trigger validation after composition ends
+            validateInput(document.getElementById('japaneseInput'));
+        });
+
+        // Event listener for input field changes
+        document.getElementById('japaneseInput').addEventListener('input', function () {
+            validateInput(this);
+        });
+
+    </script>
+    <script>
+        function updateButtonState() {
+            const japaneseInput = $('#japaneseInput').val();
+            const numberInput = $('#numberInput').val();
+            const isPolicyChecked = $('#policy').is(':checked');
+            const isJapaneseInputValid = /^[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]+$/u.test(japaneseInput);
+            const isNumberInputValid = /^[0-9]+$/u.test(numberInput);
+
+            if (!isJapaneseInputValid || !isNumberInputValid || !isPolicyChecked) {
+                $('#FormSubmit').addClass('disabled');
+            } else {
+                $('#FormSubmit').removeClass('disabled');
+            }
+        }
+        $(document).ready(function () {
+            // Event listeners for composition events to track IME state
+            $('#japaneseInput').on('compositionstart', function () {
+                isComposing = true;
+            });
+
+            $('#japaneseInput').on('compositionend', function () {
+                isComposing = false;
+                // Trigger validation after composition ends
+                validateInput(this);
+                updateButtonState();
+            });
+
+            // Event listeners for input field changes
+            $('#japaneseInput').on('input', function () {
+               /* validateInput(this);*/
+                updateButtonState();
+            });
+
+            $('#numberInput').on('input', function () {
+              /*  validateNumberInput(this);*/
+                updateButtonState();
+            });
+
+            // Initial validation to set button state on page load
+            updateButtonState();
+        });
     </script>
     <script src="~/Content/validation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
