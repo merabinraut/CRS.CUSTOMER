@@ -1614,7 +1614,7 @@ button {
     padding: 20px 0 0 0;
     display: block;
     float: left;
-    border-bottom: 4px solid #fafafa;
+   /* border-bottom: 4px solid #fafafa;*/
     /* background: #fcfcfc;*/
     background: #fff;
 }
