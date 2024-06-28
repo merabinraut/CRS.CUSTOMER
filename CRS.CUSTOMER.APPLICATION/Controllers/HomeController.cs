@@ -62,7 +62,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (!string.IsNullOrEmpty(ReferCode))
             {
                 ReferralModelCommon referCommon = new ReferralModelCommon();
-                referCommon.ReferCode = ReferCode;
+                referCommon.ReferCode = ReferCode.DecryptParameter();
                 referCommon.ActionIP = ApplicationUtilities.GetIP();
                 var dbReferralRes = _buss.ValidateReferralCode(referCommon);
                 if (dbReferralRes != null && dbReferralRes.Code == "0")
