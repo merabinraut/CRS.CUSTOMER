@@ -122,6 +122,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             Model.RequestModel = RequestModel.MapObject<LocationClubHostRequestModel>();
 
             ViewBag.RenderValue = !string.IsNullOrEmpty(RenderId) ? RenderId : null;
+            if (RequestModel.GroupId > 1)
+                ViewBag.TabActive = true;
             return View(Model);
         }
 
