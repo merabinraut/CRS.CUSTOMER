@@ -38,13 +38,11 @@
           referrerpolicy="no-referrer" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z189BCRTWP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <script>window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-Z189BCRTWP');
-    </script>
+        gtag('config', 'G-Z189BCRTWP');</script>
     @*  <title>ホスログ | @ViewBag.Title</title>*@
     <title>@ViewBag.Title</title>
     <meta property="og:title" content="ホスログ/公式ホームページ">
@@ -236,16 +234,14 @@
             /* 18.26px */
         }
     </style>
-    <script>
-        (function (d) {
+    <script>(function (d) {
             var config = {
                 kitId: 'scz4hqc',
                 scriptTimeout: 3000,
                 async: true
             },
                 h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
-        })(document);
-    </script>
+        })(document);</script>
 </head>
 <body class="md:hidden">
     <!-- #endregion -->
@@ -559,8 +555,7 @@
 
 
 
-    <script>
-        $(document).ready(function () {
+    <script>$(document).ready(function () {
             $('select').select2({
                 minimumResultsForSearch: Infinity
             });
@@ -646,8 +641,7 @@
                 queryObject[item[0]] = decodeURIComponent(item[1]);
             });
             return queryObject;
-        }
-    </script>
+        }</script>
     <!-- #endregion -->
     <!-- #region Fotter-links -->
     <script src="~/Content/assets/js/modal.js"></script>
@@ -660,8 +654,7 @@
             integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-    <script>
-        // Get the button
+    <script>// Get the button
 
         let mybutton = document.getElementById("myBtn");
         // When the user scrolls down 20px from the top of the document, show the button
@@ -681,8 +674,7 @@
         function topFunction() {
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
-        }
-    </script>
+        }</script>
 
     <script>
     //For toaster Notification
@@ -720,8 +712,7 @@
 
     </script>
 
-    <script>
-        function OnLoadLoaderFunction() {
+    <script>function OnLoadLoaderFunction() {
             document.getElementById('loader-id-v2').style.display = 'flex';
             document.body.addEventListener('touchmove', preventDefault, { passive: false });
             document.body.classList.add('no-scroll-loader');
@@ -747,15 +738,13 @@
 
         function NavCloseFunction() {
             document.getElementById('drawer-right-example').classList.add('translate-x-full');
-        }
-    </script>
+        }</script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="~/Content/assets/js/reservation-common.js"></script>
     <script src="~/Content/assets/js/search-filter-common.js"></script>
     <script src="~/Content/assets/js/ManageRedirectURL.js"></script>
     <script src="~/Content/assets/js/BookmarkManagement.js"></script>
-    <script>
-        function WindowHistoryBack() {
+    <script>function WindowHistoryBack() {
             var previousUrl = document.referrer;
             if (isLoginPageWithReturnUrl(previousUrl)) {
                 window.location.href = '/';
@@ -781,8 +770,7 @@
         function ClubDetailRedirectFunction(ClubCode, PrefecturesArea) {
             var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
             window.location.href = url;
-        }
-    </script>
+        }</script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

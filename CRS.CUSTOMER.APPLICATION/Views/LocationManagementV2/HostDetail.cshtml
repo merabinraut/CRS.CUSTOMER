@@ -120,12 +120,22 @@
 </div>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="/" class="active">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home</a>
+    @*<a href="/" class="active">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home</a>
+        <i class="las la-angle-right"></i>
+        <a onclick="RedirectToLocation();" class="active">@Model.ClubNameJapanese</a>
+        <i class="las la-angle-right"></i>
+        <a href="#">@CRS.CUSTOMER.APPLICATION.Resources.Resource.HostDetail</a>*@
+
+    <a href="/" class="active">
+        @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home*@
+        ホームページ
+    </a>
+    <i class="las la-angle-right"></i>
+    <a href="/" class="active">店舗/ホスト一覧</a>
     <i class="las la-angle-right"></i>
     <a onclick="RedirectToLocation();" class="active">@Model.ClubNameJapanese</a>
     <i class="las la-angle-right"></i>
-    <a href="#">@CRS.CUSTOMER.APPLICATION.Resources.Resource.HostDetail</a>
-
+    <a href="#">@Model.HostNameJapanese</a>
 </div>
 <!-- host image  -->
 
@@ -360,10 +370,24 @@
                     </span>
                 </p>
             }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Birthdate :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
+                    </span>
+                </p>
+            }
             @if (!string.IsNullOrEmpty(@Model.HostBirthPlace))
             {
                 <p style="line-height: 180%;">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.BirthPlace :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostBirthPlace</span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.BirthPlace :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span>
                 </p>
             }
             @if (!string.IsNullOrEmpty(@Model.HostBloodType))
@@ -372,11 +396,25 @@
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Blood_Type :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostBloodType </span>
                 </p>
             }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Blood_Type :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答 </span>
+                </p>
+            }
             @if (!string.IsNullOrEmpty(@Model.HostConstellationGroup))
             {
                 <p style="line-height: 180%;">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Constellation :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1">
                         @Model.HostConstellationGroup
+                    </span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Constellation :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
                     </span>
                 </p>
             }
@@ -388,6 +426,14 @@
                     </span>
                 </p>
             }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Former_Job :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
+                    </span>
+                </p>
+            }
             @if (!string.IsNullOrEmpty(@Model.HostHeight))
             {
                 <p style="line-height: 180%;">
@@ -396,10 +442,24 @@
                     </span>
                 </p>
             }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Height :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
+                    </span>
+                </p>
+            }
             @if (!string.IsNullOrEmpty(@Model.HostLiquorStrength))
             {
                 <p style="line-height: 180%;">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Strength_of_Alcohol :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostLiquorStrength</span>
+                    お酒の強さ :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostLiquorStrength</span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    お酒の強さ :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span>
                 </p>
             }
         </div>
@@ -573,15 +633,7 @@
 <div class="bg-[#FAFAFA]  py-[10px] mt-4 sticky bottom-0">
     <div class="flex flex-row px-[16px] gap-6  items-center justify-between">
         <div class="flex gap-6 items-center justify-start p-[4px]">
-            <div id="shareButton">
-                <div class="flex justify-center items-center flex-col" style="line-height:52%">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                        <path d="M16.0972 3.05078L15.125 4.02295L17.9905 6.875H11.3438C9.25925 6.875 7.5625 8.57106 7.5625 10.6562C7.5625 12.7414 9.25925 14.4375 11.3438 14.4375H11.6875V13.0625H11.3438C10.0169 13.0625 8.9375 11.9831 8.9375 10.6562C8.9375 9.32938 10.0169 8.25 11.3438 8.25H17.9932L15.1304 11.1128L16.1025 12.085L20.625 7.5625L16.0972 3.05078ZM3.4375 3.4375V18.5625H18.5625V11.6875L17.1875 13.0625V17.1875H4.8125V4.8125H12.2743L13.6493 3.4375H3.4375Z"
-                              fill="#D75A8B" />
-                    </svg>
-                    <span class="text-[#D75A8B] text-[9px] font-medium">共有</span>
-                </div>
-            </div>
+
             <div class="flex justify-center items-center flex-col" style="line-height:48%">
                 <a href="@Model.LocationURL" target="_blank" class="flex justify-center items-center flex-col">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -591,7 +643,15 @@
                     <span class="text-[#D75A8B] text-[9px] font-medium">地図</span>
                 </a>
             </div>
-
+            <div id="shareButton">
+                <div class="flex justify-center items-center flex-col" style="line-height:52%">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                        <path d="M16.0972 3.05078L15.125 4.02295L17.9905 6.875H11.3438C9.25925 6.875 7.5625 8.57106 7.5625 10.6562C7.5625 12.7414 9.25925 14.4375 11.3438 14.4375H11.6875V13.0625H11.3438C10.0169 13.0625 8.9375 11.9831 8.9375 10.6562C8.9375 9.32938 10.0169 8.25 11.3438 8.25H17.9932L15.1304 11.1128L16.1025 12.085L20.625 7.5625L16.0972 3.05078ZM3.4375 3.4375V18.5625H18.5625V11.6875L17.1875 13.0625V17.1875H4.8125V4.8125H12.2743L13.6493 3.4375H3.4375Z"
+                              fill="#D75A8B" />
+                    </svg>
+                    <span class="text-[#D75A8B] text-[9px] font-medium">共有</span>
+                </div>
+            </div>
 
         </div>
         <button style="border-radius: 4px ;
@@ -671,8 +731,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="~/Content/CustomHelper.js"></script>
-    <script>
-        const shareButton = document.querySelector("#shareButton");
+    <script>const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -718,8 +777,7 @@
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
         }</script>
-    <script>
-        // Function to open a specific modal
+    <script>// Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -840,8 +898,7 @@
         // Update the chart
         hostRadarChart.update();
     </script>
-    <script>
-        function gotoClubDetail(clubid, locationid) {
+    <script>function gotoClubDetail(clubid, locationid) {
             if (clubid != null && locationid != null) {
                 window.location.href = '/LocationManagement/ClubDetail_V2?ClubId=' + clubid + '&LocationId=' + locationid;
             }
