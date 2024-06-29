@@ -25,5 +25,6 @@
         public string ClubLocationId { get; set; }
         public string IsBookmarked { get; set; }
         public string LocationURL { get; set; }
+        public string TotalRecords { get; set; }
     }
 }
