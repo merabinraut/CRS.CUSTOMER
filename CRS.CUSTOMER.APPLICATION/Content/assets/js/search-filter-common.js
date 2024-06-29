@@ -713,6 +713,7 @@ function DisableLoaderFunction() {
 
 //#region date/time filter
 async function InitiateDateTimeFilterPopupFunction() {
+    debugger;
     EnableLoaderFunction();
     document.body.classList.add('body-no-scroll');
     document.getElementById("DateTimeFilter-Id").classList.remove("disable-click");
@@ -720,7 +721,6 @@ async function InitiateDateTimeFilterPopupFunction() {
     if (locationfilterpopupContent.trim() !== '') {
         var element = document.getElementById('drawer-date-time');
         if (element) {
-            DateTimeFilterCommon();
             element.classList.remove('translate-y-full');
             DisableLoaderFunction();
             return false;
