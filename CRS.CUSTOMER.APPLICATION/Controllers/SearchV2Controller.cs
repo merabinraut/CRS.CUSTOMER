@@ -174,7 +174,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var locationId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, ViewBag.PrefecturesArea);
-            if (!string.IsNullOrEmpty(target) || (!string.IsNullOrEmpty(target) && NewHost) || (!string.IsNullOrEmpty(target) || NewClub))
+            if (!string.IsNullOrEmpty(target) || (!string.IsNullOrEmpty(target) && NewHost) || (!string.IsNullOrEmpty(target) && NewClub))
             {
                 if (target.Trim().ToLower() == "host" || NewHost)
                 {

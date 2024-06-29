@@ -1035,3 +1035,34 @@ function NewHostRenderFunction() {
     form.submit();
     DisableLoaderFunction();
 }
+function PopupFilterNewClubRenderFunction() {
+    EnableLoaderFunction();
+    let locationId = $('#filter-location-id').val();
+    if (!locationId || locationId.trim() === '') {
+        locationId = $('#current-location-id').val();
+    }
+    $('.location-class').val(locationId);
+    var searchUrl = `/Search${locationId}/?scftab=03&NewClub=${true}`;
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = searchUrl;
+    document.body.appendChild(form);
+    form.submit();
+    DisableLoaderFunction();
+}
+
+function PopupFilterNewHostRenderFunction() {
+    EnableLoaderFunction();
+    let locationId = $('#filter-location-id').val();
+    if (!locationId || locationId.trim() === '') {
+        locationId = $('#current-location-id').val();
+    }
+    $('.location-class').val(locationId);
+    var searchUrl = `/Search${locationId}/?scftab=03&NewHost=${true}`;
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = searchUrl;
+    document.body.appendChild(form);
+    form.submit();
+    DisableLoaderFunction();
+}
