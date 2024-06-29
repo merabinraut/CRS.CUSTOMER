@@ -713,7 +713,6 @@ function DisableLoaderFunction() {
 
 //#region date/time filter
 async function InitiateDateTimeFilterPopupFunction() {
-    debugger;
     EnableLoaderFunction();
     document.body.classList.add('body-no-scroll');
     document.getElementById("DateTimeFilter-Id").classList.remove("disable-click");
