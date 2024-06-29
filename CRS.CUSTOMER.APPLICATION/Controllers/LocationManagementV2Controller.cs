@@ -101,6 +101,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             var PrefecturesArea = $"/{prefectures}/{area}";
             ViewBag.LocationId = PrefecturesArea;
+            ViewBag.ClubId = ClubId;
             var LocationJapaneseLabel = ApplicationUtilities.GetKeyValueFromDictionary(_locationJapaneseLabelHelper, PrefecturesArea);
             ViewBag.LocationJapaneseLabel = string.IsNullOrEmpty(LocationJapaneseLabel) ? PrefecturesArea : LocationJapaneseLabel;
             var culture = Request.Cookies["culture"]?.Value;
@@ -357,7 +358,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ViewBag.BackButtonURL = "/";
                 ViewBag.FileLocationPath = "";
                 ViewBag.SFilterDate = ScheduleFilterDate;
-                ViewBag.ClubId = ClubId;
                 ViewBag.ClubName = !string.IsNullOrEmpty(responseModel.ClubNameJp) ? responseModel.ClubNameJp : responseModel.ClubNameEng;
                 return View(responseModel);
             }
