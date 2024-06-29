@@ -68,15 +68,11 @@
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="/" class="active">
-        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Home
-    </a>
+    <a href="/" class="active">ホームページ</a>
     <i class="las la-angle-right"></i>
-    <a class="active" onclick="RedirectToLocation();">
-        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Clubs
-    </a>
+    <a class="active" onclick="RedirectToLocation();">店舗/ホスト一覧</a>
     <i class="las la-angle-right"></i>
-    <a href="#">@Model.ClubNameEng</a>
+    <a href="#">@Model.ClubNameJp</a>
 </div>
 <div class="h-[189px]">
     <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
@@ -1589,8 +1585,8 @@
     </button>
     <!--<div id="modal2" class="modal">
         <div class="modal-content">-->
-            <!-- <span class="close-btn"  >&times;</span> -->
-            <!--<div class="fixed bottom-0 w-[100%] left-0 right-0 bg-white z-20">
+    <!-- <span class="close-btn"  >&times;</span> -->
+    <!--<div class="fixed bottom-0 w-[100%] left-0 right-0 bg-white z-20">
                 <div class="py-[10px] px-4 border-b border-b-[#EDEDED] flex justify-between bg-white">
                     <h5 id="drawer-bottom-label" class="text-sm text-secondary-1">
                         共有

@@ -85,14 +85,6 @@
         width: 100%;
     }
 
-    /*
-    .owl-item .item img {
-        width: 298px;
-    }
-
-    .owl-carousel .owl-item {
-        width: 298px;
-    }*/
     .owl-carousel {
         position: relative;
     }
@@ -120,22 +112,13 @@
 </div>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    @*<a href="/" class="active">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home</a>
-        <i class="las la-angle-right"></i>
-        <a onclick="RedirectToLocation();" class="active">@Model.ClubNameJapanese</a>
-        <i class="las la-angle-right"></i>
-        <a href="#">@CRS.CUSTOMER.APPLICATION.Resources.Resource.HostDetail</a>*@
-
-    <a href="/" class="active">
-        @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home*@
-        ホームページ
-    </a>
+    <a href="/" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">ホームページ</a>
     <i class="las la-angle-right"></i>
-    <a href="/" class="active">店舗/ホスト一覧</a>
+    <a href="/" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">店舗/ホスト一覧</a>
     <i class="las la-angle-right"></i>
-    <a onclick="RedirectToLocation();" class="active">@Model.ClubNameJapanese</a>
+    <a onclick="RedirectToLocation();" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@Model.ClubNameJapanese</a>
     <i class="las la-angle-right"></i>
-    <a href="#">@Model.HostNameJapanese</a>
+    <a href="#" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@Model.HostNameJapanese</a>
 </div>
 <!-- host image  -->
 
@@ -146,14 +129,9 @@
             {
                 foreach (var item in Model.HostGalleryImageList)
                 {
-                    @* <a href="#">*@
-                    @*                    <div class="flex h-[413px] w-[195px] rounded ">*@
                     <img class="rounded object-cover h-[413px]" src="@item"
                          alt="modelimage">
-                    @*</div>*@
-                    @* </a>*@
                 }
-
             }
             else
             {
@@ -731,7 +709,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="~/Content/CustomHelper.js"></script>
-    <script>const shareButton = document.querySelector("#shareButton");
+    <script>
+        const shareButton = document.querySelector("#shareButton");
         var shareableLink = window.location.href;
         shareButton.addEventListener("click", (event) => {
             if (navigator.share) {
@@ -777,7 +756,8 @@
             localStorage.setItem("ClubId", EncryptParameter(i));
             localStorage.setItem("ClubName", EncryptParameter(j));
         }</script>
-    <script>// Function to open a specific modal
+    <script>
+        // Function to open a specific modal
         function openModal(modalId) {
             var modal = document.getElementById(modalId);
             if (modal) {
@@ -898,7 +878,8 @@
         // Update the chart
         hostRadarChart.update();
     </script>
-    <script>function gotoClubDetail(clubid, locationid) {
+    <script>
+        function gotoClubDetail(clubid, locationid) {
             if (clubid != null && locationid != null) {
                 window.location.href = '/LocationManagement/ClubDetail_V2?ClubId=' + clubid + '&LocationId=' + locationid;
             }
