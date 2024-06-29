@@ -1,7 +1,9 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.LocationManagement.ViewHostDetailModelV2
 @{
     var ClubId = ViewBag.ClubName;
+    var ClubCode = ViewBag.ClubId;
     var HostName = ViewBag.HostName;
+    var LocationURL = ViewBag.LocationId;
     ViewBag.Title = $"{HostName}のプロフィール‖{ClubId}‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var HostSkillsModel = @Model.HostIdentityDetailsModel.Where(x => x.LabelType.Trim().ToUpper() == "SKILLS").ToList();
@@ -114,9 +116,9 @@
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
     <a href="/" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">ホームページ</a>
     <i class="las la-angle-right"></i>
-    <a href="/" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">店舗/ホスト一覧</a>
+    <a onclick="RedirectToLocation();" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">店舗/ホスト一覧</a>
     <i class="las la-angle-right"></i>
-    <a onclick="RedirectToLocation();" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@Model.ClubNameJapanese</a>
+    <a onclick="ClubDetailRedirectFunction('@ClubCode', '@LocationURL');" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@Model.ClubNameJapanese</a>
     <i class="las la-angle-right"></i>
     <a href="#" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@Model.HostNameJapanese</a>
 </div>
