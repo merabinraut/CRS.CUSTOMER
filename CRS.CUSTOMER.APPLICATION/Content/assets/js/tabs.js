@@ -14,7 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             // Show the selected tab and set active class on the clicked button
-            tabs[index].classList.remove("hidden");
+            if (tabs) {
+                tabs[index].classList.remove("hidden");
+            }
             tabButton.classList.add("active");
         });
     });
@@ -35,8 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             // Show the selected tab and set active class on the clicked button
-            tabs[index].classList.remove("hidden");
-            tabButton.classList.add("active");
+            if (tabs[index]) {
+                if (tabs) {
+                    tabs[index].classList.remove("hidden");
+                }
+                tabButton.classList.add("active");
+            }
         });
     });
 });

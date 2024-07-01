@@ -16,7 +16,9 @@ namespace CRS.CUSTOMER.SHARED.Search
     public class SearchFilterClubDetailCommon
     {
         public string ClubId { get; set; }
+        public string ClubCode { get; set; }
         public string ClubLocationId { get; set; }
+        public string LocationURL { get; set; }
         public string ClubNameEnglish { get; set; }
         public string ClubNameJapanese { get; set; }
         public string ClubLogo { get; set; }
@@ -67,6 +69,9 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string ClubLocationId { get; set; }
         public string IsBookmarked { get; set; }
         public string TotalRecords { get; set; }
+        public string ClubCode { get; set; }
+        public string HostCode { get; set; }
+        public string LocationURL { get; set; }
     }
     public class ClubDateTimeAndOtherFilterRequest
     {

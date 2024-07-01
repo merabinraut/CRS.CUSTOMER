@@ -616,7 +616,8 @@ function ClosePreferenceFilterPopUp() {
 
 //#region 1
 function LocationFunction(i) {
-    window.location.href = "/LocationManagement/Index?LocationId=" + i;
+    //window.location.href = "/LocationManagement/Index?LocationId=" + i;
+    window.location.href = "/area" + i;
 }
 //#endregion
 
@@ -632,6 +633,7 @@ function ClubFilterSubmitButton() {
     $('.location-class').val(locationId);
     ManagePreferenceFilterHTMLContent();
     var form = document.getElementById("club-filter-form-id");
+    form.action = "/search" + locationId + "/?scftab=01";
     form.submit();
     DisableLoaderFunction();
 }
@@ -650,6 +652,7 @@ function HostFilterSubmitButton() {
     $('#host-occupation-id').val($('#host-occupation-ddl-id').val());
     ManagePreferenceFilterHTMLContent();
     var form = document.getElementById("host-filter-form-id");
+    form.action = "/search" + locationId + "/?scftab=02";
     form.submit();
     DisableLoaderFunction();
 }
@@ -717,7 +720,6 @@ async function InitiateDateTimeFilterPopupFunction() {
     if (locationfilterpopupContent.trim() !== '') {
         var element = document.getElementById('drawer-date-time');
         if (element) {
-            DateTimeFilterCommon();
             element.classList.remove('translate-y-full');
             DisableLoaderFunction();
             return false;
@@ -995,6 +997,7 @@ function SubmitDateTimeFilterFunction() {
     $('.location-class').val(locationId);
     ManageDateTimeFilterHTMLContent();
     var form = document.getElementById("date-time-filter-id");
+    form.action = "/search" + locationId;
     form.submit();
     DisableLoaderFunction();
 }
@@ -1007,7 +1010,13 @@ function NewClubRenderFunction() {
         locationId = $('#current-location-id').val();
     }
     $('.location-class').val(locationId);
-    window.location.href = `/Search/ClubSearchResult?LocationId=${locationId}&NewClub=${true}`;
+    var searchUrl = `/Search${locationId}/?target=new&NewClub=${true}`;
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = searchUrl;
+    document.body.appendChild(form);
+    form.submit();
+    DisableLoaderFunction();
 }
 
 function NewHostRenderFunction() {
@@ -1017,5 +1026,42 @@ function NewHostRenderFunction() {
         locationId = $('#current-location-id').val();
     }
     $('.location-class').val(locationId);
-    window.location.href = `/Search/HostSearchResult?LocationId=${locationId}&NewHost=${true}`;
+    var searchUrl = `/Search${locationId}/?target=new&NewHost=${true}`;
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = searchUrl;
+    document.body.appendChild(form);
+    form.submit();
+    DisableLoaderFunction();
+}
+function PopupFilterNewClubRenderFunction() {
+    EnableLoaderFunction();
+    let locationId = $('#filter-location-id').val();
+    if (!locationId || locationId.trim() === '') {
+        locationId = $('#current-location-id').val();
+    }
+    $('.location-class').val(locationId);
+    var searchUrl = `/Search${locationId}/?scftab=03&NewClub=${true}`;
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = searchUrl;
+    document.body.appendChild(form);
+    form.submit();
+    DisableLoaderFunction();
+}
+
+function PopupFilterNewHostRenderFunction() {
+    EnableLoaderFunction();
+    let locationId = $('#filter-location-id').val();
+    if (!locationId || locationId.trim() === '') {
+        locationId = $('#current-location-id').val();
+    }
+    $('.location-class').val(locationId);
+    var searchUrl = `/Search${locationId}/?scftab=03&NewHost=${true}`;
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = searchUrl;
+    document.body.appendChild(form);
+    form.submit();
+    DisableLoaderFunction();
 }

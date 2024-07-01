@@ -45,6 +45,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Dashboard
                     locationList.Add(new LocationListCommon
                     {
                         LocationID = item["LocationId"].ToString(),
+                        LocationURL = item["LocationURL"].ToString(),
                         LocationName = item["LocationName"].ToString(),
                         LocationImage = item["LocationImage"].ToString(),
                         LocationURl = item["LocationURL"].ToString(),

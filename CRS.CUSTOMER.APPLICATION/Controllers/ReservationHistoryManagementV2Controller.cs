@@ -17,67 +17,83 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             _buss = buss;
         }
-        public ActionResult ReservationHistory()
+        [HttpGet, Route("user/account/reservation")]
+        public ActionResult ReservationHistory(string rsvtab = "04")
         {
             ReservationCommonModel responseInfo = new ReservationCommonModel();
             var customerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
 
-            #region "Reserved History"
-            var dbReservedInfo = _buss.GetReservedList(customerId);
-            responseInfo.GetReservedList = dbReservedInfo.MapObjects<ReservationHistoryV2Model>();
-            foreach (var item in responseInfo.GetReservedList)
+            if (!string.IsNullOrEmpty(rsvtab) && rsvtab.Trim() == "02")
             {
-                item.ClubId = item.ClubId.EncryptParameter();
-                item.ReservationId = item.ReservationId.EncryptParameter();
-                item.CustomerId = item.CustomerId.EncryptParameter();
+                #region "Visited History"
+                responseInfo.rsvtab = "02";
+                var dbVisitedInfo = _buss.GetVisitedHistoryList(customerId);
+                responseInfo.GetVisitedHistoryList = dbVisitedInfo.MapObjects<VisitedHistoryModel>();
+                foreach (var visitedItem in responseInfo.GetVisitedHistoryList)
+                {
+                    visitedItem.ClubId = visitedItem.ClubId.EncryptParameter();
+                    visitedItem.ReservationId = visitedItem.ReservationId.EncryptParameter();
+                    visitedItem.CustomerId = visitedItem.CustomerId.EncryptParameter();
+                }
+                responseInfo.GetVisitedHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
+                #endregion
             }
-            #endregion
-
-            #region "Visited History"
-            var dbVisitedInfo = _buss.GetVisitedHistoryList(customerId);
-            responseInfo.GetVisitedHistoryList = dbVisitedInfo.MapObjects<VisitedHistoryModel>();
-            foreach (var visitedItem in responseInfo.GetVisitedHistoryList)
+            else if (!string.IsNullOrEmpty(rsvtab) && rsvtab.Trim() == "03")
             {
-                visitedItem.ClubId = visitedItem.ClubId.EncryptParameter();
-                visitedItem.ReservationId = visitedItem.ReservationId.EncryptParameter();
-                visitedItem.CustomerId = visitedItem.CustomerId.EncryptParameter();
+                #region "Cancelled History"
+                responseInfo.rsvtab = "03";
+                var dbCancelledInfo = _buss.GetCancelledHistory(customerId);
+                responseInfo.GetCancelledHistoryList = dbCancelledInfo.MapObjects<CancelledHistoryModel>();
+                foreach (var cancelItem in responseInfo.GetCancelledHistoryList)
+                {
+                    cancelItem.ClubId = cancelItem.ClubId.EncryptParameter();
+                    cancelItem.ReservationId = cancelItem.ReservationId.EncryptParameter();
+                    cancelItem.CustomerId = cancelItem.CustomerId.EncryptParameter();
+                    cancelItem.LocationId = cancelItem.LocationId.EncryptParameter();
+                }
+                responseInfo.GetCancelledHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
+                #endregion
             }
-            #endregion
-
-            #region "Cancelled History"
-            var dbCancelledInfo = _buss.GetCancelledHistory(customerId);
-            responseInfo.GetCancelledHistoryList = dbCancelledInfo.MapObjects<CancelledHistoryModel>();
-            foreach (var cancelItem in responseInfo.GetCancelledHistoryList)
+            else if (!string.IsNullOrEmpty(rsvtab) && rsvtab.Trim() == "04")
             {
-                cancelItem.ClubId = cancelItem.ClubId.EncryptParameter();
-                cancelItem.ReservationId = cancelItem.ReservationId.EncryptParameter();
-                cancelItem.CustomerId = cancelItem.CustomerId.EncryptParameter();
-                cancelItem.LocationId = cancelItem.LocationId.EncryptParameter();
+                #region "All History"
+                responseInfo.rsvtab = "04";
+                var dbAllInfo = _buss.GetAllHistoryList(customerId);
+                responseInfo.GetAllHistoryList = dbAllInfo.MapObjects<AllHistoryModel>();
+                foreach (var allItem in responseInfo.GetAllHistoryList)
+                {
+                    allItem.ClubId = allItem.ClubId.EncryptParameter();
+                    allItem.ReservationId = allItem.ReservationId.EncryptParameter();
+                    allItem.CustomerId = allItem.CustomerId.EncryptParameter();
+                    allItem.LocationId = allItem.LocationId.EncryptParameter();
+                }
+                responseInfo.GetAllHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
+                #endregion
             }
-            #endregion
-
-            #region "All History"
-            var dbAllInfo = _buss.GetAllHistoryList(customerId);
-            responseInfo.GetAllHistoryList = dbAllInfo.MapObjects<AllHistoryModel>();
-            foreach (var allItem in responseInfo.GetAllHistoryList)
+            else
             {
-                allItem.ClubId = allItem.ClubId.EncryptParameter();
-                allItem.ReservationId = allItem.ReservationId.EncryptParameter();
-                allItem.CustomerId = allItem.CustomerId.EncryptParameter();
-                allItem.LocationId = allItem.LocationId.EncryptParameter();
+                #region "Reserved History"
+                responseInfo.rsvtab = "01";
+                var dbReservedInfo = _buss.GetReservedList(customerId);
+                responseInfo.GetReservedList = dbReservedInfo.MapObjects<ReservationHistoryV2Model>();
+                foreach (var item in responseInfo.GetReservedList)
+                {
+                    item.ClubId = item.ClubId.EncryptParameter();
+                    item.ReservationId = item.ReservationId.EncryptParameter();
+                    item.CustomerId = item.CustomerId.EncryptParameter();
+                }
+                responseInfo.GetReservedList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
+                #endregion
             }
-            #endregion
 
-            responseInfo.GetReservedList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
-            responseInfo.GetVisitedHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
-            responseInfo.GetCancelledHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
-            responseInfo.GetAllHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
             return View(responseInfo);
         }
+
+        [HttpGet, Route("user/account/reservation/detail")]
         public ActionResult ViewHistoryDetail(string ReservationId = "")
         {
             string CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
-            string reservationId = "";            
+            string reservationId = "";
 
             if (!string.IsNullOrEmpty(ReservationId)) reservationId = ReservationId.DecryptParameter();
             ReservationHistoryDetailModel responseinfo = new ReservationHistoryDetailModel();

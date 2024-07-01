@@ -3,6 +3,7 @@
     public class LocationListCommon : Common
     {
         public string LocationID { get; set; }
+        public string LocationURL { get; set; }
         public string LocationName { get; set; }
         public string LocationImage { get; set; }
         public string LocationURl { get; set; }

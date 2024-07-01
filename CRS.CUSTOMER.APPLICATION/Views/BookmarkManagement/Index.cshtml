@@ -1,7 +1,7 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.BookmarkManagement.BookmarkManagementModel
 
 @{
-    ViewBag.Title = "Bookmarks";
+    ViewBag.Title = "ブックマーク‖ ホスログ《 ホストクラブ初回来店・ネット予約》";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int clubCount = @Model.BookmarkedClubs.Count;
     int hostCount = Model.BookmarkedHosts.Count;
@@ -70,7 +70,8 @@
                 {
                     <div class="club_content">
                         <!-- s/link -->
-                        <a onclick="ClubDetailActionFunction('@club.LocationId', '@club.ClubId')">
+                        @*<a onclick="ClubDetailActionFunction('@club.LocationId', '@club.ClubId')">*@
+                        <a onclick="ClubDetailRedirectFunction('@club.ClubCode', '@club.LocationURL')">
                             <ul class="club_tags">
                                 @if (!string.IsNullOrEmpty(@club.Tag1))
                                 {
@@ -209,7 +210,8 @@
                     <div class="flex flex-col border-b-[4px] border-[#E3E2DB] py-3  ">
                         <div class="flex flex-row gap-[16px] mx-[16px]">
                             <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
-                                <div class="w-full flex justify-center" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                                @*<div class="w-full flex justify-center" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">*@
+                                <div class="w-full flex justify-center" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                                          src="@item.HostImage" />
                                 </div>
@@ -296,9 +298,9 @@
             myDiv.style.display = "none";
         }
 
-        function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
-        }
+        //function ClubDetailActionFunction(i, j) {
+        //    window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
+        //}
     </script>
     <script>
         function ManageBookmark(ClubId, HostId, AgentType, ClickedElement) {

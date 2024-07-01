@@ -62,7 +62,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (!string.IsNullOrEmpty(ReferCode))
             {
                 ReferralModelCommon referCommon = new ReferralModelCommon();
-                referCommon.ReferCode = ReferCode;
+                referCommon.ReferCode = ReferCode.DecryptParameter();
                 referCommon.ActionIP = ApplicationUtilities.GetIP();
                 var dbReferralRes = _buss.ValidateReferralCode(referCommon);
                 if (dbReferralRes != null && dbReferralRes.Code == "0")
@@ -270,12 +270,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var dbResponse = _buss.SetRegistrationPassword(Common);
                 if (dbResponse.Code == 0)
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.SUCCESS,
-                        Message = dbResponse.Message ?? "Success",
-                        Title = NotificationMessage.SUCCESS.ToString(),
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.SUCCESS,
+                    //    Message = dbResponse.Message ?? "Success",
+                    //    Title = NotificationMessage.SUCCESS.ToString(),
+                    //});
                     //return Redirect("/user/register/complete");
                     return Redirect("/user/remind/complete?nickname=" + ViewBag.NickName1);
                 }
@@ -381,7 +381,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
                 if (loginResponse.Item2)
                     if (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL))
+                    {
                         return Redirect(ReturnURL);
+                    }
 
                 //return Redirect(loginResponse.Item1,new { ReturnURL });
                 return Redirect(loginResponse.Item1 + "?ReturnURL=" + Uri.EscapeDataString(ReturnURL));

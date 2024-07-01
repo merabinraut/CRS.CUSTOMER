@@ -1,0 +1,269 @@
+﻿@model List<CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchFilterClubDetailModel>
+@{
+    var TypeValue = ViewBag.TypeValue?.ToString();
+    var filter = "";
+    if (TypeValue == "s00001")
+    {
+        filter = "今すぐ行けるお店";
+    }
+    else if (TypeValue == "s00002")
+    {
+        filter = "貸し切りOK";
+    }
+    else if (TypeValue == "s00003")
+    {
+        filter = "在籍人数が多い";
+    }
+    else if (TypeValue == "s00004")
+    {
+        filter = "VIPルームあり";
+    }
+    else if (TypeValue == "s00005")
+    {
+        filter = "女子会向き";
+    }
+    var TotalClubCount = ViewBag.TotalClubCount;
+    ViewBag.Title = $"{filter}からホストクラブを探す({TotalClubCount}件)‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var PostURL = ViewBag.PostURL;
+}
+<style>
+    input[type=radio]:checked + label {
+        color: #D75A8B;
+        font-weight: 600;
+    }
+
+    input[type=radio]:checked {
+        appearance: none;
+        -webkit-appearance: none;
+        border-radius: 50%;
+        background: #D75A8B;
+        border: 3px solid #FFF;
+        box-shadow: 0 0 0 4px #D75A8B;
+        width: 13px;
+        height: 13px;
+    }
+
+    input[type=radio] {
+        box-shadow: 0 0 0 4px rgba(102, 102, 102, 0.2);
+        /*    border: 1.5px solid rgba(102, 102, 102, 0.2);*/
+        appearance: none;
+        -webkit-appearance: none;
+        border-radius: 50%;
+        width: 13px;
+        height: 13px;
+    }
+</style>
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="window.location.href='/'">
+    <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
+                  fill="#BCB08A" />
+        </svg>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
+    </div>
+    <div class="text-center w-full font-bold"></div>
+</div>
+<!-- radio button  -->
+<section class='px-4 py-3 border border-b border-[#E6E6E6]'>
+
+    <div class='grid grid-cols-2 '>
+        <div class='flex flex-col gap-2'>
+            <div class='flex gap-[10px] items-center' onclick="PreferenceRedirect('s00001');">
+                <input class="custom-radio" name="radio-group" type="radio" id='click' @(TypeValue == "s00001" ? "checked" : "")>
+                <label for='click' class='font-medium text-[14px] cl'>今すぐ行けるお店</label>
+            </div>
+
+            <div class='flex gap-[10px] items-center' onclick="PreferenceRedirect('s00003');">
+                <input name="radio-group" type="radio" id='click2' @(TypeValue == "s00003" ? "checked" : "")>
+                <label for="click2" class='font-medium text-[14px] cl'>在籍人数が多い</label>
+            </div>
+
+            <div class='flex gap-[10px] items-center' onclick="PreferenceRedirect('s00005');">
+                <input name="radio-group" type="radio" id='click4' @(TypeValue == "s00005" ? "checked" : "")>
+                <label for="click4" class=' font-medium text-[14px] cl'>女子会向き</label>
+            </div>
+        </div>
+
+        <div class='flex flex-col gap-2'>
+            <div class='flex gap-[10px] items-center' onclick="PreferenceRedirect('s00002');">
+                <input name="radio-group" type="radio" id='click1' @(TypeValue == "s00002" ? "checked" : "")>
+                <label for="click1" class=' font-medium text-[14px] cl'>貸し切りOK</label>
+            </div>
+
+            <div class='flex gap-[10px] items-center' onclick="PreferenceRedirect('s00004');">
+                <input name="radio-group" type="radio" id='click3' @(TypeValue == "s00004" ? "checked" : "")>
+                <label for="click3" class=' font-medium text-[14px] cl'>VIPルームあり</label>
+            </div>
+        </div>
+
+    </div>
+</section>
+<div class='px-4 py-2 text-[12px] font-semibold bg-[#FDFBFA]'>
+    検索結果 @(Model != null ? Model.Count() : 0) 件
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="club_content">
+        <!-- s/link -->
+        <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
+            <ul class="club_tags">
+                @if (!string.IsNullOrEmpty(@item.Tag1))
+                {
+                    <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
+                }
+                @if (!string.IsNullOrEmpty(@item.Tag2))
+                {
+                    <li class="tag_rank"> @item.Tag2</li>
+                }
+                @if (!string.IsNullOrEmpty(@item.Tag3))
+                {
+                    <li class="tag_platinum">  @item.Tag3</li>
+                }
+
+                @if (!string.IsNullOrEmpty(@item.Tag4))
+                {
+                    <li class="tag_good">@item.Tag4</li>
+                }
+                @if (!string.IsNullOrEmpty(@item.Tag5))
+                {
+                    <li class="tag_big">  @item.Tag5</li>
+                }
+            </ul>
+            <div class="club_header">
+                <div class="club_logo"><img class="logo" alt="ロゴ" src="@item.ClubLogo"></div>
+                <div class="club_info">
+                    <h3 class="club_name">@item.ClubNameEnglish</h3>
+                    <p class="club_kana">@item.ClubNameJapanese</p>
+                    <p class="club_group">@item.GroupName</p>
+                </div>
+                @if (item.IsBookmarked.ToUpper() == "Y")
+                {
+                    <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                }
+                else
+                {
+                    <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                }
+            </div>
+            <ul class="club_thumb">
+                @foreach (var item2 in item.HostGalleryImage)
+                {
+                    <li><img alt="@item.ClubNameEnglish ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
+                }
+
+            </ul>
+            <div class="club_rate">
+                <ul class="rate_stars">
+                    @{
+                        var unratedScale = (5 - item.AverageRating);
+                        for (int i = 0; i < item.AverageRating; i++)
+                        {
+                            <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
+                        }
+                        for (int i = 0; i < unratedScale; i++)
+                        {
+                            <li><img src="~/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>
+                        }
+                    }
+
+                    <li class="rate_value"> @item.AverageRating</li>
+                </ul>
+                <ul class="rate_review">
+                    <li><img src="~/Content/assets/images/comment.svg" alt="コメント"></li>
+                    <li class="comment_value">@item.TotalComment</li>
+                </ul>
+            </div>
+            <p class="club_pr"> @item.ClubDescription</p>
+        </a>
+        <!-- e/link -->
+        <!-- s/club footer -->
+        <div class="club_footer">
+            <!-- s/club status -->
+            <div class="club_status">
+                <!-- s/opening hours -->
+                @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
+                {
+                    if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                    {
+                        <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                    }
+                    else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                    {
+                        <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                    }
+
+                    <!-- e/opening hours -->
+                    <!-- s/available -->
+                    if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                    {
+                        <div class="available">本日空席あり</div>
+                    }
+                    else
+                    {
+                        <div class="available disabled">本日空席あり</div>
+                    }
+                }
+                <!-- e/available -->
+            </div>
+            <!-- e/club status -->
+            <!-- s/reservation btn -->
+            <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId', '','','@PostURL')">
+                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
+                @* 今すぐ予約する*@
+            </button>
+            <!-- e/reservation btn -->
+        </div>
+        <!-- e/club footer -->
+    </div>
+}
+<div style="background-color: #FFFFFF;" class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]">
+    <div class="flex flex-row items-center justify-end gap-1 my-[12px]" id="scrollToTopButton">
+
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M7.99996 2.34375L1.89062 8.45308L2.60929 9.15575L7.99996 3.76508L13.3906 9.15575L14.1093 8.45308L7.99996 2.34375ZM7.99996 5.84375L1.89062 11.9531L2.60929 12.6557L7.99996 7.26508L13.3906 12.6557L14.1093 11.9531L7.99996 5.84375Z"
+                      fill="#040000" />
+            </svg>
+        </div>
+        <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
+            トップに戻る
+
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        function PreferenceRedirect(Type) {
+             var prefecturesArea = '@ViewBag.PrefecturesArea';
+             var searchUrl = `/search${prefecturesArea}/?TopSearch=${Type}`;
+             var form = document.createElement('form');
+             form.method = 'POST';
+             form.action = searchUrl;
+             document.body.appendChild(form);
+             form.submit();
+        }
+
+        function closeImagePopup() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+    </script>
+
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 20) {
+                $('#scrollToTopButton').fadeIn();
+            } else {
+                $('#scrollToTopButton').fadeOut();
+            }
+        });
+
+        $('#scrollToTopButton').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+    </script>
+}

@@ -19,9 +19,10 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
@@ -38,13 +39,11 @@
           referrerpolicy="no-referrer" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z189BCRTWP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+    <script>window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-Z189BCRTWP');
-    </script>
+        gtag('config', 'G-Z189BCRTWP');</script>
     @*  <title>ホスログ | @ViewBag.Title</title>*@
     <title>@ViewBag.Title</title>
     <meta property="og:title" content="ホスログ/公式ホームページ">
@@ -68,18 +67,19 @@
             border-radius: 8px;
         }
 
-        /* .modal-content {
+        .modal-content-logout {
             max-width: 100%;
             width: 312px;
             background: #fff;
-        }*/
+            padding: 16px;
+            border-radius: 4px
+        }
 
         .log-outButton {
             border-radius: 8px;
             background: #D75A8B;
             color: #FFF;
             text-align: center;
-            font-family: "Noto Sans JP";
             font-size: 15px;
             font-style: normal;
             font-weight: 700;
@@ -138,7 +138,6 @@
             text-align: left;
             margin: 0px;
             color: #44464F;
-            font-family: "Noto Sans JP";
             font-size: 14px;
             font-style: normal;
             font-weight: 500;
@@ -215,7 +214,6 @@
         .affiliationText {
             color: #999;
             text-align: center;
-            font-family: "Noto Sans JP";
             font-size: 11px;
             font-style: normal;
             font-weight: 700;
@@ -225,7 +223,6 @@
         .dividerCol {
             color: #999;
             text-align: center;
-            font-family: "Noto Sans JP";
             font-size: 11px;
             font-style: normal;
             font-weight: 700;
@@ -234,16 +231,7 @@
             /* 18.26px */
         }
     </style>
-    <script>
-        (function (d) {
-            var config = {
-                kitId: 'scz4hqc',
-                scriptTimeout: 3000,
-                async: true
-            },
-                h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
-        })(document);
-    </script>
+   
 </head>
 <body class="md:hidden">
     <!-- #endregion -->
@@ -459,26 +447,26 @@
                 </div>
                 <div class="footer bg-footer">
                     <div class="footer-logo px-4 pt-[12px] pb-[16px]" style="padding-top:30px">
-                        <img class="h-[30px] w-[102px]" src="~/Content/assets/images/logo_2.svg" />
+                        <img class="" src="~/Content/assets/images/logo_2.svg" />
                     </div>
                     <div class="p-4">
                         <!--#region need to uncomment-->
                         <!--  <div class="footer-link text-white grid grid-cols-2 ">
                         <!--      <div class="grid gap-[8px]">
-                        <!--          <a href="@Url.Action("operatingcompany","Footer")" class="text-xs">
+                        <!--          <a href="/company" class="text-xs">
                         <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
                         <!--              運営会社
                         <!--          </a>
-                        <!--          <a href="@Url.Action("faq","Footer")" class="text-xs">
+                        <!--          <a href="/faq" class="text-xs">
                         <!--              よくあるご質問
                         <!--              @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan*@
                         <!--          </a>
-                        <!--          <a href="@Url.Action("inquery","Footer")" class="text-xs">
+                        <!--          <a href="/support" class="text-xs">
                         <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide*@
                         <!--              お問い合わせ
                         <!--          </a>
                         <!--
-                        <!--          @* <a href="@Url.Action("faq","Footer")" class="text-xs">
+                        <!--          @* <a href="/faq" class="text-xs">
                         <!--                  @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
                         <!--              </a>*@
                         <!--      </div>
@@ -488,15 +476,15 @@
                         <!--          @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry*@
                         <!--          <!--新規会員登録(無料)
                         <!--          </a>-->
-                        <!--          <!--<a href="@Url.Action("operatingcompany","Footer")" class="text-xs">-->
+                        <!--          <!--<a href="/company" class="text-xs">-->
                         <!--          @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
                         <!--          <!--運営会社
                         <!--          </a>-->
-                        <!--          <a href="@Url.Action("privacypolicy","Footer")" class="text-xs">
+                        <!--          <a href="/policy" class="text-xs">
                         <!--              プライバシーポリシー
                         <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy*@
                         <!--          </a>
-                        <!--          <a href="@Url.Action("termsAndCondition","Footer")" class="text-xs">
+                        <!--          <a href="/rule" class="text-xs">
                         <!--              @* terms and condition*@
                         <!--              ホスログ利用規約
                         <!--          </a>
@@ -515,10 +503,10 @@
 
                         <div class="affiliation">
                             <div class="affiliationText">
-                                <a href="http://43.207.72.221:93/" style="font-family: Noto Sans">アフィリエイター登録</a>
+                                <a href="http://43.207.72.221:93/" style="">アフィリエイター登録</a>
                             </div>
                             <div class="dividerCol">|</div>
-                            <div class="affiliationText"><a href="http://43.207.72.221:92/" style="font-family: Noto Sans"> 店舗オーナー登録 </a></div>
+                            <div class="affiliationText"><a href="http://43.207.72.221:92/" style=""> 店舗オーナー登録 </a></div>
                         </div>
 
 
@@ -538,7 +526,7 @@
 
 
     <div id="modal2" class="modal modalWrapper bg-[#fff] w-[132px]" style="display:none; border-radius:12px; z-index:10000;">
-        <div class="modal-content flex gap-[24px] flex-col">
+        <div class="modal-content-logout flex gap-[24px] flex-col">
             <div class="font-normal text-[16px] text-[#1A1C1E]">
                 ログアウトしてもよろしいですか？
             </div>
@@ -557,15 +545,93 @@
 
 
 
-    <script>
-        $(document).ready(function () {
+    <script>$(document).ready(function () {
             $('select').select2({
                 minimumResultsForSearch: Infinity
             });
             setInterval(NotificationFunction, 20000);
-            CheckIfHasRedirectFunction();
+            // Get current URL
+            var currentUrl = window.location.href;
+            // Parse query string from current URL
+            var QueryData = ParseQueryString(currentUrl);
+            var PostURL = QueryData['PostURL'];
+            if (PostURL) {
+                var IsRedirectURL = QueryData['IsRedirectURL'];
+                var FunctionName = QueryData['FunctionName'];
+                var ClubId = QueryData['ClubId'];
+                var SelectedDate = QueryData['SelectedDate'];
+                var SelectedHost = QueryData['SelectedHost'];
+                var hostId = QueryData['hostId'];
+                var agentType = QueryData['agentType'];
+                var dynamicParams = {};
+
+                // Iterate over QueryData to populate dynamicParams
+                Object.keys(QueryData).forEach(key => {
+                    // Exclude 'PostURL' from dynamicParams
+                    if (key !== 'PostURL') {
+                        dynamicParams[key] = QueryData[key];
+                    }
+                });
+
+                // Create a form element
+                var form = document.createElement('form');
+                form.method = 'POST';
+                var actionURL = new URL(PostURL, window.location.origin);
+                if (IsRedirectURL) {
+                    actionURL.searchParams.append('IsRedirectURL', IsRedirectURL);
+                }
+                if (FunctionName) {
+                    actionURL.searchParams.append('FunctionName', FunctionName);
+                }
+
+                if (ClubId) {
+                    actionURL.searchParams.append('ClubId', ClubId);
+                }
+
+                if (SelectedDate) {
+                    actionURL.searchParams.append('SelectedDate', SelectedDate);
+                }
+
+                if (SelectedHost) {
+                    actionURL.searchParams.append('SelectedHost', SelectedHost);
+                }
+
+                if (hostId) {
+                    actionURL.searchParams.append('hostId', hostId);
+                }
+
+                if (agentType) {
+                    actionURL.searchParams.append('agentType', agentType);
+                }
+                form.action = actionURL.toString();
+
+                // Append dynamicParams as hidden form inputs
+                Object.keys(dynamicParams).forEach(key => {
+                    var input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = dynamicParams[key];
+                    form.appendChild(input);
+                });
+
+                // Append the form to the document body and submit it
+                document.body.appendChild(form);
+                form.submit();
+            }
+            else {
+                CheckIfHasRedirectFunction();
+            }
         });
-    </script>
+
+        function ParseQueryString(url) {
+            let queryString = url.split('?')[1] || '';
+            let queryObject = {};
+            queryString.split('&').forEach(function (part) {
+                let item = part.split('=');
+                queryObject[item[0]] = decodeURIComponent(item[1]);
+            });
+            return queryObject;
+        }</script>
     <!-- #endregion -->
     <!-- #region Fotter-links -->
     <script src="~/Content/assets/js/modal.js"></script>
@@ -578,8 +644,7 @@
             integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-    <script>
-        // Get the button
+    <script>// Get the button
 
         let mybutton = document.getElementById("myBtn");
         // When the user scrolls down 20px from the top of the document, show the button
@@ -599,8 +664,7 @@
         function topFunction() {
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
-        }
-    </script>
+        }</script>
 
     <script>
     //For toaster Notification
@@ -638,8 +702,7 @@
 
     </script>
 
-    <script>
-        function OnLoadLoaderFunction() {
+    <script>function OnLoadLoaderFunction() {
             document.getElementById('loader-id-v2').style.display = 'flex';
             document.body.addEventListener('touchmove', preventDefault, { passive: false });
             document.body.classList.add('no-scroll-loader');
@@ -665,15 +728,13 @@
 
         function NavCloseFunction() {
             document.getElementById('drawer-right-example').classList.add('translate-x-full');
-        }
-    </script>
+        }</script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="~/Content/assets/js/reservation-common.js"></script>
     <script src="~/Content/assets/js/search-filter-common.js"></script>
     <script src="~/Content/assets/js/ManageRedirectURL.js"></script>
     <script src="~/Content/assets/js/BookmarkManagement.js"></script>
-    <script>
-        function WindowHistoryBack() {
+    <script>function WindowHistoryBack() {
             var previousUrl = document.referrer;
             if (isLoginPageWithReturnUrl(previousUrl)) {
                 window.location.href = '/';
@@ -690,7 +751,16 @@
         if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
             document.body.style.overscrollBehaviorY = 'contain';
         }
-    </script>
+
+        function HostDetailRedirectFunction(HostCode, ClubCode, PrefecturesArea) {
+            var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/${HostCode}`;
+            window.location.href = url;
+        }
+
+        function ClubDetailRedirectFunction(ClubCode, PrefecturesArea) {
+            var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
+            window.location.href = url;
+        }</script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

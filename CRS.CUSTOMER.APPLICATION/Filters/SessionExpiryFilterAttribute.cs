@@ -57,15 +57,6 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                     }
                     if (redirectToLogin)
                     {
-                        //var userId = Convert.ToString(httpContext.Session["UserId"]);
-                        //if (!string.IsNullOrEmpty(userId))
-                        //{
-                        //    var IsForceFulLogout = CommonBusiness.GetForceFulLogout(userId.DecryptParameter());
-                        //    if (IsForceFulLogout == "Y")
-                        //    {
-
-                        //    }
-                        //}
                         var FunctionName = Functions.FirstOrDefault(x => x.FunctionURL == ActionURL);
                         var RedirectURL = new UriBuilder(HttpContext.Current.Request.Url.Scheme,
                             HttpContext.Current.Request.Url.Host,
@@ -82,6 +73,10 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                                 queryString = queryString.Substring(1);
                             var dynamicParameters = queryString;
                             var ReturnURL = HttpContext.Current.Request.UrlReferrer?.PathAndQuery;
+                            if (ReturnURL.Contains("/search/"))
+                            {
+                                ReturnURL = "/";
+                            }
                             if (string.IsNullOrEmpty(ReturnURL) || ReturnURL.Trim() == "/")
                                 ReturnURL = "/";
                             if (!string.IsNullOrEmpty(FunctionName.AdditionalValue))

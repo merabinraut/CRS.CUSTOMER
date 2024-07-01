@@ -27,14 +27,23 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
                 { "6", "10" }, //Height list
                 { "7", "11" }, //Age Range
                 { "8", "12" }, //Zodiac signs
-                { "9", "13" } //Occupation list
+                { "9", "13" }, //Occupation list
+                { "10", "21" } //get location list with total no of club count (new implementation)
             };
+
+            List<string> valuesToSkipEncryption = new List<string> { "10" };
 
             if (!methodMapping.TryGetValue(forMethod.Trim(), out var methodCode))
                 return response;
 
             var dbResponse = _CommonBuss.GetDropDown_V2(methodCode, search1, search2);
-            dbResponse.ForEach(item => response.Add(item.StaticValue.EncryptParameter(), GetLocalizedLabel(item, culture)));
+            dbResponse.ForEach(item =>
+            {
+                if (valuesToSkipEncryption.Contains(forMethod.Trim()))
+                    response.Add(item.StaticValue, GetLocalizedLabel(item, culture));
+                else
+                    response.Add(item.StaticValue.EncryptParameter(), GetLocalizedLabel(item, culture));
+            });
 
             return response;
         }

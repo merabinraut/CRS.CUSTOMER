@@ -39,5 +39,8 @@
         public string ClubNameJapanese { get; set; }
         public string ClubLogo { get; set; }
         public string IsBookmarked { get; set; }
+        public string ClubCode { get; set; }
+        public string HostCode { get; set; }
+        public string LocationURL { get; set; }
     }
 }

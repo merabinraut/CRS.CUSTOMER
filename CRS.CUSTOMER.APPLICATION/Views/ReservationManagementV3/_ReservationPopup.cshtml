@@ -1,0 +1,212 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2.InitiateClubReservationCommonModel
+
+
+@{
+    var disabledClassLabel = string.Empty;
+    string firstActiveTime = null;
+
+}
+
+<style>
+    .waitingMessageWrapper {
+        border-radius: 4px;
+        background: #FFEDED;
+        margin-top: 16px;
+        /*display: none;*/
+    }
+
+    .waitingMessage {
+        color: #000;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+</style>
+<div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform"
+     tabindex="-1" aria-labelledby="drawer-bottom-label" aria-hidden="true">
+    <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
+        <div class="text-center text-white mb-2 text-2xl">
+            <div onclick="CloseInitiatedClubReservationFunction();">
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+        <div class="px-4 pt-6 bg-white  " style="padding-top: 24px; border-radius: 6px 6px 0px 0px;">
+            <div class="text-sm text-[#333] font-bold mb-3">カレンダー</div>
+            <div class="pb-3 border-b-[1px] border-[#EFEFEF]">
+                <div id="datepicker" style="margin-top:10px; display:flex; justify-content:center" ></div>
+                <div class="flex flex-col gap-[13px] mt-[13px]">
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm text-[#333] flex justify-between items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                 fill="none">
+                                <path d="M8 2C4.69133 2 2 4.69133 2 8C2 11.3087 4.69133 14 8 14C11.3087 14 14 11.3087 14 8C14 4.69133 11.3087 2 8 2ZM8 3C10.7673 3 13 5.23267 13 8C13 10.7673 10.7673 13 8 13C7.34309 13.0011 6.69244 12.8724 6.08534 12.6215C5.47823 12.3706 4.92662 12.0024 4.46212 11.5379C3.99761 11.0734 3.62936 10.5218 3.37846 9.91466C3.12756 9.30756 2.99895 8.65691 3 8C3 5.23267 5.23267 3 8 3ZM7.5 4V8.5H11V7.5H8.5V4H7.5Z"
+                                      fill="#B08194" />
+                            </svg>
+                            <span> お時間</span>
+                        </div>
+                        <!----------------------------------------------------------------------------------------------------------------->
+                        <div class="relative">
+                            <div class=" showTimeList h-[32px] w-[72px] px-3 py-1 bg-[#F6F6F6] rounded-[4px] text-[#666] text-xs flex justify-between items-center">
+                                <div id="selected-time-id">
+                                    @{
+                                        foreach (var item in Model.ClubReservableTimeModel)
+                                        {
+                                            DateTime itemTime;
+                                            bool isValidTime = DateTime.TryParse(item.Time, out itemTime);
+                                            disabledClassLabel = (!isValidTime || itemTime < DateTime.Now ||
+                                                                  (!string.IsNullOrEmpty(item.TimeStatus) && item.TimeStatus.Trim().ToUpper() != "ACTIVE"))
+                                                                  ? "disabled" : string.Empty;
+
+                                            DateTime statocLastEntryTime = DateTime.ParseExact(Model.ClubReservableTimeModel[0].LastEntryTime.ToString(), "HH:mm", null);
+                                            DateTime staticCurrentTime = DateTime.ParseExact(item.Time.ToString(), "HH:mm", null);
+
+                                            if (string.IsNullOrEmpty(disabledClassLabel) && firstActiveTime == null)
+                                            {
+                                                if (staticCurrentTime >= statocLastEntryTime)
+                                                {
+                                                    firstActiveTime = "";
+                                                }
+                                                else
+                                                {
+                                                    firstActiveTime = item.Time;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    @firstActiveTime
+                                </div>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5" fill="none">
+                                        <path d="M4 5L0.535898 0.5L7.4641 0.5L4 5Z" fill="#666666" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div id="timeListContainer" class=" timeListContainer rounded-[4px] bg-[#F6F6F6] w-[72px]" style="display: none;">
+                                @{
+                                    foreach (var item in Model.ClubReservableTimeModel)
+                                    {
+                                        DateTime itemTime;
+                                        bool isValidTime = DateTime.TryParse(item.Time, out itemTime);
+                                        disabledClassLabel = (!isValidTime || itemTime < DateTime.Now ||
+                                                              (!string.IsNullOrEmpty(item.TimeStatus) && item.TimeStatus.Trim().ToUpper() != "ACTIVE"))
+                                                              ? "disabled" : string.Empty;
+
+                                        DateTime lastEntryTime = DateTime.ParseExact(Model.ClubReservableTimeModel[0].LastEntryTime.ToString(), "HH:mm", null);
+                                        DateTime currentTime = DateTime.ParseExact(item.Time.ToString(), "HH:mm", null);
+
+                                        if (currentTime >= lastEntryTime)
+                                        {
+                                            <div class="timeList h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center disabled">
+                                                <div class="timeValue">
+                                                    @item.Time
+                                                </div>
+                                                <div class="activeTime">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                        <path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z" fill="#666666" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="timeList @disabledClassLabel h-[32px] px-3 py-1 text-[#666] text-xs flex justify-between items-center">
+                                                <div class="timeValue">
+                                                    @item.Time
+                                                </div>
+                                                <div class="activeTime">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                        <path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z" fill="#666666" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <!----------------------------------------------------------------------------------------------------------------->
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="text-sm text-[#333] flex justify-between items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                 fill="none">
+                                <path d="M4.5 3.5C3.705 3.50211 2.94316 3.81886 2.38101 4.38101C1.81886 4.94316 1.50211 5.705 1.5 6.5C1.5 7.492 1.988 8.37533 2.73467 8.922C1.416 9.576 0.5 10.932 0.5 12.5H1.5C1.49912 12.1058 1.57612 11.7153 1.72657 11.3509C1.87702 10.9865 2.09797 10.6555 2.37672 10.3767C2.65547 10.098 2.98654 9.87702 3.35091 9.72657C3.71528 9.57612 4.10579 9.49912 4.5 9.5C4.89421 9.49912 5.28472 9.57612 5.64909 9.72657C6.01346 9.87702 6.34453 10.098 6.62328 10.3767C6.90203 10.6555 7.12298 10.9865 7.27343 11.3509C7.42388 11.7153 7.50088 12.1058 7.5 12.5H8.5C8.49912 12.1058 8.57612 11.7153 8.72657 11.3509C8.87702 10.9865 9.09797 10.6555 9.37672 10.3767C9.65547 10.098 9.98654 9.87702 10.3509 9.72657C10.7153 9.57612 11.1058 9.49912 11.5 9.5C11.8942 9.49912 12.2847 9.57612 12.6491 9.72657C13.0135 9.87702 13.3445 10.098 13.6233 10.3767C13.902 10.6555 14.123 10.9865 14.2734 11.3509C14.4239 11.7153 14.5009 12.1058 14.5 12.5H15.5C15.5 10.932 14.584 9.576 13.2653 8.922C13.6471 8.64387 13.9579 8.27957 14.1725 7.85873C14.387 7.43789 14.4992 6.97237 14.5 6.5C14.5 4.84933 13.1507 3.5 11.5 3.5C10.705 3.50211 9.94316 3.81886 9.38101 4.38101C8.81886 4.94316 8.50211 5.705 8.5 6.5C8.5 7.492 8.988 8.37533 9.73467 8.922C9.00414 9.281 8.39939 9.85274 8 10.562C7.60061 9.85274 6.99586 9.281 6.26533 8.922C6.64714 8.64387 6.95793 8.27957 7.17247 7.85873C7.387 7.43789 7.49922 6.97237 7.5 6.5C7.5 4.84933 6.15067 3.5 4.5 3.5ZM4.5 4.5C5.61133 4.5 6.5 5.38867 6.5 6.5C6.5 7.61133 5.61133 8.5 4.5 8.5C3.38867 8.5 2.5 7.61133 2.5 6.5C2.5 5.38867 3.38867 4.5 4.5 4.5ZM11.5 4.5C12.6113 4.5 13.5 5.38867 13.5 6.5C13.5 7.61133 12.6113 8.5 11.5 8.5C10.3887 8.5 9.5 7.61133 9.5 6.5C9.5 5.38867 10.3887 4.5 11.5 4.5Z"
+                                      fill="#B08194" />
+                            </svg>
+                            <span> 人数</span>
+                        </div>
+                        <!----------------------------------------------People--------------------------------------------------------------->
+                        <div class="relative">
+                            <div class=" showPeopleList cursor-pointer h-[32px] w-[72px] px-3 py-1 bg-[#F6F6F6] rounded-[4px] text-[#666] text-xs flex justify-between items-center">
+                                <div id="selected-noofpeople-id">
+                                    1
+                                </div>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="5" viewBox="0 0 8 5" fill="none">
+                                        <path d="M4 5L0.535898 0.5L7.4641 0.5L4 5Z" fill="#666666" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div id="timeListContainer" class=" timeListContainer rounded-[4px] bg-[#F6F6F6] w-[72px]" style="display: none;">
+                                <input id="maxnoofpeopleallowedinreservation-id" value="@Model.MaxNoOfPeopleAllowed" hidden />
+                                @{
+                                    for (int i = 1; i <= Model.TotalNoOfPeople; i++)
+                                    {
+
+                                        <div class="peopleList  h-[32px]  px-3 py-1 text-[#666] text-xs flex justify-between items-center">
+                                            <div class="peopleValue">
+                                                @i
+                                            </div>
+                                            <div class="activeTime">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                    <path d="M8.94643 3L4.88393 7.31494L3.05357 5.37077L2.25 6.22238L4.48214 8.59236L4.88393 9L5.28571 8.59236L9.75 3.8524L8.94643 3Z"
+                                                          fill="#666666" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <!----------------------------------------------People--------------------------------------------------------------->
+                    </div>
+                    <div id="waitingMessageWrapper" style="display:none">
+                        <div class="flex p-2 gap-2 items-center waitingMessageWrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 1.5C4.416 1.5 1.5 4.416 1.5 8C1.5 11.584 4.416 14.5 8 14.5C11.584 14.5 14.5 11.584 14.5 8C14.5 4.416 11.584 1.5 8 1.5ZM8 2.5C8.72252 2.49912 9.43811 2.64079 10.1058 2.91688C10.7735 3.19297 11.3801 3.59806 11.891 4.10896C12.4019 4.61985 12.807 5.22652 13.0831 5.8942C13.3592 6.56189 13.5009 7.27748 13.5 8C13.5009 8.72252 13.3592 9.43811 13.0831 10.1058C12.807 10.7735 12.4019 11.3801 11.891 11.891C11.3801 12.4019 10.7735 12.807 10.1058 13.0831C9.43811 13.3592 8.72252 13.5009 8 13.5C7.27748 13.5009 6.56189 13.3592 5.8942 13.0831C5.22652 12.807 4.61985 12.4019 4.10896 11.891C3.59806 11.3801 3.19297 10.7735 2.91688 10.1058C2.64079 9.43811 2.49912 8.72252 2.5 8C2.49912 7.27748 2.64079 6.56189 2.91688 5.8942C3.19297 5.22652 3.59806 4.61985 4.10896 4.10896C4.61985 3.59806 5.22652 3.19297 5.8942 2.91688C6.56189 2.64079 7.27748 2.49912 8 2.5ZM7.5 5V6H8.5V5H7.5ZM7.5 7V11H8.5V7H7.5Z"
+                                      fill="black" />
+                            </svg>
+                            <p class="waitingMessage">
+                                注意: 3名以上のお客様の座席はクラブの座席管理に従って分けられる可能性があります。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center  gap-[6px] py-[11px] px-4"
+                 style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
+                <button class="btn" type="button" onclick="CloseInitiatedClubReservationFunction();">
+                    @*キャンセル*@
+                    戻る
+                </button>
+                <button class="btn btn-primary" onclick="SubmitClubReservationFunction();">
+                    <a class="h-full w-full">
+                        @*検索*@
+                        次
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="/ReservationManagementV3/Plan" method="get" id="club-reservation-id">
+    <input type="text" id="club-id" name="ClubId" value="@Model.ClubId" required hidden />
+    @*<input type="text" id="date-id" name="Date" value="" required hidden />*@
+    <input type="text" id="date-id" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")" required hidden />
+    <input type="text" id="time-id" name="Time" value="@firstActiveTime" required hidden />
+    <input type="text" id="noofpeople-id" name="NoOfPeople" value="1" required hidden />
+    <input type="text" name="SelectedHost" value="@Model.SelectedHost" hidden />
+</form>
