@@ -264,12 +264,12 @@
 <div class="">
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
         <div class="flex tab-container-plane no-scrollbar bg-white gap-[14px] overflow-x-auto" style="overflow-y:hidden">
-            <button id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "" ? "active" : "")">店舗トップ</button>
-            <button id="tab2Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "host" ? "active" : "")">ホスト</button>
-            <button id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "review" ? "active" : "")">レビュー</button>
-            <button id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "gallery" ? "active" : "")">写真</button>
-            <button id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "schedule" ? "active" : "")">スケジュール</button>
-            <button id="tab6Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "notice" ? "active" : "")">お知らせ</button>
+            <a id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/">店舗トップ</a>
+            <a id="tab2Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "host" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/host">ホスト</a>
+            <a id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "review" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/review">レビュー</a>
+            <a id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "gallery" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/gallery">写真</a>
+            <a id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "schedule" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/schedule">スケジュール</a>
+            <a id="tab6Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "notice" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/">お知らせ</a>
         </div>
     </div>
 </div>
@@ -1788,45 +1788,6 @@
 @section scripts
 {
     <script src="~/Content/CustomHelper.js"></script>
-    <script>
-        var isFirstTimeLoad = true;
-        $(document).ready(function (event) {
-            $('#tab1Button, #tab2Button, #tab3Button, #tab4Button, #tab5Button, #tab6Button').click(function () {
-                if (isFirstTimeLoad) {
-                    isFirstTimeLoad = false;
-                    return false;
-                }
-
-                var tab = '';
-                if (this.id === 'tab2Button') tab = 'host';
-                else if (this.id === 'tab3Button') tab = 'review';
-                else if (this.id === 'tab4Button') tab = 'gallery';
-                else if (this.id === 'tab5Button') tab = 'schedule';
-                else if (this.id === 'tab6Button') tab = 'notice';
-
-                redirectToTab(tab);
-                return false;
-            });
-            event.stopPropagation();
-            isFirstTimeLoad = false;
-            return false;
-        });
-
-        function redirectToTab(tab) {
-            var prefecturesArea = '@ViewBag.LocationId';
-            var clubId = '@ViewBag.ClubId';
-            var url = `/area${prefecturesArea}/hostclub/${clubId}/${tab}`;
-            window.location.href = url;
-            return false;
-        }
-
-        function RedirectToLocation() {
-            var prefecturesArea = '@ViewBag.LocationId';
-            var url = `/area${prefecturesArea}`;
-            window.location.href = url;
-            return false;
-        }
-    </script>
     <script>
 
         document.addEventListener("DOMContentLoaded", function () {
