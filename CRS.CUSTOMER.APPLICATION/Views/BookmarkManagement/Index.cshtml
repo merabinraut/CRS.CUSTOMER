@@ -214,26 +214,79 @@
                                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                                          src="@item.HostImage" />
                                 </div>
-                                <div id="like" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
+                                <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                     <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                                 </div>
                             </div>
                             <div class="grid mt-[16px] mb-[10px] grid-rows-7" style="margin-right:16px">
-                                <div style="line-height: 140%;" class="text-[10px]">
-                                    <p class="font-[700] text-[13px]">@item.HostName </p>
+                                <div style="line-height: 140%;" class="text-[10px]" style="padding-bottom:4px">
+                                    <p class="font-[700] text-[13px]">
+                                        @if (string.IsNullOrEmpty(@item.HostNameJapanese))
+                                        {
+                                            @item.HostName
+                                        }
+                                        else
+                                        {
+                                            @item.HostNameJapanese
+                                        }
+                                    </p>
+                                    @if (!string.IsNullOrEmpty(item.FormattedDOB))
+                                    {
+                                        <p>誕生日 :<span> @item.FormattedDOB</span> </p>
+                                    }
+                                    else
+                                    {
+                                        <p>誕生日 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.Address))
+                                    {
+                                        <p>出身地 :<span> @item.Address</span> </p>
+                                    }
+                                    else
+                                    {
+                                        <p>出身地 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.BloodType))
+                                    {
+                                        <p>血液型 :<span> @item.BloodType</span> </p>
+                                    }
+                                    else
+                                    {
+                                        <p>血液型 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.ConstellationGroup))
+                                    {
+                                        <p>星座 :<span> @item.ConstellationGroup</span> </p>
+                                    }
+                                    else
+                                    {
+                                        <p>星座 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.PreviousOccupation))
+                                    {
+                                        <p>前職 :<span> @item.PreviousOccupation</span> </p>
+                                    }
+                                    else
+                                    {
+                                        <p>前職 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                                    }
 
-                                    <p>誕生日 :<span> @item.DOB</span> </p>
-
-                                    <p>身長 :<span> @item.Height</span> </p>
-
-                                    <p>血液型 :<span> @item.BloodType</span> </p>
-
-                                    <p>星座 :<span> @item.ConstellationGroup</span> </p>
-
-                                    <p>出身地 :<span> @item.Address</span> </p>
-
-                                    <p>前職 :<span> @item.PreviousOccupation</span> </p>
-                                    <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
+                                    @if (!string.IsNullOrEmpty(item.Height))
+                                    {
+                                        <p>身長 :<span> @item.Height</span> </p>
+                                    }
+                                    else
+                                    {
+                                        <p>身長 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.LiquorStrength))
+                                    {
+                                        <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
+                                    }
+                                    else
+                                    {
+                                        <p>お酒の強さ :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                                    }
 
                                 </div>
                                 <div class="flex flex-row gap-1 items-center mb-[8px] mt-1">
