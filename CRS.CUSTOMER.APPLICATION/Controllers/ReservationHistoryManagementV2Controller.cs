@@ -34,6 +34,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     visitedItem.ClubId = visitedItem.ClubId.EncryptParameter();
                     visitedItem.ReservationId = visitedItem.ReservationId.EncryptParameter();
                     visitedItem.CustomerId = visitedItem.CustomerId.EncryptParameter();
+                    if (!string.IsNullOrEmpty(visitedItem.LocationURL) && visitedItem.LocationURL != "#")
+                    {
+                        if (!visitedItem.LocationURL.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) visitedItem.LocationURL = "https://" + visitedItem.LocationURL;
+                    }
                 }
                 responseInfo.GetVisitedHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
                 #endregion
@@ -50,6 +54,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     cancelItem.ReservationId = cancelItem.ReservationId.EncryptParameter();
                     cancelItem.CustomerId = cancelItem.CustomerId.EncryptParameter();
                     cancelItem.LocationId = cancelItem.LocationId.EncryptParameter();
+                    if (!string.IsNullOrEmpty(cancelItem.LocationURL) && cancelItem.LocationURL != "#")
+                    {
+                        if (!cancelItem.LocationURL.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) cancelItem.LocationURL = "https://" + cancelItem.LocationURL;
+                    }
                 }
                 responseInfo.GetCancelledHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
                 #endregion
@@ -66,6 +74,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     allItem.ReservationId = allItem.ReservationId.EncryptParameter();
                     allItem.CustomerId = allItem.CustomerId.EncryptParameter();
                     allItem.LocationId = allItem.LocationId.EncryptParameter();
+                    if (!string.IsNullOrEmpty(allItem.LocationURL) && allItem.LocationURL != "#")
+                    {
+                        if (!allItem.LocationURL.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) allItem.LocationURL = "https://" + allItem.LocationURL;
+                    }
                 }
                 responseInfo.GetAllHistoryList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
                 #endregion
@@ -81,6 +93,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     item.ClubId = item.ClubId.EncryptParameter();
                     item.ReservationId = item.ReservationId.EncryptParameter();
                     item.CustomerId = item.CustomerId.EncryptParameter();
+                    if (!string.IsNullOrEmpty(item.LocationURL) && item.LocationURL != "#")
+                    {
+                        if (!item.LocationURL.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) item.LocationURL = "https://" + item.LocationURL;
+                    }
                 }
                 responseInfo.GetReservedList.ForEach(x => x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo));
                 #endregion
