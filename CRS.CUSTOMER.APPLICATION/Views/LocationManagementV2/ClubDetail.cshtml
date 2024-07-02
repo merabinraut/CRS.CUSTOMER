@@ -1950,5 +1950,12 @@
         $('#comment_ID').click('click', function () {
             $('#tab3Button').click();
         });
+
+         function RedirectToLocation() {
+             var prefecturesArea = '@ViewBag.LocationId';
+             var url = `/area${prefecturesArea}`;
+             window.location.href = url;
+             return false;
+         }
     </script>
 }
