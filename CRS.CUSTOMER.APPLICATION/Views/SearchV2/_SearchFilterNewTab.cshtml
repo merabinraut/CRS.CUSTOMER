@@ -57,7 +57,6 @@
                         foreach (var item in Model.HostModel)
                         {
                             var activeClass = !string.IsNullOrEmpty(item.IsBookmarked) && item.IsBookmarked.Trim().Equals("Y", StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
-                            @*<div class="hosts-that-match-you @activeClass" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">*@
                             <div class="hosts-that-match-you @activeClass" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                                 <img src="@item.HostLogo" alt="host-logo" />
                                 @if (item.IsBookmarked.ToUpper() == "Y")

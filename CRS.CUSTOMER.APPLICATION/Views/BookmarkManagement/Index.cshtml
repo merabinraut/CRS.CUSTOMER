@@ -79,7 +79,7 @@
                                 }
                                 @if (!string.IsNullOrEmpty(@club.Tag2))
                                 {
-                                    <li class="tag_rank"> @club.Tag2</li>
+                                    <li class="tag_rank">ランク @club.Tag2</li>
                                 }
                                 @if (!string.IsNullOrEmpty(@club.Tag3))
                                 {
@@ -210,7 +210,6 @@
                     <div class="flex flex-col border-b-[4px] border-[#E3E2DB] py-3  ">
                         <div class="flex flex-row gap-[16px] mx-[16px]">
                             <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
-                                @*<div class="w-full flex justify-center" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">*@
                                 <div class="w-full flex justify-center" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                                          src="@item.HostImage" />

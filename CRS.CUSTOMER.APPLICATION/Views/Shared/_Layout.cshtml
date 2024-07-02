@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
@@ -39,7 +39,8 @@
           referrerpolicy="no-referrer" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z189BCRTWP"></script>
-    <script>window.dataLayer = window.dataLayer || [];
+    <script>
+        window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
@@ -231,7 +232,7 @@
             /* 18.26px */
         }
     </style>
-   
+
 </head>
 <body class="md:hidden">
     <!-- #endregion -->
@@ -545,7 +546,8 @@
 
 
 
-    <script>$(document).ready(function () {
+    <script>
+        $(document).ready(function () {
             $('select').select2({
                 minimumResultsForSearch: Infinity
             });
@@ -644,7 +646,8 @@
             integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-    <script>// Get the button
+    <script>
+        // Get the button
 
         let mybutton = document.getElementById("myBtn");
         // When the user scrolls down 20px from the top of the document, show the button
@@ -702,7 +705,8 @@
 
     </script>
 
-    <script>function OnLoadLoaderFunction() {
+    <script>
+        function OnLoadLoaderFunction() {
             document.getElementById('loader-id-v2').style.display = 'flex';
             document.body.addEventListener('touchmove', preventDefault, { passive: false });
             document.body.classList.add('no-scroll-loader');
@@ -734,7 +738,8 @@
     <script src="~/Content/assets/js/search-filter-common.js"></script>
     <script src="~/Content/assets/js/ManageRedirectURL.js"></script>
     <script src="~/Content/assets/js/BookmarkManagement.js"></script>
-    <script>function WindowHistoryBack() {
+    <script>
+        function WindowHistoryBack() {
             var previousUrl = document.referrer;
             if (isLoginPageWithReturnUrl(previousUrl)) {
                 window.location.href = '/';
