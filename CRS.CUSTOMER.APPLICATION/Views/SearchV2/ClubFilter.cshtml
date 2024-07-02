@@ -5,6 +5,7 @@
     var LocationId = !string.IsNullOrEmpty(ViewBag.LocationId) ? ViewBag.LocationId : (Model.FilteredClubModel != null && Model.FilteredClubModel.Count > 0) ? Model.FilteredClubModel[0].ClubLocationId : string.Empty;
     var target = ViewBag.target;
     var PostURL = ViewBag.PostURL;
+    DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:mm"));
 }
 
 @if (!string.IsNullOrEmpty(target))
@@ -109,7 +110,7 @@
                             @if (!string.IsNullOrEmpty(@item.Tag2))
                             {
                                 <!-- s/tag -->
-                                <li class="tag_rank"> @item.Tag2</li>
+                                <li class="tag_rank">ランク @item.Tag2</li>
                             }
                             <!-- e/tag -->
                             <!-- s/tag -->
@@ -252,7 +253,7 @@
 
                                 <!-- e/opening hours -->
                                 <!-- s/available -->
-                                if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                                if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubOpeningTime) < currentTime && DateTime.Parse(item.ClubClosingTime) > currentTime)
                                 {
                                     <div class="available">本日空席あり</div>
                                 }

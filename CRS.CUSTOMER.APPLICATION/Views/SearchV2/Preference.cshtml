@@ -26,6 +26,7 @@
     ViewBag.Title = $"{filter}からホストクラブを探す({TotalClubCount}件)‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var PostURL = ViewBag.PostURL;
+    DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:mm"));
 }
 <style>
     input[type=radio]:checked + label {
@@ -114,7 +115,7 @@
                 }
                 @if (!string.IsNullOrEmpty(@item.Tag2))
                 {
-                    <li class="tag_rank"> @item.Tag2</li>
+                    <li class="tag_rank">ランク @item.Tag2</li>
                 }
                 @if (!string.IsNullOrEmpty(@item.Tag3))
                 {
@@ -195,7 +196,7 @@
 
                     <!-- e/opening hours -->
                     <!-- s/available -->
-                    if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                    if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubOpeningTime) < currentTime && DateTime.Parse(item.ClubClosingTime) > currentTime)
                     {
                         <div class="available">本日空席あり</div>
                     }
