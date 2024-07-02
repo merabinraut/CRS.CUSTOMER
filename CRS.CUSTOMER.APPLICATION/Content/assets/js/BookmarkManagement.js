@@ -8,7 +8,7 @@ function ManageBookmark(ClubId, HostId, AgentType, ClickedElement, PostData = ""
         data: { clubId: ClubId, hostId: HostId, agentType: AgentType },
         success: function (data) {
             CheckIfHasRedirectURL(data, PostData);
-            if (ClickedElement !== null && ClickedElement !== undefined) {
+            if (ClickedElement !== null && ClickedElement !== undefined && ClickedElement !== "") {
                 var type = data.type;
                 var imageElement = ClickedElement.querySelector('img');
                 var svgElement = ClickedElement.querySelector('svg');

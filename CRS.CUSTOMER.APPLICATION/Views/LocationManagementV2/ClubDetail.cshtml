@@ -142,17 +142,18 @@
     </div>
     @if (string.IsNullOrEmpty(Model.IsBookmarked) || Model.IsBookmarked.Trim().ToUpper() == "N")
     {
-        <div class="flex items-center flex-col" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)">
+        <div class="flex items-center flex-col">
             <div class="p-1">
-                <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                <div class="action_keep" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
             </div>
         </div>
     }
     else
     {
-        <div class="flex items-center flex-col" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)">
-            <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
-
+        <div class="flex items-center flex-col">
+            <div class="p-1">
+                <div class="action_keep" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+            </div>
         </div>
     }
 
@@ -269,7 +270,7 @@
             <a id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "review" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/review">レビュー</a>
             <a id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "gallery" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/gallery">写真</a>
             <a id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "schedule" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/schedule">スケジュール</a>
-            <a id="tab6Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "notice" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/">お知らせ</a>
+            <a id="tab6Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "notice" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/notice">お知らせ</a>
         </div>
     </div>
 </div>
@@ -970,7 +971,7 @@
                                     </svg>
                                     <h4 class="text-[#333] text-[12px] font-bold leading-[20px]">お知らせ</h4>
                                 </div>
-                                <div class="flex justify-start items-center gap-[3px]" id="notice_id">
+                                <div class="flex justify-start items-center gap-[3px]" id="notice_id" onclick="window.location.href='/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/notice'">
                                     <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                         <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
@@ -1014,7 +1015,7 @@
                                     </svg>
                                     <h4 class="text-[#333] text-[12px] font-bold leading-[20px]">スケジュール情報</h4>
                                 </div>
-                                <div class="flex justify-start items-center gap-[3px]" id="schedule_id">
+                                <div class="flex justify-start items-center gap-[3px]" id="schedule_id" onclick="window.location.href='/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/schedule'">
                                     <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                         <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
@@ -1900,7 +1901,7 @@
             });
         });
     </script>
-    <script>
+    @*<script>
         $('#notice_id').click('click', function () {
             var activeElement = document.querySelector('.tab-link.active');
             if (activeElement) {
@@ -1922,7 +1923,7 @@
                 newActiveElement.classList.add('active');
                 $('#tab5Button').click();
             }
-        });</script>
+        });</script>*@
 
     <!--make clicked the tab after reload-->
     <script>

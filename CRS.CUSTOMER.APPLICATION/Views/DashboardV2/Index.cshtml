@@ -777,7 +777,8 @@
 <!--#endregion-->
 @section scripts
 {
-    <script>$(document).ready(function () {
+    <script>
+        $(document).ready(function () {
             EnableLoaderFunction();
             $('.owl-carousel').owlCarousel({
                 center: true,
@@ -943,7 +944,6 @@
                                 if (host.IsBookmarked != "" && host.IsBookmarked != null && host.IsBookmarked.trim().toUpperCase() == "Y") {
                                     BookmarkLabel = filled;
                                 }
-                                /*<a onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=${host.HostId}'">*/
                                 recommendedHostContentHTML += `
                                      <a onclick="HostDetailRedirectFunction('${host.HostCode}', '${host.ClubCode}', '${host.LocationURL}')">
                                         <div class="flex hover:cursor-pointer">
@@ -1056,7 +1056,8 @@
         }
 
         function CurrentLocationRedirectFunction(RenderId = "") {
-            window.location.href = `/LocationManagement/Index?LocationId=${CurrentLocationId}&RenderId=${RenderId}`;
+            var locationId = $('#current-location-id').val();
+            window.location.href = `/area${locationId}/?RenderId=${RenderId}`;
         }
 
         const WorkingHoursShowPopup = () => {
@@ -1714,7 +1715,8 @@
         }
     });
     </script>
-    <script>function handleFirstTab() {
+    <script>
+        function handleFirstTab() {
             document.getElementById('tab2').style.display = 'none';
             document.getElementById('tab1').style.display = '';
             document.getElementById('tab1Button').classList.add('active');
