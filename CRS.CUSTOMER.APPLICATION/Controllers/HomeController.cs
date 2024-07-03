@@ -72,7 +72,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.SUCCESS,
                         Message = dbReferralRes.Message,
-                        //Title = NotificationMessage.SUCCESS.ToString(),
+                        Title = NotificationMessage.SUCCESS.ToString(),
                     });
                     return View(Response);
                 }
@@ -82,7 +82,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.INFORMATION,
                         Message = dbReferralRes.Message,
-                        //Title = NotificationMessage.INFORMATION.ToString(),
+                        Title = NotificationMessage.INFORMATION.ToString(),
                     });
                     return View(Response);
                 }
@@ -117,7 +117,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse.Message ?? "Failed",
-                    //Title = NotificationMessage.INFORMATION.ToString(),
+                    Title = NotificationMessage.INFORMATION.ToString(),
                 });
                 return View(Model);
             }
@@ -145,7 +145,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.SUCCESS,
                         Message = dbResponse.Message ?? "SUCCESS",
-                        //Title = NotificationMessage.SUCCESS.ToString(),
+                        Title = NotificationMessage.SUCCESS.ToString(),
                     });
                     return RedirectToAction("SetRegistrationPassword", "Home", new { AgentId = dbResponse.Extra1.DefaultEncryptParameter(), UserId = dbResponse.Extra2.DefaultEncryptParameter(), MobileNumber = Model.MobileNumber, NickName = Model.NickName });
                 }
@@ -153,7 +153,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse.Message ?? "Failed",
-                    //Title = NotificationMessage.INFORMATION.ToString(),
+                    Title = NotificationMessage.INFORMATION.ToString(),
                 });
                 return View(Model);
             }
@@ -165,7 +165,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.ERROR,
                 Message = errorMessage,
-                //Title = NotificationMessage.ERROR.ToString(),
+                Title = NotificationMessage.ERROR.ToString(),
             }).ToArray();
             AddNotificationMessage(notificationModels);
             return View(Model);
@@ -245,7 +245,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.INFORMATION,
                         Message = "Password and confirm password must match",
-                        //Title = NotificationMessage.INFORMATION.ToString()
+                        Title = NotificationMessage.INFORMATION.ToString()
                     });
                     return View(Model);
                 }
@@ -256,7 +256,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.INFORMATION,
                         Message = "Password is required",
-                       //Title = NotificationMessage.INFORMATION.ToString()
+                       Title = NotificationMessage.INFORMATION.ToString()
                     });
                     return View(Model);
                 }
@@ -283,7 +283,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse.Message ?? "Failed",
-                    //Title = NotificationMessage.INFORMATION.ToString(),
+                    Title = NotificationMessage.INFORMATION.ToString(),
                 });
                 return View(Model);
             }
@@ -399,7 +399,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.ERROR,
                     Message = errorMessage,
-                    //Title = NotificationMessage.ERROR.ToString(),
+                    Title = NotificationMessage.ERROR.ToString(),
                 }).ToArray();
 
                 AddNotificationMessage(notificationModels);
@@ -437,7 +437,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse.Message,
-                    //Title = NotificationMessage.INFORMATION.ToString(),
+                    Title = NotificationMessage.INFORMATION.ToString(),
                 });
                 return new Tuple<string, bool>("login", false);
             }
@@ -447,7 +447,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Something went wrong",
-                    //Title = NotificationMessage.INFORMATION.ToString(),
+                    Title = NotificationMessage.INFORMATION.ToString(),
                 });
 
                 return new Tuple<string, bool>("login", false);
@@ -489,7 +489,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Something went Wrong" + ex,
-                    //Title = NotificationMessage.INFORMATION.ToString(),
+                    Title = NotificationMessage.INFORMATION.ToString(),
                 });
                 return View();
             }
@@ -519,7 +519,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.INFORMATION,
                         Message = dbresp.Message,
-                        //Title = NotificationMessage.INFORMATION.ToString(),
+                        Title = NotificationMessage.INFORMATION.ToString(),
                     });
                     return View();
                 }
@@ -537,7 +537,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.INFORMATION,
                         Message = "OTP code missing",
-                        //Title = NotificationMessage.INFORMATION.ToString(),
+                        Title = NotificationMessage.INFORMATION.ToString(),
                     });
                     return View("ForgotPasswordOTP", Model);
                 }
@@ -554,7 +554,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.SUCCESS,
                         Message = dbResponse.Message ?? "Success",
-                        //Title = NotificationMessage.SUCCESS.ToString(),
+                        Title = NotificationMessage.SUCCESS.ToString(),
                     });
                     return RedirectToAction("SetNewPasswordV2", "Home", new { AgentId = dbResponse.Extra1.EncryptParameter(), MobileNumber = Model.MobileNumber.EncryptParameter(), UserID = dbResponse.Extra3.EncryptParameter(), NickName = Model.NickName });
                 }
@@ -574,7 +574,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.ERROR,
                 Message = errorMessage,
-                //Title = NotificationMessage.ERROR.ToString(),
+                Title = NotificationMessage.ERROR.ToString(),
             }).ToArray();
             AddNotificationMessage(notificationModels);
             return RedirectToAction("ForgotPassword", "Home");
@@ -620,7 +620,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    //Title = NotificationMessage.INFORMATION.ToString()
+                    Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return RedirectToAction("login");
             }
@@ -698,7 +698,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.ERROR,
                     Message = errorMessage,
-                   // Title = NotificationMessage.ERROR.ToString(),
+                    Title = NotificationMessage.ERROR.ToString(),
                 }).ToArray();
                 AddNotificationMessage(notificationModels);
                 return View(Model);

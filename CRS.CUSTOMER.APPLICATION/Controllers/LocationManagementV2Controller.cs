@@ -166,7 +166,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.WARNING,
                         Message = "Invalid Details",
-                        //Title = NotificationMessage.WARNING.ToString()
+                        Title = NotificationMessage.WARNING.ToString()
                     });
                     return Redirect("/");
                 }

@@ -72,7 +72,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Invalid Profile details",
                     NotificationType = NotificationMessage.WARNING,
-                    //Title = NotificationMessage.WARNING.ToString(),
+                    Title = NotificationMessage.WARNING.ToString(),
                 });
                 return Json(1);
             }
@@ -90,7 +90,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? "Your account has been deleted",
                         NotificationType = NotificationMessage.SUCCESS,
-                       // Title = NotificationMessage.SUCCESS.ToString(),
+                        Title = NotificationMessage.SUCCESS.ToString(),
                     });
                     return Json(new { redirect = Url.Action("LogOff", "Home") });
                 }
@@ -98,7 +98,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = dbResponseInfo.Message ?? "Failed",
                     NotificationType = NotificationMessage.INFORMATION,
-                    //Title = NotificationMessage.INFORMATION.ToString(),
+                    Title = NotificationMessage.INFORMATION.ToString(),
                 });
                 return Json(1);
             }
@@ -106,7 +106,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 Message = "Something went wrong. Please try again later.",
                 NotificationType = NotificationMessage.INFORMATION,
-               // Title = NotificationMessage.INFORMATION.ToString(),
+               Title = NotificationMessage.INFORMATION.ToString(),
             });
             return Json(1);
         }
@@ -146,7 +146,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         {
                             NotificationType = NotificationMessage.SUCCESS,
                             Message = "長さは 4 文字である必要があります",
-                            //Title = NotificationMessage.SUCCESS.ToString()
+                            Title = NotificationMessage.SUCCESS.ToString()
                         });
                         return Redirect("/user/account/profile");
                     }
@@ -157,7 +157,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         {
                             NotificationType = NotificationMessage.SUCCESS,
                             Message = "長さは 2 文字である必要があります",
-                            //Title = NotificationMessage.SUCCESS.ToString()
+                            Title = NotificationMessage.SUCCESS.ToString()
                         });
                         return Redirect("/user/account/profile");
                     }
@@ -169,7 +169,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         {
                             NotificationType = NotificationMessage.SUCCESS,
                             Message = "長さは 2 文字である必要があります",
-                           // Title = NotificationMessage.SUCCESS.ToString()
+                            Title = NotificationMessage.SUCCESS.ToString()
                         });
                         return Redirect("/user/account/profile");
                     }
@@ -183,7 +183,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.SUCCESS,
                         Message = dbresp.Message,
-                       // Title = NotificationMessage.SUCCESS.ToString()
+                        Title = NotificationMessage.SUCCESS.ToString()
                     });
                     return Redirect("/user/account/profile");
                 }
@@ -193,7 +193,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.ERROR,
                         Message = dbresp.Message,
-                       // Title = NotificationMessage.ERROR.ToString()
+                        Title = NotificationMessage.ERROR.ToString()
                     });
                     return Redirect("/user/account/profile");
                 }
@@ -207,7 +207,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.ERROR,
                 Message = Resources.Resource.All_fields_are_required,
-                //Title = NotificationMessage.ERROR.ToString()
+                Title = NotificationMessage.ERROR.ToString()
             });
             return Redirect("/user/account/profile");
         }
@@ -236,7 +236,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.ERROR,
                     Message = errorMessage,
-                    //Title = NotificationMessage.ERROR.ToString(),
+                    Title = NotificationMessage.ERROR.ToString(),
                 }).ToArray();
                 TempData["ChangePWErrorMessage"] = notificationModels[0].Message;
                 return RedirectToAction("ChangePasswordV2", changePasswordModel);
@@ -297,7 +297,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.INFORMATION,
                         Message = "Image must be in jpeg, jpg or png format",
-                        //Title = NotificationMessage.INFORMATION.ToString()
+                        Title = NotificationMessage.INFORMATION.ToString()
                     });
 
                     return Json(new { Code = "0", Message = "File Must be .jpg,.png,.jpeg,.heif" });
@@ -313,7 +313,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.SUCCESS,
                         Message = dbresp.Message,
-                        //Title = NotificationMessage.SUCCESS.ToString()
+                        Title = NotificationMessage.SUCCESS.ToString()
                     });
 
                     return Json(new { Code = "0", Message = "Uploaded successfully" });
@@ -323,7 +323,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.ERROR,
                 Message = "Something went wrong please try again",
-               // Title = NotificationMessage.ERROR.ToString(),
+               Title = NotificationMessage.ERROR.ToString(),
             });
             return Json(new { Code = "1", Message = "Something went wrong please try again" });
         }
