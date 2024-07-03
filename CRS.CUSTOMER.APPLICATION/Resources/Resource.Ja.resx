@@ -689,7 +689,7 @@
     <value>最小長は 1 文字です</value>
   </data>
   <data name="Minimum length is 11 characters" xml:space="preserve">
-    <value>最小長は 11 文字です</value>
+    <value>11文字の携帯電話番号入力してください</value>
     <comment>Register</comment>
   </data>
   <data name="Minimum length is 4 characters" xml:space="preserve">
