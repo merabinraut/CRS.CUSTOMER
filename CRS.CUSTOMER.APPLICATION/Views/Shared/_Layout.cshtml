@@ -678,8 +678,8 @@
             var messages = (List<CRS.CUSTOMER.SHARED.NotificationModel>)TempData["Notifications"];
             foreach (var note in messages)
             {
-                @*<text>showNotification("@note.Message", "@note.Title", "@note.NotificationType");</text>*@
-                 <text>showNotification("@note.Message", "", "@note.NotificationType");</text>
+                <text>showNotification("@note.Message", "@note.Title", "@note.NotificationType");</text>
+                 @*<text>showNotification("@note.Message", "", "@note.NotificationType");</text>*@
             }
 
         }

@@ -20,16 +20,16 @@
 
     switch (type) {
         case "SUCCESS":
-            toastr.success(message, title);
+            toastr.success(message, "");
             break;
         case "ERROR":
-            toastr.error(message, title);
+            toastr.error(message, "");
             break;
         case "INFORMATION":
-            toastr.info(message, title);
+            toastr.info(message, "");
             break;
         case "WARNING":
-            toastr.warning(message, title);
+            toastr.warning(message, "");
             break;
     }
 }
