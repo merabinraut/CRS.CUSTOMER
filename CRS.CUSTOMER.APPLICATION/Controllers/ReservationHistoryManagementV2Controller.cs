@@ -143,7 +143,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Invalid Reservation Details",
                     NotificationType = NotificationMessage.WARNING,
-                    Title = NotificationMessage.WARNING.ToString(),
+                   // Title = NotificationMessage.WARNING.ToString(),
                 });
                 return RedirectToAction("ReservationHistory", "ReservationHistoryManagementV2");
             }
@@ -171,7 +171,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         {
                             Message = dbResponseInfo.Message ?? " 予約が更新されました",
                             NotificationType = NotificationMessage.SUCCESS,
-                            Title = NotificationMessage.SUCCESS.ToString(),
+                           // Title = NotificationMessage.SUCCESS.ToString(),
                         });
                         redirectToUrl = Url.Action("ReservationHistory", "ReservationHistoryManagementV2");
                         return Json(new { redirectToUrl });
@@ -182,7 +182,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         {
                             Message = dbResponseInfo.Message ?? "Failed",
                             NotificationType = NotificationMessage.INFORMATION,
-                            Title = NotificationMessage.INFORMATION.ToString(),
+                            //Title = NotificationMessage.INFORMATION.ToString(),
                         });
                         return Json(new { redirectToUrl });
                     }
@@ -194,7 +194,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Invalid Reservation Details",
                     NotificationType = NotificationMessage.WARNING,
-                    Title = NotificationMessage.WARNING.ToString(),
+                   // Title = NotificationMessage.WARNING.ToString(),
                 });
                 return RedirectToAction("ReservationHistory", "ReservationHistoryManagementV2");
             }
@@ -211,7 +211,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Invalid Reservation Details",
                     NotificationType = NotificationMessage.WARNING,
-                    Title = NotificationMessage.WARNING.ToString(),
+                   // Title = NotificationMessage.WARNING.ToString(),
                 });
                 return RedirectToAction("ReservationHistory", "ReservationHistoryManagementV2");
             }
@@ -229,7 +229,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? "Your reservation has been cancelled",
                         NotificationType = NotificationMessage.SUCCESS,
-                        Title = NotificationMessage.SUCCESS.ToString()
+                       // Title = NotificationMessage.SUCCESS.ToString()
                     });
                     return Json(dbResponseInfo.SetMessageInTempData(this));
                 }
@@ -239,7 +239,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? "Failed",
                         NotificationType = NotificationMessage.INFORMATION,
-                        Title = NotificationMessage.INFORMATION.ToString(),
+                       // Title = NotificationMessage.INFORMATION.ToString(),
                     });
                     return Json(JsonRequestBehavior.AllowGet);
                 }
@@ -250,7 +250,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Something went wrong. Please try again later.",
                     NotificationType = NotificationMessage.INFORMATION,
-                    Title = NotificationMessage.INFORMATION.ToString(),
+                   // Title = NotificationMessage.INFORMATION.ToString(),
                 });
                 return Json(JsonRequestBehavior.AllowGet);
             }
@@ -265,7 +265,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Invalid Reservation details",
                     NotificationType = NotificationMessage.WARNING,
-                    Title = NotificationMessage.WARNING.ToString(),
+                    //Title = NotificationMessage.WARNING.ToString(),
                 });
                 return RedirectToAction("ReservationHistory", "ReservationHistoryManagementV2");
             }
@@ -283,7 +283,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? " Your reservation has been redo",
                         NotificationType = NotificationMessage.SUCCESS,
-                        Title = NotificationMessage.SUCCESS.ToString(),
+                        //Title = NotificationMessage.SUCCESS.ToString(),
                     });
                     return Json(dbResponseInfo.SetMessageInTempData(this));
                 }
@@ -293,7 +293,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? "Failed",
                         NotificationType = NotificationMessage.INFORMATION,
-                        Title = NotificationMessage.INFORMATION.ToString(),
+                      //  Title = NotificationMessage.INFORMATION.ToString(),
                     });
                     return Json(JsonRequestBehavior.AllowGet);
                 }
@@ -304,7 +304,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Something went wrong. Please try again later.",
                     NotificationType = NotificationMessage.INFORMATION,
-                    Title = NotificationMessage.INFORMATION.ToString(),
+                    //Title = NotificationMessage.INFORMATION.ToString(),
                 });
                 return Json(JsonRequestBehavior.AllowGet);
             }
@@ -319,7 +319,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Invalid Reservation details",
                     NotificationType = NotificationMessage.WARNING,
-                    Title = NotificationMessage.WARNING.ToString(),
+                    //Title = NotificationMessage.WARNING.ToString(),
                 });
                 return RedirectToAction("ReservationHistory", "ReservationHistoryManagementV2");
             }
@@ -336,7 +336,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? " 予約が削除されました",
                         NotificationType = NotificationMessage.SUCCESS,
-                        Title = NotificationMessage.SUCCESS.ToString(),
+                       // Title = NotificationMessage.SUCCESS.ToString(),
                     });
                     return Json(dbResponseInfo.SetMessageInTempData(this));
                 }
@@ -346,7 +346,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? "Failed",
                         NotificationType = NotificationMessage.INFORMATION,
-                        Title = NotificationMessage.INFORMATION.ToString(),
+                       // Title = NotificationMessage.INFORMATION.ToString(),
                     });
                     return Json(JsonRequestBehavior.AllowGet);
                 }
@@ -357,7 +357,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Something went wrong. Please try again later.",
                     NotificationType = NotificationMessage.INFORMATION,
-                    Title = NotificationMessage.INFORMATION.ToString(),
+                   // Title = NotificationMessage.INFORMATION.ToString(),
                 });
                 return Json(JsonRequestBehavior.AllowGet);
             }

@@ -45,7 +45,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.WARNING,
                     Message = "Invalid request",
-                    Title = NotificationMessage.WARNING.ToString()
+                   // Title = NotificationMessage.WARNING.ToString()
                 });
                 redirectToUrl = "/";
                 return Json(new { Response, redirectToUrl }, JsonRequestBehavior.AllowGet);
@@ -57,7 +57,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.WARNING,
                     Message = "Invalid request",
-                    Title = NotificationMessage.WARNING.ToString()
+                   // Title = NotificationMessage.WARNING.ToString()
                 });
                 redirectToUrl = "/";
                 return Json(new { Response, redirectToUrl }, JsonRequestBehavior.AllowGet);

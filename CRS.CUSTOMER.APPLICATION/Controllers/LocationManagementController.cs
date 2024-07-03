@@ -58,7 +58,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid location details",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                    //Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -148,7 +148,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.WARNING,
                     Message = "Invalid Details",
-                    Title = NotificationMessage.WARNING.ToString()
+                    //Title = NotificationMessage.WARNING.ToString()
                 });
                 return Redirect("/");
             }
@@ -161,7 +161,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.WARNING,
                     Message = "こちらの店舗は現在ホスログに記載されておりません", //Club is no longer available in the hoslog,
-                    Title = NotificationMessage.WARNING.ToString()
+                    //Title = NotificationMessage.WARNING.ToString()
                 });
                 return Redirect("/");
             }
@@ -345,7 +345,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid Details",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   // Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -383,7 +383,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.INFORMATION,
                 Message = "Something went wrong.",
-                Title = NotificationMessage.INFORMATION.ToString()
+                //Title = NotificationMessage.INFORMATION.ToString()
             });
             return Redirect("/");
         }

@@ -51,7 +51,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   // Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -62,7 +62,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                    //Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -83,7 +83,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.INFORMATION,
                 Message = dbResponse.Message ?? "Invalid request",
-                Title = NotificationMessage.INFORMATION.ToString()
+               // Title = NotificationMessage.INFORMATION.ToString()
             });
             return Redirect("/");
         }
@@ -102,7 +102,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   // Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -128,7 +128,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.INFORMATION,
                 Message = dbResponse.Message ?? "Invalid request",
-                Title = NotificationMessage.INFORMATION.ToString()
+               // Title = NotificationMessage.INFORMATION.ToString()
             });
             return Redirect("/");
         }
@@ -146,7 +146,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   // Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -159,7 +159,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   // Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -189,7 +189,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   // Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -202,7 +202,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   // Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -222,7 +222,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   // Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -251,7 +251,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   // Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -274,7 +274,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                  //  Title = NotificationMessage.INFORMATION.ToString()
                 });
                 redirectToUrl = "/";
                 return Json(new { redirectToUrl });
@@ -308,7 +308,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.SUCCESS,
                     Message = dbResponse.Message ?? "Success",
-                    Title = NotificationMessage.SUCCESS.ToString()
+                   // Title = NotificationMessage.SUCCESS.ToString()
                 });
                 redirectToUrl = "/";
                 return Json(new { redirectToUrl });
@@ -319,7 +319,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse.Message ?? "Failed",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                  //  Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Json(new { redirectToUrl });
             }

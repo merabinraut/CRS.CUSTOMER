@@ -62,7 +62,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.INFORMATION,
                 Message = "Invalid request",
-                Title = NotificationMessage.INFORMATION.ToString()
+                //Title = NotificationMessage.INFORMATION.ToString()
             });
             return RedirectToAction("History", "ReservationHistoryManagement");
         }
@@ -76,7 +76,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Invalid Reservation Details",
                     NotificationType = NotificationMessage.WARNING,
-                    Title = NotificationMessage.WARNING.ToString(),
+                   // Title = NotificationMessage.WARNING.ToString(),
                 });
                 return RedirectToAction("History", "ReservationHistoryManagement");
             }
@@ -94,7 +94,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? " Your reservation has been cancelled",
                         NotificationType = NotificationMessage.SUCCESS,
-                        Title = NotificationMessage.SUCCESS.ToString(),
+                       // Title = NotificationMessage.SUCCESS.ToString(),
                     });
                     return Json(dbResponseInfo.SetMessageInTempData(this));
                 }
@@ -104,7 +104,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? "Failed",
                         NotificationType = NotificationMessage.INFORMATION,
-                        Title = NotificationMessage.INFORMATION.ToString(),
+                       // Title = NotificationMessage.INFORMATION.ToString(),
                     });
                     return Json(JsonRequestBehavior.AllowGet);
                 }
@@ -113,7 +113,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 Message = "Something went wrong. Please try again later.",
                 NotificationType = NotificationMessage.INFORMATION,
-                Title = NotificationMessage.INFORMATION.ToString(),
+                //Title = NotificationMessage.INFORMATION.ToString(),
             });
             return Json(JsonRequestBehavior.AllowGet);
         }
@@ -128,7 +128,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Invalid Reservation Details",
                     NotificationType = NotificationMessage.WARNING,
-                    Title = NotificationMessage.WARNING.ToString(),
+                    //Title = NotificationMessage.WARNING.ToString(),
                 });
                 return RedirectToAction("History", "ReservationHistoryManagement");
             }
@@ -149,7 +149,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     Message = "Invalid Reservation Details",
                     NotificationType = NotificationMessage.WARNING,
-                    Title = NotificationMessage.WARNING.ToString(),
+                  //  Title = NotificationMessage.WARNING.ToString(),
                 });
                 redirectToUrl = Url.Action("History", "ReservationHistoryManagement");
                 return Json(new { redirectToUrl });
@@ -167,7 +167,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? " Your reservation time has been updated",
                         NotificationType = NotificationMessage.SUCCESS,
-                        Title = NotificationMessage.SUCCESS.ToString(),
+                      //  Title = NotificationMessage.SUCCESS.ToString(),
                     });
                     redirectToUrl = Url.Action("History", "ReservationHistoryManagement");
                     return Json(new { redirectToUrl });
@@ -178,7 +178,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? "Failed",
                         NotificationType = NotificationMessage.INFORMATION,
-                        Title = NotificationMessage.INFORMATION.ToString(),
+                       // Title = NotificationMessage.INFORMATION.ToString(),
                     });
                     return Json(new { redirectToUrl });
                 }
@@ -187,7 +187,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 Message = "Something went wrong. Please try again later.",
                 NotificationType = NotificationMessage.INFORMATION,
-                Title = NotificationMessage.INFORMATION.ToString(),
+               // Title = NotificationMessage.INFORMATION.ToString(),
             });
             return Json(new { redirectToUrl });
         }
