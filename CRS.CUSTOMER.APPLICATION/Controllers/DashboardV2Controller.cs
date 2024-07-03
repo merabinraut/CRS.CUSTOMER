@@ -138,7 +138,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public JsonResult GetMainPageClubHost(string LocationId)
         {
             var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
-            //var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
             var lId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, LocationId);
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var Response = new LocationClubHostModel();

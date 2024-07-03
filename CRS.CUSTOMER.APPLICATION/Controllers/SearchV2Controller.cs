@@ -174,7 +174,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var locationId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, ViewBag.PrefecturesArea);
-            if (!string.IsNullOrEmpty(target) || (!string.IsNullOrEmpty(target) && NewHost) || (!string.IsNullOrEmpty(target) || NewClub))
+            if (!string.IsNullOrEmpty(target) || (!string.IsNullOrEmpty(target) && NewHost) || (!string.IsNullOrEmpty(target) && NewClub))
             {
                 if (target.Trim().ToLower() == "host" || NewHost)
                 {
@@ -205,6 +205,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         ViewBag.target = "new";
                         var dbHostResponse = _dashboardBusiness.GetNewHost(locationId, CustomerId);
                         Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
+                        ViewBag.StartIndex = HostTabRequest.StartIndex;
+                        ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
                     }
                     else
                     {

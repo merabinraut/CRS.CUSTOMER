@@ -3,6 +3,7 @@
     ViewBag.Title = "検索フィルター‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var PostURL = ViewBag.PostURL;
+    DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:mm"));
 }
 <style>
     .preferance > input[type="checkbox"] {
@@ -90,7 +91,7 @@
 
                     </div>
                     <div style="color: #666666;" id="main-date-id">
-                        @(string.IsNullOrEmpty(ViewBag.Date) ? "日付" : ViewBag.Date)
+                        @(string.IsNullOrEmpty(ViewBag.Date) ? "予約日" : ViewBag.Date)
                     </div>
                 </div>
                 <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
@@ -132,8 +133,8 @@
 
 <!-- divider -->
 <div class="bg-[#F1F1F1] mt-[8px]">
-    <div class="border-t border-b border-[#EDEDED]" style="background:#E3E3E3;">
-        <div class="flex mt-[12px]  justify-start mx-[16px] flex-row">
+    <div class=" border-b border-[#EDEDED]" style="background:#E3E3E3;">
+        <div class="flex mt-[8px]   justify-start mx-[16px] flex-row" style="padding-top:12px">
             <div class="  flex flex-row justify-start items-center  ">
                 <div class="flex flex-col">
                     <div class="font-[700] text-[#333] text-[14px] leading-[20.27px]">あなたにオススメのホストクラブ</div>
@@ -174,13 +175,13 @@
 </div>
 
 <!-- for search result -->
-<div class="bg-[#F1EEEE] flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]">
+<div class=" flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]" style="background: #FAFAFA ">
     <span>検索結果</span>
     <span>@Model.FilteredClubModel.Count 件</span>
 </div>
 <div class="bg-white">
     <!-- club section  -->
-    <div id="tab1" class="tab-content-plane  ">
+    <div id="tab1" class="tab-content-plane  " style="background: #EFEFEF ">
         @{
             if (Model.FilteredClubModel.Count <= 0)
             {
@@ -335,7 +336,7 @@
 
                                     <!-- e/opening hours -->
                                     <!-- s/available -->
-                                    if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                                    if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubOpeningTime) < currentTime && DateTime.Parse(item.ClubClosingTime) > currentTime)
                                     {
                                         <div class="available">本日空席あり</div>
                                     }
@@ -403,5 +404,18 @@
                 }
             }
         });
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 20) {
+                $('#scrollToTopButton').fadeIn();
+            } else {
+                $('#scrollToTopButton').fadeOut();
+            }
+        });
+
+        $('#scrollToTopButton').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+
     </script>
 }

@@ -1,9 +1,14 @@
-﻿:root {
-    font-family: "yu-gothic-pr6n", sans-serif;
+﻿@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+:root {
+    /*    font-family: "yu-gothic-pr6n", sans-serif;*/
+    /*font-family: 'Noto Sans JP', sans-serif;*/
+
+    font-family: 'Noto Sans JP';
     color: #292f33;
     font-size: 16px;
     width: 100%;
-    font-weight: 500;
+    font-weight: 400;
     --primary-100: #d75a8b;
     --warmgray: #bcb08a;
     --warmgray-1: #a09e91;
@@ -20,22 +25,26 @@
     --borderColor: #f1f1f1;
 }
 
-@font-face {
+/*@font-face {
     font-family: "yu-gothic-pr6n", sans-serif;
     font-weight: 400;
     font-style: normal;
-}
+}*/
 
 body {
     padding: 0;
     margin: 0;
     box-shadow: none;
     height: 100vh;
-    letter-spacing:0.5px
+    letter-spacing: 0.5px;
+    font-family: 'Noto Sans JP', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     /*overscroll-behavior: none;*/
-/*    touch-action: pan-y;
+    /*    touch-action: pan-y;
     -webkit-overflow-scrolling: touch;*/
-   /* overflow-y: auto;*/
+    /* overflow-y: auto;*/
 }
 
     body::-webkit-scrollbar {
@@ -1614,7 +1623,7 @@ button {
     padding: 20px 0 0 0;
     display: block;
     float: left;
-    border-bottom: 4px solid #fafafa;
+   /* border-bottom: 4px solid #fafafa;*/
     /* background: #fcfcfc;*/
     background: #fff;
 }
@@ -1737,7 +1746,7 @@ h3.club_name, p.club_kana, p.club_group {
 h3.club_name {
     height: 19px;
     font-size: 0.9rem;
-    max-width: 120px;
+/*    max-width: 120px;*/
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap

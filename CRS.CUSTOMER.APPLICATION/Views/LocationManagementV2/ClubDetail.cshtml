@@ -13,6 +13,7 @@
     string formattedDate = todayDate.ToString("yyyy年M月");
     var target = ViewBag.target;
     var PlanGroupList = ViewBag.PlanGroup;
+    DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:mm"));
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script src="/Content/assets/js/tabs.js"></script>
@@ -68,15 +69,11 @@
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="/" class="active">
-        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Home
-    </a>
+    <a href="/" class="active">ホームページ</a>
     <i class="las la-angle-right"></i>
-    <a class="active" onclick="RedirectToLocation();">
-        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Clubs
-    </a>
+    <a class="active" onclick="RedirectToLocation();">店舗/ホスト一覧</a>
     <i class="las la-angle-right"></i>
-    <a href="#">@Model.ClubNameEng</a>
+    <a href="#">@Model.ClubNameJp</a>
 </div>
 <div class="h-[189px]">
     <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
@@ -145,17 +142,18 @@
     </div>
     @if (string.IsNullOrEmpty(Model.IsBookmarked) || Model.IsBookmarked.Trim().ToUpper() == "N")
     {
-        <div class="flex items-center flex-col" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)">
+        <div class="flex items-center flex-col">
             <div class="p-1">
-                <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                <div class="action_keep" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
             </div>
         </div>
     }
     else
     {
-        <div class="flex items-center flex-col" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)">
-            <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
-
+        <div class="flex items-center flex-col">
+            <div class="p-1">
+                <div class="action_keep" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+            </div>
         </div>
     }
 
@@ -267,12 +265,12 @@
 <div class="">
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
         <div class="flex tab-container-plane no-scrollbar bg-white gap-[14px] overflow-x-auto" style="overflow-y:hidden">
-            <button id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "" ? "active" : "")">店舗トップ</button>
-            <button id="tab2Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "host" ? "active" : "")">ホスト</button>
-            <button id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "review" ? "active" : "")">レビュー</button>
-            <button id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "gallery" ? "active" : "")">写真</button>
-            <button id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "schedule" ? "active" : "")">スケジュール</button>
-            <button id="tab6Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "notice" ? "active" : "")">お知らせ</button>
+            <a id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/">店舗トップ</a>
+            <a id="tab2Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "host" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/host">ホスト</a>
+            <a id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "review" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/review">レビュー</a>
+            <a id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "gallery" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/gallery">写真</a>
+            <a id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "schedule" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/schedule">スケジュール</a>
+            <a id="tab6Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "notice" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/notice">お知らせ</a>
         </div>
     </div>
 </div>
@@ -973,7 +971,7 @@
                                     </svg>
                                     <h4 class="text-[#333] text-[12px] font-bold leading-[20px]">お知らせ</h4>
                                 </div>
-                                <div class="flex justify-start items-center gap-[3px]" id="notice_id">
+                                <div class="flex justify-start items-center gap-[3px]" id="notice_id" onclick="window.location.href='/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/notice'">
                                     <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                         <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
@@ -1017,7 +1015,7 @@
                                     </svg>
                                     <h4 class="text-[#333] text-[12px] font-bold leading-[20px]">スケジュール情報</h4>
                                 </div>
-                                <div class="flex justify-start items-center gap-[3px]" id="schedule_id">
+                                <div class="flex justify-start items-center gap-[3px]" id="schedule_id" onclick="window.location.href='/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/schedule'">
                                     <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                         <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
@@ -1348,7 +1346,7 @@
                                                 }
                                             }
                                             <!-- Display Label and LabelValue for each row -->
-                                            <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                            <td class="border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
                                                 @item.LabelValue
                                             </td>
                                         </tr>
@@ -1404,10 +1402,10 @@
                                                 }
                                             }
                                             <!-- Display Label and LabelValue for each row -->
-                                            <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                            <td class="border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
                                                 @item.Label
                                             </td>
-                                            <td class="border border-[#EFEFEF] text-[11px] font-medium leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                            <td class="border border-[#EFEFEF] text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
                                                 @item.LabelValue
                                             </td>
                                         </tr>
@@ -1539,7 +1537,7 @@
                 <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
             }
         </div>
-        @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.TodaysClubSchedule) && Model.GetClubBasicInformation.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+        @if (!string.IsNullOrEmpty(Model.TodaysClubSchedule) && Model.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(Model.ClubOpeningTime) < currentTime && DateTime.Parse(Model.ClubClosingTime) > currentTime)
         {
             <div class="bg-[#BCB08A] rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full">
                 本日空席あり
@@ -1589,8 +1587,8 @@
     </button>
     <!--<div id="modal2" class="modal">
         <div class="modal-content">-->
-            <!-- <span class="close-btn"  >&times;</span> -->
-            <!--<div class="fixed bottom-0 w-[100%] left-0 right-0 bg-white z-20">
+    <!-- <span class="close-btn"  >&times;</span> -->
+    <!--<div class="fixed bottom-0 w-[100%] left-0 right-0 bg-white z-20">
                 <div class="py-[10px] px-4 border-b border-b-[#EDEDED] flex justify-between bg-white">
                     <h5 id="drawer-bottom-label" class="text-sm text-secondary-1">
                         共有
@@ -1780,7 +1778,7 @@
 </div>
 
 <div id="myModal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" style="background:none">
         <span class="close-btn h-[10px] w-[10px] rounded-full bg-white aspect-square " style="right:20px" onclick="closeImagePopup();">&times;</span>
         <img src="/Content/assets/images/customer/demo-image.jpeg" alt="img" class="h-[210.5px] w-auto object-cover " style="margin:0 auto;" id="img01" />
     </div>
@@ -1791,45 +1789,6 @@
 @section scripts
 {
     <script src="~/Content/CustomHelper.js"></script>
-    <script>
-        var isFirstTimeLoad = true;
-        $(document).ready(function (event) {
-            $('#tab1Button, #tab2Button, #tab3Button, #tab4Button, #tab5Button, #tab6Button').click(function () {
-                if (isFirstTimeLoad) {
-                    isFirstTimeLoad = false;
-                    return false;
-                }
-
-                var tab = '';
-                if (this.id === 'tab2Button') tab = 'host';
-                else if (this.id === 'tab3Button') tab = 'review';
-                else if (this.id === 'tab4Button') tab = 'gallery';
-                else if (this.id === 'tab5Button') tab = 'schedule';
-                else if (this.id === 'tab6Button') tab = 'notice';
-
-                redirectToTab(tab);
-                return false;
-            });
-            event.stopPropagation();
-            isFirstTimeLoad = false;
-            return false;
-        });
-
-        function redirectToTab(tab) {
-            var prefecturesArea = '@ViewBag.LocationId';
-            var clubId = '@ViewBag.ClubId';
-            var url = `/area${prefecturesArea}/hostclub/${clubId}/${tab}`;
-            window.location.href = url;
-            return false;
-        }
-
-        function RedirectToLocation() {
-            var prefecturesArea = '@ViewBag.LocationId';
-            var url = `/area${prefecturesArea}`;
-            window.location.href = url;
-            return false;
-        }
-    </script>
     <script>
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -1942,7 +1901,7 @@
             });
         });
     </script>
-    <script>
+    @*<script>
         $('#notice_id').click('click', function () {
             var activeElement = document.querySelector('.tab-link.active');
             if (activeElement) {
@@ -1964,7 +1923,7 @@
                 newActiveElement.classList.add('active');
                 $('#tab5Button').click();
             }
-        });</script>
+        });</script>*@
 
     <!--make clicked the tab after reload-->
     <script>
@@ -1991,5 +1950,12 @@
         $('#comment_ID').click('click', function () {
             $('#tab3Button').click();
         });
+
+         function RedirectToLocation() {
+             var prefecturesArea = '@ViewBag.LocationId';
+             var url = `/area${prefecturesArea}`;
+             window.location.href = url;
+             return false;
+         }
     </script>
 }

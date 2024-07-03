@@ -720,7 +720,6 @@ async function InitiateDateTimeFilterPopupFunction() {
     if (locationfilterpopupContent.trim() !== '') {
         var element = document.getElementById('drawer-date-time');
         if (element) {
-            DateTimeFilterCommon();
             element.classList.remove('translate-y-full');
             DisableLoaderFunction();
             return false;
@@ -792,8 +791,8 @@ function DateTimeFilterCommon() {
                 '7月', '8月', '9月', '10月', '11月', '12月'
             ],
             dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
-            dayNamesShort: ['月', '火', '水', '木', '金', '土', '日',],
-            dayNamesMin: ['月', '火', '水', '木', '金', '土', '日',],
+            dayNamesShort: ['日', '月', '火', '水', '木', '金', '土',],
+            dayNamesMin: ['日', '月', '火', '水', '木', '金', '土',],
             weekHeader: '週',
             dateFormat: 'yy/mm/dd',
             firstDay: 0,
@@ -1028,6 +1027,37 @@ function NewHostRenderFunction() {
     }
     $('.location-class').val(locationId);
     var searchUrl = `/Search${locationId}/?target=new&NewHost=${true}`;
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = searchUrl;
+    document.body.appendChild(form);
+    form.submit();
+    DisableLoaderFunction();
+}
+function PopupFilterNewClubRenderFunction() {
+    EnableLoaderFunction();
+    let locationId = $('#filter-location-id').val();
+    if (!locationId || locationId.trim() === '') {
+        locationId = $('#current-location-id').val();
+    }
+    $('.location-class').val(locationId);
+    var searchUrl = `/Search${locationId}/?scftab=03&NewClub=${true}`;
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = searchUrl;
+    document.body.appendChild(form);
+    form.submit();
+    DisableLoaderFunction();
+}
+
+function PopupFilterNewHostRenderFunction() {
+    EnableLoaderFunction();
+    let locationId = $('#filter-location-id').val();
+    if (!locationId || locationId.trim() === '') {
+        locationId = $('#current-location-id').val();
+    }
+    $('.location-class').val(locationId);
+    var searchUrl = `/Search${locationId}/?scftab=03&NewHost=${true}`;
     var form = document.createElement('form');
     form.method = 'POST';
     form.action = searchUrl;

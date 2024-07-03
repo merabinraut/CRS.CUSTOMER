@@ -340,7 +340,7 @@
                 }
             </div>
         </div>
-        <div id="tab2" class="tab-content-plane hidden">
+        <div id="tab2" class="tab-content-plane hidden" style="background: #FAFAFA; margin-bottom: 4px; ">
             @if (Model.HostListModel == null || Model.HostListModel.Count <= 0)
             {
                 <!--comming soon page start-->
@@ -361,7 +361,6 @@
                     {
                         <div class="h-auto flex flex-col justify-end  text-center relative rounded-sm">
                             <div class="w-full relative">
-                                @*<a class="" href="/LocationManagement/ViewHostDetail?HostId=@item.HostId">*@
                                 <a class="" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@ViewBag.LocationId');">
                                     @if (!string.IsNullOrEmpty(item.HostImage))
                                     {

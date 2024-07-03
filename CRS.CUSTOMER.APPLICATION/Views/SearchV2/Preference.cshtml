@@ -26,6 +26,7 @@
     ViewBag.Title = $"{filter}からホストクラブを探す({TotalClubCount}件)‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var PostURL = ViewBag.PostURL;
+    DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:mm"));
 }
 <style>
     input[type=radio]:checked + label {
@@ -101,122 +102,123 @@
 <div class='px-4 py-2 text-[12px] font-semibold bg-[#FDFBFA]'>
     検索結果 @(Model != null ? Model.Count() : 0) 件
 </div>
-
-@foreach (var item in Model)
-{
-    <div class="club_content">
-        <!-- s/link -->
-        <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
-            <ul class="club_tags">
-                @if (!string.IsNullOrEmpty(@item.Tag1))
-                {
-                    <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
-                }
-                @if (!string.IsNullOrEmpty(@item.Tag2))
-                {
-                    <li class="tag_rank"> @item.Tag2</li>
-                }
-                @if (!string.IsNullOrEmpty(@item.Tag3))
-                {
-                    <li class="tag_platinum">  @item.Tag3</li>
-                }
-
-                @if (!string.IsNullOrEmpty(@item.Tag4))
-                {
-                    <li class="tag_good">@item.Tag4</li>
-                }
-                @if (!string.IsNullOrEmpty(@item.Tag5))
-                {
-                    <li class="tag_big">  @item.Tag5</li>
-                }
-            </ul>
-            <div class="club_header">
-                <div class="club_logo"><img class="logo" alt="ロゴ" src="@item.ClubLogo"></div>
-                <div class="club_info">
-                    <h3 class="club_name">@item.ClubNameEnglish</h3>
-                    <p class="club_kana">@item.ClubNameJapanese</p>
-                    <p class="club_group">@item.GroupName</p>
-                </div>
-                @if (item.IsBookmarked.ToUpper() == "Y")
-                {
-                    <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
-                }
-                else
-                {
-                    <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
-                }
-            </div>
-            <ul class="club_thumb">
-                @foreach (var item2 in item.HostGalleryImage)
-                {
-                    <li><img alt="@item.ClubNameEnglish ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
-                }
-
-            </ul>
-            <div class="club_rate">
-                <ul class="rate_stars">
-                    @{
-                        var unratedScale = (5 - item.AverageRating);
-                        for (int i = 0; i < item.AverageRating; i++)
-                        {
-                            <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
-                        }
-                        for (int i = 0; i < unratedScale; i++)
-                        {
-                            <li><img src="~/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>
-                        }
+<div class="list_wrap">
+    @foreach (var item in Model)
+    {
+        <div class="club_content">
+            <!-- s/link -->
+            <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
+                <ul class="club_tags">
+                    @if (!string.IsNullOrEmpty(@item.Tag1))
+                    {
+                        <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Tag2))
+                    {
+                        <li class="tag_rank">ランク @item.Tag2</li>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Tag3))
+                    {
+                        <li class="tag_platinum">  @item.Tag3</li>
                     }
 
-                    <li class="rate_value"> @item.AverageRating</li>
+                    @if (!string.IsNullOrEmpty(@item.Tag4))
+                    {
+                        <li class="tag_good">@item.Tag4</li>
+                    }
+                    @if (!string.IsNullOrEmpty(@item.Tag5))
+                    {
+                        <li class="tag_big">  @item.Tag5</li>
+                    }
                 </ul>
-                <ul class="rate_review">
-                    <li><img src="~/Content/assets/images/comment.svg" alt="コメント"></li>
-                    <li class="comment_value">@item.TotalComment</li>
-                </ul>
-            </div>
-            <p class="club_pr"> @item.ClubDescription</p>
-        </a>
-        <!-- e/link -->
-        <!-- s/club footer -->
-        <div class="club_footer">
-            <!-- s/club status -->
-            <div class="club_status">
-                <!-- s/opening hours -->
-                @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
-                {
-                    if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                <div class="club_header">
+                    <div class="club_logo"><img class="logo" alt="ロゴ" src="@item.ClubLogo"></div>
+                    <div class="club_info">
+                        <h3 class="club_name">@item.ClubNameEnglish</h3>
+                        <p class="club_kana">@item.ClubNameJapanese</p>
+                        <p class="club_group">@item.GroupName</p>
+                    </div>
+                    @if (item.IsBookmarked.ToUpper() == "Y")
                     {
-                        <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
-                    }
-                    else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
-                    {
-                        <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
-                    }
-
-                    <!-- e/opening hours -->
-                    <!-- s/available -->
-                    if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
-                    {
-                        <div class="available">本日空席あり</div>
+                        <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                     }
                     else
                     {
-                        <div class="available disabled">本日空席あり</div>
+                        <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
                     }
-                }
-                <!-- e/available -->
+                </div>
+                <ul class="club_thumb">
+                    @foreach (var item2 in item.HostGalleryImage)
+                    {
+                        <li><img alt="@item.ClubNameEnglish ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
+                    }
+
+                </ul>
+                <div class="club_rate">
+                    <ul class="rate_stars">
+                        @{
+                            var unratedScale = (5 - item.AverageRating);
+                            for (int i = 0; i < item.AverageRating; i++)
+                            {
+                                <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
+                            }
+                            for (int i = 0; i < unratedScale; i++)
+                            {
+                                <li><img src="~/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>
+                            }
+                        }
+
+                        <li class="rate_value"> @item.AverageRating</li>
+                    </ul>
+                    <ul class="rate_review">
+                        <li><img src="~/Content/assets/images/comment.svg" alt="コメント"></li>
+                        <li class="comment_value">@item.TotalComment</li>
+                    </ul>
+                </div>
+                <p class="club_pr"> @item.ClubDescription</p>
+            </a>
+            <!-- e/link -->
+            <!-- s/club footer -->
+            <div class="club_footer">
+                <!-- s/club status -->
+                <div class="club_status">
+                    <!-- s/opening hours -->
+                    @if (!string.IsNullOrEmpty(@item.ClubOpeningTime) && !string.IsNullOrEmpty(@item.ClubClosingTime))
+                    {
+                        if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                        {
+                            <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                        }
+                        else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                        {
+                            <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                        }
+
+                        <!-- e/opening hours -->
+                        <!-- s/available -->
+                        if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubOpeningTime) < currentTime && DateTime.Parse(item.ClubClosingTime) > currentTime)
+                        {
+                            <div class="available">本日空席あり</div>
+                        }
+                        else
+                        {
+                            <div class="available disabled">本日空席あり</div>
+                        }
+                    }
+                    <!-- e/available -->
+                </div>
+                <!-- e/club status -->
+                <!-- s/reservation btn -->
+                <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId', '','','@PostURL')">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
+                    @* 今すぐ予約する*@
+                </button>
+                <!-- e/reservation btn -->
             </div>
-            <!-- e/club status -->
-            <!-- s/reservation btn -->
-            <button class="rsv_btn gradient" onclick="InitiateClubReservationFunction('@item.ClubId', '','','@PostURL')">
-                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Book_Now
-                @* 今すぐ予約する*@
-            </button>
-            <!-- e/reservation btn -->
+            <!-- e/club footer -->
         </div>
-        <!-- e/club footer -->
-    </div>
-}
+    }
+</div>
 <div style="background-color: #FFFFFF;" class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]">
     <div class="flex flex-row items-center justify-end gap-1 my-[12px]" id="scrollToTopButton">
 

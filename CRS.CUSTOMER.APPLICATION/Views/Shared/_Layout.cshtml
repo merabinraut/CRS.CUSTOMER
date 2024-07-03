@@ -19,9 +19,10 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
@@ -43,8 +44,7 @@
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-Z189BCRTWP');
-    </script>
+        gtag('config', 'G-Z189BCRTWP');</script>
     @*  <title>ホスログ | @ViewBag.Title</title>*@
     <title>@ViewBag.Title</title>
     <meta property="og:title" content="ホスログ/公式ホームページ">
@@ -81,7 +81,6 @@
             background: #D75A8B;
             color: #FFF;
             text-align: center;
-            font-family: "Noto Sans JP";
             font-size: 15px;
             font-style: normal;
             font-weight: 700;
@@ -140,7 +139,6 @@
             text-align: left;
             margin: 0px;
             color: #44464F;
-            font-family: "Noto Sans JP";
             font-size: 14px;
             font-style: normal;
             font-weight: 500;
@@ -217,7 +215,6 @@
         .affiliationText {
             color: #999;
             text-align: center;
-            font-family: "Noto Sans JP";
             font-size: 11px;
             font-style: normal;
             font-weight: 700;
@@ -227,7 +224,6 @@
         .dividerCol {
             color: #999;
             text-align: center;
-            font-family: "Noto Sans JP";
             font-size: 11px;
             font-style: normal;
             font-weight: 700;
@@ -236,16 +232,7 @@
             /* 18.26px */
         }
     </style>
-    <script>
-        (function (d) {
-            var config = {
-                kitId: 'scz4hqc',
-                scriptTimeout: 3000,
-                async: true
-            },
-                h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
-        })(document);
-    </script>
+
 </head>
 <body class="md:hidden">
     <!-- #endregion -->
@@ -517,10 +504,10 @@
 
                         <div class="affiliation">
                             <div class="affiliationText">
-                                <a href="http://43.207.72.221:93/" style="font-family: Noto Sans">アフィリエイター登録</a>
+                                <a href="http://43.207.72.221:93/" style="">アフィリエイター登録</a>
                             </div>
                             <div class="dividerCol">|</div>
-                            <div class="affiliationText"><a href="http://43.207.72.221:92/" style="font-family: Noto Sans"> 店舗オーナー登録 </a></div>
+                            <div class="affiliationText"><a href="http://43.207.72.221:92/" style=""> 店舗オーナー登録 </a></div>
                         </div>
 
 
@@ -646,8 +633,7 @@
                 queryObject[item[0]] = decodeURIComponent(item[1]);
             });
             return queryObject;
-        }
-    </script>
+        }</script>
     <!-- #endregion -->
     <!-- #region Fotter-links -->
     <script src="~/Content/assets/js/modal.js"></script>
@@ -681,8 +667,7 @@
         function topFunction() {
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
-        }
-    </script>
+        }</script>
 
     <script>
     //For toaster Notification
@@ -747,8 +732,7 @@
 
         function NavCloseFunction() {
             document.getElementById('drawer-right-example').classList.add('translate-x-full');
-        }
-    </script>
+        }</script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="~/Content/assets/js/reservation-common.js"></script>
     <script src="~/Content/assets/js/search-filter-common.js"></script>
@@ -781,8 +765,7 @@
         function ClubDetailRedirectFunction(ClubCode, PrefecturesArea) {
             var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
             window.location.href = url;
-        }
-    </script>
+        }</script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

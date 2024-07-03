@@ -51,9 +51,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                                 .Where(item => !string.IsNullOrEmpty(item.Schedule) && item.Schedule.Trim().ToUpper() == "DAYOFF")
                                 .Select(item => item.Date)
                                 .ToList();
+
                 responseData["Dayoff"] = Newtonsoft.Json.JsonConvert.SerializeObject(dayOff);
+
                 var timeIntervalBySelectedDate = ResponseModel.ClubReservableTimeModel;
                 responseData["TimeIntervalBySelectedDate"] = Newtonsoft.Json.JsonConvert.SerializeObject(timeIntervalBySelectedDate);
+
+                var reservedTimeSlot = ResponseModel.ReservedTimeSlotModel;
+                responseData["ReservedTimeSlot"] = Newtonsoft.Json.JsonConvert.SerializeObject(reservedTimeSlot);
 
                 if (!string.IsNullOrEmpty(SelectedDate))
                     responseData["SelectedDate"] = SelectedDate;

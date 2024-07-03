@@ -1,6 +1,6 @@
 ﻿
 <div class="py-[10px] px-[16px] flex justify-between border-b border-b-[#ECECEC] sticky top-0 bg-white z-[10]" style="z-index:12">
-    @if (!string.IsNullOrEmpty( @ViewBag.BackButtonURL))
+    @if (!string.IsNullOrEmpty(@ViewBag.BackButtonURL))
     {
         <div class="flex gap-2 items-center top-[12px] left-4 text-sm" onclick="window.location.href='@ViewBag.BackButtonURL'">
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +25,18 @@
         <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
             <i class="las la-bell"></i>
         </div>
-        <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" data-drawer-target="drawer-right-example"
-             data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
-            <i class="las la-bars"></i>
-        </div>
+        @if (@Session["Username"] != null)
+        {
+            <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" data-drawer-target="drawer-right-example"
+                 data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+                <i class="las la-bars"></i>
+            </div>
+        }
+        else
+        {
+            <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='/login'">
+                <i class="las la-bars"></i>
+            </div>
+        }
     </div>
 </div>
