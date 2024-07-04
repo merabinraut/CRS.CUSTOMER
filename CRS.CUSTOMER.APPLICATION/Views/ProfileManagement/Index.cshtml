@@ -130,7 +130,7 @@
         </div>
     </div>
 
-    @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post))
+    @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post, new {id = "profile-form"}))
     {
         @Html.AntiForgeryToken()
         if (!string.IsNullOrEmpty(Model.EmailAddress))
@@ -193,9 +193,9 @@
                            value="@Model.FirstName"
                            name="FirstName"
                            id="GivenName">
-                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "error-validation-msg" })
-                    </div>
+                    @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "error-validation-msg" })
+                        </div>*@
                 </div>
             </div>
             <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">
@@ -306,9 +306,9 @@
                         id="emailInput"
                         name="EmailAddress"
                         disabled style="background-color:lightgrey">*@
-                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
-                    </div>
+                    @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                            @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
+                        </div>*@
                 }
                 else
                 {
@@ -328,9 +328,9 @@
                         value="@Model.EmailAddress"
                         id="emailInput"
                         name="EmailAddress">*@
-                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                        @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
-                    </div>
+                    @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                            @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
+                        </div>*@
                 }
 
             </div>
@@ -346,23 +346,23 @@
                     <div class="relative">
                         @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE] ", @placeholder = "YYYY", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
                         <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">年</span>
-                        <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                            @Html.ValidationMessageFor(m => m.DOBYear, "", new { @class = "error-validation-msg" })
-                        </div>
+                        @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                                @Html.ValidationMessageFor(m => m.DOBYear, "", new { @class = "error-validation-msg" })
+                            </div>*@
                     </div>
                     <div class="relative">
                         @Html.TextBoxFor(model => model.DOBMonth, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "MM", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
                         <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">月</span>
-                        <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                            @Html.ValidationMessageFor(m => m.DOBMonth, "", new { @class = "error-validation-msg" })
-                        </div>
+                        @* <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                                @Html.ValidationMessageFor(m => m.DOBMonth, "", new { @class = "error-validation-msg" })
+                            </div>*@
                     </div>
                     <div class="relative">
                         @Html.TextBoxFor(model => model.DOBDay, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "DD", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
                         <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">日</span>
-                        <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                            @Html.ValidationMessageFor(m => m.DOBDay, "", new { @class = "error-validation-msg" })
-                        </div>
+                        @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                                @Html.ValidationMessageFor(m => m.DOBDay, "", new { @class = "error-validation-msg" })
+                            </div>*@
                     </div>
                 </div>
             </div>
@@ -401,9 +401,9 @@
                         <div style="position: absolute; top: 10px; left: 10px; color: #6A6A6A" lang="">〒</div>
                         @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @style = "width:100%; padding-left:34px", @placeholder = "", autocomplete = "off" })
 
-                        <div class="validationMessage">
-                            @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "error-validation-msg" })
-                        </div>
+                        @*<div class="validationMessage">
+                                @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "error-validation-msg" })
+                            </div>*@
                     </div>
                 </div>
                 <div style="width:60%">
@@ -453,9 +453,9 @@
                            data-val="true"
                            data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
                            name="City">
-                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                        @Html.ValidationMessageFor(m => m.City, "", new { @class = "error-validation-msg" })
-                    </div>
+                    @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                            @Html.ValidationMessageFor(m => m.City, "", new { @class = "error-validation-msg" })
+                        </div>*@
                 </div>
                 <div class="input-field-common">
                     <input placeholder="番地" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] w-full"
@@ -464,9 +464,9 @@
                            data-val="true"
                            data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
                            name="Street">
-                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                        @Html.ValidationMessageFor(m => m.Street, "", new { @class = "error-validation-msg" })
-                    </div>
+                    @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                            @Html.ValidationMessageFor(m => m.Street, "", new { @class = "error-validation-msg" })
+                        </div>*@
                 </div>
             </div>
             <div class="flex flex-col pb-[61px]">
@@ -479,9 +479,9 @@
                            data-val-required="@CRS.CUSTOMER.APPLICATION.Resources.Resource.This_field_is_required"
                            name="ResidenceNumber"
                            value="@Model.ResidenceNumber">
-                    <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                        @Html.ValidationMessageFor(m => m.ResidenceNumber, "", new { @class = "error-validation-msg" })
-                    </div>
+                    @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
+                            @Html.ValidationMessageFor(m => m.ResidenceNumber, "", new { @class = "error-validation-msg" })
+                        </div>*@
                 </div>
 
                 @*<span class="text-[12px] font-[400] text-[#BDBDBD] ">
@@ -498,13 +498,13 @@
 
         <div class="py-[12px] mt-[20px] px-[16px]  w-full grid grid-cols-1" style="box-shadow:0px 0px 7px 0px rgba(68,47,38,0.25)">
 
-            <div class="grid grid-cols-1   ">
+            <div class="grid grid-cols-1" onclick="openModal('save_Modal')">
                 @* <div style="border: 1px solid var(--Secondary-Text-II, #A1A1AA);"
                          class="flex rounded-[4px] justify-center items-center text-white h-[48px]    ">
                         <p class="ml-2 text-[14px] text-[#B7B7B7]" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</p>
                     </div>*@
-                <div onclick="openModal('save_Modal')" class="flex rounded-[4px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  ">
-                    <button onclick="openModal('save_Modal')" class="ml-2 text-[14px]">
+                <div class="flex rounded-[4px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  ">
+                    <button type="button" class="ml-2 text-[14px]">
                         更新する
                         @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile*@
                     </button>
@@ -550,11 +550,11 @@
         <div class="flex flex-col gap-1">
 
             <div class="modal_header">
-                最終確認
+                更新の確認
             </div>
 
             <div class="text-[12px] flex justify-center mb-2">
-                本当に削除してもよろしいですか？
+                プロフィールをし更新してもよろしいですか？
             </div>
         </div>
 
@@ -562,10 +562,10 @@
 
         <div class="save_cont flex gap-2 justify-center mt-4">
             <div onclick="closeModal('save_Modal')" class="flex justify-center items-center underline px-8 w-[135px]">
-                キャンセル
+                いいえ
             </div>
-            <button onclick="closeModal('save_Modal')" type="submit" class="savebtn w-[135px]">
-                削除する
+            <button onclick="SubmitFormFunction();" type="submit" class="savebtn w-[135px]">
+                はい
             </button>
         </div>
     </div>
@@ -621,7 +621,7 @@
 @*second popup*@
 
 <div id="modal2" class="modal modalWrapper" style="display:none">
-    <div class="modal-content modalContentWrapper">
+    <div class=" modalContentWrapper" style="margin:auto">
         <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
             <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('modal2')"
                   style="top:-49px">&times;</span>
@@ -637,11 +637,11 @@
                 <div class="grid gap-4 p-6 pt-4 grid-cols-2">
                     <button class=" h-[40px] border-[1px] border-[#B12D23] rounded text-[#B12D23] text-[14px] font-medium leading-[24px] underline " onclick="closeModal('modal2')"
                             data-modal-hide="defaultModal">
-                        キャンセル
+                        いいえ
                     </button>
                     <button class=" btn-primary rounded h-[40px]  text-[#FFFFFF] font-medium text-[14px]  leading-[24px]" onclick="DeleteAccount()"
                             data-modal-hide="defaultModal">
-                        削除する
+                        はい
                     </button>
                 </div>
             </div>
@@ -769,10 +769,15 @@
             postalCodeInput.addEventListener('input', function () {
                 let value = postalCodeInput.value.replace(/-/g, '');
                 if (value.length > 3) {
-                    value = value.slice(0, 3) + '-' + value.slice(3,7);
+                    value = value.slice(0, 3) + '-' + value.slice(3, 7);
                 }
                 postalCodeInput.value = value;
             });
         });
+
+        function SubmitFormFunction() {
+            closeModal('save_Modal');
+            document.getElementById('profile-form').submit();
+        }
     </script>
 }
