@@ -490,7 +490,7 @@
             return maskedNumber;
         }
         if ("@Model.MobileNumber" !== "") {
-            var message = "+ 81-" + maskLastFourDigits(mobileNumber) + " 宛にSMSを送信しました、メッセージに記載された6桁の数字を確認し、入力してください";
+            var message = "" + maskLastFourDigits(mobileNumber) + " 宛にSMSを送信しました、メッセージに記載された6桁の数字を確認し、入力してください";
             $(".displayMessage").text(message);
         }
 
