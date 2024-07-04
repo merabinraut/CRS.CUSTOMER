@@ -172,6 +172,16 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 var responseModel = new Models.LocationManagementV2.ClubDetailModel();
                 var clubDetailResp = _business.GetClubDetailById("", agentId, ClubId);
+                if (clubDetailResp.Code != ResponseCode.Success)
+                {
+                    AddNotificationMessage(new NotificationModel()
+                    {
+                        NotificationType = NotificationMessage.INFORMATION,
+                        Message = !string.IsNullOrEmpty(clubDetailResp.Message) ? clubDetailResp.Message : NotificationMessage.ERROR.ToString(),
+                        Title = NotificationMessage.INFORMATION.ToString()
+                    });
+                    return Redirect("/");
+                }
                 responseModel = clubDetailResp.MapObject<Models.LocationManagementV2.ClubDetailModel>();
                 responseModel.ClubId = responseModel.ClubId.EncryptParameter();
                 responseModel.LocationId = responseModel.LocationId.EncryptParameter();
