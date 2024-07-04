@@ -111,6 +111,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     TempData["ReferCode"] = ReferCode;
                     Session["exptime"] = DateTime.Parse(dbResponse.Extra2.ToString());
                     //Session["exptime"] = DateTime.Parse(DateTime.UtcNow.AddMinutes(10).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                    AddNotificationMessage(new NotificationModel()
+                    {
+                        NotificationType = NotificationMessage.INFORMATION,
+                        Message = dbResponse.Message ?? "認証コードが送信されました",
+                        Title = NotificationMessage.INFORMATION.ToString(),
+                    });
                     return View("VerifyOTP", otpModel);
                 }
                 AddNotificationMessage(new NotificationModel()
