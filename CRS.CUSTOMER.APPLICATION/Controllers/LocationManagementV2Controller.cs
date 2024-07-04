@@ -89,7 +89,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 request.ClubId = recommendedHostDBRequest.ClubId?.EncryptParameter();
             }
             ViewBag.LocationId = PrefecturesArea;
-            var getTotalPage = _recommendedClubHostBuss.GetTotalRecommendedPageCount();
+            var getTotalPage = _recommendedClubHostBuss.GetTotalRecommendedPageCount(locationId);
             ViewBag.TotalGroupCount = getTotalPage >= 0 ? getTotalPage : 0;
             response.RequestModel = request.MapObject<LocationV2ClubHostRequestModel>();
             ViewBag.RenderValue = !string.IsNullOrEmpty(request.RenderId) ? request.RenderId : null;
