@@ -83,6 +83,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string Tag3 { get; set; }
         public string Tag4 { get; set; }
         public string Tag5 { get; set; }
+        public string ClubLocationURL { get; set; }
+        public string ClubCode { get; set; }
     }
     public class AllHistoryModel
     {
@@ -108,6 +110,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string Tag3 { get; set; }
         public string Tag4 { get; set; }
         public string Tag5 { get; set; }
+        public string ClubLocationURL { get; set; }
+        public string ClubCode { get; set; }
     }
     #region " Reservation History Detail Model"
     public class ReservationHistoryDetailModel

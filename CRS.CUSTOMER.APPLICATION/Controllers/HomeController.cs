@@ -256,7 +256,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.INFORMATION,
                         Message = "Password is required",
-                        Title = NotificationMessage.INFORMATION.ToString()
+                       Title = NotificationMessage.INFORMATION.ToString()
                     });
                     return View(Model);
                 }

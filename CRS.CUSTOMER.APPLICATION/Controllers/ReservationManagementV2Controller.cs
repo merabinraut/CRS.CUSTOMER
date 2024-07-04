@@ -98,7 +98,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse.Item2 ?? "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -193,7 +193,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                    Title = NotificationMessage.INFORMATION.ToString()
+                   Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }

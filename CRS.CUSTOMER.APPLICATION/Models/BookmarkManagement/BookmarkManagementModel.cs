@@ -62,6 +62,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.BookmarkManagement
         public string DOB { get; set; }
         public string Address { get; set; }
         public string LoveCount { get; set; }
+        public string HostNameJapanese { get; set; }
+        public string FormattedDOB { get; set; }
     }
 
     public class GalleryImageModel
