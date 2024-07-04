@@ -26,9 +26,9 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             {
                 var Code = dbResp.Rows[0]["Code"].ToString();
                 var Message = dbResp.Rows[0]["Message"].ToString();
-                var response = _dao.DataTableToListObject<ClubDetailCommon>(dbResp).ToList();
                 if (!string.IsNullOrEmpty(Code) && Code.Trim() == "0")
                 {
+                    var response = _dao.DataTableToListObject<ClubDetailCommon>(dbResp).ToList();
                     var cId = response.FirstOrDefault().ClubId;
                     string SQL2 = "EXEC sproc_club_schedule_management @Flag ='gcws'";
                     SQL2 += ",@ClubId=" + _dao.FilterString(cId);
@@ -48,14 +48,14 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
                 {
                     return new ClubDetailCommon
                     {
-                        Code = ResponseCode.Failed,
+                        Code = "1",
                         Message = !string.IsNullOrEmpty(Message) ? Message : ResponseCode.Failed.ToString()
                     };
                 }
             }
             return new ClubDetailCommon
             {
-                Code = ResponseCode.Failed,
+                Code = "1",
                 Message = ResponseCode.Failed.ToString()
             };
         }

@@ -172,7 +172,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 var responseModel = new Models.LocationManagementV2.ClubDetailModel();
                 var clubDetailResp = _business.GetClubDetailById("", agentId, ClubId);
-                if (clubDetailResp.Code != ResponseCode.Success)
+                if (clubDetailResp.Code.Trim() != "0")
                 {
                     AddNotificationMessage(new NotificationModel()
                     {

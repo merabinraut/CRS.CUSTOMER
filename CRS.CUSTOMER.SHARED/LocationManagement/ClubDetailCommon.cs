@@ -4,7 +4,7 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
 {
     public class ClubDetailCommon
     {
-        public ResponseCode Code { get; set; }
+        public string Code { get; set; }
         public string Message { get; set; }
         public string ClubId { get; set; }
         public string LocationId { get; set; }

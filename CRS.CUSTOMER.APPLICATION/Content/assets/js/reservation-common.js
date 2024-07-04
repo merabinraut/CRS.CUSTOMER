@@ -128,6 +128,7 @@
 }
 
 function getTimeIntervalByDayWise(date, timeInterval, reservedTimeSlot) {
+    debugger;
     var timeListHtml = '';
     var selectedDate = new Date(date);
 
@@ -142,6 +143,7 @@ function getTimeIntervalByDayWise(date, timeInterval, reservedTimeSlot) {
     var filteredTimeInterval = timeInterval.filter(interval => interval.Time !== reservedTimeSlot.Time);
 
     filteredTimeInterval.forEach(function (item) {
+        debugger;
         var itemTime = new Date(selectedDate.toDateString() + ' ' + item.Time);
         var currentTime = new Date();
         var disabledClassLabel = '';
