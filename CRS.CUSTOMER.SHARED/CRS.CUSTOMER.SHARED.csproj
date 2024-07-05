@@ -120,6 +120,7 @@
     <Compile Include="NotificationManagement\NotificationManagementCommon.cs" />
     <Compile Include="NotificationMessage.cs" />
     <Compile Include="ProfileManagement\PasswordCommon.cs" />
+    <Compile Include="ProfileManagement\PointReportCommon.cs" />
     <Compile Include="ProfileManagement\UserProfileCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecommendedClubHost\RecommendedClubHostCommon.cs" />

@@ -2,6 +2,7 @@
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models;
 using CRS.CUSTOMER.APPLICATION.Models.ProfileManagement;
+using CRS.CUSTOMER.APPLICATION.Models.ReservationManagement;
 using CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement;
 using CRS.CUSTOMER.BUSINESS.ProfileManagement;
 using CRS.CUSTOMER.SHARED;
@@ -331,6 +332,16 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         public ActionResult points()
         {
+            PointReportModel model = new PointReportModel();
+            var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
+            var alldbresp = _business.GetCustomerPointsReport(AgentId,"");
+            model.AllPointReportList = alldbresp.MapObjects<PointReportDetailModel>();
+
+            var creditdbresp = _business.GetCustomerPointsReport(AgentId, "CR");
+            model.CreditPointReportList = creditdbresp.MapObjects<PointReportDetailModel>();
+
+            var debitdbresp = _business.GetCustomerPointsReport(AgentId, "DR");
+            model.DebitPointReportList = debitdbresp.MapObjects<PointReportDetailModel>();
             return View();
         }
     }
