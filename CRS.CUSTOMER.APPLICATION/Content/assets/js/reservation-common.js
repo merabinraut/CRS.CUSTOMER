@@ -17,7 +17,7 @@
         },
         success: function (data) {
             CheckIfHasRedirectURL(data, PostData);
-            $("#stickey_id").css("display", "none")
+            $("#stickey_id").css("display", "none");
             if (!data || data.Code !== 0) {
                 toastr.info(data?.Message);
                 DisableLoaderFunction();
@@ -113,16 +113,22 @@
             initTimeFunction();
             initPeopleFunction();
             DisableLoaderFunction();
+            document.body.classList.remove('body-no-scroll');
         },
         error: function (xhr, status, error) {
+            if (document.getElementById('club-bottom-tab-id')) {
+                document.getElementById('club-bottom-tab-id').style.display = '';
+            }
             toastr.info("Something went wrong. Please try again later.");
             DisableLoaderFunction();
+            document.body.classList.remove('body-no-scroll');
             return false;
         }
     });
 }
 
 function getTimeIntervalByDayWise(date, timeInterval, reservedTimeSlot) {
+    debugger;
     var timeListHtml = '';
     var selectedDate = new Date(date);
 
@@ -137,6 +143,7 @@ function getTimeIntervalByDayWise(date, timeInterval, reservedTimeSlot) {
     var filteredTimeInterval = timeInterval.filter(interval => interval.Time !== reservedTimeSlot.Time);
 
     filteredTimeInterval.forEach(function (item) {
+        debugger;
         var itemTime = new Date(selectedDate.toDateString() + ' ' + item.Time);
         var currentTime = new Date();
         var disabledClassLabel = '';

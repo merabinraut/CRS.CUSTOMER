@@ -327,5 +327,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             });
             return Json(new { Code = "1", Message = "Something went wrong please try again" });
         }
+
+
+        public ActionResult points()
+        {
+            return View();
+        }
     }
 }
