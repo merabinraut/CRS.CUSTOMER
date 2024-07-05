@@ -249,7 +249,7 @@
     <div class="flex mx-[16px]   flex-row py-[12px]">
         <div class=" flex flex-row justify-start items-center w-[160px] ">
             <span>   <i class="fa-solid fa-location-dot text-primary-100"></i></span>
-            <h2 class="ml-3 font-[700] text-black  leading-[21px]" style="font-size:16px; font-family:Noto sans JP">場所から選ぶ</h2>
+            <h2 class="ml-[6px] font-[700] text-black leading-[21px] " style="font-size: 16px; letter-spacing:0; font-family:Noto sans JP">場所から選ぶ</h2>
         </div>
     </div>
     <div class="flex flex-col  gap-[6px] px-4 gap-[6px] pb-[16px]">
@@ -382,7 +382,7 @@
 <div style="border: 1px solid #EDEDED;background: #FFF;">
 
     <!-- clippath -->
-    <div class=" mt-[8px]">
+    <div class=" mt-[12px]">
         <svg id="clippath" xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
             <path d="M0 4C0 1.79086 1.79086 0 4 0H215L202.675 14.4652L215 27H4C1.79086 27 0 25.2091 0 23V4Z"
                   fill="url(#paint0_linear_2051_57311)" />
@@ -395,7 +395,7 @@
                 </linearGradient>
             </defs>
             <image x="7" y="5" width="16" height="16" xlink:href="~/Content/assets/images/customer/slippathsvg.svg" />
-            <text y="18" x="25" font-size="14" style="font-weight: 700; " fill="#FAFAFA">
+            <text y="18" x="25" font-size="14" style="font-weight: 700; line-height:16.8px" fill="#FAFAFA">
 
                 あなたにマッチするホスト
             </text>
@@ -413,7 +413,7 @@
 <div class="flex flex-col  gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
     <div class="flex tab-container-plane justify-between bg-white gap-[14px]">
         @*new tab*@
-        <div class="grid grid-cols-2 w-full tab-container-plane bg-white gap-[14px]">
+        <div class="grid grid-cols-2 w-full tab-container-plane bg-white gap-[14px] text-[15px]">
             <button id="tab1Button" class="tab-button-plane exclude-class tab-link active text-center" onclick="handleFirstTab()">
                 ホストクラブ
             </button>
@@ -432,7 +432,7 @@
 <!----------------------------------------------------Plan Section---------------------------------------------------->
 <!-- #region Plan section -->
 <div class="flex flex-col overflow-hidden bg-[#EFDDE4]  py-[25px]">
-    <h2 class="text-[14px] pl-[16px] flex-none  font-[700]" style="color:#000">
+    <h2 class="text-[16px] pl-[16px] flex-none  font-[700]" style="color:#000">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.HoslogLimitedPlan
     </h2>
     <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-2 py-4 ">
@@ -451,7 +451,7 @@
                         <!-- image  -->
                         <div class="px-4">
                             <div class='flex'>
-                                <div class="">
+                                <div class="flex flex-col items-center">
                                     @if (item.PlanId == lowestPrice.First().PlanId)
                                     {
                                         <i class="las la-crown linear-gradient-text text-[23px]"></i>
@@ -950,8 +950,8 @@
                                           <div style="border-radius: 4px; width:112px" class="w-[112px] h-auto flex flex-col justify-end text-center relative">
                                             <div class="w-full flex justify-center relative">
                                               <img style="width:112px" class="w-[112px] h-[154px] object-cover rounded-[2px]" src="${hostImage}" alt="hostlogo" />
-                                              <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="event.stopPropagation(); ${host.IsBookmarked.trim().toUpperCase() == 'Y' ? 'ManageBookmark' : 'ManageBookmark'}('${host.ClubId}', '${host.HostId}', 'host', this)">
-                                                <img src="${BookmarkLabel}" alt="unfilled" style="width: 24px; height: 24px;"/>
+                                              <div class="absolute " style="width: 30px; height: 30px; top:2px; right:2px;" onclick="event.stopPropagation(); ${host.IsBookmarked.trim().toUpperCase() == 'Y' ? 'ManageBookmark' : 'ManageBookmark'}('${host.ClubId}', '${host.HostId}', 'host', this)">
+                                                <img src="${BookmarkLabel}" alt="unfilled" style="width: 30px; height: 30px;"/>
                                               </div>
                                             </div>
                                             <div style="background-color:rgba(0, 0, 0, 0.70); left:0.25px; border-radius: 0 0 2px 2px;"

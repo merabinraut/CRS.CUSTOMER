@@ -125,6 +125,7 @@
 }
 
 .tab-container-plane .tab-button-plane {
+    font-size:15px;
   padding: 0px 4px 18px 4px;
 }
 .tab-container-plane .active {
