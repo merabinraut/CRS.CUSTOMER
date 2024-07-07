@@ -147,11 +147,28 @@
                                     {
                                         if (!string.IsNullOrEmpty(@club.ClubTimePeriod) && @club.ClubTimePeriod.Trim().ToUpper() == "DAY")
                                         {
-                                            <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime</div>
+                                            <div class="opening_hours">
+                                                <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
+                                                @*@club.ClubOpeningTime &#xff5e; @club.ClubClosingTime*@
+                                            <span style="line-height:13.5px;">
+                                                @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime
+
+                                            </span>
+
+                                            </div>
                                         }
                                         else if (!string.IsNullOrEmpty(@club.ClubTimePeriod) && @club.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                                         {
-                                            <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@club.ClubOpeningTime &#xff5e; @club.ClubClosingTime</div>
+                                <div class="opening_hours">
+                                    <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+
+                                  @*  @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime*@
+                                <span style="line-height:13.5px;">
+                                    @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime
+
+                                </span>
+
+                                </div>
                                         }
 
                                         <!-- e/opening hours -->

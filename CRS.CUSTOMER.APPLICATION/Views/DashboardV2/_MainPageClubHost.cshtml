@@ -51,7 +51,7 @@
 
     ul.club_tags, .club_header, .club_rate, .club_pr {
         padding-left: 15px;
-        padding-right: 9px;
+        padding-right: 11px;
     }
     /* tags */
     ul.club_tags {
@@ -108,9 +108,11 @@
     .club_header {
         width: 100%;
         height: auto;
-        display: flex;
+        /* display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;
+        align-items: flex-start;*/
+        display: flex;
+        justify-content: space-between;
     }
 
     .club_logo {
@@ -537,11 +539,25 @@
                         {
                             if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
                             {
-                                <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                                <div class="opening_hours">
+                                    <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
+                                   @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+                                    <span style="line-height:13.5px;">
+                                        @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                                    </span>
+                                </div>
                             }
                             else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                             {
-                                <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                    <div class="opening_hours">
+                        <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+                      @*  @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+
+                        <span style="line-height:13.5px;">
+                            @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                        </span>
+
+                    </div>
                             }
 
                             <!-- e/opening hours -->

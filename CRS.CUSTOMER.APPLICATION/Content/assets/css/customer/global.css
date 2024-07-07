@@ -1644,7 +1644,7 @@ button {
 
 ul.club_tags, .club_header, .club_rate, .club_pr {
     padding-left:15px;
-    padding-right:9px;
+    padding-right:11px;
 }
 /* tags */
 ul.club_tags {
@@ -1701,9 +1701,11 @@ ul.club_tags {
 .club_header {
     width: 100%;
     height: auto;
-    display: flex;
+    /*display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: flex-start;*/
+    display: flex;
+    justify-content: space-between;
 }
 
 .club_logo {
