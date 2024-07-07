@@ -47,11 +47,11 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
             string response = $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{_AmazonS3Configruation.NoImageURL.TrimStart('/')}";
             if (!useDefaultImage && !string.IsNullOrEmpty(imageURL))
                 if (imageURL.ToLower().Contains("/content/"))
-                    response = $"{ConfigurationManager.AppSettings["ImageVirtualPath"].ToString()}/{imageURL.TrimStart('/')}";
+                    response = $"{ConfigurationManager.AppSettings["ImageVirtualPath"].ToString()}/{imageURL.Trim().TrimStart('/')}";
                 else if (imageURL.ToLower().Contains(_AmazonS3Configruation.BaseURL))
                     response = imageURL;
                 else
-                    response = $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{imageURL.TrimStart('/')}";
+                    response = $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{imageURL.Trim().TrimStart('/')}";
             return response;
         }
 

@@ -48,7 +48,7 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
             return (dbResponse != null && dbResponse.Rows.Count > 0) ? _dao.DataTableToListObject<ClubReservationScheduleCommon>(dbResponse).ToList() : new List<ClubReservationScheduleCommon>();
         }
 
-        private List<ClubReservableTimeCommon> GetClubReservationTime(string ClubId)
+        public List<ClubReservableTimeCommon> GetClubReservationTime(string ClubId)
         {
             string SQL = "EXEC sproc_cp_reservation_management @Flag = 'gcrtd'";
             SQL += ", @ClubId=" + _dao.FilterString(ClubId);

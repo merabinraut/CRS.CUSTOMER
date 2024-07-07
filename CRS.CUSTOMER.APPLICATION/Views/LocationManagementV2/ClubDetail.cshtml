@@ -1885,6 +1885,26 @@
     <script>
         $(document).ready(function () {
             $("#scheduleDropdown").change(function () {
+                  localStorage.setItem('SelectedDate', $(this).val());
+                  var selectedValue = localStorage.getItem('SelectedDate');
+                  var prefecturesArea = '@ViewBag.LocationId';
+                  var ClubId = '@ViewBag.ClubId';
+                  var url = `/area${prefecturesArea}/hostclub/${ClubId}/schedule?ScheduleFilterDate=` + selectedValue;
+                  window.location.href = url;
+                  return false;
+                  @*$.ajax({
+                      url: '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId',
+                      type: 'POST',
+                      data: { ScheduleFilterDate: selectedValue },
+                      success: function (result) {
+                          window.location.href = '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId';
+                      },
+                      error: function (error) {
+                          window.location.href = '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId';
+                      }
+                  });*@
+              });
+            @*$("#scheduleDropdown").change(function () {
                 localStorage.setItem('SelectedDate', $(this).val());
                 var selectedValue = localStorage.getItem('SelectedDate');
                 $.ajax({
@@ -1898,7 +1918,7 @@
                         window.location.href = '/LocationManagement/ClubDetail_V2?ScheduleFilterDate=' + selectedValue + '&ClubId=' + '@ViewBag.ClubId' + '&LocationId=' + '@ViewBag.LocationId';
                     }
                 });
-            });
+            });*@
         });
     </script>
     @*<script>
