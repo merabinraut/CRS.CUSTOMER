@@ -19,7 +19,7 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
@@ -30,6 +30,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="~/Content/js/NotificationMessageToaster.js"></script>
     <!--share js-->
@@ -60,7 +61,117 @@
         }
     </script>
 
-    <title>Hoslog | Reservation | @ViewBag.Title</title>
+    <title>@ViewBag.Title</title>
+    <style>
+        .ui-datepicker {
+            /* width: max-content; */
+            width: 98%;
+            background-color: #FBF8F8;
+            padding: 12px 8px;
+            position: relative !important;
+            top: unset !important;
+            left: unset !important;
+            border: none !important;
+            font-family: "yu-gothic-pr6n", sans-serif;
+            font-size: 14px;
+            display: block !important;
+            border-radius: 8px;
+        }
+
+        .ui-state-default {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            border: none !important;
+            background: inherit !important;
+            font-weight: normal;
+            color: #454545;
+            height: 36px;
+            width: 36px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 1px solid #FBF8F8 !important;
+        }
+
+        .ui-state-active,
+        .ui-widget-content .ui-state-active,
+        .ui-widget-header .ui-state-active,
+        a.ui-button:active,
+        .ui-button:active,
+        .ui-button.ui-state-active:hover {
+            border: 1px solid #D75A8B !important;
+            background: inherit !important;
+            font-weight: normal;
+            color: #D75A8B !important;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .ui-state-highlight,
+        .ui-widget-content .ui-state-highlight,
+        .ui-widget-header .ui-state-highlight {
+            border: 1px solid #D75A8B !important;
+            background: #D75A8B !important;
+            color: #FFFFFF !important;
+            border-radius: 5px;
+        }
+
+        .ui-widget-header {
+            border: none;
+            background-color: inherit !important;
+        }
+
+        .ui-datepicker .ui-datepicker-title {
+            text-align: left;
+            margin: 0px;
+            color: #44464F;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            /* 142.857% */
+            letter-spacing: 0.1px;
+            padding: 10px 8px;
+        }
+
+        .ui-datepicker .ui-datepicker-prev {
+            right: 45px;
+            left: unset !important;
+            height: 40px;
+            width: 40px;
+            border: 1px solid #FBF8F8;
+            cursor: pointer;
+        }
+
+        .ui-datepicker .ui-datepicker-next {
+            height: 40px;
+            width: 40px;
+            right: 10px !important;
+            border: 1px solid #FBF8F8;
+            cursor: pointer;
+        }
+
+            .ui-datepicker .ui-datepicker-next span {
+                background-image: url("../../Content/assets/images/navigate_next.svg");
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+        .ui-datepicker .ui-datepicker-prev span {
+            background-image: url("../../Content/assets/images/navigate_before.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .ui-datepicker th:last-child {
+            color: #697DBF;
+        }
+
+        th.ui-datepicker-week-end {
+            color: #D75A8B;
+        }
+    </style>
 </head>
 
 <body class="md:hidden">
@@ -72,7 +183,7 @@
     <script src="~/Content/assets/js/tabs.js"></script>
     <script src="~/Content/assets/js/toogle.js"></script>
     <script src="~/Content/assets/js/owl.carousel.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
 
@@ -124,6 +235,8 @@
          }
      });
     </script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="~/Content/assets/js/reschedule-reservation.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 

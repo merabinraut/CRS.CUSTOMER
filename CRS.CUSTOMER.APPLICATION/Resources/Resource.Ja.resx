@@ -423,6 +423,10 @@
     <value>あなたの電話番号</value>
     <comment>Login</comment>
   </data>
+  <data name="Enter_your_mobile_phone_number_or_nickname" xml:space="preserve">
+    <value>携帯電話番号またはニックネームを入力してください</value>
+    <comment>Login Page</comment>
+  </data>
   <data name="Events" xml:space="preserve">
     <value>イベント情報</value>
   </data>
@@ -689,7 +693,7 @@
     <value>最小長は 1 文字です</value>
   </data>
   <data name="Minimum length is 11 characters" xml:space="preserve">
-    <value>最小長は 11 文字です</value>
+    <value>11文字の携帯電話番号入力してください</value>
     <comment>Register</comment>
   </data>
   <data name="Minimum length is 4 characters" xml:space="preserve">
@@ -822,6 +826,10 @@
   <data name="PasswordRequired" xml:space="preserve">
     <value>パスワードが必要</value>
   </data>
+  <data name="Passwords_are_highly_secure" xml:space="preserve">
+    <value>パスワードの安全性が高いです</value>
+    <comment>Profile SetNewPassword</comment>
+  </data>
   <data name="PaymentAmount" xml:space="preserve">
     <value>お支払い金額</value>
   </data>
@@ -901,6 +909,18 @@
   <data name="PleaseTellUsAboutYourExperienceAtTheStore" xml:space="preserve">
     <value>店舗での体験について教えてください</value>
     <comment>Review Controller</comment>
+  </data>
+  <data name="Please_enter_a_nickname" xml:space="preserve">
+    <value>ニックネームを入力してください</value>
+    <comment>Registration Page</comment>
+  </data>
+  <data name="Please_enter_your_mobile_phone_number" xml:space="preserve">
+    <value>携帯電話番号を入力してください</value>
+    <comment>Registration Page</comment>
+  </data>
+  <data name="Please_enter_your_password" xml:space="preserve">
+    <value>パスワードを入力してください</value>
+    <comment>Login Page</comment>
   </data>
   <data name="Points" xml:space="preserve">
     <value>ポイント</value>

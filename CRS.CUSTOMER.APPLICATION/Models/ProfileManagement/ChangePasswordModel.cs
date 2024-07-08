@@ -11,7 +11,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ProfileManagement
         //[RegularExpression("^.{8,16}$", ErrorMessage = "Must be of length 8 to 16")]
         public string OldPassword { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Required")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Passwords_are_highly_secure")]
         [Display(Name = "Password", ResourceType = typeof(Resource))]
         //[RegularExpression(@"^.*(?=.{8,32})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be of length 8 to 32 and must contain a-z,A-Z,0-9,@#$%^&+=")]
         //[RegularExpression("^.{8,16}$", ErrorMessage = "Must be of length 8 to 16")]

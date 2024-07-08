@@ -9,6 +9,8 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
     {
         #region InitiateClubReservationProcess
         InitiateClubReservationCommon InitiateClubReservationProcess(string ClubId, string SelectedDate = "");
+        List<ClubReservableTimeCommon> GetClubReservationTime(string ClubId);
+        List<ReservedTimeSlotModelCommon> GetReservedTimeSlot(string ClubId, string SelectedDate);
         #endregion
 
         #region  Verify club and get club details

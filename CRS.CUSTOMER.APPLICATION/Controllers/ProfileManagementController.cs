@@ -106,7 +106,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 Message = "Something went wrong. Please try again later.",
                 NotificationType = NotificationMessage.INFORMATION,
-                Title = NotificationMessage.INFORMATION.ToString(),
+               Title = NotificationMessage.INFORMATION.ToString(),
             });
             return Json(1);
         }
@@ -323,9 +323,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.ERROR,
                 Message = "Something went wrong please try again",
-                Title = NotificationMessage.ERROR.ToString(),
+               Title = NotificationMessage.ERROR.ToString(),
             });
             return Json(new { Code = "1", Message = "Something went wrong please try again" });
+        }
+
+
+        public ActionResult points()
+        {
+            return View();
         }
     }
 }

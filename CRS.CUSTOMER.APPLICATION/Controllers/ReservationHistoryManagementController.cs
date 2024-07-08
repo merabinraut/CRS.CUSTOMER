@@ -178,7 +178,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? "Failed",
                         NotificationType = NotificationMessage.INFORMATION,
-                        Title = NotificationMessage.INFORMATION.ToString(),
+                       Title = NotificationMessage.INFORMATION.ToString(),
                     });
                     return Json(new { redirectToUrl });
                 }

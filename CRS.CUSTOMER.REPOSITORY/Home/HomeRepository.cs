@@ -80,7 +80,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
         public CommonDbResponse Login(LoginRequestCommon Request)
         {
             string SQL = "EXEC sproc_customer_login_management @flag='login'";
-            SQL += ",@LoginId=" + _dao.FilterString(Request.LoginId);
+            SQL += ",@LoginId= N" + _dao.FilterString(Request.LoginId);
             SQL += ",@Password=" + _dao.FilterString(Request.Password);
             SQL += ",@ActionIP=" + _dao.FilterString(Request.ActionIP);
             SQL += ",@ActionPlatform=" + _dao.FilterString(Request.ActionPlatform);

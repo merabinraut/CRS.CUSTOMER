@@ -588,7 +588,7 @@
     </div>
 
     <!-- club info -->
-    <div class="mt-6 px-[12.5px] clubInfo flex justify-start items-center gap-2" onclick="gotoClubDetail('@Model.ClubId','@Model.LocationId')">
+    <div class="mt-6 px-[12.5px] clubInfo flex justify-start items-center gap-2" onclick="ClubDetailRedirectFunction('@ClubCode', '@LocationURL');">
         <!-- logo -->
         <div class="">
             <img class="object-cover h-[48px] w-[48px] rounded-full "
@@ -880,12 +880,6 @@
         // Update the chart
         hostRadarChart.update();
     </script>
-    <script>
-        function gotoClubDetail(clubid, locationid) {
-            if (clubid != null && locationid != null) {
-                window.location.href = '/LocationManagement/ClubDetail_V2?ClubId=' + clubid + '&LocationId=' + locationid;
-            }
-        }</script>
 
     <script>
         function OpenImagePopup(ImageURL) {
