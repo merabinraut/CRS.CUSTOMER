@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Mvc;
+using Amazon.Runtime.Internal.Transform;
 using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2;
+using CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2;
 using CRS.CUSTOMER.BUSINESS.ReservationHistoryManagementV2;
+using CRS.CUSTOMER.BUSINESS.ReservationManagementV2;
 using CRS.CUSTOMER.SHARED;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
@@ -13,9 +16,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     public class ReservationHistoryManagementV2Controller : CustomController
     {
         private readonly IReservationHistoryManagementV2Business _buss;
-        public ReservationHistoryManagementV2Controller(IReservationHistoryManagementV2Business buss)
+        private readonly IReservationManagementV2Business _reservationBuss;
+        public ReservationHistoryManagementV2Controller(IReservationHistoryManagementV2Business buss, IReservationManagementV2Business reservationBuss)
         {
             _buss = buss;
+            _reservationBuss = reservationBuss;
         }
         [HttpGet, Route("user/account/reservation")]
         public ActionResult ReservationHistory(string rsvtab = "04")
@@ -169,7 +174,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult RescheduleReservation(string Selectedhour = "", string Selectedminute = "", string ReservationID = "")
         {
-            var redirectToUrl = string.Empty;
+            var redirectToUrl = Url.Action("ReservationHistory", "ReservationHistoryManagementV2");
             if (!string.IsNullOrEmpty(Selectedhour) && !string.IsNullOrEmpty(Selectedminute) && !string.IsNullOrEmpty(ReservationID))
             {
                 var commonDBRequest = new Common();
@@ -189,7 +194,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             NotificationType = NotificationMessage.SUCCESS,
                             Title = NotificationMessage.SUCCESS.ToString(),
                         });
-                        redirectToUrl = Url.Action("ReservationHistory", "ReservationHistoryManagementV2");
                         return Json(new { redirectToUrl });
                     }
                     else
@@ -208,11 +212,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 AddNotificationMessage(new NotificationModel()
                 {
-                    Message = "Invalid Reservation Details",
+                    Message = "Invalid Details",
                     NotificationType = NotificationMessage.WARNING,
                     Title = NotificationMessage.WARNING.ToString(),
                 });
-                return RedirectToAction("ReservationHistory", "ReservationHistoryManagementV2");
             }
             return Json(new { redirectToUrl });
         }
@@ -309,7 +312,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         Message = dbResponseInfo.Message ?? "Failed",
                         NotificationType = NotificationMessage.INFORMATION,
-                      Title = NotificationMessage.INFORMATION.ToString(),
+                        Title = NotificationMessage.INFORMATION.ToString(),
                     });
                     return Json(JsonRequestBehavior.AllowGet);
                 }
@@ -378,6 +381,86 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 return Json(JsonRequestBehavior.AllowGet);
             }
         }
+
+        #region Reschedule Reservation
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult RescheduleClubReservation(string Time = "", string ReservationId = "")
+        {
+            var redirectToUrl = Url.Action("ReservationHistory", "ReservationHistoryManagementV2");
+            if (!string.IsNullOrEmpty(Time) && !string.IsNullOrEmpty(ReservationId))
+            {
+                var commonDBRequest = new Common();
+                commonDBRequest.ActionIP = ApplicationUtilities.GetIP();
+                commonDBRequest.ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString();
+                commonDBRequest.AgentId = ReservationId.DecryptParameter();
+
+                string time = Time;
+                var dbResponseInfo = _buss.RescheduleReservation(commonDBRequest, time);
+                if (dbResponseInfo != null)
+                {
+                    if (dbResponseInfo.Code == ResponseCode.Success)
+                    {
+                        AddNotificationMessage(new NotificationModel()
+                        {
+                            Message = dbResponseInfo.Message ?? " 予約が更新されました",
+                            NotificationType = NotificationMessage.SUCCESS,
+                            Title = NotificationMessage.SUCCESS.ToString(),
+                        });
+                        return Redirect(redirectToUrl);
+                    }
+                    else
+                    {
+                        AddNotificationMessage(new NotificationModel()
+                        {
+                            Message = dbResponseInfo.Message ?? "Failed",
+                            NotificationType = NotificationMessage.INFORMATION,
+                            Title = NotificationMessage.INFORMATION.ToString(),
+                        });
+                        return Redirect(redirectToUrl);
+                    }
+                }
+            }
+            else
+            {
+                AddNotificationMessage(new NotificationModel()
+                {
+                    Message = "Invalid Details",
+                    NotificationType = NotificationMessage.WARNING,
+                    Title = NotificationMessage.WARNING.ToString(),
+                });
+            }
+            return Redirect(redirectToUrl);
+        }
+
+        [HttpGet]
+        public JsonResult InitateRescheduleReservationProcess(string clubId, string reservedDate, string noOfPeople, string reservationId, string time)
+        {
+            var culture = Request.Cookies["culture"]?.Value ?? "ja";
+            var ResponseModel = new InitateRescheduleReservationModel
+            {
+                SelectedDate = reservedDate,
+                ClubId = clubId,
+                ReservationId = reservationId,
+                NoOfPeople = noOfPeople,
+                Time = time
+            };
+            var cId = !string.IsNullOrEmpty(clubId) ? clubId.DecryptParameter() : string.Empty;
+            var formattedReservedDate = !string.IsNullOrEmpty(reservedDate) ? Convert.ToDateTime(reservedDate).ToString("yyyy-MM-dd") : string.Empty;
+            var responseData = new Dictionary<string, object>() { { "code", 1 }, { "message", "Invalid Details" }, { "PartialView", "" }, { "SelectedDate", "" } };
+            var clubReservableTimeDBResponse = _reservationBuss.GetClubReservationTime(cId);
+            var ReservedTimeSlotDBResponse = _reservationBuss.GetReservedTimeSlot(cId, formattedReservedDate);
+            ResponseModel.ClubReservableTimeModel = ApplicationUtilities.MapObjects<ClubReservableTimeModel>(clubReservableTimeDBResponse);
+            ResponseModel.ReservedTimeSlotModel = ApplicationUtilities.MapObjects<ReservedTimeSlotModel>(ReservedTimeSlotDBResponse);
+            var partialViewString = RenderHelper.RenderPartialViewToString(this, "_RescheduleReservationPopup", ResponseModel);
+            responseData["PartialView"] = partialViewString;
+            responseData["Code"] = 0;
+            responseData["Message"] = "Success";
+            responseData["SelectedDate"] = formattedReservedDate;
+            responseData["TimeIntervalBySelectedDate"] = Newtonsoft.Json.JsonConvert.SerializeObject(clubReservableTimeDBResponse);
+            responseData["ReservedTimeSlot"] = Newtonsoft.Json.JsonConvert.SerializeObject(ReservedTimeSlotDBResponse);
+            return Json(responseData, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }
 

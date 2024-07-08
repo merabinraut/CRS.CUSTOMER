@@ -279,6 +279,7 @@
     <Compile Include="Models\ProfileManagement\ChangePasswordModel.cs" />
     <Compile Include="Models\ProfileManagement\PointReportModel.cs" />
     <Compile Include="Models\ProfileManagement\UserProfileModel.cs" />
+    <Compile Include="Models\ReservationHistoryV2\InitateRescheduleReservationModel.cs" />
     <Compile Include="Models\ReservationHistory\ReservationHistoryModel.cs" />
     <Compile Include="Models\ReservationManagementV2\BillingModel.cs" />
     <Compile Include="Models\ReservationManagementV2\ClubBasicDetailModel.cs" />
@@ -518,6 +519,7 @@
     <Content Include="Content\assets\js\modal.js" />
     <Content Include="Content\assets\js\owl.carousel.js" />
     <Content Include="Content\assets\js\owl.carousel.min.js" />
+    <Content Include="Content\assets\js\reschedule-reservation.js" />
     <Content Include="Content\assets\js\reservation-common.js" />
     <Content Include="Content\assets\js\search-filter-common.js" />
     <Content Include="Content\assets\js\tabs.js" />
@@ -739,6 +741,7 @@
     <Content Include="Views\ReservationManagementV3\_ReservationPopup.cshtml" />
     <Content Include="Views\ReservationManagementV3\Success.cshtml" />
     <Content Include="Views\ProfileManagement\points.cshtml" />
+    <Content Include="Views\ReservationHistoryManagementV2\_RescheduleReservationPopup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
