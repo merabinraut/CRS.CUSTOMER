@@ -53,9 +53,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Register Management
         [HttpGet, Route("user/register")]
-        public ActionResult Register(string ReferCode = "")
+        public ActionResult Register(string ReferCode = "", string Type = "")
         {
+
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
+            if (!string.IsNullOrEmpty(ReferCode) || !string.IsNullOrEmpty(Type))
+            {
+                ViewBag.ReferCode = ReferCode;
+                ViewBag.Type = Type;
+            }
             if (!string.IsNullOrEmpty(Username))
                 return Redirect("/");
             var Response = new RegistrationHoldModel();
@@ -91,9 +97,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, Route("user/register"), ValidateAntiForgeryToken]
-        public ActionResult Register(RegistrationHoldModel Model, string ReferCode = "")
+        public ActionResult Register(RegistrationHoldModel Model, string ReferCode = "", string Type = "")
         {
             ViewBag.ReferCode = ReferCode;
+            ViewBag.Type = Type;
             if (ModelState.IsValid)
             {
                 RegistrationHoldCommon Common = Model.MapObject<RegistrationHoldCommon>();
@@ -109,6 +116,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         NickName = Model.NickName
                     };
                     TempData["ReferCode"] = ReferCode;
+                    TempData["Type"] = Type;
                     Session["exptime"] = DateTime.Parse(dbResponse.Extra2.ToString());
                     //Session["exptime"] = DateTime.Parse(DateTime.UtcNow.AddMinutes(10).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
                     return View("VerifyOTP", otpModel);
@@ -129,7 +137,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult VerifyOTP(RegistrationModel Model)
         {
             var ReferCode = string.Empty;
+            var Type = string.Empty;
             if (TempData.ContainsKey("ReferCode")) ReferCode = TempData["ReferCode"] as string;
+            if (TempData.ContainsKey("Type")) Type = TempData["Type"] as string;
             if (ModelState.IsValid)
             {
                 RegistrationCommon Common = Model.MapObject<RegistrationCommon>();
@@ -137,7 +147,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.AgentId = Common.AgentId.DefaultDecryptParameter();
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Common.MobileNumber;
-                Common.ReferCode = ReferCode;
+                if (!string.IsNullOrEmpty(ReferCode))
+                    Common.ReferCode = ReferCode.DecryptParameter();
+                if (!string.IsNullOrEmpty(Type))
+                    Common.Type = Type;
                 var dbResponse = _buss.Register(Common);
                 if (dbResponse.Code == 0)
                 {

@@ -31,6 +31,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string AgentId { get; set; }
         public string MobileNumber { get; set; }
         public string ReferCode { get; set; }
+        public string Type { get; set; }
         public string NickName { get; set; }
         //public string OTP1 { get; set; }
         //public string OTP2 { get; set; }

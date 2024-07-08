@@ -1792,10 +1792,11 @@
         var isFirstTimeLoad = true;
         $(document).ready(function (event) {
             $('#tab1Button, #tab2Button, #tab3Button, #tab4Button, #tab5Button, #tab6Button').click(function () {
-                if (isFirstTimeLoad) {
-                    isFirstTimeLoad = false;
-                    return false;
+               if (isFirstTimeLoad) {
+                  isFirstTimeLoad = false;
+                   return false;
                 }
+                
 
                 var tab = '';
                 if (this.id === 'tab2Button') tab = 'host';
@@ -1803,7 +1804,6 @@
                 else if (this.id === 'tab4Button') tab = 'gallery';
                 else if (this.id === 'tab5Button') tab = 'schedule';
                 else if (this.id === 'tab6Button') tab = 'notice';
-
                 redirectToTab(tab);
                 return false;
             });
