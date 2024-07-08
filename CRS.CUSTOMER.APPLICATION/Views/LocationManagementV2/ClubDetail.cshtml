@@ -110,7 +110,7 @@
 </div>
 
 <!-- section 2 -->
-<div class="px-4 pb-[8px] flex justify-between ">
+<div class="pl-4 pr-[2px] flex justify-between ">
     <div class="flex gap-[8px]">
         @if (Model.ClubLogo != null || Model.ClubLogo != "")
         {
@@ -1539,7 +1539,7 @@
         </div>
         @if (!string.IsNullOrEmpty(Model.TodaysClubSchedule) && Model.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(Model.ClubOpeningTime) < currentTime && DateTime.Parse(Model.ClubClosingTime) > currentTime)
         {
-            <div class="bg-[#BCB08A] rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full">
+            <div class=" rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full" style="background: #d4b78a; display: flex; align-items: baseline;">
                 本日空席あり
             </div>
         }
