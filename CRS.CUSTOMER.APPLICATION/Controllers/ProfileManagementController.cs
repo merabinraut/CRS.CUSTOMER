@@ -7,6 +7,7 @@ using CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement;
 using CRS.CUSTOMER.BUSINESS.ProfileManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ProfileManagement;
+using DocumentFormat.OpenXml.Office2010.CustomUI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Util;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
@@ -107,7 +109,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 Message = "Something went wrong. Please try again later.",
                 NotificationType = NotificationMessage.INFORMATION,
-               Title = NotificationMessage.INFORMATION.ToString(),
+                Title = NotificationMessage.INFORMATION.ToString(),
             });
             return Json(1);
         }
@@ -324,7 +326,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.ERROR,
                 Message = "Something went wrong please try again",
-               Title = NotificationMessage.ERROR.ToString(),
+                Title = NotificationMessage.ERROR.ToString(),
             });
             return Json(new { Code = "1", Message = "Something went wrong please try again" });
         }
@@ -334,15 +336,88 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             PointReportModel model = new PointReportModel();
             var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
-            var alldbresp = _business.GetCustomerPointsReport(AgentId,"");
-            model.AllPointReportList = alldbresp.MapObjects<PointReportDetailModel>();
+
+            //------ Start debit,credit points of customer (when admin transfer and retrive, after reservation otp confirmation bonus point )---------------//
+
+            var alldbresp = _business.GetCustomerPointsReport(AgentId, "");
+            if (alldbresp.Count > 0)
+            {
+                var allgroupedTransactions = alldbresp
+                   .GroupBy(t => t.DayType)  // Group by the Date part of TransactionDate
+                   .Select(Group => new
+                   {
+                       DayType = Group.Select(detail => detail.DayType).FirstOrDefault(),
+                       PointReportList = Group.Select(detail => new PointReportDetailModel
+                       {
+                           TransactionDate = detail.TransactionDate,
+                           TransactionMode = detail.TransactionMode,
+                           Point = detail.Point,
+                           Remark = detail.Remark,
+                           TotalPoints= detail.TotalPoints,
+                       }).ToList()
+                   })
+                   .ToList();
+                model.AllPointReportList = allgroupedTransactions.MapObjects<PointDayTypeModel>();
+            }
+
+
+            //------ End debit,credit points of customer (when admin transfer and retrive, after reservation otp confirmation bonus point )---------------//
+
+
+            //------ Start credit points of customer (when admin transfer, after reservation otp confirmation bonus point )---------------//
 
             var creditdbresp = _business.GetCustomerPointsReport(AgentId, "CR");
-            model.CreditPointReportList = creditdbresp.MapObjects<PointReportDetailModel>();
+            if (creditdbresp.Count > 0)
+            {
+                var creditgroupedTransactions = creditdbresp
+                   .GroupBy(t => t.DayType)  // Group by the Date part of TransactionDate
+                   .Select(Group => new
+                   {
+                       DayType = Group.Select(detail => detail.DayType).FirstOrDefault(),
+                       PointReportList = Group.Select(detail => new PointReportDetailModel
+                       {
+                           TransactionDate = detail.TransactionDate,
+                           TransactionMode = detail.TransactionMode,
+                           Point = detail.Point,
+                           Remark = detail.Remark,
+                           TotalPoints = detail.TotalPoints,
+                       }).ToList()
+                   })
+                   .ToList();
+
+                model.CreditPointReportList = creditgroupedTransactions.MapObjects<PointDayTypeModel>();
+            }
+
+            //------ End credit points of customer (when admin transfer, after reservation otp confirmation bonus point )---------------//
+
+
+            //------ Start deduct points of customer (when admin retrive)---------------//
 
             var debitdbresp = _business.GetCustomerPointsReport(AgentId, "DR");
-            model.DebitPointReportList = debitdbresp.MapObjects<PointReportDetailModel>();
-            return View();
+            if (debitdbresp.Count > 0)
+            {
+                var groupedTransactions = debitdbresp
+                   .GroupBy(t => t.DayType)  // Group by the Date part of TransactionDate
+                   .Select(Group => new
+                   {
+                       DayType = Group.Select(detail => detail.DayType).FirstOrDefault(),
+                       PointReportList = Group.Select(detail => new PointReportDetailModel
+                       {
+                           TransactionDate = detail.TransactionDate,
+                           TransactionMode = detail.TransactionMode,
+                           Point = detail.Point,
+                           Remark = detail.Remark,
+                           TotalPoints = detail.TotalPoints,
+                       }).ToList()
+                   })
+                   .ToList();
+
+
+                model.DebitPointDayTypeList = groupedTransactions.MapObjects<PointDayTypeModel>();
+            }
+
+            //------ End deduct points of customer (when admin retrive)---------------//
+            return View(model);
         }
     }
 }

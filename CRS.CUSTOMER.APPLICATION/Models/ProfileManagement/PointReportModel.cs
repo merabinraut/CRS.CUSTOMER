@@ -9,9 +9,14 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ProfileManagement
 {
     public class PointReportModel
     {
-        public List<PointReportDetailModel> AllPointReportList { get; set; }=new List<PointReportDetailModel>();
-        public List<PointReportDetailModel> CreditPointReportList { get; set; } = new List<PointReportDetailModel>();
-        public List<PointReportDetailModel> DebitPointReportList { get; set; } = new List<PointReportDetailModel>();
+        public List<PointDayTypeModel> AllPointReportList { get; set; }=new List<PointDayTypeModel>();
+        public List<PointDayTypeModel> CreditPointReportList { get; set; } = new List<PointDayTypeModel>();
+        public List<PointDayTypeModel> DebitPointDayTypeList { get; set; } = new List<PointDayTypeModel>();
+    }
+    public class PointDayTypeModel
+    {
+        public string DayType { get; set; }
+        public List<PointReportDetailModel> PointReportList { get; set; } = new List<PointReportDetailModel>();
     }
     public class PointReportDetailModel
     {
@@ -19,6 +24,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ProfileManagement
         public string TransactionDate { get; set; }
         public string Point { get; set; }
         public string TransactionMode { get; set; }
-        public string Remark { get; set; }
+        public string Remark { get; set; } 
+        public string TotalPoints { get; set; }
     }
 }

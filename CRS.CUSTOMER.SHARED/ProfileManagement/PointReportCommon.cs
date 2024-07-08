@@ -13,5 +13,6 @@ namespace CRS.CUSTOMER.SHARED.ProfileManagement
         public string Point { get; set; }
         public string TransactionMode { get; set; }
         public string Remark { get; set; }
+        public string TotalPoints { get; set; }
     }
 }
