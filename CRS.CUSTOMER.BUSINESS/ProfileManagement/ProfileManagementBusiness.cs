@@ -1,6 +1,7 @@
 ﻿using CRS.CUSTOMER.REPOSITORY.ProfileManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ProfileManagement;
+using System.Collections.Generic;
 
 namespace CRS.CUSTOMER.BUSINESS.ProfileManagement
 {
@@ -33,6 +34,10 @@ namespace CRS.CUSTOMER.BUSINESS.ProfileManagement
         public CommonDbResponse UpdateUserProfileDetail(UserProfileCommon userProfileCommon)
         {
             return _repo.UpdateUserProfileDetail(userProfileCommon);
+        }
+        public List<PointReportCommon> GetCustomerPointsReport(string customerId, string TxnType)
+        {
+            return _repo.GetCustomerPointsReport(customerId, TxnType);
         }
     }
 }

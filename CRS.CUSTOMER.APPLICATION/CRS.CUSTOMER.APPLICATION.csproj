@@ -277,6 +277,7 @@
     <Compile Include="Models\LocationManagement\ViewHostDetailModel.cs" />
     <Compile Include="Models\NotificationManagement\NotificationManagementModel.cs" />
     <Compile Include="Models\ProfileManagement\ChangePasswordModel.cs" />
+    <Compile Include="Models\ProfileManagement\PointReportModel.cs" />
     <Compile Include="Models\ProfileManagement\UserProfileModel.cs" />
     <Compile Include="Models\ReservationHistoryV2\InitateRescheduleReservationModel.cs" />
     <Compile Include="Models\ReservationHistory\ReservationHistoryModel.cs" />
@@ -740,6 +741,7 @@
     <Content Include="Views\ReservationManagementV3\Billing.cshtml" />
     <Content Include="Views\ReservationManagementV3\_ReservationPopup.cshtml" />
     <Content Include="Views\ReservationManagementV3\Success.cshtml" />
+    <Content Include="Views\ProfileManagement\points.cshtml" />
     <Content Include="Views\ReservationHistoryManagementV2\_RescheduleReservationPopup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
