@@ -45,9 +45,9 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
             return _REPO.GetForceFulLogout(UserId);
         }
 
-        public Tuple<int, int> GetMetaTagInfo(string type)
+        public Tuple<int, int> GetMetaTagInfo(string type, string locationId = "", string clubId = "")
         {
-            return _REPO.GetMetaTagInfo(type);
+            return _REPO.GetMetaTagInfo(type, locationId, clubId);
         }
     }
 }

@@ -16,6 +16,6 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         List<SystemLinkCommon> GetSystemLink();
         #endregion
         string GetForceFulLogout(string UserId);
-        Tuple<int, int> GetMetaTagInfo(string type);
+        Tuple<int, int> GetMetaTagInfo(string type, string locationId = "", string clubId = "");
     }
 }

@@ -83,10 +83,12 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
             return Convert.ToString(isforcefullogout);
         }
 
-        public Tuple<int, int> GetMetaTagInfo(string type)
+        public Tuple<int, int> GetMetaTagInfo(string type, string locationId = "", string clubId = "")
         {
             var response = new Tuple<int, int>(0, 0);
             string SQL = $"EXEC sproc_get_meta_tag_info @Flag= {type}";
+            SQL += !string.IsNullOrEmpty(locationId) ? $", @LocationId={locationId}" : string.Empty;
+            SQL += !string.IsNullOrEmpty(clubId) ? $", @AgentId={clubId}" : string.Empty;
             var dbResponse = _DAO.ExecuteDataRow(SQL);
             if (dbResponse != null)
             {
