@@ -518,7 +518,7 @@
     <comment>Dashboard Controller</comment>
   </data>
   <data name="Host" xml:space="preserve">
-    <value>ホスト一覧</value>
+    <value>ピックアップホスト</value>
     <comment>Location Management</comment>
   </data>
   <data name="Host Blood Type" xml:space="preserve">
@@ -550,7 +550,7 @@
     <comment>Host Search</comment>
   </data>
   <data name="HostClubList" xml:space="preserve">
-    <value>ホストクラブ一覧</value>
+    <value>ピックアップ店舗</value>
   </data>
   <data name="HostClubs" xml:space="preserve">
     <value>ホストクラブ</value>
