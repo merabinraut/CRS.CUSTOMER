@@ -22,9 +22,9 @@ namespace CRS.CUSTOMER.BUSINESS.RecommendedClubHost
             return _repo.GetRecommendedHost(Request);
         }
 
-        public int GetTotalRecommendedPageCount()
+        public int GetTotalRecommendedPageCount(string LocationId)
         {
-            return _repo.GetTotalRecommendedPageCount();
+            return _repo.GetTotalRecommendedPageCount( LocationId);
         }
     }
 }

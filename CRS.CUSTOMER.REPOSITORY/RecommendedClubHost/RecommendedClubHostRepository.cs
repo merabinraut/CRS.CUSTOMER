@@ -106,10 +106,11 @@ namespace CRS.CUSTOMER.REPOSITORY.RecommendedClubHost
             return new List<RecommendedHostResponseCommon>();
         }
 
-        public int GetTotalRecommendedPageCount()
+        public int GetTotalRecommendedPageCount(string LocationId)
         {
             int Response = 0;
             string SQL = "EXEC dbo.sproc_get_customer_recommended_clubandhost @Flag = 'gtgl'";
+            SQL += ",@LocationId=" + _dao.FilterString(LocationId);
             var dbResponse = _dao.ExecuteDataRow(SQL);
             if (dbResponse != null)
             {
