@@ -16,6 +16,7 @@ namespace CRS.CUSTOMER.SHARED.Home
         public string MobileNumber { get; set; }
         public string VerificationCode { get; set; }
         public string ReferCode { get; set; }
+        public string Type { get; set; }
     }
 
     public class ResendRegistrationOTPCommon : Common

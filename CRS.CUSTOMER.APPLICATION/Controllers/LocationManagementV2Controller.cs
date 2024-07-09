@@ -3,12 +3,12 @@ using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.Dashboard;
 using CRS.CUSTOMER.APPLICATION.Models.LocationManagement;
 using CRS.CUSTOMER.APPLICATION.Models.LocationManagementV2;
+using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Dashboard;
 using CRS.CUSTOMER.BUSINESS.LocationManagement;
 using CRS.CUSTOMER.BUSINESS.RecommendedClubHost;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.RecommendedClubHost;
-using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,12 +24,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IDashboardBusiness _dashboardBuss;
         private readonly IRecommendedClubHostBusiness _recommendedClubHostBuss;
         private readonly ILocationManagementBusiness _business;
+        private readonly ICommonManagementBusiness _commonBusiness;
 
-        public LocationManagementV2Controller(IDashboardBusiness dashboardBuss, IRecommendedClubHostBusiness recommendedClubHostBuss, ILocationManagementBusiness business)
+        public LocationManagementV2Controller(IDashboardBusiness dashboardBuss, IRecommendedClubHostBusiness recommendedClubHostBuss, ILocationManagementBusiness business, ICommonManagementBusiness commonBusiness)
         {
             _dashboardBuss = dashboardBuss;
             _recommendedClubHostBuss = recommendedClubHostBuss;
             _business = business;
+            _commonBusiness = commonBusiness;
         }
 
         [HttpGet, Route("area/{prefectures}/{area}")]
@@ -93,6 +95,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.TotalGroupCount = getTotalPage >= 0 ? getTotalPage : 0;
             response.RequestModel = request.MapObject<LocationV2ClubHostRequestModel>();
             ViewBag.RenderValue = !string.IsNullOrEmpty(request.RenderId) ? request.RenderId : null;
+            var metaTagDBResponse = _commonBusiness.GetMetaTagInfo("1", locationId);
+            ViewBag.MetaClubCount = metaTagDBResponse.Item1;
+            ViewBag.MetaHostCount = metaTagDBResponse.Item2;
             return View(response);
         }
 
@@ -216,6 +221,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     if (!responseModel.GetClubBasicInformation.WebsiteLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.WebsiteLink = "https://" + responseModel.GetClubBasicInformation.WebsiteLink;
                 }
+                var ClubName = !string.IsNullOrEmpty(responseModel.ClubNameJp) ? responseModel.ClubNameJp : responseModel.ClubNameEng;
                 #region TAB
                 #region TAB 2
                 if (!string.IsNullOrEmpty(target) && target.Trim() == "host")
@@ -230,6 +236,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         item.LocationId = item.LocationId.EncryptParameter();
                         item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
                     }
+                    PopulateMetaTagInfo("host", ClubName, locationId, PrefecturesArea, responseModel.ClubId.DecryptParameter(), responseModel.ClubDescription);
                 }
                 #endregion
                 #region TAB 3
@@ -270,6 +277,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             }
                         }
                     }
+                    PopulateMetaTagInfo("review", ClubName, locationId, PrefecturesArea, responseModel.ClubId.DecryptParameter(), responseModel.ClubDescription);
                 }
                 #endregion
                 #region TAB 4
@@ -283,6 +291,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         responseModel.ClubGalleryImageList.ForEach(x => x = ImageHelper.ProcessedImage(x));
                     }
                     else responseModel.ClubGalleryImageList = new List<string>();
+                    PopulateMetaTagInfo("gallery", ClubName, locationId, PrefecturesArea, responseModel.ClubId.DecryptParameter(), responseModel.ClubDescription);
                 }
                 #endregion
                 #region TAB 5
@@ -310,6 +319,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             item_schedule.ScheduleImage = "";
                         }
                     }
+                    PopulateMetaTagInfo("schedule", ClubName, locationId, PrefecturesArea, responseModel.ClubId.DecryptParameter(), responseModel.ClubDescription);
                 }
                 #endregion
                 #region TAB 6
@@ -325,6 +335,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         // Get the day name
                         allNotice_item.DayName = date.ToString("ddd");
                     }
+                    PopulateMetaTagInfo("notice", ClubName, locationId, PrefecturesArea, responseModel.ClubId.DecryptParameter(), responseModel.ClubDescription);
                 }
                 #endregion
                 #region TAB 1
@@ -361,6 +372,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     .ToList();
                     ViewBag.PlanGroup = groupedResults.MapObjects<Models.LocationManagement.PlanGroup>();
                     ViewBag.PlanGroup1 = groupedResults.MapObjects<Models.LocationManagement.PlanGroup>();
+                    PopulateMetaTagInfo("", ClubName, locationId, PrefecturesArea, responseModel.ClubId.DecryptParameter(), responseModel.ClubDescription);
                 }
                 #endregion
                 #endregion
@@ -391,6 +403,38 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
 
             return scheduleList;
+        }
+
+        private void PopulateMetaTagInfo(string type, string clubName, string locationId, string prefecturesArea, string clubId, string clubDescription = "")
+        {
+            string[] PrefecturesAreaPart = prefecturesArea.Split('/');
+            string metaTagDescription;
+
+            switch (type.Trim())
+            {
+                case "host":
+                    var hostMetaTagDBResponse = _commonBusiness.GetMetaTagInfo("2", locationId, clubId);
+                    metaTagDescription = $"{clubName}のホスト・スタッフ一覧です。業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」にて、{clubName}のホスト・スタッフ{hostMetaTagDBResponse.Item1}件を掲載中です☆";
+                    break;
+                case "schedule":
+                    metaTagDescription = $"{clubName}のスケジュール一覧です。業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」にて、{clubName}のイベント・店休日など最新情報をチェック☆";
+                    break;
+                case "notice":
+                    metaTagDescription = $"{clubName}のお知らせ一覧です。業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」にて、{clubName}のお知らせを最速をチェック☆";
+                    break;
+                case "review":
+                    var reviewMetaTagDBResponse = _commonBusiness.GetMetaTagInfo("3", locationId, clubId);
+                    metaTagDescription = $"{clubName}のレビュー（口コミ）一覧です。業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」にて、{clubName}のレビュー（口コミ）{reviewMetaTagDBResponse.Item1}件を掲載中です☆";
+                    break;
+                case "gallery":
+                    var galleryMetaTagDBResponse = _commonBusiness.GetMetaTagInfo("4", locationId, clubId);
+                    metaTagDescription = $"{clubName}の写真一覧です。業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」にて、[club]([ruby])の写真{galleryMetaTagDBResponse.Item1}件を掲載中です☆";
+                    break;
+                default:
+                    metaTagDescription = $"{clubName}‖{PrefecturesAreaPart[2]}({PrefecturesAreaPart[1]})の店舗情報はホスログでチェック☆{clubDescription}";
+                    break;
+            }
+            ViewBag.MetaTagDescription = metaTagDescription;
         }
     }
 }
