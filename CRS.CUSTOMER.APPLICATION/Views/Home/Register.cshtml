@@ -238,6 +238,7 @@
             {
                 @Html.AntiForgeryToken()
                 <input value="@ViewBag.ReferCode" name="ReferCode" hidden />
+                <input value="@ViewBag.Type" name="Type" hidden />
                 <div class="inputWrapper">
                     @Html.TextBoxFor(model => model.NickName, new { @class = "focus:outline-none w-full ring-0 focus:ring-0 focus:ring-transparent", @placeholder = "ニックネーム", @id= "japaneseInput", @oninput = "validateInput(this)", autocomplete = "off", @maxlength = "20" })
                 </div>

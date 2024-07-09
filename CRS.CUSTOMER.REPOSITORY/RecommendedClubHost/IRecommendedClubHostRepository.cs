@@ -7,6 +7,6 @@ namespace CRS.CUSTOMER.REPOSITORY.RecommendedClubHost
     {
         List<RecommendedClubResponseCommon> GetRecommendedClub(RecommendedClubRequestCommon Request);
         List<RecommendedHostResponseCommon> GetRecommendedHost(RecommendedHostRequestCommon Request);
-        int GetTotalRecommendedPageCount();
+        int GetTotalRecommendedPageCount(string LocationId);
     }
 }

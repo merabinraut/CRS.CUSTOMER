@@ -5,8 +5,11 @@
     string[] PrefecturesAreaPart = PrefecturesArea.Split('/');
     ViewBag.Title = $"{PrefecturesAreaPart[2]}({PrefecturesAreaPart[1]})のホストクラブ‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var MetaClubCount = ViewBag.MetaClubCount;
+    var MetaHostCount = ViewBag.MetaHostCount;
+    var metaContent = $"『{PrefecturesAreaPart[2]}({PrefecturesAreaPart[1]})』エリア{MetaClubCount}件のホストクラブ・{MetaHostCount}人のホスト情報を掲載中！業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！";
 }
-
+<meta name="description" content="@metaContent">
 
 <style>
     /* The Modal (background) */
@@ -304,24 +307,26 @@
                                     {
                                         if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
                                         {
-                                            <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> 
-                                    @*@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
-                                    
-                                            <span style="line-height:13px;">
-                                                @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                                            <div class="opening_hours">
+                                                <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
+                                                @*@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
 
-                                            </span>
-                                    </div>
+                                                <span style="line-height:13px;">
+                                                    @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+
+                                                </span>
+                                            </div>
                                         }
                                         else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                                         {
-                                            <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">
-                                   @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
-                                            <span style="line-height:13px;">
-                                                @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                                            <div class="opening_hours">
+                                                <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+                                                @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+                                                <span style="line-height:13px;">
+                                                    @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
 
-                                            </span>
-                                    </div>
+                                                </span>
+                                            </div>
                                         }
 
                                         <!-- e/opening hours -->
@@ -482,8 +487,8 @@
     <img class="my-modal-content" id="img01">
 </div>
 @*<div class="loader" id="loader-id">
-    <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
-</div>*@
+        <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
+    </div>*@
 <!-- #endregion -->
 @section scripts
 {
