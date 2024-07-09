@@ -1644,7 +1644,7 @@ button {
 
 ul.club_tags, .club_header, .club_rate, .club_pr {
     padding-left:15px;
-    padding-right:10px;
+    padding-right:11px;
 }
 /* tags */
 ul.club_tags {
@@ -1772,7 +1772,7 @@ p.club_group {
 
 .action_keep {
     width: 33px;
-    height: 33px;
+    height: 33px    ;
    /* padding: 6px;*/
     display: inline-flex;
     flex-flow: wrap-reverse;
