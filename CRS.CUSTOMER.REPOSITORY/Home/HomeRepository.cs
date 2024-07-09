@@ -46,6 +46,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
             SQL += ",@ActionPlatform=" + _dao.FilterString(Request.ActionPlatform);
             SQL += ",@ActionIP=" + _dao.FilterString(Request.ActionIP);
             SQL += !string.IsNullOrEmpty(Request.ReferCode) ? ",@ReferCode=" + _dao.FilterString(Request.ReferCode) : null;
+            SQL += !string.IsNullOrEmpty(Request.Type) ? ",@ReferType=" + _dao.FilterString(Request.Type) : null;
             return _dao.ParseCommonDbResponse(SQL);
         }
 
