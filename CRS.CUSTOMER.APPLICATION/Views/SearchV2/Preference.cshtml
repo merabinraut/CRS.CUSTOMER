@@ -27,7 +27,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var PostURL = ViewBag.PostURL;
     DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:mm"));
+    var TotalSearchResult = (Model != null ? Model.Count() : 0);
+    var metaContent = $"業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。利用シーン「{filter}」から{TotalSearchResult}件のホストクラブ情報を掲載中！";
 }
+<meta name="description" content="@metaContent">
+
 <style>
     input[type=radio]:checked + label {
         color: #D75A8B;
@@ -100,7 +104,7 @@
     </div>
 </section>
 <div class='px-4 py-2 text-[12px] font-semibold bg-[#FDFBFA]'>
-    検索結果 @(Model != null ? Model.Count() : 0) 件
+    検索結果 @TotalSearchResult 件
 </div>
 <div class="list_wrap">
     @foreach (var item in Model)
@@ -187,24 +191,25 @@
                     {
                         if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
                         {
-                            <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"
-                                             @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
-                            <span style="line-height:13px;">
-                                @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                            <div class="opening_hours">
+                                <img src="~/Content/assets/images/customer/sun.svg" alt="夜"
+                                     @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+                                <span style="line-height:13px;">
+                                    @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
 
-                            </span>
-                        </div>
+                                </span>
+                            </div>
                         }
                         else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                         {
-                <div class="opening_hours">
-                    <img src="/Content/assets/images/customer/moon.svg" alt="夜">
-                    @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
-                    <span style="line-height:13px;">
-                        @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                            <div class="opening_hours">
+                                <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+                                @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+                                <span style="line-height:13px;">
+                                    @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
 
-                    </span>
-                </div>
+                                </span>
+                            </div>
                         }
 
                         <!-- e/opening hours -->

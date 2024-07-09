@@ -7,7 +7,9 @@
     ViewBag.Title = $"{HostName}のプロフィール‖{ClubId}‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var HostSkillsModel = @Model.HostIdentityDetailsModel.Where(x => x.LabelType.Trim().ToUpper() == "SKILLS").ToList();
+    var metaContent = $"{HostName}のプロフィールページです。業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」にて、{HostName}の基本情報・メッセージ・一問一答などをチェック♪";
 }
+<meta name="description" content="@metaContent">
 
 <style>
     .clubInfo {
