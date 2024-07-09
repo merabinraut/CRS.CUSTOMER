@@ -59,11 +59,11 @@
                     </div>
                     <div class=" font-semibold mt-12 text-center" style="color:#000; font-size:12px; font-weight:500; line-height:14px; text-align:center">お気入りの店舗はありません</div>
                 </div>
-                <div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='/'" id="DateTimeFilter-Id">
-                    <div class="my-[12px] text-[12px] font-[700] text-[#FFF] text-center " style="width:100%">
-                        マイページヘ
-                    </div>
-                </div>
+                @*<div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='/'" id="DateTimeFilter-Id">
+                        <div class="my-[12px] text-[12px] font-[700] text-[#FFF] text-center " style="width:100%">
+                            マイページヘ
+                        </div>
+                    </div>*@
             }
             else
             {
@@ -147,11 +147,28 @@
                                     {
                                         if (!string.IsNullOrEmpty(@club.ClubTimePeriod) && @club.ClubTimePeriod.Trim().ToUpper() == "DAY")
                                         {
-                                            <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime</div>
+                                            <div class="opening_hours">
+                                                <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
+                                                @*@club.ClubOpeningTime &#xff5e; @club.ClubClosingTime*@
+                                            <span style="line-height:13px;">
+                                                @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime
+
+                                            </span>
+
+                                            </div>
                                         }
                                         else if (!string.IsNullOrEmpty(@club.ClubTimePeriod) && @club.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                                         {
-                                            <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@club.ClubOpeningTime &#xff5e; @club.ClubClosingTime</div>
+                                <div class="opening_hours">
+                                    <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+
+                                  @*  @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime*@
+                                <span style="line-height:13px;">
+                                    @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime
+
+                                </span>
+
+                                </div>
                                         }
 
                                         <!-- e/opening hours -->
@@ -200,11 +217,11 @@
                     </div>
                     <div class=" font-semibold mt-12 text-center" style="color:#000; font-size:12px; font-weight:500; line-height:14px; text-align:center">お気入りのホストはありません</div>
                 </div>
-                <div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='/'" id="DateTimeFilter-Id">
-                    <div class="my-[12px] text-[12px] font-[700] text-[#FFF] text-center " style="width:100%">
-                        マイページヘ
-                    </div>
-                </div>
+                @*<div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='/'" id="DateTimeFilter-Id">
+                        <div class="my-[12px] text-[12px] font-[700] text-[#FFF] text-center " style="width:100%">
+                            マイページヘ
+                        </div>
+                    </div>*@
             }
             else
             {
@@ -301,7 +318,7 @@
                                         @item.LoveCount
                                     </p>
                                 </div>
-                                <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]">
+                                <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]" onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
                                     <div>
                                         <img style="border: 1px solid #F1EEEE;" class="object-cover h-[32px] w-[32px] rounded-full "
                                              src="@item.ClubLogo" alt="clublogo">
@@ -332,8 +349,7 @@
 {
     <script src="~/Content/CustomHelper.js"></script>
 
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function () {
+    <script type="text/javascript">document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";
         });
@@ -355,10 +371,8 @@
 
         //function ClubDetailActionFunction(i, j) {
         //    window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
-        //}
-    </script>
-    <script>
-        function ManageBookmark(ClubId, HostId, AgentType, ClickedElement) {
+        //}</script>
+    <script>function ManageBookmark(ClubId, HostId, AgentType, ClickedElement) {
             EnableLoaderFunction();
             $.ajax({
                 url: '/BookmarkManagement/ManageBookmark',
@@ -378,6 +392,5 @@
                     DisableLoaderFunction();
                 }
             })
-        }
-    </script>
+        }</script>
 }
