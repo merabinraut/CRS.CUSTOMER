@@ -103,6 +103,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
             ViewBag.JsonLocation = JsonConvert.SerializeObject(locationsList);
             ViewBag.ActionPageName = "Dashboard";
+
+            var metaTagDBResponse = _commonBusiness.GetMetaTagInfo("1");
+            ViewBag.MetaClubCount = metaTagDBResponse.Item1;
+            ViewBag.MetaHostCount = metaTagDBResponse.Item2;
             return View(ResponseModel);
         }
 

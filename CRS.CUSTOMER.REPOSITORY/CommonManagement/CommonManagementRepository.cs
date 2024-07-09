@@ -1,7 +1,6 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.CommonManagement;
 using CRS.CUSTOMER.SHARED.Home;
-using CRS.CUSTOMER.SHARED.ReservationManagement;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -74,14 +73,28 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
         public string GetForceFulLogout(string UserId)
         {
             string isforcefullogout = null;
-            string SQL = "SELECT dbo.fn_IsForceFulLogout (";         
-            SQL +=  _DAO.FilterString(UserId) +" )";
+            string SQL = "SELECT dbo.fn_IsForceFulLogout (";
+            SQL += _DAO.FilterString(UserId) + " )";
             var dbResponse = _DAO.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0)
             {
-                 isforcefullogout = Convert.ToString(dbResponse.Rows[0][0]);
+                isforcefullogout = Convert.ToString(dbResponse.Rows[0][0]);
             }
             return Convert.ToString(isforcefullogout);
+        }
+
+        public Tuple<int, int> GetMetaTagInfo(string type)
+        {
+            var response = new Tuple<int, int>(0, 0);
+            string SQL = $"EXEC sproc_get_meta_tag_info @Flag= {type}";
+            var dbResponse = _DAO.ExecuteDataRow(SQL);
+            if (dbResponse != null)
+            {
+                int Item1 = _DAO.ParseColumnValue(dbResponse, "Item1") is int value1 ? value1 : 0;
+                int Item2 = _DAO.ParseColumnValue(dbResponse, "Item2") is int value2 ? value2 : 0;
+                response = new Tuple<int, int>(Item1, Item2);
+            }
+            return response;
         }
     }
 }
