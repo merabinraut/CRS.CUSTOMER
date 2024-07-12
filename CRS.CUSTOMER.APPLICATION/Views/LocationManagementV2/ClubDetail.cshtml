@@ -1538,7 +1538,7 @@
                 <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
             }
         </div>
-        @if (!string.IsNullOrEmpty(Model.TodaysClubSchedule) && Model.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(Model.ClubOpeningTime) < currentTime && DateTime.Parse(Model.ClubClosingTime) > currentTime)
+        @if (!string.IsNullOrEmpty(Model.TodaysClubSchedule) && Model.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(Model.ClubClosingTime) > currentTime)
         {
             <div class=" rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full" style="background: #d4b78a; display: flex; align-items: baseline;">
                 本日空席あり
