@@ -185,9 +185,10 @@
 
             <div class="bg-[#FFF]  w-full mt-[10px]">
                 <div class="grid gap-[12px] pb-[18px]">
+                    <input id="selected_mvp_id" value="" hidden />
                     <div>
                         <div class="flex flex-row justify-center">
-                            <button class="button-curve   btn-primary  mx-[20px] py-2 disabled" disabled id="modalbtn" onclick="SubmitFunction('` + value[0] + `')">
+                            <button class="button-curve   btn-primary  mx-[20px] py-2 disabled" disabled id="modalbtn" onclick="SubmitFunction()">
                                 <span>
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
                                 </span>
@@ -214,7 +215,7 @@
        //function MVPOnClickFunction() {
        //    debugger;
        //    $(this);
-           
+
        //     //$(this).toggleClass('active');
        //     //// Count the number of active divs
        //     //var activeDivsCount1 = $('.modalbutnActive.active').length;
@@ -292,7 +293,7 @@
                 newHTMLContent += `<div class="text-[12px] font-[500]">` + value[3] + `</div>
                                                                  </div>
                                                              </div>`;
-                newHTMLContent += `<button class="btn-primary-softrose-review gap-[2px] font-[700] modalbutnActive" id="softrore-btn-id-${i}" >
+                newHTMLContent += `<button class="btn-primary-softrose-review gap-[2px] font-[700] modalbutnActive" id="softrore-btn-id-${i}" data-info="` + value[0] + `")">
                                                                  <i class="las la-crown mt-[2px]"></i>
                                                                  @MVPLabel
                                                              </button>
@@ -300,22 +301,22 @@
                                                          </div>
                                                      `;
 
-               
+
             }
             targetElement.innerHTML = newHTMLContent;
 
             for (var i = 0; i < HostIdList.length; i++) {
                 document.getElementById("softrore-btn-id-" + i).addEventListener("click", function () {
-                   
+
                     let btnGroup = document.getElementsByClassName("modalbutnActive");
                     for (let j = 0; j < btnGroup.length; j++) {
                         btnGroup[j].classList.remove("active");
                     }
 
-               
+
                     this.classList.add("active");
 
-                    
+                    $('#selected_mvp_id').val(this.getAttribute('data-info'));
                     let targetBtn = document.getElementById('modalbtn');
 
                     targetBtn.classList.add("active");
@@ -323,7 +324,7 @@
                     targetBtn.removeAttribute("disabled");
 
 
-                    
+
                 });
             }
         }
@@ -337,7 +338,8 @@
         })
 
 
-        function SubmitFunction(MVPHostId) {
+        function SubmitFunction() {
+            let MVPHostId = $('#selected_mvp_id').val();
             if (MVPHostId === null || MVPHostId === "") {
                 toastr.info('MVP host is required');
                 return false;
