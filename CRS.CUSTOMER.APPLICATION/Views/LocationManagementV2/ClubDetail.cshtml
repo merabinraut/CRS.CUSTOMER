@@ -266,12 +266,12 @@
 <div class="">
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
         <div class="flex tab-container-plane no-scrollbar bg-white gap-[14px] overflow-x-auto" style="overflow-y:hidden">
-            <a id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/">店舗トップ</a>
-            <a id="tab2Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "host" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/host">ホスト</a>
-            <a id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "review" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/review">レビュー</a>
-            <a id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "gallery" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/gallery">写真</a>
-            <a id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "schedule" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/schedule">スケジュール</a>
-            <a id="tab6Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "notice" ? "active" : "")" href="/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/notice">お知らせ</a>
+            <a id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/")">店舗トップ</a>
+            <a id="tab2Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "host" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/host")">ホスト</a>
+            <a id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "review" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/review")">レビュー</a>
+            <a id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "gallery" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/gallery")">写真</a>
+            <a id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "schedule" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/schedule")">スケジュール</a>
+            <a id="tab6Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "notice" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/notice")">お知らせ</a>
         </div>
     </div>
 </div>
