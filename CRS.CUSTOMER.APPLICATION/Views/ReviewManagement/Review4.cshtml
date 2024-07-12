@@ -50,6 +50,7 @@
                 <!-- select answer -->
                 @{
                     int i = 1;
+
                     foreach (var item in Model.ReviewDichotomousQuestionModel)
                     {
                         <div class="review-dichotomous-class">
@@ -81,7 +82,7 @@
                                                 <div class="text">@item2.RemarkLabel</div>
                                             </div>
                                         }
-                                        else if (!string.IsNullOrEmpty(item2.RemarkLabelEnglish) && item2.RemarkLabelEnglish.ToLower() == "no")
+                                        else if (!string.IsNullOrEmpty(item2.RemarkLabelEnglish) && item2.RemarkLabelEnglish.ToLower() == "neither")
                                         {
                                             <div class="review-select-qtn text-green " id="box2">
                                                 <input hidden class="review-dichotomous-answer-class" value="@item.RemarkId:@item2.RemarkId" data-extra-info="@item.RemarkLabel:@item2.RemarkLabel" />
@@ -106,7 +107,7 @@
                                                 <div class="text">@item2.RemarkLabel</div>
                                             </div>
                                         }
-                                        else if (!string.IsNullOrEmpty(item2.RemarkLabelEnglish) && item2.RemarkLabelEnglish.ToLower() == "neither")
+                                        else if (!string.IsNullOrEmpty(item2.RemarkLabelEnglish) && item2.RemarkLabelEnglish.ToLower() == "no")
                                         {
                                             <div class="review-select-qtn text-blue" id="box3">
                                                 <input hidden class="review-dichotomous-answer-class" value="@item.RemarkId:@item2.RemarkId" data-extra-info="@item.RemarkLabel:@item2.RemarkLabel" />
@@ -130,6 +131,7 @@
                                                 </div>
                                                 <div class="text">@item2.RemarkLabel</div>
                                             </div>
+
                                         }
                                     }
                                 }
@@ -153,7 +155,7 @@
             </button>
         </a>
         <div class="text-center mt-[10px]">
-            <a onclick="WindowHistoryBack();" class="text-xs border-b border-[#404040] ">
+            <a onclick="history.back()" class="text-xs border-b border-[#404040] ">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.BackToPreviousPage
             </a>
         </div>
@@ -192,11 +194,11 @@
                 ReviewDichotomousQADisplayLabelList.push(this.dataset.extraInfo);
             });
             if (ReviewDichotomousQAList === null || ReviewDichotomousQAList === "" || ReviewDichotomousQAList.length <= 0) {
-                toastr.info('Please answer the questions');
+                toastr.info('申し訳ございませんがアンケートに答えてください'); /*'Please answer the questions'*/
                 return false;
             }
             else if (ReviewDichotomousQAList.length != @TotalDichotomousQuestion) {
-                toastr.info('Please answer all the questions');
+                toastr.info('申し訳ございませんが全アンケートに答えてください。'); /* Please answer all the questions*/
                 return false;
             }
             DataStorageFunction(ReviewDichotomousQAList, ReviewDichotomousQADisplayLabelList);
