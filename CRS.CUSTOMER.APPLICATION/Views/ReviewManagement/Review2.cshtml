@@ -22,7 +22,7 @@
     }
 
     .modalbutnActive.active {
-        background: red;
+        background: #D75A8B;
     }
 </style>
 <div class="flex flex-col justify-between h-screen relative">
@@ -162,7 +162,7 @@
             </div>
         </button>
         <div class="text-center mt-[10px]">
-            <a onclick="history.back()" class="text-xs border-b border-[#404040] ">
+            <a onclick="window.history.back(); return false;" class="text-xs border-b border-[#404040] ">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.BackToPreviousPage
             </a>
         </div>
@@ -187,7 +187,7 @@
                 <div class="grid gap-[12px] pb-[18px]">
                     <div>
                         <div class="flex flex-row justify-center">
-                            <button class="button-curve btn-light  btn-primary mx-[20px] py-2" id="modalbtn" disabled onclick="SubmitFunction('` + value[0] + `')">
+                            <button class="button-curve   btn-primary  mx-[20px] py-2 disabled" disabled id="modalbtn" onclick="SubmitFunction('` + value[0] + `')">
                                 <span>
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
                                 </span>
@@ -196,8 +196,8 @@
                     </div>
                     <div>
                         <div class="flex flex-row justify-center">
-                            <button data-modal-hide="defaultModal">
-                                <b> ホストを選び直す</b>
+                            <button data-modal-hide="defaultModal" id="defaultmodalId">
+                                <span class="text-[12px] font-[500]"> ホストを選び直す</span>
                             </button>
                         </div>
                     </div>
@@ -252,7 +252,7 @@
                     // If there's at least one active div, add the 'active-btn' class to the button
                     $('#button-review').addClass('btn-primary');
                     $('#button-review').prop('disabled', false);
-                    selectedElement.textContent = '@CRS.CUSTOMER.APPLICATION.Resources.Resource.Selected' + '(' + activeDivsCount + ')';
+                    selectedElement.textContent = '(' + activeDivsCount + ')'+ '@CRS.CUSTOMER.APPLICATION.Resources.Resource.Selected';
                 } else {
                     // If there are no active divs, remove the 'active-btn' class from the button
                     $('#button-review').removeClass('btn-primary');
@@ -292,16 +292,50 @@
                 newHTMLContent += `<div class="text-[12px] font-[500]">` + value[3] + `</div>
                                                                  </div>
                                                              </div>`;
-                newHTMLContent += `<button class="btn-primary-softrose-review gap-[2px] font-[700] modalbutnActive" id="softrore-btn-id" >
+                newHTMLContent += `<button class="btn-primary-softrose-review gap-[2px] font-[700] modalbutnActive" id="softrore-btn-id-${i}" >
                                                                  <i class="las la-crown mt-[2px]"></i>
                                                                  @MVPLabel
                                                              </button>
 
                                                          </div>
                                                      `;
+
+               
             }
             targetElement.innerHTML = newHTMLContent;
+
+            for (var i = 0; i < HostIdList.length; i++) {
+                document.getElementById("softrore-btn-id-" + i).addEventListener("click", function () {
+                   
+                    let btnGroup = document.getElementsByClassName("modalbutnActive");
+                    for (let j = 0; j < btnGroup.length; j++) {
+                        btnGroup[j].classList.remove("active");
+                    }
+
+               
+                    this.classList.add("active");
+
+                    
+                    let targetBtn = document.getElementById('modalbtn');
+
+                    targetBtn.classList.add("active");
+                    targetBtn.classList.remove("disabled");
+                    targetBtn.removeAttribute("disabled");
+
+
+                    
+                });
+            }
         }
+
+
+        $('#defaultmodalId').click(function () {
+            let targetBtn = document.getElementById('modalbtn');
+            targetBtn.classList.add("disabled");
+            targetBtn.setAttribute("disabled");
+
+        })
+
 
         function SubmitFunction(MVPHostId) {
             if (MVPHostId === null || MVPHostId === "") {

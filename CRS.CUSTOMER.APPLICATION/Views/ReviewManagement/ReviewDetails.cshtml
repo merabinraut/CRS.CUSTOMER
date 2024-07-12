@@ -289,8 +289,8 @@
                 dataArray.push(ReviewDichotomousQADisplayLabelList[i].split(','));
                 var value = dataArray[0];
                 var splitedvalue = value[0].split(':');
-                newHTMLContent += `<div>
-                     <div class="text-xs  text-start mb-2 ">`  + splitedvalue[0]  + `</div>
+                newHTMLContent += `<div class="mb-2">
+                     <div class="text-xs  text-start ">`  + splitedvalue[0]  + `</div>
                      <div class="text-xs  font-bold text-start ">`+ splitedvalue[1] +`</div>
                  </div>`;
                 targetElement.innerHTML = newHTMLContent;

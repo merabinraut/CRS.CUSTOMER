@@ -94,7 +94,7 @@
             </button>
         </a>
         <div class="text-center mt-[10px]">
-            <a onclick="history.back()" class="text-xs border-b border-[#404040] ">
+            <a onclick="window.location.href='@Url.Action("Review2","ReviewManagement", @Request)'" class="text-xs border-b border-[#404040] ">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.BackToPreviousPage
             </a>
         </div>
@@ -108,15 +108,15 @@
 <div id="modal1" class="modal">
     <div class="modal-content" style="background:none;" >
         <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
-        <div class="relative bg-white rounded-lg shadow overflow-hidden">
+        <div class="relative bg-white rounded-lg shadow overflow-hidden  w-[290px] h-[487px]">
             <!-- Modal content -->
             <div class="relative bg-white overflow-hidden">
                 <!-- Modal body -->
                 <div class="text-center pt-4 pb-3 px-2 border-b border-[#DCDCDC]">
                     <div class=" text-[13px] font-bold">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ReviewWhatYouThinkAboutTheClub</div>
-                    <div class="text-[13px  ]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TheSelectedTagWillBeUsedInTheTitleOfTheReview</div>
+                    <div class="text-[11px] font-[400]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TheSelectedTagWillBeUsedInTheTitleOfTheReview</div>
                 </div>
-                <div class=" h-[201px] pb-2 overflow-hidden	 overflow-y-scroll	custom-scrollbar-review">
+                <div class=" h-[320px] pb-2 overflow-hidden	overflow-y-scroll custom-scrollbar-review">
                     @foreach (var item in Model.ReviewRemarkListModel)
                     {
                         <div class="flex justify-between items-center px-[13px] py-[10px] border-b border-[#DCDCDC]">
@@ -149,7 +149,7 @@
                     <div>
                         <div class="flex flex-row justify-center">
                             <button onclick="window.location.href='@Url.Action("Review2","ReviewManagement", @Request)'">
-                                <b> @CRS.CUSTOMER.APPLICATION.Resources.Resource.Re_SelectYourHost</b>
+                                <span class="text-[12px] font-[500]"> @CRS.CUSTOMER.APPLICATION.Resources.Resource.Re_SelectYourHost</span>
                             </button>
                         </div>
                     </div>
