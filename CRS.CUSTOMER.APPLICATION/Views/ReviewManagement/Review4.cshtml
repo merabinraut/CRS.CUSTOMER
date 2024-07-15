@@ -84,7 +84,12 @@
                                         }
                                         else if (!string.IsNullOrEmpty(item2.RemarkLabelEnglish) && item2.RemarkLabelEnglish.ToLower() == "neither")
                                         {
-                                            <div class="review-select-qtn text-green " id="box2">
+                                            var isDisabled = "";
+                                            if (item.RemarkId == "t7GwWlssMlrZ41235asf4214yliLozVg77tt4yh788qqw77tt4yh788qqw")
+                                            {
+                                                isDisabled = "disabled";
+                                            }
+                                            <div class="review-select-qtn text-green @isDisabled" id="box2">
                                                 <input hidden class="review-dichotomous-answer-class" value="@item.RemarkId:@item2.RemarkId" data-extra-info="@item.RemarkLabel:@item2.RemarkLabel" />
                                                 <div class="image">
                                                     <div class="image">
