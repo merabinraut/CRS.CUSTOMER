@@ -10,6 +10,8 @@
         public string RatingScale { get; set; }
         public string CommentedOn { get; set; }
         public string DateGroup { get; set; }
+        public string LocationURL { get; set; }
+        public string ClubCode { get; set; }
     }
 
     public class CustomerReviewDetailRequestCommon
