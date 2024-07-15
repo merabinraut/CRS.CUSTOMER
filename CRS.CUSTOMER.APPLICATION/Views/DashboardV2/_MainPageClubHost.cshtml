@@ -620,13 +620,13 @@
                 @if (!string.IsNullOrEmpty(item.IsBookmarked.ToUpper()) && item.IsBookmarked.ToUpper() == "Y")
                 {
                     <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                        <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                        <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
                     </div>
                 }
                 else
                 {
                     <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                        <img src="~/Content/assets/images/customer/favorite-unfilled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                        <img src="~/Content/assets/images/customer/favorite-unfilled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
                     </div>
                 }
             </div>
