@@ -266,12 +266,12 @@
 <div class="">
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
         <div class="flex tab-container-plane no-scrollbar bg-white gap-[14px] overflow-x-auto" style="overflow-y:hidden">
-            <a id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/")">店舗トップ</a>
-            <a id="tab2Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "host" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/host")">ホスト</a>
-            <a id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "review" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/review")">レビュー</a>
-            <a id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "gallery" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/gallery")">写真</a>
-            <a id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "schedule" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/schedule")">スケジュール</a>
-            <a id="tab6Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "notice" ? "active" : "")" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/notice")">お知らせ</a>
+            <a id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "" ? "active" : "")" style="font-size:12px;" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/")">店舗トップ</a>
+            <a id="tab2Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "host" ? "active" : "")" style="font-size: 12px;" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/host")">ホスト</a>
+            <a id="tab3Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "review" ? "active" : "")" style="font-size: 12px;" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/review")">レビュー</a>
+            <a id="tab4Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "gallery" ? "active" : "")" style="font-size: 12px;" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/gallery")">写真</a>
+            <a id="tab5Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "schedule" ? "active" : "")" style="font-size: 12px;" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/schedule")">スケジュール</a>
+            <a id="tab6Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "notice" ? "active" : "")" style="font-size: 12px;" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/notice")">お知らせ</a>
         </div>
     </div>
 </div>
@@ -980,7 +980,7 @@
                                 </div>
                             </div>
                             <!-- border bottom -->
-                            <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
+                          @*  <div class="h-[1px] bg-[#EFEFEF] w-full"></div>*@
                             <!-- notices section -->
                             @{
                                 if (Model.GetNoticeByClubId != null)
@@ -994,13 +994,15 @@
                             <span>@item.EventDate ( @item.Day )</span>
                             <span class=" ">@item.EventDescription</span>
                         </div>*@
+
+                                            <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
+
                                             <div class="flex justify-start items-center gap-[9px] text-[#333] text-[11px] leading-[20px] font-medium my-[5px] overflow-hidden text-ellipsis whitespace-nowrap"
                                                  style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 20px;">
                                                 <span>@item.EventDate ( @item.Day )</span>
                                                 <span class="overflow-hidden text-ellipsis whitespace-nowrap">@item.EventDescription</span>
                                             </div>
 
-                                            <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
                                         }
 
                                     }
@@ -1030,7 +1032,7 @@
                                 </div>
                             </div>
                             <!-- border bottom -->
-                            <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
+                            @*  <div class="h-[1px] bg-[#EFEFEF] w-full"></div>*@
                             <!-- notices section -->
                             @{
                                 if (Model.GetNoticeByClubId != null)
@@ -1039,12 +1041,15 @@
                                     {
                                         if (item.EventType.Trim().ToString() == "2")
                                         {
+
+                                            <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
+
                                             <div class="flex justify-start items-center gap-[9px] text-[#333] text-[11px] leading-[20px] font-medium my-[5px] overflow-hidden text-ellipsis whitespace-nowrap"
                                                  style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 20px;">
                                                 <div>@item.EventDate ( @item.Day )</div>
                                                 <div class="overflow-hidden text-ellipsis whitespace-nowrap">@item.EventTitle</div>
                                             </div>
-                                            <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
+                                            @* <div class="h-[1px] bg-[#EFEFEF] w-full"></div>*@
                                         }
 
                                     }
