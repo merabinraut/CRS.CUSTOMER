@@ -899,15 +899,16 @@
                                                 }
                                                 @if (item.IsBookmarked.Trim().ToUpper() == "Y")
                                                 {
-                                                    <div class="absolute top-2 right-2" style="width:26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                                                        <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="height:26px; width:26px" />
+                                                    <div class="absolute top-[2px] right-2" style="width:26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                                                        <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
+
                                                     </div>
                                                 }
                                                 else
                                                 {
-                                                    <div class="absolute top-2 right-2" style="width: 26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                                                        <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height:26px; width:26px" />
-                                                    </div>
+                                            <div class="absolute top-[2px] right-2" style="width: 26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                                                <img src="~/Content/assets/images/customer/favorite-unfilled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
+                                            </div>
                                                 }
 
                                             </div>
