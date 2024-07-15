@@ -750,8 +750,8 @@
                                         }
                                     </div>
                                     <!-- for the notice with mention -->
-                                    <div class="text-[11px] font-medium leading-[16px] text-[#333]">
-                                        <span class="text-[#D17979] ">@notice.EventDescription</span>
+                                    <div class="text-[11px] font-medium leading-[16px] text-[#333] ">
+                                        <span class="text-[#D17979] break-all ">@notice.EventDescription</span>
                                     </div>
                                 </div>
                                 <div class="h-[1px] bg-[#EFEFEF] w-full "></div>
@@ -989,11 +989,17 @@
                                     {
                                         if (item.EventType.Trim().ToString() == "1")
                                         {
-                                            <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px]"
-                                                 style="line-height:20px">
-                                                <div>@item.EventDate ( @item.Day )</div>
-                                                <div>@item.EventDescription</div>
+                                            @*<div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px] overflow-hidden text-ellipsis whitespace-nowrap"
+                             style="line-height:20px">
+                            <span>@item.EventDate ( @item.Day )</span>
+                            <span class=" ">@item.EventDescription</span>
+                        </div>*@
+                                            <div class="flex justify-start items-center gap-[9px] text-[#333] text-[11px] leading-[20px] font-medium my-[5px] overflow-hidden text-ellipsis whitespace-nowrap"
+                                                 style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 20px;">
+                                                <span>@item.EventDate ( @item.Day )</span>
+                                                <span class="overflow-hidden text-ellipsis whitespace-nowrap">@item.EventDescription</span>
                                             </div>
+
                                             <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
                                         }
 
@@ -1033,10 +1039,10 @@
                                     {
                                         if (item.EventType.Trim().ToString() == "2")
                                         {
-                                            <div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px]"
-                                                 style="line-height:20px">
+                                            <div class="flex justify-start items-center gap-[9px] text-[#333] text-[11px] leading-[20px] font-medium my-[5px] overflow-hidden text-ellipsis whitespace-nowrap"
+                                                 style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 20px;">
                                                 <div>@item.EventDate ( @item.Day )</div>
-                                                <div>@item.EventTitle</div>
+                                                <div class="overflow-hidden text-ellipsis whitespace-nowrap">@item.EventTitle</div>
                                             </div>
                                             <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
                                         }
