@@ -1,0 +1,934 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.LocationManagement.ViewHostDetailModelV2
+@{
+    var ClubId = ViewBag.ClubName;
+    var ClubCode = ViewBag.ClubId;
+    var HostName = ViewBag.HostName;
+    var LocationURL = ViewBag.LocationId;
+    ViewBag.Title = $"{HostName}のプロフィール‖{ClubId}‖ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var HostSkillsModel = @Model.HostIdentityDetailsModel.Where(x => x.LabelType.Trim().ToUpper() == "SKILLS").ToList();
+    var metaContent = $"{HostName}のプロフィールページです。業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」にて、{HostName}の基本情報・メッセージ・一問一答などをチェック♪";
+}
+<meta name="description" content="@metaContent">
+
+<style>
+    .clubInfo {
+        border-radius: 6px;
+        border: 1px solid #EAEAEA;
+        background: #F6F6F6;
+        margin-left: 12.5px;
+        margin-right: 12.5px;
+        padding: 13px 0px 14px 14.5px;
+    }
+
+    .clubName {
+        color: #292F33;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 100%;
+    }
+
+    .store {
+        color: #404040;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 100%;
+    }
+
+    .owl-stage .owl-item.active {
+        width: 295px !important;
+        margin-left: 16px;
+    }
+
+    .owl-item active {
+    }
+
+    .owl-theme .owl-dots {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .owl-carousel.owl-loaded {
+        margin-top: 10px;
+        /*       margin-left:5px;*/
+    }
+
+    .owl-theme .owl-nav.disabled + .owl-dots {
+        margin-top: 5px !important;
+        width: calc(100vw - 50px);
+        margin-left: 21px;
+    }
+
+    .owl-theme .owl-dots .owl-dot {
+        gap: 5px;
+    }
+
+        .owl-theme .owl-dots .owl-dot span {
+            width: 100%;
+            /*  max-width: 50px;*/
+            margin: 0;
+            background: #E0E0E0;
+            height: 2px;
+            border: 1px solid #CDCDCD
+        }
+
+        .owl-theme .owl-dots .owl-dot.active span {
+            width: 100%;
+            /*  max-width: 50px;*/
+            background: #E3A1A1;
+            height: 2px;
+            border: 1px solid #E39696
+        }
+
+    .owl-carousel .owl-item img {
+        display: block;
+        width: 100%;
+    }
+
+    .owl-carousel {
+        position: relative;
+    }
+
+    .owl-theme .owl-dots {
+        position: absolute;
+        top: 0
+    }
+
+        .owl-theme .owl-dots button {
+            width: 50px
+        }
+</style>
+
+<!-- back button -->
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="history.back()">
+    <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
+                  fill="#BCB08A" />
+        </svg>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
+    </div>
+    <div class="text-center w-full font-bold"></div>
+
+</div>
+<!-- breadcrumb  -->
+<div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
+    <a href="/" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">ホームページ</a>
+    <i class="las la-angle-right"></i>
+    <a onclick="RedirectToLocation();" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">店舗/ホスト一覧</a>
+    <i class="las la-angle-right"></i>
+    <a onclick="ClubDetailRedirectFunction('@ClubCode', '@LocationURL');" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@Model.ClubNameJapanese</a>
+    <i class="las la-angle-right"></i>
+    <a href="#" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@Model.HostNameJapanese</a>
+</div>
+<!-- host image  -->
+
+<div class="relative">
+    <div class="  ">
+        <div class=" owl-carousel owl-theme no-scrollbar ">
+            @if (Model.HostGalleryImageList != null && Model.HostGalleryImageList.Count > 0)
+            {
+                foreach (var item in Model.HostGalleryImageList)
+                {
+                    <img class="rounded object-cover h-[413px]" src="@item"
+                         alt="modelimage">
+                }
+            }
+            else
+            {
+                <div class="flex h-[413px] w-[294px] rounded ">
+                    <img class="rounded object-cover" src="~/Content/assets/images/customer/demo-image.jpeg"
+                         alt="modelimage" style="width:100%">
+                </div>
+            }
+        </div>
+    </div>
+    <!-- favourite icon -->
+    @if (!string.IsNullOrEmpty(Model.IsBookmarked) && Model.IsBookmarked.ToUpper() == "N")
+    {
+        <div class="absolute  right-3" style="bottom: -1.75rem; z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
+            <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height: 59px; width: 60px; z-index: 1" />
+        </div>
+    }
+    else
+    {
+        <div class="absolute  right-3" style="bottom: -1.75rem;z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
+            <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="height: 59px; width: 60px; z-index: 1 " />
+        </div>
+    }
+</div>
+<div class="">
+    <!-- host details -->
+    <div class=" px-4 ">
+        <div class="mt-6 flex justify-start items-center gap-[9px] border-b border-[#EFEFEF] pb-[11px]">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="4" height="43" viewBox="0 0 4 43" fill="none">
+                    <path d="M0 43L0.8 43L0.799998 -3.49691e-08L-1.87959e-06 0L0 43ZM3.2 43L4 43L4 -1.74846e-07L3.2 -1.39877e-07L3.2 43Z"
+                          fill="#BCB08A" />
+                </svg>
+            </div>
+            <div class="flex flex-col justify-start items-start ">
+                <div>
+                    <span class="hostName text-[#292F33] leading-[29.4px] text-[21px] font-bold pr-3">@Model.HostNameJapanese</span>
+                    <span class="age text-[#A09E91] text-[20px] font-bold leading-[28px]">@Model.HostAge</span>
+                </div>
+                <div class="text-[12px] overflow-hidden text-ellipsis font-bold leading-[16.8px] ">
+                    @Model.HostNameEnglish
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Share -->
+    <div class="grid py-[8px] ">
+        <div class="flex flex-row px-[16px] justify-between items-center">
+            <div class="flex flex-row items-center gap-[10px]">
+                <!-- instaV -->
+
+                @if (!string.IsNullOrWhiteSpace(Model.HostInstagramLink))
+                {
+                    <div class="  bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex">
+                        <a href="@Model.HostInstagramLink" target="_blank">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="28" height="28" rx="14" fill="#F8F8F8" />
+                                <g clip-path="url(#clip0_11317_109137)">
+                                    <path d="M14 7.44062C16.1375 7.44062 16.3906 7.45 17.2313 7.4875C18.0125 7.52187 18.4344 7.65313 18.7156 7.7625C19.0875 7.90625 19.3563 8.08125 19.6344 8.35938C19.9156 8.64063 20.0875 8.90625 20.2313 9.27813C20.3406 9.55938 20.4719 9.98437 20.5063 10.7625C20.5438 11.6062 20.5531 11.8594 20.5531 13.9938C20.5531 16.1313 20.5438 16.3844 20.5063 17.225C20.4719 18.0063 20.3406 18.4281 20.2313 18.7094C20.0875 19.0813 19.9125 19.35 19.6344 19.6281C19.3531 19.9094 19.0875 20.0813 18.7156 20.225C18.4344 20.3344 18.0094 20.4656 17.2313 20.5C16.3875 20.5375 16.1344 20.5469 14 20.5469C11.8625 20.5469 11.6094 20.5375 10.7688 20.5C9.9875 20.4656 9.56563 20.3344 9.28438 20.225C8.9125 20.0813 8.64375 19.9063 8.36563 19.6281C8.08438 19.3469 7.9125 19.0813 7.76875 18.7094C7.65938 18.4281 7.52813 18.0031 7.49375 17.225C7.45625 16.3813 7.44688 16.1281 7.44688 13.9938C7.44688 11.8563 7.45625 11.6031 7.49375 10.7625C7.52813 9.98125 7.65938 9.55938 7.76875 9.27813C7.9125 8.90625 8.0875 8.6375 8.36563 8.35938C8.64688 8.07813 8.9125 7.90625 9.28438 7.7625C9.56563 7.65313 9.99063 7.52187 10.7688 7.4875C11.6094 7.45 11.8625 7.44062 14 7.44062ZM14 6C11.8281 6 11.5563 6.00937 10.7031 6.04688C9.85313 6.08438 9.26875 6.22187 8.7625 6.41875C8.23438 6.625 7.7875 6.89688 7.34375 7.34375C6.89688 7.7875 6.625 8.23438 6.41875 8.75938C6.22187 9.26875 6.08438 9.85 6.04688 10.7C6.00938 11.5562 6 11.8281 6 14C6 16.1719 6.00938 16.4438 6.04688 17.2969C6.08438 18.1469 6.22187 18.7313 6.41875 19.2375C6.625 19.7656 6.89688 20.2125 7.34375 20.6563C7.7875 21.1 8.23438 21.375 8.75938 21.5781C9.26875 21.775 9.85 21.9125 10.7 21.95C11.5531 21.9875 11.825 21.9969 13.9969 21.9969C16.1688 21.9969 16.4406 21.9875 17.2938 21.95C18.1438 21.9125 18.7281 21.775 19.2344 21.5781C19.7594 21.375 20.2063 21.1 20.65 20.6563C21.0938 20.2125 21.3688 19.7656 21.5719 19.2406C21.7688 18.7313 21.9063 18.15 21.9438 17.3C21.9813 16.4469 21.9906 16.175 21.9906 14.0031C21.9906 11.8313 21.9813 11.5594 21.9438 10.7063C21.9063 9.85625 21.7688 9.27188 21.5719 8.76563C21.375 8.23438 21.1031 7.7875 20.6563 7.34375C20.2125 6.9 19.7656 6.625 19.2406 6.42188C18.7313 6.225 18.15 6.0875 17.3 6.05C16.4438 6.00938 16.1719 6 14 6Z" fill="black" />
+                                    <path d="M14 9.89062C11.7313 9.89062 9.89062 11.7313 9.89062 14C9.89062 16.2688 11.7313 18.1094 14 18.1094C16.2688 18.1094 18.1094 16.2688 18.1094 14C18.1094 11.7313 16.2688 9.89062 14 9.89062ZM14 16.6656C12.5281 16.6656 11.3344 15.4719 11.3344 14C11.3344 12.5281 12.5281 11.3344 14 11.3344C15.4719 11.3344 16.6656 12.5281 16.6656 14C16.6656 15.4719 15.4719 16.6656 14 16.6656Z" fill="black" />
+                                    <path d="M19.2312 9.72793C19.2312 10.2592 18.8 10.6873 18.2719 10.6873C17.7406 10.6873 17.3125 10.2561 17.3125 9.72793C17.3125 9.19668 17.7438 8.76855 18.2719 8.76855C18.8 8.76855 19.2312 9.19981 19.2312 9.72793Z" fill="black" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_11317_109137">
+                                        <rect width="16" height="16" fill="white" transform="translate(6 6)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="  bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex">
+                        <a href="#" disabled="disabled" class="pointer-events-none">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="28" height="28" rx="14" fill="white" />
+                                <g opacity="0.08" clip-path="url(#clip0_11311_109078)">
+                                    <path d="M14 7.44062C16.1375 7.44062 16.3906 7.45 17.2313 7.4875C18.0125 7.52187 18.4344 7.65313 18.7156 7.7625C19.0875 7.90625 19.3563 8.08125 19.6344 8.35938C19.9156 8.64063 20.0875 8.90625 20.2313 9.27813C20.3406 9.55938 20.4719 9.98437 20.5063 10.7625C20.5438 11.6062 20.5531 11.8594 20.5531 13.9938C20.5531 16.1313 20.5438 16.3844 20.5063 17.225C20.4719 18.0063 20.3406 18.4281 20.2313 18.7094C20.0875 19.0813 19.9125 19.35 19.6344 19.6281C19.3531 19.9094 19.0875 20.0813 18.7156 20.225C18.4344 20.3344 18.0094 20.4656 17.2313 20.5C16.3875 20.5375 16.1344 20.5469 14 20.5469C11.8625 20.5469 11.6094 20.5375 10.7688 20.5C9.9875 20.4656 9.56563 20.3344 9.28438 20.225C8.9125 20.0813 8.64375 19.9063 8.36563 19.6281C8.08438 19.3469 7.9125 19.0813 7.76875 18.7094C7.65938 18.4281 7.52813 18.0031 7.49375 17.225C7.45625 16.3813 7.44688 16.1281 7.44688 13.9938C7.44688 11.8563 7.45625 11.6031 7.49375 10.7625C7.52813 9.98125 7.65938 9.55938 7.76875 9.27813C7.9125 8.90625 8.0875 8.6375 8.36563 8.35938C8.64688 8.07813 8.9125 7.90625 9.28438 7.7625C9.56563 7.65313 9.99063 7.52187 10.7688 7.4875C11.6094 7.45 11.8625 7.44062 14 7.44062ZM14 6C11.8281 6 11.5563 6.00937 10.7031 6.04688C9.85313 6.08438 9.26875 6.22187 8.7625 6.41875C8.23438 6.625 7.7875 6.89688 7.34375 7.34375C6.89688 7.7875 6.625 8.23438 6.41875 8.75938C6.22187 9.26875 6.08438 9.85 6.04688 10.7C6.00938 11.5562 6 11.8281 6 14C6 16.1719 6.00938 16.4438 6.04688 17.2969C6.08438 18.1469 6.22187 18.7313 6.41875 19.2375C6.625 19.7656 6.89688 20.2125 7.34375 20.6563C7.7875 21.1 8.23438 21.375 8.75938 21.5781C9.26875 21.775 9.85 21.9125 10.7 21.95C11.5531 21.9875 11.825 21.9969 13.9969 21.9969C16.1688 21.9969 16.4406 21.9875 17.2938 21.95C18.1438 21.9125 18.7281 21.775 19.2344 21.5781C19.7594 21.375 20.2063 21.1 20.65 20.6563C21.0938 20.2125 21.3688 19.7656 21.5719 19.2406C21.7688 18.7313 21.9063 18.15 21.9438 17.3C21.9813 16.4469 21.9906 16.175 21.9906 14.0031C21.9906 11.8313 21.9813 11.5594 21.9438 10.7063C21.9063 9.85625 21.7688 9.27188 21.5719 8.76563C21.375 8.23438 21.1031 7.7875 20.6563 7.34375C20.2125 6.9 19.7656 6.625 19.2406 6.42188C18.7313 6.225 18.15 6.0875 17.3 6.05C16.4438 6.00938 16.1719 6 14 6Z" fill="black" />
+                                    <path d="M14 9.89062C11.7313 9.89062 9.89062 11.7313 9.89062 14C9.89062 16.2688 11.7313 18.1094 14 18.1094C16.2688 18.1094 18.1094 16.2688 18.1094 14C18.1094 11.7313 16.2688 9.89062 14 9.89062ZM14 16.6656C12.5281 16.6656 11.3344 15.4719 11.3344 14C11.3344 12.5281 12.5281 11.3344 14 11.3344C15.4719 11.3344 16.6656 12.5281 16.6656 14C16.6656 15.4719 15.4719 16.6656 14 16.6656Z" fill="black" />
+                                    <path d="M19.2312 9.72793C19.2312 10.2592 18.8 10.6873 18.2719 10.6873C17.7406 10.6873 17.3125 10.2561 17.3125 9.72793C17.3125 9.19668 17.7438 8.76855 18.2719 8.76855C18.8 8.76855 19.2312 9.19981 19.2312 9.72793Z" fill="black" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_11311_109078">
+                                        <rect width="16" height="16" fill="white" transform="translate(6 6)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+
+                        </a>
+                    </div>
+                }
+                <!-- tiktok  -->
+                @if (!string.IsNullOrWhiteSpace(Model.HostTiktokLink))
+                {
+                    <div class="  bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex">
+                        <a href="@Model.HostTiktokLink" target="_blank">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="28" height="28" rx="14" fill="#F8F8F8" />
+                                <path d="M17.3823 6H14.6859V16.8985C14.6859 18.1971 13.6488 19.2638 12.3582 19.2638C11.0675 19.2638 10.0304 18.1971 10.0304 16.8985C10.0304 15.6232 11.0445 14.5797 12.289 14.5333V11.7971C9.54646 11.8435 7.33398 14.0928 7.33398 16.8985C7.33398 19.7276 9.59256 22 12.3812 22C15.1698 22 17.4284 19.7044 17.4284 16.8985V11.3101C18.4425 12.0522 19.687 12.4928 21.0007 12.516V9.77971C18.9726 9.71015 17.3823 8.04058 17.3823 6Z" fill="black" />
+                            </svg>
+
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="  bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex">
+                        <a href="#" disabled="disabled" class="pointer-events-none">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="28" height="28" rx="14" fill="white" />
+                                <g opacity="0.08">
+                                    <path d="M17.3823 6H14.6859V16.8985C14.6859 18.1971 13.6488 19.2638 12.3582 19.2638C11.0675 19.2638 10.0304 18.1971 10.0304 16.8985C10.0304 15.6232 11.0445 14.5797 12.289 14.5333V11.7971C9.54646 11.8435 7.33398 14.0928 7.33398 16.8985C7.33398 19.7276 9.59256 22 12.3812 22C15.1698 22 17.4284 19.7044 17.4284 16.8985V11.3101C18.4425 12.0522 19.687 12.4928 21.0007 12.516V9.77971C18.9726 9.71015 17.3823 8.04058 17.3823 6Z" fill="black" />
+                                </g>
+                            </svg>
+
+
+                        </a>
+                    </div>
+                }
+
+                <!-- X -->
+                @if (!string.IsNullOrWhiteSpace(Model.HostTwitterLink))
+                {
+                    <div class="  bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex">
+                        <a href="@Model.HostTwitterLink" target="_blank">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="28" height="28" rx="14" fill="#F8F8F8" />
+                                <g clip-path="url(#clip0_11317_109141)">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0186 14.7007L6.30407 21.2234H8.83554L13.2096 16.2175L17.0639 21.2245L22 21.1976L15.7417 12.9219L21.0824 6.80422L18.5916 6.77637L14.5574 11.3739L11.1059 6.78387L6 6.77833L12.0186 14.7007ZM19.0105 19.722L17.7331 19.718L8.95653 8.22802H10.3306L19.0105 19.722Z" fill="black" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_11317_109141">
+                                        <rect width="16" height="16" fill="white" transform="translate(6 6)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex cursor-default">
+                        <a href="#" target="_blank" disabled="disabled" class="pointer-events-none">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="28" height="28" rx="14" fill="white" />
+                                <g opacity="0.08" clip-path="url(#clip0_11311_109082)">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0186 14.7007L6.30407 21.2234H8.83554L13.2096 16.2175L17.0639 21.2245L22 21.1976L15.7417 12.9219L21.0824 6.80422L18.5916 6.77637L14.5574 11.3739L11.1059 6.78387L6 6.77833L12.0186 14.7007ZM19.0105 19.722L17.7331 19.718L8.95653 8.22802H10.3306L19.0105 19.722Z" fill="black" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_11311_109082">
+                                        <rect width="16" height="16" fill="white" transform="translate(6 6)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+
+                        </a>
+                    </div>
+                }
+                <!-- line  -->
+                @if (!string.IsNullOrWhiteSpace(Model.HostLine))
+                {
+                    <div class="  bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex">
+                        <a href="@Model.HostLine" target="_blank">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="28" height="28" rx="14" fill="#F8F8F8" />
+                                <path d="M14 6C18.4107 6 22 9.05814 22 12.8186C22 14.3194 21.445 15.6784 20.2823 17.0137C19.445 18.0294 18.0856 19.1475 16.8323 20.0719C15.579 20.9849 14.4267 21.7036 14 21.8919C13.8293 21.9661 13.7013 22 13.6 22C13.248 22 13.2796 21.6015 13.3062 21.4361C13.3276 21.3105 13.424 20.7161 13.424 20.7161C13.4506 20.5049 13.4769 20.1693 13.3969 19.9582C13.3062 19.7242 12.9488 19.604 12.6875 19.5469C8.8475 19.0106 6 16.1853 6 12.8186C6 9.05814 9.58933 6 14 6ZM13.4625 10.5639C13.1938 10.5693 12.9333 10.7887 12.9333 11.1357V14.5595C12.9333 14.8745 13.1723 15.1301 13.4667 15.1301C13.7611 15.1301 14 14.8745 14 14.5595V12.9167L15.1656 14.8905C15.4675 15.3424 16.1333 15.1147 16.1333 14.5595V11.1357C16.1333 10.8207 15.8944 10.5651 15.6 10.5651C15.3056 10.5651 15.0667 10.8207 15.0667 11.1357V12.8476L13.901 10.8047C13.7878 10.6352 13.6237 10.5607 13.4625 10.5639ZM8.66667 10.5651C8.37227 10.5651 8.13333 10.8207 8.13333 11.1357V14.5595C8.13333 14.8745 8.37227 15.1301 8.66667 15.1301H10.2667C10.5611 15.1301 10.8 14.8745 10.8 14.5595C10.8 14.2445 10.5611 13.9889 10.2667 13.9889H9.2V11.1357C9.2 10.8207 8.96107 10.5651 8.66667 10.5651ZM11.8667 10.5651C11.5723 10.5651 11.3333 10.8207 11.3333 11.1357V14.5595C11.3333 14.8745 11.5723 15.1301 11.8667 15.1301C12.1611 15.1301 12.4 14.8745 12.4 14.5595V11.1357C12.4 10.8207 12.1611 10.5651 11.8667 10.5651ZM17.2 10.5651C16.9056 10.5651 16.6667 10.8207 16.6667 11.1357V14.5595C16.6667 14.8745 16.9056 15.1301 17.2 15.1301H18.8C19.0944 15.1301 19.3333 14.8745 19.3333 14.5595C19.3333 14.2445 19.0944 13.9889 18.8 13.9889H17.7333V13.4182H18.8C19.0949 13.4182 19.3333 13.1626 19.3333 12.8476C19.3333 12.5326 19.0949 12.277 18.8 12.277H17.7333V11.7063H18.8C19.0944 11.7063 19.3333 11.4507 19.3333 11.1357C19.3333 10.8207 19.0944 10.5651 18.8 10.5651H17.2Z" fill="black" />
+                            </svg>
+
+
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="bg-[#F8F8F8] rounded-full h-7 w-7 justify-center items-center flex">
+                        <a href="#" disabled="disabled" class="pointer-events-none">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="28" height="28" rx="14" fill="white" />
+                                <g opacity="0.08">
+                                    <path d="M9.219 5.75C8.30042 5.75473 7.42081 6.12173 6.77127 6.77127C6.12173 7.42081 5.75473 8.30042 5.75 9.219V18.781C5.75473 19.6996 6.12173 20.5792 6.77127 21.2287C7.42081 21.8783 8.30042 22.2453 9.219 22.25H18.781C19.6996 22.2453 20.5792 21.8783 21.2287 21.2287C21.8783 20.5792 22.2453 19.6996 22.25 18.781V9.22C22.2453 8.30142 21.8783 7.42181 21.2287 6.77227C20.5792 6.12273 19.6996 5.75573 18.781 5.751H9.22L9.219 5.75ZM9.219 7.25H18.781C19.871 7.25 20.75 8.129 20.75 9.219V18.781C20.75 19.871 19.871 20.75 18.781 20.75H9.22C8.96132 20.7504 8.7051 20.6997 8.46603 20.6009C8.22696 20.5021 8.00974 20.3571 7.82683 20.1742C7.64391 19.9913 7.49889 19.774 7.40008 19.535C7.30126 19.2959 7.2506 19.0397 7.251 18.781V9.22C7.251 8.13 8.13 7.251 9.22 7.251L9.219 7.25ZM14 8.914C10.988 8.914 8.54 10.9 8.54 13.344C8.54 15.535 10.484 17.357 13.11 17.704C13.288 17.741 13.517 17.832 13.578 17.984C13.634 18.122 13.619 18.336 13.602 18.477C13.602 18.477 13.546 18.863 13.532 18.945C13.508 19.083 13.417 19.496 14 19.25C14.583 19.004 17.144 17.38 18.29 16.062C19.08 15.195 19.46 14.322 19.46 13.344C19.46 10.9 17.012 8.914 14 8.914ZM10.79 12.054C10.947 12.054 11.07 12.178 11.07 12.336V14.211H11.867C12.025 14.211 12.148 14.357 12.148 14.516C12.1483 14.5528 12.1412 14.5894 12.1272 14.6235C12.1133 14.6576 12.0926 14.6885 12.0666 14.7146C12.0405 14.7406 12.0096 14.7613 11.9755 14.7752C11.9414 14.7892 11.9048 14.7963 11.868 14.796H10.788C10.63 14.796 10.483 14.674 10.483 14.516V12.336C10.483 12.178 10.63 12.055 10.788 12.055L10.79 12.054ZM12.71 12.054C12.87 12.054 12.992 12.178 12.992 12.336V14.516C12.9923 14.5529 12.9852 14.5895 12.9711 14.6237C12.9571 14.6579 12.9364 14.6889 12.9102 14.7149C12.8841 14.741 12.853 14.7616 12.8188 14.7755C12.7846 14.7894 12.7479 14.7964 12.711 14.796C12.553 14.796 12.406 14.674 12.406 14.516V12.336C12.406 12.178 12.553 12.055 12.711 12.055L12.71 12.054ZM13.602 12.054C13.631 12.046 13.666 12.054 13.695 12.054C13.783 12.054 13.854 12.099 13.906 12.172L15.031 13.672V12.336C15.031 12.178 15.154 12.055 15.312 12.055C15.471 12.055 15.594 12.178 15.594 12.335V14.515C15.5958 14.5728 15.5783 14.6295 15.5443 14.6762C15.5102 14.723 15.4616 14.757 15.406 14.773C15.377 14.783 15.342 14.797 15.312 14.797C15.2667 14.7967 15.222 14.7859 15.1814 14.7657C15.1409 14.7454 15.1055 14.7161 15.078 14.68L13.977 13.156V14.516C13.9773 14.553 13.9701 14.5897 13.956 14.6239C13.9419 14.6582 13.9211 14.6892 13.8949 14.7153C13.8686 14.7414 13.8374 14.762 13.8031 14.7758C13.7688 14.7897 13.732 14.7965 13.695 14.796C13.537 14.796 13.391 14.674 13.391 14.516V12.336C13.3935 12.2734 13.4149 12.2131 13.4524 12.1629C13.4899 12.1128 13.5417 12.0751 13.601 12.055L13.602 12.054ZM16.273 12.054H17.352C17.51 12.054 17.632 12.178 17.632 12.336C17.6324 12.3729 17.6254 12.4096 17.6115 12.4438C17.5976 12.478 17.577 12.5091 17.5509 12.5352C17.5249 12.5614 17.4939 12.5821 17.4597 12.5961C17.4255 12.6102 17.3889 12.6173 17.352 12.617H16.555V13.133H17.352C17.51 13.133 17.632 13.256 17.632 13.414C17.632 13.572 17.51 13.719 17.352 13.719H16.555V14.211H17.352C17.51 14.211 17.632 14.357 17.632 14.516C17.6323 14.5528 17.6252 14.5894 17.6112 14.6235C17.5973 14.6576 17.5766 14.6885 17.5506 14.7146C17.5245 14.7406 17.4936 14.7613 17.4595 14.7752C17.4254 14.7892 17.3888 14.7963 17.352 14.796H16.273C16.2362 14.7963 16.1996 14.7892 16.1655 14.7752C16.1314 14.7613 16.1005 14.7406 16.0744 14.7146C16.0484 14.6885 16.0277 14.6576 16.0138 14.6235C15.9998 14.5894 15.9927 14.5528 15.993 14.516V12.336C15.993 12.178 16.115 12.055 16.273 12.055V12.054Z" fill="#18181B" />
+                                </g>
+                            </svg>
+
+
+                        </a>
+                    </div>
+                }
+
+            </div>
+            <div class="flex gap-1 justify-center items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+                    <path d="M2.71508 7.28808L2.70726 7.27998L2.70051 7.2735L2.7004 7.2734L2.70026 7.27326L2.70021 7.27321L2.69995 7.27296L2.696 7.26904C2.69144 7.26449 2.68357 7.25654 2.67287 7.24539C2.65143 7.22306 2.61888 7.18818 2.57905 7.14239C2.49882 7.05016 2.39213 6.91727 2.28764 6.75675C2.06535 6.4153 1.87344 6.01067 1.87344 5.57862C1.87344 4.15778 3.0009 3.00918 4.34162 3.00918C5.48602 3.00918 6.23945 3.7206 6.56586 4.06395L7.00071 4.52136L7.43556 4.06395C7.76198 3.7206 8.5154 3.00918 9.6598 3.00918C11.0005 3.00918 12.128 4.15778 12.128 5.57862C12.128 6.01783 11.9416 6.43296 11.723 6.76259C11.6164 6.92328 11.5095 7.05255 11.4301 7.14057C11.3907 7.18431 11.3588 7.21712 11.3381 7.23775C11.3277 7.24805 11.3202 7.25526 11.3161 7.25921L11.3132 7.26198L11.3126 7.26247L11.3126 7.26253L11.3124 7.26268L11.3123 7.26277L11.2998 7.27415L11.2863 7.28808L7.00071 11.7279L2.71508 7.28808Z"
+                          stroke="#D75A8B" stroke-width="1.2" />
+                </svg>
+                <span class="text-[12px] leading-[16.8px] font-medium text-[#404040]">@Model.HostLoveCount</span>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- details  -->
+    <div class="grid mt-[12px] mx-[16px] mb-[10px] grid-rows-7">
+        <div style="line-height: 180%; letter-spacing:1.2px" class="text-[#292F33] font-bold text-[12px]">
+            @if (!string.IsNullOrEmpty(@Model.HostDOB))
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Birthdate :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1">
+                        @Model.HostDOB
+                    </span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Birthdate :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
+                    </span>
+                </p>
+            }
+            @if (!string.IsNullOrEmpty(@Model.HostBirthPlace))
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.BirthPlace :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostBirthPlace</span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.BirthPlace :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span>
+                </p>
+            }
+            @if (!string.IsNullOrEmpty(@Model.HostBloodType))
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Blood_Type :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostBloodType </span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Blood_Type :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答 </span>
+                </p>
+            }
+            @if (!string.IsNullOrEmpty(@Model.HostConstellationGroup))
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Constellation :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1">
+                        @Model.HostConstellationGroup
+                    </span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Constellation :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
+                    </span>
+                </p>
+            }
+            @if (!string.IsNullOrEmpty(@Model.HostPreviousOccupation))
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Former_Job :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1">
+                        @Model.HostPreviousOccupation
+                    </span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Former_Job :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
+                    </span>
+                </p>
+            }
+            @if (!string.IsNullOrEmpty(@Model.HostHeight))
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Height :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1">
+                        @Model.HostHeight
+                    </span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Height :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                        未回答
+                    </span>
+                </p>
+            }
+            @if (!string.IsNullOrEmpty(@Model.HostLiquorStrength))
+            {
+                <p style="line-height: 180%;">
+                    お酒の強さ :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1"> @Model.HostLiquorStrength</span>
+                </p>
+            }
+            else
+            {
+                <p style="line-height: 180%;">
+                    お酒の強さ :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span>
+                </p>
+            }
+        </div>
+        <!-- for button -->
+        @*<button class="flex justify-center items-center gap-2 mt-[10px] "
+                    style="background:linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%); border-radius:3px; color:#EDF1F6">
+                <span class="py-3 text-center text-[15px] font-semibold leading-[23px] "
+                      style="letter-spacing: -0.16px;">あなたとのマッチ度</span>
+                <span class="py-3 text-[20px] font-bold leading-[23px]" style="letter-spacing: 1px;">@Model.CustomerHostCompatibility</span>
+            </button>*@
+    </div>
+
+    <!-- introduction  -->
+    <div class="mt-6 bg-[#EFEFEF]  px-4 " style="padding-top: 30px; padding-bottom:35px">
+        <div class="flex justify-start items-center gap-[9px] ">
+            <div class="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="4" height="43" viewBox="0 0 4 43" fill="none">
+                    <path d="M0 43L0.8 43L0.799998 -3.49691e-08L-1.87959e-06 0L0 43ZM3.2 43L4 43L4 -1.74846e-07L3.2 -1.39877e-07L3.2 43Z"
+                          fill="#BCB08A" />
+                </svg>
+            </div>
+            <div>
+                <div class="font-bold text-[21px] leading-[29.4px]" style="font-size:20px">Introduction</div>
+                <div class="text-[#404040] leading-[16.8px] font-bold text-[12px] pb-[5px]">自己紹介</div>
+            </div>
+        </div>
+        <div class="w-full h-[1px] bg-[#FDFBFA]"></div>
+        @if (!string.IsNullOrEmpty(Model.HostIntroduction))
+        {
+            <div class="text-[#404040] pt-[5px] text-[12px] font-normal leading-[16.8px]" style="white-space:normal; text-overflow:ellipsis; overflow:hidden">
+                @Model.HostIntroduction
+            </div>
+        }
+        else
+        {
+            <div class="text-[#D17979] pt-[5px] text-[12px] font-normal leading-[16.8px]">
+                未回答
+            </div>
+        }
+    </div>
+    <!-- host skills -->
+    <div class="mt-6 px-4 mb-6">
+        <div class="flex justify-start items-center gap-[9px] mb-[14px]">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="4" height="43" viewBox="0 0 4 43" fill="none">
+                    <path d="M0 43L0.8 43L0.799998 -3.49691e-08L-1.87959e-06 0L0 43ZM3.2 43L4 43L4 -1.74846e-07L3.2 -1.39877e-07L3.2 43Z"
+                          fill="#BCB08A" />
+                </svg>
+            </div>
+            <div class="flex flex-col justify-start">
+                <span class="text-[#292F33] text-[21px] font-bold leading-[29.4px]">Host Skills</span>
+                <span class="text-[12px] font-bold leading-[16.8px] text-[#404040]">スキル自己評価</span>
+            </div>
+
+        </div>
+        <div class="h-[1px] bg-[#EFEFEF] mb-[17px]"></div>
+        <div class=" py-1">
+            <canvas id="hostSkillChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <!-- personality -->
+    <div class=" px-4">
+        <div class="flex justify-start items-center gap-[9px] mb-[14px]">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="4" height="43" viewBox="0 0 4 43" fill="none">
+                    <path d="M0 43L0.8 43L0.799998 -3.49691e-08L-1.87959e-06 0L0 43ZM3.2 43L4 43L4 -1.74846e-07L3.2 -1.39877e-07L3.2 43Z"
+                          fill="#BCB08A" />
+                </svg>
+            </div>
+            <div class="flex flex-col justify-start">
+                <span class="text-[#292F33] text-[21px] font-bold leading-[29.4px]">Personality</span>
+                <span class="text-[12px] font-bold leading-[16.8px] text-[#404040]">人物像</span>
+            </div>
+
+        </div>
+        <div class="h-[1px] bg-[#EFEFEF] mb-[17px]"></div>
+        <div>
+            <div class="grid mt-[10px] mx-[16px] mb-[10px] grid-rows-9">
+                <div style="line-height: 180%;" class="text-[#292F33] font-bold text-[12px]">
+                    @{
+                        var Personality = Model.HostIdentityDetailsModel.Where(x => x.LabelType.Trim().ToUpper() == "PERSONALITY").ToList();
+                        foreach (var item in Personality)
+                        {
+                            <p style="line-height: 180%;">
+                                @item.Label :
+                                @if (!string.IsNullOrEmpty(item.LabelValue))
+                                {
+                                    <span class="text-[#404040] font-medium tracking-[1.2px] pl-1">
+                                        @item.LabelValue
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="text-[#D17979] font-medium tracking-[1.2px] pl-1">
+                                        未回答
+                                    </span>
+                                }
+                            </p>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Life Style -->
+    <div class="my-6 px-[19px]" style="padding-left: 19px; padding-right: 19px;">
+        <div class="flex justify-start items-center gap-[9px] mb-[14px]">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="4" height="43" viewBox="0 0 4 43" fill="none">
+                    <path d="M0 43L0.8 43L0.799998 -3.49691e-08L-1.87959e-06 0L0 43ZM3.2 43L4 43L4 -1.74846e-07L3.2 -1.39877e-07L3.2 43Z"
+                          fill="#BCB08A" />
+                </svg>
+            </div>
+            <div class="flex flex-col justify-start">
+                <span class="text-[#292F33] text-[21px] font-bold leading-[29.4px]">Lifestyle</span>
+                <span class="text-[12px] font-bold leading-[16.8px] text-[#404040]">ライフスタイル</span>
+            </div>
+
+        </div>
+        <div class="h-[1px] bg-[#EFEFEF] mb-[17px]"></div>
+        @{
+            var Lifestyle = Model.HostIdentityDetailsModel.Where(x => x.LabelType.Trim().ToUpper() == "LIFESTYLE").ToList();
+            foreach (var item in Lifestyle)
+            {
+                <div class="mt-[10px] flex flex-col gap-[3px] text-[12px]">
+                    <!-- question -->
+                    <div class="font-bold whitespace-nowrap" style="line-height:180%; letter-spacing:1.2px ">@item.Label</div>
+                    <!-- answer -->
+                    @if (!string.IsNullOrEmpty(item.LabelValue))
+                    {
+                        <div class="text-ellipsis font-medium  text-[#404040]" style="line-height: 140%; letter-spacing:1.2px">
+                            @item.LabelValue
+                        </div>
+                    }
+                    else
+                    {
+                        <div class=" font-medium  text-[#D17979] text-ellipsis"
+                             style="line-height: 140%; letter-spacing:1.2px; color:#D17979">未回答</div>
+                    }
+                </div>
+            }
+        }
+    </div>
+
+    <!-- club info -->
+    <div class="mt-6 px-[12.5px] clubInfo flex justify-start items-center gap-2" onclick="ClubDetailRedirectFunction('@ClubCode', '@LocationURL');">
+        <!-- logo -->
+        <div class="">
+            <img class="object-cover h-[48px] w-[48px] rounded-full "
+                 src="@Model.ClubLogo" alt="clublogo">
+        </div>
+        <!-- info -->
+        <div class="flex flex-col gap-1 ">
+            <div class="clubName">@Model.ClubNameEnglish</div>
+            <div class="store mt-1">@Model.ClubNameJapanese</div>
+            <div class="flex text-[#A09E91] font-medium text-[10px] gap-1 mt-[7px]">
+                <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 14px; width: 14px;">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M2.1875 4.0791C2.1875 2.53003 3.45093 1.2666 5 1.2666C6.54907 1.2666 7.8125 2.53003 7.8125 4.0791C7.8125 4.51855 7.63428 5.0227 7.39258 5.57324C7.15088 6.12378 6.8396 6.7085 6.52344 7.25293C5.89111 8.34302 5.25391 9.25488 5.25391 9.25488L5 9.62598L4.74609 9.25488C4.74609 9.25488 4.10889 8.34302 3.47656 7.25293C3.1604 6.7085 2.84912 6.12378 2.60742 5.57324C2.36572 5.0227 2.1875 4.51855 2.1875 4.0791ZM5 3.4541C4.65454 3.4541 4.375 3.73364 4.375 4.0791C4.375 4.42456 4.65454 4.7041 5 4.7041C5.34546 4.7041 5.625 4.42456 5.625 4.0791C5.625 3.73364 5.34546 3.4541 5 3.4541Z"
+                          fill="#D75A8B" />
+                </svg>
+                <span>@Model.ClubLocationName</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-[#FAFAFA]  py-[10px] mt-4 sticky bottom-0">
+    <div class="flex flex-row px-[16px] gap-6  items-center justify-between">
+        <div class="flex gap-6 items-center justify-start p-[4px]">
+
+            <div class="flex justify-center items-center flex-col" style="line-height:48%">
+                <a href="@Model.LocationURL" target="_blank" class="flex justify-center items-center flex-col">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 4C13.7995 4 12 5.76051 12 7.91338C12 8.56051 12.2552 9.22038 12.5833 9.95159C12.9115 10.6828 13.3255 11.4573 13.75 12.1732C14.599 13.6051 15.4583 14.8025 15.4583 14.8025L16 15.5771L16.5417 14.8025C16.5417 14.8025 17.401 13.6051 18.25 12.1732C18.6745 11.4573 19.0885 10.6828 19.4167 9.95159C19.7448 9.22038 20 8.56051 20 7.91338C20 5.76051 18.2005 4 16 4ZM9.3125 5.26369L4 7.48535V19.6984C4 19.8415 4.14599 19.9383 4.27785 19.8826L9.35417 17.7376L14.6875 19.6943L20 17.4726V11.786C19.5755 12.5834 19.1042 13.3478 18.6667 14.028V16.6166L15.3333 18.0025V16.9427L14.3542 15.5567C14.25 15.4089 14.1276 15.2331 14 15.0471V18.0637L10 16.5962V6.89427L10.7292 7.15924C10.7943 6.71847 10.9115 6.29299 11.0833 5.89554L9.3125 5.26369ZM16 5.30446C17.4792 5.30446 18.6667 6.46624 18.6667 7.91338C18.6667 8.16561 18.5052 8.76178 18.2083 9.42166C17.9115 10.0815 17.4922 10.8306 17.0833 11.521C16.5391 12.4382 16.3047 12.7643 16 13.2127C15.6953 12.7643 15.4609 12.4382 14.9167 11.521C14.5078 10.8306 14.0885 10.0815 13.7917 9.42166C13.4948 8.76178 13.3333 8.16561 13.3333 7.91338C13.3333 6.46624 14.5208 5.30446 16 5.30446ZM8.66667 6.93503V16.6166L5.33333 18.0025V8.3414L8.66667 6.93503ZM16 6.93503C15.4479 6.93503 15 7.37325 15 7.91338C15 8.4535 15.4479 8.89172 16 8.89172C16.5521 8.89172 17 8.4535 17 7.91338C17 7.37325 16.5521 6.93503 16 6.93503Z" fill="#D75A8B" />
+                    </svg>
+
+                    <span class="text-[#D75A8B] text-[9px] font-medium">地図</span>
+                </a>
+            </div>
+            <div id="shareButton">
+                <div class="flex justify-center items-center flex-col" style="line-height:52%">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                        <path d="M16.0972 3.05078L15.125 4.02295L17.9905 6.875H11.3438C9.25925 6.875 7.5625 8.57106 7.5625 10.6562C7.5625 12.7414 9.25925 14.4375 11.3438 14.4375H11.6875V13.0625H11.3438C10.0169 13.0625 8.9375 11.9831 8.9375 10.6562C8.9375 9.32938 10.0169 8.25 11.3438 8.25H17.9932L15.1304 11.1128L16.1025 12.085L20.625 7.5625L16.0972 3.05078ZM3.4375 3.4375V18.5625H18.5625V11.6875L17.1875 13.0625V17.1875H4.8125V4.8125H12.2743L13.6493 3.4375H3.4375Z"
+                              fill="#D75A8B" />
+                    </svg>
+                    <span class="text-[#D75A8B] text-[9px] font-medium">共有</span>
+                </div>
+            </div>
+
+        </div>
+        <button style="border-radius: 4px ;
+                background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%); border-radius: 4px;"
+                @*class=" flex w-[208px] justify-center items-center py-[9px] px-9 gap-[2px]" onclick="ClubReservationActionFunction('@Model.ClubId', '@Model.ClubNameEnglish', '@Model.HostId')">*@
+                class=" flex w-[208px] justify-center items-center py-[9px] px-9 gap-[2px]" onclick="InitiateClubReservationFunction('@Model.ClubId','', '@Model.HostId')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none"
+                 class=" flex justify-center items-center">
+                <path d="M6.125 3.125V3.75H3.625V17.5H17.375V3.75H14.875V3.125H13.625V3.75H7.375V3.125H6.125ZM4.875 5H6.125V5.625H7.375V5H13.625V5.625H14.875V5H16.125V6.25H4.875V5ZM4.875 7.5H16.125V16.25H4.875V7.5ZM9.875 8.75V11.25H7.375V12.5H9.875V15H11.125V12.5H13.625V11.25H11.125V8.75H9.875Z"
+                      fill="white" />
+            </svg>
+            <p class="text-white text-[14px] font-semibold" style="letter-spacing:0.56px; line-height: 21px;">
+                来店予約
+            </p>
+        </button>
+
+    </div>
+
+    <!--<div id="modal2" class="modal">
+        <div class="modal-content">-->
+    <!-- <span class="close-btn"  >&times;</span> -->
+    <!--<div class="fixed bottom-0 w-[100%] left-0 right-0 bg-white z-20">
+
+                <div class="py-[10px] px-4 border-b border-b-[#EDEDED] flex justify-between bg-white">
+                    <h5 id="drawer-bottom-label" class="text-sm text-secondary-1">
+                        共有
+                    </h5>
+                    <button onclick="closeModal('modal2')" type="button" data-drawer-hide="drawer-bottom-example"
+                            aria-controls="drawer-bottom-example" class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M13.3 0.710032C12.91 0.320032 12.28 0.320032 11.89 0.710032L6.99997 5.59003L2.10997 0.700032C1.71997 0.310032 1.08997 0.310032 0.699971 0.700032C0.309971 1.09003 0.309971 1.72003 0.699971 2.11003L5.58997 7.00003L0.699971 11.89C0.309971 12.28 0.309971 12.91 0.699971 13.3C1.08997 13.69 1.71997 13.69 2.10997 13.3L6.99997 8.41003L11.89 13.3C12.28 13.69 12.91 13.69 13.3 13.3C13.69 12.91 13.69 12.28 13.3 11.89L8.40997 7.00003L13.3 2.11003C13.68 1.73003 13.68 1.09003 13.3 0.710032Z"
+                                  fill="black" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="py-[12px] px-4 bg-white">
+                    <div class="flex py-[12px] px-4 gap-[12px] items-center">
+                        <img src="~/Content/assets/images/customer/line-1.svg" alt="img" class="h-[22px] w-[22px]" />
+                        <div class="text-sm text-secondary-1">LINE</div>
+                    </div>
+                    <div class="flex py-[12px] px-4 gap-[12px] items-center">
+                        <img src="~/Content/assets/images/customer/tiktok-1.svg" alt="img" class="h-[22px] w-[22px]" />
+
+                        <div class="text-sm text-secondary-1">Tiktok</div>
+
+                    </div>
+                    <div class="flex py-[12px] px-4 gap-[12px] items-center">
+                        <img src="~/Content/assets/images/customer/insta.svg" alt="img" class="h-[22px] w-[22px]" />
+
+                        <div class="text-sm text-secondary-1">Instagram</div>
+
+                    </div>
+                    <div class="flex py-[12px] px-4 gap-[12px] items-center">
+                        <img src="~/Content/assets/images/customer/x.svg" alt="img" class="h-[22px] w-[22px]" />
+
+                        <div class="text-sm text-secondary-1">Twitter</div>
+
+                    </div>
+                    <div class="flex py-[12px] px-4 gap-[12px] items-center">
+                        <img src="~/Content/assets/images/customer/copy.svg" alt="img" class="h-[22px] w-[22px]" />
+
+                        <div class="text-sm text-secondary-1">シェアリンクをコピー</div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>
+<div class="loader" id="loader-id">
+    <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
+</div>
+@section scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="~/Content/CustomHelper.js"></script>
+    <script>
+        const shareButton = document.querySelector("#shareButton");
+        var shareableLink = window.location.href;
+        shareButton.addEventListener("click", (event) => {
+            if (navigator.share) {
+                navigator.share({
+                    title: "Share host details",
+                    url: shareableLink,
+                }).then(() => {
+                    //console.log('Thanks for sharing!');
+                }).catch(console.error);
+            } else {
+                toastr.info('Web Share API is not supported in this browser.');
+            }
+        });
+        $(document).ready(function () {
+            localStorage.clear();
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            // The DOM is fully loaded, hide the loader
+            document.getElementById("loader-id").style.display = "none";
+        });
+
+        // If you also want to handle external resources like images, use the load event
+        window.addEventListener("load", function () {
+            // The entire page, including external resources, is fully loaded, hide the loader
+            document.getElementById("loader-id").style.display = "none";
+        });
+
+        function ActivateLoaderFunction() {
+            var myDiv = document.getElementById("loader-id");
+            myDiv.style.display = "flex";
+        }
+        function DeactivateLoaderFunction() {
+            var myDiv = document.getElementById("loader-id");
+            myDiv.style.display = "none";
+        }
+
+        function ClubReservationActionFunction(i, j, k) {
+            DataStorageFunction(i, j);
+            window.location.href = "/LocationManagement/ClubReservation?ClubId=" + i + "&SelectedHost=" + k;
+        }
+
+        const DataStorageFunction = (i, j) => {
+            localStorage.setItem("ClubId", EncryptParameter(i));
+            localStorage.setItem("ClubName", EncryptParameter(j));
+        }</script>
+    <script>
+        // Function to open a specific modal
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "flex";
+            }
+        }
+
+        // Function to close a specific modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Close the modal if the overlay is clicked
+        window.onclick = function (event) {
+            var modals = document.getElementsByClassName("modal");
+            for (var i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    closeModal(modals[i].id);
+                }
+            }
+        }
+
+        // Open the first modal automatically when the page loads
+        // window.onload = function() {
+        //     openModal('modal1');
+        // }
+        // Close the modal only if the overlay is clicked outside of modal1
+        window.onclick = function (event) {
+            var modal1 = document.getElementById('modal1');
+            // Check if the click is outside of modal1
+            if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
+                closeModal('modal1');
+            }
+        }</script>
+
+
+    <script>
+        var skillData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(HostSkillsModel));
+        var arrayLabel = skillData.map(x => x.Label);
+        var arrayValue = skillData.map(x => x.LabelValue);
+
+        var data = {
+            //labels: ["Photoshop", "イラストレーター", "microsoft office", ["Vray", "フォー ライノ"], "test", "Rhinoceros"],
+            labels: arrayLabel,
+            datasets: [{
+                label: "",
+                //data: [50, 50, 50, 100, 50, 100],
+                data: arrayValue,
+                borderColor: '#D75A8B',
+                backgroundColor: 'rgba(215, 90, 139, 0.3)',
+                borderWidth: 4,
+
+            }]
+        };
+
+        var options = {
+            plugins: {
+                datalabels: {
+                    display: false
+                }
+            },
+            layout: {
+                padding: {
+                    left: 1,
+                    right: 1,
+                    // top: 10,
+                    // bottom: 1
+                }
+            },
+            scale: {
+                gridLines: {
+                    color: ["#FFD5E6", "#FFD5E6", "#FFBDD8", "#FF9AC3", "#FF8BBA"],
+                    lineWidth: 2
+                },
+                ticks: {
+                    display: false,
+                    beginAtZero: true,
+                    min: 0,
+                    max: 100,
+                    stepSize: 20,
+                },
+
+                angleLines: {
+                    display: false
+                },
+            },
+            legend: {
+                display: false
+            },
+
+        };
+
+        var ctx = document.getElementById("hostSkillChart").getContext("2d");
+
+        var hostRadarChart = new Chart(ctx, {
+            type: 'radar',
+            data: data,
+            options: options
+        });
+
+        var labels = document.querySelectorAll('#hostSkillChart > .chartjs-radar >.chartjs-legend > li > span ');
+        labels.forEach(function (label) {
+            label.style.overflow = 'hidden';
+            label.style.textOverflow = 'ellipsis';
+            label.style.whiteSpace = 'wrap';
+            label.style.maxWidth = '10px'; // Set the maximum width before truncation
+        });
+        // Modify dataset properties
+        hostRadarChart.data.datasets.forEach(function (dataset) {
+            dataset.pointBackgroundColor = '#FFCFE2'; // Change the color of the spotted points
+            dataset.pointBorderColor = '#FF8DBA';
+            dataset.pointBorderWidth = 1;
+        });
+
+        // Update the chart
+        hostRadarChart.update();
+    </script>
+
+    <script>
+        function OpenImagePopup(ImageURL) {
+            if (ImageURL != '' && ImageURL != null) {
+                var modalImg = document.getElementById("img01");
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+                modalImg.src = ImageURL;
+            }
+        }
+
+        function closeImagePopup() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                center: false,
+                startPosition: 0,
+                items: 1,
+                loop: false,
+                margin: 8,
+
+                autoplay: false,
+                autoplayTimeout: 3000,
+                responsive: {
+                    items: 1,
+                    stagePadding: '25%'
+                }
+                /* responsive: {
+                     400: {
+                         items: 1.75,
+
+                     }
+                 }*/
+
+            })
+
+            localStorage.clear();
+        })
+
+         function RedirectToLocation() {
+             var prefecturesArea = '@ViewBag.LocationId';
+             var url = `/area${prefecturesArea}`;
+             window.location.href = url;
+             return false;
+         }
+    </script>
+}

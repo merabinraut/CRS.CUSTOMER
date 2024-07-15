@@ -226,6 +226,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageManagementController.cs" />
     <Compile Include="Controllers\LocationManagementController.cs" />
+    <Compile Include="Controllers\LocationManagementV2Controller.cs" />
     <Compile Include="Controllers\LogManagementController.cs" />
     <Compile Include="Controllers\NotificationManagementController.cs" />
     <Compile Include="Controllers\PaymentMethodManagementController.cs" />
@@ -233,8 +234,10 @@
     <Compile Include="Controllers\RecommendedClubHostController.cs" />
     <Compile Include="Controllers\ReservationHistoryManagementController.cs" />
     <Compile Include="Controllers\ReservationManagementV2Controller.cs" />
+    <Compile Include="Controllers\ReservationManagementV3Controller.cs" />
     <Compile Include="Controllers\ReviewManagementController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SearchV2Controller.cs" />
     <Compile Include="CustomHelpers\CustomHtmlHelpers.cs" />
     <Compile Include="CustomValidations\MobileNumberAttribute.cs" />
     <Compile Include="Filters\ActivityLogFilter.cs" />
@@ -264,6 +267,8 @@
     <Compile Include="Models\Dashboard\LocationModel.cs" />
     <Compile Include="Models\Home\LoginManagementModel.cs" />
     <Compile Include="Models\Home\RegistrationManagementModel.cs" />
+    <Compile Include="Models\LocationManagementV2\ClubDetailModel.cs" />
+    <Compile Include="Models\LocationManagementV2\LocationManagementModel.cs" />
     <Compile Include="Models\LocationManagement\ClubDetailModel.cs" />
     <Compile Include="Models\LocationManagement\ClubReservationModel.cs" />
     <Compile Include="Models\LocationManagement\ClubReviewManagementModel.cs" />
@@ -272,7 +277,9 @@
     <Compile Include="Models\LocationManagement\ViewHostDetailModel.cs" />
     <Compile Include="Models\NotificationManagement\NotificationManagementModel.cs" />
     <Compile Include="Models\ProfileManagement\ChangePasswordModel.cs" />
+    <Compile Include="Models\ProfileManagement\PointReportModel.cs" />
     <Compile Include="Models\ProfileManagement\UserProfileModel.cs" />
+    <Compile Include="Models\ReservationHistoryV2\InitateRescheduleReservationModel.cs" />
     <Compile Include="Models\ReservationHistory\ReservationHistoryModel.cs" />
     <Compile Include="Models\ReservationManagementV2\BillingModel.cs" />
     <Compile Include="Models\ReservationManagementV2\ClubBasicDetailModel.cs" />
@@ -281,6 +288,7 @@
     <Compile Include="Models\ReservationManagementV2\InitiateClubReservationModel.cs" />
     <Compile Include="Models\ReservationManagementV2\PlanV2Model.cs" />
     <Compile Include="Models\ReservationManagementV2\ReservationConfirmationModel.cs" />
+    <Compile Include="Models\ReservationManagementV3\ReservationManagementModel.cs" />
     <Compile Include="Models\ReservationManagement\ReservationDetailModel.cs" />
     <Compile Include="Models\ReservationManagement\ReservationPlanModel.cs" />
     <Compile Include="Models\ReviewManagement\CustomerReviewedDetailModel.cs" />
@@ -291,9 +299,11 @@
     <Compile Include="Models\SearchFilterManagement\ClubSearchManagementModel.cs" />
     <Compile Include="Models\SearchFilterManagement\HostSearchManagementModel.cs" />
     <Compile Include="Models\SearchFilterManagement\SearchFilterViewModel.cs" />
+    <Compile Include="Models\SearchV2\SearchV2FilterModel.cs" />
     <Compile Include="Models\Search\MapModel.cs" />
     <Compile Include="Models\Search\SearchFilterModel.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
+    <Compile Include="Models\URLManagementConfigruationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -509,6 +519,7 @@
     <Content Include="Content\assets\js\modal.js" />
     <Content Include="Content\assets\js\owl.carousel.js" />
     <Content Include="Content\assets\js\owl.carousel.min.js" />
+    <Content Include="Content\assets\js\reschedule-reservation.js" />
     <Content Include="Content\assets\js\reservation-common.js" />
     <Content Include="Content\assets\js\search-filter-common.js" />
     <Content Include="Content\assets\js\tabs.js" />
@@ -625,6 +636,7 @@
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -710,7 +722,27 @@
     <Content Include="Views\Footer\termsAndCondition.cshtml" />
     <Content Include="Views\Home\ForgotPasswordSuccessView.cshtml" />
     <Content Include="Views\Home\RegisterSuccessView.cshtml" />
-    <Content Include="Views\LocationManagement\ClubDetail.cshtml" />
+    <Content Include="Views\SearchV2\Index.cshtml" />
+    <Content Include="Views\SearchV2\ClubFilter.cshtml" />
+    <Content Include="Views\SearchV2\HostFilter.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterClubTab.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterHostTab.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterNewTab.cshtml" />
+    <Content Include="Views\SearchV2\_SearchFilterMapTab.cshtml" />
+    <Content Include="Views\SearchV2\ClubSearchResult.cshtml" />
+    <Content Include="Views\SearchV2\HostSearchResult.cshtml" />
+    <Content Include="Views\SearchV2\Preference.cshtml" />
+    <Content Include="Views\LocationManagementV2\Index.cshtml" />
+    <Content Include="Views\LocationManagementV2\ClubDetail.cshtml" />
+    <Content Include="Views\LocationManagementV2\HostDetail.cshtml" />
+    <Content Include="Views\ReservationManagementV3\Plan.cshtml" />
+    <Content Include="Views\ReservationManagementV3\Host.cshtml" />
+    <Content Include="Views\ReservationManagementV3\Confirmation.cshtml" />
+    <Content Include="Views\ReservationManagementV3\Billing.cshtml" />
+    <Content Include="Views\ReservationManagementV3\_ReservationPopup.cshtml" />
+    <Content Include="Views\ReservationManagementV3\Success.cshtml" />
+    <Content Include="Views\ProfileManagement\points.cshtml" />
+    <Content Include="Views\ReservationHistoryManagementV2\_RescheduleReservationPopup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

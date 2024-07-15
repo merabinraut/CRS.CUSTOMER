@@ -1,5 +1,4 @@
-﻿using CRS.CUSTOMER.APPLICATION.CustomValidations;
-using CRS.CUSTOMER.APPLICATION.Resources;
+﻿using CRS.CUSTOMER.APPLICATION.Resources;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,13 +7,13 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
     public class LoginRequestModel
     {
         [Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Enter_your_mobile_phone_number_or_nickname")]
         //[RegularExpression("^[0-9]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
         //[MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
         //[MobileNumber(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
         public string LoginId { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "PasswordRequired")]
+        [Required(AllowEmptyStrings = false, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Please_enter_your_password")]
         [Display(Name = "Password")]
         [MaxLength(32, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_32_characters")]
         //[MinLength(8, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_8_characters")]

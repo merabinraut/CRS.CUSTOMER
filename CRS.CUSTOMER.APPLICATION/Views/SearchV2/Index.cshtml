@@ -1,0 +1,238 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchV2FilterRequestModel
+@{
+    ViewBag.Title = "検索フィルター‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var _SearchFilterClubTabModel = Model.SearchV2FilterClubTabModel as CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchV2FilterClubTabModel;
+    var _SearchFilterHostTabModel = Model.SearchV2FilterHostTabModel as CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchV2FilterHostTabModel;
+    var _SearchFilterNewTabModel = Model.SearchV2FilterNewTabModel as CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchV2FilterNewTabModel;
+    var _SearchFilterMapTabModel = Model.SearchV2FilterMapTabModel as CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchV2FilterMapTabModel;
+    var target = ViewBag.target;
+    var PrefecturesArea = ViewBag.PrefecturesArea ?? "";
+    var LocationPageURL = "/area" + PrefecturesArea;
+    var PostURL = ViewBag.PostURL;
+}
+@if (!string.IsNullOrEmpty(target))
+{
+    <style>
+        .preferance > input[type="checkbox"] {
+            display: none;
+        }
+
+        /* Style the labels to look like bordered options */
+        label {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 5px;
+            border: 1px solid #d75a8b;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style the labels when they are selected */
+        .preferance > input[type="checkbox"]:checked + label {
+            background-color: #fff;
+            border-color: #d75a8b;
+            color: #d75a8b;
+        }
+    </style>
+
+
+    <div class="relative">
+        <!-- Nav bar -->
+        <div class="flex items-center border-t-[2px] border-t-[#C8B477] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
+            @*<div class="flex gap-2 items-center absolute top-[12px] left-4 text-sm" onclick="window.location.href='/LocationManagement/Index?LocationId=@FilteredLocationId'">*@
+            <div class="flex gap-2 items-center absolute top-[12px] left-4 text-sm" onclick="window.location.href = '@LocationPageURL'">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="22" height="23" viewBox="0 0 22 23" fill="none">
+                    <path d="M15.2352 3.24084C14.786 2.79167 14.0618 2.79167 13.6127 3.24084L5.99518 10.8583C5.63768 11.2158 5.63768 11.7933 5.99518 12.1508L13.6127 19.7683C14.0618 20.2175 14.786 20.2175 15.2352 19.7683C15.6843 19.3192 15.6843 18.595 15.2352 18.1458L8.59851 11.5L15.2443 4.85417C15.6843 4.41417 15.6843 3.68084 15.2352 3.24084Z"
+                          fill="#BCB08A" />
+                </svg> @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
+            </div>
+            <div class="text-center w-full font-[700] text-[#333] text-sm ">
+                検索フィルター
+            </div>
+        </div>
+        <!-- search bar -->
+        <div class="py-[8px] px-4 border-b-[1px] border-[#EFEFEF] sticky top-[44px] z-10 bg-white">
+            <div class=" border border-[#D6CEB4] flex rounded-[4px]">
+                <span class="flex items-center ml-3 material-icons-outlined text-[#D6CEB4]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M8.125 1.875C11.5698 1.875 14.375 4.68018 14.375 8.125C14.375 9.62158 13.8501 10.9937 12.9688 12.0703L17.9492 17.0508L17.0508 17.9492L12.0703 12.9688C10.9937 13.8501 9.62158 14.375 8.125 14.375C4.68018 14.375 1.875 11.5698 1.875 8.125C1.875 4.68018 4.68018 1.875 8.125 1.875ZM8.125 3.125C5.35645 3.125 3.125 5.35645 3.125 8.125C3.125 10.8936 5.35645 13.125 8.125 13.125C10.8936 13.125 13.125 10.8936 13.125 8.125C13.125 5.35645 10.8936 3.125 8.125 3.125Z"
+                              fill="#BCB08A" />
+                    </svg>
+                </span>
+                <input style="border-radius: 4px; background: #FCFCFC;font-size:16px;outline:none "
+                       class="w-full ml-1 text-sm text-[#A09E91] border-none focus-visible:outline-0" title="Search"
+                       type="text" placeholder="店舗名、ホスト名、キーワードで探す" id="main-search-id" autocomplete="off" />
+                <div class="group flex justify-end cursor-pointer p-3" title="Filter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" viewBox="0 0 19 17" fill="none">
+                        <path d="M7.2418 2.1217C6.99882 1.21843 6.2109 0.554688 5.27835 0.554688C4.3458 0.554688 3.55792 1.21843 3.3149 2.1217H0.5V3.29696H3.3149C3.55788 4.20022 4.3458 4.86397 5.27835 4.86397C6.2109 4.86397 6.99878 4.20022 7.2418 3.29696H18.5V2.1217H7.2418ZM5.27835 3.68871C4.76674 3.68871 4.35052 3.24936 4.35052 2.70933C4.35052 2.1693 4.76674 1.72995 5.27835 1.72995C5.78996 1.72995 6.20619 2.1693 6.20619 2.70933C6.20619 3.24936 5.78996 3.68871 5.27835 3.68871Z"
+                              fill="#BCB08A" />
+                        <path d="M9.5 6.49609C8.56745 6.49609 7.77957 7.15984 7.53655 8.0631H0.5V9.23836H7.53655C7.77953 10.1416 8.56745 10.8054 9.5 10.8054C10.4325 10.8054 11.2204 10.1416 11.4634 9.23836H18.5V8.0631H11.4634C11.2204 7.15984 10.4325 6.49609 9.5 6.49609ZM9.5 9.63011C8.98839 9.63011 8.57216 9.19076 8.57216 8.65073C8.57216 8.1107 8.98839 7.67135 9.5 7.67135C10.0116 7.67135 10.4278 8.1107 10.4278 8.65073C10.4278 9.19076 10.0116 9.63011 9.5 9.63011Z"
+                              fill="#BCB08A" />
+                        <path d="M5.27835 12.4375C4.3458 12.4375 3.55792 13.1012 3.3149 14.0045H0.5V15.1798H3.3149C3.55788 16.083 4.3458 16.7468 5.27835 16.7468C6.2109 16.7468 6.99878 16.083 7.2418 15.1798H18.5V14.0045H7.2418C6.99878 13.1012 6.2109 12.4375 5.27835 12.4375ZM5.27835 15.5715C4.76674 15.5715 4.35052 15.1322 4.35052 14.5921C4.35052 14.0521 4.76674 13.6128 5.27835 13.6128C5.78996 13.6128 6.20619 14.0521 6.20619 14.5921C6.20619 15.1322 5.78996 15.5715 5.27835 15.5715Z"
+                              fill="#BCB08A" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="px-4 pt-1 text-[#0F0F0F] text-sm font-bold">
+                検索対象を選ぶ
+            </div>
+            <div class="bg-[#fff]">
+                <div class="mx-4 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
+                    <div class="flex gap-[24px] w-full " style="border-bottom: 4px solid #F4F4F4;">
+                        <div class="flex tab-container-plane booking-tab bg-white gap-6 w-full text-sm no-scrollbar">
+                            <button id="tab1Button" class="tab-button-plane w-max flex-none tab-link @(target == "club" ? "active" : "")" onclick="TabRedirectionFunction('club');">ホストクラブ</button>
+                            <button id="tab2Button" class="tab-button-plane w-max flex-none tab-link pt-0 @(target == "host" ? "active" : "")" onclick="TabRedirectionFunction('host');">ホスト</button>
+                            <button id="tab3Button" class="tab-button-plane w-max flex-none tab-link pt-0 @(target == "new" ? "active" : "")" onclick="TabRedirectionFunction('new');">新規店舗</button>
+                            <button id="tab4Button" class="tab-button-plane w-max flex-none tab-link pt-0 @(target == "map" ? "active" : "")" onclick="TabRedirectionFunction('map');">
+                                現在地に近い店舗
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-4">
+                    <div class="bg-white pb-4  px-[16px]">
+                        @if (!string.IsNullOrEmpty(target) && target == "host")
+                        {
+                            <div id="tab1" class="tab-content-plane hidden"></div>
+                            @Html.Partial("_SearchFilterHostTab", _SearchFilterHostTabModel)
+                        }
+                        else if (!string.IsNullOrEmpty(target) && target == "new")
+                        {
+                            <div id="tab1" class="tab-content-plane hidden"></div>
+                            <div id="tab2" class="tab-content-plane hidden"></div>
+                            @Html.Partial("_SearchFilterNewTab", _SearchFilterNewTabModel)
+                        }
+                        else if (!string.IsNullOrEmpty(target) && target == "map")
+                        {
+                            <div id="tab1" class="tab-content-plane hidden"></div>
+                            <div id="tab2" class="tab-content-plane hidden"></div>
+                            <div id="tab3" class="tab-content-plane hidden"></div>
+                            @Html.Partial("_SearchFilterMapTab", _SearchFilterMapTabModel)
+                        }
+                        else
+                        {
+                            @Html.Partial("_SearchFilterClubTab", _SearchFilterClubTabModel)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section scripts
+{
+        <script>
+        function ClearFunction() {
+            window.location.reload();
+        }
+
+        function getSelectedCheckboxValues(checkboxName, targetElementId, checkboxClass) {
+            var checkboxes = document.querySelectorAll('input[type ="checkbox" ][name="' + checkboxName + '" ]');
+            var selectedValues = [];
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked && checkbox.classList.contains(checkboxClass)) {
+                    selectedValues.push(checkbox.value);
+                }
+            });
+            document.getElementById(targetElementId).value = selectedValues.join(', ');
+        }
+
+
+            function ClubFilterSubmitButton() {
+
+            EnableLoaderFunction();
+            getSelectedCheckboxValues('search-by-store-category', 'club-category-id', 'club-category-class');// Call the function for the first set of checkboxes
+            getSelectedCheckboxValues('search-by-plan', 'price-id', 'plan-price-class');// Call the function for the second set of checkboxes
+            var locationDIV = document.getElementById("club-location-id");
+            let locationId = '';
+            if (locationDIV && locationDIV.classList.contains("active")) {
+                locationId = locationDIV.querySelector(".locationValue").getAttribute("data-info");
+            }
+            if (!locationId || locationId.trim() === '') {
+                locationId = '';
+            }
+            $('#LocationId_1').val(locationId);
+            $('#club-search').val($('#main-search-id').val());
+            var form = document.getElementById("club-filter-form-id");
+            form.action = "/search" + "@ViewBag.PrefecturesArea" + "/?target=club";
+            form.submit();
+            DisableLoaderFunction();
+        }
+
+        function HostFilterSubmitButton() {
+            EnableLoaderFunction();
+            getSelectedCheckboxValues('choose-your-height', 'host-height-id', 'host-height');// Call the function for the first set of checkboxes
+            getSelectedCheckboxValues('select-age', 'host-age-id', 'host-age');// Call the function for the second set of checkboxes
+            getSelectedCheckboxValues('choose-blood-type', 'host-bloodtype-id', 'host-blood-type');// Call the function for the second set of checkboxes
+            getSelectedCheckboxValues('hostConstellationGroup', 'host-constellationgroup-id', 'host-constellation-group-class');// Call the function for the second set of checkboxes
+
+            var locationDIV = document.getElementById("host-location-id");
+            let locationId = '';
+            if (locationDIV && locationDIV.classList.contains("active")) {
+                locationId = locationDIV.querySelector(".locationValue").getAttribute("data-info");
+            }
+            if (!locationId || locationId.trim() === '') {
+                locationId = '';
+            }
+            $('#LocationId_2').val(locationId);
+            $('#host-search').val($('#main-search-id').val());
+            $('#host-occupation-id').val($('#host-occupation-ddl-id').val());
+            var form = document.getElementById("host-filter-form-id");
+            form.action = "/search" + "@ViewBag.PrefecturesArea" + "/?target=host";
+            form.submit();
+            DisableLoaderFunction();
+        }
+
+        function NewClubRenderFunction() {
+            var prefecturesArea = '@ViewBag.PrefecturesArea';
+            var searchUrl = `/search${prefecturesArea}/?target=new&NewClub=true`;
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = searchUrl;
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        function NewHostRenderFunction() {
+            var prefecturesArea = '@ViewBag.PrefecturesArea';
+            var searchUrl = `/search${prefecturesArea}/?target=new&NewHost=true`;
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = searchUrl;
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        function Tab3SubmitFunction() {
+            var filter = $('#main-search-id').val();
+            var prefecturesArea = '@ViewBag.PrefecturesArea';
+            var searchUrl = `/search${prefecturesArea}/?target=club&SearchFilter=${filter}`;
+            window.location.href = searchUrl;
+        }
+
+         function Tab4SubmitFunction() {
+             var filter = $('#main-search-id').val();
+             var locationDIV = document.getElementById("tab4-loaction-id");
+             let locationId = '';
+             if (locationDIV && locationDIV.classList.contains("active")) {
+                 locationId = locationDIV.querySelector(".locationValue").getAttribute("data-info");
+             }
+             if (!locationId || locationId.trim() === '') {
+                 locationId = '';
+             }
+             var searchUrl = `/search${prefecturesArea}/?target=club&LocationId=${locationId}&SearchFilter=${filter}`;
+             window.location.href = searchUrl;
+         }
+
+        function TabRedirectionFunction(tab) {
+            var prefecturesArea = '@ViewBag.PrefecturesArea';
+            var searchUrl = `/search${prefecturesArea}/?target=${tab}`;
+            window.location.href = searchUrl;
+        }
+        </script>
+    }
+}

@@ -53,16 +53,22 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Register Management
         [HttpGet, Route("user/register")]
-        public ActionResult Register(string ReferCode = "")
+        public ActionResult Register(string ReferCode = "", string Type = "")
         {
+
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
+            if (!string.IsNullOrEmpty(ReferCode) || !string.IsNullOrEmpty(Type))
+            {
+                ViewBag.ReferCode = ReferCode;
+                ViewBag.Type = Type;
+            }
             if (!string.IsNullOrEmpty(Username))
                 return Redirect("/");
             var Response = new RegistrationHoldModel();
             if (!string.IsNullOrEmpty(ReferCode))
             {
                 ReferralModelCommon referCommon = new ReferralModelCommon();
-                referCommon.ReferCode = ReferCode;
+                referCommon.ReferCode = ReferCode.DecryptParameter();
                 referCommon.ActionIP = ApplicationUtilities.GetIP();
                 var dbReferralRes = _buss.ValidateReferralCode(referCommon);
                 if (dbReferralRes != null && dbReferralRes.Code == "0")
@@ -91,9 +97,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, Route("user/register"), ValidateAntiForgeryToken]
-        public ActionResult Register(RegistrationHoldModel Model, string ReferCode = "")
+        public ActionResult Register(RegistrationHoldModel Model, string ReferCode = "", string Type = "")
         {
             ViewBag.ReferCode = ReferCode;
+            ViewBag.Type = Type;
             if (ModelState.IsValid)
             {
                 RegistrationHoldCommon Common = Model.MapObject<RegistrationHoldCommon>();
@@ -109,8 +116,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         NickName = Model.NickName
                     };
                     TempData["ReferCode"] = ReferCode;
+                    TempData["Type"] = Type;
                     Session["exptime"] = DateTime.Parse(dbResponse.Extra2.ToString());
                     //Session["exptime"] = DateTime.Parse(DateTime.UtcNow.AddMinutes(10).ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                    AddNotificationMessage(new NotificationModel()
+                    {
+                        NotificationType = NotificationMessage.INFORMATION,
+                        Message = dbResponse.Message ?? "認証コードが送信されました",
+                        Title = NotificationMessage.INFORMATION.ToString(),
+                    });
                     return View("VerifyOTP", otpModel);
                 }
                 AddNotificationMessage(new NotificationModel()
@@ -129,7 +143,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult VerifyOTP(RegistrationModel Model)
         {
             var ReferCode = string.Empty;
+            var Type = string.Empty;
             if (TempData.ContainsKey("ReferCode")) ReferCode = TempData["ReferCode"] as string;
+            if (TempData.ContainsKey("Type")) Type = TempData["Type"] as string;
             if (ModelState.IsValid)
             {
                 RegistrationCommon Common = Model.MapObject<RegistrationCommon>();
@@ -137,7 +153,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.AgentId = Common.AgentId.DefaultDecryptParameter();
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Common.MobileNumber;
-                Common.ReferCode = ReferCode;
+                if (!string.IsNullOrEmpty(ReferCode))
+                    Common.ReferCode = ReferCode.DecryptParameter();
+                if (!string.IsNullOrEmpty(Type))
+                    Common.Type = Type;
                 var dbResponse = _buss.Register(Common);
                 if (dbResponse.Code == 0)
                 {
@@ -256,7 +275,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.INFORMATION,
                         Message = "Password is required",
-                        Title = NotificationMessage.INFORMATION.ToString()
+                       Title = NotificationMessage.INFORMATION.ToString()
                     });
                     return View(Model);
                 }
@@ -266,16 +285,18 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
                 ViewBag.NickName = Model.NickName;
+                ViewBag.NickName1 = Model.NickName.EncryptParameter();
                 var dbResponse = _buss.SetRegistrationPassword(Common);
                 if (dbResponse.Code == 0)
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.SUCCESS,
-                        Message = dbResponse.Message ?? "Success",
-                        Title = NotificationMessage.SUCCESS.ToString(),
-                    });
-                    return Redirect("/user/register/complete");
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.SUCCESS,
+                    //    Message = dbResponse.Message ?? "Success",
+                    //    Title = NotificationMessage.SUCCESS.ToString(),
+                    //});
+                    //return Redirect("/user/register/complete");
+                    return Redirect("/user/remind/complete?nickname=" + ViewBag.NickName1);
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -327,8 +348,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else this.ClearSessionData();
                 LoginRequestModel Response = new LoginRequestModel();
-                
-                
+
+
                 if (phaseValue.ToUpper() == "DEVELOPMENT")
                 {
                     Response.affiliateURL = "http://43.207.72.221:93/";
@@ -341,7 +362,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
-                
+
                 return View(Response);
             }
             else return Redirect("/");
@@ -373,16 +394,18 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Expires = DateTime.Now.AddMonths(-1)
                     });
                 }
-                string IsPasswordForceful =Convert.ToString( Session["IsPasswordForceful"]);
-                if(!string.IsNullOrEmpty(IsPasswordForceful) && IsPasswordForceful=="Y")
+                string IsPasswordForceful = Convert.ToString(Session["IsPasswordForceful"]);
+                if (!string.IsNullOrEmpty(IsPasswordForceful) && IsPasswordForceful == "Y")
                     return RedirectToAction("SetNewPasswordV2", "Home", new { AgentId = Session["AgentId"], MobileNumber = Session["MobileNumber"], UserID = Session["UserId"], NickName = Session["Username"], ReturnUrl = ReturnURL });
 
                 if (loginResponse.Item2)
                     if (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL))
+                    {
                         return Redirect(ReturnURL);
+                    }
 
                 //return Redirect(loginResponse.Item1,new { ReturnURL });
-                return Redirect(loginResponse.Item1 + "?ReturnURL=" +  Uri.EscapeDataString(ReturnURL));
+                return Redirect(loginResponse.Item1 + "?ReturnURL=" + Uri.EscapeDataString(ReturnURL));
 
             }
             else
@@ -662,9 +685,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Model.MobileNumber;
                 ViewBag.NickName = Model.NickName;
-                if (!string.IsNullOrEmpty(Convert.ToString( TempData["returnURLAfterReset"])))
+                ViewBag.NickName1 = Model.NickName.EncryptParameter();
+                if (!string.IsNullOrEmpty(Convert.ToString(TempData["returnURLAfterReset"])))
                 {
-                    
+
                     Model.IsPasswordForceful = "N";
                 }
                 Common.IsPasswordForceful = Model.IsPasswordForceful;
@@ -678,7 +702,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         this.ClearSessionData();
                         return RedirectToAction("Index", "Home", new { ReturnURL = returnurl });
                     }
-                    return Redirect("/user/remind/complete");
+                    //return Redirect("/user/remind/complete?nickname ='" + ViewBag.NickName + "'");
+                    return Redirect("/user/remind/complete?nickname=" + ViewBag.NickName1);
                 }
                 TempData["ForgetPWErrorMessage"] = dbResponse.Message ?? "Failed";
                 return View(Model);
@@ -700,8 +725,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet, Route("user/remind/complete"), OverrideActionFilters]
-        public ActionResult ForgotPasswordSuccessView()
+        public ActionResult ForgotPasswordSuccessView(string nickname)
         {
+            TempData["CallJavaScriptFunction"] = "True";
+            Session["AgentId"] = null;
+            Session["Username"] = null;
+            Session["HasLandingSession"] = null;
+            ViewBag.NickName = !string.IsNullOrEmpty(nickname) ? nickname.DecryptParameter() : "";
             return View();
         }
         #endregion

@@ -14,6 +14,7 @@
             types[index] = "checked";
         }
     }
+    DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:mm"));
 }
 <style>
     input[type=radio]:checked + label {
@@ -175,16 +176,30 @@
                 {
                     if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
                     {
-                        <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                        <div class="opening_hours">
+                            <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
+                          @*  @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+
+                            <div>
+                                @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                            </div>
+                        </div>
                     }
                     else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                     {
-                        <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                        <div class="opening_hours">
+                            <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+                
+                            <div>
+                              @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                            </div>
+                
+                </div>
                     }
 
                     <!-- e/opening hours -->
                     <!-- s/available -->
-                    if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                    if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubClosingTime) > currentTime)
                     {
                         <div class="available">本日空席あり</div>
                     }

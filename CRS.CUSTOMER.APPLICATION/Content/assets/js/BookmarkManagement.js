@@ -1,4 +1,4 @@
-function ManageBookmark(ClubId, HostId, AgentType, ClickedElement) {
+function ManageBookmark(ClubId, HostId, AgentType, ClickedElement, PostData = "") {
     EnableLoaderFunction();
     $.ajax({
         url: '/BookmarkManagement/ManageBookmark',
@@ -7,8 +7,8 @@ function ManageBookmark(ClubId, HostId, AgentType, ClickedElement) {
         dataType: 'json',
         data: { clubId: ClubId, hostId: HostId, agentType: AgentType },
         success: function (data) {
-            CheckIfHasRedirectURL(data);
-            if (ClickedElement !== null && ClickedElement !== undefined) {
+            CheckIfHasRedirectURL(data, PostData);
+            if (ClickedElement !== null && ClickedElement !== undefined && ClickedElement !== "") {
                 var type = data.type;
                 var imageElement = ClickedElement.querySelector('img');
                 var svgElement = ClickedElement.querySelector('svg');

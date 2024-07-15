@@ -46,5 +46,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement
         public string ClubNameEnglish { get; set; }
         public string ClubNameJapanese { get; set; }
         public string ClubLogo { get; set; }
+        public string LocationURL { get; set; }
+        public string ClubCode { get; set; }
     }
 }

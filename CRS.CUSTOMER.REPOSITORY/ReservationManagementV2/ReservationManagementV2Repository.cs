@@ -30,6 +30,7 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
                 Response.TotalNoOfPeople = !string.IsNullOrEmpty(_dao.ParseColumnValue(dbResponse, "TotalNoOfPeople").ToString()) ? Convert.ToInt32(_dao.ParseColumnValue(dbResponse, "TotalNoOfPeople").ToString()) : 0;
                 Response.ClubReservationScheduleModel = GetClubSchedule(ClubId);
                 Response.ClubReservableTimeModel = GetClubReservationTime(ClubId);
+                Response.ReservedTimeSlotModel = GetReservedTimeSlot(ClubId, SelectedDate);
             }
             else
             {
@@ -47,12 +48,21 @@ namespace CRS.CUSTOMER.REPOSITORY.ReservationManagementV2
             return (dbResponse != null && dbResponse.Rows.Count > 0) ? _dao.DataTableToListObject<ClubReservationScheduleCommon>(dbResponse).ToList() : new List<ClubReservationScheduleCommon>();
         }
 
-        private List<ClubReservableTimeCommon> GetClubReservationTime(string ClubId)
+        public List<ClubReservableTimeCommon> GetClubReservationTime(string ClubId)
         {
             string SQL = "EXEC sproc_cp_reservation_management @Flag = 'gcrtd'";
             SQL += ", @ClubId=" + _dao.FilterString(ClubId);
             var dbResponse = _dao.ExecuteDataTable(SQL);
             return (dbResponse != null && dbResponse.Rows.Count > 0) ? _dao.DataTableToListObject<ClubReservableTimeCommon>(dbResponse).ToList() : new List<ClubReservableTimeCommon>();
+        }
+
+        public List<ReservedTimeSlotModelCommon> GetReservedTimeSlot(string ClubId, string SelectedDate)
+        {
+            string sp_name = "EXEC sproc_cp_reservation_management @Flag='rts'";
+            sp_name += " ,@ClubId=" + _dao.FilterString(ClubId);
+            sp_name += " ,@SelectedDate=" + _dao.FilterString(SelectedDate);
+            var dbResponse = _dao.ExecuteDataTable(sp_name);
+            return (dbResponse != null && dbResponse.Rows.Count > 0) ? _dao.DataTableToListObject<ReservedTimeSlotModelCommon>(dbResponse).ToList() : new List<ReservedTimeSlotModelCommon>();
         }
         #endregion
 

@@ -94,7 +94,7 @@
             </button>
         </a>
         <div class="text-center mt-[10px]">
-            <a onclick="WindowHistoryBack();" class="text-xs border-b border-[#404040] ">
+            <a onclick="window.location.href='@Url.Action("Review2","ReviewManagement", @Request)'" class="text-xs border-b border-[#404040] ">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.BackToPreviousPage
             </a>
         </div>
@@ -106,28 +106,28 @@
      class="fixed top-0 left-0 right-0 z-50 hidden w-full flex-col p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
 </div>
 <div id="modal1" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" style="background:none;" >
         <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
-        <div class="relative bg-white rounded-lg shadow overflow-hidden">
+        <div class="relative bg-white rounded-lg shadow overflow-hidden  w-[290px] h-[487px]">
             <!-- Modal content -->
             <div class="relative bg-white overflow-hidden">
                 <!-- Modal body -->
                 <div class="text-center pt-4 pb-3 px-2 border-b border-[#DCDCDC]">
                     <div class=" text-[13px] font-bold">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ReviewWhatYouThinkAboutTheClub</div>
-                    <div class="text-[13px  ]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TheSelectedTagWillBeUsedInTheTitleOfTheReview</div>
+                    <div class="text-[11px] font-[400]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TheSelectedTagWillBeUsedInTheTitleOfTheReview</div>
                 </div>
-                <div class=" h-[201px] pb-2 overflow-hidden	 overflow-y-scroll	custom-scrollbar-review">
+                <div class=" h-[320px] pb-2 overflow-hidden	overflow-y-scroll custom-scrollbar-review">
                     @foreach (var item in Model.ReviewRemarkListModel)
                     {
                         <div class="flex justify-between items-center px-[13px] py-[10px] border-b border-[#DCDCDC]">
                             <div class="flex justify-between items-center gap-[13px]">
                                 <div>
-                                    <div class="text-[10px] text-primary">@item.RemarkType</div>
-                                    <div class="text-[10px]">@item.RemarkLabel</div>
+                                    <div class="text-[10px] text-primary font-bold leading-tight">@item.RemarkType</div>
+                                    <div class="text-[10px] font-[400] leading-tight">@item.RemarkLabel</div>
                                 </div>
                             </div>
                             <a>
-                                <button class="btn-primary-softrose-review gap-[2px] markbtn-active" data-value="@item.RemarkId">
+                                <button class="btn-primary-softrose-review gap-[2px] markbtn-active" style="padding:4px 11px 6px 10px" data-value="@item.RemarkId">
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Select
                                 </button>
                             </a>
@@ -135,22 +135,26 @@
                     }
                 </div>
             </div>
-            <div class="bg-[#FFF]  w-full rounded-b-lg shadow">
+            <div class="bg-[#FFF]  w-full mt-[10px]">
                 <div class="grid gap-[12px] pb-[18px]">
                     <div>
                         <div class="flex flex-row justify-center">
-                            <button onclick="window.location.href='@Url.Action("Review2","ReviewManagement", @Request)'">
-                                <b> @CRS.CUSTOMER.APPLICATION.Resources.Resource.Re_SelectYourHost</b>
+                            <button class="button-curve btn-primary mx-[20px] py-2" onclick="closeModal('modal1')">
+                                <span>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
+                                </span>
                             </button>
                         </div>
                     </div>
                     <div>
                         <div class="flex flex-row justify-center">
-                            <button class="button-curve btn-primary h-[29px] mx-[20px]" onclick="closeModal('modal1')">
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
+                            <button onclick="window.location.href='@Url.Action("Review2","ReviewManagement", @Request)'">
+                                <span class="text-[12px] font-[500]"> @CRS.CUSTOMER.APPLICATION.Resources.Resource.Re_SelectYourHost</span>
                             </button>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>

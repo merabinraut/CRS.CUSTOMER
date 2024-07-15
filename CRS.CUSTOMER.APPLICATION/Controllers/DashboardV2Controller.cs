@@ -24,6 +24,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
     public class DashboardV2Controller : CustomController
     {
+        private readonly Dictionary<string, string> _locationHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Location");
         private readonly IDashboardBusiness _oldDashboardBusiness;
         private readonly IRecommendedClubHostBusiness _recommendedClubHostBuss;
         private readonly IDashboardV2Business _dashboardBusiness;
@@ -37,6 +38,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet, Route("")]
         public ActionResult Index()
         {
+            Session["ReservationPage1Model"] = null;
+            Session["ReservationPage2Model"] = null;
+            Session["ReservationPage3Model"] = null;
+            Session["ReservationPage4Model"] = null;
             var ResponseModel = new DashboardModel();
             if (Session["SystemLinkModel"] == null)
             {
@@ -91,17 +96,25 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             List<RecommendationLocationModel> locationsList = new List<RecommendationLocationModel>();
             foreach (var item in ResponseModel.Location)
-                locationsList.Add(new RecommendationLocationModel { name = item.LocationName, lat = item.Latitude, lng = item.Longitude, id = item.LocationID });
+            {
+                if (!string.IsNullOrEmpty(item.LocationStatus) && item.LocationStatus.Trim().ToLower() == "A")
+                    locationsList.Add(new RecommendationLocationModel { name = item.LocationName, lat = item.Latitude, lng = item.Longitude, id = item.LocationURl });
+            }
 
             ViewBag.JsonLocation = JsonConvert.SerializeObject(locationsList);
             ViewBag.ActionPageName = "Dashboard";
+
+            var metaTagDBResponse = _commonBusiness.GetMetaTagInfo("1");
+            ViewBag.MetaClubCount = metaTagDBResponse.Item1;
+            ViewBag.MetaHostCount = metaTagDBResponse.Item2;
             return View(ResponseModel);
         }
 
         [HttpGet]
         public JsonResult GetRecommendedClubAndHost(string LocationId)
         {
-            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
+            //var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
+            var lId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, LocationId);
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var Response = new RecommendedClubAndHostModel();
             var clubRecommendationDBResponse = _oldDashboardBusiness.GetRecommendedClub(lId);
@@ -129,7 +142,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public JsonResult GetMainPageClubHost(string LocationId)
         {
             var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
-            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : null;
+            var lId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, LocationId);
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var Response = new LocationClubHostModel();
             #region Recommended Club
@@ -201,7 +214,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" } };
             var Response = new List<StaticDataModel>();
-            Response = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("1"));
+            Response = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("10"));
             if (Response.Count > 0)
             {
                 responseData["Code"] = 0;
@@ -216,7 +229,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var responseData = new Dictionary<string, object> { { "Code", 1 }, { "Message", "Invalid Details" }, { "PartialView", "" }, { "ClubDetailMapData", "" } };
-            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : string.Empty;
+            //var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : string.Empty;
+            var lId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, LocationId);
             var Response = new PreferenceFilterModel();
             Response.AgeModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("7"));
             Response.ConstellationModel = DDLHelper.ConvertDictionaryToList(DDLHelper.LoadDropdownList("8"));
@@ -246,24 +260,24 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 dynamic mappedItem = new System.Dynamic.ExpandoObject();
                 if (!string.IsNullOrEmpty(CurrentUrl))
                 {
-                    if (!CurrentUrl.Contains("/LocationManagement/ClubDetail_V2"))
-                        CurrentUrl += "/LocationManagement/ClubDetail_V2";
-                    var parameters = new List<string>();
-                    if (!string.IsNullOrEmpty(item.LocationId))
-                        parameters.Add($"LocationId={item.LocationId.EncryptParameter()}");
+                    CurrentUrl = $"/area{item.LocationURL}/hostclub/{item.ClubCode}/";
+                    mappedItem.URL = CurrentUrl.ToString();
+                    //if (!CurrentUrl.Contains("/LocationManagement/ClubDetail_V2"))
+                    //    CurrentUrl += "/LocationManagement/ClubDetail_V2";
+                    //var parameters = new List<string>();
+                    //if (!string.IsNullOrEmpty(item.LocationId))
+                    //    parameters.Add($"LocationId={item.LocationId.EncryptParameter()}");
 
-                    if (!string.IsNullOrEmpty(item.ClubId))
-                        parameters.Add($"ClubId={item.ClubId.EncryptParameter()}");
+                    //if (!string.IsNullOrEmpty(item.ClubId))
+                    //    parameters.Add($"ClubId={item.ClubId.EncryptParameter()}");
 
-                    string queryString = string.Join("&", parameters);
+                    //string queryString = string.Join("&", parameters);
 
-                    StringBuilder urlBuilder = new StringBuilder(CurrentUrl);
-                    urlBuilder.Append(CurrentUrl.Contains("?") ? "&" : "?");
-                    urlBuilder.Append(queryString);
+                    //StringBuilder urlBuilder = new StringBuilder(CurrentUrl);
+                    //urlBuilder.Append(CurrentUrl.Contains("?") ? "&" : "?");
+                    //urlBuilder.Append(queryString);
 
-                    mappedItem.URL = urlBuilder.ToString();
                 }
-
                 if (float.TryParse(item.Latitude, out float latitude) && float.TryParse(item.Longitude, out float longitude))
                 {
                     mappedItem.lat = latitude;
@@ -292,7 +306,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.ActionPageName = "SearchFilter";
             ViewBag.TypeValue = TypeValue;
             ViewBag.LocationId = LocationId;
-            var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : LocationId;
+            //var lId = !string.IsNullOrEmpty(LocationId) ? LocationId.DecryptParameter() : LocationId;
+            var lId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, LocationId);
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var Response = new List<ClubAvailabilityDetailModel>();
             var dbResponse = _dashboardBusiness.GetAvailabilityClub(lId, CustomerId, TypeValue);

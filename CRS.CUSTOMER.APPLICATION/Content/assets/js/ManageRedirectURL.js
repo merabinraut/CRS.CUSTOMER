@@ -14,12 +14,31 @@ function IsSameDomain(url) {
     }
 }
 
-function CheckIfHasRedirectURL(Data) {
+//function CheckIfHasRedirectURL(Data, PostRequestData) {
+//    if (Data != null && Data.Code == 999 && Data.RedirectURL && IsValidURL(Data.RedirectURL) && IsSameDomain(Data.RedirectURL)) {
+//        window.location.href = Data.RedirectURL;
+//        window.location.replace(Data.RedirectURL);
+//        window.history.replaceState(null, '', Data.RedirectURL);
+//        return;
+//    }
+//}
+
+function CheckIfHasRedirectURL(Data, PostRequestData = "") {
     if (Data != null && Data.Code == 999 && Data.RedirectURL && IsValidURL(Data.RedirectURL) && IsSameDomain(Data.RedirectURL)) {
-        window.location.href = Data.RedirectURL;
-        window.location.replace(Data.RedirectURL);
-        window.history.replaceState(null, '', Data.RedirectURL);
-        return;
+        if (PostRequestData != "" || PostRequestData != null) {
+            //const queryParams = new URLSearchParams(PostRequestData).toString();
+            const redirectURLWithParams = `${Data.RedirectURL}%26PostURL=${encodeURIComponent(PostRequestData)}`;
+            window.location.href = redirectURLWithParams;
+            window.location.replace(redirectURLWithParams);
+            window.history.replaceState(null, '', redirectURLWithParams);
+            return;
+        }
+        else {
+            window.location.href = Data.RedirectURL;
+            window.location.replace(Data.RedirectURL);
+            window.history.replaceState(null, '', Data.RedirectURL);
+            return;
+        }
     }
 }
 

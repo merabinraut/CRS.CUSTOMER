@@ -1,0 +1,358 @@
+﻿<div id="tab4" class="tab-content-plane">
+    <!--#region near-location.php-->
+    <div class="pb-12">
+        <div class="bg-white ">
+            <div class="flex tab-container map-tab-container">
+                <button id="tab1Button" class="tab-button tab-link map-tab ">こだわりから探す</button>
+                <button id="tab2Button" class="tab-button tab-link  map-tab active">マップから探す</button>
+            </div>
+        </div>
+        <div class="bg-white ">
+            <div id="tab1" class="tab-content hidden">
+                <div class="flex items-center gap-1 text-[#d75a8b] text-[10px] px-[2px] py-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8.00156 1C5.29256 1 3.10156 3.191 3.10156 5.9C3.10156 9.575 8.00156 15 8.00156 15C8.00156 15 12.9016 9.575 12.9016 5.9C12.9016 3.191 10.7106 1 8.00156 1ZM4.50156 5.9C4.50156 3.968 6.06956 2.4 8.00156 2.4C9.93356 2.4 11.5016 3.968 11.5016 5.9C11.5016 7.916 9.48556 10.933 8.00156 12.816C6.54556 10.947 4.50156 7.895 4.50156 5.9Z"
+                              fill="#D75A8B" />
+                        <path d="M8 7.64844C8.9665 7.64844 9.75 6.86494 9.75 5.89844C9.75 4.93194 8.9665 4.14844 8 4.14844C7.0335 4.14844 6.25 4.93194 6.25 5.89844C6.25 6.86494 7.0335 7.64844 8 7.64844Z"
+                              fill="#D75A8B" />
+                    </svg>
+                    現在地
+                </div>
+                <div class="py-2">
+                    <div class="text-sm text-[#333] font-bold mb-[13px]">
+                        エリアから探す
+                    </div>
+                    <div class="flex flex-col mt-[8px] gap-[13px]">
+                        @foreach (var item in Model.LocationModel)
+                        {
+                            var Label = item.StaticLabel.Split('/');
+                            var activeClass = (!string.IsNullOrEmpty(ViewBag.PrefecturesArea) && item.StaticValue.Trim() == ViewBag.PrefecturesArea) ? "active" : string.Empty;
+                            <div class="select-near-location select-loaction-host text-[#333] text-sm @activeClass" id="tab4-loaction-id">
+                                <div class="square">
+                                </div>
+                                <div class="flex gap-1">
+                                    <div class="locationValue font-bold" data-info="@item.StaticValue" data-info-2="@Label[0]">
+                                        @Label[0]/
+                                    </div>
+                                    <span>@Label[1]</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="flex gap-4 py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
+                    <button class="btn bg-[#E4E4E4] " onclick="ClearFunction();">
+                        条件をクリア
+                    </button>
+                    <button class="btn btn-primary" onclick="Tab4SubmitFunction();">
+                        <a class="h-full w-full">
+                            検索する
+                        </a>
+                    </button>
+                </div>
+            </div>
+            <div id="tab2" class="tab-content ">
+                <!--#region map.php-->
+                <style>
+                    .map-container #map {
+                        height: 365px;
+                    }
+
+                    .gm-style div[aria-label="Google Map"] > div:last-child {
+                        display: none;
+                    }
+                </style>
+                <div class="flex items-center gap-1 text-[#d75a8b] text-[10px] px-[2px] py-3  w-max" onclick="setUserLocation()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8.00156 1C5.29256 1 3.10156 3.191 3.10156 5.9C3.10156 9.575 8.00156 15 8.00156 15C8.00156 15 12.9016 9.575 12.9016 5.9C12.9016 3.191 10.7106 1 8.00156 1ZM4.50156 5.9C4.50156 3.968 6.06956 2.4 8.00156 2.4C9.93356 2.4 11.5016 3.968 11.5016 5.9C11.5016 7.916 9.48556 10.933 8.00156 12.816C6.54556 10.947 4.50156 7.895 4.50156 5.9Z"
+                              fill="#D75A8B" />
+                        <path d="M8 7.64844C8.9665 7.64844 9.75 6.86494 9.75 5.89844C9.75 4.93194 8.9665 4.14844 8 4.14844C7.0335 4.14844 6.25 4.93194 6.25 5.89844C6.25 6.86494 7.0335 7.64844 8 7.64844Z"
+                              fill="#D75A8B" />
+                    </svg>
+                    現在地
+                </div>
+                <div class="map-container">
+                    <div id="map"></div>
+                </div>
+
+                <div class="map-card mt-2 mx-4" id="map-card" style="display: none;border-radius: 10px;">
+                    <div class="flex gap-1">
+                        <img src="" id="clubImage" class="h-6 w-6 rounded-full border border-[#F1EEEE]" alt="">
+                        <div class="text-[#333]">
+                            <div class="text-[10px] text-ellipsis-customer h-[15px] " id="clubNameEng">
+                            </div>
+                            <div class="text-[8px]" id="clubNamejpn"></div>
+                            <div class="flex gap-1 items-center">
+                                <span class="review-start text-[#F0D830] text-xs" id="rating-label-id">
+                                </span>
+                                <div class="text-[8px]" id="rating"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-between">
+                        <a href="#" id="clubUrl">
+                            <div class="text-[8px] border-b-[1px] border-[#D75A8B] text-[#D75A8B] w-max">詳細を見る</div>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex gap-4 py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
+                    <button class="btn bg-[#E4E4E4] " onclick="ClearFunction();">
+                        条件をクリア
+                    </button>
+                    <button class="btn btn-primary" onclick="Tab4SubmitFunction();">
+                        <a class="h-full w-full">
+                            検索する
+                        </a>
+                    </button>
+                </div>
+                <!--#endregion map.php-->
+            </div>
+        </div>
+    </div>
+    <!--#endregion near-location.php-->
+</div>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap"></script>
+<script>
+    // Get all the div elements
+    var selectnearlocation = document.querySelectorAll('.select-near-location');
+
+    // Add click event listeners to each div
+    selectnearlocation.forEach(function (div) {
+        div.addEventListener('click', function () {
+            // Remove the 'bg-red' class from all selectnearlocation
+            selectnearlocation.forEach(function (d) {
+                d.classList.remove('active');
+
+            });
+            // Add the 'bg-red' class to the clicked div
+            this.classList.add('active');
+
+        });
+    });
+</script>
+<!--#region map.php JS-->
+<script>
+        var map;
+        var marker;
+        var service;
+        var lastClickedCoordinates = null;
+        var infoWindows = [];
+        var trackUserInterval;
+        var customMarkerPosArray = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.ClubDetailMapData));
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15, // Set the initial zoom level
+                disableDefaultUI: true // Disable default UI elements
+            });
+
+            // Loop through the array of custom marker positions
+            for (var i = 0; i < customMarkerPosArray.length; i++) {
+                var customMarkerPos = customMarkerPosArray[i];
+                createCustomMarker(customMarkerPos);
+            }
+            // Start tracking user's location
+            trackUserLocation();
+        }
+
+        function trackUserLocation() {
+            trackUserInterval = navigator.geolocation.watchPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                if (!marker) {
+                    // Create marker for current location if not already created
+                    var markerIcon = {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        fillColor: '#d75a8b',
+                        fillOpacity: 1,
+                        strokeColor: '#FFF',
+                        strokeWeight: 2,
+                        scale: 10
+                    };
+
+                    marker = new google.maps.Marker({
+                        position: pos,
+                        map: map,
+                        icon: markerIcon
+                    });
+                } else {
+                    // Update marker position
+                    marker.setPosition(pos);
+                }
+
+                // Optionally, center the map on the user's position
+                map.setCenter(pos);
+            }, handleLocationError);
+        }
+
+        function stopTrackingUserLocation() {
+            if (trackUserInterval) {
+                navigator.geolocation.clearWatch(trackUserInterval);
+                trackUserInterval = null;
+            }
+        }
+
+        function searchNearby(location) {
+            service.nearbySearch({
+                location: location,
+                radius: 500, // Search radius in meters
+                type: ['restaurant'] // Only search for restaurants
+            }, processResults);
+        }
+
+        function processResults(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
+            }
+        }
+
+        function createMarker(place) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+                title: place.name,
+                icon: {
+                    scaledSize: new google.maps.Size(100, 100) // Scaled size of the marker icon
+                }
+            });
+            // Add click listener to show place details
+            // Add click listener to show place details
+            google.maps.event.addListener(map, 'click', function (event) {
+                //console.log("Clicked Location:", event);
+                var data = service.getDetails({
+                    placeId: event.placeId // Change event.place_id to event.placeId
+                })
+                console.log({
+                    data
+                })
+            });
+
+        }
+
+        function createCustomMarker(customMarkerPos) {
+            var customMarker = new google.maps.Marker({
+                position: customMarkerPos,
+                map: map,
+                title: 'Custom Marker',
+                icon: {
+                    scaledSize: new google.maps.Size(100, 100) // Scaled size of the marker icon
+                }
+            });
+
+
+            // Create info window for the custom marker
+
+            // Add click event listener to show info window
+            customMarker.addListener('click', function () {
+                if (customMarkerPos.clubNameEnglish) {
+                    var clubCard = document.getElementById('map-card');
+                    clubCard.style.display = 'flex'; // Show the map card
+                    var clubImage = document.getElementById('clubImage');
+                    var clubNameEng = document.getElementById('clubNameEng');
+                    var clubNameJpn = document.getElementById('clubNamejpn');
+                    var rating = document.getElementById('rating');
+                    var clubUrl = document.getElementById('clubUrl');
+                    var ratingElement = document.getElementById('rating-label-id');
+
+                } else {
+                    var clubCard = document.getElementById('map-card');
+                    clubCard.style.display = 'none'; // Hide the map card if clubNameEng is empty
+                }
+
+
+                clubImage.src = customMarkerPos.clubLogo;
+                clubNameEng.textContent = customMarkerPos.clubNameEnglish;
+                clubNameJpn.textContent = customMarkerPos.clubNameJapanese;
+                rating.textContent = customMarkerPos.ratingScale;
+                clubUrl.href = customMarkerPos.URL;
+                ratingElement.innerHTML = generateStarIcons(customMarkerPos.ratingScale);
+                //console.log({
+                //    customMarkerPos
+
+                //})
+
+            });
+
+        }
+
+        function generateStarIcons(rating) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 !== 0;
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+            let starsHTML = '';
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += '<i class="las la-star"></i>';
+            }
+            if (halfStar) {
+                starsHTML += '<i class="las la-star-half-alt"></i>';
+            }
+            for (let i = 0; i < emptyStars; i++) {
+                starsHTML += '<i class="lar la-star"></i>';
+            }
+
+            return starsHTML;
+        }
+
+        function handleLocationError(error) {
+            console.error("Error getting user's location:", error);
+        }
+
+        function closeAllInfoWindows() {
+            for (var i = 0; i < infoWindows.length; i++) {
+                infoWindows[i].close();
+            }
+        }
+
+        function closeAllInfoWindowsExcept(exceptInfoWindow) {
+            for (var i = 0; i < infoWindows.length; i++) {
+                if (infoWindows[i] !== exceptInfoWindow) {
+                    infoWindows[i].close();
+                }
+            }
+        }
+
+        // Function to set user's current location
+        function setUserLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    map.setCenter(pos);
+                    map.setZoom(15); // Set the zoom level to 24
+
+                    // Create marker for current location
+                    var markerIcon = {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        fillColor: '#ff0000',
+                        fillOpacity: 0.8,
+                        strokeColor: '#FFF',
+                        strokeWeight: 2,
+                        scale: 10
+                    };
+
+                    if (marker) {
+                        marker.setPosition(pos);
+                    } else {
+                        marker = new google.maps.Marker({
+                            position: pos,
+                            map: map,
+                            icon: markerIcon
+                        });
+                    }
+                }, handleLocationError);
+            } else {
+                console.error("Geolocation is not supported by this browser");
+            }
+        }
+</script>
+<!--#endregion map.php JS-->

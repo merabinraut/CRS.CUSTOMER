@@ -46,6 +46,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
             SQL += ",@ActionPlatform=" + _dao.FilterString(Request.ActionPlatform);
             SQL += ",@ActionIP=" + _dao.FilterString(Request.ActionIP);
             SQL += !string.IsNullOrEmpty(Request.ReferCode) ? ",@ReferCode=" + _dao.FilterString(Request.ReferCode) : null;
+            SQL += !string.IsNullOrEmpty(Request.Type) ? ",@ReferType=" + _dao.FilterString(Request.Type) : null;
             return _dao.ParseCommonDbResponse(SQL);
         }
 
@@ -79,7 +80,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
         public CommonDbResponse Login(LoginRequestCommon Request)
         {
             string SQL = "EXEC sproc_customer_login_management @flag='login'";
-            SQL += ",@LoginId=" + _dao.FilterString(Request.LoginId);
+            SQL += ",@LoginId= N" + _dao.FilterString(Request.LoginId);
             SQL += ",@Password=" + _dao.FilterString(Request.Password);
             SQL += ",@ActionIP=" + _dao.FilterString(Request.ActionIP);
             SQL += ",@ActionPlatform=" + _dao.FilterString(Request.ActionPlatform);

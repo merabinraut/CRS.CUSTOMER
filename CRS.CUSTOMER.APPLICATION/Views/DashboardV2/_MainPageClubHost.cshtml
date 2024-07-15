@@ -1,160 +1,7 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.LocationManagement.LocationClubHostModel
 
-@*toggle section end
-    club section*@
-
 <style>
 
-    /*@@charset "utf-8";*/
-    /* reset */ /*:where([hidden]:not([hidden='until-found'])) {
-      display: none !important;
-    }
-    :where(html) {
-      -webkit-text-size-adjust: none;
-      color-scheme: dark light;
-      tab-size: 2;
-      scrollbar-gutter: stable;
-    }
-    :where(html:has(dialog:modal[open])) {
-      overflow: clip;
-    }
-    @@media (prefers-reduced-motion:no-preference) {
-      :where(html: focus-within) {
-        scroll-behavior: smooth;
-      }
-    }
-    :where(body) {
-      line-height: 1.5;
-      font-family: system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    :where(button) {
-      all: unset;
-    }
-    :where(input, button, textarea, select) {
-      font: inherit;
-      color: inherit;
-    }
-    :where(textarea) {
-      resize: vertical;
-      resize: block;
-    }
-    :where(button, label, select, summary, [role='button'], [role='option']) {
-      cursor: pointer;
-    }
-    :where(:disabled) {
-      cursor: not-allowed;
-    }
-    :where(label:has(>input:disabled), label:has(+input:disabled)) {
-      cursor: not-allowed;
-    }
-    :where(a) {
-      color: inherit;
-      text-underline-offset: .2ex;
-    }
-    :where(ul, ol) {
-      list-style: none;
-    }
-    :where(img, svg, video, canvas, audio, iframe, embed, object) {
-      display: block;
-    }
-    :where(img, picture, svg, video) {
-      max-inline-size: 100%;
-      block-size: auto;
-    }
-    :where(p, h1, h2, h3, h4, h5, h6) {
-      overflow-wrap: break-word;
-    }
-    :where(h1, h2, h3) {
-      line-height: calc(1em + 0.5rem);
-      text-wrap: balance;
-    }
-    :where(hr) {
-      border: none;
-      border-block-start: 1px solid;
-      color: inherit;
-      block-size: 0;
-      overflow: visible;
-    }
-    :where(dialog) {
-      border: none;
-      background: none;
-      inset: unset;
-      max-width: unset;
-      max-height: unset;
-    }
-    :where(dialog:not([open])) {
-      display: none !important;
-    }
-    :where(:focus-visible) {
-      outline: 3px solid CanvasText;
-      box-shadow: 0 0 0 5px Canvas;
-      outline-offset: 1px;
-    }
-    :where(:focus-visible, :target) {
-      scroll-margin-block: 8vh;
-    }
-    :where(.visually-hidden:not(:focus-within, :active)) {
-      clip-path: inset(50%) !important;
-      height: 1px !important;
-      width: 1px !important;
-      overflow: hidden !important;
-      position: absolute !important;
-      white-space: nowrap !important;
-      border: 0 !important;
-    }*/
-    /* base */
-    /*html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      -webkit-text-size-adjust: 100%;
-      color: #292f33;
-      background: #fcfcfc;
-    }
-    html {
-      font-size: 62.5%;*/ /* 10px */
-    /*}
-    body {
-      width: 100%;
-      height: auto !important;
-      height: 100%;
-      min-height: 100%;
-      position: relative;
-      font-size: 1.4rem;
-      line-height: 1;
-      letter-spacing: 0.05rem;
-      text-size-adjust: 100%;
-      -webkit-text-size-adjust: 100%;
-      word-break: break-all;
-      animation: fadeIn 1s ease 0s 1 normal;
-      -webkit-animation: fadeIn 1s ease 0s 1 normal;
-      z-index: -2;
-    }
-    html, body, input, button, textarea, select {
-      font-family: -apple-system, YakuHanJPs, Roboto, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", Arial, nc3Jp, sans-serif !important;
-      font-weight: 400;
-    }
-    html.overlay {
-      overflow: hidden;
-    }
-    a:hover, a:active {
-      transition: .4s;
-    }
-    a {
-      text-decoration: none;
-    }
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-    button {
-      border-radius: 3px;
-    }*/
     /* decorate */
     .disabled {
         color: #aaaaaa !important;
@@ -180,12 +27,12 @@
         width: 100%;
         height: auto;
         margin: 10px 0 0 0;
-        padding: 20px 0 0 0;
+        padding: 15px 0 0 0;
         display: block;
         float: left;
         border-bottom: 1px solid #efefef;
-     /*   background: #fcfcfc;*/
-     background:#fff;
+        /*   background: #fcfcfc;*/
+        background: #fff;
     }
 
         .club_content:first-child {
@@ -203,7 +50,8 @@
         }
 
     ul.club_tags, .club_header, .club_rate, .club_pr {
-        padding: 0 15px;
+        padding-left: 15px;
+        padding-right: 10px;
     }
     /* tags */
     ul.club_tags {
@@ -218,7 +66,7 @@
             width: auto;
             height: auto;
             margin: 5px 0 0 5px;
-            padding: 4px 8px;
+            padding: 2px 8px;
             display: inline-flex;
             align-items: center;
             color: #ffffff;
@@ -260,9 +108,11 @@
     .club_header {
         width: 100%;
         height: auto;
-        display: flex;
+        /* display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;
+        align-items: flex-start;*/
+        display: flex;
+        justify-content: space-between;
     }
 
     .club_logo {
@@ -318,16 +168,16 @@
     }
 
     .action_keep {
-        width: 45px;
-        height: 45px;
-        padding: 6px;
+        width: 33px;
+        height: 33px;
+        padding: 1px;
         display: inline-flex;
         flex-flow: wrap-reverse;
     }
 
         .action_keep img {
-            width: 100%;
-            height: 100%;
+            width: 33px;
+            height: 33PX;
             aspect-ratio: 1 / 1;
         }
     /* hostclub thumb */
@@ -398,12 +248,19 @@
             }
 
             ul.rate_stars li.rate_value {
-                width: auto;
+                /*width: auto;
                 height: 18px;
                 margin: 0 0 0 8px;
                 padding: 2px 0 0 0;
                 font-size: 1.2rem;
                 font-weight: 600;
+                letter-spacing: 0;*/
+                width: auto;
+                height: 18px;
+                margin: 0 0 0 8px;
+                padding: 0;
+                font-size: 20px;
+                font-weight: bold;
                 letter-spacing: 0;
             }
 
@@ -414,18 +271,25 @@
     }
 
         ul.rate_review li.comment_value {
-            width: auto;
+            /* width: auto;
             height: 18px;
             margin: 0 0 0 5px;
             padding: 4px 0 0 0;
             display: inline-flex;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: 0.8rem;*/
+            width: auto;
+            height: 20px;
+            margin: 0 0 0 2px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px;
         }
 
         ul.rate_review li:first-child {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
         }
 
     .rate_review img {
@@ -436,6 +300,13 @@
     }
 
     p.club_pr {
+        /* width: 100%;
+        height: 50px;
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        font-size: 0.75rem;
+        overflow: hidden;*/
         width: 100%;
         height: 50px;
         display: inline-flex;
@@ -443,6 +314,9 @@
         align-items: center;
         font-size: 0.75rem;
         overflow: hidden;
+        line-height: 1.4;
+        text-overflow: ellipsis;
+
     }
     /* hostclub footer */
     .club_footer {
@@ -497,12 +371,20 @@
     }
 
     .club_footer .rsv_btn {
-        width: calc(100% - 160px);
+        /* width: calc(100% - 160px);
+        height: 45px;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: bold;
+        display: inline-flex;*/
+        width: calc(100% - 135px);
         height: 45px;
         color: #ffffff;
         font-size: 1rem;
         font-weight: bold;
         display: inline-flex;
+        letter-spacing: 1px;
+        border-radius: 4px;
     }
 </style>
 
@@ -513,7 +395,7 @@
             /* new improvememnt*/
             <div class="club_content">
                 <!-- s/link -->
-                <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
+                <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
                     <!-- s/club_tag -->
                     <ul class="club_tags">
                         @if (!string.IsNullOrEmpty(@item.Tag1))
@@ -525,9 +407,9 @@
                         @if (!string.IsNullOrEmpty(@item.Tag2))
                         {
                             <!-- s/tag -->
-                    <li class="tag_rank">
-                        ランク @item.Tag2
-                    </li>
+                            <li class="tag_rank">
+                                ランク @item.Tag2
+                            </li>
                         }
                         <!-- e/tag -->
                         <!-- s/tag -->
@@ -574,7 +456,7 @@
                         }
                         else
                         {
-                            <div class="action_keep"  onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                            <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
                         }
                         <!-- e/action btn -->
                     </div>
@@ -657,18 +539,32 @@
                         {
                             if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
                             {
-                                <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                                <div class="opening_hours">
+                                    <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
+                                   @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+                                    <span style="line-height:13px;">
+                                        @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                                    </span>
+                                </div>
                             }
                             else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                             {
-                                <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                    <div class="opening_hours">
+                        <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+                      @*  @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+
+                        <span style="line-height:13px;">
+                            @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                        </span>
+
+                    </div>
                             }
 
                             <!-- e/opening hours -->
                             <!-- s/available -->
 
 
-                            if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubOpeningTime) < currentTime && DateTime.Parse(item.ClubClosingTime) > currentTime)
+                            if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubClosingTime) > currentTime)
                             {
                                 <div class="available">本日空席あり</div>
                             }
@@ -717,7 +613,7 @@
     {
         <div class="flex flex-row gap-[16px] mx-[16px]">
             <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
-                <div class="w-full flex justify-center" onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=@item.HostId'">
+                <div class="w-full flex justify-center" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                          src="@item.HostImage" />
                 </div>
@@ -736,7 +632,7 @@
             </div>
             <div class="grid mt-[16px]  mb-[10px] grid-rows-7" style="margin-right:16px">
                 <div style="line-height: 140%;" class="text-[10px]">
-                    <p class="font-[700] text-[13px]">
+                    <p class="font-[700] text-[13px]" style="padding-bottom:4px">
 
                         @if (string.IsNullOrEmpty(@item.HostNameJapanese))
                         {
@@ -747,19 +643,63 @@
                             @item.HostNameJapanese
                         }
                     </p>
+                    @if (!string.IsNullOrEmpty(item.FormattedDOB))
+                    {
+                        <p>誕生日 :<span> @item.FormattedDOB</span> </p>
+                    }
+                    else
+                    {
+                        <p>誕生日 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.HostBirthPlace))
+                    {
+                        <p>出身地 :<span> @item.HostBirthPlace</span> </p>
+                    }
+                    else
+                    {
+                        <p>出身地 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.HostBloodType))
+                    {
+                        <p>血液型 :<span> @item.HostBloodType</span> </p>
+                    }
+                    else
+                    {
+                        <p>血液型 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.HostConstellationGroup))
+                    {
+                        <p>星座 :<span> @item.HostConstellationGroup</span> </p>
+                    }
+                    else
+                    {
+                        <p>星座 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Occupation))
+                    {
+                        <p>前職 :<span> @item.Occupation</span> </p>
+                    }
+                    else
+                    {
+                        <p>前職 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
 
-                    <p>誕生日 :<span> @item.FormattedDOB</span> </p>
-
-                    <p>身長 :<span> @item.HostHeight</span> </p>
-
-                    <p>血液型 :<span> @item.HostBloodType</span> </p>
-
-                    <p>星座 :<span> @item.HostConstellationGroup</span> </p>
-
-                    <p>出身地 :<span> @item.HostBirthPlace</span> </p>
-
-                    <p>前職 :<span> @item.Occupation</span> </p>
-                    <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
+                    @if (!string.IsNullOrEmpty(item.HostHeight))
+                    {
+                        <p>身長 :<span> @item.HostHeight</span> </p>
+                    }
+                    else
+                    {
+                        <p>身長 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.LiquorStrength))
+                    {
+                        <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
+                    }
+                    else
+                    {
+                        <p>お酒の強さ :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
+                    }
 
                 </div>
                 <div class="flex flex-row gap-1 items-center mb-[8px] mt-1">
@@ -771,13 +711,13 @@
                         @item.HostLoveCount
                     </p>
                 </div>
-                <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]">
+                <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]" onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL');">
                     <div>
                         <img style="border: 1px solid #F1EEEE;" class="object-cover h-[32px] w-[32px] rounded-full "
                              src="@item.ClubLogo" alt="clublogo">
                     </div>
                     <div class="flex flex-col justify-center ">
-                        <p style="line-height: 100%;" class="text-[10px] text-[#292F33] font-[700]">
+                        <p style="line-height: 100%;padding-bottom:3px;overflow:hidden; text-overflow:ellipsis;white-space:nowrap; max-width:90px" class="text-[10px] text-[#292F33] font-[700]">
                             @item.ClubName
                         </p>
                         <p style="line-height: 100%;" class="text-[8px] text-[#A09E91] font-[400]">

@@ -1,4 +1,5 @@
-﻿using CRS.CUSTOMER.SHARED.LocationManagement;
+﻿using CRS.CUSTOMER.SHARED;
+using CRS.CUSTOMER.SHARED.LocationManagement;
 using CRS.CUSTOMER.SHARED.ReviewManagement;
 using System;
 using System.Collections.Generic;
@@ -23,22 +24,40 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             var dbResp = _dao.ExecuteDataTable(sql);
             if (dbResp != null && dbResp.Rows.Count == 1)
             {
-                var response = _dao.DataTableToListObject<ClubDetailCommon>(dbResp).ToList();
-                string SQL2 = "EXEC sproc_club_schedule_management @Flag ='gcws'";
-                SQL2 += ",@ClubId=" + _dao.FilterString(clubId);
-                var dbResponse2 = _dao.ExecuteDataTable(SQL2);
-
-                string sql3 = "sproc_customer_club_and_host_management @Flag='gce'";
-                sql3 += " ,@ClubId=" + _dao.FilterString(clubId);
-                var dbResp3 = _dao.ExecuteDataTable(sql3);
-                foreach (var item in response)
+                var Code = dbResp.Rows[0]["Code"].ToString();
+                var Message = dbResp.Rows[0]["Message"].ToString();
+                if (!string.IsNullOrEmpty(Code) && Code.Trim() == "0")
                 {
-                    if (dbResponse2 != null && dbResponse2.Rows.Count > 0) item.ClubWeeklyScheduleList = _dao.DataTableToListObject<ClubWeeklyScheduleCommon>(dbResponse2).ToList();
-                    if (dbResp3 != null && dbResp3.Rows.Count > 0) item.ClubEventList = _dao.DataTableToListObject<ClubEventCommon>(dbResp3).ToList();
+                    var response = _dao.DataTableToListObject<ClubDetailCommon>(dbResp).ToList();
+                    var cId = response.FirstOrDefault().ClubId;
+                    string SQL2 = "EXEC sproc_club_schedule_management @Flag ='gcws'";
+                    SQL2 += ",@ClubId=" + _dao.FilterString(cId);
+                    var dbResponse2 = _dao.ExecuteDataTable(SQL2);
+
+                    string sql3 = "sproc_customer_club_and_host_management @Flag='gce'";
+                    sql3 += " ,@ClubId=" + _dao.FilterString(cId);
+                    var dbResp3 = _dao.ExecuteDataTable(sql3);
+                    foreach (var item in response)
+                    {
+                        if (dbResponse2 != null && dbResponse2.Rows.Count > 0) item.ClubWeeklyScheduleList = _dao.DataTableToListObject<ClubWeeklyScheduleCommon>(dbResponse2).ToList();
+                        if (dbResp3 != null && dbResp3.Rows.Count > 0) item.ClubEventList = _dao.DataTableToListObject<ClubEventCommon>(dbResp3).ToList();
+                    }
+                    return response.First();
                 }
-                return response.First();
+                else
+                {
+                    return new ClubDetailCommon
+                    {
+                        Code = "1",
+                        Message = !string.IsNullOrEmpty(Message) ? Message : ResponseCode.Failed.ToString()
+                    };
+                }
             }
-            return new ClubDetailCommon();
+            return new ClubDetailCommon
+            {
+                Code = "1",
+                Message = ResponseCode.Failed.ToString()
+            };
         }
 
         public List<LocationManagementCommon> GetLocations()
@@ -223,17 +242,18 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
             return Response;
         }
 
-        public ViewHostDetailCommonV2 ViewHostDetailsV2(string HostId, string customerId)
+        public ViewHostDetailCommonV2 ViewHostDetailsV2(string HostCode, string customerId)
         {
             var Response = new ViewHostDetailCommonV2();
             string SQL = "EXEC sproc_cpanel_host_management @Flag='ghd'";
-            SQL += ",@HostId=" + _dao.FilterString(HostId);
+            SQL += ",@HostCode=" + _dao.FilterString(HostCode);
             SQL += ",@CustomerAgentId=" + _dao.FilterString(customerId);
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count == 1)
             {
                 var ResponseMapper = _dao.DataTableToListObject<ViewHostDetailCommonV2>(dbResponse).ToList();
                 Response = ResponseMapper[0];
+                var HostId = Response.HostId;
                 string SQL2 = "EXEC sproc_cpanel_host_management @Flag='ghgil'";
                 SQL2 += ",@HostId=" + _dao.FilterString(HostId);
                 var dbResponse2 = _dao.ExecuteDataTable(SQL2);

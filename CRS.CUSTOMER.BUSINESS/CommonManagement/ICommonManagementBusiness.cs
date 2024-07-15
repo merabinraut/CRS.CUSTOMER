@@ -1,6 +1,7 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.CommonManagement;
 using CRS.CUSTOMER.SHARED.Home;
+using System;
 using System.Collections.Generic;
 
 namespace CRS.CUSTOMER.BUSINESS.CommonManagement
@@ -15,5 +16,6 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         List<SystemLinkCommon> GetSystemLink();
         #endregion
         string GetForceFulLogout(string UserId);
+        Tuple<int, int> GetMetaTagInfo(string type, string locationId = "", string clubId = "");
     }
 }

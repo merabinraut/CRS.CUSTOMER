@@ -302,11 +302,24 @@
                                     {
                                         if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
                                         {
-                                            <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                                            <div class="opening_hours">
+                                                <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
+                                               @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+
+                                            <span style="line-height:13px;">
+                                                @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+
+                                            </span>
+                                            </div>
                                         }
                                         else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                                         {
-                                            <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                                            <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">
+                                            <span style="line-height:13.5px;">
+                                                @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+
+                                            </span>
+                                    </div>
                                         }
 
                                         <!-- e/opening hours -->
@@ -492,12 +505,18 @@
 <!-- #endregion -->
 @section scripts
 {
-    <script>
+    <script>       
         $(document).ready(function () {
            var RenderValue = '@ViewBag.RenderValue';
             var tab1Button = document.getElementById("tab1Button");
             var tab2Button = document.getElementById("tab2Button");
-
+            var tabActive = '@ViewBag.TabActive';
+            if (tabActive == 'True') {
+                tab1Button.classList.remove("active");
+                tab2Button.classList.add("active");
+                tab1.classList.add("hidden");
+                tab2.classList.remove("hidden");
+            }
             if (RenderValue && (RenderValue === "host" || RenderValue === "club")) {
                 if (RenderValue === "host") {
                     tab1Button.classList.remove("active");
@@ -683,7 +702,7 @@
 
         function redirectToSearchPage() {
            var locationId = '@ViewBag.LocationId';
-            var searchUrl = `/Search/Index?LocationId=${locationId}`;
+            var searchUrl = `/search${locationId}/?target=club`;
             window.location.href = searchUrl;
         }
 

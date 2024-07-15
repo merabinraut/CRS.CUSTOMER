@@ -1,0 +1,364 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.ProfileManagement.PointReportModel
+@{
+    ViewBag.Title = "ポイント | hoslogJP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<style>
+    .pointcontainer {
+        margin-top: 16px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .pointSection {
+        border-radius: 8px;
+        border: 1px solid #FFEAF5;
+        background: #FFFBFD;
+        display: flex;
+        gap: 16px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        padding-left: 16PX;
+        /*        align-items: center;*/
+        filter: drop-shadow(0px 0px 10px rgba(141, 136, 196, 0.10));
+        /* height: 90px;*/
+    }
+
+    .pointsvg {
+        width: 48px;
+        height: 48px;
+        padding: 10.5px;
+        border-radius: 100%;
+        background: #FFEBF5;
+    }
+
+
+
+    .tabs {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #F4F4F4;
+    }
+
+        .tabs button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+        }
+
+            .tabs button.active {
+                /*background-color: #ccc;*/
+                border-bottom: 2px solid #D75A8B;
+                color: #D75A8B;
+            }
+
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border-top: none;
+    }
+
+    #Tab1 {
+        display: block;
+    }
+</style>
+
+<div>
+
+    @*Navbar*@
+    <div class="flex items-center border-t-[2px] border-t-[#C8B477] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="window.location.href='/'">
+        <div class="flex gap-2 items-center absolute top-[12px] left-4 text-sm">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="22" height="23" viewBox="0 0 22 23" fill="none">
+                <path d="M15.2352 3.24084C14.786 2.79167 14.0618 2.79167 13.6127 3.24084L5.99518 10.8583C5.63768 11.2158 5.63768 11.7933 5.99518 12.1508L13.6127 19.7683C14.0618 20.2175 14.786 20.2175 15.2352 19.7683C15.6843 19.3192 15.6843 18.595 15.2352 18.1458L8.59851 11.5L15.2443 4.85417C15.6843 4.41417 15.6843 3.68084 15.2352 3.24084Z"
+                      fill="#BCB08A" />
+            </svg>戻る
+        </div>
+        <div class="text-center w-full font-[700] text-[#333] text-sm ">
+            ポイント
+        </div>
+    </div>
+
+    <div class="pointcontainer">
+
+
+        @*Section 1*@
+        <div class='pointSection'>
+            <div class='pointsvg'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <path d="M18.2188 3.875C16.7059 3.875 15.3348 4.15845 14.2637 4.69238C13.1925 5.22632 12.3125 6.09644 12.3125 7.25V10.625C12.3125 10.7338 12.3488 10.8392 12.3652 10.9414C11.5808 10.7371 10.7107 10.625 9.78125 10.625C8.26843 10.625 6.89734 10.9084 5.82617 11.4424C4.75501 11.9763 3.875 12.8464 3.875 14V20.75C3.875 21.9036 4.75501 22.7737 5.82617 23.3076C6.89734 23.8416 8.26843 24.125 9.78125 24.125C11.2941 24.125 12.6652 23.8416 13.7363 23.3076C14.8075 22.7737 15.6875 21.9036 15.6875 20.75V20.4072C16.462 20.6116 17.3091 20.75 18.2188 20.75C19.7316 20.75 21.1027 20.4666 22.1738 19.9326C23.245 19.3987 24.125 18.5286 24.125 17.375V7.25C24.125 6.09644 23.245 5.22632 22.1738 4.69238C21.1027 4.15845 19.7316 3.875 18.2188 3.875ZM18.2188 5.5625C19.5042 5.5625 20.6478 5.83936 21.4092 6.22168C22.1705 6.604 22.4375 7.0061 22.4375 7.25C22.4375 7.4939 22.1705 7.896 21.4092 8.27832C20.6478 8.66065 19.5042 8.9375 18.2188 8.9375C16.9334 8.9375 15.7897 8.66065 15.0283 8.27832C14.267 7.896 14 7.4939 14 7.25C14 7.0061 14.267 6.604 15.0283 6.22168C15.7897 5.83936 16.9334 5.5625 18.2188 5.5625ZM14 9.64941C14.089 9.69885 14.1714 9.76148 14.2637 9.80762C15.3348 10.3416 16.7059 10.625 18.2188 10.625C19.7316 10.625 21.1027 10.3416 22.1738 9.80762C22.2661 9.76148 22.3485 9.69885 22.4375 9.64941V10.625C22.4375 10.8689 22.1705 11.271 21.4092 11.6533C20.6478 12.0356 19.5042 12.3125 18.2188 12.3125C16.9334 12.3125 15.7897 12.0356 15.0283 11.6533C14.267 11.271 14 10.8689 14 10.625V9.64941ZM9.78125 12.3125C11.0667 12.3125 12.2103 12.5894 12.9717 12.9717C13.733 13.354 14 13.7561 14 14C14 14.2439 13.733 14.646 12.9717 15.0283C12.2103 15.4106 11.0667 15.6875 9.78125 15.6875C8.49585 15.6875 7.35217 15.4106 6.59082 15.0283C5.82947 14.646 5.5625 14.2439 5.5625 14C5.5625 13.7561 5.82947 13.354 6.59082 12.9717C7.35217 12.5894 8.49585 12.3125 9.78125 12.3125ZM22.4375 13.0244V14C22.4375 14.2439 22.1705 14.646 21.4092 15.0283C20.6478 15.4106 19.5042 15.6875 18.2188 15.6875C17.2596 15.6875 16.3928 15.5293 15.6875 15.292V14C15.6875 13.8912 15.6512 13.7858 15.6348 13.6836C16.4192 13.8879 17.2893 14 18.2188 14C19.7316 14 21.1027 13.7166 22.1738 13.1826C22.2661 13.1365 22.3485 13.0739 22.4375 13.0244ZM5.5625 16.3994C5.65149 16.4489 5.73389 16.5115 5.82617 16.5576C6.89734 17.0916 8.26843 17.375 9.78125 17.375C11.2941 17.375 12.6652 17.0916 13.7363 16.5576C13.8286 16.5115 13.911 16.4489 14 16.3994V17.375C14 17.6189 13.733 18.021 12.9717 18.4033C12.2103 18.7856 11.0667 19.0625 9.78125 19.0625C8.49585 19.0625 7.35217 18.7856 6.59082 18.4033C5.82947 18.021 5.5625 17.6189 5.5625 17.375V16.3994ZM22.4375 16.3994V17.375C22.4375 17.6189 22.1705 18.021 21.4092 18.4033C20.6478 18.7856 19.5042 19.0625 18.2188 19.0625C17.2596 19.0625 16.3928 18.9274 15.6875 18.6934V17.0586C16.462 17.2629 17.3058 17.375 18.2188 17.375C19.7316 17.375 21.1027 17.0916 22.1738 16.5576C22.2661 16.5115 22.3485 16.4489 22.4375 16.3994ZM5.5625 19.7744C5.65149 19.8239 5.73389 19.8865 5.82617 19.9326C6.89734 20.4666 8.26843 20.75 9.78125 20.75C11.2941 20.75 12.6652 20.4666 13.7363 19.9326C13.8286 19.8865 13.911 19.8239 14 19.7744V20.75C14 20.9939 13.733 21.396 12.9717 21.7783C12.2103 22.1606 11.0667 22.4375 9.78125 22.4375C8.49585 22.4375 7.35217 22.1606 6.59082 21.7783C5.82947 21.396 5.5625 20.9939 5.5625 20.75V19.7744Z" fill="#D75A8B" />
+                </svg>
+            </div>
+
+            <div class="flex flex-col gap-[1.5]">
+                <p class='font-[400] text-[12px] mb-1'>ホスログポイント</p>
+                <p class='font-bold mb-3 ' style="font-size:23px; height:20px">@Session["Amount"]</p>
+                <p class='text-[10px] font-[400]'>獲得ポイントと使用ポイントの合計を表示します</p>
+            </div>
+
+        </div>
+
+
+
+        <div class="tabs">
+            <button class="tablinks active" onclick="openTab(event, 'Tab1')">全て</button>
+            <button class="tablinks" onclick="openTab(event, 'Tab2')">獲得</button>
+            <button class="tablinks" onclick="openTab(event, 'Tab3')">交換済み</button>
+        </div>
+
+        <div id="Tab1" class="tabcontent">
+            @if (!string.IsNullOrEmpty(Model.AllPointReportList.ToString()) && Model.AllPointReportList.Count > 0)
+            {
+                foreach (var item in Model.AllPointReportList)
+                {
+
+                    <div class="mt-4 flex flex-col gap-3">
+
+                        @if (@item.DayType.ToLower() == "today")
+                        {
+                            <p>
+                                本日
+                            </p>
+                        }
+                        else if (@item.DayType.ToLower() == "yesterday")
+                        {
+                            <p>
+                                昨日
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                @item.DayType
+                            </p>
+                        }
+
+
+
+                        @foreach (var item1 in item.PointReportList)
+                        {
+                            <div class="flex justify-between pb-2 " style="border-bottom: 1px solid #A1A1AA33; ">
+
+                                <div class="flex gap-2 items-center">
+
+                                    <div style="width:2px" class="h-7 bg-[#D75A8B] rounded"> </div>
+
+                                    <div>
+                                        <p class="text-[12px] font-[700] text-[#344054]">
+                                            @item1.TransactionDate
+                                        </p>
+                                        <p class="text-[10px] font-[400] text-[#667085]">
+                                            @item1.Remark
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                                <div>
+                                    @if (@item1.TransactionMode.ToLower() == "cr")
+                                    {
+                                        <p class="text-[12px] font-[700] " style="color: #33AF31">
+                                            + @item1.Point
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-[12px] font-[700] " style="color: #E05151">
+                                            - @item1.Point
+                                        </p>
+                                    }
+
+                                    <p class="text-[8px] font-[400] text-[#667085]">
+                                        @item1.TotalPoints
+                                    </p>
+                                </div>
+
+                            </div>
+                        }
+
+
+                    </div>
+                }
+            }
+
+
+
+            @*<div class="mt-4 flex flex-col gap-3">
+                    <p>昨日</p>
+
+                    <div class="flex justify-between pb-2 " style="border-bottom: 1px solid #A1A1AA33; ">
+
+                        <div class="flex gap-2 items-center">
+
+                            <div style="width:2px" class="h-7 bg-[#D75A8B] rounded"> </div>
+
+                            <div>
+                                <p class="text-[12px] font-[700] text-[#344054]">
+                                    2024.01.03
+                                </p>
+                                <p class="text-[10px] font-[400] text-[#667085]">
+                                    ご予約につきの獲得ポイント
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <p class="text-[12px] font-[700] " style="color: #E05151">
+                                - 500
+                            </p>
+                            <p class="text-[8px] font-[400] text-[#667085]">
+                                1,200.00
+                            </p>
+                        </div>
+
+                    </div>
+                </div>*@
+
+        </div>
+
+        @*tab2*@
+
+        <div id="Tab2" class="tabcontent">
+            <div class="mt-4 flex flex-col gap-3">
+                @if (!string.IsNullOrEmpty(Model.CreditPointReportList.ToString()) && Model.CreditPointReportList.Count > 0)
+                {
+                    foreach (var item in Model.CreditPointReportList)
+                    {
+
+                        <p>@item.DayType</p>
+                        foreach (var item1 in item.PointReportList)
+                        {
+                            <div class="flex justify-between pb-2 " style="border-bottom: 1px solid #A1A1AA33; ">
+
+                                <div class="flex gap-2 items-center">
+
+                                    <div style="width:2px" class="h-7 bg-[#D75A8B] rounded"> </div>
+
+                                    <div>
+                                        <p class="text-[12px] font-[700] text-[#344054]">
+                                            @item1.TransactionDate
+                                        </p>
+                                        <p class="text-[10px] font-[400] text-[#667085]">
+                                            @item1.Remark
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                                <div>
+                                    @if (@item1.TransactionMode.ToLower() == "cr")
+                                    {
+                                        <p class="text-[12px] font-[700] " style="color: #33AF31">
+                                            + @item1.Point
+                                        </p>
+                                    }
+
+
+                                    <p class="text-[8px] font-[400] text-[#667085]">
+                                        @item1.TotalPoints
+                                    </p>
+                                </div>
+
+                            </div>
+                        }
+
+
+                    }
+                }
+
+            </div>
+
+
+
+        </div>
+
+
+        @*tab3*@
+
+        <div id="Tab3" class="tabcontent">
+
+            <div class="mt-4 flex flex-col gap-3">
+                @if (!string.IsNullOrEmpty(Model.DebitPointDayTypeList.ToString()) && Model.DebitPointDayTypeList.Count > 0)
+                {
+                    foreach (var item in Model.DebitPointDayTypeList)
+                    {
+
+                        <p>@item.DayType</p>
+                        foreach (var item1 in item.PointReportList)
+                        {
+                            <div class="flex justify-between pb-2 " style="border-bottom: 1px solid #A1A1AA33; ">
+
+                                <div class="flex gap-2 items-center">
+
+                                    <div style="width:2px" class="h-7 bg-[#D75A8B] rounded"> </div>
+
+                                    <div>
+                                        <p class="text-[12px] font-[700] text-[#344054]">
+                                            @item1.TransactionDate
+                                        </p>
+                                        <p class="text-[10px] font-[400] text-[#667085]">
+                                            @item1.Remark
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                                <div>
+                                    @if (@item1.TransactionMode.ToLower() == "dr")
+                                    {
+                                        <p class="text-[12px] font-[700] " style="color: #E05151">
+                                            - @item1.Point
+                                        </p>
+                                    }
+
+                                    <p class="text-[8px] font-[400] text-[#667085]">
+                                        @item1.TotalPoints
+                                    </p>
+                                </div>
+
+                            </div>
+                        }
+                    }
+                }
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+
+        // Hide all tab content
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Remove the active class from all tab links
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+</script>

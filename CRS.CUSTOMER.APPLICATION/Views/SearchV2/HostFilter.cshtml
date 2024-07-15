@@ -1,0 +1,366 @@
+﻿@model CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchV2FilterHostTabResponseModel
+@{
+    ViewBag.Title = "検索フィルター‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var PostURL = ViewBag.PostURL;
+}
+<style>
+    #like {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+    }
+
+    .active {
+        color: #D75A8B;
+        background: #F3F3F3;
+    }
+</style>
+<style>
+
+    .next-prev-btn {
+        border: 1px solid #F8F8F8;
+        display: flex;
+        width: 44px;
+        height: 44px;
+        justify-content: center;
+        align-items: center;
+        flex: none;
+        cursor: pointer
+    }
+
+    .page-number-list div {
+        border: 1px solid #F8F8F8;
+        display: flex;
+        height: 44px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px; /* 150% */
+        cursor: default;
+    }
+
+        .page-number-list div.active {
+            color: #D75A8B;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px; /* 150% */
+            background: #F3F3F3;
+        }
+
+    .owl-dots > .active {
+        background: #E3A1A1;
+    }
+
+    .locationSearch:focus {
+        outline: none;
+    }
+</style>
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="window.location.href='/'">
+    <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
+                  fill="#BCB08A" />
+        </svg>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
+    </div>
+    <div class="text-center w-full font-bold"> 検索結果</div>
+</div>
+<!-- search bar -->
+<div class=" border border-[#D6CEB4] flex my-2 mx-4 rounded-[4px] search-input" onclick="redirectToSearchPage()">
+    <span class=" mt-[10px] ml-3 material-icons-outlined text-[#D6CEB4]">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.125 1.875C11.5698 1.875 14.375 4.68018 14.375 8.125C14.375 9.62158 13.8501 10.9937 12.9688 12.0703L17.9492 17.0508L17.0508 17.9492L12.0703 12.9688C10.9937 13.8501 9.62158 14.375 8.125 14.375C4.68018 14.375 1.875 11.5698 1.875 8.125C1.875 4.68018 4.68018 1.875 8.125 1.875ZM8.125 3.125C5.35645 3.125 3.125 5.35645 3.125 8.125C3.125 10.8936 5.35645 13.125 8.125 13.125C10.8936 13.125 13.125 10.8936 13.125 8.125C13.125 5.35645 10.8936 3.125 8.125 3.125Z"
+                  fill="#BCB08A" />
+        </svg>
+    </span>
+    <input class="w-full text-xs text-[#BCB08A] "
+           title="Search"
+           type="text"
+           placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Filter_Placeholder" readonly />
+    <div class="group flex justify-end cursor-pointer p-3 rotate-90" title="Filter">
+        <a onclick="redirectToSearchPage()">
+            <svg class="group-hover:bg-primaryLight w-4 h-4 text-[#BCB08A] " aria-hidden="true"
+                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                      d="M4 12.25V1m0 11.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M4 19v-2.25m6-13.5V1m0 2.25a2.25 2.25 0 0 0 0 4.5m0-4.5a2.25 2.25 0 0 1 0 4.5M10 19V7.75m6 4.5V1m0 11.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM16 19v-2" />
+            </svg>
+        </a>
+    </div>
+
+</div>
+
+<div style="border: 1px solid #EDEDED;background: #E3E3E3;">
+    <!-- clippath -->
+    <div class=" mt-[8px]">
+        @*  <svg id="clippath" xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
+                <path d="M0 4C0 1.79086 1.79086 0 4 0H215L202.675 14.4652L215 27H4C1.79086 27 0 25.2091 0 23V4Z"
+                      fill="url(#paint0_linear_2051_57311)" />
+                <defs>
+                    <linearGradient id="paint0_linear_2051_57311" x1="21.5" y1="2.7" x2="145.635" y2="106.49"
+                                    gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#99AEFB" />
+                        <stop offset="0.578125" stop-color="#F04AA4" />
+                        <stop offset="1" stop-color="#E7B282" />
+                    </linearGradient>
+                </defs>
+                <image x="7" y="5" width="16" height="16" xlink:href="/Content/assets/images/customer/slippathsvg.svg" />
+                <text y="18" x="25" font-family="Arial" font-size="14" style="font-weight: 700; " fill="#FAFAFA">
+                    あなたにマッチするホスト2
+                </text>
+            </svg>*@
+        <svg xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
+            <path d="M0 0H215L202.675 14.4652L215 27H0V0Z" fill="url(#paint0_linear_15277_243149)" />
+            <defs>
+                <linearGradient id="paint0_linear_15277_243149" x1="21.5" y1="2.7" x2="145.635" y2="106.49" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#99AEFB" />
+                    <stop offset="0.578125" stop-color="#F04AA4" />
+                    <stop offset="1" stop-color="#E7B282" />
+                </linearGradient>
+            </defs>
+
+            <image x="7" y="5.5" width="16" height="16" xlink:href="~/Content/assets/images/customer/slippathsvg.svg" />
+            <text x="25" y="50%" font-size="14" style="font-weight: 700; line-height:16.8px" fill="#FAFAFA" dominant-baseline="central">
+                あなたにマッチするホスト
+            </text>
+        </svg>
+    </div>
+    <!-- clippath end  -->
+    <div class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px] my-[12px]" style="overflow-y:hidden">
+        @foreach (var item in Model.HostRecommendationModel)
+        {
+
+            <a onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@ViewBag.PrefecturesArea');">
+                <div class="flex  hover:cursor-pointer">
+                    <div style="border-radius: 4px; width:112px" class="w-[112px]  h-auto flex flex-col justify-end text-center relative">
+                        <div class="w-full flex justify-center">
+                            <img style="width:112px" class="w-[112px] h-[154px] object-cover rounded-[2px]"
+                                 src="@item.HostLogo" />
+                        </div>
+                        @if (item.IsBookmarked.ToUpper() == "Y")
+                        {
+                            <div id="like" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
+                                <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="like" onclick="AddBookmark('@item.ClubId','@item.HostId','host')">
+                                <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                            </div>
+                        }
+                        <div style="background-color:rgba(0, 0, 0, 0.70);"
+                             class="absolute  w-[112px] h-[35px]  rounded-[2px] flex flex-col   py-[2px] px-[4px]">
+                            <strong class="text-[12px] text-[#FFFFFF] font-bold text-center">@item.HostNameJapanese</strong>
+                            <p style="font-weight:400" class="  flex items-center gap-1 text-[10px] justify-center text-[#FFFFFF]">
+                                <img src="@item.ClubLogo" alt="img"
+                                     class="h-[11px] w-[11px] rounded-full" /><span style="overflow:hidden; width:80px;white-space:nowrap;text-overflow:ellipsis">@item.ClubNameEnglish</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+    </div>
+</div>
+<!-- for search result -->
+<div class="bg-[##FFFFFF]  flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]">
+    <span>検索結果</span>
+    <span>@Model.FilteredHostModel.Count 件</span>
+</div>
+@if (Model.FilteredHostModel.Count <= 0)
+{
+    <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center">
+        <div class="text-[#18181B] font-semibold mt-12 text-center">
+            @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
+        </div>
+    </div>
+}
+else
+{
+    <div class="no-scrollbar flex flex-wrap flex-row gap-[8px] justify-center my-[12px] bg-[##FFFFFF#FFFFFF]">
+        @foreach (var item in Model.FilteredHostModel)
+        {
+            <a onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@ViewBag.PrefecturesArea');">
+                <div class="flex  hover:cursor-pointer">
+                    <div style="border-radius: 4px; width:112px" class="w-[112px]  h-auto flex flex-col justify-end text-center relative">
+                        <div class="w-full flex justify-center">
+                            <img style="width:112px" class="w-[112px] h-[154px] object-cover	 rounded-[2px]"
+                                 src="@item.HostLogo" />
+                        </div>
+                        @if (item.IsBookmarked.ToUpper() == "Y")
+                        {
+                            <div id="like" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
+                                <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="like" onclick="AddBookmark('@item.ClubId','@item.HostId','host')">
+                                <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                            </div>
+                        }
+                        <div style="background-color:rgba(0, 0, 0, 0.70);"
+                             class="absolute  w-[112px] h-[35px]  rounded-[2px] flex flex-col    py-[2px] px-[4px]">
+                            <strong class="text-[12px] text-[#FFFFFF] font-bold text-center">@item.HostNameJapanese</strong>
+                            <p style="font-weight:400" class="  flex items-center gap-1 text-[10px] justify-center text-[#FFFFFF]">
+                                <img src="@item.ClubLogo" alt="img"
+                                     class="h-[11px] w-[11px] rounded-full" />
+                                <span style="overflow:hidden; width:80px;white-space:nowrap;text-overflow:ellipsis">
+
+                                    @item.ClubNameEnglish
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+}
+<form method="post" id="pagination-form-id" hidden>
+    <input name="LocationId" value="@Model.RequestModel.LocationId" hidden />
+    <input name="SearchFilter" value="@Model.RequestModel.SearchFilter" hidden />
+    <input name="Height" value="@Model.RequestModel.Height" hidden />
+    <input name="Age" value="@Model.RequestModel.Age" hidden />
+    <input name="BloodType" value="@Model.RequestModel.BloodType" hidden />
+    <input name="ConstellationGroup" value="@Model.RequestModel.ConstellationGroup" hidden />
+    <input name="Occupation" value="@Model.RequestModel.Occupation" hidden />
+    <input name="StartIndex" id="startindex-id" value="0" hidden />
+</form>
+<!-- for pagination -->
+<div id="pagination-container" class="flex justify-between pagination-container-wrapper my-[7px] ">
+    <button id="prev-btn" class="next-prev-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+            <path d="M10.707 2.13599C10.8945 2.32351 10.9998 2.57782 10.9998 2.84299C10.9998 3.10815 10.8945 3.36246 10.707 3.54999L5.75705 8.49999L10.707 13.45C10.8892 13.6386 10.99 13.8912 10.9877 14.1534C10.9854 14.4156 10.8803 14.6664 10.6949 14.8518C10.5095 15.0372 10.2586 15.1424 9.99645 15.1447C9.73425 15.1469 9.48165 15.0461 9.29305 14.864L3.63605 9.20699C3.44858 9.01946 3.34326 8.76515 3.34326 8.49999C3.34326 8.23482 3.44858 7.98052 3.63605 7.79299L9.29305 2.13599C9.48058 1.94852 9.73488 1.8432 10 1.8432C10.2652 1.8432 10.5195 1.94852 10.707 2.13599Z" fill="#959595" />
+        </svg>
+    </button>
+    <div id="page-numbers" class=" page-number-list flex justify-between w-full">
+        @{
+            int startIndex = ViewBag.StartIndex;
+            double currentPage = Math.Floor((double)startIndex / 12) + 1; // Calculate current page number
+            double totalPages = ViewBag.TotalRecords != null ? Math.Ceiling((double)ViewBag.TotalRecords / 12) : 0; // Calculate total pages
+            int maxPagesToShow = 3; // Maximum number of page links to display
+
+            // Calculate the start and end pages to display
+            int startPage = Math.Max(1, (int)currentPage - (maxPagesToShow / 2));
+            int endPage = Math.Min((int)totalPages, startPage + maxPagesToShow - 1);
+            if (endPage - startPage + 1 < maxPagesToShow)
+            {
+                startPage = Math.Max(1, endPage - maxPagesToShow + 1);
+            }
+
+            // Display page links
+            for (int i = startPage; i <= endPage; i++)
+            {
+                if (i == (int)currentPage)
+                {
+                    <div class="active">@i</div>
+                }
+                else
+                {
+                    <div onclick="PaginationFunction(@i);">@i</div>
+                }
+            }
+        }
+
+    </div>
+    <button id="next-btn" class="next-prev-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+            <path d="M5.29295 2.13605C5.10548 2.32358 5.00017 2.57788 5.00017 2.84305C5.00017 3.10821 5.10548 3.36252 5.29295 3.55005L10.243 8.50005L5.29295 13.45C5.11079 13.6387 5.01 13.8913 5.01228 14.1535C5.01456 14.4156 5.11973 14.6665 5.30513 14.8519C5.49054 15.0373 5.74135 15.1424 6.00355 15.1447C6.26575 15.147 6.51835 15.0462 6.70695 14.864L12.364 9.20705C12.5514 9.01952 12.6567 8.76521 12.6567 8.50005C12.6567 8.23488 12.5514 7.98058 12.364 7.79305L6.70695 2.13605C6.51942 1.94858 6.26512 1.84326 5.99995 1.84326C5.73479 1.84326 5.48048 1.94858 5.29295 2.13605Z" fill="#959595" />
+        </svg>
+    </button>
+</div>
+<!-- pagination end -->
+<div class=" ">
+    <div>
+
+    </div>
+    <div style="background-color: #FFFFFF;" class="flex flex-row items-center justify-end gap-1 pr-[16px] ">
+        <div class="flex flex-row items-center justify-end gap-1 py-[12px] " id="scrollToTopButton">
+
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M7.99996 2.34375L1.89062 8.45308L2.60929 9.15575L7.99996 3.76508L13.3906 9.15575L14.1093 8.45308L7.99996 2.34375ZM7.99996 5.84375L1.89062 11.9531L2.60929 12.6557L7.99996 7.26508L13.3906 12.6557L14.1093 11.9531L7.99996 5.84375Z"
+                          fill="#040000" />
+                </svg>
+            </div>
+            <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
+                トップに戻る
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- </div> -->
+@section scripts
+{
+    <script>
+        let currentPage = Math.floor((@ViewBag.StartIndex) / 12) + 1; // Calculate current page number
+        const totalPages = @(ViewBag.TotalRecords != null ? Math.Ceiling(Convert.ToDouble(ViewBag.TotalRecords) / 12) : 0);
+
+        if (currentPage > 1) {
+            document.getElementById("prev-btn").removeAttribute("disabled");
+        }
+        else {
+            document.getElementById("prev-btn").setAttribute("disabled", "disabled");
+        }
+
+        if (currentPage >= totalPages ) {
+            document.getElementById("next-btn").setAttribute("disabled", "disabled");
+        }
+        else {
+            document.getElementById("next-btn").removeAttribute("disabled");
+        }
+
+
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 20) {
+                    $('#scrollToTopButton').fadeIn();
+                } else {
+                    $('#scrollToTopButton').fadeOut();
+                }
+            });
+
+            $('#scrollToTopButton').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                return false;
+            });
+        });
+
+         function redirectToSearchPage() {
+            var prefecturesArea = '@ViewBag.PrefecturesArea';
+            var searchUrl = `/search${prefecturesArea}/?target=club`;
+            window.location.href = searchUrl;
+        }
+
+        $('#prev-btn').on('click', function () {
+            if (currentPage > 1) {
+                currentPage--;
+                PaginationFunction(currentPage);
+            }
+        });
+
+        $('#next-btn').on('click', function () {
+            if (currentPage < totalPages) {
+                currentPage = Math.min(currentPage + 1, totalPages);
+                PaginationFunction(currentPage);
+            }
+        });
+
+        function PaginationFunction(currentPage) {
+            let page_size = 12;
+            const startIndex = (currentPage - 1) * page_size;
+            $('#startindex-id').val(startIndex);
+            var form = document.getElementById("pagination-form-id");
+            form.action = "/search" + "@ViewBag.PrefecturesArea" + "/?target=host";
+            form.submit();
+        }
+    </script>
+}

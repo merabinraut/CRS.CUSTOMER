@@ -578,7 +578,7 @@ align-items: center;
 }
 
 .modal-content {
-    /* background-color: #fff; */
+    background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
@@ -599,7 +599,7 @@ align-items: center;
 @media (max-width: 768px) {
     .modal-content {
         max-width: 100%;
-        width: 100%;
+        /*width: 100%;*/
     }
 }
 
@@ -850,7 +850,6 @@ a.ui-button:active,
     text-align: left;
     margin: 0px;
     color: #44464f;
-    font-family: "Noto Sans JP";
     font-size: 14px;
     font-style: normal;
     font-weight: 500;

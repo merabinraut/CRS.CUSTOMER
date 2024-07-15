@@ -2,8 +2,11 @@
 @{
     ViewBag.Title = "よくあるご質問 ‖ ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
+    var MetaClubCount = ViewBag.MetaClubCount;
+    var MetaHostCount = ViewBag.MetaHostCount;
+    var metaContent = $"業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びが簡単に☆接客リクエストで推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した{MetaClubCount}件のホストクラブ・{MetaHostCount}人のホスト情報を掲載中！";
 }
-
+<meta name="description" content="@metaContent">
 <style>
     .containermain {
         position: relative;
@@ -44,7 +47,7 @@
 </style>
 <!-- breadcrum -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="#" class="active">ホーム</a>
+    <a href="/login" class="active">ホーム</a>
     <i class="las la-angle-right"></i>
     <a href="#">よくある質問</a>
 </div>
@@ -447,22 +450,22 @@
             <div class="containermain justify-center flex flex-row">
                 <div class="box w-[48px]  h-[48px]" id="first">
                     @*<img class="rounded-full object-cover" src="Content/assets/images/customer/stackimg.png"
-        alt="profileimg">*@
+                        alt="profileimg">*@
                     <img class="rounded-full object-cover" src="~/Content/assets/images/customer/stackimg.png" style="height:48px; width:48px"
                          alt="profileimg">
 
                 </div>
                 <div class="box w-[48px]  h-[48px]" id="second" style="height:48px; width:48px">
                     @* <img class="rounded-full object-cover" src="Content/assets/images/customer/stackimg.png"
-        alt="profileimg">*@
+                        alt="profileimg">*@
                     <img class="rounded-full object-cover" src="~/Content/assets/images/customer/stackimg1.png" style="height:48px; width:48px"
                          alt="profileimg">
 
                 </div>
                 <div class="box w-[48px]  h-[48px]" id="third">
                     @* <img class="rounded-full object-cover" src="Content/assets/images/customer/stackmid.png"
-        alt="profileimg">*@
-                    <img class="rounded-full object-cover" src="~/Content/assets/images/customer/stackmid.png" style="height:56px; width:56px" 
+                        alt="profileimg">*@
+                    <img class="rounded-full object-cover" src="~/Content/assets/images/customer/stackmid.png" style="height:56px; width:56px"
                          alt="profileimg">
 
                 </div>
@@ -476,7 +479,7 @@
                 </div>
                 <button style="background-color: #D75A8B; color: #ffffff; border-radius: 8px; z-index:10"
                         class="p-2 mt-[16px]">
-                    <a href="@Url.Action("inquery","Footer")">
+                    <a href="/support">
 
                         お問い合わせを！
                     </a>

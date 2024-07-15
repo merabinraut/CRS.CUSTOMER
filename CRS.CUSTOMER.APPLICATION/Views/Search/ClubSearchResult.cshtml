@@ -89,7 +89,7 @@
 
                     </div>
                     <div style="color: #666666;" id="main-date-id">
-                        @(string.IsNullOrEmpty(ViewBag.Date) ? "日付" : ViewBag.Date)
+                        @(string.IsNullOrEmpty(ViewBag.Date) ? "予約日" : ViewBag.Date)
                     </div>
                 </div>
                 <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
@@ -131,7 +131,7 @@
 
 <!-- divider -->
 <div class="bg-[#F1F1F1] mt-[8px]">
-    <div class="border-t border-b border-[#EDEDED]" style="background:#E3E3E3;">
+    <div class=" border-[#EDEDED]" style="background:#E3E3E3;">
         <div class="flex mt-[12px]  justify-start mx-[16px] flex-row">
             <div class="  flex flex-row justify-start items-center  ">
                 <div class="flex flex-col">
@@ -325,11 +325,23 @@
                                 {
                                     if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "DAY")
                                     {
-                                        <div class="opening_hours"><img src="~/Content/assets/images/customer/sun.svg" alt="夜"> @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                                        <div class="opening_hours">
+                                            <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
+                                            <span style="line-height:13.5px;">
+                                                @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+
+                                            </span>
+                                        </div>
                                     }
                                     else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                                     {
-                                        <div class="opening_hours"><img src="/Content/assets/images/customer/moon.svg" alt="夜">@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime</div>
+                            <div class="opening_hours">
+                                <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+                                <span style="line-height:13.5px;">
+                                    @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+
+                                </span>
+                            </div>
                                     }
 
                                     <!-- e/opening hours -->

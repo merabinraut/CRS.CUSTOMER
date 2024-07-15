@@ -12,9 +12,18 @@
                 <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
             </i>
         </div>
-        <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" data-drawer-target="drawer-right-example"
-             data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
-            <i class="las la-bars"></i>
-        </div>
+        @if (@Session["Username"] != null)
+        {
+            <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" data-drawer-target="drawer-right-example"
+                 data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
+                <i class="las la-bars"></i>
+            </div>
+        }
+        else
+        {
+            <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='/login'">
+                <i class="las la-bars"></i>
+            </div>
+        }
     </div>
 </div>

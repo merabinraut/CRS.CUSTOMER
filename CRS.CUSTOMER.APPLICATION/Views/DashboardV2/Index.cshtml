@@ -2,7 +2,11 @@
 @{
     ViewBag.Title = "ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var MetaClubCount = ViewBag.MetaClubCount;
+    var MetaHostCount = ViewBag.MetaHostCount;
+    var metaContent = $"業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した{@MetaClubCount}件のホストクラブ・{@MetaHostCount}人のホスト情報を掲載中！";
 }
+<meta name="description" content="@metaContent">
 <style>
     #like {
         position: absolute;
@@ -169,7 +173,7 @@
 </div>
 <div class="flex flex-row justify-center">
     <div id="child" style="box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.14);"
-         class=" border-[1px] flex flex-col rounded-[8px] border-[#F1F1F1] bg-[#FCF8F9]  h-[196px]  mx-[16px]">
+         class=" border-[1px] flex flex-col rounded-[4px] border-[#ffffff] bg-[#ffffff]  h-[196px]  mx-[16px]">
         <div style="background-color: #EEEEEE; margin-left:15px;margin-right:15px; margin-top:24px; border-radius:3px "
              class="grid grid-cols-2 text-[14px]  py-[8px] mx-[15px]  border-black  ">
             <div class="flex pr-[8px]  flex-row gap-[4px] items-center" onclick="GetLocationFilterPopUp();">
@@ -180,7 +184,7 @@
 
                 </div>
                 <div style="color: #666666" id="selected-locationlabel-id" data-info="">
-                    場所
+                    エリア
                 </div>
             </div>
             <div class="flex flex-row gap-[4px] pl-[8px] pr-[12px]   items-center " style="border-left:1px solid #D6D6D6" onclick="GetPreferenceFilterPopUp();">
@@ -207,7 +211,7 @@
                     </svg>
                 </div>
                 <div style="color: #666666 ; " id="main-date-id">
-                    日付
+                    予約日
                 </div>
             </div>
             <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
@@ -249,7 +253,7 @@
     <div class="flex mx-[16px]   flex-row py-[12px]">
         <div class=" flex flex-row justify-start items-center w-[160px] ">
             <span>   <i class="fa-solid fa-location-dot text-primary-100"></i></span>
-            <h2 class="ml-3 font-[700] text-black  leading-[21px]" style="font-size:16px">場所から選ぶ</h2>
+            <h2 class="ml-[6px] font-[700] text-black leading-[21px] " style="font-size: 16px; letter-spacing:0; font-family:Noto sans JP">場所から選ぶ</h2>
         </div>
     </div>
     <div class="flex flex-col  gap-[6px] px-4 gap-[6px] pb-[16px]">
@@ -264,7 +268,7 @@
                         var afterSlash = locationParts.Length > 1 ? locationParts[1] : "";
                         if (Model.Location[i].LocationStatus == "A")
                         {
-                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
+                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationURL')">
                                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                     <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location1">
                                     <p class="locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
@@ -311,7 +315,7 @@
 
                         if (Model.Location[i].LocationStatus == "A")
                         {
-                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationID')">
+                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationURL')">
                                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                     <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
                                     <p style="line-height:12px; font-size:14px" class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
@@ -339,7 +343,7 @@
                                         </span>
                                     </p>
                                 </div>
-                                <div class="overlay" style="background:#fff; opacity:0.8"></div>
+                                <div class="overlay" style="background:#ccc; opacity:0.8"></div>
                             </div>
 
                         }
@@ -376,30 +380,49 @@
     }
 </style>
 
-<div style="background-color: #e2e2e2;" class=" h-[12px]">
+<div style="background-color: #F8F8F8; height: 12px">
 
 </div>
-<div style="border: 1px solid #EDEDED;background: #FFF;">
+<div style="border: 1px solid #EDEDED; border-left:none; background: #FFF;">
 
     <!-- clippath -->
-    <div class=" mt-[8px]">
-        <svg id="clippath" xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
-            <path d="M0 4C0 1.79086 1.79086 0 4 0H215L202.675 14.4652L215 27H4C1.79086 27 0 25.2091 0 23V4Z"
-                  fill="url(#paint0_linear_2051_57311)" />
+    <div class=" mt-[12px]">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
+            <path d="M0 0H215L202.675 14.4652L215 27H0V0Z" fill="url(#paint0_linear_15277_243149)" />
             <defs>
-                <linearGradient id="paint0_linear_2051_57311" x1="21.5" y1="2.7" x2="145.635" y2="106.49"
-                                gradientUnits="userSpaceOnUse">
+                <linearGradient id="paint0_linear_15277_243149" x1="21.5" y1="2.7" x2="145.635" y2="106.49" gradientUnits="userSpaceOnUse">
                     <stop stop-color="#99AEFB" />
                     <stop offset="0.578125" stop-color="#F04AA4" />
                     <stop offset="1" stop-color="#E7B282" />
                 </linearGradient>
             </defs>
-            <image x="7" y="5" width="16" height="16" xlink:href="~/Content/assets/images/customer/slippathsvg.svg" />
-            <text y="18" x="25" font-size="14" style="font-weight: 700; " fill="#FAFAFA">
 
+            <image x="7" y="5.5" width="16" height="16" xlink:href="~/Content/assets/images/customer/slippathsvg.svg" />
+            <text x="25" y="50%" font-size="14" style="font-weight: 700; line-height:16.8px" fill="#FAFAFA" dominant-baseline="central">
                 あなたにマッチするホスト
             </text>
         </svg>
+
+
+
+        @*      <svg id="clippath" xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
+                <path d="M0 4C0 1.79086 1.79086 0 4 0H215L202.675 14.4652L215 27H4C1.79086 27 0 25.2091 0 23V4Z"
+                      fill="url(#paint0_linear_2051_57311)" />
+                <defs>
+                    <linearGradient id="paint0_linear_2051_57311" x1="21.5" y1="2.7" x2="145.635" y2="106.49"
+                                    gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#99AEFB" />
+                        <stop offset="0.578125" stop-color="#F04AA4" />
+                        <stop offset="1" stop-color="#E7B282" />
+                    </linearGradient>
+                </defs>
+                <image x="7" y="5" width="16" height="16" xlink:href="~/Content/assets/images/customer/slippathsvg.svg" />
+                <text y="18" x="25" font-size="14" style="font-weight: 700; line-height:16.8px" fill="#FAFAFA">
+
+                    あなたにマッチするホスト
+                </text>
+            </svg>*@
     </div>
     <!-- clippath end  -->
     <div style="background-color :#F8F8F8; overflow-y:hidden;margin-left:16px" class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px]  my-[12px]" id="recommended-host-content-id">
@@ -413,12 +436,12 @@
 <div class="flex flex-col  gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
     <div class="flex tab-container-plane justify-between bg-white gap-[14px]">
         @*new tab*@
-        <div class="grid grid-cols-2 w-full tab-container-plane bg-white gap-[14px]">
+        <div class="grid grid-cols-2 w-full tab-container-plane bg-white gap-[14px] text-[15px]">
             <button id="tab1Button" class="tab-button-plane exclude-class tab-link active text-center" onclick="handleFirstTab()">
-                ホストクラブ
+                ピックアップ店舗
             </button>
             <button id="tab2Button" class="tab-button-plane exclude-class tab-link text-center" onclick="handleSecondTab()">
-                ホスト
+                ピックアップホスト
             </button>
         </div>
         @*new tab end*@
@@ -432,10 +455,10 @@
 <!----------------------------------------------------Plan Section---------------------------------------------------->
 <!-- #region Plan section -->
 <div class="flex flex-col overflow-hidden bg-[#EFDDE4]  py-[25px]">
-    <h2 class="text-[14px] pl-[16px] flex-none  font-[700]" style="color:#000">
+    <h2 class="text-[16px] pl-[16px] flex-none  font-[700]" style="color:#000">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.HoslogLimitedPlan
     </h2>
-    <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-2 py-4 ">
+    <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-[13px] py-4 ">
         @{
             var groupedByPrice = Model.PlanModel.OrderBy(p => p.Price).GroupBy(p => p.Price);
             var lowestPrice = groupedByPrice.First();
@@ -445,13 +468,13 @@
                 foreach (var item in group)
                 {
 
-                    <div style="box-shadow: 0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 16px -4px rgba(16, 24, 40, 0.08);border-radius: 8px;
+                    <div style="box-shadow: 0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 16px -4px rgba(16, 24, 40, 0.08);border-radius: 4px;
                border: 1px solid #EAECF0;"
                          class="bg-white w-[272px] pb-6 pt-4 flex flex-col justify-between">
                         <!-- image  -->
                         <div class="px-4">
                             <div class='flex'>
-                                <div class="">
+                                <div class="flex flex-col items-center gap-[1px]">
                                     @if (item.PlanId == lowestPrice.First().PlanId)
                                     {
                                         <i class="las la-crown linear-gradient-text text-[23px]"></i>
@@ -627,7 +650,7 @@
     </div>
     <div class="flex flex-col  gap-[6px] px-4 gap-[6px] pb-[16px]">
         <div class="grid  grid-cols-2 gap-[6px]">
-            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("0").ToString()');">
+            <div class="relative" onclick="PreferenceRedirect('s00001');">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/ShopsYouCanVisit.jpg" alt="location1">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -637,7 +660,7 @@
                 <div class="overlay"></div>
 
             </div>
-            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("1").ToString()');">
+            <div class="relative" onclick="PreferenceRedirect('s00002');">
                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden  rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/PrivateReservation.jpg" alt="location2">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -649,7 +672,7 @@
             </div>
         </div>
         <div class="grid grid-cols-3 gap-[6px]">
-            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("2").ToString()');">
+            <div class="relative" onclick="PreferenceRedirect('s00003');">
                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/LargeNumber.jpg" alt="location3">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -659,7 +682,7 @@
                 </div>
                 <div class="overlay"></div>
             </div>
-            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("3").ToString()');">
+            <div class="relative" onclick="PreferenceRedirect('s00004');">
                 <div class="innercontainer h-[100px] flex flex-row text-center  justify-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/VIPRoomsAvailable.jpg" alt="loction4">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -669,7 +692,7 @@
                 </div>
                 <div class="overlay"></div>
             </div>
-            <div class="relative" onclick="PreferenceRedirect('@ApplicationUtilities.EncryptParameter("4").ToString()');">
+            <div class="relative" onclick="PreferenceRedirect('s00005');">
                 <div class="innercontainer h-[100px] flex flex-row text-center justify-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/GirlsNightOut.jpg" alt="location5">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
@@ -753,7 +776,7 @@
             </div>
         </div>
         <div class="px-4 pt-6 pb-6 bg-white " style="padding-top: 24px; border-radius: 6px 6px 0px 0px; ">
-            <div class="text-sm text-[#333] font-bold mb-3">営業時間を選択する</div>
+            <div class="text-sm text-[#333] font-bold mb-3">最終入店時間から探す</div>
             <div class=" relative">
                 <div class="flex justify-center gap-5 items-center h-[171px] py-6 ">
                     <div class="relative">
@@ -815,10 +838,10 @@
         });</script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&libraries=geometry&callback=initMap" async defer></script>
     <script>
-        var CurrentLocationId = 0;
+        var CurrentLocationId = '/tokyo/kabukicho';
 
         function initMap() {
-           function findNearestLocation(userLocation, locations) {
+            function findNearestLocation(userLocation, locations) {
                 var userLatLng = new google.maps.LatLng(userLocation.lat, userLocation.lng);
                 var nearestLocation = null;
                 var nearestDistance = Number.MAX_VALUE;
@@ -831,8 +854,10 @@
                         nearestDistance = distance;
                         nearestLocation = locations[i];
                     }
-                }
-               CurrentLocationId = nearestLocation.id;
+               }
+               if (nearestLocation != null && nearestLocation != "") {
+                 CurrentLocationId = nearestLocation.id;
+               }
                $('#current-location-id').val(CurrentLocationId);
             }
             var userLocation = { lat: 0, lng: 0 }; // User's location
@@ -869,7 +894,7 @@
                                 let club = ResponseModel.RecommendedClubModel[i];
                                 let clubLogoSrc = club.ClubLogo ? club.ClubLogo : '~/Content/assets/images/customer/demo-image.jpeg';
                                 recommendedClubContentHTML += `
-                                    <a onclick="ClubDetailActionFunction('${club.LocationId}', '${club.ClubId}')">
+                                    <a onclick="ClubDetailRedirectFunction('${club.ClubCode}', '${club.LocationURL}')">
                                         <div class="flex w-[118px]">
                                             <div style="border-radius: 6px; border: 1px solid #F3F3F3; background: #FFF;" class="flex flex-col w-[118px] px-[8px] py-[10px]">
                                                 <div class="flex flex-row justify-center">
@@ -943,13 +968,13 @@
                                     BookmarkLabel = filled;
                                 }
                                 recommendedHostContentHTML += `
-                                      <a onclick="window.location.href='/LocationManagement/ViewHostDetail?HostId=${host.HostId}'">
+                                     <a onclick="HostDetailRedirectFunction('${host.HostCode}', '${host.ClubCode}', '${host.LocationURL}')">
                                         <div class="flex hover:cursor-pointer">
                                           <div style="border-radius: 4px; width:112px" class="w-[112px] h-auto flex flex-col justify-end text-center relative">
                                             <div class="w-full flex justify-center relative">
                                               <img style="width:112px" class="w-[112px] h-[154px] object-cover rounded-[2px]" src="${hostImage}" alt="hostlogo" />
-                                              <div class="absolute top-2 right-2" style="width: 24px; height: 24px;" onclick="event.stopPropagation(); ${host.IsBookmarked.trim().toUpperCase() == 'Y' ? 'ManageBookmark' : 'ManageBookmark'}('${host.ClubId}', '${host.HostId}', 'host', this)">
-                                                <img src="${BookmarkLabel}" alt="unfilled" style="width: 24px; height: 24px;"/>
+                                              <div class="absolute " style="width: 30px; height: 30px; top:2px; right:2px;" onclick="event.stopPropagation(); ${host.IsBookmarked.trim().toUpperCase() == 'Y' ? 'ManageBookmark' : 'ManageBookmark'}('${host.ClubId}', '${host.HostId}', 'host', this)">
+                                                <img src="${BookmarkLabel}" alt="unfilled" style="width: 30px; height: 30px;"/>
                                               </div>
                                             </div>
                                             <div style="background-color:rgba(0, 0, 0, 0.70); left:0.25px; border-radius: 0 0 2px 2px;"
@@ -1038,15 +1063,24 @@
         }
 
         function ClubHostRedirectFunction(RenderId) {
-            window.location.href = `/LocationManagement/Index?LocationId=${CurrentLocationId}&RenderId=${RenderId}`;
+            var locationId = $('#current-location-id').val();
+            window.location.href = `/area${locationId}/?RenderId=${RenderId}`;
+            //window.location.href = `/LocationManagement/Index?LocationId=${CurrentLocationId}&RenderId=${RenderId}`;
         }
 
         function PreferenceRedirect(Type) {
-            window.location.href = `/DashboardV2/Preference?LocationId=${CurrentLocationId}&Type=${Type}`;
+            var locationId = $('#current-location-id').val();
+            var searchUrl = `/search${locationId}/?TopSearch=${Type}`;
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = searchUrl;
+            document.body.appendChild(form);
+            form.submit();
         }
 
         function CurrentLocationRedirectFunction(RenderId = "") {
-            window.location.href = `/LocationManagement/Index?LocationId=${CurrentLocationId}&RenderId=${RenderId}`;
+            var locationId = $('#current-location-id').val();
+            window.location.href = `/area${locationId}/?RenderId=${RenderId}`;
         }
 
         const WorkingHoursShowPopup = () => {
@@ -1064,8 +1098,22 @@
             var concatenatedTime = concatenateTime(hourValue, minuteValue).trim();
             if (concatenatedTime === null || concatenatedTime === "") {
                 toastr.info("Invalid time");
+                return false;
             }
-            window.location.href = "/Search/DateTimeFilter?LocationId=" + CurrentLocationId + "&&FilteredTime=" + concatenatedTime + "&&ResultType='1'";
+            let today = new Date();
+            // Get the day, month, and year
+            let day = today.getDate(); // Get the day of the month (1-31)
+            let month = today.getMonth() + 1; // Get the month (0-11, add 1 to get 1-12)
+            let year = today.getFullYear(); // Get the full year (YYYY)
+            let formattedTodayDate = `${year}-${month}-${day}`;
+            //window.location.href = "/Search/DateTimeFilter?LocationId=" + CurrentLocationId + "&&FilteredTime=" + concatenatedTime + "&&ResultType='1'";
+            var prefecturesArea = $('#current-location-id').val();
+            var searchUrl = `/search${prefecturesArea}/?FilteredTime=${concatenatedTime}&&ResultType=@ApplicationUtilities.EncryptParameter("1").ToString()&&Date=${formattedTodayDate}`;
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = searchUrl;
+            document.body.appendChild(form);
+            form.submit();
         }
 
         const LastEntryShowPopup = () => {
@@ -1084,7 +1132,20 @@
             if (concatenatedTime === null || concatenatedTime === "") {
                 toastr.info("Invalid time");
             }
-            window.location.href = `/Search/DateTimeFilter?LocationId=${CurrentLocationId}&&FilteredTime=${concatenatedTime}&&ResultType=${'@ApplicationUtilities.EncryptParameter("2").ToString()'}`;
+            var prefecturesArea = $('#current-location-id').val();
+            let today = new Date();
+            // Get the day, month, and year
+            let day = today.getDate(); // Get the day of the month (1-31)
+            let month = today.getMonth() + 1; // Get the month (0-11, add 1 to get 1-12)
+            let year = today.getFullYear(); // Get the full year (YYYY)
+            let formattedTodayDate = `${year}-${month}-${day}`;
+            //window.location.href = `/Search/DateTimeFilter?LocationId=${CurrentLocationId}&&FilteredTime=${concatenatedTime}&&ResultType=${'@ApplicationUtilities.EncryptParameter("2").ToString()'}`;
+            var searchUrl = `/search${prefecturesArea}/?FilteredTime=${concatenatedTime}&&ResultType=@ApplicationUtilities.EncryptParameter("2").ToString()&&Date=${formattedTodayDate}`;
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = searchUrl;
+            document.body.appendChild(form);
+            form.submit();
         }
 
         function concatenateTime(hourValue, minuteValue) {
@@ -1109,11 +1170,12 @@
     <!--#region 1-->
     <script>
         function LocationFunction(i) {
-            window.location.href = "/LocationManagement/Index?LocationId=" + i;
+            window.location.href = "/area" + i;
         }
-        function ClubDetailActionFunction(i, j) {
-            window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
-        }</script>
+        //function ClubDetailActionFunction(i, j) {
+        //    window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
+        //}
+    </script>
     <!--#endregion-->
 
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
@@ -1687,7 +1749,6 @@
             document.getElementById('tab2').style.display = '';
             document.getElementById('tab1Button').classList.remove('active');
             document.getElementById('tab2Button').classList.add('active');
-        }
-    </script>
+        }</script>
 }
 

@@ -1,11 +1,14 @@
 ﻿@{
-    /* ViewBag.Title = "operating company";*/
-    ViewBag.Title = "運営会社 ‖ ホスログ ‖ ホストクラブ初回来店・ネット予約";
+    ViewBag.Title = "運営会社 ‖ ホスログ《 ホストクラブ初回来店・ネット予約》";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
+    var MetaClubCount = ViewBag.MetaClubCount;
+    var MetaHostCount = ViewBag.MetaHostCount;
+    var metaContent = $"業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びが簡単に☆接客リクエストで推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した{MetaClubCount}件のホストクラブ・{MetaHostCount}人のホスト情報を掲載中！";
 }
+<meta name="description" content="@metaContent">
 <!-- breadcrum -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="@Url.Action("HomePage", "Home")" class="active">ホーム</a>
+    <a href="/login" class="active">ホーム</a>
     <i class="las la-angle-right"></i>
     <a href="#">運営会社</a>
 </div>
@@ -20,7 +23,7 @@
                 <div class="text-[#D75A8B] font-[700]" style="font-weight:700;">
                     事業者名
                 </div>
-                <div class=" font-[400]"  style="color:#333">
+                <div class=" font-[400]" style="color:#333">
                     株式会社JOY CREATE
                 </div>
             </div>
@@ -65,17 +68,17 @@
                 </div>
             </div>
             @*<div class="flex flex-col gap-[4px] text-[12px]">
-                <div class="text-[#D75A8B] font-[700] ">
-                    担当者直通ダイヤル
-                </div>
-                <div class=" font-[400]">
-                    080-4920-2323/15:00〜23:00受付 
-                </div>
-            </div>*@
+                    <div class="text-[#D75A8B] font-[700] ">
+                        担当者直通ダイヤル
+                    </div>
+                    <div class=" font-[400]">
+                        080-4920-2323/15:00〜23:00受付 
+                    </div>
+                </div>*@
         </div>
 
         <!-- 4th row  -->
-       @* <div class="grid  grid-cols-1 gap-[32px]">
+        @* <div class="grid  grid-cols-1 gap-[32px]">
             <div class="flex flex-col gap-[4px] text-[12px]">
                 <div class="text-[#D75A8B] font-[700] ">
                     事業内容
@@ -97,7 +100,7 @@
                     </p>
                 </div>
             </div>*@
-            @*<div class="flex flex-col gap-[4px] text-[12px]">
+        @*<div class="flex flex-col gap-[4px] text-[12px]">
                 <div class="text-[#D75A8B] font-[700] ">
                     店舗掲載・パートナー提携
                 </div>
@@ -105,20 +108,20 @@
                     『経営者』『関係者』専用コンタクトフォーム 
                 </div>
             </div>*@
+    </div>
+    <!-- 5th: -->
+    <div class=" grid gap-[4px] px-4">
+        <div class="text-[#D75A8B] font-[700] text-[12px] ">
+            事業内容
         </div>
-        <!-- 5th: -->
-        <div class=" grid gap-[4px] px-4">
-            <div class="text-[#D75A8B] font-[700] text-[12px] ">
-                事業内容
-            </div>
-            <div style="margin-left:50px; font-size:12px; font-weight:400; color:#333">
-                ホストクラブトータルサポート<br>
-                キャリアコンサルティング<br>
-                ホスト人材育成事業<br>
-                ホスト求人サイト運営(ホストの求人窓口)
-                <br />
-            </div>
+        <div style="margin-left:50px; font-size:12px; font-weight:400; color:#333">
+            ホストクラブトータルサポート<br>
+            キャリアコンサルティング<br>
+            ホスト人材育成事業<br>
+            ホスト求人サイト運営(ホストの求人窓口)
+            <br />
         </div>
     </div>
+</div>
 
 </div>

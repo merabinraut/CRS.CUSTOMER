@@ -11,14 +11,14 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
     public class RegistrationHoldModel
     {
         [Display(Name = "Nickname", ResourceType = typeof(Resource))]
-        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Please_enter_a_nickname")]
         //[RegularExpression("^\\p{L}\\p{N}._\\-]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
         [MinLength(4, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_4_characters")]
         [MaxLength(20, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_20_characters")]
         public string NickName { get; set; }
 
         [Display(Name = "MobileNumber", ResourceType = typeof(Resource))]
-        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Please_enter_your_mobile_phone_number")]
         [MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
         [RegularExpression("^(?![eE])[0-9]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
         //[MobileNumber(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Invalid_mobile_number")]
@@ -31,6 +31,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string AgentId { get; set; }
         public string MobileNumber { get; set; }
         public string ReferCode { get; set; }
+        public string Type { get; set; }
         public string NickName { get; set; }
         //public string OTP1 { get; set; }
         //public string OTP2 { get; set; }
@@ -73,7 +74,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
     #region Forgot Password
     public class ForgotPasswordModel
     {
-        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+        [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Please_enter_your_mobile_phone_number")]
         [MinLength(11, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_11_characters")]
         [RegularExpression("^(?![eE])[0-9]*$", ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Only_numbers_are_allowed")]
 

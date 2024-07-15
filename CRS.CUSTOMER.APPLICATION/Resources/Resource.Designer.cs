@@ -790,6 +790,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter your mobile phone number or nickname.
+        /// </summary>
+        public static string Enter_your_mobile_phone_number_or_nickname {
+            get {
+                return ResourceManager.GetString("Enter_your_mobile_phone_number_or_nickname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Events.
         /// </summary>
         public static string Events {
@@ -1762,6 +1771,15 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Passwords are highly secure.
+        /// </summary>
+        public static string Passwords_are_highly_secure {
+            get {
+                return ResourceManager.GetString("Passwords_are_highly_secure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment Amount.
         /// </summary>
         public static string PaymentAmount {
@@ -1848,6 +1866,33 @@ namespace CRS.CUSTOMER.APPLICATION.Resources {
         public static string Plans {
             get {
                 return ResourceManager.GetString("Plans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a nickname.
+        /// </summary>
+        public static string Please_enter_a_nickname {
+            get {
+                return ResourceManager.GetString("Please_enter_a_nickname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter your mobile phone number.
+        /// </summary>
+        public static string Please_enter_your_mobile_phone_number {
+            get {
+                return ResourceManager.GetString("Please_enter_your_mobile_phone_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter your password.
+        /// </summary>
+        public static string Please_enter_your_password {
+            get {
+                return ResourceManager.GetString("Please_enter_your_password", resourceCulture);
             }
         }
         

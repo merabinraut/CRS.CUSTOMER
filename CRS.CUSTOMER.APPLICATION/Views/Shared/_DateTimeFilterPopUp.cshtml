@@ -11,7 +11,7 @@
         <div class="px-4 pt-6 pb-6 bg-white  " style="padding-top: 24px; border-radius: 6px 6px 0px 0px;">
             <div class="text-sm text-[#333] font-bold mb-3">カレンダー</div>
             <div class="pb-3 border-b-[1px] border-[#EFEFEF]">
-                <div id="datepicker2" style="margin-top:10px"></div>
+                <div id="datepicker2" style="margin-top:10px; display:flex; justify-content:center" ></div>
                 <div class="flex flex-col gap-[13px] mt-[13px]">
                     <div class="flex justify-between items-center">
                         <div class="text-sm text-[#333] flex justify-between items-center gap-2">
@@ -117,7 +117,7 @@
     </div>
 </div>
 
-<form action="/Search/DateTimeFilter" method="get" id="date-time-filter-id">
+<form method="post" id="date-time-filter-id">
     <input type="text" class="location-class" id="DateFilterLocationId" name="LocationId" value="" hidden />
     <input type="text" id="date-id" name="Date" value="" hidden />
     <input type="text" id="time-id2" name="Time" value="" hidden />
