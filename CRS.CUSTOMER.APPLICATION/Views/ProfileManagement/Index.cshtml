@@ -74,6 +74,12 @@
         color: #292F33;
         font-size: 0.5em;
     }
+    .disabled-div {
+        opacity: 0.5;
+        pointer-events: none;
+        background: #F0F0F0;
+        color: #BEBEBE
+    }
 </style>
 <div class=" no-scrollbar overflow-y-auto">
 
@@ -344,21 +350,21 @@
                 </label>
                 <div class="grid grid-cols-3  gap-[6px]">
                     <div class="relative">
-                        @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE] ", @placeholder = "YYYY", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
+                        @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE] ", @placeholder = "YYYY", @id= "dob-year", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
                         <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">年</span>
                         @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
                                 @Html.ValidationMessageFor(m => m.DOBYear, "", new { @class = "error-validation-msg" })
                             </div>*@
                     </div>
                     <div class="relative">
-                        @Html.TextBoxFor(model => model.DOBMonth, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "MM", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
+                        @Html.TextBoxFor(model => model.DOBMonth, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "MM", @id = "dob-month", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
                         <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">月</span>
                         @* <div class="validationMessage text-[10px] font-normal leading-[13.62px]">
                                 @Html.ValidationMessageFor(m => m.DOBMonth, "", new { @class = "error-validation-msg" })
                             </div>*@
                     </div>
                     <div class="relative">
-                        @Html.TextBoxFor(model => model.DOBDay, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "DD", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
+                        @Html.TextBoxFor(model => model.DOBDay, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE]", @placeholder = "DD", @id = "dob-day", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '2' })
                         <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">日</span>
                         @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
                                 @Html.ValidationMessageFor(m => m.DOBDay, "", new { @class = "error-validation-msg" })
@@ -399,7 +405,7 @@
                     <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]"></span></label>
                     <div class="input-field-common mb-[10px] relative">
                         <div style="position: absolute; top: 10px; left: 10px; color: #6A6A6A" lang="">〒</div>
-                        @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @style = "width:100%; padding-left:34px", @placeholder = "", autocomplete = "off" })
+                        @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @id = "postcode", @style = "width:100%; padding-left:34px", @placeholder = "", autocomplete = "off" })
 
                         @*<div class="validationMessage">
                                 @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "error-validation-msg" })
@@ -447,6 +453,7 @@
 
                 <div class="input-field-common">
                     <input placeholder="市区町村"
+                           id="city"
                            class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] h-[40px] w-full"
                            value="@Model.City"
                            type="text"
@@ -459,6 +466,7 @@
                 </div>
                 <div class="input-field-common">
                     <input placeholder="番地" class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] w-full"
+                           id="street"
                            value="@Model.Street"
                            type="text"
                            data-val="true"
@@ -473,6 +481,7 @@
 
                 <div class="input-field-common ">
                     <input placeholder="建物名・部屋番号"
+                           id="ResidenceNumber"
                            class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] w-full "
                            type="text"
                            data-val="true"
@@ -503,8 +512,8 @@
                          class="flex rounded-[4px] justify-center items-center text-white h-[48px]    ">
                         <p class="ml-2 text-[14px] text-[#B7B7B7]" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</p>
                     </div>*@
-                <div class="flex rounded-[4px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  ">
-                    <button type="button" class="ml-2 text-[14px]">
+                <div class="flex rounded-[8px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  "  id="save_btn">
+                    <button type="button" id="save_button"  class="ml-2 text-[14px]">
                         更新する
                         @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile*@
                     </button>
@@ -779,5 +788,50 @@
             closeModal('save_Modal');
             document.getElementById('profile-form').submit();
         }
+    </script>
+
+
+
+    <script>
+
+        
+        function checkForm() {
+            // Get all the form fields
+            var surname = document.getElementById('Surname').value;
+            var givenName = document.getElementById('GivenName').value;
+
+            var dobYear = document.getElementById('dob-year').value;
+            var dobMonth = document.getElementById('dob-month').value;
+            var dobDay = document.getElementById('dob-day').value;
+            var postcode = document.getElementById('postcode').value;
+            var prefecture = document.getElementById('default_select').value;
+            var city = document.getElementById('city').value;
+            var building = document.getElementById('street').value;
+            var ResidenceNumber = document.getElementById('ResidenceNumber').value
+
+
+            // Check if any field is empty
+            if (surname === '' || givenName === '' || dobYear === '' || dobMonth === '' || dobDay === '' || postcode === '' || prefecture === '' || city === '' || building === '' || ResidenceNumber === '') {
+                document.getElementById('save_btn').classList.add('disabled-div');
+            } else {
+                document.getElementById('save_btn').classList.remove('disabled-div');
+            }
+        }
+
+        // Add event listeners to each input field to check on input change
+        document.getElementById('Surname').addEventListener('input', checkForm);
+        document.getElementById('GivenName').addEventListener('input', checkForm);
+        document.getElementById('dob-year').addEventListener('input', checkForm);
+        document.getElementById('dob-month').addEventListener('input', checkForm);
+        document.getElementById('dob-day').addEventListener('input', checkForm);
+        document.getElementById('postcode').addEventListener('input', checkForm);
+        document.getElementById('default_select').addEventListener('input', checkForm);
+        document.getElementById('city').addEventListener('input', checkForm);
+        document.getElementById('street').addEventListener('input', checkForm);
+        document.getElementById('ResidenceNumber').addEventListener('input', checkForm);
+
+        // Initial check on page load
+        checkForm();
+
     </script>
 }

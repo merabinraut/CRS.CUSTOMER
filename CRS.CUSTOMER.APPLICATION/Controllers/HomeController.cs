@@ -275,7 +275,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         NotificationType = NotificationMessage.INFORMATION,
                         Message = "Password is required",
-                       Title = NotificationMessage.INFORMATION.ToString()
+                        Title = NotificationMessage.INFORMATION.ToString()
                     });
                     return View(Model);
                 }
@@ -399,11 +399,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     return RedirectToAction("SetNewPasswordV2", "Home", new { AgentId = Session["AgentId"], MobileNumber = Session["MobileNumber"], UserID = Session["UserId"], NickName = Session["Username"], ReturnUrl = ReturnURL });
 
                 if (loginResponse.Item2)
+                {
                     if (!string.IsNullOrEmpty(ReturnURL) && Url.IsLocalUrl(ReturnURL))
                     {
                         return Redirect(ReturnURL);
                     }
-
+                    return Redirect(loginResponse.Item1);
+                }
                 //return Redirect(loginResponse.Item1,new { ReturnURL });
                 return Redirect(loginResponse.Item1 + "?ReturnURL=" + Uri.EscapeDataString(ReturnURL));
 
