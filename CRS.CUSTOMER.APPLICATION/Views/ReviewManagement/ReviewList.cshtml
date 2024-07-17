@@ -54,7 +54,8 @@ else
                                 <div>
                                     <div class="text-sm  mb-1 text-[#667085]">
                                         <p>
-                                            あなたがレビューした日
+                                            @*あなたがレビューした日*@
+                                            @item.ClubName
                                             <span class="review-start text-[#F0D830]">
                                                 @for (int i = 0; i < Convert.ToInt32(item.RatingScale); i++)
                                                 {
@@ -75,7 +76,7 @@ else
                                     </div>
 
                                 </div>
-                                <a href="@Url.Action("ClubDetail_V2","LocationManagement", new {LocationId = item.ClubLocationId, ClubId = item.ClubId})">
+                                <a onclick="ClubDetailReviewTabRedirectFunction('@item.ClubCode', '@item.LocationURL');">
                                     <i class="las la-chevron-circle-right text-[#959595] text-[18px]"></i>
                                 </a>
                             </div>
@@ -87,3 +88,9 @@ else
     </div>
 }
 
+<script>
+    function ClubDetailReviewTabRedirectFunction(ClubCode, PrefecturesArea) {
+        var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/review`;
+        window.location.href = url;
+    }
+</script>
