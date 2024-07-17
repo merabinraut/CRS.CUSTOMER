@@ -233,7 +233,25 @@
                     foreach (var item in Model.CreditPointReportList)
                     {
 
-                        <p>@item.DayType</p>
+                        if (@item.DayType.ToLower() == "today")
+                        {
+                            <p>
+                                本日
+                            </p>
+                        }
+                        else if (@item.DayType.ToLower() == "yesterday")
+                        {
+                            <p>
+                                昨日
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                @item.DayType
+                            </p>
+                        }
+
                         foreach (var item1 in item.PointReportList)
                         {
                             <div class="flex justify-between pb-2 " style="border-bottom: 1px solid #A1A1AA33; ">
@@ -291,7 +309,25 @@
                     foreach (var item in Model.DebitPointDayTypeList)
                     {
 
-                        <p>@item.DayType</p>
+                        if (@item.DayType.ToLower() == "today")
+                        {
+                            <p>
+                                本日
+                            </p>
+                        }
+                        else if (@item.DayType.ToLower() == "yesterday")
+                        {
+                            <p>
+                                昨日
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                @item.DayType
+                            </p>
+                        }
+
                         foreach (var item1 in item.PointReportList)
                         {
                             <div class="flex justify-between pb-2 " style="border-bottom: 1px solid #A1A1AA33; ">
