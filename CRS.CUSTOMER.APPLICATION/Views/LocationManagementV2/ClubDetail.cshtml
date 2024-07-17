@@ -1459,6 +1459,17 @@
                                         </td>
                                     </tr>
                                 }
+                                @if (Model.GetClubBasicInformation.ExtensionFee != null)
+                                {
+                                    <tr class="">
+                                        <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                            延長料金
+                                        </td>
+                                        <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                            @Model.GetClubBasicInformation.ExtensionFee / 1時間
+                                        </td>
+                                    </tr>
+                                }
                                 @if (Model.GetClubBasicInformation.DesignationFee != null)
                                 {
                                     <tr class="">
@@ -1481,17 +1492,17 @@
                                         </td>
                                     </tr>
                                 }
-                                @if (Model.GetClubBasicInformation.ExtensionFee != null)
-                                {
-                                    <tr class="">
-                                        <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
-                                            延長料金
-                                        </td>
-                                        <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.ExtensionFee / 1時間
-                                        </td>
-                                    </tr>
-                                }
+                                @*   @if (Model.GetClubBasicInformation.ExtensionFee != null)
+        {
+            <tr class="">
+                <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                    延長料金
+                </td>
+                <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                    @Model.GetClubBasicInformation.ExtensionFee / 1時間
+                </td>
+            </tr>
+        }*@
                                 @if (Model.GetClubBasicInformation.Drink != null)
                                 {
                                     <tr class="">
