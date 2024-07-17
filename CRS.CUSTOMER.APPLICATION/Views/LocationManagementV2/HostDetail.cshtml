@@ -194,15 +194,14 @@
         </div>
     }
 </div>
-
-<div class="flex justify-center bg-[#FFECEC] py-2" style="margin:11px 18px 0 17px; border-radius:4px;">
-    <div class="text-[12px] font-[700] leading-[16.8px] text-[#D75A8B]">
-
-        新人王 売上No.1
+@if (!string.IsNullOrEmpty(@Model.Title))
+{
+    <div class="flex justify-center bg-[#FFECEC] py-2" style="margin:11px 18px 0 17px; border-radius:4px;">
+        <div class="text-[12px] font-[700] leading-[16.8px] text-[#D75A8B]">
+            @Model.Title
+        </div>
     </div>
-</div>
-
-
+}
 <div class="">
     <!-- host details -->
     <div class=" px-4 ">
@@ -218,9 +217,12 @@
                 </svg>
             </div>
             <div class="flex flex-col justify-start items-start ">
-                <div class="font-[700] text-[12px] text-[#D75A8B] " style="line-height:16.8px">
-                    代表取締役
-                </div>
+                @if (!string.IsNullOrEmpty(@Model.Position))
+                {
+                    <div class="font-[700] text-[12px] text-[#D75A8B] " style="line-height:16.8px">
+                        @Model.Position
+                    </div>
+                }
                 <div>
                     <span class="hostName text-[#292F33] leading-[29.4px] text-[21px] font-bold pr-3">@Model.HostNameJapanese</span>
                     <span class="age text-[#A09E91] text-[20px] font-bold leading-[28px]">@Model.HostAge</span>
