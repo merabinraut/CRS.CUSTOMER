@@ -74,23 +74,23 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 if (dbReferralRes != null && dbReferralRes.Code == "0")
                 {
                     ViewBag.ReferCode = ReferCode;
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.SUCCESS,
-                        Message = dbReferralRes.Message,
-                        Title = NotificationMessage.SUCCESS.ToString(),
-                    });
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.SUCCESS,
+                    //    Message = dbReferralRes.Message,
+                    //    Title = NotificationMessage.SUCCESS.ToString(),
+                    //});
                     return View(Response);
                 }
                 else
                 {
-                    AddNotificationMessage(new NotificationModel()
-                    {
-                        NotificationType = NotificationMessage.INFORMATION,
-                        Message = dbReferralRes.Message,
-                        Title = NotificationMessage.INFORMATION.ToString(),
-                    });
-                    return View(Response);
+                    //AddNotificationMessage(new NotificationModel()
+                    //{
+                    //    NotificationType = NotificationMessage.INFORMATION,
+                    //    Message = dbReferralRes.Message,
+                    //    Title = NotificationMessage.INFORMATION.ToString(),
+                    //});
+                    return Redirect("/user/register");
                 }
             }
             return View(Response);
