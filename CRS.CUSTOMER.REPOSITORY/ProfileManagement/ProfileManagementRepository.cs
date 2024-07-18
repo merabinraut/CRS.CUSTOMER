@@ -1,5 +1,8 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ProfileManagement;
+using CRS.CUSTOMER.SHARED.SearchFilterManagement;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CRS.CUSTOMER.REPOSITORY.ProfileManagement
 {
@@ -102,6 +105,16 @@ namespace CRS.CUSTOMER.REPOSITORY.ProfileManagement
             sql += ", @AgentId=" + _dao.FilterString(userProfileCommon.AgentId);
             sql += ", @ActionUser=" + _dao.FilterString(userProfileCommon.ActionUser);
             return _dao.ParseCommonDbResponse(sql);
+        }
+
+        public List<PointReportCommon> GetCustomerPointsReport(string customerId,string TxnType)
+        {
+            string SQL = "EXEC sproc_customer_get_points_report ";
+            SQL += !string.IsNullOrEmpty(customerId) ? " @customerid=" + _dao.FilterString(customerId) : "";
+            SQL += !string.IsNullOrEmpty(TxnType) ? ",@TransactionMode=" + _dao.FilterString(TxnType) : "";
+            var dbResponse = _dao.ExecuteDataTable(SQL);
+            if (dbResponse != null && dbResponse.Rows.Count > 0) return _dao.DataTableToListObject<PointReportCommon>(dbResponse).ToList();
+            return new List<PointReportCommon>();
         }
     }
 }

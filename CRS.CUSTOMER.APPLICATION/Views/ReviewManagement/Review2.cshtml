@@ -1,6 +1,6 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.ReviewManagement.ReviewHostListByClubViewModel
 @{
-    ViewBag.Title = "Review-2";
+    ViewBag.Title = "店舗評価‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = "~/Views/Shared/_ReviewLayout.cshtml";
     var Request = Model.ReviewClubDetailModel;
     var MVPLabel = CRS.CUSTOMER.APPLICATION.Resources.Resource.MVP;
@@ -20,6 +20,10 @@
         border-radius: 50%;
         cursor: pointer;
     }
+
+    .modalbutnActive.active {
+        background: #D75A8B;
+    }
 </style>
 <div class="flex flex-col justify-between h-screen relative">
     <div>
@@ -30,7 +34,7 @@
             </div>
             <div>
                 <div class="text-[13px] font-bold pb-[5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ConfirmTheHostsThatWereInCharge</div>
-                <div class="text-[13px] font-bold text-[#7E6D5E]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.SelectAllTheHostsYouRemember</div>
+                <div class="text-[11px] font-[400] text-[#7E6D5E]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.SelectAllTheHostsYouRemember</div>
             </div>
         </div>
         <!-- header end  -->
@@ -120,26 +124,26 @@
                                 {
                                     <img src="~/Content/assets/images/customer/demo-image.jpeg" alt="">
                                 }
-                                <div class="text-[10px] px-[6px] rounded-[2px] absolute bottom-1 left-1 bg-[#ffffffe6] leading-[17px]">
-                                    No. @i
-                                </div>
+                                @*<div class="text-[10px] px-[6px] rounded-[2px] absolute bottom-1 left-1 bg-[#ffffffe6] leading-[17px]">
+                                        No. @i
+                                    </div>*@
                             </div>
                             <div class="py-1 px-2">
                                 @if (!string.IsNullOrEmpty(@item.HostPosition))
                                 {
-                                    <div class="text-[10px] text-primary font-bold">@item.HostPosition</div>
+                                    <div class="text-[10px] text-[#D17979] font-bold">@item.HostPosition</div>
                                 }
-                            <div class="text-xs text-[#404040]">
-                                @if (!string.IsNullOrEmpty(@item.HostNameJapanese))
-                                {
-                                    @item.HostNameJapanese
-                                }
-                                else
-                                {
-                                    @item.HostName
-                                }
+                                <div class="text-xs text-[#404040] font-[400]">
+                                    @if (!string.IsNullOrEmpty(@item.HostNameJapanese))
+                                    {
+                                        @item.HostNameJapanese
+                                    }
+                                    else
+                                    {
+                                        @item.HostName
+                                    }
 
-                            </div>
+                                </div>
                             </div>
                         </div>
                         i++;
@@ -158,7 +162,7 @@
             </div>
         </button>
         <div class="text-center mt-[10px]">
-            <a onclick="WindowHistoryBack();" class="text-xs border-b border-[#404040] ">
+            <a onclick="window.history.back(); return false;" class="text-xs border-b border-[#404040] ">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.BackToPreviousPage
             </a>
         </div>
@@ -173,10 +177,34 @@
             <!-- Modal body -->
             <div class="text-center pt-4 pb-3 px-2 border-b border-[#DCDCDC]">
                 <div class=" text-[13px] font-bold">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PickMVP</div>
-                <div class="text-[13px  ]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.WhoWasTheMostImpressiveHost</div>
+                <div class="text-[11px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.WhoWasTheMostImpressiveHost</div>
             </div>
             <div class=" h-[201px] pb-2 overflow-hidden	 overflow-y-scroll	custom-scrollbar-review" id="MVPHostId">
 
+            </div>
+
+            <div class="bg-[#FFF]  w-full mt-[10px]">
+                <div class="grid gap-[12px] pb-[18px]">
+                    <input id="selected_mvp_id" value="" hidden />
+                    <div>
+                        <div class="flex flex-row justify-center">
+                            <button class="button-curve   btn-primary  mx-[20px] py-2 disabled" disabled id="modalbtn" onclick="SubmitFunction()">
+                                <span>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex flex-row justify-center">
+                            <button data-modal-hide="defaultModal" id="defaultmodalId">
+                                <span class="text-[12px] font-[500]"> ホストを選び直す</span>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
         </div>
     </div>
@@ -184,6 +212,33 @@
 @section scripts
 {
     <script>
+       //function MVPOnClickFunction() {
+       //    debugger;
+       //    $(this);
+
+       //     //$(this).toggleClass('active');
+       //     //// Count the number of active divs
+       //     //var activeDivsCount1 = $('.modalbutnActive.active').length;
+       //     //// Check if there's at least one active div
+       //     //var selectedElement1 = document.getElementById('modalbtn');
+       //     //if (activeDivsCount1 > 0) {
+       //     //    $('#modalbtn').removeClass('btn-light');
+       //     //    // If there's at least one active div, add the 'active-btn' class to the button
+       //     //    $('#modalbtn').addClass('btn-primary');
+       //     //    $('#modalbtn').prop('disabled', false);
+       //     //    selectedElement1.textContent = 'hello';
+       //     //} else {
+       //     //    // If there are no active divs, remove the 'active-btn' class from the button
+       //     //    $('#modalbtn').removeClass('btn-primary');
+       //     //    // If there's at least one active div, add the 'active-btn' class to the button
+       //     //    $('#modalbtn').addClass('btn-light');
+       //     //    $('#modalbtn').prop('disabled', true);
+       //     //    selectedElement1.textContent = 'hii';
+       //     //}
+       // };
+
+
+
         $(document).ready(function () {
             // Add click event listeners to each div
             $('.image-active').on('click', function () {
@@ -198,7 +253,7 @@
                     // If there's at least one active div, add the 'active-btn' class to the button
                     $('#button-review').addClass('btn-primary');
                     $('#button-review').prop('disabled', false);
-                    selectedElement.textContent = '@CRS.CUSTOMER.APPLICATION.Resources.Resource.Selected' + '(' + activeDivsCount + ')';
+                    selectedElement.textContent = '(' + activeDivsCount + ')'+ '@CRS.CUSTOMER.APPLICATION.Resources.Resource.Selected';
                 } else {
                     // If there are no active divs, remove the 'active-btn' class from the button
                     $('#button-review').removeClass('btn-primary');
@@ -233,23 +288,58 @@
                 }
                 newHTMLContent += ` </div> <div>`;
                 if (value[2] != null && value[2] != "") {
-                    newHTMLContent += `<div class="text-[10px] text-primary">` + value[2] + `</div>`;
+                    newHTMLContent += `<div class="text-[10px] font-[700] text-[#D17979]">` + value[2] + `</div>`;
                 }
-                newHTMLContent += `<div class="text-xs">` + value[3] + `</div>
+                newHTMLContent += `<div class="text-[12px] font-[500]">` + value[3] + `</div>
                                                                  </div>
                                                              </div>`;
-                newHTMLContent += `<button class="btn-primary-softrose-review gap-[2px]" onclick="SubmitFunction('` + value[0] + `')">
-                                                                 <i class="las la-crown"></i>
+                newHTMLContent += `<button class="btn-primary-softrose-review gap-[2px] font-[700] modalbutnActive" id="softrore-btn-id-${i}" data-info="` + value[0] + `")">
+                                                                 <i class="las la-crown mt-[2px]"></i>
                                                                  @MVPLabel
                                                              </button>
 
                                                          </div>
                                                      `;
+
+
             }
             targetElement.innerHTML = newHTMLContent;
+
+            for (var i = 0; i < HostIdList.length; i++) {
+                document.getElementById("softrore-btn-id-" + i).addEventListener("click", function () {
+
+                    let btnGroup = document.getElementsByClassName("modalbutnActive");
+                    for (let j = 0; j < btnGroup.length; j++) {
+                        btnGroup[j].classList.remove("active");
+                    }
+
+
+                    this.classList.add("active");
+
+                    $('#selected_mvp_id').val(this.getAttribute('data-info'));
+                    let targetBtn = document.getElementById('modalbtn');
+
+                    targetBtn.classList.add("active");
+                    targetBtn.classList.remove("disabled");
+                    targetBtn.removeAttribute("disabled");
+
+
+
+                });
+            }
         }
 
-        function SubmitFunction(MVPHostId) {
+
+        $('#defaultmodalId').click(function () {
+            let targetBtn = document.getElementById('modalbtn');
+            targetBtn.classList.add("disabled");
+            targetBtn.setAttribute("disabled");
+
+        })
+
+
+        function SubmitFunction() {
+            let MVPHostId = $('#selected_mvp_id').val();
             if (MVPHostId === null || MVPHostId === "") {
                 toastr.info('MVP host is required');
                 return false;

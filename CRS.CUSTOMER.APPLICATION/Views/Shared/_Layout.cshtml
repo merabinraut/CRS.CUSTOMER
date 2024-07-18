@@ -50,8 +50,8 @@
     <meta property="og:title" content="ホスログ/公式ホームページ">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://hoslog.jp/">
-    <meta property="og:image" content="https://hoslog.jp/Content/assets/images/customer/demo-image.jpeg">
-    <meta property="og:description" content="業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した★★★件のホストクラブ・★★★人のホスト情報を掲載中！">
+    <meta property="og:image" content="https://hoslogjapan.s3.ap-northeast-1.amazonaws.com/logo.png">
+    @*<meta property="og:description" content="業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した★★★件のホストクラブ・★★★人のホスト情報を掲載中！">*@
     <style>
         .ui-datepicker {
             /* width: max-content; */
@@ -414,7 +414,7 @@
             <!-- #endregion -->
             <!----Render Body section start-->
             <div>
-                <input type="text" id="current-location-id" value="" hidden />
+                <input type="text" id="current-location-id" value="/tokyo/kabukicho" hidden />
                 @Html.AntiForgeryToken()
                 @RenderBody()
                 <div class="loader" id="loader-id-v2" style="display:none;">

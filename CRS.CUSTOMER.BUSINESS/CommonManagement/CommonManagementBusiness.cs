@@ -2,6 +2,7 @@
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.CommonManagement;
 using CRS.CUSTOMER.SHARED.Home;
+using System;
 using System.Collections.Generic;
 
 namespace CRS.CUSTOMER.BUSINESS.CommonManagement
@@ -42,6 +43,11 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         public string GetForceFulLogout(string UserId)
         {
             return _REPO.GetForceFulLogout(UserId);
+        }
+
+        public Tuple<int, int> GetMetaTagInfo(string type, string locationId = "", string clubId = "")
+        {
+            return _REPO.GetMetaTagInfo(type, locationId, clubId);
         }
     }
 }

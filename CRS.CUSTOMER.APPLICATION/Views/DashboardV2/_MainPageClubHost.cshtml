@@ -51,7 +51,7 @@
 
     ul.club_tags, .club_header, .club_rate, .club_pr {
         padding-left: 15px;
-        padding-right: 11px;
+        padding-right: 10px;
     }
     /* tags */
     ul.club_tags {
@@ -176,8 +176,8 @@
     }
 
         .action_keep img {
-            width: 100%;
-            height: 100%;
+            width: 33px;
+            height: 33PX;
             aspect-ratio: 1 / 1;
         }
     /* hostclub thumb */
@@ -542,7 +542,7 @@
                                 <div class="opening_hours">
                                     <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
                                    @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
-                                    <span style="line-height:13.5px;">
+                                    <span style="line-height:13px;">
                                         @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
                                     </span>
                                 </div>
@@ -553,7 +553,7 @@
                         <img src="/Content/assets/images/customer/moon.svg" alt="夜">
                       @*  @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
 
-                        <span style="line-height:13.5px;">
+                        <span style="line-height:13px;">
                             @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
                         </span>
 
@@ -564,7 +564,7 @@
                             <!-- s/available -->
 
 
-                            if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubOpeningTime) < currentTime && DateTime.Parse(item.ClubClosingTime) > currentTime)
+                            if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(item.ClubClosingTime) > currentTime)
                             {
                                 <div class="available">本日空席あり</div>
                             }
@@ -620,13 +620,13 @@
                 @if (!string.IsNullOrEmpty(item.IsBookmarked.ToUpper()) && item.IsBookmarked.ToUpper() == "Y")
                 {
                     <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                        <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                        <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
                     </div>
                 }
                 else
                 {
                     <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                        <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
+                        <img src="~/Content/assets/images/customer/favorite-unfilled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
                     </div>
                 }
             </div>

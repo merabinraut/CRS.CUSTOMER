@@ -1,6 +1,6 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.ReviewManagement.ReviewClubDetailModel
 @{
-    ViewBag.Title = "Review Details";
+    ViewBag.Title = "店舗評価‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = "~/Views/Shared/_ReviewLayout.cshtml";
     var Request = Model;
 }
@@ -94,7 +94,7 @@
             </div>
         </button>
         <div class="text-center mt-[10px]">
-            <a onclick="WindowHistoryBack();" class="text-xs border-b border-[#404040] ">
+            <a onclick="history.back()" class="text-xs border-b border-[#404040] ">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.BackToPreviousPage
             </a>
         </div>
@@ -119,9 +119,23 @@
                     <div data-value="4"><i class="fa-solid fa-star"></i></div>
                     <div data-value="5"><i class="fa-solid fa-star"></i></div>
                 </div>
+                
                 <button class="button-curve btn-primary h-[46px]" onclick="SubmitFunction();">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.PostAReviewForThisStore
+                    @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.PostAReviewForThisStore*@
+                   
+
+                    <div class="count-display"
+                        <span  id="count-display">
+
+                        </span>
+                        <span id="remove_display">
+
+                            この店舗へレビューを投稿する
+                        </span>
+                    </div>
                 </button>
+                
+            </div>
             </div>
         </div>
     </div>
@@ -275,12 +289,31 @@
                 dataArray.push(ReviewDichotomousQADisplayLabelList[i].split(','));
                 var value = dataArray[0];
                 var splitedvalue = value[0].split(':');
-                newHTMLContent += `<div>
-                     <div class="text-xs  text-start mb-2 ">`  + splitedvalue[0]  + `</div>
+                newHTMLContent += `<div class="mb-2">
+                     <div class="text-xs  text-start ">`  + splitedvalue[0]  + `</div>
                      <div class="text-xs  font-bold text-start ">`+ splitedvalue[1] +`</div>
                  </div>`;
                 targetElement.innerHTML = newHTMLContent;
             }
         }
+    </script>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const stars = document.querySelectorAll('.rating div');
+            const countDisplay = document.getElementById('count-display');
+            const remove_display = document.getElementById('remove_display');
+
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const rating = star.getAttribute('data-value');
+                    countDisplay.textContent = `星${rating}つでレビューを投稿する`;
+                    remove_display.textContent=``
+                });
+            });
+        });
+
     </script>
 }

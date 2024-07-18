@@ -117,7 +117,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             //}
             //ViewBag.TuplesJson = Newtonsoft.Json.JsonConvert.SerializeObject(tuples);
             ViewBag.LocationId = RequestModel.LocationId;
-            var getTotalPage = _recommendedClubHostBuss.GetTotalRecommendedPageCount();
+            var getTotalPage = _recommendedClubHostBuss.GetTotalRecommendedPageCount(locationId);
             ViewBag.TotalGroupCount = getTotalPage >= 0 ? getTotalPage : 0;
             Model.RequestModel = RequestModel.MapObject<LocationClubHostRequestModel>();
 

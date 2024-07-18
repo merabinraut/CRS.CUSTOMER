@@ -1,11 +1,14 @@
 ﻿@{
     ViewBag.Title = "プライバシーポリシー ‖ ホスログ《 ホストクラブ初回来店・ネット予約》";
     Layout = "~/Views/Shared/_FooterLayout.cshtml";
+    var MetaClubCount = ViewBag.MetaClubCount;
+    var MetaHostCount = ViewBag.MetaHostCount;
+    var metaContent = $"業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びが簡単に☆接客リクエストで推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した{MetaClubCount}件のホストクラブ・{MetaHostCount}人のホスト情報を掲載中！";
 }
-
+<meta name="description" content="@metaContent">
 <!-- breadcrum -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
-    <a href="@Url.Action("HomePage", "Home")" class="active">ホーム</a>
+    <a href="/login" class="active">ホーム</a>
     <i class="las la-angle-right"></i>
     <a href="#">プライバシーポリシー</a>
 </div>
