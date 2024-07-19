@@ -103,6 +103,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagementV2
         public string WebsiteLink { get; set; }
         public string ClubTimePeriod { get; set; }
         public string TodaysClubSchedule { get; set; }
+        public string ClubClosingDate { get; set; }
     }
     public class AllNoticeModel : NoticeModel
     {

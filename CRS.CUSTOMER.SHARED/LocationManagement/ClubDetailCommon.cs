@@ -93,6 +93,7 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
         public string WebsiteLink { get; set; }
         public string ClubTimePeriod { get; set; }
         public string TodaysClubSchedule { get; set; }
+        public string ClubClosingDate { get; set; }
 
     }
     public class AllNoticeModelCommon : NoticeModelCommon
