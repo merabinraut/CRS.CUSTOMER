@@ -147,8 +147,9 @@
     }
 
     .review-experience.blue-dotted {
-        border: 1px dotted #8e91cf;
+        border: 1px dotted #8e91cf !important;
         color: #8e91cf;
+        background:#fff;
     }
 
 .review-select-qtn {
