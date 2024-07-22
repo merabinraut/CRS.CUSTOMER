@@ -618,6 +618,7 @@
     <Content Include="App_Data\Configuration.json" />
     <Content Include="App_Data\AmazonConfigruation.json" />
     <Content Include="App_Data\URLManagementConfigruation.json" />
+    <None Include="App_Data\.editorconfig" />
     <None Include="packages.config" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
