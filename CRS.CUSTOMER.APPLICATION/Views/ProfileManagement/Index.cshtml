@@ -74,6 +74,7 @@
         color: #292F33;
         font-size: 0.5em;
     }
+
     .disabled-div {
         opacity: 0.5;
         pointer-events: none;
@@ -141,7 +142,7 @@
         </div>
     </div>
 
-    @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post, new {id = "profile-form"}))
+    @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post, new { id = "profile-form" }))
     {
         @Html.AntiForgeryToken()
         if (!string.IsNullOrEmpty(Model.EmailAddress))
@@ -355,7 +356,7 @@
                 </label>
                 <div class="grid grid-cols-3  gap-[6px]">
                     <div class="relative">
-                        @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE] ", @placeholder = "YYYY", @id= "dob-year", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
+                        @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE] ", @placeholder = "YYYY", @id = "dob-year", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
                         <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">年</span>
                         @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
                                 @Html.ValidationMessageFor(m => m.DOBYear, "", new { @class = "error-validation-msg" })
@@ -440,7 +441,7 @@
                             var selectedId = ViewBag.PrefectureKey as string;
                             if (item.Key == selectedId)
                             {
-                                <option value="@item.Key">
+                                <option value="@item.Key" selected>
                                     @item.Value
                                 </option>
                             }
@@ -517,8 +518,8 @@
                          class="flex rounded-[4px] justify-center items-center text-white h-[48px]    ">
                         <p class="ml-2 text-[14px] text-[#B7B7B7]" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</p>
                     </div>*@
-                <div class="flex rounded-[8px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  "  id="save_btn">
-                    <button type="button" id="save_button"  class="ml-2 text-[14px]">
+                <div class="flex rounded-[8px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  " id="save_btn">
+                    <button type="button" id="save_button" class="ml-2 text-[14px]">
                         更新する
                         @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile*@
                     </button>
@@ -791,7 +792,47 @@
 
         function SubmitFormFunction() {
             closeModal('save_Modal');
-            document.getElementById('profile-form').submit();
+            var dobYear = $('#dob-year').val();
+            var dobMonth = $('#dob-month').val();
+            var dobDate = $('#dob-day').val();
+            var postcode = $('#postcode').val();
+            if (!isNullOrEmpty(postcode) && postcode.length != 8) {
+                toastr.info("郵便番号情報に誤りがあります");
+                return;
+            }
+            let isValidDOB = true;
+            if (!isNullOrEmpty(dobYear) || !isNullOrEmpty(dobMonth) || !isNullOrEmpty(dobDate)) {
+                isValidDOB = isValidDate(dobDate, dobMonth, dobYear);
+            }
+            if (isValidDOB) {
+                document.getElementById('profile-form').submit();
+                return;
+            }
+            toastr.info("誕生日の情報に誤りがあります");
+            return;
+        }
+
+        function isValidDate(day, month, year) {
+            // Check if year, month, and day are within valid ranges
+            if (year < 1 || month < 1 || month > 12 || day < 1 || day > 31) {
+                return false;
+            }
+
+            // Check for month-specific day limits
+            const monthLengths = [31, (isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            if (day > monthLengths[month - 1]) {
+                return false;
+            }
+
+            return true;
+        }
+
+        function isLeapYear(year) {
+            return (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
+        }
+
+        function isNullOrEmpty(value) {
+            return value === null || value === undefined || value === '';
         }
     </script>
 
@@ -799,7 +840,7 @@
 
     <script>
 
-        
+
         function checkForm() {
             // Get all the form fields
             var surname = document.getElementById('Surname').value;
