@@ -31,7 +31,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.LocationDDL = ApplicationUtilities.LoadDropdownList("LOCATIONDDL", "", "") as Dictionary<string, string>;
             ViewBag.PrefectureDDL = ApplicationUtilities.LoadDropdownList("PREFECTUREDDL", "", "") as Dictionary<string, string>;
             ViewBag.ActionPageName = "NavMenu";
-            ViewBag.PageTitle = Resources.Resource.ProfileInfo;
+            ViewBag.PageTitle = "プロフィール編集"/*Resources.Resource.ProfileInfo*/;
             if (TempData["UserProfileModel"] != null)
             {
                 var userProfileJson = TempData["UserProfileModel"].ToString();
