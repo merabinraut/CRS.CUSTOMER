@@ -441,7 +441,7 @@
                             var selectedId = ViewBag.PrefectureKey as string;
                             if (item.Key == selectedId)
                             {
-                                <option value="@item.Key">
+                                <option value="@item.Key" selected>
                                     @item.Value
                                 </option>
                             }
@@ -795,6 +795,11 @@
             var dobYear = $('#dob-year').val();
             var dobMonth = $('#dob-month').val();
             var dobDate = $('#dob-day').val();
+            var postcode = $('#postcode').val();
+            if (!isNullOrEmpty(postcode) && postcode.length != 8) {
+                toastr.info("郵便番号情報に誤りがあります");
+                return;
+            }
             let isValidDOB = true;
             if (!isNullOrEmpty(dobYear) || !isNullOrEmpty(dobMonth) || !isNullOrEmpty(dobDate)) {
                 isValidDOB = isValidDate(dobDate, dobMonth, dobYear);
