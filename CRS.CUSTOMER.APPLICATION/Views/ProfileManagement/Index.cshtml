@@ -74,6 +74,7 @@
         color: #292F33;
         font-size: 0.5em;
     }
+
     .disabled-div {
         opacity: 0.5;
         pointer-events: none;
@@ -136,7 +137,7 @@
         </div>
     </div>
 
-    @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post, new {id = "profile-form"}))
+    @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post, new { id = "profile-form" }))
     {
         @Html.AntiForgeryToken()
         if (!string.IsNullOrEmpty(Model.EmailAddress))
@@ -350,7 +351,7 @@
                 </label>
                 <div class="grid grid-cols-3  gap-[6px]">
                     <div class="relative">
-                        @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE] ", @placeholder = "YYYY", @id= "dob-year", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
+                        @Html.TextBoxFor(model => model.DOBYear, new { @class = "border-[1px] text-[#6A6A6A] rounded-[3px] w-full border-[#BEBEBE] ", @placeholder = "YYYY", @id = "dob-year", @onkeypress = "return isNumber(event)", autocomplete = "off", @maxLength = '4' })
                         <span style="position: absolute; top: 10px; right: 10px; color: #6A6A6A">年</span>
                         @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
                                 @Html.ValidationMessageFor(m => m.DOBYear, "", new { @class = "error-validation-msg" })
@@ -512,8 +513,8 @@
                          class="flex rounded-[4px] justify-center items-center text-white h-[48px]    ">
                         <p class="ml-2 text-[14px] text-[#B7B7B7]" onclick="openModal('modal1')">@CRS.CUSTOMER.APPLICATION.Resources.Resource.DeleteYourAccount</p>
                     </div>*@
-                <div class="flex rounded-[8px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  "  id="save_btn">
-                    <button type="button" id="save_button"  class="ml-2 text-[14px]">
+                <div class="flex rounded-[8px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  " id="save_btn">
+                    <button type="button" id="save_button" class="ml-2 text-[14px]">
                         更新する
                         @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile*@
                     </button>
@@ -786,7 +787,19 @@
 
         function SubmitFormFunction() {
             closeModal('save_Modal');
-            document.getElementById('profile-form').submit();
+            var dobYear = $('#dob-year').val();
+            var dobMonth = $('#dob-month').val();
+            var dobDate = $('#dob-day').val();
+            let isValidDOB = true;
+            if (!isNaN(dobYear) || !isNaN(dobMonth) || !isNaN(dobDate)) {
+                isValidDOB = isValidDate(dobDate, dobMonth, dobYear);
+            }
+            if (isValidDOB) {
+                document.getElementById('profile-form').submit();
+                return;
+            }
+            toastr.info("誕生日の情報に誤りがあります");
+            return;
         }
     </script>
 
@@ -794,7 +807,7 @@
 
     <script>
 
-        
+
         function checkForm() {
             // Get all the form fields
             var surname = document.getElementById('Surname').value;
