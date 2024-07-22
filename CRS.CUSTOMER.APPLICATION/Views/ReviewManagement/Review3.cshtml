@@ -106,7 +106,7 @@
      class="fixed top-0 left-0 right-0 z-50 hidden w-full flex-col p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
 </div>
 <div id="modal1" class="modal">
-    <div class="modal-content" style="background:none;" >
+    <div class="modal-content" style="background:none;">
         <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
         <div class="relative bg-white rounded-lg shadow overflow-hidden  w-[290px] h-[487px]">
             <!-- Modal content -->
@@ -122,15 +122,33 @@
                         <div class="flex justify-between items-center px-[13px] py-[10px] border-b border-[#DCDCDC]">
                             <div class="flex justify-between items-center gap-[13px]">
                                 <div>
-                                    <div class="text-[10px] text-primary font-bold leading-tight">@item.RemarkType</div>
+                                    @if (item.RemarkType == "良い")
+                                    {
+
+                                        <div class="text-[10px] text-primary font-bold leading-tight">@item.RemarkType</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="text-[10px] text-[#5578D2] flex justify-start font-bold leading-tight">@item.RemarkType</div>
+
+                                    }
                                     <div class="text-[10px] font-[400] leading-tight">@item.RemarkLabel</div>
                                 </div>
                             </div>
                             <a>
-                                <button class="btn-primary-softrose-review gap-[2px] markbtn-active" style="padding:4px 11px 6px 10px" data-value="@item.RemarkId">
-                                    @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.Select*@
-                                    これにする
-                                </button>
+                                @if (item.RemarkType == "良い")
+                                {
+
+                                    <button class="btn-primary-softrose-review gap-[2px] markbtn-active" style="padding:4px 11px 6px 10px" data-value="@item.RemarkId">
+                                        これにする
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button class="btn-primary-softrose-review gap-[2px] markbtn-active dotted" style="padding:4px 11px 6px 10px" data-value="@item.RemarkId">
+                                        これにする
+                                    </button>
+                                }
                             </a>
                         </div>
                     }
@@ -183,7 +201,10 @@
         $(document).ready(function () {
             // Add click event listeners to each div
             $('.review-experience').on('click', function () {
-                // Toggle the 'active' class of the clicked div
+                if ($(this).hasClass('dotted')) {
+                    $(this).toggleClass('blue-dotted');
+                }
+
                 $(this).toggleClass('active');
             });
             SelectedHostDisplayFunction();
@@ -264,6 +285,9 @@
                 var dataInfo = elements[i].getAttribute('data-info');
                 if (dataValue === dataInfo) {
                     elements[i].classList.toggle('active');
+                    if ($(this).hasClass('dotted')) {
+                        elements[i].classList.toggle('blue-dotted');
+                    }
                 }
             }
         });

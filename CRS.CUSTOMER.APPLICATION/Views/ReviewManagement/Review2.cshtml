@@ -253,7 +253,7 @@
                     // If there's at least one active div, add the 'active-btn' class to the button
                     $('#button-review').addClass('btn-primary');
                     $('#button-review').prop('disabled', false);
-                    selectedElement.textContent = '(' + activeDivsCount + ')'+ '@CRS.CUSTOMER.APPLICATION.Resources.Resource.Selected';
+                    selectedElement.textContent = '(' + activeDivsCount + ')' + '@*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Selected*@ 人を選びました！ ';
                 } else {
                     // If there are no active divs, remove the 'active-btn' class from the button
                     $('#button-review').removeClass('btn-primary');
