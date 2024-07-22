@@ -1,6 +1,6 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.ReviewManagement.Review3ViewModel
 @{
-    ViewBag.Title = "Review-3";
+    ViewBag.Title = "店舗評価‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = "~/Views/Shared/_ReviewLayout.cshtml";
     var Request = Model.ReviewClubDetailModel;
 }
@@ -22,7 +22,7 @@
             </div>
             <div>
                 <div class="text-[13px] font-bold pb-[5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.TellUsAboutYourClubExperience</div>
-                <div class="text-[13px] font-bold text-[#7E6D5E]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.SelectMultipleResponseAboutTheOverallClubAndHostsImpressions</div>
+                <div class="text-[11px] font-[400] text-[#7E6D5E]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.SelectMultipleResponseAboutTheOverallClubAndHostsImpressions</div>
             </div>
         </div>
         <!-- header end  -->
@@ -128,7 +128,8 @@
                             </div>
                             <a>
                                 <button class="btn-primary-softrose-review gap-[2px] markbtn-active" style="padding:4px 11px 6px 10px" data-value="@item.RemarkId">
-                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Select
+                                    @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.Select*@
+                                    これにする
                                 </button>
                             </a>
                         </div>

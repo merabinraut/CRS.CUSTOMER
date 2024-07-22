@@ -23,10 +23,12 @@
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
         <div class="grid grid-cols-2 w-full tab-container-plane bg-white gap-[14px]">
             <button id="tab1Button" class="tab-button-plane tab-link @(bmktabVal == "01" ? "active" : "")" onclick="window.location.href='/user/account/bookmark/?bmktab=01'">
-                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Club
+                @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Club*@
+                ピックアップ店舗
             </button>
             <button id="tab2Button" class="tab-button-plane tab-link @(bmktabVal == "02" ? "active" : "")" onclick="window.location.href='/user/account/bookmark/?bmktab=02'">
-                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host
+                @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Host*@
+                ピックアップホスト
             </button>
         </div>
     </div>
@@ -35,7 +37,7 @@
     <div class="bg-white">
         <div id="tab1" class="tab-content-plane @(bmktabVal == "02" ? "hidden" : "")">
 
-            <div class="flex flex-row items-center bg-[#E5E5E5] h-[32px]">
+            <div class="flex flex-row items-center  h-[32px]">
                 <p class="pl-[16px] text-[14px] font-[500] ">
                     @clubCount @CRS.CUSTOMER.APPLICATION.Resources.Resource.Items
                 </p>
@@ -199,7 +201,7 @@
             }
         </div>
         <div id="tab2" class="tab-content-plane @(bmktabVal == "01" ? "hidden" : "")">
-            <div class="flex flex-row items-center bg-[#E5E5E5] h-[32px]">
+            <div class="flex flex-row items-center h-[32px]">
                 <p class="pl-[16px] text-[14px] font-[500] ">
                     @hostCount @CRS.CUSTOMER.APPLICATION.Resources.Resource.Items
                 </p>
@@ -215,7 +217,7 @@
 
 
                     </div>
-                    <div class=" font-semibold mt-12 text-center" style="color:#000; font-size:12px; font-weight:500; line-height:14px; text-align:center">お気入りのお気入りのホストはいません</div>
+                    <div class=" font-semibold mt-12 text-center" style="color:#000; font-size:12px; font-weight:500; line-height:14px; text-align:center">お気入りのホストはいません</div>
                 </div>
                 @*<div style="margin-left:24px;margin-right:24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px]" onclick="window.location.href='/'" id="DateTimeFilter-Id">
                         <div class="my-[12px] text-[12px] font-[700] text-[#FFF] text-center " style="width:100%">

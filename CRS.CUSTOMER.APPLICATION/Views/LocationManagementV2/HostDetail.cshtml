@@ -128,13 +128,47 @@
 
 <div class="relative">
     <div class="  ">
+        @if (Model.HostRank == "1")
+        {
+
+            <div class="absolute z-10 flex items-center gap-[3px] bg-[#fff] w-[55px] pt-2 pb-[10px] pl-1 justify-center mt-3" style="border-radius: 0px 4px 4px 0px; ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
+                    <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z" fill="#E3AB00" />
+                </svg>
+                <span class="text-[15px] font-[700] " style="line-height:normal">@Model.HostRank</span>
+            </div>
+        }
+        else if (Model.HostRank == "2")
+        {
+            <div class="absolute z-10 flex items-center gap-[3px] bg-[#fff] w-[55px] pt-2 pb-[10px] justify-center mt-3" style="border-radius: 0px 4px 4px 0px; ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
+                    <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z" fill="#C9CACA" />
+                </svg>
+                <span class="text-[15px] font-[700] " style="line-height:normal">@Model.HostRank</span>
+            </div>
+        }
+        else if (Model.HostRank == "3")
+        {
+            <div class="absolute z-10 flex items-center gap-[3px] bg-[#fff] w-[55px] pt-2 pb-[10px] justify-center mt-3" style="border-radius: 0px 4px 4px 0px; ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="16" viewBox="0 0 19 16" fill="none">
+                    <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z" fill="#BD764B" />
+                </svg>
+                <span class="text-[15px] font-[700] " style="line-height:normal">@Model.HostRank</span>
+            </div>
+        }
         <div class=" owl-carousel owl-theme no-scrollbar ">
             @if (Model.HostGalleryImageList != null && Model.HostGalleryImageList.Count > 0)
             {
+
                 foreach (var item in Model.HostGalleryImageList)
                 {
-                    <img class="rounded object-cover h-[413px]" src="@item"
-                         alt="modelimage">
+
+
+                    <div>
+
+                        <img class="rounded object-cover h-[413px]" src="@item"
+                             alt="modelimage">
+                    </div>
                 }
             }
             else
@@ -149,7 +183,7 @@
     <!-- favourite icon -->
     @if (!string.IsNullOrEmpty(Model.IsBookmarked) && Model.IsBookmarked.ToUpper() == "N")
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem; z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
+        <div class="absolute  right-3" style="bottom: -15px; z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
             <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height: 59px; width: 60px; z-index: 1" />
         </div>
     }
@@ -160,17 +194,35 @@
         </div>
     }
 </div>
+@if (!string.IsNullOrEmpty(@Model.Title))
+{
+    <div class="flex justify-center bg-[#FFECEC] py-2" style="margin:11px 18px 0 17px; border-radius:4px;">
+        <div class="text-[12px] font-[700] leading-[16.8px] text-[#D75A8B]">
+            @Model.Title
+        </div>
+    </div>
+}
 <div class="">
     <!-- host details -->
     <div class=" px-4 ">
         <div class="mt-6 flex justify-start items-center gap-[9px] border-b border-[#EFEFEF] pb-[11px]">
             <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="4" height="43" viewBox="0 0 4 43" fill="none">
-                    <path d="M0 43L0.8 43L0.799998 -3.49691e-08L-1.87959e-06 0L0 43ZM3.2 43L4 43L4 -1.74846e-07L3.2 -1.39877e-07L3.2 43Z"
-                          fill="#BCB08A" />
+                @*<svg xmlns="http://www.w3.org/2000/svg" width="4" height="43" viewBox="0 0 4 43" fill="none">
+                        <path d="M0 43L0.8 43L0.799998 -3.49691e-08L-1.87959e-06 0L0 43ZM3.2 43L4 43L4 -1.74846e-07L3.2 -1.39877e-07L3.2 43Z"
+                              fill="#BCB08A" />
+                    </svg>*@
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="4" height="64" viewBox="0 0 4 64" fill="none">
+                    <path d="M0 64L0.800001 64L0.799998 -3.49691e-08L-2.79753e-06 0L0 64ZM3.2 64L4 64L4 -1.74846e-07L3.2 -1.39877e-07L3.2 64Z" fill="#BCB08A" />
                 </svg>
             </div>
             <div class="flex flex-col justify-start items-start ">
+                @if (!string.IsNullOrEmpty(@Model.Position))
+                {
+                    <div class="font-[700] text-[12px] text-[#D75A8B] " style="line-height:16.8px">
+                        @Model.Position
+                    </div>
+                }
                 <div>
                     <span class="hostName text-[#292F33] leading-[29.4px] text-[21px] font-bold pr-3">@Model.HostNameJapanese</span>
                     <span class="age text-[#A09E91] text-[20px] font-bold leading-[28px]">@Model.HostAge</span>

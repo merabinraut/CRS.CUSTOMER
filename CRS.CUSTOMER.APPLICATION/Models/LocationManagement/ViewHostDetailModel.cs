@@ -60,6 +60,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string IsBookmarked { get; set; }
         public string HostLoveCount { get; set; }
         public string CustomerHostCompatibility { get; set; }
+        public string Position { get; set; }
+        public string Title { get; set; }
         public List<string> HostGalleryImageList { get; set; }
         public List<HostIdentityDetailsModel> HostIdentityDetailsModel = new List<HostIdentityDetailsModel>();
     }

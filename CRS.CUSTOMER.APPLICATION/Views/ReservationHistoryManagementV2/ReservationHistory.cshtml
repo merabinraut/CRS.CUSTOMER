@@ -46,11 +46,11 @@
                   fill="#BCB08A" />
         </svg> 戻る
     </div>
-    <div class="text-center text-sm w-full font-[700] text-[#333] ">予約確認・変更…予約一覧</div>
+    <div class="text-center text-sm w-full font-[700] text-[#333] ">予約確認・変更</div>
 </div>
 <!-- tab  -->
 <div class="bg-[#FAFAFA]">
-    <div class="px-8 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
+    <div class="px-4 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
         <div class="flex gap-[24px]  w-full " style="border-bottom: 4px solid #F4F4F4;">
             <div class="flex tab-container-plane booking-tab bg-white justify-between w-full text-sm no-scrollbar">
                 <button id="tab1Button" class="tab-button-plane w-max flex-none tab-link  @(rsvtab == "01" ? "active" : "")" onclick="window.location.href='/user/account/reservation/?rsvtab=01'">予約中</button>
@@ -243,7 +243,7 @@
                             </div>
                         </div>
                         <span class="text-[12px] mt-4 flex justify-center text-[#000]">
-                            店舗にはまだ予約入ってません
+                            ご予約中店舗はございません
                         </span>
                     </div>
 
@@ -421,7 +421,7 @@
                             </div>
                         </div>
                         <span class="text-[12px] mt-4 flex justify-center text-[#000]">
-                            店舗にはまだ予約入ってません
+                            訪問済みの店舗はございません
                         </span>
                     </div>
                 }
@@ -599,7 +599,7 @@
                             </div>
                         </div>
                         <span class="text-[12px] mt-4 flex justify-center text-[#000]">
-                            店舗にはまだ予約入ってません
+                            キャンセル済みの店舗はございません
                         </span>
                     </div>
                 }
@@ -869,7 +869,7 @@
                             </div>
                         </div>
                         <span class="text-[12px] mt-4 flex justify-center text-[#000]">
-                            店舗にはまだ予約入ってません
+                            過去のご予約の情報が見つかりません
                         </span>
                     </div>
                 }

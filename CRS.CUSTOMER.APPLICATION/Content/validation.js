@@ -48,3 +48,22 @@ function isNumberWithDot(evt, obj) {
     if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
     return true;
 }
+
+function isValidDate(day, month, year) {
+    // Check if year, month, and day are within valid ranges
+    if (year < 1 || month < 1 || month > 12 || day < 1 || day > 31) {
+        return false;
+    }
+
+    // Check for month-specific day limits
+    const monthLengths = [31, (isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    if (day > monthLengths[month - 1]) {
+        return false;
+    }
+
+    return true;
+}
+
+function isLeapYear(year) {
+    return (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
+}
