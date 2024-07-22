@@ -796,7 +796,7 @@
             var dobMonth = $('#dob-month').val();
             var dobDate = $('#dob-day').val();
             let isValidDOB = true;
-            if (!isNaN(dobYear) || !isNaN(dobMonth) || !isNaN(dobDate)) {
+            if (!isNullOrEmpty(dobYear) || !isNullOrEmpty(dobMonth) || !isNullOrEmpty(dobDate)) {
                 isValidDOB = isValidDate(dobDate, dobMonth, dobYear);
             }
             if (isValidDOB) {
@@ -824,6 +824,10 @@
 
         function isLeapYear(year) {
             return (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
+        }
+
+        function isNullOrEmpty(value) {
+            return value === null || value === undefined || value === '';
         }
     </script>
 
