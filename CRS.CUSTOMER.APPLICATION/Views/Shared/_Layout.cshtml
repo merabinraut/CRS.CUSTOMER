@@ -239,7 +239,7 @@
                 /* background-image: url('../../content/assets/images/sprinkle.png');
             background-repeat: no-repeat;
             background-size: cover;*/
-                background: url('../../content/assets/images/sprinkle.png') no-repeat center center fixed;
+                background: url('/content/assets/images/sprinkle.png') no-repeat center center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -248,12 +248,15 @@
             }
 
             #toast-container {
-                max-width: 375px !important !important;
+                max-width: 375px !important ;
                 width: 100% !important;
                 left: 50%;
                 transform: translate(-35%);
             }
+            #noscrollx{
+                overflow-x:hidden;
 
+            }
 
 
             #test {
@@ -350,7 +353,7 @@
        <div id="leftcontent" style="margin-top: 30%; " class="flex  flex-col items-center ">
             <div id="leftfix" class="fixed">
                 <div class="flex flex-row justify-center">
-                    <img src="../../content/assets/images/bglogo.png" />
+                    <img src="~/content/assets/images/bglogo.png" />
                 </div>
                 <div id="siteurl" class="flex flex-row justify-center">
                     <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
@@ -553,7 +556,7 @@
 
                 <!-- #endregion -->
                 <!----Render Body section start-->
-                <div>
+                <div id="noscrollx" >
                     <input type="text" id="current-location-id" value="/tokyo/kabukicho" hidden />
                     @Html.AntiForgeryToken()
                     @RenderBody()
@@ -683,22 +686,22 @@
         <div id="rightcontent" style="margin-top: 10%; " class="flex flex-col items-center">
             <div id="innerfixed" class="fixed   flex flex-col gap-2">
                 @* <div >*@
-                <img src="../../content/assets/images/hpi1.jpeg" style="width:inherit" />
+                <img src="~/content/assets/images/hpi1.jpeg" style="width:inherit" />
                 @* </div>
                     <div>*@
-                <img src="../../content/assets/images/hpi2.jpeg" style="width:inherit" />
+                <img src="~/content/assets/images/hpi2.jpeg" style="width:inherit" />
                 @*  </div>
                     <div>*@
-                <img src="../../content/assets/images/hpi3.jpeg" style="width:inherit" />
+                <img src="~/content/assets/images/hpi3.jpeg" style="width:inherit" />
                 @*</div>
                     <div>*@
-                <img src="../../content/assets/images/hpi4.jpeg" style="width:inherit" />
+                <img src="~/content/assets/images/hpi4.jpeg" style="width:inherit" />
                 @*  </div>
                     <div>*@
-                <img src="../../content/assets/images/hpi5.jpeg" style="width:inherit" />
+                <img src="~/content/assets/images/hpi5.jpeg" style="width:inherit" />
                 @* </div>
                     <div>*@
-                <img src="../../content/assets/images/hpi6.jpeg" style="width:inherit" />
+                <img src="~/content/assets/images/hpi6.jpeg" style="width:inherit" />
                 @*  </div>*@
             </div>
 

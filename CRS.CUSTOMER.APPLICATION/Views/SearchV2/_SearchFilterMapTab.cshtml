@@ -1,4 +1,17 @@
-﻿<div id="tab4" class="tab-content-plane">
+﻿<style>
+    @@media (min-width: 640px) {
+        #searchbutton {
+            max-width: 375px !important;
+            width: 100% !important;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        #noscrollx{
+            height:100vh
+        }
+    }
+</style>
+<div id="tab4" class="tab-content-plane">
     <!--#region near-location.php-->
     <div class="pb-12">
         <div class="bg-white ">
@@ -96,7 +109,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="flex gap-4 py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
+                <div id="searchbutton" class="flex gap-4 py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
                     <button class="btn bg-[#E4E4E4] " onclick="ClearFunction();">
                         条件をクリア
                     </button>

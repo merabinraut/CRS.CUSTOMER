@@ -1,4 +1,19 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchV2FilterHostTabModel
+
+<style>
+    @@media (min-width: 640px) {
+        #searchbutton {
+            max-width: 375px !important;
+            width: 100% !important;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        #noscrollx {
+            height: 100vh
+        }
+       
+    }
+</style>
 <div id="tab2" class="tab-content-plane">
     <form method="post" id="host-filter-form-id" hidden>
         <input type="search" id="host-search" name="SearchFilter" hidden>
@@ -145,7 +160,7 @@
 
 
     </div>
-    <div class="flex gap-4 py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
+    <div id="searchbutton" class="flex gap-4 py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
         <button class="btn bg-[#E4E4E4] " onclick="ClearFunction();">
             条件をクリア
         </button>
@@ -158,7 +173,8 @@
     </div>
     <!--#endregion host.php-->
 </div>
-<script>var selectlocationstorehostsection = document.querySelectorAll('.select-location-store-host-section');
+<script>
+    var selectlocationstorehostsection = document.querySelectorAll('.select-location-store-host-section');
     // Add click event listeners to each div
     selectlocationstorehostsection.forEach(function (div) {
         div.addEventListener('click', function () {

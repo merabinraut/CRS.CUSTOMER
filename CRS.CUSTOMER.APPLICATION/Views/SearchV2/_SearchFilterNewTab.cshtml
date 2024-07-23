@@ -1,4 +1,18 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchV2FilterNewTabModel
+
+<style>
+    @@media (min-width: 640px) {
+        #searchbutton {
+            max-width: 375px !important;
+            width: 100% !important;
+            left: 50%;
+            transform: translate(-50%);
+        }
+        #noscrollx {
+            height: 100vh
+        }
+    }
+</style>
 <div id="tab3" class="tab-content-plane">
     <!--#region new-store.php-->
     <div class="pb-12" style="padding-bottom:60px">
@@ -163,7 +177,7 @@
         </div>
 
     </div>
-    <div class="flex gap-4 py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white z-10 ">
+    <div id="searchbutton" class="flex gap-4 py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white z-10 ">
         <button class="btn bg-[#E4E4E4] " onclick="ClearFunction();">
             条件をクリア
         </button>

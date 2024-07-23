@@ -29,7 +29,7 @@
     <title> @ViewBag.Title</title>
 </head>
 <body class="md:hidden">
-    <div class="py-[10px] px-[16px] flex justify-between border-b border-b-[#ECECEC] sticky top-0 bg-white z-[10]" style="z-index:10">
+    <div id="navbarback" class="py-[10px] px-[16px] flex justify-between border-b border-b-[#ECECEC] sticky top-0 bg-white z-[10]" style="z-index:10">
         @{
             var url = "/Home/HomePage";
             var Username = Session["Username"]?.ToString();
