@@ -483,6 +483,7 @@
     <Content Include="Content\assets\images\recommendation.svg" />
     <Content Include="Content\assets\images\recommendationActive.svg" />
     <Content Include="Content\assets\images\reservable.svg" />
+    <Content Include="Content\assets\images\reservation.svg" />
     <Content Include="Content\assets\images\review-active.svg" />
     <Content Include="Content\assets\images\review.svg" />
     <Content Include="Content\assets\images\save-check.svg" />
@@ -524,6 +525,7 @@
     <Content Include="Content\assets\js\search-filter-common.js" />
     <Content Include="Content\assets\js\tabs.js" />
     <Content Include="Content\assets\js\toogle.js" />
+    <Content Include="Content\assets\images\visited.svg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css" />
