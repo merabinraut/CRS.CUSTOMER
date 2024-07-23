@@ -261,7 +261,7 @@
                     6桁の数字を確認し、入力してください*@
             </div>
             <input type="hidden" name="exptime" id="exptime" value='@Html.Raw(Session["exptime"]!=null?Session["exptime"].ToString():"")' />
-            <div class="flex justify-end items-end remainigTime" id="otp-code-timer">
+            <div class="flex justify-end items-end remainigTime" id="otp-code-timer"> 
                 @*1 分 59 秒*@
             </div>
             <!-- for waiting message -->
@@ -289,13 +289,13 @@
                 <!-- for button group -->
                 <div class="flex justify-between items-center gap-4 mb-4">
                     <button class="returnButton" onclick="history.back()">戻る</button>
-                    <button class="nextButton" type="submit" name="submit" id="valCod" value="Next">次</button>
+                    <button class="nextButton" type="submit" name="submit" id="valCod" value="Next">送信</button>
                 </div>
             }
             <!-- for unable to get code  -->
             <div class="acessCodeWrapper">
                 <div class="accessCodeText">
-                    コードを取得できませんでしたか?
+                    認証コードを取得できませんでしたか？
                 </div>
                 <div class="accessCodeLink" id="resend-verification-code">
                     <p class="accessCodeLink">

@@ -54,14 +54,14 @@ else
                                 <div>
                                     <div class="text-sm  mb-1 text-[#667085]">
                                         <p>
-                                            @*あなたがレビューした日*@
-                                            @item.ClubName
+                                            @item.ClubName に
                                             <span class="review-start text-[#F0D830]">
                                                 @for (int i = 0; i < Convert.ToInt32(item.RatingScale); i++)
                                                 {
                                                     <i class="las la-star"></i>
                                                 }
                                             </span>
+                                            でレビュー..
                                         </p>
                                     </div>
                                     <div class="flex gap-1 items-center text-xs ">
