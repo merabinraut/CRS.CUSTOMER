@@ -18,6 +18,11 @@
     .inset-0 {
         inset: 5rem !important;
     }
+    @@media(min-width:640px){
+        #noclub ,#clubs{
+            height:100vh
+        }
+    }
 </style>
 <div class="">
     <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
@@ -208,7 +213,7 @@
             </div>
             @if (Model.BookmarkedHosts.Count <= 0)
             {
-                <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0]  justify-center items-center " style="padding-top:64px">
+                <div id="noclub" class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0]  justify-center items-center " style="padding-top:64px">
                     <div style="display:flex; justify-content:center; align-items:center">
                         <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="80" cy="80" r="79" stroke="#F4F4F4" stroke-width="2" />
@@ -229,7 +234,7 @@
             {
                 foreach (var item in Model.BookmarkedHosts)
                 {
-                    <div class="flex flex-col border-b-[4px] border-[#E3E2DB] py-3  ">
+                    <div id="clubs" class="flex flex-col border-b-[4px] border-[#E3E2DB] py-3  ">
                         <div class="flex flex-row gap-[16px] mx-[16px]">
                             <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
                                 <div class="w-full flex justify-center" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
