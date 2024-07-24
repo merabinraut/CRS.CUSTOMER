@@ -214,16 +214,37 @@
         {
             if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SAT")
             {
-                <div class="text-blue">
-                    @item2.DayLabel
-                </div>
+                var isSatoff = item2.ScheduleLabel;
+                if (!string.IsNullOrEmpty(isSatoff) && isSatoff.ToUpper().Trim() == "DAYOFF")
+                {
+                    <div style="background: #D9D9D9; opacity:0.3">
+                        @item2.DayLabel
+                    </div>
+
+                }
+                else
+                {
+                    <div class="text-blue">
+                        @item2.DayLabel
+                    </div>
+                }
+
             }
             else if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SUN")
             {
-
-                <div class="text-red">
-                    @item2.DayLabel
-                </div>
+                var isSunoff = item2.ScheduleLabel;
+                if (!string.IsNullOrEmpty(isSunoff) && isSunoff.ToUpper().Trim() == "DAYOFF")
+                {
+                    <div style="background: #D9D9D9; opacity:0.3">
+                        @item2.DayLabel
+                    </div>
+                }
+                else
+                {
+                    <div class="text-red">
+                        @item2.DayLabel
+                    </div>
+                }
             }
             else if (!string.IsNullOrEmpty(item2.ScheduleLabel) && item2.ScheduleLabel.ToUpper().Trim() == "DAYOFF")
             {
@@ -906,9 +927,9 @@
                                                 }
                                                 else
                                                 {
-                                            <div class="absolute top-[2px] right-2" style="width: 26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                                                <img src="~/Content/assets/images/customer/favorite-unfilled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
-                                            </div>
+                                                    <div class="absolute top-[2px] right-2" style="width: 26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                                                        <img src="~/Content/assets/images/customer/favorite-unfilled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
+                                                    </div>
                                                 }
 
                                             </div>
@@ -981,7 +1002,7 @@
                                 </div>
                             </div>
                             <!-- border bottom -->
-                          @*  <div class="h-[1px] bg-[#EFEFEF] w-full"></div>*@
+                            @*  <div class="h-[1px] bg-[#EFEFEF] w-full"></div>*@
                             <!-- notices section -->
                             @{
                                 if (Model.GetNoticeByClubId != null)
@@ -991,10 +1012,10 @@
                                         if (item.EventType.Trim().ToString() == "1")
                                         {
                                             @*<div class="flex justify-start items-center gap-[9px] text-[333] text-[11px] leading-[20px] font-medium my-[5px] overflow-hidden text-ellipsis whitespace-nowrap"
-                             style="line-height:20px">
-                            <span>@item.EventDate ( @item.Day )</span>
-                            <span class=" ">@item.EventDescription</span>
-                        </div>*@
+                                                     style="line-height:20px">
+                                                    <span>@item.EventDate ( @item.Day )</span>
+                                                    <span class=" ">@item.EventDescription</span>
+                                                </div>*@
 
                                             <div class="h-[1px] bg-[#EFEFEF] w-full"></div>
 
@@ -1489,7 +1510,7 @@
                                             指名料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.DesignationFee 円 
+                                            @Model.GetClubBasicInformation.DesignationFee 円
                                         </td>
                                     </tr>
                                 }
@@ -1500,21 +1521,21 @@
                                             同伴料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.CompanionFee 円 
+                                            @Model.GetClubBasicInformation.CompanionFee 円
                                         </td>
                                     </tr>
                                 }
                                 @*   @if (Model.GetClubBasicInformation.ExtensionFee != null)
-        {
-            <tr class="">
-                <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
-                    延長料金
-                </td>
-                <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                    @Model.GetClubBasicInformation.ExtensionFee / 1時間
-                </td>
-            </tr>
-        }*@
+                                    {
+                                        <tr class="">
+                                            <td class="border border-[#EFEFEF] w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-[13px]" style="padding-left:13px">
+                                                延長料金
+                                            </td>
+                                            <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
+                                                @Model.GetClubBasicInformation.ExtensionFee / 1時間
+                                            </td>
+                                        </tr>
+                                    }*@
                                 @if (Model.GetClubBasicInformation.Drink != null)
                                 {
                                     <tr class="">
