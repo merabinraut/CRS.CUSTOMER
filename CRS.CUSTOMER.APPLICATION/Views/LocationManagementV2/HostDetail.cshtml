@@ -468,7 +468,7 @@
                     </span>
                 </p>
             }
-            @if (!string.IsNullOrEmpty(@Model.HostHeight))
+            @if (!string.IsNullOrEmpty(@Model.HostHeight) && Model.HostHeight.Trim() != "未回答")
             {
                 <p style="line-height: 180%;">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Height :<span class="text-[#404040] font-medium tracking-[1.2px] pl-1">
