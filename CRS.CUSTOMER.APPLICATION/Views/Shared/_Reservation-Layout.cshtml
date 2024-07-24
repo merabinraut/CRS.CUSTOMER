@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/Content/assets/css/tailwind.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/global.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/club.css">
+    <link rel="stylesheet" href="~/Content/assets/css/customer/responsive.css">
     <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.theme.default.min.css">
 
@@ -18,7 +19,7 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet"
@@ -35,6 +36,7 @@
     <script src="~/Content/js/NotificationMessageToaster.js"></script>
     <!--share js-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
     <!-- Include Clipboard.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
     <script>
@@ -171,13 +173,79 @@
         th.ui-datepicker-week-end {
             color: #D75A8B;
         }
+
+        @@media (min-width: 640px) {
+            #innersec {
+                margin-top: 22px;
+            }
+        }
     </style>
 </head>
 
 <body class="md:hidden">
+    <div id="test">
+        <div id="leftcontent" style="margin-top: 30%; " class="flex  flex-col items-center ">
+            <div id="leftfix" class="fixed">
+                <div class="flex flex-row justify-center">
+                    <img src="~/content/assets/images/bglogo.png" />
+                </div>
+                <div id="siteurl" class="flex flex-row justify-center">
+                    <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
+                </div>
+                <div style="max-width: 300px; height: 57px; background-color: #D75A8B ;border-radius:2px " class="flex flex-row justify-center items-center text-center">
+                    <div>
+                        <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+                    </div>
+                </div>
+                <div style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
+                    </div>
+                </div>
+                <div style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div id="innersec">
+          
+
+            @RenderBody()
+        </div>
+        <div id="rightcontent" style="margin-top: 10%; " class="flex flex-col items-center">
+            <div id="innerfixed" class="fixed   flex flex-col gap-2">
+                @* <div >*@
+                <img src="~/content/assets/images/hpi1.jpeg" style="width:inherit" />
+                @* </div>
+                <div>*@
+                <img src="~/content/assets/images/hpi2.jpeg" style="width:inherit" />
+                @*  </div>
+                <div>*@
+                <img src="~/content/assets/images/hpi3.jpeg" style="width:inherit" />
+                @*</div>
+                <div>*@
+                <img src="~/content/assets/images/hpi4.jpeg" style="width:inherit" />
+                @*  </div>
+                <div>*@
+                <img src="~/content/assets/images/hpi5.jpeg" style="width:inherit" />
+                @* </div>
+                <div>*@
+                <img src="~/content/assets/images/hpi6.jpeg" style="width:inherit" />
+                @*  </div>*@
+            </div>
+
+        </div>
+
+    </div>
+
 
     <!-- #endregion -->
-    @RenderBody()
+   
     <!-- #region Footer section -->
 
     <script src="~/Content/assets/js/tabs.js"></script>
