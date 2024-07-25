@@ -214,16 +214,37 @@
         {
             if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SAT")
             {
-                <div class="text-blue">
-                    @item2.DayLabel
-                </div>
+                var isSatoff = item2.ScheduleLabel;
+                if (!string.IsNullOrEmpty(isSatoff) && isSatoff.ToUpper().Trim() == "DAYOFF")
+                {
+                    <div style="background: #D9D9D9; opacity:0.3">
+                        @item2.DayLabel
+                    </div>
+
+                }
+                else
+                {
+                    <div class="text-blue">
+                        @item2.DayLabel
+                    </div>
+                }
+
             }
             else if (!string.IsNullOrEmpty(item2.EnglishDay) && item2.EnglishDay.ToUpper().Trim() == "SUN")
             {
-
-                <div class="text-red">
-                    @item2.DayLabel
-                </div>
+                var isSunoff = item2.ScheduleLabel;
+                if (!string.IsNullOrEmpty(isSunoff) && isSunoff.ToUpper().Trim() == "DAYOFF")
+                {
+                    <div style="background: #D9D9D9; opacity:0.3">
+                        @item2.DayLabel
+                    </div>
+                }
+                else
+                {
+                    <div class="text-red">
+                        @item2.DayLabel
+                    </div>
+                }
             }
             else if (!string.IsNullOrEmpty(item2.ScheduleLabel) && item2.ScheduleLabel.ToUpper().Trim() == "DAYOFF")
             {

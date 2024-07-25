@@ -845,7 +845,8 @@
             // Get all the form fields
             var surname = document.getElementById('Surname').value;
             var givenName = document.getElementById('GivenName').value;
-
+            var sex = document.querySelector('.language-option.active');
+            var email = document.getElementById('emailInput').value;
             var dobYear = document.getElementById('dob-year').value;
             var dobMonth = document.getElementById('dob-month').value;
             var dobDay = document.getElementById('dob-day').value;
@@ -857,8 +858,10 @@
 
 
             // Check if any field is empty
-          
-            if (surname !== '' || givenName !== '' || dobYear !== '' || dobMonth !== '' || dobDay !== '' || postcode !== '' || prefecture !== '' || city !== '' || building !== '' || ResidenceNumber !== '') {
+
+            //console.log(sex, "hello ")
+
+            if (surname !== '' || givenName !== '' || email !== ''  || sex || dobYear !== '' || dobMonth !== '' || dobDay !== '' || postcode !== '' || prefecture !== '' || city !== '' || building !== '' || ResidenceNumber !== '') {
                 document.getElementById('save_btn').classList.remove('disabled-div');
                 document.getElementById('savebtndiv').classList.remove('savebtndivcss');
               
@@ -874,6 +877,8 @@
         // Add event listeners to each input field to check on input change
         document.getElementById('Surname').addEventListener('input', checkForm);
         document.getElementById('GivenName').addEventListener('input', checkForm);
+      
+        document.getElementById('emailInput').addEventListener('input', checkForm);
         document.getElementById('dob-year').addEventListener('input', checkForm);
         document.getElementById('dob-month').addEventListener('input', checkForm);
         document.getElementById('dob-day').addEventListener('input', checkForm);
@@ -883,6 +888,14 @@
         document.getElementById('street').addEventListener('input', checkForm);
         document.getElementById('ResidenceNumber').addEventListener('input', checkForm);
 
+        // Add event listeners to gender options
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.language-option').forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                checkForm();
+            });
+        });
         // Initial check on page load
         checkForm();
 
