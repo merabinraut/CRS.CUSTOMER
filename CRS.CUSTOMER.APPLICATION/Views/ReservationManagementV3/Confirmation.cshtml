@@ -4,7 +4,23 @@
     Layout = "~/Views/Shared/_Reservation-Layout-V2.cshtml";
     var DefaultHostId = ApplicationUtilities.EncryptParameter("0").ToString();
 }
-<div class="flex flex-col justify-between h-screen relative pb-8">
+<style>
+    @@media (min-width: 640px) {
+        #confirmButton {
+            width: 375px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            bottom: -40px;
+        }
+
+        #confirmContent {
+            padding-top: 8px;
+        }
+    }
+</style>
+  
+
+<div id="confirmContent" class="flex flex-col justify-between h-screen relative pb-8">
     <div>
         <!-- header  -->
         <div class="flex items-center justify-between  pt-[13px] px-[14px] pb-[9px] border-b border-b-[#DCDCDC]">
@@ -162,7 +178,7 @@
         </div>
     </div>
 </div>
-<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
+<div id="confirmButton" class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
      style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
     <button class="btn" onclick="WindowHistoryBack();">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back

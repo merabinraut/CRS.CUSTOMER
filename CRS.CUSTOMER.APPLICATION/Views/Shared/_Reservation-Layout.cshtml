@@ -1,25 +1,26 @@
 <!-- #region Header section -->
-
-<!DOCTYPE html>
-<html lang="en">
-
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/Content/assets/css/tailwind.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/global.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/club.css">
+    <link rel="stylesheet" href="~/Content/assets/css/customer/.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/responsive.css">
     <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.theme.default.min.css">
-
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    *@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet"
@@ -31,12 +32,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="~/Content/js/NotificationMessageToaster.js"></script>
     <!--share js-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
+
     <!-- Include Clipboard.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
     <script>
@@ -65,6 +66,7 @@
 
     <title>@ViewBag.Title</title>
     <style>
+
         .ui-datepicker {
             /* width: max-content; */
             width: 98%;
@@ -179,10 +181,14 @@
                 margin-top: 22px;
             }
         }
+
+     
     </style>
 </head>
 
-<body class="md:hidden">
+
+<body >
+
     <div id="test">
         <div id="leftcontent" style="margin-top: 30%; " class="flex  flex-col items-center ">
             <div id="leftfix" class="fixed">
@@ -194,7 +200,19 @@
                 </div>
                 <div style="max-width: 300px; height: 57px; background-color: #D75A8B ;border-radius:2px " class="flex flex-row justify-center items-center text-center">
                     <div>
-                        <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+                        <p id="textContainerone" style="font-size:18px;font-weight:600 ; " class="text-white">
+                            <span class="japanese-text">
+                                @Html.Raw("訪問")
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <span>
+                            安尼派
+                        </span>
+                        @*<p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>*@
                     </div>
                 </div>
                 <div style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
@@ -202,10 +220,8 @@
                         <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
                     </div>
                 </div>
-                <div style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
-                    <div>
-                        <p style="font-size:18px;font-weight:600" class="text-black">新規会員登録</p>
-                    </div>
+                <div>
+                    安尼派
                 </div>
             </div>
 
@@ -213,7 +229,7 @@
 
         </div>
         <div id="innersec">
-          
+            
 
             @RenderBody()
         </div>
@@ -302,6 +318,16 @@
              }
          }
      });
+      /*  document.addEventListener("DOMContentLoaded", function () {
+            // Text to be displayed
+            var textToDisplay = "こんにちは、";
+
+            // Get the container element
+            var container = document.getElementById("textContainerone");
+
+            // Insert the text into the container
+            container.textContent = textToDisplay;
+        });*/
     </script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="~/Content/assets/js/reschedule-reservation.js"></script>
