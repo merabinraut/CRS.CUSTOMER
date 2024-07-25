@@ -27,6 +27,9 @@
         width: 100vw;
         background: yellow;
     }
+    .blue{
+        color:red;
+    }
 
     .tab-container-plane .active {
         border-bottom: 2px solid #E3A1A1;
@@ -754,7 +757,7 @@
                                     </div>
                                     <!-- for the notice with mention -->
                                     <div class="text-[11px] font-medium leading-[16px] text-[#333] ">
-                                        <span class="text-[#D17979] break-all ">@notice.EventDescription</span>
+                                        <span class="event-description mentioned" id="mentioned">@notice.EventDescription</span>
                                     </div>
                                 </div>
                                 <div class="h-[1px] bg-[#EFEFEF] w-full "></div>
@@ -2017,4 +2020,29 @@
              return false;
          }
     </script>
+
+
+
+    <script>
+        function highlightMention() {
+            const mentions = document.querySelectorAll('.event-description.mentioned');
+            mentions.forEach(element => {
+                let text = element.innerHTML;
+                const atIndex = text.indexOf('@@');
+                if (atIndex !== -1) {
+                    let partAfterAt = text.substring(atIndex);
+                    let words = partAfterAt.split(/\s+/);
+                    if (words.length >= 3) {
+                        let mentionText = words.slice(0, 3).join(' '); 
+                        let restOfText = partAfterAt.substring(mentionText.length);
+
+                        text = text.substring(0, atIndex) + '<span class="blue">' + mentionText + '</span>' + restOfText;
+                        element.innerHTML = text;
+                    }
+                }
+            });
+        }
+        highlightMention();
+    </script>
+
 }
