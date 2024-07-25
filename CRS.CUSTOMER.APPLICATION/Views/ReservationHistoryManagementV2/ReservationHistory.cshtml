@@ -243,7 +243,7 @@
                             </div>
                         </div>
                         <span class="text-[12px] mt-4 flex justify-center text-[#000]">
-                            ご予約中店舗はございません
+                            ご予約中店舗はありません
                         </span>
                     </div>
 
@@ -264,7 +264,7 @@
                                     <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] club-border image-cover" alt="img" />
                                 </div>
                                 <div class="pl-4" style="width:100%" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
-                                    <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px; overflow-x: scroll ">
+                                    <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px; overflow-x: scroll; max-width:fit-content; ">
                                         @if (!string.IsNullOrEmpty(@item.Tag1))
                                         {
                                             <!-- s/tag -->
@@ -421,7 +421,7 @@
                             </div>
                         </div>
                         <span class="text-[12px] mt-4 flex justify-center text-[#000]">
-                            訪問済みの店舗はございません
+                            訪問済みの店舗はありません
                         </span>
                     </div>
                 }
@@ -440,7 +440,7 @@
                                         <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] club-border image-cover" alt="img" />
                                     </div>
                                     <div class="pl-4" style="width:100%" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
-                                        <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px; overflow-x: scroll ">
+                                        <ul class="club_tags no-scrollbar" style="padding: 0px; display: flex; flex-direction: column; height: 28px; overflow-x: scroll; max-width: fit-content; ">
                                             @if (!string.IsNullOrEmpty(@item.Tag1))
                                             {
                                                 <!-- s/tag -->
@@ -599,7 +599,7 @@
                             </div>
                         </div>
                         <span class="text-[12px] mt-4 flex justify-center text-[#000]">
-                            キャンセル済みの店舗はございません
+                            キャンセル済みの店舗はありません
                         </span>
                     </div>
                 }
@@ -1066,7 +1066,7 @@
                 <!-- Modal header -->
                 <div class="text-center pt-2 pb-4 px-2 border-b border-[#DCDCDC] flex flex-col justify-center gap-1 ">
                     <div class=" text-[16px] font-semibold text-[#1A1C1E]">確認</div>
-                    <div class=" text-[12px] font-normal text-[#1A1C1E]">ご予約はキャンセルにしすか？</div>
+                    <div class=" text-[12px] font-normal text-[#1A1C1E]">ご予約はキャンセルにしますか?</div>
                 </div>
                 <!-- Modal body -->
                 <div class="grid gap-4 p-6 pt-4 grid-cols-2">
