@@ -613,7 +613,7 @@
                         <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
                             <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
                                 <div class="h-[82px] w-[82px] relative flex-none">
-                                    @if (item.TransactionStatus.Trim().ToUpper() == "A" || item.OTPVerificationStatus.Trim().ToUpper() == "P")
+                                    @if (item.TransactionStatus.Trim().ToUpper() == "A")
                                     {
                                         <img src="/Content/assets/images/reservation.svg" alt="reserved"
                                              class="absolute top-[6px] left-[-5px] " />
@@ -623,7 +623,7 @@
                                         <img src="/Content/assets/images/status-cancelled.svg" alt="reserved"
                                              class="absolute top-[6px] left-[-5px]" />
                                     }
-                                    @if (item.TransactionStatus.Trim().ToUpper() == "S" && item.OTPVerificationStatus.Trim().ToUpper() == "A")
+                                    @if (item.TransactionStatus.Trim().ToUpper() == "S")
                                     {
                                         <img src="/Content/assets/images/visited.svg" alt="reserved"
                                              class="absolute top-[6px] left-[-5px]" />
