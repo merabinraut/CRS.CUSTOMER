@@ -103,6 +103,9 @@ namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
         public string Tag5 { get; set; }
         public string ClubLocationURL { get; set; }
         public string ClubCode { get; set; }
+        public string OTPVerificationStatus { get; set; }
+        public string IsManual { get; set; }
+        public string ManualRemarkId { get; set; }
     }
     #region " Reservation History Detail Model"
     public class ReservationHistoryDetailModelCommon

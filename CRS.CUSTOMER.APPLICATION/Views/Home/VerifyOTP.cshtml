@@ -34,7 +34,7 @@
     <script src="/Content/js/NotificationMessageToaster.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <title>Hoslog | Customer | Verify OTP</title>
+    <title>新規会員登録‖ホスログ《 ホストクラブ初回来店・ネット予約 》</title>
 </head>
 <body class="md:hidden">
     @*<div class="mx-[16px]">
@@ -124,7 +124,7 @@
             color: #B12D23;
             text-align: right;
             font-feature-settings: 'clig' off, 'liga' off;
-            font-size: 10px;
+            font-size: 12px;
             font-style: normal;
             font-weight: 500;
             line-height: 16px;
@@ -261,8 +261,16 @@
                     6桁の数字を確認し、入力してください*@
             </div>
             <input type="hidden" name="exptime" id="exptime" value='@Html.Raw(Session["exptime"]!=null?Session["exptime"].ToString():"")' />
-            <div class="flex justify-end items-end remainigTime" id="otp-code-timer"> 
-                @*1 分 59 秒*@
+
+            <div class="flex justify-end items-end remainigTime">
+                <span>
+                    有効期限 :
+                </span>
+
+                <div class="flex justify-end items-end remainigTime" id="otp-code-timer">
+
+                    @*1 分 59 秒*@
+                </div>
             </div>
             <!-- for waiting message -->
             <div id="waitingMessageWrapper">

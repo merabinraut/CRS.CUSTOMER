@@ -1,6 +1,6 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2.ReservationHistoryDetailModel
 @{
-    ViewBag.Title = "View History Detail";
+    ViewBag.Title = "予約確認・変更 ‖ ホスログ《 ホストクラブ初回来店・ネット予約》";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!Doctype html>
@@ -14,7 +14,7 @@
                       fill="#BCB08A" />
             </svg> 戻る
         </div>
-        <div class="text-center text-sm w-full font-[700] text-[#333] ">予約確認・変更…予約一覧</div>
+        <div class="text-center text-sm w-full font-[700] text-[#333] ">ご予約確認・変更</div>
     </div>
     <div class="flex flex-col justify-between h-screen relative pb-8">
         @if (Model.ClubId != null && Model.ClubId != "")
@@ -162,9 +162,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="h-[37px] rounded-[5px] mt-[9px] border border-[#E3AB00] text-[#E3AB00] font-bold flex justify-center items-center text-sm gap-[2px]" style="background:#FFFAF5">
+                     @*   <div class="h-[37px] rounded-[5px] mt-[9px] border border-[#E3AB00] text-[#E3AB00] font-bold flex justify-center items-center text-sm gap-[2px]" style="background:#FFFAF5">
                             <i class="las la-coins text-[18px]"></i> 500ポイント獲得できます！
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>

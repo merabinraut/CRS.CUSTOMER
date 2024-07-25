@@ -441,7 +441,7 @@
                             var selectedId = ViewBag.PrefectureKey as string;
                             if (item.Key == selectedId)
                             {
-                                <option value="@item.Key">
+                                <option value="@item.Key" selected>
                                     @item.Value
                                 </option>
                             }
@@ -795,8 +795,13 @@
             var dobYear = $('#dob-year').val();
             var dobMonth = $('#dob-month').val();
             var dobDate = $('#dob-day').val();
+            var postcode = $('#postcode').val();
+            if (!isNullOrEmpty(postcode) && postcode.length != 8) {
+                toastr.info("郵便番号情報に誤りがあります");
+                return;
+            }
             let isValidDOB = true;
-            if (!isNaN(dobYear) || !isNaN(dobMonth) || !isNaN(dobDate)) {
+            if (!isNullOrEmpty(dobYear) || !isNullOrEmpty(dobMonth) || !isNullOrEmpty(dobDate)) {
                 isValidDOB = isValidDate(dobDate, dobMonth, dobYear);
             }
             if (isValidDOB) {
@@ -805,6 +810,29 @@
             }
             toastr.info("誕生日の情報に誤りがあります");
             return;
+        }
+
+        function isValidDate(day, month, year) {
+            // Check if year, month, and day are within valid ranges
+            if (year < 1 || month < 1 || month > 12 || day < 1 || day > 31) {
+                return false;
+            }
+
+            // Check for month-specific day limits
+            const monthLengths = [31, (isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            if (day > monthLengths[month - 1]) {
+                return false;
+            }
+
+            return true;
+        }
+
+        function isLeapYear(year) {
+            return (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
+        }
+
+        function isNullOrEmpty(value) {
+            return value === null || value === undefined || value === '';
         }
     </script>
 
@@ -817,7 +845,8 @@
             // Get all the form fields
             var surname = document.getElementById('Surname').value;
             var givenName = document.getElementById('GivenName').value;
-
+            var sex = document.querySelector('.language-option.active');
+            var email = document.getElementById('emailInput').value;
             var dobYear = document.getElementById('dob-year').value;
             var dobMonth = document.getElementById('dob-month').value;
             var dobDay = document.getElementById('dob-day').value;
@@ -829,8 +858,10 @@
 
 
             // Check if any field is empty
-          
-            if (surname !== '' || givenName !== '' || dobYear !== '' || dobMonth !== '' || dobDay !== '' || postcode !== '' || prefecture !== '' || city !== '' || building !== '' || ResidenceNumber !== '') {
+
+            //console.log(sex, "hello ")
+
+            if (surname !== '' || givenName !== '' || email !== ''  || sex || dobYear !== '' || dobMonth !== '' || dobDay !== '' || postcode !== '' || prefecture !== '' || city !== '' || building !== '' || ResidenceNumber !== '') {
                 document.getElementById('save_btn').classList.remove('disabled-div');
                 document.getElementById('savebtndiv').classList.remove('savebtndivcss');
               
@@ -846,6 +877,8 @@
         // Add event listeners to each input field to check on input change
         document.getElementById('Surname').addEventListener('input', checkForm);
         document.getElementById('GivenName').addEventListener('input', checkForm);
+      
+        document.getElementById('emailInput').addEventListener('input', checkForm);
         document.getElementById('dob-year').addEventListener('input', checkForm);
         document.getElementById('dob-month').addEventListener('input', checkForm);
         document.getElementById('dob-day').addEventListener('input', checkForm);
@@ -855,6 +888,14 @@
         document.getElementById('street').addEventListener('input', checkForm);
         document.getElementById('ResidenceNumber').addEventListener('input', checkForm);
 
+        // Add event listeners to gender options
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.language-option').forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                checkForm();
+            });
+        });
         // Initial check on page load
         checkForm();
 
