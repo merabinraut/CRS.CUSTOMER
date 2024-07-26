@@ -29,7 +29,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult faq()
         {
             PopulateMetaTagInfo();
-            return View();
+            return View("faqv2");
         }
 
         [HttpGet, Route("support")]
