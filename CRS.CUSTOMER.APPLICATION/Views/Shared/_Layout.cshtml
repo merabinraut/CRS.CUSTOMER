@@ -466,54 +466,66 @@
                     </div>
                     <div class="p-4">
                         <!--#region need to uncomment-->
-                        <!--  <div class="footer-link text-white grid grid-cols-2 ">
-                        <!--      <div class="grid gap-[8px]">
-                        <!--          <a href="/company" class="text-xs">
-                        <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
-                        <!--              運営会社
-                        <!--          </a>
-                        <!--          <a href="/faq" class="text-xs">
-                        <!--              よくあるご質問
-                        <!--              @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan*@
-                        <!--          </a>
-                        <!--          <a href="/support" class="text-xs">
-                        <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide*@
-                        <!--              お問い合わせ
-                        <!--          </a>
-                        <!--
-                        <!--          @* <a href="/faq" class="text-xs">
-                        <!--                  @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
-                        <!--              </a>*@
-                        <!--      </div>
-                        <!--      <div class="grid gap-[8px]">
-                        <!--
-                        <!--          <!--<a href="@Url.Action("Register","Home")" class="text-xs">-->
-                        <!--          @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Inquiry*@
-                        <!--          <!--新規会員登録(無料)
-                        <!--          </a>-->
-                        <!--          <!--<a href="/company" class="text-xs">-->
-                        <!--          @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
-                        <!--          <!--運営会社
-                        <!--          </a>-->
-                        <!--          <a href="/policy" class="text-xs">
-                        <!--              プライバシーポリシー
-                        <!--              @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy*@
-                        <!--          </a>
-                        <!--          <a href="/rule" class="text-xs">
-                        <!--              @* terms and condition*@
-                        <!--              ホスログ利用規約
-                        <!--          </a>
-                        <!--          <a href="" class="text-xs" style="height:16px">
-                        <!--              @* 運営会社*@
-                        <!--          </a>
-                        <!--          @*                                <a href="https://hoslog.jp/" class="text-xs">
-                        <!--                  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
-                        <!--              </a>*@
-                        <!--      </div>
-                        <!--  </div>
-                        <!--
-                        <!--  @* divider*@
-                        <!--  <div style="border-top: 1px dashed #999; padding: 0 16px; margin-top:14px"></div>
+                         <div class="footer-link text-white grid grid-cols-2 ">
+                             <div class="flex flex-col gap-[8px]">
+                                 <!--<a href="/company" class="text-xs">-->
+                                     @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
+                                     <!--運営会社
+                                 </a>-->
+                                 <a href="/faq" class="text-xs">
+                                     よくあるご質問
+                                     @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan*@
+                                 </a>
+                                 <a href="/support" class="text-xs">
+                                     @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.UserGuide*@
+                                     お問い合わせ
+                                 </a>
+                        
+                                 @* <a href="/faq" class="text-xs">
+                                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
+                                     </a>*@
+                             </div>
+                             <div class="flex flex-col gap-[8px]">
+                        
+                                 <a href="@Url.Action("Register","Home")" class="text-xs">
+                                 @*  @crs.customer.application.resources.resource.inquiry*@
+                                 新規会員登録(無料)
+                                 </a>
+                                 <a href="/company" class="text-xs">
+                               @*   @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
+                                 運営会社
+                                 </a>
+                                 <a href="/policy" class="text-xs">
+                                     プライバシーポリシー
+                                     @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.PrivacyPolicy*@
+                                 </a>
+                                 <a href="/rule" class="text-xs">
+                                     @* terms and condition*@
+                                     ホスログ利用規約
+                                 </a>
+                                 <!--<a href="" class="text-xs" style="height:16px">-->
+                                     @* 運営会社*@
+                                 <!--</a>-->
+                                 @*                                <a href="https://hoslog.jp/" class="text-xs">
+                                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
+                                     </a>*@
+                             </div>
+                         </div>
+                        
+                         @* divider*@
+                         <div style="border-top: 1px dashed #999999; padding: 0 16px; margin-top: 14px"></div>
+
+                         <div class="text-[#999999] font-bold text-[11px] flex gap-[8px] justify-center py-2 mt-2" >
+                             <div>
+                                 アフィリエイト登録
+                             </div>
+                             
+                             <div class="w-[11px] flex justify-center"> | </div>
+
+                             <div>
+                                 アフィリエイト登録
+                             </div>
+                         </div>
                          <!--#endregion need to uncomment-->
 
                         <div class="affiliation">
@@ -526,9 +538,11 @@
 
 
                         <div class=" my-4 p-[8px] border rounded-[4px] border-[#393939] bg-[#232323] text-center text-white" style="font-size: 0.7rem;">
-                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.WarningNotes
+                            @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.WarningNotes*@
+
+                            18歳未満の方の閲覧・利用は固くお断りいたします。また、20歳未満の方の飲酒は法律で固く禁じられております
                         </div>
-                        <div class='text-center  text-white' style="font-size:12px">© 2019 - @DateTime.Now.Year  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog</div>
+                        <div class='text-center  text-white' style="font-size:12px">© <span style="font-style:italic;"> 2019 - @DateTime.Now.Year </span>  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog</div>
                     </div>
                 </div>
             </div>
