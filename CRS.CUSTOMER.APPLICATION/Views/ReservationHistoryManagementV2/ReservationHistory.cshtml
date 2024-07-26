@@ -1,40 +1,59 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2.ReservationCommonModel
 @{
     ViewBag.Title = "予約確認・変更 ‖ ホスログ《 ホストクラブ初回来店・ネット予約》";
-    Layout = "~/Views/Shared/_Reservation-Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var rsvtab = Model.rsvtab;
 }
+<link rel="stylesheet" href="~/Content/assets/css/customer/reservation.css">
 <style>
-    .modalWrapper {
-        background: rgba(27,27,27,0.5);
-        height: 100%;
-        z-index: 555;
-        position: fixed;
-        top: 0px;
-    }
 
-    .modalContentWrapper {
-        display: block;
-        width: 100vw;
-        padding: 0 16px;
-        top: 50%;
-        margin-top: 65%
-    }
 
-    .ui-datepicker {
-        /* width: max-content; */
-        width: 98%;
-        background-color: #FBF8F8;
-        padding: 12px 8px;
-        position: relative !important;
-        top: unset !important;
-        left: unset !important;
-        border: none !important;
-        font-family: "yu-gothic-pr6n", sans-serif;
-        font-size: 14px;
-        display: block !important;
-        border-radius: 8px;
-    }
+    @@media (min-width: 640px) {
+        #innersec {
+            height: 103vh;
+        }
+
+        .modalContentWrapper {
+            width: 375px !important;
+            /*left: 50% !important;*/
+            transform: translate(-0%, -25%) !important;
+            top: 20% !important;
+            position: relative !important;
+            margin-top: 0% !important;
+            padding: 0 16px;
+            /* bottom: -40px; */
+        }
+
+        .modalWrapper {
+            background: rgba(27,27,27,0.5);
+            height: 100%;
+            z-index: 555;
+            position: fixed;
+            top: 0px;
+        }
+
+        .modalContentWrapper {
+            display: block;
+            width: 100vw;
+            padding: 0 0px;
+            top: 50%;
+            margin-top: 65%
+        }
+
+        .ui-datepicker {
+            /* width: max-content; */
+            width: 98%;
+            background-color: #FBF8F8;
+            padding: 12px 8px;
+            position: relative !important;
+            top: unset !important;
+            left: unset !important;
+            border: none !important;
+            font-family: "yu-gothic-pr6n", sans-serif;
+            font-size: 14px;
+            display: block !important;
+            border-radius: 8px;
+        }
 </style>
 
 
@@ -387,7 +406,7 @@
                                         <svg class="club-visited" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                             <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
                                                   fill="" ;
-                                                  "                                                                                                                                                          />
+                                                  "                                                                                                                                                                 />
                                         </svg>
                                     </div>
                                     <div class="text-[8px] ">
@@ -1149,35 +1168,125 @@
     <img src="~/Content/assets/images/loader.gif" class="h-[150px]" style="opacity:100%" />
 </div>
 
-<!--modal 2 pop  up-->
-<script>
-    function openModal2(modalid) {
-        var modal = document.getElementById(modalid);
-        if (modal) {
-            modal.style.display = "block";
+@section scripts{
+    <script src="~/Content/assets/js/reschedule-reservation.js"></script>
+    <!--modal 2 pop  up-->
+    <script>
+        function openModal2(modalid) {
+            var modal = document.getElementById(modalid);
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }</script>
+    <script>
+        function closeDeleteModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
         }
-    }</script>
-<script>
-    function closeDeleteModal(modalId) {
-        var modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "none";
+        function openDeleteModal(modalId, reservationId) {
+            var modal = document.getElementById(modalId);
+            $('#delete_id').val(reservationId);
+            if (modal) {
+                modal.style.display = "block";
+            }
         }
-    }
-    function openDeleteModal(modalId, reservationId) {
-        var modal = document.getElementById(modalId);
-        $('#delete_id').val(reservationId);
-        if (modal) {
-            modal.style.display = "block";
+        function DeleteReservation() {
+            var ReservationId = $('#delete_id').val();
+            if (ReservationId != "") {
+                $.ajax({
+                    type: 'POST',
+                    async: true,
+                    url: "/ReservationHistoryManagementV2/DeleteReservation?RID=" + ReservationId,
+                    dataType: 'json',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    },
+                    success: function (data) {
+                        window.location.href = "/user/account/reservation";
+                    }
+                });
+            }
+        }</script>
+    <script>
+        function closeRedoModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
         }
-    }
-    function DeleteReservation() {
-        var ReservationId = $('#delete_id').val();
-        if (ReservationId != "") {
+        function openRedoModal(modalId, reservationId) {
+            var modal = document.getElementById(modalId);
+            $('#redo_id').val(reservationId);
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }
+        //function gotoClubDetail(locationId, clubId) {
+        //    window.location.href = '/LocationManagement/ClubDetail_V2?LocationId=' + locationId + '&ClubId=' + clubId;
+        //}
+
+        function gotoClubDetail(ClubCode, PrefecturesArea) {
+            var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
+            window.location.href = url;
+        }
+
+        function RedoReservation() {
+            var reservationId = $('#redo_id').val();
+            if (reservationId != "") {
+                $.ajax({
+                    type: 'POST',
+                    async: true,
+                    url: "/ReservationHistoryManagementV2/RedoReservation?RID=" + reservationId,
+                    dataType: 'json',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    },
+                    success: function (data) {
+                        window.location.href = "/user/account/reservation";
+                    }
+                });
+            }
+        }</script>
+    <script>
+        function getid(reservationid) {
+            $('#cancel_id').val(reservationid);
+            var modal = document.getElementById('modal_cancel');
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }
+        // Function to close a specific modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
+        }
+        // Close the modal if the overlay is clicked
+        window.onclick = function (event) {
+            var modals = document.getElementsByClassName("modal");
+            for (var i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    closeModal(modals[i].id);
+                }
+            }
+        }
+        // Close the modal only if the overlay is clicked outside of modal1
+        window.onclick = function (event) {
+            var modal1 = document.getElementById('modal_cancel');
+            // Check if the click is outside of modal1
+            if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
+                closeModal('modal_cancel');
+            }
+        }
+        function CancelReservation() {
+            var reservationId = $('#cancel_id').val();
             $.ajax({
                 type: 'POST',
                 async: true,
-                url: "/ReservationHistoryManagementV2/DeleteReservation?RID=" + ReservationId,
+                url: "/ReservationHistoryManagementV2/CancelReservation?RID=" + reservationId,
                 dataType: 'json',
                 data: {
                     __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
@@ -1186,141 +1295,53 @@
                     window.location.href = "/user/account/reservation";
                 }
             });
+        }</script>
+    <script>
+        // Function to open a specific modal
+        function editTime(reservationid) {
+            $('#reservation_id').val(reservationid);
+            var drawerDate = document.getElementById("drawer-date");
+            drawerDate.style.display = "block";
         }
-    }</script>
-<script>
-    function closeRedoModal(modalId) {
-        var modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "none";
-        }
-    }
-    function openRedoModal(modalId, reservationId) {
-        var modal = document.getElementById(modalId);
-        $('#redo_id').val(reservationId);
-        if (modal) {
-            modal.style.display = "block";
-        }
-    }
-    //function gotoClubDetail(locationId, clubId) {
-    //    window.location.href = '/LocationManagement/ClubDetail_V2?LocationId=' + locationId + '&ClubId=' + clubId;
-    //}
 
-    function gotoClubDetail(ClubCode, PrefecturesArea) {
-        var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
-        window.location.href = url;
-    }
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            var firstModal = document.getElementById("drawer-date");
+            if (modal) {
+                modal.style.display = "block";
+                firstModal.style.zIndex = "200";
+            }
+        }
+        // Function to close a specific modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            var firstModal = document.getElementById("drawer-date");
 
-    function RedoReservation() {
-        var reservationId = $('#redo_id').val();
-        if (reservationId != "") {
-            $.ajax({
-                type: 'POST',
-                async: true,
-                url: "/ReservationHistoryManagementV2/RedoReservation?RID=" + reservationId,
-                dataType: 'json',
-                data: {
-                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
-                },
-                success: function (data) {
-                    window.location.href = "/user/account/reservation";
+            if (modal) {
+                modal.style.display = "none";
+                firstModal.style.zIndex = "40";
+            }
+        }
+
+        // Close the modal if the overlay is clicked
+        window.onclick = function (event) {
+            var modals = document.getElementsByClassName("modal");
+            for (var i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    closeModal(modals[i].id);
                 }
-            });
-        }
-    }</script>
-<script>
-    function getid(reservationid) {
-        $('#cancel_id').val(reservationid);
-        var modal = document.getElementById('modal_cancel');
-        if (modal) {
-            modal.style.display = "block";
-        }
-    }
-    // Function to close a specific modal
-    function closeModal(modalId) {
-        var modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "none";
-        }
-    }
-    // Close the modal if the overlay is clicked
-    window.onclick = function (event) {
-        var modals = document.getElementsByClassName("modal");
-        for (var i = 0; i < modals.length; i++) {
-            if (event.target == modals[i]) {
-                closeModal(modals[i].id);
             }
         }
-    }
-    // Close the modal only if the overlay is clicked outside of modal1
-    window.onclick = function (event) {
-        var modal1 = document.getElementById('modal_cancel');
-        // Check if the click is outside of modal1
-        if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
-            closeModal('modal_cancel');
-        }
-    }
-    function CancelReservation() {
-        var reservationId = $('#cancel_id').val();
-        $.ajax({
-            type: 'POST',
-            async: true,
-            url: "/ReservationHistoryManagementV2/CancelReservation?RID=" + reservationId,
-            dataType: 'json',
-            data: {
-                __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
-            },
-            success: function (data) {
-                window.location.href = "/user/account/reservation";
+        // Close the modal only if the overlay is clicked outside of modal1
+        window.onclick = function (event) {
+            var modal1 = document.getElementById('modal1');
+            // Check if the click is outside of modal1
+            if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
+                closeModal('modal1');
             }
-        });
-    }</script>
-<script>
-    // Function to open a specific modal
-    function editTime(reservationid) {
-        $('#reservation_id').val(reservationid);
-        var drawerDate = document.getElementById("drawer-date");
-        drawerDate.style.display = "block";
-    }
-
-    function openModal(modalId) {
-        var modal = document.getElementById(modalId);
-        var firstModal = document.getElementById("drawer-date");
-        if (modal) {
-            modal.style.display = "block";
-            firstModal.style.zIndex = "200";
-        }
-    }
-    // Function to close a specific modal
-    function closeModal(modalId) {
-        var modal = document.getElementById(modalId);
-        var firstModal = document.getElementById("drawer-date");
-
-        if (modal) {
-            modal.style.display = "none";
-            firstModal.style.zIndex = "40";
-        }
-    }
-
-    // Close the modal if the overlay is clicked
-    window.onclick = function (event) {
-        var modals = document.getElementsByClassName("modal");
-        for (var i = 0; i < modals.length; i++) {
-            if (event.target == modals[i]) {
-                closeModal(modals[i].id);
-            }
-        }
-    }
-    // Close the modal only if the overlay is clicked outside of modal1
-    window.onclick = function (event) {
-        var modal1 = document.getElementById('modal1');
-        // Check if the click is outside of modal1
-        if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
-            closeModal('modal1');
-        }
-    }</script>
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-<script>
+        }</script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script>
         var hour;
         var minute;
 
@@ -1857,6 +1878,8 @@
                     window.location.reload();
                 }
             });
-        }</script>
+    }
+    </script>
 
 
+}

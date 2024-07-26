@@ -1,4 +1,6 @@
-﻿#leftcontent {
+﻿
+@charset "UTF-8";
+#leftcontent {
     display: none;
 }
 
@@ -7,6 +9,15 @@
 }
 
 @media (min-width: 640px) {
+
+    .modalContentWrapper {
+        width: 375px !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important ;
+        top:20% !important;
+        position:relative !important; 
+        /* bottom: -40px; */
+    }
     .md\:hidden {
         display: block !important;
     }
