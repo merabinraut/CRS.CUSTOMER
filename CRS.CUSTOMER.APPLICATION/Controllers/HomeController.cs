@@ -737,5 +737,21 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View();
         }
         #endregion
+
+        public ActionResult Error505()
+        {
+            
+            return View();
+        }
+        public ActionResult Error404()
+        {
+            
+            return View();
+        }
+        public ActionResult Maintenance()
+        {
+            
+            return View();
+        }
     }
 }

@@ -747,6 +747,9 @@
     <Content Include="Views\ProfileManagement\points.cshtml" />
     <Content Include="Views\ReservationHistoryManagementV2\_RescheduleReservationPopup.cshtml" />
     <Content Include="Views\Footer\faqv2.cshtml" />
+    <Content Include="Views\Home\Error505.cshtml" />
+    <Content Include="Views\Home\Error404.cshtml" />
+    <Content Include="Views\Home\Maintenance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

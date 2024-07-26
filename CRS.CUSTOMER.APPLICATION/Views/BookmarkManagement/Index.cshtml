@@ -157,25 +157,25 @@
                                             <div class="opening_hours">
                                                 <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
                                                 @*@club.ClubOpeningTime &#xff5e; @club.ClubClosingTime*@
-                                            <span style="line-height:13px;">
-                                                @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime
+                                                <span style="line-height:13px;">
+                                                    @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime
 
-                                            </span>
+                                                </span>
 
                                             </div>
                                         }
                                         else if (!string.IsNullOrEmpty(@club.ClubTimePeriod) && @club.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                                         {
-                                <div class="opening_hours">
-                                    <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+                                            <div class="opening_hours">
+                                                <img src="/Content/assets/images/customer/moon.svg" alt="夜">
 
-                                  @*  @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime*@
-                                <span style="line-height:13px;">
-                                    @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime
+                                                @*  @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime*@
+                                                <span style="line-height:13px;">
+                                                    @club.ClubOpeningTime &#xff5e; @club.ClubClosingTime
 
-                                </span>
+                                                </span>
 
-                                </div>
+                                            </div>
                                         }
 
                                         <!-- e/opening hours -->
@@ -257,7 +257,7 @@
                                             @item.HostNameJapanese
                                         }
                                     </p>
-                                    @if (!string.IsNullOrEmpty(item.FormattedDOB))
+                                    @if (!string.IsNullOrEmpty(item.FormattedDOB) && item.FormattedDOB.Trim() != "未回答")
                                     {
                                         <p>誕生日 :<span> @item.FormattedDOB</span> </p>
                                     }
@@ -265,7 +265,7 @@
                                     {
                                         <p>誕生日 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                                     }
-                                    @if (!string.IsNullOrEmpty(item.Address))
+                                    @if (!string.IsNullOrEmpty(item.Address) && item.Address.Trim() != "未回答")
                                     {
                                         <p>出身地 :<span> @item.Address</span> </p>
                                     }
@@ -273,7 +273,7 @@
                                     {
                                         <p>出身地 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                                     }
-                                    @if (!string.IsNullOrEmpty(item.BloodType))
+                                    @if (!string.IsNullOrEmpty(item.BloodType) && item.BloodType.Trim() != "未回答")
                                     {
                                         <p>血液型 :<span> @item.BloodType</span> </p>
                                     }
@@ -281,7 +281,7 @@
                                     {
                                         <p>血液型 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                                     }
-                                    @if (!string.IsNullOrEmpty(item.ConstellationGroup))
+                                    @if (!string.IsNullOrEmpty(item.ConstellationGroup) && item.ConstellationGroup.Trim() != "未回答")
                                     {
                                         <p>星座 :<span> @item.ConstellationGroup</span> </p>
                                     }
@@ -289,7 +289,7 @@
                                     {
                                         <p>星座 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                                     }
-                                    @if (!string.IsNullOrEmpty(item.PreviousOccupation))
+                                    @if (!string.IsNullOrEmpty(item.PreviousOccupation) && item.PreviousOccupation.Trim() != "未回答")
                                     {
                                         <p>前職 :<span> @item.PreviousOccupation</span> </p>
                                     }
@@ -298,7 +298,7 @@
                                         <p>前職 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                                     }
 
-                                    @if (!string.IsNullOrEmpty(item.Height))
+                                    @if (!string.IsNullOrEmpty(item.Height) && item.Height.Trim() != "未回答")
                                     {
                                         <p>身長 :<span> @item.Height</span> </p>
                                     }
@@ -306,7 +306,7 @@
                                     {
                                         <p>身長 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                                     }
-                                    @if (!string.IsNullOrEmpty(item.LiquorStrength))
+                                    @if (!string.IsNullOrEmpty(item.LiquorStrength) && item.LiquorStrength.Trim() != "未回答")
                                     {
                                         <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
                                     }
@@ -356,7 +356,8 @@
 {
     <script src="~/Content/CustomHelper.js"></script>
 
-    <script type="text/javascript">document.addEventListener("DOMContentLoaded", function () {
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";
         });
@@ -379,7 +380,8 @@
         //function ClubDetailActionFunction(i, j) {
         //    window.location.href = "/LocationManagement/ClubDetail_V2?LocationId=" + i + "&&ClubId=" + j;
         //}</script>
-    <script>function ManageBookmark(ClubId, HostId, AgentType, ClickedElement) {
+    <script>
+        function ManageBookmark(ClubId, HostId, AgentType, ClickedElement) {
             EnableLoaderFunction();
             $.ajax({
                 url: '/BookmarkManagement/ManageBookmark',
