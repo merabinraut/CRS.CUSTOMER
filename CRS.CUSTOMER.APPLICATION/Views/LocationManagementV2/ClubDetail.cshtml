@@ -2076,7 +2076,7 @@
                 if (atIndex !== -1) {
                     let partAfterAt = text.substring(atIndex);
                     let words = partAfterAt.split(/\s+/);
-                    if (words.length >= 3) {
+                    if (words.length >= 3 || words.length >= 2) {
                         let mentionText = words.slice(0, 3).join(' '); 
                         let restOfText = partAfterAt.substring(mentionText.length);
 

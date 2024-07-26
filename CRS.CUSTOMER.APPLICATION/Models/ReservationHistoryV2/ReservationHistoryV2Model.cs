@@ -17,6 +17,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2
         public string ReservedDate { get; set; }
         public string VisitDate { get; set; }
         public string VisitTime { get; set; }
+        public string FormattedVisitDate { get; set; }
         public string InvoiceId { get; set; }
         public string TransactionStatus { get; set; }
         public string ClubNameEng { get; set; }
