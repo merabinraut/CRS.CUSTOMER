@@ -238,7 +238,11 @@
 
         function SubmitFunction() {
             const activeElement = document.querySelector('.plan-selection .active');
-            if (!activeElement) return false;
+            if (!activeElement) {                
+                toastr.info('プランを選択してください');
+                    return false;
+             
+            }               
 
             const PlanId = activeElement.querySelector('.planid-class').value;
             if (!PlanId) {
