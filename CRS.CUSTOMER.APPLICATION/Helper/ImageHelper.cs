@@ -42,9 +42,9 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
             return generatePresignedURLResponse.Item1;
         }
 
-        public static string ProcessedImage(string imageURL, bool useDefaultImage = false)
+        public static string ProcessedImage(string imageURL, bool useDefaultImage = false, string customNoImageURL = "")
         {
-            string response = $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{_AmazonS3Configruation.NoImageURL.TrimStart('/')}";
+            string response = !string.IsNullOrEmpty(customNoImageURL) ? customNoImageURL.Trim() : $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{_AmazonS3Configruation.NoImageURL.TrimStart('/')}";
             if (!useDefaultImage && !string.IsNullOrEmpty(imageURL))
                 if (imageURL.ToLower().Contains("/content/"))
                     response = $"{ConfigurationManager.AppSettings["ImageVirtualPath"].ToString()}/{imageURL.Trim().TrimStart('/')}";

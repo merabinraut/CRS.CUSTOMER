@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
+using CRS.CUSTOMER.APPLICATION.Models;
 using CRS.CUSTOMER.APPLICATION.Models.NotificationManagement;
 using CRS.CUSTOMER.BUSINESS.NotificationManagement;
 using CRS.CUSTOMER.SHARED;
@@ -13,6 +14,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     public class NotificationManagementController : CustomController
     {
         private readonly INotificationManagementBusiness _buss;
+        private static AmazonS3Configruation _AmazonS3Configruation = ApplicationUtilities.GetAppDataJsonConfigValue<AmazonConfigruation>("AmazonConfigruation").AmazonS3Configruation;
         public NotificationManagementController(INotificationManagementBusiness buss) => _buss = buss;
 
         [HttpGet]
@@ -38,7 +40,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 x.NotificationId = x.NotificationId.EncryptParameter();
                 x.NotificationURL = (!string.IsNullOrEmpty(x.NotificationURL) && x.NotificationURL.Trim() != "#") ? URLHelper.EncryptQueryParams(x.NotificationURL) : "#";
-                x.NotificationImage = ImageHelper.ProcessedImage(x.NotificationImage);
+                x.NotificationImage = ImageHelper.ProcessedImage(x.NotificationImage, false, $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{_AmazonS3Configruation.NotificationNoImageURL.TrimStart('/')}");
             });
             return View(responseModel);
         }
