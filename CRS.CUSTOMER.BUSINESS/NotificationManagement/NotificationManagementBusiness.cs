@@ -34,9 +34,9 @@ namespace CRS.CUSTOMER.BUSINESS.NotificationManagement
             return _repo.ManageReservationCancelRemark(Request, NotificationId, CustomerRemarks);
         }
 
-        public CommonDbResponse ManageSingleNotificationReadStatus(Common dbRequest)
+        public CommonDbResponse ManageSingleNotificationReadStatus(Common dbRequest, string NotificationId)
         {
-            return _repo.ManageSingleNotificationReadStatus(dbRequest);
+            return _repo.ManageSingleNotificationReadStatus(dbRequest, NotificationId);
         }
     }
 }
