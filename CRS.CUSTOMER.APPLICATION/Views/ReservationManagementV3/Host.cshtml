@@ -15,8 +15,8 @@
                     <div class="text tracking-tight	">2/<span>4</span></div>
                 </div>
                 <div>
-                    <div class="text-[13px] font-bold pb-[5px]">プラン選択</div>
-                    <div class="text-[11px] text-[#7E6D5E]">予約するプランを選んでください</div>
+                    <div class="text-[13px] font-bold pb-[5px]">ホスト選択</div>
+                    <div class="text-[11px] text-[#7E6D5E]">接客をリクエストするホストを選んでください</div>
                 </div>
             </div>
             <div onclick="window.history.go(-2)">
@@ -212,7 +212,8 @@
             $('.host-detail-class .active .hostid-class').each(function () { HostIdList.push($(this).val()); });
             if (HostIdList === null || HostIdList === "" || HostIdList.length <= 0) {
                 /*toastr.info('Host is required');*/
-                toastr.info('ホストが必要です');
+                /*toastr.info('ホストが必要です');*/
+                toastr.info('ご指定のホストがいればお知らせください、特に希望がなければお店にお任せください');
                 return false;
             }
             DataStorageFunction(HostIdList);

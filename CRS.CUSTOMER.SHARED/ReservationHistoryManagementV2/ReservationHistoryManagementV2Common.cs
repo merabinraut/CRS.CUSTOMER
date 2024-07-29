@@ -7,6 +7,7 @@ namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
         public string ClubId { get; set; }
         public string ReservedDate { get; set; }
         public string VisitDate { get; set; }
+        public string FormattedVisitDate { get; set; }
         public string VisitTime { get; set; }
         public string InvoiceId { get; set; }
         public string TransactionStatus { get; set; }
@@ -103,6 +104,9 @@ namespace CRS.CUSTOMER.SHARED.ReservationHistoryManagementV2
         public string Tag5 { get; set; }
         public string ClubLocationURL { get; set; }
         public string ClubCode { get; set; }
+        public string OTPVerificationStatus { get; set; }
+        public string IsManual { get; set; }
+        public string ManualRemarkId { get; set; }
     }
     #region " Reservation History Detail Model"
     public class ReservationHistoryDetailModelCommon
