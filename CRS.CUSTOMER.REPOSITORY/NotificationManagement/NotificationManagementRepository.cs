@@ -57,5 +57,13 @@ namespace CRS.CUSTOMER.REPOSITORY.NotificationManagement
             SQL += ",@CustomerRemarks=" + _dao.FilterString(CustomerRemarks);
             return _dao.ParseCommonDbResponse(SQL);
         }
+
+        public CommonDbResponse ManageSingleNotificationReadStatus(Common dbRequest)
+        {
+            string sp_name = "sproc_customer_notification_management @Flag='msnrs'";
+            sp_name += ",@AgentId=" + _dao.FilterString(dbRequest.AgentId);
+            sp_name += ",@ActionUser=" + _dao.FilterString(dbRequest.ActionUser);
+            return _dao.ParseCommonDbResponse(sp_name);
+        }
     }
 }

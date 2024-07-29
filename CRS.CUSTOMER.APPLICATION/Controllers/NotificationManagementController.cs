@@ -76,6 +76,26 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(new { Code = "1", Message = "Something went wrong. Please try again later." });
         }
         [HttpPost, ValidateAntiForgeryToken]
+        public JsonResult ManageSingleNotificationReadStatus(string notificationId = "")
+        {
+            var dbRequest = new Common()
+            {
+                AgentId = notificationId.DecryptParameter(),
+                ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString()
+            };
+            if (!string.IsNullOrEmpty(dbRequest.AgentId) && !string.IsNullOrEmpty(dbRequest.ActionUser))
+            {
+                var dbResponse = _buss.ManageSingleNotificationReadStatus(dbRequest);
+                if (dbRequest != null && dbResponse.Code == ResponseCode.Success) return Json(new { Code = "0", Message = dbResponse.Message ?? "Success", PageTitle = Resources.Resource.Notifications });
+                return Json(new
+                {
+                    Code = "1",
+                    Message = dbResponse.Message ?? "Invalid request"
+                });
+            }
+            return Json(new { Code = "1", Message = "Something went wrong. Please try again later" });
+        }
+        [HttpPost, ValidateAntiForgeryToken]
         public JsonResult CustomerReservationCancelRemark(string NotificationId, string CustomerRemarks)
         {
             var dbRequest = new Common()
