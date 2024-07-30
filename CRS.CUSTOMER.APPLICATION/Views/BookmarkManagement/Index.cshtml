@@ -112,12 +112,12 @@
                                         <p class="club_group">@club.GroupName</p>
                                     </div>
 
-                                    <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@club.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                                    <div style="cursor:pointer" class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@club.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                                 </div>
-                                <ul class="club_thumb">
+                                <ul  class="club_thumb">
                                     @foreach (var item2 in club.HostGalleryImage)
                                     {
-                                        <li><img alt="@club.ClubName ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
+                                        <li><img style="cursor:pointer" alt="@club.ClubName ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
                                     }
 
                                 </ul>
@@ -236,7 +236,7 @@
                 {
                     <div id="clubs" class="flex flex-col border-b-[4px] border-[#E3E2DB] py-3  ">
                         <div class="flex flex-row gap-[16px] mx-[16px]">
-                            <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
+                            <div style="border-radius: 4px; cursor:pointer" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
                                 <div class="w-full flex justify-center" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                                          src="@item.HostImage" />
@@ -325,7 +325,7 @@
                                         @item.LoveCount
                                     </p>
                                 </div>
-                                <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]" onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
+                                <div style="padding: 4px; width:144px ;cursor:pointer" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]" onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
                                     <div>
                                         <img style="border: 1px solid #F1EEEE;" class="object-cover h-[32px] w-[32px] rounded-full "
                                              src="@item.ClubLogo" alt="clublogo">

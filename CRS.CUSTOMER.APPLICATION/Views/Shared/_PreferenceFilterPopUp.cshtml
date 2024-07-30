@@ -511,7 +511,7 @@
                                                             <img src="@item.HostLogo" alt="host-logo" />
                                                             @if (item.IsBookmarked.ToUpper() == "Y")
                                                             {
-                                                                <div class="like-host" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
+                                                                <div class="like-host" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
                                                                         <g filter="url(#filter0_d_4820_24085)">
                                                                             <circle cx="17" cy="17" r="10" fill="#D75A8B" />
@@ -534,7 +534,7 @@
                                                             }
                                                             else
                                                             {
-                                                                <div class="like-host" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
+                                                                <div class="like-host" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                                                     <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
                                                                          viewBox="0 0 31 34" fill="none">
                                                                         <g filter="url(#filter0_d_3058_46008)">

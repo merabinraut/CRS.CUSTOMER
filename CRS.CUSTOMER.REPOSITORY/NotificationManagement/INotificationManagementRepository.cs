@@ -11,5 +11,6 @@ namespace CRS.CUSTOMER.REPOSITORY.NotificationManagement
         bool HasUnReadNotification(string AgentId);
         CommonDbResponse ManageNotificationReadStatus(Common Request);
         CommonDbResponse ManageReservationCancelRemark(Common Request, string NotificationId, string CustomerRemarks);
+        CommonDbResponse ManageSingleNotificationReadStatus(Common dbRequest, string NotificationId);
     }
 }

@@ -48,7 +48,7 @@
              class=" border-[1px] flex flex-col rounded-[8px] border-[#F1F1F1] bg-[#FCF8F9]  h-[196px]  mx-[16px]">
             <div style="background-color: #EEEEEE; margin-left:15px;margin-right:15px; margin-top:24px; "
                  class="grid grid-cols-2 text-[14px]  py-[8px] mx-[15px] rounded-[4px] border-black  ">
-                <div class="flex pr-[8px]  flex-row gap-[4px] items-center" onclick="GetLocationFilterPopUp();">
+                <div style="cursor:pointer" class="flex pr-[8px]  flex-row gap-[4px] items-center" onclick="GetLocationFilterPopUp();">
                     <div class="pl-[8px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
                             <path d="M7.5 2.39062C5.17625 2.39062 3.28125 4.28563 3.28125 6.60938C3.28125 7.26875 3.54875 8.025 3.91125 8.85063C4.27375 9.67625 4.74062 10.5531 5.215 11.37C5.81209 12.3945 6.44733 13.3962 7.11937 14.3731L7.5 14.9294L7.88125 14.3731C7.88125 14.3731 8.83687 13.005 9.785 11.37C10.2594 10.5531 10.7263 9.67625 11.0888 8.85063C11.4513 8.025 11.7188 7.26875 11.7188 6.60938C11.7188 4.28563 9.82375 2.39062 7.5 2.39062ZM7.5 3.32813C9.31875 3.32813 10.7812 4.79063 10.7812 6.60938C10.7812 6.98438 10.58 7.695 10.2394 8.47C9.89875 9.24438 9.42813 10.1031 8.96438 10.9013C8.22875 12.1719 7.77063 12.8444 7.5 13.245C7.22875 12.8444 6.77125 12.1719 6.035 10.9013C5.57188 10.1031 5.10125 9.24438 4.76063 8.47C4.42 7.695 4.21875 6.98438 4.21875 6.60938C4.21875 4.79063 5.68125 3.32813 7.5 3.32813ZM7.5 5.67188C7.25136 5.67188 7.0129 5.77065 6.83709 5.94646C6.66127 6.12228 6.5625 6.36073 6.5625 6.60938C6.5625 6.85802 6.66127 7.09647 6.83709 7.27229C7.0129 7.4481 7.25136 7.54688 7.5 7.54688C7.74864 7.54688 7.9871 7.4481 8.16291 7.27229C8.33873 7.09647 8.4375 6.85802 8.4375 6.60938C8.4375 6.36073 8.33873 6.12228 8.16291 5.94646C7.9871 5.77065 7.74864 5.67188 7.5 5.67188Z"
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="flex flex-row gap-[4px] pl-[8px] pr-[12px]   items-center "
-                     style="border-left:1px solid #D6D6D6" onclick="GetPreferenceFilterPopUp();">
+                     style="border-left: 1px solid #D6D6D6; cursor: pointer" onclick="GetPreferenceFilterPopUp();">
                     <div>
                         <svg style="margin-left: 8px;" xmlns="http://www.w3.org/2000/svg" width="17" height="18"
                              viewBox="0 0 17 18" fill="none">
@@ -252,11 +252,11 @@
                                 <!-- s/action btn -->
                                 @if (item.IsBookmarked.ToUpper() == "Y")
                                 {
-                                    <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                                    <div style="cursor:pointer" class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                                 }
                                 else
                                 {
-                                    <div class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                                    <div style="cursor:pointer" class="action_keep"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
                                 }
                                 <!-- e/action btn -->
                             </div>
@@ -266,7 +266,7 @@
                                 <!-- s/club thumb -->
                                 @foreach (var item2 in item.HostGalleryImage)
                                 {
-                                    <li><img alt="@item.ClubNameEnglish ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2" style="object-position:top;"></li>
+                                    <li><img style="cursor:pointer" alt="@item.ClubNameEnglish ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2" style="object-position:top;"></li>
                                 }
                                 <!-- e/club thumb -->
                                 <!-- s/club thumb -->

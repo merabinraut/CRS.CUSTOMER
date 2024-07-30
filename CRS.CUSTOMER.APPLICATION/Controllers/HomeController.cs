@@ -452,6 +452,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Session["IsPasswordForceful"] = response.IsPasswordForceful;
                     Session["MobileNumber"] = response.MobileNumber.EncryptParameter();
                     Session["Amount"] = response.Amount;
+                    Session["CustomerCode"] = response.CustomerCode;
                     return new Tuple<string, bool>("/", true);
                 }
                 this.AddNotificationMessage(new NotificationModel()

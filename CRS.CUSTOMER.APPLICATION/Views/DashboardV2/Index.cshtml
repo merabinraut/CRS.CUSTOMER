@@ -244,8 +244,8 @@
                 </div>
             </div>
         </div>
-        <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] disable-click" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
-            <div class="my-[12px] font-[700] text-[#FFF] " style="font-size:15px">
+        <div  style="cursor: pointer; margin-left:15px; margin-right: 15px; margin-bottom: 24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] disable-click" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
+            <div class="my-[12px] font-[700] text-[#FFF] " style="font-size: 15px; ">
                 検索
             </div>
         </div>
@@ -274,7 +274,7 @@
                         var afterSlash = locationParts.Length > 1 ? locationParts[1] : "";
                         if (Model.Location[i].LocationStatus == "A")
                         {
-                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationURL')">
+                            <div style="cursor:pointer" class="relative" onclick="LocationFunction('@Model.Location[i].LocationURL')">
                                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                     <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location1">
                                     <p class="locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
@@ -321,7 +321,7 @@
 
                         if (Model.Location[i].LocationStatus == "A")
                         {
-                            <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationURL')">
+                            <div style="cursor:pointer" class="relative" onclick="LocationFunction('@Model.Location[i].LocationURL')">
                                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                     <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
                                     <p style="line-height:12px; font-size:14px" class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
@@ -586,7 +586,7 @@
     <div class="flex flex-col  gap-[6px] px-4  pb-[16px]">
         <div class="grid  grid-cols-2 gap-[6px]">
             <div class="relative" onclick="GetLocationFilterPopUp();">
-                <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
+                <div style="cursor:pointer" class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/Area.jpg" alt="location1">
                     <h3 class="locationtext justify-center text-[12px] text-white font-[700] z-10">
                         エリアで検索
@@ -595,7 +595,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="relative" onclick="ClubHostRedirectFunction('club');">
-                <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden  rounded-[4px]">
+                <div style="cursor:pointer" class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden  rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/HostClubs.jpg" alt="location2">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         ホストクラブから探す
@@ -606,8 +606,8 @@
             </div>
         </div>
         <div class="grid grid-cols-3 gap-[6px]">
-            <div class="relative" onclick="ClubHostRedirectFunction('host');">
-                <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
+            <div  class="relative" onclick="ClubHostRedirectFunction('host');">
+                <div style="cursor:pointer" class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/Hosts.jpg" alt="location3">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         ホストから探す
@@ -619,7 +619,7 @@
 
             </div>
             <div class="relative">
-                <div class="innercontainer h-[100px] flex flex-row text-center  justify-center items-center w-full  overflow-hidden rounded-[4px]" onclick="WorkingHoursShowPopup();">
+                <div style="cursor:pointer" class="innercontainer h-[100px] flex flex-row text-center  justify-center items-center w-full  overflow-hidden rounded-[4px]" onclick="WorkingHoursShowPopup();">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/WorkingHours.jpg" alt="loction4">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         営業時間から探す
@@ -631,7 +631,7 @@
 
             </div>
             <div class="relative">
-                <div class="innercontainer h-[100px] flex flex-row text-center justify-center items-center w-full  overflow-hidden rounded-[4px]" onclick="LastEntryShowPopup();">
+                <div style="cursor:pointer" class="innercontainer h-[100px] flex flex-row text-center justify-center items-center w-full  overflow-hidden rounded-[4px]" onclick="LastEntryShowPopup();">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/LastEntry.jpg" alt="location5">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
                         最終入店時間
@@ -657,7 +657,7 @@
     <div class="flex flex-col  gap-[6px] px-4 gap-[6px] pb-[16px]">
         <div class="grid  grid-cols-2 gap-[6px]">
             <div class="relative" onclick="PreferenceRedirect('s00001');">
-                <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
+                <div style="cursor:pointer" class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/ShopsYouCanVisit.jpg" alt="location1">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
                         今すぐ行けるお店
@@ -667,7 +667,7 @@
 
             </div>
             <div class="relative" onclick="PreferenceRedirect('s00002');">
-                <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden  rounded-[4px]">
+                <div style="cursor:pointer" class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden  rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/PrivateReservation.jpg" alt="location2">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         貸し切りOK
@@ -679,7 +679,7 @@
         </div>
         <div class="grid grid-cols-3 gap-[6px]">
             <div class="relative" onclick="PreferenceRedirect('s00003');">
-                <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
+                <div style="cursor:pointer" class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/LargeNumber.jpg" alt="location3">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         在籍人数が多い
@@ -689,7 +689,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="relative" onclick="PreferenceRedirect('s00004');">
-                <div class="innercontainer h-[100px] flex flex-row text-center  justify-center items-center w-full  overflow-hidden rounded-[4px]">
+                <div style="cursor:pointer" class="innercontainer h-[100px] flex flex-row text-center  justify-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/VIPRoomsAvailable.jpg" alt="loction4">
                     <h3 class=" locationtext justify-center text-[12px] text-white font-[700] z-10">
                         VIPルームあり
@@ -699,7 +699,7 @@
                 <div class="overlay"></div>
             </div>
             <div class="relative" onclick="PreferenceRedirect('s00005');">
-                <div class="innercontainer h-[100px] flex flex-row text-center justify-center items-center w-full  overflow-hidden rounded-[4px]">
+                <div style="cursor:pointer" class="innercontainer h-[100px] flex flex-row text-center justify-center items-center w-full  overflow-hidden rounded-[4px]">
                     <img class="locationimage" src="~/Content/assets/images/customer/Dashboard/GirlsNightOut.jpg" alt="location5">
                     <p class="locationtext justify-center text-[12px] text-white font-[700] z-10">
                         女子会向き
@@ -724,7 +724,7 @@
         <div>
         </div>
         <div style="background-color: #FFFFFF;" class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]">
-            <div class="flex flex-row items-center justify-end gap-1 my-[12px]" id="scrollToTopButton">
+            <div style="cursor:pointer" class="flex flex-row items-center justify-end gap-1 my-[12px]" id="scrollToTopButton">
 
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -902,7 +902,7 @@
                                 recommendedClubContentHTML += `
                                     <a onclick="ClubDetailRedirectFunction('${club.ClubCode}', '${club.LocationURL}')">
                                         <div class="flex w-[118px]">
-                                            <div style="border-radius: 6px; border: 1px solid #F3F3F3; background: #FFF;" class="flex flex-col w-[118px] px-[8px] py-[10px]">
+                                            <div style=" cursor:pointer; border-radius: 6px; border: 1px solid #F3F3F3; background: #FFF;" class="flex flex-col w-[118px] px-[8px] py-[10px]">
                                                 <div class="flex flex-row justify-center">
                                                     <div class="h-[48px] w-[48px]   bg-[#ffffff]  flex flex-row justify-center">
                                                         <img style="border-color:#F1EEEE" class="h-[48px] w-[48px]  border-[1px] rounded-full object-cover" src="${clubLogoSrc}" alt="clublogo" />

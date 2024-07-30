@@ -156,16 +156,16 @@
                         @*(item.IsBookmarked.ToUpper() == "Y")*@
                         @if (!string.IsNullOrEmpty(item.IsBookmarked.ToUpper()) && item.IsBookmarked.ToUpper() == "Y")
                         {
-                            <div class="action_keep"
+                            <div  class="action_keep"
                                  onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this, '@PostURL')">
-                                <img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg">
+                                <img style="cursor:pointer" alt="保存する" src="~/Content/assets/images/bookmark-filled.svg">
                             </div>
                         }
                         else
                         {
                             <div class="action_keep"
                                  onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this, '@PostURL')">
-                                <img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg">
+                                <img style="cursor:pointer" alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg">
                             </div>
                         }
                         <!-- e/action btn -->
@@ -176,7 +176,7 @@
                         <!-- s/club thumb -->
                         @foreach (var item2 in item.HostGalleryImage)
                         {
-                            <li><img alt="@item.ClubNameEnglish ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
+                            <li><img style="cursor:pointer" alt="@item.ClubNameEnglish ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
                         }
                         <!-- e/club thumb -->
                         <!-- s/club thumb -->
@@ -196,7 +196,7 @@
                                 var unratedScale = (5 - item.AverageRating);
                                 for (int i = 0; i < item.AverageRating; i++)
                                 {
-                                    <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
+                                    <li><img  src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
                                 }
                                 for (int i = 0; i < unratedScale; i++)
                                 {

@@ -673,7 +673,7 @@ align-items: center;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-       /* gap: 4px;*/
+        /* gap: 4px;*/
         position: absolute;
         bottom: 0;
         z-index: 2;
@@ -862,17 +862,17 @@ a.ui-button:active,
     left: unset !important;
 }
 
-.ui-datepicker .ui-datepicker-next {
-    background-image: url("../../Content/assets/images/navigate_next.svg");
+/*.ui-datepicker .ui-datepicker-next {
+    background-image: url("/Content/assets/images/navigate_next.svg");
     width: 16px;
     height: 16px;
 }
 
     .ui-datepicker .ui-datepicker-next span {
-        background-image: url(../../Content/assets/images/navigate_next.svg);
+        background-image: url("/Content/assets/images/navigate_next.svg");
         background-repeat: no-repeat;
         background-position: center;
-    }
+    }*/
 
 .ui-datepicker .ui-datepicker-prev span {
     background-image: url(../../assets/images/navigate_before.svg);
