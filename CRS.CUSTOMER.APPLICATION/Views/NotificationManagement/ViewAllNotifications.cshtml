@@ -49,73 +49,127 @@
     }
     else
     {
-        foreach (var group in Model.GroupBy(item => item.DateCategory))
-        {
-            <div class="notification-all">
+        <div class="notification-all">
+            @if (Model.FirstOrDefault()?.NotificationReadStatus.Trim().ToUpper() == "P")
+            {
+                <div class="flex gap-1 items-center text-primary cursor-pointer" id="markAllRead" onclick="ManageNotificationReadStatus();">
+                    <img src="~/Content/assets/images/double-check.svg" alt="check">@CRS.CUSTOMER.APPLICATION.Resources.Resource.MarkAllAsRead
+                </div>
+            }
+            @foreach (var group in Model.GroupBy(item => item.DateCategory))
+            {
+
                 <div class="flex justify-between items-center mb-3">
                     <div class="text-[#18181B] text-sm">@group.Key</div>
-                    @if (!string.IsNullOrEmpty(group.FirstOrDefault().NotificationReadStatus) && group.FirstOrDefault().NotificationReadStatus.Trim().ToUpper() == "P")
-                    {
-                        <div class="flex gap-1 items-center text-primary cursor-pointer" id="markAllRead" onclick="ManageNotificationReadStatus();">
-                            <img src="~/Content/assets/images/double-check.svg" alt="check">@CRS.CUSTOMER.APPLICATION.Resources.Resource.MarkAllAsRead
-                        </div>
-                    }
                 </div>
                 <div class="flex flex-col gap-3 ">
                     @{
                         var activeClassName = "";
                         foreach (var item in group)
                         {
-                            activeClassName = (!string.IsNullOrEmpty(item.NotificationReadStatus) && item.NotificationReadStatus.Trim().ToUpper() == "P") ? "active" : "";
-                            <div class="flex justify-between items-center notification-list @activeClassName">
-                                <div class="flex gap-3 w-max ">
-                                    <div class="flex-none">
-                                        <img src="@item.NotificationImage"
-                                             class="h-[32px] w-[32px] object-cover rounded-full" />
+                            if (!string.IsNullOrEmpty(item.NotificationReadStatus) && item.NotificationReadStatus.Trim().ToUpper() == "P")
+                            {
+                                activeClassName = (!string.IsNullOrEmpty(item.NotificationReadStatus) && item.NotificationReadStatus.Trim().ToUpper() == "P") ? "active" : "";
+                                <div class="flex justify-between items-center notification-list @activeClassName">
+                                    <div class="flex gap-3 w-max ">
+                                        <div class="flex-none">
+                                            <img src="@item.NotificationImage"
+                                                 class="h-[32px] w-[32px] object-cover rounded-full" />
+                                        </div>
+                                        <div class="notification-detail-class" onclick="ManageNotificationReadStatus();">
+                                            <input type="hidden" value="@item.NotificationURL">
+                                            <div class='text-sm font-bold text-charcolBlack notification-title pb-1 '>@item.NotificationSubject</div>
+                                            <div class='text-xs  text-[#667085] pb-1'>@Html.Raw(@item.NotificationBody)</div>
+                                            @if (!string.IsNullOrEmpty(@item.SecondNotificationBody))
+                                            {
+                                                <br>
+                                                <div class='text-xs  text-[#667085] pb-1'>@item.SecondNotificationBody</div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(@item.ThirdNotificationBody))
+                                            {
+                                                <br>
+                                                <div class='text-xs  text-[#667085] pb-1'>@item.ThirdNotificationBody</div>
+                                            }
+                                            <div class='text-[10px]  text-[#A1A1AA] pb-1'>@item.FormattedDate</div>
+
+                                            @if (@item.NotificationType.ToLower() == "no visit code" && string.IsNullOrEmpty(@item.IsRemarksDone.ToLower()))
+                                            {
+                                                @*<input type="hidden" name="NotificationId" value="@item.NotificationId"/>*@
+                                                <div class="flex items-center  gap-[6px] py-[11px]">
+                                                    <button class="btn-notification btn-primary" onclick="ReservationCancelFunction('@item.NotificationId','Y');">
+                                                        <a class="h-full w-full">
+                                                            Yes
+                                                        </a>
+                                                    </button>
+                                                    <button class="btn-notification" type="button" style="border-radius: 4px;
+                        border: 1px solid #A1A1AA;" onclick="ReservationCancelFunction('@item.NotificationId','N');">
+                                                        No
+                                                    </button>
+
+                                                </div>
+                                            }
+
+                                        </div>
                                     </div>
-                                    <div class="notification-detail-class">
-                                        <input type="hidden" value="@item.NotificationURL">
-                                        <div class='text-sm font-bold text-charcolBlack notification-title pb-1 '>@item.NotificationSubject</div>
-                                        <div class='text-xs  text-[#667085] pb-1'>@Html.Raw(@item.NotificationBody)</div>
-                                        @if (!string.IsNullOrEmpty(@item.SecondNotificationBody))
-                                        {
-                                            <br>
-                                            <div class='text-xs  text-[#667085] pb-1'>@item.SecondNotificationBody</div>
-                                        }
-                                        @if (!string.IsNullOrEmpty(@item.ThirdNotificationBody))
-                                        {
-                                            <br>
-                                            <div class='text-xs  text-[#667085] pb-1'>@item.ThirdNotificationBody</div>
-                                        }
-                                        <div class='text-[10px]  text-[#A1A1AA] pb-1'>@item.FormattedDate</div>
-
-                                        @if (@item.NotificationType.ToLower() == "no visit code" && string.IsNullOrEmpty(@item.IsRemarksDone.ToLower()))
-                                        {
-                                            @*<input type="hidden" name="NotificationId" value="@item.NotificationId"/>*@
-                                            <div class="flex items-center  gap-[6px] py-[11px]">
-                                                <button class="btn-notification btn-primary" onclick="ReservationCancelFunction('@item.NotificationId','Y');">
-                                                    <a class="h-full w-full">
-                                                        Yes
-                                                    </a>
-                                                </button>
-                                                <button class="btn-notification" type="button" style="border-radius: 4px;
-                                                    border: 1px solid #A1A1AA;" onclick="ReservationCancelFunction('@item.NotificationId','N');">
-                                                    No
-                                                </button>
-
-                                            </div>
-                                        }
-
+                                    <div class="circle flex-none">
                                     </div>
                                 </div>
-                                <div class="circle flex-none">
+                            }
+                            else
+                            {
+                                activeClassName = (!string.IsNullOrEmpty(item.NotificationReadStatus) && item.NotificationReadStatus.Trim().ToUpper() == "P") ? "active" : "";
+                                <div class="flex justify-between items-center notification-list @activeClassName">
+                                    <div class="flex gap-3 w-max ">
+                                        <div class="flex-none">
+                                            <img src="@item.NotificationImage"
+                                                 class="h-[32px] w-[32px] object-cover rounded-full" />
+                                        </div>
+                                        <div class="notification-detail-class">
+                                            <input type="hidden" value="@item.NotificationURL">
+                                            <div class='text-sm font-bold text-charcolBlack notification-title pb-1 '>@item.NotificationSubject</div>
+                                            <div class='text-xs  text-[#667085] pb-1'>@Html.Raw(@item.NotificationBody)</div>
+                                            @if (!string.IsNullOrEmpty(@item.SecondNotificationBody))
+                                            {
+                                                <br>
+                                                <div class='text-xs  text-[#667085] pb-1'>@item.SecondNotificationBody</div>
+                                            }
+                                            @if (!string.IsNullOrEmpty(@item.ThirdNotificationBody))
+                                            {
+                                                <br>
+                                                <div class='text-xs  text-[#667085] pb-1'>@item.ThirdNotificationBody</div>
+                                            }
+                                            <div class='text-[10px]  text-[#A1A1AA] pb-1'>@item.FormattedDate</div>
+
+                                            @if (@item.NotificationType.ToLower() == "no visit code" && string.IsNullOrEmpty(@item.IsRemarksDone.ToLower()))
+                                            {
+                                                @*<input type="hidden" name="NotificationId" value="@item.NotificationId"/>*@
+                                                <div class="flex items-center  gap-[6px] py-[11px]">
+                                                    <button class="btn-notification btn-primary" onclick="ReservationCancelFunction('@item.NotificationId','Y');">
+                                                        <a class="h-full w-full">
+                                                            Yes
+                                                        </a>
+                                                    </button>
+                                                    <button class="btn-notification" type="button" style="border-radius: 4px;
+                        border: 1px solid #A1A1AA;" onclick="ReservationCancelFunction('@item.NotificationId','N');">
+                                                        No
+                                                    </button>
+
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div class="circle flex-none">
+                                    </div>
                                 </div>
-                            </div>
+                            }
+
                         }
                     }
                 </div>
-            </div>
-        }
+
+            }
+        </div>
     }
 </div>
 @section scripts
@@ -161,6 +215,7 @@
         var pageLabel = document.getElementById("page-label-id");
         var markAllRead = document.getElementById("markAllRead");
         function ManageNotificationReadStatus() {
+            debugger;
             $.ajax({
                 url: '/NotificationManagement/ManageNotificationReadStatus',
                 type: 'POST',
