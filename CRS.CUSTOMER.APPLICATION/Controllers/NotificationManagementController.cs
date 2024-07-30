@@ -1,6 +1,5 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
-using CRS.CUSTOMER.APPLICATION.Models;
 using CRS.CUSTOMER.APPLICATION.Models.NotificationManagement;
 using CRS.CUSTOMER.BUSINESS.NotificationManagement;
 using CRS.CUSTOMER.SHARED;
@@ -14,7 +13,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     public class NotificationManagementController : CustomController
     {
         private readonly INotificationManagementBusiness _buss;
-        private static AmazonS3Configruation _AmazonS3Configruation = ApplicationUtilities.GetAppDataJsonConfigValue<AmazonConfigruation>("AmazonConfigruation").AmazonS3Configruation;
         public NotificationManagementController(INotificationManagementBusiness buss) => _buss = buss;
 
         [HttpGet]
@@ -40,7 +38,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 x.NotificationId = x.NotificationId.EncryptParameter();
                 x.NotificationURL = (!string.IsNullOrEmpty(x.NotificationURL) && x.NotificationURL.Trim() != "#") ? URLHelper.EncryptQueryParams(x.NotificationURL) : "#";
-                x.NotificationImage = ImageHelper.ProcessedImage(x.NotificationImage, false, $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{_AmazonS3Configruation.NotificationNoImageURL.TrimStart('/')}");
+                x.NotificationImage = ImageHelper.ProcessedImage(x.NotificationImage);
             });
             return View(responseModel);
         }
@@ -76,6 +74,29 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 return Json(new { Code = "1", Message = dbResponse.Message ?? "Invalid request" });
             }
             return Json(new { Code = "1", Message = "Something went wrong. Please try again later." });
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public JsonResult ManageSingleNotificationReadStatus(string notificationId = "")
+        {
+            string NotificationId = "";
+            if (!string.IsNullOrEmpty(notificationId))
+                NotificationId = notificationId.DecryptParameter();
+            var dbRequest = new Common()
+            {
+                AgentId = !string.IsNullOrEmpty(ApplicationUtilities.GetSessionValue("AgentId").ToString()) ? ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter() : null,
+                ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString()
+            };
+            if (!string.IsNullOrEmpty(dbRequest.AgentId) && !string.IsNullOrEmpty(dbRequest.ActionUser) && !string.IsNullOrEmpty(NotificationId))
+            {
+                var dbResponse = _buss.ManageSingleNotificationReadStatus(dbRequest, NotificationId);
+                if (dbRequest != null && dbResponse.Code == ResponseCode.Success) return Json(new { Code = "0", Message = dbResponse.Message ?? "Success", PageTitle = Resources.Resource.Notifications });
+                return Json(new
+                {
+                    Code = "1",
+                    Message = dbResponse.Message ?? "Invalid request"
+                });
+            }
+            return Json(new { Code = "1", Message = "Something went wrong. Please try again later" });
         }
         [HttpPost, ValidateAntiForgeryToken]
         public JsonResult CustomerReservationCancelRemark(string NotificationId, string CustomerRemarks)
