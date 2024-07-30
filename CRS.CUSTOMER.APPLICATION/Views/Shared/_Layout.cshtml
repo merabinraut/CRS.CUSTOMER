@@ -278,10 +278,12 @@
                                     <img class="rounded-full w-[40px] h-[40px] object-cover border border-[#E1E1E1]" style="height:60px; width:60px"
                                          src="@Session["ProfileImage"]" alt="profileimage">
                                 }
+                            <div class="flex flex-col gap-[2px]">
+
+                                <span class=" text-[#252525]  font-[700]" style="font-size: 12px; line-height: 12px;"> @Session["Username"]</span>
                                 <div class="flex flex-col">
 
-                                    <span class=" text-[#252525]  font-[700]" style="font-size: 16px; line-height: 12px;"> @Session["Username"]</span>
-                                    <span class=" text-[#252525] font-normal text-clip" style="font-size:14px; width:178px; ">@string.Concat("@", @Session["CustomerCode"])</span>
+                                    <span class=" text-[#252525] font-normal text-clip" style="font-size:11px; width:178px; ">@string.Concat("@", @Session["CustomerCode"])</span>
 
                                     @if (@Session["Username"] != null)
                                     {
@@ -295,10 +297,11 @@
 
                                         </div>
                                     }
-                                    @*<span class="ml-[12px] text-[#252525]  font-normal text-clip" style="font-size:14px; width:178px">@Session["Amount"]</span>*@
-                                    <span class="ml-[12px] flex justify-start gap-[2px] items-center">
-                                    </span>
                                 </div>
+                                @*<span class="ml-[12px] text-[#252525]  font-normal text-clip" style="font-size:14px; width:178px">@Session["Amount"]</span>*@
+                                <span class="ml-[12px] flex justify-start gap-[2px] items-center">
+                                </span>
+                            </div>
                             </a>
                             <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
                                     class=" flex flex-col justify-center items-center z-50 pr-[18px] pt-[6px]" onclick="NavCloseFunction();">
