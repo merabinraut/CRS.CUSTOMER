@@ -150,7 +150,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 LocationId = lId,
                 CustomerId = CustomerId,
-                //PageType = "1"
+                PageType = "1"
             };
             var dbClubResponse = _recommendedClubHostBuss.GetRecommendedClub(recommendedClubDBRequest);
             Response.ClubListModel = dbClubResponse.MapObjects<LocationClubListModel>();
@@ -170,7 +170,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     LocationId = lId,
                     CustomerId = CustomerId,
-                    //PageType = "1"
+                    PageType = "1"
                 };
                 var dbHostResponse = _recommendedClubHostBuss.GetRecommendedHost(recommendedHostDBRequest);
                 Response.HostListModel = dbHostResponse.MapObjects<LocationHostListModel>();
