@@ -34,6 +34,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             _commonBusiness = commonBusiness;
         }
 
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("area/{prefectures}/{area}")]
         public ActionResult Index(string prefectures, string area, LocationV2ClubHostRequestModel request)
         {
@@ -101,6 +102,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(response);
         }
 
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("area/{prefectures}/{area}/hostclub/{ClubId}/{target?}")]
         public ActionResult ClubDetail(string prefectures, string area, string ClubId, string target = "", string ScheduleFilterDate = null)
         {

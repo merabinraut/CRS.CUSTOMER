@@ -3,6 +3,7 @@ using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
+    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     [OverrideActionFilters]
     public class FooterController : Controller
     {

@@ -25,6 +25,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IProfileManagementBusiness _business;
         public ProfileManagementController(IProfileManagementBusiness business) => this._business = business;
 
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("user/account/profile")]
         public ActionResult Index()
         {
@@ -215,6 +216,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Redirect("/user/account/profile");
         }
 
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("user/account/password/edit")]
         public ActionResult ChangePasswordV2()
         {
@@ -331,7 +333,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(new { Code = "1", Message = "Something went wrong please try again" });
         }
 
-
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult points()
         {
             PointReportModel model = new PointReportModel();
@@ -353,7 +355,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                            TransactionMode = detail.TransactionMode,
                            Point = detail.Point,
                            Remark = detail.Remark,
-                           TotalPoints= detail.TotalPoints,
+                           TotalPoints = detail.TotalPoints,
                        }).ToList()
                    })
                    .ToList();
