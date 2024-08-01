@@ -64,6 +64,8 @@ namespace CRS.CUSTOMER.REPOSITORY.NotificationManagement
             sp_name += ",@notificationId=" + _dao.FilterString(NotificationId);
             sp_name += ",@AgentId=" + _dao.FilterString(dbRequest.AgentId);
             sp_name += ",@ActionUser=" + _dao.FilterString(dbRequest.ActionUser);
+            sp_name += ",@ActionIP=" + _dao.FilterString(dbRequest.ActionIP);
+            sp_name += ",@ActionPlatform=" + _dao.FilterString(dbRequest.ActionPlatform);
             return _dao.ParseCommonDbResponse(sp_name);
         }
     }
