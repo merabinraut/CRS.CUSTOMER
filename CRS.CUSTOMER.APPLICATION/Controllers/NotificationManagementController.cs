@@ -86,7 +86,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dbRequest = new Common()
             {
                 AgentId = !string.IsNullOrEmpty(ApplicationUtilities.GetSessionValue("AgentId").ToString()) ? ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter() : null,
-                ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString()
+                ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString(),
+                ActionIP = ApplicationUtilities.GetIP()
             };
             if (!string.IsNullOrEmpty(dbRequest.AgentId) && !string.IsNullOrEmpty(dbRequest.ActionUser) && !string.IsNullOrEmpty(NotificationId))
             {
