@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
+    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class CustomController : Controller
     {
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
