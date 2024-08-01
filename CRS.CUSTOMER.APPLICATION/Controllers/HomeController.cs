@@ -1,6 +1,7 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.Home;
+using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Home;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
@@ -16,7 +17,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     public class HomeController : CustomController
     {
         private readonly IHomeBusiness _buss;
-        public HomeController(IHomeBusiness buss) => _buss = buss;
+        private readonly ICommonManagementBusiness _commonBusiness;
+        public HomeController(IHomeBusiness buss, ICommonManagementBusiness commonBusiness) => (_buss , _commonBusiness) =( buss,commonBusiness);
         #region Landing Page
         [HttpGet]
         public ActionResult HomePage()
@@ -334,7 +336,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (string.IsNullOrEmpty(Username))
             {
 
-                //ViewBag.CallJavaScriptFunction = TempData["CallJavaScriptFunction"] ?? "False";
+                //ViewBag.CallJavaScriptFunction = TempData["CallJavaScriptFunction"] ?? "False";               
                 ViewBag.CallJavaScriptFunction = TempData["CallJavaScriptFunction"] ?? "True";
                 var HasLandingSession = Request.Cookies["HasLandingSession"]?.Value;
                 if (!string.IsNullOrEmpty(HasLandingSession) && HasLandingSession.Trim() == "True")
@@ -362,7 +364,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
-
+                //Session["AdvertisementImage"] = advertisementlist;
+                var advertisementimage = _commonBusiness.GetAdvertisement();
+                advertisementimage = advertisementimage
+                    .Select(item => ImageHelper.ProcessedImage(item))
+                    .ToList();
+                Session["AdvertisementImage"] = advertisementimage;
                 return View(Response);
             }
             else return Redirect("/");

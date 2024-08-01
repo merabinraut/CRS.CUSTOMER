@@ -49,5 +49,9 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         {
             return _REPO.GetMetaTagInfo(type, locationId, clubId);
         }
+        public List<string> GetAdvertisement()
+        {
+            return _REPO.GetAdvertisement();
+        }
     }
 }

@@ -17,5 +17,6 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         #endregion
         string GetForceFulLogout(string UserId);
         Tuple<int, int> GetMetaTagInfo(string type, string locationId = "", string clubId = "");
+        List<string> GetAdvertisement();
     }
 }

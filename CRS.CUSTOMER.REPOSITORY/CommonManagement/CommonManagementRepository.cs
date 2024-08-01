@@ -1,6 +1,7 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.CommonManagement;
 using CRS.CUSTOMER.SHARED.Home;
+using DocumentFormat.OpenXml.Office2016.Excel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -98,5 +99,23 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
             }
             return response;
         }
+        public List<string> GetAdvertisement()
+        {
+            var advertisementManagement = new List<string>();
+            var sql = "Exec sproc_advertisement_management @Flag='s'";            
+            var dt = _DAO.ExecuteDataTable(sql);
+            if (dt != null)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    // Assuming ImgPath is the only column you want to add to the list
+                    var imagePath = item["ImgPath"].ToString();
+                    advertisementManagement.Add(imagePath);
+                }
+            }
+
+            return advertisementManagement;
+        }
+
     }
 }
