@@ -219,8 +219,6 @@
         function ManageNotificationReadStatus() {
             $('.active').each(function () {
                 dataIdValue = $(this).data('id');
-                //console.log(dataIdValue);
-                debugger;
                 $.ajax({
                     url: '/NotificationManagement/ManageNotificationReadStatus',
                     type: 'POST',
@@ -233,7 +231,6 @@
                             //toastr.success(result.Message);
                             pageLabel.innerHTML = result.PageTitle;
                             markAllRead.innerHTML = '';
-                            debugger
                             notificationListItems.forEach(function (item) {
                                 if (item.classList.contains('active')) {
                                     item.classList.remove('active');
