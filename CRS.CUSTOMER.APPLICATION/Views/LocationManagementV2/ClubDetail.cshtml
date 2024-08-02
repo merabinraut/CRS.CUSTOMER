@@ -27,9 +27,11 @@
         width: 100vw;
         background: yellow;
     }
+
     .mentioned_name {
         color: #D17979;
     }
+
     .mentioned {
         font-size: 11px;
         font-weight: 500;
@@ -377,46 +379,46 @@
                             <div class="px-4 py-[10px]">
                                 <div class="flex gap-[8px] items-center ">
                                     @*<div data-modal-target="defaultModal" data-modal-toggle="defaultModal">*@
-                                        <div>
-                                            @if (!string.IsNullOrEmpty(item.CustomerImage))
-                                            {
-                                                <img src="@item.CustomerImage"
-                                                     class="h-[48px] w-[48px] object-cover rounded-full" />
-                                            }
-                                            else
-                                            {
-                                                <img src="~/Content/assets/images/logo.svg"
-                                                     class="h-[48px] w-[48px] object-cover rounded-full" />
-                                            }
-                                        </div>
-                                        <div>
-                                            <div class='text-[11px] font-bold text-charcolBlack '>@item.CustomerName</div>
-                                            <div class="flex gap-1 items-center">
-                                                <div class="rating-review text-[11px]" id="stars">
-                                                    @{
-                                                        var unratedScale2 = (5 - Convert.ToInt32(item.RatingScale));
-                                                        for (int i = 0; i < Convert.ToInt32(item.RatingScale); i++)
-                                                        {
-                                                            <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                                                <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
-                                                                      fill="#F89336" />
-                                                            </svg>
-                                                        }
-                                                        for (int i = 0; i < unratedScale2; i++)
-                                                        {
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
-                                                                <g opacity="0.3">
-                                                                    <path d="M9.44612 1.1453L8.95768 2.25692L7.20604 6.18126L2.928 6.63601L1.71533 6.77076L2.62484 7.5792L5.8081 10.4593L4.91544 14.67L4.6628 15.849L5.72389 15.2426L9.44612 13.0868L13.1684 15.2426L14.2294 15.849L13.9768 14.67L13.0841 10.4593L16.2674 7.5792L17.1769 6.77076L15.9642 6.63601L11.6862 6.18126L9.93456 2.25692L9.44612 1.1453ZM9.44612 3.7896L10.8272 6.9055L10.962 7.19182L11.2651 7.22551L14.6505 7.5792L12.1241 9.85296L11.8883 10.0719L11.9557 10.3751L12.6631 13.6931L9.7156 12.0088L9.44612 11.8404L9.17664 12.0088L6.22917 13.6931L6.93656 10.3751L7.00393 10.0719L6.76813 9.85296L4.24173 7.5792L7.62711 7.22551L7.93028 7.19182L8.06502 6.9055L9.44612 3.7896Z"
-                                                                          fill="#C8B477" />
-                                                                </g>
-                                                            </svg>
-                                                        }
+                                    <div>
+                                        @if (!string.IsNullOrEmpty(item.CustomerImage))
+                                        {
+                                            <img src="@item.CustomerImage"
+                                                 class="h-[48px] w-[48px] object-cover rounded-full" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/assets/images/logo.svg"
+                                                 class="h-[48px] w-[48px] object-cover rounded-full" />
+                                        }
+                                    </div>
+                                    <div>
+                                        <div class='text-[11px] font-bold text-charcolBlack '>@item.CustomerName</div>
+                                        <div class="flex gap-1 items-center">
+                                            <div class="rating-review text-[11px]" id="stars">
+                                                @{
+                                                    var unratedScale2 = (5 - Convert.ToInt32(item.RatingScale));
+                                                    for (int i = 0; i < Convert.ToInt32(item.RatingScale); i++)
+                                                    {
+                                                        <svg key={ind} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                            <path d="M16.3501 6.76236L10.8678 6.18339L8.62355 1.14954L6.37926 6.18339L0.896973 6.76236L4.99185 10.453L3.84865 15.8448L8.62355 13.091L13.3984 15.8448L12.2553 10.453L16.3501 6.76236Z"
+                                                                  fill="#F89336" />
+                                                        </svg>
                                                     }
-                                                </div>
-                                                <div class="text-[11px] mt-[2px]">@item.RatingScale</div>
+                                                    for (int i = 0; i < unratedScale2; i++)
+                                                    {
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                                                            <g opacity="0.3">
+                                                                <path d="M9.44612 1.1453L8.95768 2.25692L7.20604 6.18126L2.928 6.63601L1.71533 6.77076L2.62484 7.5792L5.8081 10.4593L4.91544 14.67L4.6628 15.849L5.72389 15.2426L9.44612 13.0868L13.1684 15.2426L14.2294 15.849L13.9768 14.67L13.0841 10.4593L16.2674 7.5792L17.1769 6.77076L15.9642 6.63601L11.6862 6.18126L9.93456 2.25692L9.44612 1.1453ZM9.44612 3.7896L10.8272 6.9055L10.962 7.19182L11.2651 7.22551L14.6505 7.5792L12.1241 9.85296L11.8883 10.0719L11.9557 10.3751L12.6631 13.6931L9.7156 12.0088L9.44612 11.8404L9.17664 12.0088L6.22917 13.6931L6.93656 10.3751L7.00393 10.0719L6.76813 9.85296L4.24173 7.5792L7.62711 7.22551L7.93028 7.19182L8.06502 6.9055L9.44612 3.7896Z"
+                                                                      fill="#C8B477" />
+                                                            </g>
+                                                        </svg>
+                                                    }
+                                                }
                                             </div>
+                                            <div class="text-[11px] mt-[2px]">@item.RatingScale</div>
                                         </div>
                                     </div>
+                                </div>
                                 <div class="flex gap-1 items-center mt-2">
                                     <div class="text-[11px] font-bold ">#推しが見つかった</div>
                                     <div class="linear-gradient rounded-[2px] text-[8px] text-white px-[4px]"
@@ -1034,7 +1036,7 @@
                                             <div class="flex justify-start items-center gap-[9px] text-[#333] text-[11px] leading-[20px] font-medium my-[5px] overflow-hidden text-ellipsis whitespace-nowrap"
                                                  style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 20px;">
                                                 <span>@item.EventDate ( @item.Day )</span>
-                                                <span class="overflow-hidden text-ellipsis whitespace-nowrap">@item.EventDescription</span>
+                                                <span class="overflow-hidden text-ellipsis whitespace-nowrap event-description mentioned">@item.EventDescription</span>
                                             </div>
 
                                         }
@@ -2059,8 +2061,13 @@
                 if (atIndex !== -1) {
                     let partAfterAt = text.substring(atIndex);
                     let words = partAfterAt.split(/\s+/);
-                    if (words.length >= 3 || words.length >= 2) {
-                        let mentionText = words.slice(0, 3).join(' '); 
+                    if (words.length > 3) {
+                        let mentionText = words.slice(0, 3).join(' ');
+                        let restOfText = partAfterAt.substring(mentionText.length);
+                        text = text.substring(0, atIndex) + '<span class="mentioned_name">' + mentionText + '</span>' + restOfText;
+                        element.innerHTML = text;
+                    } else if (words.length > 2 || words.length > 1) {
+                        let mentionText = words.slice(0, 2).join(' ');
                         let restOfText = partAfterAt.substring(mentionText.length);
 
                         text = text.substring(0, atIndex) + '<span class="mentioned_name">' + mentionText + '</span>' + restOfText;
