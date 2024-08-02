@@ -72,7 +72,7 @@
                             if (!string.IsNullOrEmpty(item.NotificationReadStatus) && item.NotificationReadStatus.Trim().ToUpper() == "P")
                             {
                                 activeClassName = (!string.IsNullOrEmpty(item.NotificationReadStatus) && item.NotificationReadStatus.Trim().ToUpper() == "P") ? "active" : "";
-                                <div class="flex justify-between items-center notification-list @activeClassName" id="single_unread_status">
+                                <div class="flex justify-between items-center notification-list @activeClassName" id="single_unread_status" data-id="@item.NotificationId">
                                     <div class="flex gap-3 w-max ">
                                         <div class="flex-none">
                                             <img src="@item.NotificationImage"
@@ -215,35 +215,44 @@
         var notificationListItems = document.querySelectorAll('.notification-list');
         var pageLabel = document.getElementById("page-label-id");
         var markAllRead = document.getElementById("markAllRead");
+        var dataIdValue = null;
         function ManageNotificationReadStatus() {
-            $.ajax({
-                url: '/NotificationManagement/ManageNotificationReadStatus',
-                type: 'POST',
-                data: {
-                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
-                },
-                success: function (result) {
-                    if (result.Code === "0") {
-                        //toastr.success(result.Message);
-                        pageLabel.innerHTML = result.PageTitle;
-                        markAllRead.innerHTML = '';
-                        notificationListItems.forEach(function (item) {
-                            if (item.classList.contains('active')) {
-                                item.classList.remove('active');
-                            }
-                        });
+            $('.active').each(function () {
+                dataIdValue = $(this).data('id');
+                //console.log(dataIdValue);
+                debugger;
+                $.ajax({
+                    url: '/NotificationManagement/ManageNotificationReadStatus',
+                    type: 'POST',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                        notificationId: dataIdValue
+                    },
+                    success: function (result) {
+                        if (result.Code === "0") {
+                            //toastr.success(result.Message);
+                            pageLabel.innerHTML = result.PageTitle;
+                            markAllRead.innerHTML = '';
+                            debugger
+                            notificationListItems.forEach(function (item) {
+                                if (item.classList.contains('active')) {
+                                    item.classList.remove('active');
+                                }
+                            });
+                        }
+                        else {
+                            toastr.info(result.Message);
+                        }
+                    },
+                    error: function () {
+                        toastr.error("Something went wrong. Please try again later.");
                     }
-                    else {
-                        toastr.info(result.Message);
-                    }
-                },
-                error: function () {
-                    toastr.error("Something went wrong. Please try again later.");
-                }
+                });
             });
+
         }
         function ManageSingleNotificationReadStatus(id) {
-           // var singleUnreadStatus = document.getElementById('single_unread_status');
+            // var singleUnreadStatus = document.getElementById('single_unread_status');
             $.ajax({
                 url: '/NotificationManagement/ManageSingleNotificationReadStatus',
                 type: 'POST',
