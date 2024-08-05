@@ -282,7 +282,8 @@
                 VisitDate: '@ViewBag.VisitDate' ? EncryptParameter('@ViewBag.VisitDate') : '',
                 VisitTime: '@ViewBag.VisitTime' ? EncryptParameter('@ViewBag.VisitTime') : '',
                 NoOfPeople: '@ViewBag.NoOfPeople' ? EncryptParameter('@ViewBag.NoOfPeople'): '',
-                SelectedHost: '@ViewBag.SelectedHost'
+                SelectedHost: '@ViewBag.SelectedHost',
+                IsPopularPlan: IsPopularPlan ? EncryptParameter(IsPopularPlan):''
             };
 
             Object.entries(encryptedData).forEach(([key, value]) => localStorage.setItem(key, value));
