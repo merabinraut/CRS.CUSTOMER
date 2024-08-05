@@ -131,7 +131,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 NotificationType = NotificationMessage.INFORMATION,
                 Message = "Something went wrong. Please try again later",
-               Title = NotificationMessage.INFORMATION.ToString()
+                Title = NotificationMessage.INFORMATION.ToString()
             });
             return Redirect("/");
         }
@@ -140,6 +140,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet]
         public ActionResult Plan(string ClubId, string Date, string Time, string NoOfPeople, string SelectedHost = "")
         {
+            var returnURL = !string.IsNullOrEmpty(Request.UrlReferrer.ToString()) ? Request.UrlReferrer.ToString() : "/";
             var cId = !string.IsNullOrEmpty(ClubId) ? ClubId.DecryptParameter() : null;
             string customerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
             if (string.IsNullOrEmpty(cId) ||
@@ -153,7 +154,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return Redirect("/");
+                return Redirect(returnURL);
             }
             //check if the customer can proceed with the reservation process
             var dbResponse = _buss.IsReservationProcessValid(cId, customerId, Date, Time, NoOfPeople);
@@ -165,7 +166,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Message = dbResponse.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return Redirect("/");
+                return Redirect(returnURL);
             }
             //check if the customer can proceed with the reservation process
             //check Verify club and get club details
@@ -176,9 +177,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse.Item2 ?? "Invalid request",
-                   Title = NotificationMessage.INFORMATION.ToString()
+                    Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return Redirect("/");
+                return Redirect(returnURL);
             }
             //check Verify club and get club details
             var FileLocationPath = string.Empty;
@@ -191,13 +192,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dbResponse3 = _buss.GetPlans(cId, customerId, Date, Time);
             if (dbResponse3.Item1 == ResponseCode.Failed || dbResponse3.Item1 == ResponseCode.Exception)
             {
+
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse3.Item2 ?? "Invalid request",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
-                return Redirect("/");
+                return Redirect(returnURL);
             }
             else if (dbResponse3.Item1 == ResponseCode.Success)
             {
@@ -360,7 +362,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse.Item2 ?? "Invalid request",
-                   Title = NotificationMessage.INFORMATION.ToString()
+                    Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -381,7 +383,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse2.Item2 ?? "Invalid request",
-                   Title = NotificationMessage.INFORMATION.ToString()
+                    Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -416,7 +418,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.ERROR,
                     Message = "Invalid request",
-                   Title = NotificationMessage.ERROR.ToString()
+                    Title = NotificationMessage.ERROR.ToString()
                 });
                 return Redirect("/");
             }
@@ -451,7 +453,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.ERROR,
                     Message = dbResponse.Message ?? "Invalid request",
-                   Title = NotificationMessage.ERROR.ToString()
+                    Title = NotificationMessage.ERROR.ToString()
                 });
                 return Redirect("/");
             }
