@@ -259,7 +259,6 @@
                 },
                 success: function (result) {
                     if (result.Code === "0") {
-                        document.getElementById('single_unread_status').remove('active');
                         if (notificationUrl.toString().trim() == "#") {
                             window.location.reload();
                         }
