@@ -321,7 +321,7 @@
                 </div>
                 @if (Model.HostListModels != null && Model.HostListModels.Count != 0)
                 {
-                    <div class="p-[10px] galleryHost bg-[#EFEFEF]">
+                    <div class="p-[10px] galleryHost bg-[#F8F8F8]">
                         @foreach (var item in Model.HostListModels)
                         {
                             <div onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@PrefecturesArea')">
@@ -1502,7 +1502,8 @@
                                             通常料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px]  text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.RegularPrice 円 / 1時間
+                                            @*@Model.GetClubBasicInformation.RegularPrice 円 / 1時間*@
+                                            @Convert.ToInt64(@Model.GetClubBasicInformation.RegularPrice).ToString("#,###,###,###") 円 / 1時間
                                         </td>
                                     </tr>
                                 }
@@ -1513,7 +1514,7 @@
                                             延長料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.ExtensionFee 円 / 1時間
+                                            @Convert.ToInt64(@Model.GetClubBasicInformation.ExtensionFee).ToString("#,###,###,###") 円 / 1時間
                                         </td>
                                     </tr>
                                 }
@@ -1524,7 +1525,7 @@
                                             指名料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.DesignationFee 円
+                                            @Convert.ToInt64(@Model.GetClubBasicInformation.DesignationFee).ToString("#,###,###,###") 円 / 1時間
                                         </td>
                                     </tr>
                                 }
@@ -1535,7 +1536,8 @@
                                             同伴料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.CompanionFee 円
+                                            @Convert.ToInt64(@Model.GetClubBasicInformation.CompanionFee).ToString("#,###,###,###") 円 
+                                            @*@Model.GetClubBasicInformation.CompanionFee 円*@
                                         </td>
                                     </tr>
                                 }
