@@ -249,9 +249,7 @@
 
         }
         function ManageSingleNotificationReadStatus(id) {
-            // var singleUnreadStatus = document.getElementById('single_unread_status');
             var notificationUrl = document.getElementById('notificationid').getAttribute("value")
-            //alert('url:', notificationUrl);
             $.ajax({
                 url: '/NotificationManagement/ManageSingleNotificationReadStatus',
                 type: 'POST',
@@ -262,7 +260,9 @@
                 success: function (result) {
                     if (result.Code === "0") {
                         document.getElementById('single_unread_status').remove('active');
-                       // window.location.reload();
+                        if (notificationUrl.toString().trim() == "#") {
+                            window.location.reload();
+                        }
                     }
                     else {
                         toastr.info(result.Message);
