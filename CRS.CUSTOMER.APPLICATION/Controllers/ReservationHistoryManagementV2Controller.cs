@@ -22,6 +22,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             _buss = buss;
             _reservationBuss = reservationBuss;
         }
+
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("user/account/reservation")]
         public ActionResult ReservationHistory(string rsvtab = "04")
         {
@@ -110,6 +112,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(responseInfo);
         }
 
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("user/account/reservation/detail")]
         public ActionResult ViewHistoryDetail(string ReservationId = "")
         {

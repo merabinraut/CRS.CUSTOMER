@@ -37,8 +37,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             _commonBusiness = commonBusiness;
         }
 
-        [HttpGet, Route("search/{prefectures}/{area}")]
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
+        [HttpGet, Route("search/{prefectures}/{area}")]
         public ActionResult Index(string prefectures, string area, string target)
         {
             ViewBag.PrefecturesArea = $"/{prefectures}/{area}";

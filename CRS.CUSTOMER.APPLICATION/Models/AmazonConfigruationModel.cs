@@ -8,6 +8,7 @@
         public int TimeoutDurationInMin { get; set; }
         public string BaseURL { get; set; }
         public string NoImageURL { get; set; }
+        public string NotificationNoImageURL { get; set; }
     }
 
     public class AmazonConfigruation

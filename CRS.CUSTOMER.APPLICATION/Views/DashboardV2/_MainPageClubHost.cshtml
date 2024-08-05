@@ -316,7 +316,6 @@
         overflow: hidden;
         line-height: 1.4;
         text-overflow: ellipsis;
-
     }
     /* hostclub footer */
     .club_footer {
@@ -466,7 +465,8 @@
                         <!-- s/club thumb -->
                         @foreach (var item2 in item.HostGalleryImage)
                         {
-                            <li><img alt="@item.ClubName ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>
+                            <li><img alt="@item.ClubName" src="@item2"></li>
+                            @*<li><img alt="@item.ClubName ([ruby])の写真‖[area]([prefectures])のホストクラブ‖ホスログ《ホストクラブ初回来店・ネット予約》" src="@item2"></li>*@
                         }
                         <!-- e/club thumb -->
                         <!-- s/club thumb -->
@@ -541,7 +541,7 @@
                             {
                                 <div class="opening_hours">
                                     <img src="~/Content/assets/images/customer/sun.svg" alt="夜">
-                                   @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+                                    @* @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
                                     <span style="line-height:13px;">
                                         @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
                                     </span>
@@ -549,15 +549,15 @@
                             }
                             else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                             {
-                    <div class="opening_hours">
-                        <img src="/Content/assets/images/customer/moon.svg" alt="夜">
-                      @*  @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+                                <div class="opening_hours">
+                                    <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+                                    @*  @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
 
-                        <span style="line-height:13px;">
-                            @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
-                        </span>
+                                    <span style="line-height:13px;">
+                                        @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                                    </span>
 
-                    </div>
+                                </div>
                             }
 
                             <!-- e/opening hours -->
@@ -651,7 +651,7 @@
                     {
                         <p>誕生日 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                     }
-                    @if (!string.IsNullOrEmpty(item.HostBirthPlace))
+                    @if (!string.IsNullOrEmpty(item.HostBirthPlace) && item.HostBirthPlace.Trim() != "未回答")
                     {
                         <p>出身地 :<span> @item.HostBirthPlace</span> </p>
                     }
@@ -659,7 +659,7 @@
                     {
                         <p>出身地 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                     }
-                    @if (!string.IsNullOrEmpty(item.HostBloodType))
+                    @if (!string.IsNullOrEmpty(item.HostBloodType) && item.HostBloodType.Trim() != "未回答")
                     {
                         <p>血液型 :<span> @item.HostBloodType</span> </p>
                     }
@@ -667,7 +667,7 @@
                     {
                         <p>血液型 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                     }
-                    @if (!string.IsNullOrEmpty(item.HostConstellationGroup))
+                    @if (!string.IsNullOrEmpty(item.HostConstellationGroup) && item.HostConstellationGroup.Trim() != "未回答")
                     {
                         <p>星座 :<span> @item.HostConstellationGroup</span> </p>
                     }
@@ -675,7 +675,7 @@
                     {
                         <p>星座 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                     }
-                    @if (!string.IsNullOrEmpty(item.Occupation))
+                    @if (!string.IsNullOrEmpty(item.Occupation) && item.Occupation.Trim() != "未回答")
                     {
                         <p>前職 :<span> @item.Occupation</span> </p>
                     }
@@ -684,7 +684,7 @@
                         <p>前職 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                     }
 
-                    @if (!string.IsNullOrEmpty(item.HostHeight))
+                    @if (!string.IsNullOrEmpty(item.HostHeight) && item.HostHeight.Trim() != "未回答")
                     {
                         <p>身長 :<span> @item.HostHeight</span> </p>
                     }
@@ -692,7 +692,7 @@
                     {
                         <p>身長 :<span class="text-[#D17979] font-medium tracking-[1.2px] pl-1"> 未回答</span> </p>
                     }
-                    @if (!string.IsNullOrEmpty(item.LiquorStrength))
+                    @if (!string.IsNullOrEmpty(item.LiquorStrength) && item.LiquorStrength.Trim() != "未回答")
                     {
                         <p>お酒の強さ :<span> @item.LiquorStrength </span> </p>
                     }

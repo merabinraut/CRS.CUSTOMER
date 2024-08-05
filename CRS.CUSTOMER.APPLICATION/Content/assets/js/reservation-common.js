@@ -19,7 +19,12 @@
             CheckIfHasRedirectURL(data, PostData);
             $("#stickey_id").css("display", "none");
             if (!data || data.Code !== 0) {
-                toastr.info(data?.Message);
+                if (data.Message != null && data.Message != '') {
+                    toastr.info(data?.Message);
+                }
+                else {
+                    toastr.info("Something went wrong. Please try again later.");
+                }
                 DisableLoaderFunction();
                 return false;
             }
@@ -83,13 +88,13 @@
                         //var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         //return [formattedDates.indexOf(string) == -1];
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                        if (date.getDay() === 0) { // Sunday
-                            return [true, 'Sunday']; // Make Sunday unselectable
-                        }
+                        //if (date.getDay() === 0) { // Sunday
+                        //    return [true, 'Sunday']; // Make Sunday unselectable
+                        //}
                         //else if (formattedDates.indexOf(string) != -1) {
                         //    return [false]; // Unreservable date
                         //}
-                        else if (holidayDates.indexOf(string) != -1) {
+                        if (holidayDates.indexOf(string) != -1) {
                             return [false, 'Dayoff']; // Dayoff date
                         }
                         else {
