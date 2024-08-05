@@ -18,6 +18,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IHomeBusiness _buss;
         public HomeController(IHomeBusiness buss) => _buss = buss;
         #region Landing Page
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet]
         public ActionResult HomePage()
         {
@@ -53,6 +54,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Register Management
         [HttpGet, Route("user/register")]
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Register(string ReferCode = "", string Type = "")
         {
 
@@ -489,6 +491,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Forgot Password
         [HttpGet, Route("user/remind")]
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult ForgotPassword()
         {
             Session.Clear();
@@ -738,20 +741,22 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View();
         }
         #endregion
-
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Error505()
         {
-            
+
             return View();
         }
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Error404()
         {
-            
+
             return View();
         }
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Maintenance()
         {
-            
+
             return View();
         }
     }

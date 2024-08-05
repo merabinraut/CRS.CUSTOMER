@@ -459,6 +459,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Reservation Success
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("reservation/complete")]
         public ActionResult Success()
         {

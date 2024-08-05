@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
+    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class BookmarkManagementController : CustomController
     {
         private readonly IBookmarkManagementBusiness _buss;
