@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
+    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class NotificationManagementController : CustomController
     {
         private readonly INotificationManagementBusiness _buss;
@@ -62,16 +63,20 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public JsonResult ManageNotificationReadStatus()
+        public JsonResult ManageNotificationReadStatus(string notificationId = "")
         {
+            string NotificationId = "";
+            if (!string.IsNullOrEmpty(notificationId))
+                NotificationId = notificationId.DecryptParameter();
             var dbRequest = new Common()
             {
                 AgentId = !string.IsNullOrEmpty(ApplicationUtilities.GetSessionValue("AgentId").ToString()) ? ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter() : null,
-                ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString()
+                ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString(),
+                ActionIP = ApplicationUtilities.GetIP()
             };
             if (!string.IsNullOrEmpty(dbRequest.AgentId) && !string.IsNullOrEmpty(dbRequest.ActionUser))
             {
-                var dbResponse = _buss.ManageNotificationReadStatus(dbRequest);
+                var dbResponse = _buss.ManageNotificationReadStatus(dbRequest, NotificationId);
                 if (dbResponse != null && dbResponse.Code == ResponseCode.Success) return Json(new { Code = "0", Message = dbResponse.Message ?? "Success", PageTitle = Resources.Resource.Notifications });
                 return Json(new { Code = "1", Message = dbResponse.Message ?? "Invalid request" });
             }
@@ -86,7 +91,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dbRequest = new Common()
             {
                 AgentId = !string.IsNullOrEmpty(ApplicationUtilities.GetSessionValue("AgentId").ToString()) ? ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter() : null,
-                ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString()
+                ActionUser = ApplicationUtilities.GetSessionValue("Username").ToString(),
+                ActionIP = ApplicationUtilities.GetIP()
             };
             if (!string.IsNullOrEmpty(dbRequest.AgentId) && !string.IsNullOrEmpty(dbRequest.ActionUser) && !string.IsNullOrEmpty(NotificationId))
             {

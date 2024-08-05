@@ -27,9 +27,11 @@
         width: 100vw;
         background: yellow;
     }
+
     .mentioned_name {
         color: #D17979;
     }
+
     .mentioned {
         font-size: 11px;
         font-weight: 500;
@@ -319,7 +321,7 @@
                 </div>
                 @if (Model.HostListModels != null && Model.HostListModels.Count != 0)
                 {
-                    <div class="p-[10px] galleryHost bg-[#EFEFEF]">
+                    <div class="p-[10px] galleryHost bg-[#F8F8F8]">
                         @foreach (var item in Model.HostListModels)
                         {
                             <div onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@PrefecturesArea')">
@@ -376,7 +378,8 @@
                         <div class=" border-b-2 border-[#efefef]" style=" padding: 0 21px;">
                             <div class="px-4 py-[10px]">
                                 <div class="flex gap-[8px] items-center ">
-                                    <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
+                                    @*<div data-modal-target="defaultModal" data-modal-toggle="defaultModal">*@
+                                    <div>
                                         @if (!string.IsNullOrEmpty(item.CustomerImage))
                                         {
                                             <img src="@item.CustomerImage"
@@ -1033,7 +1036,7 @@
                                             <div class="flex justify-start items-center gap-[9px] text-[#333] text-[11px] leading-[20px] font-medium my-[5px] overflow-hidden text-ellipsis whitespace-nowrap"
                                                  style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 20px;">
                                                 <span>@item.EventDate ( @item.Day )</span>
-                                                <span class="overflow-hidden text-ellipsis whitespace-nowrap">@item.EventDescription</span>
+                                                <span class="overflow-hidden text-ellipsis whitespace-nowrap event-description mentioned">@item.EventDescription</span>
                                             </div>
 
                                         }
@@ -1499,7 +1502,8 @@
                                             通常料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px]  text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.RegularPrice 円 / 1時間
+                                            @*@Model.GetClubBasicInformation.RegularPrice 円 / 1時間*@
+                                            @Convert.ToInt64(@Model.GetClubBasicInformation.RegularPrice).ToString("#,###,###,###") 円 / 1時間
                                         </td>
                                     </tr>
                                 }
@@ -1510,7 +1514,7 @@
                                             延長料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.ExtensionFee 円 / 1時間
+                                            @Convert.ToInt64(@Model.GetClubBasicInformation.ExtensionFee).ToString("#,###,###,###") 円 / 1時間
                                         </td>
                                     </tr>
                                 }
@@ -1521,7 +1525,7 @@
                                             指名料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.DesignationFee 円
+                                            @Convert.ToInt64(@Model.GetClubBasicInformation.DesignationFee).ToString("#,###,###,###") 円 / 1時間
                                         </td>
                                     </tr>
                                 }
@@ -1532,7 +1536,8 @@
                                             同伴料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Model.GetClubBasicInformation.CompanionFee 円
+                                            @Convert.ToInt64(@Model.GetClubBasicInformation.CompanionFee).ToString("#,###,###,###") 円 
+                                            @*@Model.GetClubBasicInformation.CompanionFee 円*@
                                         </td>
                                     </tr>
                                 }
@@ -2058,8 +2063,13 @@
                 if (atIndex !== -1) {
                     let partAfterAt = text.substring(atIndex);
                     let words = partAfterAt.split(/\s+/);
-                    if (words.length >= 3 || words.length >= 2) {
-                        let mentionText = words.slice(0, 3).join(' '); 
+                    if (words.length > 3) {
+                        let mentionText = words.slice(0, 3).join(' ');
+                        let restOfText = partAfterAt.substring(mentionText.length);
+                        text = text.substring(0, atIndex) + '<span class="mentioned_name">' + mentionText + '</span>' + restOfText;
+                        element.innerHTML = text;
+                    } else if (words.length > 2 || words.length > 1) {
+                        let mentionText = words.slice(0, 2).join(' ');
                         let restOfText = partAfterAt.substring(mentionText.length);
 
                         text = text.substring(0, atIndex) + '<span class="mentioned_name">' + mentionText + '</span>' + restOfText;

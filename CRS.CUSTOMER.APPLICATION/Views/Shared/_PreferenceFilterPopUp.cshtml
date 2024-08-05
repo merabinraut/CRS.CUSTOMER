@@ -45,6 +45,15 @@
     .gm-style div[aria-label="Google Map"] > div:last-child {
         display: none;
     }
+    select {
+        -webkit-appearance: none; /* Safari and Chrome */
+        -moz-appearance: none; /* Firefox */
+        appearance: none; /* Standard syntax */
+    }
+
+        select::-ms-expand {
+            display: none; /* IE10+ and Edge */
+        }
 </style>
 <!------------------------------------------------------- #region PREFERENCE------------------------------------------------------->
 <!-- drawer component -->
@@ -398,24 +407,33 @@
                                             <div class="text-sm text-[#333] font-bold mb-2">
                                                 前職を選ぶ
                                             </div>
-                                            <div class="input-field-common">
-                                                <select id="host-occupation-ddl-id" style="width: 100%;" class="text-[#B7B7B7] h-[44px]">
-                                                    @foreach (var item in Model.OccupationModel)
-                                                    {
-                                                        if (!string.IsNullOrEmpty(item.StaticValue) && item.StaticValue.Trim() == "0")
+                                            <div class="flex justify-between items-center" style="width: 100%; border-radius: 2px; border: 1px solid #F1F1F1; background: #FFF; padding: 11px 13px; height:43px;">
+
+                                                <div class="input-field-common" style=" width: -webkit-fill-available;">
+                                                    <select id="host-occupation-ddl-id" class="text-[#B7B7B7] " style=" width: -webkit-fill-available; outline:none;">
+                                                        @foreach (var item in Model.OccupationModel)
                                                         {
-                                                            <option value="@item.StaticValue" selected>
-                                                                @item.StaticLabel
-                                                            </option>
+                                                            if (!string.IsNullOrEmpty(item.StaticValue) && item.StaticValue.Trim() == "0")
+                                                            {
+                                                                <option value="@item.StaticValue" selected>
+                                                                    @item.StaticLabel
+                                                                </option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@item.StaticValue">
+                                                                    @item.StaticLabel
+                                                                </option>
+                                                            }
                                                         }
-                                                        else
-                                                        {
-                                                            <option value="@item.StaticValue">
-                                                                @item.StaticLabel
-                                                            </option>
-                                                        }
-                                                    }
-                                                </select>
+                                                    </select>
+                                                </div>
+                                                <span class="">
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                                    <path d="M7 8L0.937823 0.5L13.0622 0.499999L7 8Z" fill="#707070" />
+                                                </svg>
+                                                </span>
                                             </div>
                                         </div>
 
@@ -462,7 +480,7 @@
                                                     </a>
                                                 }
                                             </div>
-                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-1 ">
+                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3 ">
                                                 <div class="border-b-[1px] border-[#D75A8B] pb-[1px] " onclick="PopupFilterNewClubRenderFunction()">
                                                     続きを見る
                                                 </div>
@@ -578,7 +596,7 @@
                                                     }
                                                 }
                                             </div>
-                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-1 ">
+                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3 ">
                                                 <div class="border-b-[1px] border-[#D75A8B] pb-[1px] " onclick="PopupFilterNewHostRenderFunction()">
                                                     続きを見る
                                                 </div>

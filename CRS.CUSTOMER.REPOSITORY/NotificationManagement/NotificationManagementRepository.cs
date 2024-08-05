@@ -41,11 +41,14 @@ namespace CRS.CUSTOMER.REPOSITORY.NotificationManagement
             return false;
         }
 
-        public CommonDbResponse ManageNotificationReadStatus(Common Request)
+        public CommonDbResponse ManageNotificationReadStatus(Common Request, string NotificationId)
         {
             string SQL = "sproc_customer_notification_management @Flag='unrs'";
             SQL += ",@AgentId=" + _dao.FilterString(Request.AgentId);
+            SQL += ",@notificationId=" + _dao.FilterString(NotificationId);
+            SQL += ",@ActionIP=" + _dao.FilterString(Request.ActionIP);
             SQL += ",@ActionUser=" + _dao.FilterString(Request.ActionUser);
+            SQL += ",@ActionPlatform=" + _dao.FilterString(Request.ActionPlatform);
             return _dao.ParseCommonDbResponse(SQL);
         }
         public CommonDbResponse ManageReservationCancelRemark(Common Request, string NotificationId, string CustomerRemarks)
@@ -64,6 +67,8 @@ namespace CRS.CUSTOMER.REPOSITORY.NotificationManagement
             sp_name += ",@notificationId=" + _dao.FilterString(NotificationId);
             sp_name += ",@AgentId=" + _dao.FilterString(dbRequest.AgentId);
             sp_name += ",@ActionUser=" + _dao.FilterString(dbRequest.ActionUser);
+            sp_name += ",@ActionIP=" + _dao.FilterString(dbRequest.ActionIP);
+            sp_name += ",@ActionPlatform=" + _dao.FilterString(dbRequest.ActionPlatform);
             return _dao.ParseCommonDbResponse(sp_name);
         }
     }

@@ -104,7 +104,7 @@
 </style>
 
 <!-- back button -->
-<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="history.back()">
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" style="z-index:11" onclick="history.back()">
     <div class="flex gap-2 items-center absolute top-[12px] text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
             <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
@@ -556,7 +556,7 @@
     </div>
 
     <!-- personality -->
-    <div class=" px-4">
+    <div class="" style="padding-left:19px">
         <div class="flex justify-start items-center gap-[9px] mb-[14px]">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="4" height="43" viewBox="0 0 4 43" fill="none">
@@ -572,7 +572,7 @@
         </div>
         <div class="h-[1px] bg-[#EFEFEF] mb-[17px]"></div>
         <div>
-            <div class="grid mt-[10px] mx-[16px] mb-[10px] grid-rows-9">
+            <div class="grid mt-[10px] mb-[10px] grid-rows-9">
                 <div style="line-height: 180%;" class="text-[#292F33] font-bold text-[12px]">
                     @{
                         var Personality = Model.HostIdentityDetailsModel.Where(x => x.LabelType.Trim().ToUpper() == "PERSONALITY").ToList();

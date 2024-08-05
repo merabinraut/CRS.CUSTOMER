@@ -72,14 +72,14 @@
                             if (!string.IsNullOrEmpty(item.NotificationReadStatus) && item.NotificationReadStatus.Trim().ToUpper() == "P")
                             {
                                 activeClassName = (!string.IsNullOrEmpty(item.NotificationReadStatus) && item.NotificationReadStatus.Trim().ToUpper() == "P") ? "active" : "";
-                                <div class="flex justify-between items-center notification-list @activeClassName" id="single_unread_status">
+                                <div class="flex justify-between items-center notification-list @activeClassName" id="single_unread_status" data-id="@item.NotificationId">
                                     <div class="flex gap-3 w-max ">
                                         <div class="flex-none">
                                             <img src="@item.NotificationImage"
                                                  class="h-[32px] w-[32px] object-cover rounded-full" />
                                         </div>
                                         <div class="notification-detail-class" onclick="ManageSingleNotificationReadStatus('@item.NotificationId');">
-                                            <input type="hidden" value="@item.NotificationURL">
+                                            <input type="hidden" value="@item.NotificationURL" id="notificationid">
                                             <div class='text-sm font-bold text-charcolBlack notification-title pb-1 '>@item.NotificationSubject</div>
                                             <div class='text-xs  text-[#667085] pb-1'>@Html.Raw(@item.NotificationBody)</div>
                                             @if (!string.IsNullOrEmpty(@item.SecondNotificationBody))
@@ -127,7 +127,7 @@
                                                  class="h-[32px] w-[32px] object-cover rounded-full" />
                                         </div>
                                         <div class="notification-detail-class">
-                                            <input type="hidden" value="@item.NotificationURL">
+                                            <input type="hidden" value="@item.NotificationURL" id="notificationid">
                                             <div class='text-sm font-bold text-charcolBlack notification-title pb-1 '>@item.NotificationSubject</div>
                                             <div class='text-xs  text-[#667085] pb-1'>@Html.Raw(@item.NotificationBody)</div>
                                             @if (!string.IsNullOrEmpty(@item.SecondNotificationBody))
@@ -215,35 +215,41 @@
         var notificationListItems = document.querySelectorAll('.notification-list');
         var pageLabel = document.getElementById("page-label-id");
         var markAllRead = document.getElementById("markAllRead");
+        var dataIdValue = null;
         function ManageNotificationReadStatus() {
-            $.ajax({
-                url: '/NotificationManagement/ManageNotificationReadStatus',
-                type: 'POST',
-                data: {
-                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
-                },
-                success: function (result) {
-                    if (result.Code === "0") {
-                        //toastr.success(result.Message);
-                        pageLabel.innerHTML = result.PageTitle;
-                        markAllRead.innerHTML = '';
-                        notificationListItems.forEach(function (item) {
-                            if (item.classList.contains('active')) {
-                                item.classList.remove('active');
-                            }
-                        });
+            $('.active').each(function () {
+                dataIdValue = $(this).data('id');
+                $.ajax({
+                    url: '/NotificationManagement/ManageNotificationReadStatus',
+                    type: 'POST',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                        notificationId: dataIdValue
+                    },
+                    success: function (result) {
+                        if (result.Code === "0") {
+                            //toastr.success(result.Message);
+                            pageLabel.innerHTML = result.PageTitle;
+                            markAllRead.innerHTML = '';
+                            notificationListItems.forEach(function (item) {
+                                if (item.classList.contains('active')) {
+                                    item.classList.remove('active');
+                                }
+                            });
+                        }
+                        else {
+                            toastr.info(result.Message);
+                        }
+                    },
+                    error: function () {
+                        toastr.error("Something went wrong. Please try again later.");
                     }
-                    else {
-                        toastr.info(result.Message);
-                    }
-                },
-                error: function () {
-                    toastr.error("Something went wrong. Please try again later.");
-                }
+                });
             });
+
         }
         function ManageSingleNotificationReadStatus(id) {
-           // var singleUnreadStatus = document.getElementById('single_unread_status');
+            var notificationUrl = document.getElementById('notificationid').getAttribute("value")
             $.ajax({
                 url: '/NotificationManagement/ManageSingleNotificationReadStatus',
                 type: 'POST',
@@ -254,7 +260,9 @@
                 success: function (result) {
                     if (result.Code === "0") {
                         document.getElementById('single_unread_status').remove('active');
-                        window.location.reload();
+                        if (notificationUrl.toString().trim() == "#") {
+                            window.location.reload();
+                        }
                     }
                     else {
                         toastr.info(result.Message);
