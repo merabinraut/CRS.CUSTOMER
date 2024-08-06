@@ -2,12 +2,10 @@
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models;
 using CRS.CUSTOMER.APPLICATION.Models.ProfileManagement;
-using CRS.CUSTOMER.APPLICATION.Models.ReservationManagement;
 using CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement;
 using CRS.CUSTOMER.BUSINESS.ProfileManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ProfileManagement;
-using DocumentFormat.OpenXml.Office2010.CustomUI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,7 +14,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Util;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
@@ -269,6 +266,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     //    Message = dbResp.Message,
                     //    Title = NotificationMessage.SUCCESS.ToString()
                     //});
+                    TempData["CallJavaScriptFunction"] = "True";
+                    Session["AgentId"] = null;
+                    Session["Username"] = null;
+                    Session["HasLandingSession"] = null;
                     return Redirect("/user/remind/complete?nickname=" + dbResp.Extra1.EncryptParameter());
                     //return Redirect("user/remind/complete", "Home",new { nickname = dbResp.Extra1.EncryptParameter() });
 

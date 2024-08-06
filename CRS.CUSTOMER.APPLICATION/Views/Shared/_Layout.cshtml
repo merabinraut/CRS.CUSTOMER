@@ -595,7 +595,7 @@
                 var SelectedDate = QueryData['SelectedDate'];
                 var SelectedHost = QueryData['SelectedHost'];
                 var hostId = QueryData['HostId'] !== undefined ? QueryData['HostId'] : QueryData['hostId'];
-                var agentType = QueryData['agentType'];
+                var agentType = QueryData['AgentType'] !== undefined ? QueryData['AgentType'] : QueryData['agentType'];
                 var dynamicParams = {};
 
                 // Iterate over QueryData to populate dynamicParams
@@ -629,7 +629,7 @@
                     actionURL.searchParams.append('SelectedHost', SelectedHost);
                 }
 
-                if (hostId) {
+                if (hostId || hostId === "") {
                     actionURL.searchParams.append('hostId', hostId);
                 }
 
