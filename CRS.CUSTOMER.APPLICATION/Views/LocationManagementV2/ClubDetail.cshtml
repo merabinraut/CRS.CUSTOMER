@@ -19,6 +19,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script src="/Content/assets/js/tabs.js"></script>
 <style>
+    @@media (min-width: 640px) {
+        #searchbottom {
+            width: 375px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            bottom: -40px;
+        }
+    }
     .stickyBox {
         position: -webkit-sticky;
         position: sticky;
@@ -155,7 +163,7 @@
     {
         <div class="flex items-center flex-col">
             <div class="p-1">
-                <div class="action_keep" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                <div style="cursor:pointer" class="action_keep" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
             </div>
         </div>
     }
@@ -163,7 +171,7 @@
     {
         <div class="flex items-center flex-col">
             <div class="p-1">
-                <div class="action_keep" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                <div style="cursor:pointer"  class="action_keep" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
             </div>
         </div>
     }
@@ -859,6 +867,16 @@
                             border-right: none;
                             /* Remove top border from header cells */
                         }
+                    @@media (min-width: 640px) {
+                     
+
+                        #searchbottom{
+                            width: 375px;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            bottom: -40px;
+                        }
+                    }
                 </Style>
                 <div class="px-[16px]"  style="margin-left:5px;">
                     <div class="mx-[8.5px] py-[6.54px] p-l-[22px] p-r-[10px] ">
@@ -924,7 +942,7 @@
                                             <div class="relative h-[180px] w-[128px]">
                                                 @if (!string.IsNullOrEmpty(item.HostImage))
                                                 {
-                                                    <img src="@item.HostImage"
+                                                    <img style="cursor:pointer" src="@item.HostImage"
                                                          class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@PrefecturesArea')">
                                                 }
                                                 else
@@ -1008,7 +1026,7 @@
                                     </svg>
                                     <h4 class="text-[#333] text-[12px] font-bold leading-[20px]">お知らせ</h4>
                                 </div>
-                                <div class="flex justify-start items-center gap-[3px]" id="notice_id" onclick="window.location.href='/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/notice'">
+                                <div style="cursor:pointer" class="flex justify-start items-center gap-[3px]" id="notice_id" onclick="window.location.href='/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/notice'">
                                     <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                         <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
@@ -1060,7 +1078,7 @@
                                     </svg>
                                     <h4 class="text-[#333] text-[12px] font-bold leading-[20px]">スケジュール情報</h4>
                                 </div>
-                                <div class="flex justify-start items-center gap-[3px]" id="schedule_id" onclick="window.location.href='/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/schedule'">
+                                <div style="cursor:pointer" class="flex justify-start items-center gap-[3px]" id="schedule_id" onclick="window.location.href='/area/@PrefecturesArea/hostclub/@ViewBag.ClubId/schedule'">
                                     <span class="text-[10px] leading-[20px] font-normal text-[#333]">全て表示</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="5" height="7" viewBox="0 0 5 7" fill="none">
                                         <path d="M1 1L4 3.5L1 6" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" />
@@ -1597,7 +1615,7 @@
     </div>
 </div>
 <!-- for position stickey at the bottom -->
-<div class="pl-[16px] pr-[10px] pt-[12px] fixed bottom-0  flex justify-between items-center  bg-[#FAFAFA] w-full "
+<div id="searchbottom" class="pl-[16px] pr-[10px] pt-[12px] fixed bottom-0  flex justify-between items-center  bg-[#FAFAFA] w-full "
      style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000" id="club-bottom-tab-id">
     <div>
         <div class="flex justify-center items-center gap-1 pb-1">

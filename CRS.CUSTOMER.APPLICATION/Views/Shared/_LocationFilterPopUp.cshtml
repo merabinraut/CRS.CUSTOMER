@@ -1,8 +1,23 @@
 ﻿@model List<CRS.CUSTOMER.APPLICATION.Models.CommonModel.StaticDataModel>
+<style>
+    @@media (min-width: 640px) {
+        #searchinpc {
+            width: 375px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* #pcbutton, #pcbuttonnext {
+            width: 375px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            bottom: -40px;
+        }*/
+    }
+</style>
 <!------------------------------------------------------- #region FILTER-LOCATION ------------------------------------------------------->
 <div id="drawer-search-by-area" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform
 " tabindex="-1" aria-labelledby="drawer-bottom-label">
-    <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
+    <div id="searchinpc" class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
         <div class="text-center text-white mb-2 text-2xl" onclick="CloseLocationFilterPopUp();">
             <div data-drawer-hide="drawer-search-by-area" aria-controls="drawer-search-by-area">
                 <i class="fa-solid fa-chevron-down"></i>

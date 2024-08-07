@@ -84,7 +84,22 @@
                 </div>
             }
         </div>*@
+    <link rel="stylesheet" href="~/Content/assets/css/customer/responsive.css">
     <style>
+        @@media (min-width: 640px) {
+
+            #navbarback {
+                max-width: 375px !important;
+                width: 100% !important;
+                margin-bottom: 8px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #innersec {
+                height: 104vh;
+            }
+        }
         .customContainer {
             padding: 0 24px;
         }
@@ -238,36 +253,69 @@
             background: none;
         }
     </style>
-    <div>
-        <!-- for back button -->
-        <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
-            <div class="flex gap-2 items-center absolute top-[12px] text-sm" onclick="history.back()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
-                          fill="#BCB08A" />
-                </svg>戻る
+    <div id="test">
+        <div id="leftcontent" style="margin-top: 30%; " class="flex  flex-col items-center ">
+            <div id="leftfix" class="fixed">
+                <div class="flex flex-row justify-center">
+                    <img src="~/content/assets/images/bglogo.png" />
+                </div>
+                <div id="siteurl" class="flex flex-row justify-center">
+                    <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
+                </div>
+                <a style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
+                    <div>
+                        <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+                    </div>
+                </a>
+                <a style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <p style="font-size:18px;font-weight:600" class="text-black">店舗オーナー登録</p>
+                    </div>
+                </a>
+                <a style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <p style="font-size:18px;font-weight:600" class="text-black">アフィリエイター登録</p>
+                    </div>
+                </a>
             </div>
-            <div class="text-center w-full font-bold"></div>
+
+
+
         </div>
-        <!-- back button end -->
-        <div class=" px-6">
-            <!-- for request for identification -->
-            <div class="identification">
-                ご本人確認のお願い
-            </div>
-            <!-- for message -->
-            <div class="displayMessage">
-                @*+ 81- @Model.MobileNumber 宛にSMSを送信しました、メッセージに記載された
-                    6桁の数字を確認し、入力してください*@
-            </div>
-            <input type="hidden" name="exptime" id="exptime" value='@Html.Raw(Session["exptime"]!=null?Session["exptime"].ToString():"")' />
 
-            <div class="flex justify-end items-end remainigTime">
-                <span>
-                    有効期限 :
-                </span>
+        <div id="innersec">
 
-                <div class="flex justify-end items-end remainigTime" id="otp-code-timer">
+
+            <div>
+                <!-- for back button -->
+                <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
+                    <div class="flex gap-2 items-center absolute top-[12px] text-sm" onclick="history.back()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                            <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
+                                  fill="#BCB08A" />
+                        </svg>戻る
+                    </div>
+                    <div class="text-center w-full font-bold"></div>
+                </div>
+                <!-- back button end -->
+                <div class=" px-6">
+                    <!-- for request for identification -->
+                    <div class="identification">
+                        ご本人確認のお願い
+                    </div>
+                    <!-- for message -->
+                    <div class="displayMessage">
+                        @*+ 81- @Model.MobileNumber 宛にSMSを送信しました、メッセージに記載された
+                            6桁の数字を確認し、入力してください*@
+                    </div>
+                    <input type="hidden" name="exptime" id="exptime" value='@Html.Raw(Session["exptime"]!=null?Session["exptime"].ToString():"")' />
+
+                    <div class="flex justify-end items-end remainigTime">
+                        <span>
+                            有効期限 :
+                        </span>
+
+                        <div class="flex justify-end items-end remainigTime" id="otp-code-timer">
 
                     @*1 分 59 秒*@
                 </div>

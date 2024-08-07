@@ -36,6 +36,21 @@
     img {
         object-fit: cover;
     }
+    @@media (min-width: 640px) {
+        #pcsection {
+            max-width: 375px !important;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #pcbutton, #pcbuttonnext {
+            width: 375px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            bottom: -40px;
+        }
+    }
 </style>
 <style>
     .map-container #map {
@@ -61,7 +76,7 @@
      class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform " tabindex="-1"
      aria-labelledby="drawer-bottom-label">
 
-    <div class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
+    <div id="pcsection" class="h-screen flex flex-col justify-end" style=" background: rgba(27, 27, 27, 0.50); ">
         <div class="text-center text-white mb-2 text-2xl" onclick="ClosePreferenceFilterPopUp();">
             <div data-drawer-hide="drawer-filter-location" aria-controls="drawer-filter-location">
                 <i class="fa-solid fa-chevron-down"></i>
@@ -283,7 +298,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
+                                    <div  id="pcbutton"  class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
                                         <button class="btn btn-primary" style=" border-radius: 8px; " onclick="ClubFilterSubmitButton();">
                                             <a class="h-full w-full">
                                                 検索
@@ -441,8 +456,8 @@
 
 
                                 </div>
-                                <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
-                                    <button class="btn btn-primary" style=" border-radius: 8px;" onclick="HostFilterSubmitButton();">
+                                <div id="pcbuttonnext" class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
+                                    <button  class="btn btn-primary" style=" border-radius: 8px;" onclick="HostFilterSubmitButton();">
                                         <a href="#" class="h-full w-full">
                                             検索
                                         </a>

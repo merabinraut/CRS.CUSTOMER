@@ -1,25 +1,54 @@
 ﻿@model CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2.ReservationCommonModel
 @{
     ViewBag.Title = "予約確認・変更 ‖ ホスログ《 ホストクラブ初回来店・ネット予約》";
-    Layout = "~/Views/Shared/_Reservation-Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var rsvtab = Model.rsvtab;
 }
+<link rel="stylesheet" href="~/Content/assets/css/customer/reservation.css">
 <style>
-    .modalWrapper {
-        background: rgba(27,27,27,0.5);
-        height: 100%;
-        z-index: 555;
-        position: fixed;
-        top: 0px;
+    .modalContentWrapper {
+        margin-top: 65% !important;
+       
+       
+    }
+    .modal-content{
+        background-color:transparent;
+    }
+    .modalContentWrapper {
+        padding: 0 16px !important;
     }
 
-    .modalContentWrapper {
-        display: block;
-        width: 100vw;
-        padding: 0 16px;
-        top: 50%;
-        margin-top: 65%
-    }
+        @@media (min-width: 640px) {
+            #innersec {
+            height: 103vh;
+        }
+
+        .modalContentWrapper {
+            width: 375px !important;
+            /*left: 50% !important;*/
+            transform: translate(-0%, -25%) !important;
+            top: 20% !important;
+            position: relative !important;
+            margin-top: 0% !important;
+            padding: 0 16px;
+            /* bottom: -40px; */
+        }
+
+        .modalWrapper {
+            background: rgba(27,27,27,0.5);
+            height: 100%;
+            z-index: 555;
+            position: fixed;
+            top: 0px;
+        }
+
+        .modalContentWrapper {
+            display: block;
+            width: 100vw;
+            padding: 0 0px;
+            top: 50%;
+            margin-top: 65%
+        }
 
     .ui-datepicker {
         /* width: max-content; */
@@ -65,7 +94,7 @@
 
 @Html.AntiForgeryToken()
 <div class="flex items-center border-b-[2px] border-t-[#C8B477] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
-    <div class="flex gap-2 items-center absolute top-[9px] left-4 text-sm text-[#292F33]" onclick="window.location.href='/'">
+    <div style="cursor:pointer" class="flex gap-2 items-center absolute top-[9px] left-4 text-sm text-[#292F33]" onclick="window.location.href='/'">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
             <path d="M15.2352 3.24084C14.786 2.79167 14.0618 2.79167 13.6127 3.24084L5.99518 10.8583C5.63768 11.2158 5.63768 11.7933 5.99518 12.1508L13.6127 19.7683C14.0618 20.2175 14.786 20.2175 15.2352 19.7683C15.6843 19.3192 15.6843 18.595 15.2352 18.1458L8.59851 11.5L15.2443 4.85417C15.6843 4.41417 15.6843 3.68084 15.2352 3.24084Z"
                   fill="#BCB08A" />
@@ -1205,35 +1234,125 @@
     <img src="~/Content/assets/images/loader.gif" class="h-[150px]" style="opacity:100%" />
 </div>
 
-<!--modal 2 pop  up-->
-<script>
-    function openModal2(modalid) {
-        var modal = document.getElementById(modalid);
-        if (modal) {
-            modal.style.display = "block";
+@section scripts{
+    <script src="~/Content/assets/js/reschedule-reservation.js"></script>
+    <!--modal 2 pop  up-->
+    <script>
+        function openModal2(modalid) {
+            var modal = document.getElementById(modalid);
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }</script>
+    <script>
+        function closeDeleteModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
         }
-    }</script>
-<script>
-    function closeDeleteModal(modalId) {
-        var modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "none";
+        function openDeleteModal(modalId, reservationId) {
+            var modal = document.getElementById(modalId);
+            $('#delete_id').val(reservationId);
+            if (modal) {
+                modal.style.display = "block";
+            }
         }
-    }
-    function openDeleteModal(modalId, reservationId) {
-        var modal = document.getElementById(modalId);
-        $('#delete_id').val(reservationId);
-        if (modal) {
-            modal.style.display = "block";
+        function DeleteReservation() {
+            var ReservationId = $('#delete_id').val();
+            if (ReservationId != "") {
+                $.ajax({
+                    type: 'POST',
+                    async: true,
+                    url: "/ReservationHistoryManagementV2/DeleteReservation?RID=" + ReservationId,
+                    dataType: 'json',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    },
+                    success: function (data) {
+                        window.location.href = "/user/account/reservation";
+                    }
+                });
+            }
+        }</script>
+    <script>
+        function closeRedoModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
         }
-    }
-    function DeleteReservation() {
-        var ReservationId = $('#delete_id').val();
-        if (ReservationId != "") {
+        function openRedoModal(modalId, reservationId) {
+            var modal = document.getElementById(modalId);
+            $('#redo_id').val(reservationId);
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }
+        //function gotoClubDetail(locationId, clubId) {
+        //    window.location.href = '/LocationManagement/ClubDetail_V2?LocationId=' + locationId + '&ClubId=' + clubId;
+        //}
+
+        function gotoClubDetail(ClubCode, PrefecturesArea) {
+            var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
+            window.location.href = url;
+        }
+
+        function RedoReservation() {
+            var reservationId = $('#redo_id').val();
+            if (reservationId != "") {
+                $.ajax({
+                    type: 'POST',
+                    async: true,
+                    url: "/ReservationHistoryManagementV2/RedoReservation?RID=" + reservationId,
+                    dataType: 'json',
+                    data: {
+                        __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    },
+                    success: function (data) {
+                        window.location.href = "/user/account/reservation";
+                    }
+                });
+            }
+        }</script>
+    <script>
+        function getid(reservationid) {
+            $('#cancel_id').val(reservationid);
+            var modal = document.getElementById('modal_cancel');
+            if (modal) {
+                modal.style.display = "block";
+            }
+        }
+        // Function to close a specific modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = "none";
+            }
+        }
+        // Close the modal if the overlay is clicked
+        window.onclick = function (event) {
+            var modals = document.getElementsByClassName("modal");
+            for (var i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    closeModal(modals[i].id);
+                }
+            }
+        }
+        // Close the modal only if the overlay is clicked outside of modal1
+        window.onclick = function (event) {
+            var modal1 = document.getElementById('modal_cancel');
+            // Check if the click is outside of modal1
+            if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
+                closeModal('modal_cancel');
+            }
+        }
+        function CancelReservation() {
+            var reservationId = $('#cancel_id').val();
             $.ajax({
                 type: 'POST',
                 async: true,
-                url: "/ReservationHistoryManagementV2/DeleteReservation?RID=" + ReservationId,
+                url: "/ReservationHistoryManagementV2/CancelReservation?RID=" + reservationId,
                 dataType: 'json',
                 data: {
                     __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
@@ -1242,141 +1361,53 @@
                     window.location.href = "/user/account/reservation";
                 }
             });
+        }</script>
+    <script>
+        // Function to open a specific modal
+        function editTime(reservationid) {
+            $('#reservation_id').val(reservationid);
+            var drawerDate = document.getElementById("drawer-date");
+            drawerDate.style.display = "block";
         }
-    }</script>
-<script>
-    function closeRedoModal(modalId) {
-        var modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "none";
-        }
-    }
-    function openRedoModal(modalId, reservationId) {
-        var modal = document.getElementById(modalId);
-        $('#redo_id').val(reservationId);
-        if (modal) {
-            modal.style.display = "block";
-        }
-    }
-    //function gotoClubDetail(locationId, clubId) {
-    //    window.location.href = '/LocationManagement/ClubDetail_V2?LocationId=' + locationId + '&ClubId=' + clubId;
-    //}
 
-    function gotoClubDetail(ClubCode, PrefecturesArea) {
-        var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
-        window.location.href = url;
-    }
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            var firstModal = document.getElementById("drawer-date");
+            if (modal) {
+                modal.style.display = "block";
+                firstModal.style.zIndex = "200";
+            }
+        }
+        // Function to close a specific modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            var firstModal = document.getElementById("drawer-date");
 
-    function RedoReservation() {
-        var reservationId = $('#redo_id').val();
-        if (reservationId != "") {
-            $.ajax({
-                type: 'POST',
-                async: true,
-                url: "/ReservationHistoryManagementV2/RedoReservation?RID=" + reservationId,
-                dataType: 'json',
-                data: {
-                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
-                },
-                success: function (data) {
-                    window.location.href = "/user/account/reservation";
+            if (modal) {
+                modal.style.display = "none";
+                firstModal.style.zIndex = "40";
+            }
+        }
+
+        // Close the modal if the overlay is clicked
+        window.onclick = function (event) {
+            var modals = document.getElementsByClassName("modal");
+            for (var i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    closeModal(modals[i].id);
                 }
-            });
-        }
-    }</script>
-<script>
-    function getid(reservationid) {
-        $('#cancel_id').val(reservationid);
-        var modal = document.getElementById('modal_cancel');
-        if (modal) {
-            modal.style.display = "block";
-        }
-    }
-    // Function to close a specific modal
-    function closeModal(modalId) {
-        var modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = "none";
-        }
-    }
-    // Close the modal if the overlay is clicked
-    window.onclick = function (event) {
-        var modals = document.getElementsByClassName("modal");
-        for (var i = 0; i < modals.length; i++) {
-            if (event.target == modals[i]) {
-                closeModal(modals[i].id);
             }
         }
-    }
-    // Close the modal only if the overlay is clicked outside of modal1
-    window.onclick = function (event) {
-        var modal1 = document.getElementById('modal_cancel');
-        // Check if the click is outside of modal1
-        if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
-            closeModal('modal_cancel');
-        }
-    }
-    function CancelReservation() {
-        var reservationId = $('#cancel_id').val();
-        $.ajax({
-            type: 'POST',
-            async: true,
-            url: "/ReservationHistoryManagementV2/CancelReservation?RID=" + reservationId,
-            dataType: 'json',
-            data: {
-                __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
-            },
-            success: function (data) {
-                window.location.href = "/user/account/reservation";
+        // Close the modal only if the overlay is clicked outside of modal1
+        window.onclick = function (event) {
+            var modal1 = document.getElementById('modal1');
+            // Check if the click is outside of modal1
+            if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
+                closeModal('modal1');
             }
-        });
-    }</script>
-<script>
-    // Function to open a specific modal
-    function editTime(reservationid) {
-        $('#reservation_id').val(reservationid);
-        var drawerDate = document.getElementById("drawer-date");
-        drawerDate.style.display = "block";
-    }
-
-    function openModal(modalId) {
-        var modal = document.getElementById(modalId);
-        var firstModal = document.getElementById("drawer-date");
-        if (modal) {
-            modal.style.display = "block";
-            firstModal.style.zIndex = "200";
-        }
-    }
-    // Function to close a specific modal
-    function closeModal(modalId) {
-        var modal = document.getElementById(modalId);
-        var firstModal = document.getElementById("drawer-date");
-
-        if (modal) {
-            modal.style.display = "none";
-            firstModal.style.zIndex = "40";
-        }
-    }
-
-    // Close the modal if the overlay is clicked
-    window.onclick = function (event) {
-        var modals = document.getElementsByClassName("modal");
-        for (var i = 0; i < modals.length; i++) {
-            if (event.target == modals[i]) {
-                closeModal(modals[i].id);
-            }
-        }
-    }
-    // Close the modal only if the overlay is clicked outside of modal1
-    window.onclick = function (event) {
-        var modal1 = document.getElementById('modal1');
-        // Check if the click is outside of modal1
-        if (modal1 && event.target !== modal1 && !modal1.contains(event.target)) {
-            closeModal('modal1');
-        }
-    }</script>
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-<script>
+        }</script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script>
         var hour;
         var minute;
 
@@ -1913,6 +1944,8 @@
                     window.location.reload();
                 }
             });
-        }</script>
+    }
+    </script>
 
 
+}

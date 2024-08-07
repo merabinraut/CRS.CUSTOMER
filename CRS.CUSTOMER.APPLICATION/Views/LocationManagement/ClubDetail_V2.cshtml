@@ -10,6 +10,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script src="/Content/assets/js/tabs.js"></script>
 <style>
+
+    @@media (min-width: 640px) {
+        #searchbottom {
+            width: 375px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            bottom: -40px;
+            
+        }
+    }
     .stickyBox {
         position: -webkit-sticky;
         position: sticky;
@@ -1312,6 +1322,16 @@
                         max-width: 360px;
                     }
                 }
+                @@media (min-width: 640px) {
+               
+
+                    #searchbottom {
+                        width: 375px !important;
+                        left: 50% !important;
+                        transform: translate(-50%, -50%) !important;
+                        bottom: -40px !important;
+                    }
+                }
             </style>
             <div class="mx-[8px] py-[6.54px] p-l-[22px] p-r-[10px] px-[16px] ">
                 <div class="customer-title">
@@ -1513,7 +1533,7 @@
     </div>
 </div>
 <!-- for position stickey at the bottom -->
-<div class="pl-[16px] pr-[10px] pt-[12px] fixed bottom-0  flex justify-between items-center  bg-[#FAFAFA] w-full "
+<div id="searchbottom" class="pl-[16px] pr-[10px] pt-[12px] fixed bottom-0  flex justify-between items-center  bg-[#FAFAFA] w-full "
      style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000" id="club-bottom-tab-id">
     <div>
         <div class="flex justify-center items-center gap-1 pb-1">

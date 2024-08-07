@@ -252,11 +252,11 @@
                                     </div>
                                     @if (item.IsBookmarked.ToUpper() == "Y")
                                     {
-                                        <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                                        <div style="cursor:pointer" class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                                     }
                                     else
-                                    {
-                                        <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                                    { 
+                                        <div style="cursor:pointer" class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','','club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
                                     }
                                 </div>
                                 <ul class="club_thumb">

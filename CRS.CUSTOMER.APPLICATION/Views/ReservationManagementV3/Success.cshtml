@@ -4,6 +4,13 @@
 }
 
 <style>
+    @@media (min-width: 640px) {
+      
+        #innersec{
+            height:103vh !important;
+            padding-top:22px !important;
+        }
+    }
     .modal-content-logout {
         max-width: 100%;
         width: 312px;
@@ -166,7 +173,7 @@
 
 @Html.Partial("_HomePageNavMenu")
 
-<div class="mt-[70px]">
+<div id="confirmPage" class="mt-[70px]">
     <div class="flex flex-col justify-center items-center w-full px-[45px]">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
@@ -198,7 +205,7 @@
             <a href="@Url.Action("LogOff", "Home")" class="log-outButton w-[120px]">
                 はい
             </a>
-            <div onclick="closeModal('modal2')" class="flex justify-center items-center underline w-[120px]">
+            <div style="cursor:pointer" onclick="closeModal('modal2')" class="flex justify-center items-center underline w-[120px]">
                 いいえ
             </div>
         </div>

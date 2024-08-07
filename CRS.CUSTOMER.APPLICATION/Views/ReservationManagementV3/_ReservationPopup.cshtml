@@ -23,6 +23,14 @@
         font-weight: 500;
         line-height: normal;
     }
+    @@media (min-width: 640px) {
+        #calender {
+            max-width: 375px !important;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
 </style>
 <div id="drawer-date" class="fixed bottom-0 left-0 right-0 z-40 w-full h-screen overflow-y-auto transition-transform"
      tabindex="-1" aria-labelledby="drawer-bottom-label" aria-hidden="true">
@@ -32,7 +40,7 @@
                 <i class="fa-solid fa-chevron-down"></i>
             </div>
         </div>
-        <div class="px-4 pt-6 bg-white  " style="padding-top: 24px; border-radius: 6px 6px 0px 0px;">
+        <div id="calender" class="px-4 pt-6 bg-white  " style="padding-top: 24px; border-radius: 6px 6px 0px 0px;">
             <div class="text-sm text-[#333] font-bold mb-3">カレンダー</div>
             <div class="pb-3 border-b-[1px] border-[#EFEFEF]">
                 <div id="datepicker" style="margin-top:10px; display:flex; justify-content:center"></div>

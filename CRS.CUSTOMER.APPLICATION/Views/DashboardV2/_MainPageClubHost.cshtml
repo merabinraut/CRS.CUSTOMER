@@ -451,11 +451,11 @@
                         <!-- s/action btn -->
                         @if (item.IsBookmarked.ToUpper() == "Y")
                         {
-                            <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
+                            <div style="cursor:pointer" class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-filled.svg"></div>
                         }
                         else
                         {
-                            <div class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                            <div style="cursor:pointer" class="action_keep" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
                         }
                         <!-- e/action btn -->
                     </div>
@@ -596,7 +596,7 @@
     </div>
     <div style="background-color: #F6F6F6; height:42px; display:flex; width:100%"
          class="flex flex-row gap-[4px] justify-center h-[24px] items-center my-[0px] pb-[12px] ">
-        <div style="line-height:18px;" class="text-[#D75A8B] underline text-[12px]" onclick="CurrentLocationRedirectFunction();">
+        <div style="line-height:18px; cursor:pointer" class="text-[#D75A8B] underline text-[12px]" onclick="CurrentLocationRedirectFunction();">
             @CRS.CUSTOMER.APPLICATION.Resources.Resource.See_more
         </div>
         <div>
@@ -612,7 +612,7 @@
     @foreach (var item in Model.HostListModel)
     {
         <div class="flex flex-row gap-[16px] mx-[16px]">
-            <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
+            <div style="border-radius: 4px; cursor:pointer" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
                 <div class="w-full flex justify-center" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                          src="@item.HostImage" />
@@ -711,7 +711,7 @@
                         @item.HostLoveCount
                     </p>
                 </div>
-                <div style="padding: 4px; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]" onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL');">
+                <div style="padding: 4px; cursor:pointer; width:144px" class="flex bg-[#F6F6F6]  flex-row gap-[5px] rounded-[4px]" onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL');">
                     <div>
                         <img style="border: 1px solid #F1EEEE;" class="object-cover h-[32px] w-[32px] rounded-full "
                              src="@item.ClubLogo" alt="clublogo">
@@ -737,7 +737,7 @@
     }
     <div style="background-color: #F6F6F6; height:42px"
          class="flex flex-row gap-[4px] justify-center h-[24px] items-center my-[0px] pb-[12px] ">
-        <div style="line-height:18px;" class="text-[#D75A8B] underline text-[12px]" onclick="CurrentLocationRedirectFunction('host');">
+        <div style="line-height:18px; cursor:pointer" class="text-[#D75A8B] underline text-[12px]" onclick="CurrentLocationRedirectFunction('host');">
             @CRS.CUSTOMER.APPLICATION.Resources.Resource.See_more
         </div>
         <div>
