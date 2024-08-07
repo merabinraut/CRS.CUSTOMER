@@ -1992,3 +1992,30 @@ p.club_pr {
 img{
     object-fit:cover !important
 }
+
+
+/*for responsive design*/
+@media(width > 639px){
+    #child{
+        max-width:369px;
+        width:90%;
+    }
+    .responsiveModalPopup {
+        max-width: 369px;
+        width:100%;
+        margin:0 auto;
+    }
+    .responsiveButton {
+        max-width: 369px;
+        width: 100%;
+        margin: 0 auto;
+        margin-left:-16px;
+        left:auto
+    }
+    .responsiveFullHeight{
+        height:100vh;
+        overflow-x: hidden;
+    }
+}
+
+
