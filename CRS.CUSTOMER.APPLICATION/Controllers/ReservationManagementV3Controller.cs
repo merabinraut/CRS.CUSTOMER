@@ -68,7 +68,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet, Route("reservation")]
-        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
+        //[OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(string resvpg)
         {
             var ReservationPage1Model = new ReservationManagementCommonModel();
