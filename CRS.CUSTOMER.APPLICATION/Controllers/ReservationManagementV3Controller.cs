@@ -68,7 +68,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet, Route("reservation")]
-        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
+        //[OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult Index(string resvpg)
         {
             var ReservationPage1Model = new ReservationManagementCommonModel();
@@ -84,7 +84,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = "Invalid request",
+                    Message = "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
@@ -151,7 +151,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = "Invalid request",
+                    Message = "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect(returnURL);
@@ -163,7 +163,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse.Item2 ?? "Invalid request",
+                    Message = dbResponse.Item2 ?? "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect(returnURL);
@@ -176,7 +176,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse.Item2 ?? "Invalid request",
+                    Message = dbResponse.Item2 ?? "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect(returnURL);
@@ -196,7 +196,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse3.Item2 ?? "Invalid request",
+                    Message = dbResponse3.Item2 ?? "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect(returnURL);
@@ -237,7 +237,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = "Invalid request",
+                    Message = "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
@@ -277,7 +277,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = "Invalid request",
+                    Message = "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
@@ -292,7 +292,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = "Invalid request",
+                    Message = "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
@@ -349,7 +349,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = "Invalid request",
+                    Message = "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
@@ -361,7 +361,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse.Item2 ?? "Invalid request",
+                    Message = dbResponse.Item2 ?? "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
@@ -382,7 +382,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.INFORMATION,
-                    Message = dbResponse2.Item2 ?? "Invalid request",
+                    Message = dbResponse2.Item2 ?? "こちらの操作は出来ません",
                     Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
@@ -417,7 +417,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.ERROR,
-                    Message = "Invalid request",
+                    Message = "こちらの操作は出来ません",
                     Title = NotificationMessage.ERROR.ToString()
                 });
                 return Redirect("/");
@@ -452,7 +452,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 AddNotificationMessage(new NotificationModel()
                 {
                     NotificationType = NotificationMessage.ERROR,
-                    Message = dbResponse.Message ?? "Invalid request",
+                    Message = dbResponse.Message ?? "こちらの操作は出来ません",
                     Title = NotificationMessage.ERROR.ToString()
                 });
                 return Redirect("/");
@@ -461,7 +461,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         #region Reservation Success
-        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("reservation/complete")]
         public ActionResult Success()
         {
