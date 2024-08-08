@@ -47,6 +47,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             };
             var data = _business.GetUserProfileDetail(common);
             var viewModel = data.MapObject<UserProfileModel>();
+            viewModel.Email = !string.IsNullOrEmpty(viewModel.EmailAddress) ? viewModel.EmailAddress : string.Empty;
             if (viewModel.ProfileImage != null)
                 viewModel.ProfileImage = ImageHelper.ProcessedImage(viewModel.ProfileImage);
             ViewBag.PrefectureKey = viewModel.Prefecture?.EncryptParameter();
@@ -180,6 +181,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 CommonDbResponse dbresp = _business.UpdateUserProfileDetail(common);
                 if (dbresp.Code == ResponseCode.Success)
                 {
+                    TempData["UserProfileModel"] = null;
                     Session["EmailAddress"] = common.EmailAddress;
                     AddNotificationMessage(new NotificationModel()
                     {
@@ -191,8 +193,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else
                 {
+                    // common.EmailAddress = "";
                     AddNotificationMessage(new NotificationModel()
                     {
+
                         NotificationType = NotificationMessage.ERROR,
                         Message = dbresp.Message,
                         Title = NotificationMessage.ERROR.ToString()
