@@ -20,6 +20,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet, Route("user/account/bookmark")]
         public ActionResult Index(string bmktab = "01")
         {
+            TempData["BackFromMenuBar"] = "Bookmark";
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
             var viewModel = new BookmarkManagementModel();

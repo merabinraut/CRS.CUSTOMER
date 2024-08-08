@@ -60,6 +60,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             viewModel.PreferredLocation = viewModel.PreferredLocation?.EncryptParameter();
             viewModel.Prefecture = viewModel.Prefecture?.EncryptParameter();
+            TempData["BackFromMenuBar"] = "Profile";
             return View(viewModel);
         }
 
@@ -218,6 +219,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult ChangePasswordV2()
         {
             ViewBag.ActionPageName = "NavMenu";
+            TempData["BackFromMenuBar"] = "ChangePassword";
             ViewBag.PageTitle = Resources.Resource.ChangePassword;
             return View(new ChangePasswordModel());
         }
@@ -337,6 +339,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult points()
         {
+            TempData["BackFromMenuBar"] = "PointHistory";
             PointReportModel model = new PointReportModel();
             var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
 

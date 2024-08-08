@@ -24,6 +24,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet, Route("user/account/review")]
         public ActionResult ReviewList()
         {
+            TempData["BackFromMenuBar"] = "Review";
             var Response = new List<CustomerReviewedListModel>();
             var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var dbResponse = _reviewBuss.GetCustomerReviewedList(AgentId);

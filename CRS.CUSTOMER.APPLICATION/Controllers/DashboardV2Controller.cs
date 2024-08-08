@@ -43,6 +43,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             Session["ReservationPage2Model"] = null;
             Session["ReservationPage3Model"] = null;
             Session["ReservationPage4Model"] = null;
+            TempData["BackFromMenuBar"] = "null";
             var ResponseModel = new DashboardModel();
             if (Session["SystemLinkModel"] == null)
             {

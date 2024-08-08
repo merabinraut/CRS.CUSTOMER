@@ -28,4 +28,48 @@ function formatDate(inputDate) {
 
     return formattedDate;
 }
+function WindowBackForNavMenu(tempdata) {
 
+    console.log('logs:', '@TempData["BackFromMenuBar"]')
+    var backFromMenuBar = tempdata.toUpperCase().trim();
+
+    switch (backFromMenuBar) {
+        case 'PROFILE':
+            sessionStorage.setItem('backFromMenuBar', 'true');
+            window.history.back();
+            break;
+        case 'BOOKINGHISTORY':
+            sessionStorage.setItem('backFromMenuBar', 'true');
+            window.history.back();
+            break;
+        case 'REVIEW':
+            sessionStorage.setItem('backFromMenuBar', 'true');
+            window.history.back();
+            break;
+        case 'BOOKMARK':
+            sessionStorage.setItem('backFromMenuBar', 'true');
+            window.history.back();
+            break;
+        case 'POINTHISTORY':
+            sessionStorage.setItem('backFromMenuBar', 'true');
+            window.history.back();
+            break;
+        case 'CHANGEPASSWORD':
+            sessionStorage.setItem('backFromMenuBar', 'true');
+            window.history.back();
+            break;
+        default:
+            window.history.back();
+            break;
+    }
+}
+function GotoNavMenu() {
+    document.addEventListener('DOMContentLoaded', (event) => {
+        if (sessionStorage.getItem('backFromMenuBar') === 'true') {
+            document.getElementById('drawer-right-example').classList.remove('translate-x-full');
+
+            // Remove the flag from sessionStorage
+            sessionStorage.removeItem('backFromMenuBar');
+        }
+    });
+}

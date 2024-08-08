@@ -3,6 +3,10 @@
     ViewBag.Title = "予約確認・変更 ‖ ホスログ《 ホストクラブ初回来店・ネット予約》";
     Layout = "~/Views/Shared/_Reservation-Layout.cshtml";
     var rsvtab = Model.rsvtab;
+    if (TempData["BackFromMenuBar"] == null)
+    {
+        TempData["BackFromMenuBar"] = "null";
+    }
 }
 <style>
     .modalWrapper {
@@ -36,9 +40,9 @@
         border-radius: 8px;
     }
 
-    .club_group{
-        margin-top:4px;
-        font-size:10px;
+    .club_group {
+        margin-top: 4px;
+        font-size: 10px;
     }
 
     .tag_location {
@@ -48,15 +52,19 @@
         font-size: 8px !important;
         padding: 1px 8px !important;
     }
+
     .tag_rank {
         font-size: 8px !important;
     }
+
     .tag_platinum {
         font-size: 8px !important;
     }
+
     .tag_good {
         font-size: 8px !important;
     }
+
     .tag_big {
         font-size: 8px !important;
     }
@@ -64,8 +72,9 @@
 
 
 @Html.AntiForgeryToken()
+<script src="~/Content/CustomHelper.js"></script>
 <div class="flex items-center border-b-[2px] border-t-[#C8B477] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
-    <div class="flex gap-2 items-center absolute top-[9px] left-4 text-sm text-[#292F33]" onclick="window.location.href='/'">
+    <div class="flex gap-2 items-center absolute top-[9px] left-4 text-sm text-[#292F33]" onclick="WindowBackForNavMenu('@TempData["BackFromMenuBar"]')">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="23" viewBox="0 0 22 23" fill="none">
             <path d="M15.2352 3.24084C14.786 2.79167 14.0618 2.79167 13.6127 3.24084L5.99518 10.8583C5.63768 11.2158 5.63768 11.7933 5.99518 12.1508L13.6127 19.7683C14.0618 20.2175 14.786 20.2175 15.2352 19.7683C15.6843 19.3192 15.6843 18.595 15.2352 18.1458L8.59851 11.5L15.2443 4.85417C15.6843 4.41417 15.6843 3.68084 15.2352 3.24084Z"
                   fill="#BCB08A" />
@@ -443,7 +452,7 @@
                                         <svg class="club-visited" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                             <path d="M12.8946 1.5C12.6833 1.50022 12.4741 1.54233 12.2791 1.62388C12.0842 1.70543 11.9073 1.82481 11.7588 1.97511L6.38342 7.33073L6.26477 7.44932L6.23076 7.61854L5.85745 9.5168L5.68816 10.3137L6.48542 10.1445L8.38453 9.77135L8.55382 9.73736L8.67247 9.61876L14.0305 4.24579C14.2548 4.02073 14.4075 3.73436 14.4693 3.42274C14.5311 3.11113 14.4992 2.7882 14.3778 2.49463C14.2564 2.20105 14.0507 1.94996 13.7868 1.77297C13.5229 1.59598 13.2125 1.501 12.8946 1.5ZM12.8946 2.55145C13.022 2.55145 13.1471 2.61654 13.2679 2.7373C13.5096 2.97883 13.5096 3.24206 13.2679 3.48359L8.01122 8.73652L7.07795 8.9231L7.26605 7.99168L12.5221 2.7373C12.6429 2.61654 12.7673 2.55145 12.8946 2.55145ZM1.5 3.65281V14.5H12.352V7.34808L11.2668 8.4328V13.4153H2.5852V4.73753H7.56991L8.65511 3.65281H1.5Z"
                                                   fill="" ;
-                                                  "                                                                                                                                                                 />
+                                                  "                                                                                                                                                                     />
                                         </svg>
                                     </div>
                                     <div class="text-[8px] ">
@@ -1913,6 +1922,8 @@
                     window.location.reload();
                 }
             });
-        }</script>
+    }
+    GotoNavMenu()
+</script>
 
 
