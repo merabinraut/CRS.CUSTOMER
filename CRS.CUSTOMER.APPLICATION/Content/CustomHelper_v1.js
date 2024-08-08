@@ -67,7 +67,7 @@ function GotoNavMenu() {
     document.addEventListener('DOMContentLoaded', (event) => {
         if (sessionStorage.getItem('backFromMenuBar') === 'true') {
             document.getElementById('drawer-right-example').classList.remove('translate-x-full');
-            document.getElementById('drawer-right-example').classList.add('transform-none');
+
             // Remove the flag from sessionStorage
             sessionStorage.removeItem('backFromMenuBar');
         }
