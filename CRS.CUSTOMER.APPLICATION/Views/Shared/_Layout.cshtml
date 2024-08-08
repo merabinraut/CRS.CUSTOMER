@@ -1,4 +1,4 @@
-﻿﻿<!-- #region Header -->
+﻿<!-- #region Header -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="~/Content/CustomHelper_v1.js"></script>
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet"
@@ -960,10 +961,11 @@
                 window.location.href = '/';
             }
             else {
+                WindowBackForNavMenu('@TempData["BackFromMenuBar"]')
                 window.history.back();
             }
         }
-
+        GotoNavMenu()
         function isLoginPageWithReturnUrl(url) {
             return url.includes("ReturnURL");
         }

@@ -27,6 +27,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpGet, Route("user/account/reservation")]
         public ActionResult ReservationHistory(string rsvtab = "04")
         {
+            TempData["BackFromMenuBar"] = "BookingHistory";
             ReservationCommonModel responseInfo = new ReservationCommonModel();
             var customerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
 
