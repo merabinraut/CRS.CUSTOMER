@@ -29,8 +29,6 @@ function formatDate(inputDate) {
     return formattedDate;
 }
 function WindowBackForNavMenu(tempdata) {
-
-    console.log('logs:', '@TempData["BackFromMenuBar"]')
     var backFromMenuBar = tempdata.toUpperCase().trim();
 
     switch (backFromMenuBar) {
