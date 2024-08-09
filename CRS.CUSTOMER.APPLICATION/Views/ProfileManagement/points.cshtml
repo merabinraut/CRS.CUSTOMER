@@ -68,9 +68,20 @@
     #Tab1 {
         display: block;
     }
+    @@media (min-width: 640px) {
+    #innersec {
+        background-color: #FFFFFF;
+        width: 375px;
+        height: 100vh;
+        margin-left: auto;
+        margin-right: auto;
+        overflow-y: auto;
+        box-shadow: 0px 0px 24px 0px #0D102E40;
+    }
+}
 </style>
 <script src="~/Content/CustomHelper_v1.js"></script>
-<div>
+<div id="innersec">
 
     @*Navbar*@
     <div class="flex items-center border-t-[2px] border-t-[#C8B477] border-b border-b-[#E0E0E0] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="WindowBackForNavMenu('@TempData["BackFromMenuBar"]');">
