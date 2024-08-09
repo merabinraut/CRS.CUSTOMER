@@ -536,6 +536,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\Custom-Scripts.js" />
     <Content Include="Content\CustomHelper.js" />
+    <Content Include="Content\CustomHelper_v1.js" />
     <Content Include="Content\font\all.css" />
     <Content Include="Content\font\all.min.css" />
     <Content Include="Content\font\brands.css" />

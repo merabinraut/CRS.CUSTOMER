@@ -40,7 +40,7 @@ function WindowBackForNavMenu(tempdata) {
             break;
         case 'BOOKINGHISTORY':
             sessionStorage.setItem('backFromMenuBar', 'true');
-            window.history.back();
+            window.location.href = '/'
             break;
         case 'REVIEW':
             sessionStorage.setItem('backFromMenuBar', 'true');
@@ -48,11 +48,11 @@ function WindowBackForNavMenu(tempdata) {
             break;
         case 'BOOKMARK':
             sessionStorage.setItem('backFromMenuBar', 'true');
-            window.history.back();
+            window.location.href = '/'
             break;
         case 'POINTHISTORY':
             sessionStorage.setItem('backFromMenuBar', 'true');
-            window.history.back();
+            window.location.href = '/'
             break;
         case 'CHANGEPASSWORD':
             sessionStorage.setItem('backFromMenuBar', 'true');
