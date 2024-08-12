@@ -25,13 +25,18 @@ namespace CRS.CUSTOMER.BUSINESS.NotificationManagement
             return _repo.HasUnReadNotification(AgentId);
         }
 
-        public CommonDbResponse ManageNotificationReadStatus(Common Request)
+        public CommonDbResponse ManageNotificationReadStatus(Common Request, string NotificationId)
         {
-            return _repo.ManageNotificationReadStatus(Request);
+            return _repo.ManageNotificationReadStatus(Request, NotificationId);
         }
         public CommonDbResponse ManageReservationCancelRemark(Common Request, string NotificationId, string CustomerRemarks)
         {
             return _repo.ManageReservationCancelRemark(Request, NotificationId, CustomerRemarks);
+        }
+
+        public CommonDbResponse ManageSingleNotificationReadStatus(Common dbRequest, string NotificationId)
+        {
+            return _repo.ManageSingleNotificationReadStatus(dbRequest, NotificationId);
         }
     }
 }

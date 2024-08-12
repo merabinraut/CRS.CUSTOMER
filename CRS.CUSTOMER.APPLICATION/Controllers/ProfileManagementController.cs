@@ -2,12 +2,10 @@
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models;
 using CRS.CUSTOMER.APPLICATION.Models.ProfileManagement;
-using CRS.CUSTOMER.APPLICATION.Models.ReservationManagement;
 using CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement;
 using CRS.CUSTOMER.BUSINESS.ProfileManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.ProfileManagement;
-using DocumentFormat.OpenXml.Office2010.CustomUI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,7 +14,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Util;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
@@ -25,6 +22,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private readonly IProfileManagementBusiness _business;
         public ProfileManagementController(IProfileManagementBusiness business) => this._business = business;
 
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("user/account/profile")]
         public ActionResult Index()
         {
@@ -49,6 +47,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             };
             var data = _business.GetUserProfileDetail(common);
             var viewModel = data.MapObject<UserProfileModel>();
+            viewModel.Email = !string.IsNullOrEmpty(viewModel.EmailAddress) ? viewModel.EmailAddress : string.Empty;
             if (viewModel.ProfileImage != null)
                 viewModel.ProfileImage = ImageHelper.ProcessedImage(viewModel.ProfileImage);
             ViewBag.PrefectureKey = viewModel.Prefecture?.EncryptParameter();
@@ -62,6 +61,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             viewModel.PreferredLocation = viewModel.PreferredLocation?.EncryptParameter();
             viewModel.Prefecture = viewModel.Prefecture?.EncryptParameter();
+            TempData["BackFromMenuBar"] = "Profile";
             return View(viewModel);
         }
 
@@ -181,6 +181,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 CommonDbResponse dbresp = _business.UpdateUserProfileDetail(common);
                 if (dbresp.Code == ResponseCode.Success)
                 {
+                    TempData["UserProfileModel"] = null;
                     Session["EmailAddress"] = common.EmailAddress;
                     AddNotificationMessage(new NotificationModel()
                     {
@@ -192,8 +193,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else
                 {
+                    // common.EmailAddress = "";
                     AddNotificationMessage(new NotificationModel()
                     {
+
                         NotificationType = NotificationMessage.ERROR,
                         Message = dbresp.Message,
                         Title = NotificationMessage.ERROR.ToString()
@@ -215,10 +218,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Redirect("/user/account/profile");
         }
 
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("user/account/password/edit")]
         public ActionResult ChangePasswordV2()
         {
             ViewBag.ActionPageName = "NavMenu";
+            TempData["BackFromMenuBar"] = "ChangePassword";
             ViewBag.PageTitle = Resources.Resource.ChangePassword;
             return View(new ChangePasswordModel());
         }
@@ -267,6 +272,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     //    Message = dbResp.Message,
                     //    Title = NotificationMessage.SUCCESS.ToString()
                     //});
+                    TempData["CallJavaScriptFunction"] = "True";
+                    Session["AgentId"] = null;
+                    Session["Username"] = null;
+                    Session["HasLandingSession"] = null;
                     return Redirect("/user/remind/complete?nickname=" + dbResp.Extra1.EncryptParameter());
                     //return Redirect("user/remind/complete", "Home",new { nickname = dbResp.Extra1.EncryptParameter() });
 
@@ -331,9 +340,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(new { Code = "1", Message = "Something went wrong please try again" });
         }
 
-
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult points()
         {
+            TempData["BackFromMenuBar"] = "PointHistory";
             PointReportModel model = new PointReportModel();
             var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
 

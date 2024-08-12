@@ -1,4 +1,4 @@
-﻿﻿@model CRS.CUSTOMER.APPLICATION.Models.Home.LoginRequestModel
+﻿﻿﻿@model CRS.CUSTOMER.APPLICATION.Models.Home.LoginRequestModel
 @{
     ViewBag.Title = "ログイン‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = null;
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/Content/assets/css/customer/customcss.css">
     <link rel="stylesheet" href="/Content/assets/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="/Content/assets/css/owl-carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/Content/assets/css/customer/responsive.css">
     <script src="~/Content/js/NotificationMessageToaster.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
@@ -220,91 +221,152 @@
                     font-size: 18px;
                     letter-spacing: 0.5px;
                 }
-    </style>
-    <div class="  ">
 
-        <div class=" px-[24px] flex justify-between border-b border-b-[#ECECEC] bg-white z-[10]" style="z-index:12; padding-bottom:10px">
-            <a class="flex gap-[6px] items-center" href="/">
-                <img src="~/Content/assets/images/logo.svg" class="h-[24px]" alt='logo' />
-            </a>
-            <div class="flex gap-4">
-                <div class="text-xl text-warmgray cursor-pointer" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
+        .md\:hidden {
+            display: block;
+        }
+        @@media (min-width: 640px) {
+            .loginContainer {
+               height:auto !important
+            }
+        }
+    </style>
+    <div id="lgoinWrapper">
+        <div id="leftcontent" style="margin-top: 30%; " class="flex  flex-col items-center ">
+            <div id="leftfix" class="fixed">
+                <div class="flex flex-row justify-center">
+                    <img src="~/content/assets/images/bglogo.png" />
+                </div>
+                <div id="siteurl" class="flex flex-row justify-center">
+                    <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
+                </div>
+                <a style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
+                    <div>
+                        <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+                    </div>
+                </a>
+                <a style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <p style="font-size:18px;font-weight:600" class="text-black">店舗オーナー登録</p>
+                    </div>
+                </a>
+                <a style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                    <div>
+                        <p style="font-size:18px;font-weight:600" class="text-black">アフィリエイター登録</p>
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+        <div id="innersec">
+
+            <div class=" px-[24px] flex justify-between border-b border-b-[#ECECEC] bg-white z-[10]" style="z-index:12; padding-bottom:10px">
+                <a class="flex gap-[6px] items-center" href="/">
+                    <img src="~/Content/assets/images/logo.svg" class="h-[24px]" alt='logo' />
+                </a>
+                <div class="flex gap-4">
+                    <div class="text-xl text-warmgray cursor-pointer" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
+                    </div>
+                </div>
+            </div>
+            <div class="loginContainer">
+                <div class="login">ログイン</div>
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { @role = "form", @id = "Form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input name="ReturnURL" value="@ViewBag.ReturnURL" hidden />
+                    <div class="inputWrapper focus:text-[12px]">
+                        @Html.TextBoxFor(model => model.LoginId, new
+                        {
+                        @class = "contactNumber focus:outline-none border-none  w-full ring-0 focus:ring-0 focus:ring-transparent",
+                        @placeholder = "携帯電話番号"
+                        })
+                        <hr>
+                        <div class="relative">
+                            @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "32" })
+                            <i class="las la-eye password-eye absolute top-2 right-2 text-[2] " style="font-size: 24px; color: #A1A1AA" onclick="togglePassword()"></i>
+                        </div>
+                    </div>
+                    @*<div class="validationMessage  text-[10px] font-normal leading-[13.62px] mt-2">
+                            @Html.ValidationMessageFor(m => m.LoginId, "", new { @class = "error-validation-msg" })
+                        </div>*@
+                    <!-- for check box -->
+                    <div class="checkboxWrapper flex justify-between items-center">
+                        <div>
+                            <input type="checkbox" name="RememberMe" value="Remember"
+                                   class="checkBox focus:outline-none bg-transparent ring-offset-0 ring-0 focus:ring-0 focus:ring-transparent focus:ring-shadow-none"
+                                   id="rememberMe">
+                            <label for="rememberMe" class="rememberMe">ログインしたままにする</label>
+                        </div>
+                        <!-- for forget pasword -->
+                        <div>
+                            <a href="@Url.Action("remind", "user")" class="forgetPassword" style="text-transform:uppercase ">パスワードをお忘れですか <span style="font-size:14px">?</span></a>
+                        </div>
+                    </div>
+                    <!-- for login  -->
+                    <div>
+                        <button type="submit" class="loginButton border rounded-lg  w-full" id="FormSubmit" name="FormSubmit" value="Next">ログイン</button>
+                    </div>
+                }
+                <!-- for term and condition -->
+                <div class="mt-4 flex justify-center items-center flex-col">
+                    <div class="flex justify-center items-center text-[11px] font-bold leading-[15px] termsAndContion">
+                        <a href="/rule" class="termLink">利用規約</a><span>と</span>
+                        <a href="/policy" class="termLink">プライバシーポリシー</a>
+                        <span> に</span>
+                    </div>
+                    <div class=" text-[11px]" style="color: rgba(24, 24, 27, 0.60); font-weight:500">
+                        同意したものとみなします
+                    </div>
+                </div>
+                <!-- for other account -->
+                <!-- for other account new -->
+                <div class=" mt-16 " style="border: 1px solid #FFEAF5; border-radius: 3px; background: #FFFBFD ">
+                    <div class="flex justify-center items-center mx-4" style="margin-top:15px">
+                        <div class="  spertator"></div>
+                        <span class="otherAccotunt" style="text-transform:uppercase">初めてホスログをご利用ですか <span style="font-size:14px">?</span></span>
+                        <div class="  spertator"></div>
+                    </div>
+                    <!-- for new registration -->
+                    <div class="mx-4" style="margin-bottom:18px">
+                        <button type="submit" class="registerButton border rounded-lg  w-full " id="RegisterId">新しくホスログを始める</button>
+                    </div>
+                </div>
+
+                <!-- for other account new end -->
+                <!-- for affiliation -->
+                <div class="affiliation">
+                    <div class="affiliationText">
+                        <a href=@Model.affiliateURL style="">アフィリエイター登録</a>
+                    </div>
+                    <div class="dividerCol">|</div>
+                    <div class="affiliationText"><a href=@Model.clubURL style=""> 店舗オーナー登録 </a></div>
                 </div>
             </div>
         </div>
-        <div class="loginContainer">
-            <div class="login">ログイン</div>
-            @using (Html.BeginForm(null, null, FormMethod.Post, new { @role = "form", @id = "Form" }))
-            {
-                @Html.AntiForgeryToken()
-                <input name="ReturnURL" value="@ViewBag.ReturnURL" hidden />
-                <div class="inputWrapper focus:text-[12px]">
-                    @Html.TextBoxFor(model => model.LoginId, new
-                    {
-                    @class = "contactNumber focus:outline-none border-none  w-full ring-0 focus:ring-0 focus:ring-transparent",
-                    @placeholder = "携帯電話番号"
-                    })
-                    <hr>
-                    <div class="relative">
-                        @Html.TextBoxFor(model => model.Password, new { @class = "w-full border-none  focus:outline-none bg-transparent ring-0 focus:ring-0 focus:ring-transparent focus:text-[12px] password-field", @type = "password", @placeholder = "●●●●●", @maxlength = "32" })
-                        <i class="las la-eye password-eye absolute top-2 right-2 text-[2] " style="font-size: 24px; color: #A1A1AA" onclick="togglePassword()"></i>
-                    </div>
-                </div>
-                @*<div class="validationMessage  text-[10px] font-normal leading-[13.62px] mt-2">
-                    @Html.ValidationMessageFor(m => m.LoginId, "", new { @class = "error-validation-msg" })
-                </div>*@
-                <!-- for check box -->
-                <div class="checkboxWrapper flex justify-between items-center">
-                    <div>
-                        <input type="checkbox" name="RememberMe" value="Remember"
-                               class="checkBox focus:outline-none bg-transparent ring-offset-0 ring-0 focus:ring-0 focus:ring-transparent focus:ring-shadow-none"
-                               id="rememberMe">
-                        <label for="rememberMe" class="rememberMe">ログインしたままにする</label>
-                    </div>
-                    <!-- for forget pasword -->
-                    <div>
-                        <a href="@Url.Action("remind", "user")" class="forgetPassword" style="text-transform:uppercase ">パスワードをお忘れですか <span style="font-size:14px">?</span></a>
-                    </div>
-                </div>
-                <!-- for login  -->
-                <div>
-                    <button type="submit" class="loginButton border rounded-lg  w-full" id="FormSubmit" name="FormSubmit" value="Next">ログイン</button>
-                </div>
-            }
-            <!-- for term and condition -->
-            <div class="mt-4 flex justify-center items-center flex-col">
-                <div class="flex justify-center items-center text-[11px] font-bold leading-[15px] termsAndContion">
-                    <a href="/rule" class="termLink">利用規約</a><span>と</span>
-                    <a href="/policy" class="termLink">プライバシーポリシー</a>
-                    <span> に</span>
-                </div>
-                <div class=" text-[11px]" style="color: rgba(24, 24, 27, 0.60); font-weight:500">
-                    同意したものとみなします
-                </div>
-            </div>
-            <!-- for other account -->
-            <!-- for other account new -->
-            <div class=" mt-16 " style="border: 1px solid #FFEAF5; border-radius: 3px; background: #FFFBFD ">
-                <div class="flex justify-center items-center mx-4" style="margin-top:15px">
-                    <div class="  spertator"></div>
-                    <span class="otherAccotunt" style="text-transform:uppercase">初めてホスログをご利用ですか <span style="font-size:14px">?</span></span>
-                    <div class="  spertator"></div>
-                </div>
-                <!-- for new registration -->
-                <div class="mx-4" style="margin-bottom:18px">
-                    <button type="submit" class="registerButton border rounded-lg  w-full " id="RegisterId">新しくホスログを始める</button>
-                </div>
+        <div id="rightcontent" style="margin-top: 10%; " class="flex flex-col items-center">
+            <div id="innerfixed" class="fixed   flex flex-col gap-2">
+                @* <div >*@
+                <img src="../../content/assets/images/hpi1.jpeg" style="width:inherit" />
+                @* </div>
+                    <div>*@
+                <img src="../../content/assets/images/hpi2.jpeg" style="width:inherit" />
+                @*  </div>
+                    <div>*@
+                <img src="../../content/assets/images/hpi3.jpeg" style="width:inherit" />
+                @*</div>
+                    <div>*@
+                <img src="../../content/assets/images/hpi4.jpeg" style="width:inherit" />
+                @*  </div>
+                    <div>*@
+                <img src="../../content/assets/images/hpi5.jpeg" style="width:inherit" />
+                @* </div>
+                    <div>*@
+                <img src="../../content/assets/images/hpi6.jpeg" style="width:inherit" />
+                @*  </div>*@
             </div>
 
-            <!-- for other account new end -->
-            <!-- for affiliation -->
-            <div class="affiliation">
-                <div class="affiliationText">
-                    <a href=@Model.affiliateURL style="">アフィリエイター登録</a>
-                </div>
-                <div class="dividerCol">|</div>
-                <div class="affiliationText"><a href=@Model.clubURL style=""> 店舗オーナー登録 </a></div>
-            </div>
         </div>
     </div>
     <script>

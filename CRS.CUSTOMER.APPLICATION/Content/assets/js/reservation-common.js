@@ -19,7 +19,12 @@
             CheckIfHasRedirectURL(data, PostData);
             $("#stickey_id").css("display", "none");
             if (!data || data.Code !== 0) {
-                toastr.info(data?.Message);
+                if (data.Message != null && data.Message != '') {
+                    toastr.info(data?.Message);
+                }
+                else {
+                    toastr.info("Something went wrong. Please try again later.");
+                }
                 DisableLoaderFunction();
                 return false;
             }
@@ -89,7 +94,7 @@
                         //else if (formattedDates.indexOf(string) != -1) {
                         //    return [false]; // Unreservable date
                         //}
-                         if (holidayDates.indexOf(string) != -1) {
+                        if (holidayDates.indexOf(string) != -1) {
                             return [false, 'Dayoff']; // Dayoff date
                         }
                         else {
@@ -291,8 +296,18 @@ function CloseInitiatedClubReservationFunction() {
 function SubmitClubReservationFunction() {
     var form = document.getElementById('club-reservation-id');
     var requiredFields = form.querySelectorAll('[required]');
+    const dateElement = document.querySelector('td.ui-datepicker-current-day a');
+    const dataDateValue = dateElement.getAttribute('data-date');
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1;
+    const day = String(parseInt(dataDateValue)).padStart(2, '0');
+    const fullDate = new Date(year, month - 1, day);
+    const selectedDate = `${fullDate.getFullYear()}/${String(fullDate.getMonth() + 1).padStart(2, '0')}/${String(fullDate.getDate()).padStart(2, '0')}`;
+    const dateInput = document.getElementById('date-id');
+    dateInput.value = selectedDate;
     for (var i = 0; i < requiredFields.length; i++) {
-        if (!requiredFields[i].value) {
+        if (!requiredFields[i].value && selectedDate != null) {
             /*toastr.info('Please fill out all required fields.');*/
             toastr.info('日付が必要です');
             return; // Prevent form submission

@@ -80,11 +80,29 @@
         pointer-events: none;
         background: #F0F0F0;
         color: #BEBEBE;
-
     }
+
     .savebtndivcss {
         cursor: not-allowed;
         pointer-events: none;
+    }
+    /* custom select*/
+    .custom-select {
+        position: relative;
+        display: inline-block;
+    }
+
+    select {
+        appearance: none;
+        padding-right: 30px; /* Space for the custom arrow */
+    }
+
+    .custom-arrow {
+        position: absolute;
+        right: 13px; /* Adjust this to move the icon horizontally */
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none; /* Ensures the arrow does not block clicks */
     }
 </style>
 <div class=" no-scrollbar overflow-y-auto">
@@ -122,9 +140,9 @@
                     <div class="text-[14px] font-[700]">
                         @Model.NickName
                     </div>
-                    @* <div class="text-[14px] ">
-                            @Model.EmailAddress
-                        </div>*@
+                    <div class="text-[14px] ">
+                        @string.Concat("@", @Session["CustomerCode"])
+                    </div>
                     <div class=" rounded-[3px] text-[#F89336] border-[#F89336] flex flex-row items-center rounded-[3px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
                             <path d="M7.79167 0C6.96989 0 6.2251 0.153972 5.64323 0.44401C5.06136 0.73405 4.58333 1.20671 4.58333 1.83333V3.66667C4.58333 3.72575 4.60303 3.78304 4.61198 3.83854C4.18587 3.72754 3.71322 3.66667 3.20833 3.66667C2.38656 3.66667 1.64176 3.82064 1.0599 4.11068C0.478027 4.40072 0 4.87337 0 5.5V9.16667C0 9.79329 0.478027 10.266 1.0599 10.556C1.64176 10.846 2.38656 11 3.20833 11C4.03011 11 4.7749 10.846 5.35677 10.556C5.93864 10.266 6.41667 9.79329 6.41667 9.16667V8.98047C6.8374 9.09147 7.29753 9.16667 7.79167 9.16667C8.61344 9.16667 9.35824 9.0127 9.9401 8.72266C10.522 8.43262 11 7.95996 11 7.33333V1.83333C11 1.20671 10.522 0.73405 9.9401 0.44401C9.35824 0.153972 8.61344 0 7.79167 0ZM7.79167 0.916667C8.48991 0.916667 9.11117 1.06706 9.52474 1.27474C9.93831 1.48242 10.0833 1.70085 10.0833 1.83333C10.0833 1.96582 9.93831 2.18424 9.52474 2.39193C9.11117 2.59961 8.48991 2.75 7.79167 2.75C7.09342 2.75 6.47217 2.59961 6.05859 2.39193C5.64502 2.18424 5.5 1.96582 5.5 1.83333C5.5 1.70085 5.64502 1.48242 6.05859 1.27474C6.47217 1.06706 7.09342 0.916667 7.79167 0.916667ZM5.5 3.13672C5.54834 3.16357 5.5931 3.19759 5.64323 3.22266C6.2251 3.5127 6.96989 3.66667 7.79167 3.66667C8.61344 3.66667 9.35824 3.5127 9.9401 3.22266C9.99023 3.19759 10.035 3.16357 10.0833 3.13672V3.66667C10.0833 3.79915 9.93831 4.01758 9.52474 4.22526C9.11117 4.43294 8.48991 4.58333 7.79167 4.58333C7.09342 4.58333 6.47217 4.43294 6.05859 4.22526C5.64502 4.01758 5.5 3.79915 5.5 3.66667V3.13672ZM3.20833 4.58333C3.90658 4.58333 4.52783 4.73372 4.94141 4.94141C5.35498 5.14909 5.5 5.36751 5.5 5.5C5.5 5.63249 5.35498 5.85091 4.94141 6.05859C4.52783 6.26628 3.90658 6.41667 3.20833 6.41667C2.51009 6.41667 1.88883 6.26628 1.47526 6.05859C1.06169 5.85091 0.916667 5.63249 0.916667 5.5C0.916667 5.36751 1.06169 5.14909 1.47526 4.94141C1.88883 4.73372 2.51009 4.58333 3.20833 4.58333ZM10.0833 4.97005V5.5C10.0833 5.63249 9.93831 5.85091 9.52474 6.05859C9.11117 6.26628 8.48991 6.41667 7.79167 6.41667C7.27067 6.41667 6.79981 6.33073 6.41667 6.20182V5.5C6.41667 5.44092 6.39697 5.38363 6.38802 5.32812C6.81413 5.43913 7.28678 5.5 7.79167 5.5C8.61344 5.5 9.35824 5.34603 9.9401 5.05599C9.99023 5.03092 10.035 4.99691 10.0833 4.97005ZM0.916667 6.80339C0.965007 6.83024 1.00977 6.86426 1.0599 6.88932C1.64176 7.17936 2.38656 7.33333 3.20833 7.33333C4.03011 7.33333 4.7749 7.17936 5.35677 6.88932C5.4069 6.86426 5.45166 6.83024 5.5 6.80339V7.33333C5.5 7.46582 5.35498 7.68425 4.94141 7.89193C4.52783 8.09961 3.90658 8.25 3.20833 8.25C2.51009 8.25 1.88883 8.09961 1.47526 7.89193C1.06169 7.68425 0.916667 7.46582 0.916667 7.33333V6.80339ZM10.0833 6.80339V7.33333C10.0833 7.46582 9.93831 7.68425 9.52474 7.89193C9.11117 8.09961 8.48991 8.25 7.79167 8.25C7.27067 8.25 6.79981 8.1766 6.41667 8.04948V7.16146C6.8374 7.27246 7.29574 7.33333 7.79167 7.33333C8.61344 7.33333 9.35824 7.17936 9.9401 6.88932C9.99023 6.86426 10.035 6.83024 10.0833 6.80339ZM0.916667 8.63672C0.965007 8.66357 1.00977 8.69759 1.0599 8.72266C1.64176 9.0127 2.38656 9.16667 3.20833 9.16667C4.03011 9.16667 4.7749 9.0127 5.35677 8.72266C5.4069 8.69759 5.45166 8.66357 5.5 8.63672V9.16667C5.5 9.29915 5.35498 9.51758 4.94141 9.72526C4.52783 9.93294 3.90658 10.0833 3.20833 10.0833C2.51009 10.0833 1.88883 9.93294 1.47526 9.72526C1.06169 9.51758 0.916667 9.29915 0.916667 9.16667V8.63672Z" fill="#E3AB00" />
@@ -145,12 +163,13 @@
     @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post, new { id = "profile-form" }))
     {
         @Html.AntiForgeryToken()
-        if (!string.IsNullOrEmpty(Model.EmailAddress))
+        if (!string.IsNullOrEmpty(Model.Email))
         {
             @Html.HiddenFor(model => model.EmailAddress)
         }
         @Html.HiddenFor(model => model.Gender)
         @Html.HiddenFor(model => model.NickName)
+        @Html.HiddenFor(model => model.Email)
         <div class="flex flex-col px-[16px]" style="background:#FAF7F9; padding-bottom:22px; padding-top:14px">
 
             <div class="input-field-common w-full flex flex-col">
@@ -176,9 +195,9 @@
 
 
         <div class="flex flex-col mx-[16px]">
-           @* <div style="padding-top: 21px;text-align: center; font-size: 13px; color: #7E6D5E ">
-                ホスログを便利に使うために登録しよう！
-            </div>*@
+            @* <div style="padding-top: 21px;text-align: center; font-size: 13px; color: #7E6D5E ">
+                    ホスログを便利に使うために登録しよう！
+                </div>*@
 
             <div class="grid grid-cols-2 gap-[16px] mt-[12px] ">
                 <div class="flex flex-col input-field-common">
@@ -299,7 +318,7 @@
                 <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email <span class="text-[#D32F2F]"></span>
                 </label>
-                @if (!string.IsNullOrEmpty(Model.EmailAddress))
+                @if (!string.IsNullOrEmpty(Model.Email))
                 {
                     @Html.TextBoxFor(model => model.EmailAddress, new
                {
@@ -308,19 +327,10 @@
                    id = "emailInput",
                    @autocomplete = "off",
                    @disabled = "disabled",
-                        @style = "background-color:lightgrey",
-                   @type = "text"
+                   @style = "background-color:lightgrey",
+                   @type = "text",
+                   @value = Model.EmailAddress
                })
-                    @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
-                        class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-                        type="text"
-                        value="@Model.EmailAddress"
-                        id="emailInput"
-                        name="EmailAddress"
-                        disabled style="background-color:lightgrey">*@
-                    @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                            @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
-                        </div>*@
                 }
                 else
                 {
@@ -330,19 +340,11 @@
                    @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
                    @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
                    @id = "emailInput",
-                   @autocomplete = "off"
-                   ,
-                        @type = "text"
+                   @autocomplete = "off",
+                   @type = "text",
+                   @value = Model.EmailAddress
                })
-                    @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
-                        class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-                        type="text"
-                        value="@Model.EmailAddress"
-                        id="emailInput"
-                        name="EmailAddress">*@
-                    @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                            @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
-                        </div>*@
+
                 }
 
             </div>
@@ -407,9 +409,9 @@
                 </div>*@
             <div style="display: flex; justify-content:flex-start; align-items:center; gap:7px">
 
-                <div style="width:40%">
+                <div style="width:40%;">
                     <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]"></span></label>
-                    <div class="input-field-common mb-[10px] relative">
+                    <div class="input-field-common mb-[10px] relative" style=" margin: 12px 0 10px;">
                         <div style="position: absolute; top: 10px; left: 10px; color: #6A6A6A" lang="">〒</div>
                         @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @id = "postcode", @style = "width:100%; padding-left:34px", @placeholder = "", autocomplete = "off" })
 
@@ -430,8 +432,8 @@
 
             </div>
             <div class="grid grid-cols-1 " style="padding-bottom:12px">
-                <div class="input-field-common">
-                    <select id="default_select" style="width: 100%; font-size:15px"
+                <div class="input-field-common custom-select" >
+                    <select id="default_select" style="width: 100%; border-radius:3px; font-size:15px; outline:none;"
                             class="default_select text-[#B7B7B7] h-[44px] select-common" name="PrefectureDDL">
                         <option value="" selected>
                             都道府県を選択してください
@@ -453,6 +455,11 @@
                             }
                         }
                     </select>
+                    <span class="custom-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                            <path d="M7 8L0.937823 0.5L13.0622 0.499999L7 8Z" fill="#707070" />
+                        </svg>
+                    </span> <!-- Downward arrow or any icon -->
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-[6px]  " style="margin-bottom:12px">
@@ -557,7 +564,7 @@
 
 
 
-<div id="save_Modal" class="modal modalWrapper"
+<div id="save_Modal" class="modal modalWrapper responsiveModalfull"
      style="display:none;">
     <div class="save_modal-content relative" style="max-width: 312px; border-radius: 15px;">
         <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('save_Modal')"
@@ -591,9 +598,9 @@
 
 
 
-<div id="modal1" class="modal " style="display:none">
+<div id="modal1" class="modal responsiveModalfull" style="display:none">
     <div class=" " style="width:90%">
-        <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
+        <div class="relative w-full max-w-2xl max-h-full " style="z-index:1000">
             <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('modal1')"
                   style="top:-49px">&times;</span>
             <div id="cancel_id" value="" hidden></div>
@@ -635,8 +642,8 @@
 </div>
 @*second popup*@
 
-<div id="modal2" class="modal modalWrapper" style="display:none">
-    <div class=" modalContentWrapper" style="margin:auto">
+<div id="modal2" class="modal modalWrapper responsiveModalfull" style="display:none">
+    <div class=" modalContentWrapper">
         <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
             <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('modal2')"
                   style="top:-49px">&times;</span>
@@ -809,6 +816,7 @@
                 return;
             }
             toastr.info("誕生日の情報に誤りがあります");
+
             return;
         }
 
@@ -861,11 +869,11 @@
 
             //console.log(sex, "hello ")
 
-            if (surname !== '' || givenName !== '' || email !== ''  || sex || dobYear !== '' || dobMonth !== '' || dobDay !== '' || postcode !== '' || prefecture !== '' || city !== '' || building !== '' || ResidenceNumber !== '') {
+            if (surname !== '' || givenName !== '' || email !== '' || sex || dobYear !== '' || dobMonth !== '' || dobDay !== '' || postcode !== '' || prefecture !== '' || city !== '' || building !== '' || ResidenceNumber !== '') {
                 document.getElementById('save_btn').classList.remove('disabled-div');
                 document.getElementById('savebtndiv').classList.remove('savebtndivcss');
-              
-               
+
+
             } else {
                 document.getElementById('save_btn').classList.add('disabled-div');
                 document.getElementById('savebtndiv').classList.add('savebtndivcss');
@@ -877,7 +885,7 @@
         // Add event listeners to each input field to check on input change
         document.getElementById('Surname').addEventListener('input', checkForm);
         document.getElementById('GivenName').addEventListener('input', checkForm);
-      
+
         document.getElementById('emailInput').addEventListener('input', checkForm);
         document.getElementById('dob-year').addEventListener('input', checkForm);
         document.getElementById('dob-month').addEventListener('input', checkForm);
@@ -898,6 +906,9 @@
         });
         // Initial check on page load
         checkForm();
+
+    </script>
+    <script>
 
     </script>
 }

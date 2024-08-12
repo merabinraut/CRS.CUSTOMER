@@ -27,7 +27,7 @@
         <!-- header end  -->
         <div style="height: calc(100vh - 140px);" class="no-scrollbar overflow-y-scroll pb-4 ">
             <!-- image  -->
-            <div class="px-[14px] py-3 grid gap-3">
+            <div class="px-[14px] pt-3 grid gap-3">
                 <div class="flex gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
                     <div data-modal-target="defaultModal" data-modal-toggle="defaultModal">
                         @if (!string.IsNullOrEmpty(Model.ClubDetailModel.ClubLogo))
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <!-- Selected host -->
-            <div class="px-[14px] py-3 grid gap-3">
+            <div class="px-[14px]  grid gap-3" style="padding-top:7px; padding-bottom:13px;">
                 <div class="flex flex-col gap-[8px] p-[14px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
 
                     <div class="flex justify-between items-center text-xs font-bold">
@@ -166,20 +166,20 @@
         </div>
     </div>
 </div>
-<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
+<div class="responsiveButtonPlan flex py-3 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
      style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
     <button class="btn" onclick="WindowHistoryBack();">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
     </button>
     <button class="btn btn-primary" onclick="SubmitFunction();">
-        <a class="h-full w-full">
+        <a class=" w-full">
             次
         </a>
     </button>
 </div>
 @section scripts
 {
-    <script src="~/Content/CustomHelper.js"></script>
+    <script src="~/Content/CustomHelper_v1.js"></script>
     <script>
         const decryptAndGetValue = key => localStorage.getItem(key) ? DecryptParameter(localStorage.getItem(key)) : "";
 

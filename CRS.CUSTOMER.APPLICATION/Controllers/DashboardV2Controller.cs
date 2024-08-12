@@ -22,6 +22,7 @@ using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
+    [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
     public class DashboardV2Controller : CustomController
     {
         private readonly Dictionary<string, string> _locationHelper = ApplicationUtilities.MapJsonDataToDictionaryViaKeyName("URLManagementConfigruation", "Location");
@@ -42,6 +43,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             Session["ReservationPage2Model"] = null;
             Session["ReservationPage3Model"] = null;
             Session["ReservationPage4Model"] = null;
+            TempData["BackFromMenuBar"] = "null";
             var ResponseModel = new DashboardModel();
             if (Session["SystemLinkModel"] == null)
             {

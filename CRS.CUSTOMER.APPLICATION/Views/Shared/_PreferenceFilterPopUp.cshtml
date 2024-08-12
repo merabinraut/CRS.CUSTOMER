@@ -45,6 +45,15 @@
     .gm-style div[aria-label="Google Map"] > div:last-child {
         display: none;
     }
+    select {
+        -webkit-appearance: none; /* Safari and Chrome */
+        -moz-appearance: none; /* Firefox */
+        appearance: none; /* Standard syntax */
+    }
+
+        select::-ms-expand {
+            display: none; /* IE10+ and Edge */
+        }
 </style>
 <!------------------------------------------------------- #region PREFERENCE------------------------------------------------------->
 <!-- drawer component -->
@@ -58,7 +67,7 @@
                 <i class="fa-solid fa-chevron-down"></i>
             </div>
         </div>
-        <div class="px-4 pb-6 bg-white drawer-filter-location relative no-scrollbar">
+        <div class="px-4 pb-6 bg-white drawer-filter-location relative no-scrollbar responsiveModalPopup">
             <div class="">
                 <div class="bg-[#fff]  ">
                     <div class="sticky top-0 z-10  pt-6 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
@@ -274,9 +283,9 @@
                                         </div>
 
                                     </div>
-                                    <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white ">
+                                    <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white responsiveButton">
                                         <button class="btn btn-primary" style=" border-radius: 8px; " onclick="ClubFilterSubmitButton();">
-                                            <a class="h-full w-full">
+                                            <a class=" w-full">
                                                 検索
                                             </a>
                                         </button>
@@ -398,24 +407,33 @@
                                             <div class="text-sm text-[#333] font-bold mb-2">
                                                 前職を選ぶ
                                             </div>
-                                            <div class="input-field-common">
-                                                <select id="host-occupation-ddl-id" style="width: 100%;" class="text-[#B7B7B7] h-[44px]">
-                                                    @foreach (var item in Model.OccupationModel)
-                                                    {
-                                                        if (!string.IsNullOrEmpty(item.StaticValue) && item.StaticValue.Trim() == "0")
+                                            <div class="flex justify-between items-center" style="width: 100%; border-radius: 2px; border: 1px solid #F1F1F1; background: #FFF; padding: 11px 13px; height:43px;">
+
+                                                <div class="input-field-common" style=" width: -webkit-fill-available;">
+                                                    <select id="host-occupation-ddl-id" class="text-[#B7B7B7] " style=" width: -webkit-fill-available; outline:none;">
+                                                        @foreach (var item in Model.OccupationModel)
                                                         {
-                                                            <option value="@item.StaticValue" selected>
-                                                                @item.StaticLabel
-                                                            </option>
+                                                            if (!string.IsNullOrEmpty(item.StaticValue) && item.StaticValue.Trim() == "0")
+                                                            {
+                                                                <option value="@item.StaticValue" selected>
+                                                                    @item.StaticLabel
+                                                                </option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@item.StaticValue">
+                                                                    @item.StaticLabel
+                                                                </option>
+                                                            }
                                                         }
-                                                        else
-                                                        {
-                                                            <option value="@item.StaticValue">
-                                                                @item.StaticLabel
-                                                            </option>
-                                                        }
-                                                    }
-                                                </select>
+                                                    </select>
+                                                </div>
+                                                <span class="">
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                                                    <path d="M7 8L0.937823 0.5L13.0622 0.499999L7 8Z" fill="#707070" />
+                                                </svg>
+                                                </span>
                                             </div>
                                         </div>
 
@@ -423,7 +441,7 @@
 
 
                                 </div>
-                                <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
+                                <div class="responsiveButton flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
                                     <button class="btn btn-primary" style=" border-radius: 8px;" onclick="HostFilterSubmitButton();">
                                         <a href="#" class="h-full w-full">
                                             検索
@@ -462,7 +480,7 @@
                                                     </a>
                                                 }
                                             </div>
-                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-1 ">
+                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3 ">
                                                 <div class="border-b-[1px] border-[#D75A8B] pb-[1px] " onclick="PopupFilterNewClubRenderFunction()">
                                                     続きを見る
                                                 </div>
@@ -496,7 +514,7 @@
                                                             <img src="@item.HostLogo" alt="host-logo" />
                                                             @if (item.IsBookmarked.ToUpper() == "Y")
                                                             {
-                                                                <div class="like-host" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
+                                                                <div class="like-host" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
                                                                         <g filter="url(#filter0_d_4820_24085)">
                                                                             <circle cx="17" cy="17" r="10" fill="#D75A8B" />
@@ -519,7 +537,7 @@
                                                             }
                                                             else
                                                             {
-                                                                <div class="like-host" onclick="ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
+                                                                <div class="like-host" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                                                     <svg class="inActive-svg" xmlns="http://www.w3.org/2000/svg" width="31" height="34"
                                                                          viewBox="0 0 31 34" fill="none">
                                                                         <g filter="url(#filter0_d_3058_46008)">
@@ -578,7 +596,7 @@
                                                     }
                                                 }
                                             </div>
-                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-1 ">
+                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3 ">
                                                 <div class="border-b-[1px] border-[#D75A8B] pb-[1px] " onclick="PopupFilterNewHostRenderFunction()">
                                                     続きを見る
                                                 </div>

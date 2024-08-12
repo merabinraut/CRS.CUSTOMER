@@ -8,8 +8,9 @@ namespace CRS.CUSTOMER.BUSINESS.NotificationManagement
     {
         List<NotificationDetailCommon> GetNotification(string AgentId);
         List<NotificationDetailCommon> GetAllNotification(ManageNotificationCommon Request);
-        CommonDbResponse ManageNotificationReadStatus(Common Request);
+        CommonDbResponse ManageNotificationReadStatus(Common Request, string NotificationId);
         bool HasUnReadNotification(string AgentId);
         CommonDbResponse ManageReservationCancelRemark(Common Request, string NotificationId, string CustomerRemarks);
+        CommonDbResponse ManageSingleNotificationReadStatus(Common dbRequest, string NotificationId);
     }
 }

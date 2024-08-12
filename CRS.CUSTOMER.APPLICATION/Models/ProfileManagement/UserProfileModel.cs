@@ -10,14 +10,14 @@ namespace CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement
         [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]
         public string NickName { get; set; }
 
-      /*  [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
-        [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]*/
+        /*  [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+          [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
+          [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]*/
         public string FirstName { get; set; }
 
-       /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
-        [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]*/
+        /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+         [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
+         [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]*/
         public string LastName { get; set; }
         public string MobileNumber { get; set; }
         public string DateOfBirth { get; set; }
@@ -28,7 +28,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement
             ErrorMessageResourceName = "Invalid_Email")]*/
         public string EmailAddress { get; set; }
 
-       /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]*/
+        /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]*/
         public string Gender { get; set; }
         public string PreferredLocation { get; set; }
         /*[Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
@@ -36,19 +36,19 @@ namespace CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement
         public string PostalCode { get; set; }
         public string Prefecture { get; set; }
 
-      /*  [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
-        [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]*/
+        /*  [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+          [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
+          [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]*/
         public string City { get; set; }
 
-       /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
-        [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]*/
+        /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+         [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
+         [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]*/
         public string Street { get; set; }
 
-       /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
-        [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]*/
+        /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+         [MinLength(1, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Minimum_length_is_1_characters")]
+         [MaxLength(30, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Maximum_length_is_30_characters")]*/
         public string ResidenceNumber { get; set; }
         public string ProfileImage { get; set; }
         public string Session { get; set; }
@@ -57,12 +57,13 @@ namespace CRS.CUSTOMER.APPLICATION.Models.UserProfileManagement
         [StringLength(6, MinimumLength = 4, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_4_characters")]*/
         public string DOBYear { get; set; }
 
-       /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [StringLength(4, MinimumLength = 2, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_2_characters")]*/
+        /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+         [StringLength(4, MinimumLength = 2, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_2_characters")]*/
         public string DOBMonth { get; set; }
 
-       /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
-        [StringLength(4, MinimumLength = 2, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_2_characters")]*/
+        /* [Required(ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "This_field_is_required")]
+         [StringLength(4, MinimumLength = 2, ErrorMessageResourceType = typeof(Resource), ErrorMessageResourceName = "Length_should_be_2_characters")]*/
         public string DOBDay { get; set; }
+        public string Email { get; set; }
     }
 }

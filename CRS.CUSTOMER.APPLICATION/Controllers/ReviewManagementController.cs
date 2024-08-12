@@ -20,9 +20,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             _reviewBuss = reviewBuss;
         }
         #region
+        [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet, Route("user/account/review")]
         public ActionResult ReviewList()
         {
+            TempData["BackFromMenuBar"] = "Review";
             var Response = new List<CustomerReviewedListModel>();
             var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var dbResponse = _reviewBuss.GetCustomerReviewedList(AgentId);
@@ -51,7 +53,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                   Title = NotificationMessage.INFORMATION.ToString()
+                    Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -146,7 +148,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                   Title = NotificationMessage.INFORMATION.ToString()
+                    Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -189,7 +191,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                   Title = NotificationMessage.INFORMATION.ToString()
+                    Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Redirect("/");
             }
@@ -274,7 +276,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = "Invalid request",
-                   Title = NotificationMessage.INFORMATION.ToString()
+                    Title = NotificationMessage.INFORMATION.ToString()
                 });
                 redirectToUrl = "/";
                 return Json(new { redirectToUrl });
@@ -319,7 +321,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     NotificationType = NotificationMessage.INFORMATION,
                     Message = dbResponse.Message ?? "Failed",
-                   Title = NotificationMessage.INFORMATION.ToString()
+                    Title = NotificationMessage.INFORMATION.ToString()
                 });
                 return Json(new { redirectToUrl });
             }

@@ -63,7 +63,7 @@
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
     <a href="/" class="active">
         @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Home*@
-        ホームページ
+        TOP
     </a>
     <i class="las la-angle-right"></i>
     <a href="@Url.Action("Index", "LocationManagement", new { LocationId = Model.LocationId })" class="active">
@@ -1777,7 +1777,7 @@
 </div>
 @section scripts
 {
-    <script src="~/Content/CustomHelper.js"></script>
+    <script src="~/Content/CustomHelper_v1.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function () {
             // The DOM is fully loaded, hide the loader
             document.getElementById("loader-id").style.display = "none";

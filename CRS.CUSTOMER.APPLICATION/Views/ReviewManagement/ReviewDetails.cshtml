@@ -5,6 +5,14 @@
     var Request = Model;
 }
 @Html.AntiForgeryToken()
+<style>
+    @@media (min-width: 640px) {
+        .fullScreenModal {
+            max-width: 360px;
+            margin: 0 auto;
+        }
+    }
+</style>
 <div class="flex flex-col justify-between h-screen">
     <div>
         <!-- header  -->
@@ -90,7 +98,7 @@
 
         <button class="button-curve btn-primary h-[46px] " data-modal-target="defaultModal"
                 data-modal-toggle="defaultModal">
-            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
+            @*    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue*@ この内容で投稿する
             <div class=" absolute top-[14px] right-[15px]">
                 <i class="fa-solid fa-arrow-right text-[18px]"></i>
             </div>
@@ -107,7 +115,7 @@
      class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-2xl max-h-full">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow ">
+        <div class="relative bg-white rounded-lg shadow  fullScreenModal">
             <!-- Modal header -->
             <div class="text-center pt-4 pb-3 px-2 border-b border-[#DCDCDC]">
                 <div class=" text-[13px] font-bold">@CRS.CUSTOMER.APPLICATION.Resources.Resource.OverallExperienceAboutClub</div>
@@ -141,7 +149,6 @@
             </div>
         </div>
     </div>
-</div>
 @section scripts
 {
     <script>
