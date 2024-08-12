@@ -86,6 +86,24 @@
         cursor: not-allowed;
         pointer-events: none;
     }
+    /* custom select*/
+    .custom-select {
+        position: relative;
+        display: inline-block;
+    }
+
+    select {
+        appearance: none;
+        padding-right: 30px; /* Space for the custom arrow */
+    }
+
+    .custom-arrow {
+        position: absolute;
+        right: 13px; /* Adjust this to move the icon horizontally */
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none; /* Ensures the arrow does not block clicks */
+    }
 </style>
 <div class=" no-scrollbar overflow-y-auto">
 
@@ -414,8 +432,8 @@
 
             </div>
             <div class="grid grid-cols-1 " style="padding-bottom:12px">
-                <div class="input-field-common">
-                    <select id="default_select" style="width: 100%; border-radius:3px; font-size:15px"
+                <div class="input-field-common custom-select" >
+                    <select id="default_select" style="width: 100%; border-radius:3px; font-size:15px; outline:none;"
                             class="default_select text-[#B7B7B7] h-[44px] select-common" name="PrefectureDDL">
                         <option value="" selected>
                             都道府県を選択してください
@@ -437,6 +455,11 @@
                             }
                         }
                     </select>
+                    <span class="custom-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                            <path d="M7 8L0.937823 0.5L13.0622 0.499999L7 8Z" fill="#707070" />
+                        </svg>
+                    </span> <!-- Downward arrow or any icon -->
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-[6px]  " style="margin-bottom:12px">
