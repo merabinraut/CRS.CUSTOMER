@@ -104,6 +104,24 @@
         transform: translateY(-50%);
         pointer-events: none; /* Ensures the arrow does not block clicks */
     }
+    .profileimg2 {
+        width: 100%;
+        height: 100%;
+        
+    }
+    .editoption2 {
+        margin-left: 44px;
+        /* margin-top: 44px; */
+        height: 24px;
+        width: 24px;
+        border-radius: 55px;
+        justify-items: center;
+        position: absolute;
+        background-color: #fff;
+        top: 41px;
+        border: 1px solid #e8e8e8;
+        z-index: 12;
+    }
 </style>
 <div class=" no-scrollbar overflow-y-auto">
 
@@ -111,7 +129,7 @@
         <div class="flex flex-row justify-between">
             <div class="flex flex-row">
                 <div class="photocontainer">
-                    <div class="profileimage">
+                    <div class="profileimg2" style="z-index:1;">
                         @if (String.IsNullOrWhiteSpace(Model.ProfileImage))
                         {
                             <img class="rounded-full h-[64px] w-[64px] object-fill " src="~/Content/assets/images/customer/demo-image.jpeg" alt="Profile Image">
@@ -121,7 +139,7 @@
                             <img class="rounded-full h-[64px] w-[64px] object-fill " src="@Model.ProfileImage" alt="Profile Image">
                         }
                     </div>
-                    <div class="editoption">
+                    <div class="editoption2">
                         <input type="file" id="fileInput" accept="image/jpeg, image/png, image/jpg" style="display: none">
                         <button onclick="uploadProfileImage()">
                             <svg id="camera"
