@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.BUSINESS.CommonManagement;
+using CRS.CUSTOMER.BUSINESS.ProfileManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,6 +102,13 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                             RedirectURL.Query = $"ReturnURL={HttpUtility.UrlEncode(ReturnURL)}";
                             filterContext.Result = new RedirectResult(RedirectURL.Uri.ToString());
                         }
+                    }
+                    if (!string.IsNullOrEmpty(httpContext.Session["UserName"]?.ToString()))
+                    {
+                        var _business = new ProfileManagementBusiness();
+                        var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
+                        var Amount = _business.GetCustomerPointsReport(AgentId, "");
+                        httpContext.Session["Amount"] = !string.IsNullOrEmpty(Amount[0].TotalPoints) ? Amount[0].TotalPoints : "0";
                     }
                 }
             }
