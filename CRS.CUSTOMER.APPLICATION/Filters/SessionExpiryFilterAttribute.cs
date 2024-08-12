@@ -108,7 +108,10 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                         var _business = new ProfileManagementBusiness();
                         var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
                         var Amount = _business.GetCustomerPointsReport(AgentId, "");
-                        httpContext.Session["Amount"] = !string.IsNullOrEmpty(Amount[0].TotalPoints) ? Amount[0].TotalPoints : "0";
+                        if(Amount.Count > 0)
+                        {
+                            httpContext.Session["Amount"] = !string.IsNullOrEmpty(Amount[0].TotalPoints) ? Amount[0].TotalPoints : "0";
+                        }
                     }
                 }
             }
