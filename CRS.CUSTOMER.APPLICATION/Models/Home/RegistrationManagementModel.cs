@@ -33,13 +33,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string ReferCode { get; set; }
         public string Type { get; set; }
         public string NickName { get; set; }
-        //public string OTP1 { get; set; }
-        //public string OTP2 { get; set; }
-        //public string OTP3 { get; set; }
-        //public string OTP4 { get; set; }
-        //public string OTP5 { get; set; }
-        //public string OTP6 { get; set; }
         public string OTPCode { get; set; }
+        public string ProcessId { get; set; }
     }
 
     public class ResendRegistrationOTPModel
@@ -69,6 +64,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string MobileNumber { get; set; }
         public string NickName { get; set; }
         public string IsPasswordForceful { get; set; }
+        public string ProcessId { get; set; }
     }
     #endregion
     #region Forgot Password

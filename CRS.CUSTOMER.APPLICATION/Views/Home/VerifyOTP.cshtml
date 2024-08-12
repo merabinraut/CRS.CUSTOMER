@@ -37,54 +37,6 @@
     <title>新規会員登録‖ホスログ《 ホストクラブ初回来店・ネット予約 》</title>
 </head>
 <body class="md:hidden">
-    @*<div class="mx-[16px]">
-        @*<div class="flex justify-start flex-row mt-5">
-            <div class="flex justify-center items-center" onclick="history.back()">
-                <div class="pr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
-                        <path d="M10.2352 0.740836C9.78601 0.29167 9.06184 0.29167 8.61268 0.740836L0.995176 8.35834C0.637676 8.71584 0.637676 9.29333 0.995176 9.65084L8.61268 17.2683C9.06184 17.7175 9.78601 17.7175 10.2352 17.2683C10.6843 16.8192 10.6843 16.095 10.2352 15.6458L3.59851 9L10.2443 2.35417C10.6843 1.91417 10.6843 1.18084 10.2352 0.740836Z" fill="#BCB08A" />
-                    </svg>
-                </div>
-                <a class="text-[#292F33]">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
-                </a>
-            </div>
-        </div>*@
-    @*<div class="pt-4">
-                <p class="font-[500] text-[14px]">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Enter_6_digit_code_sent_in_sms
-                </p>
-                <p class="mt-2 mb-8 font-[600] ">@Model.MobileNumber</p>
-            </div>
-            <input type="hidden" name="exptime" id="exptime" value='@Html.Raw(Session["exptime"]!=null?Session["exptime"].ToString():"")' />
-            @using (Html.BeginForm("VerifyOTP", "Home", FormMethod.Post, new { @role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.HiddenFor(model => model.AgentId)
-                @Html.HiddenFor(model => model.MobileNumber)
-                <div class="input-field">
-                    <input type="text" id="OTP1" name="OTP1" onkeypress="return isNumber(event)" required />
-                    <input type="text" id="OTP2" name="OTP2" onkeypress="return isNumber(event)" disabled required />
-                    <input type="text" id="OTP3" name="OTP3" onkeypress="return isNumber(event)" disabled required />
-                    <input type="text" id="OTP4" name="OTP4" onkeypress="return isNumber(event)" disabled required />
-                    <input type="text" id="OTP5" name="OTP5" onkeypress="return isNumber(event)" disabled required />
-                    <input type="text" id="OTP6" name="OTP6" onkeypress="return isNumber(event)" disabled required />
-                </div>
-                <div class="text-sm text-center my-[35px]">
-                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Did_not_get_a_code
-                    </div>
-                <p id="otp-code-timer" class="small text-muted mt-3"></p>
-                <div class="text-base text-center text-[#D75A8B] font-bold underline" id="resend-verification-code">
-                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Request_a_new_code
-                </div>
-                <div class="flex justify-center mt-6">
-                    <button type="submit" name="submit" value="Next" class="btn btn-primary rounded-[44px] ">
-                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Next
-                    </button>
-                </div>
-            }
-        </div>*@
-    <link rel="stylesheet" href="~/Content/assets/css/customer/responsive.css">
     <style>
         @@media (min-width: 640px) {
 
@@ -164,8 +116,6 @@
 
             .otpContainer > input {
                 border: none;
-                /* border-radius: 4px;
-        border: 1px solid #F1F1F1; */
             }
 
                 .otpContainer > input ::placeholder {
@@ -345,6 +295,7 @@
                         @Html.HiddenFor(model => model.AgentId)
                         @Html.HiddenFor(model => model.MobileNumber)
                         @Html.HiddenFor(model => model.NickName)
+                        @Html.HiddenFor(model => model.ProcessId)
                         <!-- for otp container -->
                         <div class="otpContainer ring-0 focus:ring-0 focus:ring-transparent">
                             <input type="number" placeholder="認証コード" class="inputContainer w-full ring-0 focus:ring-0 focus:ring-transparent" name="OTPCode" oninput="limitInputLength(this, 6)" required>
