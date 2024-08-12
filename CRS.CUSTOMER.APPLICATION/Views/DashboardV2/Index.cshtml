@@ -8,11 +8,26 @@
 }
 <meta name="description" content="@metaContent">
 <style>
+    a{
+        cursor:pointer;
+    }
     #like {
         position: absolute;
         top: 2px;
         right: 2px;
     }
+
+    .scroll-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        gap: 8px;
+        padding: 12px 0;
+        margin-left: 16px;
+    }
+
+
 </style>
 <style>
     #parent {
@@ -1749,5 +1764,72 @@
             document.getElementById('tab1Button').classList.remove('active');
             document.getElementById('tab2Button').classList.add('active');
         }</script>
+   @* <script>
+        const recommendedHostContent = document.getElementById('recommended-host-content-id');
+
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        recommendedHostContent.addEventListener('mousedown', (e) => {
+            isDown = true;
+            recommendedHostContent.classList.add('active');
+            startX = e.pageX - recommendedHostContent.offsetLeft;
+            scrollLeft = recommendedHostContent.scrollLeft;
+        });
+
+        recommendedHostContent.addEventListener('mouseleave', () => {
+            isDown = false;
+            recommendedHostContent.classList.remove('active');
+        });
+
+        recommendedHostContent.addEventListener('mouseup', () => {
+            isDown = false;
+            recommendedHostContent.classList.remove('active');
+        });
+
+        recommendedHostContent.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - recommendedHostContent.offsetLeft;
+            const walk = (x - startX) * 2; // Adjust the scrolling speed
+            recommendedHostContent.scrollLeft = scrollLeft - walk;
+        });
+
+    </script>*@
+
+    @*<script>
+        const recommendedClubContent = document.getElementById('recommended-club-content-id');
+
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        recommendedClubContent.addEventListener('mousedown', (e) => {
+            isDown = true;
+            recommendedClubContent.classList.add('active');
+            startX = e.pageX - recommendedClubContent.offsetLeft;
+            scrollLeft = recommendedClubContent.scrollLeft;
+        });
+
+        recommendedClubContent.addEventListener('mouseleave', () => {
+            isDown = false;
+            recommendedClubContent.classList.remove('active');
+        });
+
+        recommendedClubContent.addEventListener('mouseup', () => {
+            isDown = false;
+            recommendedClubContent.classList.remove('active');
+        });
+
+        recommendedClubContent.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - recommendedClubContent.offsetLeft;
+            const walk = (x - startX) * 2; // Adjust the scrolling speed
+            recommendedClubContent.scrollLeft = scrollLeft - walk;
+        });
+
+    </script>*@
 }
 
