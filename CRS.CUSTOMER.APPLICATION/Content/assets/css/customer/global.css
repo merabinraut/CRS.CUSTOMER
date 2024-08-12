@@ -2030,6 +2030,9 @@ img{
         /*margin-left: -16px;*/
         left: auto
     }
+    .fullHeightResponsive {
+        height:calc('100vh - 132px')
+    }
 }
 
 
