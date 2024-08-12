@@ -10,7 +10,7 @@ namespace CRS.CUSTOMER.REPOSITORY.ProfileManagement
     {
         private readonly RepositoryDao _dao;
 
-        public ProfileManagementRepository(RepositoryDao dao) => this._dao = dao;
+        public ProfileManagementRepository() => this._dao = new RepositoryDao();
 
         public CommonDbResponse ChangePassword(PasswordCommon passwordCommon)
         {

@@ -352,6 +352,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var alldbresp = _business.GetCustomerPointsReport(AgentId, "");
             if (alldbresp.Count > 0)
             {
+
                 var allgroupedTransactions = alldbresp
                    .GroupBy(t => t.DayType)  // Group by the Date part of TransactionDate
                    .Select(Group => new
@@ -367,6 +368,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                        }).ToList()
                    })
                    .ToList();
+                ViewBag.TotalPoint = !string.IsNullOrEmpty(alldbresp[0].TotalPoints) ? alldbresp[0].TotalPoints : "0";
                 model.AllPointReportList = allgroupedTransactions.MapObjects<PointDayTypeModel>();
             }
 
