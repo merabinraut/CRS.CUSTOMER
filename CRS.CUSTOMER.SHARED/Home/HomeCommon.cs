@@ -17,6 +17,7 @@ namespace CRS.CUSTOMER.SHARED.Home
         public string VerificationCode { get; set; }
         public string ReferCode { get; set; }
         public string Type { get; set; }
+        public string ProcessId { get; set; }
     }
 
     public class ResendRegistrationOTPCommon : Common
@@ -31,6 +32,7 @@ namespace CRS.CUSTOMER.SHARED.Home
         public string UserId { get; set; }
         public string Password { get; set; }
         public string IsPasswordForceful { get; set; }
+        public string ProcessId { get; set; }
     }
     #endregion
 

@@ -45,6 +45,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
             SQL += ",@ActionUser=" + _dao.FilterString(Request.ActionUser);
             SQL += ",@ActionPlatform=" + _dao.FilterString(Request.ActionPlatform);
             SQL += ",@ActionIP=" + _dao.FilterString(Request.ActionIP);
+            SQL += ",@ProcessId=" + _dao.FilterString(Request.ProcessId);
             SQL += !string.IsNullOrEmpty(Request.ReferCode) ? ",@ReferCode=" + _dao.FilterString(Request.ReferCode) : null;
             SQL += !string.IsNullOrEmpty(Request.Type) ? ",@ReferType=" + _dao.FilterString(Request.Type) : null;
             return _dao.ParseCommonDbResponse(SQL);
@@ -59,6 +60,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
             SQL += ",@ActionUser=" + _dao.FilterString(Request.ActionUser);
             SQL += ",@ActionPlatform=" + _dao.FilterString(Request.ActionPlatform);
             SQL += ",@ActionIP=" + _dao.FilterString(Request.ActionIP);
+            SQL += ",@ProcessId=" + _dao.FilterString(Request.ProcessId);
             return _dao.ParseCommonDbResponse(SQL);
         }
 
@@ -110,7 +112,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
                         ProfileImage = _dao.ParseColumnValue(dbResponse, "ProfileImage").ToString(),
                         SessionId = _dao.ParseColumnValue(dbResponse, "SessionId").ToString(),
                         ActionDate = _dao.ParseColumnValue(dbResponse, "ActionDate").ToString(),
-                        Amount =  Convert.ToInt32(_dao.ParseColumnValue(dbResponse, "Amount").ToString()),
+                        Amount = Convert.ToInt32(_dao.ParseColumnValue(dbResponse, "Amount").ToString()),
                         CustomerCode = _dao.ParseColumnValue(dbResponse, "CustomerCode").ToString()
                     };
 
@@ -150,6 +152,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
             sql += "@flag='vfp_otp'";
             sql += ",@VerificationCode=" + _dao.FilterString(common.VerificationCode);
             sql += ",@MobileNumber=" + _dao.FilterString(common.MobileNumber);
+            sql += ",@ProcessId=" + _dao.FilterString(common.ProcessId);
             return _dao.ParseCommonDbResponse(sql);
         }
 
@@ -162,7 +165,8 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
             SQL += ",@ActionUser=" + _dao.FilterString(common.ActionUser);
             SQL += ",@ActionPlatform=" + _dao.FilterString(common.ActionPlatform);
             SQL += ",@ActionIP=" + _dao.FilterString(common.ActionIP);
-            SQL += ",@IsPasswordForceful="+ _dao.FilterString(common.IsPasswordForceful); 
+            SQL += ",@IsPasswordForceful=" + _dao.FilterString(common.IsPasswordForceful);
+            SQL += ",@ProcessId=" + _dao.FilterString(common.ProcessId);
             return _dao.ParseCommonDbResponse(SQL);
         }
 
