@@ -2032,7 +2032,7 @@ img{
         left: auto
     }
     .fullHeightResponsive {
-        height:calc('100vh - 132px')
+        height: calc(100vh - 102px) !important;
     }
     .loginMarginTop {
         margin-top: -23px;
