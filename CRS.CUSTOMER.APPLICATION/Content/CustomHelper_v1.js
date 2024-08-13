@@ -29,14 +29,12 @@ function formatDate(inputDate) {
     return formattedDate;
 }
 function WindowBackForNavMenu(tempdata) {
-
-    console.log('logs:', '@TempData["BackFromMenuBar"]')
     var backFromMenuBar = tempdata.toUpperCase().trim();
 
     switch (backFromMenuBar) {
         case 'PROFILE':
             sessionStorage.setItem('backFromMenuBar', 'true');
-            window.history.back();
+            window.location.href = '/'
             break;
         case 'BOOKINGHISTORY':
             sessionStorage.setItem('backFromMenuBar', 'true');
