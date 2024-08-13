@@ -2066,4 +2066,20 @@ img{
     }
 }
 
+    .responsiveLoader {
+        max-width: 375px;
+        width: 100%;
+        margin: 62px auto;
+        height: fit-content;
+    }
+}
+
+@media(width < 639px) {
+    .responsiveLoader {
+       /* max-width: 375px;*/
+        width: 100%;
+        margin: 62px auto;
+        height:fit-content;
+    }
+}
 
