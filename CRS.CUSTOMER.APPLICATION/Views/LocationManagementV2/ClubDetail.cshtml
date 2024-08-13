@@ -19,6 +19,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 <script src="/Content/assets/js/tabs.js"></script>
 <style>
+    @@media (min-width: 640px) {
+        #innersec {
+            height:100vh;
+        }
+    }
     .stickyBox {
         position: -webkit-sticky;
         position: sticky;
@@ -306,7 +311,7 @@
         </div>
     </div>
 </div>
-<div class="relative" style="margin-bottom:75px">
+<div class="relative" style="margin-bottom:75px; " >
     <div class="bg-white">
         @if (!string.IsNullOrEmpty(target) && target == "host")
         {
