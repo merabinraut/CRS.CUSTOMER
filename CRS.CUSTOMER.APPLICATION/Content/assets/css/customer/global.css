@@ -2059,7 +2059,7 @@ img{
         padding-top:24px !important;
     }
     .resposniveHeightSearchTab{
-       /* height:calc(100vh - 140px);*/
+        height:calc(100vh - 140px);
     }
 }
 
