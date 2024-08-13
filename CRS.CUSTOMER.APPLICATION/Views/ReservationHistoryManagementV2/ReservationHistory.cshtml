@@ -676,7 +676,7 @@
                     foreach (var item in Model.GetAllHistoryList)
                     {
                         <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
-                            <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] ">
+                            <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] " style=" max-width: calc(100% - 57px); ">
                                 <div class="h-[82px] w-[82px] relative flex-none">
                                     @if (item.TransactionStatus.Trim().ToUpper() == "A")
                                     {
@@ -736,12 +736,12 @@
                                         }
                                         <!-- e/tag -->
                                     </ul>
-                                    <div class="club_info" style="width:auto">
+                                    <div class="flex flex-col" style="width:auto">
                                         <!-- s/club_name -->
-                                        <h3 class="club_name">@item.ClubNameEng</h3>
+                                        <h3 class="" style=" width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: calc(100% - 32px);">@item.ClubNameEng</h3>
                                         <!-- e/club_name -->
                                         <!-- s/club group -->
-                                        <p class="club_group">@item.GroupName</p>
+                                        <h3 class="club_group" style="color: #e3a1a1; width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.GroupName</h3>
                                         <!-- e/club group -->
                                     </div>
                                     <div class="flex text-[#565656] gap-[2px] text-[9px] items-center gap-1" style="margin-top:9px;">
