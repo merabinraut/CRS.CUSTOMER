@@ -2058,6 +2058,9 @@ img{
         height:calc(100vh - 24px) !important;
         padding-top:24px !important;
     }
+    .resposniveHeightSearchTab{
+        height:calc(100vh - 140px);
+    }
 }
 
 
