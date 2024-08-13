@@ -63,6 +63,18 @@ body {
   border-color: #d75a8b !important;
   --tw-ring-shadow: none !important;
 }
+/* Hide the number input spinners in WebKit browsers (Chrome, Safari) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide the number input spinners in Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 /*select:focus {
   border-color: #d75a8b !important;
   --tw-ring-shadow: none !important;
@@ -2046,6 +2058,10 @@ img{
         height:calc(100vh - 24px) !important;
         padding-top:24px !important;
     }
+    .resposniveHeightSearchTab{
+        height:calc(100vh - 140px);
+    }
+}
 
     .responsiveLoader {
         max-width: 375px;
