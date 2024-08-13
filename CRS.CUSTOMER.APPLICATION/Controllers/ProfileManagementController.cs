@@ -350,6 +350,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             //------ Start debit,credit points of customer (when admin transfer and retrive, after reservation otp confirmation bonus point )---------------//
 
             var alldbresp = _business.GetCustomerPointsReport(AgentId, "");
+            ViewBag.TotalPoint = "0";
             if (alldbresp.Count > 0)
             {
 
@@ -371,7 +372,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ViewBag.TotalPoint = !string.IsNullOrEmpty(alldbresp[0].TotalPoints) ? alldbresp[0].TotalPoints : "0";
                 model.AllPointReportList = allgroupedTransactions.MapObjects<PointDayTypeModel>();
             }
-
+          
 
             //------ End debit,credit points of customer (when admin transfer and retrive, after reservation otp confirmation bonus point )---------------//
 
