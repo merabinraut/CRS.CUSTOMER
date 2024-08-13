@@ -37,7 +37,7 @@
     </style>
 
 
-    <div class="relative">
+    <div class="relative"  style="height:100vh">
         <!-- Nav bar -->
         <div class="flex items-center border-t-[2px] border-t-[#C8B477] border-b-[1px] border-b-[#C8B477] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]">
             @*<div class="flex gap-2 items-center absolute top-[12px] left-4 text-sm" onclick="window.location.href='/LocationManagement/Index?LocationId=@FilteredLocationId'">*@
@@ -94,7 +94,7 @@
                     </div>
                 </div>
                 <div class="my-4">
-                    <div class="bg-white pb-4  px-[16px]">
+                    <div class="bg-white pb-4  px-[16px] resposniveHeightSearchTab" >
                         @if (!string.IsNullOrEmpty(target) && target == "host")
                         {
                             <div id="tab1" class="tab-content-plane hidden"></div>
