@@ -472,7 +472,7 @@
     <h2 class="text-[16px] pl-[16px] flex-none  font-[700]" style="color:#000">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.HoslogLimitedPlan
     </h2>
-    <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-[13px] py-4 ">
+    <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-[13px] py-4 " id="plan-list">
         @{
             var groupedByPrice = Model.PlanModel.OrderBy(p => p.Price).GroupBy(p => p.Price);
             var lowestPrice = groupedByPrice.First();
@@ -484,7 +484,7 @@
 
                     <div style="box-shadow: 0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 16px -4px rgba(16, 24, 40, 0.08);border-radius: 4px;
                border: 1px solid #EAECF0;"
-                         class="bg-white w-[272px] pb-6 pt-4 flex flex-col justify-between">
+                         class="bg-white w-[272px] pb-6 pt-4 flex flex-col justify-between ">
                         <!-- image  -->
                         <div class="px-4">
                             <div class='flex'>
@@ -1838,7 +1838,7 @@
             });
 
         </script>*@
-  
+
     <script>
         (function () {
             const container = document.getElementById('recommended-host-content-id');
@@ -1930,6 +1930,35 @@
                         e.preventDefault(); // Prevent link click if dragging
                     }
                 });
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            const container = document.getElementById('plan-list');
+            let isDragging = false;
+            let startX, scrollLeft;
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                isDragging = false;
+            });
+
+            container.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fastness factor
+                container.scrollLeft = scrollLeft - walk;
             });
         })();
     </script>

@@ -7,10 +7,11 @@
 }
 <style>
     @@media (min-width: 640px) {
-    #innersec
-    {
-        height:100vh;
-    }}
+        #innersec {
+            height: 100vh;
+        }
+    }
+
     .preferance > input[type="checkbox"] {
         display: none;
     }
@@ -146,7 +147,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex  overflow-x-auto flex-row gap-[8px] mx-[16px] my-[12px] no-scrollbar mb-[12px]">
+        <div class="flex  overflow-x-auto flex-row gap-[8px] mx-[16px] my-[12px] no-scrollbar mb-[12px]" id="recomended-club">
             @{
                 foreach (var item in Model.RecommendedClubModel)
                 {
@@ -343,15 +344,15 @@
                                     }
                                     else if (!string.IsNullOrEmpty(@item.ClubTimePeriod) && @item.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                                     {
-                            <div class="opening_hours">
-                                <img src="/Content/assets/images/customer/moon.svg" alt="夜">
-                                @*@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
-                                <span style="line-height:13px;">
-                                    @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
+                                        <div class="opening_hours">
+                                            <img src="/Content/assets/images/customer/moon.svg" alt="夜">
+                                            @*@item.ClubOpeningTime &#xff5e; @item.ClubClosingTime*@
+                                            <span style="line-height:13px;">
+                                                @item.ClubOpeningTime &#xff5e; @item.ClubClosingTime
 
-                                </span>
+                                            </span>
 
-                            </div>
+                                        </div>
                                     }
 
                                     <!-- e/opening hours -->
@@ -390,14 +391,14 @@
                  class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]">
                 <div class="flex flex-row items-center justify-end gap-1 pr-[16px] " id="scrollToTopButton">
                     @*<div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M7.99996 2.34375L1.89062 8.45308L2.60929 9.15575L7.99996 3.76508L13.3906 9.15575L14.1093 8.45308L7.99996 2.34375ZM7.99996 5.84375L1.89062 11.9531L2.60929 12.6557L7.99996 7.26508L13.3906 12.6557L14.1093 11.9531L7.99996 5.84375Z"
-                      fill="#040000" />
-            </svg>
-        </div>
-        <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
-            トップに戻る
-        </div>*@
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M7.99996 2.34375L1.89062 8.45308L2.60929 9.15575L7.99996 3.76508L13.3906 9.15575L14.1093 8.45308L7.99996 2.34375ZM7.99996 5.84375L1.89062 11.9531L2.60929 12.6557L7.99996 7.26508L13.3906 12.6557L14.1093 11.9531L7.99996 5.84375Z"
+                                      fill="#040000" />
+                            </svg>
+                        </div>
+                        <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
+                            トップに戻る
+                        </div>*@
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                         <path d="M6.99219 7.83594H24.9858V9.68464H6.99219V7.83594ZM23.5763 23.5191L16.9187 16.6789V30.6674H15.0893V16.6789L8.43168 23.5191L7.14213 22.1942L15.989 13.1047L24.8359 22.1942L23.5763 23.5191Z" fill="black" />
                         <path d="M9.81179 1.39648C9.96611 1.39648 10.0278 1.45811 10.0278 1.61217V1.67379C10.0278 1.82785 9.96611 1.88947 9.81179 1.88947H8.63897C8.6081 1.88947 8.6081 1.88947 8.6081 1.92028V6.51123C8.6081 6.54204 8.57724 6.57286 8.54637 6.57286C8.51551 6.57286 8.48465 6.54204 8.48465 6.51123V1.92028C8.48465 1.79704 8.51551 1.76623 8.63897 1.76623H9.81179C9.87352 1.76623 9.90439 1.73541 9.90439 1.67379V1.61217C9.90439 1.55054 9.87352 1.51973 9.81179 1.51973H6.84886C6.78713 1.51973 6.75627 1.55054 6.75627 1.61217V1.67379C6.75627 1.73541 6.78713 1.76623 6.84886 1.76623H8.02169C8.14514 1.76623 8.17601 1.82785 8.17601 1.92028V6.51123C8.17601 6.54204 8.14514 6.57286 8.11428 6.57286C8.08342 6.57286 8.05255 6.54204 8.05255 6.51123V1.92028C8.05255 1.88947 8.05255 1.88947 8.02169 1.88947H6.84886C6.69454 1.88947 6.63281 1.82785 6.63281 1.67379V1.61217C6.63281 1.45811 6.69454 1.39648 6.84886 1.39648H9.81179Z" fill="black" />
@@ -445,5 +446,34 @@
             return false;
         });
 
+    </script>
+    <script>
+        (function () {
+            const container = document.getElementById('recomended-club');
+            let isDragging = false;
+            let startX, scrollLeft;
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                isDragging = false;
+            });
+
+            container.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fastness factor
+                container.scrollLeft = scrollLeft - walk;
+            });
+        })();
     </script>
 }
