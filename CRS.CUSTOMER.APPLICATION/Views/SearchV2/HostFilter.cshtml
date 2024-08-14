@@ -10,6 +10,7 @@
             height: 100vh;
         }
     }
+
     #like {
         position: absolute;
         top: 3px;
@@ -148,13 +149,13 @@
                         </div>
                         @if (item.IsBookmarked.ToUpper() == "Y")
                         {
-                            <div id="like" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
+                            <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','@item.HostId','host', this)">
                                 <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
                         else
                         {
-                            <div id="like" onclick="AddBookmark('@item.ClubId','@item.HostId','host')">
+                            <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                 <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
@@ -199,13 +200,13 @@ else
                         </div>
                         @if (item.IsBookmarked.ToUpper() == "Y")
                         {
-                            <div id="like" onclick="RemoveBookmark('@item.ClubId','@item.HostId','host')">
+                            <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId','@item.HostId','host', this)">
                                 <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
                         else
                         {
-                            <div id="like" onclick="AddBookmark('@item.ClubId','@item.HostId','host')">
+                            <div id="like" onclick="event.stopPropagation(); ManageBookmark('@item.ClubId', '@item.HostId', 'host', this)">
                                 <img src="~/Content/assets/images/loveicon-nf.svg" class="h-[34px] w-[34px]" alt="bookmark" />
                             </div>
                         }
@@ -289,15 +290,15 @@ else
         <div class="flex flex-row items-center justify-end gap-1 py-[12px] " id="scrollToTopButton">
 
             @* <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M7.99996 2.34375L1.89062 8.45308L2.60929 9.15575L7.99996 3.76508L13.3906 9.15575L14.1093 8.45308L7.99996 2.34375ZM7.99996 5.84375L1.89062 11.9531L2.60929 12.6557L7.99996 7.26508L13.3906 12.6557L14.1093 11.9531L7.99996 5.84375Z"
-                      fill="#040000" />
-            </svg>
-        </div>
-        <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
-            トップに戻る
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M7.99996 2.34375L1.89062 8.45308L2.60929 9.15575L7.99996 3.76508L13.3906 9.15575L14.1093 8.45308L7.99996 2.34375ZM7.99996 5.84375L1.89062 11.9531L2.60929 12.6557L7.99996 7.26508L13.3906 12.6557L14.1093 11.9531L7.99996 5.84375Z"
+                              fill="#040000" />
+                    </svg>
+                </div>
+                <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
+                    トップに戻る
 
-        </div>*@
+                </div>*@
 
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                 <path d="M6.99219 7.83594H24.9858V9.68464H6.99219V7.83594ZM23.5763 23.5191L16.9187 16.6789V30.6674H15.0893V16.6789L8.43168 23.5191L7.14213 22.1942L15.989 13.1047L24.8359 22.1942L23.5763 23.5191Z" fill="black" />
