@@ -8,9 +8,10 @@
 }
 <meta name="description" content="@metaContent">
 <style>
-    a{
-        cursor:pointer;
+    a {
+        cursor: pointer;
     }
+
     #like {
         position: absolute;
         top: 2px;
@@ -26,8 +27,6 @@
         padding: 12px 0;
         margin-left: 16px;
     }
-
-
 </style>
 <style>
     #parent {
@@ -736,14 +735,14 @@
             <div class="flex flex-row items-center justify-end gap-1 my-[12px]" id="scrollToTopButton">
 
                 @*   <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                <path d="M7.99996 3.14355L1.89062 9.25289L2.60929 9.95555L7.99996 4.56489L13.3906 9.95555L14.1093 9.25289L7.99996 3.14355ZM7.99996 6.64355L1.89062 12.7529L2.60929 13.4556L7.99996 8.06489L13.3906 13.4556L14.1093 12.7529L7.99996 6.64355Z" fill="#040000" />
-            </svg>
-        </div>
-        <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
-            トップに戻る
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                            <path d="M7.99996 3.14355L1.89062 9.25289L2.60929 9.95555L7.99996 4.56489L13.3906 9.95555L14.1093 9.25289L7.99996 3.14355ZM7.99996 6.64355L1.89062 12.7529L2.60929 13.4556L7.99996 8.06489L13.3906 13.4556L14.1093 12.7529L7.99996 6.64355Z" fill="#040000" />
+                        </svg>
+                    </div>
+                    <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
+                        トップに戻る
 
-        </div>*@
+                    </div>*@
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <path d="M6.99219 7.83594H24.9858V9.68464H6.99219V7.83594ZM23.5763 23.5191L16.9187 16.6789V30.6674H15.0893V16.6789L8.43168 23.5191L7.14213 22.1942L15.989 13.1047L24.8359 22.1942L23.5763 23.5191Z" fill="black" />
                     <path d="M9.81179 1.39648C9.96611 1.39648 10.0278 1.45811 10.0278 1.61217V1.67379C10.0278 1.82785 9.96611 1.88947 9.81179 1.88947H8.63897C8.6081 1.88947 8.6081 1.88947 8.6081 1.92028V6.51123C8.6081 6.54204 8.57724 6.57286 8.54637 6.57286C8.51551 6.57286 8.48465 6.54204 8.48465 6.51123V1.92028C8.48465 1.79704 8.51551 1.76623 8.63897 1.76623H9.81179C9.87352 1.76623 9.90439 1.73541 9.90439 1.67379V1.61217C9.90439 1.55054 9.87352 1.51973 9.81179 1.51973H6.84886C6.78713 1.51973 6.75627 1.55054 6.75627 1.61217V1.67379C6.75627 1.73541 6.78713 1.76623 6.84886 1.76623H8.02169C8.14514 1.76623 8.17601 1.82785 8.17601 1.92028V6.51123C8.17601 6.54204 8.14514 6.57286 8.11428 6.57286C8.08342 6.57286 8.05255 6.54204 8.05255 6.51123V1.92028C8.05255 1.88947 8.05255 1.88947 8.02169 1.88947H6.84886C6.69454 1.88947 6.63281 1.82785 6.63281 1.67379V1.61217C6.63281 1.45811 6.69454 1.39648 6.84886 1.39648H9.81179Z" fill="black" />
@@ -1772,72 +1771,167 @@
             document.getElementById('tab1Button').classList.remove('active');
             document.getElementById('tab2Button').classList.add('active');
         }</script>
-   @* <script>
-        const recommendedHostContent = document.getElementById('recommended-host-content-id');
+    @* <script>
+            const recommendedHostContent = document.getElementById('recommended-host-content-id');
 
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+            let isDown = false;
+            let startX;
+            let scrollLeft;
 
-        recommendedHostContent.addEventListener('mousedown', (e) => {
-            isDown = true;
-            recommendedHostContent.classList.add('active');
-            startX = e.pageX - recommendedHostContent.offsetLeft;
-            scrollLeft = recommendedHostContent.scrollLeft;
-        });
+            recommendedHostContent.addEventListener('mousedown', (e) => {
+                isDown = true;
+                recommendedHostContent.classList.add('active');
+                startX = e.pageX - recommendedHostContent.offsetLeft;
+                scrollLeft = recommendedHostContent.scrollLeft;
+            });
 
-        recommendedHostContent.addEventListener('mouseleave', () => {
-            isDown = false;
-            recommendedHostContent.classList.remove('active');
-        });
+            recommendedHostContent.addEventListener('mouseleave', () => {
+                isDown = false;
+                recommendedHostContent.classList.remove('active');
+            });
 
-        recommendedHostContent.addEventListener('mouseup', () => {
-            isDown = false;
-            recommendedHostContent.classList.remove('active');
-        });
+            recommendedHostContent.addEventListener('mouseup', () => {
+                isDown = false;
+                recommendedHostContent.classList.remove('active');
+            });
 
-        recommendedHostContent.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - recommendedHostContent.offsetLeft;
-            const walk = (x - startX) * 2; // Adjust the scrolling speed
-            recommendedHostContent.scrollLeft = scrollLeft - walk;
-        });
+            recommendedHostContent.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - recommendedHostContent.offsetLeft;
+                const walk = (x - startX) * 2; // Adjust the scrolling speed
+                recommendedHostContent.scrollLeft = scrollLeft - walk;
+            });
 
-    </script>*@
+        </script>*@
 
     @*<script>
-        const recommendedClubContent = document.getElementById('recommended-club-content-id');
+            const recommendedClubContent = document.getElementById('recommended-club-content-id');
 
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+            let isDown = false;
+            let startX;
+            let scrollLeft;
 
-        recommendedClubContent.addEventListener('mousedown', (e) => {
-            isDown = true;
-            recommendedClubContent.classList.add('active');
-            startX = e.pageX - recommendedClubContent.offsetLeft;
-            scrollLeft = recommendedClubContent.scrollLeft;
-        });
+            recommendedClubContent.addEventListener('mousedown', (e) => {
+                isDown = true;
+                recommendedClubContent.classList.add('active');
+                startX = e.pageX - recommendedClubContent.offsetLeft;
+                scrollLeft = recommendedClubContent.scrollLeft;
+            });
 
-        recommendedClubContent.addEventListener('mouseleave', () => {
-            isDown = false;
-            recommendedClubContent.classList.remove('active');
-        });
+            recommendedClubContent.addEventListener('mouseleave', () => {
+                isDown = false;
+                recommendedClubContent.classList.remove('active');
+            });
 
-        recommendedClubContent.addEventListener('mouseup', () => {
-            isDown = false;
-            recommendedClubContent.classList.remove('active');
-        });
+            recommendedClubContent.addEventListener('mouseup', () => {
+                isDown = false;
+                recommendedClubContent.classList.remove('active');
+            });
 
-        recommendedClubContent.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - recommendedClubContent.offsetLeft;
-            const walk = (x - startX) * 2; // Adjust the scrolling speed
-            recommendedClubContent.scrollLeft = scrollLeft - walk;
-        });
+            recommendedClubContent.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - recommendedClubContent.offsetLeft;
+                const walk = (x - startX) * 2; // Adjust the scrolling speed
+                recommendedClubContent.scrollLeft = scrollLeft - walk;
+            });
 
-    </script>*@
+        </script>*@
+  
+    <script>
+        (function () {
+            const container = document.getElementById('recommended-host-content-id');
+
+            let isDragging = false;
+            let startX, scrollLeft;
+            const links = container.querySelectorAll('a');
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+                container.classList.add('disable-pointer-events'); // Disable pointer events during drag
+            });
+
+            container.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                }
+            });
+
+            container.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                }
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fastness factor
+                container.scrollLeft = scrollLeft - walk;
+            });
+
+            // Optionally, if you want to handle clicks while dragging is ongoing
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (container.classList.contains('disable-pointer-events')) {
+                        e.preventDefault(); // Prevent link click if dragging
+                    }
+                });
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            const container = document.getElementById('recommended-club-content-id');
+
+            let isDragging = false;
+            let startX, scrollLeft;
+            const links = container.querySelectorAll('a');
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+                container.classList.add('disable-pointer-events'); // Disable pointer events during drag
+            });
+
+            container.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                }
+            });
+
+            container.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                }
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fastness factor
+                container.scrollLeft = scrollLeft - walk;
+            });
+
+            // Optionally, if you want to handle clicks while dragging is ongoing
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (container.classList.contains('disable-pointer-events')) {
+                        e.preventDefault(); // Prevent link click if dragging
+                    }
+                });
+            });
+        })();
+    </script>
 }
 
