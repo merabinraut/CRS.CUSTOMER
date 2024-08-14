@@ -193,7 +193,7 @@
             </svg>*@
     </div>
     <!-- clippath end  -->
-    <div class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px] my-[12px]">
+    <div class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px] my-[12px]" id="host-search-result-scroll">
         @{
             foreach (var item in Model.HostRecommendationModel)
             {
@@ -488,5 +488,52 @@
                 updatePagination();
             }
         }
+    </script>
+    <script>
+        (function () {
+            const container = document.getElementById('host-search-result-scroll');
+
+            let isDragging = false;
+            let startX, scrollLeft;
+            const links = container.querySelectorAll('a');
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+                container.classList.add('disable-pointer-events'); // Disable pointer events during drag
+            });
+
+            container.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                }
+            });
+
+            container.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                }
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fastness factor
+                container.scrollLeft = scrollLeft - walk;
+            });
+
+            // Optionally, if you want to handle clicks while dragging is ongoing
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (container.classList.contains('disable-pointer-events')) {
+                        e.preventDefault(); // Prevent link click if dragging
+                    }
+                });
+            });
+        })();
     </script>
 }

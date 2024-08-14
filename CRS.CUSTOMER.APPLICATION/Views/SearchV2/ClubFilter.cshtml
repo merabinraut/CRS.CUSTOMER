@@ -53,7 +53,7 @@
             <p class="text-[14px] font-[600] pl-[16px] ">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Club_recommended_for_you
             </p>
-            <div class="flex  overflow-x-auto mx-[16px] no-scrollbar flex-row gap-[8px]  my-[8px]">
+            <div class="flex  overflow-x-auto mx-[16px] no-scrollbar flex-row gap-[8px]  my-[8px]" id="club-filter-scroll">
                 @{
                     foreach (var item in Model.RecommendedClubModel)
                     {
@@ -351,6 +351,54 @@
             var searchUrl = `/search${prefecturesArea}/?target=${target}`;
             window.location.href = searchUrl;
         }
+        </script>
+        <script>
+
+            (function () {
+                const container = document.getElementById('club-filter-scroll');
+
+                let isDragging = false;
+                let startX, scrollLeft;
+                const links = container.querySelectorAll('a');
+
+                container.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    startX = e.pageX - container.offsetLeft;
+                    scrollLeft = container.scrollLeft;
+                    container.classList.add('disable-pointer-events'); // Disable pointer events during drag
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                    }
+                });
+
+                container.addEventListener('mouseup', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                    }
+                });
+
+                container.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    const x = e.pageX - container.offsetLeft;
+                    const walk = (x - startX) * 2; // Scroll-fastness factor
+                    container.scrollLeft = scrollLeft - walk;
+                });
+
+                // Optionally, if you want to handle clicks while dragging is ongoing
+                links.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        if (container.classList.contains('disable-pointer-events')) {
+                            e.preventDefault(); // Prevent link click if dragging
+                        }
+                    });
+                });
+            })();
         </script>
     }
 }
