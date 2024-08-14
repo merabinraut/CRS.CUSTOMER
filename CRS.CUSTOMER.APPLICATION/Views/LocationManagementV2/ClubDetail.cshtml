@@ -87,7 +87,7 @@
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
     <a href="/" class="active">TOP</a>
     <i class="las la-angle-right"></i>
-    <a class="active" onclick="RedirectToLocation();">店舗/ホスト一覧</a>
+    <a class="active cursor-pointer" onclick="RedirectToLocation();">店舗/ホスト一覧</a>
     <i class="las la-angle-right"></i>
     <a href="#">@Model.ClubNameJp</a>
 </div>
@@ -160,7 +160,7 @@
     {
         <div class="flex items-center flex-col">
             <div class="p-1">
-                <div class="action_keep" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
+                <div class="action_keep cursor-pointer" onclick="ManageBookmark('@Model.ClubId', '', 'club', this)"><img alt="保存する" src="~/Content/assets/images/bookmark-notfilled.svg"></div>
             </div>
         </div>
     }
@@ -282,7 +282,7 @@
             var imageURL = "/Content/assets/images/" + item2.ScheduleLabel + ".svg";
             if (!string.IsNullOrEmpty(item2.Schedule) && item2.Schedule.Trim().ToUpper() == "RESERVABLE")
             {
-                <div onclick="InitiateClubReservationFunction('@Model.ClubId','@item2.FullDate' )">
+                <div class="cursor-pointer" onclick="InitiateClubReservationFunction('@Model.ClubId','@item2.FullDate' )">
                     @item2.Date <div class="flex justify-center mt-1">
                         <img src="@imageURL" class="h-[11px] w-[12px]">
                     </div>
@@ -329,7 +329,7 @@
                     <div class="p-[10px] galleryHost bg-[#F8F8F8]">
                         @foreach (var item in Model.HostListModels)
                         {
-                            <div onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@PrefecturesArea')">
+                            <div class="cursor-pointer" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@PrefecturesArea')">
                                 @if (!string.IsNullOrEmpty(item.HostImage))
                                 {
                                     <img src="@item.HostImage"
@@ -623,7 +623,7 @@
                     <div class="bg-[#3A3A3A] gallery">
                         @foreach (var item in Model.ClubGalleryImageList)
                         {
-                            <img src="@item" alt="img" onclick="OpenImagePopup('@item')" />
+                            <img src="@item" alt="img" class="cursor-pointer" onclick="OpenImagePopup('@item')" />
                         }
                     </div>
                 }
