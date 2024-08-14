@@ -138,6 +138,9 @@ input[type="number"] {
     border: none;
     outline: none;
 }
+#scrollToTopButton{
+    cursor:pointer;
+}
 
 .breadcrumb {
     background-color: var(--breadCrumb);
