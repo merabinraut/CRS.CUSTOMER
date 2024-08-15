@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 ">
     <link rel="stylesheet" href="~/Content/assets/css/tailwind.css">
-    <link rel="stylesheet" href="~/Content/assets/css/customer/global.css">
+    <link rel="stylesheet" href="~/Content/assets/css/customer/global_v1.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/club.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/responsive.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/customcss.css">
@@ -31,7 +31,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="~/Content/js/NotificationMessageToaster.js"></script>
-    <script src="~/Content/CustomHelper_v1.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -48,6 +47,315 @@
         gtag('config', 'G-Z189BCRTWP');
     </script>
     <title>@ViewBag.Title</title>
+    <style>
+
+            .ui-datepicker {
+                /* width: max-content; */
+                width: 98%;
+                background-color: #FBF8F8;
+                padding: 12px 8px;
+                position: relative !important;
+                top: unset !important;
+                left: unset !important;
+                border: none !important;
+                font-family: "yu-gothic-pr6n", sans-serif;
+                font-size: 14px;
+                display: block !important;
+                border-radius: 8px;
+            }
+
+            .modal-content-logout {
+                max-width: 100%;
+                width: 312px;
+                background: #fff;
+                padding: 16px;
+                border-radius: 4px
+            }
+
+            .log-outButton {
+                border-radius: 8px;
+                background: #D75A8B;
+                color: #FFF;
+                text-align: center;
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 15px; /* 100% */
+                padding-left: 25px;
+                padding-right: 25px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+
+            .ui-state-default {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                border: none !important;
+                background: inherit !important;
+                font-weight: normal;
+                color: #454545;
+                height: 36px;
+                width: 36px;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                border: 1px solid #FBF8F8 !important;
+            }
+
+            .ui-state-active,
+            .ui-widget-content .ui-state-active,
+            .ui-widget-header .ui-state-active,
+            a.ui-button:active,
+            .ui-button:active,
+            .ui-button.ui-state-active:hover {
+                border: 1px solid #D75A8B !important;
+                background: inherit !important;
+                font-weight: normal;
+                color: #D75A8B !important;
+                text-align: center;
+                border-radius: 5px;
+            }
+
+            .ui-state-highlight,
+            .ui-widget-content .ui-state-highlight,
+            .ui-widget-header .ui-state-highlight {
+                border: 1px solid #D75A8B !important;
+                background: #D75A8B !important;
+                color: #FFFFFF !important;
+                border-radius: 5px;
+            }
+
+            .ui-widget-header {
+                border: none;
+                background-color: inherit !important;
+            }
+
+            .ui-datepicker .ui-datepicker-title {
+                text-align: left;
+                margin: 0px;
+                color: #44464F;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 20px;
+                /* 142.857% */
+                letter-spacing: 0.1px;
+                padding: 10px 8px;
+            }
+
+            .ui-datepicker .ui-datepicker-prev {
+                right: 45px;
+                left: unset !important;
+                height: 40px;
+                width: 40px;
+                border: 1px solid #FBF8F8;
+                cursor: pointer;
+            }
+
+            .ui-datepicker .ui-datepicker-next {
+                height: 40px;
+                width: 40px;
+                right: 10px !important;
+                border: 1px solid #FBF8F8;
+                cursor: pointer;
+            }
+
+                .ui-datepicker .ui-datepicker-next span {
+                    background-image: url("/Content/assets/images/navigate_next.svg");
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+
+            .ui-datepicker .ui-datepicker-prev span {
+                background-image: url("/Content/assets/images/navigate_before.svg");
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .ui-datepicker th:last-child {
+                color: #697DBF;
+            }
+
+            th.ui-datepicker-week-end {
+                color: #D75A8B;
+            }
+            /*  .ui-datepicker th:nth-last-child(2) {
+            color: #697DBF;
+        }*/
+
+            #selectedDateBtn {
+                margin-top: 10px;
+                padding: 8px 16px;
+                background-color: #D75A8B;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .disable-click {
+                pointer-events: none;
+            }
+
+            .affiliation {
+                display: flex;
+                padding: 4px 0px;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                margin-top: 8px;
+                display: none;
+            }
+
+            .affiliationText {
+                color: #999;
+                text-align: center;
+                font-size: 11px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 166%;
+            }
+
+            .dividerCol {
+                color: #999;
+                text-align: center;
+                font-size: 11px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 166%;
+                display: none
+                /* 18.26px */
+            }
+
+            #leftcontent {
+                display: none;
+            }
+
+            .modalContentWrapper {
+                padding: 0 16px;
+            }
+
+            @@media (min-width: 640px) {
+                body {
+                    /* background-image: url('../../content/assets/images/sprinkle.png');
+            background-repeat: no-repeat;
+            background-size: cover;*/
+                    background: url('/content/assets/images/sprinkle.png') no-repeat center center fixed;
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+                    background-color: none;
+                }
+
+                .modalContentWrapper {
+                    width: 375px !important;
+                    /*left: 50% !important;*/
+                    transform: translate(-0%, -25%) !important;
+                    top: 20% !important;
+                    position: relative !important;
+                    margin-top: 0% !important;
+                    padding: 0 16px;
+                    /* bottom: -40px; */
+                }
+
+                #toast-container {
+                    max-width: 375px !important;
+                    width: 100% !important;
+                    left: 50%;
+                    transform: translate(-35%);
+                }
+
+                #noscrollx {
+                    overflow-x: hidden;
+                }
+
+
+                #test {
+                    display: grid;
+                    grid-template-columns: 1fr auto 1fr;
+                    /* grid-template-columns: repeat(3, minmax(0, 1fr));*/
+                    grid-auto-columns: auto;
+                }
+
+                #innersec {
+                    background-color: #FFFFFF;
+                    width: 375px;
+                    height: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    overflow-y: auto;
+                    box-shadow: 0px 0px 24px 0px #0D102E40;
+                }
+
+                #leftcontent {
+                    display: flex;
+                }
+
+                #rightcontent {
+                    display: flex;
+                }
+
+                .transform-none {
+                    left: 50%;
+                    transform: translate(-50%);
+                    width: 375px;
+                }
+
+                #rightcontent img {
+                    max-width: 100%
+                }
+
+                .transition-transform {
+                    transition-property: none;
+                    transition-timing-function: unset;
+                    transition-duration: unset;
+                }
+
+                .bg-gray-900 {
+                    background-color: transparent;
+                }
+
+                #innerfixed {
+                    max-width: 300px;
+                    width: 100%;
+                    top: 35%
+                }
+            }
+
+            #leftfix {
+                max-width: 140px;
+                width: 100%;
+                top: 35%
+            }
+
+                #leftfix img {
+                    max-width: 130px;
+                }
+
+                #leftfix #siteurl p {
+                    font-size: 15px !important;
+                }
+
+            #innerfixed {
+                max-width: 140px;
+                width: 100%;
+            }
+
+
+            @@media(min-width: 1005px) {
+                #leftfix {
+                    top: 10%;
+                    max-width: 300px;
+                }
+
+                #innerfixed {
+                    top: 10%;
+                    max-width: 300px;
+                }
+            }
+    </style>
 </head>
 <body class="md:hidden">
     <div id="test">
@@ -216,7 +524,6 @@
         function isLoginPageWithReturnUrl(url) {
             return url.includes("ReturnURL");
         }
-        GotoNavMenu()
     </script>
     <script src="~/Content/assets/js/ManageRedirectURL.js"></script>
     <script src="~/Content/assets/js/BookmarkManagement.js"></script>
