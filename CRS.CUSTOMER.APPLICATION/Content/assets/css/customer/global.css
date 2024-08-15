@@ -2013,8 +2013,8 @@ img{
 /*for responsive design*/
 @media(width > 639px){
     #child{
-        max-width:375px;
-        width:90%;
+        max-width:343px;
+        width:90%;  
     }
     .responsiveModalPopup {
         max-width: 375px;
@@ -2064,22 +2064,16 @@ img{
     .resposniveHeightSearchTab{
         height:calc(100vh - 140px);
     }
-}
-
     .responsiveLoader {
         max-width: 375px;
         width: 100%;
-        margin: 62px auto;
+        margin: 55px auto;
         height: fit-content;
     }
 }
-
-@media(width < 639px) {
-    .responsiveLoader {
+    .responsiveLoader2 {
        /* max-width: 375px;*/
         width: 100%;
-        margin: 62px auto;
+        margin: 55px auto;
         height:fit-content;
     }
-}
-
