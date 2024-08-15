@@ -1,8 +1,10 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.CommonManagement;
+using CRS.CUSTOMER.SHARED.Enquiry;
 using CRS.CUSTOMER.SHARED.Home;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CRS.CUSTOMER.BUSINESS.CommonManagement
 {
@@ -17,5 +19,6 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         #endregion
         string GetForceFulLogout(string UserId);
         Tuple<int, int> GetMetaTagInfo(string type, string locationId = "", string clubId = "");
+        CommonDbResponse PostEnquiryAsync(EnquiryRequestcommon request);
     }
 }

@@ -111,6 +111,7 @@
     <Compile Include="Dashboard\DashboardRecommendedClubCommon.cs" />
     <Compile Include="Dashboard\DashboardRecommendedHostCommon.cs" />
     <Compile Include="Dashboard\LocationCommon.cs" />
+    <Compile Include="Enquiry\EnquiryRequestCommon.cs" />
     <Compile Include="Home\HomeCommon.cs" />
     <Compile Include="LocationManagement\ClubDetailCommon.cs" />
     <Compile Include="LocationManagement\ClubReservationCommon.cs" />

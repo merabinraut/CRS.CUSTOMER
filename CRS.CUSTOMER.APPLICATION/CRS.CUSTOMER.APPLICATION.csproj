@@ -265,6 +265,7 @@
     <Compile Include="Models\Dashboard\DashboardRecommendedClubModel.cs" />
     <Compile Include="Models\Dashboard\DashboardRecommendedHostModel.cs" />
     <Compile Include="Models\Dashboard\LocationModel.cs" />
+    <Compile Include="Models\Enquiry\EnquiryRequestModel.cs" />
     <Compile Include="Models\Home\LoginManagementModel.cs" />
     <Compile Include="Models\Home\RegistrationManagementModel.cs" />
     <Compile Include="Models\LocationManagementV2\ClubDetailModel.cs" />
@@ -699,7 +700,7 @@
     <Content Include="Views\Footer\customervoice.cshtml" />
     <Content Include="Views\Shared\_FooterLayout.cshtml" />
     <Content Include="Views\Footer\faq.cshtml" />
-    <Content Include="Views\Footer\inquery.cshtml" />
+    <Content Include="Views\Footer\Inquiry.cshtml" />
     <Content Include="Views\Footer\operatingcompany.cshtml" />
     <Content Include="Views\Footer\privacypolicy.cshtml" />
     <Content Include="Views\Home\ForgotPassword_SuccessView.cshtml" />
