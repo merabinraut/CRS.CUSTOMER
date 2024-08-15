@@ -340,6 +340,7 @@
     <Content Include="Content\assets\css\customer\club.css" />
     <Content Include="Content\assets\css\customer\customcss.css" />
     <Content Include="Content\assets\css\customer\global.css" />
+    <Content Include="Content\assets\css\customer\responsive.css" />
     <Content Include="Content\assets\css\owl-carousel\owl.carousel.min.css" />
     <Content Include="Content\assets\css\owl-carousel\owl.theme.default.min.css" />
     <Content Include="Content\assets\css\styles.css" />
@@ -522,6 +523,7 @@
     <Content Include="Content\assets\js\owl.carousel.min.js" />
     <Content Include="Content\assets\js\reschedule-reservation.js" />
     <Content Include="Content\assets\js\reservation-common.js" />
+    <Content Include="Content\assets\js\reservation-common.v1.js" />
     <Content Include="Content\assets\js\search-filter-common.js" />
     <Content Include="Content\assets\js\tabs.js" />
     <Content Include="Content\assets\js\toogle.js" />
@@ -536,6 +538,7 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\Custom-Scripts.js" />
     <Content Include="Content\CustomHelper.js" />
+    <Content Include="Content\CustomHelper_v1.js" />
     <Content Include="Content\font\all.css" />
     <Content Include="Content\font\all.min.css" />
     <Content Include="Content\font\brands.css" />

@@ -6,6 +6,7 @@ using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
 using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -115,7 +116,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     {
                         AgentId = dbResponse.Extra1.DefaultEncryptParameter(),
                         MobileNumber = Model.MobileNumber,
-                        NickName = Model.NickName
+                        NickName = Model.NickName,
+                        ProcessId = dbResponse.Extra3
                     };
                     TempData["ReferCode"] = ReferCode;
                     TempData["Type"] = Type;
@@ -168,7 +170,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "SUCCESS",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("SetRegistrationPassword", "Home", new { AgentId = dbResponse.Extra1.DefaultEncryptParameter(), UserId = dbResponse.Extra2.DefaultEncryptParameter(), MobileNumber = Model.MobileNumber, NickName = Model.NickName });
+                    return RedirectToAction("SetRegistrationPassword", "Home", new { AgentId = dbResponse.Extra1.DefaultEncryptParameter(), UserId = dbResponse.Extra2.DefaultEncryptParameter(), MobileNumber = Model.MobileNumber, NickName = Model.NickName, ProcessId = Model.ProcessId });
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -243,7 +245,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet]
-        public ActionResult SetRegistrationPassword(string AgentId, string UserId, string MobileNumber, string NickName)
+        public ActionResult SetRegistrationPassword(string AgentId, string UserId, string MobileNumber, string NickName, string ProcessId)
         {
             var response = new SetRegistrationPasswordModel()
             {
@@ -251,6 +253,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 UserId = UserId,
                 MobileNumber = MobileNumber,
                 NickName = NickName,
+                ProcessId = ProcessId
             };
             return View(response);
         }
@@ -291,13 +294,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 var dbResponse = _buss.SetRegistrationPassword(Common);
                 if (dbResponse.Code == 0)
                 {
-                    //AddNotificationMessage(new NotificationModel()
-                    //{
-                    //    NotificationType = NotificationMessage.SUCCESS,
-                    //    Message = dbResponse.Message ?? "Success",
-                    //    Title = NotificationMessage.SUCCESS.ToString(),
-                    //});
-                    //return Redirect("/user/register/complete");
                     return Redirect("/user/remind/complete?nickname=" + ViewBag.NickName1);
                 }
                 AddNotificationMessage(new NotificationModel()
@@ -532,9 +528,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         AgentId = dbresp.Extra1.EncryptParameter(),
                         MobileNumber = model.MobileNo,
                         NickName = dbresp.Extra3,
+                        ProcessId = dbresp.Extra4
                     };
-                    //Session["exptime"] = DateTime.Parse(DateTime.UtcNow.AddMinutes(10).ToString()).ToString("yyyy-MM-dd HH:mm:ss");//DateTime.Parse(dbresp.Extra2.ToString());
-                    //Session["exptime"] = DateTime.Parse(starttime.ToString());
                     Session["exptime"] = DateTime.Parse(dbresp.Extra2.ToString());
                     return View("ForgotPasswordOTP", otpModel);
                 }
@@ -581,7 +576,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "Success",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    return RedirectToAction("SetNewPasswordV2", "Home", new { AgentId = dbResponse.Extra1.EncryptParameter(), MobileNumber = Model.MobileNumber.EncryptParameter(), UserID = dbResponse.Extra3.EncryptParameter(), NickName = Model.NickName });
+                    return RedirectToAction("SetNewPasswordV2", "Home", new { AgentId = dbResponse.Extra1.EncryptParameter(), MobileNumber = Model.MobileNumber.EncryptParameter(), UserID = dbResponse.Extra3.EncryptParameter(), NickName = Model.NickName, ProcessId = Model.ProcessId });
                 }
                 AddNotificationMessage(new NotificationModel()
                 {
@@ -633,7 +628,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Set new Password
         [HttpGet]
-        public ActionResult SetNewPasswordV2(string AgentId, string MobileNumber, string UserID, string NickName, string ReturnUrl = null)
+        public ActionResult SetNewPasswordV2(string AgentId, string MobileNumber, string UserID, string NickName, string ReturnUrl = null, string ProcessId = null)
         {
             TempData["returnURLAfterReset"] = null;
             var aId = !string.IsNullOrEmpty(AgentId) ? AgentId.DecryptParameter() : null;
@@ -655,6 +650,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 UserId = UserID,
                 MobileNumber = MobileNumber,
                 NickName = NickName,
+                ProcessId = ProcessId
             };
             if (!string.IsNullOrEmpty(ReturnUrl))
             {

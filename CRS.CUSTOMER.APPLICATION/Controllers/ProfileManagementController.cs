@@ -47,6 +47,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             };
             var data = _business.GetUserProfileDetail(common);
             var viewModel = data.MapObject<UserProfileModel>();
+            viewModel.Email = !string.IsNullOrEmpty(viewModel.EmailAddress) ? viewModel.EmailAddress : string.Empty;
             if (viewModel.ProfileImage != null)
                 viewModel.ProfileImage = ImageHelper.ProcessedImage(viewModel.ProfileImage);
             ViewBag.PrefectureKey = viewModel.Prefecture?.EncryptParameter();
@@ -60,6 +61,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             viewModel.PreferredLocation = viewModel.PreferredLocation?.EncryptParameter();
             viewModel.Prefecture = viewModel.Prefecture?.EncryptParameter();
+            TempData["BackFromMenuBar"] = "Profile";
             return View(viewModel);
         }
 
@@ -179,6 +181,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 CommonDbResponse dbresp = _business.UpdateUserProfileDetail(common);
                 if (dbresp.Code == ResponseCode.Success)
                 {
+                    TempData["UserProfileModel"] = null;
                     Session["EmailAddress"] = common.EmailAddress;
                     AddNotificationMessage(new NotificationModel()
                     {
@@ -190,8 +193,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else
                 {
+                    // common.EmailAddress = "";
                     AddNotificationMessage(new NotificationModel()
                     {
+
                         NotificationType = NotificationMessage.ERROR,
                         Message = dbresp.Message,
                         Title = NotificationMessage.ERROR.ToString()
@@ -218,6 +223,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult ChangePasswordV2()
         {
             ViewBag.ActionPageName = "NavMenu";
+            TempData["BackFromMenuBar"] = "ChangePassword";
             ViewBag.PageTitle = Resources.Resource.ChangePassword;
             return View(new ChangePasswordModel());
         }
@@ -337,14 +343,17 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult points()
         {
+            TempData["BackFromMenuBar"] = "PointHistory";
             PointReportModel model = new PointReportModel();
             var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
 
             //------ Start debit,credit points of customer (when admin transfer and retrive, after reservation otp confirmation bonus point )---------------//
 
             var alldbresp = _business.GetCustomerPointsReport(AgentId, "");
+            ViewBag.TotalPoint = "0";
             if (alldbresp.Count > 0)
             {
+
                 var allgroupedTransactions = alldbresp
                    .GroupBy(t => t.DayType)  // Group by the Date part of TransactionDate
                    .Select(Group => new
@@ -360,9 +369,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                        }).ToList()
                    })
                    .ToList();
+                ViewBag.TotalPoint = !string.IsNullOrEmpty(alldbresp[0].TotalPoints) ? alldbresp[0].TotalPoints : "0";
                 model.AllPointReportList = allgroupedTransactions.MapObjects<PointDayTypeModel>();
             }
-
+          
 
             //------ End debit,credit points of customer (when admin transfer and retrive, after reservation otp confirmation bonus point )---------------//
 

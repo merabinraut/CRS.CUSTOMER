@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.BUSINESS.NotificationManagement;
+using CRS.CUSTOMER.BUSINESS.ProfileManagement;
 using CRS.CUSTOMER.SHARED;
 using System.Web;
 using System.Web.Mvc;
@@ -34,8 +35,12 @@ namespace CRS.CUSTOMER.APPLICATION.Filters
                         });
                 }
                 var _notificationBuss = new NotificationManagementBusiness();
+                var _business = new ProfileManagementBusiness();
                 var notifications = _notificationBuss.GetNotification(getUserId);
+                var AgentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
+                var Amount = _business.GetCustomerPointsReport(AgentId, "");
                 httpctx.Session["Notifications"] = notifications;
+                httpctx.Session["Amount"] = !string.IsNullOrEmpty(Amount[0].TotalPoints) ? Amount[0].TotalPoints : "0";
             }
             base.OnActionExecuting(filterContext);
         }

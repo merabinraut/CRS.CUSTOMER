@@ -169,17 +169,9 @@ function getAntiForgeryToken() {
 
 function EnableLoaderFunction() {
     document.getElementById('loader-id-v2').style.display = 'flex';
-    //function preventDefault(e) {
-    //    e.preventDefault();
-    //}
-    //document.body.addEventListener('touchmove', preventDefault, { passive: false });
     document.body.classList.add('no-scroll-loader');
 }
 function DisableLoaderFunction() {
     document.getElementById('loader-id-v2').style.display = 'none';
-    //function preventDefault(e) {
-    //    e.preventDefault();
-    //}
-    //document.body.removeEventListener('touchmove', preventDefault, { passive: false });
     document.body.classList.remove('no-scroll-loader');
 }

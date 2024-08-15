@@ -8,10 +8,24 @@
 }
 <meta name="description" content="@metaContent">
 <style>
+    a {
+        cursor: pointer;
+    }
+
     #like {
         position: absolute;
         top: 2px;
         right: 2px;
+    }
+
+    .scroll-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        gap: 8px;
+        padding: 12px 0;
+        margin-left: 16px;
     }
 </style>
 <style>
@@ -176,7 +190,7 @@
          class=" border-[1px] flex flex-col rounded-[4px] border-[#ffffff] bg-[#ffffff]  h-[196px]  mx-[16px]">
         <div style="background-color: #EEEEEE; margin-left:15px;margin-right:15px; margin-top:24px; border-radius:3px "
              class="grid grid-cols-2 text-[14px]  py-[8px] mx-[15px]  border-black  ">
-            <div class="flex pr-[8px]  flex-row gap-[4px] items-center" onclick="GetLocationFilterPopUp();">
+            <div class="cursor-pointer flex pr-[8px]  flex-row gap-[4px] items-center" onclick="GetLocationFilterPopUp();">
                 <div class="pl-[8px]">
                     <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 2.17188C6.2115 2.17188 3.9375 4.44588 3.9375 7.23438C3.9375 8.02563 4.2585 8.93313 4.6935 9.92388C5.1285 10.9146 5.68875 11.9669 6.258 12.9471C6.97451 14.1765 7.73679 15.3786 8.54325 16.5509L9 17.2184L9.4575 16.5509C9.4575 16.5509 10.6043 14.9091 11.742 12.9471C12.3113 11.9669 12.8715 10.9146 13.3065 9.92388C13.7415 8.93313 14.0625 8.02563 14.0625 7.23438C14.0625 4.44588 11.7885 2.17188 9 2.17188ZM9 3.29688C11.1825 3.29688 12.9375 5.05188 12.9375 7.23438C12.9375 7.68438 12.696 8.53713 12.2872 9.46713C11.8785 10.3964 11.3138 11.4269 10.7573 12.3846C9.8745 13.9094 9.32475 14.7164 9 15.1971C8.6745 14.7164 8.1255 13.9094 7.242 12.3846C6.68625 11.4269 6.1215 10.3964 5.71275 9.46713C5.304 8.53713 5.0625 7.68438 5.0625 7.23438C5.0625 5.05188 6.8175 3.29688 9 3.29688ZM9 6.10938C8.70163 6.10938 8.41548 6.2279 8.2045 6.43888C7.99353 6.64986 7.875 6.93601 7.875 7.23438C7.875 7.53274 7.99353 7.81889 8.2045 8.02987C8.41548 8.24085 8.70163 8.35938 9 8.35938C9.29837 8.35938 9.58452 8.24085 9.7955 8.02987C10.0065 7.81889 10.125 7.53274 10.125 7.23438C10.125 6.93601 10.0065 6.64986 9.7955 6.43888C9.58452 6.2279 9.29837 6.10938 9 6.10938Z" fill="#B08194" />
@@ -196,7 +210,7 @@
                     </svg>
 
                 </div>
-                <div style="color: #666666" class="text-[14px] font-normal leading-[16px]">
+                <div style="color: #666666" class="text-[14px] font-normal leading-[16px] cursor-pointer">
                     こだわり
                 </div>
             </div>
@@ -210,12 +224,12 @@
                               fill="#B08194" />
                     </svg>
                 </div>
-                <div style="color: #666666 ; " id="main-date-id">
+                <div style="color: #666666 ; " id="main-date-id" class="cursor-pointer">
                     予約日
                 </div>
             </div>
             <div style="padding-right: 16px; padding-left:16px; border-right:1px solid #D6D6D6; border-left:1px solid #D6D6D6"
-                 class="flex flex-row gap-[4px] justify-center  items-center  ">
+                 class="flex flex-row gap-[4px] justify-center  items-center  cursor-pointer">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
                         <path d="M8.5 3.10938C4.98454 3.10938 2.125 5.96892 2.125 9.48438C2.125 12.9998 4.98454 15.8594 8.5 15.8594C12.0155 15.8594 14.875 12.9998 14.875 9.48438C14.875 5.96892 12.0155 3.10938 8.5 3.10938ZM8.5 4.17188C11.4403 4.17188 13.8125 6.54408 13.8125 9.48438C13.8125 12.4247 11.4403 14.7969 8.5 14.7969C7.80204 14.798 7.11072 14.6613 6.46567 14.3948C5.82062 14.1282 5.23453 13.7369 4.741 13.2434C4.24746 12.7498 3.85619 12.1638 3.58961 11.5187C3.32303 10.8737 3.18638 10.1823 3.1875 9.48438C3.1875 6.54408 5.55971 4.17188 8.5 4.17188ZM7.96875 5.23438V10.0156H11.6875V8.95312H9.03125V5.23438H7.96875Z"
@@ -226,7 +240,7 @@
                     時間
                 </div>
             </div>
-            <div class="flex flex-row gap-[4px]  items-center  ">
+            <div class="flex flex-row gap-[4px]  items-center  cursor-pointer">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                         <path d="M5.28125 4.70312C4.43656 4.70537 3.62711 5.04191 3.02983 5.6392C2.43254 6.23649 2.09599 7.04594 2.09375 7.89062C2.09375 8.94462 2.61225 9.88317 3.40558 10.464C2.0045 11.1589 1.03125 12.5996 1.03125 14.2656H2.09375C2.09282 13.8468 2.17463 13.4319 2.33448 13.0447C2.49434 12.6576 2.72909 12.3058 3.02526 12.0096C3.32144 11.7135 3.6732 11.4787 4.06034 11.3189C4.44749 11.159 4.8624 11.0772 5.28125 11.0781C5.7001 11.0772 6.11501 11.159 6.50216 11.3189C6.8893 11.4787 7.24106 11.7135 7.53724 12.0096C7.83341 12.3058 8.06816 12.6576 8.22802 13.0447C8.38787 13.4319 8.46968 13.8468 8.46875 14.2656H9.53125C9.53032 13.8468 9.61213 13.4319 9.77198 13.0447C9.93184 12.6576 10.1666 12.3058 10.4628 12.0096C10.7589 11.7135 11.1107 11.4787 11.4978 11.3189C11.885 11.159 12.2999 11.0772 12.7188 11.0781C13.1376 11.0772 13.5525 11.159 13.9397 11.3189C14.3268 11.4787 14.6786 11.7135 14.9747 12.0096C15.2709 12.3058 15.5057 12.6576 15.6655 13.0447C15.8254 13.4319 15.9072 13.8468 15.9062 14.2656H16.9688C16.9688 12.5996 15.9955 11.1589 14.5944 10.464C15.0001 10.1685 15.3303 9.78142 15.5582 9.33428C15.7862 8.88713 15.9054 8.39252 15.9062 7.89062C15.9062 6.13679 14.4726 4.70312 12.7188 4.70312C11.8741 4.70537 11.0646 5.04191 10.4673 5.6392C9.87004 6.23649 9.53349 7.04594 9.53125 7.89062C9.53125 8.94462 10.0498 9.88317 10.8431 10.464C10.0669 10.8454 9.42436 11.4529 9 12.2065C8.57564 11.4529 7.9331 10.8454 7.15692 10.464C7.56258 10.1685 7.8928 9.78142 8.12075 9.33428C8.34869 8.88713 8.46792 8.39252 8.46875 7.89062C8.46875 6.13679 7.03508 4.70312 5.28125 4.70312ZM5.28125 5.76562C6.46204 5.76562 7.40625 6.70983 7.40625 7.89062C7.40625 9.07142 6.46204 10.0156 5.28125 10.0156C4.10046 10.0156 3.15625 9.07142 3.15625 7.89062C3.15625 6.70983 4.10046 5.76562 5.28125 5.76562ZM12.7188 5.76562C13.8995 5.76562 14.8438 6.70983 14.8438 7.89062C14.8438 9.07142 13.8995 10.0156 12.7188 10.0156C11.538 10.0156 10.5938 9.07142 10.5938 7.89062C10.5938 6.70983 11.538 5.76562 12.7188 5.76562Z"
@@ -271,10 +285,10 @@
                             <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationURL')">
                                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                     <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location1">
-                                    <p class="locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
+                                    <p class="cursor-pointer locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
                                         @beforeSlash
                                         <br>
-                                        <span class="locationdown  font-[500]  text-center" style="font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block">
+                                        <span class="locationdown  font-[500]  text-center cursor-pointer" style="font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block">
                                             (@afterSlash)
                                         </span>
                                     </p>
@@ -287,10 +301,10 @@
                             <div class="relative">
                                 <div class="innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                     <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location1">
-                                    <p class="locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
+                                    <p class="cursor-pointer locationtext justify-center text-white font-[600]  z-10" style="font-size:14px">
                                         @beforeSlash
                                         <br>
-                                        <span class="locationdown  font-[500]  text-center" style="font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block">
+                                        <span class="locationdown  font-[500]  text-center cursor-pointer" style="font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block">
                                             (@afterSlash)
                                         </span>
                                     </p>
@@ -318,10 +332,10 @@
                             <div class="relative" onclick="LocationFunction('@Model.Location[i].LocationURL')">
                                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                     <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
-                                    <p style="line-height:12px; font-size:14px" class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
+                                    <p style="line-height:12px; font-size:14px" class="cursor-pointer locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
                                         @beforeSlash
                                         <br>
-                                        <span style="line-height: 100%;margin-top:4px;font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block " class="locationdown leading-[8px] font-[500] pt-[4px]  text-center">
+                                        <span style="line-height: 100%;margin-top:4px;font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block " class="locationdown leading-[8px] font-[500] pt-[4px]  text-center cursor-pointer">
                                             (@afterSlash)
                                         </span>
                                     </p>
@@ -335,10 +349,10 @@
                             <div class="relative">
                                 <div class=" innercontainer h-[100px] flex flex-row justify-center text-center items-center w-full  overflow-hidden rounded-[4px]">
                                     <img class="locationimage" src="@Model.Location[i].LocationImage" alt="location3">
-                                    <p style="line-height:12px; font-size:14px" class=" locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
+                                    <p style="line-height:12px; font-size:14px" class="cursor-pointer locationtext justify-center text-white font-[600] text-[12px] leading-[12px] z-10">
                                         @beforeSlash
                                         <br>
-                                        <span style="line-height: 100%;margin-top:4px;font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block " class="locationdown leading-[8px] font-[500] pt-[4px]  text-center">
+                                        <span style="line-height: 100%;margin-top:4px;font-size:11px; letter-spacing:1.5px; margin-top:3px;display:inline-block " class="locationdown leading-[8px] font-[500] pt-[4px]  text-center cursor-pointer">
                                             (@afterSlash)
                                         </span>
                                     </p>
@@ -458,7 +472,7 @@
     <h2 class="text-[16px] pl-[16px] flex-none  font-[700]" style="color:#000">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.HoslogLimitedPlan
     </h2>
-    <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-[13px] py-4 ">
+    <div class="overflow-x-auto flex bg-[#EFDDE4] w-full no-scrollbar px-4 gap-[13px] py-4 " id="plan-list">
         @{
             var groupedByPrice = Model.PlanModel.OrderBy(p => p.Price).GroupBy(p => p.Price);
             var lowestPrice = groupedByPrice.First();
@@ -470,7 +484,7 @@
 
                     <div style="box-shadow: 0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 16px -4px rgba(16, 24, 40, 0.08);border-radius: 4px;
                border: 1px solid #EAECF0;"
-                         class="bg-white w-[272px] pb-6 pt-4 flex flex-col justify-between">
+                         class="bg-white w-[272px] pb-6 pt-4 flex flex-col justify-between ">
                         <!-- image  -->
                         <div class="px-4">
                             <div class='flex'>
@@ -720,15 +734,23 @@
         <div style="background-color: #FFFFFF;" class="flex flex-row items-center justify-end pr-[16px] ">
             <div class="flex flex-row items-center justify-end gap-1 my-[12px]" id="scrollToTopButton">
 
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-                        <path d="M7.99996 3.14355L1.89062 9.25289L2.60929 9.95555L7.99996 4.56489L13.3906 9.95555L14.1093 9.25289L7.99996 3.14355ZM7.99996 6.64355L1.89062 12.7529L2.60929 13.4556L7.99996 8.06489L13.3906 13.4556L14.1093 12.7529L7.99996 6.64355Z" fill="#040000" />
-                    </svg>
-                </div>
-                <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
-                    トップに戻る
+                @*   <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                            <path d="M7.99996 3.14355L1.89062 9.25289L2.60929 9.95555L7.99996 4.56489L13.3906 9.95555L14.1093 9.25289L7.99996 3.14355ZM7.99996 6.64355L1.89062 12.7529L2.60929 13.4556L7.99996 8.06489L13.3906 13.4556L14.1093 12.7529L7.99996 6.64355Z" fill="#040000" />
+                        </svg>
+                    </div>
+                    <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
+                        トップに戻る
 
-                </div>
+                    </div>*@
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M6.99219 7.83594H24.9858V9.68464H6.99219V7.83594ZM23.5763 23.5191L16.9187 16.6789V30.6674H15.0893V16.6789L8.43168 23.5191L7.14213 22.1942L15.989 13.1047L24.8359 22.1942L23.5763 23.5191Z" fill="black" />
+                    <path d="M9.81179 1.39648C9.96611 1.39648 10.0278 1.45811 10.0278 1.61217V1.67379C10.0278 1.82785 9.96611 1.88947 9.81179 1.88947H8.63897C8.6081 1.88947 8.6081 1.88947 8.6081 1.92028V6.51123C8.6081 6.54204 8.57724 6.57286 8.54637 6.57286C8.51551 6.57286 8.48465 6.54204 8.48465 6.51123V1.92028C8.48465 1.79704 8.51551 1.76623 8.63897 1.76623H9.81179C9.87352 1.76623 9.90439 1.73541 9.90439 1.67379V1.61217C9.90439 1.55054 9.87352 1.51973 9.81179 1.51973H6.84886C6.78713 1.51973 6.75627 1.55054 6.75627 1.61217V1.67379C6.75627 1.73541 6.78713 1.76623 6.84886 1.76623H8.02169C8.14514 1.76623 8.17601 1.82785 8.17601 1.92028V6.51123C8.17601 6.54204 8.14514 6.57286 8.11428 6.57286C8.08342 6.57286 8.05255 6.54204 8.05255 6.51123V1.92028C8.05255 1.88947 8.05255 1.88947 8.02169 1.88947H6.84886C6.69454 1.88947 6.63281 1.82785 6.63281 1.67379V1.61217C6.63281 1.45811 6.69454 1.39648 6.84886 1.39648H9.81179Z" fill="black" />
+                    <path d="M12.9571 3.15188C12.9571 2.31996 12.4941 1.82697 11.8151 1.82697C11.1052 1.82697 10.6731 2.31996 10.6731 3.15188V3.67568C10.6731 3.82973 10.6114 3.89136 10.4571 3.89136H10.3953C10.241 3.89136 10.1793 3.82973 10.1793 3.67568V3.15188C10.1793 2.01184 10.8274 1.33398 11.8151 1.33398C12.8027 1.33398 13.4509 2.01184 13.4509 3.15188V3.82973C13.4509 3.86055 13.42 3.89136 13.3891 3.89136C13.3583 3.89136 13.3274 3.86055 13.3274 3.82973V3.15188C13.3274 2.07347 12.741 1.45723 11.8151 1.45723C10.8892 1.45723 10.3028 2.10428 10.3028 3.15188V3.67568C10.3028 3.7373 10.3336 3.76811 10.3953 3.76811H10.4571C10.5188 3.76811 10.5497 3.7373 10.5497 3.67568V3.15188C10.5497 2.22752 11.0435 1.70372 11.8151 1.70372C12.5867 1.70372 13.0805 2.25834 13.0805 3.15188V3.82973C13.0805 3.86055 13.0496 3.89136 13.0188 3.89136C12.9879 3.89136 12.9571 3.86055 12.9571 3.82973V3.15188ZM10.6423 4.81571C10.6423 5.64763 11.1052 6.14061 11.7842 6.14061C12.4941 6.14061 12.9262 5.64763 12.9262 4.81571V4.29191C12.9262 4.13785 12.9879 4.07623 13.1422 4.07623H13.204C13.3583 4.07623 13.42 4.13785 13.42 4.29191V4.81571C13.42 5.95574 12.7719 6.6336 11.7842 6.6336C10.7966 6.6336 10.1484 5.95574 10.1484 4.81571V4.13785C10.1484 4.10704 10.1793 4.07623 10.2102 4.07623C10.241 4.07623 10.2719 4.10704 10.2719 4.13785V4.81571C10.2719 5.89412 10.8583 6.51035 11.7842 6.51035C12.7101 6.51035 13.2966 5.86331 13.2966 4.81571V4.29191C13.2966 4.23029 13.2657 4.19947 13.204 4.19947H13.1422C13.0805 4.19947 13.0496 4.23029 13.0496 4.29191V4.81571C13.0496 5.74006 12.5558 6.26386 11.7842 6.26386C11.0126 6.26386 10.5188 5.70925 10.5188 4.81571V4.13785C10.5188 4.10704 10.5497 4.07623 10.5805 4.07623C10.6114 4.07623 10.6423 4.10704 10.6423 4.13785V4.81571Z" fill="black" />
+                    <path d="M17.8352 1.39648C17.9896 1.39648 18.0513 1.45811 18.0513 1.61217V1.67379C18.0513 1.82785 17.9896 1.88947 17.8352 1.88947H16.6624C16.6315 1.88947 16.6315 1.88947 16.6315 1.92028V6.51123C16.6315 6.54204 16.6007 6.57286 16.5698 6.57286C16.5389 6.57286 16.5081 6.54204 16.5081 6.51123V1.92028C16.5081 1.79704 16.5389 1.76623 16.6624 1.76623H17.8352C17.897 1.76623 17.9278 1.73541 17.9278 1.67379V1.61217C17.9278 1.55054 17.897 1.51973 17.8352 1.51973H14.8723C14.8106 1.51973 14.7797 1.55054 14.7797 1.61217V1.67379C14.7797 1.73541 14.8106 1.76623 14.8723 1.76623H16.0451C16.1686 1.76623 16.1994 1.82785 16.1994 1.92028V6.51123C16.1994 6.54204 16.1686 6.57286 16.1377 6.57286C16.1069 6.57286 16.076 6.54204 16.076 6.51123V1.92028C16.076 1.88947 16.076 1.88947 16.0451 1.88947H14.8723C14.718 1.88947 14.6562 1.82785 14.6562 1.67379V1.61217C14.6562 1.45811 14.718 1.39648 14.8723 1.39648H17.8352Z" fill="black" />
+                    <path d="M21.0781 3.15188C21.0781 2.31996 20.6152 1.82697 19.9362 1.82697C19.2263 1.82697 18.7942 2.31996 18.7942 3.15188V3.67568C18.7942 3.82973 18.7325 3.89136 18.5782 3.89136H18.5164C18.3621 3.89136 18.3004 3.82973 18.3004 3.67568V3.15188C18.3004 2.01184 18.9485 1.33398 19.9362 1.33398C20.9238 1.33398 21.572 2.01184 21.572 3.15188V3.82973C21.572 3.86055 21.5411 3.89136 21.5102 3.89136C21.4794 3.89136 21.4485 3.86055 21.4485 3.82973V3.15188C21.4485 2.07347 20.8621 1.45723 19.9362 1.45723C19.0103 1.45723 18.4239 2.10428 18.4239 3.15188V3.67568C18.4239 3.7373 18.4547 3.76811 18.5164 3.76811H18.5782C18.6399 3.76811 18.6708 3.7373 18.6708 3.67568V3.15188C18.6708 2.22752 19.1646 1.70372 19.9362 1.70372C20.7078 1.70372 21.2016 2.25834 21.2016 3.15188V3.82973C21.2016 3.86055 21.1707 3.89136 21.1399 3.89136C21.109 3.89136 21.0781 3.86055 21.0781 3.82973V3.15188ZM18.7634 4.81571C18.7634 5.64763 19.2263 6.14061 19.9053 6.14061C20.6152 6.14061 21.0473 5.64763 21.0473 4.81571V4.29191C21.0473 4.13785 21.109 4.07623 21.2633 4.07623H21.3559C21.5102 4.07623 21.572 4.13785 21.572 4.29191V4.81571C21.572 5.95574 20.9238 6.6336 19.9362 6.6336C18.9485 6.6336 18.2695 5.95574 18.2695 4.81571V4.13785C18.2695 4.10704 18.3004 4.07623 18.3313 4.07623C18.3621 4.07623 18.393 4.10704 18.393 4.13785V4.81571C18.393 5.89412 18.9794 6.51035 19.9053 6.51035C20.8312 6.51035 21.4176 5.86331 21.4176 4.81571V4.29191C21.4176 4.23029 21.3868 4.19947 21.3251 4.19947H21.2633C21.2016 4.19947 21.1707 4.23029 21.1707 4.29191V4.81571C21.1707 5.74006 20.6769 6.26386 19.9053 6.26386C19.1337 6.26386 18.6399 5.70925 18.6399 4.81571V4.13785C18.6399 4.10704 18.6708 4.07623 18.7016 4.07623C18.7325 4.07623 18.7634 4.10704 18.7634 4.13785V4.81571Z" fill="black" />
+                    <path d="M23.8834 3.89224C24.5933 3.89224 24.9945 3.49168 24.9945 2.87545C24.9945 2.25921 24.5933 1.85866 23.8834 1.85866H22.8958C22.8649 1.85866 22.8649 1.85866 22.8649 1.88947V6.35717C22.8649 6.51123 22.8032 6.57286 22.6489 6.57286H22.5871C22.4328 6.57286 22.3711 6.51123 22.3711 6.35717V1.64298C22.3711 1.48892 22.4328 1.39648 22.618 1.39648H23.8834C24.9019 1.39648 25.4883 1.98191 25.4883 2.87545C25.4883 3.76899 24.9019 4.35441 23.8834 4.35441H23.1118C23.081 4.35441 23.0501 4.3236 23.0501 4.29279C23.0501 4.26198 23.081 4.23116 23.1118 4.23116H23.8834C24.8093 4.23116 25.3649 3.67655 25.3649 2.84464C25.3649 2.01272 24.8093 1.45811 23.8834 1.45811H22.5871C22.4945 1.45811 22.4637 1.48892 22.4637 1.58135V6.35717C22.4637 6.4188 22.4945 6.44961 22.5563 6.44961H22.618C22.6797 6.44961 22.7106 6.4188 22.7106 6.35717V1.92028C22.7106 1.79704 22.7415 1.76623 22.8649 1.76623H23.8526C24.6242 1.76623 25.0871 2.2284 25.0871 2.87545C25.0871 3.52249 24.6242 3.98467 23.8526 3.98467H23.081C23.0501 3.98467 23.0192 3.95386 23.0192 3.92305C23.0192 3.89224 23.0501 3.86142 23.081 3.86142H23.8834V3.89224Z" fill="black" />
+                </svg>
             </div>
         </div>
     </div>
@@ -742,7 +764,7 @@
                 <i class="fa-solid fa-chevron-down"></i>
             </div>
         </div>
-        <div class="px-4 pt-6 pb-6 bg-white " style="padding-top: 24px; border-radius: 6px 6px 0px 0px; ">
+        <div class="px-4 pt-6 pb-6 bg-white responsiveModalPopup" style="padding-top: 24px; border-radius: 6px 6px 0px 0px; ">
             <div class="text-sm text-[#333] font-bold mb-3">営業時間を選択する</div>
             <div class=" relative">
                 <div class="flex justify-center gap-5 items-center h-[171px] py-6 ">
@@ -757,7 +779,7 @@
                 <input hidden id="minuteShadowval" value="00" />
             </div>
             <button class="btn btn-primary mt-3" style=" border-radius: 8px; " onclick="WorkingHoursSubmitFunction();">
-                <p class="h-full w-full">
+                <p class=" w-full">
                     検索
                 </p>
             </button>
@@ -774,7 +796,7 @@
                 <i class="fa-solid fa-chevron-down"></i>
             </div>
         </div>
-        <div class="px-4 pt-6 pb-6 bg-white " style="padding-top: 24px; border-radius: 6px 6px 0px 0px; ">
+        <div class="px-4 pt-6 pb-6 bg-white responsiveModalPopup" style="padding-top: 24px; border-radius: 6px 6px 0px 0px; ">
             <div class="text-sm text-[#333] font-bold mb-3">最終入店時間から探す</div>
             <div class=" relative">
                 <div class="flex justify-center gap-5 items-center h-[171px] py-6 ">
@@ -895,7 +917,7 @@
                                 recommendedClubContentHTML += `
                                     <a onclick="ClubDetailRedirectFunction('${club.ClubCode}', '${club.LocationURL}')">
                                         <div class="flex w-[118px]">
-                                            <div style="border-radius: 6px; border: 1px solid #F3F3F3; background: #FFF;" class="flex flex-col w-[118px] px-[8px] py-[10px]">
+                                            <div style="border-radius: 6px; border: 1px solid #F3F3F3; background: #FFF;" class="cursor-pointer flex flex-col w-[118px] px-[8px] py-[10px]">
                                                 <div class="flex flex-row justify-center">
                                                     <div class="h-[48px] w-[48px]   bg-[#ffffff]  flex flex-row justify-center">
                                                         <img style="border-color:#F1EEEE" class="h-[48px] w-[48px]  border-[1px] rounded-full object-cover" src="${clubLogoSrc}" alt="clublogo" />
@@ -1749,5 +1771,196 @@
             document.getElementById('tab1Button').classList.remove('active');
             document.getElementById('tab2Button').classList.add('active');
         }</script>
+    @* <script>
+            const recommendedHostContent = document.getElementById('recommended-host-content-id');
+
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            recommendedHostContent.addEventListener('mousedown', (e) => {
+                isDown = true;
+                recommendedHostContent.classList.add('active');
+                startX = e.pageX - recommendedHostContent.offsetLeft;
+                scrollLeft = recommendedHostContent.scrollLeft;
+            });
+
+            recommendedHostContent.addEventListener('mouseleave', () => {
+                isDown = false;
+                recommendedHostContent.classList.remove('active');
+            });
+
+            recommendedHostContent.addEventListener('mouseup', () => {
+                isDown = false;
+                recommendedHostContent.classList.remove('active');
+            });
+
+            recommendedHostContent.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - recommendedHostContent.offsetLeft;
+                const walk = (x - startX) * 2; // Adjust the scrolling speed
+                recommendedHostContent.scrollLeft = scrollLeft - walk;
+            });
+
+        </script>*@
+
+    @*<script>
+            const recommendedClubContent = document.getElementById('recommended-club-content-id');
+
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            recommendedClubContent.addEventListener('mousedown', (e) => {
+                isDown = true;
+                recommendedClubContent.classList.add('active');
+                startX = e.pageX - recommendedClubContent.offsetLeft;
+                scrollLeft = recommendedClubContent.scrollLeft;
+            });
+
+            recommendedClubContent.addEventListener('mouseleave', () => {
+                isDown = false;
+                recommendedClubContent.classList.remove('active');
+            });
+
+            recommendedClubContent.addEventListener('mouseup', () => {
+                isDown = false;
+                recommendedClubContent.classList.remove('active');
+            });
+
+            recommendedClubContent.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - recommendedClubContent.offsetLeft;
+                const walk = (x - startX) * 2; // Adjust the scrolling speed
+                recommendedClubContent.scrollLeft = scrollLeft - walk;
+            });
+
+        </script>*@
+
+    <script>
+        (function () {
+            const container = document.getElementById('recommended-host-content-id');
+
+            let isDragging = false;
+            let startX, scrollLeft;
+            const links = container.querySelectorAll('a');
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+                container.classList.add('disable-pointer-events'); // Disable pointer events during drag
+            });
+
+            container.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                }
+            });
+
+            container.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                }
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fastness factor
+                container.scrollLeft = scrollLeft - walk;
+            });
+
+            // Optionally, if you want to handle clicks while dragging is ongoing
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (container.classList.contains('disable-pointer-events')) {
+                        e.preventDefault(); // Prevent link click if dragging
+                    }
+                });
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            const container = document.getElementById('recommended-club-content-id');
+
+            let isDragging = false;
+            let startX, scrollLeft;
+            const links = container.querySelectorAll('a');
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+                container.classList.add('disable-pointer-events'); // Disable pointer events during drag
+            });
+
+            container.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                }
+            });
+
+            container.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    container.classList.remove('disable-pointer-events'); // Re-enable pointer events
+                }
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fastness factor
+                container.scrollLeft = scrollLeft - walk;
+            });
+
+            // Optionally, if you want to handle clicks while dragging is ongoing
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (container.classList.contains('disable-pointer-events')) {
+                        e.preventDefault(); // Prevent link click if dragging
+                    }
+                });
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            const container = document.getElementById('plan-list');
+            let isDragging = false;
+            let startX, scrollLeft;
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                isDragging = false;
+            });
+
+            container.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fastness factor
+                container.scrollLeft = scrollLeft - walk;
+            });
+        })();
+    </script>
 }
 

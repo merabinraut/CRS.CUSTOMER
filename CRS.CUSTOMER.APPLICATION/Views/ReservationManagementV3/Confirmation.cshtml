@@ -156,8 +156,8 @@
                     </div>
                 </div>
                 <div class="h-[37px] rounded-[5px] mt-[9px] border border-[#E3AB00] text-[#E3AB00] font-bold flex justify-center items-center text-sm gap-[2px]" style="background: #fffaf5;">
-                        <i class="las la-coins text-[18px]"></i> 500ポイント獲得できます！
-                    </div>
+                    <i class="las la-coins text-[18px]"></i> 一人につき500ポイント取得できます！
+                </div>
 
                 <div class="font-[500] text-[12px] text-[#D75A8B] flex justify-center mt-9">
                     ※ 店舗ご来店時顔付き本人確認書類をご持参ください
@@ -166,7 +166,7 @@
         </div>
     </div>
 </div>
-<div class="flex py-3 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
+<div class="responsiveButtonPlan flex py-3 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
      style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
     <button class="btn" onclick="WindowHistoryBack();">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Back
@@ -179,7 +179,7 @@
 </div>
 @section scripts
 {
-    <script src="~/Content/CustomHelper.js"></script>
+    <script src="~/Content/CustomHelper_v1.js"></script>
     <script>
         const decryptAndGetValue = key => localStorage.getItem(key) ? DecryptParameter(localStorage.getItem(key)) : "";
 

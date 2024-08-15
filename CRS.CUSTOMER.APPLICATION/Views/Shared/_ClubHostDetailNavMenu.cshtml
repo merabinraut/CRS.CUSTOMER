@@ -23,19 +23,19 @@
 
     <div class="flex gap-4">
         <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
-            <i class="las la-bell"></i>
+            <i class="las la-bell"  style="color:#d75a88"></i>
         </div>
         @if (@Session["Username"] != null)
         {
             <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" data-drawer-target="drawer-right-example"
                  data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">
-                <i class="las la-bars"></i>
+                <i class="las la-bars" style="color:#d75a88"></i>
             </div>
         }
         else
         {
             <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='/login'">
-                <i class="las la-bars"></i>
+                <i class="las la-bars"  style="color:#d75a88"></i>
             </div>
         }
     </div>

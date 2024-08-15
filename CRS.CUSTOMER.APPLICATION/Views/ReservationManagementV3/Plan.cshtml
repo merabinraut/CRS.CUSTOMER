@@ -5,8 +5,24 @@
     var ClubDetailModel = Model.ClubDetailModel;
 
 }
+<style>
 
-<div class="flex flex-col justify-between h-screen relative pb-8">
+    @@media (min-width: 640px) {
+        #planbutton {
+            width: 375px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            bottom: -40px;
+        }
+
+      /*  #planContent {
+            padding-top: 8px;
+        }*/
+    }
+</style>
+
+
+<div id="planContent" class="flex flex-col justify-between h-screen relative pb-8">
     <div>
         <!-- header  -->
         <div class="flex items-center justify-between  pt-[13px] px-[14px] pb-[9px] border-b border-b-[#DCDCDC]">
@@ -203,7 +219,7 @@
     </div>
 </div>
 
-<div class="flex py-3 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
+<div class="responsiveButtonPlan flex py-3 items-center fixed bottom-0 left-0 w-full px-4 bg-white"
      style="box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);">
     <button class="btn" onclick="WindowHistoryBack();">
         @CRS.CUSTOMER.APPLICATION.Resources.Resource.Cancel
@@ -219,7 +235,7 @@
 </div>
 @section scripts
 {
-    <script src="~/Content/CustomHelper.js"></script>
+    <script src="~/Content/CustomHelper_v1.js"></script>
     <script>
         // Get all the div elements
         var divs = document.querySelectorAll('.plan-card');
@@ -238,11 +254,11 @@
 
         function SubmitFunction() {
             const activeElement = document.querySelector('.plan-selection .active');
-            if (!activeElement) {                
+            if (!activeElement) {
                 toastr.info('プランを選択してください');
                     return false;
-             
-            }               
+
+            }
 
             const PlanId = activeElement.querySelector('.planid-class').value;
             if (!PlanId) {

@@ -86,6 +86,42 @@
         cursor: not-allowed;
         pointer-events: none;
     }
+    /* custom select*/
+    .custom-select {
+        position: relative;
+        display: inline-block;
+    }
+
+    select {
+        appearance: none;
+        padding-right: 30px; /* Space for the custom arrow */
+    }
+
+    .custom-arrow {
+        position: absolute;
+        right: 13px; /* Adjust this to move the icon horizontally */
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none; /* Ensures the arrow does not block clicks */
+    }
+    .profileimg2 {
+        width: 100%;
+        height: 100%;
+        
+    }
+    .editoption2 {
+        margin-left: 44px;
+        /* margin-top: 44px; */
+        height: 24px;
+        width: 24px;
+        border-radius: 55px;
+        justify-items: center;
+        position: absolute;
+        background-color: #fff;
+        top: 41px;
+        border: 1px solid #e8e8e8;
+        z-index: 0;
+    }
 </style>
 <div class=" no-scrollbar overflow-y-auto">
 
@@ -93,7 +129,7 @@
         <div class="flex flex-row justify-between">
             <div class="flex flex-row">
                 <div class="photocontainer">
-                    <div class="profileimage">
+                    <div class="profileimg2" style="z-index:1;">
                         @if (String.IsNullOrWhiteSpace(Model.ProfileImage))
                         {
                             <img class="rounded-full h-[64px] w-[64px] object-fill " src="~/Content/assets/images/customer/demo-image.jpeg" alt="Profile Image">
@@ -103,7 +139,7 @@
                             <img class="rounded-full h-[64px] w-[64px] object-fill " src="@Model.ProfileImage" alt="Profile Image">
                         }
                     </div>
-                    <div class="editoption">
+                    <div class="editoption2">
                         <input type="file" id="fileInput" accept="image/jpeg, image/png, image/jpg" style="display: none">
                         <button onclick="uploadProfileImage()">
                             <svg id="camera"
@@ -123,7 +159,7 @@
                         @Model.NickName
                     </div>
                     <div class="text-[14px] ">
-                       @string.Concat("@", @Session["CustomerCode"])
+                        @string.Concat("@", @Session["CustomerCode"])
                     </div>
                     <div class=" rounded-[3px] text-[#F89336] border-[#F89336] flex flex-row items-center rounded-[3px]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
@@ -145,12 +181,13 @@
     @using (Html.BeginForm("UpdateUserProfileDetail", "ProfileManagement", FormMethod.Post, new { id = "profile-form" }))
     {
         @Html.AntiForgeryToken()
-        if (!string.IsNullOrEmpty(Model.EmailAddress))
+        if (!string.IsNullOrEmpty(Model.Email))
         {
             @Html.HiddenFor(model => model.EmailAddress)
         }
         @Html.HiddenFor(model => model.Gender)
         @Html.HiddenFor(model => model.NickName)
+        @Html.HiddenFor(model => model.Email)
         <div class="flex flex-col px-[16px]" style="background:#FAF7F9; padding-bottom:22px; padding-top:14px">
 
             <div class="input-field-common w-full flex flex-col">
@@ -299,7 +336,7 @@
                 <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]" for="fname">
                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email <span class="text-[#D32F2F]"></span>
                 </label>
-                @if (!string.IsNullOrEmpty(Model.EmailAddress))
+                @if (!string.IsNullOrEmpty(Model.Email))
                 {
                     @Html.TextBoxFor(model => model.EmailAddress, new
                {
@@ -308,19 +345,10 @@
                    id = "emailInput",
                    @autocomplete = "off",
                    @disabled = "disabled",
-                        @style = "background-color:lightgrey",
-                   @type = "text"
+                   @style = "background-color:lightgrey",
+                   @type = "email",
+                   @value = Model.EmailAddress
                })
-                    @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
-                        class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-                        type="text"
-                        value="@Model.EmailAddress"
-                        id="emailInput"
-                        name="EmailAddress"
-                        disabled style="background-color:lightgrey">*@
-                    @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                            @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
-                        </div>*@
                 }
                 else
                 {
@@ -330,19 +358,11 @@
                    @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
                    @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
                    @id = "emailInput",
-                   @autocomplete = "off"
-                   ,
-                        @type = "text"
+                   @autocomplete = "off",
+                   @type = "email",
+                   @value = Model.EmailAddress
                })
-                    @*<input placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Email"
-                        class="border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] "
-                        type="text"
-                        value="@Model.EmailAddress"
-                        id="emailInput"
-                        name="EmailAddress">*@
-                    @*<div class="validationMessage text-[10px] font-normal leading-[13.62px]">
-                            @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "error-validation-msg" })
-                        </div>*@
+
                 }
 
             </div>
@@ -407,9 +427,9 @@
                 </div>*@
             <div style="display: flex; justify-content:flex-start; align-items:center; gap:7px">
 
-                <div style="width:40%">
+                <div style="width:40%;">
                     <label class="text-[14px] font-[700] mt-[12px] uppercase mb-[10px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Address <span class="text-[#D32F2F]"></span></label>
-                    <div class="input-field-common mb-[10px] relative">
+                    <div class="input-field-common mb-[10px] relative" style=" margin: 12px 0 10px;">
                         <div style="position: absolute; top: 10px; left: 10px; color: #6A6A6A" lang="">〒</div>
                         @Html.TextBoxFor(model => model.PostalCode, new { @class = "border-[1px]  text-[#6A6A6A] rounded-[3px] border-[#BEBEBE]", @id = "postcode", @style = "width:100%; padding-left:34px", @placeholder = "", autocomplete = "off" })
 
@@ -430,8 +450,8 @@
 
             </div>
             <div class="grid grid-cols-1 " style="padding-bottom:12px">
-                <div class="input-field-common">
-                    <select id="default_select" style="width: 100%; font-size:15px"
+                <div class="input-field-common custom-select" >
+                    <select id="default_select" style="width: 100%; border-radius:3px; font-size:15px; outline:none;"
                             class="default_select text-[#B7B7B7] h-[44px] select-common" name="PrefectureDDL">
                         <option value="" selected>
                             都道府県を選択してください
@@ -453,6 +473,11 @@
                             }
                         }
                     </select>
+                    <span class="custom-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                            <path d="M7 8L0.937823 0.5L13.0622 0.499999L7 8Z" fill="#707070" />
+                        </svg>
+                    </span> <!-- Downward arrow or any icon -->
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-[6px]  " style="margin-bottom:12px">
@@ -557,7 +582,7 @@
 
 
 
-<div id="save_Modal" class="modal modalWrapper"
+<div id="save_Modal" class="modal modalWrapper responsiveModalfull"
      style="display:none;">
     <div class="save_modal-content relative" style="max-width: 312px; border-radius: 15px;">
         <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('save_Modal')"
@@ -591,9 +616,9 @@
 
 
 
-<div id="modal1" class="modal " style="display:none">
+<div id="modal1" class="modal responsiveModalfull" style="display:none">
     <div class=" " style="width:90%">
-        <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
+        <div class="relative w-full max-w-2xl max-h-full " style="z-index:1000">
             <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('modal1')"
                   style="top:-49px">&times;</span>
             <div id="cancel_id" value="" hidden></div>
@@ -635,8 +660,8 @@
 </div>
 @*second popup*@
 
-<div id="modal2" class="modal modalWrapper" style="display:none">
-    <div class=" modalContentWrapper" style="margin:auto">
+<div id="modal2" class="modal modalWrapper responsiveModalfull" style="display:none">
+    <div class=" modalContentWrapper">
         <div class="relative w-full max-w-2xl max-h-full" style="z-index:1000">
             <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('modal2')"
                   style="top:-49px">&times;</span>
@@ -809,6 +834,7 @@
                 return;
             }
             toastr.info("誕生日の情報に誤りがあります");
+
             return;
         }
 
@@ -898,6 +924,9 @@
         });
         // Initial check on page load
         checkForm();
+
+    </script>
+    <script>
 
     </script>
 }

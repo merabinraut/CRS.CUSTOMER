@@ -9,7 +9,7 @@ namespace CRS.CUSTOMER.BUSINESS.ProfileManagement
     {
         private readonly IProfileManagementRepository _repo;
 
-        public ProfileManagementBusiness(ProfileManagementRepository profileManagementRepository) => this._repo = profileManagementRepository;
+        public ProfileManagementBusiness() => this._repo = new ProfileManagementRepository();
 
         public CommonDbResponse ChangePassword(PasswordCommon passwordCommon)
         {
