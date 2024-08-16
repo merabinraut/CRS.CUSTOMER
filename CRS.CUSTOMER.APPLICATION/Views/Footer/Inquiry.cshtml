@@ -220,19 +220,18 @@
         var message = $('#Message').val().trim();
         var emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
         if (email == null || email == '') {
-            $('#erroremail').text('必須').show();
-            $('#errormsg').text('必須').show();
-            return false;
-        }
-        else if (message == null || message == '') {
-            $('#erroremail').text('必須').show();
-            $('#errormsg').text('必須').show();
+            $('#erroremail').text('必須').show();          
             return false;
         }
         else if (!emailPattern.test(email)) {
+            $('#errormsg').hide();
             $('#erroremail').text('メールアドレスに誤りがあります').show();
             return false;
         }
+        else if (message == null || message == '') {           
+            $('#errormsg').text('必須').show();
+            return false;
+        }    
         else {
             $('#errormsg').hide();
             $('#erroremail').hide();
@@ -243,14 +242,14 @@
         var email = $('#EmailAddress').val().trim();
         if (email !== null && email !== '') {
             $('#erroremail').hide();
-            var email = $('#EmailAddress').val();
-            var emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            //var email = $('#EmailAddress').val();
+            //var emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
 
-            if (!emailPattern.test(email)) {
-                $('#erroremail').text('メールアドレスに誤りがあります').show();
-            } else {
-                $('#erroremail').hide();
-            }
+            //if (!emailPattern.test(email)) {
+            //    $('#erroremail').text('メールアドレスに誤りがあります').show();
+            //} else {
+            //    $('#erroremail').hide();
+            //}
         }
         else {
             $('#erroremail').text('必須').show();
