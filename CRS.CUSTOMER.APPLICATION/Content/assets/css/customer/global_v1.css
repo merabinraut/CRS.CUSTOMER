@@ -59,9 +59,10 @@ body {
 .font-futura {
     font-family: "Futura";
 }
- input:focus {
-  border-color: #d75a8b !important;
-  --tw-ring-shadow: none !important;
+
+input:focus {
+    border-color: #d75a8b !important;
+    --tw-ring-shadow: none !important;
 }
 /* Hide the number input spinners in WebKit browsers (Chrome, Safari) */
 input[type="number"]::-webkit-inner-spin-button,
@@ -138,8 +139,9 @@ input[type="number"] {
     border: none;
     outline: none;
 }
-#scrollToTopButton{
-    cursor:pointer;
+
+#scrollToTopButton {
+    cursor: pointer;
 }
 
 .breadcrumb {
@@ -294,14 +296,17 @@ input[type="number"] {
     color: var(--warmgray-1);
     position: relative;
 }
+
 .tab-button-plane-preference {
     color: #667085;
 }
+
 .tab-container-plane .tab-button-plane-preference.active {
     padding: 15px 4px 13px 4px !important;
     color: #d75a8b;
     border-bottom: 2px solid var(--primary-softrose) !important;
 }
+
 .tab-container-plane .active {
     /* padding: 15px 4px 13px 4px; */
     color: var(--charcoalBlack);
@@ -407,7 +412,7 @@ input[type="number"] {
     width: 100%;
     height: 100%;
     border-radius: 4px;
-    cursor:pointer;
+    cursor: pointer;
     background-color: rgba( 0, 0, 0, 0.6 ); /* Adjust the alpha (4th) value for transparency */
 }
 /* form  */
@@ -892,7 +897,7 @@ label {
 
     .payment-option.active {
         border: 1px solid var(--primary, #d75a8b);
-   /*     color: var(--primary);*/
+        /*     color: var(--primary);*/
         font-weight: 600;
     }
 
@@ -1232,8 +1237,7 @@ label {
     background: #3E3E3E;
     box-shadow: 0px -4px 9px 0px rgba(0, 0, 0, 0.04);
     backdrop-filter: blur(17px);
-    overflow:hidden !important;
-   
+    overflow: hidden !important;
 }
 
 
@@ -1373,15 +1377,15 @@ label {
 .text-clip {
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space:nowrap;
+    white-space: nowrap;
     /*width:100%;*/
-/*    text-align:center;*/
+    /*    text-align:center;*/
 }
 
 .no-scroll-loader {
     overflow-y: hidden !important;
     -webkit-overflow-scrolling: auto !important;
-    scroll-behavior:revert;
+    scroll-behavior: revert;
 }
 /*.disable-click {
     background: #F0F0F0;
@@ -1413,20 +1417,22 @@ label {
     white-space: nowrap;
     font-weight: 500;
 }
+
 .strikethrough-wrapper {
     display: flex;
     gap: 4px;
     font-size: 14px;
-    font-weight:500;
-    align-items:center;
+    font-weight: 500;
+    align-items: center;
 }
+
     .strikethrough-wrapper > span {
         color: #D17979;
         font-family: Futura;
         font-weight: 500;
         letter-spacing: -0.6px;
         font-size: 10px;
-        font-weight:500;
+        font-weight: 500;
     }
 
 
@@ -1639,7 +1645,7 @@ button {
     padding: 15px 0 0 0;
     display: block;
     float: left;
-   /* border-bottom: 4px solid #fafafa;*/
+    /* border-bottom: 4px solid #fafafa;*/
     /* background: #fcfcfc;*/
     background: #fff;
 }
@@ -1659,8 +1665,8 @@ button {
     }
 
 ul.club_tags, .club_header, .club_rate, .club_pr {
-    padding-left:15px;
-    padding-right:11px;
+    padding-left: 15px;
+    padding-right: 11px;
 }
 /* tags */
 ul.club_tags {
@@ -1753,7 +1759,6 @@ ul.club_tags {
 h3.club_name, p.club_kana, p.club_group {
     display: inline-flex;
     align-items: center;
-    
 }
 
 .club_info h3, .club_info p {
@@ -1765,7 +1770,7 @@ h3.club_name, p.club_kana, p.club_group {
 h3.club_name {
     height: 19px;
     font-size: 0.9rem;
-/*    max-width: 120px;*/
+    /*    max-width: 120px;*/
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap
@@ -1774,7 +1779,6 @@ h3.club_name {
 p.club_kana, p.club_group {
     height: 13px;
     color: #aaaaaa;
-    
 }
 
 p.club_group {
@@ -1788,8 +1792,8 @@ p.club_group {
 
 .action_keep {
     width: 33px;
-    height: 33px    ;
-   /* padding: 6px;*/
+    height: 33px;
+    /* padding: 6px;*/
     display: inline-flex;
     flex-flow: wrap-reverse;
 }
@@ -1919,7 +1923,7 @@ ul.rate_review {
 }
 
 p.club_pr {
-   /* width: 100%;
+    /* width: 100%;
     height: 50px;
     display: inline-flex;
     flex-wrap: wrap;
@@ -1935,7 +1939,6 @@ p.club_pr {
     overflow: hidden;
     line-height: 1.4;
     text-overflow: ellipsis;
-
 }
 /* hostclub footer */
 .club_footer {
@@ -2005,31 +2008,35 @@ p.club_pr {
     letter-spacing: 1px;
     border-radius: 4px;
 }
-img{
-    object-fit:cover !important
+
+img {
+    object-fit: cover !important
 }
 
 
 /*for responsive design*/
-@media(width > 639px){
-    #child{
-        max-width:375px;
-        width:90%;
+@media(width > 639px) {
+    #child {
+        max-width: 343px;
+        width: 90%;
     }
+
     .responsiveModalPopup {
         max-width: 375px;
-        width:100%;
-        margin:0 auto;
+        width: 100%;
+        margin: 0 auto;
     }
+
     .responsiveButton {
         max-width: 375px;
         width: 100%;
         margin: 0 auto;
-        margin-left:-16px;
-        left:auto
+        margin-left: -16px;
+        left: auto
     }
-    .responsiveFullHeight{
-        height:100vh;
+
+    .responsiveFullHeight {
+        height: 100vh;
         overflow-x: hidden;
     }
 
@@ -2039,6 +2046,7 @@ img{
         margin: 0 auto;
         left: auto !important;
     }
+
     .responsiveButtonPlan {
         max-width: 375px;
         width: 100%;
@@ -2046,9 +2054,11 @@ img{
         /*margin-left: -16px;*/
         left: auto
     }
+
     .fullHeightResponsive {
         height: calc(100vh - 102px) !important;
     }
+
     .loginMarginTop {
         margin-top: -23px;
         display: grid;
@@ -2057,29 +2067,27 @@ img{
         /* grid-template-columns: repeat(3, minmax(0, 1fr)); */
         grid-auto-columns: auto;
     }
-    .loginContainer{
-        height:calc(100vh - 24px) !important;
-        padding-top:24px !important;
+
+    .loginContainer {
+        height: calc(100vh - 24px) !important;
+        padding-top: 24px !important;
     }
-    .resposniveHeightSearchTab{
-        height:calc(100vh - 140px);
+
+    .resposniveHeightSearchTab {
+        height: calc(100vh - 140px);
     }
-}
 
     .responsiveLoader {
         max-width: 375px;
         width: 100%;
-        margin: 62px auto;
+        margin: 55px auto;
         height: fit-content;
     }
 }
 
-@media(width < 639px) {
-    .responsiveLoader {
-       /* max-width: 375px;*/
-        width: 100%;
-        margin: 62px auto;
-        height:fit-content;
-    }
+.responsiveLoader2 {
+    /* max-width: 375px;*/
+    width: 100%;
+    margin: 55px auto;
+    height: fit-content;
 }
-

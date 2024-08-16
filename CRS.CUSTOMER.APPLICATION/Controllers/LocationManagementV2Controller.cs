@@ -42,6 +42,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var culture = Request.Cookies["culture"]?.Value;
             culture = string.IsNullOrEmpty(culture) ? "ja" : culture;
             var PrefecturesArea = $"/{prefectures}/{area}";
+            var LocationJapaneseLabel = ApplicationUtilities.GetKeyValueFromDictionary(_locationJapaneseLabelHelper, PrefecturesArea);
+            ViewBag.LocationJapaneseLabel = string.IsNullOrEmpty(LocationJapaneseLabel) ? PrefecturesArea : LocationJapaneseLabel;
             ViewBag.ActionPageName = "Dashboard";
             var locationId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, PrefecturesArea);
             var agentId = ApplicationUtilities.GetSessionValue("AgentId")?.ToString()?.DecryptParameter();
