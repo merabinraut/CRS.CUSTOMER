@@ -106,7 +106,7 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
         {
             string SQL = "EXEC sproc_customer_request_enquiry";
             SQL += " @emailAddress=" + _DAO.FilterString(request.EmailAddress);
-            SQL += ",@message=" + _DAO.FilterString(request.Message);    
+            SQL += !string.IsNullOrEmpty(request.Message)?",@message=N" + _DAO.FilterString(request.Message) : ",@message=" + _DAO.FilterString(request.Message);    
             return _DAO.ParseCommonDbResponse(SQL);
         }
     }
