@@ -270,7 +270,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             Time = !string.IsNullOrEmpty(ClubTabRequest.Time) ? string.Join(",", ClubTabRequest.Time.Split(',').Select(x => x.DecryptParameter()).Where(x => x != null)).Trim(',')
                                : string.Empty,
                             ClubAvailability = !string.IsNullOrEmpty(ClubTabRequest.ClubAvailability) ? string.Join(",", ClubTabRequest.ClubAvailability.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,
-                            CustomerId = CustomerId
+                            CustomerId = CustomerId,
+                            Skip = ClubTabRequest.StartIndex,
+                            Take = ClubTabRequest.PageSize,
                         };
                         var dbResponse = _searchBusiness.ClubPreferenceFilter(dbRequest);
                         Response.FilteredClubModel = ApplicationUtilities.MapObjects<CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
@@ -282,6 +284,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
                         x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
                     });
+                    ViewBag.StartIndex = ClubTabRequest.StartIndex;
+                    ViewBag.TotalRecords = (Response.FilteredClubModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredClubModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredClubModel.FirstOrDefault().TotalRecords) : 0;
                     return View("ClubFilter", Response);
                 }
             }

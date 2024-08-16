@@ -265,6 +265,7 @@
     <Compile Include="Models\Dashboard\DashboardRecommendedClubModel.cs" />
     <Compile Include="Models\Dashboard\DashboardRecommendedHostModel.cs" />
     <Compile Include="Models\Dashboard\LocationModel.cs" />
+    <Compile Include="Models\Enquiry\EnquiryRequestModel.cs" />
     <Compile Include="Models\Home\LoginManagementModel.cs" />
     <Compile Include="Models\Home\RegistrationManagementModel.cs" />
     <Compile Include="Models\LocationManagementV2\ClubDetailModel.cs" />
@@ -621,8 +622,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Data\Configuration.json" />
-    <Content Include="App_Data\AmazonConfigruation.json" />
     <Content Include="App_Data\URLManagementConfigruation.json" />
+    <Content Include="App_Data\AmazonConfigruation.json" />
     <None Include="packages.config" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
@@ -699,7 +700,7 @@
     <Content Include="Views\Footer\customervoice.cshtml" />
     <Content Include="Views\Shared\_FooterLayout.cshtml" />
     <Content Include="Views\Footer\faq.cshtml" />
-    <Content Include="Views\Footer\inquery.cshtml" />
+    <Content Include="Views\Footer\Inquiry.cshtml" />
     <Content Include="Views\Footer\operatingcompany.cshtml" />
     <Content Include="Views\Footer\privacypolicy.cshtml" />
     <Content Include="Views\Home\ForgotPassword_SuccessView.cshtml" />

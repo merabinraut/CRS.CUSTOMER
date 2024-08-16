@@ -43,11 +43,22 @@
         }
     </style>
     <title>ホスログ/公式ホームページ</title>
-    <meta property="og:title" content="ホスログ/公式ホームページ">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://hoslog.jp/">
-    <meta property="og:image" content="https://hoslog.jp/Content/assets/images/customer/demo-image.jpeg">
-    <meta property="og:description" content="test">
+    @{
+        var phase = System.Configuration.ConfigurationManager.AppSettings["phase"];
+        if (!string.IsNullOrEmpty(phase) && phase.ToUpper() == "LIVE")
+        {
+            <meta property="og:title" content="ホスログ/公式ホームページ">
+            <meta property="og:type" content="article">
+            <meta property="og:url" content="https://hoslog.jp/">
+            <meta property="og:image" content="https://hoslogjapan.s3.ap-northeast-1.amazonaws.com/logo.png">
+            <meta property="og:description" content="test">
+        }
+    }
+    @* <meta property="og:title" content="ホスログ/公式ホームページ">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://hoslog.jp/">
+        <meta property="og:image" content="https://hoslog.jp/Content/assets/images/customer/demo-image.jpeg">*@
+    @*<meta property="og:description" content="test">*@
     <style>
         .overlay-login {
             position: absolute;

@@ -32,6 +32,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchV2
         public string Shift { get; set; }
         public string Time { get; set; }
         public string ClubAvailability { get; set; }
+        public int StartIndex { get; set; } = 0;
+        public int PageSize { get; set; } = 25;
     }
 
     public class SearchV2FilterClubTabResponseModel
@@ -65,6 +67,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchV2
         public int AverageRating { get; set; }
         public List<string> HostGalleryImage { get; set; } = new List<string>();
         public string TotalClubCount { get; set; }
+        public string TotalRecords { get; set; }
     }
     #endregion
 

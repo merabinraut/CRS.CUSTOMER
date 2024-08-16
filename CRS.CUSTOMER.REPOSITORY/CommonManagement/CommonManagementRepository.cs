@@ -1,10 +1,13 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.CommonManagement;
+using CRS.CUSTOMER.SHARED.Enquiry;
 using CRS.CUSTOMER.SHARED.Home;
+using DocumentFormat.OpenXml.Office2016.Excel;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
 {
@@ -97,6 +100,14 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
                 response = new Tuple<int, int>(Item1, Item2);
             }
             return response;
+        }
+
+        public CommonDbResponse PostEnquiryAsync(EnquiryRequestcommon request)
+        {
+            string SQL = "EXEC sproc_customer_request_enquiry";
+            SQL += " @emailAddress=" + _DAO.FilterString(request.EmailAddress);
+            SQL += !string.IsNullOrEmpty(request.Message)?",@message=N" + _DAO.FilterString(request.Message) : ",@message=" + _DAO.FilterString(request.Message);    
+            return _DAO.ParseCommonDbResponse(SQL);
         }
     }
 }
