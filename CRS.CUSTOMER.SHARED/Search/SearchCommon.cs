@@ -12,6 +12,8 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string Time { get; set; }
         public string ClubAvailability { get; set; }
         public string CustomerId { get; set; }
+        public int Skip { get; set; }
+        public int Take { get; set; }
     }
     public class SearchFilterClubDetailCommon
     {
@@ -37,6 +39,7 @@ namespace CRS.CUSTOMER.SHARED.Search
         public int TotalComment { get; set; }
         public int AverageRating { get; set; }
         public List<string> HostGalleryImage { get; set; } = new List<string>();
+        public string TotalRecords { get; set; }
 
     }
 
