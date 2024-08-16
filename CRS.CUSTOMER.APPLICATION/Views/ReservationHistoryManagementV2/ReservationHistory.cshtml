@@ -962,8 +962,8 @@
 
     </div>
 
-    <div class="px-4 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
-        <div class="flex gap-[24px]  w-full " style="border-bottom: 4px solid #F4F4F4;">
+    <div class=" mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
+        <div class="flex px-4 gap-[24px]  w-full " style="border-bottom: 4px solid #F4F4F4;">
             <div class="flex tab-container-plane booking-tab bg-white justify-between w-full text-sm no-scrollbar">
                 <button id="tab1Button" class="tab-button-plane w-max flex-none tab-link  @(rsvtab == "01" ? "active" : "")" onclick="window.location.href='/user/account/reservation/?rsvtab=01'">予約中</button>
                 <button id="tab2Button" class="tab-button-plane w-max flex-none tab-link pt-0 @(rsvtab == "02" ? "active" : "")" onclick="window.location.href='/user/account/reservation/?rsvtab=02'">訪問済み</button>
@@ -972,7 +972,7 @@
             </div>
         </div>
     </div>
-    <div class="my-4">
+    <div class="py-4" style="margin:0; background-color:white;">
         <div class="bg-white pb-4  px-[16px] ">
             <div id="tab1" class="tab-content-plane @(rsvtab == "01" ? "" : "hidden")">
                 @if (Model.GetReservedList != null && Model.GetReservedList.Count > 0)
@@ -1026,10 +1026,10 @@
                                             </div>*@
                                         <div class="club_info" style="width:auto">
                                             <!-- s/club_name -->
-                                            <h3 class="club_name">@item.ClubNameEng</h3>
+                                            <h3 class="club_name" style=" width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.ClubNameEng</h3>
                                             <!-- e/club_name -->
                                             <!-- s/club group -->
-                                            <p class="club_group">@item.GroupName</p>
+                                            <p class="club_group" style="color: #e3a1a1; width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.GroupName</p>
                                             <!-- e/club group -->
                                         </div>
 
@@ -1240,10 +1240,10 @@
                                     </ul>
                                     <div class="club_info" style="width:auto">
                                         <!-- s/club_name -->
-                                        <h3 class="club_name">@item.ClubNameEng</h3>
+                                        <h3 class="club_name" style=" width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.ClubNameEng</h3>
                                         <!-- e/club_name -->
                                         <!-- s/club group -->
-                                        <p class="club_group">@item.GroupName</p>
+                                        <p class="club_group" style="color: #e3a1a1; width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.GroupName</p>
                                         <!-- e/club group -->
                                     </div>
 
@@ -1417,10 +1417,10 @@
 
                                         <div class="club_info" style="width:auto">
                                             <!-- s/club_name -->
-                                            <h3 class="club_name">@item.ClubNameEng</h3>
+                                            <h3 class="club_name" style=" width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.ClubNameEng</h3>
                                             <!-- e/club_name -->
                                             <!-- s/club group -->
-                                            <p class="club_group">@item.GroupName</p>
+                                            <p class="club_group" style="color: #e3a1a1; width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.GroupName</p>
                                             <!-- e/club group -->
                                         </div>
 
@@ -1554,7 +1554,7 @@
                     foreach (var item in Model.GetAllHistoryList)
                     {
                         <div class="bg-white  bg-[#fff] pt-[12px] pb-0 px-[8px] booking-card" style="margin-bottom:12px;">
-                            <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] " style=" max-width: calc(100% - 57px); ">
+                            <div class="flex pb-3 border-b-[1px] border-[#F1F1F1] " style=" max-width: 100%; ">
                                 <div class="h-[82px] w-[82px] relative flex-none">
                                     @if (item.TransactionStatus.Trim().ToUpper() == "A")
                                     {
@@ -1614,12 +1614,12 @@
                                         }
                                         <!-- e/tag -->
                                     </ul>
-                                    <div class="flex flex-col" style="width:auto">
+                                    <div class="flex flex-col club_info" style="width:auto">
                                         <!-- s/club_name -->
-                                        <h3 class="" style=" width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: calc(100% - 32px);">@item.ClubNameEng</h3>
+                                        <h3 class="club_name" style=" width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.ClubNameEng</h3>
                                         <!-- e/club_name -->
                                         <!-- s/club group -->
-                                        <h3 class="club_group" style="color: #e3a1a1; width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.GroupName</h3>
+                                        <h3 class="club_group" style="color: #e3a1a1; width: 100%; text-overflow: ellipsis; overflow: hidden; font-weight:normal; white-space: nowrap; max-width: 226px;">@item.GroupName</h3>
                                         <!-- e/club group -->
                                     </div>
                                     <div class="flex text-[#565656] gap-[2px] text-[9px] items-center gap-1" style="margin-top:9px;">
