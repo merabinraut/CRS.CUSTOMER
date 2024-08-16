@@ -169,15 +169,15 @@
 
         <div class="grid gap-[12px]" style="margin-left: 16px; margin-right:16px">
             @*<div class="flex flex-col gap-[10px]">
-                    <div class="text-[#535353] font-[600]">
-                        ニックネーム <span class="text-[#D32F2F]">*</span>
-                    </div>
-                    <div>
-                        <input class="w-full" style="border-radius: 3px; padding: 11px 16px; border: 1px solid #BEBEBE;"
-                               type="text">
-                    </div>
+            <div class="text-[#535353] font-[600]">
+                ニックネーム <span class="text-[#D32F2F]">*</span>
+            </div>
+            <div>
+                <input class="w-full" style="border-radius: 3px; padding: 11px 16px; border: 1px solid #BEBEBE;"
+                       type="text">
+            </div>
 
-                </div>*@
+        </div>*@
 
             <!-- 2nd text field  -->
             <div class="flex flex-col gap-[10px]">
@@ -185,10 +185,10 @@
                     Eメール <span class="text-[#D32F2F]">*</span>
                 </div>
                 <div>
-                    <input class="w-full" name="EmailAddress" id="EmailAddress" style="border-radius: 3px;padding: 11px 16px; border: 1px solid #BEBEBE;"
-                           type="Email">
+                    <input class="w-full" name="EmailAddress" id="EmailAddress" onkeypress="return removeEmailValidation();" style="border-radius: 3px;padding: 11px 16px; border: 1px solid #BEBEBE;"
+                           type="text">
                 </div>
-                <h6 id="erroremail" hidden style="color:red;" class="text-danger"></h6>
+                <h6 id="erroremail" hidden style="color: red; font-size: 12px" class="text-danger"></h6>
             </div>
             <!-- 3rd field  -->
             <div class="flex flex-col gap-[10px]">
@@ -197,9 +197,9 @@
                 </div>
                 <div>
                     <textarea name="Message" id="Message" placeholder="文章を書く" class="w-full"
-                              style="border-radius: 3px;padding: 11px 16px; height: 82px; border: 1px solid #BEBEBE;" maxlength="250" type="text">
-                </textarea>
-                    <h6 id="errormsg" hidden  style="color:red;" class="text-danger"></h6>
+                              style="border-radius: 3px; padding: 11px 16px; height: 82px; border: 1px solid #BEBEBE;" maxlength="250" type="text" onkeypress="return removeMessageValidation();"></textarea>
+
+                    <h6 id="errormsg" hidden style="color: red; font-size: 12px" class="text-danger"></h6>
                 </div>
 
             </div>
@@ -216,20 +216,53 @@
 </div>
 <script>
     function validate() {
-        debugger;
-        var email = $('#EmailAddress').val().trim();;
-        var message = $('#Message').val().trim();;
+        var email = $('#EmailAddress').val().trim();
+        var message = $('#Message').val().trim();
+        var emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
         if (email == null || email == '') {
-            $('#erroremail').text('Email_address_is_required!').show();
+            $('#erroremail').text('必須').show();
+            $('#errormsg').text('必須').show();
             return false;
         }
-        if (message == null || message == '') {
-            $('#errormsg').text('Message_is_required!').show();
+        else if (message == null || message == '') {
+            $('#erroremail').text('必須').show();
+            $('#errormsg').text('必須').show();
+            return false;
+        }
+        else if (!emailPattern.test(email)) {
+            $('#erroremail').text('メールアドレスに誤りがあります').show();
             return false;
         }
         else {
+            $('#errormsg').hide();
+            $('#erroremail').hide();
             return true;
         }
+    }
+    function removeEmailValidation() {
+        var email = $('#EmailAddress').val().trim();
+        if (email !== null && email !== '') {
+            $('#erroremail').hide();
+            var email = $('#EmailAddress').val();
+            var emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
 
+            if (!emailPattern.test(email)) {
+                $('#erroremail').text('メールアドレスに誤りがあります').show();
+            } else {
+                $('#erroremail').hide();
+            }
+        }
+        else {
+            $('#erroremail').text('必須').show();
+        }
+
+    }
+    function removeMessageValidation() {
+        var message = $('#Message').val().trim();
+        if (message !== null && message !== '') {
+            $('#errormsg').hide();
+        } else {
+            $('#errormsg').text('必須').show();
+        }
     }
 </script>
