@@ -3,6 +3,7 @@ using CRS.CUSTOMER.APPLICATION.Models.Enquiry;
 using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Enquiry;
+using DocumentFormat.OpenXml.Office2013.Excel;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -49,23 +50,32 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [HttpPost, Route("support")]
         public ActionResult Inquiry(EnquiryRequestModel request)
         {
-            var mappedRequest = request.MapObject<EnquiryRequestcommon>();
-            var resp = _commonBusiness.PostEnquiryAsync(mappedRequest);
-            if (resp.Code == 0)
+            if (ModelState.IsValid)
             {
-                AddNotificationMessage(new NotificationModel()
+                var mappedRequest = request.MapObject<EnquiryRequestcommon>();
+                var resp = _commonBusiness.PostEnquiryAsync(mappedRequest);
+                if (resp.Code == 0)
                 {
-                    NotificationType = NotificationMessage.SUCCESS ,
-                    Message = resp.Message,
-                    Title = NotificationMessage.SUCCESS.ToString()
-                });
+                    AddNotificationMessage(new NotificationModel()
+                    {
+                        NotificationType = NotificationMessage.SUCCESS,
+                        Message = resp.Message,
+                        Title = NotificationMessage.SUCCESS.ToString()
+                    });
+                    return RedirectToAction("Index", "DashboardV2");
+                }
                 return RedirectToAction("Index", "DashboardV2");
             }
-            return RedirectToAction("Index", "DashboardV2");
+            else
+            {
+                if (string.IsNullOrWhiteSpace(request.Message))
+                    ViewBag.ErrorMsg = "Message_is_required!";
+                if (string.IsNullOrWhiteSpace(request.EmailAddress))
+                    ViewBag.ErrorEmail = "Email_is_required!";
+                return RedirectToAction("Inquiry", "Footer");
+            }
+
         }
-
-
-
         [HttpGet, Route("company")]
         public ActionResult operatingcompany()
         {
