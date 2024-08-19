@@ -53,7 +53,7 @@
                 <div class="flex flex-col gap-[8px] p-[14px] pr-[8px] bg-[#F6F6F6] border border-[#EAEAEA] rounded-[6px]">
 
                     <div class="flex justify-between items-center text-xs font-bold">
-                       @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.Selected*@
+                        @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.Selected*@
                         選択中のホスト
                         <span class="text-primary cursor-pointer">
                             <i class="las la-pen"></i><span class="border-b border-primary" onclick="Review2RedirectFunction();">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Edit</span>
@@ -129,10 +129,10 @@
                     <div data-value="4"><i class="fa-solid fa-star"></i></div>
                     <div data-value="5"><i class="fa-solid fa-star"></i></div>
                 </div>
-                
+
                 <button class="button-curve btn-primary h-[46px]" onclick="SubmitFunction();">
                     @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.PostAReviewForThisStore*@
-                   
+
 
                     <div class="count-display"
                         <span  id="count-display">
@@ -144,11 +144,11 @@
                         </span>
                     </div>
                 </button>
-                
-            </div>
+
             </div>
         </div>
     </div>
+</div>
 @section scripts
 {
     <script>
@@ -284,7 +284,13 @@
             var targetElement = document.getElementById("selected-remark-id");
             var newHTMLContent = '';
             for (var i = 0; i < ReviewRemarkDisplayLabelList.length; i++) {
-                newHTMLContent += `<div class="review-experience h-[19px] mb-0 text-[10px] active">` + ReviewRemarkDisplayLabelList[i] + `</div>`;
+                var data = ReviewRemarkDisplayLabelList[i].split(':');
+                if (data[1] === "good") {
+                    newHTMLContent += `<div class="review-experience h-[19px] mb-0 text-[10px] active" style="margin-left: 2px;">` + data[0] + `</div>`;
+                }
+                else {
+                    newHTMLContent += `<div class="review-experience blue-dotted h-[19px] mb-0 text-[10px] active" style="margin-left: 2px;">` + data[0] + `</div>`;
+                }
             }
             targetElement.innerHTML = newHTMLContent;
         }
@@ -319,7 +325,7 @@
                 star.addEventListener('click', () => {
                     const rating = star.getAttribute('data-value');
                     countDisplay.textContent = `星${rating}つでレビューを投稿する`;
-                    remove_display.textContent=``
+                    remove_display.textContent = ``
                 });
             });
         });

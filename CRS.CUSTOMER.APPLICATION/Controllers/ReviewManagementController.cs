@@ -171,7 +171,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     RemarkId = item.RemarkId?.EncryptParameter(),
                     RemarkLabel = (!string.IsNullOrEmpty(culture) && culture == "en") ? item.RemarkLabelEnglish : item.RemarkLabelJapanese,
-                    RemarkType = (!string.IsNullOrEmpty(culture) && culture == "en") ? item.RemarkTypeEnglish : item.RemarkTypeJapanese,
+                    RemarkType = item.RemarkTypeEnglish,
                     RemarkTypeEnglish = item.RemarkTypeEnglish
                 });
             }
