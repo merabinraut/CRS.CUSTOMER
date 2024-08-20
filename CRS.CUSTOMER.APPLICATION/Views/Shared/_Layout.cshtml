@@ -1,4 +1,19 @@
-﻿<!-- #region Header -->
+﻿@using Newtonsoft.Json
+
+@functions {
+    public dynamic ReadJson()
+    {
+        string filePath = HttpContext.Current.Server.MapPath("~/App_Data/RedirectURLConfiguration.json");
+        string jsonContent = System.IO.File.ReadAllText(filePath);
+        var jsonData = JsonConvert.DeserializeObject<dynamic>(jsonContent);
+        return jsonData;
+    }
+}
+@{
+    var jsonData = ReadJson();
+}
+
+<!-- #region Header -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -28,6 +43,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <script src="~/Content/assets/js/owl.carousel.js"></script>
@@ -60,10 +76,10 @@
             <meta property="og:image" content="https://hoslogjapan.s3.ap-northeast-1.amazonaws.com/logo.png">
         }
     }
-  @*  <meta property="og:title" content="ホスログ/公式ホームページ">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://hoslog.jp/">
-    <meta property="og:image" content="https://hoslogjapan.s3.ap-northeast-1.amazonaws.com/logo.png">*@
+    @*  <meta property="og:title" content="ホスログ/公式ホームページ">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="https://hoslog.jp/">
+        <meta property="og:image" content="https://hoslogjapan.s3.ap-northeast-1.amazonaws.com/logo.png">*@
     @*<meta property="og:description" content="業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した★★★件のホストクラブ・★★★人のホスト情報を掲載中！">*@
     <style>
 
@@ -388,19 +404,19 @@
                 <div id="siteurl" class="flex flex-row justify-center">
                     <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
                 </div>
-                <a href="https://hoslog.jp/user/register" style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
+                <a href="@jsonData.CustomerRegistration.url" style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
                     <div>
-                        <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+                        <p style="font-size:18px;font-weight:600 ; " class="text-white">@jsonData.CustomerRegistration.text</p>
                     </div>
                 </a>
-                <a href="https://owner.hoslog.jp/owner/register/" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                <a href="@jsonData.ClubRegistration.url" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
                     <div>
-                        <p style="font-size:18px;font-weight:600" class="text-black">店舗オーナー登録</p>
+                        <p style="font-size:18px;font-weight:600" class="text-black">@jsonData.ClubRegistration.text</p>
                     </div>
                 </a>
-                <a href="https://affiliate.hoslog.jp/auth/register" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                <a href="@jsonData.AffiliateRegistration.url" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
                     <div>
-                        <p style="font-size:18px;font-weight:600" class="text-black">アフィリエイター登録</p>
+                        <p style="font-size:18px;font-weight:600" class="text-black">@jsonData.AffiliateRegistration.text</p>
                     </div>
                 </a>
             </div>
@@ -690,13 +706,13 @@
                             <div style="border-top: 1px dashed #999999; padding: 0 16px; margin-top: 14px"></div>
 
                             <div class="text-[#999999] font-bold text-[11px] flex gap-[8px] justify-center py-2 mt-2">
-                                <a target="_blank" href="https://affiliate.hoslog.jp/auth/register">
+                                <a target="_blank" href="@jsonData.AffiliateRegistration.url">
                                     アフィリエイト登録
                                 </a>
 
                                 <div class="w-[11px] flex justify-center"> | </div>
 
-                                <a href="https://owner.hoslog.jp/owner/register/" target="_blank">
+                                <a href="@jsonData.ClubRegistration.url" target="_blank">
                                     店舗オーナー登録
                                 </a>
                             </div>

@@ -1,4 +1,19 @@
-﻿﻿@model CRS.CUSTOMER.APPLICATION.Models.Home.RegistrationModel
+﻿@using Newtonsoft.Json
+
+@functions {
+    public dynamic ReadJson()
+    {
+        string filePath = HttpContext.Current.Server.MapPath("~/App_Data/RedirectURLConfiguration.json");
+        string jsonContent = System.IO.File.ReadAllText(filePath);
+        var jsonData = JsonConvert.DeserializeObject<dynamic>(jsonContent);
+        return jsonData;
+    }
+}
+@{
+    var jsonData = ReadJson();
+}
+
+﻿@model CRS.CUSTOMER.APPLICATION.Models.Home.RegistrationModel
 @{
     Layout = null;
 }
@@ -52,8 +67,9 @@
             #innersec {
                 height: 100vh;
             }
+
             #test {
-                 margin-top: -23px; 
+                margin-top: -23px;
                 display: grid;
                 height: 100%;
                 grid-template-columns: 1fr auto 1fr;
@@ -222,21 +238,38 @@
                 <div id="siteurl" class="flex flex-row justify-center">
                     <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
                 </div>
-                <a href="https://hoslog.jp/user/register" style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
+                @* <a href="https://hoslog.jp/user/register" style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
+                        <div>
+                            <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+                        </div>
+                    </a>
+                    <a href="https://owner.hoslog.jp/owner/register/" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                        <div>
+                            <p style="font-size:18px;font-weight:600" class="text-black">店舗オーナー登録</p>
+                        </div>
+                    </a>
+                    <a href="https://affiliate.hoslog.jp/auth/register" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                        <div>
+                            <p style="font-size:18px;font-weight:600" class="text-black">アフィリエイター登録</p>
+                        </div>
+                    </a>*@
+
+                <a href="@jsonData.CustomerRegistration.url" style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
                     <div>
-                        <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+                        <p style="font-size:18px;font-weight:600 ; " class="text-white">@jsonData.CustomerRegistration.text</p>
                     </div>
                 </a>
-                <a href="https://owner.hoslog.jp/owner/register/" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                <a href="@jsonData.ClubRegistration.url" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
                     <div>
-                        <p style="font-size:18px;font-weight:600" class="text-black">店舗オーナー登録</p>
+                        <p style="font-size:18px;font-weight:600" class="text-black">@jsonData.ClubRegistration.text</p>
                     </div>
                 </a>
-                <a href="https://affiliate.hoslog.jp/auth/register" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                <a href="@jsonData.AffiliateRegistration.url" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
                     <div>
-                        <p style="font-size:18px;font-weight:600" class="text-black">アフィリエイター登録</p>
+                        <p style="font-size:18px;font-weight:600" class="text-black">@jsonData.AffiliateRegistration.text</p>
                     </div>
                 </a>
+
             </div>
 
 
@@ -264,7 +297,7 @@
                     <!-- for message -->
                     <div class="displayMessage">
                         @*+ 81- @Model.MobileNumber 宛にSMSを送信しました、メッセージに記載された
-                        6桁の数字を確認し、入力してください*@
+                            6桁の数字を確認し、入力してください*@
                     </div>
                     <input type="hidden" name="exptime" id="exptime" value='@Html.Raw(Session["exptime"]!=null?Session["exptime"].ToString():"")' />
 
@@ -326,19 +359,19 @@
                 @* <div >*@
                 <img src="../../content/assets/images/hpi1.jpeg" style="width:inherit" />
                 @* </div>
-                <div>*@
+                    <div>*@
                 <img src="../../content/assets/images/hpi2.jpeg" style="width:inherit" />
                 @*  </div>
-                <div>*@
+                    <div>*@
                 <img src="../../content/assets/images/hpi3.jpeg" style="width:inherit" />
                 @*</div>
-                <div>*@
+                    <div>*@
                 <img src="../../content/assets/images/hpi4.jpeg" style="width:inherit" />
                 @*  </div>
-                <div>*@
+                    <div>*@
                 <img src="../../content/assets/images/hpi5.jpeg" style="width:inherit" />
                 @* </div>
-                <div>*@
+                    <div>*@
                 <img src="../../content/assets/images/hpi6.jpeg" style="width:inherit" />
                 @*  </div>*@
             </div>
@@ -346,42 +379,42 @@
         </div>
 
     </div>
-            
-            <script>
-                //const inputs = document.querySelectorAll("input"),
-                //    button = document.querySelector("button");
-                //inputs.forEach((input, index1) => {
-                //    input.addEventListener("keyup", (e) => {
-                //        const currentInput = input,
-                //            nextInput = input.nextElementSibling,
-                //            prevInput = input.previousElementSibling;
-                //        if (currentInput.value.length > 1) {
-                //            currentInput.value = "";
-                //            return;
-                //        }
-                //        if (nextInput && nextInput.hasAttribute("disabled") && currentInput.value !== "") {
-                //            nextInput.removeAttribute("disabled");
-                //            nextInput.focus();
-                //        }
-                //        if (e.key === "Backspace") {
-                //            inputs.forEach((input, index2) => {
-                //                if (index1 <= index2 && prevInput) {
-                //                    input.setAttribute("disabled", true);
-                //                    input.value = "";
-                //                    prevInput.focus();
-                //                }
-                //            });
-                //        }
-                //        if (!inputs[3].disabled && inputs[3].value !== "") {
-                //            button.classList.add("active");
-                //            return;
-                //        }
-                //        button.classList.remove("active");
-                //    });
-                //});
-                ///window.addEventListener("load", () => inputs[0].focus());
-            </script>
-            <script>
+
+    <script>
+        //const inputs = document.querySelectorAll("input"),
+        //    button = document.querySelector("button");
+        //inputs.forEach((input, index1) => {
+        //    input.addEventListener("keyup", (e) => {
+        //        const currentInput = input,
+        //            nextInput = input.nextElementSibling,
+        //            prevInput = input.previousElementSibling;
+        //        if (currentInput.value.length > 1) {
+        //            currentInput.value = "";
+        //            return;
+        //        }
+        //        if (nextInput && nextInput.hasAttribute("disabled") && currentInput.value !== "") {
+        //            nextInput.removeAttribute("disabled");
+        //            nextInput.focus();
+        //        }
+        //        if (e.key === "Backspace") {
+        //            inputs.forEach((input, index2) => {
+        //                if (index1 <= index2 && prevInput) {
+        //                    input.setAttribute("disabled", true);
+        //                    input.value = "";
+        //                    prevInput.focus();
+        //                }
+        //            });
+        //        }
+        //        if (!inputs[3].disabled && inputs[3].value !== "") {
+        //            button.classList.add("active");
+        //            return;
+        //        }
+        //        button.classList.remove("active");
+        //    });
+        //});
+        ///window.addEventListener("load", () => inputs[0].focus());
+    </script>
+    <script>
   //For toaster Notification
   $(function () {
   {
@@ -399,71 +432,71 @@
       }
       }
   });
-            </script>
-            <script src="~/Content/validation.js"></script>
+    </script>
+    <script src="~/Content/validation.js"></script>
 
-            <script>
-                var isValid = false;
-                $(function () {
-                    var myDiv = document.getElementById("resend-verification-code");
-                    myDiv.style.display = "block";
-                    var today = new Date();
-                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                    var dateTime = date + ' ' + time;
-                    isValid = false;
-                    countdown($("#exptime").val());
+    <script>
+        var isValid = false;
+        $(function () {
+            var myDiv = document.getElementById("resend-verification-code");
+            myDiv.style.display = "block";
+            var today = new Date();
+            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var dateTime = date + ' ' + time;
+            isValid = false;
+            countdown($("#exptime").val());
+            var divElement = document.getElementById("resend-verification-code");
+            divElement.style.pointerEvents = "none";
+            divElement.style.opacity = 0.5;
+            var buttonsAndInputs = divElement.getElementsByTagName("button");
+            for (var i = 0; i < buttonsAndInputs.length; i++) {
+                buttonsAndInputs[i].disabled = true;
+            }
+        });
+        function countdown(endtime) {
+            //var countDownDate = new Date(endtime).getTime();
+            var endtime = endtime
+            const dateParts = endtime.split(' ');
+            const date = dateParts[0];
+            const time = dateParts[1];
+            //const [year, month, day] = date.split('-');
+            const [year, month, day] = date.split(/[-\/]/);
+            const [hours, minutes, seconds] = time.split(':');
+            const isoDate = new Date(year, month - 1, day, hours, minutes, seconds).toISOString();
+            //const isoDate = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).toISOString();
+            const countDownDate = new Date(isoDate);
+
+            var x = setInterval(function () {
+                /* var now = new Date().getTime();*/
+                var date2 = new Date().toISOString();
+                const now = new Date(date2);
+                var distance = countDownDate - now;
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("otp-code-timer").innerHTML = minutes + "分 " + seconds + "秒 ";
+                if (distance < 0) {
+                    clearInterval(x);
+                    isValid = true;
                     var divElement = document.getElementById("resend-verification-code");
-                    divElement.style.pointerEvents = "none";
-                    divElement.style.opacity = 0.5;
+                    divElement.style.pointerEvents = "auto";
+                    divElement.style.opacity = 1;
                     var buttonsAndInputs = divElement.getElementsByTagName("button");
                     for (var i = 0; i < buttonsAndInputs.length; i++) {
-                        buttonsAndInputs[i].disabled = true;
+                        buttonsAndInputs[i].disabled = false;
                     }
-                });
-                function countdown(endtime) {
-                    //var countDownDate = new Date(endtime).getTime();
-                    var endtime = endtime
-                    const dateParts = endtime.split(' ');
-                    const date = dateParts[0];
-                    const time = dateParts[1];
-                    //const [year, month, day] = date.split('-');
-                    const [year, month, day] = date.split(/[-\/]/);
-                    const [hours, minutes, seconds] = time.split(':');
-                    const isoDate = new Date(year, month - 1, day, hours, minutes, seconds).toISOString();
-                    //const isoDate = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds)).toISOString();
-                    const countDownDate = new Date(isoDate);
-
-                    var x = setInterval(function () {
-                        /* var now = new Date().getTime();*/
-                        var date2 = new Date().toISOString();
-                        const now = new Date(date2);
-                        var distance = countDownDate - now;
-                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                        document.getElementById("otp-code-timer").innerHTML = minutes + "分 " + seconds + "秒 ";
-                        if (distance < 0) {
-                            clearInterval(x);
-                            isValid = true;
-                            var divElement = document.getElementById("resend-verification-code");
-                            divElement.style.pointerEvents = "auto";
-                            divElement.style.opacity = 1;
-                            var buttonsAndInputs = divElement.getElementsByTagName("button");
-                            for (var i = 0; i < buttonsAndInputs.length; i++) {
-                                buttonsAndInputs[i].disabled = false;
-                            }
-                            $('#waitingMessageWrapper').hide();
-                            var myDiv = document.getElementById("resend-verification-code");
-                            myDiv.style.display = "block";
-                            document.getElementById("otp-code-timer").innerHTML = "";
-                            //document.getElementById("otp-code-timer").innerHTML = "あなたの認証コードは期限切れです。再送してください。";//"Your code is expired. Please resend.";
-                        }
-                    }, 1000);
+                    $('#waitingMessageWrapper').hide();
+                    var myDiv = document.getElementById("resend-verification-code");
+                    myDiv.style.display = "block";
+                    document.getElementById("otp-code-timer").innerHTML = "";
+                    //document.getElementById("otp-code-timer").innerHTML = "あなたの認証コードは期限切れです。再送してください。";//"Your code is expired. Please resend.";
                 }
-            </script>
-            <script>
+            }, 1000);
+        }
+    </script>
+    <script>
         $("#resend-verification-code").click(function (e) {
             $('#waitingMessageWrapper').show();
             var divElement = document.getElementById("resend-verification-code");
@@ -501,8 +534,8 @@
             }
              });
 
-            </script>
-            <script>
+    </script>
+    <script>
         $('#valCod').prop('disabled', true).css('opacity', '0.5');
         $('#waitingMessageWrapper').hide();
         function limitInputLength(input, maxLength) {
@@ -536,6 +569,6 @@
             $(".displayMessage").text(message);
         }
 
-            </script>
+    </script>
 </body>
 </html>

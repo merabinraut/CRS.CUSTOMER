@@ -2070,6 +2070,9 @@ img{
         margin: 55px auto;
         height: fit-content;
     }
+    .reviewhostpopup{
+        max-width: 20rem;
+    }
 }
     .responsiveLoader2 {
        /* max-width: 375px;*/

@@ -1,0 +1,14 @@
+﻿{
+  "CustomerRegistration": {
+    "url": "https://app.hoslog.jp/user/register",
+    "text": "新規会員登録"
+  },
+  "ClubRegistration": {
+    "url": "https://owner.hoslog.jp/register/",
+    "text": "店舗オーナー登録"
+  },
+  "AffiliateRegistration": {
+    "url": "https://affiliate.hoslog.jp/auth/register",
+    "text": "アフィリエイター登録"
+  }
+}

@@ -39,7 +39,52 @@
         color: #000 !important;
     }
 </style>
-<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="history.back()">
+<style>
+
+    .next-prev-btn {
+        border: 1px solid #F8F8F8;
+        display: flex;
+        width: 44px;
+        height: 44px;
+        justify-content: center;
+        align-items: center;
+        flex: none;
+        cursor: pointer
+    }
+
+    .page-number-list div {
+        border: 1px solid #F8F8F8;
+        display: flex;
+        height: 44px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px; /* 150% */
+        cursor: default;
+    }
+
+        .page-number-list div.active {
+            color: #D75A8B;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px; /* 150% */
+            background: #F3F3F3;
+        }
+
+    .owl-dots > .active {
+        background: #E3A1A1;
+    }
+
+    .locationSearch:focus {
+        outline: none;
+    }
+</style>
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick=" window.location.href='/'">
     <div class="flex gap-2 items-center absolute top-[12px] text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
             <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
@@ -183,7 +228,7 @@
 <!-- for search result -->
 <div class=" flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]" style="background: #FAFAFA ">
     <span>検索結果</span>
-    <span>@Model.FilteredClubModel.Count 件</span>
+    <span>@Model.FilteredClubModel.Count() 件</span>
 </div>
 <div class="bg-white">
     <!-- club section  -->
@@ -384,11 +429,33 @@
                 }
             }
         }
+        <form method="post" id="pagination-form-id" hidden>
+            <input name="SearchFilter" value="" hidden />
+            <input name="StartIndex" id="startindex-id" value="0" hidden />
+        </form>
+        @if (Model.FilteredClubModel.Count > 0)
+        {
+            <!-- for pagination -->
+            <div id="pagination-container" class="flex justify-between bg-white pagination-container-wrapper my-[7px] " style="width:100%">
+                <button id="prev-btn" class="next-prev-btn" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                        <path d="M10.707 2.13599C10.8945 2.32351 10.9998 2.57782 10.9998 2.84299C10.9998 3.10815 10.8945 3.36246 10.707 3.54999L5.75705 8.49999L10.707 13.45C10.8892 13.6386 10.99 13.8912 10.9877 14.1534C10.9854 14.4156 10.8803 14.6664 10.6949 14.8518C10.5095 15.0372 10.2586 15.1424 9.99645 15.1447C9.73425 15.1469 9.48165 15.0461 9.29305 14.864L3.63605 9.20699C3.44858 9.01946 3.34326 8.76515 3.34326 8.49999C3.34326 8.23482 3.44858 7.98052 3.63605 7.79299L9.29305 2.13599C9.48058 1.94852 9.73488 1.8432 10 1.8432C10.2652 1.8432 10.5195 1.94852 10.707 2.13599Z" fill="#959595" />
+                    </svg>
+                </button>
+                <div id="page-numbers" class="page-number-list flex  w-full cursor-pointer" style="justify-content:space-evenly"></div>
+                <button id="next-btn" class="next-prev-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                        <path d="M5.29295 2.13605C5.10548 2.32358 5.00017 2.57788 5.00017 2.84305C5.00017 3.10821 5.10548 3.36252 5.29295 3.55005L10.243 8.50005L5.29295 13.45C5.11079 13.6387 5.01 13.8913 5.01228 14.1535C5.01456 14.4156 5.11973 14.6665 5.30513 14.8519C5.49054 15.0373 5.74135 15.1424 6.00355 15.1447C6.26575 15.147 6.51835 15.0462 6.70695 14.864L12.364 9.20705C12.5514 9.01952 12.6567 8.76521 12.6567 8.50005C12.6567 8.23488 12.5514 7.98058 12.364 7.79305L6.70695 2.13605C6.51942 1.94858 6.26512 1.84326 5.99995 1.84326C5.73479 1.84326 5.48048 1.94858 5.29295 2.13605Z" fill="#959595" />
+                    </svg>
+                </button>
+            </div>
+
+        }
         <div class=" ">
             <div>
             </div>
             <div style="background-color: #FFFFFF;"
-                 class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]">
+                 class="flex flex-row items-center justify-end gap-1 pr-[16px] pt-4">
                 <div class="flex flex-row items-center justify-end gap-1 pr-[16px] " id="scrollToTopButton">
                     @*<div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -476,4 +543,84 @@
             });
         })();
     </script>
+
+    <script>
+     $(document).ready(function () {
+    let currentPage =  Math.floor((@ViewBag.StartIndex) / 25) + 1;
+    const totalPages = @(ViewBag.TotalRecords != null ? Math.Ceiling(Convert.ToDouble(ViewBag.TotalRecords) / 25) : 0);
+
+    function updatePagination() {
+        $('#page-numbers').empty();
+        $('#prev-btn').prop('disabled', currentPage === 1);
+        let startPage = Math.max(1, currentPage - 2);
+        let endPage = Math.min(totalPages, currentPage + 2);
+        if (currentPage - 2 < 1) {
+            endPage = Math.min(5, totalPages);
+        }
+        if (currentPage + 2 > totalPages) {
+            startPage = Math.max(1, totalPages - 4);
+        }
+        if (startPage > 1) {
+            $('#page-numbers').append(createPageElement(1));
+            if (startPage > 2) {
+                $('#page-numbers').append(createEllipsis());
+            }
+        }
+        for (let i = startPage; i <= endPage; i++) {
+            const pageElement = createPageElement(i);
+            if (i === currentPage) {
+                pageElement.addClass('active');
+            }
+            $('#page-numbers').append(pageElement);
+        }
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                $('#page-numbers').append(createEllipsis());
+            }
+            $('#page-numbers').append(createPageElement(totalPages));
+        }
+        $('#next-btn').prop('disabled', currentPage === totalPages);
+    }
+
+    function createPageElement(page) {
+        return $('<div>', {
+            text: page,
+            click: function () { PaginationFunction(page); }
+        });
+    }
+
+    function createEllipsis() {
+        return $('<div>', { text: '...' });
+    }
+
+    function PaginationFunction(page) {
+        currentPage = page;
+        updatePagination();
+        submitForm(page);
+    }
+
+    function submitForm(page) {
+        let page_size = 25;
+        const startIndex = (page - 1) * page_size;
+        $('#startindex-id').val(startIndex);
+        var form = document.getElementById("pagination-form-id");
+        form.action = "/search" + "@ViewBag.PrefecturesArea" + "/?scftab=01";
+        form.submit();
+    }
+    // Handle "prev" button click
+    $('#prev-btn').on('click', function () {
+        if (currentPage > 1) {
+            PaginationFunction(currentPage - 1);
+        }
+    });
+    // Handle "next" button click
+    $('#next-btn').on('click', function () {
+        if (currentPage < totalPages) {
+            PaginationFunction(Math.min(currentPage + 1, totalPages));
+        }
+    });
+    updatePagination();
+});
+    </script>
+
 }
