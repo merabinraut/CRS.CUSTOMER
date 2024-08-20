@@ -322,6 +322,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         ViewBag.scftab = "03";
                         var dbHostResponse = _dashboardBusiness.GetNewHost(locationId, CustomerId);
                         Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
+
+                        ViewBag.StartIndex = HostTabRequest.StartIndex;
+                        ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
                     }
                     else
                     {
@@ -334,7 +337,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             BloodType = !string.IsNullOrEmpty(HostTabRequest.BloodType) ? string.Join(",", HostTabRequest.BloodType.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,
                             ConstellationGroup = !string.IsNullOrEmpty(HostTabRequest.ConstellationGroup) ? string.Join(",", HostTabRequest.ConstellationGroup.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,
                             Occupation = (string.IsNullOrEmpty(HostTabRequest.Occupation) || HostTabRequest.Occupation.Trim() == "0") ? string.Empty : HostTabRequest.Occupation.DecryptParameter(),
-                            CustomerId = CustomerId
+                            CustomerId = CustomerId,
+                            Type = "1",
+                            Skip = HostTabRequest.StartIndex,
+                            Take = HostTabRequest.PageSize,
                         };
                         var dbHostResponse = _searchBusiness.HostPreferenceFilter(dbRequest);
                         Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
@@ -347,6 +353,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
                         x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo);
                     });
+                    ViewBag.StartIndex = HostTabRequest.StartIndex;
+                    ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
                     return View("HostSearchResult", Response);
                 }
                 else
@@ -380,7 +388,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             Time = !string.IsNullOrEmpty(ClubTabRequest.Time) ? string.Join(",", ClubTabRequest.Time.Split(',').Select(x => x.DecryptParameter()).Where(x => x != null)).Trim(',')
                                : string.Empty,
                             ClubAvailability = !string.IsNullOrEmpty(ClubTabRequest.ClubAvailability) ? string.Join(",", ClubTabRequest.ClubAvailability.Split(',').Select(x => x.DecryptParameter())).Trim(',') : string.Empty,
-                            CustomerId = CustomerId
+                            CustomerId = CustomerId,
+                            Skip = ClubTabRequest.StartIndex,
+                            Take = ClubTabRequest.PageSize
                         };
                         var dbResponse = _searchBusiness.ClubPreferenceFilter(dbRequest);
                         Response.FilteredClubModel = ApplicationUtilities.MapObjects<Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
@@ -392,6 +402,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo);
                         x.HostGalleryImage = x.HostGalleryImage.Select(y => ImageHelper.ProcessedImage(y)).ToList();
                     });
+                    ViewBag.StartIndex = ClubTabRequest.StartIndex;
+                    ViewBag.TotalRecords = (Response.FilteredClubModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredClubModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredClubModel.FirstOrDefault().TotalRecords) : 0;
                     return View("ClubSearchResult", Response);
                 }
             }
