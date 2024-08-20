@@ -1,4 +1,20 @@
-﻿@model CRS.CUSTOMER.APPLICATION.Models.Home.RegistrationHoldModel
+﻿@using Newtonsoft.Json
+
+@functions {
+    public dynamic ReadJson()
+    {
+        string filePath = HttpContext.Current.Server.MapPath("~/App_Data/RedirectURLConfiguration.json");
+        string jsonContent = System.IO.File.ReadAllText(filePath);
+        var jsonData = JsonConvert.DeserializeObject<dynamic>(jsonContent);
+        return jsonData;
+    }
+}
+@{
+    var jsonData = ReadJson();
+}
+
+
+@model CRS.CUSTOMER.APPLICATION.Models.Home.RegistrationHoldModel
 @{
     ViewBag.Title = "新規会員登録‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = "";
@@ -234,21 +250,38 @@
                 <div id="siteurl" class="flex flex-row justify-center">
                     <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
                 </div>
-                <a href="https://hoslog.jp/user/register" style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
+
+                <a href="@jsonData.CustomerRegistration.url" style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
                     <div>
-                        <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+                        <p style="font-size:18px;font-weight:600 ; " class="text-white">@jsonData.CustomerRegistration.text</p>
                     </div>
                 </a>
-                <a href="https://owner.hoslog.jp/owner/register/" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                <a href="@jsonData.ClubRegistration.url" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
                     <div>
-                        <p style="font-size:18px;font-weight:600" class="text-black">店舗オーナー登録</p>
+                        <p style="font-size:18px;font-weight:600" class="text-black">@jsonData.ClubRegistration.text</p>
                     </div>
                 </a>
-                <a href="https://affiliate.hoslog.jp/auth/register" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                <a href="@jsonData.AffiliateRegistration.url" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
                     <div>
-                        <p style="font-size:18px;font-weight:600" class="text-black">アフィリエイター登録</p>
+                        <p style="font-size:18px;font-weight:600" class="text-black">@jsonData.AffiliateRegistration.text</p>
                     </div>
                 </a>
+
+                @*  <a href="https://hoslog.jp/user/register" style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
+            <div>
+                <p style="font-size:18px;font-weight:600 ; " class="text-white">新規会員登録</p>
+            </div>
+        </a>
+        <a href="https://owner.hoslog.jp/owner/register/" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+            <div>
+                <p style="font-size:18px;font-weight:600" class="text-black">店舗オーナー登録</p>
+            </div>
+        </a>
+        <a href="https://affiliate.hoslog.jp/auth/register" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+            <div>
+                <p style="font-size:18px;font-weight:600" class="text-black">アフィリエイター登録</p>
+            </div>
+        </a>*@
             </div>
 
 
@@ -348,207 +381,207 @@
             </div>
 
         </div>
-        </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script type="text/javascript">
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
 
-            $("#FormSubmit").click(function (event) {
+        $("#FormSubmit").click(function (event) {
+            event.preventDefault();
+            var MobileNumber = $('#MobileNumber').val();
+            var NickName = $('#NickName').val();
+            var checkbox = document.getElementById("policy");
+            var ischecked = checkbox.checked;
+            if (MobileNumber != "" && NickName != "" && ischecked) {
+                $("#Form").submit();
+            }
+            if (MobileNumber == "" && NickName == "") {
                 event.preventDefault();
-                var MobileNumber = $('#MobileNumber').val();
-                var NickName = $('#NickName').val();
-                var checkbox = document.getElementById("policy");
-                var ischecked = checkbox.checked;
-                if (MobileNumber != "" && NickName != "" && ischecked) {
-                    $("#Form").submit();
-                }
-                if (MobileNumber == "" && NickName == "") {
-                    event.preventDefault();
-                    $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-valid");
-                    $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-error").html("この項目は必須です");
-                    $('span[data-valmsg-for="NickName"]').addClass("field-validation-valid");
-                    $('span[data-valmsg-for="NickName"]').addClass("field-validation-error").html("この項目は必須です");
-                    return false;
-                }
-                if (MobileNumber == "") {
-                    event.preventDefault();
-                    $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-valid");
-                    $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-error").html("この項目は必須です");
-                    return false;
-                }
-                else {
-                    $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-valid");
-                    $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-error").html("");
-                }
-                if (NickName == "") {
-                    event.preventDefault();
-                    $('span[data-valmsg-for="NickName"]').addClass("field-validation-valid");
-                    $('span[data-valmsg-for="NickName"]').addClass("field-validation-error").html("この項目は必須です");
-                    return false;
-                }
-            });
+                $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-valid");
+                $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-error").html("この項目は必須です");
+                $('span[data-valmsg-for="NickName"]').addClass("field-validation-valid");
+                $('span[data-valmsg-for="NickName"]').addClass("field-validation-error").html("この項目は必須です");
+                return false;
+            }
+            if (MobileNumber == "") {
+                event.preventDefault();
+                $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-valid");
+                $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-error").html("この項目は必須です");
+                return false;
+            }
+            else {
+                $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-valid");
+                $('span[data-valmsg-for="MobileNumber"]').addClass("field-validation-error").html("");
+            }
+            if (NickName == "") {
+                event.preventDefault();
+                $('span[data-valmsg-for="NickName"]').addClass("field-validation-valid");
+                $('span[data-valmsg-for="NickName"]').addClass("field-validation-error").html("この項目は必須です");
+                return false;
+            }
+        });
 
-            /*   function validateInput(input) {
+        /*   function validateInput(input) {
 
-                   // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
-                   var regex = /^[a-zA-Z0-9\u3040-\u309f\u30a0-\u30ff]{4,}$/u;
+               // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
+               var regex = /^[a-zA-Z0-9\u3040-\u309f\u30a0-\u30ff]{4,}$/u;
 
 
-                   // Check if the input value matches the pattern
-                   if (!regex.test(input.value)) {
-                       // Clear the input value if it doesn't match the pattern
-                       input.value = input.value.replace(/[^a-zA-Z0-9\u3040-\u309f\u30a0-\u30ff]/gu, "");
-                   }
-               }*/
-            let isComposing = false;
+               // Check if the input value matches the pattern
+               if (!regex.test(input.value)) {
+                   // Clear the input value if it doesn't match the pattern
+                   input.value = input.value.replace(/[^a-zA-Z0-9\u3040-\u309f\u30a0-\u30ff]/gu, "");
+               }
+           }*/
+        let isComposing = false;
 
-            /* function validateInput(input) {
-                 // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
-                 var regex = /[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]/u;
+        /* function validateInput(input) {
+             // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
+             var regex = /[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]/u;
 
-                 // Check if currently composing text (IME active)
-                 if (!isComposing) {
-                     // Check if the input value matches the pattern
-                     if (!regex.test(input.value)) {
-                         // Clear the input value if it doesn't match the pattern
-                         input.value = input.value.replace(/[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-　]/gu, "");
-                     }
+             // Check if currently composing text (IME active)
+             if (!isComposing) {
+                 // Check if the input value matches the pattern
+                 if (!regex.test(input.value)) {
+                     // Clear the input value if it doesn't match the pattern
+                     input.value = input.value.replace(/[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-　]/gu, "");
                  }
+             }
 
 
-                 // Event listener for composition events to track IME state
-                 document.addEventListener('compositionstart', function () {
-                     isComposing = true;
-                 });
+             // Event listener for composition events to track IME state
+             document.addEventListener('compositionstart', function () {
+                 isComposing = true;
+             });
 
-                 document.addEventListener('compositionend', function () {
-                     isComposing = false;
-                     // Trigger validation after composition ends
-                     validateInput(document.getElementById('japaneseInput'));
-                 });
+             document.addEventListener('compositionend', function () {
+                 isComposing = false;
+                 // Trigger validation after composition ends
+                 validateInput(document.getElementById('japaneseInput'));
+             });
 
-                 // Event listener for input field changes
-                 document.getElementById('japaneseInput').addEventListener('input', function () {
-                     validateInput(this);
-                 });
-             }*/
+             // Event listener for input field changes
+             document.getElementById('japaneseInput').addEventListener('input', function () {
+                 validateInput(this);
+             });
+         }*/
 
-            /* let isComposing = false;*/
+        /* let isComposing = false;*/
 
-            function validateInput(input) {
-                // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
-                var regex = /^[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]+$/u;
+        function validateInput(input) {
+            // Regular expression pattern to allow only alphabets (English letters), numbers, underscores, periods, hyphens, and Japanese characters
+            var regex = /^[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]+$/u;
 
-                // Check if currently composing text (IME active)
-                if (!isComposing) {
-                    // Check if the input value matches the pattern
-                    if (!regex.test(input.value)) {
-                        // Clear the input value if it doesn't match the pattern
-                        input.value = input.value.replace(/[^一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]/gu, "");
-                    }
+            // Check if currently composing text (IME active)
+            if (!isComposing) {
+                // Check if the input value matches the pattern
+                if (!regex.test(input.value)) {
+                    // Clear the input value if it doesn't match the pattern
+                    input.value = input.value.replace(/[^一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]/gu, "");
+                }
+            }
+        }
+
+        // Event listener for composition events to track IME state
+        document.addEventListener('compositionstart', function () {
+            isComposing = true;
+        });
+
+        document.addEventListener('compositionend', function () {
+            isComposing = false;
+            // Trigger validation after composition ends
+            validateInput(document.getElementById('japaneseInput'));
+        });
+
+        // Event listener for input field changes
+        document.getElementById('japaneseInput').addEventListener('input', function () {
+            validateInput(this);
+        });
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const japaneseInput = document.getElementById('japaneseInput');
+            const numberInput = document.getElementById('numberInput');
+            const policyCheckbox = document.getElementById('policy');
+            const submitButton = document.getElementById('FormSubmit');
+
+            function updateButtonState() {
+                const japaneseInputValue = japaneseInput.value;
+                const numberInputValue = numberInput.value;
+                const isPolicyChecked = policyCheckbox.checked;
+                const isJapaneseInputValid = /^[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]+$/u.test(japaneseInputValue);
+                const isNumberInputValid = /^[0-9]+$/u.test(numberInputValue);
+
+                if (japaneseInputValue === "" || numberInputValue === "" || !isPolicyChecked || !isJapaneseInputValid || !isNumberInputValid) {
+                    submitButton.classList.add('disabled');
+                    submitButton.disabled = true;
+                } else {
+                    submitButton.classList.remove('disabled');
+                    submitButton.disabled = false;
                 }
             }
 
-            // Event listener for composition events to track IME state
-            document.addEventListener('compositionstart', function () {
+            japaneseInput.addEventListener('compositionstart', function () {
                 isComposing = true;
             });
 
-            document.addEventListener('compositionend', function () {
+            japaneseInput.addEventListener('compositionend', function () {
                 isComposing = false;
-                // Trigger validation after composition ends
-                validateInput(document.getElementById('japaneseInput'));
-            });
-
-            // Event listener for input field changes
-            document.getElementById('japaneseInput').addEventListener('input', function () {
-                validateInput(this);
-            });
-
-        </script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const japaneseInput = document.getElementById('japaneseInput');
-                const numberInput = document.getElementById('numberInput');
-                const policyCheckbox = document.getElementById('policy');
-                const submitButton = document.getElementById('FormSubmit');
-
-                function updateButtonState() {
-                    const japaneseInputValue = japaneseInput.value;
-                    const numberInputValue = numberInput.value;
-                    const isPolicyChecked = policyCheckbox.checked;
-                    const isJapaneseInputValid = /^[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]+$/u.test(japaneseInputValue);
-                    const isNumberInputValid = /^[0-9]+$/u.test(numberInputValue);
-
-                    if (japaneseInputValue === "" || numberInputValue === "" || !isPolicyChecked || !isJapaneseInputValid || !isNumberInputValid) {
-                        submitButton.classList.add('disabled');
-                        submitButton.disabled = true;
-                    } else {
-                        submitButton.classList.remove('disabled');
-                        submitButton.disabled = false;
-                    }
-                }
-
-                japaneseInput.addEventListener('compositionstart', function () {
-                    isComposing = true;
-                });
-
-                japaneseInput.addEventListener('compositionend', function () {
-                    isComposing = false;
-                    updateButtonState();
-                });
-
-                japaneseInput.addEventListener('input', updateButtonState);
-                numberInput.addEventListener('input', updateButtonState);
-                policyCheckbox.addEventListener('change', updateButtonState);
-
                 updateButtonState();
             });
 
-            /*  function updateButtonState() {
-                  const japaneseInput = $('#japaneseInput').val();
-                  const numberInput = $('#numberInput').val();
-                  const isPolicyChecked = $('#policy').is(':checked');
-                  const isJapaneseInputValid = /^[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]+$/u.test(japaneseInput);
-                  const isNumberInputValid = /^[0-9]+$/u.test(numberInput);
+            japaneseInput.addEventListener('input', updateButtonState);
+            numberInput.addEventListener('input', updateButtonState);
+            policyCheckbox.addEventListener('change', updateButtonState);
 
-                  if (japaneseInput == "" || numberInput == "" || !isPolicyChecked) {
+            updateButtonState();
+        });
 
-                      $('#FormSubmit').addClass('disabled');
-                  } else {
-                      $('#FormSubmit').removeClass('disabled');
-                  }
+        /*  function updateButtonState() {
+              const japaneseInput = $('#japaneseInput').val();
+              const numberInput = $('#numberInput').val();
+              const isPolicyChecked = $('#policy').is(':checked');
+              const isJapaneseInputValid = /^[一-龠ぁ-ゔァ-ヴーa-zA-Z0-9._-]+$/u.test(japaneseInput);
+              const isNumberInputValid = /^[0-9]+$/u.test(numberInput);
+
+              if (japaneseInput == "" || numberInput == "" || !isPolicyChecked) {
+
+                  $('#FormSubmit').addClass('disabled');
+              } else {
+                  $('#FormSubmit').removeClass('disabled');
               }
-              $(document).ready(function () {
+          }
+          $(document).ready(function () {
 
-                  $('#japaneseInput').on('compositionstart', function () {
-                      isComposing = true;
-                  });
+              $('#japaneseInput').on('compositionstart', function () {
+                  isComposing = true;
+              });
 
-                  $('#japaneseInput').on('compositionend', function () {
-                      isComposing = false;
-
-                      updateButtonState();
-                  });
-
-
-                  $('#japaneseInput').on('change', function () {
-
-                      updateButtonState();
-                  });
-
-                  $('#numberInput').on('change', function () {
-                      validateNumberInput(this);
-                      updateButtonState();
-                  });
-
+              $('#japaneseInput').on('compositionend', function () {
+                  isComposing = false;
 
                   updateButtonState();
-              });*/
-        </script>
-        <script src="~/Content/validation.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
-        <script>
+              });
+
+
+              $('#japaneseInput').on('change', function () {
+
+                  updateButtonState();
+              });
+
+              $('#numberInput').on('change', function () {
+                  validateNumberInput(this);
+                  updateButtonState();
+              });
+
+
+              updateButtonState();
+          });*/
+    </script>
+    <script src="~/Content/validation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script>
         function limitInputLength(input, maxLength) {
             var value = input.value;
             // Remove non-numeric characters
@@ -575,6 +608,6 @@
         }
         }
     });
-        </script>
+    </script>
 </body>
 </html>
