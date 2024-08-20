@@ -879,7 +879,7 @@
                     <div class=" pb-4 flex gap-[8px] " style="padding-left:16px">
 
                         @*  <div class="owl-carousel owl-theme store-host-carousel">*@
-                        <div class="flex overflow-x-auto no-scrollbar  " style="gap:8px">
+                        <div id="host" class="flex overflow-x-auto no-scrollbar  " style="gap:8px">
                             @{
 
                                 foreach (var item in Model.TopHostListModels)
@@ -2086,4 +2086,36 @@
         highlightMention();
     </script>
 
+    <script>
+        (function () {
+            const container = document.getElementById('host');
+            let isDragging = false;
+            let startX, scrollLeft;
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+               
+            });
+
+            container.addEventListener('mouseleave', () => {
+                isDragging = false;
+               
+            });
+
+            container.addEventListener('mouseup', () => {
+                isDragging = false;
+               
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return; // Only run if dragging
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Multiply for faster scrolling
+                container.scrollLeft = scrollLeft - walk;
+            });
+        })();
+    </script>
 }
