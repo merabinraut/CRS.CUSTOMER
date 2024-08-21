@@ -46,7 +46,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return View(responseModel);
         }
 
-        [HttpPost]
+        [HttpPost, OverrideActionFilters]
         public JsonResult HasUnReadNotification()
         {
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString();

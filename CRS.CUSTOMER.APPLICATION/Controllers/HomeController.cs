@@ -1,6 +1,7 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.Home;
+using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Home;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
@@ -17,7 +18,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     public class HomeController : CustomController
     {
         private readonly IHomeBusiness _buss;
-        public HomeController(IHomeBusiness buss) => _buss = buss;
+        private readonly ICommonManagementBusiness _commonBusiness;
+        public HomeController(IHomeBusiness buss, ICommonManagementBusiness commonBusiness) => (_buss, _commonBusiness) = (buss, commonBusiness);
         #region Landing Page
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet]
@@ -60,6 +62,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
 
             var Username = ApplicationUtilities.GetSessionValue("Username").ToString();
+            //var advertisementimage = _commonBusiness.GetAdvertisement();
+            //advertisementimage = advertisementimage
+            //     .Select(item => ImageHelper.ProcessedImage(item))
+            //     .ToList();
+            //Session["AdvertisementImage"] = advertisementimage;
             if (!string.IsNullOrEmpty(ReferCode) || !string.IsNullOrEmpty(Type))
             {
                 ViewBag.ReferCode = ReferCode;
@@ -360,7 +367,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
-
+        
                 return View(Response);
             }
             else return Redirect("/");
@@ -490,7 +497,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         public ActionResult ForgotPassword()
         {
-            Session.Clear();
+            this.ClearSessionData();
             ForgotPasswordModel model = new ForgotPasswordModel();
             return View(model);
         }
