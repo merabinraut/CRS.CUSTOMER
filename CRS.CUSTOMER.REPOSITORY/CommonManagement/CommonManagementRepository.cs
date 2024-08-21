@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 
 namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
@@ -109,5 +110,23 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
             SQL += !string.IsNullOrEmpty(request.Message)?",@message=N" + _DAO.FilterString(request.Message) : ",@message=" + _DAO.FilterString(request.Message);    
             return _DAO.ParseCommonDbResponse(SQL);
         }
+        public List<string> GetAdvertisement()
+        {
+            var advertisementManagement = new List<string>();
+            var sql = "Exec sproc_advertisement_management @Flag='s'";
+            var dt = _DAO.ExecuteDataTable(sql);
+            if (dt != null)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    // Assuming ImgPath is the only column you want to add to the list
+                    var imagePath = item["ImgPath"].ToString();
+                    advertisementManagement.Add(imagePath);
+                }
+            }
+
+            return advertisementManagement;
+        }
+       
     }
 }

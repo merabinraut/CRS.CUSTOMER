@@ -109,6 +109,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var metaTagDBResponse = _commonBusiness.GetMetaTagInfo("1");
             ViewBag.MetaClubCount = metaTagDBResponse.Item1;
             ViewBag.MetaHostCount = metaTagDBResponse.Item2;
+            //var advertisementimage = _commonBusiness.GetAdvertisement();
+            //advertisementimage = advertisementimage
+            //    .Select(item => ImageHelper.ProcessedImage(item))
+            //    .ToList();
+            //Session["AdvertisementImage"] = advertisementimage;
             return View(ResponseModel);
         }
 

@@ -1,7 +1,11 @@
-﻿using CRS.CUSTOMER.APPLICATION.Library;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
+using CRS.CUSTOMER.APPLICATION.Library;
+using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.SHARED;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
@@ -26,6 +30,16 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     lang = LanguageMang.GetDefaultLanguage();
             }
             new LanguageMang().SetLanguage(lang);
+            if (Session["AdvertisementImage"] == null)
+            {
+                var CommonBusiness = new CommonManagementBusiness();
+                var advertisementimage = CommonBusiness.GetAdvertisement();
+                advertisementimage = advertisementimage
+                    .Select(item => ImageHelper.ProcessedImage(item))
+                    .ToList();
+                Session["AdvertisementImage"] = advertisementimage;
+            }
+            
             return base.BeginExecuteCore(callback, state);
         }
 
@@ -56,6 +70,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             {
                 Response.Cookies["culture"].Value = string.Empty;
                 Response.Cookies["culture"].Expires = DateTime.Now.AddMonths(-20);
+            }
+            if (Session["AdvertisementImage"] == null)
+            {
+                var CommonBusiness = new CommonManagementBusiness();
+                var advertisementimage = CommonBusiness.GetAdvertisement();
+                advertisementimage = advertisementimage
+                    .Select(item => ImageHelper.ProcessedImage(item))
+                    .ToList();
+                Session["AdvertisementImage"] = advertisementimage;
             }
         }
         public string[] AllowedImageContentType()
