@@ -73,11 +73,11 @@
                     {
                         if (!string.IsNullOrEmpty(item.RemarkTypeEnglish) && item.RemarkTypeEnglish.ToLower() == "good")
                         {
-                            <div class="review-experience" data-info="@item.RemarkId">@item.RemarkLabel</div>
+                            <div class="review-experience" data-info="@item.RemarkId" data-info-2="@Html.Raw(item.RemarkLabel + ':' + "good")">@item.RemarkLabel</div>
                         }
                         else
                         {
-                            <div class="review-experience dotted" data-info="@item.RemarkId">@item.RemarkLabel</div>
+                            <div class="review-experience dotted" data-info="@item.RemarkId" data-info-2="@Html.Raw(item.RemarkLabel + ':' + "bad")">@item.RemarkLabel</div>
                         }
                     }
                 </div>
@@ -122,7 +122,7 @@
                         <div class="flex justify-between items-center px-[13px] py-[10px] border-b border-[#DCDCDC]">
                             <div class="flex justify-between items-center gap-[13px]">
                                 <div>
-                                    @if (item.RemarkType == "良い")
+                                    @if (item.RemarkType.ToUpper().Trim() == "GOOD")
                                     {
 
                                         <div class="text-[10px] text-primary font-bold leading-tight">@item.RemarkType</div>
@@ -136,16 +136,16 @@
                                 </div>
                             </div>
                             <a>
-                                @if (item.RemarkType == "良い")
+                                @if (item.RemarkType.ToUpper().Trim() == "GOOD")
                                 {
 
-                                    <button class="btn-primary-softrose-review gap-[2px] markbtn-active" style="padding:4px 11px 6px 10px" data-value="@item.RemarkId">
+                                    <button class="btn-primary-softrose-review gap-[2px] markbtn-active" style="padding:4px 11px 6px 10px; font-size:12px;" data-value="@item.RemarkId">
                                         これにする
                                     </button>
                                 }
                                 else
                                 {
-                                    <button class="btn-primary-softrose-review gap-[2px] markbtn-active dotted" style="padding:4px 11px 6px 10px" data-value="@item.RemarkId">
+                                    <button class="btn-primary-softrose-review gap-[2px] markbtn-active dotted" style="padding:4px 11px 6px 10px; font-size:12px;" data-value="@item.RemarkId">
                                         これにする
                                     </button>
                                 }
@@ -217,7 +217,7 @@
             const elements = document.querySelectorAll('.remark-list-class .active');
             elements.forEach(function (element) {
                 ReviewRemarkList.push(element.dataset.info);
-                ReviewRemarkDisplayLabelList.push(element.innerHTML);
+                ReviewRemarkDisplayLabelList.push(element.getAttribute('data-info-2'));
             });
             if (ReviewRemarkList === null || ReviewRemarkList === "" || ReviewRemarkList.length <= 0) {
                 toastr.info('Please select remark');

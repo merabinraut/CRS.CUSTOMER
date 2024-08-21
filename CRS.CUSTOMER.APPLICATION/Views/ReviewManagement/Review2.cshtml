@@ -44,7 +44,7 @@
                 <div class="text tracking-tight	">2/<span>4</span></div>
             </div>
             <div>
-                <div class="text-[13px] font-bold pb-[5px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.ConfirmTheHostsThatWereInCharge</div>
+                <div class="text-[13px] font-bold pb-[5px]">@*@CRS.CUSTOMER.APPLICATION.Resources.Resource.ConfirmTheHostsThatWereInCharge*@ 今回あなたを接客したホストを教えてください</div>
                 <div class="text-[11px] font-[400] text-[#7E6D5E]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.SelectAllTheHostsYouRemember</div>
             </div>
         </div>
@@ -187,8 +187,8 @@
         <div class="relative bg-white rounded-lg shadow overflow-hidden fullScreenModal">
             <!-- Modal body -->
             <div class="text-center pt-4 pb-3 px-2 border-b border-[#DCDCDC]">
-                <div class=" text-[13px] font-bold">@CRS.CUSTOMER.APPLICATION.Resources.Resource.PickMVP</div>
-                <div class="text-[11px]">@CRS.CUSTOMER.APPLICATION.Resources.Resource.WhoWasTheMostImpressiveHost</div>
+                <div class=" text-[13px] font-bold">@*@CRS.CUSTOMER.APPLICATION.Resources.Resource.PickMVP*@ さらにMVPを選ぼう！</div>
+                <div class="text-[11px]">@*@CRS.CUSTOMER.APPLICATION.Resources.Resource.WhoWasTheMostImpressiveHost*@ 一番印象が良かったホストを教えてください</div>
             </div>
             <div class=" h-[201px] pb-2 overflow-hidden	 overflow-y-scroll	custom-scrollbar-review" id="MVPHostId">
 
@@ -304,9 +304,9 @@
                 newHTMLContent += `<div class="text-[12px] font-[500]">` + value[3] + `</div>
                                                                  </div>
                                                              </div>`;
-                newHTMLContent += `<button class="btn-primary-softrose-review min-w-[105px] gap-[2px] font-[700] modalbutnActive" id="softrore-btn-id-${i}" data-info="` + value[0] + `")">
-                                                                 <i class="las la-crown mt-[2px]"></i>
-                                                                 @MVPLabel
+                newHTMLContent += `<button class="btn-primary-softrose-review min-w-[75px] gap-[2px] font-[700] modalbutnActive" id="softrore-btn-id-${i}" data-info="` + value[0] + `")" style="font-size:12px;">
+                                                                 <i class="las la-crown"></i>
+                                                               @*  @MVPLabel*@ MVP
                                                              </button>
 
                                                          </div>

@@ -104,11 +104,12 @@
         transform: translateY(-50%);
         pointer-events: none; /* Ensures the arrow does not block clicks */
     }
+
     .profileimg2 {
         width: 100%;
         height: 100%;
-        
     }
+
     .editoption2 {
         margin-left: 44px;
         /* margin-top: 44px; */
@@ -357,7 +358,7 @@
                {
                    @class = "border-[1px] text-[#6A6A6A] rounded-[3px] border-[#BEBEBE] ",
                    @placeholder = @CRS.CUSTOMER.APPLICATION.Resources.Resource.Email,
-                   @id = "emailInput",
+                   @id = "EmailAddress",
                    @autocomplete = "off",
                    @type = "email",
                    @value = Model.EmailAddress
@@ -450,7 +451,7 @@
 
             </div>
             <div class="grid grid-cols-1 " style="padding-bottom:12px">
-                <div class="input-field-common custom-select" >
+                <div class="input-field-common custom-select">
                     <select id="default_select" style="width: 100%; border-radius:3px; font-size:15px; outline:none;"
                             class="default_select text-[#B7B7B7] h-[44px] select-common" name="PrefectureDDL">
                         <option value="" selected>
@@ -817,6 +818,11 @@
 
         function SubmitFormFunction() {
             closeModal('save_Modal');
+            var emailAddress = $('#EmailAddress').val();
+            if (emailAddress != '' && !validateEmail(emailAddress)) {
+                toastr.info("有効なメールアドレスを入力してください");
+                return false;
+            }
             var dobYear = $('#dob-year').val();
             var dobMonth = $('#dob-month').val();
             var dobDate = $('#dob-day').val();
@@ -836,6 +842,14 @@
             toastr.info("誕生日の情報に誤りがあります");
 
             return;
+        }
+
+        function validateEmail(email) {
+            // Regular expression for validating an email address
+            const emailPattern = /^[^\s]+[^\s]+\.[^\s]+$/;
+
+            // Test the email against the regular expression
+            return emailPattern.test(email);
         }
 
         function isValidDate(day, month, year) {

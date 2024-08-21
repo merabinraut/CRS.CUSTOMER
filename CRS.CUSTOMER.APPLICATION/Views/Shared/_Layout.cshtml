@@ -43,6 +43,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <script src="~/Content/assets/js/owl.carousel.js"></script>
@@ -705,13 +706,13 @@
                             <div style="border-top: 1px dashed #999999; padding: 0 16px; margin-top: 14px"></div>
 
                             <div class="text-[#999999] font-bold text-[11px] flex gap-[8px] justify-center py-2 mt-2">
-                                <a target="_blank" href="https://affiliate.hoslog.jp/auth/register">
+                                <a target="_blank" href="@jsonData.AffiliateRegistration.url">
                                     アフィリエイト登録
                                 </a>
 
                                 <div class="w-[11px] flex justify-center"> | </div>
 
-                                <a href="https://owner.hoslog.jp/owner/register/" target="_blank">
+                                <a href="@jsonData.ClubRegistration.url" target="_blank">
                                     店舗オーナー登録
                                 </a>
                             </div>
