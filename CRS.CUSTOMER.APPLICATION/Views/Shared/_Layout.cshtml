@@ -388,7 +388,188 @@
                 top: 10%;
                 max-width: 300px;
             }
+
+            .image-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+                .image-container img {
+                    max-width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                }
+
+            .imgclasssecond {
+                width: 300px !important;
+                height: 76px !important;
+            }
+
+            .imgclassfirst {
+                width: 300px !important;
+                height: 152px !important;
+            }
         }
+
+        @@media(min-width: 640px) and (max-width: 730px) {
+
+            #innerfixed {
+                top: 24% !important;
+                max-width: 126px !important;
+            }
+
+            .image-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+                .image-container img {
+                    max-width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                }
+
+            .imgclasssecond {
+                width: 126px !important;
+                height: 35px !important;
+            }
+
+            .imgclassfirst {
+                width: 126px !important;
+                height: 63px !important;
+            }
+        }
+
+
+        @@media(min-width: 731px) and (max-width: 800px) {
+
+            #innerfixed {
+                top: 24% !important;
+                max-width: 158px !important;
+            }
+
+            .image-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+                .image-container img {
+                    max-width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                }
+
+            .imgclasssecond {
+                width: 158px !important;
+                height: 76px !important;
+            }
+
+            .imgclassfirst {
+                width: 158px !important;
+                height: 100px !important;
+            }
+        }
+
+        @@media(min-width: 801px) and (max-width: 900px) {
+
+            #innerfixed {
+                top: 15% !important;
+                max-width: 191px !important;
+            }
+
+            .image-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+                .image-container img {
+                    max-width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                }
+
+            .imgclasssecond {
+                width: 191px !important;
+                height: 76px !important;
+            }
+
+            .imgclassfirst {
+                width: 191px !important;
+                height: 100px !important;
+            }
+        }
+
+        @@media(min-width: 901px) and (max-width: 970px) {
+
+            #innerfixed {
+                top: 9% !important;
+                max-width: 252px !important;
+            }
+
+            .image-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+                .image-container img {
+                    max-width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                }
+
+            .imgclasssecond {
+                width: 252px !important;
+                height: 76px !important;
+            }
+
+            .imgclassfirst {
+                width: 252px !important;
+                height: 152px !important;
+            }
+        }
+
+        @@media(min-width: 918px) and (max-width: 1004px) {
+
+            #innerfixed {
+                top: 9% !important;
+                max-width: 230px !important;
+            }
+
+            .image-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+                .image-container img {
+                    max-width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                }
+
+            .imgclasssecond {
+                width: 300px !important;
+                height: 76px !important;
+            }
+
+            .imgclassfirst {
+                width: 300px !important;
+                height: 152px !important;
+            }
+        }
+
+
     </style>
 
 </head>
@@ -661,7 +842,7 @@
                                     <!--<a href="/company" class="text-xs">-->
                                     @* @CRS.CUSTOMER.APPLICATION.Resources.Resource.OperatingCompany*@
                                     <!--運営会社
-                                    </a>-->
+                                </a>-->
                                     <a href="/faq" class="text-xs">
                                         よくあるご質問
                                         @*  @CRS.CUSTOMER.APPLICATION.Resources.Resource.Hoslog_Limited_Plan*@
@@ -672,8 +853,8 @@
                                     </a>
 
                                     @* <a href="/faq" class="text-xs">
-                                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
-                                        </a>*@
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.FAQ
+                                    </a>*@
                                 </div>
                                 <div class="flex flex-col gap-[8px]">
 
@@ -697,8 +878,8 @@
                                     @* 運営会社*@
                                     <!--</a>-->
                                     @*                                <a href="https://hoslog.jp/" class="text-xs">
-                                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
-                                        </a>*@
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Register_an_Account
+                                    </a>*@
                                 </div>
                             </div>
 
@@ -744,173 +925,207 @@
 
 
 
+        <!--<div id="rightcontent" style="margin-top: 10%; " class="flex flex-col items-center">
+        <div id="innerfixed" class="fixed   flex flex-col gap-2">-->
+        @* <div >*@
+        <!--<img src="~/content/assets/images/hpi1.jpeg" style="width:inherit" />-->
+        @* </div>
+        <div>*@
+        <!--<img src="~/content/assets/images/hpi2.jpeg" style="width:inherit" />-->
+        @*  </div>
+        <div>*@
+        <!--<img src="~/content/assets/images/hpi3.jpeg" style="width:inherit" />-->
+        @*</div>
+        <div>*@
+        <!--<img src="~/content/assets/images/hpi4.jpeg" style="width:inherit" />-->
+        @*  </div>
+        <div>*@
+        <!--<img src="~/content/assets/images/hpi5.jpeg" style="width:inherit" />-->
+        @* </div>
+        <div>*@
+        <!--<img src="~/content/assets/images/hpi6.jpeg" style="width:inherit" />-->
+        @*  </div>*@
+        <!--</div>
+
+    </div>-->
+
         <div id="rightcontent" style="margin-top: 10%; " class="flex flex-col items-center">
             <div id="innerfixed" class="fixed   flex flex-col gap-2">
-                @* <div >*@
-                <img src="~/content/assets/images/hpi1.jpeg" style="width:inherit" />
-                @* </div>
-                    <div>*@
-                <img src="~/content/assets/images/hpi2.jpeg" style="width:inherit" />
-                @*  </div>
-                    <div>*@
-                <img src="~/content/assets/images/hpi3.jpeg" style="width:inherit" />
-                @*</div>
-                    <div>*@
-                <img src="~/content/assets/images/hpi4.jpeg" style="width:inherit" />
-                @*  </div>
-                    <div>*@
-                <img src="~/content/assets/images/hpi5.jpeg" style="width:inherit" />
-                @* </div>
-                    <div>*@
-                <img src="~/content/assets/images/hpi6.jpeg" style="width:inherit" />
-                @*  </div>*@
+                @{
+                    if (Session["AdvertisementImage"] != null)
+                    {
+                        var advertisementimage = Session["AdvertisementImage"] as List<string>;
+                        if (advertisementimage != null && advertisementimage.Count > 0)
+                        {
+                            var i = 0;
+                            foreach (var item in advertisementimage)
+                            {
+                                @*<img src="@item"  style="width:300px;height:152px;"/>*@
+                                if (i < 2)
+                                {
+                                    <div class="image-container">
+                                        <img src="@item" class="imgclassfirst" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="image-container">
+                                        <img src="@item" class="imgclasssecond" />
+                                    </div>
+                                }
+
+                                i++;
+
+                            }
+                        }
+                    }
+
+                }
+                </div>
+
             </div>
 
-        </div>
+            <div id="modal2" class="modal modalWrapper bg-[#fff] w-[132px]" style="display:none; border-radius:12px; z-index:10000;">
+                <div class="modal-content-logout flex gap-[24px] flex-col">
+                    <div class="font-normal text-[16px] text-[#1A1C1E]">
+                        ログアウトしてもよろしいですか？
+                    </div>
 
-    </div>
-
-    <div id="modal2" class="modal modalWrapper bg-[#fff] w-[132px]" style="display:none; border-radius:12px; z-index:10000;">
-        <div class="modal-content-logout flex gap-[24px] flex-col">
-            <div class="font-normal text-[16px] text-[#1A1C1E]">
-                ログアウトしてもよろしいですか？
-            </div>
-
-            <div class="flex gap-3 justify-center">
-                <a href="@Url.Action("LogOff", "Home")" class="log-outButton w-[120px]">
-                    はい
-                </a>
-                <div style="cursor:pointer" onclick="closeModal('modal2')" class="flex justify-center items-center underline w-[120px]">
-                    いいえ
+                    <div class="flex gap-3 justify-center">
+                        <a href="@Url.Action("LogOff", "Home")" class="log-outButton w-[120px]">
+                            はい
+                        </a>
+                        <div style="cursor:pointer" onclick="closeModal('modal2')" class="flex justify-center items-center underline w-[120px]">
+                            いいえ
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <script>
-        $(document).ready(function () {
-            $('select').select2({
-                minimumResultsForSearch: Infinity
-            });
-            setInterval(NotificationFunction, 20000);
-            // Get current URL
-            var currentUrl = window.location.href;
-            // Parse query string from current URL
-            var QueryData = ParseQueryString(currentUrl);
-            var PostURL = QueryData['PostURL'];
-            if (PostURL) {
-                var IsRedirectURL = QueryData['IsRedirectURL'];
-                var FunctionName = QueryData['FunctionName'];
-                var ClubId = QueryData['ClubId'];
-                var SelectedDate = QueryData['SelectedDate'];
-                var SelectedHost = QueryData['SelectedHost'];
-                var hostId = QueryData['hostId'];
-                var agentType = QueryData['agentType'];
-                var dynamicParams = {};
+            <script>
+                $(document).ready(function () {
+                    $('select').select2({
+                        minimumResultsForSearch: Infinity
+                    });
+                    setInterval(NotificationFunction, 20000);
+                    // Get current URL
+                    var currentUrl = window.location.href;
+                    // Parse query string from current URL
+                    var QueryData = ParseQueryString(currentUrl);
+                    var PostURL = QueryData['PostURL'];
+                    if (PostURL) {
+                        var IsRedirectURL = QueryData['IsRedirectURL'];
+                        var FunctionName = QueryData['FunctionName'];
+                        var ClubId = QueryData['ClubId'];
+                        var SelectedDate = QueryData['SelectedDate'];
+                        var SelectedHost = QueryData['SelectedHost'];
+                        var hostId = QueryData['hostId'];
+                        var agentType = QueryData['agentType'];
+                        var dynamicParams = {};
 
-                // Iterate over QueryData to populate dynamicParams
-                Object.keys(QueryData).forEach(key => {
-                    // Exclude 'PostURL' from dynamicParams
-                    if (key !== 'PostURL') {
-                        dynamicParams[key] = QueryData[key];
+                        // Iterate over QueryData to populate dynamicParams
+                        Object.keys(QueryData).forEach(key => {
+                            // Exclude 'PostURL' from dynamicParams
+                            if (key !== 'PostURL') {
+                                dynamicParams[key] = QueryData[key];
+                            }
+                        });
+
+                        // Create a form element
+                        var form = document.createElement('form');
+                        form.method = 'POST';
+                        var actionURL = new URL(PostURL, window.location.origin);
+                        if (IsRedirectURL) {
+                            actionURL.searchParams.append('IsRedirectURL', IsRedirectURL);
+                        }
+                        if (FunctionName) {
+                            actionURL.searchParams.append('FunctionName', FunctionName);
+                        }
+
+                        if (ClubId) {
+                            actionURL.searchParams.append('ClubId', ClubId);
+                        }
+
+                        if (SelectedDate) {
+                            actionURL.searchParams.append('SelectedDate', SelectedDate);
+                        }
+
+                        if (SelectedHost) {
+                            actionURL.searchParams.append('SelectedHost', SelectedHost);
+                        }
+
+                        if (hostId) {
+                            actionURL.searchParams.append('hostId', hostId);
+                        }
+
+                        if (agentType) {
+                            actionURL.searchParams.append('agentType', agentType);
+                        }
+                        form.action = actionURL.toString();
+
+                        // Append dynamicParams as hidden form inputs
+                        Object.keys(dynamicParams).forEach(key => {
+                            var input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = key;
+                            input.value = dynamicParams[key];
+                            form.appendChild(input);
+                        });
+
+                        // Append the form to the document body and submit it
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                    else {
+                        CheckIfHasRedirectFunction();
                     }
                 });
 
-                // Create a form element
-                var form = document.createElement('form');
-                form.method = 'POST';
-                var actionURL = new URL(PostURL, window.location.origin);
-                if (IsRedirectURL) {
-                    actionURL.searchParams.append('IsRedirectURL', IsRedirectURL);
+                function ParseQueryString(url) {
+                    let queryString = url.split('?')[1] || '';
+                    let queryObject = {};
+                    queryString.split('&').forEach(function (part) {
+                        let item = part.split('=');
+                        queryObject[item[0]] = decodeURIComponent(item[1]);
+                    });
+                    return queryObject;
+                }</script>
+            <!-- #endregion -->
+            <!-- #region Fotter-links -->
+            <script src="~/Content/assets/js/modal.js"></script>
+
+            <script src="~/Content/assets/js/slider.js"></script>
+            <script src="~/Content/assets/js/tabs.js"></script>
+            <script src="~/Content/assets/js/toogle.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
+                    integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="
+                    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+            <script>
+                // Get the button
+
+                let mybutton = document.getElementById("myBtn");
+                // When the user scrolls down 20px from the top of the document, show the button
+                window.onscroll = function () {
+                    scrollFunction()
+                };
+                function scrollFunction() {
+                    if (mybutton) {
+                        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                            mybutton.style.display = "block";
+                        } else {
+                            mybutton.style.display = "none";
+                        }
+                    }
                 }
-                if (FunctionName) {
-                    actionURL.searchParams.append('FunctionName', FunctionName);
-                }
+                // When the user clicks on the button, scroll to the top of the document
+                function topFunction() {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                }</script>
 
-                if (ClubId) {
-                    actionURL.searchParams.append('ClubId', ClubId);
-                }
-
-                if (SelectedDate) {
-                    actionURL.searchParams.append('SelectedDate', SelectedDate);
-                }
-
-                if (SelectedHost) {
-                    actionURL.searchParams.append('SelectedHost', SelectedHost);
-                }
-
-                if (hostId) {
-                    actionURL.searchParams.append('hostId', hostId);
-                }
-
-                if (agentType) {
-                    actionURL.searchParams.append('agentType', agentType);
-                }
-                form.action = actionURL.toString();
-
-                // Append dynamicParams as hidden form inputs
-                Object.keys(dynamicParams).forEach(key => {
-                    var input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = dynamicParams[key];
-                    form.appendChild(input);
-                });
-
-                // Append the form to the document body and submit it
-                document.body.appendChild(form);
-                form.submit();
-            }
-            else {
-                CheckIfHasRedirectFunction();
-            }
-        });
-
-        function ParseQueryString(url) {
-            let queryString = url.split('?')[1] || '';
-            let queryObject = {};
-            queryString.split('&').forEach(function (part) {
-                let item = part.split('=');
-                queryObject[item[0]] = decodeURIComponent(item[1]);
-            });
-            return queryObject;
-        }</script>
-    <!-- #endregion -->
-    <!-- #region Fotter-links -->
-    <script src="~/Content/assets/js/modal.js"></script>
-
-    <script src="~/Content/assets/js/slider.js"></script>
-    <script src="~/Content/assets/js/tabs.js"></script>
-    <script src="~/Content/assets/js/toogle.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
-            integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-    <script>
-        // Get the button
-
-        let mybutton = document.getElementById("myBtn");
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function () {
-            scrollFunction()
-        };
-        function scrollFunction() {
-            if (mybutton) {
-                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                    mybutton.style.display = "block";
-                } else {
-                    mybutton.style.display = "none";
-                }
-            }
-        }
-        // When the user clicks on the button, scroll to the top of the document
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }</script>
-
-    <script>
+            <script>
     //For toaster Notification
     $(function () {
     {
@@ -945,42 +1160,42 @@
                 });
             }
 
-    </script>
+            </script>
 
-    <script>
-        function OnLoadLoaderFunction() {
-            document.getElementById('loader-id-v2').style.display = 'flex';
-            document.body.addEventListener('touchmove', preventDefault, { passive: false });
-            document.body.classList.add('no-scroll-loader');
-            setTimeout(function () {
-                document.getElementById('loader-id-v2').style.display = 'none';
-                document.body.removeEventListener('touchmove', preventDefault, { passive: false });
-                document.body.classList.remove('no-scroll-loader');
-            }, 10000);
-        }
-        function preventDefault(event) {
-            event.preventDefault();
-        }
-        function EnableLoaderFunction() {
-            document.getElementById('loader-id-v2').style.display = 'flex';
-            document.body.addEventListener('touchmove', preventDefault, { passive: false });
-            document.body.classList.add('no-scroll-loader');
-        }
-        function DisableLoaderFunction() {
-            document.getElementById('loader-id-v2').style.display = 'none';
-            document.body.removeEventListener('touchmove', preventDefault, { passive: false });
-            document.body.classList.remove('no-scroll-loader');
-        }
+            <script>
+                function OnLoadLoaderFunction() {
+                    document.getElementById('loader-id-v2').style.display = 'flex';
+                    document.body.addEventListener('touchmove', preventDefault, { passive: false });
+                    document.body.classList.add('no-scroll-loader');
+                    setTimeout(function () {
+                        document.getElementById('loader-id-v2').style.display = 'none';
+                        document.body.removeEventListener('touchmove', preventDefault, { passive: false });
+                        document.body.classList.remove('no-scroll-loader');
+                    }, 10000);
+                }
+                function preventDefault(event) {
+                    event.preventDefault();
+                }
+                function EnableLoaderFunction() {
+                    document.getElementById('loader-id-v2').style.display = 'flex';
+                    document.body.addEventListener('touchmove', preventDefault, { passive: false });
+                    document.body.classList.add('no-scroll-loader');
+                }
+                function DisableLoaderFunction() {
+                    document.getElementById('loader-id-v2').style.display = 'none';
+                    document.body.removeEventListener('touchmove', preventDefault, { passive: false });
+                    document.body.classList.remove('no-scroll-loader');
+                }
 
-        function NavCloseFunction() {
-            document.getElementById('drawer-right-example').classList.add('translate-x-full');
-        }</script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <script src="~/Content/assets/js/reservation-common.js"></script>
-    <script src="~/Content/assets/js/search-filter-common.js"></script>
-    <script src="~/Content/assets/js/ManageRedirectURL.js"></script>
-    <script src="~/Content/assets/js/BookmarkManagement.js"></script>
-    <script>
+                function NavCloseFunction() {
+                    document.getElementById('drawer-right-example').classList.add('translate-x-full');
+                }</script>
+            <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+            <script src="~/Content/assets/js/reservation-common.js"></script>
+            <script src="~/Content/assets/js/search-filter-common.js"></script>
+            <script src="~/Content/assets/js/ManageRedirectURL.js"></script>
+            <script src="~/Content/assets/js/BookmarkManagement.js"></script>
+            <script>
         function WindowHistoryBack() {
             var previousUrl = document.referrer;
             if (isLoginPageWithReturnUrl(previousUrl)) {
@@ -1008,7 +1223,7 @@
             var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
             window.location.href = url;
         }</script>
-    @RenderSection("scripts", required: false)
+            @RenderSection("scripts", required: false)
 </body>
 </html>
 <!-- #endregion -->

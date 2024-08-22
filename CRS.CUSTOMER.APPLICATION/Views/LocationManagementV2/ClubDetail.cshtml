@@ -21,9 +21,10 @@
 <style>
     @@media (min-width: 640px) {
         #innersec {
-            height:100vh;
+            height: 100vh;
         }
     }
+
     .stickyBox {
         position: -webkit-sticky;
         position: sticky;
@@ -311,7 +312,7 @@
         </div>
     </div>
 </div>
-<div class="relative" style="margin-bottom:75px; " >
+<div class="relative" style="margin-bottom:75px; ">
     <div class="bg-white">
         @if (!string.IsNullOrEmpty(target) && target == "host")
         {
@@ -426,130 +427,136 @@
                                 </div>
                                 <div class="flex gap-1 items-center mt-2">
                                     <div class="text-[11px] font-bold ">#推しが見つかった</div>
-                                    <div class="linear-gradient rounded-[2px] text-[8px] text-white px-[4px]"
-                                         style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Extended_Course</div>
-                                    </div>
-                                    <div>
-                                        @foreach (var item2 in item.GetClubReviewRemarkList)
+                                    @{
+                                        bool IsCourseExtended = item.GetClubReviewRemarkList.FirstOrDefault().IsCourseExtended;
+                                        if (IsCourseExtended)
                                         {
-                                            if (!string.IsNullOrEmpty(item2.RemarkType))
-                                            {
-                                                if (item2.RemarkType.Trim().ToUpper() == "GOOD" && !string.IsNullOrEmpty(item2.Remark))
-                                                {
-                                                    <div class="review-experience h-[19px] mb-0 text-[10px] active">
-                                                        @item2.Remark
-                                                    </div>
-                                                }
-                                                else if (item2.RemarkType.Trim().ToUpper() == "Bad" && !string.IsNullOrEmpty(item2.Remark))
-                                                {
-                                                    <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">
-                                                        @item2.Remark
-                                                    </div>
-                                                }
-                                            }
+                                            <div class="linear-gradient rounded-[2px] text-[8px] text-white px-[4px]" style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Extended_Course</div>
                                         }
-                                    </div>
+                                    }
+                                    @*<div class="linear-gradient rounded-[2px] text-[8px] text-white px-[4px]" style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);">@CRS.CUSTOMER.APPLICATION.Resources.Resource.Extended_Course</div>*@
                                 </div>
-                                <div class=" bg-[#F6F6F6]" style=" margin-left: 10px; margin-right: 18px; height: 77px; padding: 4px 16px;">
-                                    <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
-                                        <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                                <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
-                                                      fill="#7E6D5E" />
-                                            </svg>
-                                        </span>
-                                        <div id="tooltip-right" role="tooltip"
-                                             class="absolute z-10 invisible inline-block px-[6px] py-[6px] font-medium text-white text-[7px] w-[200px] bg-gray-900 rounded-lg leading-[140%] opacity-0 tooltip "
-                                             style="background: rgba(41, 47, 51, 0.95);">
-                                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon <div class="tooltip-arrow" data-popper-arrow>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
-                                        @{
-                                            var hostDetails = item.GetClubReviewHostList.FirstOrDefault(x => x.HostId == x.MVPHostId);
-                                            if (hostDetails != null)
+                                <div>
+                                    @foreach (var item2 in item.GetClubReviewRemarkList)
+                                    {
+                                        if (!string.IsNullOrEmpty(item2.RemarkType))
+                                        {
+                                            if (item2.RemarkType.Trim().ToUpper() == "GOOD" && !string.IsNullOrEmpty(item2.Remark))
                                             {
-
-                                                <div>
-                                                    <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
-                                                        @if (!string.IsNullOrEmpty(hostDetails.HostImage))
-                                                        {
-                                                            <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                                                 src="@hostDetails.HostImage"
-                                                                 alt="">
-                                                        }
-                                                        else
-                                                        {
-                                                            <img class="inline-block h-[31px] w-[31px] rounded-full "
-                                                                 src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                                 alt="">
-                                                        }
-                                                        <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
-                                                    </div>
-                                                    <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">@hostDetails.HostName</div>
+                                                <div class="review-experience h-[19px] mb-0 text-[10px] active">
+                                                    @item2.Remark
+                                                </div>
+                                            }
+                                            else if (item2.RemarkType.Trim().ToUpper() == "Bad" && !string.IsNullOrEmpty(item2.Remark))
+                                            {
+                                                <div class="review-experience h-[19px] mb-0 text-[10px] blue-dotted ">
+                                                    @item2.Remark
                                                 </div>
                                             }
                                         }
-                                        @{
-                                            var hostListDetails = item.GetClubReviewHostList.Where(x => x.HostId != x.MVPHostId).ToList();
-                                            foreach (var item2 in hostListDetails)
-                                            {
-                                                <div class="flex-none">
-                                                    @if (!string.IsNullOrEmpty(item2.HostImage))
+                                    }
+                                </div>
+                            </div>
+                            <div class=" bg-[#F6F6F6]" style=" margin-left: 10px; margin-right: 18px; height: 77px; padding: 4px 16px;">
+                                <div class="text-[9px] font-bold flex gap-[2px] items-center leading-[17px]">
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge
+                                    <span data-tooltip-target="tooltip-right" data-tooltip-placement="right" class="cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
+                                            <path d="M4.5 0C2.01855 0 0 2.01855 0 4.5C0 6.98145 2.01855 9 4.5 9C6.98145 9 9 6.98145 9 4.5C9 2.01855 6.98145 0 4.5 0ZM4.5 0.75C6.57568 0.75 8.25 2.42432 8.25 4.5C8.25 6.57568 6.57568 8.25 4.5 8.25C2.42432 8.25 0.75 6.57568 0.75 4.5C0.75 2.42432 2.42432 0.75 4.5 0.75ZM4.5 2.25C3.67529 2.25 3 2.92529 3 3.75H3.75C3.75 3.33105 4.08105 3 4.5 3C4.91895 3 5.25 3.33105 5.25 3.75C5.25 4.03711 5.06543 4.29199 4.79297 4.38281L4.64062 4.42969C4.33447 4.53076 4.125 4.82373 4.125 5.14453V5.625H4.875V5.14453L5.02734 5.09766C5.60449 4.90576 6 4.35791 6 3.75C6 2.92529 5.32471 2.25 4.5 2.25ZM4.125 6V6.75H4.875V6H4.125Z"
+                                                  fill="#7E6D5E" />
+                                        </svg>
+                                    </span>
+                                    <div id="tooltip-right" role="tooltip"
+                                         class="absolute z-10 invisible inline-block px-[6px] py-[6px] font-medium text-white text-[7px] w-[200px] bg-gray-900 rounded-lg leading-[140%] opacity-0 tooltip "
+                                         style="background: rgba(41, 47, 51, 0.95);">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon <div class="tooltip-arrow" data-popper-arrow>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-[3px] w-full overflow-y-scroll no-scrollbar py-[6px]">
+                                    @{
+                                        var hostDetails = item.GetClubReviewHostList.FirstOrDefault(x => x.HostId == x.MVPHostId);
+                                        if (hostDetails != null)
+                                        {
+
+                                            <div>
+                                                <div class="relative linear-gradient-yellow-border flex justify-center items-center flex-col">
+                                                    @if (!string.IsNullOrEmpty(hostDetails.HostImage))
                                                     {
-                                                        <img class="inline-block h-[34px] w-[34px] rounded-full border-2 border-[#fff]"
-                                                             src="@item2.HostImage"
+                                                        <img class="inline-block h-[31px] w-[31px] rounded-full "
+                                                             src="@hostDetails.HostImage"
                                                              alt="">
                                                     }
                                                     else
                                                     {
-                                                        <img class="inline-block h-[34px] w-[34px] rounded-full border-2 border-[#fff]"
+                                                        <img class="inline-block h-[31px] w-[31px] rounded-full "
                                                              src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                                              alt="">
                                                     }
-                                                    <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">@item2.HostName</div>
-
+                                                    <i class="las la-crown linear-gradient-yellow absolute top-[-6px] left-[24.3px] rotate-[41deg] text-xs "></i>
                                                 </div>
-                                            }
-                                        }
-                                        <div id="tooltip-right" role="tooltip"
-                                             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white text-[7px] w-[200px] rounded-lg leading-[140%] opacity-0 tooltip "
-                                             style="background: rgba(41, 47, 51, 0.95);">
-                                            @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon<div class="tooltip-arrow" data-popper-arrow>
+                                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">@hostDetails.HostName</div>
                                             </div>
+                                        }
+                                    }
+                                    @{
+                                        var hostListDetails = item.GetClubReviewHostList.Where(x => x.HostId != x.MVPHostId).ToList();
+                                        foreach (var item2 in hostListDetails)
+                                        {
+                                            <div class="flex-none">
+                                                @if (!string.IsNullOrEmpty(item2.HostImage))
+                                                {
+                                                    <img class="inline-block h-[34px] w-[34px] rounded-full border-2 border-[#fff]"
+                                                         src="@item2.HostImage"
+                                                         alt="">
+                                                }
+                                                else
+                                                {
+                                                    <img class="inline-block h-[34px] w-[34px] rounded-full border-2 border-[#fff]"
+                                                         src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                         alt="">
+                                                }
+                                                <div class="text-ellipsis-customer h-[11px] w-[28px] text-[7px] text-[#7E6D5E] ">@item2.HostName</div>
+
+                                            </div>
+                                        }
+                                    }
+                                    <div id="tooltip-right" role="tooltip"
+                                         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white text-[7px] w-[200px] rounded-lg leading-[140%] opacity-0 tooltip "
+                                         style="background: rgba(41, 47, 51, 0.95);">
+                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Host_in_charge_Info_Icon<div class="tooltip-arrow" data-popper-arrow>
                                         </div>
                                     </div>
-                                    <div>
-                                    </div>
                                 </div>
-                                <div class=" py-[9px] flex gap-[6px] justify-between" style="padding-left:10px; padding-right:10px">
-                                    <div class="flex text-[#A09E91] gap-[2px] items-center" style="font-size:8px">
-                                        <i class="las la-calendar text-[#7E6D5E]"></i>
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_On :@item.VisitedOn
-                                    </div>
-                                    <div class="flex text-[#A09E91] gap-[2px] items-center" style="font-size:8px">
-                                        <i class="las la-clock text-[#7E6D5E]"></i>
-                                        @CRS.CUSTOMER.APPLICATION.Resources.Resource.Commented_On :@item.CommentedOn
-                                    </div>
+                                <div>
                                 </div>
                             </div>
-                        }
-                    }
-                    else
-                    {
-                        <!-- for no review found page  -->
-                        <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
-                            <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
-                                    <path d="M4.54688 8.34375V33.6562H16.6791L21 37.9772L25.3209 33.6562H37.4531V8.34375H4.54688ZM7.07812 10.875H34.9219V31.125H24.2728L21 34.3978L17.7272 31.125H7.07812V10.875ZM12.1406 14.6719V17.2031H29.8594V14.6719H12.1406ZM12.1406 19.7344V22.2656H29.8594V19.7344H12.1406ZM12.1406 24.7969V27.3281H24.7969V24.7969H12.1406Z"
-                                          fill="#E0E0E0" />
-                                </svg>
+                            <div class=" py-[9px] flex gap-[6px] justify-between" style="padding-left:10px; padding-right:10px">
+                                <div class="flex text-[#A09E91] gap-[2px] items-center" style="font-size:8px">
+                                    <i class="las la-calendar text-[#7E6D5E]"></i>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Visited_On :@item.VisitedOn
+                                </div>
+                                <div class="flex text-[#A09E91] gap-[2px] items-center" style="font-size:8px">
+                                    <i class="las la-clock text-[#7E6D5E]"></i>
+                                    @CRS.CUSTOMER.APPLICATION.Resources.Resource.Commented_On :@item.CommentedOn
+                                </div>
                             </div>
-                            <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだ評価やレビューはありません</div>
                         </div>
                     }
+                }
+                else
+                {
+                    <!-- for no review found page  -->
+                    <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
+                        <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+                                <path d="M4.54688 8.34375V33.6562H16.6791L21 37.9772L25.3209 33.6562H37.4531V8.34375H4.54688ZM7.07812 10.875H34.9219V31.125H24.2728L21 34.3978L17.7272 31.125H7.07812V10.875ZM12.1406 14.6719V17.2031H29.8594V14.6719H12.1406ZM12.1406 19.7344V22.2656H29.8594V19.7344H12.1406ZM12.1406 24.7969V27.3281H24.7969V24.7969H12.1406Z"
+                                      fill="#E0E0E0" />
+                            </svg>
+                        </div>
+                        <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだ評価やレビューはありません</div>
+                    </div>
+                }
             </div>
         }
         else if (!string.IsNullOrEmpty(target) && target == "gallery")
@@ -557,7 +564,7 @@
             <div id="tab4" class="tab-content-plane">
                 <style>
                     body {
-                       /* font-family: Arial, sans-serif;*/
+                        /* font-family: Arial, sans-serif;*/
                         margin: 0;
                         padding: 0;
                         box-sizing: border-box;
@@ -865,7 +872,7 @@
                             /* Remove top border from header cells */
                         }
                 </Style>
-                <div class="px-[16px]"  style="margin-left:5px;">
+                <div class="px-[16px]" style="margin-left:5px;">
                     <div class="mx-[8.5px] py-[6.54px] p-l-[22px] p-r-[10px] ">
                         <div class="customer-title">
                             <h2 class="text-[#292F33] text-[16px] font-bold" style="line-height:140%">トップランキング</h2>
@@ -879,7 +886,7 @@
                     <div class=" pb-4 flex gap-[8px] " style="padding-left:16px">
 
                         @*  <div class="owl-carousel owl-theme store-host-carousel">*@
-                        <div class="flex overflow-x-auto no-scrollbar  " style="gap:8px">
+                        <div id="host" class="flex overflow-x-auto no-scrollbar  " style="gap:8px">
                             @{
 
                                 foreach (var item in Model.TopHostListModels)
@@ -1541,7 +1548,7 @@
                                             同伴料金
                                         </td>
                                         <td class=" border border-[#EFEFEF] text-[11px] font-[400] leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="padding-left:13px">
-                                            @Convert.ToInt64(@Model.GetClubBasicInformation.CompanionFee).ToString("#,###,###,###") 円 
+                                            @Convert.ToInt64(@Model.GetClubBasicInformation.CompanionFee).ToString("#,###,###,###") 円
                                             @*@Model.GetClubBasicInformation.CompanionFee 円*@
                                         </td>
                                     </tr>
@@ -1862,8 +1869,8 @@
     </div>
 </div>
 @*<div class="loader" id="loader-id">
-    <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
-</div>*@
+        <img src="~/Content/assets/images/loader.gif" class="h-[150px]" />
+    </div>*@
 @section scripts
 {
     <script src="~/Content/CustomHelper_v1.js"></script>
@@ -2086,4 +2093,36 @@
         highlightMention();
     </script>
 
+    <script>
+        (function () {
+            const container = document.getElementById('host');
+            let isDragging = false;
+            let startX, scrollLeft;
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+
+            });
+
+            container.addEventListener('mouseleave', () => {
+                isDragging = false;
+
+            });
+
+            container.addEventListener('mouseup', () => {
+                isDragging = false;
+
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return; // Only run if dragging
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 2; // Multiply for faster scrolling
+                container.scrollLeft = scrollLeft - walk;
+            });
+        })();
+    </script>
 }
