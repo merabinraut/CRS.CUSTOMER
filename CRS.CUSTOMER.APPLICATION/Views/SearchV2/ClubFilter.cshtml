@@ -10,7 +10,7 @@
 <style>
     @@media (min-width: 640px) {
         #innersec {
-            height: 100vh;
+            /* height: 100vh;*/
         }
     }
 </style>
@@ -596,6 +596,28 @@
                     $(this).addClass('active');
                 });
             });
+        </script>
+        <script>
+
+            $(document).ready(function () {
+                function adjustStyles() {
+                    var contentHeight = $('#innersec').height();
+                    var viewportHeight = $(window).height();
+                    if (viewportHeight < contentHeight) {
+
+                        $('#innersec').css({
+                            'height': "",
+
+                        });
+                    } else {
+                        $('#innersec').css({
+                            "height": "100vh",
+                        });
+                    }
+                }
+
+                adjustStyles()
+            })
         </script>
     }
 }
