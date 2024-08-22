@@ -458,7 +458,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     ViewBag.TypeValue = TopSearch;
                     ViewBag.TotalClubCount = "0";
                     var Response = new List<Models.SearchV2.SearchFilterClubDetailModel>();
-                    var dbResponse = _dashboardBusiness.GetAvailabilityClub(locationId, CustomerId, TypeValue);
+                    var Request = new ClubPreferenceFilterRequest
+                    {
+                        Skip = ClubTabRequest.StartIndex,
+                        Take = ClubTabRequest.PageSize
+                    };
+                    var dbResponse = _dashboardBusiness.GetAvailabilityClub(locationId, CustomerId, TypeValue, Request);
                     if (dbResponse != null && dbResponse.Count > 0)
                     {
                         Response = ApplicationUtilities.MapObjects<Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
@@ -471,6 +476,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         });
                         ViewBag.TotalClubCount = Response?.FirstOrDefault()?.TotalClubCount;
                     }
+                    ViewBag.StartIndex = ClubTabRequest.StartIndex;
+                    ViewBag.TotalRecords = (Response.Count > 0 && !string.IsNullOrEmpty(Response.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FirstOrDefault().TotalRecords) : 0;
                     return View("Preference", Response);
                 }
             }

@@ -317,7 +317,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var lId = ApplicationUtilities.GetKeyValueFromDictionary(_locationHelper, LocationId);
             var CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
             var Response = new List<ClubAvailabilityDetailModel>();
-            var dbResponse = _dashboardBusiness.GetAvailabilityClub(lId, CustomerId, TypeValue);
+            var dbResponse = _dashboardBusiness.GetAvailabilityClub(lId, CustomerId, TypeValue, null);
             if (dbResponse != null && dbResponse.Count > 0)
             {
                 Response = dbResponse.MapObjects<ClubAvailabilityDetailModel>();
