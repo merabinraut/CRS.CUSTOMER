@@ -29,5 +29,6 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string JapaneseRemark { get; set; }
         public string Remark { get; set; }
         public string RemarkType { get; set; }
+        public bool IsCourseExtended { get; set; }
     }
 }
