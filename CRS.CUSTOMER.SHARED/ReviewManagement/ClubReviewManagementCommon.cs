@@ -28,5 +28,6 @@ namespace CRS.CUSTOMER.SHARED.ReviewManagement
         public string EnglishRemark { get; set; }
         public string JapaneseRemark { get; set; }
         public string RemarkType { get; set; }
+        public bool IsCourseExtended { get; set; }
     }
 }
