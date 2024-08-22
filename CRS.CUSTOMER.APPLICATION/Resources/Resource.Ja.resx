@@ -443,7 +443,7 @@
     <comment>Add Card</comment>
   </data>
   <data name="Extended Course" xml:space="preserve">
-    <value>コースを延長した</value>
+    <value>延長コース</value>
     <comment>Dashboard</comment>
   </data>
   <data name="FAQ" xml:space="preserve">
