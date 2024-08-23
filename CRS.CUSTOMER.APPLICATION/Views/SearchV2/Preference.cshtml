@@ -345,7 +345,8 @@
         const totalPages = @(ViewBag.TotalRecords != null ? Math.Ceiling(Convert.ToDouble(ViewBag.TotalRecords) / 25) : 0);
         var prefecturesArea = "@ViewBag.PrefecturesArea";
         var typeValue = "@TypeValue";
-        initializePagination(currentPage, totalPages, prefecturesArea, typeValue)
+        var page_size = 25;
+        initializePagination(currentPage, totalPages, prefecturesArea, typeValue, page_size)
         scrollToTop();
         adjustFilterHeight();
     </script>

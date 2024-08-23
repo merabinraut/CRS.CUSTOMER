@@ -84,6 +84,7 @@
         outline: none;
     }
 </style>
+<script src="~/Content/assets/js/pagination.js"></script>
 <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick=" window.location.href='/'">
     <div class="flex gap-2 items-center absolute top-[12px] text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -523,86 +524,13 @@
             });
         })();
     </script>
-
     <script>
-     $(document).ready(function () {
-    let currentPage =  Math.floor((@ViewBag.StartIndex) / 25) + 1;
-    const totalPages = @(ViewBag.TotalRecords != null ? Math.Ceiling(Convert.ToDouble(ViewBag.TotalRecords) / 25) : 0);
-
-    function updatePagination() {
-        $('#page-numbers').empty();
-        $('#prev-btn').prop('disabled', currentPage === 1);
-        let startPage = Math.max(1, currentPage - 2);
-        let endPage = Math.min(totalPages, currentPage + 2);
-        if (currentPage - 2 < 1) {
-            endPage = Math.min(5, totalPages);
-        }
-        if (currentPage + 2 > totalPages) {
-            startPage = Math.max(1, totalPages - 4);
-        }
-        if (startPage > 1) {
-            $('#page-numbers').append(createPageElement(1));
-            if (startPage > 2) {
-                $('#page-numbers').append(createEllipsis());
-            }
-        }
-        for (let i = startPage; i <= endPage; i++) {
-            const pageElement = createPageElement(i);
-            if (i === currentPage) {
-                pageElement.addClass('active');
-            }
-            $('#page-numbers').append(pageElement);
-        }
-        if (endPage < totalPages) {
-            if (endPage < totalPages - 1) {
-                $('#page-numbers').append(createEllipsis());
-            }
-            $('#page-numbers').append(createPageElement(totalPages));
-        }
-        $('#next-btn').prop('disabled', currentPage === totalPages);
-    }
-
-    function createPageElement(page) {
-        return $('<div>', {
-            text: page,
-            click: function () { PaginationFunction(page); }
-        });
-    }
-
-    function createEllipsis() {
-        return $('<div>', { text: '...' });
-    }
-
-    function PaginationFunction(page) {
-        currentPage = page;
-        updatePagination();
-        submitForm(page);
-    }
-
-    function submitForm(page) {
-        let page_size = 25;
-        const startIndex = (page - 1) * page_size;
-        $('#startindex-id').val(startIndex);
-        var form = document.getElementById("pagination-form-id");
-        form.action = "/search" + "@ViewBag.PrefecturesArea" + "/?scftab=01";
-        form.submit();
-    }
-    // Handle "prev" button click
-    $('#prev-btn').on('click', function () {
-        if (currentPage > 1) {
-            PaginationFunction(currentPage - 1);
-        }
-    });
-    // Handle "next" button click
-    $('#next-btn').on('click', function () {
-        if (currentPage < totalPages) {
-            PaginationFunction(Math.min(currentPage + 1, totalPages));
-        }
-    });
-    updatePagination();
-});
-    </script>
-    <script>
+        let currentPage =  Math.floor((@ViewBag.StartIndex) / 25) + 1;
+        const totalPages = @(ViewBag.TotalRecords != null ? Math.Ceiling(Convert.ToDouble(ViewBag.TotalRecords) / 25) : 0);
+        var prefecturesArea = "@ViewBag.PrefecturesArea";
+        var typeValue = "scftab=01";
+        var page_size = 25;
+        initializePagination(currentPage, totalPages, prefecturesArea, typeValue, page_size);
         scrollToTop();
         adjustFilterHeight();
     </script>
