@@ -1,5 +1,6 @@
 ﻿using CRS.CUSTOMER.REPOSITORY.DashboardV2;
 using CRS.CUSTOMER.SHARED.DashboardV2;
+using CRS.CUSTOMER.SHARED.Search;
 using System.Collections.Generic;
 
 namespace CRS.CUSTOMER.BUSINESS.DashboardV2
@@ -19,9 +20,9 @@ namespace CRS.CUSTOMER.BUSINESS.DashboardV2
             return _repo.GetNewHost(LocationId, CustomerId, Type);
         }
         #region CLUB AVAILABILITY
-        public List<ClubAvailabilityDetailCommon> GetAvailabilityClub(string LocationId, string CustomerId, string AvailabilityType)
+        public List<ClubAvailabilityDetailCommon> GetAvailabilityClub(string LocationId, string CustomerId, string AvailabilityType, ClubPreferenceFilterRequest Request)
         {
-            return _repo.GetAvailabilityClub(LocationId, CustomerId, AvailabilityType);
+            return _repo.GetAvailabilityClub(LocationId, CustomerId, AvailabilityType, Request);
         }
         #endregion
     }
