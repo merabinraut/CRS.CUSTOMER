@@ -71,3 +71,40 @@ function GotoNavMenu() {
         }
     });
 }
+function scrollToTop() {
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 20) {
+                $('#scrollToTopButton').fadeIn();
+            } else {
+                $('#scrollToTopButton').fadeOut();
+            }
+        });
+        $('#scrollToTopButton').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 800);
+            return false;
+        });
+        $('.flex-col').on('click', function () {
+            $('.flex-col').removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+}
+function adjustFilterHeight() {
+    $(document).ready(function () {
+        var contentHeight = $('#innersec').height();
+        var viewportHeight = $(window).height();
+        if (viewportHeight < contentHeight) {
+            $('#innersec').css({
+                'height': ''
+            });
+        } else {
+            $('#innersec').css({
+                'height': '100vh'
+            });
+        }
+        // Call the function whenever the window is resized
+        $(window).resize(adjustStyles);
+    });
+}
+

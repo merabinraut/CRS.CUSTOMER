@@ -1,4 +1,6 @@
 ﻿using CRS.CUSTOMER.SHARED.DashboardV2;
+using CRS.CUSTOMER.SHARED.Search;
+using DocumentFormat.OpenXml.Office2016.Excel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -32,11 +34,13 @@ namespace CRS.CUSTOMER.REPOSITORY.DashboardV2
                 : new List<HostDetailCommon>();
         }
         #region CLUB AVAILABILITY
-        public List<ClubAvailabilityDetailCommon> GetAvailabilityClub(string LocationId, string CustomerId, string AvailabilityType)
+        public List<ClubAvailabilityDetailCommon> GetAvailabilityClub(string LocationId, string CustomerId, string AvailabilityType, ClubPreferenceFilterRequest Request)
         {
             var Response = new List<ClubAvailabilityDetailCommon>();
             string SQL = $"EXEC sproc_cp_dashboard_v2 @flag='3', @LocationId = {_dao.FilterString(LocationId)}" +
                 $",@CustomerId = {_dao.FilterString(CustomerId)}, @AvailabilityType = {_dao.FilterString(AvailabilityType)}";
+            SQL += ",@Skip=" + Request.Skip;
+            SQL += ",@Take=" + Request.Take;
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0)
             {
