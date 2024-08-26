@@ -27,5 +27,6 @@ namespace CRS.CUSTOMER.SHARED.DashboardV2
         public string ClubCode { get; set; }
         public string LocationURL { get; set; }
         public string TotalClubCount { get; set; }
+        public string TotalRecords { get; set; }
     }
 }

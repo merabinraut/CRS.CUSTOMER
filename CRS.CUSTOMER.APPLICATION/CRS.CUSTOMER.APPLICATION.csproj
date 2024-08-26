@@ -522,6 +522,7 @@
     <Content Include="Content\assets\js\modal.js" />
     <Content Include="Content\assets\js\owl.carousel.js" />
     <Content Include="Content\assets\js\owl.carousel.min.js" />
+    <Content Include="Content\assets\js\pagination.js" />
     <Content Include="Content\assets\js\reschedule-reservation.js" />
     <Content Include="Content\assets\js\reservation-common.js" />
     <Content Include="Content\assets\js\reservation-common.v1.js" />

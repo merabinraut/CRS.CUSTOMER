@@ -12,6 +12,18 @@
     .text-primary {
         text-align: left;
     }
+
+    .selected {
+        background-color: var(--primary); /* Example: Change background color when selected */
+         
+    }
+
+    .button-enabled {
+        background-color: var(--primary);
+        color: white; /* Optional: Change text color for better contrast */
+    }
+
+
 </style>
 <div class="flex flex-col justify-between h-screen">
     <div>
@@ -158,7 +170,7 @@
                 <div class="grid gap-[12px] pb-[18px]">
                     <div>
                         <div class="flex flex-row justify-center">
-                            <button class="button-curve btn-primary mx-[20px] py-2" onclick="closeModal('modal1')">
+                            <button class="button-curve btn-light mx-[20px] py-2" disabled id="nextbutton-review" onclick="closeModal('modal1')">
                                 <span>
                                     @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
                                 </span>
@@ -291,5 +303,42 @@
                 }
             }
         });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select all buttons that can be marked as active
+            const selectableButtons = document.querySelectorAll('.markbtn-active');
+
+            // Select the next button that needs to be enabled/disabled
+            const nextButton = document.getElementById('nextbutton-review');
+
+            // Function to check if any button is selected
+            function updateButtonState() {
+                const anyButtonSelected = Array.from(selectableButtons).some(button => button.classList.contains('selected'));
+                nextButton.disabled = !anyButtonSelected; // Enable if any button is selected, disable otherwise
+
+                // Add or remove the 'button-enabled' class based on the state
+                if (anyButtonSelected) {
+                    nextButton.classList.add('button-enabled');
+                } else {
+                    nextButton.classList.remove('button-enabled');
+                }
+            }
+
+            // Add click event listener to each selectable button
+            selectableButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Toggle the 'selected' state of the button
+                    this.classList.toggle('selected');
+                    updateButtonState();
+                });
+            });
+
+            // Initial check to set the state of the next button on page load
+            updateButtonState();
+        });
+
+
     </script>
 }

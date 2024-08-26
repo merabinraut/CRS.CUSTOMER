@@ -27,17 +27,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var PostURL = ViewBag.PostURL;
     DateTime currentTime = DateTime.Parse(DateTime.Now.ToString("HH:mm"));
-    var TotalSearchResult = (Model != null ? Model.Count() : 0);
+    var TotalSearchResult = ViewBag.TotalRecords;
     var metaContent = $"業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。利用シーン「{filter}」から{TotalSearchResult}件のホストクラブ情報を掲載中！";
 }
 <meta name="description" content="@metaContent">
 
 <style>
-    @@media (min-width: 640px) {
-        #innersec {
-            height: 100vh;
-        }
-    }
 
     input[type=radio]:checked + label {
         color: #D75A8B;
@@ -65,6 +60,52 @@
         height: 13px;
     }
 </style>
+<style>
+
+    .next-prev-btn {
+        border: 1px solid #F8F8F8;
+        display: flex;
+        width: 44px;
+        height: 44px;
+        justify-content: center;
+        align-items: center;
+        flex: none;
+        cursor: pointer
+    }
+
+    .page-number-list div {
+        border: 1px solid #F8F8F8;
+        display: flex;
+        height: 44px;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px; /* 150% */
+        cursor: default;
+    }
+
+        .page-number-list div.active {
+            color: #D75A8B;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px; /* 150% */
+            background: #F3F3F3;
+        }
+
+    .owl-dots > .active {
+        background: #E3A1A1;
+    }
+
+    .locationSearch:focus {
+        outline: none;
+    }
+</style>
+<script src="~/Content/assets/js/pagination.js"></script>
 <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="window.location.href='/'">
     <div class="flex gap-2 items-center absolute top-[12px] text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -242,23 +283,32 @@
             <!-- e/club footer -->
         </div>
     }
+    <form method="post" id="pagination-form-id" hidden>
+        <input name="SearchFilter" value="" hidden />
+        <input name="StartIndex" id="startindex-id" value="0" hidden />
+    </form>
+    @if (Model.Count > 0)
+    {
+        <!-- for pagination -->
+        <div id="pagination-container" class="flex justify-between pagination-container-wrapper my-[7px] " style="width: 100%; background: white">
+            <button id="prev-btn" class="next-prev-btn" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                    <path d="M10.707 2.13599C10.8945 2.32351 10.9998 2.57782 10.9998 2.84299C10.9998 3.10815 10.8945 3.36246 10.707 3.54999L5.75705 8.49999L10.707 13.45C10.8892 13.6386 10.99 13.8912 10.9877 14.1534C10.9854 14.4156 10.8803 14.6664 10.6949 14.8518C10.5095 15.0372 10.2586 15.1424 9.99645 15.1447C9.73425 15.1469 9.48165 15.0461 9.29305 14.864L3.63605 9.20699C3.44858 9.01946 3.34326 8.76515 3.34326 8.49999C3.34326 8.23482 3.44858 7.98052 3.63605 7.79299L9.29305 2.13599C9.48058 1.94852 9.73488 1.8432 10 1.8432C10.2652 1.8432 10.5195 1.94852 10.707 2.13599Z" fill="#959595" />
+                </svg>
+            </button>
+            <div id="page-numbers" class="page-number-list flex  w-full" style="justify-content:space-evenly"></div>
+            <button id="next-btn" class="next-prev-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                    <path d="M5.29295 2.13605C5.10548 2.32358 5.00017 2.57788 5.00017 2.84305C5.00017 3.10821 5.10548 3.36252 5.29295 3.55005L10.243 8.50005L5.29295 13.45C5.11079 13.6387 5.01 13.8913 5.01228 14.1535C5.01456 14.4156 5.11973 14.6665 5.30513 14.8519C5.49054 15.0373 5.74135 15.1424 6.00355 15.1447C6.26575 15.147 6.51835 15.0462 6.70695 14.864L12.364 9.20705C12.5514 9.01952 12.6567 8.76521 12.6567 8.50005C12.6567 8.23488 12.5514 7.98058 12.364 7.79305L6.70695 2.13605C6.51942 1.94858 6.26512 1.84326 5.99995 1.84326C5.73479 1.84326 5.48048 1.94858 5.29295 2.13605Z" fill="#959595" />
+                </svg>
+            </button>
+        </div>
+    }
 </div>
 @if (TotalSearchResult > 0)
 {
-
     <div style="background-color: #FFFFFF;" class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]">
         <div class="flex flex-row items-center justify-end gap-1 my-[12px]" id="scrollToTopButton">
-
-            @*<div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M7.99996 2.34375L1.89062 8.45308L2.60929 9.15575L7.99996 3.76508L13.3906 9.15575L14.1093 8.45308L7.99996 2.34375ZM7.99996 5.84375L1.89062 11.9531L2.60929 12.6557L7.99996 7.26508L13.3906 12.6557L14.1093 11.9531L7.99996 5.84375Z"
-                              fill="#040000" />
-                    </svg>
-                </div>
-                <div class="font-normal text-[12px] leading-[16.34px] text-[#000]">
-                    トップに戻る
-
-                </div>*@
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                 <path d="M6.99219 7.83594H24.9858V9.68464H6.99219V7.83594ZM23.5763 23.5191L16.9187 16.6789V30.6674H15.0893V16.6789L8.43168 23.5191L7.14213 22.1942L15.989 13.1047L24.8359 22.1942L23.5763 23.5191Z" fill="black" />
                 <path d="M9.81179 1.39648C9.96611 1.39648 10.0278 1.45811 10.0278 1.61217V1.67379C10.0278 1.82785 9.96611 1.88947 9.81179 1.88947H8.63897C8.6081 1.88947 8.6081 1.88947 8.6081 1.92028V6.51123C8.6081 6.54204 8.57724 6.57286 8.54637 6.57286C8.51551 6.57286 8.48465 6.54204 8.48465 6.51123V1.92028C8.48465 1.79704 8.51551 1.76623 8.63897 1.76623H9.81179C9.87352 1.76623 9.90439 1.73541 9.90439 1.67379V1.61217C9.90439 1.55054 9.87352 1.51973 9.81179 1.51973H6.84886C6.78713 1.51973 6.75627 1.55054 6.75627 1.61217V1.67379C6.75627 1.73541 6.78713 1.76623 6.84886 1.76623H8.02169C8.14514 1.76623 8.17601 1.82785 8.17601 1.92028V6.51123C8.17601 6.54204 8.14514 6.57286 8.11428 6.57286C8.08342 6.57286 8.05255 6.54204 8.05255 6.51123V1.92028C8.05255 1.88947 8.05255 1.88947 8.02169 1.88947H6.84886C6.69454 1.88947 6.63281 1.82785 6.63281 1.67379V1.61217C6.63281 1.45811 6.69454 1.39648 6.84886 1.39648H9.81179Z" fill="black" />
@@ -291,17 +341,13 @@
     </script>
 
     <script>
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 20) {
-                $('#scrollToTopButton').fadeIn();
-            } else {
-                $('#scrollToTopButton').fadeOut();
-            }
-        });
-
-        $('#scrollToTopButton').click(function () {
-            $('html, body').animate({ scrollTop: 0 }, 800);
-            return false;
-        });
+        let currentPage =  Math.floor((@ViewBag.StartIndex) / 25) + 1;
+        const totalPages = @(ViewBag.TotalRecords != null ? Math.Ceiling(Convert.ToDouble(ViewBag.TotalRecords) / 25) : 0);
+        var prefecturesArea = "@ViewBag.PrefecturesArea";
+        var typeValue = "@TypeValue";
+        var page_size = 25;
+        initializePagination(currentPage, totalPages, prefecturesArea, typeValue, page_size)
+        scrollToTop();
+        adjustFilterHeight();
     </script>
 }
