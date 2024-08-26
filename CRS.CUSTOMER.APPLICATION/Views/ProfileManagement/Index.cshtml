@@ -4,6 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
+    @@media (min-width: 640px) {
+        #innersec {
+            height: 90vh;
+        }
+    }
+
     .modal-content {
         max-width: 100%;
         width: 400px;
@@ -123,8 +129,9 @@
         border: 1px solid #e8e8e8;
         z-index: 0;
     }
+
 </style>
-<div class=" no-scrollbar overflow-y-auto">
+<div class="no-scrollbar overflow-y-auto ios-scroll" style="height:100%;">
 
     <div class="px-[12px] py-[20px] grid border-y  ">
         <div class="flex flex-row justify-between">
@@ -451,7 +458,7 @@
 
             </div>
             <div class="grid grid-cols-1 " style="padding-bottom:12px">
-                <div class="input-field-common custom-select">
+                <div class="input-field-common custom-select relative" style="max-height:44px;">
                     <select id="default_select" style="width: 100%; border-radius:3px; font-size:15px; outline:none;"
                             class="default_select text-[#B7B7B7] h-[44px] select-common" name="PrefectureDDL">
                         <option value="" selected>
