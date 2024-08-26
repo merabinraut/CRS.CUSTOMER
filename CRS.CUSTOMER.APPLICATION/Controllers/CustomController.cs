@@ -2,6 +2,7 @@
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.SHARED;
+using CRS.CUSTOMER.SHARED.CommonManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,9 +34,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (Session["AdvertisementImage"] == null)
             {
                 var CommonBusiness = new CommonManagementBusiness();
-                var advertisementimage = CommonBusiness.GetAdvertisement();
+                List<AdvertisementCommon> advertisementimage = CommonBusiness.GetAdvertisement();
                 advertisementimage = advertisementimage
-                    .Select(item => ImageHelper.ProcessedImage(item))
+                    .Select(item => 
+                    {
+                        item.image = ImageHelper.ProcessedImage(item.image);
+                        return item;
+                    })
                     .ToList();
                 Session["AdvertisementImage"] = advertisementimage;
             }
@@ -74,9 +79,17 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (Session["AdvertisementImage"] == null)
             {
                 var CommonBusiness = new CommonManagementBusiness();
-                var advertisementimage = CommonBusiness.GetAdvertisement();
+                //var advertisementimage = CommonBusiness.GetAdvertisement();
+                //advertisementimage = advertisementimage
+                //    .Select(item => ImageHelper.ProcessedImage(item))
+                //    .ToList();
+                List<AdvertisementCommon> advertisementimage = CommonBusiness.GetAdvertisement();
                 advertisementimage = advertisementimage
-                    .Select(item => ImageHelper.ProcessedImage(item))
+                    .Select(item =>
+                    {
+                        item.image = ImageHelper.ProcessedImage(item.image);
+                        return item;
+                    })
                     .ToList();
                 Session["AdvertisementImage"] = advertisementimage;
             }
