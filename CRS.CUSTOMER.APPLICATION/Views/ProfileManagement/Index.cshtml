@@ -4,6 +4,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
+    body {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    @@supports (-webkit-touch-callout: none) {
+        body {
+            overscroll-behavior: none;
+        }
+    }
+
+
     @@media (min-width: 640px) {
         #innersec {
             height: 90vh;
@@ -130,7 +142,13 @@
         z-index: 0;
     }
 
+    .ios-scroll {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.1.6/inobounce.min.js"></script>
+
 <div class="no-scrollbar overflow-y-auto ios-scroll" style="height:100%;">
 
     <div class="px-[12px] py-[20px] grid border-y  ">
@@ -945,6 +963,10 @@
         });
         // Initial check on page load
         checkForm();
+
+        document.addEventListener('touchmove', function (event) {
+            event.preventDefault();
+        }, { passive: false });
 
     </script>
     <script>
