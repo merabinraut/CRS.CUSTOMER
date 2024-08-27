@@ -84,16 +84,18 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpGet, Route("policy")]
-        public ActionResult privacypolicy()
+        public ActionResult privacypolicy(string origin = "")
         {
             PopulateMetaTagInfo();
+            ViewBag.Origin = origin;
             return View();
         }
 
         [HttpGet, Route("rule")]
-        public ActionResult termsAndCondition()
+        public ActionResult termsAndCondition(string origin = "")
         {
             PopulateMetaTagInfo();
+            ViewBag.origin = origin;
             return View();
         }
     }
