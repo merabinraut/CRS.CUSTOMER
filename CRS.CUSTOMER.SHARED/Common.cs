@@ -1,4 +1,4 @@
-namespace CRS.CUSTOMER.SHARED
+ namespace CRS.CUSTOMER.SHARED
 {
     public class Common
     {

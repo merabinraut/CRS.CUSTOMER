@@ -56,7 +56,7 @@ namespace CRS.CUSTOMER.BUSINESS.CommonManagement
         {
             return _REPO.PostEnquiryAsync(request);
         }
-        public List<string> GetAdvertisement()
+        public List<AdvertisementCommon> GetAdvertisement()
         {
             return _REPO.GetAdvertisement();
         }
