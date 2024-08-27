@@ -20,6 +20,6 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
         string GetForceFulLogout(string UserId);
         Tuple<int, int> GetMetaTagInfo(string type, string locationId = "", string clubId = "");
         CommonDbResponse PostEnquiryAsync(EnquiryRequestcommon request);
-        List<string> GetAdvertisement();
+        List<AdvertisementCommon> GetAdvertisement();
     }
 }

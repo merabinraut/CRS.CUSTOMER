@@ -696,26 +696,34 @@
                 @{
                     if (Session["AdvertisementImage"] != null)
                     {
-                        var advertisementimage = Session["AdvertisementImage"] as List<string>;
+                        var advertisementimage = Session["AdvertisementImage"] as List<CRS.CUSTOMER.SHARED.CommonManagement.AdvertisementCommon>;
                         if (advertisementimage != null && advertisementimage.Count > 0)
                         {
                             var i = 0;
                             foreach (var item in advertisementimage)
                             {
                                 @*<img src="@item"  style="width:300px;height:152px;"/>*@
-                                if (i < 2)
+                                if (item.status.ToUpper() == "A")
                                 {
-                                    <div class="image-container">
-                                        <img src="@item" class="imgclassfirst" />
-                                    </div>
+                                    if (i < 2)
+                                    {
+                                        <div class="image-container">
+                                            <a href="@item.link" target="_blank">
+                                                <img src="@item.image" class="imgclassfirst" alt="Advertisement Image" />
+                                            </a>
+                                            @*<img src="@item.image" class="imgclassfirst" />*@
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="image-container">
+                                            <a href="@item.link" target="_blank">
+                                                <img src="@item.image" class="imgclasssecond" alt="Advertisement Image" />
+                                            </a>
+                                            @*<img src="@item.image" class="imgclasssecond" />*@
+                                        </div>
+                                    }
                                 }
-                                else
-                                {
-                                    <div class="image-container">
-                                        <img src="@item" class="imgclasssecond" />
-                                    </div>
-                                }
-
                                 i++;
 
                             }

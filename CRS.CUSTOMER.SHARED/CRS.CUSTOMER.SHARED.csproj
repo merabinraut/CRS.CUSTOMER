@@ -102,6 +102,7 @@
     <Compile Include="BookmarkManagement\BookmarkManagementCommon.cs" />
     <Compile Include="CommonDbResponse.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="CommonManagement\AdvertisementCommon.cs" />
     <Compile Include="CommonManagement\PrivilegesCommon.cs" />
     <Compile Include="DashboardV2\ClubAvailabilityCommon.cs" />
     <Compile Include="DashboardV2\ClubHostDetailCommon.cs" />

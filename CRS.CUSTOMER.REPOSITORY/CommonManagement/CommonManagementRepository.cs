@@ -110,23 +110,26 @@ namespace CRS.CUSTOMER.REPOSITORY.CommonManagement
             SQL += !string.IsNullOrEmpty(request.Message)?",@message=N" + _DAO.FilterString(request.Message) : ",@message=" + _DAO.FilterString(request.Message);    
             return _DAO.ParseCommonDbResponse(SQL);
         }
-        public List<string> GetAdvertisement()
+        public List<AdvertisementCommon> GetAdvertisement()
         {
-            var advertisementManagement = new List<string>();
+            var advertisementManagement = new List<AdvertisementCommon>();
             var sql = "Exec sproc_advertisement_management @Flag='s'";
             var dt = _DAO.ExecuteDataTable(sql);
+
             if (dt != null)
             {
                 foreach (DataRow item in dt.Rows)
-                {
-                    // Assuming ImgPath is the only column you want to add to the list
-                    var imagePath = item["ImgPath"].ToString();
-                    advertisementManagement.Add(imagePath);
+                {                
+                    var advertisement = new AdvertisementCommon();
+                    advertisement.image = item["ImgPath"].ToString();
+                    advertisement.link = item["Link"].ToString();
+                    advertisement.status = item["Status"].ToString();
+                    advertisementManagement.Add(advertisement);
                 }
             }
-
             return advertisementManagement;
         }
-       
+
+
     }
 }
