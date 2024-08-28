@@ -42,6 +42,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.NotificationId = x.NotificationId.EncryptParameter();
                 x.NotificationURL = (!string.IsNullOrEmpty(x.NotificationURL) && x.NotificationURL.Trim() != "#") ? URLHelper.EncryptQueryParams(x.NotificationURL) : "#";
                 x.NotificationImage = ImageHelper.ProcessedImage(x.NotificationImage, false, $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{_AmazonS3Configruation.NotificationNoImageURL.TrimStart('/')}");
+                x.CreatedDate = x.CreatedDate;
+                ViewBag.CreatedDate = x.CreatedDate;
             });
             return View(responseModel);
         }

@@ -23,5 +23,6 @@
         public string IsRemarksDone { get; set; }
         public string SecondNotificationBody { get; set; } 
         public string ThirdNotificationBody { get; set; }
+        public string CreatedDate { get; set; }
     }
 }
