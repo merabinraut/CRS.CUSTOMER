@@ -28,7 +28,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         {
             ViewBag.LocationDDL = ApplicationUtilities.LoadDropdownList("LOCATIONDDL", "", "") as Dictionary<string, string>;
             ViewBag.PrefectureDDL = ApplicationUtilities.LoadDropdownList("PREFECTUREDDL", "", "") as Dictionary<string, string>;
-            ViewBag.ActionPageName = "NavMenu";
+            ViewBag.ActionPageName = "ProfileNavMenu";
             ViewBag.PageTitle = "プロフィール編集"/*Resources.Resource.ProfileInfo*/;
             if (TempData["UserProfileModel"] != null)
             {
@@ -372,7 +372,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ViewBag.TotalPoint = !string.IsNullOrEmpty(alldbresp[0].TotalPoints) ? alldbresp[0].TotalPoints : "0";
                 model.AllPointReportList = allgroupedTransactions.MapObjects<PointDayTypeModel>();
             }
-          
+
 
             //------ End debit,credit points of customer (when admin transfer and retrive, after reservation otp confirmation bonus point )---------------//
 
