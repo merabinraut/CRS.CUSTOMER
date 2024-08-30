@@ -224,6 +224,7 @@
              if (!locationId || locationId.trim() === '') {
                  locationId = '';
              }
+             var prefecturesArea = '@ViewBag.PrefecturesArea';
              var searchUrl = `/search${prefecturesArea}/?target=club&LocationId=${locationId}&SearchFilter=${filter}`;
              window.location.href = searchUrl;
          }

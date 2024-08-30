@@ -18,7 +18,7 @@
 
     @@media (min-width: 640px) {
         #innersec {
-            height: 90vh;
+            height: 100vh;
         }
     }
 
@@ -572,40 +572,37 @@
                 <div class="flex rounded-[8px] justify-center items-center text-white h-[48px]  bg-[#D75A8B]  " id="save_btn">
                     <button type="button" id="save_button" class="ml-2 text-[14px]">
                         更新する
-                        @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.UpdateYourProfile*@
                     </button>
                 </div>
             </div>
         </div>
     }
 </div>
-<!--<div id="modal1" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
-        <div class="relative bg-white rounded-lg shadow overflow-hidden">-->
-<!-- Modal content -->
-<!--<div class="bg-[#FFF]  w-full rounded-b-lg shadow">
-                <div class="grid gap-[12px] pb-[18px]">
-                    <div>
-                        <div class="flex flex-row justify-center">
-                            <button onclick="closeModal('modal1')">
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Cancel
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-row justify-center">
-                            <button class="button-curve btn-primary h-[29px] mx-[20px]" onclick="DeleteAccount()">
-                                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Confirm
-                            </button>
-                        </div>
-                    </div>
-                </div>
+
+<div id="confimation_modal" class="modal modalWrapper "
+     style="display:none;">
+    <div class="save_modal-content relative" style="max-width: 312px; border-radius: 15px;">
+        <span class=" absolute  z-30 text-[#fff] text-[28px] cursor-pointer right-3" onclick="closeModal('confimation_modal')"
+              style="top:-49px">&times;</span>
+        <div class="flex flex-col gap-1">
+            <div class="modal_header">
+                このサイトを離れますか?
+            </div>
+            <div class="text-[12px] flex justify-center mb-2">
+                行った変更が保存されない可能性があります。
+            </div>
+        </div>
+        <div class="border"></div>
+        <div class="save_cont flex gap-2 justify-center mt-4">
+            <button onclick="window.location.href='/login'" type="submit" class="savebtn w-[135px]">
+                はい
+            </button>
+            <div onclick="closeModal('confimation_modal')" class="flex justify-center items-center underline px-8 w-[135px]">
+                いいえ
             </div>
         </div>
     </div>
-</div>-->
-
+</div>
 
 
 <div id="save_Modal" class="modal modalWrapper responsiveModalfull"
@@ -970,6 +967,8 @@
 
     </script>
     <script>
-
+        $('#backbutton_id').click(function () {
+            openModal('confimation_modal')
+        });
     </script>
 }
