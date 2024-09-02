@@ -289,7 +289,6 @@ function CloseInitiatedClubReservationFunction() {
 }
 
 function SubmitClubReservationFunction() {
-    debugger;
     var form = document.getElementById('club-reservation-id');
     var requiredFields = form.querySelectorAll('[required]');
     for (var i = 0; i < requiredFields.length; i++) {

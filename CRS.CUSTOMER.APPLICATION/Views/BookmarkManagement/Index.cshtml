@@ -605,7 +605,7 @@
 
                                         <!-- e/opening hours -->
                                         <!-- s/available -->
-                                        if (!string.IsNullOrEmpty(club.TodaysClubSchedule) && club.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE" && DateTime.Parse(club.ClubOpeningTime) < currentTime && DateTime.Parse(club.ClubClosingTime) > currentTime)
+                                        if (!string.IsNullOrEmpty(club.TodaysClubSchedule) && club.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                                         {
                                             <div class="available">本日空席あり</div>
                                         }

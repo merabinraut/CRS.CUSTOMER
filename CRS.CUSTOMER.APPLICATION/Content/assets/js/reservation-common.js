@@ -294,7 +294,6 @@ function CloseInitiatedClubReservationFunction() {
 }
 
 function SubmitClubReservationFunction() {
-    //debugger;
     var form = document.getElementById('club-reservation-id');
     var requiredFields = form.querySelectorAll('[required]');
     //const dateElement = document.querySelector('td.ui-datepicker-current-day a');
