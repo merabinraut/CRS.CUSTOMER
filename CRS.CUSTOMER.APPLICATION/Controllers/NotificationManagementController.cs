@@ -5,7 +5,10 @@ using CRS.CUSTOMER.APPLICATION.Models.NotificationManagement;
 using CRS.CUSTOMER.BUSINESS.NotificationManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.NotificationManagement;
+using DocumentFormat.OpenXml.Bibliography;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -43,7 +46,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.NotificationURL = (!string.IsNullOrEmpty(x.NotificationURL) && x.NotificationURL.Trim() != "#") ? URLHelper.EncryptQueryParams(x.NotificationURL) : "#";
                 x.NotificationImage = ImageHelper.ProcessedImage(x.NotificationImage, false, $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{_AmazonS3Configruation.NotificationNoImageURL.TrimStart('/')}");
                 x.CreatedDate = x.CreatedDate;
-                ViewBag.CreatedDate = x.CreatedDate;
+                ViewBag.CreatedDate = Convert.ToDateTime(x.CreatedDate).ToString("yyyy.MM.dd");                
             });
             return View(responseModel);
         }
