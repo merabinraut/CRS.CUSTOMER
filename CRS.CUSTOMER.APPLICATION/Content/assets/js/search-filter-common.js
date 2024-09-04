@@ -807,7 +807,7 @@ function DateTimeFilterCommon() {
         var selectedHtmlDate = $('#main-date-id').html();
         var selectedDate = null;
         if (selectedHtmlDate != null && selectedHtmlDate != '') {
-            $('#date-id').val(selectedHtmlDate.trim());
+            $('#search-date-id').val(selectedHtmlDate.trim());
             selectedDate = new Date(selectedHtmlDate);
         }
         else {
@@ -820,7 +820,7 @@ function DateTimeFilterCommon() {
             defaultDate: selectedDate,
             onSelect: function (dateText, inst) {
                 inst.inline = true; // Set datepicker to inline mode
-                $('#date-id').val(dateText.trim());
+                $('#search-date-id').val(dateText.trim());
                 $('#main-date-id').html(dateText.trim());
             }
         });
