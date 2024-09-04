@@ -309,7 +309,7 @@ function SubmitClubReservationFunction() {
     //var test = dateInput.value;
     //dateInput.value = selectedDate;
     for (var i = 0; i < requiredFields.length; i++) {
-        if (!requiredFields[i].value && selectedDate != null) {
+        if (!requiredFields[i].value) { // || (selectedDate == null || selectedDate == '')) {
             /*toastr.info('Please fill out all required fields.');*/
             toastr.info('日付が必要です');
             return; // Prevent form submission

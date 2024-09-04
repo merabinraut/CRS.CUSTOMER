@@ -438,6 +438,17 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ActionUser = ApplicationUtilities.GetSessionValue("UserId")?.ToString()?.DecryptParameter(),
                 ActionIP = ApplicationUtilities.GetIP()
             };
+            var dbValidationResponse = _buss.IsReservationProcessValid(dbRequest.ClubId, dbRequest.CustomerId, dbRequest.VisitDate, dbRequest.VisitTime, dbRequest.NoOfPeople);
+            if (dbValidationResponse.Item1 != ResponseCode.Success)
+            {
+                AddNotificationMessage(new NotificationModel()
+                {
+                    NotificationType = NotificationMessage.INFORMATION,
+                    Message = dbValidationResponse.Item2 ?? "こちらの操作は出来ません",
+                    Title = NotificationMessage.INFORMATION.ToString()
+                });
+                return Redirect("/");
+            }
             var dbResponse = _buss.ReservationConfirmation(dbRequest);
             if (dbResponse.Code == ResponseCode.Success)
             {
@@ -445,7 +456,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Session["ReservationPage2Model"] = null;
                 Session["ReservationPage3Model"] = null;
                 Session["ReservationPage4Model"] = null;
-                return Redirect("/reservation/complete");//return RedirectToAction("Success", "ReservationManagementV2");
+                return Redirect("/reservation/complete");
             }
             else
             {
