@@ -15,15 +15,12 @@
 
     .selected {
         background-color: var(--primary); /* Example: Change background color when selected */
-         
     }
 
     .button-enabled {
         background-color: var(--primary);
         color: white; /* Optional: Change text color for better contrast */
     }
-
-
 </style>
 <div class="flex flex-col justify-between h-screen">
     <div>
@@ -98,7 +95,7 @@
     </div>
     <div class="px-4 py-[18px] shadow-review absolute bottom-0 left-0 w-full bg-white">
         <a onclick="SubmitFunction();" class="">
-            <button class="button-curve btn-primary h-[46px]">
+            <button class="button-curve btn-light h-[46px]" disabled id="btn_continue">
                 @CRS.CUSTOMER.APPLICATION.Resources.Resource.Continue
                 <div class="absolute top-[14px] right-[15px]">
                     <i class="fa-solid fa-arrow-right text-[18px]"></i>
@@ -119,7 +116,7 @@
 </div>
 <div id="modal1" class="modal">
     <div class="modal-content" style="background:none;">
-       @* <span class="close-btn" onclick="closeModal('modal1')">&times;</span>*@
+        @* <span class="close-btn" onclick="closeModal('modal1')">&times;</span>*@
         <div class="relative bg-white rounded-lg shadow overflow-hidden  w-[290px] h-[487px]">
             <!-- Modal content -->
             <div class="relative bg-white overflow-hidden">
@@ -309,10 +306,10 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Select all buttons that can be marked as active
             const selectableButtons = document.querySelectorAll('.markbtn-active');
-
+            const continueButton = document.querySelector('#btn_continue');
             // Select the next button that needs to be enabled/disabled
             const nextButton = document.getElementById('nextbutton-review');
-
+            const remarkList = document.querySelector('.remark-list-class');
             // Function to check if any button is selected
             function updateButtonState() {
                 const anyButtonSelected = Array.from(selectableButtons).some(button => button.classList.contains('selected'));
@@ -323,6 +320,14 @@
                     nextButton.classList.add('button-enabled');
                 } else {
                     nextButton.classList.remove('button-enabled');
+                }
+                const hasActiveClass = remarkList.querySelector('.active') !== null;
+                continueButton.disabled = !hasActiveClass;
+
+                if (hasActiveClass) {
+                    continueButton.classList.add('button-enabled');
+                } else {
+                    continueButton.classList.remove('button-enabled');
                 }
             }
 
@@ -340,5 +345,29 @@
         });
 
 
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const continueButton = document.querySelector('#btn_continue');
+            const remarkList = document.querySelector('.remark-list-class');
+
+            function toggleButtonState() {
+                const hasActiveClass = remarkList.querySelector('.active') !== null;
+                continueButton.disabled = !hasActiveClass;
+
+                if (hasActiveClass) {
+                    continueButton.classList.add('button-enabled');
+                } else {
+                    continueButton.classList.remove('button-enabled');
+                }
+            }
+            toggleButtonState();
+            remarkList.addEventListener('click', function (e) {
+                if (e.target.classList.contains('review-experience')) {
+                    toggleButtonState();
+                }
+            });
+        });
     </script>
 }

@@ -87,6 +87,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult privacypolicy()
         {
             PopulateMetaTagInfo();
+            ViewBag.IsVisibleNavIcon = "false";
             return View();
         }
 
@@ -94,6 +95,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         public ActionResult termsAndCondition()
         {
             PopulateMetaTagInfo();
+            ViewBag.IsVisibleNavIcon = "false";
             return View();
         }
     }
