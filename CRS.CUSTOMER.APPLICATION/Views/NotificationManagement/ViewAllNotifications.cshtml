@@ -137,7 +137,7 @@
                                                         <img src="@item.NotificationImage"
                                                              class="h-[32px] w-[32px] object-cover rounded-full" />
                                                     </div>
-                                                    <div class="notification-detail-class" onclick="handleNotificationToReadClick('@item.NotificationId', event);">
+                                                    <div class="notification-detail-class" onclick="handleNotificationToReadClick('@item.NotificationId', '@item.NotificationURL' , event);">
                                                         <input type="hidden" class="unread" value="" id="notificationid-@item.NotificationId">
                                                         <div class='text-sm font-bold text-charcolBlack notification-title pb-1 '>@item.NotificationSubject</div>
                                                         <div class='text-xs  text-[#667085] pb-1'>@Html.Raw(@item.NotificationBody)</div>
@@ -351,8 +351,8 @@
             var notificationUrl = document.getElementById('notificationid-' + notificationId).value;
             //ManageSingleNotificationReadStatus(notificationId, notificationUrl);
         }
-        function handleNotificationToReadClick(notificationId, event) {
-            var notificationUrl = document.getElementById('notificationid-' + notificationId).value;
+        function handleNotificationToReadClick(notificationId, notificationUrl, event) {
+            //var notificationUrl = document.getElementById('notificationid-' + notificationId).value;
             ManageSingleNotificationReadStatus(notificationId, notificationUrl, event);
         }
         function ManageSingleNotificationReadStatus(id, notificationURL, event) {
@@ -369,9 +369,10 @@
                             var parentDiv = event.target.closest('.notification-list');
                             if (parentDiv) {
                                 parentDiv.classList.remove('active');
+                                //window.location.reload();
                             }
-                            //window.location.reload();
-                        } else {
+                            //;
+                        } else {                   
                             window.location.href = notificationURL;
                         }
                     }
