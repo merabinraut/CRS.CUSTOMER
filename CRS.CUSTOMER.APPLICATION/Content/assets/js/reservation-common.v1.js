@@ -89,7 +89,7 @@
                         //else if (formattedDates.indexOf(string) != -1) {
                         //    return [false]; // Unreservable date
                         //}
-                         if (holidayDates.indexOf(string) != -1) {
+                        if (holidayDates.indexOf(string) != -1) {
                             return [false, 'Dayoff']; // Dayoff date
                         }
                         else {
