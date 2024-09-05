@@ -90,7 +90,7 @@
     <i class="las la-angle-right"></i>
     <a class="active cursor-pointer" onclick="RedirectToLocation();">店舗/ホスト一覧</a>
     <i class="las la-angle-right"></i>
-    <a href="#">@Model.ClubNameJp</a>
+    <a href="#">@Model.ClubNameEng</a>
 </div>
 <div class="h-[189px]">
     <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
@@ -1183,7 +1183,7 @@
                                     <td class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
                                         締日(毎月)
                                     </td>
-                                    @if (Model.GetClubBasicInformation.ClubClosingDate != null)
+                                    @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubClosingDate))
                                     {
                                         <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
                                             @Model.GetClubBasicInformation.ClubClosingDate 日

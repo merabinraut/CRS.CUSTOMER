@@ -78,7 +78,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (!string.IsNullOrEmpty(ReferCode))
             {
                 ReferralModelCommon referCommon = new ReferralModelCommon();
-                referCommon.ReferCode = ReferCode.DecryptParameter();
+                referCommon.ReferCode = ReferCode;
                 referCommon.ActionIP = ApplicationUtilities.GetIP();
                 var dbReferralRes = _buss.ValidateReferralCode(referCommon);
                 if (dbReferralRes != null && dbReferralRes.Code == "0")
@@ -94,6 +94,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else
                 {
+                    
                     //AddNotificationMessage(new NotificationModel()
                     //{
                     //    NotificationType = NotificationMessage.INFORMATION,
@@ -165,7 +166,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Common.ActionIP = ApplicationUtilities.GetIP();
                 Common.ActionUser = Common.MobileNumber;
                 if (!string.IsNullOrEmpty(ReferCode))
-                    Common.ReferCode = ReferCode.DecryptParameter();
+                    Common.ReferCode = ReferCode;
                 if (!string.IsNullOrEmpty(Type))
                     Common.Type = Type;
                 var dbResponse = _buss.Register(Common);
