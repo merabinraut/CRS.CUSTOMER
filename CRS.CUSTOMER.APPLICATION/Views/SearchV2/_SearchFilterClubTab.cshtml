@@ -90,7 +90,7 @@
                                 <circle cx="6.4987" cy="6.4987" r="2.66667" fill="#D75A8B" />
                             </svg>
                         </div>
-                        <div class="searchbybusinesshoursValue text-sm text-[#333]" data-info="@ApplicationUtilities.EncryptParameter("1").ToString()">昼</div>
+                        <div class="searchbybusinesshoursValue text-sm text-[#333]" data-info="@ApplicationUtilities.EncryptParameter("1").ToString()">朝・昼</div>
                     </div>
                     <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm ">
                         <div class="">
@@ -287,7 +287,7 @@
         });
     });
 
-    document.querySelectorAll('.timeList').forEach(item => {
+ /*   document.querySelectorAll('.timeList').forEach(item => {
         item.addEventListener('click', event => {
             if (event.currentTarget.classList.contains('disabled')) {
                 return;
@@ -309,7 +309,39 @@
                 }
             }
         });
+    });*/
+
+
+
+    document.querySelectorAll('.timeList').forEach(item => {
+        item.addEventListener('click', event => {
+            if (event.currentTarget.classList.contains('disabled')) {
+                return;  // Ignore clicks on disabled items
+            }
+
+            // Remove 'active' class from all timeList items
+            document.querySelectorAll('.timeList').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Add 'active' class to the clicked timeList item
+            event.currentTarget.classList.add('active');
+
+            // Store and display the selected time value
+            const timeValueElement = event.currentTarget.querySelector('.timeValue');
+            if (timeValueElement) {
+                var timeValue = timeValueElement.getAttribute('data-info');
+
+                // Update the selected time in the UI
+                var selectedTimeDiv = document.getElementById("selected-time-id");
+                selectedTimeDiv.textContent = timeValueElement.textContent.trim();  // Use textContent instead of innerHTML
+
+                // Update the hidden input field with the selected time
+                $('#time-id').val(timeValue.trim());
+            }
+        });
     });
+
 
     var multiSelectValues = [];
 

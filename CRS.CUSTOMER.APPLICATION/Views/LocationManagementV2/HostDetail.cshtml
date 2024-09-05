@@ -205,16 +205,16 @@
 <div class="">
     <!-- host details -->
     <div class=" px-4 ">
-        <div class="mt-6 flex justify-start items-center gap-[9px] border-b border-[#EFEFEF] pb-[11px]">
-            <div>
+        <div class="mt-6 flex justify-start items-stretch  gap-[9px] border-b border-[#EFEFEF] pb-[11px]">
+            <div class="w-1" style=" padding: 1px; border-left: 1px solid #BCB08A; border-right: 0.5px solid #BCB08A; min-height: 52px; max-height: fit-content ">
                 @*<svg xmlns="http://www.w3.org/2000/svg" width="4" height="43" viewBox="0 0 4 43" fill="none">
                         <path d="M0 43L0.8 43L0.799998 -3.49691e-08L-1.87959e-06 0L0 43ZM3.2 43L4 43L4 -1.74846e-07L3.2 -1.39877e-07L3.2 43Z"
                               fill="#BCB08A" />
                     </svg>*@
 
-                <svg xmlns="http://www.w3.org/2000/svg" width="4" height="64" viewBox="0 0 4 64" fill="none">
+              @*  <svg xmlns="http://www.w3.org/2000/svg" width="4" height=100%  viewBox="0 0 4 64" fill="none">
                     <path d="M0 64L0.800001 64L0.799998 -3.49691e-08L-2.79753e-06 0L0 64ZM3.2 64L4 64L4 -1.74846e-07L3.2 -1.39877e-07L3.2 64Z" fill="#BCB08A" />
-                </svg>
+                </svg>*@
             </div>
             <div class="flex flex-col justify-start items-start ">
                 @if (!string.IsNullOrEmpty(@Model.Position))
