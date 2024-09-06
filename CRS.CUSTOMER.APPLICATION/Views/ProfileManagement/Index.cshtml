@@ -5,13 +5,15 @@
 }
 <style>
     body {
-        overflow-y: scroll;
+        overflow-y: scroll !important;
+      /*  -webkit-overflow-scrolling: touch;*/
         -webkit-overflow-scrolling: touch;
-    }
+        
+        }
 
     @@supports (-webkit-touch-callout: none) {
         body {
-            overscroll-behavior: none;
+       /*     overscroll-behavior: none;*/
         }
     }
 
@@ -961,9 +963,9 @@
         // Initial check on page load
         checkForm();
 
-        document.addEventListener('touchmove', function (event) {
+      /*  document.addEventListener('touchmove', function (event) {
             event.preventDefault();
-        }, { passive: false });
+        }, { passive: false });*/
 
     </script>
     <script>
