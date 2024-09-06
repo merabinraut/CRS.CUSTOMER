@@ -24,7 +24,7 @@
         var phase = System.Configuration.ConfigurationManager.AppSettings["phase"];
         if (!string.IsNullOrEmpty(phase) && phase.ToUpper() == "LIVE")
         {
-            <meta property="og:title" content="ホスログ ||◤推しホストが見つかる◢|| ホストクラブ初回来店・ネット予約">
+            <meta property="og:title" content="@ViewBag.Title">
             <meta property="og:description" content="業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した0件のホストクラブ・0人のホスト情報を掲載中！">
             <meta property="og:type" content="article">
             <meta property="og:url" content="https://hoslog.jp/">
@@ -68,12 +68,31 @@
           referrerpolicy="no-referrer" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z189BCRTWP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-Z189BCRTWP');
-    </script>
+    @{
+        if (!string.IsNullOrEmpty(phase) && phase.ToUpper() == "LIVE")
+        {
+            <!-- Google Tag Manager -->
+            <script>
+                (function (w, d, s, l, i) {
+                    w[l] = w[l] || []; w[l].push({
+                        'gtm.start':
+                            new Date().getTime(), event: 'gtm.js'
+                    }); var f = d.getElementsByTagName(s)[0],
+                        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                                                })(window, document, 'script', 'dataLayer', 'GTM-M9CNRKRX');</script>
+            <!-- End Google Tag Manager -->
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-TX8QRQ5FZZ"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag() {
+                    dataLayer.push(arguments);
+                }
+                gtag('js', new Date());
+                gtag('config', 'G-TX8QRQ5FZZ');</script>
+        }
+    }
     <style>
         .ui-datepicker {
             /* width: max-content; */
