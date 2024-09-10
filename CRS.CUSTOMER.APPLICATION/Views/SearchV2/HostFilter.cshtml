@@ -17,10 +17,10 @@
         right: 3px;
     }
 
-    .active {
+   /* .active {
         color: #D75A8B;
         background: #F3F3F3;
-    }
+    }*/
 </style>
 <style>
 
@@ -101,26 +101,11 @@
 
 </div>
 
-<div style="border: 1px solid #EDEDED;background: #E3E3E3;">
+<div style="border: 1px solid #EDEDED;background: #E3E3E3; padding-left:16px;">
     <!-- clippath -->
     <div class=" mt-[8px]">
-        @*  <svg id="clippath" xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
-                <path d="M0 4C0 1.79086 1.79086 0 4 0H215L202.675 14.4652L215 27H4C1.79086 27 0 25.2091 0 23V4Z"
-                      fill="url(#paint0_linear_2051_57311)" />
-                <defs>
-                    <linearGradient id="paint0_linear_2051_57311" x1="21.5" y1="2.7" x2="145.635" y2="106.49"
-                                    gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#99AEFB" />
-                        <stop offset="0.578125" stop-color="#F04AA4" />
-                        <stop offset="1" stop-color="#E7B282" />
-                    </linearGradient>
-                </defs>
-                <image x="7" y="5" width="16" height="16" xlink:href="/Content/assets/images/customer/slippathsvg.svg" />
-                <text y="18" x="25" font-family="Arial" font-size="14" style="font-weight: 700; " fill="#FAFAFA">
-                    あなたにマッチするホスト2
-                </text>
-            </svg>*@
-        <svg xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
+
+     @*   <svg xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
             <path d="M0 0H215L202.675 14.4652L215 27H0V0Z" fill="url(#paint0_linear_15277_243149)" />
             <defs>
                 <linearGradient id="paint0_linear_15277_243149" x1="21.5" y1="2.7" x2="145.635" y2="106.49" gradientUnits="userSpaceOnUse">
@@ -134,8 +119,12 @@
             <text x="25" y="50%" font-size="14" style="font-weight: 700; line-height:16.8px" fill="#FAFAFA" dominant-baseline="central">
                 あなたにマッチするホスト
             </text>
-        </svg>
+        </svg>*@
+    <text x="25" y="50%" font-size="14" style="font-weight: 700; line-height:16.8px" fill="#FAFAFA" dominant-baseline="central">
+        オススメのホスト
+    </text>
     </div>
+
     <!-- clippath end  -->
     <div class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px] my-[12px]" id="scroll-container-host" style="overflow-y:hidden">
         @foreach (var item in Model.HostRecommendationModel)
