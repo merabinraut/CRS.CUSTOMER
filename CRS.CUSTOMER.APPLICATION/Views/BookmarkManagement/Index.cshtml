@@ -502,7 +502,7 @@
                 <div class="list_wrap">
                     @foreach (var club in Model.BookmarkedClubs)
                     {
-                        <div class="club_content">
+                        <div class="club_content cursor-pointer">
                             <!-- s/link -->
                             @*<a onclick="ClubDetailActionFunction('@club.LocationId', '@club.ClubId')">*@
                             <a onclick="ClubDetailRedirectFunction('@club.ClubCode', '@club.LocationURL')">
@@ -661,7 +661,7 @@
                 {
                     <div class="flex flex-col border-b-[4px] border-[#E3E2DB] py-3  ">
                         <div class="flex flex-row gap-[16px] mx-[16px]">
-                            <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
+                            <div style="border-radius: 4px;" class="w-[128px] mt-[16px] cursor-pointer h-auto flex  justify-end text-center relative">
                                 <div class="w-full flex justify-center" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                                          src="@item.HostImage" />
