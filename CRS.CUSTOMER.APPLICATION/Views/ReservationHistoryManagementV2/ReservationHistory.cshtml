@@ -989,11 +989,11 @@
                                     </div>
                                     <div class="pl-4" style="width:100%" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
                                         @*new design *@
-                                        <ul class="club_tags no-scrollbar" style="padding: 0px; margin:0; display: flex; flex-direction: column; height: 28px; overflow-x: scroll; max-width:fit-content;">
+                                        <ul class="club_tags no-scrollbar" style="padding: 0px; margin:0; display: flex; flex-direction: column; height: 16px; overflow-x: scroll; max-width:fit-content;">
                                             @if (!string.IsNullOrEmpty(@item.Tag1))
                                             {
                                                 <!-- s/tag -->
-                                                <li class="tag_location" style="margin-top:0px"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
+                                                <li class="tag_location" style="margin-top:0px; height:16px;"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
                                                 <!-- e/tag -->
                                             }
                                             @if (!string.IsNullOrEmpty(@item.Tag2))
@@ -1024,19 +1024,19 @@
                                         @* <div class="text-[8px] text-[#E3A1A1] mt-1">
                                                 @item.GroupName
                                             </div>*@
-                                        <div class="club_info" style="width:auto">
+                                        <div class="club_info mt-2" style="width:auto">
                                             <!-- s/club_name -->
-                                            <h3 class="club_name" style=" width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.ClubNameEng</h3>
+                                            <h3 class="club_name" style=" width: 100%; line-height: 14px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.ClubNameEng</h3>
                                             <!-- e/club_name -->
                                             <!-- s/club group -->
-                                            <p class="club_group" style="color: #e3a1a1; width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.GroupName</p>
+                                            <p class="club_group" style="color: #e3a1a1; line-height: 10px; width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.GroupName</p>
                                             <!-- e/club group -->
                                         </div>
 
                                         <div class="flex text-[#565656] gap-[2px] text-[9px] items-center gap-1" style="margin-top:9px;">
                                             <i class="las la-calendar text-[#565656] text-[10px] "></i>
-                                            <div class="text-[#565656]">@item.VisitDate</div>
-                                            <div class="text-[#565656]">
+                                            <div class="text-[#565656]" style="line-height:9.6px;">@item.VisitDate</div>
+                                            <div class="text-[#565656]" style="line-height:9.6px;">
                                                 @item.VisitTime 時～
                                             </div>
                                         </div>
@@ -1207,50 +1207,50 @@
                                     <img src="@item.ClubLogo" class="h-[82px] w-[82px] rounded-[4px] club-border image-cover" alt="img" />
                                 </div>
                                 <div class="pl-4" style="width:100%" onclick="gotoHistoryDetail('@item.ReservationId','@item.CustomerId')">
-                                    <ul class="club_tags no-scrollbar" style="padding: 0px; margin: 0; display: flex; flex-direction: column; height: 28px; overflow-x: scroll; max-width: fit-content; ">
+                                    <ul class="club_tags no-scrollbar" style="padding: 0px; margin: 0; display: flex; flex-direction: column; height: 16px; overflow-x: scroll; max-width: fit-content; ">
                                         @if (!string.IsNullOrEmpty(@item.Tag1))
                                         {
                                             <!-- s/tag -->
-                                            <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
+                                            <li class="tag_location" style="margin-top:0px ; height:16px"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
                                             <!-- e/tag -->
                                         }
                                         @if (!string.IsNullOrEmpty(@item.Tag2))
                                         {
                                             <!-- s/tag -->
-                                            <li class="tag_rank">ランク @item.Tag2</li>
+                                            <li class="tag_rank" style="margin-top:0px ;">ランク @item.Tag2</li>
                                         }
                                         <!-- e/tag -->
                                         <!-- s/tag -->
                                         @if (!string.IsNullOrEmpty(@item.Tag3))
                                         {
-                                            <li class="tag_platinum">  @item.Tag3</li>
+                                            <li class="tag_platinum" style="margin-top:0px ;">  @item.Tag3</li>
                                         }
 
                                         @if (!string.IsNullOrEmpty(@item.Tag4))
                                         {
                                             <!-- e/tag -->
                                             <!-- s/tag -->
-                                            <li class="tag_good">@item.Tag4</li>
+                                            <li class="tag_good" style="margin-top:0px ;">@item.Tag4</li>
                                         }
                                         @if (!string.IsNullOrEmpty(@item.Tag5))
                                         {
-                                            <li class="tag_big">  @item.Tag5</li>
+                                            <li class="tag_big" style="margin-top:0px ;">  @item.Tag5</li>
                                         }
                                         <!-- e/tag -->
                                     </ul>
-                                    <div class="club_info" style="width:auto">
+                                    <div class="club_info mt-2" style="width:auto">
                                         <!-- s/club_name -->
-                                        <h3 class="club_name" style=" width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.ClubNameEng</h3>
+                                        <h3 class="club_name" style=" width: 100%; line-height: 14px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.ClubNameEng</h3>
                                         <!-- e/club_name -->
                                         <!-- s/club group -->
-                                        <p class="club_group" style="color: #e3a1a1; width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.GroupName</p>
+                                        <p class="club_group" style="color: #e3a1a1; line-height: 10px; width: 100%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.GroupName</p>
                                         <!-- e/club group -->
                                     </div>
 
                                     <div class="flex text-[#565656] gap-[2px] text-[9px] items-center gap-1" style="margin-top:9px;">
                                         <i class="las la-calendar text-[#565656] text-[10px] "></i>
-                                        <div class="text-[#565656]">@item.VisitDate</div>
-                                        <div class="text-[#565656]">
+                                        <div class="text-[#565656]"  style="line-height:9.6px;">@item.VisitDate</div>
+                                        <div class="text-[#565656]"  style="line-height:9.6px;">
                                             @item.VisitTime 時～
                                         </div>
                                     </div>
@@ -1616,7 +1616,7 @@
                                     </ul>
                                     <div class="flex flex-col club_info" style="width:auto">
                                         <!-- s/club_name -->
-                                        <h3 class="club_name mt-2" style=" width: 100%; line-height:14px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.ClubNameEng</h3>
+                                        <h3 class="club_name mt-2"  style=" width: 100%; line-height:14px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 226px;">@item.ClubNameEng</h3>
                                         <!-- e/club_name -->
                                         <!-- s/club group -->
                                         <h3 class="club_group" style="color: #e3a1a1; line-height:10px; font-size:10px; width: 100%; text-overflow: ellipsis; overflow: hidden; font-weight:normal; white-space: nowrap; max-width: 226px;">@item.GroupName</h3>
