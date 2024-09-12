@@ -43,6 +43,7 @@
         color: #000 !important;
     }
 </style>
+<script src="~/Content/assets/js/pagination.js"></script>
 <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] px-4 py-[10px] h-[44px]" onclick="history.back()">
     <div class="flex gap-2 cursor-pointer items-center absolute top-[12px] text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -459,24 +460,24 @@
         });
     </script>
     <script>
-        let currentPage = 1;
-        const itemsPerPage = 12;
-        const totalItems = 150;
-        const maxVisiblePages = 3;
+        //let currentPage = 1;
+        //const itemsPerPage = 12;
+        //const totalItems = 150;
+        //const maxVisiblePages = 3;
 
-        function leftPageinate() {
-            if (currentPage > 1) {
-                currentPage--;
-                updatePagination();
-            }
-        }
+        //function leftPageinate() {
+        //    if (currentPage > 1) {
+        //        currentPage--;
+        //        updatePagination();
+        //    }
+        //}
 
-        function rightPageinate() {
-            if (currentPage < Math.ceil(totalItems / itemsPerPage)) {
-                currentPage++;
-                updatePagination();
-            }
-        }
+        //function rightPageinate() {
+        //    if (currentPage < Math.ceil(totalItems / itemsPerPage)) {
+        //        currentPage++;
+        //        updatePagination();
+        //    }
+        //}
 
         //function updatePagination() {
         //    // Remove all existing pagination items
@@ -506,6 +507,15 @@
         //    }
         //}
         //updatePagination();
+        let currentPage =  Math.floor((@ViewBag.StartIndex) / 25) + 1;
+        const totalPages = @(ViewBag.TotalRecords != null ? Math.Ceiling(Convert.ToDouble(ViewBag.TotalRecords) / 25) : 0);
+        var prefecturesArea = "@ViewBag.PrefecturesArea";
+        var typeValue = "scftab=02";
+        var page_size = 12;
+        initializePagination(currentPage, totalPages, prefecturesArea, typeValue, page_size)
+        scrollToTop();
+       // adjustFilterHeight();
+
     </script>
     <script>
         (function () {
