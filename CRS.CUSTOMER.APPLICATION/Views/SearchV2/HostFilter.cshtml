@@ -166,7 +166,7 @@
 <!-- for search result -->
 <div class="bg-[##FFFFFF]  flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]">
     <span>検索結果</span>
-    <span>@Model.FilteredHostModel.Count 件</span>
+    <span>@ViewBag.TotalRecords 件</span>
 </div>
 @if (Model.FilteredHostModel.Count <= 0)
 {
