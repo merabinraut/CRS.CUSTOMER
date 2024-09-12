@@ -91,8 +91,8 @@
                             <span class="japanese-text">
                                 @*
 
-                            い
-                        </span>*@
+                                        い
+                                    </span>*@
                                 @*     <span class="text-[#BCB08A] text-[10px] font-normal leading-[18px]">*@
                                 新規会員登録
                             </span>
@@ -130,7 +130,7 @@
                                     <a class="flex gap-[6px] items-center" href="/">
                                         <img src="~/Content/assets/images/logo.svg" class="h-[24px]" alt='logo' />
                                     </a>
-                                   
+
                                 </div>
                             }
                             else
@@ -147,9 +147,9 @@
                                 url = "/";
                             }
                             @* <div class="flex gap-[6px] items-center" onclick="WindowHistoryBack();">
-                <div class="text-xl text-warmgray cursor-pointer"><i class="las la-angle-left"></i></div>
-                <div class="text-charcoalBlack text-sm">戻る</div>
-            </div>*@
+                                    <div class="text-xl text-warmgray cursor-pointer"><i class="las la-angle-left"></i></div>
+                                    <div class="text-charcoalBlack text-sm">戻る</div>
+                                </div>*@
                             <div class="flex gap-4">
                                 @if (ViewBag.IsVisibleNavIcon == "false")
                                 {
@@ -157,11 +157,14 @@
                                 }
                                 else
                                 {
-                                    <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
-                                        <i class="las la-bell relative" style="color:#d75a88" id="notification-bell-id">
-                                            <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
-                                        </i>
-                                    </div>
+                                    if (@Session["Username"] != null)
+                                    {
+                                        <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='@Url.Action("ViewAllNotifications", "NotificationManagement")'">
+                                            <i class="las la-bell relative" style="color:#d75a88" id="notification-bell-id">
+                                                <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
+                                            </i>
+                                        </div>
+                                    }
                                     if (@Session["Username"] != null)
                                     {
                                         <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" data-drawer-target="drawer-right-example"
