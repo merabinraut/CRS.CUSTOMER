@@ -79,9 +79,9 @@
     <div id="test">
         <div id="leftcontent" style="margin-top: 30%; " class="flex  flex-col items-center ">
             <div id="leftfix" class="fixed">
-                <div class="flex flex-row justify-center">
+                <a href="/" class="flex flex-row justify-center">
                     <img src="~/content/assets/images/bglogo.png" />
-                </div>
+                </a>
                 <div id="siteurl" class="flex flex-row justify-center">
                     <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
                 </div>
@@ -118,21 +118,38 @@
 
         </div>
         <div id="innersec">
-            <div class="flex flex-col  justify-between h-screen">
+            <div class="flex flex-col  justify-between h-screen overflow-x-hidden">
                 <div>
                     @*mew implementation end*@
                     <div class="py-[10px] px-[16px] flex justify-between border-b border-b-[#ECECEC] sticky top-0 bg-white z-[10] responsiveFooterContatiner" style="z-index:10">
                         @{
+                            var origin = ViewBag.origin;
+                            if (origin == "login" || origin == "register")
+                            {
+                                <div class="flex justify-between bg-white z-[10] loginResponsive" style="z-index:12;">
+                                    <a class="flex gap-[6px] items-center" href="/">
+                                        <img src="~/Content/assets/images/logo.svg" class="h-[24px]" alt='logo' />
+                                    </a>
+
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="flex gap-[6px] items-center" onclick="WindowHistoryBack();">
+                                    <div class="text-xl text-warmgray cursor-pointer"><i class="las la-angle-left"></i></div>
+                                    <div class="text-charcoalBlack text-sm">戻る</div>
+                                </div>
+                            }
                             var url = "/Home/HomePage";
                             var Username = Session["Username"]?.ToString();
                             if (!string.IsNullOrEmpty(Username))
                             {
                                 url = "/";
                             }
-                            <div class="flex gap-[6px] items-center" onclick="WindowHistoryBack();">
-                                <div class="text-xl text-warmgray cursor-pointer"><i class="las la-angle-left"></i></div>
-                                <div class="text-charcoalBlack text-sm">戻る</div>
-                            </div>
+                            @* <div class="flex gap-[6px] items-center" onclick="WindowHistoryBack();">
+                                    <div class="text-xl text-warmgray cursor-pointer"><i class="las la-angle-left"></i></div>
+                                    <div class="text-charcoalBlack text-sm">戻る</div>
+                                </div>*@
                             <div class="flex gap-4">
                                 @if (ViewBag.IsVisibleNavIcon == "false")
                                 {
@@ -140,11 +157,14 @@
                                 }
                                 else
                                 {
-                                    <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
-                                        <i class="las la-bell relative" style="color:#d75a88" id="notification-bell-id">
-                                            <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
-                                        </i>
-                                    </div>
+                                    if (@Session["Username"] != null)
+                                    {
+                                        <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='@Url.Action("ViewAllNotifications", "NotificationManagement")'">
+                                            <i class="las la-bell relative" style="color:#d75a88" id="notification-bell-id">
+                                                <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
+                                            </i>
+                                        </div>
+                                    }
                                     if (@Session["Username"] != null)
                                     {
                                         <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" data-drawer-target="drawer-right-example"

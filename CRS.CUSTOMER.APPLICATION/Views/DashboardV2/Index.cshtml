@@ -167,6 +167,19 @@
             display: none
         }
     }
+
+    .loader {
+        position: fixed;
+        z-index: 20;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #777777 !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 
 <div id="parent" class="loop owl-carousel kiran owl-theme center-image-slider">
@@ -252,7 +265,7 @@
                 </div>
             </div>
         </div>
-        <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px;" class="flex flex-row justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] disable-click" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
+        <div style="margin-left:15px;margin-right:15px; margin-bottom: 24px; cursor:pointer;" class="flex flex-row cursor-pointer justify-center rounded-[8px] bg-[#D75A8B] mt-[16px] disable-click" onclick="SubmitDateTimeFilterFunction();" id="DateTimeFilter-Id">
             <div class="my-[12px] font-[700] text-[#FFF] " style="font-size:15px">
                 検索
             </div>
@@ -380,7 +393,7 @@
             </div>
         </div>
     </div>
-    <div class="flex  overflow-x-auto flex-row gap-[8px]  my-[12px] no-scrollbar mb-[12px]" style="margin-left:16px" id="recommended-club-content-id">
+    <div class="flex  overflow-x-auto flex-row gap-[8px] my-[12px] no-scrollbar mb-[12px]" style="margin-left:16px ; padding-right:16px;" id="recommended-club-content-id">
         <!--Ajax call-->
     </div>
 </div>
@@ -443,7 +456,7 @@
         </svg>*@
     </div>
     <!-- clippath end  -->
-    <div style="background-color :#F8F8F8; overflow-y:hidden;margin-left:16px" class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px]  my-[12px]" id="recommended-host-content-id">
+    <div style=" overflow-y:hidden;margin-left:16px; margin-right:16px;" class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px]  my-[12px]" id="recommended-host-content-id">
         <!--Ajax call-->
     </div>
 </div>
@@ -589,7 +602,7 @@
 <!----------------------------------------------------Review Section---------------------------------------------------->
 <!----------------------------------------------------Search by condtion---------------------------------------------------->
 <!-- search by condtion  -->
-<div style="border-top: 1px solid #EDEDED;">
+@*<div style="border-top: 1px solid #EDEDED;">
     <div class="flex mx-[16px]   flex-row pb-[10px] mt-[12px]">
         <div class=" flex flex-row justify-start items-center w-[160px] ">
             <div class="font-[700] text-black text-[14px] leading-[21px]">条件から探す</div>
@@ -655,7 +668,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 <!-- search by condition end  -->
 <!-- search by preference  -->
@@ -727,8 +740,8 @@
 <!-- search by preference   end  -->
 <!----------------------------------------------------Search by condtion---------------------------------------------------->
 <!----------------------------------------------------Other---------------------------------------------------->
-<div style="height:16px; background-color: #F8F8F8;" class=" w-full">
-</div>
+@*<div style="height:16px; background-color: #F8F8F8;" class=" w-full">
+</div>*@
 <div class="flex flex-col ">
     <div>
     </div>
@@ -822,6 +835,8 @@
         </div>
     </div>
 </div>
+
+
 <!--#endregion-->
 @section scripts
 {

@@ -31,20 +31,30 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     lang = LanguageMang.GetDefaultLanguage();
             }
             new LanguageMang().SetLanguage(lang);
-            if (Session["AdvertisementImage"] == null)
-            {
-                var CommonBusiness = new CommonManagementBusiness();
-                List<AdvertisementCommon> advertisementimage = CommonBusiness.GetAdvertisement();
-                advertisementimage = advertisementimage
-                    .Select(item => 
-                    {
-                        item.image = ImageHelper.ProcessedImage(item.image);
-                        return item;
-                    })
-                    .ToList();
-                Session["AdvertisementImage"] = advertisementimage;
-            }
-            
+            //if (Session["AdvertisementImage"] == null)
+            //{
+            //    var CommonBusiness = new CommonManagementBusiness();
+            //    List<AdvertisementCommon> advertisementimage = CommonBusiness.GetAdvertisement();
+            //    advertisementimage = advertisementimage
+            //        .Select(item => 
+            //        {
+            //            item.image = ImageHelper.ProcessedImage(item.image);
+            //            return item;
+            //        })
+            //        .ToList();
+            //    Session["AdvertisementImage"] = advertisementimage;
+            //}
+            var CommonBusiness = new CommonManagementBusiness();
+            List<AdvertisementCommon> advertisementimage = CommonBusiness.GetAdvertisement();
+            advertisementimage = advertisementimage
+                .Select(item =>
+                {
+                    item.image = ImageHelper.ProcessedImage(item.image);
+                    return item;
+                })
+                .ToList();
+            Session["AdvertisementImage"] = advertisementimage;
+
             return base.BeginExecuteCore(callback, state);
         }
 

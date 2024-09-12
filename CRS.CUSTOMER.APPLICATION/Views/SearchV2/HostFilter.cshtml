@@ -17,10 +17,10 @@
         right: 3px;
     }
 
-    .active {
+   /* .active {
         color: #D75A8B;
         background: #F3F3F3;
-    }
+    }*/
 </style>
 <style>
 
@@ -47,7 +47,7 @@
         font-style: normal;
         font-weight: 500;
         line-height: 24px; /* 150% */
-        cursor: default;
+        cursor: pointer;
     }
 
         .page-number-list div.active {
@@ -68,8 +68,8 @@
     }
 </style>
 <script src="~/Content/assets/js/pagination.js"></script>
-<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="window.location.href='/'">
-    <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+<div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="history.back()">
+    <div class="flex gap-2 cursor-pointer items-center absolute top-[12px] text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
             <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
                   fill="#BCB08A" />
@@ -85,7 +85,7 @@
                   fill="#BCB08A" />
         </svg>
     </span>
-    <input class="w-full text-xs text-[#BCB08A] "
+    <input class="w-full text-xs text-[#BCB08A] " style="outline:none;"
            title="Search"
            type="text"
            placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Filter_Placeholder" readonly />
@@ -101,26 +101,11 @@
 
 </div>
 
-<div style="border: 1px solid #EDEDED;background: #E3E3E3;">
+<div style="border: 1px solid #EDEDED;background: #E3E3E3; padding-left:16px;">
     <!-- clippath -->
     <div class=" mt-[8px]">
-        @*  <svg id="clippath" xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
-                <path d="M0 4C0 1.79086 1.79086 0 4 0H215L202.675 14.4652L215 27H4C1.79086 27 0 25.2091 0 23V4Z"
-                      fill="url(#paint0_linear_2051_57311)" />
-                <defs>
-                    <linearGradient id="paint0_linear_2051_57311" x1="21.5" y1="2.7" x2="145.635" y2="106.49"
-                                    gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#99AEFB" />
-                        <stop offset="0.578125" stop-color="#F04AA4" />
-                        <stop offset="1" stop-color="#E7B282" />
-                    </linearGradient>
-                </defs>
-                <image x="7" y="5" width="16" height="16" xlink:href="/Content/assets/images/customer/slippathsvg.svg" />
-                <text y="18" x="25" font-family="Arial" font-size="14" style="font-weight: 700; " fill="#FAFAFA">
-                    あなたにマッチするホスト2
-                </text>
-            </svg>*@
-        <svg xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
+
+     @*   <svg xmlns="http://www.w3.org/2000/svg" width="215" height="27" viewBox="0 0 215 27" fill="none">
             <path d="M0 0H215L202.675 14.4652L215 27H0V0Z" fill="url(#paint0_linear_15277_243149)" />
             <defs>
                 <linearGradient id="paint0_linear_15277_243149" x1="21.5" y1="2.7" x2="145.635" y2="106.49" gradientUnits="userSpaceOnUse">
@@ -134,8 +119,12 @@
             <text x="25" y="50%" font-size="14" style="font-weight: 700; line-height:16.8px" fill="#FAFAFA" dominant-baseline="central">
                 あなたにマッチするホスト
             </text>
-        </svg>
+        </svg>*@
+    <text x="25" y="50%" font-size="14" style="font-weight: 700; line-height:16.8px" fill="#FAFAFA" dominant-baseline="central">
+        オススメのホスト
+    </text>
     </div>
+
     <!-- clippath end  -->
     <div class="no-scrollbar flex  overflow-x-auto flex-row gap-[8px] my-[12px]" id="scroll-container-host" style="overflow-y:hidden">
         @foreach (var item in Model.HostRecommendationModel)
@@ -177,7 +166,7 @@
 <!-- for search result -->
 <div class="bg-[##FFFFFF]  flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]">
     <span>検索結果</span>
-    <span>@Model.FilteredHostModel.Count() 件</span>
+    <span>@ViewBag.TotalRecords 件</span>
 </div>
 @if (Model.FilteredHostModel.Count <= 0)
 {

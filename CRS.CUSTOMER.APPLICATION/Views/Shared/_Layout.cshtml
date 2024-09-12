@@ -19,11 +19,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    @{
+        var phase = System.Configuration.ConfigurationManager.AppSettings["phase"];
+        if (!string.IsNullOrEmpty(phase) && phase.ToUpper() == "LIVE")
+        {
+            <meta property="og:title" content="@ViewBag.Title">
+            <meta property="og:description" content="業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した0件のホストクラブ・0人のホスト情報を掲載中！">
+            <meta property="og:type" content="article">
+            <meta property="og:url" content="https://hoslog.jp/">
+            <meta property="og:image" content="https://s3.ap-northeast-1.amazonaws.com/assets.hoslog.jp/ADMIN/hosloglogo.png">
+        }
+    }
+    <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/Content/assets/css/tailwind.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/global_v1.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/club_v2.css">
     <link rel="stylesheet" href="~/Content/assets/css/customer/customcss.css">
-
     <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.theme.default.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -36,14 +48,13 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
-    <meta name="robots" content="noindex,nofollow,noarchive" />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <script src="~/Content/assets/js/owl.carousel.js"></script>
@@ -57,35 +68,35 @@
           referrerpolicy="no-referrer" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z189BCRTWP"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-Z189BCRTWP');</script>
-    @*  <title>ホスログ | @ViewBag.Title</title>*@
-    <title>@ViewBag.Title</title>
-
     @{
-        var phase = System.Configuration.ConfigurationManager.AppSettings["phase"];
         if (!string.IsNullOrEmpty(phase) && phase.ToUpper() == "LIVE")
         {
-            <meta property="og:title" content="ホスログ/公式ホームページ">
-            <meta property="og:type" content="article">
-            <meta property="og:url" content="https://hoslog.jp/">
-            <meta property="og:image" content="https://hoslogjapan.s3.ap-northeast-1.amazonaws.com/logo.png">
+            <!-- Google Tag Manager -->
+            <script>
+                (function (w, d, s, l, i) {
+                    w[l] = w[l] || []; w[l].push({
+                        'gtm.start':
+                            new Date().getTime(), event: 'gtm.js'
+                    }); var f = d.getElementsByTagName(s)[0],
+                        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                                                })(window, document, 'script', 'dataLayer', 'GTM-M9CNRKRX');</script>
+            <!-- End Google Tag Manager -->
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-TX8QRQ5FZZ"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag() {
+                    dataLayer.push(arguments);
+                }
+                gtag('js', new Date());
+                gtag('config', 'G-TX8QRQ5FZZ');</script>
         }
     }
-    @*  <meta property="og:title" content="ホスログ/公式ホームページ">
-        <meta property="og:type" content="article">
-        <meta property="og:url" content="https://hoslog.jp/">
-        <meta property="og:image" content="https://hoslogjapan.s3.ap-northeast-1.amazonaws.com/logo.png">*@
-    @*<meta property="og:description" content="業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した★★★件のホストクラブ・★★★人のホスト情報を掲載中！">*@
     <style>
-
         .ui-datepicker {
             /* width: max-content; */
-            width: 98%;
+            width: 100% !important ;
             background-color: #FBF8F8;
             padding: 12px 8px;
             position: relative !important;
@@ -577,9 +588,9 @@
     <div id="test">
         <div id="leftcontent" style="margin-top: 30%; " class="flex  flex-col items-center ">
             <div id="leftfix" class="fixed">
-                <div class="flex flex-row justify-center">
+                <a href="/" class="flex flex-row justify-center">
                     <img src="~/content/assets/images/bglogo.png" />
-                </div>
+                </a>
                 <div id="siteurl" class="flex flex-row justify-center">
                     <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
                 </div>
@@ -588,12 +599,12 @@
                         <p style="font-size:18px;font-weight:600 ; " class="text-white">@jsonData.CustomerRegistration.text</p>
                     </div>
                 </a>
-                <a href="@jsonData.ClubRegistration.url" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                <a href="@jsonData.ClubRegistration.url" target="_blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
                     <div>
                         <p style="font-size:18px;font-weight:600" class="text-black">@jsonData.ClubRegistration.text</p>
                     </div>
                 </a>
-                <a href="@jsonData.AffiliateRegistration.url" target="blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
+                <a href="@jsonData.AffiliateRegistration.url" target="_blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
                     <div>
                         <p style="font-size:18px;font-weight:600" class="text-black">@jsonData.AffiliateRegistration.text</p>
                     </div>
@@ -616,7 +627,7 @@
                 else if (!string.IsNullOrEmpty(ViewBag.ActionPageName) && ViewBag.ActionPageName == "ProfileNavMenu")
                 {
                     <div class="flex items-center border-t-[2px] border-t-[#C8B477] border-b-[1px] border-b-[#E0E0E0] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" id="backbutton_id">
-                        <div class="flex gap-2 items-center  absolute  left-4 text-sm">
+                        <div class="flex gap-2 cursor-pointer items-center  absolute  left-4 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="22" height="23" viewBox="0 0 22 23" fill="none">
                                 <path d="M15.2352 3.24084C14.786 2.79167 14.0618 2.79167 13.6127 3.24084L5.99518 10.8583C5.63768 11.2158 5.63768 11.7933 5.99518 12.1508L13.6127 19.7683C14.0618 20.2175 14.786 20.2175 15.2352 19.7683C15.6843 19.3192 15.6843 18.595 15.2352 18.1458L8.59851 11.5L15.2443 4.85417C15.6843 4.41417 15.6843 3.68084 15.2352 3.24084Z"

@@ -39,7 +39,7 @@
         font-style: normal;
         font-weight: 500;
         line-height: 24px; /* 150% */
-        cursor: default;
+        cursor: pointer;
     }
 
         .page-number-list div.active {
@@ -62,8 +62,8 @@
 <script src="~/Content/assets/js/pagination.js"></script>
 @if (!string.IsNullOrEmpty(target))
 {
-    <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="window.location.href='/'">
-        <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+    <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" onclick="history.back()">
+        <div class="flex gap-2 cursor-pointer items-center absolute top-[12px] text-sm">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                 <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
                       fill="#BCB08A" />
@@ -79,7 +79,7 @@
                       fill="#BCB08A" />
             </svg>
         </span>
-        <input class="w-full text-xs text-[#BCB08A] "
+        <input class="w-full text-xs text-[#BCB08A] " style="outline:none;"
                title="Search"
                type="text"
                placeholder="@CRS.CUSTOMER.APPLICATION.Resources.Resource.Search_Filter_Placeholder" readonly />
@@ -97,7 +97,8 @@
     <div style="background-color:#E3E3E3;" class="flex flex-row ">
         <div class="flex-col overflow-y-auto   pt-[8px] pb-[8px]">
             <p class="text-[14px] font-[600] pl-[16px] ">
-                @CRS.CUSTOMER.APPLICATION.Resources.Resource.Club_recommended_for_you
+                @*@CRS.CUSTOMER.APPLICATION.Resources.Resource.Club_recommended_for_you*@
+                オススメのホストクラブ
             </p>
             <div class="flex  overflow-x-auto mx-[16px] no-scrollbar flex-row gap-[8px]  my-[8px]" id="club-filter-scroll">
                 @{
@@ -105,7 +106,7 @@
                     {
                         <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@ViewBag.PrefecturesArea')">
                             <div class="flex  w-[118px]">
-                                <div style="border-radius: 6px; border: 1px solid #EDEDED; background: #FFF;"
+                                <div style="border-radius: 6px; border: 1px solid #EDEDED; background: #FFF; cursor: pointer;"
                                      class=" flex flex-col w-[118px]  px-[8px] py-[10px]">
                                     <div class="flex flex-row justify-center">
                                         <div class="h-[48px] w-[48px] object-fill   bg-[#ffffff]  flex flex-row justify-center">
@@ -149,7 +150,7 @@
             <div class="list_wrap">
                 @foreach (var item in Model.FilteredClubModel)
                 {
-                    <div class="club_content">
+                    <div class="club_content cursor-pointer">
                         <!-- s/link -->
                         <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
                             <!-- s/club_tag -->

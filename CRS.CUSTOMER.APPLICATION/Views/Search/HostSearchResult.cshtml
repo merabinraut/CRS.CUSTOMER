@@ -43,8 +43,9 @@
         color: #000 !important;
     }
 </style>
+<script src="~/Content/assets/js/pagination.js"></script>
 <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] px-4 py-[10px] h-[44px]" onclick="history.back()">
-    <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+    <div class="flex gap-2 cursor-pointer items-center absolute top-[12px] text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
             <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
                   fill="#BCB08A" />
@@ -270,7 +271,7 @@
 <!-- for search result -->
 <div class="bg-[##FFFFFF]  flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]">
     <span>検索結果</span>
-    <span>@Model.FilteredHostModel.Count() 件</span>
+    <span>@ViewBag.TotalRecords 件</span>
 </div>
 <div class="no-scrollbar flex flex-wrap flex-row gap-[8px] justify-center my-[12px] bg-[#FFFFFF]">
     @{
@@ -459,24 +460,24 @@
         });
     </script>
     <script>
-        let currentPage = 1;
-        const itemsPerPage = 12;
-        const totalItems = 150;
-        const maxVisiblePages = 3;
+        //let currentPage = 1;
+        //const itemsPerPage = 12;
+        //const totalItems = 150;
+        //const maxVisiblePages = 3;
 
-        function leftPageinate() {
-            if (currentPage > 1) {
-                currentPage--;
-                updatePagination();
-            }
-        }
+        //function leftPageinate() {
+        //    if (currentPage > 1) {
+        //        currentPage--;
+        //        updatePagination();
+        //    }
+        //}
 
-        function rightPageinate() {
-            if (currentPage < Math.ceil(totalItems / itemsPerPage)) {
-                currentPage++;
-                updatePagination();
-            }
-        }
+        //function rightPageinate() {
+        //    if (currentPage < Math.ceil(totalItems / itemsPerPage)) {
+        //        currentPage++;
+        //        updatePagination();
+        //    }
+        //}
 
         //function updatePagination() {
         //    // Remove all existing pagination items
@@ -506,6 +507,15 @@
         //    }
         //}
         //updatePagination();
+        let currentPage =  Math.floor((@ViewBag.StartIndex) / 25) + 1;
+        const totalPages = @(ViewBag.TotalRecords != null ? Math.Ceiling(Convert.ToDouble(ViewBag.TotalRecords) / 25) : 0);
+        var prefecturesArea = "@ViewBag.PrefecturesArea";
+        var typeValue = "scftab=02";
+        var page_size = 12;
+        initializePagination(currentPage, totalPages, prefecturesArea, typeValue, page_size)
+        scrollToTop();
+       // adjustFilterHeight();
+
     </script>
     <script>
         (function () {

@@ -87,7 +87,7 @@
         font-style: normal;
         font-weight: 500;
         line-height: 24px; /* 150% */
-        cursor: default;
+        cursor: pointer;
         max-width: 51px;
         width: 100%;
     }
@@ -215,7 +215,7 @@
                     foreach (var item in Model.ClubListModel)
                     {
                         /*New design */
-                        <div class="club_content">
+                        <div class="club_content cursor-pointer">
                             <!-- s/link -->
                             <a onclick="ClubDetailActionFunction('@item.LocationId', '@item.ClubId')">
                                 <ul class="club_tags">

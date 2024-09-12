@@ -101,11 +101,23 @@
         .owl-theme .owl-dots button {
             width: 50px
         }
+@@media(width > 639px){ 
+    .owl-theme .owl-nav.disabled + .owl-dots {
+        width:375px !important
+    }
+
+    }
+
+    .owl-stage{
+        display:flex;
+    }
+    
+    
 </style>
 
 <!-- back button -->
 <div class="flex items-center  border-b border-b-[#E8E8E8] sticky top-0 bg-white z-[10] relative px-4 py-[10px] h-[44px]" style="z-index:11" onclick="history.back()">
-    <div class="flex gap-2 items-center absolute top-[12px] text-sm">
+    <div class="flex gap-2 cursor-pointer items-center absolute top-[12px] text-sm">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
             <path d="M15.2347 2.74084C14.7855 2.29167 14.0614 2.29167 13.6122 2.74084L5.99469 10.3583C5.63719 10.7158 5.63719 11.2933 5.99469 11.6508L13.6122 19.2683C14.0614 19.7175 14.7855 19.7175 15.2347 19.2683C15.6839 18.8192 15.6839 18.095 15.2347 17.6458L8.59802 11L15.2439 4.35417C15.6839 3.91417 15.6839 3.18084 15.2347 2.74084Z"
                   fill="#BCB08A" />
@@ -120,7 +132,7 @@
     <i class="las la-angle-right"></i>
     <a onclick="RedirectToLocation();" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">店舗/ホスト一覧</a>
     <i class="las la-angle-right"></i>
-    <a onclick="ClubDetailRedirectFunction('@ClubCode', '@LocationURL');" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@Model.ClubNameJapanese</a>
+    <a onclick="ClubDetailRedirectFunction('@ClubCode', '@LocationURL');" class="active" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@Model.ClubNameEnglish</a>
     <i class="las la-angle-right"></i>
     <a href="#" style="max-width:90px; overflow:hidden;text-overflow:ellipsis;white-space:nowrap">@Model.HostNameJapanese</a>
 </div>
@@ -183,13 +195,13 @@
     <!-- favourite icon -->
     @if (!string.IsNullOrEmpty(Model.IsBookmarked) && Model.IsBookmarked.ToUpper() == "N")
     {
-        <div class="absolute  right-3" style="bottom: -15px; z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
+        <div class="absolute  right-3 cursor-pointer" style="bottom: -15px; z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
             <img src="~/Content/assets/images/customer/favorite-unfilled.svg" alt="unfilled" style="height: 59px; width: 60px; z-index: 1" />
         </div>
     }
     else
     {
-        <div class="absolute  right-3" style="bottom: -1.75rem;z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
+        <div class="absolute  right-3 cursor-pointer" style="bottom: -1.75rem;z-index:5" onclick="ManageBookmark('@Model.ClubId','@Model.HostId','host', this)">
             <img src="~/Content/assets/images/customer/favorite-filled.svg" alt="filled" style="height: 59px; width: 60px; z-index: 1 " />
         </div>
     }
@@ -205,16 +217,16 @@
 <div class="">
     <!-- host details -->
     <div class=" px-4 ">
-        <div class="mt-6 flex justify-start items-center gap-[9px] border-b border-[#EFEFEF] pb-[11px]">
-            <div>
+        <div class="mt-6 flex justify-start items-stretch  gap-[9px] border-b border-[#EFEFEF] pb-[11px]">
+            <div class="w-1" style=" padding: 1px; border-left: 1px solid #BCB08A; border-right: 0.5px solid #BCB08A; min-height: 52px; max-height: fit-content ">
                 @*<svg xmlns="http://www.w3.org/2000/svg" width="4" height="43" viewBox="0 0 4 43" fill="none">
                         <path d="M0 43L0.8 43L0.799998 -3.49691e-08L-1.87959e-06 0L0 43ZM3.2 43L4 43L4 -1.74846e-07L3.2 -1.39877e-07L3.2 43Z"
                               fill="#BCB08A" />
                     </svg>*@
 
-                <svg xmlns="http://www.w3.org/2000/svg" width="4" height="64" viewBox="0 0 4 64" fill="none">
+              @*  <svg xmlns="http://www.w3.org/2000/svg" width="4" height=100%  viewBox="0 0 4 64" fill="none">
                     <path d="M0 64L0.800001 64L0.799998 -3.49691e-08L-2.79753e-06 0L0 64ZM3.2 64L4 64L4 -1.74846e-07L3.2 -1.39877e-07L3.2 64Z" fill="#BCB08A" />
-                </svg>
+                </svg>*@
             </div>
             <div class="flex flex-col justify-start items-start ">
                 @if (!string.IsNullOrEmpty(@Model.Position))
@@ -678,7 +690,7 @@
                 </a>
             </div>
             <div id="shareButton">
-                <div class="flex justify-center items-center flex-col" style="line-height:52%">
+                <div class="flex justify-center items-center flex-col cursor-pointer" style="line-height:52%">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <path d="M16.0972 3.05078L15.125 4.02295L17.9905 6.875H11.3438C9.25925 6.875 7.5625 8.57106 7.5625 10.6562C7.5625 12.7414 9.25925 14.4375 11.3438 14.4375H11.6875V13.0625H11.3438C10.0169 13.0625 8.9375 11.9831 8.9375 10.6562C8.9375 9.32938 10.0169 8.25 11.3438 8.25H17.9932L15.1304 11.1128L16.1025 12.085L20.625 7.5625L16.0972 3.05078ZM3.4375 3.4375V18.5625H18.5625V11.6875L17.1875 13.0625V17.1875H4.8125V4.8125H12.2743L13.6493 3.4375H3.4375Z"
                               fill="#D75A8B" />

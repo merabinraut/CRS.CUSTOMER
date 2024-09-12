@@ -226,6 +226,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         };
                         var dbHostResponse = _searchBusiness.HostPreferenceFilter(dbRequest);
                         Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
+                        ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
                     }
                     Response.FilteredHostModel.ForEach(x =>
                     {
@@ -276,6 +277,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         };
                         var dbResponse = _searchBusiness.ClubPreferenceFilter(dbRequest);
                         Response.FilteredClubModel = ApplicationUtilities.MapObjects<CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
+                        //ViewBag.TotalRecords = (Response.FilteredClubModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredClubModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredClubModel.FirstOrDefault().TotalRecords) : 0;
                     }
                     Response.FilteredClubModel.ForEach(x =>
                     {
@@ -344,6 +346,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         };
                         var dbHostResponse = _searchBusiness.HostPreferenceFilter(dbRequest);
                         Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
+                        ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
                     }
                     Response.FilteredHostModel.ForEach(x =>
                     {

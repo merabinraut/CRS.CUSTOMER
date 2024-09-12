@@ -392,7 +392,7 @@
         @foreach (var item in Model.ClubListModel)
         {
             /* new improvememnt*/
-            <div class="club_content">
+            <div class="club_content cursor-pointer">
                 <!-- s/link -->
                 <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
                     <!-- s/club_tag -->
@@ -596,7 +596,7 @@
     </div>
     <div style="background-color: #F6F6F6; height:42px; display:flex; width:100%"
          class="flex flex-row gap-[4px] justify-center h-[24px] items-center my-[0px] pb-[12px] ">
-        <div style="line-height:18px;" class="text-[#D75A8B] underline text-[12px]" onclick="CurrentLocationRedirectFunction();">
+        <div style="line-height:18px;" class="text-[#D75A8B] cursor-pointer underline text-[12px]" onclick="CurrentLocationRedirectFunction();">
             @CRS.CUSTOMER.APPLICATION.Resources.Resource.See_more
         </div>
         <div>
@@ -612,7 +612,7 @@
     @foreach (var item in Model.HostListModel)
     {
         <div class="flex flex-row gap-[16px] mx-[16px]">
-            <div style="border-radius: 4px;" class="w-[128px] mt-[16px]  h-auto flex  justify-end text-center relative">
+            <div style="border-radius: 4px;" class="w-[128px] mt-[16px] cursor-pointer h-auto flex  justify-end text-center relative">
                 <div class="w-full flex justify-center" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@item.LocationURL');">
                     <img class="w-[128px] h-[180px] object-cover rounded-[2px]"
                          src="@item.HostImage" />
@@ -737,7 +737,7 @@
     }
     <div style="background-color: #F6F6F6; height:42px"
          class="flex flex-row gap-[4px] justify-center h-[24px] items-center my-[0px] pb-[12px] ">
-        <div style="line-height:18px;" class="text-[#D75A8B] underline text-[12px]" onclick="CurrentLocationRedirectFunction('host');">
+        <div style="line-height:18px;" class="text-[#D75A8B] cursor-pointer underline text-[12px]" onclick="CurrentLocationRedirectFunction('host');">
             @CRS.CUSTOMER.APPLICATION.Resources.Resource.See_more
         </div>
         <div>
