@@ -455,6 +455,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ViewBag.Date = filterDate;
                 ViewBag.Time = string.IsNullOrEmpty(ClubDateTimeTabRequest.Time) ? string.Empty : ClubDateTimeTabRequest.Time.DecryptParameter();
                 ViewBag.NoOfPeople = string.IsNullOrEmpty(ClubDateTimeTabRequest.NoOfPeople) ? string.Empty : ClubDateTimeTabRequest.NoOfPeople.DecryptParameter();
+                ViewBag.TypeValue = "true";
+                ViewBag.FilterTime = ClubDateTimeTabRequest.FilteredTime;
+                ViewBag.StartIndex = ClubDateTimeTabRequest.StartIndex;
                 return View("ClubSearchResult", Response);
             }
             else if (!string.IsNullOrEmpty(TopSearch))
