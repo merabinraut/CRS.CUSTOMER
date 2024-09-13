@@ -328,7 +328,6 @@
     <span>検索結果</span>
     <span>@ViewBag.TotalRecords 件</span>
 </div>
-
 @if (Model.FilteredHostModel.Count <= 0)
 {
     <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center">
@@ -443,6 +442,13 @@ else
     </div>
 }
 <form method="post" id="pagination-form-id" hidden>
+    <input name="LocationId" value="@Model.RequestModel.LocationId" hidden />
+    <input name="SearchFilter" value="@Model.RequestModel.SearchFilter" hidden />
+    <input name="Height" value="@Model.RequestModel.Height" hidden />
+    <input name="Age" value="@Model.RequestModel.Age" hidden />
+    <input name="BloodType" value="@Model.RequestModel.BloodType" hidden />
+    <input name="ConstellationGroup" value="@Model.RequestModel.ConstellationGroup" hidden />
+    <input name="Occupation" value="@Model.RequestModel.Occupation" hidden />
     <input name="StartIndex" id="startindex-id" value="0" hidden />
 </form>
 @if (Model.FilteredHostModel.Count > 0)
@@ -541,6 +547,6 @@ else
         var page_size = 12;
         initializePagination(currentPage, totalPages, prefecturesArea, typeValue, page_size);
         scrollToTop();
-        adjustFilterHeight();
+        //adjustFilterHeight();
     </script>
 }

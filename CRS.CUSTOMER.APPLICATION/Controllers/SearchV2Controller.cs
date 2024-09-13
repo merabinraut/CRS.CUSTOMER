@@ -344,6 +344,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             Skip = HostTabRequest.StartIndex,
                             Take = HostTabRequest.PageSize,
                         };
+                        Response.RequestModel = ApplicationUtilities.MapObject<HostSearchFilterRequestModel>(HostTabRequest);
                         var dbHostResponse = _searchBusiness.HostPreferenceFilter(dbRequest);
                         Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
                         ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
