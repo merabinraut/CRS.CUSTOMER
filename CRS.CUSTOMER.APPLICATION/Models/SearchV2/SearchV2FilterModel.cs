@@ -145,5 +145,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchV2
         public string NoOfPeople { get; set; }
         public string ResultType { get; set; }
         public string FilteredTime { get; set; }
+        public int StartIndex { get; set; } = 0;
+        public int PageSize { get; set; } = 25;
     }
 }
