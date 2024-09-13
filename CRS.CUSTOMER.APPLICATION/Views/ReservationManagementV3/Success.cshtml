@@ -11,6 +11,7 @@
         padding: 16px;
         border-radius: 4px
     }
+
     .log-outButton {
         border-radius: 8px;
         background: #D75A8B;
@@ -25,7 +26,6 @@
         padding-top: 15px;
         padding-bottom: 15px;
     }
-
 </style>
 <div id="drawer-right-example"
      class="fixed  top-0 right-0 z-[60] h-screen  overflow-y-auto transition-transform translate-x-1 bg-white w-[90%] translate-x-full" style="z-index:9999"
@@ -209,9 +209,9 @@
 {
     <script src="~/Content/assets/js/modal.js"></script>
     <script>
-        $(document).ready(function () {
-            localStorage.clear();
-        });
+        //$(document).ready(function () {
+        //    localStorage.clear();
+        //});
 
         function NotificationFunction() {
             $.ajax({
@@ -227,5 +227,7 @@
                 error: function () {
                 }
             });
-        }</script>
+        }
+        localStorage.setItem('activeTab1', 1);
+    </script>
 }
