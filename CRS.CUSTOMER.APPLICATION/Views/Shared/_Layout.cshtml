@@ -21,14 +21,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow,noarchive" />
     @{
+
         var phase = System.Configuration.ConfigurationManager.AppSettings["phase"];
         if (!string.IsNullOrEmpty(phase) && phase.ToUpper() == "LIVE")
         {
             <meta property="og:title" content="@ViewBag.Title">
             <meta property="og:description" content="業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した0件のホストクラブ・0人のホスト情報を掲載中！">
             <meta property="og:type" content="article">
-            <meta property="og:url" content="https://hoslog.jp/">
-            <meta property="og:image" content="https://s3.ap-northeast-1.amazonaws.com/assets.hoslog.jp/ADMIN/hosloglogo.png">
+            <meta property="og:url" content="
+            https://hoslog.jp/">
+            <meta property="og:image" content="
+            https://s3.ap-northeast-1.amazonaws.com/assets.hoslog.jp/ADMIN/hosloglogo.png">
+
+            <?xml version="1.0" encoding="UTF-8" ?>
+
+            <urlset xmlns="
+            http://www.sitemaps.org/schemas/sitemap/0.9"
+                    xmlns:xsi="
+            http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="
+            http://www.sitemaps.org/schemas/sitemap/0.9
+
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+            </urlset>
+
         }
     }
     <title>@ViewBag.Title</title>
@@ -79,8 +95,8 @@
                             new Date().getTime(), event: 'gtm.js'
                     }); var f = d.getElementsByTagName(s)[0],
                         j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                                                })(window, document, 'script', 'dataLayer', 'GTM-M9CNRKRX');</script>
+                            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+                })(window, document, 'script', 'dataLayer', 'GTM-M9CNRKRX');</script>
             <!-- End Google Tag Manager -->
             <!-- Google tag (gtag.js) -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-TX8QRQ5FZZ"></script>
@@ -96,7 +112,7 @@
     <style>
         .ui-datepicker {
             /* width: max-content; */
-            width: 100% !important ;
+            width: 100% !important;
             background-color: #FBF8F8;
             padding: 12px 8px;
             position: relative !important;
@@ -287,7 +303,7 @@
             background-repeat: no-repeat;
             background-size: cover;*/
                 /*  background: url('/content/assets/images/sprinkle.png') no-repeat center center fixed;*/
-                background-color: #FFEAEE ;
+                background-color: #FFEAEE;
                 -moz-background-size: cover;
                 -o-background-size: cover;
                 background-size: cover;
