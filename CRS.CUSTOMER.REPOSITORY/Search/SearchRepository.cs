@@ -159,6 +159,8 @@ namespace CRS.CUSTOMER.REPOSITORY.Search
             var flag = (!string.IsNullOrEmpty(Request.ResultType) && Request.ResultType == "1") ? "4" : (!string.IsNullOrEmpty(Request.ResultType) && Request.ResultType == "2") ? "5" : "3";
             var time = !string.IsNullOrEmpty(Request.FilteredTime) ? _dao.FilterString(Request.FilteredTime) : _dao.FilterString(Request.Time);
             string SQL = $"EXEC sproc_cp_search_filter_management @Flag = '{flag}', @LocationId= {_dao.FilterString(Request.LocationId)}, @Time={time} , @Date = {_dao.FilterString(Request.Date)}, @CustomerId = {_dao.FilterString(Request.CustomerId)}, @NoOfPeople = {_dao.FilterString(Request.NoOfPeople)}";
+            SQL += ",@Skip=" + Request.Skip;
+            SQL += ",@Take=" + Request.Take;
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0)
             {

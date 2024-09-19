@@ -6,14 +6,13 @@
 <style>
     body {
         overflow-y: scroll !important;
-      /*  -webkit-overflow-scrolling: touch;*/
+        /*  -webkit-overflow-scrolling: touch;*/
         -webkit-overflow-scrolling: touch;
-        
-        }
+    }
 
     @@supports (-webkit-touch-callout: none) {
         body {
-       /*     overscroll-behavior: none;*/
+            /*     overscroll-behavior: none;*/
         }
     }
 
@@ -910,7 +909,7 @@
             var surname = document.getElementById('Surname').value;
             var givenName = document.getElementById('GivenName').value;
             var sex = document.querySelector('.language-option.active');
-            var email = document.getElementById('emailInput').value;
+            var email = document.getElementById('EmailAddress').value;
             var dobYear = document.getElementById('dob-year').value;
             var dobMonth = document.getElementById('dob-month').value;
             var dobDay = document.getElementById('dob-day').value;
@@ -963,14 +962,119 @@
         // Initial check on page load
         checkForm();
 
-      /*  document.addEventListener('touchmove', function (event) {
-            event.preventDefault();
-        }, { passive: false });*/
+        /*  document.addEventListener('touchmove', function (event) {
+              event.preventDefault();
+          }, { passive: false });*/
 
     </script>
     <script>
+        var inititalSurname = document.getElementById("Surname").value;
+        var initialGienName = document.getElementById("GivenName").value;
+        var initialEmailAddress = document.getElementById("EmailAddress").value;
+        var initialDOBYear = document.getElementById("dob-year").value;
+        var initialDOBMonth = document.getElementById("dob-month").value;
+        var initialDOBDay = document.getElementById("dob-day").value;
+        var initialPostcode = document.getElementById("postcode").value;
+        var initialCity = "";
+        document.addEventListener('DOMContentLoaded', function () {
+            initialCity = document.getElementById("city").value;
+        });
+        var initialStreet = document.getElementById("street").value;
+        var initialResidenceNumber = document.getElementById("ResidenceNumber").value;
+        var initialDropdownValue = document.getElementById("default_select").value;
+        var isEdit = false;
+        var selectedGender = "";
+        document.addEventListener('click', function (event) {
+            var activeOption = document.querySelector('.language-option');
+            if (activeOption) {
+                selectedGender = activeOption.getAttribute('data-gender');
+                isEdit = true;
+            }
+        });
+        document.getElementById("Surname").addEventListener("input", function () {
+            if (this.value !== inititalSurname) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+        document.getElementById("GivenName").addEventListener("input", function () {
+            if (this.value !== initialGienName) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+        document.getElementById("EmailAddress").addEventListener("input", function () {
+            if (this.value !== initialEmailAddress) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+        document.getElementById("dob-year").addEventListener("input", function () {
+            if (this.value !== initialDOBYear) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+        document.getElementById("dob-month").addEventListener("input", function () {
+            if (this.value !== initialDOBMonth) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+        document.getElementById("dob-day").addEventListener("input", function () {
+            if (this.value !== initialDOBDay) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+        document.getElementById("postcode").addEventListener("input", function () {
+            if (this.value !== initialPostcode) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+        document.getElementById("city").addEventListener("input", function () {
+            if (this.value !== initialCity) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+        document.getElementById("street").addEventListener("input", function () {
+            if (this.value !== initialStreet) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+        document.getElementById("ResidenceNumber").addEventListener("input", function () {
+            if (this.value !== initialResidenceNumber) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+        document.getElementById("default_select").addEventListener("change", function () {
+            if (this.value !== initialDropdownValue) {
+                isEdit = true;
+            } else {
+                isEdit = false;
+            }
+        });
+
         $('#backbutton_id').click(function () {
-            openModal('confimation_modal')
+            if (isEdit) {
+                openModal('confimation_modal')
+            } else {
+                window.location.href = '/login'
+            }
         });
     </script>
 }

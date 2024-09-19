@@ -64,7 +64,6 @@ function submitForm(page, prefecturesArea, typeValue, page_size) {
     //const page_size = page_size;
     const startIndex = (page - 1) * page_size;
     $('#startindex-id').val(startIndex);
-
     const form = document.getElementById("pagination-form-id");
     if (typeValue.trim().toUpperCase() === "CLUB") {
         form.action = `/search${prefecturesArea}/?target=${typeValue}`;
@@ -74,7 +73,10 @@ function submitForm(page, prefecturesArea, typeValue, page_size) {
         form.action = `/search${prefecturesArea}/?${typeValue}`;
     } else if (typeValue.trim() === "scftab=02") {
         form.action = `/search${prefecturesArea}/?${typeValue}`;
-    } else {
+    } else if (typeValue === "") {
+        form.action = `/search${prefecturesArea}`;
+    }
+    else {
         form.action = `/search${prefecturesArea}/?TopSearch=${typeValue}`;
     }
     form.submit();

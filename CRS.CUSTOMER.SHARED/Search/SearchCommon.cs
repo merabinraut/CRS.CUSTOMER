@@ -85,5 +85,7 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string CustomerId { get; set; }
         public string ResultType { get; set; }
         public string FilteredTime { get; set; }
+        public int Skip { get; set; } = 0;
+        public int Take { get; set; } = 25;
     }
 }

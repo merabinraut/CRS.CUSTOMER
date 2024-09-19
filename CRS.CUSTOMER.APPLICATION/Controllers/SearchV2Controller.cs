@@ -344,6 +344,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                             Skip = HostTabRequest.StartIndex,
                             Take = HostTabRequest.PageSize,
                         };
+                        Response.RequestModel = ApplicationUtilities.MapObject<HostSearchFilterRequestModel>(HostTabRequest);
                         var dbHostResponse = _searchBusiness.HostPreferenceFilter(dbRequest);
                         Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
                         ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
@@ -397,6 +398,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         };
                         var dbResponse = _searchBusiness.ClubPreferenceFilter(dbRequest);
                         Response.FilteredClubModel = ApplicationUtilities.MapObjects<Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
+                        ViewBag.TotalRecords = (Response.FilteredClubModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredClubModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredClubModel.FirstOrDefault().TotalRecords) : 0;
                     }
                     Response.FilteredClubModel.ForEach(x =>
                     {
@@ -433,11 +435,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     NoOfPeople = string.IsNullOrEmpty(ClubDateTimeTabRequest.NoOfPeople) ? string.Empty : ClubDateTimeTabRequest.NoOfPeople.DecryptParameter(),
                     CustomerId = CustomerId,
                     ResultType = string.IsNullOrEmpty(ClubDateTimeTabRequest.ResultType) ? string.Empty : ClubDateTimeTabRequest.ResultType?.DecryptParameter(),
-                    FilteredTime = !string.IsNullOrEmpty(ClubDateTimeTabRequest.FilteredTime) ? ClubDateTimeTabRequest.FilteredTime.Trim() : string.Empty
+                    FilteredTime = !string.IsNullOrEmpty(ClubDateTimeTabRequest.FilteredTime) ? ClubDateTimeTabRequest.FilteredTime.Trim() : string.Empty,
+                    Skip = ClubDateTimeTabRequest.StartIndex,
+                    Take = ClubDateTimeTabRequest.PageSize
 
                 };
                 var dbResponse = _searchBusiness.ClubFilterViewDateTimeAndOthers(dbRequest);
                 Response.FilteredClubModel = ApplicationUtilities.MapObjects<Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
+                ViewBag.TotalRecords = (Response.FilteredClubModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredClubModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredClubModel.FirstOrDefault().TotalRecords) : 0;
                 Response.FilteredClubModel.ForEach(x =>
                 {
                     x.ClubId = x.ClubId.EncryptParameter();
@@ -450,6 +455,9 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 ViewBag.Date = filterDate;
                 ViewBag.Time = string.IsNullOrEmpty(ClubDateTimeTabRequest.Time) ? string.Empty : ClubDateTimeTabRequest.Time.DecryptParameter();
                 ViewBag.NoOfPeople = string.IsNullOrEmpty(ClubDateTimeTabRequest.NoOfPeople) ? string.Empty : ClubDateTimeTabRequest.NoOfPeople.DecryptParameter();
+                ViewBag.TypeValue = "true";
+                ViewBag.FilterTime = ClubDateTimeTabRequest.FilteredTime;
+                ViewBag.StartIndex = ClubDateTimeTabRequest.StartIndex;
                 return View("ClubSearchResult", Response);
             }
             else if (!string.IsNullOrEmpty(TopSearch))
