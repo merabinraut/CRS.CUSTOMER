@@ -212,22 +212,6 @@
         //$(document).ready(function () {
         //    localStorage.clear();
         //});
-
-        function NotificationFunction() {
-            $.ajax({
-                url: '/NotificationManagement/HasUnReadNotification',
-                type: 'POST',
-                success: function (result) {
-                    if (result.HasUnReadNotification) {
-                        document.getElementById("notification-bell-id").getElementsByTagName("span")[0].style.display = "block";
-                    }
-                    else {
-                    }
-                },
-                error: function () {
-                }
-            });
-        }
         localStorage.setItem('activeTab1', 1);
     </script>
 }

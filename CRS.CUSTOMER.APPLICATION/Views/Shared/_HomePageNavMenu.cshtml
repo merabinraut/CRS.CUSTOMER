@@ -11,7 +11,14 @@
         {
             <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='@Url.Action("ViewAllNotifications","NotificationManagement")'">
                 <i class="las la-bell relative" style="color:#d75a88" id="notification-bell-id">
-                    <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
+                    @if (Session["NotificationUnReadCount"] != null && Convert.ToInt32(Session["NotificationUnReadCount"].ToString()) > 0)
+                    {
+                        <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:block;"></span>
+                    }
+                    else
+                    {
+                        <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
+                    }
                 </i>
             </div>
         }

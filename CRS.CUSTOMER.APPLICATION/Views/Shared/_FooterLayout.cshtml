@@ -1,4 +1,33 @@
-﻿<!DOCTYPE html>
+﻿@using Newtonsoft.Json
+
+@functions {
+    public dynamic ReadJson(string fileName)
+    {
+        try
+        {
+            string filePath = HttpContext.Current.Server.MapPath($"~/App_Data/{fileName}");
+            string jsonContent = System.IO.File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<dynamic>(jsonContent);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error reading JSON from {fileName}: {ex.Message}");
+        }
+    }
+}
+@{
+    var jsonData = ReadJson("RedirectURLConfiguration.json");
+    var jsonData2 = ReadJson("Configuration.json");
+}
+
+<script>
+    let notificationSignalRBaseURL = '@jsonData2.baseURL';
+    let notificationUsername = '@jsonData2.username';
+    let notificationPassword = '@jsonData2.password';
+    let customerId = '@ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter()';
+    let notificationFunctions = ["ReceiveNotificationCount"];
+</script>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -29,6 +58,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <title> @ViewBag.Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
+    <script src="~/Content/assets/js/notification-signalR.js"></script>
 </head>
 
 
@@ -161,7 +192,14 @@
                                     {
                                         <div class="text-xl text-warmgray cursor-pointer" style="font-size:1.65rem" onclick="window.location.href='@Url.Action("ViewAllNotifications", "NotificationManagement")'">
                                             <i class="las la-bell relative" style="color:#d75a88" id="notification-bell-id">
-                                                <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
+                                                @if (Session["NotificationUnReadCount"] != null && Convert.ToInt32(Session["NotificationUnReadCount"].ToString()) > 0)
+                                                {
+                                                    <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:block;"></span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="h-[5px] w-[5px] bg-red rounded-full border-[1px] border-[#E8E0C6] absolute top-[4px] right-[3px]" style="display:none;"></span>
+                                                }
                                             </i>
                                         </div>
                                     }
@@ -557,27 +595,27 @@
                 }
 
             </div>
-    </div>
+        </div>
 
-    <script>
-        function WindowHistoryBack() {
-            var previousUrl = document.referrer;
-            if (isLoginPageWithReturnUrl(previousUrl)) {
-                window.location.href = '/';
-                window.close();
+        <script>
+            function WindowHistoryBack() {
+                var previousUrl = document.referrer;
+                if (isLoginPageWithReturnUrl(previousUrl)) {
+                    window.location.href = '/';
+                    window.close();
+                }
+                else {
+                    window.history.back();
+                    window.close();
+                }
             }
-            else {
-                window.history.back();
-                window.close();
-            }
-        }
 
-        function isLoginPageWithReturnUrl(url) {
-            return url.includes("ReturnURL");
-        }
-        function NavCloseFunction() {
-            document.getElementById('drawer-right-example').classList.add('translate-x-full');
-        }
-    </script>
+            function isLoginPageWithReturnUrl(url) {
+                return url.includes("ReturnURL");
+            }
+            function NavCloseFunction() {
+                document.getElementById('drawer-right-example').classList.add('translate-x-full');
+            }
+        </script>
 </body>
 </html>

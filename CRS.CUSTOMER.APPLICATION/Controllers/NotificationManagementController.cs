@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using static Google.Apis.Requests.BatchRequest;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
@@ -46,7 +47,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.NotificationURL = (!string.IsNullOrEmpty(x.NotificationURL) && x.NotificationURL.Trim() != "#") ? URLHelper.EncryptQueryParams(x.NotificationURL) : "#";
                 x.NotificationImage = ImageHelper.ProcessedImage(x.NotificationImage, false, $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{_AmazonS3Configruation.NotificationNoImageURL.TrimStart('/')}");
                 x.CreatedDate = x.CreatedDate;
-                ViewBag.CreatedDate = Convert.ToDateTime(x.CreatedDate).ToString("yyyy.MM.dd");                
+                ViewBag.CreatedDate = Convert.ToDateTime(x.CreatedDate).ToString("yyyy.MM.dd");
             });
             return View(responseModel);
         }
@@ -82,7 +83,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (!string.IsNullOrEmpty(dbRequest.AgentId) && !string.IsNullOrEmpty(dbRequest.ActionUser))
             {
                 var dbResponse = _buss.ManageNotificationReadStatus(dbRequest, NotificationId);
-                if (dbResponse != null && dbResponse.Code == ResponseCode.Success) return Json(new { Code = "0", Message = dbResponse.Message ?? "Success", PageTitle = Resources.Resource.Notifications });
+                if (dbResponse != null && dbResponse.Code == ResponseCode.Success)
+                {
+                    Session["NotificationUnReadCount"] = dbResponse.Extra1;
+                    return Json(new { Code = "0", Message = dbResponse.Message ?? "Success", PageTitle = Resources.Resource.Notifications, notificationUnReadCount = dbResponse.Extra1 });
+                }
                 return Json(new { Code = "1", Message = dbResponse.Message ?? "Invalid request" });
             }
             return Json(new { Code = "1", Message = "Something went wrong. Please try again later." });
@@ -102,7 +107,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (!string.IsNullOrEmpty(dbRequest.AgentId) && !string.IsNullOrEmpty(dbRequest.ActionUser) && !string.IsNullOrEmpty(NotificationId))
             {
                 var dbResponse = _buss.ManageSingleNotificationReadStatus(dbRequest, NotificationId);
-                if (dbRequest != null && dbResponse.Code == ResponseCode.Success) return Json(new { Code = "0", Message = dbResponse.Message ?? "Success", PageTitle = Resources.Resource.Notifications });
+                if (dbRequest != null && dbResponse.Code == ResponseCode.Success)
+                {
+                    Session["NotificationUnReadCount"] = dbResponse.Extra1;
+                    return Json(new { Code = "0", Message = dbResponse.Message ?? "Success", PageTitle = Resources.Resource.Notifications, notificationUnReadCount = dbResponse.Extra1 });
+                }
                 return Json(new
                 {
                     Code = "1",

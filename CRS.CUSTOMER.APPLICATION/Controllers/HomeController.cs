@@ -94,7 +94,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 else
                 {
-                    
+
                     //AddNotificationMessage(new NotificationModel()
                     //{
                     //    NotificationType = NotificationMessage.INFORMATION,
@@ -368,7 +368,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 }
                 HttpCookie cookie = Request.Cookies["CRS-CUSTOMER-LOGINID"];
                 if (cookie != null) Response.LoginId = cookie.Value.DefaultDecryptParameter() ?? null;
-        
+
                 return View(Response);
             }
             else return Redirect("/");
@@ -459,6 +459,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Session["MobileNumber"] = response.MobileNumber.EncryptParameter();
                     Session["Amount"] = response.Amount;
                     Session["CustomerCode"] = response.CustomerCode;
+                    Session["NotificationUnReadCount"] = response.NotificationUnReadCount;
                     return new Tuple<string, bool>("/", true);
                 }
                 this.AddNotificationMessage(new NotificationModel()

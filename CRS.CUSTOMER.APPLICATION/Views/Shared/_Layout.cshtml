@@ -1,17 +1,32 @@
 ﻿@using Newtonsoft.Json
 
 @functions {
-    public dynamic ReadJson()
+    public dynamic ReadJson(string fileName)
     {
-        string filePath = HttpContext.Current.Server.MapPath("~/App_Data/RedirectURLConfiguration.json");
-        string jsonContent = System.IO.File.ReadAllText(filePath);
-        var jsonData = JsonConvert.DeserializeObject<dynamic>(jsonContent);
-        return jsonData;
+        try
+        {
+            string filePath = HttpContext.Current.Server.MapPath($"~/App_Data/{fileName}");
+            string jsonContent = System.IO.File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<dynamic>(jsonContent);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error reading JSON from {fileName}: {ex.Message}");
+        }
     }
 }
 @{
-    var jsonData = ReadJson();
+    var jsonData = ReadJson("RedirectURLConfiguration.json");
+    var jsonData2 = ReadJson("Configuration.json");
 }
+
+<script>
+    let notificationSignalRBaseURL = '@jsonData2.baseURL';
+    let notificationUsername = '@jsonData2.username';
+    let notificationPassword = '@jsonData2.password';
+    let customerId = '@ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter()';
+    let notificationFunctions = ["ReceiveNotificationCount"];
+</script>
 
 <!-- #region Header -->
 <!DOCTYPE html>
@@ -103,6 +118,8 @@
             <!-- End Google Tag Manager (noscript) -->
         }
     }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
+    <script src="~/Content/assets/js/notification-signalR.js"></script>
     <style>
         .ui-datepicker {
             /* width: max-content; */
@@ -1045,7 +1062,6 @@
                 $('select').select2({
                     minimumResultsForSearch: Infinity
                 });
-                setInterval(NotificationFunction, 10000);
                 // Get current URL
                 var currentUrl = window.location.href;
                 // Parse query string from current URL
@@ -1164,40 +1180,24 @@
             }</script>
 
         <script>
-    //For toaster Notification
-    $(function () {
-    {
-        @if (TempData["Notifications"] != null)
+        //For toaster Notification
+        $(function () {
         {
-            var messages = (List<CRS.CUSTOMER.SHARED.NotificationModel>)TempData["Notifications"];
-            foreach (var note in messages)
+            @if (TempData["Notifications"] != null)
             {
-                <text>showNotification("@note.Message", "@note.Title", "@note.NotificationType");</text>
-                 @*<text>showNotification("@note.Message", "", "@note.NotificationType");</text>*@
-            }
+                var messages = (List<CRS.CUSTOMER.SHARED.NotificationModel>)TempData["Notifications"];
+                foreach (var note in messages)
+                {
+                    <text>showNotification("@note.Message", "@note.Title", "@note.NotificationType");</text>
+                     @*<text>showNotification("@note.Message", "", "@note.NotificationType");</text>*@
+                }
 
-        }
-        @{
-            ViewBag.Notifications = string.Empty;
-        }
-        }
-    });
-            function NotificationFunction() {
-                $.ajax({
-                    url: '/NotificationManagement/HasUnReadNotification',
-                    type: 'POST',
-                    success: function (result) {
-                        if (result.HasUnReadNotification && document.getElementById("notification-bell-id")) {
-                            document.getElementById("notification-bell-id").getElementsByTagName("span")[0].style.display = "block";
-                        }
-                        else {
-                        }
-                    },
-                    error: function () {
-                    }
-                });
             }
-
+            @{
+                ViewBag.Notifications = string.Empty;
+            }
+            }
+        });
         </script>
 
         <script>

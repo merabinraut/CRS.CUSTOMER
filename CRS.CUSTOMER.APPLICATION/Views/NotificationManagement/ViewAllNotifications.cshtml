@@ -3,6 +3,9 @@
     ViewBag.Title = "通知‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    notificationFunctions = ["ReceiveNotification"];
+</script>
 <style>
     .notification-list {
         background: #fff;
@@ -271,7 +274,6 @@
         </div>
     </div>
 </div>
-
 @section scripts
 {
     <script>
@@ -292,14 +294,6 @@
                 success: function (result) {
                     if (result.Code === "0") {
                         toastr.info(result.Message);
-                        //toastr.success(result.Message);
-                        //pageLabel.innerHTML = result.PageTitle;
-                        //markAllRead.innerHTML = '';
-                        //notificationListItems.forEach(function (item) {
-                        //    if (item.classList.contains('active')) {
-                        //        item.classList.remove('active');
-                        //    }
-                        //});
                     }
                     else {
                         toastr.info(result.Message);
@@ -327,7 +321,11 @@
                     },
                     success: function (result) {
                         if (result.Code === "0") {
-                            //toastr.success(result.Message);
+                            const notificationCountDiv = document.getElementById('page-label-id');
+                            var notificationUnReadCount = result.notificationUnReadCount;
+                            if (notificationCountDiv && (notificationUnReadCount != null && notificationUnReadCount > 0)) {
+                                notificationCountDiv.innerHTML = `通知 (${notificationUnReadCount})`;
+                            }
                             pageLabel.innerHTML = result.PageTitle;
                             markAllRead.innerHTML = '';
                             notificationListItems.forEach(function (item) {
@@ -365,14 +363,18 @@
                 },
                 success: function (result) {
                     if (result.Code === "0") {
+                        const notificationCountDiv = document.getElementById('page-label-id');
+                        var notificationUnReadCount = result.notificationUnReadCount;
+                        if (notificationCountDiv && (notificationUnReadCount != null && notificationUnReadCount > 0)) {
+                            notificationCountDiv.innerHTML = `通知 (${notificationUnReadCount})`;
+                        }
+
                         if (notificationURL.toString() === "#" || notificationURL === "") {
                             var parentDiv = event.target.closest('.notification-list');
                             if (parentDiv) {
                                 parentDiv.classList.remove('active');
-                                //window.location.reload();
                             }
-                            //;
-                        } else {                   
+                        } else {
                             window.location.href = notificationURL;
                         }
                     }
