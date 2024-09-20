@@ -17,58 +17,45 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex,nofollow,noarchive" />
     @{
 
         var phase = System.Configuration.ConfigurationManager.AppSettings["phase"];
         if (!string.IsNullOrEmpty(phase) && phase.ToUpper() == "LIVE")
         {
-            <meta property="og:title" content="@ViewBag.Title">
-            <meta property="og:description" content="業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した0件のホストクラブ・0人のホスト情報を掲載中！">
-            <meta property="og:type" content="article">
+            <meta property="og:title" content="@ViewBag.Title" />
+            <meta property="og:description" content="業界初！ホストクラブの初回来店がネット予約出来る「ホスログ」。ランキングやレビュー（口コミ）でお店選びに失敗しません☆予約時に好みをリクエスト出来て推しホストに出会いやすい！歌舞伎町を中心に全国から厳選した0件のホストクラブ・0人のホスト情報を掲載中！" />
+            <meta property="og:type" content="article" />
             <meta property="og:url" content="
-            https://hoslog.jp/">
+            https://hoslog.jp/" />
             <meta property="og:image" content="
-            https://s3.ap-northeast-1.amazonaws.com/assets.hoslog.jp/ADMIN/hosloglogo.png">
-
-            <?xml version="1.0" encoding="UTF-8" ?>
-
-            <urlset xmlns="
-            http://www.sitemaps.org/schemas/sitemap/0.9"
-                    xmlns:xsi="
-            http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="
-            http://www.sitemaps.org/schemas/sitemap/0.9
-
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-            </urlset>
-
+            https://s3.ap-northeast-1.amazonaws.com/assets.hoslog.jp/ADMIN/hosloglogo.png" />
         }
     }
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/Content/assets/css/tailwind.css">
-    <link rel="stylesheet" href="~/Content/assets/css/customer/global_v1.css">
-    <link rel="stylesheet" href="~/Content/assets/css/customer/club_v2.css">
-    <link rel="stylesheet" href="~/Content/assets/css/customer/customcss.css">
-    <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.theme.default.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/assets/css/tailwind.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/customer/global_v1.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/customer/club_v2.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/customer/customcss.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/owl-carousel/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="~/Content/CustomHelper_v1.js"></script>
     <link rel="stylesheet"
-          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
     <link rel="stylesheet"
-          href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=PT+Sans:wght@400;700&family=Poppins:wght@500;600;700&family=Roboto+Condensed:wght@500;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -83,7 +70,7 @@
           crossorigin="anonymous"
           referrerpolicy="no-referrer" />
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z189BCRTWP"></script>
+    <script async=async src="https://www.googletagmanager.com/gtag/js?id=G-Z189BCRTWP"></script>
     @{
         if (!string.IsNullOrEmpty(phase) && phase.ToUpper() == "LIVE")
         {
@@ -95,11 +82,11 @@
                             new Date().getTime(), event: 'gtm.js'
                     }); var f = d.getElementsByTagName(s)[0],
                         j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                                                })(window, document, 'script', 'dataLayer', 'GTM-M9CNRKRX');</script>
+                            'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+                })(window, document, 'script', 'dataLayer', 'GTM-M9CNRKRX');</script>
             <!-- End Google Tag Manager -->
             <!-- Google tag (gtag.js) -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-TX8QRQ5FZZ"></script>
+            <script async=async src="https://www.googletagmanager.com/gtag/js?id=G-TX8QRQ5FZZ"></script>
             <script>
                 window.dataLayer = window.dataLayer || [];
                 function gtag() {
@@ -107,11 +94,13 @@
                 }
                 gtag('js', new Date());
                 gtag('config', 'G-TX8QRQ5FZZ');</script>
-				
-			<!-- Google Tag Manager (noscript) -->
-			<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M9CNRKRX"
-			height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-			<!-- End Google Tag Manager (noscript) -->
+
+            <!-- Google Tag Manager (noscript) -->
+            <noscript>
+                <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M9CNRKRX"
+                        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+            </noscript>
+            <!-- End Google Tag Manager (noscript) -->
         }
     }
     <style>
@@ -682,12 +671,12 @@
                                     @if ((Session["ProfileImage"] == null))
                                     {
                                         <img class="rounded-full  object-cover border border-[#E1E1E1]" style="height:60px; width:60px"
-                                             src="~/Content/assets/images/customer/demo-image.jpeg" alt="profileimage">
+                                             src="~/Content/assets/images/customer/demo-image.jpeg" alt="profileimage" />
                                     }
                                     else
                                     {
                                         <img class="rounded-full w-[40px] h-[40px] object-cover border border-[#E1E1E1]" style="height:60px; width:60px"
-                                             src="@Session["ProfileImage"]" alt="profileimage">
+                                             src="@Session["ProfileImage"]" alt="profileimage" />
                                     }
                                     <div class="flex flex-col gap-[2px]">
 
@@ -821,7 +810,7 @@
                             }
 
                             <!-- divider -->
-                            <hr class="my-2">
+                            <hr class="my-2" />
                         </div>
                     </div>
                 </div>
@@ -830,7 +819,7 @@
                 <!-- #endregion -->
                 <!----Render Body section start-->
                 <div id="noscrollx">
-                    <input type="text" id="current-location-id" value="/tokyo/kabukicho" hidden />
+                    <input type="text" id="current-location-id" value="/tokyo/kabukicho" hidden=hidden />
                     @Html.AntiForgeryToken()
                     @RenderBody()
                     <div class="loader" id="loader-id-v2" style="display:none;">
@@ -1273,6 +1262,7 @@
             window.location.href = url;
         }</script>
         @RenderSection("scripts", required: false)
+    </div>
 </body>
 </html>
 <!-- #endregion -->
