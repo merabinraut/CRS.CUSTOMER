@@ -3,6 +3,9 @@
     ViewBag.Title = "通知‖ホスログ《 ホストクラブ初回来店・ネット予約 》";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    notificationFunctions = ["ReceiveNotification"];
+</script>
 <style>
     .notification-list {
         background: #fff;
@@ -271,7 +274,6 @@
         </div>
     </div>
 </div>
-
 @section scripts
 {
     <script>
@@ -372,7 +374,7 @@
                                 //window.location.reload();
                             }
                             //;
-                        } else {                   
+                        } else {
                             window.location.href = notificationURL;
                         }
                     }
