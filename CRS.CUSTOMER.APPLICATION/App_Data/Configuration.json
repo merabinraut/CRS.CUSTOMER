@@ -1,5 +1,5 @@
 {
-  "baseURL": "http://localhost:5222",
-  "username": "hoslog.signalR",
-  "password": "HOSLOG.signalR#1"
+  "baseURL": "http://43.207.72.221:8443",
+  "username": "hoslog.UAT.signalR",
+  "password": "HOSLOG.UAT.signalR#1"
 }
