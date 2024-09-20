@@ -1,7 +1,6 @@
 ﻿using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CRS.CUSTOMER.REPOSITORY.Home
@@ -113,7 +112,8 @@ namespace CRS.CUSTOMER.REPOSITORY.Home
                         SessionId = _dao.ParseColumnValue(dbResponse, "SessionId").ToString(),
                         ActionDate = _dao.ParseColumnValue(dbResponse, "ActionDate").ToString(),
                         Amount = Convert.ToInt32(_dao.ParseColumnValue(dbResponse, "Amount").ToString()),
-                        CustomerCode = _dao.ParseColumnValue(dbResponse, "CustomerCode").ToString()
+                        CustomerCode = _dao.ParseColumnValue(dbResponse, "CustomerCode").ToString(),
+                        NotificationUnReadCount = !string.IsNullOrEmpty(_dao.ParseColumnValue(dbResponse, "NotificationUnReadCount").ToString()) ? Convert.ToInt32(_dao.ParseColumnValue(dbResponse, "NotificationUnReadCount")) : 0
                     };
 
                     string SQL2 = "EXEC sproc_system_links_management";

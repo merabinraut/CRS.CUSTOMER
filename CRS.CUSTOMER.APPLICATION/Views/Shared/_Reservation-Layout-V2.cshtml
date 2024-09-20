@@ -1,17 +1,32 @@
 @using Newtonsoft.Json
 
 @functions {
-    public dynamic ReadJson()
+    public dynamic ReadJson(string fileName)
     {
-        string filePath = HttpContext.Current.Server.MapPath("~/App_Data/RedirectURLConfiguration.json");
-        string jsonContent = System.IO.File.ReadAllText(filePath);
-        var jsonData = JsonConvert.DeserializeObject<dynamic>(jsonContent);
-        return jsonData;
+        try
+        {
+            string filePath = HttpContext.Current.Server.MapPath($"~/App_Data/{fileName}");
+            string jsonContent = System.IO.File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<dynamic>(jsonContent);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error reading JSON from {fileName}: {ex.Message}");
+        }
     }
 }
 @{
-    var jsonData = ReadJson();
+    var jsonData = ReadJson("RedirectURLConfiguration.json");
+    var jsonData2 = ReadJson("Configuration.json");
 }
+
+<script>
+    let notificationSignalRBaseURL = '@jsonData2.baseURL';
+    let notificationUsername = '@jsonData2.username';
+    let notificationPassword = '@jsonData2.password';
+    let customerId = '@ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter()';
+    let notificationFunctions = ["ReceiveNotificationCount"];
+</script>
 
 <!-- #region Header -->
 <!DOCTYPE html>
@@ -61,6 +76,8 @@
 
         gtag('config', 'G-Z189BCRTWP');
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
+    <script src="~/Content/assets/js/notification-signalR.js"></script>
     <title>@ViewBag.Title</title>
     <style>
 
@@ -301,7 +318,7 @@
                 height: 100%;
                 margin-left: auto;
                 margin-right: auto;
-              /*  overflow-y: auto;*/
+                /*  overflow-y: auto;*/
                 box-shadow: 0px 0px 24px 0px #0D102E40;
             }
 

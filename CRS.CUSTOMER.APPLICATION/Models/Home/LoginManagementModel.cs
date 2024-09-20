@@ -36,6 +36,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.Home
         public string ActionDate { get; set; }
         public int Amount { get; set; }
         public string CustomerCode { get; set; }
+        public int NotificationUnReadCount { get; set; } = 0;
         public List<SystemLinkModel> SystemLink { get; set; } = new List<SystemLinkModel>();
     }
     public class SystemLinkModel

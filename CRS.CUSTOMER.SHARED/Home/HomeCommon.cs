@@ -56,6 +56,7 @@ namespace CRS.CUSTOMER.SHARED.Home
         public string MobileNumber { get; set; }
         public int Amount { get; set; }
         public string CustomerCode { get; set; }
+        public int NotificationUnReadCount { get; set; } = 0;
         public List<SystemLinkCommon> SystemLink { get; set; } = new List<SystemLinkCommon>();
     }
 
