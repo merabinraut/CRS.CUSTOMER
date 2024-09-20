@@ -184,6 +184,9 @@
 </div>
 
 <!-- divider -->
+@if(Model.RecommendedClubModel.Count > 0)
+            {
+
 <div class="bg-[#F1F1F1] mt-[8px]">
     <div class=" border-b border-[#EDEDED]" style="background:#E3E3E3;">
         <div class="flex mt-[8px]   justify-start mx-[16px] flex-row" style="padding-top:12px">
@@ -225,6 +228,7 @@
         </div>
     </div>
 </div>
+            }
 
 <!-- for search result -->
 <div class=" flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]" style="background: #FAFAFA ">
