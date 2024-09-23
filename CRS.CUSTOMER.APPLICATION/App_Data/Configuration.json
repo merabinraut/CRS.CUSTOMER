@@ -1,5 +1,5 @@
 {
-  "baseURL": "http://43.207.72.221:8443",
-  "username": "hoslog.UAT.signalR",
-  "password": "HOSLOG.UAT.signalR#1"
+  "baseURL": "https://dev-ws.hoslog.jp",
+  "username": "hoslog.signalR.UAT",
+  "password": "HOSLOG.signalR@#1"
 }
