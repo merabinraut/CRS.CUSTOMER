@@ -355,8 +355,10 @@
     <Compile Include="Helper\RenderHelper.cs" />
     <Compile Include="Helper\URLHelper.cs" />
     <Compile Include="Library\ApplicationUtilities.cs" />
+    <Compile Include="Library\HttpClientHelper.cs" />
     <Compile Include="Library\LanguageManag.cs" />
     <Compile Include="Library\ProjectGrid.cs" />
+    <Compile Include="Library\SignalRStringCipher.cs" />
     <Compile Include="Library\StaticData.cs" />
     <Compile Include="Library\StringCipher.cs" />
     <Compile Include="Models\AmazonConfigruationModel.cs" />
@@ -409,6 +411,7 @@
     <Compile Include="Models\Search\MapModel.cs" />
     <Compile Include="Models\Search\SearchFilterModel.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
+    <Compile Include="Models\SignalRConfigruationModel.cs" />
     <Compile Include="Models\URLManagementConfigruationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
