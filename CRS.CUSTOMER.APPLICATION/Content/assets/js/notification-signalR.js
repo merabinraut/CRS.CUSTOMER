@@ -36,15 +36,20 @@
     }
 
     async function initHubConnection(customerId) {
+        debugger;
         const token = await getBearerToken();
         if (!token) {
             logMessage("Failed to get valid token");
             return false;
         }
-
+        let agentId = await encrypt(customerId);
+        if (!agentId) {
+            logMessage("Invalid customerId");
+            return false;
+        }
         try {
             hubConnection = new signalR.HubConnectionBuilder()
-                .withUrl(`${baseServerUrl}?customerId=${customerId}`, {
+                .withUrl(`${baseServerUrl}?agentId=${agentId}`, {
                     accessTokenFactory: () => token
                 })
                 .withAutomaticReconnect()
@@ -113,3 +118,54 @@
         console.log(`${new Date().toLocaleTimeString()} :- ${message}`);
     }
 });
+
+async function encrypt(plainText) {
+    const { key, iv } = await importKey(securityKey, securityIV);
+
+    const encoder = new TextEncoder();
+    const data = encoder.encode(plainText);
+
+    const encryptedData = await window.crypto.subtle.encrypt(
+        {
+            name: "AES-CBC",
+            iv: iv
+        },
+        key,
+        data
+    );
+
+    return btoa(String.fromCharCode(...new Uint8Array(encryptedData)));
+}
+
+async function decrypt(encryptedText) {
+    const { key, iv } = await importKey(securityKey, securityIV);
+
+    const encryptedData = new Uint8Array(atob(encryptedText).split("").map(char => char.charCodeAt(0)));
+
+    const decryptedData = await window.crypto.subtle.decrypt(
+        {
+            name: "AES-CBC",
+            iv: iv
+        },
+        key,
+        encryptedData
+    );
+
+    const decoder = new TextDecoder();
+    return decoder.decode(decryptedData);
+}
+
+async function importKey(rawKey, iv) {
+    const key = await window.crypto.subtle.importKey(
+        "raw",
+        rawKey,
+        {
+            name: "AES-CBC",
+            length: 256
+        },
+        false,
+        ["encrypt", "decrypt"]
+    );
+    return { key, iv };
+}
+
