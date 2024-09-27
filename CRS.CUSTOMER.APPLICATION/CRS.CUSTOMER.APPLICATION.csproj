@@ -444,8 +444,10 @@
     <Content Include="Content\assets\css\club\payment-management.css" />
     <Content Include="Content\assets\css\club\schedule.css" />
     <Content Include="Content\assets\css\customer\club.css" />
+    <Content Include="Content\assets\css\customer\club_v2.css" />
     <Content Include="Content\assets\css\customer\customcss.css" />
     <Content Include="Content\assets\css\customer\global.css" />
+    <Content Include="Content\assets\css\customer\global_v1.css" />
     <Content Include="Content\assets\css\customer\responsive.css" />
     <Content Include="Content\assets\css\owl-carousel\owl.carousel.min.css" />
     <Content Include="Content\assets\css\owl-carousel\owl.theme.default.min.css" />
