@@ -111,7 +111,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             ViewBag.MetaHostCount = metaTagDBResponse.Item2;
             var jsonRecommendedClubAndHost = GetRecommendedClubAndHost("1");
             var data = jsonRecommendedClubAndHost.Data as RecommendedClubAndHostModel;
-            if (data != null && (data.RecommendedClubModel != null || data.RecommendedHostModel != null))
+            if (data != null && (data.RecommendedClubModel.Count > 0 || data.RecommendedHostModel.Count > 0))
             {
                 ViewBag.IsAvailableRecommended = true;
             }
