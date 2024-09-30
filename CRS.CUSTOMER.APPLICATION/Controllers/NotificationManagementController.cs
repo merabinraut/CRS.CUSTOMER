@@ -1,6 +1,7 @@
 ﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models;
+using CRS.CUSTOMER.APPLICATION.Models.NotificationHelper;
 using CRS.CUSTOMER.APPLICATION.Models.NotificationManagement;
 using CRS.CUSTOMER.BUSINESS.NotificationManagement;
 using CRS.CUSTOMER.SHARED;
@@ -8,6 +9,7 @@ using CRS.CUSTOMER.SHARED.NotificationManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
@@ -19,10 +21,14 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private static AmazonS3Configruation _AmazonS3Configruation = ApplicationUtilities.GetAppDataJsonConfigValue<AmazonConfigruation>("AmazonConfigruation").AmazonS3Configruation;
         private static SignalRConfigruationModel _signalRConfigruation = ApplicationUtilities.GetAppDataJsonConfigValue<SignalRConfigruationModel>("SignalRConfigruation");
         private readonly SignalRStringCipher _stringCipher;
-        public NotificationManagementController(INotificationManagementBusiness buss, SignalRStringCipher stringCipher)
+        private readonly NotificationHelper _notificationHelper;
+        public NotificationManagementController(INotificationManagementBusiness buss,
+            SignalRStringCipher stringCipher,
+            NotificationHelper notificationHelper)
         {
             _buss = buss;
             _stringCipher = stringCipher;
+            _notificationHelper = notificationHelper;
         }
 
         [HttpGet]
@@ -141,50 +147,73 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             return Json(new { Code = "1", Message = "Something went wrong. Please try again later." });
         }
 
+        //[HttpPost, ValidateAntiForgeryToken]
+        //public JsonResult ManageNotificationReadStatus(string notificationId)
+        //{
+        //    string id = !string.IsNullOrEmpty(notificationId) ? notificationId.DecryptParameter() : null;
+        //    if (!string.IsNullOrEmpty(notificationId) && string.IsNullOrEmpty(id))
+        //        return Json(new
+        //        {
+        //            Code = "1",
+        //            Message = "Invalid request"
+        //        });
+        //    var agentId = !string.IsNullOrEmpty(ApplicationUtilities.GetSessionValue("AgentId").ToString()) ? ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter() : null;
+        //    agentId = _stringCipher.Encrypt(agentId);
+        //    id = _stringCipher.Encrypt(id);
+        //    if (string.IsNullOrEmpty(agentId) || (!string.IsNullOrEmpty(notificationId) && string.IsNullOrEmpty(id)))
+        //        return Json(new
+        //        {
+        //            Code = "1",
+        //            Message = "Invalid request"
+        //        });
+        //    var apiRequestModel = new NotificationReadRequestModel
+        //    {
+        //        notificationId = id,
+        //        agentId = agentId,
+        //        actionPlatform = "CustomerWeb"
+        //    };
+        //    var signalRServiceToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiaG9zbG9nLnNpZ25hbFIiLCJuYmYiOjE3Mjc2NzUwNjksImV4cCI6MTcyNzc2MTQ2OSwiaXNzIjoiaG9zbG9nLnNpZ25hbFIiLCJhdWQiOiJob3Nsb2cuc2lnbmFsUiJ9.LBQN1UDv8_WYdU7fJWhCOBPsOPK830k5GkcnswjJblU";//ApplicationUtilities.GetSessionValue("signalRServiceToken").ToString();
+        //    var apiCallResponse = HttpClientHelper.HttpPatchRequestWithToken<CommonAPIResponse>(_signalRConfigruation.baseURL.TrimStart('/') + "/api/customer-notification/mark-read", apiRequestModel, signalRServiceToken);
+        //    if (apiCallResponse != null || apiCallResponse.code == "0")
+        //    {
+        //        var data = apiCallResponse.data.MapObject<NotificationReadResponseModel>();
+        //        return Json(new { Code = "0", Message = apiCallResponse.message ?? "Success", PageTitle = Resources.Resource.Notifications });
+        //    }
+        //    return Json(new { Code = "1", Message = !string.IsNullOrEmpty(apiCallResponse?.message) ? apiCallResponse.message : "Something went wrong. Please try again later" });
+        //}
+
         [HttpPost, ValidateAntiForgeryToken]
-        public JsonResult ManageNotificationReadStatus(string notificationId)
+        public async Task<JsonResult> ManageNotificationReadStatus(string notificationId)
         {
-            string id = !string.IsNullOrEmpty(notificationId) ? notificationId.DecryptParameter() : null;
-            if (!string.IsNullOrEmpty(notificationId) && string.IsNullOrEmpty(id))
-                return Json(new
-                {
-                    Code = "1",
-                    Message = "Invalid request"
-                });
-            var agentId = !string.IsNullOrEmpty(ApplicationUtilities.GetSessionValue("AgentId").ToString()) ? ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter() : null;
-            agentId = _stringCipher.Encrypt(agentId);
-            id = _stringCipher.Encrypt(id);
-            if (string.IsNullOrEmpty(agentId) || (!string.IsNullOrEmpty(notificationId) && string.IsNullOrEmpty(id)))
-                return Json(new
-                {
-                    Code = "1",
-                    Message = "Invalid request"
-                });
-            var apiRequestModel = new NotificationReadRequestModel
+            const string errorMessage = "Invalid request";
+
+            var decryptedNotificationId = !string.IsNullOrEmpty(notificationId) ? notificationId.DecryptParameter() : null;
+            if (!string.IsNullOrEmpty(notificationId) && string.IsNullOrEmpty(decryptedNotificationId))
+                return Json(new { Code = "1", Message = errorMessage });
+
+            var sessionAgentId = ApplicationUtilities.GetSessionValue("AgentId")?.ToString();
+            var decryptedAgentId = !string.IsNullOrEmpty(sessionAgentId) ? sessionAgentId.DecryptParameter() : null;
+            if (string.IsNullOrEmpty(decryptedAgentId))
+                return Json(new { Code = "1", Message = errorMessage });
+
+            var helperRequest = new NotificationReadRequestModel
             {
-                notificationId = id,
-                agentId = agentId,
-                actionPlatform = "CustomerWeb"
+                notificationId = decryptedNotificationId,
+                agentId = decryptedAgentId
             };
-            var signalRServiceToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiaG9zbG9nLnNpZ25hbFIiLCJuYmYiOjE3MjcyNjM5MDEsImV4cCI6MTcyNzM1MDMwMSwiaXNzIjoiaG9zbG9nLnNpZ25hbFIiLCJhdWQiOiJob3Nsb2cuc2lnbmFsUiJ9._PPfUHEyqIrImWP5DjOjUW67wnmd2BMRLK50wIJhEy4";//ApplicationUtilities.GetSessionValue("signalRServiceToken").ToString();
-            var apiCallResponse = HttpClientHelper.HttpPatchRequestWithToken<CommonAPIResponse>(_signalRConfigruation.baseURL.TrimStart('/') + "/api/customer-notification/mark-read", apiRequestModel, signalRServiceToken);
-            if (apiCallResponse != null || apiCallResponse.code == "0")
-                return Json(new { Code = "0", Message = apiCallResponse.message ?? "Success", PageTitle = Resources.Resource.Notifications });
-            return Json(new { Code = "1", Message = !string.IsNullOrEmpty(apiCallResponse?.message) ? apiCallResponse.message : "Something went wrong. Please try again later" });
-        }
 
-        public class CommonAPIResponse
-        {
-            public string code { get; set; } = null;
-            public string message { get; set; } = null;
-            public object data { get; set; } = null;
-        }
+            var helperResponse = await _notificationHelper.MarkNotificationAsReadHelperAsync(helperRequest);
+            if (helperResponse == null || helperResponse.code != "0")
+                return Json(new { Code = "1", Message = helperResponse?.message ?? "Something went wrong. Please try again later" });
 
-        public class NotificationReadRequestModel
-        {
-            public string notificationId { get; set; }
-            public string agentId { get; set; }
-            public string actionPlatform { get; set; }
+            var data = helperResponse.data?.MapObject<NotificationReadResponseModel>();
+            return Json(new
+            {
+                Code = "0",
+                Message = helperResponse.message ?? "Success",
+                PageTitle = Resources.Resource.Notifications,
+                id = data?.notificationId
+            });
         }
     }
 }

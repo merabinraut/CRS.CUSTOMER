@@ -352,6 +352,7 @@
     </Compile>
     <Compile Include="Helper\DDLHelper.cs" />
     <Compile Include="Helper\ImageHelper.cs" />
+    <Compile Include="Helper\NotificationHelper.cs" />
     <Compile Include="Helper\RenderHelper.cs" />
     <Compile Include="Helper\URLHelper.cs" />
     <Compile Include="Library\ApplicationUtilities.cs" />
@@ -383,6 +384,7 @@
     <Compile Include="Models\LocationManagement\HostDetailModel.cs" />
     <Compile Include="Models\LocationManagement\LocationClubHostModel.cs" />
     <Compile Include="Models\LocationManagement\ViewHostDetailModel.cs" />
+    <Compile Include="Models\NotificationHelper\NotificationHelperModel.cs" />
     <Compile Include="Models\NotificationManagement\NotificationManagementModel.cs" />
     <Compile Include="Models\ProfileManagement\ChangePasswordModel.cs" />
     <Compile Include="Models\ProfileManagement\PointReportModel.cs" />
