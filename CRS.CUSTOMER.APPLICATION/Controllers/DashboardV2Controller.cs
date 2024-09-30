@@ -109,6 +109,16 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var metaTagDBResponse = _commonBusiness.GetMetaTagInfo("1");
             ViewBag.MetaClubCount = metaTagDBResponse.Item1;
             ViewBag.MetaHostCount = metaTagDBResponse.Item2;
+            var jsonRecommendedClubAndHost = GetRecommendedClubAndHost("1");
+            var data = jsonRecommendedClubAndHost.Data as RecommendedClubAndHostModel;
+            if (data != null && (data.RecommendedClubModel.Count > 0 || data.RecommendedHostModel.Count > 0))
+            {
+                ViewBag.IsAvailableRecommended = true;
+            }
+            else
+            {
+                ViewBag.IsAvailableRecommended = false;
+            }
             //var advertisementimage = _commonBusiness.GetAdvertisement();
             //advertisementimage = advertisementimage
             //    .Select(item => ImageHelper.ProcessedImage(item))
