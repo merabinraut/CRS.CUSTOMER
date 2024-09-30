@@ -1,5 +1,7 @@
 {
-  "baseURL": "https://dev-ws.hoslog.jp",
-  "username": "hoslog.signalR.UAT",
-  "password": "HOSLOG.signalR@#1"
+  "baseURL": "http://localhost:5222",
+  "username": "hoslog.signalR",
+  "password": "HOSLOG.signalR#1",
+  "securityKey": "nKbe5aCvGG3j6gAe+QuaeRs7Q8v6i/j0EtR9cQvt25Q=",
+  "securityIV": "2arHKybeJDDxUZideALk9g=="
 }

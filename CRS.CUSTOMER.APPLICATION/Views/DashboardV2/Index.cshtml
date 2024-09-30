@@ -392,7 +392,7 @@
 </div>
 <!----------------------------------------------------Location---------------------------------------------------->
 <!----------------------------------------------------Club---------------------------------------------------->
-@if (Model.RecommendedClubModel.Count > 0)
+@if (ViewBag.IsAvailableRecommended)
 {
 
     <div class="border-t border-b border-[#EDEDED]">
@@ -423,7 +423,7 @@
 
 
 @*<div style="border: 1px solid #EDEDED; border-left:none; background: #FFF;">*@
-@if (Model.RecommendedHostModel.Count > 0)
+@if (ViewBag.IsAvailableRecommended)
 {
     <div class="border-t border-b border-[#EDEDED]" style="border: 1px solid #EDEDED; border-left:none; background: #FFF;">
         <!-- clippath -->
