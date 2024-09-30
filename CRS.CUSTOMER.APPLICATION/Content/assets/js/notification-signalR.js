@@ -36,7 +36,6 @@
     }
 
     async function initHubConnection(customerId) {
-        debugger;
         const token = await getBearerToken();
         if (!token) {
             logMessage("Failed to get valid token");
