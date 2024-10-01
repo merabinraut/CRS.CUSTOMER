@@ -45,6 +45,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.NotificationHelper
     public class NotificationReadResponseModel
     {
         public string notificationId { get; set; }
+        public int notificationUnReadCount { get; set; } = 0;
     }
 
     public class LoginRequestModel
