@@ -59,6 +59,38 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
             return new NotificationHelperCommonAPIResponseModel { code = "1", message = apiResponse?.message ?? ErrorMessage };
         }
 
+        public async Task SendNotificationHelperAsync(NotificationManagementModel request)
+        {
+            var apiRequest = new NotificationManagementModel
+            {
+                agentId = _stringCipher.Encrypt(request.agentId),
+                notificationType = request.notificationType,
+                extraId1 = !string.IsNullOrEmpty(request.extraId1) ? _stringCipher.Encrypt(request.extraId1) : string.Empty,
+                actionPlatform = ActionPlatform
+            };
+
+            var signalRServiceToken = ApplicationUtilities.GetSessionValue("SignalRServiceToken")?.ToString();
+            if (string.IsNullOrEmpty(signalRServiceToken))
+            {
+                var tokenResponse = await GetAPITokenAsync();
+                if (tokenResponse.Item1)
+                    signalRServiceToken = tokenResponse.Item2;
+                else
+                    return;
+            }
+
+            var apiResponse = await HttpClientHelper.HttpPostRequestWithTokenAsync<NotificationHelperCommonAPIResponseModel>(
+            $"{_signalRConfigruation.baseURL.TrimEnd('/')}/api/customer-notification/send", apiRequest, signalRServiceToken);
+            if (apiResponse?.code == "0")
+            {
+                var dataObject = apiResponse.data?.MapObject<NotificationReadResponseModel>();
+
+                if (!string.IsNullOrEmpty(dataObject?.notificationId))
+                    dataObject.notificationId = _stringCipher.Encrypt(dataObject.notificationId);
+            }
+            return;
+        }
+
         private async Task<Tuple<bool, string>> GetAPITokenAsync()
         {
             var apiRequest = new LoginRequestModel
