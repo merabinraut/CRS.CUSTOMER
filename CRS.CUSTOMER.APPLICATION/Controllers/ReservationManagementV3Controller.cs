@@ -1,5 +1,4 @@
-﻿using Amazon.Runtime.Internal;
-using CRS.CUSTOMER.APPLICATION.Helper;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV3;
@@ -10,6 +9,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,9 +18,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     public class ReservationManagementV3Controller : CustomController
     {
         private readonly IReservationManagementV2Business _buss;
-        public ReservationManagementV3Controller(IReservationManagementV2Business buss)
+        private readonly NotificationHelper _notificationHelper;
+        public ReservationManagementV3Controller(IReservationManagementV2Business buss, NotificationHelper notificationHelper)
         {
             _buss = buss;
+            _notificationHelper = notificationHelper;
         }
 
         [HttpGet]
@@ -402,9 +404,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
         #region Reservation Confirmation
         [HttpGet]
-        public ActionResult ReservationConfirmation(ReservationConfirmationRequestModel Model, string HostIdList)
+        public async Task<ActionResult> ReservationConfirmation(ReservationConfirmationRequestModel Model, string HostIdList)
         {
             var clubId = !string.IsNullOrEmpty(Model.ClubId) ? Model.ClubId.DecryptParameter() : null;
+            var agentId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter();
             var planId = !string.IsNullOrEmpty(Model.PlanId) ? Model.PlanId.DecryptParameter() : null;
             if (string.IsNullOrEmpty(clubId) ||
                 string.IsNullOrEmpty(planId) ||
@@ -428,7 +431,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dbRequest = new ReservationConfirmationRequestCommon
             {
                 ClubId = clubId,
-                CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter(),
+                CustomerId = agentId,
                 PlanId = planId,
                 VisitDate = Model.VisitDate,
                 VisitTime = Model.VisitTime,
@@ -456,6 +459,19 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Session["ReservationPage2Model"] = null;
                 Session["ReservationPage3Model"] = null;
                 Session["ReservationPage4Model"] = null;
+                await _notificationHelper.SendClubNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
+                {
+                    agentId = clubId,
+                    extraId1 = agentId,
+                    notificationType = "Reservation Notification"
+                });
+
+                await _notificationHelper.SendCustomerNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
+                {
+                    agentId = agentId,
+                    extraId1 = dbResponse.Extra1,
+                    notificationType = "Reservation Notification"
+                });
                 return Redirect("/reservation/complete");
             }
             else

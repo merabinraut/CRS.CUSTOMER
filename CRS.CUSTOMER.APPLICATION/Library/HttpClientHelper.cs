@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,281 +10,95 @@ namespace CRS.CUSTOMER.APPLICATION.Library
 {
     public static class HttpClientHelper
     {
-        public static T HttpGetRequest<T>(string url, string username, string password, Dictionary<string, string> headers = null)
+        private static readonly HttpClient _httpClient = new HttpClient();
+
+        public static async Task<T> HttpGetRequestAsync<T>(string url, string username, string password, Dictionary<string, string> headers = null)
         {
-            T result = default(T);
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.Method = "GET";
-            httpWebRequest.ContentType = "application/json;charset=UTF-8";
-            httpWebRequest.Accept = "application/json";
-            httpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
-            httpWebRequest.Credentials = new NetworkCredential(username, password);
-            string auth = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{password}"));
-            httpWebRequest.Headers.Add("Authorization", "Basic " + auth);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
+            AddBasicAuth(requestMessage, username, password);
+            AddHeaders(requestMessage, headers);
 
-            if (headers != null)
-            {
-                foreach (KeyValuePair<string, string> header in headers)
-                {
-                    httpWebRequest.Headers.Add(header.Key, header.Value);
-                }
-            }
-
-            try
-            {
-                string responseContent;
-                using (var response = (HttpWebResponse)httpWebRequest.GetResponse())
-                {
-                    using (var reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        responseContent = reader.ReadToEnd();
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(responseContent))
-                {
-                    result = responseContent.MapResponseString<T>();
-                }
-            }
-            catch (WebException ex)
-            {
-                HandleWebException(ex);  // Helper method to handle exceptions (optional)
-            }
-
-            return result;
+            return await SendRequestAsync<T>(requestMessage);
         }
 
-        public static async Task<T> HttpGetRequestWithBearerToken<T>(string url, string token, Dictionary<string, string> headers = null)
+        public static async Task<T> HttpGetRequestWithBearerTokenAsync<T>(string url, string token, Dictionary<string, string> headers = null)
         {
-            T result = default(T);
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.Method = "GET";
-            httpWebRequest.ContentType = "application/json;charset=UTF-8";
-            httpWebRequest.Accept = "application/json";
-            httpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
-            httpWebRequest.Headers.Add("Authorization", "Bearer " + token);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            AddHeaders(requestMessage, headers);
 
-            if (headers != null)
-            {
-                foreach (KeyValuePair<string, string> header in headers)
-                {
-                    httpWebRequest.Headers.Add(header.Key, header.Value);
-                }
-            }
-
-            try
-            {
-                using (HttpWebResponse response = (HttpWebResponse)await httpWebRequest.GetResponseAsync())
-                {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        string responseContent = await reader.ReadToEndAsync();
-                        //result = JsonConvert.DeserializeObject<T>(responseContent);
-                        result = responseContent.MapResponseString<T>();
-                    }
-                }
-            }
-            catch (WebException ex)
-            {
-                HandleWebException(ex);  // This handles exceptions like a 401 Unauthorized
-            }
-
-            return result;
+            return await SendRequestAsync<T>(requestMessage);
         }
 
-
-        public static T HttpPostRequestWithBasicAuth<T>(string url, object model, string username, string password, Dictionary<string, string> headers = null)
+        public static async Task<T> HttpPostRequestAsync<T>(string url, object model, Dictionary<string, string> headers = null)
         {
-            T result = default(T);
-
-            // Create the web request object
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-
-            // Serialize the model to JSON
-            byte[] bytes = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(model));
-
-            // Set the method to POST and specify the content type and length
-            httpWebRequest.Method = "POST";
-            httpWebRequest.ContentType = "application/json;charset=UTF-8";
-            httpWebRequest.ContentLength = bytes.Length;
-            httpWebRequest.Accept = "application/json";
-            httpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
-
-            // Add Basic Authentication header
-            string authValue = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{username}:{password}"));
-            httpWebRequest.Headers.Add("Authorization", "Basic " + authValue);
-
-            // Add custom headers if provided
-            if (headers != null)
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
             {
-                foreach (KeyValuePair<string, string> header in headers)
-                {
-                    httpWebRequest.Headers.Add(header.Key, header.Value);
-                }
-            }
+                Content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json")
+            };
+            AddHeaders(requestMessage, headers);
 
-            try
-            {
-                // Write the request body (the serialized model)
-                using (Stream stream = httpWebRequest.GetRequestStream())
-                {
-                    stream.Write(bytes, 0, bytes.Length);
-                }
-
-                // Handle the response from the server
-                using (HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse())
-                {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        string responseContent = reader.ReadToEnd();
-                        if (!string.IsNullOrEmpty(responseContent))
-                        {
-                            result = responseContent.MapResponseString<T>();
-                        }
-                    }
-                }
-            }
-            catch (WebException ex)
-            {
-                // Handle the WebException to extract more details (optional)
-                HandleWebException(ex);
-            }
-
-            return result;
+            return await SendRequestAsync<T>(requestMessage);
         }
 
-
-        public static T HttpPostRequestWithToken<T>(string url, object model, string token, Dictionary<string, string> headers = null)
+        public static async Task<T> HttpPostRequestWithTokenAsync<T>(string url, object model, string token, Dictionary<string, string> headers = null)
         {
-            T result = default(T);
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            byte[] bytes = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(model));
-            httpWebRequest.Method = "POST";
-            httpWebRequest.ContentType = "application/json;charset=UTF-8";
-            httpWebRequest.ContentLength = bytes.Length;
-            httpWebRequest.Accept = "application/json";
-            httpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
-            httpWebRequest.Headers.Add("Authorization", "Bearer " + token);
-
-            if (headers != null)
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
             {
-                foreach (KeyValuePair<string, string> header in headers)
-                {
-                    httpWebRequest.Headers.Add(header.Key, header.Value);
-                }
-            }
+                Content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json")
+            };
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            AddHeaders(requestMessage, headers);
 
-            try
-            {
-                using (Stream stream = httpWebRequest.GetRequestStream())
-                {
-                    stream.Write(bytes, 0, bytes.Length);
-                }
-
-                string responseContent;
-                using (HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse())
-                {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        responseContent = reader.ReadToEnd();
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(responseContent))
-                {
-                    result = responseContent.MapResponseString<T>();
-                }
-            }
-            catch (WebException ex)
-            {
-                HandleWebException(ex);  // Helper method to handle exceptions (optional)
-            }
-
-            return result;
+            return await SendRequestAsync<T>(requestMessage);
         }
 
-        public static T HttpPatchRequestWithToken<T>(string url, object model, string token, Dictionary<string, string> headers = null)
+        public static async Task<T> HttpPutRequestWithTokenAsync<T>(string url, object model, string token, Dictionary<string, string> headers = null)
         {
-            T result = default(T);
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            byte[] bytes = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(model));
-            httpWebRequest.Method = "PATCH";
-            httpWebRequest.ContentType = "application/json;charset=UTF-8";
-            httpWebRequest.ContentLength = bytes.Length;
-            httpWebRequest.Accept = "application/json";
-            httpWebRequest.UserAgent = "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
-            httpWebRequest.Headers.Add("Authorization", "Bearer " + token);
-
-            if (headers != null)
+            var requestMessage = new HttpRequestMessage(HttpMethod.Put, url)
             {
-                foreach (KeyValuePair<string, string> header in headers)
-                {
-                    httpWebRequest.Headers.Add(header.Key, header.Value);
-                }
-            }
+                Content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json")
+            };
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            AddHeaders(requestMessage, headers);
 
-            try
-            {
-                using (Stream stream = httpWebRequest.GetRequestStream())
-                {
-                    stream.Write(bytes, 0, bytes.Length);
-                }
-
-                string responseContent;
-                using (HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse())
-                {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        responseContent = reader.ReadToEnd();
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(responseContent))
-                {
-                    result = responseContent.MapResponseString<T>();
-                }
-            }
-            catch (WebException ex)
-            {
-                HandleWebException(ex);  // Helper method to handle exceptions (optional)
-            }
-
-            return result;
+            return await SendRequestAsync<T>(requestMessage);
         }
 
-        private static void HandleWebException(WebException ex)
-        {
-            if (ex.Response != null)
-            {
-                using (HttpWebResponse httpWebResponse = (HttpWebResponse)ex.Response)
-                {
-                    using (StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream()))
-                    {
-                        string errorResponse = streamReader.ReadToEnd();
-                        // Log or handle the error
-                        Console.WriteLine($"Error: {errorResponse}");
-                    }
-                }
-            }
-            else
-            {
-                // Handle no response case
-                Console.WriteLine("No response from server.");
-            }
-        }
-
-        private static T MapResponseString<T>(this string jsonString)
+        private static async Task<T> SendRequestAsync<T>(HttpRequestMessage requestMessage)
         {
             try
             {
-                return JsonConvert.DeserializeObject<T>(jsonString);
+                using (HttpResponseMessage response = await _httpClient.SendAsync(requestMessage))
+                {
+                    //response.EnsureSuccessStatusCode();
+                    string responseContent = await response.Content.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<T>(responseContent);
+                }
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                _ = ex.Message;
+                Console.WriteLine($"Request failed: {ex.Message}");
                 throw;
             }
         }
 
+        private static void AddHeaders(HttpRequestMessage requestMessage, Dictionary<string, string> headers)
+        {
+            if (headers != null)
+            {
+                foreach (var header in headers)
+                {
+                    requestMessage.Headers.Add(header.Key, header.Value);
+                }
+            }
+        }
+
+        private static void AddBasicAuth(HttpRequestMessage requestMessage, string username, string password)
+        {
+            var byteArray = Encoding.ASCII.GetBytes($"{username}:{password}");
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+        }
     }
 }

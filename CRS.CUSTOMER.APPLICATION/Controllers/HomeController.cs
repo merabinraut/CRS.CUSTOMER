@@ -5,10 +5,11 @@ using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.BUSINESS.Home;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.Home;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Configuration;
-using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,7 +20,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     {
         private readonly IHomeBusiness _buss;
         private readonly ICommonManagementBusiness _commonBusiness;
-        public HomeController(IHomeBusiness buss, ICommonManagementBusiness commonBusiness) => (_buss, _commonBusiness) = (buss, commonBusiness);
+        private readonly NotificationHelper _notificationHelper;
+        public HomeController(IHomeBusiness buss, ICommonManagementBusiness commonBusiness, NotificationHelper notificationHelper)
+        {
+            _buss = buss;
+            _commonBusiness = commonBusiness;
+            _notificationHelper = notificationHelper;
+        }
         #region Landing Page
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
         [HttpGet]
@@ -152,7 +159,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult VerifyOTP(RegistrationModel Model)
+        public async Task<ActionResult> VerifyOTP(RegistrationModel Model)
         {
             var ReferCode = string.Empty;
             var Type = string.Empty;
@@ -177,6 +184,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         NotificationType = NotificationMessage.SUCCESS,
                         Message = dbResponse.Message ?? "SUCCESS",
                         Title = NotificationMessage.SUCCESS.ToString(),
+                    });
+                    await _notificationHelper.SendCustomerNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
+                    {
+                        agentId = dbResponse.Extra1,
+                        notificationType = "Registration"
                     });
                     return RedirectToAction("SetRegistrationPassword", "Home", new { AgentId = dbResponse.Extra1.DefaultEncryptParameter(), UserId = dbResponse.Extra2.DefaultEncryptParameter(), MobileNumber = Model.MobileNumber, NickName = Model.NickName, ProcessId = Model.ProcessId });
                 }
