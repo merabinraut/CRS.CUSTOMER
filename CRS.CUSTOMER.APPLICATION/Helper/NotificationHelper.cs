@@ -59,7 +59,13 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
             return new NotificationHelperCommonAPIResponseModel { code = "1", message = apiResponse?.message ?? ErrorMessage };
         }
 
-        public async Task SendNotificationHelperAsync(NotificationManagementModel request)
+        public async Task SendClubNotificationHelperAsync(NotificationManagementModel request) =>
+           await SendNotificationHelperAsync(request, "club-notification/send");
+
+        public async Task SendCustomerNotificationHelperAsync(NotificationManagementModel request) =>
+            await SendNotificationHelperAsync(request, "customer-notification/send");
+
+        public async Task SendNotificationHelperAsync(NotificationManagementModel request, string endpoint)
         {
             var apiRequest = new NotificationManagementModel
             {
@@ -80,7 +86,7 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
             }
 
             var apiResponse = await HttpClientHelper.HttpPostRequestWithTokenAsync<NotificationHelperCommonAPIResponseModel>(
-            $"{_signalRConfigruation.baseURL.TrimEnd('/')}/api/customer-notification/send", apiRequest, signalRServiceToken);
+            $"{_signalRConfigruation.baseURL.TrimEnd('/')}/api/{endpoint}", apiRequest, signalRServiceToken);
             if (apiResponse?.code == "0")
             {
                 var dataObject = apiResponse.data?.MapObject<NotificationReadResponseModel>();

@@ -185,7 +185,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         Message = dbResponse.Message ?? "SUCCESS",
                         Title = NotificationMessage.SUCCESS.ToString(),
                     });
-                    await _notificationHelper.SendNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
+                    await _notificationHelper.SendCustomerNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
                     {
                         agentId = dbResponse.Extra1,
                         notificationType = "Registration"
