@@ -71,7 +71,7 @@ namespace CRS.CUSTOMER.APPLICATION.Library
             {
                 using (HttpResponseMessage response = await _httpClient.SendAsync(requestMessage))
                 {
-                    response.EnsureSuccessStatusCode();
+                    //response.EnsureSuccessStatusCode();
                     string responseContent = await response.Content.ReadAsStringAsync();
 
                     return JsonConvert.DeserializeObject<T>(responseContent);

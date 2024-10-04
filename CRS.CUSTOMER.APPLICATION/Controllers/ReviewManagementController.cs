@@ -7,6 +7,7 @@ using CRS.CUSTOMER.SHARED.ReviewManagement;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,9 +16,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     public class ReviewManagementController : CustomController
     {
         private readonly IReviewManagementBusiness _reviewBuss;
-        public ReviewManagementController(IReviewManagementBusiness reviewBuss)
+        private readonly NotificationHelper _notificationHelper;
+        public ReviewManagementController(IReviewManagementBusiness reviewBuss, NotificationHelper notificationHelper)
         {
             _reviewBuss = reviewBuss;
+            _notificationHelper = notificationHelper;
         }
         #region
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
@@ -261,7 +264,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public JsonResult ReviewDetails(string Request, string ReviewMVPHostId, string[] ReviewDichotomousQAIdList, string[] ReviewRemarkIdList, string[] ReviewHostIdList, int RatingScale)
+        public async Task<JsonResult> ReviewDetails(string Request, string ReviewMVPHostId, string[] ReviewDichotomousQAIdList, string[] ReviewRemarkIdList, string[] ReviewHostIdList, int RatingScale)
         {
             var redirectToUrl = string.Empty;
             var reviewDetail = JsonConvert.DeserializeObject<ReviewClubDetailModel>(HttpUtility.UrlDecode(Request));
@@ -313,6 +316,11 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     Title = NotificationMessage.SUCCESS.ToString()
                 });
                 redirectToUrl = "/";
+                await _notificationHelper.SendClubNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
+                {
+                    agentId = clubId,
+                    notificationType = "Ratings Given By Customer"
+                });
                 return Json(new { redirectToUrl });
             }
             else

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Web.Mvc;
-using Amazon.Runtime.Internal.Transform;
-using CRS.CUSTOMER.APPLICATION.Helper;
+﻿using CRS.CUSTOMER.APPLICATION.Helper;
 using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationHistoryV2;
 using CRS.CUSTOMER.APPLICATION.Models.ReservationManagementV2;
 using CRS.CUSTOMER.BUSINESS.ReservationHistoryManagementV2;
 using CRS.CUSTOMER.BUSINESS.ReservationManagementV2;
 using CRS.CUSTOMER.SHARED;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace CRS.CUSTOMER.APPLICATION.Controllers
 {
