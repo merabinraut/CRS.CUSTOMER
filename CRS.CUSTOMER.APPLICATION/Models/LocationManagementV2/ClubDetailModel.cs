@@ -104,6 +104,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagementV2
         public string ClubTimePeriod { get; set; }
         public string TodaysClubSchedule { get; set; }
         public string ClubClosingDate { get; set; }
+        public string ClubCategory { get; set; }
     }
     public class AllNoticeModel : NoticeModel
     {
