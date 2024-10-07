@@ -45,6 +45,8 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
         public string ClubLastOrderTime { get; set; }
         public string ClubLastEntrySyokai { get; set; }
         public string ClubHoliday { get; set; }
+        public string ClubCategory { get; set; }
+        public string LandLine { get; set; }
         public List<ClubWeeklyScheduleCommon> ClubWeeklyScheduleList { get; set; } = new List<ClubWeeklyScheduleCommon>();
         public List<ClubEventCommon> ClubEventList { get; set; } = new List<ClubEventCommon>();
         public List<NoticeModelCommon> GetNoticeByClubId { get; set; }

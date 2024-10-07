@@ -44,6 +44,8 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagementV2
         public string ClubLastOrderTime { get; set; }
         public string ClubLastEntrySyokai { get; set; }
         public string ClubHoliday { get; set; }
+        public string ClubCategory { get; set; }
+        public string LandLine { get; set; }
         public List<LocationV2HostListModel> HostListModels { get; set; } = new List<LocationV2HostListModel>();
         public List<LocationV2HostListModel> TopHostListModels { get; set; } = new List<LocationV2HostListModel>();
         public List<string> ClubGalleryImageList { get; set; } = new List<string>();
