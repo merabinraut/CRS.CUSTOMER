@@ -42,6 +42,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagement
         public string IsBookmarked { get; set; }
         public int TotalComment { get; set; }
         public int AverageRating { get; set; }
+        public string ClubCategory { get; set; }
         public List<string> ClubGalleryImage { get; set; } = new List<string>();
         public List<string> HostGalleryImage { get; set; } = new List<string>();
         public List<ClubWeeklyScheduleModel> ClubWeeklyScheduleList { get; set; } = new List<ClubWeeklyScheduleModel>();
