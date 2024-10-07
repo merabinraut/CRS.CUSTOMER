@@ -17,10 +17,10 @@
 }
 @{
     var jsonData = ReadJson("RedirectURLConfiguration.json");
-    var jsonData2 = ReadJson("Configuration.json");
+    //var jsonData2 = ReadJson("Configuration.json");
 }
 
-<script>
+@*<script>
     function base64ToUint8Array(base64) {
         const binaryString = atob(base64);
         const len = binaryString.length;
@@ -38,7 +38,7 @@
     let notificationFunctions = ["ReceiveNotificationCount"];
     let securityKey = base64ToUint8Array('@jsonData2.securityKey');
     let securityIV = base64ToUint8Array('@jsonData2.securityIV');
-</script>
+</script>*@
 
 <!-- #region Header -->
 <!DOCTYPE html>
@@ -131,7 +131,7 @@
         }
     }
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
-    <script src="~/Content/assets/js/notification-signalR.js"></script>
+    @*<script src="~/Content/assets/js/notification-signalR.js"></script>*@
     <style>
         .ui-datepicker {
             /* width: max-content; */
