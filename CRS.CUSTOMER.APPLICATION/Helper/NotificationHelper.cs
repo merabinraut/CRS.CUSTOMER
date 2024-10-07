@@ -2,6 +2,8 @@
 using CRS.CUSTOMER.APPLICATION.Models;
 using CRS.CUSTOMER.APPLICATION.Models.NotificationHelper;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -43,12 +45,9 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
             if (apiResponse?.code == "0")
             {
                 var dataObject = apiResponse.data?.MapObject<NotificationReadResponseModel>();
-
-                if (!string.IsNullOrEmpty(dataObject?.notificationId))
-                {
-                    dataObject.notificationId = _stringCipher.Encrypt(dataObject.notificationId);
-                }
-
+                var notificationIds = dataObject.notificationId?.Select(id => _stringCipher.Decrypt(id)).ToList() ?? new List<string>();
+                var encryptedNotificationIds = notificationIds?.Select(id => ApplicationUtilities.EncryptParameter(id)).ToList() ?? new List<string>();
+                dataObject.notificationId = encryptedNotificationIds.ToArray();
                 return new NotificationHelperCommonAPIResponseModel
                 {
                     code = "0",
@@ -87,13 +86,13 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
 
             var apiResponse = await HttpClientHelper.HttpPostRequestWithTokenAsync<NotificationHelperCommonAPIResponseModel>(
             $"{_signalRConfigruation.baseURL.TrimEnd('/')}/api/{endpoint}", apiRequest, signalRServiceToken);
-            if (apiResponse?.code == "0")
-            {
-                var dataObject = apiResponse.data?.MapObject<NotificationReadResponseModel>();
+            //if (apiResponse?.code == "0")
+            //{
+            //    var dataObject = apiResponse.data?.MapObject<NotificationReadResponseModel>();
 
-                if (!string.IsNullOrEmpty(dataObject?.notificationId))
-                    dataObject.notificationId = _stringCipher.Encrypt(dataObject.notificationId);
-            }
+            //    if (!string.IsNullOrEmpty(dataObject?.notificationId))
+            //        dataObject.notificationId = _stringCipher.Encrypt(dataObject.notificationId);
+            //}
             return;
         }
 

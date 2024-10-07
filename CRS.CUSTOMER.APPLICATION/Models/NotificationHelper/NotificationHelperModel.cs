@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CRS.CUSTOMER.APPLICATION.Models.NotificationHelper
 {
@@ -44,7 +45,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.NotificationHelper
 
     public class NotificationReadResponseModel
     {
-        public string notificationId { get; set; }
+        public string[] notificationId { get; set; } = Array.Empty<string>();
         public int notificationUnReadCount { get; set; } = 0;
     }
 
