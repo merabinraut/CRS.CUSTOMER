@@ -101,15 +101,15 @@
         .owl-theme .owl-dots button {
             width: 50px
         }
-@@media(width > 639px){ 
-    .owl-theme .owl-nav.disabled + .owl-dots {
-        width:375px !important
+
+    @@media(width > 639px) {
+        .owl-theme .owl-nav.disabled + .owl-dots {
+            width: 375px !important
+        }
     }
 
-    }
-
-    .owl-stage{
-        display:flex;
+    .owl-stage {
+        display: flex;
     }
 
     .call-now-button {
@@ -128,7 +128,6 @@
         line-height: 150%;
         height: 40px;
     }
-    
 </style>
 
 <!-- back button -->
@@ -681,117 +680,110 @@
     <div class="flex flex-row px-[16px] gap-6  items-center justify-between">
         @*<div class="flex gap-6 items-center justify-start p-[4px]">
 
-            <div class="flex justify-center items-center flex-col" style="line-height:48%">
-                <a href="@Model.LocationURL" target="_blank" class="flex justify-center items-center flex-col">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 4C13.7995 4 12 5.76051 12 7.91338C12 8.56051 12.2552 9.22038 12.5833 9.95159C12.9115 10.6828 13.3255 11.4573 13.75 12.1732C14.599 13.6051 15.4583 14.8025 15.4583 14.8025L16 15.5771L16.5417 14.8025C16.5417 14.8025 17.401 13.6051 18.25 12.1732C18.6745 11.4573 19.0885 10.6828 19.4167 9.95159C19.7448 9.22038 20 8.56051 20 7.91338C20 5.76051 18.2005 4 16 4ZM9.3125 5.26369L4 7.48535V19.6984C4 19.8415 4.14599 19.9383 4.27785 19.8826L9.35417 17.7376L14.6875 19.6943L20 17.4726V11.786C19.5755 12.5834 19.1042 13.3478 18.6667 14.028V16.6166L15.3333 18.0025V16.9427L14.3542 15.5567C14.25 15.4089 14.1276 15.2331 14 15.0471V18.0637L10 16.5962V6.89427L10.7292 7.15924C10.7943 6.71847 10.9115 6.29299 11.0833 5.89554L9.3125 5.26369ZM16 5.30446C17.4792 5.30446 18.6667 6.46624 18.6667 7.91338C18.6667 8.16561 18.5052 8.76178 18.2083 9.42166C17.9115 10.0815 17.4922 10.8306 17.0833 11.521C16.5391 12.4382 16.3047 12.7643 16 13.2127C15.6953 12.7643 15.4609 12.4382 14.9167 11.521C14.5078 10.8306 14.0885 10.0815 13.7917 9.42166C13.4948 8.76178 13.3333 8.16561 13.3333 7.91338C13.3333 6.46624 14.5208 5.30446 16 5.30446ZM8.66667 6.93503V16.6166L5.33333 18.0025V8.3414L8.66667 6.93503ZM16 6.93503C15.4479 6.93503 15 7.37325 15 7.91338C15 8.4535 15.4479 8.89172 16 8.89172C16.5521 8.89172 17 8.4535 17 7.91338C17 7.37325 16.5521 6.93503 16 6.93503Z" fill="#D75A8B" />
-                    </svg>
+                <div class="flex justify-center items-center flex-col" style="line-height:48%">
+                    <a href="@Model.LocationURL" target="_blank" class="flex justify-center items-center flex-col">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 4C13.7995 4 12 5.76051 12 7.91338C12 8.56051 12.2552 9.22038 12.5833 9.95159C12.9115 10.6828 13.3255 11.4573 13.75 12.1732C14.599 13.6051 15.4583 14.8025 15.4583 14.8025L16 15.5771L16.5417 14.8025C16.5417 14.8025 17.401 13.6051 18.25 12.1732C18.6745 11.4573 19.0885 10.6828 19.4167 9.95159C19.7448 9.22038 20 8.56051 20 7.91338C20 5.76051 18.2005 4 16 4ZM9.3125 5.26369L4 7.48535V19.6984C4 19.8415 4.14599 19.9383 4.27785 19.8826L9.35417 17.7376L14.6875 19.6943L20 17.4726V11.786C19.5755 12.5834 19.1042 13.3478 18.6667 14.028V16.6166L15.3333 18.0025V16.9427L14.3542 15.5567C14.25 15.4089 14.1276 15.2331 14 15.0471V18.0637L10 16.5962V6.89427L10.7292 7.15924C10.7943 6.71847 10.9115 6.29299 11.0833 5.89554L9.3125 5.26369ZM16 5.30446C17.4792 5.30446 18.6667 6.46624 18.6667 7.91338C18.6667 8.16561 18.5052 8.76178 18.2083 9.42166C17.9115 10.0815 17.4922 10.8306 17.0833 11.521C16.5391 12.4382 16.3047 12.7643 16 13.2127C15.6953 12.7643 15.4609 12.4382 14.9167 11.521C14.5078 10.8306 14.0885 10.0815 13.7917 9.42166C13.4948 8.76178 13.3333 8.16561 13.3333 7.91338C13.3333 6.46624 14.5208 5.30446 16 5.30446ZM8.66667 6.93503V16.6166L5.33333 18.0025V8.3414L8.66667 6.93503ZM16 6.93503C15.4479 6.93503 15 7.37325 15 7.91338C15 8.4535 15.4479 8.89172 16 8.89172C16.5521 8.89172 17 8.4535 17 7.91338C17 7.37325 16.5521 6.93503 16 6.93503Z" fill="#D75A8B" />
+                        </svg>
 
-                    <span class="text-[#D75A8B] text-[9px] font-medium">地図</span>
-                </a>
-            </div>
-            <div id="shareButton">
-                <div class="flex justify-center items-center flex-col cursor-pointer" style="line-height:52%">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                        <path d="M16.0972 3.05078L15.125 4.02295L17.9905 6.875H11.3438C9.25925 6.875 7.5625 8.57106 7.5625 10.6562C7.5625 12.7414 9.25925 14.4375 11.3438 14.4375H11.6875V13.0625H11.3438C10.0169 13.0625 8.9375 11.9831 8.9375 10.6562C8.9375 9.32938 10.0169 8.25 11.3438 8.25H17.9932L15.1304 11.1128L16.1025 12.085L20.625 7.5625L16.0972 3.05078ZM3.4375 3.4375V18.5625H18.5625V11.6875L17.1875 13.0625V17.1875H4.8125V4.8125H12.2743L13.6493 3.4375H3.4375Z"
-                              fill="#D75A8B" />
-                    </svg>
-                    <span class="text-[#D75A8B] text-[9px] font-medium">共有</span>
+                        <span class="text-[#D75A8B] text-[9px] font-medium">地図</span>
+                    </a>
                 </div>
-            </div>
+                <div id="shareButton">
+                    <div class="flex justify-center items-center flex-col cursor-pointer" style="line-height:52%">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                            <path d="M16.0972 3.05078L15.125 4.02295L17.9905 6.875H11.3438C9.25925 6.875 7.5625 8.57106 7.5625 10.6562C7.5625 12.7414 9.25925 14.4375 11.3438 14.4375H11.6875V13.0625H11.3438C10.0169 13.0625 8.9375 11.9831 8.9375 10.6562C8.9375 9.32938 10.0169 8.25 11.3438 8.25H17.9932L15.1304 11.1128L16.1025 12.085L20.625 7.5625L16.0972 3.05078ZM3.4375 3.4375V18.5625H18.5625V11.6875L17.1875 13.0625V17.1875H4.8125V4.8125H12.2743L13.6493 3.4375H3.4375Z"
+                                  fill="#D75A8B" />
+                        </svg>
+                        <span class="text-[#D75A8B] text-[9px] font-medium">共有</span>
+                    </div>
+                </div>
 
-        </div>
-        <button style="border-radius: 4px ;
-                background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%); border-radius: 4px;"
-                class=" flex w-[208px] justify-center items-center py-[9px] px-9 gap-[2px]" onclick="InitiateClubReservationFunction('@Model.ClubId','', '@Model.HostId')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none"
-                 class=" flex justify-center items-center">
-                <path d="M6.125 3.125V3.75H3.625V17.5H17.375V3.75H14.875V3.125H13.625V3.75H7.375V3.125H6.125ZM4.875 5H6.125V5.625H7.375V5H13.625V5.625H14.875V5H16.125V6.25H4.875V5ZM4.875 7.5H16.125V16.25H4.875V7.5ZM9.875 8.75V11.25H7.375V12.5H9.875V15H11.125V12.5H13.625V11.25H11.125V8.75H9.875Z"
-                      fill="white" />
-            </svg>
-            <p class="text-white text-[14px] font-semibold" style="letter-spacing:0.56px; line-height: 21px;">
-                来店予約
-            </p>
-        </button>*@
-       @* <div class="responsiveModalPopup pl-[16px] pr-[16px] pt-[12px] fixed bottom-0  flex justify-between items-center  bg-[#FAFAFA] w-full "
-             style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000">
-          *@
-            <div>
-              @*  @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod))*@
-                @if("B" == "B")
+            </div>
+            <button style="border-radius: 4px ;
+                    background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%); border-radius: 4px;"
+                    class=" flex w-[208px] justify-center items-center py-[9px] px-9 gap-[2px]" onclick="InitiateClubReservationFunction('@Model.ClubId','', '@Model.HostId')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none"
+                     class=" flex justify-center items-center">
+                    <path d="M6.125 3.125V3.75H3.625V17.5H17.375V3.75H14.875V3.125H13.625V3.75H7.375V3.125H6.125ZM4.875 5H6.125V5.625H7.375V5H13.625V5.625H14.875V5H16.125V6.25H4.875V5ZM4.875 7.5H16.125V16.25H4.875V7.5ZM9.875 8.75V11.25H7.375V12.5H9.875V15H11.125V12.5H13.625V11.25H11.125V8.75H9.875Z"
+                          fill="white" />
+                </svg>
+                <p class="text-white text-[14px] font-semibold" style="letter-spacing:0.56px; line-height: 21px;">
+                    来店予約
+                </p>
+            </button>*@
+        @* <div class="responsiveModalPopup pl-[16px] pr-[16px] pt-[12px] fixed bottom-0  flex justify-between items-center  bg-[#FAFAFA] w-full "
+            style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000">
+        *@
+        <div>
+            @if (!string.IsNullOrEmpty(Model.ClubTimePeriod))
+            {
+                if (Model.ClubCategory.Trim().ToUpper() == "P")
                 {
                     <div class="flex justify-center items-center gap-1 pb-1" style="width:100px">
-                       @* @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                        @if (!string.IsNullOrEmpty(Model.ClubTimePeriod) && Model.ClubTimePeriod.Trim().ToUpper() == "DAY")
                         {
-                            <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="~/Content/assets/images/customer/sun.svg" alt="夜" style="margin-right: 5px; margin-bottom: 2px"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
+                            <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="~/Content/assets/images/customer/sun.svg" alt="夜" style="margin-right: 5px; margin-bottom: 2px"> @Model.ClubOpeningTime &#xff5e; @Model.ClubClosingTime</div>
                         }
-                        else if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
-                        {*@
-                            <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">
-                      @*  @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime*@ 
-                        nabin
-                        </div>
-                       @* }*@
+                        else if (!string.IsNullOrEmpty(Model.ClubTimePeriod) && Model.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                        {
+                            <div class="text-sm text-secondary-1 flex justify-center items-center">
+                                <img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">
+                                @Model.ClubOpeningTime &#xff5e; @Model.ClubClosingTime
+
+                            </div>
+                        }
                     </div>
                 }
-                @*@if (Model.ClubCategory.Trim().ToUpper() == "P")*@
-            @if("p"=="p")
-            {
-                /* if (!string.IsNullOrEmpty(Model.TodaysClubSchedule) && Model.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")*/
-                if("res" == "res")
-                {
-                        <div class=" rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full" style="background: #d4b78a; display: flex; align-items: baseline;">
-                            本日空席あり
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="available disabled" style="width:100px">本日空席あり</div>
-                    }
             }
-            /* else if (Model.ClubCategory.Trim().ToUpper() == "B")*/
-                else if("B"=="B")
+            @if (Model.ClubCategory.Trim().ToUpper() == "P")
             {
-                    <div class="" style="max-width:100px; width:100%; min-width:100px"></div>
+                if (!string.IsNullOrEmpty(Model.TodaysClubSchedule) && Model.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
+                {
+                    <div class=" rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full" style="background: #d4b78a; display: flex; align-items: baseline;">
+                        本日空席あり
+                    </div>
                 }
-
-            </div>
-            <a class="call-now-button" href="tel:897465312546">
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-                    <path d="M5.91022 2.0752C5.58307 2.0752 5.26081 2.19238 4.99225 2.40723L4.95319 2.42676L4.93366 2.44629L2.98053 4.45801L3.00006 4.47754C2.39704 5.03418 2.21149 5.8667 2.47272 6.58691C2.47516 6.5918 2.47028 6.60156 2.47272 6.60644C3.00251 8.12256 4.35749 11.0498 7.00397 13.6963C9.66022 16.3525 12.6265 17.6538 14.0938 18.2275H14.1133C14.8726 18.4814 15.6954 18.3008 16.2813 17.7978L18.254 15.8252C18.7715 15.3076 18.7715 14.4092 18.254 13.8916L15.7149 11.3525L15.6954 11.3135C15.1778 10.7959 14.2598 10.7959 13.7423 11.3135L12.4923 12.5635C12.0406 12.3462 10.9639 11.7895 9.93366 10.8057C8.91071 9.8291 8.38825 8.70605 8.19538 8.2666L9.44538 7.0166C9.97028 6.4917 9.98004 5.61768 9.42585 5.10254L9.44538 5.08301L9.38678 5.02441L6.88678 2.44629L6.86725 2.42676L6.82819 2.40723C6.55964 2.19238 6.23737 2.0752 5.91022 2.0752ZM5.91022 3.3252C5.95661 3.3252 6.00299 3.34717 6.04694 3.38379L8.54694 5.94238L8.60553 6.00098C8.60065 5.99609 8.64215 6.06201 8.56647 6.13769L7.00397 7.70019L6.711 7.97363L6.84772 8.36426C6.84772 8.36426 7.56549 10.2856 9.07428 11.7236L9.211 11.8408C10.6636 13.1665 12.3751 13.8916 12.3751 13.8916L12.7657 14.0674L14.6212 12.2119C14.7286 12.1045 14.709 12.1045 14.8165 12.2119L17.3751 14.7705C17.4825 14.8779 17.4825 14.8389 17.3751 14.9463L15.461 16.8603C15.1729 17.1069 14.8677 17.1582 14.504 17.0361C13.088 16.4795 10.3365 15.271 7.88288 12.8174C5.40973 10.3442 4.11823 7.53906 3.6446 6.17676C3.54938 5.92285 3.61774 5.54687 3.83991 5.35644L3.87897 5.31738L5.7735 3.38379C5.81745 3.34717 5.86383 3.3252 5.91022 3.3252Z" fill="#D75A8B" />
-                </svg>
-                電話
-            </a>
-          @*  @if (Model.ClubCategory.Trim().ToUpper() == "B")*@
-        @if("B"!="B")
+                else
+                {
+                    <div class="available disabled" style="width:100px">本日空席あり</div>
+                }
+            }
+            else if (Model.ClubCategory.Trim().ToUpper() == "B")
             {
-                <button class=" flex justify-center items-center gap-[1px] px-[20px] py-[10px] rounded"
-                        style="background: #F0F0F0; color:#fff" data-drawer-placement="bottom" aria-controls="drawer-bottom-example">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M5.625 3.125V3.75H3.125V17.5H16.875V3.75H14.375V3.125H13.125V3.75H6.875V3.125H5.625ZM4.375 5H5.625V5.625H6.875V5H13.125V5.625H14.375V5H15.625V6.25H4.375V5ZM4.375 7.5H15.625V16.25H4.375V7.5ZM9.375 8.75V11.25H6.875V12.5H9.375V15H10.625V12.5H13.125V11.25H10.625V8.75H9.375Z"
-                              fill="white" />
-                    </svg>
-                    <span class="text-[14px] font-semibold leading-[21px] tracking-[0.56px] text-[#fff] ">来店予約</span>
-                </button>
+                <div class="" style="max-width:100px; width:100%; min-width:100px"></div>
+            }
+        </div>
+        <a class="call-now-button" href="tel:@Model.LandLine">
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                <path d="M5.91022 2.0752C5.58307 2.0752 5.26081 2.19238 4.99225 2.40723L4.95319 2.42676L4.93366 2.44629L2.98053 4.45801L3.00006 4.47754C2.39704 5.03418 2.21149 5.8667 2.47272 6.58691C2.47516 6.5918 2.47028 6.60156 2.47272 6.60644C3.00251 8.12256 4.35749 11.0498 7.00397 13.6963C9.66022 16.3525 12.6265 17.6538 14.0938 18.2275H14.1133C14.8726 18.4814 15.6954 18.3008 16.2813 17.7978L18.254 15.8252C18.7715 15.3076 18.7715 14.4092 18.254 13.8916L15.7149 11.3525L15.6954 11.3135C15.1778 10.7959 14.2598 10.7959 13.7423 11.3135L12.4923 12.5635C12.0406 12.3462 10.9639 11.7895 9.93366 10.8057C8.91071 9.8291 8.38825 8.70605 8.19538 8.2666L9.44538 7.0166C9.97028 6.4917 9.98004 5.61768 9.42585 5.10254L9.44538 5.08301L9.38678 5.02441L6.88678 2.44629L6.86725 2.42676L6.82819 2.40723C6.55964 2.19238 6.23737 2.0752 5.91022 2.0752ZM5.91022 3.3252C5.95661 3.3252 6.00299 3.34717 6.04694 3.38379L8.54694 5.94238L8.60553 6.00098C8.60065 5.99609 8.64215 6.06201 8.56647 6.13769L7.00397 7.70019L6.711 7.97363L6.84772 8.36426C6.84772 8.36426 7.56549 10.2856 9.07428 11.7236L9.211 11.8408C10.6636 13.1665 12.3751 13.8916 12.3751 13.8916L12.7657 14.0674L14.6212 12.2119C14.7286 12.1045 14.709 12.1045 14.8165 12.2119L17.3751 14.7705C17.4825 14.8779 17.4825 14.8389 17.3751 14.9463L15.461 16.8603C15.1729 17.1069 14.8677 17.1582 14.504 17.0361C13.088 16.4795 10.3365 15.271 7.88288 12.8174C5.40973 10.3442 4.11823 7.53906 3.6446 6.17676C3.54938 5.92285 3.61774 5.54687 3.83991 5.35644L3.87897 5.31738L5.7735 3.38379C5.81745 3.34717 5.86383 3.3252 5.91022 3.3252Z" fill="#D75A8B" />
+            </svg>
+            電話
+        </a>
+        @if (Model.ClubCategory.Trim().ToUpper() == "B")
+        {
+            <button class=" flex justify-center items-center gap-[1px] px-[20px] py-[10px] rounded"
+                    style="background: #F0F0F0; color:#fff" data-drawer-placement="bottom" aria-controls="drawer-bottom-example">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M5.625 3.125V3.75H3.125V17.5H16.875V3.75H14.375V3.125H13.125V3.75H6.875V3.125H5.625ZM4.375 5H5.625V5.625H6.875V5H13.125V5.625H14.375V5H15.625V6.25H4.375V5ZM4.375 7.5H15.625V16.25H4.375V7.5ZM9.375 8.75V11.25H6.875V12.5H9.375V15H10.625V12.5H13.125V11.25H10.625V8.75H9.375Z"
+                          fill="white" />
+                </svg>
+                <span class="text-[14px] font-semibold leading-[21px] tracking-[0.56px] text-[#fff] ">来店予約</span>
+            </button>
 
         }
-        /*  else if (Model.ClubCategory.Trim().ToUpper() == "P")*/
-        else if("P"=="P")
+        else if (Model.ClubCategory.Trim().ToUpper() == "P")
         {
-                <button class=" flex justify-center items-center gap-[1px] px-[20px] py-[10px] rounded"
-                        style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);" data-drawer-placement="bottom" aria-controls="drawer-bottom-example" onclick="InitiateClubReservationFunction('@Model.ClubId')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M5.625 3.125V3.75H3.125V17.5H16.875V3.75H14.375V3.125H13.125V3.75H6.875V3.125H5.625ZM4.375 5H5.625V5.625H6.875V5H13.125V5.625H14.375V5H15.625V6.25H4.375V5ZM4.375 7.5H15.625V16.25H4.375V7.5ZM9.375 8.75V11.25H6.875V12.5H9.375V15H10.625V12.5H13.125V11.25H10.625V8.75H9.375Z"
-                              fill="white" />
-                    </svg>
-                    <span class="text-[14px] font-semibold leading-[21px] tracking-[0.56px] text-[#fff] ">来店予約</span>
-                </button>
-            }
-        @*</div>*@
-
+            <button class=" flex justify-center items-center gap-[1px] px-[20px] py-[10px] rounded"
+                    style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);" data-drawer-placement="bottom" aria-controls="drawer-bottom-example" onclick="InitiateClubReservationFunction('@Model.ClubId')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M5.625 3.125V3.75H3.125V17.5H16.875V3.75H14.375V3.125H13.125V3.75H6.875V3.125H5.625ZM4.375 5H5.625V5.625H6.875V5H13.125V5.625H14.375V5H15.625V6.25H4.375V5ZM4.375 7.5H15.625V16.25H4.375V7.5ZM9.375 8.75V11.25H6.875V12.5H9.375V15H10.625V12.5H13.125V11.25H10.625V8.75H9.375Z"
+                          fill="white" />
+                </svg>
+                <span class="text-[14px] font-semibold leading-[21px] tracking-[0.56px] text-[#fff] ">来店予約</span>
+            </button>
+        }
     </div>
-
-   
 </div>
 
 @section scripts

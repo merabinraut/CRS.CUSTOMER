@@ -63,6 +63,12 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
         public string CustomerHostCompatibility { get; set; }
         public string Position { get; set; }
         public string Title { get; set; }
+        public string ClubCategory { get; set; }
+        public string TodaysClubSchedule { get; set; }
+        public string ClubTimePeriod { get; set; }
+        public string ClubClosingTime { get; set; }
+        public string ClubOpeningTime { get; set; }
+        public string LandLine { get; set; }
         public List<string> HostGalleryImageList { get; set; }
         public List<HostIdentityDetailsCommon> HostIdentityDetailsModel = new List<HostIdentityDetailsCommon>();
     }
