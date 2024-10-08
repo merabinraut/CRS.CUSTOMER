@@ -110,7 +110,7 @@
         font-weight: 600;
         letter-spacing: 0.56px;
         line-height: 150%;
-        height: 45px;
+        height: 40px;
     }
 
     .blocked-btn {
@@ -428,107 +428,111 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                     </div>
                 </div>
                 @*tab 1 top 10 list this is new implementation for top 10 hosts*@
-                @if (Model.TopHostListModels != null && Model.TopHostListModels.Count != 0)
+                @if (Model.ClubCategory.Trim().ToUpper() == "P")
                 {
-                    <div class=" pb-4 flex gap-[8px] " style="padding-left:16px">
-                        <div id="host" class="flex overflow-x-auto no-scrollbar  " style="gap:8px">
-                            @{
-                                foreach (var item in Model.TopHostListModels)
-                                {
-                                    <div class="item" style="width:128px">
-                                        <div class=" relative flex-none">
-                                            <div class="flex pb-1">
-                                                <div class="absolute top-1 left-0">
-                                                    @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
+                    if (Model.TopHostListModels != null && Model.TopHostListModels.Count != 0)
+                    {
+                        <div class=" pb-4 flex gap-[8px] " style="padding-left:16px">
+                            <div id="host" class="flex overflow-x-auto no-scrollbar  " style="gap:8px">
+                                @{
+                                    foreach (var item in Model.TopHostListModels)
+                                    {
+                                        <div class="item" style="width:128px">
+                                            <div class=" relative flex-none">
+                                                <div class="flex pb-1">
+                                                    <div class="absolute top-1 left-0">
+                                                        @if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "1")
+                                                        {
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
+                                                                 viewBox="0 0 19 31" fill="none">
+                                                                <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
+                                                                      fill="#E3AB00" />
+                                                                <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#E3AB00" />
+                                                            </svg>
+                                                        }
+                                                        else if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "2")
+                                                        {
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
+                                                                 viewBox="0 0 19 31" fill="none">
+                                                                <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
+                                                                      fill="#C9CACA" />
+                                                                <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#C9CACA" />
+                                                            </svg>
+                                                        }
+                                                        else if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "3")
+                                                        {
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
+                                                                 viewBox="0 0 19 31" fill="none">
+                                                                <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
+                                                                      fill="#BD764B" />
+                                                                <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#BD764B" />
+                                                            </svg>
+                                                        }
+                                                        else
+                                                        {
+                                                            <svg></svg>
+                                                        }
+                                                    </div>
+                                                    @if (string.IsNullOrEmpty(@item.Rank))
                                                     {
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
-                                                             viewBox="0 0 19 31" fill="none">
-                                                            <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
-                                                                  fill="#E3AB00" />
-                                                            <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#E3AB00" />
-                                                        </svg>
+                                                        <div class="pl-6">-</div>
                                                     }
-                                                    else if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "2")
+                                                    <div class="pl-6">@item.Rank</div>
+                                                </div>
+                                                <div class="cursor-pointer relative h-[180px] w-[128px]">
+                                                    @if (!string.IsNullOrEmpty(item.HostImage))
                                                     {
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
-                                                             viewBox="0 0 19 31" fill="none">
-                                                            <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
-                                                                  fill="#C9CACA" />
-                                                            <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#C9CACA" />
-                                                        </svg>
-                                                    }
-                                                    else if (!string.IsNullOrEmpty(item.Rank) && item.Rank.Trim() == "3")
-                                                    {
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="31"
-                                                             viewBox="0 0 19 31" fill="none">
-                                                            <path d="M9.33333 0C8.23698 0 7.33333 0.903646 7.33333 2C7.33333 2.75 7.75521 3.40885 8.375 3.75L6.41667 7.66667L3.35417 5.47917C3.75521 5.11198 4 4.58073 4 4C4 2.90365 3.09635 2 2 2C0.903646 2 0 2.90365 0 4C0 4.89844 0.617187 5.64583 1.4375 5.89583L2.66667 12.6667V16H16V12.6667L17.2292 5.89583C18.0495 5.64583 18.6667 4.89844 18.6667 4C18.6667 2.90365 17.763 2 16.6667 2C15.5703 2 14.6667 2.90365 14.6667 4C14.6667 4.58073 14.9115 5.11198 15.3125 5.47917L12.25 7.66667L10.2917 3.75C10.9115 3.40885 11.3333 2.75 11.3333 2C11.3333 0.903646 10.4297 0 9.33333 0ZM9.33333 1.33333C9.70833 1.33333 10 1.625 10 2C10 2.375 9.70833 2.66667 9.33333 2.66667C8.95833 2.66667 8.66667 2.375 8.66667 2C8.66667 1.625 8.95833 1.33333 9.33333 1.33333ZM2 3.33333C2.375 3.33333 2.66667 3.625 2.66667 4C2.66667 4.375 2.375 4.66667 2 4.66667C1.625 4.66667 1.33333 4.375 1.33333 4C1.33333 3.625 1.625 3.33333 2 3.33333ZM16.6667 3.33333C17.0417 3.33333 17.3333 3.625 17.3333 4C17.3333 4.375 17.0417 4.66667 16.6667 4.66667C16.2917 4.66667 16 4.375 16 4C16 3.625 16.2917 3.33333 16.6667 3.33333ZM9.33333 4.83333L11.3958 8.95833L12.3958 9.20833L15.7292 6.83333L14.7917 12H3.875L2.9375 6.83333L6.27083 9.20833L7.27083 8.95833L9.33333 4.83333ZM4 13.3333H14.6667V14.6667H4V13.3333Z"
-                                                                  fill="#BD764B" />
-                                                            <line x1="9.5" y1="15" x2="9.5" y2="31" stroke="#BD764B" />
-                                                        </svg>
+                                                        <img src="@item.HostImage"
+                                                             class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@PrefecturesArea')">
                                                     }
                                                     else
                                                     {
-                                                        <svg></svg>
+                                                        <img src="~/Content/assets/images/customer/demo-image.jpeg"
+                                                             class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" />
+                                                    }
+                                                    @if (item.IsBookmarked.Trim().ToUpper() == "Y")
+                                                    {
+                                                        <div class="absolute top-[2px] right-2" style="width:26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                                                            <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
+
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="absolute top-[2px] right-2" style="width: 26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
+                                                            <img src="~/Content/assets/images/customer/favorite-unfilled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
+                                                        </div>
+                                                    }
+
+                                                </div>
+                                                <div class="pt-[5px]">
+                                                    @if (!string.IsNullOrEmpty(item.HostPosition))
+                                                    {
+                                                        <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="text-[10px] font-bold text-primaryDark"></div>
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(item.HostNameJapanese))
+                                                    {
+                                                        <h3 class="text-xs  text-charcoalBlack" style="font-weight: bold; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@item.HostNameJapanese</h3>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <h3 class="text-xs  text-charcoalBlack" style="font-weight: bold; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@item.HostName</h3>
                                                     }
                                                 </div>
-                                                @if (string.IsNullOrEmpty(@item.Rank))
-                                                {
-                                                    <div class="pl-6">-</div>
-                                                }
-                                                <div class="pl-6">@item.Rank</div>
-                                            </div>
-                                            <div class="cursor-pointer relative h-[180px] w-[128px]">
-                                                @if (!string.IsNullOrEmpty(item.HostImage))
-                                                {
-                                                    <img src="@item.HostImage"
-                                                         class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@PrefecturesArea')">
-                                                }
-                                                else
-                                                {
-                                                    <img src="~/Content/assets/images/customer/demo-image.jpeg"
-                                                         class="w-[128px] h-[180px] object-fill rounded-[6px] image-cover" />
-                                                }
-                                                @if (item.IsBookmarked.Trim().ToUpper() == "Y")
-                                                {
-                                                    <div class="absolute top-[2px] right-2" style="width:26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                                                        <img src="~/Content/assets/images/loveicon-filled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
-
-                                                    </div>
-                                                }
-                                                else
-                                                {
-                                                    <div class="absolute top-[2px] right-2" style="width: 26px; height:26px;" onclick="ManageBookmark('@item.ClubId','@item.HostId','host', this)">
-                                                        <img src="~/Content/assets/images/customer/favorite-unfilled.svg" class="h-[30px] w-[30px]" alt="bookmark" />
-                                                    </div>
-                                                }
-
-                                            </div>
-                                            <div class="pt-[5px]">
-                                                @if (!string.IsNullOrEmpty(item.HostPosition))
-                                                {
-                                                    <div class="text-[10px] font-bold text-primaryDark">@item.HostPosition</div>
-                                                }
-                                                else
-                                                {
-                                                    <div class="text-[10px] font-bold text-primaryDark"></div>
-                                                }
-                                                @if (!string.IsNullOrEmpty(item.HostNameJapanese))
-                                                {
-                                                    <h3 class="text-xs  text-charcoalBlack" style="font-weight: bold; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@item.HostNameJapanese</h3>
-
-                                                }
-                                                else
-                                                {
-                                                    <h3 class="text-xs  text-charcoalBlack" style="font-weight: bold; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@item.HostName</h3>
-                                                }
                                             </div>
                                         </div>
-                                    </div>
+                                    }
                                 }
-                            }
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
+
                 @*tab 1 top 10 list end *@
                 @if (Model.HostListModels != null && Model.HostListModels.Count != 0)
                 {
@@ -543,7 +547,6 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                                 }
                                 else
                                 {
-
                                     <img src="~/Content/assets/images/customer/demo-image.jpeg"
                                          class="w-[104px] h-[104px] object-fill rounded-[6px] image-cover" />
                                 }
@@ -553,9 +556,6 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                                 </div>
                             </div>
                         }
-
-
-
                     </div>
                 }
                 else

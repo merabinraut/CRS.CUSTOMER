@@ -240,6 +240,15 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                         item.LocationId = item.LocationId.EncryptParameter();
                         item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
                     }
+                    var dbTopHostList = _business.GetHostList(locationId, cId, agentId, "trhl");
+                    responseModel.TopHostListModels = dbTopHostList.MapObjects<LocationV2HostListModel>();
+                    foreach (var item in responseModel.TopHostListModels)
+                    {
+                        item.ClubId = item.ClubId.EncryptParameter();
+                        item.HostId = item.HostId.EncryptParameter();
+                        item.LocationId = item.LocationId.EncryptParameter();
+                        item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
+                    }
                     PopulateMetaTagInfo("host", ClubName, locationId, PrefecturesArea, responseModel.ClubId.DecryptParameter(), responseModel.ClubDescription);
                 }
                 #endregion
@@ -345,16 +354,16 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 #region TAB 1
                 else
                 {
-                    var dbTopHostList = _business.GetHostList(locationId, cId, agentId, "trhl");
+                    // var dbTopHostList = _business.GetHostList(locationId, cId, agentId, "trhl");
                     ViewBag.target = "";
-                    responseModel.TopHostListModels = dbTopHostList.MapObjects<LocationV2HostListModel>();
-                    foreach (var item in responseModel.TopHostListModels)
-                    {
-                        item.ClubId = item.ClubId.EncryptParameter();
-                        item.HostId = item.HostId.EncryptParameter();
-                        item.LocationId = item.LocationId.EncryptParameter();
-                        item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
-                    }
+                    //responseModel.TopHostListModels = dbTopHostList.MapObjects<LocationV2HostListModel>();
+                    //foreach (var item in responseModel.TopHostListModels)
+                    //{
+                    //    item.ClubId = item.ClubId.EncryptParameter();
+                    //    item.HostId = item.HostId.EncryptParameter();
+                    //    item.LocationId = item.LocationId.EncryptParameter();
+                    //    item.HostImage = ImageHelper.ProcessedImage(item.HostImage);
+                    //}
 
                     var dbNoticeResponseInfo = _business.GetNoticeByClubId(cId);
                     responseModel.GetNoticeByClubId = dbNoticeResponseInfo.MapObjects<Models.LocationManagementV2.NoticeModel>();
