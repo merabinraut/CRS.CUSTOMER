@@ -48,5 +48,9 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchFilterManagement
         public string ClubLogo { get; set; }
         public string LocationURL { get; set; }
         public string ClubCode { get; set; }
+        public string ClubCategory { get; set; }
+        public string LandLine { get; set; }
+        public string ClubOpeningTime { get; set; }
+        public string ClubClosingTime { get; set; }
     }
 }
