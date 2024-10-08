@@ -220,7 +220,10 @@
                 <p class="club_kana">@Model.ClubNameJp</p>
                 <!-- e/club kana -->
                 <!-- s/club group -->
-                <p class="club_group">@Model.GroupName</p>
+                @if (!string.IsNullOrEmpty(Model.GroupName))
+                {
+                    <p class="club_group">@Model.GroupName</p>
+                }
                 <!-- e/club group -->
             </div>
         </div>
@@ -277,9 +280,12 @@
             </ul>
             <!-- e/club review -->
         </div>
-        <div class="text-[12px] font-normal pt-2 leading-[18px] self-stretch	text-[#333]">
-            @Model.ClubDescription
-        </div>
+        @if (!string.IsNullOrEmpty(Model.ClubDescription))
+        {
+            <div class="text-[12px] font-normal pt-2 leading-[18px] self-stretch	text-[#333]">
+                @Model.ClubDescription
+            </div>
+        }
     </div>
     <!-- calender -->
     <div>
@@ -294,6 +300,7 @@
                         <div style="background: #D9D9D9; opacity:0.3">
                             @item2.DayLabel
                         </div>
+
 
                     }
                     else
@@ -361,12 +368,18 @@
 }
 else
 {
+
+
+
     @*for basic*@
-    <div class="px-4 py-[12px]" style="border-bottom: 1px solid #E5E7EB;">
-        <div class="text-[12px] font-normal pt-2 leading-[18px] self-stretch	text-[#333]">
-            @Model.ClubDescription
+    if (!string.IsNullOrEmpty(Model.ClubDescription))
+    {
+        <div class="px-4 py-[12px]" style="border-bottom: 1px solid #E5E7EB;">
+            <div class="text-[12px] font-normal pt-2 leading-[18px] self-stretch	text-[#333]">
+                @Model.ClubDescription
+            </div>
         </div>
-    </div>
+    }
 }
 
 @*for premium tab *@
@@ -1196,10 +1209,16 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                                     <td class="border border-[#EFEFEF] border-l-0  w-1/3 text-[11px] font-bold leading-[20px] text-[#333] pl-4">
                                         住所
                                     </td>
-                                    @if (Model.GetClubBasicInformation.ClubAddress != null)
+                                    @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubAddress))
                                     {
                                         <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="white-space:normal">
                                             @Model.GetClubBasicInformation.ClubAddress
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="white-space:normal">
+                                            ー
                                         </td>
                                     }
                                 </tr>
@@ -1207,10 +1226,16 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                                     <td class="border border-[#EFEFEF] border-l-0  w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
                                         営業時間
                                     </td>
-                                    @if (Model.GetClubBasicInformation.ClubClosingTime != null || Model.GetClubBasicInformation.ClubOpeningTime != null)
+                                    @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubClosingTime) || !string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubOpeningTime))
                                     {
                                         <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
                                             @Model.GetClubBasicInformation.ClubOpeningTime ～ @Model.GetClubBasicInformation.ClubClosingTime
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="white-space:normal">
+                                            ー
                                         </td>
                                     }
                                 </tr>
@@ -1218,22 +1243,38 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                                     <td class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
                                         最終入店時間
                                     </td>
-                                    <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
-                                        @Model.GetClubBasicInformation.LastEntryTime
-                                        @if (Model.GetClubBasicInformation.LastOrderTime != null)
-                                        {
-                                            <text>(L.O. @Model.GetClubBasicInformation.LastOrderTime)</text>
-                                        }
-                                    </td>
+                                    @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.LastOrderTime))
+                                    {
+
+                                        <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
+                                            @Model.GetClubBasicInformation.LastEntryTime
+                                            @if (Model.GetClubBasicInformation.LastOrderTime != null)
+                                            {
+                                                <text>(L.O. @Model.GetClubBasicInformation.LastOrderTime)</text>
+                                            }
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="white-space:normal">
+                                            ー
+                                        </td>
+                                    }
                                 </tr>
                                 <tr class="">
                                     <td class="border border-[#EFEFEF] border-l-0 w-1/3 text-[11px] font-bold leading-[20px] text-[#333]">
                                         定休日
                                     </td>
-                                    @if (Model.GetClubBasicInformation.Holiday != null)
+                                    @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.Holiday))
                                     {
                                         <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
                                             @Model.GetClubBasicInformation.Holiday
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="white-space:normal">
+                                            ー
                                         </td>
                                     }
 
@@ -1246,6 +1287,12 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                                     {
                                         <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]">
                                             @Model.GetClubBasicInformation.ClubClosingDate 日
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class=" border border-[#EFEFEF] border-r-0 text-[11px] font-normal leading-[20px] text-[#333] whitespace-nowrap pl-[13px]" style="white-space:normal">
+                                            ー
                                         </td>
                                     }
                                 </tr>
@@ -1667,7 +1714,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
     </div>
 </div>
 <!-- for position stickey at the bottom -->
-<div class="responsiveModalPopup pl-[16px] pr-[10px] pt-[12px] fixed bottom-0  flex justify-between items-center  bg-[#FAFAFA] w-full "
+<div class="responsiveModalPopup pl-[16px] pr-[16px] pt-[12px] fixed bottom-0  flex justify-between items-center  bg-[#FAFAFA] w-full "
      style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000">
     <div class="share-button-floating" id="shareButton">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1675,16 +1722,19 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
         </svg>
     </div>
     <div>
-        <div class="flex justify-center items-center gap-1 pb-1">
-            @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "DAY")
-            {
-                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="~/Content/assets/images/customer/sun.svg" alt="夜" style="margin-right: 5px; margin-bottom: 2px"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
-            }
-            else if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
-            {
-                <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
-            }
-        </div>
+        @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod))
+        {
+            <div class="flex justify-center items-center gap-1 pb-1">
+                @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "DAY")
+                {
+                    <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="~/Content/assets/images/customer/sun.svg" alt="夜" style="margin-right: 5px; margin-bottom: 2px"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
+                }
+                else if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
+                {
+                    <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
+                }
+            </div>
+        }
         @if (Model.ClubCategory.Trim().ToUpper() == "P")
         {
             if (!string.IsNullOrEmpty(Model.TodaysClubSchedule) && Model.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
@@ -1700,7 +1750,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
         }
         else if (Model.ClubCategory.Trim().ToUpper() == "B")
         {
-            <div class="available disabled">営業中</div>
+            <div class="" style="max-width:100px; width:100%; min-width:100px"></div>
         }
 
     </div>
