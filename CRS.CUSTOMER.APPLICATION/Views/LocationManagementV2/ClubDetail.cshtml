@@ -146,7 +146,7 @@
 
 @*if club cover photo present it need to be enabled*@
 
-@if (Model.ClubCoverPhoto != null)
+@if (Model.ClubCategory.Trim().ToUpper() == "P")
 {
     <div class="h-[189px]">
         <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
