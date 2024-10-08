@@ -116,34 +116,22 @@
                 <div id="siteurl" class="flex flex-row justify-center">
                     <p style="font-size: 25px; font-weight: 600; margin-bottom: 26px" class="text-black">https://hoslog.jp/  </p>
                 </div>
-                <a style="max-width: 300px; height: 57px; background-color: #D75A8B ;border-radius:2px " class="flex flex-row justify-center items-center text-center">
+                <a href="@jsonData.CustomerRegistration.url" style="max-width: 300px; height: 57px; background-color: #D75A8B; border-radius: 2px; cursor: pointer; " class="flex flex-row justify-center items-center text-center">
                     <div>
-                        <p id="textContainerone" style="font-size:18px;font-weight:600 ; " class="text-white">
-                            <span class="japanese-text">
-                                @*
-
-                                        い
-                                    </span>*@
-                                @*     <span class="text-[#BCB08A] text-[10px] font-normal leading-[18px]">*@
-                                新規会員登録
-                            </span>
-                        </p>
+                        <p style="font-size:18px;font-weight:600 ; " class="text-white">@jsonData.CustomerRegistration.text</p>
                     </div>
                 </a>
-                <a style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                <a href="@jsonData.ClubRegistration.url" target="_blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor: pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
                     <div>
-
-                        <p style="font-size:18px;font-weight:600" class="text-black">店舗オーナー登録</p>
+                        <p style="font-size:18px;font-weight:600" class="text-black">@jsonData.ClubRegistration.text</p>
                     </div>
                 </a>
-                <a style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); " class="flex flex-row justify-center items-center bg-white mt-3">
+                <a href="@jsonData.AffiliateRegistration.url" target="_blank" style="max-width: 300px; height: 57px; border-radius: 2px; box-shadow: 0px 0px 12px 0px rgba(30, 34, 75, 0.15); cursor:pointer; " class="flex flex-row justify-center items-center bg-white mt-3">
                     <div>
-                        <p style="font-size:18px;font-weight:600" class="text-black">アフィリエイター登録</p>
+                        <p style="font-size:18px;font-weight:600" class="text-black">@jsonData.AffiliateRegistration.text</p>
                     </div>
                 </a>
-
             </div>
-
 
 
 

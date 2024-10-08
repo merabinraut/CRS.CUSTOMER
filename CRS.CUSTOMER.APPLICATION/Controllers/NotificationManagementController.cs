@@ -46,6 +46,24 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 x.CreatedDate = x.CreatedDate;
                 ViewBag.CreatedDate = Convert.ToDateTime(x.CreatedDate).ToString("yyyy.MM.dd");
             });
+            foreach (var item in responseModel)
+            {
+                if (!string.IsNullOrWhiteSpace(item.ExtraDetails))
+                {
+                    string[] dbValues = item.ExtraDetails.Split(new[] { ',' }, 2);
+
+                    if (dbValues.Length > 0)
+                    {
+                        dbValues[0] = ImageHelper.ProcessedImage(
+                            dbValues[0],
+                            false,
+                            $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{_AmazonS3Configruation.NotificationNoImageURL.TrimStart('/')}"
+                        );
+
+                        item.ExtraDetails = string.Join(",", dbValues);
+                    }
+                }
+            }
             return View(responseModel);
         }
 
