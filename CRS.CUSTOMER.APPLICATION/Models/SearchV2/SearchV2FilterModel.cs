@@ -99,7 +99,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchV2
     {
         public List<DashboardV2HostDetailModel> FilteredHostModel { get; set; } = new List<DashboardV2HostDetailModel>();
         public List<DashboardV2HostDetailModel> HostRecommendationModel { get; set; } = new List<DashboardV2HostDetailModel>();
-        public HostSearchFilterRequestModel RequestModel { get; set; }
+        public HostSearchFilterRequestModel RequestModel { get; set; } = new HostSearchFilterRequestModel();
     }
     #endregion
 
