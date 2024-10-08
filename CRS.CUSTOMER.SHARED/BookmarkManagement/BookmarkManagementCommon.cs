@@ -27,6 +27,9 @@ namespace CRS.CUSTOMER.SHARED.BookmarkManagement
         public string ClubTimePeriod { get; set; }
         public string IsBookmarked { get; set; }
         public int TotalComment { get; set; }
+        public string ClubCategory { get; set; }
+        public string Landlind { get; set; }
+
         public int AverageRating { get; set; }
         public List<string> ClubGalleryImage { get; set; } = new List<string>();
         public List<string> HostGalleryImage { get; set; } = new List<string>();
