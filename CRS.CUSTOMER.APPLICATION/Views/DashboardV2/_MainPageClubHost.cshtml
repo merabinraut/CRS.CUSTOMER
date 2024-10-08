@@ -477,7 +477,10 @@
                                 <p class="club_kana">@item.ClubNameJapanese</p>
                                 <!-- e/club kana -->
                                 <!-- s/club group -->
-                                <p class="club_group">@item.GroupName</p>
+                                @if (!string.IsNullOrEmpty(item.GroupName))
+                                {
+                                    <p class="club_group">@item.GroupName</p>
+                                }
                                 <!-- e/club group -->
                             </div>
                             <!-- e/club info -->
@@ -540,7 +543,10 @@
                         </div>
                         <!-- e/club rate -->
                         <!-- s/club pr -->
-                        <p class="club_pr"> @item.ClubDescription</p>
+                        @if (!string.IsNullOrEmpty(item.ClubDescription))
+                        {
+                            <p class="club_pr"> @item.ClubDescription</p>
+                        }
                         <!-- e/club pr -->
                     </a>
                     <!-- e/link -->
