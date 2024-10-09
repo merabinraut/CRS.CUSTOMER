@@ -65,6 +65,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchV2
         public string GroupName { get; set; }
         public int TotalComment { get; set; }
         public int AverageRating { get; set; }
+        public string ClubCategory { get; set; }
         public List<string> HostGalleryImage { get; set; } = new List<string>();
         public string TotalClubCount { get; set; }
         public string TotalRecords { get; set; }
