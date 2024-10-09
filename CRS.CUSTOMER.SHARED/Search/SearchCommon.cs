@@ -38,6 +38,8 @@ namespace CRS.CUSTOMER.SHARED.Search
         public string GroupName { get; set; }
         public int TotalComment { get; set; }
         public int AverageRating { get; set; }
+        public string LandLine { get; set; }
+        public string ClubCategory { get; set; }
         public List<string> HostGalleryImage { get; set; } = new List<string>();
         public string TotalRecords { get; set; }
 
