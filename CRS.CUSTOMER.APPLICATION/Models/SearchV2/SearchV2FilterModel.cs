@@ -65,6 +65,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchV2
         public string GroupName { get; set; }
         public int TotalComment { get; set; }
         public int AverageRating { get; set; }
+        public string ClubCategory { get; set; }
         public List<string> HostGalleryImage { get; set; } = new List<string>();
         public string TotalClubCount { get; set; }
         public string TotalRecords { get; set; }
@@ -99,7 +100,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.SearchV2
     {
         public List<DashboardV2HostDetailModel> FilteredHostModel { get; set; } = new List<DashboardV2HostDetailModel>();
         public List<DashboardV2HostDetailModel> HostRecommendationModel { get; set; } = new List<DashboardV2HostDetailModel>();
-        public HostSearchFilterRequestModel RequestModel { get; set; }
+        public HostSearchFilterRequestModel RequestModel { get; set; } = new HostSearchFilterRequestModel();
     }
     #endregion
 
