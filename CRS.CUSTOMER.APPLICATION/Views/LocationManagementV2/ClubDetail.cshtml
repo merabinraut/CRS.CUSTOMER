@@ -148,6 +148,21 @@
         padding: 8px 0px 8px 12px;
         gap: 2px;
     }
+
+    .available {
+        width: 100%;
+        height: auto;
+        /*margin: 5px 0 0 0;*/
+        /* padding: 1.4px;*/
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border-radius: 3px;
+        background: #d4b78a;
+    }
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
@@ -1766,14 +1781,14 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
     <div>
         @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod))
         {
-            <div class="flex justify-center items-center gap-1 pb-1">
+            <div class="flex justify-center items-center gap-1">
                 @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "DAY")
                 {
-                    <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="~/Content/assets/images/customer/sun.svg" alt="夜" style="margin-right: 5px; margin-bottom: 2px"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
+                    <div class="text-sm text-secondary-1 flex justify-center items-center font-medium leading-[100%]"><img src="~/Content/assets/images/customer/sun.svg" alt="夜" style="margin-right: 5px; margin-bottom: 2px"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
                 }
                 else if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                 {
-                    <div class="text-sm text-secondary-1 flex justify-center items-center"><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
+                    <div class="text-sm text-secondary-1 flex justify-center items-center font-medium leading-[100%]"  ><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
                 }
             </div>
         }
