@@ -459,19 +459,19 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 Session["ReservationPage2Model"] = null;
                 Session["ReservationPage3Model"] = null;
                 Session["ReservationPage4Model"] = null;
-                await _notificationHelper.SendClubNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
-                {
-                    agentId = clubId,
-                    extraId1 = agentId,
-                    notificationType = "Reservation Notification"
-                });
+                //await _notificationHelper.SendClubNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
+                //{
+                //    agentId = clubId,
+                //    extraId1 = agentId,
+                //    notificationType = "Reservation Notification"
+                //});
 
-                await _notificationHelper.SendCustomerNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
-                {
-                    agentId = agentId,
-                    extraId1 = dbResponse.Extra1,
-                    notificationType = "Reservation Notification"
-                });
+                //await _notificationHelper.SendCustomerNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
+                //{
+                //    agentId = agentId,
+                //    extraId1 = dbResponse.Extra1,
+                //    notificationType = "Reservation Notification"
+                //});
                 return Redirect("/reservation/complete");
             }
             else
