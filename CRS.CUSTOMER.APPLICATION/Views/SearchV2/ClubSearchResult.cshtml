@@ -274,37 +274,53 @@
                         <!-- s/link -->
                         <a onclick="ClubDetailRedirectFunction('@item.ClubCode', '@item.LocationURL')">
                             <!-- s/club_tag -->
-                            <ul class="club_tags">
-                                @if (!string.IsNullOrEmpty(@item.Tag1))
-                                {
-                                    <!-- s/tag -->
-                                    <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
+                            @if (item.ClubCategory.Trim().ToUpper() == "P")
+                            {
+                                <ul class="club_tags">
+                                    @if (!string.IsNullOrEmpty(@item.Tag1))
+                                    {
+                                        <!-- s/tag -->
+                                        <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
+                                        <!-- e/tag -->
+                                    }
+                                    @if (!string.IsNullOrEmpty(@item.Tag2))
+                                    {
+                                        <!-- s/tag -->
+                                        <li class="tag_rank">ランク @item.Tag2</li>
+                                    }
                                     <!-- e/tag -->
-                                }
-                                @if (!string.IsNullOrEmpty(@item.Tag2))
-                                {
                                     <!-- s/tag -->
-                                    <li class="tag_rank">ランク @item.Tag2</li>
-                                }
-                                <!-- e/tag -->
-                                <!-- s/tag -->
-                                @if (!string.IsNullOrEmpty(@item.Tag3))
-                                {
-                                    <li class="tag_platinum">  @item.Tag3</li>
-                                }
+                                    @if (!string.IsNullOrEmpty(@item.Tag3))
+                                    {
+                                        <li class="tag_platinum">  @item.Tag3</li>
+                                    }
 
-                                @if (!string.IsNullOrEmpty(@item.Tag4))
-                                {
+                                    @if (!string.IsNullOrEmpty(@item.Tag4))
+                                    {
+                                        <!-- e/tag -->
+                                        <!-- s/tag -->
+                                        <li class="tag_good">@item.Tag4</li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(@item.Tag5))
+                                    {
+                                        <li class="tag_big">  @item.Tag5</li>
+                                    }
+
+
                                     <!-- e/tag -->
-                                    <!-- s/tag -->
-                                    <li class="tag_good">@item.Tag4</li>
-                                }
-                                @if (!string.IsNullOrEmpty(@item.Tag5))
-                                {
-                                    <li class="tag_big">  @item.Tag5</li>
-                                }
-                                <!-- e/tag -->
-                            </ul>
+                                </ul>
+                            }
+                            else
+                            { <ul class="club_tags">
+                                    @if (!string.IsNullOrEmpty(@item.Tag1))
+                                    {
+                                        <!-- s/tag -->
+                                        <li class="tag_location"><img class="map_pin" src="~/Content/assets/images/location_icon.svg" alt="ピン"> @item.Tag1</li>
+                                        <!-- e/tag -->
+                                    }
+                                </ul>
+
+                            }
                             <!-- e/club_tag -->
                             <!-- s/club header -->
                             <div class="club_header">
@@ -348,46 +364,54 @@
                                 <!-- e/club thumb -->
                             </ul>
                             <!-- e/thumb area -->
-                            <!-- s/club rate -->
-                            <div class="club_rate">
-                                <!-- s/club rank -->
-                                <ul class="rate_stars">
-                                    <!-- s/rank star -->
-                                    @{
-                                        var unratedScale = (5 - item.AverageRating);
-                                        for (int i = 0; i < item.AverageRating; i++)
-                                        {
-                                            <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
+                            @if (item.ClubCategory.Trim().ToUpper() == "P")
+                            {
+                                <!-- s/club rate -->
+                                <div class="club_rate">
+                                    <!-- s/club rank -->
+                                    <ul class="rate_stars">
+                                        <!-- s/rank star -->
+                                        @{
+                                            var unratedScale = (5 - item.AverageRating);
+                                            for (int i = 0; i < item.AverageRating; i++)
+                                            {
+                                                <li><img src="~/Content/assets/images/ratingstar-filled.svg" alt="未評価"></li>
+                                            }
+                                            for (int i = 0; i < unratedScale; i++)
+                                            {
+                                                <!-- e/rank star -->
+                                                <!-- s/rank star -->
+                                                <li><img src="~/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>
+                                            }
                                         }
-                                        for (int i = 0; i < unratedScale; i++)
-                                        {
-                                            <!-- e/rank star -->
-                                            <!-- s/rank star -->
-                                            <li><img src="~/Content/assets/images/ratingstar-notfilled.svg" alt="未評価"></li>
-                                        }
-                                    }
-                                    <!-- e/rank star -->
-                                    <!-- s/rank star -->
-                                    <!-- e/rank star -->
-                                    <!-- s/rank star -->
-                                    <li class="rate_value"> @item.AverageRating</li>
-                                    <!-- e/rank star -->
-                                </ul>
-                                <!-- e/club rank -->
-                                <!-- s/club review -->
-                                <ul class="rate_review">
-                                    <!-- s/comment frame -->
-                                    <li><img src="~/Content/assets/images/comment.svg" alt="コメント"></li>
-                                    <!-- e/comment frame -->
-                                    <!-- s/comment value -->
-                                    <li class="comment_value">@item.TotalComment</li>
-                                    <!-- e/comment value -->
-                                </ul>
-                                <!-- e/club review -->
-                            </div>
+                                        <!-- e/rank star -->
+                                        <!-- s/rank star -->
+                                        <!-- e/rank star -->
+                                        <!-- s/rank star -->
+                                        <li class="rate_value"> @item.AverageRating</li>
+                                        <!-- e/rank star -->
+                                    </ul>
+                                    <!-- e/club rank -->
+                                    <!-- s/club review -->
+                                    <ul class="rate_review">
+                                        <!-- s/comment frame -->
+                                        <li><img src="~/Content/assets/images/comment.svg" alt="コメント"></li>
+                                        <!-- e/comment frame -->
+                                        <!-- s/comment value -->
+                                        <li class="comment_value">@item.TotalComment</li>
+                                        <!-- e/comment value -->
+                                    </ul>
+                                    <!-- e/club review -->
+                                </div>
+                            }
+
                             <!-- e/club rate -->
                             <!-- s/club pr -->
-                            <p class="club_pr"> @item.ClubDescription</p>
+                            @if (!string.IsNullOrEmpty(@item.ClubDescription))
+                            {
+
+                                <p class="club_pr"> @item.ClubDescription</p>
+                            }
                             <!-- e/club pr -->
                         </a>
                         <!-- e/link -->
