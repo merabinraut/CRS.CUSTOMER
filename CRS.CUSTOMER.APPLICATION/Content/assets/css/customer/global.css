@@ -1,7 +1,6 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
 
 :root {
-    /*    font-family: "yu-gothic-pr6n", sans-serif;*/
     /*font-family: 'Noto Sans JP', sans-serif;*/
 
     font-family: 'Noto Sans JP';
@@ -25,11 +24,7 @@
     --borderColor: #f1f1f1;
 }
 
-/*@font-face {
-    font-family: "yu-gothic-pr6n", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}*/
+
 
 body {
     padding: 0;
@@ -41,10 +36,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    /*overscroll-behavior: none;*/
-    /*    touch-action: pan-y;
-    -webkit-overflow-scrolling: touch;*/
-    /* overflow-y: auto;*/
+   
 }
 
     body::-webkit-scrollbar {
