@@ -1939,6 +1939,7 @@ p.club_pr {
     display: flex;
     justify-content: space-between;
     border-top: 1px solid #e5e7eb;
+    gap:12px;
 }
 
 .club_status {
