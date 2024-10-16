@@ -1269,7 +1269,7 @@
         }
 
         function ClubDetailRedirectFunction(ClubCode, PrefecturesArea) {
-            var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/`;
+            var url = `/area${PrefecturesArea}/hostclub/${encodeURIComponent(ClubCode)}/host`;
             window.location.href = url;
         }</script>
         @RenderSection("scripts", required: false)
