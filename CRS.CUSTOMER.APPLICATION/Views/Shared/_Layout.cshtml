@@ -17,28 +17,28 @@
 }
 @{
     var jsonData = ReadJson("RedirectURLConfiguration.json");
-    var jsonData2 = ReadJson("Configuration.json");
+    //var jsonData2 = ReadJson("Configuration.json");
 }
 
-<script>
-    function base64ToUint8Array(base64) {
-        const binaryString = atob(base64);
-        const len = binaryString.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
+@*<script>
+        function base64ToUint8Array(base64) {
+            const binaryString = atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes;
         }
-        return bytes;
-    }
 
-    let notificationSignalRBaseURL = '@jsonData2.baseURL';
-    let notificationUsername = '@jsonData2.username';
-    let notificationPassword = '@jsonData2.password';
-    let customerId = '@ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter()';
-    let notificationFunctions = ["ReceiveNotificationCount"];
-    let securityKey = base64ToUint8Array('@jsonData2.securityKey');
-    let securityIV = base64ToUint8Array('@jsonData2.securityIV');
-</script>
+        let notificationSignalRBaseURL = '@jsonData2.baseURL';
+        let notificationUsername = '@jsonData2.username';
+        let notificationPassword = '@jsonData2.password';
+        let customerId = '@ApplicationUtilities.GetSessionValue("AgentId").ToString().DecryptParameter()';
+        let notificationFunctions = ["ReceiveNotificationCount"];
+        let securityKey = base64ToUint8Array('@jsonData2.securityKey');
+        let securityIV = base64ToUint8Array('@jsonData2.securityIV');
+    </script>*@
 
 <!-- #region Header -->
 <!DOCTYPE html>
@@ -317,6 +317,12 @@
 
         .modalContentWrapper {
             padding: 0 16px;
+        }
+
+        @@media (max-width: 639px) {
+            #rightcontent {
+                display: none !important;
+            }
         }
 
         @@media (min-width: 640px) {
