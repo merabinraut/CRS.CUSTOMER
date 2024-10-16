@@ -333,6 +333,7 @@
                                     item.classList.remove('active');
                                 }
                             });
+                            window.location.reload();
                         }
                         else {
                             toastr.info(result.Message);
@@ -373,6 +374,7 @@
                             var parentDiv = event.target.closest('.notification-list');
                             if (parentDiv) {
                                 parentDiv.classList.remove('active');
+                                window.location.reload();
                             }
                         } else {
                             window.location.href = notificationURL;
