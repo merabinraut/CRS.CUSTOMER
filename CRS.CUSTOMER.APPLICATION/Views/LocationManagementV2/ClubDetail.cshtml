@@ -49,9 +49,37 @@
         color: #333333;
     }
 
-    .tab-container-plane .active {
+    /*    .tab-container-plane .active {
         border-bottom: 2px solid #E3A1A1;
+    }*/
+
+    .main-tab-container {
+        position: relative;
     }
+
+        .main-tab-container::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 4px;
+            background-color: #EFEFEF;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+    .tab-container-plane .active::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 4px;
+        background-color: #E3A1A1;
+        position: absolute;
+        border-radius: 12px;
+        bottom: 0;
+        left: 1px;
+    }
+
 
     .gallery {
         display: grid;
@@ -153,7 +181,7 @@
         width: 100%;
         height: auto;
         margin: 0 0 0 0;
-         padding: 0px;
+        padding: 0px;
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -419,7 +447,7 @@ else
 @if (Model.ClubCategory.Trim().ToUpper() == "P")
 {
     <div class="">
-        <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
+        <div class="flex px-[16px] gap-[24px] main-tab-container" >
             <div class="flex tab-container-plane no-scrollbar bg-white gap-[4px] overflow-x-auto" style="overflow-y:hidden">
                 <a id="tab2Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "host" ? "active" : "")" style="font-size: 12px;" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/host")">スタッフ</a>
                 <a id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "" ? "active" : "")" style="font-size:12px;" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/")">店舗詳細</a>
@@ -434,7 +462,8 @@ else
 else if (Model.ClubCategory.Trim().ToUpper() == "B")
 {
     <div class="">
-        <div class="flex px-[16px] gap-[24px]" style="border-bottom: 4px solid #EFEFEF;">
+        <div class="flex px-[16px] gap-[24px] main-tab-container"
+             @*style="border-bottom: 4px solid #EFEFEF;"*@>
             <div class="flex tab-container-plane no-scrollbar bg-white gap-[4px] overflow-x-auto" style="overflow-y:hidden">
                 <a id="tab2Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "host" ? "active" : "")" style="font-size: 12px;" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/host")">スタッフ</a>
                 <a id="tab1Button" class="tab-button-plane tab-link whitespace-nowrap @(target == "" ? "active" : "")" style="font-size:12px;" href="@($"/area{PrefecturesArea}/hostclub/{ViewBag.ClubId}/")">店舗詳細</a>
@@ -1787,7 +1816,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                 }
                 else if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "NIGHT")
                 {
-                    <div class="text-sm text-secondary-1 flex justify-center items-center font-medium leading-[100%]"  ><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
+                    <div class="text-sm text-secondary-1 flex justify-center items-center font-medium leading-[100%]"><img src="/Content/assets/images/customer/moon.svg" alt="夜" style="margin-right:5px; margin-bottom:2px">@Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
                 }
             </div>
         }
