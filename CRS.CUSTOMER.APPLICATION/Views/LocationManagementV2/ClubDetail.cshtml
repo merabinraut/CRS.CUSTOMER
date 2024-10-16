@@ -139,6 +139,7 @@
         letter-spacing: 0.56px;
         line-height: 150%;
         height: 40px;
+        flex-grow:1;
     }
 
     .blocked-btn {
@@ -1800,7 +1801,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
 </div>
 <!-- for position stickey at the bottom -->
 <div class="responsiveModalPopup pl-[16px] pr-[16px] pt-[12px] fixed bottom-0  flex justify-between items-center  bg-[#FAFAFA] w-full "
-     style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); padding-bottom: 10px; z-index:1000" id="club-bottom-tab-id">
+     style="box-shadow: 0px 0px 8px 0px rgba(85, 93, 101, 0.25); gap:12px; padding-bottom: 10px; z-index:1000" id="club-bottom-tab-id">
     <div class="share-button-floating" id="shareButton">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M16.4355 4L15.375 5.00277L18.501 7.9446H11.25C8.976 7.9446 7.125 9.69405 7.125 11.8449C7.125 13.9957 8.976 15.7452 11.25 15.7452H11.625V14.3269H11.25C9.8025 14.3269 8.625 13.2135 8.625 11.8449C8.625 10.4762 9.8025 9.36288 11.25 9.36288H18.5039L15.3809 12.3158L16.4414 13.3186L21.375 8.65374L16.4355 4ZM2.625 4.39889V20H19.125V12.9086L17.625 14.3269V18.5817H4.125V5.81717H12.2651L13.7651 4.39889H2.625Z" fill="#D75A8B" />
@@ -1809,7 +1810,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
     <div>
         @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod))
         {
-            <div class="flex justify-center items-center gap-1">
+            <div class="flex justify-center items-center gap-1 whitespace-nowrap">
                 @if (!string.IsNullOrEmpty(Model.GetClubBasicInformation.ClubTimePeriod) && Model.GetClubBasicInformation.ClubTimePeriod.Trim().ToUpper() == "DAY")
                 {
                     <div class="text-sm text-secondary-1 flex justify-center items-center font-medium leading-[100%]"><img src="~/Content/assets/images/customer/sun.svg" alt="夜" style="margin-right: 5px; margin-bottom: 2px"> @Model.GetClubBasicInformation.ClubOpeningTime &#xff5e; @Model.GetClubBasicInformation.ClubClosingTime</div>
@@ -1859,8 +1860,8 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
     }
     else if (Model.ClubCategory.Trim().ToUpper() == "P")
     {
-        <button class=" flex justify-center items-center gap-[1px] px-[20px] py-[10px] rounded"
-                style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%);" data-drawer-placement="bottom" aria-controls="drawer-bottom-example" onclick="InitiateClubReservationFunction('@Model.ClubId')">
+        <button class=" flex justify-center items-center gap-[1px] px-[20px] py-[10px] rounded whitespace-nowrap"
+                style="background: linear-gradient(96deg, #99AEFB 10%, #F04AA4 61.32%, #E7B282 98.78%); flex-grow:1" data-drawer-placement="bottom" aria-controls="drawer-bottom-example" onclick="InitiateClubReservationFunction('@Model.ClubId')">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M5.625 3.125V3.75H3.125V17.5H16.875V3.75H14.375V3.125H13.125V3.75H6.875V3.125H5.625ZM4.375 5H5.625V5.625H6.875V5H13.125V5.625H14.375V5H15.625V6.25H4.375V5ZM4.375 7.5H15.625V16.25H4.375V7.5ZM9.375 8.75V11.25H6.875V12.5H9.375V15H10.625V12.5H13.125V11.25H10.625V8.75H9.375Z"
                       fill="white" />
