@@ -93,6 +93,7 @@ namespace CRS.CUSTOMER.SHARED.LocationManagement
         public string Tax { get; set; }
         public string LastOrderTime { get; set; }
         public string WebsiteLink { get; set; }
+        public string LocationURL { get; set; }
         public string ClubTimePeriod { get; set; }
         public string TodaysClubSchedule { get; set; }
         public string ClubClosingDate { get; set; }

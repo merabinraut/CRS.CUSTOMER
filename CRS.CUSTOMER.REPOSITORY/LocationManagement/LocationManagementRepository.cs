@@ -336,7 +336,9 @@ namespace CRS.CUSTOMER.REPOSITORY.LocationManagement
                     ClubTimePeriod = _dao.ParseColumnValue(dbResponseInfo, "ClubTimePeriod").ToString(),
                     TodaysClubSchedule = _dao.ParseColumnValue(dbResponseInfo, "TodaysClubSchedule").ToString(),
                     ClubClosingDate = _dao.ParseColumnValue(dbResponseInfo, "ClubClosingDate").ToString(),
-                    ClubCategory = _dao.ParseColumnValue(dbResponseInfo, "ClubCategory").ToString()
+                    ClubCategory = _dao.ParseColumnValue(dbResponseInfo, "ClubCategory").ToString(),
+                    LocationURL = _dao.ParseColumnValue(dbResponseInfo, "LocationURL").ToString(),
+
                 };
             }
             return new ClubBasicInformationModelCommon();

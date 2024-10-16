@@ -290,9 +290,12 @@
                                     <!-- e/club review -->
                                 </div>
                                 <!-- e/club rate -->
-                                <!-- s/club pr -->
-                                <p class="club_pr"> @item.ClubDescription</p>
-                                <!-- e/club pr -->
+                                @if (!string.IsNullOrEmpty(item.ClubDescription))
+                                {
+                                    <!-- s/club pr -->
+                                    <p class="club_pr"> @item.ClubDescription</p>
+                                    <!-- e/club pr -->
+                                }
                             </a>
                             <!-- e/link -->
                             <!-- s/club footer -->

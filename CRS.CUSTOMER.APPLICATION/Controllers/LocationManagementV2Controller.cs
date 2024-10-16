@@ -225,6 +225,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 {
                     if (!responseModel.GetClubBasicInformation.WebsiteLink.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.WebsiteLink = "https://" + responseModel.GetClubBasicInformation.WebsiteLink;
                 }
+                if (!string.IsNullOrEmpty(responseModel.GetClubBasicInformation.LocationURL) && responseModel.GetClubBasicInformation.LocationURL != "#")
+                {
+                    if (!responseModel.GetClubBasicInformation.LocationURL.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) responseModel.GetClubBasicInformation.LocationURL = "https://" + responseModel.GetClubBasicInformation.LocationURL;
+                }
                 var ClubName = !string.IsNullOrEmpty(responseModel.ClubNameJp) ? responseModel.ClubNameJp : responseModel.ClubNameEng;
                 #region TAB
                 #region TAB 2
