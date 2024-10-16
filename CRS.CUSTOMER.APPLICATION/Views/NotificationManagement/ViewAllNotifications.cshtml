@@ -72,7 +72,7 @@
                         @if (hasUnreadNotification)
                         {
                             hasUnreadNotification = false;
-                            <div class="flex gap-1 items-center text-primary cursor-pointer" id="markAllRead" onclick="ManageSingleNotificationReadStatus('', '#', this);">
+                            <div class="flex gap-1 items-center text-primary cursor-pointer" id="markAllRead" onclick="ManageNotificationReadStatus();">
                                 <img src="~/Content/assets/images/double-check.svg" alt="check">@CRS.CUSTOMER.APPLICATION.Resources.Resource.MarkAllAsRead
                             </div>
                         }
@@ -87,7 +87,7 @@
                                     activeClassName = (!string.IsNullOrEmpty(item.NotificationReadStatus) && item.NotificationReadStatus.Trim().ToUpper() == "P") ? "active" : "";
                                     if (item.NotificationType == "レビュー")
                                     {
-                                        <div onclick="Modal('@item.NotificationURL','@item.NotificationImage')">
+                                        <div onclick="Modal('@item.NotificationURL','@item.NotificationImage', '@item.ExtraDetails')">
                                             <div class="flex justify-between items-center notification-list @activeClassName" id="single_unread_status" data-id="@item.NotificationId">
                                                 <div class="flex gap-3 w-max ">
                                                     <div class="flex-none">
@@ -249,12 +249,12 @@
             <input type="hidden" value="" id="notification_image">
             <div class=" bg-white rounded-[6px]" style="padding-top:38px;">
                 <div class="grid justify-center text-center pb-[37px]">
-                    <div class="text-[10px] text-warmgray-1 flex gap-1 justify-center">
+                    <div class="text-[10px] text-warmgray-1 flex gap-1 justify-center" id="location">
                         <i class="fa-solid fa-location-dot text-primaryDark"></i>歌舞伎町
                     </div>
-                    <div class="font-bold">ACQUA FUKUOKA</div>
-                    <div class="text-xs pb-[6px] text-warmgray-2">アクアフクオカ</div>
-                    <div class="text-[11px] bg-creamy-secondary rounded-[2px] py-[6px] px-[14px]">来店日：@ViewBag.CreatedDate</div>
+                    <div class="font-bold" id="clubnameenglish">ACQUA FUKUOKA</div>
+                    <div class="text-xs pb-[6px] text-warmgray-2" id="clubnamejapanese">アクアフクオカ</div>
+                    <div class="text-[11px] bg-creamy-secondary rounded-[2px] py-[6px] px-[14px]" id="vistidate">来店日：</div>
                 </div>
                 <div class="flex justify-center items-center pb-[10px]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="21" viewBox="0 0 15 21" fill="none">
@@ -333,6 +333,7 @@
                                     item.classList.remove('active');
                                 }
                             });
+                            window.location.reload();
                         }
                         else {
                             toastr.info(result.Message);
@@ -355,7 +356,7 @@
         }
         function ManageSingleNotificationReadStatus(id, notificationURL, event) {
             $.ajax({
-                url: '/NotificationManagement/ManageNotificationReadStatus',
+                url: '/NotificationManagement/ManageSingleNotificationReadStatus',
                 type: 'POST',
                 data: {
                     __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
@@ -373,6 +374,7 @@
                             var parentDiv = event.target.closest('.notification-list');
                             if (parentDiv) {
                                 parentDiv.classList.remove('active');
+                                window.location.reload();
                             }
                         } else {
                             window.location.href = notificationURL;
@@ -388,9 +390,19 @@
             });
         }
 
-        function Modal(notificationUrl, notificationImage) {
+        function Modal(notificationUrl, notificationImage, extraDetails) {
             $('#notification_modal').val(notificationUrl);
             document.getElementById('image').src = notificationImage;
+            const splitData = extraDetails.split(',');
+
+            const img = document.getElementById('image');
+            img.src = splitData[0];
+
+            const locationDiv = document.getElementById('location');
+            locationDiv.innerHTML = ' <i class="fa-solid fa-location-dot text-primaryDark"></i>' + splitData[1];
+            document.getElementById('clubnameenglish').innerText = splitData[2];
+            document.getElementById('clubnamejapanese').innerText = splitData[3];
+            document.getElementById('vistidate').innerText = '来店日：' + splitData[4];
             openModal('defaultModal');
         }
         $('#notification_url').click('click', function () {
