@@ -5,7 +5,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Search
 {
     public interface ISearchRepository
     {
-        List<SearchFilterClubDetailCommon> GetNewClub(string LocationId, string CustomerId);
+        List<SearchFilterClubDetailCommon> GetNewClub(string LocationId, string CustomerId, ClubPreferenceFilterRequest dbRequest);
         List<SearchFilterClubDetailCommon> ClubPreferenceFilter(ClubPreferenceFilterRequest Request);
         List<HostPreferenceFilterResponse> HostPreferenceFilter(HostPreferenceFilterRequest Request);
         List<SearchFilterClubDetailCommon> ClubFilterViewDateTimeAndOthers(ClubDateTimeAndOtherFilterRequest Request);

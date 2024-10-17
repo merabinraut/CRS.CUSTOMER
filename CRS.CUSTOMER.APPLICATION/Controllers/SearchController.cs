@@ -43,7 +43,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             });
             if (NewClub)
             {
-                var dbResponse = _searchBusiness.GetNewClub(lId, CustomerId);
+                var dbResponse = _searchBusiness.GetNewClub(lId, CustomerId, null);
                 Response.FilteredClubModel = dbResponse.MapObjects<SearchFilterClubDetailModel>();
             }
             else
@@ -151,7 +151,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             if (NewHost)
             {
-                var dbHostResponse = _dashboardBusiness.GetNewHost(lId, CustomerId);
+                var dbHostResponse = _dashboardBusiness.GetNewHost(lId, CustomerId,null);
                 Response.FilteredHostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
             }
             else
@@ -205,7 +205,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dbClubResponse = _dashboardBusiness.GetNewClub(lId, CustomerId, "1");
             Response.ClubModel = dbClubResponse.MapObjects<DashboardV2ClubDetailModel>();
             Response.ClubModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); });
-            var dbHostResponse = _dashboardBusiness.GetNewHost(lId, CustomerId, "1");
+            var dbHostResponse = _dashboardBusiness.GetNewHost(lId, CustomerId,null, "1");
             Response.HostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
             Response.HostModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.HostId = x.HostId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo); });
             var ClubDetailMapModel = new List<ClubMapDetailModel>();
@@ -271,7 +271,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             });
             if (NewClub)
             {
-                var dbResponse = _searchBusiness.GetNewClub(lId, CustomerId);
+                var dbResponse = _searchBusiness.GetNewClub(lId, CustomerId,null);
                 Response.FilteredClubModel = dbResponse.MapObjects<SearchFilterClubDetailModel>();
             }
             else
@@ -328,7 +328,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             if (NewHost)
             {
-                var dbHostResponse = _dashboardBusiness.GetNewHost(lId, CustomerId);
+                var dbHostResponse = _dashboardBusiness.GetNewHost(lId, CustomerId, null);
                 Response.FilteredHostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
             }
             else

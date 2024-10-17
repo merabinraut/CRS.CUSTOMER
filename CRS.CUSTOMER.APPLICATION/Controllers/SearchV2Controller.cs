@@ -68,7 +68,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     var dbClubResponse = _dashboardBusiness.GetNewClub(locationId, CustomerId, "1");
                     Response.SearchV2FilterNewTabModel.ClubModel = ApplicationUtilities.MapObjects<DashboardV2ClubDetailModel>(dbClubResponse);
                     Response.SearchV2FilterNewTabModel.ClubModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); });
-                    var dbHostResponse = _dashboardBusiness.GetNewHost(locationId, CustomerId, "1");
+                    var dbHostResponse = _dashboardBusiness.GetNewHost(locationId, CustomerId, null, "1");
                     Response.SearchV2FilterNewTabModel.HostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
                     Response.SearchV2FilterNewTabModel.HostModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.HostId = x.HostId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo); });
                 }
@@ -203,7 +203,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     if (NewHost)
                     {
                         ViewBag.target = "new";
-                        var dbHostResponse = _dashboardBusiness.GetNewHost(locationId, CustomerId);
+                        var dbRequest = new HostPreferenceFilterRequest
+                        {
+                            Skip = HostTabRequest.StartIndex,
+                            Take = HostTabRequest.PageSize,
+                        };
+                        var dbHostResponse = _dashboardBusiness.GetNewHost(locationId, CustomerId, dbRequest);
                         Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
                         ViewBag.StartIndex = HostTabRequest.StartIndex;
                         ViewBag.TotalRecords = (Response.FilteredHostModel.Count > 0 && !string.IsNullOrEmpty(Response.FilteredHostModel.FirstOrDefault().TotalRecords)) ? Convert.ToInt32(Response.FilteredHostModel.FirstOrDefault().TotalRecords) : 0;
@@ -256,7 +261,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     if (NewClub)
                     {
                         ViewBag.target = "new";
-                        var dbResponse = _searchBusiness.GetNewClub(locationId, CustomerId);
+                        ViewBag.TypeValue = "new";
+                        var dbRequest = new ClubPreferenceFilterRequest
+                        {
+                            Skip = ClubTabRequest.StartIndex,
+                            Take = ClubTabRequest.PageSize
+                        };
+                        var dbResponse = _searchBusiness.GetNewClub(locationId, CustomerId, dbRequest);
                         Response.FilteredClubModel = ApplicationUtilities.MapObjects<CRS.CUSTOMER.APPLICATION.Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
                     }
                     else
@@ -322,7 +333,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     if (NewHost)
                     {
                         ViewBag.scftab = "03";
-                        var dbHostResponse = _dashboardBusiness.GetNewHost(locationId, CustomerId);
+                        ViewBag.TypeValue = "03";
+                        var dbRequest = new HostPreferenceFilterRequest
+                        {
+                            Skip = HostTabRequest.StartIndex,
+                            Take = HostTabRequest.PageSize,
+                        };
+                        var dbHostResponse = _dashboardBusiness.GetNewHost(locationId, CustomerId, dbRequest);
                         Response.FilteredHostModel = ApplicationUtilities.MapObjects<DashboardV2HostDetailModel>(dbHostResponse);
 
                         ViewBag.StartIndex = HostTabRequest.StartIndex;
@@ -377,7 +394,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     if (NewClub)
                     {
                         ViewBag.scftab = "03";
-                        var dbResponse = _searchBusiness.GetNewClub(locationId, CustomerId);
+                        ViewBag.TypeValue = "03";
+                        var dbRequest = new ClubPreferenceFilterRequest
+                        {
+                            Skip = ClubTabRequest.StartIndex,
+                            Take = ClubTabRequest.PageSize
+                        };
+                        var dbResponse = _searchBusiness.GetNewClub(locationId, CustomerId, dbRequest);
                         Response.FilteredClubModel = ApplicationUtilities.MapObjects<Models.SearchV2.SearchFilterClubDetailModel>(dbResponse);
                     }
                     else

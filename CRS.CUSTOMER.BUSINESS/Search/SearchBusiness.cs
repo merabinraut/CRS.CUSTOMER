@@ -9,9 +9,9 @@ namespace CRS.CUSTOMER.BUSINESS.Search
         private readonly ISearchRepository _repo;
         public SearchBusiness(SearchRepository repo) => (_repo) = _repo = repo;
 
-        public List<SearchFilterClubDetailCommon> GetNewClub(string LocationId, string CustomerId)
+        public List<SearchFilterClubDetailCommon> GetNewClub(string LocationId, string CustomerId, ClubPreferenceFilterRequest dbRequest)
         {
-            return _repo.GetNewClub(LocationId, CustomerId);
+            return _repo.GetNewClub(LocationId, CustomerId, dbRequest);
         }
 
         public List<SearchFilterClubDetailCommon> ClubPreferenceFilter(ClubPreferenceFilterRequest Request)

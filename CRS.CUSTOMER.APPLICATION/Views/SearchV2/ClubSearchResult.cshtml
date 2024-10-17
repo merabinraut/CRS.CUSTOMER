@@ -630,8 +630,11 @@
         var prefecturesArea = "@ViewBag.PrefecturesArea";
         var typeValue = "";
         if ("@ViewBag.TypeValue" == "true") {
-            var typeValue = "";
-        } else {
+             typeValue = "";
+        } else if ("@ViewBag.TypeValue" == "03") {
+            typeValue ="scftab=03&NewClub=true"
+        }
+        else {
             typeValue = "scftab=01";
         }
 

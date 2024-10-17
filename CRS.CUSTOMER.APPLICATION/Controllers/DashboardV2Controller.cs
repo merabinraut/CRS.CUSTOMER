@@ -261,7 +261,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             var dbClubResponse = _dashboardBusiness.GetNewClub(lId, CustomerId, "1");
             Response.ClubModel = dbClubResponse.MapObjects<DashboardV2ClubDetailModel>();
             Response.ClubModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); });
-            var dbHostResponse = _dashboardBusiness.GetNewHost(lId, CustomerId, "1");
+            var dbHostResponse = _dashboardBusiness.GetNewHost(lId, CustomerId, null, "1");
             Response.HostModel = dbHostResponse.MapObjects<DashboardV2HostDetailModel>();
             Response.HostModel.ForEach(x => { x.ClubId = x.ClubId.EncryptParameter(); x.HostId = x.HostId.EncryptParameter(); x.ClubLocationId = x.ClubLocationId.EncryptParameter(); x.ClubLogo = ImageHelper.ProcessedImage(x.ClubLogo); x.HostLogo = ImageHelper.ProcessedImage(x.HostLogo); });
 

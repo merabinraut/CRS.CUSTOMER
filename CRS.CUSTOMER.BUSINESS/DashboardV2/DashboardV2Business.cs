@@ -15,9 +15,9 @@ namespace CRS.CUSTOMER.BUSINESS.DashboardV2
             return _repo.GetNewClub(LocationId, CustomerId, Type);
         }
 
-        public List<HostDetailCommon> GetNewHost(string LocationId, string CustomerId, string Type = "")
+        public List<HostDetailCommon> GetNewHost(string LocationId, string CustomerId, HostPreferenceFilterRequest dbRequest, string Type = "")
         {
-            return _repo.GetNewHost(LocationId, CustomerId, Type);
+            return _repo.GetNewHost(LocationId, CustomerId, dbRequest, Type);
         }
         #region CLUB AVAILABILITY
         public List<ClubAvailabilityDetailCommon> GetAvailabilityClub(string LocationId, string CustomerId, string AvailabilityType, ClubPreferenceFilterRequest Request)
