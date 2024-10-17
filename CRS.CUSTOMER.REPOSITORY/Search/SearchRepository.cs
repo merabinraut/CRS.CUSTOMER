@@ -11,11 +11,14 @@ namespace CRS.CUSTOMER.REPOSITORY.Search
         private readonly RepositoryDao _dao;
         public SearchRepository() => (_dao) = new RepositoryDao();
 
-        public List<SearchFilterClubDetailCommon> GetNewClub(string LocationId, string CustomerId)
+        public List<SearchFilterClubDetailCommon> GetNewClub(string LocationId, string CustomerId, ClubPreferenceFilterRequest dbRequest)
         {
             var Response = new List<SearchFilterClubDetailCommon>();
             string SQL = $"EXEC sproc_cp_dashboard_v2 @flag='4', @LocationId = {_dao.FilterString(LocationId)}" +
                $",@CustomerId = {_dao.FilterString(CustomerId)}";
+            SQL += ",@Skip=" + dbRequest.Skip;
+            SQL += ",@Take=" + dbRequest.Take;
+
             var dbResponse = _dao.ExecuteDataTable(SQL);
             if (dbResponse != null && dbResponse.Rows.Count > 0)
             {
@@ -62,7 +65,7 @@ namespace CRS.CUSTOMER.REPOSITORY.Search
             var Response = new List<SearchFilterClubDetailCommon>();
             string SQL = $"EXEC sproc_cp_search_filter_management @Flag = '1', @LocationId= {_dao.FilterString(Request.LocationId)}, @ClubCategory= {_dao.FilterString(Request.ClubCategory)}, @Price= {_dao.FilterString(Request.Price)}, @Shift = {_dao.FilterString(Request.Shift)}, @Time= {_dao.FilterString(Request.Time)}, @ClubAvailability = {_dao.FilterString(Request.ClubAvailability)}, @CustomerId = {_dao.FilterString(Request.CustomerId)}" +
                 $"{(!string.IsNullOrEmpty(Request.SearchFilter) ? $", @SearchFilter = N{_dao.FilterString(Request.SearchFilter)}" : "")}";
-                       
+
             SQL += ",@Skip=" + Request.Skip;
             SQL += ",@Take=" + Request.Take;
 
