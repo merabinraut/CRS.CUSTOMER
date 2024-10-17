@@ -98,9 +98,7 @@
             </svg>
         </a>
     </div>
-
 </div>
-
 @if (Model.HostRecommendationModel.Count > 0)
 {
 
@@ -139,7 +137,8 @@
                             }
                             <div style="background-color:rgba(0, 0, 0, 0.70);"
                                  class="absolute  w-[112px] h-[35px]  rounded-[2px] flex flex-col   py-[2px] px-[4px]">
-                                <strong class="text-[12px] text-[#FFFFFF] font-bold text-center">@item.HostNameJapanese</strong>
+
+                                <strong class="text-[12px] text-[#FFFFFF] font-bold text-center whitespace-nowrap text-ellipsis " style="white-space:nowrap">@item.HostNameJapanese</strong>
                                 <p style="font-weight:400" class="  flex items-center gap-1 text-[10px] justify-center text-[#FFFFFF]">
                                     <img src="@item.ClubLogo" alt="img"
                                          class="h-[11px] w-[11px] rounded-full" /><span style="overflow:hidden; width:80px;white-space:nowrap;text-overflow:ellipsis">@item.ClubNameEnglish</span>
@@ -192,11 +191,11 @@ else
                         }
                         <div style="background-color:rgba(0, 0, 0, 0.70);"
                              class="absolute  w-[112px] h-[35px]  rounded-[2px] flex flex-col    py-[2px] px-[4px]">
-                            <strong class="text-[12px] text-[#FFFFFF] font-bold text-center">@item.HostNameJapanese</strong>
-                            <p style="font-weight:400" class="  flex items-center gap-1 text-[10px] justify-center text-[#FFFFFF]">
-                                <img src="@item.ClubLogo" alt="img"
+                            <strong class="text-[12px] text-[#FFFFFF] font-bold text-center whitespace-nowrap text-ellipsis">@item.HostNameJapanese</strong>
+                            <p style="font-weight:400" class="  flex items-center gap-1 text-[10px] justify-center  text-[#FFFFFF]">
+                                <img src="@item.ClubLogo" alt="img" height="11" width="11"
                                      class="h-[11px] w-[11px] rounded-full" />
-                                <span style="overflow:hidden; width:80px;white-space:nowrap;text-overflow:ellipsis">
+                                <span style="overflow:hidden; width:max-content;white-space:nowrap;text-overflow:ellipsis">
 
                                     @item.ClubNameEnglish
                                 </span>
