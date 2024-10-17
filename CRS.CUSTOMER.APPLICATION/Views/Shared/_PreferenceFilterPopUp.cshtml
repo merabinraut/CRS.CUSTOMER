@@ -55,6 +55,70 @@
         select::-ms-expand {
             display: none; /* IE10+ and Edge */
         }
+
+
+    /*new */
+
+    /* Container with a bottom border */
+    .tab-container-plane {
+        display: flex;
+        gap: 16px;
+        width: 100%;
+        background-color: white;
+        border-bottom: 4px solid #F4F4F4; /* Border for the entire tab container */
+    }
+
+    /* General button styling */
+    .tab-button-plane-preference {
+        flex: none;
+        padding: 10px 20px;
+        background-color: transparent;
+        color: #333;
+        border: none;
+        cursor: pointer;
+        position: relative; /* For the ::after pseudo-element */
+        font-size: 16px;
+        text-align: center;
+        transition: color 0.3s;
+    }
+
+        /* Active tab with border/underline */
+        .tab-button-plane-preference.active::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 4px;
+            background-color: #E3A1A1;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            border-radius:10px;
+        }
+
+
+    /*new end*/
+    .tab-container-plane .tab-button-plane-preference.active {
+        padding: 15px 4px 13px 4px !important;
+        color: #d75a8b;
+        border-bottom: none !important;
+    }
+
+    .tab-container-plane .active {
+        /* padding: 15px 4px 13px 4px; */
+        color: var(--charcoalBlack);
+        /* border-bottom: 2px solid var(--primary-softrose); */
+    }
+
+        .tab-container-plane .active::before {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            border-radius: 10px;
+            background-color: var(--primary-softrose);
+        }
 </style>
 <!------------------------------------------------------- #region PREFERENCE------------------------------------------------------->
 <!-- drawer component -->
@@ -72,8 +136,8 @@
             <div class="">
                 <div class="bg-[#fff]  ">
                     <div class="sticky top-0 z-10  pt-6 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
-                        <div class="flex gap-[24px] w-full " style="border-bottom: 4px solid #F4F4F4;">
-                            <div class="flex tab-container-plane  bg-white gap-6 w-full text-sm no-scrollbar">
+                        <div class="flex gap-[24px] w-full ">
+                            <div class="flex tab-container-plane  bg-white gap-6 w-full text-sm no-scrollbar" style="border-bottom: 4px solid #F4F4F4;">
                                 <button id="tab1Button"
                                         class="tab-button-plane-preference preferance-tab w-max flex-none tab-link active">
                                     ホストクラブ
