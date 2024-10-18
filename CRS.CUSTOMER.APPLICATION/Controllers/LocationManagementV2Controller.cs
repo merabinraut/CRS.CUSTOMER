@@ -86,6 +86,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     LocationId = locationId,
                     CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter()
                 };
+                if (!string.IsNullOrEmpty(recommendedHostDBRequest.PositionId))
+                {
+                    recommendedHostDBRequest.PositionId = groupWiseData[(Convert.ToInt32(recommendedHostDBRequest.PositionId) - 1)].PositionId;
+                }
                 var dbHostResponse = _recommendedClubHostBuss.GetRecommendedHost(recommendedHostDBRequest);
                 response.HostListModel = dbHostResponse.MapObjects<LocationV2HostListModel>();
                 foreach (var item in response.HostListModel)
