@@ -29,6 +29,8 @@
 
     .preferance > input[type="checkbox"] + label {
         background-color: #fff;
+        /*  border-color: #d75a8b;
+        color: */ /*#d75a8b;*/
     }
 
     img {
@@ -54,74 +56,13 @@
             display: none; /* IE10+ and Edge */
         }
 
-
-    /*new */
-
-    /* Container with a bottom border */
-    .tab-container-plane {
-        display: flex;
-        gap: 16px;
-        width: 100%;
-        background-color: white;
-        border-bottom: 4px solid #F4F4F4; /* Border for the entire tab container */
-    }
-
-    /* General button styling */
-    .tab-button-plane-preference {
-        flex: none;
-        padding: 10px 20px;
-        background-color: transparent;
-        color: #333;
-        border: none;
-        cursor: pointer;
-        position: relative; /* For the ::after pseudo-element */
-        font-size: 16px;
-        text-align: center;
-        transition: color 0.3s;
-    }
-
-        /* Active tab with border/underline */
-        .tab-button-plane-preference.active::after {
-            content: "";
-            display: block;
-            width: 100%;
-            height: 4px;
-            background-color: #E3A1A1;
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            border-radius: 10px;
-        }
-
-
-    /*new end*/
-    .tab-container-plane .tab-button-plane-preference.active {
-        padding: 15px 4px 13px 4px !important;
-        color: #d75a8b;
-        border-bottom: none !important;
-    }
-
-    .tab-container-plane .active {
-        color: var(--charcoalBlack);
-    }
-
-        .tab-container-plane .active::before {
-            content: "";
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            border-radius: 10px;
-            background-color: var(--primary-softrose);
-        }
-
     .input-search::placeholder {
         font-size: 12px;
         line-height: 40px;
         font-weight: 400;
         transform: translateY(-2px)
     }
+
 </style>
 <!------------------------------------------------------- #region PREFERENCE------------------------------------------------------->
 <!-- drawer component -->
@@ -139,8 +80,8 @@
             <div class="">
                 <div class="bg-[#fff]  ">
                     <div class="sticky top-0 z-10  pt-6 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
-                        <div class="flex gap-[24px] w-full ">
-                            <div class="flex tab-container-plane  bg-white gap-6 w-full text-sm no-scrollbar" style="border-bottom: 4px solid #F4F4F4;">
+                        <div class="flex gap-[24px] w-full " style="border-bottom: 4px solid #F4F4F4;">
+                            <div class="flex tab-container-plane  bg-white gap-6 w-full text-sm no-scrollbar">
                                 <button id="tab1Button"
                                         class="tab-button-plane-preference preferance-tab w-max flex-none tab-link active">
                                     ホストクラブ
@@ -172,7 +113,7 @@
                                         </div>
                                         <form method="post" id="club-filter-form-id">
                                             <div class="relative input-search-wrapper h-[40px] my-4 ">
-                                                <div class="absolute inset-y-0 left-0 flex items-center  pl-[16px] pointer-events-none">
+                                                <div class="absolute inset-y-0 left-0 flex items-center pt-[5pxa] pl-[16px] pointer-events-none">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                         <path d="M8.125 1.875C11.5698 1.875 14.375 4.68018 14.375 8.125C14.375 9.62158 13.8501 10.9937 12.9688 12.0703L17.9492 17.0508L17.0508 17.9492L12.0703 12.9688C10.9937 13.8501 9.62158 14.375 8.125 14.375C4.68018 14.375 1.875 11.5698 1.875 8.125C1.875 4.68018 4.68018 1.875 8.125 1.875ZM8.125 3.125C5.35645 3.125 3.125 5.35645 3.125 8.125C3.125 10.8936 5.35645 13.125 8.125 13.125C10.8936 13.125 13.125 10.8936 13.125 8.125C13.125 5.35645 10.8936 3.125 8.125 3.125Z"
                                                               fill="#CECCC5" />
@@ -189,6 +130,25 @@
                                         </form>
                                     </div>
                                     <div class="flex flex-col gap-[13px] mt-2">
+                                        @*<div class="">
+                                                <div class="text-sm text-[#333] font-bold mb-2">
+                                                    店舗カテゴリーから探す
+                                                </div>
+                                                <form class="search-field-selection">
+                                                    <div class="flex flex-col w-full ">
+                                                        <div class="flex flex-row flex-wrap  gap-[24px]">
+                                                            @foreach (var item in Model.ClubCategoryModel)
+                                                            {
+                                                                <div class="preferance">
+                                                                    <input type="checkbox" id="ClubCategoryModel_@item.StaticValue" name="search-by-store-category" value="@item.StaticValue" class="club-category-class">
+                                                                    <label for="ClubCategoryModel_@item.StaticValue" class="w-[88px]">@item.StaticLabel</label>
+                                                                </div>
+                                                            }
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+                                            </div>*@
                                         <div class="">
                                             <div class="text-sm text-[#333] font-bold mb-2">
                                                 料金
@@ -210,6 +170,7 @@
                                         <div class="border-y-[1px] border-[#EFEFEF] py-[10px]">
                                             <div class="text-sm text-[#333] font-bold mb-2">
                                                 営業時間から探す
+
                                             </div>
                                             <div class="flex flex-row mt-[8px] gap-6 mb-4">
                                                 <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm">
@@ -254,6 +215,7 @@
                                                     </div>
                                                     <div class="searchbybusinesshoursValue text-sm text-[#333]" data-info="@ApplicationUtilities.EncryptParameter("3").ToString()">時間を指定する</div>
                                                 </div>
+
                                             </div>
                                             <!------------------------------------------------------------------------------#region Time------------------------------------------------------------------------------>
                                             <div class="relative" id="time-div-id" style="display:none;">
@@ -307,7 +269,28 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @*@foreach (var item in Model.ClubAvailabilityModel)
+                                                {
+                                                    <div class="flex flex-col mt-[8px] gap-6 mb-4">
+                                                        <div class="multi-select text-[#333] text-sm ">
+                                                            <div class="multi-select-value text-sm text-[#333]" data-value="@item.StaticValue">@item.StaticLabel</div>
+                                                            <div class="">
+                                                                <svg class="inactive-svg" xmlns="http://www.w3.org/2000/svg" width="25" height="24"
+                                                                     viewBox="0 0 25 24" fill="none">
+                                                                    <circle opacity="0.4" cx="12.5" cy="12" r="7" stroke="#666666" stroke-opacity="0.4"
+                                                                            stroke-width="4" />
+                                                                </svg>
+                                                                <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="25" height="24"
+                                                                     viewBox="0 0 25 24" fill="none">
+                                                                    <circle cx="12.5" cy="12" r="7.5" stroke="#D75A8B" stroke-width="3" />
+                                                                    <circle cx="12.5" cy="12" r="4" fill="#D75A8B" />
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }*@
                                         </div>
+
                                     </div>
                                     <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white responsiveButton">
                                         <button class="btn btn-primary" style=" border-radius: 8px; " onclick="ClubFilterSubmitButton();">
@@ -345,6 +328,8 @@
                                         </form>
                                     </div>
                                     <div class="flex flex-col gap-[13px]">
+
+                                        <!-- 身長を選ぶ -->
                                         <div class="">
                                             <div class="text-sm text-[#333] font-bold mb-2">
                                                 身長を選ぶ
@@ -460,7 +445,10 @@
                                                 </span>
                                             </div>
                                         </div>
+
                                     </div>
+
+
                                 </div>
                                 <div class="responsiveButton flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
                                     <button class="btn btn-primary" style=" border-radius: 8px;" onclick="HostFilterSubmitButton();">
@@ -501,8 +489,8 @@
                                                     </a>
                                                 }
                                             </div>
-                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3">
-                                                <div class="border-b-[1px] border-[#D75A8B] pb-[1px]  cursor-pointer" onclick="PopupFilterNewClubRenderFunction()">
+                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3 ">
+                                                <div class="border-b-[1px] border-[#D75A8B] pb-[1px] cursor-pointer" onclick="PopupFilterNewClubRenderFunction()">
                                                     続きを見る
                                                 </div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
@@ -519,6 +507,7 @@
                                             </div>
                                         }
                                     </div>
+
                                     <div class="pt-[13px]">
                                         <div class="text-sm text-[#333] font-bold mb-2">
                                             あなたにマッチするホスト
@@ -616,8 +605,8 @@
                                                     }
                                                 }
                                             </div>
-                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3">
-                                                <div class="border-b-[1px] border-[#D75A8B] pb-[1px]  cursor-pointer" onclick="PopupFilterNewHostRenderFunction()">
+                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3 ">
+                                                <div class="border-b-[1px] border-[#D75A8B] pb-[1px] cursor-pointer" onclick="PopupFilterNewHostRenderFunction()">
                                                     続きを見る
                                                 </div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
@@ -636,6 +625,15 @@
                                     </div>
 
                                 </div>
+                                @*<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white z-10">
+
+                                        <button class="btn btn-primary" style=" border-radius: 8px; ">
+
+                                            <a href="#" class="h-full w-full">
+                                                検索する
+                                            </a>
+                                        </button>
+                                    </div>*@
                                 <!----------------------------- #endregion ----------------------------->
                             </div>
                             <div id="tab4" class="tab-content-plane-preference  tab-preferance  hidden">
@@ -652,6 +650,7 @@
                                 <div class="map-container">
                                     <div id="map"></div>
                                 </div>
+
                                 <div class="map-card mt-2 mx-auto w-full" id="map-card" style="display: none;border-radius: 10px;">
                                     <div class="flex gap-1">
                                         <img src="" id="clubImage" class="h-6 w-6 rounded-full border border-[#F1EEEE]" alt="">
@@ -661,24 +660,42 @@
                                             <div class="text-[8px]" id="clubNamejpn"></div>
                                             <div class="flex gap-1 items-center">
                                                 <span class="review-start text-[#F0D830] text-xs" id="rating-label-id">
+                                                    @*<i class="las la-star"></i> <i class="las la-star"></i>
+                                                        <i class="las la-star"></i>
+                                                        <i class="las la-star"></i>
+                                                        <i class="las la-star-half-alt"></i>*@
                                                 </span>
                                                 <div class="text-[8px]" id="rating"></div>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="flex flex-col justify-between items-end" style="padding-right:2px">
+                                        @*<div class="text-[10px]">50m</div>*@
                                         <a href="#" id="clubUrl">
                                             <div class="text-[8px] border-b-[1px] border-[#D75A8B] text-[#D75A8B] w-max">詳細を見る</div>
+
                                         </a>
+
                                     </div>
                                 </div>
+                                @*<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
+                                        <button class="btn btn-primary" style=" border-radius: 8px; ">
+                                            <a href="#" class="h-full w-full">
+                                                検索する
+                                            </a>
+                                        </button>
+                                    </div>*@
                                 <!----------------------------- #endregion ----------------------------->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
+
 <!------------------------------------------------------- #endregion ------------------------------------------------------->
