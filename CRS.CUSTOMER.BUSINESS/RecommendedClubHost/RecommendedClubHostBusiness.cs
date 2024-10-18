@@ -22,7 +22,7 @@ namespace CRS.CUSTOMER.BUSINESS.RecommendedClubHost
             return _repo.GetRecommendedHost(Request);
         }
 
-        public int GetTotalRecommendedPageCount(string LocationId)
+        public List<GroupWisePaginationModelCommon> GetTotalRecommendedPageCount(string LocationId)
         {
             return _repo.GetTotalRecommendedPageCount( LocationId);
         }

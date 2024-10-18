@@ -106,17 +106,16 @@ namespace CRS.CUSTOMER.REPOSITORY.RecommendedClubHost
             return new List<RecommendedHostResponseCommon>();
         }
 
-        public int GetTotalRecommendedPageCount(string LocationId)
+        public List<GroupWisePaginationModelCommon> GetTotalRecommendedPageCount(string LocationId)
         {
-            int Response = 0;
+            //int Response = 0;
             string SQL = "EXEC dbo.sproc_get_customer_recommended_clubandhost @Flag = 'gtgl'";
             SQL += ",@LocationId=" + _dao.FilterString(LocationId);
-            var dbResponse = _dao.ExecuteDataRow(SQL);
-            if (dbResponse != null)
-            {
-                if (!string.IsNullOrEmpty(_dao.ParseColumnValue(dbResponse, "TotalPages").ToString())) Response = Convert.ToInt32(_dao.ParseColumnValue(dbResponse, "TotalPages").ToString());
-            }
-            return Response;
+            var dbResponse = _dao.ExecuteDataTable(SQL);
+            if (dbResponse != null && dbResponse.Rows.Count > 0)
+                return _dao.DataTableToListObject<GroupWisePaginationModelCommon>(dbResponse).ToList();
+
+            return new List<GroupWisePaginationModelCommon>();
         }
     }
 }
