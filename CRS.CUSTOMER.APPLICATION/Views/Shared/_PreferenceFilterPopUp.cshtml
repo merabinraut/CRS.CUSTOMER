@@ -29,8 +29,6 @@
 
     .preferance > input[type="checkbox"] + label {
         background-color: #fff;
-        /*  border-color: #d75a8b;
-        color: */ /*#d75a8b;*/
     }
 
     img {
@@ -92,7 +90,7 @@
             position: absolute;
             bottom: -4px;
             left: 0;
-            border-radius:10px;
+            border-radius: 10px;
         }
 
 
@@ -104,9 +102,7 @@
     }
 
     .tab-container-plane .active {
-        /* padding: 15px 4px 13px 4px; */
         color: var(--charcoalBlack);
-        /* border-bottom: 2px solid var(--primary-softrose); */
     }
 
         .tab-container-plane .active::before {
@@ -119,6 +115,7 @@
             border-radius: 10px;
             background-color: var(--primary-softrose);
         }
+
     .input-search::placeholder {
         font-size: 12px;
         line-height: 40px;
@@ -192,25 +189,6 @@
                                         </form>
                                     </div>
                                     <div class="flex flex-col gap-[13px] mt-2">
-                                        @*<div class="">
-                                                <div class="text-sm text-[#333] font-bold mb-2">
-                                                    店舗カテゴリーから探す
-                                                </div>
-                                                <form class="search-field-selection">
-                                                    <div class="flex flex-col w-full ">
-                                                        <div class="flex flex-row flex-wrap  gap-[24px]">
-                                                            @foreach (var item in Model.ClubCategoryModel)
-                                                            {
-                                                                <div class="preferance">
-                                                                    <input type="checkbox" id="ClubCategoryModel_@item.StaticValue" name="search-by-store-category" value="@item.StaticValue" class="club-category-class">
-                                                                    <label for="ClubCategoryModel_@item.StaticValue" class="w-[88px]">@item.StaticLabel</label>
-                                                                </div>
-                                                            }
-                                                        </div>
-
-                                                    </div>
-                                                </form>
-                                            </div>*@
                                         <div class="">
                                             <div class="text-sm text-[#333] font-bold mb-2">
                                                 料金
@@ -232,7 +210,6 @@
                                         <div class="border-y-[1px] border-[#EFEFEF] py-[10px]">
                                             <div class="text-sm text-[#333] font-bold mb-2">
                                                 営業時間から探す
-
                                             </div>
                                             <div class="flex flex-row mt-[8px] gap-6 mb-4">
                                                 <div class="search-by-business-hours search-by-business-hours-select text-[#333] text-sm">
@@ -277,7 +254,6 @@
                                                     </div>
                                                     <div class="searchbybusinesshoursValue text-sm text-[#333]" data-info="@ApplicationUtilities.EncryptParameter("3").ToString()">時間を指定する</div>
                                                 </div>
-
                                             </div>
                                             <!------------------------------------------------------------------------------#region Time------------------------------------------------------------------------------>
                                             <div class="relative" id="time-div-id" style="display:none;">
@@ -331,28 +307,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            @*@foreach (var item in Model.ClubAvailabilityModel)
-                                                {
-                                                    <div class="flex flex-col mt-[8px] gap-6 mb-4">
-                                                        <div class="multi-select text-[#333] text-sm ">
-                                                            <div class="multi-select-value text-sm text-[#333]" data-value="@item.StaticValue">@item.StaticLabel</div>
-                                                            <div class="">
-                                                                <svg class="inactive-svg" xmlns="http://www.w3.org/2000/svg" width="25" height="24"
-                                                                     viewBox="0 0 25 24" fill="none">
-                                                                    <circle opacity="0.4" cx="12.5" cy="12" r="7" stroke="#666666" stroke-opacity="0.4"
-                                                                            stroke-width="4" />
-                                                                </svg>
-                                                                <svg class="active-svg" xmlns="http://www.w3.org/2000/svg" width="25" height="24"
-                                                                     viewBox="0 0 25 24" fill="none">
-                                                                    <circle cx="12.5" cy="12" r="7.5" stroke="#D75A8B" stroke-width="3" />
-                                                                    <circle cx="12.5" cy="12" r="4" fill="#D75A8B" />
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                }*@
                                         </div>
-
                                     </div>
                                     <div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white responsiveButton">
                                         <button class="btn btn-primary" style=" border-radius: 8px; " onclick="ClubFilterSubmitButton();">
@@ -390,8 +345,6 @@
                                         </form>
                                     </div>
                                     <div class="flex flex-col gap-[13px]">
-
-                                        <!-- 身長を選ぶ -->
                                         <div class="">
                                             <div class="text-sm text-[#333] font-bold mb-2">
                                                 身長を選ぶ
@@ -507,10 +460,7 @@
                                                 </span>
                                             </div>
                                         </div>
-
                                     </div>
-
-
                                 </div>
                                 <div class="responsiveButton flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
                                     <button class="btn btn-primary" style=" border-radius: 8px;" onclick="HostFilterSubmitButton();">
@@ -551,12 +501,12 @@
                                                     </a>
                                                 }
                                             </div>
-                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3 ">
-                                                <div class="border-b-[1px] border-[#D75A8B] pb-[1px] " onclick="PopupFilterNewClubRenderFunction()">
+                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3">
+                                                <div class="border-b-[1px] border-[#D75A8B] pb-[1px]  cursor-pointer" onclick="PopupFilterNewClubRenderFunction()">
                                                     続きを見る
                                                 </div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
-                                                    <path d="M5 9L8 6L5 3" stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.13027 6.7913C2.02134 6.95448 2.08051 7.17251 2.25042 7.2706C2.42033 7.3687 2.63651 7.30959 2.74701 7.14748C3.24307 6.41975 3.93306 5.84202 4.74188 5.48191C5.65918 5.0735 6.68223 4.96598 7.66439 5.17474C8.64656 5.38351 9.53742 5.89785 10.2093 6.64405C10.8812 7.39025 11.2996 8.33 11.4045 9.3286C11.4088 9.36949 11.4126 9.41038 11.4158 9.45128H7.35119C7.14408 9.45128 6.97619 9.61917 6.97619 9.82628C6.97619 10.0334 7.14408 10.2013 7.35119 10.2013H11.4157C11.3601 10.9029 11.1491 11.5872 10.7936 12.203C10.2915 13.0726 9.52706 13.7609 8.60976 14.1693C7.69246 14.5777 6.66941 14.6852 5.68724 14.4765C4.82123 14.2924 4.0262 13.8708 3.38968 13.2621C3.24788 13.1265 3.02414 13.1136 2.87834 13.2449C2.73254 13.3762 2.71999 13.6017 2.86046 13.7387C3.59837 14.4582 4.52671 14.9562 5.53953 15.1714C6.66845 15.4114 7.84437 15.2878 8.89874 14.8184C9.9531 14.3489 10.8318 13.5578 11.4089 12.5582C11.827 11.834 12.0712 11.0273 12.1282 10.2013H16.6136C17.0671 10.2013 17.2675 9.62088 16.8975 9.34549L15.3037 8.15915C15.1376 8.03549 14.9027 8.06992 14.779 8.23605C14.6554 8.40219 14.6898 8.63711 14.8559 8.76078L15.7836 9.45128H12.1282C12.1237 9.38562 12.118 9.31997 12.1111 9.25434C11.9905 8.10651 11.5096 7.02634 10.7373 6.16864C9.96502 5.31094 8.94104 4.71975 7.81211 4.47978C6.68318 4.23982 5.50727 4.36342 4.4529 4.83285C3.50698 5.254 2.70246 5.93411 2.13027 6.7913Z" fill="#D75A8B" />
                                                 </svg>
                                             </div>
                                         }
@@ -569,7 +519,6 @@
                                             </div>
                                         }
                                     </div>
-
                                     <div class="pt-[13px]">
                                         <div class="text-sm text-[#333] font-bold mb-2">
                                             あなたにマッチするホスト
@@ -667,12 +616,12 @@
                                                     }
                                                 }
                                             </div>
-                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3 ">
-                                                <div class="border-b-[1px] border-[#D75A8B] pb-[1px] " onclick="PopupFilterNewHostRenderFunction()">
+                                            <div class="flex items-center gap-1 justify-center w-full text-[#D75A8B] text-xs mt-3">
+                                                <div class="border-b-[1px] border-[#D75A8B] pb-[1px]  cursor-pointer" onclick="PopupFilterNewHostRenderFunction()">
                                                     続きを見る
                                                 </div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
-                                                    <path d="M5 9L8 6L5 3" stroke="#D75A8B" stroke-linecap="round" stroke-linejoin="round" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.13027 6.7913C2.02134 6.95448 2.08051 7.17251 2.25042 7.2706C2.42033 7.3687 2.63651 7.30959 2.74701 7.14748C3.24307 6.41975 3.93306 5.84202 4.74188 5.48191C5.65918 5.0735 6.68223 4.96598 7.66439 5.17474C8.64656 5.38351 9.53742 5.89785 10.2093 6.64405C10.8812 7.39025 11.2996 8.33 11.4045 9.3286C11.4088 9.36949 11.4126 9.41038 11.4158 9.45128H7.35119C7.14408 9.45128 6.97619 9.61917 6.97619 9.82628C6.97619 10.0334 7.14408 10.2013 7.35119 10.2013H11.4157C11.3601 10.9029 11.1491 11.5872 10.7936 12.203C10.2915 13.0726 9.52706 13.7609 8.60976 14.1693C7.69246 14.5777 6.66941 14.6852 5.68724 14.4765C4.82123 14.2924 4.0262 13.8708 3.38968 13.2621C3.24788 13.1265 3.02414 13.1136 2.87834 13.2449C2.73254 13.3762 2.71999 13.6017 2.86046 13.7387C3.59837 14.4582 4.52671 14.9562 5.53953 15.1714C6.66845 15.4114 7.84437 15.2878 8.89874 14.8184C9.9531 14.3489 10.8318 13.5578 11.4089 12.5582C11.827 11.834 12.0712 11.0273 12.1282 10.2013H16.6136C17.0671 10.2013 17.2675 9.62088 16.8975 9.34549L15.3037 8.15915C15.1376 8.03549 14.9027 8.06992 14.779 8.23605C14.6554 8.40219 14.6898 8.63711 14.8559 8.76078L15.7836 9.45128H12.1282C12.1237 9.38562 12.118 9.31997 12.1111 9.25434C11.9905 8.10651 11.5096 7.02634 10.7373 6.16864C9.96502 5.31094 8.94104 4.71975 7.81211 4.47978C6.68318 4.23982 5.50727 4.36342 4.4529 4.83285C3.50698 5.254 2.70246 5.93411 2.13027 6.7913Z" fill="#D75A8B" />
                                                 </svg>
                                             </div>
                                         }
@@ -687,15 +636,6 @@
                                     </div>
 
                                 </div>
-                                @*<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white z-10">
-
-                                        <button class="btn btn-primary" style=" border-radius: 8px; ">
-
-                                            <a href="#" class="h-full w-full">
-                                                検索する
-                                            </a>
-                                        </button>
-                                    </div>*@
                                 <!----------------------------- #endregion ----------------------------->
                             </div>
                             <div id="tab4" class="tab-content-plane-preference  tab-preferance  hidden">
@@ -712,7 +652,6 @@
                                 <div class="map-container">
                                     <div id="map"></div>
                                 </div>
-
                                 <div class="map-card mt-2 mx-auto w-full" id="map-card" style="display: none;border-radius: 10px;">
                                     <div class="flex gap-1">
                                         <img src="" id="clubImage" class="h-6 w-6 rounded-full border border-[#F1EEEE]" alt="">
@@ -722,42 +661,24 @@
                                             <div class="text-[8px]" id="clubNamejpn"></div>
                                             <div class="flex gap-1 items-center">
                                                 <span class="review-start text-[#F0D830] text-xs" id="rating-label-id">
-                                                    @*<i class="las la-star"></i> <i class="las la-star"></i>
-                                                        <i class="las la-star"></i>
-                                                        <i class="las la-star"></i>
-                                                        <i class="las la-star-half-alt"></i>*@
                                                 </span>
                                                 <div class="text-[8px]" id="rating"></div>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="flex flex-col justify-between items-end" style="padding-right:2px">
-                                        @*<div class="text-[10px]">50m</div>*@
                                         <a href="#" id="clubUrl">
                                             <div class="text-[8px] border-b-[1px] border-[#D75A8B] text-[#D75A8B] w-max">詳細を見る</div>
-
                                         </a>
-
                                     </div>
                                 </div>
-                                @*<div class="flex py-4 items-center fixed bottom-0 left-0 w-full px-4 bg-white">
-                                        <button class="btn btn-primary" style=" border-radius: 8px; ">
-                                            <a href="#" class="h-full w-full">
-                                                検索する
-                                            </a>
-                                        </button>
-                                    </div>*@
                                 <!----------------------------- #endregion ----------------------------->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
-
 <!------------------------------------------------------- #endregion ------------------------------------------------------->
