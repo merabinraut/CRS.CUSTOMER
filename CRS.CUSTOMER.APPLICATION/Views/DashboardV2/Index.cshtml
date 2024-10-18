@@ -32,8 +32,7 @@
         padding: 12px 0;
         margin-left: 16px;
     }
-</style>
-<style>
+
     #parent {
         position: relative;
     }
@@ -67,8 +66,7 @@
         width: 100%;
         min-width: 298px;
     }
-</style>
-<style>
+
     .select-wrap {
         position: relative;
         height: 100%;
@@ -185,6 +183,7 @@
         justify-content: center;
         align-items: center;
     }
+  
 </style>
 
 <div id="parent" class="loop owl-carousel kiran owl-theme center-image-slider">
@@ -281,7 +280,9 @@
 </div>
 <div style="height:12px; background-color: #F8F8F8;" class=" w-full">
 </div>
-<div style="border-top: 1px solid #EDEDED;border-bottom: 1px solid #EDEDED;background: #FFF;">
+<div style="
+   /* border-top: 1px solid #EDEDED;border-bottom: 1px solid #EDEDED;*/
+    background: #FFF;">
     <div class="flex mx-[16px]   flex-row py-[12px]">
         <div class=" flex flex-row justify-start items-center w-[160px] ">
             <span>   <i class="fa-solid fa-location-dot text-primary-100"></i></span>
@@ -387,7 +388,7 @@
         </div>
     </div>
 </div>
-<div style="height:12px; background-color: #e2e2e2;" class="w-full">
+<div style="height:12px; background-color: #f8f8f8;" class="w-full">
 
 </div>
 <!----------------------------------------------------Location---------------------------------------------------->
@@ -395,7 +396,7 @@
 @if (ViewBag.IsAvailableRecommended)
 {
 
-    <div class="border-t border-b border-[#EDEDED]">
+ @*   <div class="border-t border-b border-[#EDEDED]">*@
         <div class="flex mt-[12px]  justify-start mx-[16px] flex-row">
             <div class="  flex flex-row justify-start items-center  ">
                 <div class="flex flex-col">
@@ -406,7 +407,7 @@
         <div class="flex  overflow-x-auto flex-row gap-[8px] my-[12px] no-scrollbar mb-[12px]" style="margin-left:16px ; padding-right:16px;" id="recommended-club-content-id">
             <!--Ajax call-->
         </div>
-    </div>
+    @*</div>*@
     <div style="background-color: #F8F8F8; height: 12px">
 
     </div>
@@ -425,7 +426,7 @@
 @*<div style="border: 1px solid #EDEDED; border-left:none; background: #FFF;">*@
 @if (ViewBag.IsAvailableRecommended)
 {
-    <div class="border-t border-b border-[#EDEDED]" style="border: 1px solid #EDEDED; border-left:none; background: #FFF;">
+    <div >
         <!-- clippath -->
         <div class="flex mt-[12px] justify-start mx-[16px] flex-row">
             <div class="  flex flex-row justify-start items-center  ">
