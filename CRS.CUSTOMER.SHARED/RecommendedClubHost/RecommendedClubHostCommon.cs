@@ -11,7 +11,11 @@ namespace CRS.CUSTOMER.SHARED.RecommendedClubHost
         public string CustomerId { get; set; }
         public string PageType { get; set; }
     }
-
+    public class GroupWisePaginationModelCommon
+    {
+        public int TotalPages { get; set; }
+        public string PositionId { get; set; }
+    }
     public class RecommendedClubResponseCommon
     {
         public string ClubId { get; set; }

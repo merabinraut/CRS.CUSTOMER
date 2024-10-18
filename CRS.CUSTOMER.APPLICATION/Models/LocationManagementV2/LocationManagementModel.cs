@@ -19,7 +19,11 @@ namespace CRS.CUSTOMER.APPLICATION.Models.LocationManagementV2
         public List<LocationV2HostListModel> HostListModel { get; set; } = new List<LocationV2HostListModel>();
         public List<BannersModel> Banners { get; set; } = new List<BannersModel>();
     }
-
+    public class GroupWisePaginationModel
+    {
+        public int TotalPages { get; set; }
+        public string PositionId { get; set; }
+    }
     public class LocationV2ClubListModel
     {
         public string ClubId { get; set; }
