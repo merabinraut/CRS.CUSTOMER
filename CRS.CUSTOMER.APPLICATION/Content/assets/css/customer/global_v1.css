@@ -2082,3 +2082,7 @@ img {
     margin: 55px auto;
     height: fit-content;
 }
+
+.scroll-popup-scroll-none{
+    overflow:hidden
+}
