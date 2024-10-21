@@ -624,6 +624,7 @@
     <Content Include="Content\assets\js\anychart-ui.min.js" />
     <Content Include="Content\assets\js\anychat-exports.min.js" />
     <Content Include="Content\assets\js\BookmarkManagement.js" />
+    <Content Include="Content\assets\js\call_popup_modal.js" />
     <Content Include="Content\assets\js\filter.js" />
     <Content Include="Content\assets\js\image-upload.js" />
     <Content Include="Content\assets\js\jquery.min.js" />
