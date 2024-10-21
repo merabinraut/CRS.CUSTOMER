@@ -188,7 +188,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     await _notificationHelper.SendCustomerNotificationHelperAsync(new Models.NotificationHelper.NotificationManagementModel
                     {
                         agentId = dbResponse.Extra1,
-                        notificationType = "Registration"
+                        notificationType = "Registration",
+                        actionUser = dbResponse.Extra2
                     });
                     return RedirectToAction("SetRegistrationPassword", "Home", new { AgentId = dbResponse.Extra1.DefaultEncryptParameter(), UserId = dbResponse.Extra2.DefaultEncryptParameter(), MobileNumber = Model.MobileNumber, NickName = Model.NickName, ProcessId = Model.ProcessId });
                 }

@@ -16,6 +16,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.NotificationHelper
         public string notificationType { get; set; }
         public string extraId1 { get; set; }
         public string actionPlatform { get; set; }
+        public string actionUser { get; set; }
     }
 
     public class NotificationModel
@@ -41,6 +42,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.NotificationHelper
         public string notificationId { get; set; }
         public string agentId { get; set; }
         public string actionPlatform { get; set; }
+        public string actionUser { get; set; }
     }
 
     public class NotificationReadResponseModel

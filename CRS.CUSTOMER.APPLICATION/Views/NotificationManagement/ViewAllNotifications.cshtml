@@ -333,7 +333,7 @@
                                     item.classList.remove('active');
                                 }
                             });
-                            window.location.reload();
+                            //window.location.reload();
                         }
                         else {
                             toastr.info(result.Message);
@@ -356,7 +356,7 @@
         }
         function ManageSingleNotificationReadStatus(id, notificationURL, event) {
             $.ajax({
-                url: '/NotificationManagement/ManageSingleNotificationReadStatus',
+                url: '/NotificationManagement/ManageNotificationReadStatus',
                 type: 'POST',
                 data: {
                     __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
@@ -374,7 +374,7 @@
                             var parentDiv = event.target.closest('.notification-list');
                             if (parentDiv) {
                                 parentDiv.classList.remove('active');
-                                window.location.reload();
+                                //window.location.reload();
                             }
                         } else {
                             window.location.href = notificationURL;

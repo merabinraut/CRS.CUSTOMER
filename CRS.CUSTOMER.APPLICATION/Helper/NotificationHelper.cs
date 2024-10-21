@@ -26,7 +26,8 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
             {
                 agentId = _stringCipher.Encrypt(request.agentId),
                 notificationId = !string.IsNullOrEmpty(request.notificationId) ? _stringCipher.Encrypt(request.notificationId) : string.Empty,
-                actionPlatform = ActionPlatform
+                actionPlatform = ActionPlatform,
+                actionUser = _stringCipher.Encrypt(request.actionUser)
             };
 
             var signalRServiceToken = ApplicationUtilities.GetSessionValue("SignalRServiceToken")?.ToString();
@@ -71,7 +72,8 @@ namespace CRS.CUSTOMER.APPLICATION.Helper
                 agentId = _stringCipher.Encrypt(request.agentId),
                 notificationType = request.notificationType,
                 extraId1 = !string.IsNullOrEmpty(request.extraId1) ? _stringCipher.Encrypt(request.extraId1) : string.Empty,
-                actionPlatform = ActionPlatform
+                actionPlatform = ActionPlatform,
+                actionUser = _stringCipher.Encrypt(request.actionUser)
             };
 
             var signalRServiceToken = ApplicationUtilities.GetSessionValue("SignalRServiceToken")?.ToString();
