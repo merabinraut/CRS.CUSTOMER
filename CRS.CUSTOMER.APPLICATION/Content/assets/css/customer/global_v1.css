@@ -2086,3 +2086,11 @@ img {
 .scroll-popup-scroll-none{
     overflow:hidden
 }
+
+@media(width > 639px) {
+    .responsiveReviewModalPopup {
+        max-width: 375px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}

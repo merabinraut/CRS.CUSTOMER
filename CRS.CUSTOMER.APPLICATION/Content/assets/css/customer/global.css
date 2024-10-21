@@ -2107,3 +2107,11 @@ img {
     line-height: 150%;
     height: 40px;
 }
+
+@media(width > 639px) {
+    .responsiveReviewModalPopup {
+        max-width: 375px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
