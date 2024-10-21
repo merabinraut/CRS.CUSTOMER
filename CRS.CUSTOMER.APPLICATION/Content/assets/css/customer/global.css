@@ -1947,6 +1947,7 @@ p.club_pr {
 
 .club_status {
     width: 120px;
+    min-width:120px;
     height: auto;
     margin: 0;
     display: inline-flex;
@@ -1993,6 +1994,7 @@ p.club_pr {
     font-size: 1rem;
     font-weight: bold;
     display: inline-flex;*/
+    max-width:173px;
     width: calc(100% - 135px);
     height: 45px;
     color: #ffffff;
