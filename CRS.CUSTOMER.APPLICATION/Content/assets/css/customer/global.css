@@ -36,7 +36,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-   
 }
 
     body::-webkit-scrollbar {
@@ -1779,7 +1778,7 @@ p.club_group {
     color: #e3a1a1;
     font-weight: normal;
     max-width: 120px;
-    overflow: hidden;
+    overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap
 }
@@ -1943,7 +1942,7 @@ p.club_pr {
     display: flex;
     justify-content: space-between;
     border-top: 1px solid #e5e7eb;
-    gap:12px;
+    gap: 12px;
 }
 
 .club_status {

@@ -1775,7 +1775,7 @@ p.club_group {
     color: #e3a1a1;
     font-weight: normal;
     max-width: 120px;
-    overflow: hidden;
+    overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap
 }
