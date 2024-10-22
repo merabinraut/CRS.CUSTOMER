@@ -2242,5 +2242,22 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
             });
         })();
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabLinks = document.querySelectorAll('.tab-link');
+
+            const currentPath = window.location.pathname;
+
+            tabLinks.forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add('active');
+                    link.scrollIntoView({ behavior: 'smooth', inline: 'center' }); 
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
 
 }
