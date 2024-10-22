@@ -193,8 +193,6 @@
         border-radius: 3px;
         background: #d4b78a;
     }
-
-
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
@@ -604,8 +602,22 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                                             </div>
                                         </div>
                                     }
+
+
                                 }
                             </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="h-[148px] flex flex-col justify-center items-center gap-[12px]" style="height:148px">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none">
+                                    <circle cx="36" cy="36" r="35" stroke="#F4F4F4" stroke-width="2" />
+                                    <path d="M36 22.25C31.1807 22.25 27.25 26.1807 27.25 31C27.25 34.0127 28.7881 36.6885 31.1172 38.2656C26.6592 40.1797 23.5 44.6035 23.5 49.75H26C26 44.2129 30.4629 39.75 36 39.75C41.5371 39.75 46 44.2129 46 49.75H48.5C48.5 44.6035 45.3408 40.1797 40.8828 38.2656C43.2119 36.6885 44.75 34.0127 44.75 31C44.75 26.1807 40.8193 22.25 36 22.25ZM36 24.75C39.4668 24.75 42.25 27.5332 42.25 31C42.25 34.4668 39.4668 37.25 36 37.25C32.5332 37.25 29.75 34.4668 29.75 31C29.75 27.5332 32.5332 24.75 36 24.75Z" fill="#E0E0E0" />
+                                </svg>
+                            </span>
+                            <p class="text-[#000] text-[12px] font-[500] " style="line-height:14px">まだホストが追加されていません。</p>
                         </div>
                     }
                 }
@@ -1860,7 +1872,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
         }
 
     </div>
-  
+
     <div onclick="callPopupModal('@Model.ClubNameJp', '@Model.ClubLogo', '@Model.LandLine', '@Model.Tag1', '@Model.ClubCategory');" class="call-now-button">
         電話予約
     </div>
