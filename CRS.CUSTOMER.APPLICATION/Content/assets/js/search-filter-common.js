@@ -362,6 +362,10 @@ function PreferenceFilterCommon() {
             tabButtons.forEach((button) => {
                 button.classList.remove("active");
             });
+            tabButton.scrollIntoView({
+                behavior: 'smooth', // Smooth scrolling
+                inline: 'center' // Align the tab in the center of the view
+            });
 
             // Show the selected tab and set active class on the clicked button
             tabs[index].classList.remove("hidden");

@@ -62,7 +62,50 @@
         font-weight: 400;
         transform: translateY(-2px)
     }
+</style>
+<style>
+    .preferance-tab-wrapper {
+        width: 100%;
+        position: relative;
+    }
 
+        .preferance-tab-wrapper::before {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #F4F4F4;
+            z-index: 0;
+            transition: background-color 0.3s;
+        }
+
+        .preferance-tab-wrapper .tab-link {
+            position: relative;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+            .preferance-tab-wrapper .tab-link::before {
+                content: '';
+                display: block;
+                position: absolute;
+                bottom: 0px;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background-color: #F4F4F4;
+                z-index: 0;
+                transition: background-color 0.3s;
+            }
+
+            .preferance-tab-wrapper .tab-link.active::before {
+                background-color: #D75A8B;
+                border-radius: 10px;
+            }
 </style>
 <!------------------------------------------------------- #region PREFERENCE------------------------------------------------------->
 <!-- drawer component -->
@@ -79,28 +122,48 @@
         <div class="px-4 pb-6 bg-white drawer-filter-location relative no-scrollbar responsiveModalPopup">
             <div class="">
                 <div class="bg-[#fff]  ">
-                    <div class="sticky top-0 z-10  pt-6 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
-                        <div class="flex gap-[24px] w-full " style="border-bottom: 4px solid #F4F4F4;">
-                            <div class="flex tab-container-plane  bg-white gap-6 w-full text-sm no-scrollbar">
-                                <button id="tab1Button"
-                                        class="tab-button-plane-preference preferance-tab w-max flex-none tab-link active">
+                    @*<div class="sticky top-0 z-10  pt-6 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
+                            <div class="flex gap-[24px] w-full " >
+                                <div class="flex   bg-white gap-6 w-full text-sm no-scrollbar">
+                                    <button id="tab1Button"
+                                            class="tab-button-plane-preference preferance-tab w-max flex-none tab-link active">
+                                        ホストクラブ
+                                    </button>
+                                    <button id="tab2Button"
+                                            class="tab-button-plane-preference preferance-tab w-max flex-none tab-link pt-0 ">
+                                        ホスト
+                                    </button>
+                                    <button id="tab3Button"
+                                            class="tab-button-plane-preference preferance-tab w-max flex-none tab-link pt-0 ">
+                                        新規店舗
+                                    </button>
+                                    <button id="tab4Button"
+                                            class="tab-button-plane-preference preferance-tab w-max flex-none tab-link pt-0 ">
+                                        現在地に近い店舗
+                                    </button>
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <div class="sticky top-0 z-10 pt-6 mt-[1px] bg-[#FFF] overflow-hidden overflow-x-auto no-scrollbar">
+                        <div class="flex gap-[24px] w-full">
+                            <div class="flex bg-white gap-6 w-full text-sm no-scrollbar preferance-tab-wrapper">
+                                <button id="tab1Button" class="tab-button-plane-preference preferance-tab w-max flex-none tab-link active">
                                     ホストクラブ
                                 </button>
-                                <button id="tab2Button"
-                                        class="tab-button-plane-preference preferance-tab w-max flex-none tab-link pt-0 ">
+                                <button id="tab2Button" class="tab-button-plane-preference preferance-tab w-max flex-none tab-link pt-0">
                                     ホスト
                                 </button>
-                                <button id="tab3Button"
-                                        class="tab-button-plane-preference preferance-tab w-max flex-none tab-link pt-0 ">
+                                <button id="tab3Button" class="tab-button-plane-preference preferance-tab w-max flex-none tab-link pt-0">
                                     新規店舗
                                 </button>
-                                <button id="tab4Button"
-                                        class="tab-button-plane-preference preferance-tab w-max flex-none tab-link pt-0 ">
+                                <button id="tab4Button" class="tab-button-plane-preference preferance-tab w-max flex-none tab-link pt-0">
                                     現在地に近い店舗
                                 </button>
                             </div>
                         </div>
                     </div>
+
                     <div class="my-4">
                         <div class="bg-white pb-4 ">
                             <div id="tab1" class="tab-content-plane-preference  tab-preferance  ">
