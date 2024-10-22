@@ -341,7 +341,7 @@
                                     }
                                     <!-- e/available -->
                                 </div>
-                                <a class="call-now-button whitespace-nowrap"  onclick="callPopupModal('@item.ClubNameJapanese', '@item.ClubLogo', '@item.LandLine', '@item.Tag1','@item.ClubCategory');">
+                                <a class="call-now-button whitespace-nowrap" onclick="callPopupModal('@item.ClubNameJapanese', '@item.ClubLogo', '@item.LandLine', '@item.Tag1','@item.ClubCategory');">
 
                                     電話予約
                                 </a>
@@ -481,8 +481,8 @@
                                     }
                                     <!-- e/available -->
                                 </div>
-                                <a class="call-now-button whitespace-nowrap"  onclick="callPopupModal('@item.ClubNameJapanese', '@item.ClubLogo', '@item.LandLine', '@item.Tag1','@item.ClubCategory');">
-                                   
+                                <a class="call-now-button whitespace-nowrap" onclick="callPopupModal('@item.ClubNameJapanese', '@item.ClubLogo', '@item.LandLine', '@item.Tag1','@item.ClubCategory');">
+
                                     電話予約
                                 </a>
                                 @if (item.ClubCategory.Trim().ToUpper() == "B")
@@ -531,8 +531,10 @@
                 </button>
             </div>
         }
-        else
+        else if (Model.FilteredClubModel.Count <= 25 && Model.FilteredClubModel.Count > 0)
         {
+
+
             <!-- for pagination --><div id="pagination-container" class="flex justify-between pagination-container-wrapper my-[7px] " style="width: 100%; background: white">
                 <button id="prev-btn" class="next-prev-btn" disabled>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
@@ -552,6 +554,7 @@
             </div>
 
         }
+       
     </div>
     if (Model.FilteredClubModel.Count != 0)
     {

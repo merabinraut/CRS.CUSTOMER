@@ -262,7 +262,7 @@
             if (Model.FilteredClubModel.Count <= 0)
             {
                 <div class="flex flex-col gap-4 p-4  border-t border-t-[#E0E0E0] flex justify-center items-center">
-                    <div class="text-[#18181B] font-semibold mt-12 text-center">
+                    <div class="text-[#18181B] font-semibold mt-12 mb-12 text-center" style="margin-bottom:48px">
                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
                     </div>
                 </div>
@@ -526,7 +526,7 @@
             </div>
 
         }
-        else
+        else if(Model.FilteredClubModel.Count < 25 && Model.FilteredClubModel.Count > 0)
         {
             <div id="pagination-container" class="flex justify-between bg-white pagination-container-wrapper my-[7px] " style="width: 100%; background: white">
                 <button id="prev-btn" class="next-prev-btn" disabled>
