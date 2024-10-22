@@ -8,6 +8,7 @@ using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.NotificationManagement;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -22,7 +23,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         private static SignalRConfigruationModel _signalRConfigruation = ApplicationUtilities.GetAppDataJsonConfigValue<SignalRConfigruationModel>("SignalRConfigruation");
         private readonly SignalRStringCipher _stringCipher;
         private readonly NotificationHelper _notificationHelper;
-
+        private readonly string _baseURL = ConfigurationManager.AppSettings["BaseURL"].ToString();
         public NotificationManagementController(INotificationManagementBusiness buss,
            SignalRStringCipher stringCipher,
            NotificationHelper notificationHelper)
@@ -54,7 +55,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             responseModel.ForEach(x =>
             {
                 x.NotificationId = x.NotificationId.EncryptParameter();
-                x.NotificationURL = (!string.IsNullOrEmpty(x.NotificationURL) && x.NotificationURL.Trim() != "#") ? URLHelper.EncryptQueryParams(x.NotificationURL) : "#";
+                x.NotificationURL = (!string.IsNullOrEmpty(x.NotificationURL) && x.NotificationURL.Trim() != "#") ? URLHelper.EncryptQueryParams($"{_baseURL.TrimStart('/')}{x.NotificationURL}") : "#";
                 x.NotificationImage = ImageHelper.ProcessedImage(x.NotificationImage, false, $"{_AmazonS3Configruation.BaseURL}/{_AmazonS3Configruation.BucketName}/{_AmazonS3Configruation.NotificationNoImageURL.TrimStart('/')}");
                 x.CreatedDate = x.CreatedDate;
                 ViewBag.CreatedDate = Convert.ToDateTime(x.CreatedDate).ToString("yyyy.MM.dd");

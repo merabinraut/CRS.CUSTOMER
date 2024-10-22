@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace CRS.CUSTOMER.APPLICATION.Models.NotificationHelper
 {
@@ -15,7 +14,7 @@ namespace CRS.CUSTOMER.APPLICATION.Models.NotificationHelper
         public string agentId { get; set; }
         public string notificationType { get; set; }
         public string extraId1 { get; set; }
-        public string actionPlatform { get; set; }
+        public string actionPlatform { get; set; } = "CustomerWeb";
         public string actionUser { get; set; }
     }
 

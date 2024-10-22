@@ -17,10 +17,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
     {
         private readonly IReviewManagementBusiness _reviewBuss;
         private readonly NotificationHelper _notificationHelper;
-        public ReviewManagementController(IReviewManagementBusiness reviewBuss, NotificationHelper notificationHelper)
+        private readonly SignalRStringCipher _stringCipher;
+        public ReviewManagementController(IReviewManagementBusiness reviewBuss, NotificationHelper notificationHelper, SignalRStringCipher stringCipher)
         {
             _reviewBuss = reviewBuss;
             _notificationHelper = notificationHelper;
+            _stringCipher = stringCipher;
         }
         #region
         [OutputCacheAttribute(VaryByParam = "*", Duration = 0, NoStore = true)]
@@ -44,7 +46,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
         #endregion
 
         [HttpGet]
-        public ActionResult Review(ReviewReservationRequestModel Request)
+        public async Task<ActionResult> Review(ReviewReservationRequestModel Request)
         {
             var CustomerId = !string.IsNullOrEmpty(Request.CustomerId) ? Request.CustomerId.DecryptParameter() : Request.CustomerId;
             var ReservationId = !string.IsNullOrEmpty(Request.ReservationId) ? Request.ReservationId.DecryptParameter() : Request.ReservationId;
@@ -61,6 +63,7 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 return Redirect("/");
             }
             var SessionCustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter();
+            var SessionUserId = ApplicationUtilities.GetSessionValue("UserId").ToString()?.DecryptParameter();
             if (string.IsNullOrEmpty(SessionCustomerId) || SessionCustomerId != CustomerId)
             {
                 AddNotificationMessage(new NotificationModel()
@@ -78,6 +81,13 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             if (dbResponse.Code == ResponseCode.Success)
             {
                 var ResponseModel = dbResponse.Data.MapObject<ReviewReservationResponseModel>();
+                var helperRequest = new Models.NotificationHelper.NotificationReadRequestModel
+                {
+                    notificationId = ResponseModel.NotificationId,
+                    agentId = SessionCustomerId,
+                    actionUser = SessionUserId
+                };
+                await _notificationHelper.MarkNotificationAsReadHelperAsync(helperRequest);
                 ResponseModel.ClubId = ResponseModel.ClubId.EncryptParameter();
                 ResponseModel.CustomerId = ResponseModel.CustomerId.EncryptParameter();
                 ResponseModel.ReservationId = ResponseModel.ReservationId.EncryptParameter();

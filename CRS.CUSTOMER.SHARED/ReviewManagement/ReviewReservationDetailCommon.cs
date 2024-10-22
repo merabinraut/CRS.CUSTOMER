@@ -21,5 +21,6 @@
         public string ClubNameEnglish { get; set; }
         public string ClubNameJapanese { get; set; }
         public string ClubLocationName { get; set; }
+        public string NotificationId { get; set; }
     }
 }

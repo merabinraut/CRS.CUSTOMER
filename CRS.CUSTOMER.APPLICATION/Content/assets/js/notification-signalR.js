@@ -48,7 +48,7 @@
         }
         try {
             hubConnection = new signalR.HubConnectionBuilder()
-                .withUrl(`${baseServerUrl}?agentId=${agentId}`, {
+                .withUrl(`${baseServerUrl}?agentId=${encodeURIComponent(agentId)}`, {
                     accessTokenFactory: () => token
                 })
                 .withAutomaticReconnect()
