@@ -64,9 +64,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter()
             };
             var groupWiseData = _recommendedClubHostBuss.GetTotalRecommendedPageCount(locationId);
-            if (!string.IsNullOrEmpty(recommendedClubDBRequest.PositionId))
+            if (groupWiseData.Count() > 0)
             {
-                recommendedClubDBRequest.PositionId = groupWiseData[(Convert.ToInt32(recommendedClubDBRequest.PositionId) - 1)].PositionId;
+                if (!string.IsNullOrEmpty(recommendedClubDBRequest.PositionId))
+                {
+                    recommendedClubDBRequest.PositionId = groupWiseData[(Convert.ToInt32(recommendedClubDBRequest.PositionId) - 1)].PositionId;
+                }
             }
             var dbClubResponse = _recommendedClubHostBuss.GetRecommendedClub(recommendedClubDBRequest);
             response.ClubListModel = dbClubResponse.MapObjects<LocationV2ClubListModel>();
@@ -86,9 +89,12 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                     LocationId = locationId,
                     CustomerId = ApplicationUtilities.GetSessionValue("AgentId").ToString()?.DecryptParameter()
                 };
-                if (!string.IsNullOrEmpty(recommendedHostDBRequest.PositionId))
+                if (groupWiseData.Count() > 0)
                 {
-                    recommendedHostDBRequest.PositionId = groupWiseData[(Convert.ToInt32(recommendedHostDBRequest.PositionId) - 1)].PositionId;
+                    if (!string.IsNullOrEmpty(recommendedHostDBRequest.PositionId))
+                    {
+                        recommendedHostDBRequest.PositionId = groupWiseData[(Convert.ToInt32(recommendedHostDBRequest.PositionId) - 1)].PositionId;
+                    }
                 }
                 var dbHostResponse = _recommendedClubHostBuss.GetRecommendedHost(recommendedHostDBRequest);
                 response.HostListModel = dbHostResponse.MapObjects<LocationV2HostListModel>();
@@ -104,7 +110,10 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
             }
             ViewBag.LocationId = PrefecturesArea;
             //var groupWiseData = _recommendedClubHostBuss.GetTotalRecommendedPageCount(locationId);
-            ViewBag.TotalGroupCount = groupWiseData[0].TotalPages;
+            if (groupWiseData.Count() > 0)
+                ViewBag.TotalGroupCount = groupWiseData[0].TotalPages;
+            else
+                ViewBag.TotalGroupCount = 0;
             response.RequestModel = request.MapObject<LocationV2ClubHostRequestModel>();
             ViewBag.RenderValue = !string.IsNullOrEmpty(request.RenderId) ? request.RenderId : null;
             var metaTagDBResponse = _commonBusiness.GetMetaTagInfo("1", locationId);
