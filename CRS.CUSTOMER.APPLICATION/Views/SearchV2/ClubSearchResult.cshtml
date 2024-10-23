@@ -266,7 +266,7 @@
                         @CRS.CUSTOMER.APPLICATION.Resources.Resource.NoSearchRecordFound
                     </div>
                 </div>
-                
+
             }
             else
             {
@@ -453,11 +453,20 @@
                                     <!-- s/available -->
                                     if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                                     {
-                                        <div class="available">本日空席あり</div>
+                                        if (item.ClubCategory.Trim().ToUpper() == "B")
+                                        {<div class="available">営業中</div> }
+                                        else
+                                        { <div class="available">本日空席あり</div>}
                                     }
                                     else
                                     {
-                                        <div class="available disabled">本日空席あり</div>
+                                        if (item.ClubCategory.Trim().ToUpper() == "B")
+                                        {<div class="available disabled">営業中</div> }
+                                        else
+                                        {
+
+                                            <div class="available disabled">本日空席あり</div>
+                                        }
                                     }
                                 }
                                 <!-- e/available -->
@@ -527,7 +536,7 @@
             </div>
 
         }
-        else if(Model.FilteredClubModel.Count < 25 && Model.FilteredClubModel.Count > 0)
+        else if (Model.FilteredClubModel.Count < 25 && Model.FilteredClubModel.Count > 0)
         {
             <div id="pagination-container" class="flex justify-between bg-white pagination-container-wrapper my-[7px] " style="width: 100%; background: white">
                 <button id="prev-btn" class="next-prev-btn" disabled>

@@ -213,6 +213,14 @@
 
     </div>
 }
+else if(!string.IsNullOrEmpty(@Model.ClubCoverPhoto))
+{
+    <div class="h-[189px]">
+        <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
+             style="height: 189px;" />
+
+    </div>
+}
 
 <!-- section 1 -->
 
@@ -489,7 +497,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                         {
 
                             <div class="customer-title">
-                                <h3>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Host</h3>
+                                <h3>スタッフ一覧</h3>
                                 <p>@CRS.CUSTOMER.APPLICATION.Resources.Resource.ListOfHosts</p>
                             </div>
                         }
@@ -1182,8 +1190,8 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                 <div class="px-[16px]" style="margin-left:5px;">
                     <div class="mx-[8.5px] py-[6.54px] p-l-[22px] p-r-[10px] ">
                         <div class="customer-title">
-                            <h2 class="text-[#292F33] text-[16px] font-bold" style="line-height:140%">トップランキング</h2>
-                            <p>@formattedDate</p>
+                            <h2 class="text-[#292F33] text-[16px] font-bold" style="line-height:140%">店舗詳細</h2>
+                            <p>システム&お店紹介</p>
                         </div>
                     </div>
                 </div>
@@ -1854,12 +1862,12 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
             if (!string.IsNullOrEmpty(Model.TodaysClubSchedule) && Model.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
             {
                 <div class=" rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full" style="background: #d4b78a; display: flex; align-items: baseline;">
-                    本日空席あり
+                    営業中
                 </div>
             }
             else if (Model.TodaysClubSchedule.Trim().ToUpper() == "UNRESERVABLE")
             {
-                <div class="available disabled">本日空席あり</div>
+                <div class="available disabled">営業中</div>
             }
             else
             {
@@ -2242,22 +2250,4 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
             });
         })();
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabLinks = document.querySelectorAll('.tab-link');
-
-            const currentPath = window.location.pathname;
-
-            tabLinks.forEach(link => {
-                if (link.href === window.location.href) {
-                    link.classList.add('active');
-                    link.scrollIntoView({ behavior: 'smooth', inline: 'center' }); 
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        });
-    </script>
-
-
 }
