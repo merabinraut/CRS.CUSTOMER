@@ -193,6 +193,10 @@
         border-radius: 3px;
         background: #d4b78a;
     }
+ 
+    #select2-scheduleDropdown-container {
+        line-height: 150% !important;
+    }
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
@@ -1016,17 +1020,17 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                 <div class="mt-[9px] mb-4 custom-select">
                     <select name="ScheduleFilterDate"
                             class="flex justify-between items-center w-full px-4 py-[11px] border border-[#BEBEBE] rounded-[3px] ring-0 focus:ring-0 focus:ring-transparent"
-                            id="scheduleDropdown" style="width:100%">
+                            id="scheduleDropdown" style="width:100%; ">
                         @{
                             foreach (var item in Model.GetScheduleDDL)
                             {
                                 if (item.Value == ViewBag.SFilterDate)
                                 {
-                                    <option value="@item.Value" selected>@item.Text</option>
+                                    <option style="line-height: 150%" value="@item.Value" selected>@item.Text</option>
                                 }
                                 else
                                 {
-                                    <option value="@item.Value">@item.Text</option>
+                                    <option value="@item.Value" style="line-height: 150%">@item.Text</option>
                                 }
 
                             }
@@ -1034,7 +1038,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                     </select>
                 </div>
                 <!-- for the schecdule card -->
-                <div class="flex flex-col mt-4 border-t-2 border-[#EFEFEF]">
+                <div class="flex flex-col mt-4 ">
                     @if (Model.GetAllScheduleTabList.Count != 0)
                     {
                         for (int i = 0; i < Model.GetAllScheduleTabList.Count; i++)
