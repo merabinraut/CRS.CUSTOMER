@@ -1,7 +1,7 @@
 ﻿
 function callPopupModal(clubName, clubLogo, landlineNumber, locationName, type) {
     let html = '';
-    if (type.trim().toUpperCase() === "P") {
+    if (type.trim().toUpperCase() === "B") {
         html = `<div id="call-now-popup-premium" 
                      class="fixed top-0 left-0 right-0 z-50 responsiveReviewModalPopup w-full p-4 px-[35px] h-full overflow-x-hidden overflow-y-hidden md:inset-0 h-[calc(100%-1rem)] max-h-full" style="background-color: #0D091D99; padding-left:35px; padding-right:35px">
                         <div class="relative w-full max-w-2xl max-h-full" style="top:25%;">
@@ -15,8 +15,8 @@ function callPopupModal(clubName, clubLogo, landlineNumber, locationName, type) 
                                 <img src="${clubLogo}" alt="img"
                                      class="h-[66px] w-[66px] rounded-full ring-2 ring-white absolute top-[-33px] left-[50%] translate-x-[-50%]" id="image" />
                                 <div class="bg-white rounded-[6px]" style="padding-top:38px;">
-                                    <div class="grid justify-center text-center pb-[13px]">
-                                        <div class="text-[10px] text-warmgray-1 flex  justify-center items-center" id="location" style="gap:2px">
+                                    <div class="grid justify-center text-center pb-[13px]" style="padding-bottom:13px">
+                                        <div class="text-[10px] text-warmgray-1 flex  justify-center items-center" id="location" style="gap:2px" style="padding-bottom:13px">
                                            
                                             <span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="10" viewBox="0 0 11 10" fill="none">
   <path fill-rule="evenodd" clip-rule="evenodd" d="M2.6875 3.75C2.6875 2.20093 3.95093 0.9375 5.5 0.9375C7.04907 0.9375 8.3125 2.20093 8.3125 3.75C8.3125 4.18945 8.13428 4.6936 7.89258 5.24414C7.65088 5.79468 7.3396 6.37939 7.02344 6.92383C6.39111 8.01392 5.75391 8.92578 5.75391 8.92578L5.5 9.29688L5.24609 8.92578C5.24609 8.92578 4.60889 8.01392 3.97656 6.92383C3.6604 6.37939 3.34912 5.79468 3.10742 5.24414C2.86572 4.6936 2.6875 4.18945 2.6875 3.75ZM5.5 3.125C5.15454 3.125 4.875 3.40454 4.875 3.75C4.875 4.09546 5.15454 4.375 5.5 4.375C5.84546 4.375 6.125 4.09546 6.125 3.75C6.125 3.40454 5.84546 3.125 5.5 3.125Z" fill="#D75A8B"/>
@@ -34,7 +34,7 @@ function callPopupModal(clubName, clubLogo, landlineNumber, locationName, type) 
                                     </div>
                                     <div class="text-[18px] text-[#282828] text-center font-bold" style="padding-top:12px; padding-bottom:7px">${landlineNumber}</div>
                                     <div class="px-[20px]">
-                                        <a class="btn-gradient-rounded w-full bg-[#D75A8B]" style="border-radius: 48px; background:#D75A8B" id="notification_url" href="tel:${landlineNumber}">レビューを投稿する</a>
+                                        <a class="btn-gradient-rounded w-full bg-[#D75A8B]" style="border-radius: 48px; background:#D75A8B;font-size:14px; font-weight:700" id="notification_url" href="tel:${landlineNumber}">電話予約する</a>
                                     </div>
                                     <div style="padding-top:16px; flex-direction:column; padding-bottom:7px; line-height:130%; color:#666" class="text-[#666] text-[12px] font-normal flex justify-center items-center " >
                                         <p>電話でのご予約はポイント</p>
@@ -46,7 +46,7 @@ function callPopupModal(clubName, clubLogo, landlineNumber, locationName, type) 
                         </div>
                     </div>
                   `
-    } else if (type.trim().toUpperCase() == "B") {
+    } else if (type.trim().toUpperCase() === "P") {
         html = `<div id="call-now-popup-premium"
                      class="fixed  top-0 left-0 block right-0  z-50 responsiveReviewModalPopup hidden w-full p-4 h-full overflow-x-hidden overflow-y-hidden md:inset-0 h-[calc(100%-1rem)] max-h-full" style="background-color: #0D091D99; overflow-y:hidden; display:block; padding-left:35px; padding-right:35px">
                     <div class="relative w-full max-w-2xl max-h-full" style="top:25%;">
@@ -74,7 +74,7 @@ function callPopupModal(clubName, clubLogo, landlineNumber, locationName, type) 
                                 <div class="text-[18px] text-[#282828] text-center font-bold" style="padding-top:12px; padding-bottom:7px">${landlineNumber}</div>
 
                                 <div class=" px-[20px]">
-                                    <a class="btn-gradient-rounded w-full bg-[#D75A8B]" style="border-radius: 48px; background: #D75A8B" id="notification_url" href='tel:${landlineNumber}'>レビューを投稿する</a>
+                                    <a class="btn-gradient-rounded w-full bg-[#D75A8B]" style="border-radius: 48px; background: #D75A8B; font-size:14px; font-weight:700" id="notification_url" href='tel:${landlineNumber}'>電話予約する</a>
                                 </div>
                                 <div style="padding-top:16px; padding-bottom:7px; line-height:130%;color:#666" class="text-[#666] text-[12px] font-normal flex flex-col justify-center items-center">
                                     <span>電話でのご予約はポイント</span>
