@@ -672,7 +672,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                         }
                     </div>
                 }
-                else
+               @* else
                 {
                     <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
                         <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
@@ -682,7 +682,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                         </div>
                         <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだホストが追加されていません。</div>
                     </div>
-                }
+                }*@
             </div>
         }
         else if (!string.IsNullOrEmpty(target) && target == "review")
