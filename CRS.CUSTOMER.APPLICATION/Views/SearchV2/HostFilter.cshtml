@@ -153,7 +153,7 @@
 }
 
 <!-- for search result -->
-<div class="bg-[##FFFFFF]  flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]">
+<div class="bg-[##FFFFFF]  flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]"  style="border-top:1px solid #EFEFEF">
     <span>検索結果</span>
     <span>@ViewBag.TotalRecords 件</span>
 </div>
@@ -167,7 +167,7 @@
 }
 else
 {
-    <div class="no-scrollbar flex flex-wrap flex-row gap-[8px] justify-center my-[12px] bg-[##FFFFFF#FFFFFF]">
+    <div class="no-scrollbar flex flex-wrap flex-row gap-[8px] justify-center my-[12px] bg-[#FFFFFF]">
         @foreach (var item in Model.FilteredHostModel)
         {
             <a onclick="HostDetailRedirectFunction('@item.HostCode', '@item.ClubCode', '@ViewBag.PrefecturesArea');">

@@ -158,7 +158,10 @@
 
         </div>
     }
-
+<div class=" flex justify-start gap-[5px] py-2 px-4 text-[#292F33] font-semibold text-[12px]" style=" border-top:1px solid #EFEFEF">
+    <span>検索結果</span>
+    <span>@ViewBag.TotalRecords 件</span>
+</div>
     <!-- club section  -->
     <div class="flex flex-col">
         @if (Model.FilteredClubModel.Count <= 0)
@@ -171,7 +174,7 @@
         }
         else
         {
-            <div class="list_wrap" style="border-top:1px solid #EFEFEF">
+            <div class="list_wrap" >
                 @foreach (var item in Model.FilteredClubModel)
                 {
                     if (item.ClubCategory.Trim().ToUpper() == "P")

@@ -1918,8 +1918,9 @@ p.club_pr {
     align-items: center;
     font-size: 0.75rem;
     overflow: hidden;*/
-    width: 100%;
-    height: 50px;
+    height: 100% !important;
+    max-height: 50px !important;
+    max-height: 50px;
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
@@ -2097,4 +2098,8 @@ img {
 
 .page-number-list div {
     max-width: 51px !important;
+}
+
+#pagination-container {
+    padding: 0 8px !important;
 }
