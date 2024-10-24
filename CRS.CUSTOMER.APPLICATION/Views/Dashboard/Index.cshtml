@@ -199,7 +199,8 @@
         }
     </div>
 </div>
-<script>$(document).ready(function () {
+<script>
+    $(document).ready(function () {
         $('.owl-carousel').owlCarousel({
             center: true,
             items: 2,
@@ -555,7 +556,8 @@
 <!-- #endregion -->
 @section scripts
 {
-    <script>const slideContainer = document.querySelector('.container');
+    <script>
+        const slideContainer = document.querySelector('.container');
         const slide = document.querySelector('.slides');
         const nextBtn = document.getElementById('next-btn');
         const prevBtn = document.getElementById('prev-btn');
@@ -635,7 +637,8 @@
 
         // Listen for window resize event
         window.addEventListener('resize', updateSlideWidth);</script>
-    <script>$(document).ready(function () {
+    <script>
+        $(document).ready(function () {
             localStorage.clear();
             GetRecommendedClubAndHost();
             ////LoaderFunction();
@@ -657,7 +660,20 @@
         //    // The entire page, including external resources, is fully loaded, hide the loader
         //    document.getElementById("loader-id").style.display = "none";
         //});</script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&libraries=geometry&callback=initMap" async defer></script>
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleMapKey&libraries=geometry&callback=initMap" loading="async" defer></script>*@
+    <script>
+        function loadGoogleMapsScript() {
+            var script = document.createElement('script');
+            script.src = "/Home/GetGoogleMapData?libraries=geometry&callback=initMap";
+            script.async = true; // Ensures the script is loaded asynchronously
+            script.defer = true; // Defers execution until after the document has been parsed
+            document.head.appendChild(script); // Injects the script into the document
+        }
+
+        // Call the function to load Google Maps asynchronously
+        loadGoogleMapsScript();
+    </script>
+
     <script>
         var CurrentLocationId = 0;
         function initMap() {

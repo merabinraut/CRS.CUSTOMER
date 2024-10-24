@@ -3,6 +3,7 @@ using CRS.CUSTOMER.APPLICATION.Library;
 using CRS.CUSTOMER.BUSINESS.CommonManagement;
 using CRS.CUSTOMER.SHARED;
 using CRS.CUSTOMER.SHARED.CommonManagement;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,6 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 })
                 .ToList();
             Session["AdvertisementImage"] = advertisementimage;
-
             return base.BeginExecuteCore(callback, state);
         }
 

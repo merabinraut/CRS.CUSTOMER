@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Configuration;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -776,5 +777,18 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
 
             return View();
         }
+        public ActionResult GetGoogleMapData(string queryParams)
+        {
+            string googleApiKey = ConfigurationManager.AppSettings["GoogleMapKey"];
+            string url = $"https://maps.googleapis.com/maps/api/js?key={googleApiKey}&{queryParams}";
+
+            using (var client = new HttpClient())
+            {
+                var response = client.GetAsync(url).Result;
+                var data = response.Content.ReadAsStringAsync().Result;
+                return Content(data, "application/javascript");
+            }
+        }
+
     }
 }

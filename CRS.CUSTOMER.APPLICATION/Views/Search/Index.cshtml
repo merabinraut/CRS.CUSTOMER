@@ -762,42 +762,55 @@
 
 @section scripts
 {
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap"></script>
+    @*<script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap"></script>
+        <script>*@
     <script>
+        function loadGoogleMapsScript() {
+            var script = document.createElement('script');
+            script.src = "/Home/GetGoogleMapData?libraries=geometry&callback=initMap";
+            script.async = true; // Ensures the script is loaded asynchronously
+            script.defer = true; // Defers execution until after the document has been parsed
+            document.head.appendChild(script); // Injects the script into the document
+        }
+
+        // Call the function to load Google Maps asynchronously
+        loadGoogleMapsScript();
+    </script>
+
     // Get all the div elements
 
-        var divs = document.querySelectorAll('.select-location-store');
-        var seleclLocationCLub = document.querySelectorAll('.select-location-club');
+    var divs = document.querySelectorAll('.select-location-store');
+    var seleclLocationCLub = document.querySelectorAll('.select-location-club');
 
-        // Add click event listeners to each div
-        divs.forEach(function (div) {
-            div.addEventListener('click', function () {
-                // Remove the 'bg-red' class from all divs
-                divs.forEach(function (d) {
-                    d.classList.remove('active');
+    // Add click event listeners to each div
+    divs.forEach(function (div) {
+    div.addEventListener('click', function () {
+    // Remove the 'bg-red' class from all divs
+    divs.forEach(function (d) {
+    d.classList.remove('active');
 
-                });
-                // Add the 'bg-red' class to the clicked div
-                this.classList.add('active');
-            });
-        });
+    });
+    // Add the 'bg-red' class to the clicked div
+    this.classList.add('active');
+    });
+    });
 
-        seleclLocationCLub.forEach(function (div) {
-            div.addEventListener('click', function () {
-                // Remove the 'bg-red' class from all divs
-                seleclLocationCLub.forEach(function (d) {
-                    d.classList.remove('active');
+    seleclLocationCLub.forEach(function (div) {
+    div.addEventListener('click', function () {
+    // Remove the 'bg-red' class from all divs
+    seleclLocationCLub.forEach(function (d) {
+    d.classList.remove('active');
 
-                });
-                // Add the 'bg-red' class to the clicked div
-                this.classList.add('active');
+    });
+    // Add the 'bg-red' class to the clicked div
+    this.classList.add('active');
 
-            });
-        });</script>
+    });
+    });</script>
 
     <script type="text/javascript">
-    // see more
+        // see more
         function seemore() {
             var x = document.getElementById("seemore");
 
@@ -845,7 +858,7 @@
         });</script>
     <!--#region host-club.php js-->
     <script>
-    // Get all the div elements
+        // Get all the div elements
 
         var divs = document.querySelectorAll('.select-location-store');
         var inputField = document.querySelector('input[name="selectLocationStore"]'); // Select by name attribute
@@ -864,7 +877,7 @@
         });</script>
 
     <script>
-    // Define searchbybusinesshours
+        // Define searchbybusinesshours
         var multiSelectValues = [];
 
         var multiSelect = document.querySelectorAll('.multi-select ');
@@ -904,7 +917,7 @@
             });
         });</script>
     <script>
-    // Define searchbybusinesshours
+        // Define searchbybusinesshours
         var searchbybusinesshours = document.querySelectorAll('.search-by-business-hours');
 
         // Add event listener to each searchbybusinesshours div
@@ -965,7 +978,7 @@
 
     </script>
     <script type="text/javascript">
-    // see more
+        // see more
         function seemore() {
             var x = document.getElementById("seemore");
 
@@ -1014,7 +1027,7 @@
     <!--#endregion host-club.php js-->
     <!--#region club.php JS-->
     <script>
-    // Get all the div elements
+        // Get all the div elements
 
         var selectlocationstorehostsection = document.querySelectorAll('.select-location-store-host-section');
         // Add click event listeners to each div
@@ -1032,7 +1045,7 @@
     <!--#endregion club.php JS-->
     <!--#region new-store.php JS-->
     <script>
-    var hosts = document.querySelectorAll('.hosts-that-match-you');
+        var hosts = document.querySelectorAll('.hosts-that-match-you');
         hosts.forEach(function (host) {
             host.addEventListener('click', function () {
                 this.classList.toggle('active');
@@ -1041,7 +1054,7 @@
     <!--#endregion new-store.php JS-->
     <!--#region near-location.php JS-->
     <script>
-    const tabs = document.querySelector(".wrapper");
+        const tabs = document.querySelector(".wrapper");
         const tabButton = document.querySelectorAll(".tab-button");
         const contents = document.querySelectorAll(".content");
 
@@ -1061,7 +1074,7 @@
             }
         };</script>
     <script>
-    // Get all the div elements
+        // Get all the div elements
 
         var selectnearlocation = document.querySelectorAll('.select-near-location');
 
@@ -1306,7 +1319,7 @@
     <!--#endregion map.php JS-->
     <!--#region time-index.php-->
     <script>
-    var showTimeLists = document.querySelectorAll('.showTimeList');
+        var showTimeLists = document.querySelectorAll('.showTimeList');
 
         showTimeLists.forEach(function (showTimeList) {
             showTimeList.addEventListener('click', function (event) {
@@ -1332,7 +1345,7 @@
             });
         });</script>
     <script>
-    document.querySelectorAll('.timeList').forEach(item => {
+        document.querySelectorAll('.timeList').forEach(item => {
             item.addEventListener('click', event => {
                 if (event.currentTarget.classList.contains('disabled')) {
                     return;

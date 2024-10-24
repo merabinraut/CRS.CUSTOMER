@@ -46,9 +46,9 @@
                         条件をクリア
                     </button>
                     <button class="btn btn-primary" onclick="Tab4SubmitFunction();">
-                       
-                            検索する
-                       
+
+                        検索する
+
                     </button>
                 </div>
             </div>
@@ -101,9 +101,9 @@
                         条件をクリア
                     </button>
                     <button class="btn btn-primary" onclick="Tab4SubmitFunction();">
-                       
-                            検索する
-                      
+
+                        検索する
+
                     </button>
                 </div>
                 <!--#endregion map.php-->
@@ -112,7 +112,20 @@
     </div>
     <!--#endregion near-location.php-->
 </div>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap"></script>
+@*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&callback=initMap"></script>*@
+<script>
+    function loadGoogleMapsScript() {
+        var script = document.createElement('script');
+        script.src = "/Home/GetGoogleMapData?libraries=geometry&callback=initMap";
+        script.async = true; // Ensures the script is loaded asynchronously
+        script.defer = true; // Defers execution until after the document has been parsed
+        document.head.appendChild(script); // Injects the script into the document
+    }
+
+    // Call the function to load Google Maps asynchronously
+    loadGoogleMapsScript();
+</script>
+
 <script>
     // Get all the div elements
     var selectnearlocation = document.querySelectorAll('.select-near-location');

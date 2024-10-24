@@ -8,7 +8,7 @@
 }
 <meta name="description" content="@metaContent">
 <style>
-      
+
     #innersec {
         overflow-y: visible;
     }
@@ -183,7 +183,6 @@
         justify-content: center;
         align-items: center;
     }
-  
 </style>
 <script src="~/Content/assets/js/call_popup_modal.js"></script>
 <div id="parent" class="loop owl-carousel kiran owl-theme center-image-slider">
@@ -396,17 +395,17 @@
 @if (ViewBag.IsAvailableRecommended)
 {
 
- @*   <div class="border-t border-b border-[#EDEDED]">*@
-        <div class="flex mt-[12px]  justify-start mx-[16px] flex-row">
-            <div class="  flex flex-row justify-start items-center  ">
-                <div class="flex flex-col">
-                    <h2 class="font-[700] text-[#333]  leading-[20.27px]" style="font-size:16px">オススメのホストクラブ</h2>
-                </div>
+    @*   <div class="border-t border-b border-[#EDEDED]">*@
+    <div class="flex mt-[12px]  justify-start mx-[16px] flex-row">
+        <div class="  flex flex-row justify-start items-center  ">
+            <div class="flex flex-col">
+                <h2 class="font-[700] text-[#333]  leading-[20.27px]" style="font-size:16px">オススメのホストクラブ</h2>
             </div>
         </div>
-        <div class="flex  overflow-x-auto flex-row gap-[8px] my-[12px] no-scrollbar mb-[12px]" style="margin-left:16px ; padding-right:16px;" id="recommended-club-content-id">
-            <!--Ajax call-->
-        </div>
+    </div>
+    <div class="flex  overflow-x-auto flex-row gap-[8px] my-[12px] no-scrollbar mb-[12px]" style="margin-left:16px ; padding-right:16px;" id="recommended-club-content-id">
+        <!--Ajax call-->
+    </div>
     @*</div>*@
     <div style="background-color: #F8F8F8; height: 12px">
 
@@ -426,7 +425,7 @@
 @*<div style="border: 1px solid #EDEDED; border-left:none; background: #FFF;">*@
 @if (ViewBag.IsAvailableRecommended)
 {
-    <div >
+    <div>
         <!-- clippath -->
         <div class="flex mt-[12px] justify-start mx-[16px] flex-row">
             <div class="  flex flex-row justify-start items-center  ">
@@ -707,7 +706,21 @@
             GetMainPageClubHost();
             setTimeout(DisableLoaderFunction, 1000);
         });</script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVqzKbK_YObo2ivCYETgRkFCdjCFs2aQA&libraries=geometry&callback=initMap" async defer></script>
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleMapKey&libraries=geometry&callback=initMap" loading="async" defer></script>*@
+    <script>
+        function loadGoogleMapsScript() {
+            var script = document.createElement('script');
+            script.src = "/Home/GetGoogleMapData?libraries=geometry&callback=initMap";
+            script.async = true; // Ensures the script is loaded asynchronously
+            script.defer = true; // Defers execution until after the document has been parsed
+            document.head.appendChild(script); // Injects the script into the document
+        }
+
+        // Call the function to load Google Maps asynchronously
+        loadGoogleMapsScript();
+    </script>
+
+
     <script>
         var CurrentLocationId = '/tokyo/kabukicho';
 
