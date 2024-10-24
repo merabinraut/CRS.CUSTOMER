@@ -193,6 +193,10 @@
         border-radius: 3px;
         background: #d4b78a;
     }
+ 
+    #select2-scheduleDropdown-container {
+        line-height: 150% !important;
+    }
 </style>
 <!-- breadcrumb  -->
 <div class="flex py-[8px] px-4 gap-1 items-center breadcrumb">
@@ -206,6 +210,14 @@
 @*if club cover photo present it need to be enabled*@
 
 @if (Model.ClubCategory.Trim().ToUpper() == "P")
+{
+    <div class="h-[189px]">
+        <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
+             style="height: 189px;" />
+
+    </div>
+}
+else if(!string.IsNullOrEmpty(@Model.ClubCoverPhoto))
 {
     <div class="h-[189px]">
         <img src="@Model.ClubCoverPhoto" alt="banner" class="h-[189px] w-full object-cover"
@@ -489,7 +501,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                         {
 
                             <div class="customer-title">
-                                <h3>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Host</h3>
+                                <h3>スタッフ一覧</h3>
                                 <p>@CRS.CUSTOMER.APPLICATION.Resources.Resource.ListOfHosts</p>
                             </div>
                         }
@@ -660,7 +672,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                         }
                     </div>
                 }
-                else
+               @* else
                 {
                     <div class="flex justify-center items-center flex-col gap-3 py-[100px]">
                         <div class="p-[15.75px] rounded-full border-[2px] border-[#F4F4F4]">
@@ -670,7 +682,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                         </div>
                         <div class="text-[#000] text-[12px] font-medium leading-[14px]">まだホストが追加されていません。</div>
                     </div>
-                }
+                }*@
             </div>
         }
         else if (!string.IsNullOrEmpty(target) && target == "review")
@@ -928,7 +940,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                 <div class="mx-[8px] py-[6.54px] p-l-[22px] p-r-[10px] px-[16px] " style="margin-left:13px;">
                     <div class="customer-title">
                         <!-- Galary -->
-                        <h3>@CRS.CUSTOMER.APPLICATION.Resources.Resource.Gallery</h3>
+                        <h3>店内写真</h3>
                         <p>@*@CRS.CUSTOMER.APPLICATION.Resources.Resource.OverallClubGallery*@ フォトギャラリー </p>
                     </div>
                 </div>
@@ -1008,17 +1020,17 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                 <div class="mt-[9px] mb-4 custom-select">
                     <select name="ScheduleFilterDate"
                             class="flex justify-between items-center w-full px-4 py-[11px] border border-[#BEBEBE] rounded-[3px] ring-0 focus:ring-0 focus:ring-transparent"
-                            id="scheduleDropdown" style="width:100%">
+                            id="scheduleDropdown" style="width:100%; ">
                         @{
                             foreach (var item in Model.GetScheduleDDL)
                             {
                                 if (item.Value == ViewBag.SFilterDate)
                                 {
-                                    <option value="@item.Value" selected>@item.Text</option>
+                                    <option style="line-height: 150%" value="@item.Value" selected>@item.Text</option>
                                 }
                                 else
                                 {
-                                    <option value="@item.Value">@item.Text</option>
+                                    <option value="@item.Value" style="line-height: 150%">@item.Text</option>
                                 }
 
                             }
@@ -1026,7 +1038,7 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                     </select>
                 </div>
                 <!-- for the schecdule card -->
-                <div class="flex flex-col mt-4 border-t-2 border-[#EFEFEF]">
+                <div class="flex flex-col mt-4 ">
                     @if (Model.GetAllScheduleTabList.Count != 0)
                     {
                         for (int i = 0; i < Model.GetAllScheduleTabList.Count; i++)
@@ -1182,8 +1194,8 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                 <div class="px-[16px]" style="margin-left:5px;">
                     <div class="mx-[8.5px] py-[6.54px] p-l-[22px] p-r-[10px] ">
                         <div class="customer-title">
-                            <h2 class="text-[#292F33] text-[16px] font-bold" style="line-height:140%">トップランキング</h2>
-                            <p>@formattedDate</p>
+                            <h2 class="text-[#292F33] text-[16px] font-bold" style="line-height:140%">店舗詳細</h2>
+                            <p>システム&お店紹介</p>
                         </div>
                     </div>
                 </div>
@@ -1854,12 +1866,12 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
             if (!string.IsNullOrEmpty(Model.TodaysClubSchedule) && Model.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
             {
                 <div class=" rounded-sm text-white text-xs w-[100px] h-[18px] flex items-center justify-center gap-[1px] w-full" style="background: #d4b78a; display: flex; align-items: baseline;">
-                    本日空席あり
+                    営業中
                 </div>
             }
             else if (Model.TodaysClubSchedule.Trim().ToUpper() == "UNRESERVABLE")
             {
-                <div class="available disabled">本日空席あり</div>
+                <div class="available disabled">営業中</div>
             }
             else
             {
@@ -2242,22 +2254,4 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
             });
         })();
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabLinks = document.querySelectorAll('.tab-link');
-
-            const currentPath = window.location.pathname;
-
-            tabLinks.forEach(link => {
-                if (link.href === window.location.href) {
-                    link.classList.add('active');
-                    link.scrollIntoView({ behavior: 'smooth', inline: 'center' }); 
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        });
-    </script>
-
-
 }

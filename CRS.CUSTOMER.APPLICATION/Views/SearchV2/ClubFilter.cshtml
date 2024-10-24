@@ -171,7 +171,7 @@
         }
         else
         {
-            <div class="list_wrap">
+            <div class="list_wrap" style="border-top:1px solid #EFEFEF">
                 @foreach (var item in Model.FilteredClubModel)
                 {
                     if (item.ClubCategory.Trim().ToUpper() == "P")
@@ -472,11 +472,11 @@
                                         <!-- s/available -->
                                         if (!string.IsNullOrEmpty(item.TodaysClubSchedule) && item.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                                         {
-                                            <div class="available">本日空席あり</div>
+                                            <div class="available">営業中</div>
                                         }
                                         else
                                         {
-                                            <div class="available disabled">本日空席あり</div>
+                                            <div class="available disabled">営業中</div>
                                         }
                                     }
                                     <!-- e/available -->
@@ -554,7 +554,7 @@
             </div>
 
         }
-       
+
     </div>
     if (Model.FilteredClubModel.Count != 0)
     {
@@ -565,7 +565,7 @@
                 <div>
                 </div>
                 <div style="background-color: #FFFFFF;" class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]">
-                    <div class="flex flex-row items-center justify-end gap-1 pr-[16px] my-[12px]" id="scrollToTopButton">
+                    <div class="flex flex-row items-center justify-end gap-1 my-[12px]" id="scrollToTopButton">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                             <path d="M6.99219 7.83594H24.9858V9.68464H6.99219V7.83594ZM23.5763 23.5191L16.9187 16.6789V30.6674H15.0893V16.6789L8.43168 23.5191L7.14213 22.1942L15.989 13.1047L24.8359 22.1942L23.5763 23.5191Z" fill="black" />

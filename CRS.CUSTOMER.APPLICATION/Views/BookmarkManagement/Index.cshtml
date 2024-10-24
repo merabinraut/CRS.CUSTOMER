@@ -649,7 +649,7 @@
                                     <!--</button>-->
 
 
-                                    <a class="call-now-button"  onclick="callPopupModal('@club.ClubNameJapanese', '@club.ClubLogo', '@club.Landline', '@club.Tag1','@club.ClubCategory');">
+                                    <a class="call-now-button" onclick="callPopupModal('@club.ClubNameJapanese', '@club.ClubLogo', '@club.Landline', '@club.Tag1','@club.ClubCategory');">
                                         電話予約
                                     </a>
                                     @if (club.ClubCategory.Trim().ToUpper() == "B")
@@ -740,11 +740,11 @@
                                             <!-- s/available -->
                                             if (!string.IsNullOrEmpty(club.TodaysClubSchedule) && club.TodaysClubSchedule.Trim().ToUpper() == "RESERVABLE")
                                             {
-                                                <div class="available">本日空席あり</div>
+                                                <div class="available">営業中</div>
                                             }
                                             else
                                             {
-                                                <div class="available disabled">本日空席あり</div>
+                                                <div class="available disabled">営業中</div>
                                             }
                                         }
                                         <!-- e/available -->
@@ -757,8 +757,8 @@
                                     <!--</button>-->
 
 
-                                    <a class="call-now-button"  onclick="callPopupModal('@club.ClubNameJapanese', '@club.ClubLogo', '@club.Landline', '@club.Tag1','@club.ClubCategory');">
-                                      
+                                    <a class="call-now-button" onclick="callPopupModal('@club.ClubNameJapanese', '@club.ClubLogo', '@club.Landline', '@club.Tag1','@club.ClubCategory');">
+
                                         電話予約
                                     </a>
 
