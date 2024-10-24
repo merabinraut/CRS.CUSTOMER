@@ -2117,3 +2117,6 @@ img {
         margin: 0 auto;
     }
 }
+.page-number-list div{
+    max-width:51px !important;
+}
