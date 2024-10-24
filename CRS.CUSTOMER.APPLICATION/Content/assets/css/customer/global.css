@@ -1924,7 +1924,8 @@ p.club_pr {
     font-size: 0.75rem;
     overflow: hidden;*/
     width: 100%;
-    height: 50px;
+    height:100% !important;
+    max-height: 50px !important;
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
@@ -2116,4 +2117,7 @@ img {
         width: 100%;
         margin: 0 auto;
     }
+}
+.page-number-list div{
+    max-width:51px !important;
 }

@@ -1,7 +1,6 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
 
 :root {
-
     font-family: 'Noto Sans JP';
     color: #292f33;
     font-size: 16px;
@@ -34,7 +33,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-   
 }
 
     body::-webkit-scrollbar {
@@ -1920,8 +1918,9 @@ p.club_pr {
     align-items: center;
     font-size: 0.75rem;
     overflow: hidden;*/
-    width: 100%;
-    height: 50px;
+    height: 100% !important;
+    max-height: 50px !important;
+    max-height: 50px;
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
@@ -1939,12 +1938,12 @@ p.club_pr {
     display: flex;
     justify-content: space-between;
     border-top: 1px solid #e5e7eb;
-    gap:12px;
+    gap: 12px;
 }
 
 .club_status {
     width: 120px;
-    min-width:120px;
+    min-width: 120px;
     height: auto;
     margin: 0;
     display: inline-flex;
@@ -2085,8 +2084,8 @@ img {
     height: fit-content;
 }
 
-.scroll-popup-scroll-none{
-    overflow:hidden
+.scroll-popup-scroll-none {
+    overflow: hidden
 }
 
 @media(width > 639px) {
@@ -2095,4 +2094,12 @@ img {
         width: 100%;
         margin: 0 auto;
     }
+}
+
+.page-number-list div {
+    max-width: 51px !important;
+}
+
+#pagination-container {
+    padding: 0 8px !important;
 }
