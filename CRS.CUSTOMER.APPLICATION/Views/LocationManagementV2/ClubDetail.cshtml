@@ -519,12 +519,12 @@ else if (Model.ClubCategory.Trim().ToUpper() == "B")
                 {
                     if (Model.TopHostListModels != null && Model.TopHostListModels.Count != 0)
                     {
-                        <div class=" pb-4 flex gap-[8px] " style="padding-left:16px">
-                            <div id="host" class="flex overflow-x-auto no-scrollbar  " style="gap:8px">
+                        <div class=" pb-4 flex gap-[8px] " style="padding-left:16px; padding-right:16px">
+                            <div id="host" class="flex overflow-x-auto no-scrollbar  " style="gap: 8px; scroll-snap-type: x mandatory;">
                                 @{
                                     foreach (var item in Model.TopHostListModels)
                                     {
-                                        <div class="item" style="width:128px">
+                                        <div class="item" style="width: 128px; scroll-snap-align: end; flex: 0 0 auto;">
                                             <div class=" relative flex-none">
                                                 <div class="flex pb-1">
                                                     <div class="absolute top-1 left-0">
