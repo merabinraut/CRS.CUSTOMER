@@ -203,7 +203,8 @@ namespace CRS.CUSTOMER.APPLICATION.Controllers
                 responseModel = clubDetailResp.MapObject<Models.LocationManagementV2.ClubDetailModel>();
                 responseModel.ClubId = responseModel.ClubId.EncryptParameter();
                 responseModel.LocationId = responseModel.LocationId.EncryptParameter();
-                responseModel.ClubCoverPhoto = ImageHelper.ProcessedImage(responseModel.ClubCoverPhoto);
+                if (!string.IsNullOrEmpty(responseModel.ClubCoverPhoto))
+                    responseModel.ClubCoverPhoto = ImageHelper.ProcessedImage(responseModel.ClubCoverPhoto);
                 responseModel.ClubLogo = ImageHelper.ProcessedImage(responseModel.ClubLogo);
                 if (!string.IsNullOrEmpty(responseModel.LocationURL) && responseModel.LocationURL != "#")
                 {
